@@ -1,0 +1,30 @@
+add	decoration
+name	'hydr_nebula_menu_001'
+graphique	'hydr_nebula_block_001'
+texte	'hydr_nebula_texte_002'
+type	'menu'
+directory	'Nebula'
+	
+genre	'2'
+animation	'ftghsdlssth'
+	
+div_width	'128'
+	
+	
+	
+dock_cible	'Bottom-right'
+dock_decal_x	'0'
+dock_decal_y	'0'
+	
+affiche_icones	'NON'
+icone_taille_x	'16'
+icone_taille_y	'16'
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;	

@@ -1,0 +1,88 @@
+add decoration 
+name "rw_hal9000_texte_099" 
+type	'caligraphe'						
+repertoire	'HAL-9000'						
+							
+txt_fonte	'Arial, Helvetica, Sans-serif'	txt_fonte_size_min	'10'	txt_fonte_size_max	'22'		
+							
+p_txt_indent	'000000'	p_txt_align	'justify'				
+							
+txt_col	'FFFFFF'	txt_highlight_col	'FFFF80'	txt_bg_col	'transparent'		
+txt_ok_col	'00FF00'	txt_avert_col	'FF8000'	txt_erreur_col	'FF0000'		
+							
+txt_titre_col	'263E3E'						
+							
+txt_l_01_display	'block'						
+				txt_l_01_decoration	'none'		
+txt_l_01_margin_top	'000000'	txt_l_01_margin_bottom	'000000'	txt_l_01_margin_left	'000000'	txt_l_01_margin_right	'000000'
+							
+txt_l_01_fg_col	'FFFFFF'	txt_l_01_fg_hover_col	'FFFFFF'	txt_l_01_fg_active_col	'FFFFFF'	txt_l_01_fg_visite_col	'FFFFFF'
+txt_l_01_bg_col	'transparent'	txt_l_01_bg_hover_col	'transparent'	txt_l_01_bg_active_col	'transparent'	txt_l_01_bg_visite_col	'transparent'
+							
+txt_l_td_display	'block'						
+				txt_l_td_decoration	'none'		
+txt_l_td_margin_top	'000000'	txt_l_td_margin_bottom	'000000'	txt_l_td_margin_left	'000000'	txt_l_td_margin_right	'000000'
+							
+txt_l_td_fg_col	'FFFFFF'	txt_l_td_fg_hover_col	'FFFFFF'	txt_l_td_fg_active_col	'FFFFFF'	txt_l_td_fg_visite_col	'FFFFFF'
+txt_l_td_bg_col	'transparent'	txt_l_td_bg_hover_col	'transparent'	txt_l_td_bg_active_col	'transparent'	txt_l_td_bg_visite_col	'transparent'
+							
+txt_input1_fg_col	'263E3E'	txt_input1_bg_col	'FFFFFF'				
+txt_input2_fg_col	'263E3E'	txt_input2_bg_col	'FFFFFF'				
+txt_input1_td_fg_col	'263E3E'	txt_input1_td_bg_col	'FFFFFF'				
+txt_input2_td_fg_col	'263E3E'	txt_input2_td_bg_col	'FFFFFF'				
+txt_code_fg_col	'263E3E'	txt_code_bg_col	'AAAAAA'				
+							
+ca_txt_col	'FFFFFF'	ca_txt_bg_col	'transparent'				
+cb_txt_col	'FFFFFF'	cb_txt_bg_col	'transparent'				
+cc_txt_col	'FFFFFF'	cc_txt_bg_col	'transparent'				
+cd_txt_col	'FFFFFF'	cd_txt_bg_col	'transparent'				
+cta_txt_col	'FFFFFF'	cta_txt_bg_col	'transparent'				
+ctb_txt_col	'FFFFFF'	ctb_txt_bg_col	'transparent'				
+co_txt_col	'FFFFFF'	co_txt_bg_col	'transparent'				
+							
+s1_txt_col	'FFFFFF'	s2_txt_col	'FFFFFF'	s3_txt_col	'FFFFFF'		
+s1_txt_hover_col	'263E3E'	s2_txt_hover_col	'263E3E'	s3_txt_hover_col	'263E3E'		
+tab_up_txt_col	'263E3E'	tab_up_txt_bg_col	'transparent'				
+tab_down_txt_col	'CCCCCC'	tab_down_txt_bg_col	'transparent'				
+tab_hover_txt_col	'FFFFFF'	tab_hover_txt_bg_col	'transparent'				
+							
+p_mrg_top	'000000'	p_mrg_bottom	'000000'	p_mrg_left	'000000'	p_mrg_right	'000000'
+p_pad_top	'000000'	p_pad_bottom	'000000'	p_pad_left	'000000'	p_pad_right	'000000'
+							
+ft1	'hal-9000_B99_ft1.png'	ft2	'hal-9000_B99_ft2.png'	ft3	'hal-9000_B99_ft3.png'		
+ft1_x	'8'	ft3_x	'8'	ft_y	'32'		
+bgca	'hal-9000_B99_bgc_fca.png'	bgcb	'hal-9000_B99_bgc_fcb.png'				
+bgcc	'hal-9000_B99_bgc_fcc.png'	bgcd	'hal-9000_B99_bgc_fcd.png'				
+bgcta	'hal-9000_B99_bgc_fcta.png'	bgctb	'hal-9000_B99_bgc_fctb.png'				
+bgco	'hal-9000_B99_bgc_fco.png'						
+							
+s1_01_x	'8'	s1_01_y	'32'	s1_03_x	'8'		
+s2_01_x	'8'	s2_01_y	'32'	s2_03_x	'8'		
+s3_01_x	'8'	s3_01_y	'32'	s3_03_x	'8'		
+s1_n01	'hal-9000_B99_submit_s1_n01.png'	s1_n02	'hal-9000_B99_submit_s1_n02.png'	s1_n03	'hal-9000_B99_submit_s1_n03.png'		
+s1_h01	'hal-9000_B99_submit_s1_h01.png'	s1_h02	'hal-9000_B99_submit_s1_h02.png'	s1_h03	'hal-9000_B99_submit_s1_h03.png'		
+s2_n01	'hal-9000_B99_submit_s2_n01.png'	s2_n02	'hal-9000_B99_submit_s2_n02.png'	s2_n03	'hal-9000_B99_submit_s2_n03.png'		
+s2_h01	'hal-9000_B99_submit_s2_h01.png'	s2_h02	'hal-9000_B99_submit_s2_h02.png'	s2_h03	'hal-9000_B99_submit_s2_h03.png'		
+s3_n01	'hal-9000_B99_submit_s3_n01.png'	s3_n02	'hal-9000_B99_submit_s3_n02.png'	s3_n03	'hal-9000_B99_submit_s3_n03.png'		
+s3_h01	'hal-9000_B99_submit_s3_h01.png'	s3_h02	'hal-9000_B99_submit_s3_h02.png'	s3_h03	'hal-9000_B99_submit_s3_h03.png'		
+							
+tab_y	'32'	tab_a_x	'8'	tab_c_x	'8'		
+tab_down_a	'hal-9000_B99_tab_down_a.png'	tab_down_b	'hal-9000_B99_tab_down_b.png'	tab_down_c	'hal-9000_B99_tab_down_c.png'		
+tab_up_a	'hal-9000_B99_tab_up_a.png'	tab_up_b	'hal-9000_B99_tab_up_b.png'	tab_up_c	'hal-9000_B99_tab_up_c.png'		
+tab_hover_a	'hal-9000_B99_tab_hover_a.png'	tab_hover_b	'hal-9000_B99_tab_hover_b.png'	tab_hover_c	'hal-9000_B99_tab_hover_c.png'		
+							
+icone_repertoire	'hal-9000_B99_icone_repertoire.png'						
+icone_efface	'hal-9000_B99_icone_efface.png'						
+icone_gauche	'hal-9000_B99_icone_fleche_gauche.png'						
+icone_droite	'hal-9000_B99_icone_fleche_droite.png'						
+icone_haut	'hal-9000_B99_icone_fleche_haut.png'						
+icone_bas	'hal-9000_B99_icone_fleche_bas.png'						
+icone_ok	'hal-9000_B99_icone_ok.png'						
+icone_nok	'hal-9000_B99_icone_nok.png'						
+icone_question	'hal-9000_B99_icone_question.png'						
+icone_notification	'hal-9000_B99_icone_notification.png'						
+transparent_8x8	'vide.gif'						
+							
+icone_dim_x	'32'						
+icone_dim_y	'32'						
+;							

@@ -1,0 +1,36 @@
+add decoration 
+name "hydr_aqua_texte_003" 
+type	'caligraph'						
+repertoire	'Aqua'						
+							
+txt_fonte	'Arial, Helvetica, Sans-serif'						
+							
+txt_l_01_display	'block'						
+				txt_l_01_decoration	'none'		
+txt_l_01_margin_top	'000000'	txt_l_01_margin_bottom	'000000'	txt_l_01_margin_left	'000000'	txt_l_01_margin_right	'000000'
+							
+txt_l_01_fg_col	'FFFFFF'	txt_l_01_fg_hover_col	'FFFFFF'	txt_l_01_fg_active_col	'FFFFFF'	txt_l_01_fg_visite_col	'FFFFFF'
+txt_l_01_bg_col	'transparent'	txt_l_01_bg_hover_col	'transparent'	txt_l_01_bg_active_col	'transparent'	txt_l_01_bg_visite_col	'transparent'
+							
+txt_l_td_display	'block'						
+				txt_l_td_decoration	'none'		
+txt_l_td_margin_top	'000000'	txt_l_td_margin_bottom	'000000'	txt_l_td_margin_left	'000000'	txt_l_td_margin_right	'000000'
+							
+txt_l_td_fg_col	'FFFFFF'	txt_l_td_fg_hover_col	'FFFFFF'	txt_l_td_fg_active_col	'FFFFFF'	txt_l_td_fg_visite_col	'FFFFFF'
+txt_l_td_bg_col	'transparent'	txt_l_td_bg_hover_col	'transparent'	txt_l_td_bg_active_col	'transparent'	txt_l_td_bg_visite_col	'transparent'
+							
+tab_up_b	'aqua_menu_banner_bg_normal.png'						
+tab_hover_b	'aqua_menu_banner_bg_hover.png'						
+							
+icone_repertoire	'aqua_B01_icone_repertoire.png'						
+icone_efface	'aqua_B01_icone_efface.png'						
+icone_gauche	'aqua_B01_icone_fleche_gauche.png'						
+icone_droite	'aqua_B01_icone_fleche_droite.png'						
+icone_haut	'aqua_B01_icone_fleche_haut.png'						
+icone_bas	'aqua_B01_icone_fleche_bas.png'						
+icone_ok	'aqua_B01_icone_ok.png'						
+icone_nok	'aqua_B01_icone_nok.png'						
+icone_question	'aqua_B01_icone_question.png'						
+icone_notification	'aqua_B01_icone_notification.png'						
+transparent_8x8	'vide.gif'						
+;							

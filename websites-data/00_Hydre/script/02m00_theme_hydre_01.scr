@@ -1,0 +1,43 @@
+add theme	
+name		"Hydre"	
+directory	"Hydre"	
+title		"Template theme"	
+desc		"DO NOT DELETE / NE PAS EFFACER"	
+
+stylesheet_1 "hydre_01.css"	
+stylesheet_2 "hydre_01_popmenu.css"	
+
+bg			"hydre_bg.jpg"	
+bg_repeat	"repeat"	
+logo		"hydre_logo.gif"	
+banniere	"hydre_banniere.gif"	
+
+block_01_name	"hydre_block_003"		block_01_text	"hydre_texte_001"	
+block_02_name	"hydre_block_003"		block_02_text	"hydre_texte_001"	
+block_03_name	"hydre_block_003"		block_03_text	"hydre_texte_001"	
+block_04_name	"hydre_block_004"		block_04_text	"hydre_texte_001"	
+block_05_name	"hydre_block_005"		block_05_text	"hydre_texte_001"	
+block_06_name	"hydre_block_006"		block_06_text	"hydre_texte_001"	
+
+block_01_menu	"hydre_menu_001"	
+block_02_menu	"hydre_menu_002"	
+block_03_menu	"hydre_menu_002"	
+block_04_menu	"hydre_menu_002"	
+block_05_menu	"hydre_menu_002"	
+block_06_menu	"hydre_menu_002"	
+block_07_menu	"hydre_menu_002"	
+block_08_menu	"hydre_menu_002"	
+block_09_menu	"hydre_menu_002"	
+
+
+admctrl_panel_bg "hydre_s01_bgc_1.gif"	
+admctrl_switch_bg "admctrl_switch_bg.gif"	
+admctrl_size_x 64	
+admctrl_size_y 64	
+admctrl_position "top-left"	
+
+color_gradient_start "00AA00"	
+color_gradient_end "FF0000"	
+
+state OFFLINE	
+;

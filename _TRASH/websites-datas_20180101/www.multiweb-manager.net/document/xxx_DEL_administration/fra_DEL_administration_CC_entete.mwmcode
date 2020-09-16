@@ -1,0 +1,16 @@
+/*Hydre-contenu_debut*/
+[T3][J]
+[BR]
+[B]Administration via les lignes de commande[/B][BR]
+Le moteur propose une interface qui permet de taper des commandes. 
+Ces commandes pourront influer sur tout ou partie du site concerné. 
+Une syntaxe dédiée permet de réaliser TOUTES sinon plus d'opérations que ne le permet l'interface graphique. 
+C'est un outil puissant lorsque l'on veut générer plusieurs sites ou les gérer en même temps (ex ajout d'un nouveau document, article a partager entre plusieurs site). 
+La syntaxe est multi-lingue autant que faire se peut. 
+Une commande tapée en anglais aura le même effet qu'une commande tapé en français. 
+Chaque ligne de commande est formulée avec ses arguments et se termine par un « ; ».[BR]
+[BR]
+[BR]
+[TB3]La syntaxe[/F][BR]
+[/J]
+/*Hydre-contenu_fin*/

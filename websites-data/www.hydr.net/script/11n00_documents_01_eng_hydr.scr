@@ -1,0 +1,147 @@
+add document	name "doc_hydr_eng_acceuil_p01.mwmcode"	type MWMCODE;
+insert content	file "eng_acceuil_p01.mwmcode"		into "doc_hydr_eng_acceuil_p01.mwmcode";
+share document	name "doc_hydr_eng_acceuil_p01.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_hydr_eng_acceuil_p01.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+
+add document	name "doc_eng_DEL_concepts_p01.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_concepts_p01.mwmcode"		into "doc_eng_DEL_concepts_p01.mwmcode";
+share document	name "doc_eng_DEL_concepts_p01.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_concepts_p01.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_concepts_p02.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_concepts_p02.mwmcode"		into "doc_eng_DEL_concepts_p02.mwmcode";
+share document	name "doc_eng_DEL_concepts_p02.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_concepts_p02.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_concepts_p03.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_concepts_p03.mwmcode"		into "doc_eng_DEL_concepts_p03.mwmcode";
+share document	name "doc_eng_DEL_concepts_p03.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_concepts_p03.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+
+
+add document	name "doc_eng_DEL_gestion_du_contenu_p01.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_gestion_du_contenu_p01.mwmcode"		into "doc_eng_DEL_gestion_du_contenu_p01.mwmcode";
+share document	name "doc_eng_DEL_gestion_du_contenu_p01.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_gestion_du_contenu_p01.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_gestion_du_contenu_p02.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_gestion_du_contenu_p02.mwmcode"		into "doc_eng_DEL_gestion_du_contenu_p02.mwmcode";
+share document	name "doc_eng_DEL_gestion_du_contenu_p02.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_gestion_du_contenu_p02.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+
+add document	name "doc_eng_DEL_administration_CC_entete.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_CC_entete.mwmcode"		into "doc_eng_DEL_administration_CC_entete.mwmcode";
+share document	name "doc_eng_DEL_administration_CC_entete.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_CC_entete.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_interface_entete.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_interface_entete.mwmcode"		into "doc_eng_DEL_administration_interface_entete.mwmcode";
+share document	name "doc_eng_DEL_administration_interface_entete.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_interface_entete.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+add document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_bouclage.mwmcode"		into "doc_eng_DEL_administration_tab_bouclage.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_categorie.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_categorie.mwmcode"		into "doc_eng_DEL_administration_tab_categorie.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_categorie.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_categorie.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_cdb.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_cdb.mwmcode"		into "doc_eng_DEL_administration_tab_cdb.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_cdb.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_cdb.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_decoration.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_decoration.mwmcode"		into "doc_eng_DEL_administration_tab_decoration.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_decoration.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_decoration.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_document.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_document.mwmcode"		into "doc_eng_DEL_administration_tab_document.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_document.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_document.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_groupe.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_groupe.mwmcode"		into "doc_eng_DEL_administration_tab_groupe.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_groupe.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_groupe.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_module.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_module.mwmcode"		into "doc_eng_DEL_administration_tab_module.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_module.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_module.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_site.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_site.mwmcode"		into "doc_eng_DEL_administration_tab_site.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_site.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_site.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_tab_utilisateur.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_utilisateur.mwmcode"		into "doc_eng_DEL_administration_tab_utilisateur.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_utilisateur.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_utilisateur.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+
+add document	name "doc_eng_DEL_administration_p01.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p01.mwmcode"		into "doc_eng_DEL_administration_p01.mwmcode";
+share document	name "doc_eng_DEL_administration_p01.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p01.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p02.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p02.mwmcode"		into "doc_eng_DEL_administration_p02.mwmcode";
+share document	name "doc_eng_DEL_administration_p02.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p02.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p03.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p03.mwmcode"		into "doc_eng_DEL_administration_p03.mwmcode";
+share document	name "doc_eng_DEL_administration_p03.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p03.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p04.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p04.mwmcode"		into "doc_eng_DEL_administration_p04.mwmcode";
+share document	name "doc_eng_DEL_administration_p04.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p04.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p05.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p05.mwmcode"		into "doc_eng_DEL_administration_p05.mwmcode";
+share document	name "doc_eng_DEL_administration_p05.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p05.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p06.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p06.mwmcode"		into "doc_eng_DEL_administration_p06.mwmcode";
+share document	name "doc_eng_DEL_administration_p06.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p06.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p07.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p07.mwmcode"		into "doc_eng_DEL_administration_p07.mwmcode";
+share document	name "doc_eng_DEL_administration_p07.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p07.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p08.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p08.mwmcode"		into "doc_eng_DEL_administration_p08.mwmcode";
+share document	name "doc_eng_DEL_administration_p08.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p08.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_administration_p09.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_p09.mwmcode"		into "doc_eng_DEL_administration_p09.mwmcode";
+share document	name "doc_eng_DEL_administration_p09.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_p09.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+add document	name "doc_eng_DEL_tut_001_p01.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_tut_001_p01.mwmcode"		into "doc_eng_DEL_tut_001_p01.mwmcode";
+share document	name "doc_eng_DEL_tut_001_p01.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_tut_001_p01.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+
+
+

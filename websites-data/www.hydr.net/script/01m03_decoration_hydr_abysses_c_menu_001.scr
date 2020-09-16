@@ -1,0 +1,24 @@
+add decoration 
+name "hydr_abysses_menu_001" 
+graphique			"hydr_abysses_block_001"
+texte			"hydr_abysses_texte_002"
+type "menu" 
+directory "Abysses" 
+
+genre				2 
+animation			"ftghsdlssth" 
+
+dock_decal_x			"0" 
+dock_decal_y			"0" 
+
+div_width			"128"	
+
+
+ 
+
+affiche_icones			"NON" 
+icone_taille_x			"16" 
+icone_taille_y			"16" 
+ 
+
+;

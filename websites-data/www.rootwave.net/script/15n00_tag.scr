@@ -1,0 +1,35 @@
+add tag	name "dessin";
+add tag	name "dessiner";
+add tag	name "graphisme";
+add tag	name "graphique";
+add tag	name "graphics";
+add tag	name "gfx";
+add tag	name "peindre";
+assign tag name "dessin"    to_article "fra_dessiner_p01";
+assign tag name "dessiner"  to_article "fra_dessiner_p01";
+assign tag name "graphisme" to_article "fra_dessiner_p01";
+assign tag name "graphique" to_article "fra_dessiner_p01";
+assign tag name "graphics"  to_article "fra_dessiner_p01";
+assign tag name "gfx"       to_article "fra_dessiner_p01";
+assign tag name "peindre"   to_article "fra_dessiner_p01";
+
+
+add tag	name "mc68000";
+add tag	name "mc680x0";
+add tag	name "mc68k";
+add tag	name "mc68x";
+add tag	name "assembleur";
+add tag	name "asm";
+add tag	name "motorola";
+add tag	name "source";
+add tag	name "instruction";
+add tag	name "adressage";
+assign tag name "mc68000"      to_article "fra_mc680x0_p01";
+assign tag name "mc68k"        to_article "fra_mc680x0_p01";
+assign tag name "mc680x0"      to_article "fra_mc680x0_p01";
+assign tag name "assembleur"   to_article "fra_mc680x0_p01";
+assign tag name "asm"          to_article "fra_mc680x0_p01";
+assign tag name "motorola"     to_article "fra_mc680x0_p01";
+assign tag name "source"       to_article "fra_mc680x0_p01";
+assign tag name "instruction"  to_article "fra_mc680x0_p01";
+assign tag name "adressage"    to_article "fra_mc680x0_p01";

@@ -1,0 +1,93 @@
+add decoration 							
+name	'rw_aqua_texte_099'						
+repertoire	'Aqua'						
+type	'caligraphe'						
+txt_fonte	'Arial, Helvetica, Sans-serif'	txt_fonte_size_min	'8'	txt_fonte_size_max	'20'		
+							
+p_txt_indent	'0'						
+							
+txt_col	'FFFFFF'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_titre_col	'FFFFFF'
+txt_ok_col	'008000'	txt_avert_col	'FF8000'	txt_erreur_col	'FF0000'	txt_fade_col	'000000'
+							
+txt_l_01_display	'block'	txt_l_01_size	'0'			txt_l_01_decoration	'none'
+txt_l_01_margin_top	'0'	txt_l_01_margin_bottom	'0'	txt_l_01_margin_left	'0'	txt_l_01_margin_right	'0'
+txt_l_01_hover_size	'0'	txt_l_01_hover_weight	'bold'				
+txt_l_01_fg_col	'000000'	txt_l_01_fg_hover_col	'000000'	txt_l_01_fg_active_col	'000000'	txt_l_01_fg_visite_col	'000000'
+txt_l_01_bg_col	'transparent'	txt_l_01_bg_hover_col	'transparent'	txt_l_01_bg_active_col	'transparent'	txt_l_01_bg_visite_col	'transparent'
+							
+txt_l_td_display	'block'	txt_l_td_size	'0'			txt_l_td_decoration	'none'
+txt_l_td_margin_top	'0'	txt_l_td_margin_bottom	'0'	txt_l_td_margin_left	'0'	txt_l_td_margin_right	'0'
+txt_l_td_hover_size	'0'	txt_l_td_hover_weight	'bold'				
+txt_l_td_fg_col	'000000'	txt_l_td_fg_hover_col	'FFFFFF'	txt_l_td_fg_active_col	'000000'	txt_l_td_fg_visite_col	'000000'
+txt_l_td_bg_col	'transparent'	txt_l_td_bg_hover_col	'70b0e0'	txt_l_td_bg_active_col	'transparent'	txt_l_td_bg_visite_col	'transparent'
+							
+txt_input1_fg_col	'000000'	txt_input1_bg_col	'FFFFFF'				
+txt_input2_fg_col	'000000'	txt_input2_bg_col	'FFFFFF'				
+txt_input1_td_fg_col	'000000'	txt_input1_td_bg_col	'FFFFFF'				
+txt_input2_td_fg_col	'000000'	txt_input2_td_bg_col	'FFFFFF'				
+txt_code_fg_col	'008000'	txt_code_bg_col	'000000'				
+							
+ca_txt_col	'000000'	ca_txt_bg_col	'transparent'				
+cb_txt_col	'000000'	cb_txt_bg_col	'transparent'				
+cc_txt_col	'000000'	cc_txt_bg_col	'transparent'				
+cd_txt_col	'000000'	cd_txt_bg_col	'transparent'				
+cta_txt_col	'000000'	cta_txt_bg_col	'transparent'				
+ctb_txt_col	'000000'	ctb_txt_bg_col	'transparent'				
+csa_txt_col	'FFFFFF'	csa_txt_bg_col	'transparent'				
+csb_txt_col	'FFFFFF'	csb_txt_bg_col	'transparent'				
+co_txt_col	'000000'	co_txt_bg_col	'transparent'				
+							
+s1_txt_col	'FFFFFF'	s2_txt_col	'FFFFFF'	s3_txt_col	'FFFFFF'		
+s1_txt_weight	'bold'	s2_txt_weight	'bold'	s3_txt_weight	'bold'		
+s1_txt_shadow	'0px 0px 4px #000000'	s2_txt_shadow	'0px 0px 4px #000000'	s2_txt_shadow	'0px 0px 4px #000000'		
+							
+s1_txt_hover_col	'FFFFFF'	s2_txt_hover_col	'FFFFFF'	s3_txt_hover_col	'FFFFFF'		
+s1_txt_hover_weight	'bold'	s2_txt_hover_weight	'bold'	s3_txt_hover_weight	'bold'		
+s1_txt_hover_shadow	'0px 0px 4px #FFFFFF'	s2_txt_hover_shadow	'0px 0px 4px #FFFFFF'	s3_txt_hover_shadow	'0px 0px 4px #FFFFFF'		
+							
+tab_up_txt_col	'FFFFFF'	tab_up_txt_bg_col	'transparent'	tab_up_txt_weight	'bold'	tab_up_txt_shadow	'0px 0px 5px #000000'
+tab_down_txt_col	'DDDDDD'	tab_down_txt_bg_col	'transparent'			tab_down_txt_shadow	'0px 0px 5px #000000'
+tab_hover_txt_col	'FFFFFF'	tab_hover_txt_bg_col	'transparent'	tab_hover_txt_weight	'bold'	tab_hover_txt_shadow	'0px 0px 5px #FFFFFF'
+							
+p_mrg_top	'0'	p_mrg_bottom	'0'	p_mrg_left	'0'	p_mrg_right	'0'
+p_pad_top	'5'	p_pad_bottom	'5'	p_pad_left	'8'	p_pad_right	'8'
+							
+ft1	'aqua_B01_ft1.png'	ft2	'aqua_B01_ft2.png'	ft3	'aqua_B01_ft3.png'		
+ft1_x	'16'	ft3_x	'16'	ft_y	'32'		
+							
+bgca	'aqua_B01_bgc_fca.png'	bgcb	'aqua_B01_bgc_fcb.png'				
+bgcc	'aqua_B01_bgc_fcc.png'	bgcd	'aqua_B01_bgc_fcd.png'				
+bgcta	'aqua_B01_bgc_fcta.png'	bgctb	'aqua_B01_bgc_fctb.png'				
+bgcsa	'aqua_B01_bgc_fcsa.png'	bgcsb	'aqua_B01_bgc_fcsb.png'				
+bgco	'aqua_B01_bgc_fco.png'						
+							
+s1_01_x	'16'	s1_01_y	'32'	s1_03_x	'16'		
+s2_01_x	'16'	s2_01_y	'32'	s2_03_x	'16'		
+s3_01_x	'16'	s3_01_y	'32'	s3_03_x	'16'		
+s1_n01	'aqua_B01_submit_s1_n01.png'	s1_n02	'aqua_B01_submit_s1_n02.png'	s1_n03	'aqua_B01_submit_s1_n03.png'		
+s1_h01	'aqua_B01_submit_s1_h01.png'	s1_h02	'aqua_B01_submit_s1_h02.png'	s1_h03	'aqua_B01_submit_s1_h03.png'		
+s2_n01	'aqua_B01_submit_s2_n01.png'	s2_n02	'aqua_B01_submit_s2_n02.png'	s2_n03	'aqua_B01_submit_s2_n03.png'		
+s2_h01	'aqua_B01_submit_s2_h01.png'	s2_h02	'aqua_B01_submit_s2_h02.png'	s2_h03	'aqua_B01_submit_s2_h03.png'		
+s3_n01	'aqua_B01_submit_s3_n01.png'	s3_n02	'aqua_B01_submit_s3_n02.png'	s3_n03	'aqua_B01_submit_s3_n03.png'		
+s3_h01	'aqua_B01_submit_s3_h01.png'	s3_h02	'aqua_B01_submit_s3_h02.png'	s3_h03	'aqua_B01_submit_s3_h03.png'		
+							
+tab_y	'32'	tab_a_x	'8'	tab_c_x	'8'		
+tab_down_a	'aqua_B01_tab_up_a.png'	tab_down_b	'aqua_B01_tab_up_b.png'	tab_down_c	'aqua_B01_tab_up_c.png'		
+tab_up_a	'aqua_B01_tab_down_a.png'	tab_up_b	'aqua_B01_tab_down_b.png'	tab_up_c	'aqua_B01_tab_down_c.png'		
+tab_hover_a	'aqua_B01_tab_hover_a.png'	tab_hover_b	'aqua_B01_tab_hover_b.png'	tab_hover_c	'aqua_B01_tab_hover_c.png'		
+							
+icone_repertoire	'aqua_B01_icone_repertoire.png'						
+icone_efface	'aqua_B01_icone_efface.png'						
+icone_gauche	'aqua_B01_icone_fleche_gauche.png'						
+icone_droite	'aqua_B01_icone_fleche_droite.png'						
+icone_haut	'aqua_B01_icone_fleche_haut.png'						
+icone_bas	'aqua_B01_icone_fleche_bas.png'						
+icone_ok	'aqua_B01_icone_ok.png'						
+icone_nok	'aqua_B01_icone_nok.png'						
+icone_question	'aqua_B01_icone_question.png'						
+icone_notification	'aqua_B01_icone_notification.png'						
+transparent_8x8	'vide.gif'						
+							
+icone_dim_x	'32'						
+icone_dim_y	'32'						
+;							

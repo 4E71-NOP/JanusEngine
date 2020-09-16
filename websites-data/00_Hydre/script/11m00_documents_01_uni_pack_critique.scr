@@ -1,0 +1,228 @@
+add document	name "doc_uni_console_de_commande_p01.php"	type PHP;
+insert content	file "admin_panels/uni_console_de_commande_p01.php"		into "doc_uni_console_de_commande_p01.php";
+share document	name "doc_uni_console_de_commande_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_console_de_commande_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_validation_des_documents_p01.php"	type PHP;
+insert content	file "admin_panels/uni_validation_des_documents_p01.php"		into "doc_uni_validation_des_documents_p01.php";
+share document	name "doc_uni_validation_des_documents_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_validation_des_documents_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_validation_des_documents_p02.php"	type PHP;
+insert content	file "admin_panels/uni_validation_des_documents_p02.php"		into "doc_uni_validation_des_documents_p02.php";
+share document	name "doc_uni_validation_des_documents_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_validation_des_documents_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_ecriture_des_documents_p01.php"	type PHP;
+insert content	file "admin_panels/uni_ecriture_des_documents_p01.php"		into "doc_uni_ecriture_des_documents_p01.php";
+share document	name "doc_uni_ecriture_des_documents_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_ecriture_des_documents_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_ecriture_des_documents_p02.php"	type PHP;
+insert content	file "admin_panels/uni_ecriture_des_documents_p02.php"		into "doc_uni_ecriture_des_documents_p02.php";
+share document	name "doc_uni_ecriture_des_documents_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_ecriture_des_documents_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_execution_de_scripts_p01.php"	type PHP;
+insert content	file "admin_panels/uni_execution_de_scripts_p01.php"		into "doc_uni_execution_de_scripts_p01.php";
+share document	name "doc_uni_execution_de_scripts_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_execution_de_scripts_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_generation_stylesheet_p01.php"	type PHP;
+insert content	file "admin_panels/uni_generation_stylesheet_p01.php"		into "doc_uni_generation_stylesheet_p01.php";
+share document	name "doc_uni_generation_stylesheet_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_generation_stylesheet_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_articles_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_articles_p01.php"		into "doc_uni_gestion_des_articles_p01.php";
+share document	name "doc_uni_gestion_des_articles_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_articles_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_articles_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_articles_p02.php"		into "doc_uni_gestion_des_articles_p02.php";
+share document	name "doc_uni_gestion_des_articles_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_articles_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_articles_p03.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_articles_p03.php"		into "doc_uni_gestion_des_articles_p03.php";
+share document	name "doc_uni_gestion_des_articles_p03.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_articles_p03.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_bouclages_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_bouclages_p01.php"		into "doc_uni_gestion_des_bouclages_p01.php";
+share document	name "doc_uni_gestion_des_bouclages_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_bouclages_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_bouclages_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_bouclages_p02.php"		into "doc_uni_gestion_des_bouclages_p02.php";
+share document	name "doc_uni_gestion_des_bouclages_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_bouclages_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_categories_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_categories_p01.php"		into "doc_uni_gestion_des_categories_p01.php";
+share document	name "doc_uni_gestion_des_categories_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_categories_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_categories_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_categories_p02.php"		into "doc_uni_gestion_des_categories_p02.php";
+share document	name "doc_uni_gestion_des_categories_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_categories_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_decorations_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_decorations_p01.php"		into "doc_uni_gestion_des_decorations_p01.php";
+share document	name "doc_uni_gestion_des_decorations_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_decorations_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_decorations_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_decorations_p02.php"		into "doc_uni_gestion_des_decorations_p02.php";
+share document	name "doc_uni_gestion_des_decorations_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_decorations_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_documents_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_documents_p01.php"		into "doc_uni_gestion_des_documents_p01.php";
+share document	name "doc_uni_gestion_des_documents_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_documents_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_documents_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_documents_p02.php"		into "doc_uni_gestion_des_documents_p02.php";
+share document	name "doc_uni_gestion_des_documents_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_documents_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_groupes_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_groupes_p01.php"		into "doc_uni_gestion_des_groupes_p01.php";
+share document	name "doc_uni_gestion_des_groupes_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_groupes_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_groupes_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_groupes_p02.php"		into "doc_uni_gestion_des_groupes_p02.php";
+share document	name "doc_uni_gestion_des_groupes_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_groupes_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_historiques_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_historiques_p01.php"		into "doc_uni_gestion_des_historiques_p01.php";
+share document	name "doc_uni_gestion_des_historiques_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_historiques_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_modules_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_modules_p01.php"		into "doc_uni_gestion_des_modules_p01.php";
+share document	name "doc_uni_gestion_des_modules_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_modules_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_modules_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_modules_p02.php"		into "doc_uni_gestion_des_modules_p02.php";
+share document	name "doc_uni_gestion_des_modules_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_modules_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_mots_cles_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_mots_cles_p01.php"		into "doc_uni_gestion_des_mots_cles_p01.php";
+share document	name "doc_uni_gestion_des_mots_cles_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_mots_cles_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_mots_cles_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_mots_cles_p02.php"		into "doc_uni_gestion_des_mots_cles_p02.php";
+share document	name "doc_uni_gestion_des_mots_cles_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_mots_cles_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_extensions_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_extensions_p01.php"		into "doc_uni_gestion_des_extensions_p01.php";
+share document	name "doc_uni_gestion_des_extensions_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_extensions_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_extensions_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_extensions_p02.php"		into "doc_uni_gestion_des_extensions_p02.php";
+share document	name "doc_uni_gestion_des_extensions_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_extensions_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_presentations_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_presentations_p01.php"		into "doc_uni_gestion_des_presentations_p01.php";
+share document	name "doc_uni_gestion_des_presentations_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_presentations_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_presentations_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_presentations_p02.php"		into "doc_uni_gestion_des_presentations_p02.php";
+share document	name "doc_uni_gestion_des_presentations_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_presentations_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_utilisateurs_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_utilisateurs_p01.php"		into "doc_uni_gestion_des_utilisateurs_p01.php";
+share document	name "doc_uni_gestion_des_utilisateurs_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_utilisateurs_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_utilisateurs_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_utilisateurs_p02.php"		into "doc_uni_gestion_des_utilisateurs_p02.php";
+share document	name "doc_uni_gestion_des_utilisateurs_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_utilisateurs_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_du_profil_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_du_profil_p01.php"		into "doc_uni_gestion_du_profil_p01.php";
+share document	name "doc_uni_gestion_du_profil_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_du_profil_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_du_site_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_du_site_p01.php"		into "doc_uni_gestion_du_site_p01.php";
+share document	name "doc_uni_gestion_du_site_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_du_site_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_themes_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_themes_p01.php"		into "doc_uni_gestion_des_themes_p01.php";
+share document	name "doc_uni_gestion_des_themes_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_themes_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_gestion_des_themes_p02.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_themes_p02.php"		into "doc_uni_gestion_des_themes_p02.php";
+share document	name "doc_uni_gestion_des_themes_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_themes_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_informations_utiles_p01.php"	type PHP;
+insert content	file "admin_panels/uni_informations_utiles_p01.php"		into "doc_uni_informations_utiles_p01.php";
+share document	name "doc_uni_informations_utiles_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_informations_utiles_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_liste_des_sites_p01.php"	type PHP;
+insert content	file "admin_panels/uni_liste_des_sites_p01.php"		into "doc_uni_liste_des_sites_p01.php";
+share document	name "doc_uni_liste_des_sites_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_liste_des_sites_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_outil_conversion_type_p01.php"	type PHP;
+insert content	file "admin_panels/uni_outil_conversion_type_p01.php"		into "doc_uni_outil_conversion_type_p01.php";
+share document	name "doc_uni_outil_conversion_type_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_outil_conversion_type_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_outil_nettoyage_script_p01.php"	type PHP;
+insert content	file "admin_panels/uni_outil_nettoyage_script_p01.php"		into "doc_uni_outil_nettoyage_script_p01.php";
+share document	name "doc_uni_outil_nettoyage_script_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_outil_nettoyage_script_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_outil_url_utiles_p01.php"	type PHP;
+insert content	file "admin_panels/uni_outil_url_utiles_p01.php"		into "doc_uni_outil_url_utiles_p01.php";
+share document	name "doc_uni_outil_url_utiles_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_outil_url_utiles_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_test_d_article_p01.php"	type PHP;
+insert content	file "admin_panels/uni_test_d_article_p01.php"		into "doc_uni_test_d_article_p01.php";
+share document	name "doc_uni_test_d_article_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_test_d_article_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_validation_d_article_p01.php"	type PHP;
+insert content	file "admin_panels/uni_validation_d_article_p01.php"		into "doc_uni_validation_d_article_p01.php";
+share document	name "doc_uni_validation_d_article_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_validation_d_article_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_validation_d_article_p02.php"	type PHP;
+insert content	file "admin_panels/uni_validation_d_article_p02.php"		into "doc_uni_validation_d_article_p02.php";
+share document	name "doc_uni_validation_d_article_p02.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_validation_d_article_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+add document	name "doc_uni_article_inexistant_p01.php"	type PHP;
+insert content	file "uni_article_inexistant_p01.php"		into "doc_uni_article_inexistant_p01.php";
+share document	name "doc_uni_article_inexistant_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_article_inexistant_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+
+add document	name "doc_uni_admin_authentification_p01.php"	type PHP;
+insert content	file "admin_panels/uni_admin_authentification_p01.php"		into "doc_uni_admin_authentification_p01.php";
+share document	name "doc_uni_admin_authentification_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_admin_authentification_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+
+

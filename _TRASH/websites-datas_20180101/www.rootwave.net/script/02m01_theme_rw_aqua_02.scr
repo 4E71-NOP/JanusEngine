@@ -1,0 +1,46 @@
+add theme
+name "rw_aqua_02"
+directory	"Aqua"			
+title		"Aqua (menubar)"
+desc		"Aqua (menubar)"
+
+stylesheet_1 "rw_aqua_02.css" 
+
+bg			"aqua_bg2.png"
+bg_repeat	"repeat"
+bg_color	"000000"
+blason		"aqua_logo_rw_banner.png"
+banner	"---"
+
+block_01_name	"rw_aqua_block_001"		block_01_text	"rw_aqua_texte_001" 
+block_02_name	"rw_aqua_block_002"		block_02_text	"rw_aqua_texte_001" 
+block_03_name	"rw_aqua_block_001"		block_03_text	"rw_aqua_texte_001" 
+block_04_name	"rw_aqua_block_001"		block_04_text	"rw_aqua_texte_001" 
+block_05_name	"rw_aqua_block_001"		block_05_text	"rw_aqua_texte_001" 
+block_06_name	"rw_aqua_block_001"		block_06_text	"rw_aqua_texte_001" 
+block_07_name	"rw_aqua_block_099"		block_07_text	"rw_aqua_texte_099" 
+block_08_name	"rw_aqua_block_001"		block_08_text	"rw_aqua_texte_001" 
+block_09_name	"rw_aqua_block_001"		block_09_text	"rw_aqua_texte_001" 
+block_10_name	"rw_aqua_block_001"		block_10_text	"rw_aqua_texte_001" 
+
+block_00_menu	"rw_aqua_menu_003" 
+block_01_menu	"rw_aqua_menu_004" 
+block_02_menu	"rw_aqua_menu_004" 
+block_03_menu	"rw_aqua_menu_004" 
+block_04_menu	"rw_aqua_menu_004" 
+block_05_menu	"rw_aqua_menu_004" 
+block_06_menu	"rw_aqua_menu_004" 
+block_07_menu	"rw_aqua_menu_004" 
+block_08_menu	"rw_aqua_menu_004" 
+block_09_menu	"rw_aqua_menu_004" 
+
+admctrl_panel_bg "aqua_B01_bgc_fca.png" 
+admctrl_switch_bg "admctrl_switch_bg.png" 
+admctrl_size_x 64 
+admctrl_size_y 64 
+admctrl_position "top-left" 
+
+couleur_jauge_depart "00FF00" 
+couleur_jauge_fin "FF0040" 
+
+;

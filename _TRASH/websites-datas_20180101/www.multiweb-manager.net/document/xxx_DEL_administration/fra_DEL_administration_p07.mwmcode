@@ -1,0 +1,11 @@
+/*Hydre-contenu_debut*/
+[INCLUDE]doc_fra_DEL_administration_CC_entete.mwmcode[/INCLUDE]
+[BR]
+[INCLUDE]doc_fra_DEL_administration_tab_cdb.mwmcode[/INCLUDE]
+[BR]
+[INCLUDE]doc_fra_DEL_administration_tab_groupe.mwmcode[/INCLUDE]
+[BR]
+[INCLUDE]doc_fra_DEL_administration_tab_utilisateur.mwmcode[/INCLUDE]
+[BR]
+[/J]
+/*Hydre-contenu_fin*/

@@ -1,0 +1,6 @@
+/*Hydre-contenu_debut*/
+[B]Common things on interfaces.[/B][BR]
+Each admin interface use a classic pattern. The first page enables the user to select the element that will be modified. The second (and / or third)  gives the opportunity to access and modify the selected element. Some pannels somtimes give more information on the first page.[BR]  
+[BR]
+[BR]
+/*Hydre-contenu_fin*/

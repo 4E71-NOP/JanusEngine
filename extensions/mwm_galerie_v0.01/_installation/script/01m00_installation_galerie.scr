@@ -1,0 +1,18 @@
+site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
+
+add document	name "doc_uni_config_galerie_p01.php"	type PHP;
+insert_content	file "uni_config_galerie_p01.php"		to "doc_uni_config_galerie_p01.php";
+share_document	name "doc_uni_config_galerie_p01.php"	with_site "*website*"	modification NO;
+update document	name "doc_uni_config_galerie_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add deadline name "rootwave_galeries"	title "Rootwave Galeries"			etat ONLINE;
+
+add	article	name "fra_config_galerie_p01"	reference "fra_config_galerie"	deadline "rootwave_galeries"	desc "Configuration galerie"	title "Extension : galerie"	sub_title "Configuration"	page "1"	validation_state "VALID"	config "no_menu";
+add	article	name "eng_config_galerie_p01"	reference "eng_config_galerie"	deadline "rootwave_galeries"	desc "Gallery configuration"	title "Extension : gallery"	sub_title "Configuration"	page "1"	validation_state "VALID"	config "no_menu";
+
+link	article "fra_config_galerie_p01"	document "doc_uni_config_galerie_p01.php";
+link	article "eng_config_galerie_p01"	document "doc_uni_config_galerie_p01.php";
+
+add category	name "fra_galerie"		parent "fra_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang fra	state ONLINE	deadline initial_online	title "Galerie"		desc "Configuration galerie"	groupe "Auteurs_debutant"	article fra_config_galerie;
+add category	name "eng_galerie"		parent "eng_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang eng	state ONLINE	deadline initial_online	title "Gallery"		desc "Gallery configuration"	groupe "Auteurs_debutant"	article eng_config_galerie;
+

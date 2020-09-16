@@ -1,0 +1,71 @@
+add theme			
+name	'rw_magma_01'		
+directory	'Magma'		
+title	'Magma'		
+desc	'Volcanique'		
+			
+stylesheet_1	'rw_magma_01.css'		
+			
+bg	'magma_bg.png'		
+bg_repeat	'repeat'		
+bg_color	'000000'		
+blason	'magma_logo_rw.png'		
+banner	'---'		
+			
+			
+			
+			
+			
+			
+block_01_name	'rw_magma_block_001'	block_01_text	'rw_magma_texte_001'
+block_02_name	'rw_magma_block_002'	block_02_text	'rw_magma_texte_001'
+block_03_name	'rw_magma_block_001'	block_03_text	'rw_magma_texte_001'
+block_04_name	'rw_magma_block_001'	block_04_text	'rw_magma_texte_001'
+block_05_name	'rw_magma_block_001'	block_05_text	'rw_magma_texte_001'
+block_06_name	'rw_magma_block_001'	block_06_text	'rw_magma_texte_001'
+block_07_name	'rw_magma_block_001'	block_07_text	'rw_magma_texte_001'
+block_08_name	'rw_magma_block_001'	block_08_text	'rw_magma_texte_001'
+block_09_name	'rw_magma_block_001'	block_09_text	'rw_magma_texte_001'
+block_10_name	'rw_magma_block_001'	block_10_text	'rw_magma_texte_001'
+block_11_name	'rw_magma_block_001'	block_11_text	'rw_magma_texte_001'
+block_12_name	'rw_magma_block_001'	block_12_text	'rw_magma_texte_001'
+block_13_name	'rw_magma_block_001'	block_13_text	'rw_magma_texte_001'
+block_14_name	'rw_magma_block_001'	block_14_text	'rw_magma_texte_001'
+block_15_name	'rw_magma_block_001'	block_15_text	'rw_magma_texte_001'
+block_16_name	'rw_magma_block_001'	block_16_text	'rw_magma_texte_001'
+block_17_name	'rw_magma_block_001'	block_17_text	'rw_magma_texte_001'
+block_18_name	'rw_magma_block_001'	block_18_text	'rw_magma_texte_001'
+block_19_name	'rw_magma_block_001'	block_19_text	'rw_magma_texte_001'
+block_20_name	'rw_magma_block_002'	block_20_text	'rw_magma_texte_001'
+block_21_name	'rw_magma_block_001'	block_21_text	'rw_magma_texte_001'
+block_22_name	'rw_magma_block_001'	block_22_text	'rw_magma_texte_001'
+block_23_name	'rw_magma_block_001'	block_23_text	'rw_magma_texte_001'
+block_24_name	'rw_magma_block_001'	block_24_text	'rw_magma_texte_001'
+block_25_name	'rw_magma_block_001'	block_25_text	'rw_magma_texte_001'
+block_26_name	'rw_magma_block_001'	block_26_text	'rw_magma_texte_001'
+block_27_name	'rw_magma_block_001'	block_27_text	'rw_magma_texte_001'
+block_28_name	'rw_magma_block_001'	block_28_text	'rw_magma_texte_001'
+block_29_name	'rw_magma_block_001'	block_29_text	'rw_magma_texte_001'
+block_30_name	'rw_magma_block_001'	block_30_text	'rw_magma_texte_001'
+			
+block_00_menu	'rw_magma_menu_001'		
+block_01_menu	'rw_magma_menu_002'		
+block_02_menu	'rw_magma_menu_002'		
+block_03_menu	'rw_magma_menu_002'		
+block_04_menu	'rw_magma_menu_002'		
+block_05_menu	'rw_magma_menu_002'		
+block_06_menu	'rw_magma_menu_002'		
+block_07_menu	'rw_magma_menu_002'		
+block_08_menu	'rw_magma_menu_002'		
+block_09_menu	'rw_magma_menu_002'		
+			
+admctrl_panel_bg	'magma_B01_bgc_fca.png'		
+admctrl_switch_bg	'magma_admctrl_switch_bg.png'		
+admctrl_size_x	'96'		
+admctrl_size_y	'96'		
+admctrl_position	'top-left'		
+			
+couleur_jauge_depart	'00FF00'		
+couleur_jauge_milieu	'808020'		
+couleur_jauge_fin	'FF0040'		
+;			

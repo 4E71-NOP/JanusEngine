@@ -1,0 +1,21 @@
+add decoration 
+name "rw_aqua_menu_003" 
+deco_graphique			"rw_aqua_block_003"
+deco_texte			"rw_aqua_texte_003"
+type "menu" 
+directory "Aqua" 
+
+genre				3 
+animation			"bannerft" 
+
+dock_cible			"bottom-banner"
+dock_decal_x			"0" 
+dock_decal_y			"0" 
+
+div_width			"768"
+div_height			"32"
+
+affiche_icones			"NON" 
+icone_taille_x			"16" 
+icone_taille_y			"16" 
+;

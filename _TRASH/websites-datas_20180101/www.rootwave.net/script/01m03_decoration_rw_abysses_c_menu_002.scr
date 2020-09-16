@@ -1,0 +1,24 @@
+add decoration 
+name "rw_abysses_menu_002" 
+deco_graphique			"rw_abysses_block_001"
+deco_texte			"rw_abysses_texte_002"
+type "menu" 
+directory "Abysses" 
+
+genre				2 
+animation			"ftghsdlssth" 
+
+dock_decal_x			"-16" 
+dock_decal_y			"0" 
+
+div_width			"192"	
+
+
+ 
+
+affiche_icones			"NON" 
+icone_taille_x			"16" 
+icone_taille_y			"16" 
+ 
+
+;

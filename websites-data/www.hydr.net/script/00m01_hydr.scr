@@ -1,0 +1,29 @@
+/*
++---------------------------------------+
+|		Hydr							|
+|		www.hydr.net 					|
+|		Configuration site N°2			|
++---------------------------------------+
+*/
+
+add website 
+name				"Hydr" 
+short				"Hdr" 
+lang 				"fra" 
+lang_select			"YES" 
+title 				"Hydr" 
+status_bar			"Hydr" 
+home				"www.hydr.net"
+directory			"www.hydr.net"
+info_debug			"10"
+stylesheet			"DYNAMIC"
+state				"ONLINE"
+group				"Server_owner" 
+user				"*user_install*" 
+password			"*user_install*"
+;
+
+website context name Hydr	user "*user_install*"	password "*user_install*";
+
+//show debug_off;
+set checkpoint name "Hydr - Debut";

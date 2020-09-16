@@ -1,0 +1,56 @@
+/*Hydre-contenu_debut*/
+[T3]
+[J]
+Les instructions du mc680x0 de S &agrave; T[BR]
+[BR]
+[TAB_STD][TW_MLI][FE]
+[TR][TDFCT3][F]SBCD[/TD][TDFC2][F][J]Soustraction d&eacute;cimale avec le bit d'extension. Soustraction en binaire cod&eacute; d&eacute;cimal avec le bit d'extension de deux registres de donn&eacute;es ou de deux cases m&eacute;moire adress&eacute;es par pr&eacute;-d&eacute;cr&eacute;mentation : SBCD Ds,Dd ou ABCD -(As),-(Ad). L'op&eacute;ration ne porte que sur des octets.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]Scc[/TD][TDFC2][F][J]Positionnement selon condition. Cette instruction teste la condition sp&eacute;cifi&eacute;e. Si celle-ci est v&eacute;rifie, l'octet point&eacute; par l'adresse effective est mis a $FF, sinon il est mis a $00. La condition cc est l'une des suivantes F, T, CC, CS, EQ, GE, GT, HI, LE, LS, LT, MI, NE, PL, VC, VS.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]STOP[/TD][TDFC2][F][J]Chargement du SR et arr&ecirc;t. Chargement su SR avec la donn&eacute;e imm&eacute;diate (16 bits) indiqu&eacute;e et arr&ecirc;t de l'ex&eacute;cution jusqu'&agrave; l'arriv&eacute;e d'une exception. Exception ' Trace ' si le bit T de SR a &eacute;t&eacute; mis &agrave; 1 par la donn&eacute;e imm&eacute;diate. Exception ' Interruption ' s'il arrive une interruption de priorit&eacute; sup&eacute;rieure &agrave; celle indiqu&eacute; par le masque I0, I1, I2 de SR. Exception 'Initialisation ' externe.[BR]
+Remarque :[BR]
+Si le bit S est mis &agrave; 0, l'ex&eacute;cution de STOP provoque une exception ' Violation de privil&egrave;ge '. En effet le processeur se retrouve en mode utilisateur alors que le mode superviseur est n&eacute;cessaire.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]SUB[/TD][TDFC2][F][J]Soustraction binaire de l'op&eacute;rande source &agrave; l'op&eacute;rande destination : SUB &lt;AE&gt;,Dn ou SUB Dn,&lt;AE&gt;.[BR]
+Variantes :[BR]
+Soustraction avec un registre d'adresse : SUBA &lt;AE&gt;,An (en .W ou .L).[BR]
+Soustraction avec une donn&eacute;e imm&eacute;diate : SUBI #,&lt;AE&gt;.[BR]
+Soustraction rapide : SUBQ #,&lt;AE&gt;, La donn&eacute;e est une valeur de 1 &agrave; 8 (ou 8 est cod&eacute; 000 de mani&egrave;re interne).[BR]
+Soustraction avec le bit d'extension : SUBX Ds,Dd ou SUBX -(As),-(Ad).[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]SWAP[/TD][TDFC2][F][J]Echange interne. Echange les mots de poids fort et de poids faible d'un registre de donn&eacute;es : SWAP Dn.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]TAS[/TD][TDFC2][F][J]Test d'un octet. Test de l'octet op&eacute;rande d&eacute;sign&eacute; par l'adresse effective. Le registre du CCR est mis &agrave; jour, puis le bit 7 de l'octet est mis a 1. Cette op&eacute;ration est indivisible et s'ex&eacute;cute en un seul cycle m&eacute;moire, lecture, &eacute;criture et permet ainsi la synchronisation de plusieurs processeurs : TAS &lt;AE&gt;.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]TRAP[/TD][TDFC2][F][J]Branchement &agrave; l'adresse indiqu&eacute;e par le vecteur d'expection n. Le PC ainsi que le SR sont sauvegard&eacute;s sur la pile. Le mode superviseur est automatiquement mis en vigueur: TRAP #n[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]TRAPV[/TD][TDFC2][F][J]Proc&eacute;dure d'expetion s'il y a d&eacute;passement de capacit&eacute;s. Branchement &agrave; l'adresse indiqu&eacute;e par le vecteur d'expection TRAPV. Le PC ainsi que le SR sont sauvegard&eacute;s sur la pile. Le mode superviseur est automatiquement mis en vigueur: TRAP #n[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F]TST[/TD][TDFC2][F][J]Test d'un op&eacute;rande. Comparaison &agrave; 0. Le registre du CCR est mis a jour, mais aucun r&eacute;sultat n'est conserv&eacute; : TST Dn.[BR]&nbsp;[/TD][/TR]
+[TR][TDFCT3][F][/TD][TDFC2][F][J][BR]&nbsp;[/TD][/TR]
+[/TABLE]
+[BR]
+[TAB_STD][TW_MLI][FE]
+[TR][TDFCTAB3] colspan='6' [F]Etat du SR pour les instrcutions[/TD][/TR]
+[TR][TDFCTBB2][F]Instruction[/TD]					[TDFCTAB2][F]X[/TD]	[TDFCTBB2][F]N[/TD]	[TDFCTAB2][F]Z[/TD]	[TDFCTBB2][F]V[/TD]	[TDFCTAB2][F]C[/TD][/TR]
+
+[TR][TDFCA2][F]SBCD				[/TD][TDFCB2][F]P		[/TD][TDFCA2][F]?	[/TD][TDFCB2][F]P	[/TD][TDFCA2][F]?	[/TD][TDFCB2][F]P	[/TD][/TR]
+[TR][TDFCC2][F]Scc				[/TD][TDFCD2][F]		[/TD][TDFCC2][F]	[/TD][TDFCD2][F]	[/TD][TDFCC2][F]	[/TD][TDFCD2][F]	[/TD][/TR]
+
+[TR][TDFCA2][F]STOP				[/TD][TDFCB2][F]		[/TD][TDFCA2][F]	[/TD][TDFCB2][F]	[/TD][TDFCA2][F]	[/TD][TDFCB2][F]	[/TD][/TR]
+[TR][TDFCC2][F]
+	SUB &lt;AE&gt;,Dn<br>
+	SUB Dn,&lt;AE&gt;<br>
+	SUBA &lt;AE&gt;,An<br>
+	SUBI #&lt;Donn&eacute;e&gt;,&lt;AE&gt;<br>
+	SUBQ #&lt;Donn&eacute;e&gt;,&lt;AE&gt;<br>
+	SUBX -(As),-(Ad)
+								[/TD][TDFCD2][F]P		[/TD][TDFCC2][F]P	[/TD][TDFCD2][F]P	[/TD][TDFCC2][F]P	[/TD][TDFCD2][F]P	[/TD][/TR]
+
+[TR][TDFCA2][F]SWAP				[/TD][TDFCB2][F]		[/TD][TDFCA2][F]P	[/TD][TDFCB2][F]P	[/TD][TDFCA2][F]0	[/TD][TDFCB2][F]0	[/TD][/TR]
+[TR][TDFCC2][F]TAS &lt;AE&gt;	[/TD][TDFCD2][F]		[/TD][TDFCC2][F]P	[/TD][TDFCD2][F]P	[/TD][TDFCC2][F]0	[/TD][TDFCD2][F]0	[/TD][/TR]
+
+
+[TR][TDFCA2][F]TRAP				[/TD][TDFCB2][F]		[/TD][TDFCA2][F]	[/TD][TDFCB2][F]	[/TD][TDFCA2][F]	[/TD][TDFCB2][F]	[/TD][/TR]
+[TR][TDFCC2][F]TRAPV			[/TD][TDFCD2][F]		[/TD][TDFCC2][F]	[/TD][TDFCD2][F]	[/TD][TDFCC2][F]	[/TD][TDFCD2][F]	[/TD][/TR]
+[TR][TDFCA2][F]TST Dn			[/TD][TDFCB2][F]		[/TD][TDFCA2][F]P	[/TD][TDFCB2][F]P	[/TD][TDFCA2][F]0	[/TD][TDFCB2][F]0	[/TD][/TR]
+[/TABLE]
+[BR]
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.mwmcode[/INCLUDE]
+[BR]
+[BR]
+[/J]
+/*Hydre-contenu_fin*/

@@ -1,0 +1,19 @@
+add	decoration
+name	'mwm_aplat_bleu_menu_001'
+deco_graphique	'mwm_aplat_bleu_block_001'
+deco_texte	'mwm_aplat_bleu_texte_090'
+type	'menu'
+directory	'aplat_bleu'
+	
+genre	'2'
+animation	'ftgvs'
+	
+dock_cible	'Bottom-right'
+dock_decal_x	'-32'
+dock_decal_y	'4'
+div_width	'160'
+	
+affiche_icones	'NON'
+icone_taille_x	'16'
+icone_taille_y	'16'
+;	

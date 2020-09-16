@@ -1,0 +1,26 @@
+add decoration 
+name "rw_aqua_block_003" 
+type "1_div" 
+directory	 "Aqua"			
+
+border_top_width	"0" 
+border_top_color	"FF00FF" 
+border_top_style	"none" 
+
+border_left_width	"2" 
+border_left_color	"000000" 
+border_left_style	"solid" 
+
+border_right_width	"2" 
+border_right_color	"000000" 
+border_right_style	"solid" 
+
+border_bottom_width	"2" 
+border_bottom_color	"000000" 
+border_bottom_style	"solid" 
+
+padding_all			"0" 
+margin_all			"0" 
+
+background_url		"aqua_menu_banner_bg2_normal.png"
+;

@@ -1,0 +1,29 @@
+/*
++---------------------------------------+
+|		Multi-Web Manager (MWM) 		|
+|		www.rootwave.net 				|
+|		Configuration site N°3			|
++---------------------------------------+
+*/
+
+add website 
+name				rootwave 
+short				RW 
+lang				fra
+lang_select			YES 
+title				"R o o t w a v e" 
+status_bar			"www.rootwave.net" 
+home				"www.rootwave.net" 
+directory			"www.rootwave.net" 
+info_debug			"10"
+stylesheet			DYNAMIC 
+state				ONLINE
+group				"Server_owner" 
+user				"*user_install*" 
+password			"*user_install*"
+;
+
+website context name rootwave			user "*user_install*"	password "*user_install*";
+
+//show debug_off;
+set checkpoint name "Debut - Rootwave";

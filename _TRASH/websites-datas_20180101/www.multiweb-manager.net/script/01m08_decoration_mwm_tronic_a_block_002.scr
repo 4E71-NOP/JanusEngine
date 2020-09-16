@@ -1,0 +1,23 @@
+add decoration		
+name 'mwm_tronic_block_002'		
+type 'exquise'		
+directory 'Tronic'		
+		
+ex11 'tronic_B02_ex11.png'	ex11_x '24'	ex11_y '32'
+ex12 'tronic_B02_ex12.png'	ex12_x '88'	ex12_y '32'
+ex13 'tronic_B02_ex13.png'	ex13_x '256'	ex13_y '32'
+ex14 'tronic_B02_ex14.png'	ex14_x '120'	ex14_y '32'
+ex15 'tronic_B02_ex15.png'	ex15_x '24'	ex15_y '32'
+ex21 'tronic_B02_ex21.png'	ex21_x '24'	ex21_y '26'
+ex22 'tronic_B02_ex22.png'	ex22_x '464'	ex22_y '456'
+ex25 'tronic_B02_ex25.png'	ex25_x '24'	ex25_y '32'
+ex31 'tronic_B02_ex31.png'	ex31_x '24'	ex31_y '414'
+ex35 'tronic_B02_ex35.png'	ex35_x '24'	ex35_y '390'
+ex41 'tronic_B02_ex41.png'	ex41_x '24'	ex41_y '16'
+ex45 'tronic_B02_ex45.png'	ex45_x '24'	ex45_y '34'
+ex51 'tronic_B02_ex51.png'	ex51_x '24'	ex51_y '24'
+ex52 'tronic_B02_ex52.png'	ex52_x '32'	ex52_y '24'
+ex53 'tronic_B02_ex53.png'	ex53_x '384'	ex53_y '24'
+ex54 'tronic_B02_ex54.png'	ex54_x '48'	ex54_y '24'
+ex55 'tronic_B02_ex55.png'	ex55_x '24'	ex55_y '24'
+;		

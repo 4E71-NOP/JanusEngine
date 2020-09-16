@@ -1,0 +1,16 @@
+add article	name "eng_presentation_de_l_equipe_p01"		reference "eng_presentation_de_l_equipe"	deadline "initial_online"		desc "Introduction"						title "The team"									sub_title "The staff"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_presentation_de_l_activite_p01"	reference "eng_presentation_de_l_activite"	deadline "initial_online"		desc "What do we do?"					title "What do we do?"								sub_title "The staff"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_recherche_p01"					reference "eng_recherche"					deadline "initial_online"		desc "Search"							title "Search"										sub_title "...and find"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_voir_fiche_publique_p01"			reference "eng_voir_fiche_publique"			deadline "initial_online"		desc "Public infos"						title "Public infos"								sub_title "User detail"					page "1"	validation_state "VALID"	config "no_menu";
+add	article	name "eng_recrutement_p01"					reference "eng_recrutement"					deadline "initial_online"		desc "Admin en ENG"						title "Enrolment"									sub_title "Information"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_actualite_p01"					reference "eng_actualite"					deadline "initial_online"		desc "News"								title "News"										sub_title "What's happening?"			page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_telechargement_p01"				reference "eng_telechargement"				deadline "initial_online"		desc "Download"							title "Download"									sub_title "Get it!"						page "1"	validation_state "VALID"	config "no_menu";
+
+link	article "eng_presentation_de_l_equipe_p01"		document "doc_uni_presentation_de_l_equipe_p01.php";
+link	article "eng_presentation_de_l_activite_p01"	document "doc_uni_presentation_de_l_activite_p01.php";
+link	article "eng_recherche_p01"						document "doc_uni_recherche_p01.php";
+link	article "eng_voir_fiche_publique_p01"			document "doc_uni_voir_fiche_publique_p01.php";
+link 	article	"eng_recrutement_p01"					document "doc_uni_recrutement_p01.php";
+link	article "eng_actualite_p01"						document "doc_uni_actualite_p01.php";
+link	article "eng_telechargement_p01"				document "doc_uni_telechargement_p01.php";
+

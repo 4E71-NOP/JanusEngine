@@ -1,0 +1,24 @@
+add decoration 
+name "rw_hal9000_menu_001" 
+deco_graphique		"rw_hal9000_block_001"	
+deco_texte			"rw_hal9000_texte_090"	
+type "menu" 
+repertoire	'HAL-9000'						
+
+genre				2 
+animation			"sc" 
+
+dock_decal_x		"0" 
+dock_decal_y		"0" 
+
+div_width			"128"	
+
+
+ 
+
+affiche_icones		"NON" 
+icone_taille_x		"16" 
+icone_taille_y		"16" 
+ 
+
+;

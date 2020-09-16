@@ -1,0 +1,27 @@
+assign user name dieu						to_group Server_owner					primary_group NO;
+assign user name dieu						to_group staff							primary_group YES;
+assign user name dev_senior					to_group Developpeurs_senior			primary_group YES;
+assign user name dev_confirme				to_group Developpeurs_confirme			primary_group YES;
+assign user name dev_debutant				to_group Developpeurs_debutant			primary_group YES;
+assign user name admin_senior				to_group Admins_senior					primary_group YES;
+assign user name admin_confirme				to_group Admins_confirme				primary_group YES;
+assign user name admin_debutant				to_group Admins_debutant				primary_group YES;
+assign user name admin_forum_senior			to_group Admins_forum_senior			primary_group YES;
+assign user name admin_forum_confirme		to_group Admins_forum_confirme			primary_group YES;
+assign user name admin_forum_debutant		to_group Admins_forum_debutant			primary_group YES;
+assign user name redacteur_en_chef_senior	to_group Redacteur_en_chef_senior		primary_group YES;
+assign user name redacteur_en_chef_confirme	to_group Redacteur_en_chef_confirme		primary_group YES;
+assign user name redacteur_en_chef_debutant	to_group Redacteur_en_chef_debutant		primary_group YES;
+assign user name chef_de_rubrique_senior	to_group Chef_de_rubrique_senior		primary_group YES;
+assign user name chef_de_rubrique_confirme	to_group Chef_de_rubrique_confirme		primary_group YES;
+assign user name chef_de_rubrique_debutant	to_group Chef_de_rubrique_debutant		primary_group YES;
+assign user name validateur_senior			to_group Validateurs_senior				primary_group YES;
+assign user name validateur_confirme		to_group Validateurs_confirme			primary_group YES;
+assign user name validateur_debutant		to_group Validateurs_debutant			primary_group YES;
+assign user name correcteur_senior			to_group Correcteurs_senior				primary_group YES;
+assign user name correcteur_confirme		to_group Correcteurs_confirme			primary_group YES;
+assign user name correcteur_debutant		to_group Correcteurs_debutant			primary_group YES;
+assign user name auteur_senior				to_group Auteurs_senior					primary_group YES;
+assign user name auteur_confirme			to_group Auteurs_confirme				primary_group YES;
+assign user name auteur_debutant			to_group Auteurs_debutant				primary_group YES;
+

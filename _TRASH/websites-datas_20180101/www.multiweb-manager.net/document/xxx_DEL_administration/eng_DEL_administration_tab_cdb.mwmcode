@@ -1,0 +1,24 @@
+/*Hydre-contenu_debut*/
+[TAB_STD][TW_MLI][FE]
+[TR] [TDFCTA2][COLSP]2[FE]Basic commands[/TD][/TR]
+
+[TR] [TDFCA1][F]site_context[/TD]					[TDFCB1][F]This is one of the most important command. This command selects the website on which modification have to be applied.[BR]
+Example:
+[CODE]
+site_context "MultiWeb_Engine";[BR]
+[/CODE]
+[/TD][/TR]
+[TR] [TDFCA1][F]Add[/TD]			[TDFCB1][F]Adds an element. Needs the element name. Each element name has to be unique in its own category (user/deadline etc.).[/TD][/TR]
+[TR] [TDFCA1][F]Update[/TD]			[TDFCB1][F]Modifies an element. The element selection is bound to the condition that the element exists.[/TD][/TR]
+[TR] [TDFCA1][F]Delete[/TD]			[TDFCB1][F]Delete an element. The element selection is bound to the condition that the element exists.[/TD][/TR]
+[TR] [TDFCA1][F]Show[/TD]			[TDFCB1][F]Displays element details. The element selection is bound to the condition that the element exists.[/TD][/TR]
+[BR]
+[TR] [TDFCTA2][COLSP]4[FE]Specialized commands[/TD][/TR]
+[TR] [TDFCA1][F]insert_content[/TD]					[TDFCB1][F]Replace the content of a document by the selectd file content[/TD][/TR]
+[TR] [TDFCA1][F]share_document[/TD]					[TDFCB1][F]Allows the sharing of a document. Only the website (context) owner can do it for his/its document and / or the server owner (role).[/TD][/TR]
+[TR] [TDFCA1][F]user[/TD]							[TDFCB1][F]Initiate an action on a user (ex: join_group).[/TD][/TR]
+[TR] [TDFCA1][F]Link[/TD]							[TDFCB1][F]Dedicated article command that allows to link an article with a document.[/TD][/TR]
+[/TABLE][BR]
+[BR]
+[BR]
+/*Hydre-contenu_fin*/

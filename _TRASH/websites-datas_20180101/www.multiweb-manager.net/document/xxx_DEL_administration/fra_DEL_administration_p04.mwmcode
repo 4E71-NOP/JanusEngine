@@ -1,0 +1,15 @@
+/*Hydre-contenu_debut*/
+[T3][J]
+[INCLUDE]doc_fra_DEL_administration_interface_entete.mwmcode[/INCLUDE]
+[B]Gestion des documents[/B][BR]
+L'interface propose un panneau de configuration qui permet de gérer les documents d'un site donné. Notez bien qu'il s'agit de la configuration du documents et non de son contenu.[BR]
+[BR]
+[TAB_STD][TW_MLI][FE]
+[TR]
+[TD][CENTER][POPIMG_L]fra_DEL_administration_gestion_des_documents_001.png[/POPIMG_L][POPIMG_I]fra_DEL_administration_gestion_des_documents_001.png[POPIMG_S60][/POPIMG_I][/L][/CENTER][/TD]
+[/TR]
+[/TABLE]
+[BR]
+[BR]
+[/J]
+/*Hydre-contenu_fin*/

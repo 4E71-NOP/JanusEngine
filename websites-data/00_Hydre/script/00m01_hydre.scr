@@ -1,0 +1,32 @@
+/*
++---------------------------------------+
+|		Hydre (Hdr) 					|
+|		www.hydre.info			 		|
+|		Initial Configuration site 		|
++---------------------------------------+
+*/
+
+add website 
+name				"Hydre"	
+short				"Hdr"	
+lang 				"fra"	
+lang_select			"YES"	
+title 				"Hydre"	
+status_bar			"Hydre"	
+home				"www.hydre.info"	
+directory			"00_Hydre"	
+info_debug			"1"
+stylesheet			"DYNAMIC"	
+state				"OFFLINE"	
+group				"Server_owner"	
+user				"*user_install*"	
+password			"*user_install*"	
+;
+
+website context name Hydre				user "*user_install*"	password "*user_install*";
+
+//show debug_off;
+set checkpoint name "Base critique - Debut";
+set variable name "installMonitor"		value "1";
+set variable name "DebugLevel_CC"		value "1";
+

@@ -1,0 +1,3 @@
+add deadline name "initial_offline"	title "Bouclage initial : OFFLINE par defaut"			etat OFFLINE;
+add deadline name "initial_online"	title "Bouclage projet MWM : premiere mise en ligne"	etat ONLINE;
+

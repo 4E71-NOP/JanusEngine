@@ -1,0 +1,33 @@
+add decoration 
+name "rw_abysses_texte_002" 
+type	'caligraphe'						
+repertoire	'Abysses'						
+							
+txt_fonte	'Dungeon'						
+							
+txt_l_01_display	'block'						
+		txt_l_01_weight	'normal'	txt_l_01_decoration	'none'		
+txt_l_01_margin_top	'000000'	txt_l_01_margin_bottom	'000000'	txt_l_01_margin_left	'000000'	txt_l_01_margin_right	'000000'
+		txt_l_01_hover_weight	'normal'				
+txt_l_01_fg_col	'DDEEFF'	txt_l_01_fg_hover_col	'FFFFFF'	txt_l_01_fg_active_col	'DDEEFF'	txt_l_01_fg_visite_col	'DDEEFF'
+txt_l_01_bg_col	'transparent'	txt_l_01_bg_hover_col	'transparent'	txt_l_01_bg_active_col	'transparent'	txt_l_01_bg_visite_col	'transparent'
+							
+txt_l_td_display	'block'						
+		txt_l_td_weight	'normal'	txt_l_td_decoration	'none'		
+txt_l_td_margin_top	'000000'	txt_l_td_margin_bottom	'000000'	txt_l_td_margin_left	'000000'	txt_l_td_margin_right	'000000'
+		txt_l_td_hover_weight	'normal'				
+txt_l_td_fg_col	'DDEEFF'	txt_l_td_fg_hover_col	'FFFFFF'	txt_l_td_fg_active_col	'DDEEFF'	txt_l_td_fg_visite_col	'DDEEFF'
+txt_l_td_bg_col	'transparent'	txt_l_td_bg_hover_col	'transparent'	txt_l_td_bg_active_col	'transparent'	txt_l_td_bg_visite_col	'transparent'
+							
+icone_repertoire	'abysses_B01_icone_repertoire.png'						
+icone_efface	'abysses_B01_icone_efface.png'						
+icone_gauche	'abysses_B01_icone_fleche_gauche.png'						
+icone_droite	'abysses_B01_icone_fleche_droite.png'						
+icone_haut	'abysses_B01_icone_fleche_haut.png'						
+icone_bas	'abysses_B01_icone_fleche_bas.png'						
+icone_ok	'abysses_B01_icone_ok.png'						
+icone_nok	'abysses_B01_icone_nok.png'						
+icone_question	'abysses_B01_icone_question.png'						
+icone_notification	'abysses_B01_icone_notification.png'						
+transparent_8x8	'vide.gif'						
+;							

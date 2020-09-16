@@ -1,0 +1,65 @@
+add translation	lang	"eng"		package	"initial"		name	"january"		text	"January";
+add translation	lang	"eng"		package	"initial"		name	"february"		text	"February";
+add translation	lang	"eng"		package	"initial"		name	"march"			text	"March";
+add translation	lang	"eng"		package	"initial"		name	"april"			text	"April";
+add translation	lang	"eng"		package	"initial"		name	"may"			text	"May";
+add translation	lang	"eng"		package	"initial"		name	"june"			text	"June";
+add translation	lang	"eng"		package	"initial"		name	"july"			text	"July";
+add translation	lang	"eng"		package	"initial"		name	"august"		text	"August";
+add translation	lang	"eng"		package	"initial"		name	"september"		text	"September";
+add translation	lang	"eng"		package	"initial"		name	"october"		text	"October";
+add translation	lang	"eng"		package	"initial"		name	"november"		text	"November";
+add translation	lang	"eng"		package	"initial"		name	"december"		text	"December";
+
+add translation	lang	"eng"		package	"initial"		name	"monday"		text	"Monday";
+add translation	lang	"eng"		package	"initial"		name	"tuesday"		text	"Tuesday";
+add translation	lang	"eng"		package	"initial"		name	"wetnesday"		text	"Wednesday";
+add translation	lang	"eng"		package	"initial"		name	"thurday"		text	"Thursday";
+add translation	lang	"eng"		package	"initial"		name	"friday"		text	"Friday";
+add translation	lang	"eng"		package	"initial"		name	"saturday"		text	"Saturday";
+add translation	lang	"eng"		package	"initial"		name	"sunday"		text	"Sunday";
+
+
+add translation	lang	"eng"		package	"initial"		name	"no"			text	"No";
+add translation	lang	"eng"		package	"initial"		name	"yes"			text	"Yes";
+add translation	lang	"eng"		package	"initial"		name	"offline"		text	"Offline";
+add translation	lang	"eng"		package	"initial"		name	"online"		text	"Online";
+add translation	lang	"eng"		package	"initial"		name	"disabled"		text	"Disabled";
+add translation	lang	"eng"		package	"initial"		name	"enabled"		text	"Enabled";
+add translation	lang	"eng"		package	"initial"		name	"deleted"		text	"Deleted";
+
+
+add translation	lang	"eng"		package	"initial"		name	"create"		text	"create";
+add translation	lang	"eng"		package	"initial"		name	"add"			text	"add";
+add translation	lang	"eng"		package	"initial"		name	"insert"		text	"insert";
+add translation	lang	"eng"		package	"initial"		name	"edit"			text	"edit";
+add translation	lang	"eng"		package	"initial"		name	"modify"		text	"modify";
+add translation	lang	"eng"		package	"initial"		name	"attach"		text	"attach";
+add translation	lang	"eng"		package	"initial"		name	"update"		text	"update";
+add translation	lang	"eng"		package	"initial"		name	"delete"		text	"delete";
+
+add translation	lang	"eng"		package	"initial"		name	"see"			text	"see";
+add translation	lang	"eng"		package	"initial"		name	"read"			text	"read";
+add translation	lang	"eng"		package	"initial"		name	"load"			text	"load";
+add translation	lang	"eng"		package	"initial"		name	"upload"		text	"upload";
+add translation	lang	"eng"		package	"initial"		name	"download"		text	"download";
+
+add translation	lang	"eng"		package	"initial"		name	"nothingToDisplay"	text	"Rien à afficher";
+
+add translation	lang	"eng"		package	"initial"		name	"createEditConfirm"	text	"Create and edit";
+add translation	lang	"eng"		package	"initial"		name	"updateConfirm"		text	"I confirm the changes";
+add translation	lang	"eng"		package	"initial"		name	"deleteConfirm"		text	"I confirm the deletion";
+
+add translation	lang	"eng"		package	"initial"		name	"btnCreate"		text	"Create";
+add translation	lang	"eng"		package	"initial"		name	"btnUpdate"		text	"Update";
+add translation	lang	"eng"		package	"initial"		name	"btnReturn"		text	"Return";
+add translation	lang	"eng"		package	"initial"		name	"btnDelete"		text	"Delete";
+add translation	lang	"eng"		package	"initial"		name	"btnExecute"	text	"Execute";
+add translation	lang	"eng"		package	"initial"		name	"btnRefresh"	text	"Refresh";
+add translation	lang	"eng"		package	"initial"		name	"btnFilter"		text	"Filter";
+
+add translation	lang	"eng"		package	"initial"		name	"userForgotConfirmation"	text	"You forgot to confirm the update.";
+add translation	lang	"eng"		package	"initial"		name	"userForgotDeletion"		text	"You forgot to confirm the deletion.";
+add translation	lang	"eng"		package	"initial"		name	"userForgotCreation"		text	"You forgot to confirm the creation.";
+
+

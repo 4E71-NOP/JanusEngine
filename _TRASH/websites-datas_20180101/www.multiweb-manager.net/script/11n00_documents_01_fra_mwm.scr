@@ -1,0 +1,147 @@
+add document	name "doc_mwm_fra_acceuil_p01.mwmcode"	type MWMCODE;
+insert_content	file "mwm_fra_acceuil_p01.mwmcode"		to "doc_mwm_fra_acceuil_p01.mwmcode";
+share_document	name "doc_mwm_fra_acceuil_p01.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_mwm_fra_acceuil_p01.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+
+
+
+
+add document	name "doc_fra_DEL_concepts_p01.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_concepts_p01.mwmcode"		to "doc_fra_DEL_concepts_p01.mwmcode";
+share_document	name "doc_fra_DEL_concepts_p01.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_concepts_p01.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_concepts_p02.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_concepts_p02.mwmcode"		to "doc_fra_DEL_concepts_p02.mwmcode";
+share_document	name "doc_fra_DEL_concepts_p02.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_concepts_p02.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_concepts_p03.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_concepts_p03.mwmcode"		to "doc_fra_DEL_concepts_p03.mwmcode";
+share_document	name "doc_fra_DEL_concepts_p03.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_concepts_p03.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+
+
+
+add document	name "doc_fra_DEL_gestion_du_contenu_p01.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_gestion_du_contenu_p01.mwmcode"		to "doc_fra_DEL_gestion_du_contenu_p01.mwmcode";
+share_document	name "doc_fra_DEL_gestion_du_contenu_p01.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_gestion_du_contenu_p01.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_gestion_du_contenu_p02.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_gestion_du_contenu_p02.mwmcode"		to "doc_fra_DEL_gestion_du_contenu_p02.mwmcode";
+share_document	name "doc_fra_DEL_gestion_du_contenu_p02.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_gestion_du_contenu_p02.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+
+
+add document	name "doc_fra_DEL_administration_CC_entete.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_CC_entete.mwmcode"		to "doc_fra_DEL_administration_CC_entete.mwmcode";
+share_document	name "doc_fra_DEL_administration_CC_entete.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_CC_entete.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_interface_entete.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_interface_entete.mwmcode"		to "doc_fra_DEL_administration_interface_entete.mwmcode";
+share_document	name "doc_fra_DEL_administration_interface_entete.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_interface_entete.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+
+add document	name "doc_fra_DEL_administration_tab_bouclage.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_bouclage.mwmcode"		to "doc_fra_DEL_administration_tab_bouclage.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_bouclage.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_bouclage.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_categorie.mwmcode"		to "doc_fra_DEL_administration_tab_categorie.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_cdb.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_cdb.mwmcode"		to "doc_fra_DEL_administration_tab_cdb.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_cdb.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_cdb.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_decoration.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_decoration.mwmcode"		to "doc_fra_DEL_administration_tab_decoration.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_decoration.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_decoration.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_document.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_document.mwmcode"		to "doc_fra_DEL_administration_tab_document.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_document.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_document.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_groupe.mwmcode"		to "doc_fra_DEL_administration_tab_groupe.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_module.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_module.mwmcode"		to "doc_fra_DEL_administration_tab_module.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_module.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_module.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_site.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_site.mwmcode"		to "doc_fra_DEL_administration_tab_site.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_site.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_site.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_tab_utilisateur.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_tab_utilisateur.mwmcode"		to "doc_fra_DEL_administration_tab_utilisateur.mwmcode";
+share_document	name "doc_fra_DEL_administration_tab_utilisateur.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_tab_utilisateur.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+
+
+add document	name "doc_fra_DEL_administration_p01.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p01.mwmcode"		to "doc_fra_DEL_administration_p01.mwmcode";
+share_document	name "doc_fra_DEL_administration_p01.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p01.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p02.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p02.mwmcode"		to "doc_fra_DEL_administration_p02.mwmcode";
+share_document	name "doc_fra_DEL_administration_p02.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p02.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p03.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p03.mwmcode"		to "doc_fra_DEL_administration_p03.mwmcode";
+share_document	name "doc_fra_DEL_administration_p03.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p03.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p04.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p04.mwmcode"		to "doc_fra_DEL_administration_p04.mwmcode";
+share_document	name "doc_fra_DEL_administration_p04.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p04.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p05.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p05.mwmcode"		to "doc_fra_DEL_administration_p05.mwmcode";
+share_document	name "doc_fra_DEL_administration_p05.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p05.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p06.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p06.mwmcode"		to "doc_fra_DEL_administration_p06.mwmcode";
+share_document	name "doc_fra_DEL_administration_p06.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p06.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p07.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p07.mwmcode"		to "doc_fra_DEL_administration_p07.mwmcode";
+share_document	name "doc_fra_DEL_administration_p07.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p07.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p08.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p08.mwmcode"		to "doc_fra_DEL_administration_p08.mwmcode";
+share_document	name "doc_fra_DEL_administration_p08.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p08.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_administration_p09.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_administration_p09.mwmcode"		to "doc_fra_DEL_administration_p09.mwmcode";
+share_document	name "doc_fra_DEL_administration_p09.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_administration_p09.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+
+add document	name "doc_fra_DEL_tut_001_p01.mwmcode"	type MWMCODE;
+insert_content	file "xxx_DEL_administration/fra_DEL_tut_001_p01.mwmcode"		to "doc_fra_DEL_tut_001_p01.mwmcode";
+share_document	name "doc_fra_DEL_tut_001_p01.mwmcode"	with_site MultiWeb_Manager	modification YES;
+update document	name "doc_fra_DEL_tut_001_p01.mwmcode"	checked YES	examiner "*utilisateur_install*"	from_site MultiWeb_Manager;
+

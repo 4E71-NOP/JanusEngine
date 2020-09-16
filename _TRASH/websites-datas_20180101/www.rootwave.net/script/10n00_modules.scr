@@ -1,0 +1,8 @@
+add module name "menu"					title "Menu"					file "../modules/initial/Menu/module_menu.php"							desc "Menu de selection des sujets"				group_who_can_see Anonyme					group_who_can_use Anonyme					deco ON		deco_nbr	3	position 3;
+add module name "quickskin"				title "Quickskin"				file "../modules/initial/QuickSkin/module_quickskin.php"				desc "Changeur de skin"							group_who_can_see Lecteur					group_who_can_use "Lecteur"					deco ON		deco_nbr	4	position 4;
+add module name "calendrier"			title "Calendrier"				file "../modules/initial/Calendrier/module_calendrier.php"				desc "Calendrier"								group_who_can_see Anonyme					group_who_can_use "Anonyme"					deco ON		deco_nbr	5	position 5;
+add module name "pieddepage"			title "Pied de page"			file "../modules/initial/PiedDePage/module_pied_de_page.php"			desc "Pied de page"								group_who_can_see Anonyme					group_who_can_use Anonyme					deco OFF	deco_nbr	1	position 7;
+add module name "rechercher"			title "rechercher"				file "../modules/initial/Recherche/module_recherche.php"				desc "Moteur de recherche"						group_who_can_see Lecteur					group_who_can_use "Lecteur"					deco ON		deco_nbr	6	position 9;
+add module name "AideDynamique"			title "Aide dynamique"			file "../modules/initial/AideDynamique/module_aide_dynamique.php"		desc "Aide dynamique"							group_who_can_see Anonyme					group_who_can_use Anonyme					deco ON		deco_nbr	20	position 98		deco_txt_defaut	2	container_name CalqueConteneur	execution AFTER;
+
+

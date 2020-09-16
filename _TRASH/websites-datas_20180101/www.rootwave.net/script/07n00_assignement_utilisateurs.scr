@@ -1,0 +1,27 @@
+user dieu						join_group Server_owner					primary_group NON;
+user dieu						join_group staff						primary_group OUI;
+user dev_senior					join_group Developpeurs_senior			primary_group OUI;
+user dev_confirme				join_group Developpeurs_confirme		primary_group OUI;
+user dev_debutant				join_group Developpeurs_debutant		primary_group OUI;
+user admin_senior				join_group Admins_senior				primary_group OUI;
+user admin_confirme				join_group Admins_confirme				primary_group OUI;
+user admin_debutant				join_group Admins_debutant				primary_group OUI;
+user admin_forum_senior			join_group Admins_forum_senior			primary_group OUI;
+user admin_forum_confirme		join_group Admins_forum_confirme		primary_group OUI;
+user admin_forum_debutant		join_group Admins_forum_debutant		primary_group OUI;
+user redacteur_en_chef_senior	join_group Redacteur_en_chef_senior		primary_group OUI;
+user redacteur_en_chef_confirme	join_group Redacteur_en_chef_confirme	primary_group OUI;
+user redacteur_en_chef_debutant	join_group Redacteur_en_chef_debutant	primary_group OUI;
+user chef_de_rubrique_senior	join_group Chef_de_rubrique_senior		primary_group OUI;
+user chef_de_rubrique_confirme	join_group Chef_de_rubrique_confirme	primary_group OUI;
+user chef_de_rubrique_debutant	join_group Chef_de_rubrique_debutant	primary_group OUI;
+user validateur_senior			join_group Validateurs_senior			primary_group OUI;
+user validateur_confirme		join_group Validateurs_confirme			primary_group OUI;
+user validateur_debutant		join_group Validateurs_debutant			primary_group OUI;
+user correcteur_senior			join_group Correcteurs_senior			primary_group OUI;
+user correcteur_confirme		join_group Correcteurs_confirme			primary_group OUI;
+user correcteur_debutant		join_group Correcteurs_debutant			primary_group OUI;
+user auteur_senior				join_group Auteurs_senior				primary_group OUI;
+user auteur_confirme			join_group Auteurs_confirme				primary_group OUI;
+user auteur_debutant			join_group Auteurs_debutant				primary_group OUI;
+

@@ -1,0 +1,50 @@
+<?php
+ /*Hydre-licence-debut*/
+// --------------------------------------------------------------------------------------------
+//
+//	Hydre - Le petit moteur de web
+//	Sous licence Creative Common	
+//	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
+//	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
+//
+//	(c)Faust MARIA DE AREVALO faust@club-internet.fr
+//
+// --------------------------------------------------------------------------------------------
+/*Hydre-licence-fin*/
+
+class Mapper {
+	private static $Instance = null;
+	
+	private $WhereWeAreAt = "Index";
+	private $SqlApplicant = "Index";
+	
+	private function __construct(){}
+
+	public static function getInstance() {
+		if (self::$Instance == null) {
+			self::$Instance = new Mapper();
+		}
+		return self::$Instance;
+	}
+	
+	public function AddAnotherLevel ( $data ) {
+		$this->WhereWeAreAt .= $data; 
+	}
+
+	public function RemoveThisLevel ( $data ) {
+		$this->WhereWeAreAt = substr ( $this->WhereWeAreAt , 0 , (0 - strlen( $data)) );
+	}
+
+	//@formatter:off
+	public function getWhereWeAreAt() { return $this->WhereWeAreAt; }
+// 	public function setWhereWeAreAt($WhereAreWeAt) { $this->WhereWeAreAt = $WhereAreWeAt; }
+
+	public function getSqlApplicant() { return $this->SqlApplicant; }
+	public function setSqlApplicant($SqlApplicant) { $this->SqlApplicant = $SqlApplicant; }
+	//@formatter:on
+	
+}
+
+
+
+?>

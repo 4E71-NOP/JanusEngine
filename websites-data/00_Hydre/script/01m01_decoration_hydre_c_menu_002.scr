@@ -1,0 +1,19 @@
+add decoration	
+name "hydre_menu_002"	
+graphique	'hydre_block_003'
+texte	'hydre_texte_001'
+type "menu"	
+directory	 "Hydre"	
+
+genre					1	
+animation				"ftgvs"	
+
+a_line_height			"18"	
+
+dock_decal_x			"-16"	
+
+affiche_icones			"NO"	
+icone_taille_x			"16"	
+icone_taille_y			"16"	
+icone_repertoire_01		"icone_dossier.png"	
+;

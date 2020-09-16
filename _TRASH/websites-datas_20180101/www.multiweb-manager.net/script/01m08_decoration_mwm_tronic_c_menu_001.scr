@@ -1,0 +1,19 @@
+add	decoration
+name	'mwm_tronic_menu_001'
+deco_graphique	'mwm_tronic_block_001'
+deco_texte	'mwm_tronic_texte_002'
+type	'menu'
+directory	'Tronic'
+	
+genre	'2'
+animation	'ftgvs'
+	
+dock_cible	'Bottom-right'
+dock_decal_x	'-32'
+dock_decal_y	'4'
+div_width	'160'
+	
+affiche_icones	'NON'
+icone_taille_x	'16'
+icone_taille_y	'16'
+;

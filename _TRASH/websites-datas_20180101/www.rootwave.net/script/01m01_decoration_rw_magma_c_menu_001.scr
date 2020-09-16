@@ -1,0 +1,30 @@
+add	decoration
+name	'rw_magma_menu_001'
+deco_graphique	'rw_magma_block_001'
+deco_texte	'rw_magma_texte_001'
+type	'menu'
+directory	'Magma'
+	
+genre	'2'
+animation	'ftgvsghctvdlhs'
+	
+div_width	'160'
+	
+	
+	
+dock_cible	'Bottom-right'
+dock_decal_x	'0'
+dock_decal_y	'0'
+	
+affiche_icones	'NON'
+icone_taille_x	'16'
+icone_taille_y	'16'
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;

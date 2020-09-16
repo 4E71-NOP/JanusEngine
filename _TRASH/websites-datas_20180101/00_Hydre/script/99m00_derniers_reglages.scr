@@ -1,0 +1,6 @@
+journalisation	"ERR"	"TST001"	"Test";
+journalisation	"WARN"	"TST001"	"Test";
+
+show checkpoint "Base critique - Fin";
+
+

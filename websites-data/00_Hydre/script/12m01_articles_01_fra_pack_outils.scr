@@ -1,0 +1,16 @@
+add article	name "fra_presentation_de_l_equipe_p01"		reference "fra_presentation_de_l_equipe"	deadline "initial_online"		desc "Presentation l'&eacute;quipe"		title "Pr&eacute;sentation de l'&eacute;quipe"		subtitle "Le staff"						page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_presentation_de_l_activite_p01"	reference "fra_presentation_de_l_activite"	deadline "initial_online"		desc "Presentation l'activit&eacute;"	title "Pr&eacute;sentation de l'activit&eacute;"	subtitle "Ce qu'on fait"				page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_recherche_p01"					reference "fra_recherche"					deadline "initial_online"		desc "Recherche"						title "Recherche"									subtitle "...et r&eacute;sultat"		page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_voir_fiche_publique_p01"			reference "fra_voir_fiche_publique"			deadline "initial_online"		desc "Fiche publique"					title "Fiche publique"								subtitle "d&eacute;tail utilisateur"	page "1"	validation_state "VALID"	config "no_menu";
+add	article	name "fra_recrutement_p01"					reference "fra_recrutement"					deadline "initial_online"		desc "Admin en Francais"				title "Recrutement"									subtitle "Information"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_actualite_p01"					reference "fra_actualite"					deadline "initial_online"		desc "Actualit&eacute;"					title "Actualit&eacute;"							subtitle "Que se passe-t-il?"			page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_telechargement_p01"				reference "fra_telechargement"				deadline "initial_online"		desc "T&eacute;l&eacute;chargement"		title "T&eacute;l&eacute;chargement"				subtitle "click / sauvegarder"			page "1"	validation_state "VALID"	config "no_menu";
+
+assign document name "doc_uni_presentation_de_l_equipe_p01.php"		to_article "fra_presentation_de_l_equipe_p01";
+assign document name "doc_uni_presentation_de_l_activite_p01.php"	to_article "fra_presentation_de_l_activite_p01";
+assign document name "doc_uni_recherche_p01.php"					to_article "fra_recherche_p01";					
+assign document name "doc_uni_voir_fiche_publique_p01.php"			to_article "fra_voir_fiche_publique_p01";		
+assign document name "doc_uni_recrutement_p01.php"					to_article "fra_recrutement_p01";				
+assign document name "doc_uni_actualite_p01.php"					to_article "fra_actualite_p01";					
+assign document name "doc_uni_telechargement_p01.php"				to_article "fra_telechargement_p01";			
+

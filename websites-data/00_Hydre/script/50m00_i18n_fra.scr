@@ -1,0 +1,65 @@
+add translation	lang	"fra"		package	"initial"		name	"january"		text	"Janvier";
+add translation	lang	"fra"		package	"initial"		name	"february"		text	"Février";
+add translation	lang	"fra"		package	"initial"		name	"march"			text	"Mars";
+add translation	lang	"fra"		package	"initial"		name	"april"			text	"Avril";
+add translation	lang	"fra"		package	"initial"		name	"may"			text	"Mai";
+add translation	lang	"fra"		package	"initial"		name	"june"			text	"Juin";
+add translation	lang	"fra"		package	"initial"		name	"july"			text	"Juillet";
+add translation	lang	"fra"		package	"initial"		name	"august"		text	"Aout";
+add translation	lang	"fra"		package	"initial"		name	"september"		text	"Septembre";
+add translation	lang	"fra"		package	"initial"		name	"october"		text	"Octobre";
+add translation	lang	"fra"		package	"initial"		name	"november"		text	"Novembre";
+add translation	lang	"fra"		package	"initial"		name	"december"		text	"Décembre";
+
+add translation	lang	"fra"		package	"initial"		name	"monday"		text	"Lundi";
+add translation	lang	"fra"		package	"initial"		name	"tuesday"		text	"Mardi";
+add translation	lang	"fra"		package	"initial"		name	"wetnesday"		text	"Mercredi";
+add translation	lang	"fra"		package	"initial"		name	"thurday"		text	"Jeudi";
+add translation	lang	"fra"		package	"initial"		name	"friday"		text	"Vendredi";
+add translation	lang	"fra"		package	"initial"		name	"saturday"		text	"Samedi";
+add translation	lang	"fra"		package	"initial"		name	"sunday"		text	"Dimanche";
+
+
+add translation	lang	"fra"		package	"initial"		name	"no"			text	"Non";
+add translation	lang	"fra"		package	"initial"		name	"yes"			text	"Oui";
+add translation	lang	"fra"		package	"initial"		name	"offline"		text	"Hors ligne";
+add translation	lang	"fra"		package	"initial"		name	"online"		text	"En ligne";
+add translation	lang	"fra"		package	"initial"		name	"disabled"		text	"Désactivé";
+add translation	lang	"fra"		package	"initial"		name	"enabled"		text	"Activé";
+add translation	lang	"fra"		package	"initial"		name	"deleted"		text	"Supprimé";
+
+
+add translation	lang	"fra"		package	"initial"		name	"create"		text	"créer";
+add translation	lang	"fra"		package	"initial"		name	"add"			text	"ajouter";
+add translation	lang	"fra"		package	"initial"		name	"insert"		text	"insérer";
+add translation	lang	"fra"		package	"initial"		name	"edit"			text	"éditer";
+add translation	lang	"fra"		package	"initial"		name	"modify"		text	"modifier";
+add translation	lang	"fra"		package	"initial"		name	"attach"		text	"attacher";
+add translation	lang	"fra"		package	"initial"		name	"update"		text	"mettre à jour";
+add translation	lang	"fra"		package	"initial"		name	"delete"		text	"supprimer";
+
+add translation	lang	"fra"		package	"initial"		name	"see"			text	"voir";
+add translation	lang	"fra"		package	"initial"		name	"read"			text	"lire";
+add translation	lang	"fra"		package	"initial"		name	"load"			text	"charger";
+add translation	lang	"fra"		package	"initial"		name	"upload"		text	"téléverser";
+add translation	lang	"fra"		package	"initial"		name	"download"		text	"télécharger";
+
+add translation	lang	"fra"		package	"initial"		name	"nothingToDisplay"	text	"Nothign to display";
+
+add translation	lang	"fra"		package	"initial"		name	"createEditConfirm"	text	"Créer et modifier";
+add translation	lang	"fra"		package	"initial"		name	"updateConfirm"		text	"Je confirme les modifications";
+add translation	lang	"fra"		package	"initial"		name	"deleteConfirm"		text	"Je confirme la suppression";
+
+add translation	lang	"fra"		package	"initial"		name	"btnCreate"		text	"Créer";
+add translation	lang	"fra"		package	"initial"		name	"btnUpdate"		text	"Mettre à jour";
+add translation	lang	"fra"		package	"initial"		name	"btnReturn"		text	"Retourner à la liste";
+add translation	lang	"fra"		package	"initial"		name	"btnDelete"		text	"Supprimer";
+add translation	lang	"fra"		package	"initial"		name	"btnExecute"	text	"Executer";
+add translation	lang	"fra"		package	"initial"		name	"btnRefresh"	text	"Rafraichir";
+add translation	lang	"fra"		package	"initial"		name	"btnFilter"		text	"Filtrer";
+
+add translation	lang	"fra"		package	"initial"		name	"userForgotConfirmation"	text	"Vous avez oublié de confirmer la mise à jour.";
+add translation	lang	"fra"		package	"initial"		name	"userForgotDeletion"		text	"Vous avez oublié de confirmer suppression.";
+add translation	lang	"fra"		package	"initial"		name	"userForgotCreation"		text	"Vous avez oublié de confirmer création.";
+
+

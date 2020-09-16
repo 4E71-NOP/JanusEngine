@@ -1,0 +1,5 @@
+
+add document_config	name par_defaut		menu_type MENU_SELECT	menu_style FLOAT	menu_float_position RIGHT	menu_float_taille_x 0	menu_float_taille_y 0	menu_occurence TOP	show_info_parution YES	show_info_modification YES;
+add document_config	name table			menu_type TABLE			menu_style FLOAT	menu_float_position RIGHT	menu_float_taille_x 0	menu_float_taille_y 0	menu_occurence TOP	show_info_parution YES	show_info_modification YES;
+add document_config	name no_menu		menu_type OFF			menu_style FLOAT	menu_float_position RIGHT	menu_float_taille_x 0	menu_float_taille_y 0	menu_occurence NONE	show_info_parution YES	show_info_modification YES;
+add document_config	name nothing		menu_type OFF			menu_style FLOAT	menu_float_position RIGHT	menu_float_taille_x 0	menu_float_taille_y 0	menu_occurence NONE	show_info_parution NO	show_info_modification NO;

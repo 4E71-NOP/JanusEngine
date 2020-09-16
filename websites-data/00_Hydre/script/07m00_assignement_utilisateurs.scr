@@ -1,0 +1,1 @@
+assign user name "*user_install*"		to_group staff			primary_group NO;

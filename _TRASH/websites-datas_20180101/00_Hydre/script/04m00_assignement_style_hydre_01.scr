@@ -1,0 +1,4 @@
+layout	name hydre_presentation_par_defaut		assigned_to_theme hydre	default YES;
+layout	name hydre_gestion_profil				assigned_to_theme hydre;
+layout	name hydre_test_script					assigned_to_theme hydre;
+layout	name hydre_gestion_decoration			assigned_to_theme hydre;

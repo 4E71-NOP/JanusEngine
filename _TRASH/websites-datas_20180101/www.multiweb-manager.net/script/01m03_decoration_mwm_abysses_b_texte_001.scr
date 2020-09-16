@@ -1,0 +1,88 @@
+add decoration 
+name "mwm_abysses_texte_001" 
+type	'caligraphe'						
+repertoire	'Abysses'						
+							
+txt_fonte	'Verdana, Helvetica, Sans-serif'	txt_fonte_size_min	'10'	txt_fonte_size_max	'22'		
+txt_fonte_dl_nom	'Dungeon'	txt_fonte_dl_url	'Dungeon.TTF'				
+p_txt_indent	'000000'	p_txt_align	'justify'				
+							
+txt_col	'DDEEFF'	txt_highlight_col	'DDEEFF'	txt_bg_col	'DDEEFF'		
+txt_ok_col	'008000'	txt_avert_col	'FF8000'	txt_erreur_col	'FF0000'		
+							
+txt_titre_col	'000000'						
+							
+txt_l_01_display	'block'						
+		txt_l_01_weight	'normal'	txt_l_01_decoration	'none'		
+txt_l_01_margin_top	'000000'	txt_l_01_margin_bottom	'000000'	txt_l_01_margin_left	'000000'	txt_l_01_margin_right	'000000'
+		txt_l_01_hover_weight	'normal'				
+txt_l_01_fg_col	'DDEEFF'	txt_l_01_fg_hover_col	'FFFFFF'	txt_l_01_fg_active_col	'DDEEFF'	txt_l_01_fg_visite_col	'DDEEFF'
+txt_l_01_bg_col	'transparent'	txt_l_01_bg_hover_col	'transparent'	txt_l_01_bg_active_col	'transparent'	txt_l_01_bg_visite_col	'transparent'
+							
+txt_l_td_display	'block'						
+		txt_l_td_weight	'normal'	txt_l_td_decoration	'none'		
+txt_l_td_margin_top	'000000'	txt_l_td_margin_bottom	'000000'	txt_l_td_margin_left	'000000'	txt_l_td_margin_right	'000000'
+		txt_l_td_hover_weight	'normal'				
+txt_l_td_fg_col	'DDEEFF'	txt_l_td_fg_hover_col	'FFFFFF'	txt_l_td_fg_active_col	'DDEEFF'	txt_l_td_fg_visite_col	'DDEEFF'
+txt_l_td_bg_col	'transparent'	txt_l_td_bg_hover_col	'transparent'	txt_l_td_bg_active_col	'transparent'	txt_l_td_bg_visite_col	'transparent'
+							
+txt_input1_fg_col	'DDEEFF'	txt_input1_bg_col	'5588BC'				
+txt_input2_fg_col	'DDEEFF'	txt_input2_bg_col	'5588BC'				
+txt_input1_td_fg_col	'DDEEFF'	txt_input1_td_bg_col	'73A6DA'				
+txt_input2_td_fg_col	'DDEEFF'	txt_input2_td_bg_col	'73A6DA'				
+txt_code_fg_col	'445566'	txt_code_bg_col	'DDEEFF'				
+							
+ca_txt_col	'DDEEFF'	ca_txt_bg_col	'transparent'				
+cb_txt_col	'DDEEFF'	cb_txt_bg_col	'transparent'				
+cc_txt_col	'DDEEFF'	cc_txt_bg_col	'transparent'				
+cd_txt_col	'DDEEFF'	cd_txt_bg_col	'transparent'				
+cta_txt_col	'DDEEFF'	cta_txt_bg_col	'transparent'				
+ctb_txt_col	'DDEEFF'	ctb_txt_bg_col	'transparent'				
+co_txt_col	'DDEEFF'	co_txt_bg_col	'transparent'				
+							
+s1_txt_col	'FFFFFF'	s2_txt_col	'FFFFFF'	s3_txt_col	'FFFFFF'		
+s1_txt_hover_col	'DDEEFF'	s2_txt_hover_col	'DDEEFF'	s3_txt_hover_col	'DDEEFF'		
+tab_up_txt_col	'FFFFFF'	tab_up_txt_bg_col	'transparent'				
+tab_down_txt_col	'DDEEFF'	tab_down_txt_bg_col	'transparent'				
+tab_hover_txt_col	'FFFFFF'	tab_hover_txt_bg_col	'transparent'				
+							
+p_mrg_top	'000000'	p_mrg_bottom	'000000'	p_mrg_left	'000000'	p_mrg_right	'000000'
+p_pad_top	'000000'	p_pad_bottom	'5'	p_pad_left	'000000'	p_pad_right	'000000'
+							
+ft1	'abysses_B01_ft1.png'	ft2	'abysses_B01_ft2.png'	ft3	'abysses_B01_ft3.png'		
+ft1_x	'8'	ft3_x	'8'	ft_y	'32'		
+bgca	'abysses_B01_bgc_fca.png'	bgcb	'abysses_B01_bgc_fcb.png'				
+bgcc	'abysses_B01_bgc_fcc.png'	bgcd	'abysses_B01_bgc_fcd.png'				
+bgcta	'abysses_B01_bgc_fcta.png'	bgctb	'abysses_B01_bgc_fctb.png'				
+bgco	'abysses_B01_bgc_fco.png'						
+							
+s1_01_x	'8'	s1_01_y	'32'	s1_03_x	'8'		
+s2_01_x	'8'	s2_01_y	'32'	s2_03_x	'8'		
+s3_01_x	'8'	s3_01_y	'32'	s3_03_x	'8'		
+s1_n01	'abysses_B01_submit_s1_n01.png'	s1_n02	'abysses_B01_submit_s1_n02.png'	s1_n03	'abysses_B01_submit_s1_n03.png'		
+s1_h01	'abysses_B01_submit_s1_h01.png'	s1_h02	'abysses_B01_submit_s1_h02.png'	s1_h03	'abysses_B01_submit_s1_h03.png'		
+s2_n01	'abysses_B01_submit_s2_n01.png'	s2_n02	'abysses_B01_submit_s2_n02.png'	s2_n03	'abysses_B01_submit_s2_n03.png'		
+s2_h01	'abysses_B01_submit_s2_h01.png'	s2_h02	'abysses_B01_submit_s2_h02.png'	s2_h03	'abysses_B01_submit_s2_h03.png'		
+s3_n01	'abysses_B01_submit_s3_n01.png'	s3_n02	'abysses_B01_submit_s3_n02.png'	s3_n03	'abysses_B01_submit_s3_n03.png'		
+s3_h01	'abysses_B01_submit_s3_h01.png'	s3_h02	'abysses_B01_submit_s3_h02.png'	s3_h03	'abysses_B01_submit_s3_h03.png'		
+							
+tab_y	'32'	tab_a_x	'8'	tab_c_x	'8'		
+tab_down_a	'abysses_B01_tab_down_a.png'	tab_down_b	'abysses_B01_tab_down_b.png'	tab_down_c	'abysses_B01_tab_down_c.png'		
+tab_up_a	'abysses_B01_tab_up_a.png'	tab_up_b	'abysses_B01_tab_up_b.png'	tab_up_c	'abysses_B01_tab_up_c.png'		
+tab_hover_a	'abysses_B01_tab_hover_a.png'	tab_hover_b	'abysses_B01_tab_hover_b.png'	tab_hover_c	'abysses_B01_tab_hover_c.png'		
+							
+icone_repertoire	'abysses_B01_icone_repertoire.png'						
+icone_efface	'abysses_B01_icone_efface.png'						
+icone_gauche	'abysses_B01_icone_fleche_gauche.png'						
+icone_droite	'abysses_B01_icone_fleche_droite.png'						
+icone_haut	'abysses_B01_icone_fleche_haut.png'						
+icone_bas	'abysses_B01_icone_fleche_bas.png'						
+icone_ok	'abysses_B01_icone_ok.png'						
+icone_nok	'abysses_B01_icone_nok.png'						
+icone_question	'abysses_B01_icone_question.png'						
+icone_notification	'abysses_B01_icone_notification.png'						
+transparent_8x8	'vide.gif'						
+							
+icone_dim_x	'32'						
+icone_dim_y	'32'						
+;							

@@ -1,0 +1,6 @@
+assign theme name "rw_magma_01"	to_website "rootwave";
+
+assign layout	name "rw_magma_01_presentation_par_defaut"		to_theme "rw_magma_01"	default YES;
+assign layout	name "rw_magma_01_gestion_profil"				to_theme "rw_magma_01";
+assign layout	name "rw_magma_01_test_script"					to_theme "rw_magma_01";
+assign layout	name "rw_magma_01_gestion_decoration"			to_theme "rw_magma_01";

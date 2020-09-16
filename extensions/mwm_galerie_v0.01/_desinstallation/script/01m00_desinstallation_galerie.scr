@@ -1,0 +1,9 @@
+site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
+
+delete category	name "fra_galerie";
+delete category	name "eng_galerie";
+
+delete	article	name "fra_config_galerie_p01";
+delete	article	name "eng_config_galerie_p01";
+
+delete document	name "doc_uni_config_galerie_p01.php";

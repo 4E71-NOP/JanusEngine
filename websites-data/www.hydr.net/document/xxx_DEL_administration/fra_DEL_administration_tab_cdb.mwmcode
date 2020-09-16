@@ -1,0 +1,24 @@
+/*Hydre-contenu_debut*/
+[TAB_STD][TW_MLI][FE]
+[TR] [TDFCTA2][COLSP]2[FE]Commande de base[/TD][/TR]
+
+[TR] [TDFCA1][F]site_context[/TD]					[TDFCB1][F]C'est l'une des commande les plus importante. Elle permet de sélectionner le site sur lequel on va appliquer les commandes suivantes.[BR]
+Exemple:
+[CODE]
+site_context "MultiWeb_Engine";[BR]
+[/CODE]
+[/TD][/TR]
+[TR] [TDFCA1][F]Ajout[/TD]					[TDFCB1][F]Ajoute un élément. Est soumis a la condition universelle du nom de l'élément. Chaque nom d'élément doit être unique dans sa catégorie.[/TD][/TR]
+[TR] [TDFCA1][F]Modification[/TD]			[TDFCB1][F]Modifie un élément. La sélection de l'élément est soumise a la condition qu'il existe.[/TD][/TR]
+[TR] [TDFCA1][F]Suppression[/TD]			[TDFCB1][F]Supprime un élément. La sélection de l'élément est soumise a la condition qu'il existe.[/TD][/TR]
+[TR] [TDFCA1][F]Affiche[/TD]					[TDFCB1][F]Affiche le détail d'un élément. La sélection de l'élément est soumise a la condition qu'il existe.[/TD][/TR]
+[BR]
+[TR] [TDFCTA2][COLSP]4[FE]Commande spécialisées[/TD][/TR]
+[TR] [TDFCA1][F]insert_content[/TD]					[TDFCB1][F]Manipule le document en remplaçant le contenu de celui par le contenu d'un fichier sélectionné.[/TD][/TR]
+[TR] [TDFCA1][F]share_document[/TD]					[TDFCB1][F]Permet le partage le document avec un autre site. Seul le propriétaire d'un site peut le faire pour ses document et ou le propriétaire du serveur.[/TD][/TR]
+[TR] [TDFCA1][F]user[/TD]							[TDFCB1][F]Initie une action sur un utilisateur (ex: join_group).[/TD][/TR]
+[TR] [TDFCA1][F]Link[/TD]							[TDFCB1][F]Commande dédié aux article qui permet d'associer un document a un article.[/TD][/TR]
+[/TABLE][BR]
+[BR]
+[BR]
+/*Hydre-contenu_fin*/

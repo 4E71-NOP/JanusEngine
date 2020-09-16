@@ -1,0 +1,6 @@
+update site name "MultiWeb_Manager"	theme "mwm_aqua_02";
+
+layout	name "mwm_aqua_02_presentation_par_defaut"		assigned_to_theme "mwm_aqua_02"	default YES;
+layout	name "mwm_aqua_02_gestion_profil"				assigned_to_theme "mwm_aqua_02";
+layout	name "mwm_aqua_02_test_script"					assigned_to_theme "mwm_aqua_02";
+layout	name "mwm_aqua_02_gestion_decoration"			assigned_to_theme "mwm_aqua_02";

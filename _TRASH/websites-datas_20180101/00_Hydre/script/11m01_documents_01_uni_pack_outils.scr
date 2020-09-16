@@ -1,0 +1,34 @@
+add document	name "doc_uni_presentation_de_l_equipe_p01.php"	type PHP;
+insert_content	file "uni_presentation_de_l_equipe_p01.php"		to "doc_uni_presentation_de_l_equipe_p01.php";
+share_document	name "doc_uni_presentation_de_l_equipe_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_presentation_de_l_equipe_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_presentation_de_l_activite_p01.php"	type PHP;
+insert_content	file "uni_presentation_de_l_activite_p01.php"		to "doc_uni_presentation_de_l_activite_p01.php";
+share_document	name "doc_uni_presentation_de_l_activite_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_presentation_de_l_activite_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_recrutement_p01.php"	type PHP;
+insert_content	file "uni_recrutement_p01.php"		to "doc_uni_recrutement_p01.php";
+share_document	name "doc_uni_recrutement_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_recrutement_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_recherche_p01.php"	type PHP;
+insert_content	file "uni_recherche_p01.php"		to "doc_uni_recherche_p01.php";
+share_document	name "doc_uni_recherche_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_recherche_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_voir_fiche_publique_p01.php"	type PHP;
+insert_content	file "uni_voir_fiche_publique_p01.php"		to "doc_uni_voir_fiche_publique_p01.php";
+share_document	name "doc_uni_voir_fiche_publique_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_voir_fiche_publique_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_actualite_p01.php"	type PHP;
+insert_content	file "uni_actualite_p01.php"		to "doc_uni_actualite_p01.php";
+share_document	name "doc_uni_actualite_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_actualite_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;
+
+add document	name "doc_uni_telechargement_p01.php"	type PHP;
+insert_content	file "uni_telechargement_p01.php"		to "doc_uni_telechargement_p01.php";
+share_document	name "doc_uni_telechargement_p01.php"	with_site Hydre	modification NO;
+update document	name "doc_uni_telechargement_p01.php"	checked YES	examiner "*utilisateur_install*"	from_site MWM_base;

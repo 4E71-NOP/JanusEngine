@@ -1,0 +1,14 @@
+add decoration 
+name "mwm_abysses_block_001" 
+type "elegance"
+directory	 "Abysses"	
+ex11	'abysses_B01_ex11.png'	ex11_x '16'	ex11_y '16'
+ex12	'abysses_B01_ex12.png'	ex12_x '480'	ex12_y '16'
+ex13	'abysses_B01_ex13.png'	ex13_x '16'	ex13_y '16'
+ex21	'abysses_B01_ex21.png'	ex21_x '16'	ex21_y '480'
+ex22	'abysses_B01_ex22.png'	ex22_x '480'	ex22_y '480'
+ex23	'abysses_B01_ex23.png'	ex23_x '16'	ex23_y '480'
+ex31	'abysses_B01_ex31.png'	ex31_x '16'	ex31_y '16'
+ex32	'abysses_B01_ex32.png'	ex32_x '480'	ex32_y '16'
+ex33	'abysses_B01_ex33.png'	ex33_x '16'	ex33_y '16'
+;

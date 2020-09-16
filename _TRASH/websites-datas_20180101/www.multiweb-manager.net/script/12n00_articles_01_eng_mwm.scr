@@ -1,0 +1,43 @@
+add article	name mwm_eng_acceuil_p01						reference mwm_eng_acceuil						deadline initial_online		desc "Admin en ENG"			title Welcome					sub_title Welcome								page 1	validation_state VALID;
+
+add article	name eng_doc_concepts_p01						reference eng_doc_concepts						deadline initial_online		desc "English admin"		title "Concept"					sub_title "User concepts"						page 1	validation_state VALID;
+add article	name eng_doc_concepts_p02						reference eng_doc_concepts						deadline initial_online		desc "English admin"		title "Concept"					sub_title "Document Concepts"					page 2	validation_state VALID;
+add article	name eng_doc_concepts_p03						reference eng_doc_concepts						deadline initial_online		desc "English admin"		title "Concept"					sub_title "Decoration Concepts"					page 3	validation_state VALID;
+
+add article	name eng_doc_gestion_du_contenu_p01				reference eng_doc_gestion_du_contenu			deadline initial_online		desc "English admin"		title "Content managment"		sub_title "Element hierarchy"					page 1	validation_state VALID;
+add article	name eng_doc_gestion_du_contenu_p02				reference eng_doc_gestion_du_contenu			deadline initial_online		desc "English admin"		title "Content managment"		sub_title "Content lifecycle"					page 2	validation_state VALID;
+
+add article	name eng_doc_administration_p01					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Introduction"						page 1	validation_state VALID;
+add article	name eng_doc_administration_p02					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Interface - Site"					page 2	validation_state VALID;
+add article	name eng_doc_administration_p03					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Interface - Users"					page 3	validation_state VALID;
+add article	name eng_doc_administration_p04					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Interface - Document"				page 4	validation_state VALID;
+add article	name eng_doc_administration_p05					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Interface - Decoration"				page 5	validation_state VALID;
+add article	name eng_doc_administration_p06					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Command line - Site"					page 6	validation_state VALID;
+add article	name eng_doc_administration_p07					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Command line - Users"				page 7	validation_state VALID;
+add article	name eng_doc_administration_p08					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Command line - Document"				page 8	validation_state VALID;
+add article	name eng_doc_administration_p09					reference eng_doc_administration				deadline initial_online		desc "English admin"		title Administration			sub_title "Command line - Decoration"			page 9	validation_state VALID;
+add article	name eng_DEL_tut_001_p01						reference eng_DEL_tut_001						deadline initial_online		desc "English admin"		title Administration			sub_title "Introduction"						page 1	validation_state VALID;
+
+
+
+
+link	article mwm_eng_acceuil_p01							document doc_mwm_eng_acceuil_p01.mwmcode;
+
+link	article eng_doc_concepts_p01						document doc_eng_DEL_concepts_p01.mwmcode;
+link	article eng_doc_concepts_p02						document doc_eng_DEL_concepts_p02.mwmcode;
+link	article eng_doc_concepts_p03						document doc_eng_DEL_concepts_p03.mwmcode;
+
+link	article eng_doc_gestion_du_contenu_p01				document doc_eng_DEL_gestion_du_contenu_p01.mwmcode;
+link	article eng_doc_gestion_du_contenu_p02				document doc_eng_DEL_gestion_du_contenu_p02.mwmcode;
+
+link	article eng_doc_administration_p01					document doc_eng_DEL_administration_p01.mwmcode;
+link	article eng_doc_administration_p02					document doc_eng_DEL_administration_p02.mwmcode;
+link	article eng_doc_administration_p03					document doc_eng_DEL_administration_p03.mwmcode;
+link	article eng_doc_administration_p04					document doc_eng_DEL_administration_p04.mwmcode;
+link	article eng_doc_administration_p05					document doc_eng_DEL_administration_p05.mwmcode;
+link	article eng_doc_administration_p06					document doc_eng_DEL_administration_p06.mwmcode;
+link	article eng_doc_administration_p07					document doc_eng_DEL_administration_p07.mwmcode;
+link	article eng_doc_administration_p08					document doc_eng_DEL_administration_p08.mwmcode;
+link	article eng_doc_administration_p09					document doc_eng_DEL_administration_p09.mwmcode;
+
+link	article eng_DEL_tut_001_p01							document doc_eng_DEL_tut_001_p01.mwmcode;

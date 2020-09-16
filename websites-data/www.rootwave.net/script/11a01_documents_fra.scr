@@ -1,0 +1,99 @@
+
+add document	name "doc_rw_fra_acceuil_p01.mwmcode"	type MWMCODE;
+insert content	file "rw_fra_acceuil_p01.mwmcode"		into "doc_rw_fra_acceuil_p01.mwmcode";
+share document	name "doc_rw_fra_acceuil_p01.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_rw_fra_acceuil_p01.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+
+
+
+add document	name "doc_fra_dessiner_p01.mwmcode"	type MWMCODE;
+insert content	file "fra_dessiner_p01.mwmcode"		into "doc_fra_dessiner_p01.mwmcode";
+share document	name "doc_fra_dessiner_p01.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_dessiner_p01.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_dessiner_p02.mwmcode"	type MWMCODE;
+insert content	file "fra_dessiner_p02.mwmcode"		into "doc_fra_dessiner_p02.mwmcode";
+share document	name "doc_fra_dessiner_p02.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_dessiner_p02.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_dessiner_p03.mwmcode"	type MWMCODE;
+insert content	file "fra_dessiner_p03.mwmcode"		into "doc_fra_dessiner_p03.mwmcode";
+share document	name "doc_fra_dessiner_p03.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_dessiner_p03.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_dessiner_p04.mwmcode"	type MWMCODE;
+insert content	file "fra_dessiner_p04.mwmcode"		into "doc_fra_dessiner_p04.mwmcode";
+share document	name "doc_fra_dessiner_p04.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_dessiner_p04.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_dessiner_p05.mwmcode"	type MWMCODE;
+insert content	file "fra_dessiner_p05.mwmcode"		into "doc_fra_dessiner_p05.mwmcode";
+share document	name "doc_fra_dessiner_p05.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_dessiner_p05.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_galerie_dessin_peinture.php"	type "PHP";
+insert content	file "fra_galerie_dessin_peinture.php"		into "doc_fra_galerie_dessin_peinture.php";
+share document	name "doc_fra_galerie_dessin_peinture.php"	with_website rootwave	modification YES;
+update document	name "doc_fra_galerie_dessin_peinture.php"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_galerie_image_de_synthese.php"	type "PHP";
+insert content	file "fra_galerie_image_de_synthese.php"		into "doc_fra_galerie_image_de_synthese.php";
+share document	name "doc_fra_galerie_image_de_synthese.php"	with_website rootwave	modification YES;
+update document	name "doc_fra_galerie_image_de_synthese.php"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_galerie_photographie.php"	type "PHP";
+insert content	file "fra_galerie_photographie.php"		into "doc_fra_galerie_photographie.php";
+share document	name "doc_fra_galerie_photographie.php"	with_website rootwave	modification YES;
+update document	name "doc_fra_galerie_photographie.php"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_langage_c_p01.mwmcode"	type MWMCODE;
+insert content	file "fra_langage_c_p01.mwmcode"		into "doc_fra_langage_c_p01.mwmcode";
+share document	name "doc_fra_langage_c_p01.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_langage_c_p01.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_langage_c_p02.mwmcode"	type MWMCODE;
+insert content	file "fra_langage_c_p02.mwmcode"		into "doc_fra_langage_c_p02.mwmcode";
+share document	name "doc_fra_langage_c_p02.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_langage_c_p02.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_langage_c_p03.mwmcode"	type MWMCODE;
+insert content	file "fra_langage_c_p03.mwmcode"		into "doc_fra_langage_c_p03.mwmcode";
+share document	name "doc_fra_langage_c_p03.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_langage_c_p03.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p01.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p01.mwmcode"		into "doc_fra_mc680x0_p01.mwmcode";
+share document	name "doc_fra_mc680x0_p01.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p01.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p02.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p02.mwmcode"		into "doc_fra_mc680x0_p02.mwmcode";
+share document	name "doc_fra_mc680x0_p02.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p02.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p03.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p03.mwmcode"		into "doc_fra_mc680x0_p03.mwmcode";
+share document	name "doc_fra_mc680x0_p03.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p03.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p04.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p04.mwmcode"		into "doc_fra_mc680x0_p04.mwmcode";
+share document	name "doc_fra_mc680x0_p04.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p04.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p05.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p05.mwmcode"		into "doc_fra_mc680x0_p05.mwmcode";
+share document	name "doc_fra_mc680x0_p05.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p05.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_mc680x0_p06.mwmcode"	type MWMCODE;
+insert content	file "fra_mc680x0_p06.mwmcode"		into "doc_fra_mc680x0_p06.mwmcode";
+share document	name "doc_fra_mc680x0_p06.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_mc680x0_p06.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+
+add document	name "doc_fra_sd_mc680x0_tableau_p01.mwmcode"	type MWMCODE;
+insert content	file "fra_sd_mc680x0_tableau_p01.mwmcode"		into "doc_fra_sd_mc680x0_tableau_p01.mwmcode";
+share document	name "doc_fra_sd_mc680x0_tableau_p01.mwmcode"	with_website rootwave	modification YES;
+update document	name "doc_fra_sd_mc680x0_tableau_p01.mwmcode"	checked YES	validator "*user_install*"	from_site rootwave;
+

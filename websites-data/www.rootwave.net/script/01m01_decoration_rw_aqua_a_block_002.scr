@@ -1,0 +1,23 @@
+add decoration
+name 'rw_aqua_block_002'
+type 'exquisite'
+directory 'Aqua'
+
+ex11 'aqua_B02_ex11.png' ex11_x '16' ex11_y '24'
+ex12 'aqua_B02_ex12.png' ex12_x '16' ex12_y '24'
+ex13 'aqua_B02_ex13.png' ex13_x '448' ex13_y '24'
+ex14 'aqua_B02_ex14.png' ex14_x '16' ex14_y '24'
+ex15 'aqua_B02_ex15.png' ex15_x '16' ex15_y '24'
+ex21 'aqua_B02_ex21.png' ex21_x '16' ex21_y '16'
+ex22 'aqua_B02_ex22.png' ex22_x '480' ex22_y '472'
+ex25 'aqua_B02_ex25.png' ex25_x '16' ex25_y '16'
+ex31 'aqua_B02_ex31.png' ex31_x '16' ex31_y '440'
+ex35 'aqua_B02_ex35.png' ex35_x '16' ex35_y '440'
+ex41 'aqua_B02_ex41.png' ex41_x '16' ex41_y '16'
+ex45 'aqua_B02_ex45.png' ex45_x '16' ex45_y '16'
+ex51 'aqua_B02_ex51.png' ex51_x '16' ex51_y '16'
+ex52 'aqua_B02_ex52.png' ex52_x '16' ex52_y '16'
+ex53 'aqua_B02_ex53.png' ex53_x '448' ex53_y '16'
+ex54 'aqua_B02_ex54.png' ex54_x '16' ex54_y '16'
+ex55 'aqua_B02_ex55.png' ex55_x '16' ex55_y '16'
+;

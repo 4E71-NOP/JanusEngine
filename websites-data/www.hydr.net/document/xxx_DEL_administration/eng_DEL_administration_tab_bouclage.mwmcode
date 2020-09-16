@@ -1,0 +1,17 @@
+/*Hydre-contenu_debut*/
+[TB2]« deadline » : Designate a deadline.[/F][BR]
+[TAB_STD][TW_MLI][FE]
+[TR] [TDFCTA2][COLSP]2[FE]Associated arguments of « deadline »[/TD][/TR]
+[TR] [TDFCA1][F]name		[/TD]  [TDFCB1][F]Name used as internal reference.[/TD][/TR]
+[TR] [TDFCA1][F]state		[/TD]  [TDFCB1][F]ONLINE / OFFLINE[/TD][/TR]
+[TR] [TDFCA1][F]title		[/TD]  [TDFCB1][F]Text field.[/TD][/TR]
+[TR] [TDFCA1][F]filter		[/TD]  [TDFCB1][F]Text field. Enable filtering on the internal name of the target elements for the "show" command line.[/TD][/TR]
+[/TABLE][BR]
+Example:[BR] 
+[CODE]
+site_context "MultiWeb_Engine";[BR]
+add deadline name "initial_offline" title "Bouclage initial : OFFLINE par defaut" etat "OFFLINE";[BR]
+[/CODE]
+[BR]
+[BR]
+/*Hydre-contenu_fin*/
