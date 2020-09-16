@@ -111,7 +111,6 @@ class ModuleMenu {
 		;";
 		$dbquery = $SDDMObj->query($infos['module_menu_requete']);
 		$Content = "";
-		
 		$menuData = &$infos['menuData'];
 		
 		$StringFormatObj = StringFormat::getInstance();

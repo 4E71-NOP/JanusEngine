@@ -71,15 +71,16 @@ self::$InitTable['category'] = function (&$a) {
 			"state" => "OFFLINE",
 			"parent" => 0,
 			"position" => "",
-			"groupe" => "Anonymous",
+			"group_name" => "Anonymous",
 			"role" => "NO",
 			"first_doc" => "NO",
 			"article" => 1,
 			"last_modif" => time(),
 	);
 	
-	$a['params']['deadline_id']	= $a['params']['deadline'];
-	$a['params']['groupe_id']	= $a['params']['groupe'];
+	$a['params']['deadline_id']	= &$a['params']['deadline'];
+	$a['params']['groupe']		= &$a['params']['group_name'];
+// 	$a['params']['groupe_id']	= &$a['params']['group_name'];
 };
 
 

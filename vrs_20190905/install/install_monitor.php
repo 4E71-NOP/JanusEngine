@@ -20,6 +20,7 @@ $ClassLoaderObj->provisionClass('LogManagement');
 $ClassLoaderObj->provisionClass('Mapper');
 $ClassLoaderObj->provisionClass('RequestData');
 
+
 $TimeObj = Time::getInstance();
 
 $LMObj = LogManagement::getInstance();
@@ -31,9 +32,19 @@ $MapperObj = Mapper::getInstance();
 
 $ClassLoaderObj->provisionClass('ConfigurationManagement');
 $CMObj = ConfigurationManagement::getInstance();
+$CMObj->InitBasicSettings();
+
+$ClassLoaderObj->provisionClass('StringFormat');
+$StringFormatObj = StringFormat::getInstance();
+
+
+$ClassLoaderObj->provisionClass('SessionManagement');
+session_name("HydrWebsiteSessionId");
+session_start();
+$SMObj = SessionManagement::getInstance($CMObj);
+$LMObj->InternalLog("*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
 
 $ClassLoaderObj->provisionClass('WebSite');
-
 // --------------------------------------------------------------------------------------------
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('log_errors', "On");
@@ -352,5 +363,7 @@ echo ($DocContent);
 // echo ($StringFormatObj->print_r_html($ThemeDataObj->getThemeDataEntry('B02G')));
 
 $SDDMObj->disconnect_sql();
+
+session_write_close();
 
 ?>

@@ -25,13 +25,24 @@ $TimeObj = Time::getInstance();
 
 $LMObj = LogManagement::getInstance();
 $LMObj->setDebugLogEcho(1);
-$LMObj->setInternalLogTarget(logTarget);
+$LMObj->setInternalLogTarget(installLogTarget);
 
 $RequestDataObj = RequestData::getInstance();
 $MapperObj = Mapper::getInstance();
 
 $ClassLoaderObj->provisionClass('ConfigurationManagement');
 $CMObj = ConfigurationManagement::getInstance();
+$CMObj->InitBasicSettings();
+
+$ClassLoaderObj->provisionClass('StringFormat');
+$StringFormatObj = StringFormat::getInstance();
+
+
+$ClassLoaderObj->provisionClass('SessionManagement');
+session_name("HydrWebsiteSessionId");
+session_start();
+$SMObj = SessionManagement::getInstance($CMObj);
+$LMObj->InternalLog("*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
 
 $ClassLoaderObj->provisionClass('WebSite');
 // --------------------------------------------------------------------------------------------
@@ -89,7 +100,7 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 $form = $RequestDataObj->getRequestDataEntry('form');
 $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['dbprefix'],$form['tabprefix']) );
 
-// We hav a POST we immediately set RAM and execution time limit
+// We have a POST so we set RAM and execution time limit immediately.
 if ( isset($form['memory_limit'])) {
 	ini_set( 'memory_limit', $form['memory_limit']."M" );
 	ini_set( 'max_execution_time', $form['time_limit'] );
@@ -106,8 +117,6 @@ $CMObj->PopulateLanguageList();
 // --------------------------------------------------------------------------------------------
 //	Mise en place d'un stylesheet et d'un entete HTML
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('StringFormat');
-$StringFormatObj = StringFormat::getInstance();
 
 // --------------------------------------------------------------------------------------------
 include ("../stylesheets/css_admin_install.php");
@@ -376,5 +385,8 @@ error_log(
 );
 
 error_log ( "********** Hydr installation End **********");
+
+session_write_close();
+
 
 ?>

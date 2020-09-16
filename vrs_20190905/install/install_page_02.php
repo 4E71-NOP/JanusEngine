@@ -244,6 +244,7 @@ if ( $devDebug != 1 ) {
 			"section" => "script",
 			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
 	);
+	error_log($StringFormatObj->arrayToString($infos));
 	$LibInstallationObj->scanDirectories($infos);
 	foreach ( $infos['directory_list'] as $A ) {
 		if ( isset ($A['filesFound'] ) ) {
@@ -259,6 +260,7 @@ if ( $devDebug != 1 ) {
 			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
 	);
 	$LibInstallationObj->scanDirectories($infos);
+	error_log($StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $A ) {
 		if ( isset ($A['filesFound'] ) ) {
 			$LibInstallationObj->executeContent($infos, $A);
@@ -268,6 +270,7 @@ if ( $devDebug != 1 ) {
 	// --------------------------------------------------------------------------------------------
 	$tabConfigFile = array();
 	$i=0;
+	error_log($StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $k => $v ) {
 		if ( isset ($A['filesFound'] ) ) {
 			$infos = array ( "n" => $i, );

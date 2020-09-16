@@ -111,7 +111,7 @@ self::$CheckTable['add']['category']['2']['v']	= "deadline_id";
 self::$CheckTable['add']['category']['2']['m']	= "CLI_Category_C003";
 self::$CheckTable['add']['category']['2']['p']	= "deadline";
 self::$CheckTable['add']['category']['3']['d']	= 2;
-self::$CheckTable['add']['category']['3']['f']	= function ($a) { return array ("SELECT grp.groupe_nom, grp.groupe_id FROM ".$a['sqlTables']['groupe']." grp , ".$a['sqlTables']['site_groupe']." sg  WHERE sg.site_id = '".$a['Context']['sw_id']."' AND grp.groupe_nom = '".$a['params']['groupe_id']."' AND grp.groupe_id = sg.groupe_id;");};
+self::$CheckTable['add']['category']['3']['f']	= function ($a) { return array ("SELECT grp.groupe_nom, grp.groupe_id FROM ".$a['sqlTables']['groupe']." grp , ".$a['sqlTables']['site_groupe']." sg  WHERE sg.site_id = '".$a['Context']['sw_id']."' AND grp.groupe_nom = '".$a['params']['group_name']."' AND grp.groupe_id = sg.groupe_id;");};
 self::$CheckTable['add']['category']['3']['c']	= "groupe_id";
 self::$CheckTable['add']['category']['3']['v']	= "group_id";
 self::$CheckTable['add']['category']['3']['m']	= "CLI_Category_C004";
