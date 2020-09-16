@@ -1,6 +1,0 @@
-// update site name "rootwave"	theme "rw_aqua_01";
-
-layout	name "rw_aqua_01_presentation_par_defaut"		assigned_to_theme "rw_aqua_01"	default YES;
-layout	name "rw_aqua_01_gestion_profil"				assigned_to_theme "rw_aqua_01";
-layout	name "rw_aqua_01_test_script"					assigned_to_theme "rw_aqua_01";
-layout	name "rw_aqua_01_gestion_decoration"			assigned_to_theme "rw_aqua_01";

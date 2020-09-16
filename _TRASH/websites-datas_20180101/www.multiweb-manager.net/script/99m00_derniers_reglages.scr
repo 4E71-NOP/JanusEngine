@@ -1,5 +1,0 @@
-
-update site	name MultiWeb_Manager	theme mwm_aqua_01;
-//show debug_state;
-//show echo "fin MWM";
-show checkpoint "MWM - Fin";

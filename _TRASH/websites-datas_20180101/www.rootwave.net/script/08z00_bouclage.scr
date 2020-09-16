@@ -1,5 +1,0 @@
-add deadline name "rootwave_general"	title "Bouclage Rootwave general"			etat ONLINE;
-add deadline name "rootwave_galeries"	title "Bouclage Rootwave galeries"			etat ONLINE;
-add deadline name "rootwave_dessiner"	title "Bouclage Rootwave dessiner"			etat ONLINE;
-add deadline name "rootwave_mc68000"	title "Bouclage Rootwave mc68000"			etat ONLINE;
-add deadline name "rootwave_langage_c"	title "Bouclage Rootwave langage C"			etat ONLINE;
