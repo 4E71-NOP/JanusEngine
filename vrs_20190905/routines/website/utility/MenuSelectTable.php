@@ -34,8 +34,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -59,7 +57,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getArtiRefList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -73,8 +70,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -97,7 +92,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getCategoryList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -111,8 +105,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -135,7 +127,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getDeadlineList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -149,8 +140,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -174,7 +163,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getDocumentList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -188,8 +176,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -212,7 +198,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getGroupList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -226,8 +211,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -253,7 +236,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getLayoutList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -267,8 +249,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -291,7 +271,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getLanguageList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -304,8 +283,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -329,7 +306,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getThemeList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;
 	}
 	
@@ -342,8 +318,6 @@ class MenuSelectTable {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -371,7 +345,6 @@ class MenuSelectTable {
 			$LMObj->InternalLog("MenuSelectTable/getUserList() : No rows returned");
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $tab;	
 	}
 	

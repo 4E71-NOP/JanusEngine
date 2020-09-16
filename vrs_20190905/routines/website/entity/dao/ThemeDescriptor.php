@@ -27,8 +27,6 @@ class ThemeDescriptor {
 		$Dest = $ThemeId;
 
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		if ( $Dest == "mt_" ) {
 			if ( $UserObj->getUserEntry('pref_theme') != 0 ) { $Dest = $UserObj->getUserEntry('pref_theme'); }	// By default the user theme is prefered
@@ -64,7 +62,6 @@ class ThemeDescriptor {
 		}
 		$this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
 	
-		$LMObj->setInternalLogTarget($logTarget);
 		
 	}
 

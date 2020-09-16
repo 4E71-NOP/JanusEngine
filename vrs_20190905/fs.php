@@ -13,6 +13,8 @@
 /* Hydre-licence-fin */
 
 // --------------------------------------------------------------------------------------------
+include ("define.php");
+
 include ("routines/website/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
@@ -24,8 +26,7 @@ $ClassLoaderObj->provisionClass('RequestData');
 // Time and memory measurment (with checkpoints)
 $TimeObj = Time::getInstance();
 $LMObj = LogManagement::getInstance();
-$LMObj->setInternalLogTarget("both");
-// $LMObj->setInternalLogTarget("none");
+$LMObj->setInternalLogTarget(logTarget);
 $MapperObj = Mapper::getInstance();
 $RequestDataObj = RequestData::getInstance();
 // --------------------------------------------------------------------------------------------

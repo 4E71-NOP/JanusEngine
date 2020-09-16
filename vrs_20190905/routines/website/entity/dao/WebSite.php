@@ -42,8 +42,6 @@ class WebSite {
 		$SMObj = SessionManagement::getInstance(0);
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 // 		if ( $RequestDataObj->getRequestDataEntry('sw') > 1 ){
 		if ( $SMObj->getSessionEntry('ws') > 1 ){
@@ -61,7 +59,6 @@ class WebSite {
 			else {
 				$LMObj->InternalLog("WebSite/getWebSiteDataFromDB() : No rows returned for website id=".$SMObj->getSessionEntry('ws'));
 			}
-			$LMObj->setInternalLogTarget($logTarget);
 			$_REQUEST['site_context']['site_id'] = $this->WebSite['sw_id'] ;		// Dédiée aux routines de manipulation
 		}
 		else {
@@ -79,8 +76,6 @@ class WebSite {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$dbquery = $SDDMObj->query ( 
 			"SELECT * 
@@ -97,7 +92,6 @@ class WebSite {
 			$LMObj->InternalLog("WebSite/changeWebSiteContext() : No rows returned for website id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 
 	//@formatter:off

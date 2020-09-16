@@ -27,8 +27,6 @@ class DeadLine {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -50,8 +48,6 @@ class DeadLine {
 		else {
 			$LMObj->InternalLog("DeadLine/getDeadLineDataFromDB() : No rows returned for deadline id=".$id);
 		}
-		
-		$LMObj->setInternalLogTarget($logTarget);
 		
 	}
 

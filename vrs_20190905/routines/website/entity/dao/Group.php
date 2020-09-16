@@ -27,8 +27,6 @@ class Group {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -51,7 +49,6 @@ class Group {
 			$LMObj->InternalLog("Module/getModuleDataFromDB() : No rows returned for group id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 
 	//@formatter:off

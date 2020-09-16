@@ -53,10 +53,6 @@ class ConfigurationManagement {
 	public function LoadConfigFile() {
 		$LMObj = LogManagement::getInstance();
 		$SMObj = SessionManagement::getInstance(0);
-// 		$RequestDataObj = RequestData::getInstance();
-// 		if ($RequestDataObj->getRequestDataEntry('sw') == null || $RequestDataObj->getRequestDataEntry('sw') == 0 ) { $ws = 2; }		// 2 is the default website; 1 is admin only
-// 		else { $ws = $RequestDataObj->getRequestDataEntry('sw'); }
-// 		if ( $this->Configuration['execution_context'] == "installation") {	$ws = 1; }
 
 		$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
 		$LMObj->InternalLog("ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`.");
@@ -115,10 +111,11 @@ class ConfigurationManagement {
 				$this->LanguageList = array ();
 				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 				$SqlTableListObj = SqlTableList::getInstance(null, null);
-				$RequestDataObj = RequestData::getInstance();
+				$SMObj = SessionManagement::getInstance(0);
+// 				$RequestDataObj = RequestData::getInstance();
 				
 				$TabLangueAdmises = array();
-				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('site_langue')." WHERE site_id = '".$RequestDataObj->getRequestDataEntry('sw')."';");
+				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('site_langue')." WHERE site_id = '".$SMObj->getSessionEntry('ws')."';");
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
 				sort ( $TabLangueAdmises );
 				

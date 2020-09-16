@@ -40,9 +40,6 @@ class RenderModule {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
-		
 		$LMObj->InternalLog("RenderModule->render start");
 		
 		$Content = "";
@@ -144,7 +141,6 @@ class RenderModule {
 			<!-- __________ Modules end __________ -->\r
 			";
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;
 			case 1 :	return $Content;	break;
@@ -162,8 +158,6 @@ class RenderModule {
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
 		
 		$LMObj->InternalLog("RenderModule->selectDecoration start");
 		$Content = "";
@@ -210,7 +204,6 @@ class RenderModule {
 			unset ($RenderDeco);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 		return $Content;
 	}
 	

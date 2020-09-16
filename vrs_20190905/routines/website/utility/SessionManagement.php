@@ -30,6 +30,7 @@ class SessionManagement {
 	
 	private function __construct(ConfigurationManagement $data){
 		$this->session = $_SESSION;
+// 		foreach ( $_SESSION as $A => $B ) { $this->session[$A] = $B; }
 		$this->session['SessionMaxAge'] = $data->getConfigurationEntry('SessionMaxAge');
 		$this->session['err'] = FALSE;
 	}
@@ -47,8 +48,6 @@ class SessionManagement {
 	public function CheckSession() {
 		$RequestDataObj = RequestData::getInstance ();
 		$LMObj = LogManagement::getInstance();
-		
-		$LMObj->setInternalLogTarget(logTargetNone);
 		
 		if ( isset($_SESSION['last_REMOTE_ADDR']) )	{ 
 			if ($_SESSION['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
@@ -81,7 +80,7 @@ class SessionManagement {
 		
 		// A valid session holds a ws (website) number
 		if (!isset($_SESSION['ws']) )	{ 
-// 			if ( $_SESSION['ws'] != $RequestDataObj->getRequestDataEntry('sw')) { 
+// 			if ( $_SESSION['ws'] != $RequestDataObj->getRequestDataEntry('ws')) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "No site number in \$_SESSION['ws']";
 				$LMObj->InternalLog("SessionManagement-CheckSession : No site number in \$_SESSION['ws']");
@@ -89,9 +88,9 @@ class SessionManagement {
 		}
 		else { 
 			$LMObj->InternalLog("\$_SESSION['ws']=".$_SESSION['ws']);
-// 			$_SESSION['ws'] = $RequestDataObj->getRequestDataEntry('sw'); 
+// 			$_SESSION['ws'] = $RequestDataObj->getRequestDataEntry('ws'); 
 			$this->session['ws'] = $_SESSION['ws'];
-			$RequestDataObj->setRequestDataEntry('sw', $_SESSION['ws'] );
+			$RequestDataObj->setRequestDataEntry('ws', $_SESSION['ws'] );
 		}
 		
 		// Any error leads to reset!
@@ -105,7 +104,6 @@ class SessionManagement {
 		$LMObj->InternalLog("CheckSession : Session seems ok. ws='" . $this->session['ws']."'");
 		
 		}
-		$LMObj->restoreLastInternalLogTarget();
 	}
 
 	/**
@@ -130,21 +128,26 @@ class SessionManagement {
 		$LMObj = LogManagement::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$mode = $CurrentSetObj->getDataSubEntry('autentification', 'mode');
+		$StringFormatObj = StringFormat::getInstance();
+		$RequestDataObj = RequestData::getInstance();
+		
 		
 		$LMObj->InternalLog("StoreUserCredential mode=".$mode. ". Saving user into the session");
 		switch ($mode) {
 			case "session" :
 				$LMObj->InternalLog("StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'"); 
 				if ( strlen($_SESSION['user_login']) == 0 ) { $this->ResetSession(); }
-				$this->session['user_login'] = $_SESSION['user_login'];
-				$this->session['PasswordSha512'] = "";
+				$this->session['user_login']		= $_SESSION['user_login'];
+				$this->session['PasswordSha512']	= "";
+				$this->session['ws']				= $_SESSION['ws'];
 				
 				break;
 			case "form" :
-				// We save directly the data into the session. 
+				// We save directly the data into the session.
+				$LMObj->InternalLog("Form content: " . $StringFormatObj->arrayToString($RequestDataObj->getRequestDataEntry('authentificationForm')));
 				$RequestDataObj = RequestData::getInstance();
 				$_SESSION['user_login']		=	$this->session['user_login']	=	$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
-				$_SESSION['ws']				=	$this->session['ws']			=	$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'sw');
+				$_SESSION['ws']				=	$this->session['ws']			=	$RequestDataObj->getRequestDataEntry('ws');
 				// Hash512 Password was saved during development. Is removed as of 2020 09 15.
 // 				$_SESSION['user_password']	=	$this->session['PasswordSha512']	=	hash("sha512",stripslashes($RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password')));
 				break;
@@ -162,11 +165,12 @@ class SessionManagement {
 		$this->restartSession();
 
 		$_SESSION['user_login']		= "anonymous";
-		$_SESSION['user_password']	= hash("sha512",stripslashes("anonymous"));
+// 		$_SESSION['user_password']	= hash("sha512",stripslashes("anonymous"));
 		$_SESSION['ws']				= defaultSiteId;
 
-		$this->session				= $_SESSION;
-		$this->session['err']		= FALSE;				// in case it come from CheckSession()
+		$this->session					= $_SESSION;
+		$this->session['user_password']	= hash("sha512",stripslashes("anonymous"));
+		$this->session['err']			= FALSE;				// in case it come from CheckSession()
 
 	}
 	

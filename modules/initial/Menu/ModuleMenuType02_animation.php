@@ -323,9 +323,9 @@ class ModuleMenuType02 {
 				unset ( $B );
 				foreach ( $A['entree'] as $B ) {
 					switch ( $B['deco_type'] ) {
-						case 1: $contentTarget .= "<a id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' href=\"#\" style='display: block;'>".$Micone_rep." ".$B['nom']."</a>\r";																												break;
-						case 2: $contentTarget .= "<a id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\" style='display: block;'>".$Micone_fichier." ".$B['nom']."</a>\r";	break;
-						case 3: $contentTarget .= "<a id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' href=\"#\" style='display: block;'>".$Micone_fichier." ".$B['nom']."</a>\r";																											break;
+						case 1: $contentTarget .= "<span id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' style='display: block;'>".$Micone_rep." ".$B['nom']."</span>\r";																												break;
+						case 2: $contentTarget .= "<a id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1\" style='display: block;'>".$Micone_fichier." ".$B['nom']."</a>\r";	break;
+						case 3: $contentTarget .= "<span id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' style='display: block;'>".$Micone_fichier." ".$B['nom']."</span>\r";																											break;
 					}
 				}
 			}

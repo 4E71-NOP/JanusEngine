@@ -40,9 +40,6 @@ class AuthenticateUser {
 	public function checkUserCredential ( User $UserObj, $mode ) {
 		$LMObj = LogManagement::getInstance();
 
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
-
 		if ( strlen($UserObj->getUserEntry('error_login_not_found')) == 0 ) {
 // 			$CMobj = ConfigurationManagement::getInstance ();
 			$RequestDataObj = RequestData::getInstance ();
@@ -128,7 +125,6 @@ class AuthenticateUser {
 // 				;" );
 			}
 		}
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 	
 	//@formatter:off

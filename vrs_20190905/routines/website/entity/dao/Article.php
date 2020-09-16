@@ -27,8 +27,6 @@ class Article {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -50,7 +48,6 @@ class Article {
 			$LMObj->InternalLog("Article/getArticleDataFromDB() : No rows returned for article id=".$ref."/".$page);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 	
 	

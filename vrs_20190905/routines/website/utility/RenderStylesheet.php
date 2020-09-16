@@ -34,9 +34,6 @@ class RenderStylesheet {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$LMObj = LogManagement::getInstance();
 		
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
-		
 // 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$themeArray = $ThemeDataObj->getThemeData();
 		$themeArray['tableName'] = $tableName;
@@ -237,7 +234,6 @@ class RenderStylesheet {
 
 @media print { BODY { font-size: ".$themeArray['B01T']['txt_fonte_size_min']."pt; } }\r\r-->\r</style>\r";
 
-		$LMObj->setInternalLogTarget($logTarget);
 		return $Content;
 		
 	}

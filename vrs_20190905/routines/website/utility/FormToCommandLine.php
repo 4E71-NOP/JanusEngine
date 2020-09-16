@@ -31,8 +31,6 @@ class FormToCommandLine {
 		$RequestDataObj = RequestData::getInstance();
 		$LMObj = LogManagement::getInstance();
 		
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
 		$LMObj->InternalLog("FormToCommandLine/analysis(): Analysis started");
 
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -96,7 +94,6 @@ class FormToCommandLine {
 				break;
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 	
 	//@formatter:off

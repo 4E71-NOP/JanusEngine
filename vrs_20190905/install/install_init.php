@@ -11,6 +11,8 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
+include ("define.php");
+
 include ("routines/website/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 $ClassLoaderObj->provisionClass('Time');
@@ -23,7 +25,7 @@ $TimeObj = Time::getInstance();
 
 $LMObj = LogManagement::getInstance();
 $LMObj->setDebugLogEcho(1);
-$LMObj->setInternalLogTarget("none");
+$LMObj->setInternalLogTarget(logTarget);
 
 $RequestDataObj = RequestData::getInstance();
 $MapperObj = Mapper::getInstance();

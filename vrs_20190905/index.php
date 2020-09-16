@@ -11,18 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-
-// --------------------------------------------------------------------------------------------
-// THE DEFINE SECTION IS SET HERE AND IT IS FINE HERE. 
-// If you're slow : Meaning don't define anyhere else!
-define ("defaultSiteId" , 2);
-define ("userActionSingIn" , "singIn");
-define ("userActionDisconnect" , "disconnect");
-define ("anonymousUserName" , "anonymous");
-define ("logTargetBoth" , "both");
-define ("logTargetNone" , "none");
-
-
+include ("define.php");
 
 // --------------------------------------------------------------------------------------------
 
@@ -37,7 +26,7 @@ $ClassLoaderObj->provisionClass('RequestData');
 // Time and memory measurment (with checkpoints)
 $TimeObj = Time::getInstance();
 $LMObj = LogManagement::getInstance();
-$LMObj->setInternalLogTarget(logTargetNone);
+$LMObj->setInternalLogTarget(logTarget);
 $MapperObj = Mapper::getInstance();
 $RequestDataObj = RequestData::getInstance();
 // --------------------------------------------------------------------------------------------
@@ -104,12 +93,12 @@ $ClassLoaderObj->provisionClass('SessionManagement');
 $ClassLoaderObj->provisionClass('ConfigurationManagement');
 $CMObj = ConfigurationManagement::getInstance();
 $CMObj->InitBasicSettings();
-$SMObj = SessionManagement::getInstance($CMObj);
 
 $CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 session_name($CurrentSetObj->getDataEntry('sessionName'));
 session_start();
-
+$SMObj = SessionManagement::getInstance($CMObj);
+// $LMObj->InternalLog("*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
 
 // --------------------------------------------------------------------------------------------
 //
@@ -123,6 +112,8 @@ if ( strlen($RequestDataObj->getRequestDataEntry('ws')) != 0 ) { $firstContactSc
 if ( strlen($RequestDataObj->getRequestDataEntry('formSubmitted')) == 1 && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == "ModuleAuthentification" ) {
 	$firstContactScore += 4;
 }
+if ( strlen($RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection")) { $firstContactScore += 8; }
+
 $LMObj->InternalLog("index.php : \$firstContactScore='". $firstContactScore ."'");
 $authentificationMode = "session";
 $authentificationAction = userActionSingIn;
@@ -147,26 +138,13 @@ switch ( $firstContactScore ) {
 	case 13:
 	case 14:
 	case 15:
+		$authentificationMode = "form";
 		$authentificationAction = userActionDisconnect;
-	
+		break;
 	case 1:
 		$SMObj->CheckSession();
 		break;
 }
-
-// --------------------------------------------------------------------------------------------
-
-// $ws = $RequestDataObj->getRequestDataEntry('ws');
-// if (strlen($ws) != 0 ) { 
-// 	$LMObj->InternalLog("index.php : Website specified in URI =`".$ws."`.");
-// 	$SMObj->ResetSession();					// If it is specified it's the first contact. It's not a Form or an URI.
-// 	$SMObj->setSessionEntry('ws', $ws);		// we set the ws in the session for Mr Anonymous
-// }
-// else {
-// 	$LMObj->InternalLog("index.php : Normal session check.");
-// 	$SMObj->CheckSession(); //Does NOT check login & password.
-// }
-// $LMObj->setInternalLogTarget($logTarget);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -221,7 +199,6 @@ if ( $SDDMObj->getReportEntry('cnxErr') == 1 ) {
 
 $CMObj->PopulateLanguageList();		// Not before we have access to the DB. Better isn't it?
 
-
 // --------------------------------------------------------------------------------------------
 //
 //	WebSite initialization
@@ -266,11 +243,10 @@ $AUObj = AuthenticateUser::getInstance();
 $CurrentSetObj->setInstanceOfUserObj(new User());
 $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 
-
-// we have 2 variable to drive the authentification process.
-
+// we have 2 variables used drive the authentification process.
 switch ( $authentificationMode ){
 	case "form":
+		$LMObj->InternalLog("index.php : Authentification with form mode");
 		switch ( $authentificationAction ) {
 			case userActionDisconnect:
 				$LMObj->InternalLog("index.php : disconnect submitted");
@@ -290,6 +266,8 @@ switch ( $authentificationMode ){
 		$LMObj->InternalLog("index.php : Connection attempt end");
 		break;
 	case "session":
+		$LMObj->InternalLog("index.php : Authentification with session mode. user_login='" . $SMObj->getSessionEntry('user_login')."'");
+		
 		// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 		if ( strlen($SMObj->getSessionEntry('user_login')) == 0 ) {
 			$LMObj->InternalLog("index.php : \$_SESSION strlen(user_login)=0");
@@ -297,7 +275,6 @@ switch ( $authentificationMode ){
 		}
 		$UserObj->getUserDataFromDB( $SMObj->getSessionEntry('user_login'), $WebSiteObj );
 		if ( $UserObj->getUserEntry('error_login_not_found') != 1 ) {
-// 			$LMObj->InternalLog("index.php : session mode : user_login='".$SMObj->getSessionEntry('user_login')."'; UserObj/user_login='" . $UserObj->getUserEntry('user_login') . "'");
 			$LMObj->InternalLog("index.php : session mode : ".$StringFormatObj->arrayToString( $SMObj->getSession()));
 			$AUObj->checkUserCredential($UserObj, 'session');
 		}
@@ -308,50 +285,10 @@ switch ( $authentificationMode ){
 			$UserObj->getUserDataFromDB('anonymous', $WebSiteObj);
 		}
 		break;
-	
-	
 }
 
-
-// Do we have a user submitting from the auth module form ?
-// if ( strlen($RequestDataObj->getRequestDataEntry('formSubmitted')) == 1 && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == "ModuleAuthentification" ) {
-// 	switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')){
-// 		case 'disconnection':
-// 			$LMObj->InternalLog("index.php : disconnect submitted");
-// 			$userName = 'anonymous';
-// 			break;
-// 		case 'connectionAttempt':
-// 			$LMObj->InternalLog("index.php : Connection attempt");
-// 			$userName = $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
-// 			break;
-// 	}
-// 	$SMObj->ResetSession();				// If a login comes from a form. The session object must be reset!
-// 	$UserObj->getUserDataFromDB($userName, $WebSiteObj );
-// 	$LMObj->InternalLog("index.php : user_login=" . $UserObj->getUserEntry('user_login'));
-// 	$AUObj->checkUserCredential($UserObj, 'form');
-// 	$LMObj->InternalLog("index.php : Connection attempt end");
-// }
-// else {
-// 	// Assuming a session is valid (whatever it's 'anonymous' or someone else).
-// 	if ( strlen($SMObj->getSessionEntry('user_login')) == 0 ) { 
-// 		$LMObj->InternalLog("index.php : \$_SESSION strlen(user_login)=0");
-// 		$SMObj->ResetSession();
-// 	}
-// 	$UserObj->getUserDataFromDB( $SMObj->getSessionEntry('user_login'), $WebSiteObj );
-// 	if ( $UserObj->getUserEntry('error_login_not_found') != 1 ) {
-// 		$LMObj->InternalLog("index.php : session mode : user_login='".$SMObj->getSessionEntry('user_login')."'; UserObj/user_login='" . $UserObj->getUserEntry('user_login') . "'");
-// 		$AUObj->checkUserCredential($UserObj, 'session');
-// 	}
-// 	else { 
-// 	// No form then no user found it's defintely an anonymous user
-// 		$SMObj->ResetSession();
-// 		$UserObj->resetUser();
-// 		$UserObj->getUserDataFromDB('anonymous', $WebSiteObj);
-// 	}
-// }
-
-
-$LMObj->InternalLog("index.php : session state. " . $StringFormatObj->arrayToString($SMObj->getSession()));
+$LMObj->InternalLog("index.php : \$SMObj->getSession() :" . $StringFormatObj->arrayToString($SMObj->getSession()));
+$LMObj->InternalLog("index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION));
 if ( $AUObj->getDataEntry('error') === TRUE ) { $UserObj->getUserDataFromDB("anonymous", $WebSiteObj); }
 // $LMObj->InternalLog("index.php : UserObj = " . $StringFormatObj->arrayToString($UserObj->getUser()));
 $LMObj->InternalLog("index.php : checkUserCredential end");
@@ -372,6 +309,9 @@ $scoreLang = 0;
 if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0 && $RequestDataObj->getRequestDataEntry('l') != 0 ) { $scoreLang += 4; }
 if ( strlen($UserObj->getUserEntry('lang')) != 0 && $UserObj->getUserEntry('lang') != 0 ) { $scoreLang += 2; }
 if ( strlen($WebSiteObj->getWebSiteEntry('sw_lang')) != 0 && $WebSiteObj->getWebSiteEntry('sw_lang') != 0 ) { $scoreLang += 1; }
+
+// $LMObj->InternalLog("Language list: ". $StringFormatObj->arrayToString($CMObj->getLanguageList()));
+$LMObj->InternalLog("Website : sw_lang='". $WebSiteObj->getWebSiteEntry('sw_lang')."'");
 
 switch ($scoreLang) {
 	case 0:
@@ -405,6 +345,7 @@ $ClassLoaderObj->provisionClass('I18n');
 $I18nObj = I18n::getInstance();
 $I18nObj->getI18nFromDB();
 
+$LMObj->restoreLastInternalLogTarget();
 // --------------------------------------------------------------------------------------------
 //
 //	Form Management for commandLine interface
@@ -514,9 +455,10 @@ $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_ref',		"<input t
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page',		"<input type='hidden'	name='arti_page'	value='".$CurrentSetObj->getDataSubEntry('article','arti_page')."'>\r");
 
 $urlUsrPass = "";
-if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login'); }
 // if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login')."&amp;user_pass=".$SMObj->getSessionEntry('user_password'); }
-$CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&l=".$CurrentSetObj->getDataEntry('language').$urlUsrPass );																			// Site Lang User Pass
+// $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&l=".$CurrentSetObj->getDataEntry('language').$urlUsrPass );																			// Site Lang User Pass
+if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login'); }
+$CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"");																			// Site Lang User Pass
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sldup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&l=".$CurrentSetObj->getDataEntry('language')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page').$urlUsrPass);		// Site Lang Article User Pass
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page'). $urlUsrPass);							// Site Article User Pass
 
@@ -728,6 +670,9 @@ Author : FMA - 2005 ~ ".date("Y", time())."
 Licence : Creative commons CC-by-nc-sa (http://www.creativecommons.org/)
 -->
 ";
+
+$LMObj->InternalLog("index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION));
+
 // --------------------------------------------------------------------------------------------
 $SDDMObj->disconnect_sql();
 session_write_close();

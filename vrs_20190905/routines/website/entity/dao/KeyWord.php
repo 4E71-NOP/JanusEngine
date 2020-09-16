@@ -27,8 +27,6 @@ class KeyWord {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -50,7 +48,6 @@ class KeyWord {
 			$LMObj->InternalLog("KeyWord/getKeyWordDataFromDB() : No rows returned for keyword id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 
 	//@formatter:off

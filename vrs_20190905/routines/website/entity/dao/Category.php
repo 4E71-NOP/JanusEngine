@@ -27,8 +27,6 @@ class Category {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -50,7 +48,6 @@ class Category {
 			$LMObj->InternalLog("Category/getCategoryDataFromDB() : No rows returned for category id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 	
 	//@formatter:off

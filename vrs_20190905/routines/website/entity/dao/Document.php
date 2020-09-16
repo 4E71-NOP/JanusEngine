@@ -27,8 +27,6 @@ class Document {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -52,7 +50,6 @@ class Document {
 			$LMObj->InternalLog("Document/getDocumentDataFromDB() : No rows returned for document id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 	
 	//@formatter:off

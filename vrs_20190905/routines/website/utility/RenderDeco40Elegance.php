@@ -31,8 +31,6 @@ class RenderDeco40Elegance {
 		$RenderLayoutObj = RenderLayout::getInstance();
 		$LMObj = LogManagement::getInstance();
 
-		$logTarget = $LMObj->getInternalLogTarget();
-// 		$LMObj->setInternalLogTarget("both");
 		$LMObj->InternalLog("********** RenderDeco40Elegance Start **********");
 		
 		$mn = $infos['module']['module_nom'];
@@ -137,7 +135,6 @@ class RenderDeco40Elegance {
 		$GeneratedJavaScriptObj->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$LMObj->InternalLog("____________________ End");
-		$LMObj->setInternalLogTarget($logTarget);
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

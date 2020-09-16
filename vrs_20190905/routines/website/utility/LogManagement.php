@@ -28,7 +28,7 @@ class LogManagement {
 	private $DebugLogEcho = 0;
 	private $DebugLog = array();
 	
-	private $LastInternalLogTarget = "none";
+	private $LastInternalLogTarget = "both";
 	private $InternalLogTarget = "both";
 	private $InternalLogIdx = 0;
 	private $InternalLog = array();

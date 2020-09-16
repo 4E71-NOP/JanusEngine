@@ -27,8 +27,6 @@ class Module {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$LMObj = LogManagement::getInstance();
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -51,7 +49,6 @@ class Module {
 			$LMObj->InternalLog("Module/getModuleDataFromDB() : No rows returned for module id=".$id);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
 	}
 
 	//@formatter:off

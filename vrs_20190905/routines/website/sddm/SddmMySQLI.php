@@ -81,9 +81,6 @@ class SddmMySQLI {
 		$CMobj = ConfigurationManagement::getInstance();
 		$MapperObj = Mapper::getInstance();
 		
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
-		
 		$SQL_temps_depart = $TimeObj->microtime_chrono ();
 		
 		$LMObj->increaseSqlQueryNumber();
@@ -128,7 +125,6 @@ class SddmMySQLI {
 				
 				break;
 		}
-		$LMObj->setInternalLogTarget($logTarget);
 		return $db_result;
 	}
 

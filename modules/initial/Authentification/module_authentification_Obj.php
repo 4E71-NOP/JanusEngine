@@ -28,7 +28,7 @@ class ModuleAuthentification {
 		$AUObj = AuthenticateUser::getInstance();
 		
 		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
+		$LMObj->setInternalLogTarget(logTargetNone);
 		
 		$localisation = " / ModuleAuthentification";
 		$MapperObj->AddAnotherLevel($localisation );
@@ -55,7 +55,10 @@ class ModuleAuthentification {
 		
 		$Content = "";
 		if ( $SMObj->getSessionEntry('user_login') == "anonymous") {
-			if ( $RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" ) {
+			if ( $RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && 
+					$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
+					$RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
+					) {
 				$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_avert' style='text-align: center;'>". $i18n['cnxResult'][$cnxResult] ."</span>"; 
 			}
 
@@ -70,9 +73,9 @@ class ModuleAuthentification {
 			<tr>\r<td class='".$ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align:center; padding-bottom:8px;'><input class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3' type='password' name='authentificationForm[user_password]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
 			</table>\r".
 			
-			"<!--".$StringFormatObj->print_r_debug($CurrentSetObj->getData())."-->".
+// 			"<!--".$StringFormatObj->print_r_debug($CurrentSetObj->getData())."-->".
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
+// 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
 			"
