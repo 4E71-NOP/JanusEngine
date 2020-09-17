@@ -60,7 +60,7 @@ if ( $user['groupe_tag'] == 3 ) {
 	case "Installer":
 		$pv['requete'] = "SELECT ext.* 
 		FROM ".$SQL_tab_abrege['extension']." ext 
-		WHERE ext.site_id = '".$site_web['sw_id']."' 
+		WHERE ext.site_id = '".$site_web['ws_id']."' 
 		AND ext.extension_nom = '".$P['extension_nom']."'
 		;";
 		$dbquery = requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );

@@ -178,7 +178,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 					"arti_validation_etat"			=>	0,
 					"arti_parution_date"			=>	$d,
 					"docu_id"						=>	"",
-					"site_id"						=>	$WebSiteObj->getWebSiteEntry('sw_id'),
+					"site_id"						=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";

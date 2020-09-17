@@ -37,7 +37,7 @@ class User {
 // 			AND gu.groupe_premier = '1'
 // 			AND gu.groupe_id = g.groupe_id
 // 			AND gu.groupe_id = sg.groupe_id
-// 			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('sw_id') . "'
+// 			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 // 		;"
 // 		);
 		$dbquery = $SDDMObj->query ("
@@ -48,7 +48,7 @@ class User {
 			AND gu.groupe_premier = '1'
 			AND gu.groupe_id = g.groupe_id
 			AND gu.groupe_id = sg.groupe_id
-			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('sw_id') . "'
+			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;");
 		if ($SDDMObj->num_row_sql ( $dbquery ) != 0) {
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -154,7 +154,7 @@ class User {
 		
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
-			$this->User['user_lang'] = $WebSiteObj->getWebSiteEntry('sw_lang');
+			$this->User['user_lang'] = $WebSiteObj->getWebSiteEntry('ws_lang');
 		}
 		// Set a default theme if none is specified.
 		if ( $this->User['user_pref_theme'] == 0 ) {

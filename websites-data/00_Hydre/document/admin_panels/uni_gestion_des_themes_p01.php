@@ -85,7 +85,7 @@ $dbquery = $SDDMObj->query("
 SELECT s.theme_id, s.theme_nom, s.theme_titre, s.theme_date 
 FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." s, ".$SqlTableListObj->getSQLTableName('site_theme')." ss 
 WHERE s.theme_id = ss.theme_id 
-AND ss.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND ss.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $i = 1;
@@ -101,7 +101,7 @@ else {
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?"
-			."sw=".$WebSiteObj->getWebSiteEntry('sw_id')
+			."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 			."&l=".$CurrentSetObj->getDataEntry('language')
 			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 			."&arti_page=2"

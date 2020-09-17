@@ -183,8 +183,8 @@ switch ($l) {
 
 $dbquery = $SDDMObj->query("
 SELECT sw_etat, sw_lang 
-FROM ".$SqlTableListObj->getSQLTableName('site_web')." 
-WHERE sw_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+FROM ".$SqlTableListObj->getSQLTableName('website')." 
+WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$pv['sw_etat2']		= "select_o1_1_" . $dbp['sw_etat'];
@@ -239,9 +239,9 @@ $sw_lang_select	= array();
 
 // $dbquery = $SDDMObj->query("
 // SELECT sl.lang_id
-// FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('site_web')." s
-// WHERE s.sw_id ='".$WebSiteObj->getWebSiteEntry('sw_id')."'
-// AND sl.site_id = s.sw_id
+// FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
+// WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
+// AND sl.site_id = s.ws_id
 // ;");
 // while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $langList[$dbp['lang_id']]['support'] = 1; }
 // $LMObj->logDebug($langList, "langList");
@@ -297,7 +297,7 @@ $T['AD'][$Tab]['3']['2']['cont'] = "<select name='formParams1[theme]' class='" .
 $dbquery = $SDDMObj->query("
 SELECT a.theme_id,a.theme_nom,a.theme_titre
 FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a, ".$SqlTableListObj->getSQLTableName('site_theme')." b
-WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND a.theme_id  = b.theme_id;
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
@@ -420,7 +420,7 @@ $Content .= $RenderTablesObj->render($infos, $T);
 
 */
 $Content .= "
-<input type='hidden' name='site_context[site_id]'		value='".$WebSiteObj->getWebSiteEntry('sw_id')."'>
+<input type='hidden' name='site_context[site_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
 <input type='hidden' name='site_context[site_nom]'		value='".$WebSiteObj->getWebSiteEntry('sw_nom')."'>
 
 <table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>

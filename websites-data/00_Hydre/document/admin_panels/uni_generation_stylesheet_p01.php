@@ -115,7 +115,7 @@ $Content .= "
 $dbquery = $SDDMObj->query("
 SELECT sd.theme_id,sd.theme_nom,sd.theme_titre,ss.theme_etat
 FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss 
-WHERE ss.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'  
+WHERE ss.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
 AND sd.theme_id = ss.theme_id 
 ;");
 

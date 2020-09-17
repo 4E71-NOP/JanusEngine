@@ -67,7 +67,7 @@ class CommandConsole {
 
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
-		$webSiteId = $WebSiteContextObj->getWebSiteEntry('sw_id');
+		$webSiteId = $WebSiteContextObj->getWebSiteEntry('ws_id');
 
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$CMObj = ConfigurationManagement::getInstance();

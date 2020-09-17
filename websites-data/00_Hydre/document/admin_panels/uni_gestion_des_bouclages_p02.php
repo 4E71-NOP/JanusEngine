@@ -132,7 +132,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		SELECT art.arti_nom, art.arti_titre
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 					
-		WHERE art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+		WHERE art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.arti_bouclage = '".$currentArticleObj->getDeadLineEntry('bouclage_id')."'
 		AND art.site_id = cat.site_id
 		AND art.arti_ref = cat.arti_ref
@@ -143,7 +143,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		;");
 
 		$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="
-				.$WebSiteObj->getWebSiteEntry('sw_id')
+				.$WebSiteObj->getWebSiteEntry('ws_id')
 				."&arti_ref=".$CurrentSetObj->getDataEntry('language')."_gestion_des_articles"
 				."&arti_page=3"
 				."&l=".$CurrentSetObj->getDataEntry('language')
@@ -165,7 +165,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		$currentArticleObj->setDeadLine(
 				array(
 		'bouclage_etat'	=>	1,
-		'site_id'		=>	$WebSiteObj->getWebSiteEntry('sw_id'),
+		'site_id'		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 		'user_id'		=>	$UserObj->getUserEntry('user_id'),
 		'user_login'	=>	$UserObj->getUserEntry('user_login'),
 				),

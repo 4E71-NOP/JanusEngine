@@ -118,7 +118,7 @@ else {
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "
 		<a class='".$Block."_lien' href='index.php?"
-		."sw=".$WebSiteObj->getWebSiteEntry('sw_id')
+		."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 		."&l=".$CurrentSetObj->getDataEntry('language')
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 		."&arti_page=2"

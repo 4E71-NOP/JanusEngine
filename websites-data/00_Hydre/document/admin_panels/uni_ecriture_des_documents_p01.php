@@ -110,9 +110,9 @@ $T = array();
 $dbquery = $SDDMObj->query("
 SELECT doc.docu_id, doc.docu_nom, doc.docu_type, shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY docu_id, docu_type, part_modification ASC
 ;");
 $docList = array();
@@ -143,7 +143,7 @@ else {
 	AND dcm.docu_id = art.docu_id 
 	AND art.arti_bouclage = bcl.bouclage_id 
 	AND bcl.bouclage_etat = '1' 
-	AND art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+	AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	ORDER BY dcm.docu_id ASC 
 	;");
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $docList[$dbp['docu_id']]['edition'] = 0; }

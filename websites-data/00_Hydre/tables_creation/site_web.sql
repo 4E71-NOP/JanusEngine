@@ -38,3 +38,4 @@ PRIMARY KEY (sw_id),
 KEY idx_!IdxNom!_theme_id (theme_id)
 
 );
+

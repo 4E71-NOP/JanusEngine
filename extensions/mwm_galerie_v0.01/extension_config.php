@@ -13,7 +13,7 @@
 /*MWM-licence-fin*/
 $pv['tab'] = &$extensions_['donnees'][$pv['i']];
 
-$pv['tab']['site_id']					= $site_web['sw_id'];
+$pv['tab']['site_id']					= $site_web['ws_id'];
 $pv['tab']['extension_id']				= 0;
 $pv['tab']['extension_nom']				= "MWM_Galerie";
 $pv['tab']['extension_version']			= "0.01";

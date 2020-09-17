@@ -116,7 +116,7 @@ if ( $UserObj->getUserEntry('groupe_tag') == 3 ) {
 			$dbquery = $SDDMObj->query("
 			SELECT ext.* 
 			FROM ".$SqlTableListObj->getSQLTableName('extension')." ext 
-			WHERE ext.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			WHERE ext.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND ext.extension_nom = '".$A['extension_nom']."'
 			;");
 			if ( $SDDMObj->num_row_sql($dbquery) != 0 ) { $A['extension_etat'] = 1; }

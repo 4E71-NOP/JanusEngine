@@ -97,7 +97,7 @@ AND c.site_id = '2'
 AND c.cate_lang = l.langue_id
 AND l.langue_id = sl.lang_id
 AND c.site_id = sl.site_id
-AND c.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+AND c.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 GROUP BY c.cate_lang
 ;");
 
@@ -136,13 +136,13 @@ foreach ( $CateTabList as $A ) {
 }
 
 $dbquery = $SDDMObj->query("SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('site_langue')." sl, ".$SqlTableListObj->getSQLTableName('site_web')." sw 
+FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('site_langue')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
 WHERE c.cate_type IN (0,1) 
 AND c.cate_etat = '1' 
 AND c.cate_lang IN (".$langClause.") 
 AND c.cate_lang = sl.lang_id 
-AND sl.site_id = sw.sw_id 
-AND sw.sw_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND sl.site_id = sw.ws_id 
+AND sw.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY c.cate_lang, c.cate_parent, c.cate_position 
 ;");
 
@@ -163,7 +163,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery) ) {
 	$T['AD'][$Tab][$l]['1']['style'] = "text-align:center;";
 	$T['AD'][$Tab][$l]['2']['cont'] =
 		"<a class='".$Block."_lien' href='index.php?"
-		."sw=".$WebSiteObj->getWebSiteEntry('sw_id')
+		."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 		."&l=".$CurrentSetObj->getDataEntry('language')
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 		."&arti_page=2"

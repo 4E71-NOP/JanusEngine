@@ -51,7 +51,7 @@ class RenderLayout {
 		$dbquery = $SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('site_module')." sm
-			WHERE sm.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			WHERE sm.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND m.module_id = sm.module_id
 			AND sm.module_etat = '1'
 			AND m.module_groupe_pour_voir ".$UserObj->getUserEntry('clause_in_groupe')."
@@ -72,7 +72,7 @@ class RenderLayout {
 				FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('article')." art
 				WHERE art.arti_ref = '".$_REQUEST['arti_ref']."'
 				AND art.arti_page = '".$_REQUEST['arti_page']."'
-				AND art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+				AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				AND art.pres_nom_generique = pr.pres_nom_generique
 				AND pr.pres_id = sp.pres_id
 				AND sp.theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'

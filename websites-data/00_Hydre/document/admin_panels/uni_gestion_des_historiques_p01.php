@@ -283,7 +283,7 @@ if ( strlen($RequestDataObj->getRequestDataSubEntry('mhForm', 'page') == 0 )) { 
 $dbquery = $SDDMObj->query("
 SELECT COUNT(historique_id) as nbr_historique 
 FROM ".$SqlTableListObj->getSQLTableName('historique')." 
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ;");
@@ -317,7 +317,7 @@ if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'historique_count') > $Re
 $dbquery = $SDDMObj->query("
 SELECT * 
 FROM ".$SqlTableListObj->getSQLTableName('historique')." 
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ORDER BY historique_date DESC, historique_id DESC 

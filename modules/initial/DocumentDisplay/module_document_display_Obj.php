@@ -66,7 +66,7 @@ class ModuleDocumentDisplay {
 // 		We have now some informations about the navigation, we store/prepare it for further use.
 // 		It means some modules must be processed by priority. Document/article should be first.
 //		The priority is located in the site_module table.
-// 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',			"<input type='hidden'	name='sw'			value='".$WebSiteObj->getWebSiteEntry('sw_id')."'>\r" );
+// 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',			"<input type='hidden'	name='sw'			value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>\r" );
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l',			"<input type='hidden'	name='l'			value='".$UserObj->getUserEntry('lang')."'>\r");
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login',	"<input type='hidden'	name='user_login'	value='".$UserObj->getUserEntry('login')."'>\r");
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass',	"<input type='hidden'	name='user_pass'	value='".$UserObj->getUserEntry('pass')."'>\r");
@@ -75,9 +75,9 @@ class ModuleDocumentDisplay {
 // 		if ( $_SESSION['mode_session'] != 1 ) {
 // 			$CurrentSetObj->setDataSubEntry('block_HTML', 'url_up', "&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass'));
 // 		}
-// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&amp;l=".$UserObj->getUserEntry('lang').$CurrentSetObj->getDataSubEntry('block_HTML', 'url_up') );
-// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&amp;l=".$UserObj->getUserEntry('lang')."&amp;arti_ref=".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."&amp;arti_page=".$CurrentSetObj->getDataSubEntry('document', 'arti_page').$CurrentSetObj->getDataSubEntry('block_HTML', 'url_up'));
-// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&amp;arti_ref=".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."&amp;arti_page=".$CurrentSetObj->getDataSubEntry('document', 'arti_page'). $CurrentSetObj->getDataSubEntry('block_HTML', 'url_up'));
+// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$UserObj->getUserEntry('lang').$CurrentSetObj->getDataSubEntry('block_HTML', 'url_up') );
+// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$UserObj->getUserEntry('lang')."&amp;arti_ref=".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."&amp;arti_page=".$CurrentSetObj->getDataSubEntry('document', 'arti_page').$CurrentSetObj->getDataSubEntry('block_HTML', 'url_up'));
+// 		$CurrentSetObj->setDataSubEntry('block_HTML', '', "&amp;sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;arti_ref=".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."&amp;arti_page=".$CurrentSetObj->getDataSubEntry('document', 'arti_page'). $CurrentSetObj->getDataSubEntry('block_HTML', 'url_up'));
 
 // 		We have a document object. Now we have to process it.
 		$DocumentDataObj->setDocumentDataEntry ('arti_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_creation_date')) );
@@ -128,7 +128,7 @@ class ModuleDocumentDisplay {
 		SELECT COUNT(docu_id) AS arti_nbr_page
 		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
-		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.arti_bouclage = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
 		;");
@@ -172,7 +172,7 @@ class ModuleDocumentDisplay {
 			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl 
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."' 
 			AND art.arti_validation_etat = '1' 
-			AND art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND art.arti_bouclage = bcl.bouclage_id 
 			AND bcl.bouclage_etat = '1'
 			;";
@@ -193,7 +193,7 @@ class ModuleDocumentDisplay {
 				$P2P_tab_[$pv['1']]['arti_ref']			= $dbp['arti_ref'];
 				$P2P_tab_[$pv['1']]['lien']				= "
 				<a class='".$Block."_lien ".$Block."_t2'
-				href='index.php?sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('sw_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass')."'
+				href='index.php?sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('sw_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass')."'
 				onMouseOver=\"t.ToolTip('-> ". addslashes($dbp['arti_sous_titre']) .", en page ".$dbp['arti_page']."');\"
 				onMouseOut=\"t.ToolTip();\">".$dbp['arti_page']." ".$dbp['arti_sous_titre']."</a>\r
 				";
@@ -329,7 +329,7 @@ class ModuleDocumentDisplay {
 				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 				WHERE doc.docu_nom = '".$documentAnalyse['include_docu_nom']."'
 				AND doc.docu_id = dp.docu_id
-				AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+				AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				;");
 				
 				if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
@@ -746,7 +746,7 @@ class ModuleDocumentDisplay {
 		FROM ".$SqlTableListObj->getSQLTableName('mot_cle')."
 		WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
 		AND mc_etat = '1'
-		AND site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+		AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['MC']['id']		= $dbp['mc_id'];

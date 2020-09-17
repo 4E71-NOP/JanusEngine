@@ -44,7 +44,7 @@ self::$ActionTable['add']['document']		= function (&$a) { return array ("INSERT 
 
 self::$ActionTable['add']['group'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['groupe']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_groupe']." VALUES ('".$a['params']['group_website_id']."', '".$a['Context']['sw_id']."', '".$a['params']['id']."', '1' );"
+		"INSERT INTO ".$a['sqlTables']['site_groupe']." VALUES ('".$a['params']['group_website_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
 	);
 };
 
@@ -65,7 +65,7 @@ self::$ActionTable['add']['log']	= function (&$a) {
 
 self::$ActionTable['add']['module'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['module']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_module']." VALUES ('".$a['params']['site_module_id']."', '".$a['Context']['sw_id']."', '".$a['params']['id']."', '".$a['params']['state']."', '".$a['params']['position']."' );"
+		"INSERT INTO ".$a['sqlTables']['site_module']." VALUES ('".$a['params']['site_module_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '".$a['params']['state']."', '".$a['params']['position']."' );"
 	);
 };
 
@@ -73,7 +73,7 @@ self::$ActionTable['add']['tag']			= function (&$a) { return array ("INSERT INTO
 
 self::$ActionTable['add']['theme']			= function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['theme_descripteur']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_theme']." VALUES ('".$a['params']['site_theme_id']."','".$a['Context']['sw_id']."','".$a['params']['id']."','".$a['params']['state']."');");
+		"INSERT INTO ".$a['sqlTables']['site_theme']." VALUES ('".$a['params']['site_theme_id']."','".$a['Context']['ws_id']."','".$a['params']['id']."','".$a['params']['state']."');");
 };
 
 
@@ -97,7 +97,7 @@ self::$ActionTable['add']['user']			= function (&$a) {
 self::$ActionTable['add']['website']		= function (&$a) {
 	$CurrentSetObj = CurrentSet::getInstance();
 	$CurrentSetObj->setDataSubEntry('install', 'websitePostCreation', 1 );
-	return array ("INSERT INTO ".$a['sqlTables']['site_web']." (".$a['columns'].") VALUES (".$a['values'].");");
+	return array ("INSERT INTO ".$a['sqlTables']['website']." (".$a['columns'].") VALUES (".$a['values'].");");
 };
 
 //--------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ self::$ActionTable['assign']['document']		= function (&$a) {
 };
 
 self::$ActionTable['assign']['language']		= function (&$a) {
-	return array ("INSERT INTO ".$a['sqlTables']['site_langue']." VALUES ('".$a['params']['site_lang_id']."', '".$a['params']['sw_id']."', '".$a['params']['lang_id']."');");
+	return array ("INSERT INTO ".$a['sqlTables']['site_langue']." VALUES ('".$a['params']['site_lang_id']."', '".$a['params']['ws_id']."', '".$a['params']['lang_id']."');");
 };
 
 	
@@ -123,7 +123,7 @@ self::$ActionTable['assign']['layout']		= function (&$a) {
 
 self::$ActionTable['assign']['tag']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article_tag']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['site_web']." SET theme_id = '".$a['params']['theme_id']."' WHERE sw_id = '".$a['params']['sw_id']."';");};
+self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['website']." SET theme_id = '".$a['params']['theme_id']."' WHERE ws_id = '".$a['params']['ws_id']."';");};
 
 self::$ActionTable['assign']['user']		= function (&$a) {
 	$queries = array();
@@ -146,7 +146,7 @@ self::$ActionTable['update']['document']		= function (&$a) {
 self::$ActionTable['update']['website']		= function (&$a) {
 	$queries = array();
 	if ($a['params']['updateGO'] == 1 ) { 
-		$queries[] = "UPDATE ".$a['sqlTables']['site_web']." SET ".$a['equalities']." WHERE sw_id = '".$a['params']['sw_id']."';";
+		$queries[] = "UPDATE ".$a['sqlTables']['website']." SET ".$a['equalities']." WHERE ws_id = '".$a['params']['ws_id']."';";
 	}
 	return $queries;
 };
@@ -226,7 +226,7 @@ self::$ActionTable['share']['document']		= function (&$a) { return array ("INSER
 self::$ActionTable['website']['context'] = function (&$a) {
 	$CurrentSetObj = CurrentSet::getInstance();
 	$CurrentSetObj->setInstanceOfWebSiteContextObj(new WebSite());
-	$CurrentSetObj->getInstanceOfWebSiteContextObj()->changeWebSiteContext($a['params']['sw_id']);
+	$CurrentSetObj->getInstanceOfWebSiteContextObj()->changeWebSiteContext($a['params']['ws_id']);
 	return 0; 
 };
 

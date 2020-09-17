@@ -95,10 +95,10 @@ switch ($l) {
 $dbquery = $SDDMObj->query("
 SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.docu_id = doc.docu_id 
 AND doc.docu_correction = '0' 
-AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $tab_modif = array(

@@ -52,7 +52,7 @@ class RenderAdmDashboard {
 		$dbquery = $SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('site_module')." b
-			WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry ('sw_id')."'
+			WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.module_id
 			AND b.module_etat = '1'
 			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."
@@ -64,7 +64,7 @@ class RenderAdmDashboard {
 // 			RenderAdmDashboard:Render 
 // 			SELECT *
 // 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('site_module')." b
-// 			WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry ('sw_id')."'
+// 			WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 // 			AND a.module_id = b.module_id
 // 			AND b.module_etat = '1'
 // 			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."

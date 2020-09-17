@@ -25,8 +25,8 @@ $_REQUEST['sql_initiateur'] = "fra_gestion_des_mots_cles_p03";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT art.arti_id, art.arti_nom  
 FROM ".$SQL_tab['article']." art, ".$SQL_tab['categorie']." cat 
-WHERE art.site_id = '".$site_web['sw_id']."'
-AND cat.site_id = '".$site_web['sw_id']."'
+WHERE art.site_id = '".$site_web['ws_id']."'
+AND cat.site_id = '".$site_web['ws_id']."'
 AND cat.arti_ref = art.arti_ref 
 AND cat.arti_ref != '0' 
 AND cat.cate_type IN ('0','1') 

@@ -259,7 +259,7 @@ $tab = array (
 $dbquery = $SDDMObj->query("
 SELECT *
 FROM ".$SqlTableListObj->getSQLTableName('historique')."
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ORDER BY historique_id DESC
 LIMIT 0,10
 ;");

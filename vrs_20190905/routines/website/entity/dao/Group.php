@@ -36,7 +36,7 @@ class Group {
 			FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg
 			WHERE grp.groupe_id = '".$id."'
 			AND grp.groupe_id = sg.groupe_id
-			AND sg.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			AND sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

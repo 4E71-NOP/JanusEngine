@@ -45,8 +45,8 @@ class DocumentData {
 			$dbquery = $SDDMObj->query ( "
 			SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
 			FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
-			WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('sw_id'). "'
-			AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('sw_lang'). "'
+			WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
+			AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
 			AND cat.bouclage_id = bcl.bouclage_id
 			AND bcl.bouclage_etat = '1'
 			AND cat.cate_type IN ('0','1')
@@ -72,13 +72,13 @@ class DocumentData {
 		SELECT art.*, doc.docu_id, doc.docu_nom, doc.docu_type,
 		doc.docu_createur, doc.docu_creation_date,
 		doc.docu_correcteur, doc.docu_correction_date,
-		doc.docu_origine, doc.docu_cont, sit.sw_repertoire
-		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl, ".$SqlTableListObj->getSQLTableName('site_web')." sit
+		doc.docu_origine, doc.docu_cont, sit.ws_directory
+		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl, ".$SqlTableListObj->getSQLTableName('website')." sit
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."'
 		AND art.docu_id = doc.docu_id
-		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
-		AND sit.sw_id = doc.docu_origine
+		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND sit.ws_id = doc.docu_origine
 		AND art.arti_bouclage = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
 		;");
@@ -91,7 +91,7 @@ class DocumentData {
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_nom LIKE '%article_inexistant%'
 			AND ds.docu_id = doc.docu_id
-			AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			;");
 		}
 		

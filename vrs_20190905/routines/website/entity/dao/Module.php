@@ -36,7 +36,7 @@ class Module {
 			FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('site_module')." b
 			WHERE a.module_id = '".$id."'
 			AND a.module_id = b.module_id
-			AND b.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			AND b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

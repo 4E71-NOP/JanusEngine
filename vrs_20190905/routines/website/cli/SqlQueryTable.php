@@ -58,7 +58,7 @@ self::$SqlQueryTable['M_CATEGO_reb']['colone_1']	= "bouclage_id";
 self::$SqlQueryTable['M_CATEGO_reg']['requete']		= "SELECT grp.groupe_nom, grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg  WHERE sg.site_id = '".$webSiteId."' AND grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id;";
 self::$SqlQueryTable['M_CATEGO_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_CATEGO_reg']['colone_1']	= "groupe_id";
-self::$SqlQueryTable['M_CATEGO_rrp']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('categorie')." WHERE site_id = '".$webSiteId."' AND cate_role = '2' AND cate_lang = '".$A['Context']['sw_lang']."';";
+self::$SqlQueryTable['M_CATEGO_rrp']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('categorie')." WHERE site_id = '".$webSiteId."' AND cate_role = '2' AND cate_lang = '".$A['Context']['ws_lang']."';";
 self::$SqlQueryTable['M_CATEGO_rrp']['element']		= "Categorie";
 self::$SqlQueryTable['M_CATEGO_rrp']['colone_1']	= "cate_id";
 
@@ -79,16 +79,16 @@ self::$SqlQueryTable['M_DOCUME_rdd']['element']		= "Document";
 self::$SqlQueryTable['M_DOCUME_red']['requete']		= "SELECT docu_id,docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." WHERE docu_nom = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_red']['element']		= "Document";
 self::$SqlQueryTable['M_DOCUME_red']['colone_1']	= "docu_id";
-self::$SqlQueryTable['M_DOCUME_res']['requete']		= "SELECT sw_id FROM ".$SqlTableListObj->getSQLTableName('site_web')." WHERE sw_nom = '<A1>';";
+self::$SqlQueryTable['M_DOCUME_res']['requete']		= "SELECT ws_id FROM ".$SqlTableListObj->getSQLTableName('website')." WHERE ws_name = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_res']['element']		= "Site";
-self::$SqlQueryTable['M_DOCUME_res']['colone_1']	= "sw_id";
+self::$SqlQueryTable['M_DOCUME_res']['colone_1']	= "ws_id";
 self::$SqlQueryTable['M_DOCUME_rep']['requete']		= "SELECT share_id FROM ".$SqlTableListObj->getSQLTableName('document_share')." WHERE site_id = '".$webSiteId."' AND docu_id = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_rep']['element']		= "Share";
 
 // Groupe
-self::$SqlQueryTable['M_GROUPE_rdg']['requete']		= "SELECT grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('site_web')." sw WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = sw.sw_id AND sw.sw_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_GROUPE_rdg']['requete']		= "SELECT grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('website')." ws WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = ws.ws_id AND ws.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_GROUPE_rdg']['element']		= "Groupe";
-self::$SqlQueryTable['M_GROUPE_reg']['requete']		= "SELECT grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('site_web')." sw WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = sw.sw_id AND sw.sw_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_GROUPE_reg']['requete']		= "SELECT grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('website')." ws WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = ws.ws_id AND ws.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_GROUPE_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_GROUPE_reg']['colone_1']	= "groupe_id";
 
@@ -157,7 +157,7 @@ self::$SqlQueryTable['M_UTILIS_rel']['colone_1']	= "user_id";
 self::$SqlQueryTable['M_UTILIS_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_nom AS theme_nom FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_nom = '<A1>' AND sd.theme_id = ss.theme_id AND ss.site_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_res']['element']		= "Theme";
 self::$SqlQueryTable['M_UTILIS_res']['colone_1']	= "theme_id";
-self::$SqlQueryTable['M_UTILIS_reg']['requete']		= "SELECT grp.groupe_id AS groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('site_web')." sw WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = sw.sw_id AND sw.sw_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_UTILIS_reg']['requete']		= "SELECT grp.groupe_id AS groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('website')." ws WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = ws.ws_id AND ws.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_UTILIS_reg']['colone_1']	= "groupe_id";
 self::$SqlQueryTable['M_UTILIS_rer']['requete']		= "SELECT groupe_user_id, groupe_id, user_id, groupe_premier FROM ".$SqlTableListObj->getSQLTableName('groupe_user')." WHERE groupe_id = '<A1>' AND user_id = '<A2>';";

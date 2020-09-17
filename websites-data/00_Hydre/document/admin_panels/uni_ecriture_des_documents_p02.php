@@ -37,10 +37,10 @@ $tl_['fra']['lien_modif0'] = "Modifier le contenu de ce document.";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT doc.*, shr.share_modification 
 FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
-WHERE shr.site_id = '".$site_web['sw_id']."' 
+WHERE shr.site_id = '".$site_web['ws_id']."' 
 AND doc.docu_id = '".$_REQUEST['M_DOCUME']['document_selection']."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$site_web['sw_id']."' 
+AND doc.docu_origine = '".$site_web['ws_id']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 
@@ -67,12 +67,12 @@ switch ( $document['docu_type'] ) {
 }
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_login,s.sw_nom 
-FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['site_groupe']." sg , ".$SQL_tab_abrege['site_web']." s 
+FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['site_groupe']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_correcteur']."' 
 AND gu.groupe_premier = '1' 
 AND usr.user_id = gu.user_id 
 AND gu.groupe_id = sg.groupe_id 
-AND sg.site_id = s.sw_id 
+AND sg.site_id = s.ws_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
 	$document['docu_correcteur_login']	= $dbp['user_login'];
@@ -92,7 +92,7 @@ else {
 	AND dcm.docu_id = art.docu_id 
 	AND art.arti_bouclage = bcl.bouclage_id 
 	AND bcl.bouclage_etat = '1' 
-	AND art.site_id = '".$site_web['sw_id']."'
+	AND art.site_id = '".$site_web['ws_id']."'
 	ORDER BY dcm.docu_id ASC 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 

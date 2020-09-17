@@ -58,7 +58,7 @@ class ModuleSelectLanguage {
 			$dbquery = $SDDMObj->query("
 				SELECT b.langue_id
 				FROM ".$SqlTableListObj->getSQLTableName('site_langue')." a, ".$SqlTableListObj->getSQLTableName('langues')." b
-				WHERE a.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+				WHERE a.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				AND a.lang_id = b.langue_id
 				;");
 			

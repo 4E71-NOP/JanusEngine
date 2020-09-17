@@ -46,8 +46,8 @@ class ModuleAdministration {
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
 			WHERE cate_type IN ('2', '3') 
-			AND site_id IN ('1', '".$WebSiteObj->getWebSiteEntry('sw_id')."') 
-			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('sw_lang')."' 
+			AND site_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
+			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
 			AND groupe_id ".$UserObj->getUserEntry('clause_in_groupe')." 
 			AND cate_etat = '1' 
 			;");
@@ -56,8 +56,8 @@ class ModuleAdministration {
 // 			SELECT * 
 // 			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
 // 			WHERE cate_type IN ('2', '3') 
-// 			AND site_id IN ('1', '".$WebSiteObj->getWebSiteEntry('sw_id')."') 
-// 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('sw_lang')."' 
+// 			AND site_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
+// 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
 // 			AND groupe_id ".$UserObj->getUserEntry('clause_in_groupe')." 
 // 			AND cate_etat = '1' 
 // 			;

@@ -151,7 +151,7 @@ $dbquery = $SDDMObj->query("
 SELECT a.groupe_id,a.groupe_titre,a.groupe_nom
 FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('site_groupe')." b
 WHERE a.groupe_id = b.groupe_id
-AND site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY a.groupe_titre
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 

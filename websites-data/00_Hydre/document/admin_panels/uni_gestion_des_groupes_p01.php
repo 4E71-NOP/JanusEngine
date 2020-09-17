@@ -88,7 +88,7 @@ $T = array();
 $dbquery = $SDDMObj->query("
 SELECT grp.*, sg.groupe_etat 
 FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
-WHERE sg.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+WHERE sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND grp.groupe_id = sg.groupe_id 
 and grp.groupe_nom != 'Server_owner' 
 ;");

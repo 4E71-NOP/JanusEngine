@@ -143,9 +143,9 @@ class ConfigurationManagement {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$dbquery = $SDDMObj->query("
 			SELECT sl.lang_id
-			FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('site_web')." s
-			WHERE s.sw_id ='".$WebSiteObj->getWebSiteEntry('sw_id')."'
-			AND sl.site_id = s.sw_id
+			FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
+			WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND sl.site_id = s.ws_id
 			;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['lang_id']]['support'] = 1; }
 		

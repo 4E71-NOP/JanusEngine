@@ -59,7 +59,7 @@ class LogManagement {
 			$data['t'] = $SDDMObj->escapeString($data['t']);
 			$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('historique'), "historique_id" );
 			$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('historique')." VALUES (
-						'".$id."', '".$WebSiteObj->getWebSiteEntry('sw_id')."', '".time ()."', '".$data['i']."',
+						'".$id."', '".$WebSiteObj->getWebSiteEntry('ws_id')."', '".time ()."', '".$data['i']."',
 						'".$data['a']."', '".$data['s']."', '".$data['m']."', '".$data['t']."') ;");
 			};
 		self::$logFunctions['default']['system']		= function ($a) { error_log ( html_entity_decode ( $a ) ,0 );};
@@ -277,7 +277,7 @@ class LogManagement {
 			case 'installation':
 			switch ($CMobj->getConfigurationEntry('LogTarget')) {
 				case "system" :
-					$A = "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('sw_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'];
+					$A = "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('ws_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'];
 					error_log ( html_entity_decode ( $A ) ,0 );
 				break;
 				case "echo" :
@@ -299,17 +299,17 @@ class LogManagement {
 				switch ( $CMobj->getConfigurationEntry('LogTarget') ) {
 					case "systeme" :
 					case "system" :
-						$A = "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('sw_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'];
+						$A = "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('ws_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'];
 						error_log ( html_entity_decode ( $A ) ,0 );
 						break;
 					case "echo" :
-						echo ( "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('sw_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'] ."<br>" );
+						echo ( "MWM_Engine_log: ".$WebSiteObj->getWebSiteEntry('ws_id')."|".time ()."|".$data['i']."|".$data['a']."|".$data['s']."|".$data['m']."|".$data['t'] ."<br>" );
 						break;
 					case "internal" :
 					default:
 						$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('historique'), "historique_id" );
 						$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('historique')." VALUES (
-						'".$id."', '".$WebSiteObj->getWebSiteEntry('sw_id')."', '".time ()."', '".$data['i']."',
+						'".$id."', '".$WebSiteObj->getWebSiteEntry('ws_id')."', '".time ()."', '".$data['i']."',
 						'".$data['a']."', '".$data['s']."', '".$data['m']."', '".$data['t']."') ;");
 						break;
 				}

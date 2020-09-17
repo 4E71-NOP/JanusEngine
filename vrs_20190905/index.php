@@ -216,7 +216,7 @@ $CurrentSetObj->setInstanceOfWebSiteObj(new WebSite());
 $WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 $WebSiteObj->getWebSiteDataFromDB();
 
-switch ( $WebSiteObj->getWebSiteEntry ('sw_etat') ) {
+switch ( $WebSiteObj->getWebSiteEntry ('ws_state') ) {
 case 0:			//	Offline
 case 3:			//	Maintenance
 case 99:		//	Verouillé
@@ -308,20 +308,20 @@ $scoreLang = 0;
 
 if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0 && $RequestDataObj->getRequestDataEntry('l') != 0 ) { $scoreLang += 4; }
 if ( strlen($UserObj->getUserEntry('lang')) != 0 && $UserObj->getUserEntry('lang') != 0 ) { $scoreLang += 2; }
-if ( strlen($WebSiteObj->getWebSiteEntry('sw_lang')) != 0 && $WebSiteObj->getWebSiteEntry('sw_lang') != 0 ) { $scoreLang += 1; }
+if ( strlen($WebSiteObj->getWebSiteEntry('ws_lang')) != 0 && $WebSiteObj->getWebSiteEntry('ws_lang') != 0 ) { $scoreLang += 1; }
 
 // $LMObj->InternalLog("Language list: ". $StringFormatObj->arrayToString($CMObj->getLanguageList()));
-$LMObj->InternalLog("Website : sw_lang='". $WebSiteObj->getWebSiteEntry('sw_lang')."'");
+$LMObj->InternalLog("Website : ws_lang='". $WebSiteObj->getWebSiteEntry('ws_lang')."'");
 
 switch ($scoreLang) {
 	case 0:
 		$LMObj->InternalLog("Language selection : Error on Language");
 		break;
 	case 1:
-		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'),'langue_639_3');
-		$LMObj->InternalLog("Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('sw_lang')."->".$tmp.")");
+		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'langue_639_3');
+		$LMObj->InternalLog("Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")");
 		$CurrentSetObj->setDataEntry('language', $tmp);
-		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'),'langue_id') );
+		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'langue_id') );
 		break;
 	case 2:
 	case 3:
@@ -395,7 +395,7 @@ if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) 
 			break;
 		case "AdminDashboardWebsiteManagementP01":
 			// refresh with updated data
-			$id = $WebSiteObj->getWebSiteEntry('sw_id');
+			$id = $WebSiteObj->getWebSiteEntry('ws_id');
 			$WebSiteObj->getWebSiteDataFromDB($id);
 			break;
 	}
@@ -424,8 +424,8 @@ if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 	$dbquery = $SDDMObj->query ( "
 		SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
 		FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
-		WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('sw_id'). "'
-		AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('sw_lang'). "'
+		WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
+		AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
 		AND cat.bouclage_id = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
 		AND cat.cate_type IN ('0','1')
@@ -447,7 +447,7 @@ else {
 // --------------------------------------------------------------------------------------------
 
 
-$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',				"<input type='hidden'	name='ws'			value='".$WebSiteObj->getWebSiteEntry('sw_id')."'>\r");
+$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',				"<input type='hidden'	name='ws'			value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l',				"<input type='hidden'	name='l'			value='".$CurrentSetObj->getDataEntry('language')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login',		"<input type='hidden'	name='user_login'	value='".$SMObj->getSessionEntry('user_login')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass',		"<input type='hidden'	name='user_pass'	value='".$SMObj->getSessionEntry('user_password')."'>\r");
@@ -456,11 +456,11 @@ $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page',		"<input 
 
 $urlUsrPass = "";
 // if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login')."&amp;user_pass=".$SMObj->getSessionEntry('user_password'); }
-// $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&l=".$CurrentSetObj->getDataEntry('language').$urlUsrPass );																			// Site Lang User Pass
+// $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&l=".$CurrentSetObj->getDataEntry('language').$urlUsrPass );																			// Site Lang User Pass
 if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login'); }
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"");																			// Site Lang User Pass
-$CurrentSetObj->setDataSubEntry('block_HTML', 'url_sldup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&l=".$CurrentSetObj->getDataEntry('language')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page').$urlUsrPass);		// Site Lang Article User Pass
-$CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->getWebSiteEntry('sw_id')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page'). $urlUsrPass);							// Site Article User Pass
+$CurrentSetObj->setDataSubEntry('block_HTML', 'url_sldup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&l=".$CurrentSetObj->getDataEntry('language')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page').$urlUsrPass);		// Site Lang Article User Pass
+$CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page'). $urlUsrPass);							// Site Article User Pass
 
 
 // $_REQUEST['FS_index'] = 0;
@@ -557,7 +557,7 @@ switch ( $WebSiteObj->getWebSiteEntry('sw_stylesheet') ) {
 		$Content .= "
 			<head>\r
 			<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-			<title>".$WebSiteObj->getWebSiteEntry('sw_titre')."</title>\r
+			<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 		";
 		break;
 }

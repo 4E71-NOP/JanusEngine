@@ -45,7 +45,7 @@ case 2:
 	FROM ".$SQL_tab_abrege['article']." 
 	WHERE arti_ref = '".$_REQUEST['M_ARTICL']['arti_ref_selection']."'
 	AND arti_page = '".$_REQUEST['M_ARTICL']['arti_page_selection']."' 
-	AND site_id = '".$site_web['sw_id']."'
+	AND site_id = '".$site_web['ws_id']."'
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {	foreach ( $dbp as $A => $B ) { $infos_article[$A] = $B; } }
 	unset ( $A , $B );
@@ -57,7 +57,7 @@ case 2:
 	WHERE pre.pres_id = sp.pres_id 
 	AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 	AND sp.theme_id = ss.theme_id 
-	AND ss.site_id = '".$site_web['sw_id']."' 
+	AND ss.site_id = '".$site_web['ws_id']."' 
 	AND pre.pres_nom_generique = '".$infos_article['pres_nom_generique']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l12'] = $dbp['pres_nom_generique']; }
@@ -66,7 +66,7 @@ case 2:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT * 
 	FROM ".$SQL_tab_abrege['article_config']." 
-	WHERE site_id = '".$site_web['sw_id']."' 
+	WHERE site_id = '".$site_web['ws_id']."' 
 	AND config_id = '".$infos_article['config_id']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l22'] = $dbp['config_nom']; }
@@ -75,7 +75,7 @@ case 2:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT bouclage_id,bouclage_titre,bouclage_nom  
 	FROM ".$SQL_tab_abrege['bouclage']."   
-	WHERE site_id = '".$site_web['sw_id']."' 
+	WHERE site_id = '".$site_web['ws_id']."' 
 	AND bouclage_etat != '2' 
 	AND bouclage_id = '".$infos_article['arti_bouclage']."' 
 	;");
@@ -87,7 +87,7 @@ case 2:
 	FROM ".$SQL_tab_abrege['user']." usr, ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['site_groupe']." sgp 
 	WHERE usr.user_id = grp.user_id 
 	AND grp.groupe_id = sgp.groupe_id
-	AND sgp.site_id = '".$site_web['sw_id']."'
+	AND sgp.site_id = '".$site_web['ws_id']."'
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
 		$pv['user_list'][$dbp['user_id']]['user_login'] = $dbp['user_login'];
@@ -96,7 +96,7 @@ case 2:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
 	FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." part 
-	WHERE shr.site_id = '".$site_web['sw_id']."' 
+	WHERE shr.site_id = '".$site_web['ws_id']."' 
 	AND shr.docu_id = doc.docu_id 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['document_list'][$dbp['docu_id']]['nom'] = $dbp['docu_nom']; }
@@ -109,7 +109,7 @@ case 2:
 	SELECT cate_role, cate_id, arti_ref 
 	FROM ".$SQL_tab['categorie']." 
 	WHERE cate_type IN ('2', '3') 
-	AND site_id IN ('1', '".$site_web['sw_id']."') 
+	AND site_id IN ('1', '".$site_web['ws_id']."') 
 	AND cate_lang = '".$site_web['sw_lang']."' 
 	AND groupe_id ".$user['clause_in_groupe']." 
 	AND cate_etat = '1' 
@@ -150,7 +150,7 @@ case 3:
 	WHERE pre.pres_id = sp.pres_id 
 	AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 	AND sp.theme_id = ss.theme_id 
-	AND ss.site_id = '".$site_web['sw_id']."' 
+	AND ss.site_id = '".$site_web['ws_id']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
 		$pv['TabPres'][$pv['ptr']]['id'] = $dbp['pres_id'];
@@ -166,7 +166,7 @@ case 3:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT * 
 	FROM ".$SQL_tab_abrege['article_config']." 
-	WHERE site_id = '".$site_web['sw_id']."' 
+	WHERE site_id = '".$site_web['ws_id']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
 		$pv['TabConfig'][$pv['ptr']]['id'] = $dbp['config_id'];
@@ -182,7 +182,7 @@ case 3:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT bouclage_id,bouclage_titre,bouclage_nom  
 	FROM ".$SQL_tab_abrege['bouclage']."   
-	WHERE site_id = '".$site_web['sw_id']."' 
+	WHERE site_id = '".$site_web['ws_id']."' 
 	AND bouclage_etat != '2' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
@@ -200,7 +200,7 @@ case 3:
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
 	FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
-	WHERE shr.site_id = '".$site_web['sw_id']."' 
+	WHERE shr.site_id = '".$site_web['ws_id']."' 
 	AND shr.docu_id = doc.docu_id 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 

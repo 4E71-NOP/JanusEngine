@@ -100,8 +100,8 @@ class ModuleMenu {
 		$infos['module_menu_requete'] = "
 		SELECT cat.*
 		FROM ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
-		WHERE cat.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
-		AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('sw_lang')."'
+		WHERE cat.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 		AND cat.bouclage_id = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
 		AND cat.cate_type IN ('0','1')

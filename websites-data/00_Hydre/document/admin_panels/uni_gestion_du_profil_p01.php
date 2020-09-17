@@ -394,9 +394,9 @@ else {
 	
 	$T['AD']['4']['9']['2']['cont'] = "<select name='UserProfileForm[lang]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 	$dbqueryL = $SDDMObj->query("
-	SELECT sl.lang_id FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('site_web')." s 
-	WHERE s.sw_id ='".$WebSiteObj->getWebSiteEntry('sw_id')."' 
-	AND sl.site_id = s.sw_id
+	SELECT sl.lang_id FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s 
+	WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+	AND sl.site_id = s.ws_id
 	;");
 	$langList= array();
 	while ($dbpL = $SDDMObj->fetch_array_sql($dbqueryL)) { $langList[$dbpL['lang_id']]['support'] = 1; }
@@ -626,7 +626,7 @@ else {
 			SELECT a.theme_id,a.theme_nom,theme_titre 
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE a.theme_id = b.theme_id  
-			AND b.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			AND b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			;");
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 				if ( $dbp['theme_id'] == $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId') ) { $T['AD'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_id']."' selected>".$dbp['theme_titre']."</option>\r"; }

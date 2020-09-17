@@ -34,7 +34,7 @@ for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
 	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
-	WHERE site_id = '$site_web[sw_id]' 
+	WHERE site_id = '$site_web[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
@@ -53,7 +53,7 @@ for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
 	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
-	WHERE site_id = '$site_web[sw_id]' 
+	WHERE site_id = '$site_web[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {

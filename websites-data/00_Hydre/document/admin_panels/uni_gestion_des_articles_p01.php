@@ -115,7 +115,7 @@ $listDeadline = array(
 
 $dbquery = $SDDMObj->query("
 SELECT bouclage_id,bouclage_nom,bouclage_titre,bouclage_etat FROM ".$SqlTableListObj->getSQLTableName('bouclage')."
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['bouclage_id'];
@@ -218,7 +218,7 @@ AND art.arti_bouclage = bcl.bouclage_id
 
 AND art.site_id = bcl.site_id
 AND bcl.site_id = cat.site_id
-AND cat.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+AND cat.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
 AND cat.cate_etat != '2'
 AND cat.cate_type IN ('1','0')
@@ -255,7 +255,7 @@ if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 	$T['AD']['1'][$i]['4']['cont']	= $I18nObj->getI18nEntry('col_4_txt');
 	
 	$linkId1 = "<a class='".$Block."_lien' href='index.php?"
-			."sw=".$WebSiteObj->getWebSiteEntry('sw_id')
+			."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 			."&l=".$CurrentSetObj->getDataEntry('language')
 			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 			."&arti_page=2"

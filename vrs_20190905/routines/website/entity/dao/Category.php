@@ -35,7 +35,7 @@ class Category {
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
 			WHERE cate_id = '".$id."'
-			AND site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

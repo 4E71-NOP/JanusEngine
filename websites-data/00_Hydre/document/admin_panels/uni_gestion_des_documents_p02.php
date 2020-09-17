@@ -149,7 +149,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 					"docu_id"				=>	"",
 					"docu_nom"				=>	"NewDocument",
 					"docu_type"				=>	0,
-					"docu_origine"			=>	$WebSiteObj->getWebSiteEntry('sw_id'),
+					"docu_origine"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 					"docu_createur"			=>	$UserObj->getUserEntry('user_id'),
 					"docu_creation_date"	=>	date(),
 					"docu_correction"		=>	0,

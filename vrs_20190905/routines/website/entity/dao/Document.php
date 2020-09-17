@@ -34,10 +34,10 @@ class Document {
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT doc.*, part.part_modification 
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-			WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
 			AND shr.docu_id = doc.docu_id 
-			AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

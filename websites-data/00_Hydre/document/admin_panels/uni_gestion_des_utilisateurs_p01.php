@@ -133,7 +133,7 @@ if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id'))>0 && $R
 if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'user_status'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_status = '".$RequestDataObj->getRequestDataSubEntry('RCH', 'user_status')."' ";			$clause_sql_element_offset++; }
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gr.groupe_tag != '0' ";										$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.groupe_premier = '1' ";									$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' ";	$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' ";	$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.user_id = usr.user_id";									$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.groupe_id = gu.groupe_id ";								$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.groupe_id = gr.groupe_id ";								$clause_sql_element_offset++;
@@ -197,7 +197,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$T['AD']['1'][$i]['2']['cont'] = $dbp['user_login'];
 	$T['AD']['1'][$i]['3']['cont'] = 
 	"<a class='".$Block."_lien' href='index.php?"
-	."sw=".$WebSiteObj->getWebSiteEntry('sw_id')
+	."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 	."&l=".$CurrentSetObj->getDataEntry('language')
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 	."&arti_page=2"
@@ -264,7 +264,7 @@ $gu_select1 = array(
 $dbquery = $SDDMObj->query("
 SELECT a.groupe_id,a.groupe_titre 
 FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('site_groupe')." b 
-WHERE b.site_id = ".$WebSiteObj->getWebSiteEntry('sw_id')." 
+WHERE b.site_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 AND a.groupe_tag != '0' 
 AND a.groupe_id = b.groupe_id ;
 ");

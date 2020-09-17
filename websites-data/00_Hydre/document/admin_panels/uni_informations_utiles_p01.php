@@ -76,7 +76,7 @@ $Content .= $I18nObj->getI18nEntry('url_bypass') . "
 
 <span class='".$Block."_tb4'><a class='".$Block."_lien' href='
 index.php?
-&amp;sw=".$WebSiteObj->getWebSiteEntry('sw_id')."
+&amp;sw=".$WebSiteObj->getWebSiteEntry('ws_id')."
 &amp;l=".$UserObj->getUserEntry('lang')."
 &amp;arti_ref=fra_admin_authentification
 &amp;arti_page=1
