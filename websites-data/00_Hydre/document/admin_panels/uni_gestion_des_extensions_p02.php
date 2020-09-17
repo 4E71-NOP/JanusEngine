@@ -134,8 +134,8 @@ if ( $user['groupe_tag'] == 3 ) {
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres remplissage table" );
 
-	$_REQUEST['site_context']['site_nom']	= $site_web['sw_nom'];
-	$_REQUEST['site_context']['site_lang']	= $site_web['sw_lang'];
+	$_REQUEST['site_context']['site_nom']	= $site_web['ws_name'];
+	$_REQUEST['site_context']['site_lang']	= $site_web['ws_lang'];
 	$_REQUEST['site_context']['user']		= $_REQUEST['form']['database_user_login'] = $db_['user_login'];
 	$_REQUEST['site_context']['password']	= $_REQUEST['form']['database_user_password'] = $db_['user_password'];
 	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "console de commandes";	$section = "script";

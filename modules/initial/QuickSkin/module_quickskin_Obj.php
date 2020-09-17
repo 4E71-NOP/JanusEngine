@@ -40,7 +40,7 @@ class ModuleQuickSkin {
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 		
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
 		
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");

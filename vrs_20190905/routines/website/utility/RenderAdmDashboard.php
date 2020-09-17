@@ -82,7 +82,7 @@ class RenderAdmDashboard {
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
 				$module_tab_adm_[$i]['module_deco_txt_defaut']		= $dbp['module_deco_txt_defaut'];
 				$module_tab_adm_[$i]['module_nom']					= $dbp['module_nom'];
-				$module_tab_adm_[$i]['module_nom']					= str_replace ( $WebSiteObj->getWebSiteEntry('sw_abrege') , "" , $module_tab_adm_[$i]['module_nom'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
+				$module_tab_adm_[$i]['module_nom']					= str_replace ( $WebSiteObj->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_nom'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
 				$module_tab_adm_[$i]['module_classname']			= $dbp['module_classname'];
 				$module_tab_adm_[$i]['module_titre']				= $dbp['module_titre'];
 				$module_tab_adm_[$i]['module_directory']			= $dbp['module_directory'];

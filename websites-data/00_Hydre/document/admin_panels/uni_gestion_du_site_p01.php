@@ -182,7 +182,7 @@ switch ($l) {
 // --------------------------------------------------------------------------------------------
 
 $dbquery = $SDDMObj->query("
-SELECT sw_etat, sw_lang 
+SELECT sw_etat, ws_lang 
 FROM ".$SqlTableListObj->getSQLTableName('website')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
@@ -190,7 +190,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$pv['sw_etat2']		= "select_o1_1_" . $dbp['sw_etat'];
 	$pv['sw_etat']		= $dbp['sw_etat'];
 	$Content .= "<p>".$I18nObj->getI18nEntry('msg_01').$I18nObj->getI18nEntry($pv['sw_etat2'])."<br>\r<br>\r</p>\r";
-	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['sw_lang']);
+	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['ws_lang']);
 }
 
 // --------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'		value='WebsiteManagementP01'>"
 ."<input type='hidden' name='formCommand1'					value='update'>"
 ."<input type='hidden' name='formEntity1'					value='website'>"
-."<input type='hidden' name='formTarget1[name]'				value='".$WebSiteObj->getWebSiteEntry('sw_nom')."'>"
+."<input type='hidden' name='formTarget1[name]'				value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<p>\r"
 ;
@@ -235,7 +235,7 @@ $T = array();
 // --------------------------------------------------------------------------------------------
 
 $langList		= $CMObj->getLanguageList();
-$sw_lang_select	= array();
+$ws_lang_select	= array();
 
 // $dbquery = $SDDMObj->query("
 // SELECT sl.lang_id
@@ -256,10 +256,10 @@ $T['AD'][$Tab]['3']['1']['cont'] = $I18nObj->getI18nEntry('t1_l3');
 $T['AD'][$Tab]['4']['1']['cont'] = $I18nObj->getI18nEntry('t1_l4');
 $T['AD'][$Tab]['5']['1']['cont'] = $I18nObj->getI18nEntry('t1_l5');
 
-// $T['AD'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_nom')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['AD'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('sw_nom');
-$T['AD'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_abrege')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['AD'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_titre')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+// $T['AD'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_name')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['AD'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
+$T['AD'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['AD'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[barre_status]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_barre_status')."'	class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['5']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 
@@ -275,7 +275,7 @@ $T['AD'][$Tab]['4']['1']['cont'] = $I18nObj->getI18nEntry('t2_l4');
 $T['AD'][$Tab]['5']['1']['cont'] = $I18nObj->getI18nEntry('t2_l5');
 
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-$langList[$WebSiteObj->getWebSiteEntry('sw_lang')]['s'] = " selected ";
+$langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected ";
 
 foreach ( $langList as $k => $v ) {
 	if ( !is_numeric($k) ) {
@@ -287,10 +287,10 @@ $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
 
 
 $T['AD'][$Tab]['2']['2']['cont'] = "<select name='formParams1[lang_select]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$sw_lang_select['0']['t'] = $I18nObj->getI18nEntry('no');		$sw_lang_select['0']['s'] = "";		$sw_lang_select['0']['cmd'] = "NO";
-$sw_lang_select['1']['t'] = $I18nObj->getI18nEntry('yes');	$sw_lang_select['1']['s'] = "";		$sw_lang_select['1']['cmd'] = "YES";
-$sw_lang_select[$WebSiteObj->getWebSiteEntry('sw_lang_select')]['s'] = " selected ";
-foreach ( $sw_lang_select as $A ) { $T['AD'][$Tab]['2']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s']."> ".$A['t']."</option>\r"; }
+$ws_lang_select['0']['t'] = $I18nObj->getI18nEntry('no');		$ws_lang_select['0']['s'] = "";		$ws_lang_select['0']['cmd'] = "NO";
+$ws_lang_select['1']['t'] = $I18nObj->getI18nEntry('yes');	$ws_lang_select['1']['s'] = "";		$ws_lang_select['1']['cmd'] = "YES";
+$ws_lang_select[$WebSiteObj->getWebSiteEntry('ws_lang_select')]['s'] = " selected ";
+foreach ( $ws_lang_select as $A ) { $T['AD'][$Tab]['2']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s']."> ".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['2']['2']['cont'] .= "</select>\r";
 
 $T['AD'][$Tab]['3']['2']['cont'] = "<select name='formParams1[theme]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
@@ -421,7 +421,7 @@ $Content .= $RenderTablesObj->render($infos, $T);
 */
 $Content .= "
 <input type='hidden' name='site_context[site_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
-<input type='hidden' name='site_context[site_nom]'		value='".$WebSiteObj->getWebSiteEntry('sw_nom')."'>
+<input type='hidden' name='site_context[site_nom]'		value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
 
 <table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>
 <tr>\r

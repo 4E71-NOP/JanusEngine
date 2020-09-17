@@ -54,7 +54,7 @@ class ModuleDocumentDisplay {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
@@ -193,7 +193,7 @@ class ModuleDocumentDisplay {
 				$P2P_tab_[$pv['1']]['arti_ref']			= $dbp['arti_ref'];
 				$P2P_tab_[$pv['1']]['lien']				= "
 				<a class='".$Block."_lien ".$Block."_t2'
-				href='index.php?sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('sw_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass')."'
+				href='index.php?sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('ws_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass')."'
 				onMouseOver=\"t.ToolTip('-> ". addslashes($dbp['arti_sous_titre']) .", en page ".$dbp['arti_page']."');\"
 				onMouseOut=\"t.ToolTip();\">".$dbp['arti_page']." ".$dbp['arti_sous_titre']."</a>\r
 				";

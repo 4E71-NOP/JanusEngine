@@ -58,8 +58,8 @@ class  RenderTables {
 // 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
-// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'), 'langue_639_3');
-// 		$CurL = $NumLangues_[$WebSiteObj->getWebSiteEntry('sw_lang')];
+// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+// 		$CurL = $NumLangues_[$WebSiteObj->getWebSiteEntry('ws_lang')];
 		
 		$Content = "<!-- Render Table Begin -->\r";
 		

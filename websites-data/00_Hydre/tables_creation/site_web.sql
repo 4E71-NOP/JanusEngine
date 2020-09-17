@@ -2,8 +2,8 @@
 /* Foreign keys: theme_id					*/
 /* ---------------------------------------- */
 /*
-sw_lang				FRA 1	ENG 2		ESP 3
-sw_lang_select		NON 0	OUI 1
+ws_lang				FRA 1	ENG 2		ESP 3
+ws_lang_select		NON 0	OUI 1
 sw_aide_dynamique	NON 0	OUI 1
 sw_etat				OFFLINE 0	ONLINE 1	SUPPRIME 2	MAINTENANCE 3 VEROUILLE 1000
 sw_stylesheet		STATIQUE 0	DYNAMIQUE 1

@@ -66,7 +66,7 @@ switch ( $document['docu_type'] ) {
 	break;
 }
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT usr.user_login,s.sw_nom 
+SELECT usr.user_login,s.ws_name 
 FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['site_groupe']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_correcteur']."' 
 AND gu.groupe_premier = '1' 
@@ -76,7 +76,7 @@ AND sg.site_id = s.ws_id
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
 	$document['docu_correcteur_login']	= $dbp['user_login'];
-	$document['docu_correcteur_site']	= $dbp['sw_nom'];
+	$document['docu_correcteur_site']	= $dbp['ws_name'];
 }
 $document['edition'] = 1;
 

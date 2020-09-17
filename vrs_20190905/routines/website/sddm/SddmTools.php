@@ -40,7 +40,7 @@ class SddmTools {
 		
 		$LMObj = LogManagement::getInstance();
 		
-		if (strlen($l) == 0 ) { $l = $WebSiteObj->getWebSiteEntry('sw_lang'); }		// failsafe on language selection. Back to the website default language.
+		if (strlen($l) == 0 ) { $l = $WebSiteObj->getWebSiteEntry('ws_lang'); }		// failsafe on language selection. Back to the website default language.
 		switch ($_REQUEST ['contexte_d_execution']) {
 			case "admin_menu" :
 			case "Admin_menu" :

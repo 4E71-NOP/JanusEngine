@@ -41,9 +41,9 @@ class ModuleOffLineMessage {
 		$WebSiteObj = new WebSite();
 		if ( $infos['SQLFatalError'] == 1 ) {
 			$ClassLoaderObj->provisionClass('WebSite');
-			$WebSiteObj->setWebSiteEntry('sw_nom', "Doh!!!");
+			$WebSiteObj->setWebSiteEntry('ws_name', "Doh!!!");
 			$WebSiteObj->setWebSiteEntry('sw_message', "Database connexion error!");
-			$WebSiteObj->setWebSiteEntry('sw_titre', "Doh!!!");
+			$WebSiteObj->setWebSiteEntry('ws_title', "Doh!!!");
 		}
 		
 		if ( $infos['bannerOffline'] == 1 ) {

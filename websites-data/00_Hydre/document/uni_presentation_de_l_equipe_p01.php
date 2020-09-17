@@ -46,12 +46,12 @@ $MapperObj->setSqlApplicant("uni_presentation_de_l_equipe_p01");
 switch ( $l ) {
 	case "fra":
 		$i18nDoc = array(
-		"invit" => "L'équipe de ".$WebSiteObj->getWebSiteEntry('sw_nom').".",
+		"invit" => "L'équipe de ".$WebSiteObj->getWebSiteEntry('ws_name').".",
 		);
 		break;
 	case "eng":
 		$i18nDoc = array(
-		"invit" => "The ".$WebSiteObj->getWebSiteEntry('sw_nom')." staff.",
+		"invit" => "The ".$WebSiteObj->getWebSiteEntry('ws_name')." staff.",
 		);
 		break;
 }

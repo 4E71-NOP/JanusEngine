@@ -36,13 +36,13 @@ class ModuleSelectLanguage {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 
-// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('sw_lang'), 'langue_639_3');
+// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
 // 		$i18n = array();
 // 		include ("../modules/initial/Authentification/i18n/".$l.".php");
 
 		$site_lang_ = array();
 		$Content = "";
-		if ( $WebSiteObj->getWebSiteEntry('sw_lang_select') == 1 ) {
+		if ( $WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
 			$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
 			$pv['1'] = 1;
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
@@ -71,7 +71,7 @@ class ModuleSelectLanguage {
 				}
 				foreach ( $site_lang_support as $A ) {
 					if ( $A == $site_lang_[$A]['langue_id'] && $A != $UserObj->getUserEntry('lang') ) {
-						$pv['1'] = $WebSiteObj->getWebSiteEntry('sw_lang');
+						$pv['1'] = $WebSiteObj->getWebSiteEntry('ws_lang');
 						$pv['1'] = $site_lang_[$pv['offset']][$pv['1']];
 						if ( !file_exists ( "../graph/". $ThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$site_lang_[$A]['langue_image'] ) ) { $pv['img_src'] = "../graph/universal/".$site_lang_[$A]['langue_image']; }
 						else { $pv['img_src'] = "../graph/".$ThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$site_lang_[$A]['langue_image']; }

@@ -241,7 +241,7 @@ self::$CheckTable['share']['document']['0']['v'] 	= "docu_id";
 self::$CheckTable['share']['document']['0']['m'] 	= "CLI_ShareDocument_S001";
 self::$CheckTable['share']['document']['0']['p'] 	= "document";
 self::$CheckTable['share']['document']['1']['d']	= 2;
-self::$CheckTable['share']['document']['1']['f']	= function ($a) { return array ("SELECT ws_id,sw_nom FROM ".$a['sqlTables']['website']." WHERE ws_name = '".$a['params']['with_website']."';");};
+self::$CheckTable['share']['document']['1']['f']	= function ($a) { return array ("SELECT ws_id,ws_name FROM ".$a['sqlTables']['website']." WHERE ws_name = '".$a['params']['with_website']."';");};
 self::$CheckTable['share']['document']['1']['c'] 	= "ws_id";
 self::$CheckTable['share']['document']['1']['v'] 	= "site_id";
 self::$CheckTable['share']['document']['1']['m'] 	= "CLI_ShareDocument_S002";
@@ -333,7 +333,7 @@ self::$CheckTable['delete']['keyword']['0']['p']	= "keyword";
 
 // Language (is not a entity in itself) 
 self::$CheckTable['assign']['language']['0']['d']	= 2;
-self::$CheckTable['assign']['language']['0']['f']	= function ($a) { return array ("SELECT ws_id,sw_nom FROM ".$a['sqlTables']['website']." WHERE sw_nom = '".$a['params']['to_website']."';");};
+self::$CheckTable['assign']['language']['0']['f']	= function ($a) { return array ("SELECT ws_id,ws_name FROM ".$a['sqlTables']['website']." WHERE ws_name = '".$a['params']['to_website']."';");};
 self::$CheckTable['assign']['language']['0']['c']	= "ws_id";
 self::$CheckTable['assign']['language']['0']['v']	= "ws_id";
 self::$CheckTable['assign']['language']['0']['m']	= "CLI_AddLang_A001";
@@ -502,7 +502,7 @@ self::$CheckTable['assign']['theme']['0']['v']	= "theme_id";
 self::$CheckTable['assign']['theme']['0']['m']	= "CLI_AssignTheme_A001";
 self::$CheckTable['assign']['theme']['0']['p']	= "theme";
 self::$CheckTable['assign']['theme']['1']['d']	= 2;
-self::$CheckTable['assign']['theme']['1']['f']	= function ($a) { return array ("SELECT * FROM ".$a['sqlTables']["website"]." WHERE sw_nom = '".$a['params']['to_website']."' ;");};
+self::$CheckTable['assign']['theme']['1']['f']	= function ($a) { return array ("SELECT * FROM ".$a['sqlTables']["website"]." WHERE ws_name = '".$a['params']['to_website']."' ;");};
 self::$CheckTable['assign']['theme']['1']['c']	= "ws_id";
 self::$CheckTable['assign']['theme']['1']['v']	= "ws_id";
 self::$CheckTable['assign']['theme']['1']['m']	= "CLI_AssignTheme_A002";

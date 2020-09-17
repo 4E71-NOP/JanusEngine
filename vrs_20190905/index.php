@@ -548,7 +548,7 @@ switch ( $WebSiteObj->getWebSiteEntry('sw_stylesheet') ) {
 		$Content .= "
 			<head>\r
 			<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-			<title>".$WebSiteObj->getWebSiteEntry('sw_titre')."</title>\r
+			<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 		";
 		$Content .= $stylesheet."</head>\r" . $html_body ;
 		unset (	$stylesheet );

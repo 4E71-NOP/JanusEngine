@@ -220,7 +220,7 @@ $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
 				"height"			=> 50,	//in %
 				"formName"			=> "groupForm",
 				"formTargetId"		=> "inputFile",
-				"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('sw_nom')."/data/images/avatars/",
+				"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
 				"selectionMode"		=> "file",
 		)
 );
@@ -230,7 +230,7 @@ $infos['IconSelectFile'] = array(
 		"formInputId"		=> "inputFile",
 		"formInputSize"		=> 40 ,
 		"formInputVal"		=> $currentGroupObj->getGroupEntry('groupe_fichier'),
-		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('sw_nom')."/data/images/avatars/",
+		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );

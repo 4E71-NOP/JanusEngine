@@ -128,7 +128,7 @@ AND cat.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.arti_ref = art.arti_ref
 AND cat.arti_ref != '0'
 AND cat.cate_type IN ('0','1')
-AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('sw_lang')."'
+AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 ;");
 $tabArticle_ = array();
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {

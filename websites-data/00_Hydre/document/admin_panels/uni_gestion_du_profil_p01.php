@@ -400,7 +400,7 @@ else {
 	;");
 	$langList= array();
 	while ($dbpL = $SDDMObj->fetch_array_sql($dbqueryL)) { $langList[$dbpL['lang_id']]['support'] = 1; }
-	if ( $PmListTheme['user_lang'] == 0 ) { $langList[$WebSiteObj->getWebSiteEntry('sw_lang')]['s'] = " selected "; }
+	if ( $PmListTheme['user_lang'] == 0 ) { $langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected "; }
 	else { $langList[$PmListTheme['user_lang']]['s'] = " selected "; }
 	foreach ( $langList as $A ) { 
 		if ( $A['support'] == 1 ) {
