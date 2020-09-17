@@ -15,15 +15,25 @@ class LayoutDefinition {
 	private $LayoutDefinition = array ();
 	public function __construct() {
 	}
-	public function getLayoutDefinitionDataFromDB($data) {
+	public function getLayoutDefinitionDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
-		$dbquery = $SDDMObj->query ( "" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			foreach ( $dbp as $A => $B ) { $this->LayoutDefinition [$A] = $B; }
-		}
+		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
+		$LMObj = LogManagement::getInstance();
+		$dbquery = $SDDMObj->query ( "
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('layout_defnition') . "
+			WHERE layout_defnition_id = '" . $id . "'
+			;" );
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for layout_defnition id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) { $this->LayoutDefinition[$A] = $B; }
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for layout_defnition id=".$id);
+		}
 	}
 
 	//@formatter:off

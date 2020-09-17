@@ -15,13 +15,29 @@ class DocumentShare {
 	private $DocumentShare = array ();
 	public function __construct() {
 	}
-	public function getDocumentShareDataFromDB($data) {
+	public function getDocumentShareDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 
 		$dbquery = $SDDMObj->query ( "" );
 		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) { $this->DocumentShare [$A] = $B; }
+		}
+		
+		$LMObj = LogManagement::getInstance();
+		$dbquery = $SDDMObj->query ( "
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('document_share') . "
+			WHERE share_id = '" . $id . "'
+			;" );
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for document_share id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) { $this->DocumentShare[$A] = $B; }
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for document_share id=".$id);
 		}
 		
 	}

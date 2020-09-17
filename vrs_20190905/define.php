@@ -9,6 +9,6 @@ define ("anonymousUserName" , "anonymous");
 //define ("logTargetBoth" , "both"); // deprecated
 //define ("logTargetNone" , "none"); // deprecated
 define ("logTarget" , "internal");
-define ("installLogTarget" , "none");
+define ("installLogTarget" , "system");
 
 ?>

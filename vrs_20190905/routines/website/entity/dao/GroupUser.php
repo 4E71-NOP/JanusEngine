@@ -15,13 +15,24 @@ class GroupUser {
 	private $GroupUser = array ();
 	public function __construct() {
 	}
-	public function getGroupUserDataFromDB($data) {
+	public function getGroupUserDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
-		$dbquery = $SDDMObj->query ( "" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			foreach ( $dbp as $A => $B ) { $this->GroupUser [$A] = $B; }
+		
+		$LMObj = LogManagement::getInstance();
+		$dbquery = $SDDMObj->query ( "
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('groupe_user') . "
+			WHERE groupe_user_id = '" . $id . "'
+			;" );
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for groupe_user id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) { $this->GroupUser[$A] = $B; }
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for groupe_user id=".$id);
 		}
 		
 	}

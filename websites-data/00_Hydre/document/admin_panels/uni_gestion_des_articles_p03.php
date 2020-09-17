@@ -101,10 +101,10 @@ while ($dbp = fetch_array_sql($dbquery)) {
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT doc.docu_id,doc.docu_nom,doc.docu_type,part.part_modification 
-FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_partage']." part 
-WHERE part.site_id = '".$site_web['sw_id']."' 
-AND part.docu_id = doc.docu_id 
+SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
+FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
+WHERE shr.site_id = '".$site_web['sw_id']."' 
+AND shr.docu_id = doc.docu_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { $document_list[$dbp['docu_id']]['nom'] = $dbp['docu_nom']; }
 $document_list[$infos_article['docu_id']]['s'] = " selected";

@@ -108,10 +108,10 @@ $editionLevel = $i18nDoc['level'][$UserObj->getUserEntry('groupe_tag')];
 $T = array();
 
 $dbquery = $SDDMObj->query("
-SELECT doc.docu_id, doc.docu_nom, doc.docu_type, part.part_modification 
-FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_partage')." part 
-WHERE part.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
-AND part.docu_id = doc.docu_id 
+SELECT doc.docu_id, doc.docu_nom, doc.docu_type, shr.share_modification 
+FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
+WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+AND shr.docu_id = doc.docu_id 
 AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
 ORDER BY docu_id, docu_type, part_modification ASC
 ;");

@@ -31,7 +31,7 @@ self::$SqlQueryTable['M_ARTICL_rea']['requete']		= "SELECT arti_id,arti_nom FROM
 self::$SqlQueryTable['M_ARTICL_rea']['element']		= "Article";
 self::$SqlQueryTable['M_ARTICL_rea']['colone_1']	= "arti_id";
 
-self::$SqlQueryTable['M_ARTICL_red']['requete']		= "SELECT doc.docu_id AS docu_id, doc.docu_nom AS docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." doc , ".$SqlTableListObj->getSQLTableName('document_partage')." dp WHERE doc.docu_nom = '<A1>' AND dp.docu_id = doc.docu_id AND dp.site_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_red']['requete']		= "SELECT doc.docu_id AS docu_id, doc.docu_nom AS docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." doc , ".$SqlTableListObj->getSQLTableName('document_share')." dp WHERE doc.docu_nom = '<A1>' AND dp.docu_id = doc.docu_id AND dp.site_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_red']['element']		= "Document";
 self::$SqlQueryTable['M_ARTICL_red']['colone_1']	= "docu_id";
 
@@ -82,8 +82,8 @@ self::$SqlQueryTable['M_DOCUME_red']['colone_1']	= "docu_id";
 self::$SqlQueryTable['M_DOCUME_res']['requete']		= "SELECT sw_id FROM ".$SqlTableListObj->getSQLTableName('site_web')." WHERE sw_nom = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_res']['element']		= "Site";
 self::$SqlQueryTable['M_DOCUME_res']['colone_1']	= "sw_id";
-self::$SqlQueryTable['M_DOCUME_rep']['requete']		= "SELECT part_id FROM ".$SqlTableListObj->getSQLTableName('document_partage')." WHERE site_id = '".$webSiteId."' AND docu_id = '<A1>';";
-self::$SqlQueryTable['M_DOCUME_rep']['element']		= "Partage";
+self::$SqlQueryTable['M_DOCUME_rep']['requete']		= "SELECT share_id FROM ".$SqlTableListObj->getSQLTableName('document_share')." WHERE site_id = '".$webSiteId."' AND docu_id = '<A1>';";
+self::$SqlQueryTable['M_DOCUME_rep']['element']		= "Share";
 
 // Groupe
 self::$SqlQueryTable['M_GROUPE_rdg']['requete']		= "SELECT grp.groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('site_web')." sw WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.site_id = sw.sw_id AND sw.sw_id = '".$webSiteId."';";

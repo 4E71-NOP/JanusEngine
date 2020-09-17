@@ -217,7 +217,7 @@ self::$ActionTable['set']['variable']		= function (&$a) {
 //--------------------------------------------------------------------------------
 //	Share
 //--------------------------------------------------------------------------------
-self::$ActionTable['share']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document_partage']."  (".$a['columns'].") VALUES (".$a['values'].");"); };
+self::$ActionTable['share']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document_share']."  (".$a['columns'].") VALUES (".$a['values'].");"); };
 
 //--------------------------------------------------------------------------------
 //	Website

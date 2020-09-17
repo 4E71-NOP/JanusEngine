@@ -16,15 +16,24 @@ class SqlTableList {
 	private static $Instance = null;
 	
 	private $TableList = array (
-			'article',					'article_tag',			'auteurs',				'bouclage',				'categorie',
-			'article_config',			'document_partage',		'deco_10_menu',			'deco_20_caligraphe',	'deco_30_1_div',
-			'deco_40_elegance',			'deco_50_exquise',		'deco_60_elysion',		'decoration',			'document',
-			'groupe',					'group',				'groupe_user',			'group_user',			'historique',
-			'i18n',						'installation',			'langues',				'module',				'mot_cle',
-			'note_renvoit',				'presentation',			'presentation_contenu',	'extension',			'extension_config',
-			'extension_dependances',	'extension_fichiers',	'pv',					'site_groupe',			'site_langue',
-			'site_module',				'site_theme',			'site_web',				'theme_descripteur',	'theme_presentation',
-			'stat_document',			'stat_navigateur',		'stat_utilisateur',		'tag',					'user',
+			'article',					'article_tag',			'auteurs',				'article_config',
+			'bouclage',				
+			'categorie',			
+			'document',				'document_share',			'document_partage',
+			'decoration',			'deco_10_menu',				'deco_20_caligraphe',	'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
+			'groupe',				'group',					'groupe_user',			'group_user',
+			'historique',			'i18n',						'installation',				
+			'langues',				'languages',
+			'module',				
+			'mot_cle',				'note_renvoit',				
+			'presentation',			'presentation_contenu',		
+			'extension',			'extension_config',			'extension_dependency',	'extension_file',
+			'pv',					
+			'site_web',				'site_groupe',				'site_langue',			'site_module',			'site_theme',
+			'theme_descripteur',	'theme_presentation',
+			'stored_event',			'stat_navigateur',			'stat_utilisateur',
+			'tag',					
+			'user',
 			'tl_fra'
 	);
 	

@@ -11,41 +11,41 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Logs {
-	private $Logs = array ();
+class ExtensionConfig {
+	private $ExtensionConfig = array ();
 	public function __construct() {
 	}
-	public function getLogsDataFromDB($id) {
+	public function getExtensionConfigDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-	
+		
 		$LMObj = LogManagement::getInstance();
 		$dbquery = $SDDMObj->query ( "
 			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('log') . "
-			WHERE log_id = '" . $id . "'
+			FROM " . $SqlTableListObj->getSQLTableName ('extension_config') . "
+			WHERE config_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for log id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for extension_config id=".$id);
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->Log[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { $this->ExtensionConfig[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for log id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for extension_config id=".$id);
 		}
 		
 	}
 
 	//@formatter:off
-	public function getLogsEntry ($data) { return $this->Logs[$data]; }
-	public function getLogs() { return $this->Logs; }
+	public function getExtensionConfigEntry ($data) { return $this->ExtensionConfig[$data]; }
+	public function getExtensionConfig() { return $this->ExtensionConfig; }
 	
-	public function setLogsEntry ($entry, $data) { 
-		if ( isset($this->Logs[$entry])) { $this->Logs[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setExtensionConfigEntry ($entry, $data) { 
+		if ( isset($this->ExtensionConfig[$entry])) { $this->ExtensionConfig[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setLogs($Logs) { $this->Logs = $Logs; }
+	public function setExtensionConfig($ExtensionConfig) { $this->ExtensionConfig = $ExtensionConfig; }
 	//@formatter:off
 
 }

@@ -39,13 +39,13 @@ class Category {
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("Category/getCategoryDataFromDB() : Loading data for category id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for category id=".$id);
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Category[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog("Category/getCategoryDataFromDB() : No rows returned for category id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for category id=".$id);
 		}
 		
 	}

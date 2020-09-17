@@ -86,7 +86,7 @@ self::$CheckTable['link']['article']['0']['v']	= "arti_id";
 self::$CheckTable['link']['article']['0']['m']	= "CLI_Article_L001";
 self::$CheckTable['link']['article']['0']['p']	= "article";
 self::$CheckTable['link']['article']['1']['d']	= 2;
-self::$CheckTable['link']['article']['1']['f']	= function ($a) { return array ("SELECT doc.docu_id AS docu_id, doc.docu_nom AS docu_nom FROM ".$a['sqlTables']['document']." doc , ".$a['sqlTables']['document_partage']." dp WHERE doc.docu_nom = '".$a['document']."' AND dp.docu_id = doc.docu_id AND dp.site_id = '".$a['Context']['sw_id']."';");};
+self::$CheckTable['link']['article']['1']['f']	= function ($a) { return array ("SELECT doc.docu_id AS docu_id, doc.docu_nom AS docu_nom FROM ".$a['sqlTables']['document']." doc , ".$a['sqlTables']['document_share']." dp WHERE doc.docu_nom = '".$a['document']."' AND dp.docu_id = doc.docu_id AND dp.site_id = '".$a['Context']['sw_id']."';");};
 self::$CheckTable['link']['article']['1']['c']	= "docu_id";
 self::$CheckTable['link']['article']['1']['v']	= "docu_id";
 self::$CheckTable['link']['article']['1']['m']	= "CLI_Article_L002";
@@ -247,7 +247,7 @@ self::$CheckTable['share']['document']['1']['v'] 	= "site_id";
 self::$CheckTable['share']['document']['1']['m'] 	= "CLI_ShareDocument_S002";
 self::$CheckTable['share']['document']['1']['p'] 	= "website";
 self::$CheckTable['share']['document']['2']['d'] 	= 3;
-self::$CheckTable['share']['document']['2']['f'] 	= function ($a) { return array ("SELECT part_id FROM ".$a['sqlTables']['document_partage']." WHERE site_id = '".$a['params']['site_id']."' AND docu_id = '".$a['params']['docu_id']."';" ); };
+self::$CheckTable['share']['document']['2']['f'] 	= function ($a) { return array ("SELECT share_id FROM ".$a['sqlTables']['document_share']." WHERE site_id = '".$a['params']['site_id']."' AND docu_id = '".$a['params']['docu_id']."';" ); };
 self::$CheckTable['share']['document']['2']['m'] 	= "CLI_ShareDocument_S003";
 
 

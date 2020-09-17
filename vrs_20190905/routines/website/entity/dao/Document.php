@@ -33,21 +33,21 @@ class Document {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT doc.*, part.part_modification 
-			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_partage')." part 
-			WHERE part.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
+			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
+			WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
 			AND doc.docu_id = '".$id."' 
-			AND part.docu_id = doc.docu_id 
+			AND shr.docu_id = doc.docu_id 
 			AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('sw_id')."' 
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("Document/getDocumentDataFromDB() : Loading data for document id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for document id=".$id);
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Document[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog("Document/getDocumentDataFromDB() : No rows returned for document id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for document id=".$id);
 		}
 		
 	}

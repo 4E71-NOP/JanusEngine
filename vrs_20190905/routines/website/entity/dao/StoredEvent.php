@@ -11,41 +11,41 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Logs {
-	private $Logs = array ();
+class StoredEvent {
+	private $StoredEvent = array ();
 	public function __construct() {
 	}
-	public function getLogsDataFromDB($id) {
+	public function getStoredEventDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-	
+		
 		$LMObj = LogManagement::getInstance();
 		$dbquery = $SDDMObj->query ( "
-			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('log') . "
-			WHERE log_id = '" . $id . "'
-			;" );
+				SELECT *
+				FROM " . $SqlTableListObj->getSQLTableName ('stored_event') . "
+				WHERE stored_event_id = '" . $id . "'
+				;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for log id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for stored_event id=".$id);
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->Log[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { $this->StoredEvent[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for log id=".$id);
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for stored_event id=".$id);
 		}
-		
-	}
-
-	//@formatter:off
-	public function getLogsEntry ($data) { return $this->Logs[$data]; }
-	public function getLogs() { return $this->Logs; }
 	
-	public function setLogsEntry ($entry, $data) { 
-		if ( isset($this->Logs[$entry])) { $this->Logs[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	}
+	
+	//@formatter:off
+	public function getStoredEventEntry ($data) { return $this->StoredEvent[$data]; }
+	public function getStoredEvent() { return $this->StoredEvent; }
+	
+	public function setStoredEventEntry ($entry, $data) { 
+		if ( isset($this->StoredEvent[$entry])) { $this->StoredEvent[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setLogs($Logs) { $this->Logs = $Logs; }
+	public function setStoredEvent($StoredEvent) { $this->StoredEvent = $StoredEvent; }
 	//@formatter:off
 
 }

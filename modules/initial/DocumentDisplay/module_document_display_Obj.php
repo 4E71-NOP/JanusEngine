@@ -326,10 +326,10 @@ class ModuleDocumentDisplay {
 				$documentAnalyse['include_docu_nom']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
 				$dbquery = $SDDMObj->query("
 				SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_createur, doc.docu_creation_date, doc.docu_correcteur, doc.docu_correction_date
-				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_partage')." dp
+				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 				WHERE doc.docu_nom = '".$documentAnalyse['include_docu_nom']."'
 				AND doc.docu_id = dp.docu_id
-				AND dp.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+				AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
 				;");
 				
 				if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {

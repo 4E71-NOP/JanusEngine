@@ -15,17 +15,24 @@ class Deco60_Elysion {
 	private $Deco60_Elysion = array ();
 	public function __construct() {
 	}
-	public function getDeco60_ElysionDataFromDB($data) {
+	public function getDeco60_ElysionDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
+		
+		$LMObj = LogManagement::getInstance();
 		$dbquery = $SDDMObj->query ( "
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('deco_60_elysion')."
-			WHERE deco_id = '".$data."'
+			FROM " . $SqlTableListObj->getSQLTableName ('deco_60_elysion') . "
+			WHERE deco_id = '" . $id . "'
 			;" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			$this->Deco60_Elysion[$dbp['deco_variable']] = $dbp['deco_valeur'];
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_60_elysion id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$this->Deco60_Elysion[$dbp['deco_variable']] = $dbp['deco_valeur'];
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_60_elysion id=".$id);
 		}
 		
 	}

@@ -146,7 +146,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT doc.*
-			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_partage')." dp
+			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." dp
 			WHERE doc.docu_id = dp.docu_id
 			AND dp.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
 			ORDER BY doc.docu_nom

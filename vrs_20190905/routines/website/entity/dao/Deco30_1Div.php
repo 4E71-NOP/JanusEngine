@@ -15,17 +15,24 @@ class Deco30_1Div {
 	private $Deco30_1Div = array ();
 	public function __construct() {
 	}
-	public function getDeco30_1DivDataFromDB($data) {
+	public function getDeco30_1DivDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
-		$dbquery = $SDDMObj->query ("SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('deco_30_1_div')."
-			WHERE deco_id = '".$data."'
-		;");
 		
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			$this->Deco30_1Div [$dbp['deco_variable']] = $dbp['deco_valeur'];
+		$LMObj = LogManagement::getInstance();
+		$dbquery = $SDDMObj->query ( "
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('deco_30_1_div') . "
+			WHERE deco_id = '" . $id . "'
+			;" );
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_30_1_div id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$this->Deco30_1Div[$dbp['deco_variable']] = $dbp['deco_valeur'];
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_30_1_div id=".$id);
 		}
 		
 	}

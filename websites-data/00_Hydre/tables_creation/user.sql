@@ -49,6 +49,17 @@ user_pref_autorise_smilies				INTEGER,
 user_image_avatar						VARCHAR(255),
 user_admin_commentaire					VARCHAR(255), 
 
+user_name								VARCHAR(255),
+user_perso_name							VARCHAR(255),
+user_perso_country						VARCHAR(255),
+user_perso_town							VARCHAR(255),
+user_perso_interest						VARCHAR(255),
+
+user_last_visite						INTEGER,
+user_last_ip							VARCHAR(15),
+
+
+
 PRIMARY KEY (user_id)
 
 );

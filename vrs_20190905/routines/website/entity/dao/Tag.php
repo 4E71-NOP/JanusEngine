@@ -15,13 +15,24 @@ class Tag {
 	private $Tag = array ();
 	public function __construct() {
 	}
-	public function getTagDataFromDB($data) {
+	public function getTagDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
-		$dbquery = $SDDMObj->query ( "" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			foreach ( $dbp as $A => $B ) { $this->Tag [$A] = $B; }
+		
+		$LMObj = LogManagement::getInstance();
+		$dbquery = $SDDMObj->query ( "
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('tag') . "
+			WHERE tag_id = '" . $id . "'
+			;" );
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for tag id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) { $this->Tag[$A] = $B; }
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for tag id=".$id);
 		}
 		
 	}

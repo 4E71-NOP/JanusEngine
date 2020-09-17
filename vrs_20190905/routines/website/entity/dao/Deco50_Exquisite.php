@@ -15,17 +15,24 @@ class Deco50_Exquisite {
 	private $Deco50_Exquisite = array ();
 	public function __construct() {
 	}
-	public function getDeco50_ExquisiteDataFromDB($data) {
+	public function getDeco50_ExquisiteDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
+		
+		$LMObj = LogManagement::getInstance();
 		$dbquery = $SDDMObj->query ( "
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('deco_50_exquise')."
-			WHERE deco_id = '".$data."'
+			FROM " . $SqlTableListObj->getSQLTableName ('deco_50_exquise') . "
+			WHERE deco_id = '" . $id . "'
 			;" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			$this->Deco50_Exquisite [$dbp['deco_variable']] = $dbp['deco_valeur'];
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_50_exquise id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$this->Deco50_Exquisite[$dbp['deco_variable']] = $dbp['deco_valeur'];
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_50_exquise id=".$id);
 		}
 		
 	}

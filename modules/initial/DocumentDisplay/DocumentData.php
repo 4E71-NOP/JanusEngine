@@ -88,10 +88,10 @@ class DocumentData {
 			
 			$dbquery = $SDDMObj->query("
 			SELECT doc.*
-			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_partage')." dp
+			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_nom LIKE '%article_inexistant%'
-			AND dp.docu_id = doc.docu_id
-			AND dp.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
+			AND ds.docu_id = doc.docu_id
+			AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('sw_id')."'
 			;");
 		}
 		

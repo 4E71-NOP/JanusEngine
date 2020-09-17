@@ -770,13 +770,13 @@ self::$PreRequisiteTable['share']['document'] = array (
 				array("v" => "modification",					"s" => "document"),
 		),
 		"nextId" => array (
-				array ("table" => "document_partage",	"column" => "part_id",		"target" => "part_id"),
+				array ("table" => "document_share",	"column" => "share_id",		"target" => "share_id"),
 		),
 		"columns" => array(
-				array ( "v" => "part_id",				"t" => "part_id"),
+				array ( "v" => "share_id",				"t" => "share_id"),
 				array ( "v" => "docu_id",				"t" => "docu_id"),
 				array ( "v" => "site_id",				"t" => "site_id"),
-				array ( "v" => "modification",			"t" => "part_modification"),
+				array ( "v" => "modification",			"t" => "share_modification"),
 		),
 );
 

@@ -29,17 +29,17 @@ class User {
 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
-		$LMObj->InternalLog("
-			SELECT usr.*, g.groupe_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
-			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'site_groupe' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
-			WHERE usr.user_login = '" . $UserLogin . "'
-			AND usr.user_id = gu.user_id
-			AND gu.groupe_premier = '1'
-			AND gu.groupe_id = g.groupe_id
-			AND gu.groupe_id = sg.groupe_id
-			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('sw_id') . "'
-		;"
-		);
+// 		$LMObj->InternalLog( __METHOD__ ."() : 
+// 			SELECT usr.*, g.groupe_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'site_groupe' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+// 			WHERE usr.user_login = '" . $UserLogin . "'
+// 			AND usr.user_id = gu.user_id
+// 			AND gu.groupe_premier = '1'
+// 			AND gu.groupe_id = g.groupe_id
+// 			AND gu.groupe_id = sg.groupe_id
+// 			AND sg.site_id = '" . $WebSiteObj->getWebSiteEntry('sw_id') . "'
+// 		;"
+// 		);
 		$dbquery = $SDDMObj->query ("
 			SELECT usr.*, g.groupe_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'site_groupe' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g

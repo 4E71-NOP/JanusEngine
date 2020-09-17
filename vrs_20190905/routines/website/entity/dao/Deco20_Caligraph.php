@@ -15,17 +15,24 @@ class Deco20_Caligraph {
 	private $Deco20_Caligraph = array ();
 	public function __construct() {
 	}
-	public function getDeco20_CaligraphDataFromDB($data) {
+	public function getDeco20_CaligraphDataFromDB($id) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
+		
+		$LMObj = LogManagement::getInstance();
 		$dbquery = $SDDMObj->query ( "
-			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('deco_20_caligraphe')." 
-			WHERE deco_id = '".$data."' 
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName ('deco_20_caligraphe') . "
+			WHERE deco_id = '" . $id . "'
 			;" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			$this->Deco20_Caligraph [$dbp['deco_variable']] = $dbp['deco_valeur'];
+		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_20_caligraphe id=".$id);
+			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$this->Deco20_Caligraph[$dbp['deco_variable']] = $dbp['deco_valeur'];
+			}
+		}
+		else {
+			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_20_caligraphe id=".$id);
 		}
 		
 	}
