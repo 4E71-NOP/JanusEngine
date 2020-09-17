@@ -34,7 +34,7 @@ if ( is_dir( $GAL_dir ) ) {
 	$GAL_dir_array = array();
 	$handle = opendir( $GAL_dir );
 	while (false !== ($file = readdir($handle))) {
-		if ( $file != "." && $file != ".." && strpos($file , $site_web['sw_gal_fichier_tag'] ) === false ) { $GAL_dir_array[] = $file; }
+		if ( $file != "." && $file != ".." && strpos($file , $website['ws_gal_fichier_tag'] ) === false ) { $GAL_dir_array[] = $file; }
 	}
 	closedir($handle);
 	sort ($GAL_dir_array);

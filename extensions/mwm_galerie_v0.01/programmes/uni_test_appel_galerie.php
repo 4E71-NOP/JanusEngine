@@ -38,7 +38,7 @@ $PLF = &$PA['plugin_fichiers'];
 $GAL_table_colones = 3;
 $GAL_table_lignes = 3;
 $GAL_nom = "Photographie";
-$GAL_dir = "../websites-datas/".$site_web['sw_repertoire']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
+$GAL_dir = "../websites-datas/".$website['ws_directory']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
 if (!isset($_REQUEST['GAL_page_selection'])) { $_REQUEST['GAL_page_selection'] = 1; }
 
 
@@ -72,7 +72,7 @@ echo (
 
 
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$PA,
 		$PLC , 

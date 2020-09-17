@@ -80,7 +80,7 @@ switch ($l) {
 
 $formInputFile = $RequestDataObj->getRequestDataSubEntry('formScrExec', 'inputFile');
 // if ( strlen($formData['ScrExec_id']) == 0 )		{ $RequestDataObj->setRequestData('ScrExec_id', 'test_001.php'); }
-// if ( strlen($formData['ScrExec_rep']) == 0 )		{ $RequestDataObj->setRequestData('ScrExec_rep', $WebSiteObj->getWebSiteEntry('sw_repertoire')); }
+// if ( strlen($formData['ScrExec_rep']) == 0 )		{ $RequestDataObj->setRequestData('ScrExec_rep', $WebSiteObj->getWebSiteEntry('ws_directory')); }
 // if ( strlen($formData['ScrExec_file']) == 0 )	{ $RequestDataObj->setRequestData('ScrExec_file', $RequestDataObj->getRequestDataEntry('ScrExec_rep')."/document/".$RequestDataObj->getRequestDataEntry('ScrExec_id')); }
 
 $FileSelectorConfig = array(
@@ -90,7 +90,7 @@ $FileSelectorConfig = array(
 		"formTargetId"		=> "formScrExec[inputFile]",
 		"formInputSize"		=> 60 ,
 		"formInputVal"		=> $formInputFile,
-		"path"				=> $WebSiteObj->getWebSiteEntry('sw_repertoire')."/document",
+		"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory')."/document",
 		"restrictTo"		=> "websites-data",
 		"strRemove"			=> "",
 		"strAdd"			=> "../",

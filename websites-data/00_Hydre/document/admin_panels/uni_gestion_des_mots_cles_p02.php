@@ -123,8 +123,8 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 $dbquery = $SDDMObj->query("
 SELECT art.arti_id, art.arti_nom
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat
-WHERE art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-AND cat.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.arti_ref = art.arti_ref
 AND cat.arti_ref != '0'
 AND cat.cate_type IN ('0','1')
@@ -163,7 +163,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 					"mc_etat"		=>	1,
 					"mc_nom"		=>	"NewKeyword".date(),
 					"arti_id"		=>	0,
-					"site_id"		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
+					"ws_id"		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 					"mc_chaine"		=>	"",
 					"mc_compteur"	=>	1,
 					"mc_type"		=>	3,	

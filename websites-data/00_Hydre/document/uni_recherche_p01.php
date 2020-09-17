@@ -63,7 +63,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page
 			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('bouclage')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 			WHERE tag.tag_nom LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
-			AND tag.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 					
 			AND at.tag_id = tag.tag_id
 			AND at.arti_id = art.arti_id
@@ -81,10 +81,10 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			$dbquery = $SDDMObj->query("
 			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page, doc.docu_cont
 			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('bouclage')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
-			WHERE art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND doc.docu_id = art.docu_id
 					
-			AND art.site_id = cat.site_id
+			AND art.ws_id = cat.ws_id
 			AND art.arti_bouclage = bcl.bouclage_id
 			AND art.arti_ref = cat.arti_ref
 					

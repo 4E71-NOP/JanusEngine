@@ -44,7 +44,7 @@ self::$ActionTable['add']['document']		= function (&$a) { return array ("INSERT 
 
 self::$ActionTable['add']['group'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['groupe']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_groupe']." VALUES ('".$a['params']['group_website_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
+		"INSERT INTO ".$a['sqlTables']['site_groupe']." VALUES ('".$a['params']['group_webws_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
 	);
 };
 
@@ -165,8 +165,8 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 	$CMObj = ConfigurationManagement::getInstance();
 	switch ( $CMObj->getConfigurationEntry("execution_context") ) {
 		case "render" :																																				break;
-		case "installation" :			$a['params']['file'] = "../websites-data/".$a['Context']['sw_repertoire']."/document/".$a['params']['file'];				break;
-		case "extension_installation":	$a['params']['file'] = "../extensions/".$a['Context']['sw_repertoire']."/_installation/document/".$a['params']['file'];		break;
+		case "installation" :			$a['params']['file'] = "../websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];				break;
+		case "extension_installation":	$a['params']['file'] = "../extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
 	}
 	
 	if ( file_exists($a['params']['file']) ) {

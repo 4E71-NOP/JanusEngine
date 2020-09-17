@@ -424,7 +424,7 @@ if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 	$dbquery = $SDDMObj->query ( "
 		SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
 		FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
-		WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
+		WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 		AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
 		AND cat.bouclage_id = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
@@ -543,7 +543,7 @@ $RenderStylesheetObj = RenderStylesheet::getInstance();
 $stylesheet = $RenderStylesheetObj->render("mt_", $ThemeDataObj );
 
 $Content .= "<!DOCTYPE html>\r";
-switch ( $WebSiteObj->getWebSiteEntry('sw_stylesheet') ) {
+switch ( $WebSiteObj->getWebSiteEntry('ws_stylesheet') ) {
 	case 1: // dynamique
 		$Content .= "
 			<head>\r

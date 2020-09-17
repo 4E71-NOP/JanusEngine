@@ -45,7 +45,7 @@ class DocumentData {
 			$dbquery = $SDDMObj->query ( "
 			SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
 			FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
-			WHERE cat.site_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
+			WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 			AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
 			AND cat.bouclage_id = bcl.bouclage_id
 			AND bcl.bouclage_etat = '1'
@@ -77,7 +77,7 @@ class DocumentData {
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."'
 		AND art.docu_id = doc.docu_id
-		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND sit.ws_id = doc.docu_origine
 		AND art.arti_bouclage = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
@@ -91,7 +91,7 @@ class DocumentData {
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_nom LIKE '%article_inexistant%'
 			AND ds.docu_id = doc.docu_id
-			AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			;");
 		}
 		

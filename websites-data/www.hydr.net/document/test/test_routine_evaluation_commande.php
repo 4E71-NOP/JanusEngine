@@ -98,7 +98,7 @@ arti_validation_etat		INTEGER,
 
 arti_parution_date			INTEGER,
 docu_id						INTEGER,
-site_id						INTEGER,
+ws_id						INTEGER,
 
 PRIMARY KEY (arti_id)
 );

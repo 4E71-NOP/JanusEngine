@@ -205,7 +205,7 @@ $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
 				"height"			=> 50,	//in %
 				"formName"			=> "formConsole",
 				"formTargetId"		=> "inputFile",
-				"path"				=> $WebSiteObj->getWebSiteEntry('sw_repertoire')."/script",
+				"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory')."/script",
 				"selectionMode"		=> "file",
 		)
 );
@@ -216,7 +216,7 @@ $infos['IconSelectFile'] = array(
 		"formInputId"		=> "inputFile",
 		"formInputSize"		=> 40 ,
 		"formInputVal"		=> "",
-		"path"				=> $WebSiteObj->getWebSiteEntry('sw_repertoire')."/script",
+		"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory')."/script",
 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1);
@@ -259,7 +259,7 @@ $tab = array (
 $dbquery = $SDDMObj->query("
 SELECT *
 FROM ".$SqlTableListObj->getSQLTableName('historique')."
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ORDER BY historique_id DESC
 LIMIT 0,10
 ;");

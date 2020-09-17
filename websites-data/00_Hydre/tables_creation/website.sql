@@ -19,7 +19,7 @@ ws_stylesheet		INTEGER,
 
 ws_gal_mode			INTEGER,
 ws_gal_file_tag		VARCHAR(255),
-ws_gal_qualite		INTEGER,
+ws_gal_quality		INTEGER,
 ws_gal_x			INTEGER,
 ws_gal_y			INTEGER,
 ws_gal_border		INTEGER,

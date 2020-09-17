@@ -132,9 +132,9 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		SELECT art.arti_nom, art.arti_titre
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 					
-		WHERE art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.arti_bouclage = '".$currentArticleObj->getDeadLineEntry('bouclage_id')."'
-		AND art.site_id = cat.site_id
+		AND art.ws_id = cat.ws_id
 		AND art.arti_ref = cat.arti_ref
 		AND art.arti_page = '1'
 					
@@ -165,7 +165,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		$currentArticleObj->setDeadLine(
 				array(
 		'bouclage_etat'	=>	1,
-		'site_id'		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
+		'ws_id'		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 		'user_id'		=>	$UserObj->getUserEntry('user_id'),
 		'user_login'	=>	$UserObj->getUserEntry('user_login'),
 				),

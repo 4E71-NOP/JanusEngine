@@ -47,7 +47,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 				array ( "v" => "validation_state",		"t" => "arti_validation_etat"),
 				array ( "v" => "parution_date",			"t" => "arti_parution_date"),
 				array ( "v" => "docu_id",				"t" => "docu_id"),
-				array ( "v" => "site_id",				"t" => "site_id"),
+				array ( "v" => "ws_id",				"t" => "ws_id"),
 		),
 );
 
@@ -67,7 +67,7 @@ self::$PreRequisiteTable['add']['category'] = array (
 				array ( "v" => "title",				"t" => "cate_titre"),
 				array ( "v" => "desc",				"t" => "cate_desc"),
 				array ( "v" => "type",				"t" => "cate_type"),
-				array ( "v" => "site_id",			"t" => "site_id"),
+				array ( "v" => "ws_id",			"t" => "ws_id"),
 				array ( "v" => "lang_id",			"t" => "cate_lang"),
 				array ( "v" => "deadline_id",		"t" => "bouclage_id"),
 				array ( "v" => "state",				"t" => "cate_etat"),
@@ -97,7 +97,7 @@ self::$PreRequisiteTable['add']['deadline'] = array (
 				array ( "v" => "date_creation",		"t" => "bouclage_date_creation"),
 				array ( "v" => "date_expiration",	"t" => "bouclage_date_limite"),
 				array ( "v" => "user_id",			"t" => "user_id"),
-				array ( "v" => "site_id",			"t" => "site_id"),
+				array ( "v" => "ws_id",			"t" => "ws_id"),
 		),
 );
 
@@ -167,7 +167,7 @@ self::$PreRequisiteTable['add']['document_config'] = array (
 				array ( "v" => "menu_occurence",			"t" => "config_menu_occurence"),
 				array ( "v" => "show_info_parution",		"t" => "config_montre_info_parution"),
 				array ( "v" => "show_info_modification",	"t" => "config_montre_info_modification"),
-				array ( "v" => "site_id",					"t" => "site_id"),
+				array ( "v" => "ws_id",					"t" => "ws_id"),
 		),
 );
 
@@ -208,7 +208,7 @@ self::$PreRequisiteTable['add']['group'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "groupe",			"column" => "groupe_id",		"target" => "id"),
-				array ("table" => "site_groupe",	"column" => "site_groupe_id",	"target" => "group_website_id"),
+				array ("table" => "site_groupe",	"column" => "site_groupe_id",	"target" => "group_webws_id"),
 		),
 		"timeCreate" => array (
 				"creation_date",
@@ -238,7 +238,7 @@ self::$PreRequisiteTable['add']['keyword'] = array (
 				array ( "v" => "name",						"t" => "mc_nom"),
 				array ( "v" => "state",						"t" => "mc_etat"),
 				array ( "v" => "arti_id",					"t" => "arti_id"),	
-				array ( "v" => "site",						"t" => "site_id"), 	
+				array ( "v" => "site",						"t" => "ws_id"), 	
 				array ( "v" => "string",					"t" => "mc_chaine"),
 				array ( "v" => "count",						"t" => "mc_compteur"),	
 				array ( "v" => "type",						"t" => "mc_type"),	
@@ -420,7 +420,7 @@ self::$PreRequisiteTable['add']['tag'] = array (
 				array ( "v" => "id",			"t" => "tag_id"),
 				array ( "v" => "name",			"t" => "tag_nom"),
 				array ( "v" => "html",			"t" => "tag_html"),
-				array ( "v" => "site",			"t" => "site_id"),
+				array ( "v" => "site",			"t" => "ws_id"),
 
 		),
 );
@@ -641,6 +641,7 @@ self::$PreRequisiteTable['add']['website'] = array (
 				array ("table" => "website",	"column" => "ws_id",		"target" => "ws_id"),
 		),
 		"columns" => array(
+				array ( "v" => "ws_id",			"t" => "ws_id"),
 				array ( "v" => "name",			"t" => "ws_name"),
 				array ( "v" => "short",			"t" => "ws_short"),
 				array ( "v" => "lang_id",		"t" => "ws_lang"),
@@ -774,7 +775,7 @@ self::$PreRequisiteTable['share']['document'] = array (
 		"columns" => array(
 				array ( "v" => "share_id",				"t" => "share_id"),
 				array ( "v" => "docu_id",				"t" => "docu_id"),
-				array ( "v" => "site_id",				"t" => "site_id"),
+				array ( "v" => "ws_id",				"t" => "ws_id"),
 				array ( "v" => "modification",			"t" => "share_modification"),
 		),
 );

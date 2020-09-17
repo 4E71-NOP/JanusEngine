@@ -64,7 +64,7 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 $dbquery = $SDDMObj->query("SELECT usr.user_id, grp.groupe_id, grp.groupe_desc, usr.user_login, usr.user_image_avatar, grp.groupe_nom, grp.groupe_fichier
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
 WHERE gu.groupe_premier = '1' 
-AND sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND gu.user_id = usr.user_id 
 AND sg.groupe_id = gu.groupe_id 
 AND gu.groupe_id = grp.groupe_id

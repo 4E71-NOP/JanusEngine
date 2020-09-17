@@ -53,7 +53,7 @@ class WebSite {
 			else {
 				$LMObj->InternalLog(__METHOD__ . " : No rows returned for website id=".$SMObj->getSessionEntry('ws'));
 			}
-			$_REQUEST['site_context']['site_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
+			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
 		}
 		else {
 			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");

@@ -84,7 +84,7 @@ $dbquery = $SDDMObj->query("
 SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_nom,a.module_titre,a.module_fichier,a.module_desc,a.module_groupe_pour_voir,a.module_groupe_pour_utiliser,a.module_adm_control,b.module_etat 
 FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('site_module')." b 
 WHERE a.module_id = b.module_id 
-AND b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY b.module_position
 ;");
 

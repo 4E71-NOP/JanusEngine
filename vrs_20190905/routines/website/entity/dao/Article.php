@@ -36,7 +36,7 @@ class Article {
 			FROM ".$SqlTableListObj->getSQLTableName('article')."
 			WHERE arti_ref = '".$ref."'
 			AND arti_page = '".$page."'
-			AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			;");
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog(__METHOD__ . " : Loading data for article id=".$ref."/".$page);

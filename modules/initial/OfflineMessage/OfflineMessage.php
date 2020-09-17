@@ -105,7 +105,7 @@ class ModuleOffLineMessage {
 				"module_adm_control" => 0,
 				"module_execution" => 0,
 				"site_module_id" => 11,
-				"site_id" => 2,
+				"ws_id" => 2,
 				"module_etat" => 1,
 				"module_position" => 2,
 			)

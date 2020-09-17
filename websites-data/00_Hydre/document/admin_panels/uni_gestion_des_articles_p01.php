@@ -115,7 +115,7 @@ $listDeadline = array(
 
 $dbquery = $SDDMObj->query("
 SELECT bouclage_id,bouclage_nom,bouclage_titre,bouclage_etat FROM ".$SqlTableListObj->getSQLTableName('bouclage')."
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['bouclage_id'];
@@ -216,9 +216,9 @@ FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->g
 WHERE art.arti_ref = cat.arti_ref
 AND art.arti_bouclage = bcl.bouclage_id
 
-AND art.site_id = bcl.site_id
-AND bcl.site_id = cat.site_id
-AND cat.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND art.ws_id = bcl.ws_id
+AND bcl.ws_id = cat.ws_id
+AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
 AND cat.cate_etat != '2'
 AND cat.cate_type IN ('1','0')

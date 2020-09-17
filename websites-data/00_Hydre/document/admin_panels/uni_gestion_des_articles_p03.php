@@ -44,7 +44,7 @@ SELECT *
 FROM ".$SQL_tab_abrege['article']." 
 WHERE arti_ref = '".$_REQUEST['M_ARTICL']['arti_ref_selection']."'
 AND arti_page = '".$_REQUEST['M_ARTICL']['arti_page_selection']."' 
-AND site_id = '".$site_web['ws_id']."'
+AND ws_id = '".$website['ws_id']."'
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {	foreach ( $dbp as $A => $B ) { $infos_article[$A] = $B; } }
 unset ( $A , $B );
@@ -56,7 +56,7 @@ FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentat
 WHERE pre.pres_id = sp.pres_id 
 AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 AND sp.theme_id = ss.theme_id 
-AND ss.site_id = '".$site_web['ws_id']."'
+AND ss.ws_id = '".$website['ws_id']."'
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
 	$MAA_p[$dbp['pres_id']]['t'] = $MAA_p[$dbp['pres_id']]['db'] = $dbp['pres_nom_generique'];
@@ -67,7 +67,7 @@ while ($dbp = fetch_array_sql($dbquery)) {
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT * 
 FROM ".$SQL_tab_abrege['article_config']." 
-WHERE site_id = '".$site_web['ws_id']."' 
+WHERE ws_id = '".$website['ws_id']."' 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
 	$MAA_dc[$dbp['config_id']]['t'] = $MAA_dc[$dbp['config_id']]['db'] = $dbp['config_nom'];
@@ -78,7 +78,7 @@ $MAA_dc[$infos_article['config_id']]['s'] = " selected";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT bouclage_id,bouclage_titre,bouclage_nom  
 FROM ".$SQL_tab_abrege['bouclage']." 
-WHERE site_id = '".$site_web['ws_id']."' 
+WHERE ws_id = '".$website['ws_id']."' 
 AND bouclage_etat != '2' 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
@@ -92,7 +92,7 @@ SELECT usr.user_id,usr.user_login
 FROM ".$SQL_tab_abrege['user']." usr,  ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['site_groupe']." sgp 
 WHERE usr.user_id = grp.user_id 
 AND grp.groupe_id = sgp.groupe_id
-AND sgp.site_id = '".$site_web['ws_id']."'
+AND sgp.ws_id = '".$website['ws_id']."'
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) {
@@ -103,7 +103,7 @@ while ($dbp = fetch_array_sql($dbquery)) {
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
 FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
-WHERE shr.site_id = '".$site_web['ws_id']."' 
+WHERE shr.ws_id = '".$website['ws_id']."' 
 AND shr.docu_id = doc.docu_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { $document_list[$dbp['docu_id']]['nom'] = $dbp['docu_nom']; }
@@ -117,8 +117,8 @@ $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT cate_role, cate_id, arti_ref 
 FROM ".$SQL_tab['categorie']." 
 WHERE cate_type IN ('2', '3') 
-AND site_id IN ('1', '".$site_web['ws_id']."') 
-AND cate_lang = '".$site_web['ws_lang']."' 
+AND ws_id IN ('1', '".$website['ws_id']."') 
+AND cate_lang = '".$website['ws_lang']."' 
 AND groupe_id ".$user['clause_in_groupe']." 
 AND cate_etat = '1' 
 AND cate_role = '1'
@@ -338,7 +338,7 @@ echo ("<br>\r&nbsp;
 </table>\r
 ");
 
-if ( $site_web['sw_info_debug'] < 10 ) { 
+if ( $website['ws_info_debug'] < 10 ) { 
 	unset (
 		$A , 
 		$dbp , 

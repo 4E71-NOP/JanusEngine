@@ -1,5 +1,5 @@
 /* ---------------------------------------- */
-/* Foreign keys: site_id					*/
+/* Foreign keys: ws_id					*/
 /* ---------------------------------------- */
 /*
 config_menu_type				1 table 2 menu_select
@@ -21,9 +21,9 @@ config_menu_float_taille_y		INTEGER,
 config_menu_occurence			INTEGER, 
 config_montre_info_parution		INTEGER,
 config_montre_info_modification	INTEGER,
-site_id							INTEGER, 
+ws_id							INTEGER, 
 
 PRIMARY KEY (config_id),
-KEY idx_!IdxNom!_site_id (site_id)
+KEY idx_!IdxNom!_ws_id (ws_id)
 
 );

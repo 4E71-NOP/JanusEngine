@@ -37,10 +37,10 @@ $tl_['fra']['lien_modif0'] = "Modifier le contenu de ce document.";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT doc.*, shr.share_modification 
 FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
-WHERE shr.site_id = '".$site_web['ws_id']."' 
+WHERE shr.ws_id = '".$website['ws_id']."' 
 AND doc.docu_id = '".$_REQUEST['M_DOCUME']['document_selection']."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$site_web['ws_id']."' 
+AND doc.docu_origine = '".$website['ws_id']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 
@@ -72,7 +72,7 @@ WHERE usr.user_id = '".$document['docu_correcteur']."'
 AND gu.groupe_premier = '1' 
 AND usr.user_id = gu.user_id 
 AND gu.groupe_id = sg.groupe_id 
-AND sg.site_id = s.ws_id 
+AND sg.ws_id = s.ws_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
 	$document['docu_correcteur_login']	= $dbp['user_login'];
@@ -92,7 +92,7 @@ else {
 	AND dcm.docu_id = art.docu_id 
 	AND art.arti_bouclage = bcl.bouclage_id 
 	AND bcl.bouclage_etat = '1' 
-	AND art.site_id = '".$site_web['ws_id']."'
+	AND art.ws_id = '".$website['ws_id']."'
 	ORDER BY dcm.docu_id ASC 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
@@ -211,7 +211,7 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	$fsi['js_cs']					= "";
 	$fsi['formulaire']				= "formulaire_M_DOCUME";
 	$fsi['champs']					= "M_DOCUME[fichier]";
-	$fsi['lsdf_chemin']				= "../websites-datas/".$site_web['sw_repertoire']."/document/";
+	$fsi['lsdf_chemin']				= "../websites-datas/".$website['ws_directory']."/document/";
 	$fsi['mode_selection']			= "fichier";
 	$fsi['lsdf_mode']				= "tout";
 	$fsi['lsdf_nivmax']				= 10;
@@ -365,7 +365,7 @@ else {
 	echo ("!!! " . $tl_[$l]['hax'] . " !!!");
 }
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$document,
 		$dbp,

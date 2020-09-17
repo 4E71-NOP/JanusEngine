@@ -91,7 +91,7 @@ SELECT art.* , bcl.bouclage_nom
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl 
 WHERE art.arti_validation_etat = '0' 
 AND bcl.bouclage_id = art.arti_bouclage 
-AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $i = 1;

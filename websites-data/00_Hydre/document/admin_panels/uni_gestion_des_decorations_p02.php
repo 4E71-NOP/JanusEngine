@@ -157,9 +157,9 @@ $_REQUEST['td_cs4_fcb']		= "<td class='" . $theme_tableau . $_REQUEST['bloc']."_
 // --------------------------------------------------------------------------------------------
 //	Generation du stylesheet
 // --------------------------------------------------------------------------------------------
-$_REQUEST['sauve']['site_web_sw_stylesheet'] = $site_web['sw_stylesheet'];
+$_REQUEST['sauve']['website_ws_stylesheet'] = $website['ws_stylesheet'];
 
-$site_web['sw_stylesheet'] = 1; // Passe en mode dynamique
+$website['ws_stylesheet'] = 1; // Passe en mode dynamique
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT * 
@@ -1246,10 +1246,10 @@ $_REQUEST['CreationElementIndex']++;
 $pv['j'] = &$_REQUEST['CreationElement'][$_REQUEST['CreationElementIndex']];
 $pv['j']['type'] = "ColoPicker"; 
 */
-$site_web['sw_stylesheet'] = $_REQUEST['sauve']['site_web_sw_stylesheet'];
+$website['ws_stylesheet'] = $_REQUEST['sauve']['website_ws_stylesheet'];
 
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$dbp,
 		$dbquery,

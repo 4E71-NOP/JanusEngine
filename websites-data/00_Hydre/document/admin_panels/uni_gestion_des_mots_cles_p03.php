@@ -25,12 +25,12 @@ $_REQUEST['sql_initiateur'] = "fra_gestion_des_mots_cles_p03";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT art.arti_id, art.arti_nom  
 FROM ".$SQL_tab['article']." art, ".$SQL_tab['categorie']." cat 
-WHERE art.site_id = '".$site_web['ws_id']."'
-AND cat.site_id = '".$site_web['ws_id']."'
+WHERE art.ws_id = '".$website['ws_id']."'
+AND cat.ws_id = '".$website['ws_id']."'
 AND cat.arti_ref = art.arti_ref 
 AND cat.arti_ref != '0' 
 AND cat.cate_type IN ('0','1') 
-AND cat.cate_lang = '".$site_web['ws_lang']."' 
+AND cat.cate_lang = '".$website['ws_lang']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 
@@ -205,7 +205,7 @@ echo ("
 
 ");
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$dbp , 
 		$dbquery , 

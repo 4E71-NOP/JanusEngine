@@ -81,7 +81,7 @@ $T['AD']['1'][$i]['4']['cont'] = $I18nObj->getI18nEntry('col_4_txt');
 $i++;
 
 $dbquery = $SDDMObj->query("
-SELECT ws_id, ws_name, sw_repertoire 
+SELECT ws_id, ws_name, ws_directory 
 FROM ".$SqlTableListObj->getSQLTableName('website')." 
 ORDER BY ws_id
 ;");
@@ -89,7 +89,7 @@ ORDER BY ws_id
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$T['AD']['1'][$i]['1']['cont'] = $dbp['ws_id'];
 	$T['AD']['1'][$i]['2']['cont'] = $dbp['ws_name'];
-	$T['AD']['1'][$i]['3']['cont'] = $dbp['sw_repertoire'];
+	$T['AD']['1'][$i]['3']['cont'] = $dbp['ws_directory'];
 	$T['AD']['1'][$i]['4']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$I18nObj->getI18nEntry('link')."</a>";
 	$i++;
 }

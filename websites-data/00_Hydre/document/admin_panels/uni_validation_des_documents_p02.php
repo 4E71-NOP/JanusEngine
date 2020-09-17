@@ -24,10 +24,10 @@ $_REQUEST['sql_initiateur'] = "uni_correction_des_documents_p02.php";
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT doc.*, shr.share_modification 
 FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
-WHERE part.site_id = '".$site_web['ws_id']."' 
+WHERE part.ws_id = '".$website['ws_id']."' 
 AND doc.docu_id = '".$_REQUEST['M_DOCUME']['document_selection']."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$site_web['ws_id']."' 
+AND doc.docu_origine = '".$website['ws_id']."' 
 ;");
 if ( num_row_sql($dbquery) == 0 ) { 
 	$tl_['eng']['perm_err'] = "You don't have the permission to modify this document";
@@ -215,7 +215,7 @@ else {
 	");
 }
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$document,
 		$dbp,

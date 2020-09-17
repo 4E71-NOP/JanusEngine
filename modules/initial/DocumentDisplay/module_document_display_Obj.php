@@ -128,7 +128,7 @@ class ModuleDocumentDisplay {
 		SELECT COUNT(docu_id) AS arti_nbr_page
 		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
-		AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.arti_bouclage = bcl.bouclage_id
 		AND bcl.bouclage_etat = '1'
 		;");
@@ -172,7 +172,7 @@ class ModuleDocumentDisplay {
 			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl 
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."' 
 			AND art.arti_validation_etat = '1' 
-			AND art.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND art.arti_bouclage = bcl.bouclage_id 
 			AND bcl.bouclage_etat = '1'
 			;";
@@ -329,7 +329,7 @@ class ModuleDocumentDisplay {
 				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 				WHERE doc.docu_nom = '".$documentAnalyse['include_docu_nom']."'
 				AND doc.docu_id = dp.docu_id
-				AND ds.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+				AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				;");
 				
 				if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
@@ -517,7 +517,7 @@ class ModuleDocumentDisplay {
 		// --------------------------------------------------------------------------------------------
 		//	All processing finished. We ship it.
 
-		if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') < 10 ) {
+		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			if ( $document_tableau != "MAA_" ) { unset ($DT); }
 			if ( $DT['arti_menu_occurence'] != 4 ) { unset ($document_menu_contenu); }
 			unset (
@@ -636,10 +636,10 @@ class ModuleDocumentDisplay {
 // 		$s[$ptr] = "[USER_P]";		$r[$ptr] = $UserObj->getUserEntry('pass');			$ptr++;
 // 		$s[$ptr] = "[USER_LP]";		$r[$ptr] = "&user_login=".$UserObj->getUserEntry('login')."&user_pass=".$UserObj->getUserEntry('pass');			$ptr++;
 		
-		$s[$ptr] = "[POPIMG_L]";	$r[$ptr] = "<a target='_NEW' href='../websites-data/".$WebSiteObj->getWebSiteEntry('sw_repertoire')."/data/documents/".$directory."/";			$ptr++;
+		$s[$ptr] = "[POPIMG_L]";	$r[$ptr] = "<a target='_NEW' href='../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$directory."/";			$ptr++;
 		$s[$ptr] = "[/POPIMG_L]";	$r[$ptr] = "'>";			$ptr++;
 		
-		$s[$ptr] = "[POPIMG_I]";	$r[$ptr] = "<img src='../websites-data/".$WebSiteObj->getWebSiteEntry('sw_repertoire')."/data/documents/".$directory."/";			$ptr++;
+		$s[$ptr] = "[POPIMG_I]";	$r[$ptr] = "<img src='../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$directory."/";			$ptr++;
 		$s[$ptr] = "[POPIMG_S10]";	$r[$ptr] = "' alt='Click' width='10%' height='10%' border='0";						$ptr++;
 		$s[$ptr] = "[POPIMG_S20]";	$r[$ptr] = "' alt='Click' width='20%' height='20%' border='0";						$ptr++;
 		$s[$ptr] = "[POPIMG_S30]";	$r[$ptr] = "' alt='Click' width='30%' height='30%' border='0";						$ptr++;
@@ -652,7 +652,7 @@ class ModuleDocumentDisplay {
 		$s[$ptr] = "[POPIMG_S100]";	$r[$ptr] = "' alt='Click' width='100%' height='100%' border='0";					$ptr++;
 		$s[$ptr] = "[/POPIMG_I]";	$r[$ptr] = "'>";																	$ptr++;
 		
-		$s[$ptr] = "[IMGSRC]";		$r[$ptr] = "<img src='../websites-data/".$WebSiteObj->getWebSiteEntry('sw_repertoire')."/data/documents/".$directory."/";			$ptr++;
+		$s[$ptr] = "[IMGSRC]";		$r[$ptr] = "<img src='../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$directory."/";			$ptr++;
 		$s[$ptr] = "[IMGALT]";		$r[$ptr] = "' alt='";							$ptr++;
 		$s[$ptr] = "[IMGBRD]";		$r[$ptr] = "' border='0'>";						$ptr++;
 		
@@ -746,7 +746,7 @@ class ModuleDocumentDisplay {
 		FROM ".$SqlTableListObj->getSQLTableName('mot_cle')."
 		WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
 		AND mc_etat = '1'
-		AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['MC']['id']		= $dbp['mc_id'];

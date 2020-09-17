@@ -34,7 +34,7 @@ class DeadLine {
 		$dbquery = $dbquery = $SDDMObj->query("
 		SELECT bcl.*,usr.user_login
 		FROM ".$SqlTableListObj->getSQLTableName('bouclage')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr
-		WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND usr.user_id = bcl.user_id
 		AND bouclage_id ='".$id."'
 		;");

@@ -34,7 +34,7 @@ class Document {
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT doc.*, part.part_modification 
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-			WHERE shr.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
 			AND shr.docu_id = doc.docu_id 
 			AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 

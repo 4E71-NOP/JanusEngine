@@ -59,14 +59,14 @@ class ModuleGlobalReport {
 		
 		$Content = "";
 		
-		$CurrentTab = 1;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 1 )	{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 2;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 2 )	{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 3;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 3 )	{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 4;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 4 )	{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 5;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 7 )	{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 6;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 8 )	{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 7;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 9 )	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 8;	if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') >= 10 )	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 1;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 1 )	{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 2;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 2 )	{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 3;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 3 )	{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 4;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 4 )	{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 5;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 7 )	{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 6;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 8 )	{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 7;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 9 )	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+		$CurrentTab = 8;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 10 )	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
 		
 		$tabDbgLvl = array(
 			1 => 1,			2 => 2,			3 => 3,
@@ -75,7 +75,7 @@ class ModuleGlobalReport {
 			10=> 8
 		);
 		
-		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('sw_info_debug')];
+		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('ws_info_debug')];
 		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_nom'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
 		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 		$T['tab_infos']['GroupName']		= "gr";
@@ -119,7 +119,7 @@ class ModuleGlobalReport {
 		$Content['2']['2']['cont']		= round(($memory_['peak']/1024), 2) . $I18nObj->getI18nEntry('Ko');			$Content['2']['2']['class']		= $infos['block']."_tb4";
 		$Content['3']['2']['cont']		= phpversion();																$Content['3']['2']['class']		= $infos['block']."_tb4";
 		$Content['4']['2']['cont']		= round(($memory_['usage']/1024), 2) . $I18nObj->getI18nEntry('Ko');		$Content['4']['2']['class']		= $infos['block']."_tb4";
-		$Content['5']['2']['cont']		= $WebSiteObj->getWebSiteEntry('sw_info_debug');							$Content['5']['2']['tc']		= 1;
+		$Content['5']['2']['cont']		= $WebSiteObj->getWebSiteEntry('ws_info_debug');							$Content['5']['2']['tc']		= 1;
 		$Content['6']['2']['cont']		= get_include_path();														$Content['6']['2']['tc']		= 1;
 		$Content['7']['2']['cont']		= getcwd();																	$Content['7']['2']['tc']		= 1;
 		$Content['8']['2']['cont']		= getmyuid();																$Content['8']['2']['tc']		= 1;
@@ -305,7 +305,7 @@ class ModuleGlobalReport {
 		$dbquery = $SDDMObj->query("
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('historique')."
-			WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY historique_id DESC
 			LIMIT 0,15
 			;");

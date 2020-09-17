@@ -30,12 +30,12 @@ arti_validation_etat		INTEGER,
 
 arti_parution_date			INTEGER,
 docu_id						INTEGER,
-site_id						INTEGER,
+ws_id						INTEGER,
 
 PRIMARY KEY (arti_id), 
 KEY idx_!IdxNom!_arti_bouclage (arti_bouclage),
 KEY idx_!IdxNom!_config_id (config_id),
 KEY idx_!IdxNom!_docu_id (docu_id),
-KEY idx_!IdxNom!_site_id (site_id)
+KEY idx_!IdxNom!_ws_id (ws_id)
 
 );

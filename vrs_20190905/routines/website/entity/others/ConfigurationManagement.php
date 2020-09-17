@@ -115,7 +115,7 @@ class ConfigurationManagement {
 // 				$RequestDataObj = RequestData::getInstance();
 				
 				$TabLangueAdmises = array();
-				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('site_langue')." WHERE site_id = '".$SMObj->getSessionEntry('ws')."';");
+				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('site_langue')." WHERE ws_id = '".$SMObj->getSessionEntry('ws')."';");
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
 				sort ( $TabLangueAdmises );
 				
@@ -145,7 +145,7 @@ class ConfigurationManagement {
 			SELECT sl.lang_id
 			FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
 			WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
-			AND sl.site_id = s.ws_id
+			AND sl.ws_id = s.ws_id
 			;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['lang_id']]['support'] = 1; }
 		

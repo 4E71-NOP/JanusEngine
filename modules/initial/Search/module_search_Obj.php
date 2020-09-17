@@ -102,7 +102,7 @@ class ModuleSearch {
 		else {
 			$Content .= $i18n['txt10'];
 		}
-		if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') < 10 ) {
+		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$i18n,
 				$localisation,

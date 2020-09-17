@@ -36,7 +36,7 @@ SELECT a.*,b.module_etat
 FROM $SQL_tab[module] a , $SQL_tab[site_module] b 
 WHERE a.module_id = '".$_REQUEST[MM][id]."'  
 AND a.module_id = b.module_id 
-AND b.site_id = '$site_web[ws_id]' 
+AND b.ws_id = '$website[ws_id]' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 

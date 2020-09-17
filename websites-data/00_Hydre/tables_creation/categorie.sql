@@ -1,5 +1,5 @@
 /* ---------------------------------------- */
-/* Foreign keys: site_id, bouclage_id		*/
+/* Foreign keys: ws_id, bouclage_id		*/
 /* ---------------------------------------- */
 /*
 cate_type		ARTICLE_RACINE 0	ARTICLE 1	MENU_ADMIN_RACINE 2		MENU_ADMIN 3
@@ -14,7 +14,7 @@ cate_nom 			VARCHAR(255),
 cate_titre 			VARCHAR(255),
 cate_desc 			VARCHAR(255),
 cate_type			INTEGER,
-site_id				INTEGER,
+ws_id				INTEGER,
 cate_lang			INTEGER,
 bouclage_id 		INTEGER,
 cate_etat 			INTEGER,
@@ -27,7 +27,7 @@ cate_doc_premier	INTEGER,
 arti_ref 			VARCHAR(255),
 
 PRIMARY KEY (cate_id),
-KEY idx_!IdxNom!_site_id (site_id),
+KEY idx_!IdxNom!_ws_id (ws_id),
 KEY idx_!IdxNom!_bouclage_id (bouclage_id),
 KEY idx_!IdxNom!_groupe_id (groupe_id),
 KEY idx_!IdxNom!_cate_doc_premier (cate_doc_premier)

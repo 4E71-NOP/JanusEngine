@@ -31,7 +31,7 @@ self::$InitTable['article'] = function (&$a) {
 			"docu_id" => 0,
 			"docu_name" => "",
 			"filtre" => "",
-			"site_id" => $a['Context']['ws_id']
+			"ws_id" => $a['Context']['ws_id']
 	);
 	$a['params']['document']	= &$a['params']['docu_name'];
 	$a['params']['reference']	= &$a['params']['ref'];
@@ -65,7 +65,7 @@ self::$InitTable['category'] = function (&$a) {
 			"title" => "New category",
 			"desc" => "New category",
 			"type" => "ARTICLE",
-			"site_id" => $a['Context']['ws_id'],
+			"ws_id" => $a['Context']['ws_id'],
 			"lang" => "eng",
 			"deadline" => "",
 			"state" => "OFFLINE",
@@ -529,7 +529,7 @@ self::$InitTable['deadline'] = function (&$a) {
 			"state" => 0,
 			"date_creation" => $date,
 			"date_expiration" => $date + (60*60*24*31*12*10),
-			"site_id" => $a['Context']['ws_id'],
+			"ws_id" => $a['Context']['ws_id'],
 			"user_id" => "1"
 	);
 	$a['params']['date_limite']	= &$a['params']['date_expiration'];
@@ -548,7 +548,7 @@ self::$InitTable['document_config'] = function (&$a) {
 			"menu_occurence" => "TOP",
 			"show_info_parution" => "ON",
 			"show_info_modification" => "ON",
-			"site_id" => $a['Context']['ws_id']
+			"ws_id" => $a['Context']['ws_id']
 	);
 	$a['params']['montre_info_parution']		= &$a['params']['show_info_parution'];
 	$a['params']['montre_info_modification']	= &$a['params']['show_info_modification'];

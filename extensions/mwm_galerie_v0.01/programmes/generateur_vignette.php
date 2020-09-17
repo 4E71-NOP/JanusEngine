@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*MWM-licence-fin*/
-//	sw_gal_mode			OFF 0	BASE 1(base)	FICHIER 2 (FILE)
+//	ws_gal_mode			OFF 0	BASE 1(base)	FICHIER 2 (FILE)
 // --------------------------------------------------------------------------------------------
 function microtime_chrono() {
 	list($usec, $sec) = explode(" ", microtime());

@@ -34,14 +34,14 @@ for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
 	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
-	WHERE site_id = '$site_web[ws_id]' 
+	WHERE ws_id = '$website[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
 		foreach ( $dbp as $A => $V ) { $_REQUEST[MD][$A] = $V; } 
 		$_REQUEST[MD][bouclage_id] = $tab_[$dbp[bouclage_id]];
 		$_REQUEST[MD][bouclage_etat]			= $tab_[$dbp[bouclage_etat]];
-		$_REQUEST[MD][site_id]			= $tab_[$dbp[site_id]];
+		$_REQUEST[MD][ws_id]			= $tab_[$dbp[ws_id]];
 	}
 }
 statistique_fin ( "test001" );
@@ -53,7 +53,7 @@ for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
 	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
-	WHERE site_id = '$site_web[ws_id]' 
+	WHERE ws_id = '$website[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
@@ -63,7 +63,7 @@ for ( $i=1 ; $i < 2000 ; $i++ ) {
 		$_REQUEST[MD][bouclage_etat]			= $tab_[$dbp[bouclage_etat]];
 		$_REQUEST[MD][bouclage_date_creation]			= $dbp[bouclage_date_creation];
 		$_REQUEST[MD][bouclage_date_limite]			= $dbp[bouclage_date_limite];
-		$_REQUEST[MD][site_id]			= $tab_[$dbp[site_id]];
+		$_REQUEST[MD][ws_id]			= $tab_[$dbp[ws_id]];
 		$_REQUEST[MD][user_id]			= $dbp[user_id];
 		$_REQUEST[MD][user_login] 			= $dbp[user_login];
 	}

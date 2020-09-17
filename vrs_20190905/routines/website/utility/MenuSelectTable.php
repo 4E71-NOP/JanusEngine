@@ -42,7 +42,7 @@ class MenuSelectTable {
 			SELECT DISTINCT arti_ref 
 			FROM ".$SqlTableListObj->getSQLTableName('article')." 
 			WHERE arti_validation_etat = '1'
-			AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY arti_ref
 		;");
 		$tab = array();
@@ -77,7 +77,7 @@ class MenuSelectTable {
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('categorie')."
-			WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY cate_nom
 		;");
 		$tab = array();
@@ -112,7 +112,7 @@ class MenuSelectTable {
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('bouclage')."
-			WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY bouclage_nom
 		;");
 		$tab = array();
@@ -148,7 +148,7 @@ class MenuSelectTable {
 			SELECT doc.*
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." dp
 			WHERE doc.docu_id = dp.docu_id
-			AND dp.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND dp.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY doc.docu_nom
 		;");
 		$tab = array();
@@ -184,7 +184,7 @@ class MenuSelectTable {
 			SELECT grp.* 
 			FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg
 			WHERE grp.groupe_id = sg.groupe_id
-			AND sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -221,7 +221,7 @@ class MenuSelectTable {
 			WHERE p.pres_id = tp.pres_id
 			AND tp.theme_id = wt.theme_id
 			AND wt.theme_etat = '1'
-			AND wt.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND wt.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.pres_nom
 		;");
 		$tab = array();
@@ -257,7 +257,7 @@ class MenuSelectTable {
 			SELECT l.* 
 			FROM ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('site_langue')." sl 
 			WHERE l.langue_id = sl.lang_id
-			AND sl.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND sl.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -292,7 +292,7 @@ class MenuSelectTable {
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." t, ".$SqlTableListObj->getSQLTableName('site_theme')." st 
 			WHERE t.theme_id = st.theme_id
 			AND st.theme_etat = '1' 
-			AND st.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND st.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -330,7 +330,7 @@ class MenuSelectTable {
 			AND g.groupe_tag IN (2,3)
 			AND gu.groupe_id = g.groupe_id
 			AND gu.groupe_id = sg.groupe_id
-			AND sg.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY usr.user_nom
 		;");
 		$tab = array();

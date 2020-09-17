@@ -177,7 +177,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 				"cate_titre"		=>	"Category title",
 				"cate_desc"			=>	"Category",
 				"cate_type"			=>	1,
-				"site_id"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
+				"ws_id"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				"cate_lang"			=>	"",
 				"bouclage_id"		=>	1,
 				"cate_etat"			=>	1,

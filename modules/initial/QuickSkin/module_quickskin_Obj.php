@@ -60,7 +60,7 @@ class ModuleQuickSkin {
 			$dbquery = $SDDMObj->query("
 			SELECT a.theme_id,a.theme_nom,a.theme_titre
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
-			WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_etat = '1'
 			;");
@@ -121,7 +121,7 @@ class ModuleQuickSkin {
 			}
 		}
 		
-		if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') < 10 ) {
+		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$i18n,
 					$localisation,

@@ -25,14 +25,14 @@ $_REQUEST['sql_initiateur'] = "Gestion de l'extension MWMGalerie";
 
 if ( $_REQUEST['C_GALERI']['update'] == 1 ) {
 	$_REQUEST['C_GALERI']['extension_id'] = Extension_Recherche_Id ( "MWM_Galerie" );
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['mode']."'				WHERE extension_variable = 'mode'			AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['qualite']."'			WHERE extension_variable = 'qualite'		AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['x']."'				WHERE extension_variable = 'x'				AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['y']."'				WHERE extension_variable = 'y'				AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['liserai']."'			WHERE extension_variable = 'liserai'		AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['table_colonnes']."'	WHERE extension_variable = 'table_colonnes'	AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['table_lignes']."'		WHERE extension_variable = 'table_lignes'	AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
-	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['fichier_tag']."'		WHERE extension_variable = 'fichier_tag'	AND site_id = '".$site_web['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['mode']."'				WHERE extension_variable = 'mode'			AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['qualite']."'			WHERE extension_variable = 'qualite'		AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['x']."'				WHERE extension_variable = 'x'				AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['y']."'				WHERE extension_variable = 'y'				AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['liserai']."'			WHERE extension_variable = 'liserai'		AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['table_colonnes']."'	WHERE extension_variable = 'table_colonnes'	AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['table_lignes']."'		WHERE extension_variable = 'table_lignes'	AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
+	$requete[] = "UPDATE ".$SQL_tab_abrege['extension_config']." SET extension_valeur = '".$_REQUEST['C_GALERI']['fichier_tag']."'		WHERE extension_variable = 'fichier_tag'	AND ws_id = '".$website['ws_id']."' AND extension_id =  '".$_REQUEST['C_GALERI']['extension_id']."'";
 	unset ( $A );
 	foreach ( $requete as $A ) { manipulation_traitement_requete ( $A ); }
 }
@@ -40,7 +40,7 @@ else {
 	$pv['extension_id'] = Extension_Recherche_Id ( "MWM_Galerie" );
 	$pv['requete'] = "SELECT exc.* 
 	FROM ".$SQL_tab_abrege['extension_config']." exc 
-	WHERE exc.site_id = '".$site_web['ws_id']."' 
+	WHERE exc.ws_id = '".$website['ws_id']."' 
 	AND exc.extension_id = '".$pv['extension_id']."'
 	;";
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );
@@ -152,7 +152,7 @@ $pv['galerie_album'] = "../extensions/".$PA['extension_repertoire']."/programmes
 include ( $pv['galerie_album'] );
 
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$A,
 		$B , 

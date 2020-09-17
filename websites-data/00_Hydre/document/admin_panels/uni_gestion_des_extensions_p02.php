@@ -60,7 +60,7 @@ if ( $user['groupe_tag'] == 3 ) {
 	case "Installer":
 		$pv['requete'] = "SELECT ext.* 
 		FROM ".$SQL_tab_abrege['extension']." ext 
-		WHERE ext.site_id = '".$site_web['ws_id']."' 
+		WHERE ext.ws_id = '".$website['ws_id']."' 
 		AND ext.extension_nom = '".$P['extension_nom']."'
 		;";
 		$dbquery = requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );
@@ -71,7 +71,7 @@ if ( $user['groupe_tag'] == 3 ) {
 			$P['extension_id'] = manipulation_trouve_id_suivant ( $SQL_tab_abrege['extension'] , "extension_id" );
 			$pv['requete'] = "INSERT INTO ".$SQL_tab_abrege['extension']." VALUES ('" . 
 			$P['extension_id']			. "','" . 
-			$P['site_id']				. "','" .
+			$P['ws_id']				. "','" .
 			$P['extension_nom']			. "','" . 
 			$P['extension_version']		. "','" . 
 			$P['extension_auteur']		. "','" . 
@@ -95,7 +95,7 @@ if ( $user['groupe_tag'] == 3 ) {
 
 		$pv['requete'] = "
 		DELETE FROM ".$SQL_tab_abrege['extension']."  
-		WHERE site_id = '".$P['site_id']."' 
+		WHERE ws_id = '".$P['ws_id']."' 
 		AND extension_nom = '".$P['extension_nom']."'
 		;";
 		manipulation_traitement_requete ( $pv['requete'] );
@@ -134,8 +134,8 @@ if ( $user['groupe_tag'] == 3 ) {
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres remplissage table" );
 
-	$_REQUEST['site_context']['site_nom']	= $site_web['ws_name'];
-	$_REQUEST['site_context']['site_lang']	= $site_web['ws_lang'];
+	$_REQUEST['site_context']['site_nom']	= $website['ws_name'];
+	$_REQUEST['site_context']['site_lang']	= $website['ws_lang'];
 	$_REQUEST['site_context']['user']		= $_REQUEST['form']['database_user_login'] = $db_['user_login'];
 	$_REQUEST['site_context']['password']	= $_REQUEST['form']['database_user_password'] = $db_['user_password'];
 	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "console de commandes";	$section = "script";
@@ -245,7 +245,7 @@ if ( $user['groupe_tag'] == 3 ) {
 }
 else { echo ("!!!!!!!!!!!!!!!!"); }
 
-if ( $site_web['sw_info_debug'] < 10 ) {
+if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$A,
 		$B , 

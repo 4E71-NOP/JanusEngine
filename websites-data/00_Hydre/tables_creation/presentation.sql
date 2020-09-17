@@ -1,5 +1,5 @@
 /* ---------------------------------------- */
-/* Foreign keys: site_id					*/
+/* Foreign keys: ws_id					*/
 /* ---------------------------------------- */
 CREATE TABLE !table! ( 
 pres_id				INTEGER NOT NULL,

@@ -30,7 +30,7 @@ $GAL_table_colones = &$PA['extension_config']['table_colonnes'];
 $GAL_table_lignes = &$PA['extension_config']['table_lignes'];
 $GAL_taille_nom = 24;
 $GAL_nom = "Example";
-$GAL_dir = "../websites-datas/".$site_web['sw_repertoire']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
+$GAL_dir = "../websites-datas/".$website['ws_directory']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
 if (!isset($_REQUEST['GAL_page_selection'])) { $_REQUEST['GAL_page_selection'] = 1; }
 $pv['galerie_album'] = "../extensions/".$PA['extension_repertoire']."/programmes/".$PLF['Galerie']['fichier_nom'];
 include ( $pv['galerie_album'] );

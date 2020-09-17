@@ -35,7 +35,7 @@ class KeyWord {
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('mot_cle')."
 			WHERE mc_id = '".$id."'
-			AND site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

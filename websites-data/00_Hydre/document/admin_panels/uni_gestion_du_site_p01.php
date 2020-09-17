@@ -182,14 +182,14 @@ switch ($l) {
 // --------------------------------------------------------------------------------------------
 
 $dbquery = $SDDMObj->query("
-SELECT sw_etat, ws_lang 
+SELECT ws_state, ws_lang 
 FROM ".$SqlTableListObj->getSQLTableName('website')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-	$pv['sw_etat2']		= "select_o1_1_" . $dbp['sw_etat'];
-	$pv['sw_etat']		= $dbp['sw_etat'];
-	$Content .= "<p>".$I18nObj->getI18nEntry('msg_01').$I18nObj->getI18nEntry($pv['sw_etat2'])."<br>\r<br>\r</p>\r";
+	$pv['ws_state2']		= "select_o1_1_" . $dbp['ws_state'];
+	$pv['ws_state']		= $dbp['ws_state'];
+	$Content .= "<p>".$I18nObj->getI18nEntry('msg_01').$I18nObj->getI18nEntry($pv['ws_state2'])."<br>\r<br>\r</p>\r";
 	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['ws_lang']);
 }
 
@@ -221,7 +221,7 @@ $Content .= "
 ."<p>\r"
 ;
 
-$msw_etat = array(
+$mws_state = array(
 	0		=> array( 't'=> $I18nObj->getI18nEntry('select_t1_01_1_0'),		'db' => "OFFLINE",		'v' => 0),
 	1		=> array( 't'=> $I18nObj->getI18nEntry('select_t1_01_1_1'),		'db' => "ONLINE",		'v' => 1),
 	2		=> array( 't'=> $I18nObj->getI18nEntry('select_t1_01_1_2'),		'db' => "SUPPRIME",		'v' => 2),
@@ -241,7 +241,7 @@ $ws_lang_select	= array();
 // SELECT sl.lang_id
 // FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
 // WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
-// AND sl.site_id = s.ws_id
+// AND sl.ws_id = s.ws_id
 // ;");
 // while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $langList[$dbp['lang_id']]['support'] = 1; }
 // $LMObj->logDebug($langList, "langList");
@@ -261,7 +261,7 @@ $T['AD'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
 $T['AD'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[barre_status]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_barre_status')."'	class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['AD'][$Tab]['5']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['AD'][$Tab]['5']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 
 
 // --------------------------------------------------------------------------------------------
@@ -297,7 +297,7 @@ $T['AD'][$Tab]['3']['2']['cont'] = "<select name='formParams1[theme]' class='" .
 $dbquery = $SDDMObj->query("
 SELECT a.theme_id,a.theme_nom,a.theme_titre
 FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a, ".$SqlTableListObj->getSQLTableName('site_theme')." b
-WHERE b.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND a.theme_id  = b.theme_id;
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
@@ -321,7 +321,7 @@ $sw_niv_debug = array(
 		9	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
 		10	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
 );
-$sw_niv_debug[$WebSiteObj->getWebSiteEntry('sw_info_debug')]['s'] = " selected ";
+$sw_niv_debug[$WebSiteObj->getWebSiteEntry('ws_info_debug')]['s'] = " selected ";
 foreach ( $sw_niv_debug as $A ) { $T['AD'][$Tab]['4']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['4']['2']['cont'] .= "</select>\r";
 $T['AD'][$Tab]['5']['2']['cont'] = "<select name='formParams1[stylesheet]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
@@ -332,7 +332,7 @@ $sw_CSS = Array(
 		0	=>	array("t" => $I18nObj->getI18nEntry('select_t2_05_0'),		"s" => "",		"cmd" => "STATIC"),
 		1	=>	array("t" => $I18nObj->getI18nEntry('select_t2_05_1'),		"s" => "",		"cmd" => "DYNAMIC"),
 		);
-$sw_CSS[$WebSiteObj->getWebSiteEntry('sw_stylesheet')]['s'] = " selected ";
+$sw_CSS[$WebSiteObj->getWebSiteEntry('ws_stylesheet')]['s'] = " selected ";
 foreach ( $sw_CSS as $A ) { $T['AD'][$Tab]['5']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['5']['2']['cont'] .= "</select>\r";
 
@@ -372,11 +372,11 @@ $tab3NbrLine = $i;
 // Tab 04
 $Tab++;
 
-$msw_etat[$pv['sw_etat']]['s'] = " selected ";
+$mws_state[$pv['ws_state']]['s'] = " selected ";
 
 $T['AD'][$Tab]['1']['1']['cont'] = $I18nObj->getI18nEntry('t'.$Tab.'_l1');
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[state]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-foreach ( $msw_etat as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
+foreach ( $mws_state as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
@@ -385,12 +385,12 @@ $Tab++;
 
 $T['AD'][$Tab]['1']['1']['cont'] = $I18nObj->getI18nEntry('t5_l1');
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[ma_diff]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$sw_ma_diff = array(
+$ws_ma_diff = array(
 	0	=> array('t' => $I18nObj->getI18nEntry('no'),		's' => "",		'cmd' => "NO"),
 	1	=> array('t' => $I18nObj->getI18nEntry('yes'),	's' => "",		'cmd' => "YES"),
 );
-$sw_ma_diff[$WebSiteObj->getWebSiteEntry('sw_ma_diff')]['s'] = " selected ";
-foreach ( $sw_ma_diff as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
+$ws_ma_diff[$WebSiteObj->getWebSiteEntry('ws_ma_diff')]['s'] = " selected ";
+foreach ( $ws_ma_diff as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['1']['2']['cont'] .= "</select>";
 
 // --------------------------------------------------------------------------------------------
@@ -415,12 +415,12 @@ $Content .= $RenderTablesObj->render($infos, $T);
 <input type='hidden' name='UPDATE_action'				value='UPDATE_WEBSITE'>\r
 <input type='hidden' name='UPDATE_action_complement'	value='COMPLETE_UPDATE'>\r
 <input type='hidden' name='FormWebSite[action]'			value='2'>\r
-<input type='hidden' name='FormWebSite[repertoire]'		value='".$WebSiteObj->getWebSiteEntry('sw_repertoire')."'>\r
+<input type='hidden' name='FormWebSite[repertoire]'		value='".$WebSiteObj->getWebSiteEntry('ws_directory')."'>\r
 <input type='hidden' name='FormWebSite[banner_bypass]'	value='1'>\r
 
 */
 $Content .= "
-<input type='hidden' name='site_context[site_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
+<input type='hidden' name='site_context[ws_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
 <input type='hidden' name='site_context[site_nom]'		value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
 
 <table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>

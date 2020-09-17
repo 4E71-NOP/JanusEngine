@@ -3,7 +3,7 @@
 /* ---------------------------------------- */
 /*
 docu_type					WMCODE 0	NOCODE 1	PHP 2	MIXED 3
-origine = site_id mais n est pas une clé étrangère 
+origine = ws_id mais n est pas une clé étrangère 
 juste un renseignement sur le site a qui appartien tout les droits de ce document.
 */
 

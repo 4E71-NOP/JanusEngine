@@ -94,7 +94,7 @@ if ( strlen($RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) {
 $dbquery = $SDDMObj->query("
 SELECT *  
 FROM ".$SqlTableListObj->getSQLTableName('mot_cle')." 
-WHERE site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND mc_etat != '2' 
 ".$clause." 
 ;");

@@ -93,11 +93,11 @@ SELECT c.cate_lang, l.langue_nom_original
 FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('site_langue')." sl
 WHERE c.cate_type IN ('0','1')
 AND c.cate_etat = '1'
-AND c.site_id = '2'
+AND c.ws_id = '2'
 AND c.cate_lang = l.langue_id
 AND l.langue_id = sl.lang_id
-AND c.site_id = sl.site_id
-AND c.site_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND c.ws_id = sl.ws_id
+AND c.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 GROUP BY c.cate_lang
 ;");
 
@@ -141,7 +141,7 @@ WHERE c.cate_type IN (0,1)
 AND c.cate_etat = '1' 
 AND c.cate_lang IN (".$langClause.") 
 AND c.cate_lang = sl.lang_id 
-AND sl.site_id = sw.ws_id 
+AND sl.ws_id = sw.ws_id 
 AND sw.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY c.cate_lang, c.cate_parent, c.cate_position 
 ;");

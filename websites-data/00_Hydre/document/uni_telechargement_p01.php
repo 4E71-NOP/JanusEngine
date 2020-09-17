@@ -72,7 +72,7 @@ $T = array();
 $T['AD']['1'][$i]['1']['cont']	= $i18nDoc['legende1'];
 $T['AD']['1'][$i]['2']['cont']	= $i18nDoc['legende2'];
 
-$realpath = realpath("../websites-data/".$WebSiteObj->getWebSiteEntry('sw_repertoire')."/data/public/");
+$realpath = realpath("../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/public/");
 $handle = opendir($realpath);
 while (false !== ($f = readdir($handle))) {
 	if ($f != "." && $f != "..") {

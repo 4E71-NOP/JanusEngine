@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*MWM-licence-fin*/
-//	sw_gal_mode			OFF 0	BASE 1(base)	FICHIER 2 (FILE)
+//	ws_gal_mode			OFF 0	BASE 1(base)	FICHIER 2 (FILE)
 // --------------------------------------------------------------------------------------------
 //	MDB2 notes : i couldn't make it work properly
 //	remember: The page code is in a EVAL()

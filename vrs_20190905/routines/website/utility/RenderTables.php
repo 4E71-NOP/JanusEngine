@@ -244,7 +244,7 @@ class  RenderTables {
 			case 1:			return $Content;							break;
 		}
 		
-		//if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') < 10 ) {
+		//if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 	}
 	
 	/**

@@ -40,13 +40,13 @@ class ModuleFooter {
 		$Content = "
 		<table style='margin-left: auto; margin-right: auto;'>\r
 		<tr>\r
-		<td class='".$Block."_t1' style='text-align: right;'>".$i18n['engine']."<a class='".$Block."_lien' href='http://".$WebSiteObj->getWebSiteEntry('sw_home')."' target='_new'>MultiWeb-Manager</a><br>".$i18n['author']."<br>".$i18n['license']."<span style='font-weight: bold;'>CC-by-nc-sa</span></td>\r
+		<td class='".$Block."_t1' style='text-align: right;'>".$i18n['engine']."<a class='".$Block."_lien' href='http://".$WebSiteObj->getWebSiteEntry('ws_home')."' target='_new'>MultiWeb-Manager</a><br>".$i18n['author']."<br>".$i18n['license']."<span style='font-weight: bold;'>CC-by-nc-sa</span></td>\r
 		<td class='".$Block."_t1' style='text-align: left;'><a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'><img alt='Licence Creative Commons' style='border-width:0' src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'/></a></td>\r
 		</tr>\r
 		</table>\r
 		";
 
-		if ( $WebSiteObj->getWebSiteEntry('sw_info_debug') < 10 ) {
+		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$i18n,
 				$localisation,
