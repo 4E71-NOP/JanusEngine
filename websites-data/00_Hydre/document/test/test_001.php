@@ -33,14 +33,14 @@ statistique_debut ( "Test001" , "test001" , 1 , 1 , "test001" );
 for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
-	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
+	FROM $SQL_tab_abrege[deadline] bcl , $SQL_tab_abrege[user] usr 
 	WHERE ws_id = '$website[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
 		foreach ( $dbp as $A => $V ) { $_REQUEST[MD][$A] = $V; } 
-		$_REQUEST[MD][bouclage_id] = $tab_[$dbp[bouclage_id]];
-		$_REQUEST[MD][bouclage_etat]			= $tab_[$dbp[bouclage_etat]];
+		$_REQUEST[MD][deadline_id] = $tab_[$dbp[deadline_id]];
+		$_REQUEST[MD][deadline_state]			= $tab_[$dbp[deadline_state]];
 		$_REQUEST[MD][ws_id]			= $tab_[$dbp[ws_id]];
 	}
 }
@@ -52,17 +52,17 @@ statistique_debut ( "Test002" , "test002" , 1 , 1 , "test002" );
 for ( $i=1 ; $i < 2000 ; $i++ ) {
 	$dbquery = requete_sql($_REQUEST[sql_initiateur],"
 	SELECT bcl.*,usr.user_login 
-	FROM $SQL_tab_abrege[bouclage] bcl , $SQL_tab_abrege[user] usr 
+	FROM $SQL_tab_abrege[deadline] bcl , $SQL_tab_abrege[user] usr 
 	WHERE ws_id = '$website[ws_id]' 
 	AND usr.user_id = bcl.user_id
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
-		$_REQUEST[MD][bouclage_id]			= $tab_[$dbp[bouclage_id]];
-		$_REQUEST[MD][bouclage_nom]			= $dbp[bouclage_nom];
-		$_REQUEST[MD][bouclage_titre]			= $dbp[bouclage_titre];
-		$_REQUEST[MD][bouclage_etat]			= $tab_[$dbp[bouclage_etat]];
-		$_REQUEST[MD][bouclage_date_creation]			= $dbp[bouclage_date_creation];
-		$_REQUEST[MD][bouclage_date_limite]			= $dbp[bouclage_date_limite];
+		$_REQUEST[MD][deadline_id]			= $tab_[$dbp[deadline_id]];
+		$_REQUEST[MD][deadline_name]			= $dbp[deadline_name];
+		$_REQUEST[MD][deadline_title]			= $dbp[deadline_title];
+		$_REQUEST[MD][deadline_state]			= $tab_[$dbp[deadline_state]];
+		$_REQUEST[MD][deadline_creation_date]			= $dbp[deadline_creation_date];
+		$_REQUEST[MD][deadline_end_date]			= $dbp[deadline_end_date];
 		$_REQUEST[MD][ws_id]			= $tab_[$dbp[ws_id]];
 		$_REQUEST[MD][user_id]			= $dbp[user_id];
 		$_REQUEST[MD][user_login] 			= $dbp[user_login];

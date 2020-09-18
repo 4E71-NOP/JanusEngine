@@ -126,11 +126,11 @@ class ModuleDocumentDisplay {
 		//	Get the article number of pages (Article != Document)
 		$dbquery = $SDDMObj->query("
 		SELECT COUNT(docu_id) AS arti_nbr_page
-		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
+		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND art.arti_bouclage = bcl.bouclage_id
-		AND bcl.bouclage_etat = '1'
+		AND art.arti_deadline = bcl.deadline_id
+		AND bcl.deadline_state = '1'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
 		$LMObj->InternalLog("ModuleDocument:render - arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`");
@@ -168,13 +168,13 @@ class ModuleDocumentDisplay {
 			$LMObj->InternalLog("ModuleDocument:render - menu needed");
 			
 			$q = "
-			SELECT art.arti_id, art.arti_ref, art.arti_sous_titre, art.arti_page, bcl.bouclage_nom 
-			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl 
+			SELECT art.arti_id, art.arti_ref, art.arti_sous_titre, art.arti_page, bcl.deadline_name 
+			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."' 
 			AND art.arti_validation_etat = '1' 
 			AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND art.arti_bouclage = bcl.bouclage_id 
-			AND bcl.bouclage_etat = '1'
+			AND art.arti_deadline = bcl.deadline_id 
+			AND bcl.deadline_state = '1'
 			;";
 			$LMObj->InternalLog("ModuleDocument:render - q=`".$q."`");
 			$dbquery = $SDDMObj->query($q);
@@ -484,9 +484,9 @@ class ModuleDocumentDisplay {
 			$ADP_users = array();
 			$dbquery = $SDDMObj->query("
 			SELECT a.user_id,a.user_nom
-			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('groupe_user')." b, ".$SqlTableListObj->getSQLTableName('site_groupe')." c
+			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('groupe_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
 			WHERE a.user_id = b.user_id
-			AND b.groupe_id = c.groupe_id
+			AND b.group_id = c.group_id
 			AND b.groupe_premier = '1'
 			ORDER BY a.user_id
 			;");

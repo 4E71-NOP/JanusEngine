@@ -6,7 +6,7 @@ self::$ActionTable['add']['article']			= function (&$a) { return array ("INSERT 
 
 self::$ActionTable['add']['category']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['categorie']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['bouclage']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['deadline']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['decoration']			= function (&$a) {
 	switch ( $a['params']['type']) {
@@ -44,7 +44,7 @@ self::$ActionTable['add']['document']		= function (&$a) { return array ("INSERT 
 
 self::$ActionTable['add']['group'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['groupe']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_groupe']." VALUES ('".$a['params']['group_webws_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
+		"INSERT INTO ".$a['sqlTables']['group_website']." VALUES ('".$a['params']['group_webws_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
 	);
 };
 
@@ -130,7 +130,7 @@ self::$ActionTable['assign']['user']		= function (&$a) {
 	if ( $a['params']['primary_group'] == 1 ) {
 		$queries[] = "UPDATE ".$a['sqlTables']['groupe_user']." SET groupe_premier = '0' WHERE user_id = '".$a['params']['user_id']."';";
 	}
-	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".$a['params']['groupe_user_id']."','".$a['params']['groupe_id']."','".$a['params']['user_id']."','".$a['params']['primary_group']."');";
+	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".$a['params']['groupe_user_id']."','".$a['params']['group_id']."','".$a['params']['user_id']."','".$a['params']['primary_group']."');";
 	return $queries;
 };
 

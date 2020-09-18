@@ -8,8 +8,8 @@ add article	name "fra_execution_de_scripts_p01"					reference "fra_execution_de_
 add article	name "fra_gestion_des_articles_p01"					reference "fra_gestion_des_articles"			deadline initial_online		desc "Admin en Francais"			title "Gestion des articles"					subtitle "Choisir l'article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_articles_p02"					reference "fra_gestion_des_articles"			deadline initial_online		desc "Admin en Francais"			title "Gestion des articles"					subtitle "Choisir le document"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_articles_p03"					reference "fra_gestion_des_articles"			deadline initial_online		desc "Admin en Francais"			title "Gestion des articles"					subtitle "Modifier l'article"								page "3"	validation_state "VALID"	config "no_menu";
-add article	name "fra_gestion_des_bouclages_p01"				reference "fra_gestion_des_bouclages"			deadline initial_online		desc "Admin en Francais"			title "Gestion des bouclages"					subtitle "Choisir le bouclage"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "fra_gestion_des_bouclages_p02"				reference "fra_gestion_des_bouclages"			deadline initial_online		desc "Admin en Francais"			title "Gestion des bouclages"					subtitle "Modifier/cr&eacute;er un bouclage"				page "2"	validation_state "VALID"	config "no_menu";
+add article	name "fra_gestion_des_deadlines_p01"				reference "fra_gestion_des_deadlines"			deadline initial_online		desc "Admin en Francais"			title "Gestion des deadlines"					subtitle "Choisir le deadline"								page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_gestion_des_deadlines_p02"				reference "fra_gestion_des_deadlines"			deadline initial_online		desc "Admin en Francais"			title "Gestion des deadlines"					subtitle "Modifier/cr&eacute;er un deadline"				page "2"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_categories_p01"				reference "fra_gestion_des_categories"			deadline initial_online		desc "Admin en Francais"			title "Gestion des cat&eacute;gories"			subtitle "Choisir la cat&eacute;gorie"						page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_categories_p02"				reference "fra_gestion_des_categories"			deadline initial_online		desc "Admin en Francais"			title "Gestion des cat&eacute;gories"			subtitle "Modifier/cr&eacute;er une cat&eacute;gorie"		page "2"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_decorations_p01"				reference "fra_gestion_des_decorations"			deadline initial_online		desc "Admin en Francais"			title "Gestion des decorations"					subtitle "Choisir le document"								page "1"	validation_state "VALID"	config "no_menu";
@@ -52,8 +52,8 @@ assign	document name "doc_uni_ecriture_des_documents_p02.php"			to_article "fra_
 assign	document name "doc_uni_execution_de_scripts_p01.php"			to_article "fra_execution_de_scripts_p01";
 assign	document name "doc_uni_gestion_des_articles_p01.php"			to_article "fra_gestion_des_articles_p01";
 assign	document name "doc_uni_gestion_des_articles_p02.php"			to_article "fra_gestion_des_articles_p02";
-assign	document name "doc_uni_gestion_des_bouclages_p01.php"			to_article "fra_gestion_des_bouclages_p01";
-assign	document name "doc_uni_gestion_des_bouclages_p02.php"			to_article "fra_gestion_des_bouclages_p02";
+assign	document name "doc_uni_gestion_des_deadlines_p01.php"			to_article "fra_gestion_des_deadlines_p01";
+assign	document name "doc_uni_gestion_des_deadlines_p02.php"			to_article "fra_gestion_des_deadlines_p02";
 assign	document name "doc_uni_gestion_des_categories_p01.php"			to_article "fra_gestion_des_categories_p01";
 assign	document name "doc_uni_gestion_des_categories_p02.php"			to_article "fra_gestion_des_categories_p02";
 assign	document name "doc_uni_gestion_des_decorations_p01.php"			to_article "fra_gestion_des_decorations_p01";

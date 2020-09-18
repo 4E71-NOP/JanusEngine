@@ -179,11 +179,11 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 				"cate_type"			=>	1,
 				"ws_id"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				"cate_lang"			=>	"",
-				"bouclage_id"		=>	1,
+				"deadline_id"		=>	1,
 				"cate_etat"			=>	1,
 				"cate_parent"		=>	1,
 				"cate_position"		=>	1,
-				"groupe_id"			=>	1,
+				"group_id"			=>	1,
 				"derniere_modif"	=>	"",
 				"cate_role"			=>	"",
 				"cate_doc_premier"	=>	"",
@@ -273,12 +273,12 @@ $T['AD']['1']['9']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_po
 // --------------------------------------------------------------------------------------------
 
 
-$tabDeadline[$currentCategoryObj->getCategoryEntry('bouclage_id')]['s'] = " selected ";
+$tabDeadline[$currentCategoryObj->getCategoryEntry('deadline_id')]['s'] = " selected ";
 $T['AD']['2']['1']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabDeadline as $A ) { $T['AD']['2']['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['1']['2']['cont'] .= "</select>\r";
 
-$tabGroup[$currentCategoryObj->getCategoryEntry('groupe_id')]['s'] = " selected ";
+$tabGroup[$currentCategoryObj->getCategoryEntry('group_id')]['s'] = " selected ";
 $T['AD']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabGroup as $A ) { $T['AD']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['2']['2']['cont'] .= "</select>\r";

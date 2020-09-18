@@ -46,10 +46,10 @@ share document	name "doc_eng_DEL_administration_interface_entete.mwmcode"	with_w
 update document	name "doc_eng_DEL_administration_interface_entete.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
 
 
-add document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	type MWMCODE;
-insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_bouclage.mwmcode"		into "doc_eng_DEL_administration_tab_bouclage.mwmcode";
-share document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	with_website Hydr	modification YES;
-update document	name "doc_eng_DEL_administration_tab_bouclage.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
+add document	name "doc_eng_DEL_administration_tab_deadline.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_deadline.mwmcode"		into "doc_eng_DEL_administration_tab_deadline.mwmcode";
+share document	name "doc_eng_DEL_administration_tab_deadline.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_eng_DEL_administration_tab_deadline.mwmcode"	checked YES	validator "dieu"	from_site Hydr;
 
 add document	name "doc_eng_DEL_administration_tab_categorie.mwmcode"	type MWMCODE;
 insert content	file "xxx_DEL_administration/eng_DEL_administration_tab_categorie.mwmcode"		into "doc_eng_DEL_administration_tab_categorie.mwmcode";

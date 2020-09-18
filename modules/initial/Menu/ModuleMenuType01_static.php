@@ -55,7 +55,7 @@ class ModuleMenuType01 {
 						"cate_desc"		=> $dbp['cate_desc'],
 						"cate_parent"	=> $dbp['cate_parent'],
 						"cate_position"	=> $dbp['cate_position'],
-						"groupe_id" 	=> $dbp['groupe_id'],
+						"group_id" 	=> $dbp['group_id'],
 						"arti_ref"		=> $dbp['arti_ref']
 				);
 				if ( $dbp['cate_type'] == $menu_racine ) { $racine_menu = $dbp['cate_id']; }

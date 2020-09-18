@@ -33,9 +33,9 @@ class Group {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT grp.* 
-			FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg
-			WHERE grp.groupe_id = '".$id."'
-			AND grp.groupe_id = sg.groupe_id
+			FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg
+			WHERE grp.group_id = '".$id."'
+			AND grp.group_id = sg.group_id
 			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		

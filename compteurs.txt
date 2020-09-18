@@ -106,7 +106,7 @@
 141 current/routines/website/_TRASH/cc_fonctions_article_config.php
 49 current/routines/website/_TRASH/cc_fonctions_article_tag.php
 198 current/routines/website/_TRASH/cc_fonctions_article.php
-104 current/routines/website/_TRASH/cc_fonctions_bouclage.php
+104 current/routines/website/_TRASH/cc_fonctions_deadline.php
 169 current/routines/website/_TRASH/cc_fonctions_categorie.php
 26 current/routines/website/_TRASH/cc_fonctions_contexte.php
 266 current/routines/website/_TRASH/cc_fonctions_de_verification.php
@@ -174,7 +174,7 @@
 191 current/routines/website/_TRASH/charge_donnees_theme.php
 151 current/routines/website/_TRASH/manipulation_article_config.php
 221 current/routines/website/_TRASH/manipulation_article.php
-193 current/routines/website/_TRASH/manipulation_bouclage.php
+193 current/routines/website/_TRASH/manipulation_deadline.php
 313 current/routines/website/_TRASH/manipulation_categorie.php
 130 current/routines/website/_TRASH/manipulation_contexte.php
 329 current/routines/website/_TRASH/manipulation_decoration.php
@@ -353,13 +353,13 @@
 347 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_articles_p02.php
 291 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_documents_p02.php
 362 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_articles_p03.php
-199 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_bouclages_p01.php
+199 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_deadlines_p01.php
 184 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_themes_p01.php
 223 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_mots_cles_p03.php
 206 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_decorations_p01.php
 602 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_utilisateurs_p02.php
 75 websites-data/00_Hydre/document/admin_panels/uni_admin_authentification_p01.php
-291 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_bouclages_p02.php
+291 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_deadlines_p02.php
 230 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_categories_p01.php
 264 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_extensions_p02.php
 280 websites-data/00_Hydre/document/admin_panels/uni_generation_stylesheet_p01.php

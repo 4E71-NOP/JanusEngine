@@ -112,7 +112,7 @@ switch ($l) {
 		"t2_l4"				=> "Niveau de debug",
 		"t2_l5"				=> "Stylesheet",
 		
-		't3_l1'				=> "Modifer le support des langues.",
+		't3_l1'				=> "Modifer le support des language.",
 		
 		"t4_l1"				=> "Etat",
 		
@@ -358,7 +358,7 @@ $T['AD'][$Tab][$i][$j]['cont'] = "";
 
 $i++;
 // <input type='hidden' name='formTarget2'				value=''>\r
-$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
+$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$B = "";
 	if ( $langList[$dbp['lang_id']]['support'] == 1 ) { $B = " checked"; }

@@ -61,16 +61,16 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 <br>\r
 ";
 
-$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.groupe_id, grp.groupe_desc, usr.user_login, usr.user_image_avatar, grp.groupe_nom, grp.groupe_fichier
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
+$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.groupe_desc, usr.user_login, usr.user_image_avatar, grp.groupe_nom, grp.groupe_fichier
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE gu.groupe_premier = '1' 
 AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND gu.user_id = usr.user_id 
-AND sg.groupe_id = gu.groupe_id 
-AND gu.groupe_id = grp.groupe_id
+AND sg.group_id = gu.group_id 
+AND gu.group_id = grp.group_id
 AND grp.groupe_tag = '2' 
 AND usr.user_role_fonction = '2' 
-ORDER BY grp.groupe_id,usr.user_login ASC
+ORDER BY grp.group_id,usr.user_login ASC
 ;");
 $user_liste= array();
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
@@ -85,12 +85,12 @@ $pde_img_l = 32;
 
 $CurrentGroup = 0;
 foreach ( $user_liste as $B ) {
-	if ( $B['groupe_id'] != $CurrentGroup ) {	
-		$CurrentGroup = $B['groupe_id'];
+	if ( $B['group_id'] != $CurrentGroup ) {	
+		$CurrentGroup = $B['group_id'];
 		$DisplayGroupName = 1 ;
 		$Content .= "<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r<tr>\r";
 		foreach ( $user_liste as $A ) {
-			if ( $A['groupe_id'] == $CurrentGroup ) {
+			if ( $A['group_id'] == $CurrentGroup ) {
 				if ( $DisplayGroupName == 1 ) {
 					$Content .= "<td class='".$Block."_fcta ".$Block."_tb5' width='256'>".$A['groupe_nom'];
 					if ( $pde_img_aff == 1 ) { $Content .= "<br>\r

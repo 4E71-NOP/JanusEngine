@@ -101,13 +101,13 @@ class ModuleMenu {
 		// --------------------------------------------------------------------------------------------
 		$infos['module_menu_requete'] = "
 		SELECT cat.*
-		FROM ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
+		FROM ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 		WHERE cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
-		AND cat.bouclage_id = bcl.bouclage_id
-		AND bcl.bouclage_etat = '1'
+		AND cat.deadline_id = bcl.deadline_id
+		AND bcl.deadline_state = '1'
 		AND cat.cate_type IN ('0','1')
-		AND cat.groupe_id ".$UserObj->getUserEntry('clause_in_groupe')."
+		AND cat.group_id ".$UserObj->getUserEntry('clause_in_groupe')."
 		AND cat.cate_etat = '1'
 		ORDER BY cat.cate_parent,cat.cate_position
 		;";
@@ -127,7 +127,7 @@ class ModuleMenu {
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
-					"groupe_id" 	=> $dbp['groupe_id'],
+					"group_id" 	=> $dbp['group_id'],
 					"arti_ref"		=> $dbp['arti_ref']
 				);
 				if ( $dbp['cate_type'] == $menu_racine ) { $racine_menu = $dbp['cate_id']; }

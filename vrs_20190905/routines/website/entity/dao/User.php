@@ -30,24 +30,24 @@ class User {
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
 // 		$LMObj->InternalLog( __METHOD__ ."() : 
-// 			SELECT usr.*, g.groupe_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
-// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'site_groupe' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+// 			SELECT usr.*, g.group_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 // 			WHERE usr.user_login = '" . $UserLogin . "'
 // 			AND usr.user_id = gu.user_id
 // 			AND gu.groupe_premier = '1'
-// 			AND gu.groupe_id = g.groupe_id
-// 			AND gu.groupe_id = sg.groupe_id
+// 			AND gu.group_id = g.group_id
+// 			AND gu.group_id = sg.group_id
 // 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 // 		;"
 // 		);
 		$dbquery = $SDDMObj->query ("
-			SELECT usr.*, g.groupe_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
-			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'site_groupe' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+			SELECT usr.*, g.group_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
 			AND usr.user_id = gu.user_id
 			AND gu.groupe_premier = '1'
-			AND gu.groupe_id = g.groupe_id
-			AND gu.groupe_id = sg.groupe_id
+			AND gu.group_id = g.group_id
+			AND gu.group_id = sg.group_id
 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;");
 		if ($SDDMObj->num_row_sql ( $dbquery ) != 0) {
@@ -102,15 +102,15 @@ class User {
 
 			// find all sons of the initial user "groupset". 
 			$dbquery = $SDDMObj->query ("
-				SELECT groupe_id
+				SELECT group_id
 				FROM " . $SqlTableListObj->getSQLTableName ('groupe_user') . "
 				WHERE user_id = '" . $this->User['user_id'] . "'
-				ORDER BY groupe_id
+				ORDER BY group_id
 				;
 				");
 			while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
-				$groupList01[] = $dbp ['groupe_id'];
-				$this->User['groupe'][$dbp ['groupe_id']] = 1;
+				$groupList01[] = $dbp ['group_id'];
+				$this->User['groupe'][$dbp ['group_id']] = 1;
 			}
 
 			$loopAgain = 1;
@@ -120,15 +120,15 @@ class User {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$dbquery = $SDDMObj->query ("SELECT groupe_id, groupe_parent
+				$dbquery = $SDDMObj->query ("SELECT group_id, groupe_parent
 					FROM " . $SqlTableListObj->getSQLTableName ('groupe') . "
 					WHERE groupe_parent IN " . $strGrp . "
-					ORDER BY groupe_id
+					ORDER BY group_id
 					;");
 				if ($SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
-						$groupList02[] = $dbp ['groupe_id'];
-						$this->User['groupe'][$dbp ['groupe_id']] = 1;
+						$groupList02[] = $dbp ['group_id'];
+						$this->User['groupe'][$dbp ['group_id']] = 1;
 						$loopAgain = 1;
 					}
 				}

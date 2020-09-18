@@ -61,15 +61,15 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 		case "T":
 			$dbquery = $SDDMObj->query("
 			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page
-			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('bouclage')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
+			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 			WHERE tag.tag_name LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 					
 			AND at.tag_id = tag.tag_id
 			AND at.arti_id = art.arti_id
 					
-			AND art.arti_bouclage = bcl.bouclage_id
-			AND bcl.bouclage_etat = '1'
+			AND art.arti_deadline = bcl.deadline_id
+			AND bcl.deadline_state = '1'
 					
 			AND cat.arti_ref = art.arti_ref
 			AND cat.cate_etat = '1'
@@ -80,15 +80,15 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 		case "A":
 			$dbquery = $SDDMObj->query("
 			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page, doc.docu_cont
-			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('bouclage')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
+			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
 			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND doc.docu_id = art.docu_id
 					
 			AND art.ws_id = cat.ws_id
-			AND art.arti_bouclage = bcl.bouclage_id
+			AND art.arti_deadline = bcl.deadline_id
 			AND art.arti_ref = cat.arti_ref
 					
-			AND bcl.bouclage_etat = '1'
+			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
 			AND cat.cate_lang = '".$CurrentSetObj->getDataEntry('language_id')."'
 			AND docu_cont LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'

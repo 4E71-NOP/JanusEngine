@@ -48,7 +48,7 @@ class ModuleAdministration {
 			WHERE cate_type IN ('2', '3') 
 			AND ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
-			AND groupe_id ".$UserObj->getUserEntry('clause_in_groupe')." 
+			AND group_id ".$UserObj->getUserEntry('clause_in_groupe')." 
 			AND cate_etat = '1' 
 			;");
 // 		$Content .= "<!--
@@ -58,7 +58,7 @@ class ModuleAdministration {
 // 			WHERE cate_type IN ('2', '3') 
 // 			AND ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
 // 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
-// 			AND groupe_id ".$UserObj->getUserEntry('clause_in_groupe')." 
+// 			AND group_id ".$UserObj->getUserEntry('clause_in_groupe')." 
 // 			AND cate_etat = '1' 
 // 			;
 // 			-->";
@@ -76,7 +76,7 @@ class ModuleAdministration {
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
-					"groupe_id" 	=> $dbp['groupe_id'],
+					"group_id" 	=> $dbp['group_id'],
 					"arti_ref"		=> $dbp['arti_ref']
 				);
 				if ( $dbp['cate_type'] == 2 ) { $rootMenu = $dbp['cate_id']; }

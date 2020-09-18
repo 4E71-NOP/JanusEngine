@@ -423,13 +423,13 @@ $MapperObj->setSqlApplicant("Prepare CurrentSet");
 if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 	$dbquery = $SDDMObj->query ( "
 		SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
-		FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
+		FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
 		WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 		AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
-		AND cat.bouclage_id = bcl.bouclage_id
-		AND bcl.bouclage_etat = '1'
+		AND cat.deadline_id = bcl.deadline_id
+		AND bcl.deadline_state = '1'
 		AND cat.cate_type IN ('0','1')
-		AND cat.groupe_id " . $UserObj->getUserEntry('clause_in_groupe')."
+		AND cat.group_id " . $UserObj->getUserEntry('clause_in_groupe')."
 		AND cat.cate_etat = '1'
 		AND cate_doc_premier = '1'
 		ORDER BY cat.cate_parent,cat.cate_position

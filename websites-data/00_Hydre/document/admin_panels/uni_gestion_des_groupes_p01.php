@@ -86,10 +86,10 @@ $tagTab = array(
 
 $T = array();
 $dbquery = $SDDMObj->query("
-SELECT grp.*, sg.groupe_etat 
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
+SELECT grp.*, sg.group_state 
+FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND grp.groupe_id = sg.groupe_id 
+AND grp.group_id = sg.group_id 
 and grp.groupe_nom != 'Server_owner' 
 ;");
 $i = 1;
@@ -103,7 +103,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&groupForm[selectionId]=".$dbp['groupe_id']
+	."&groupForm[selectionId]=".$dbp['group_id']
 	."'>".$dbp['groupe_nom']
 	."</a>";
 	$T['AD']['1'][$i]['2']['cont'] = $dbp['groupe_titre'];

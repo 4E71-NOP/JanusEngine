@@ -33,10 +33,10 @@ class DeadLine {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 		SELECT bcl.*,usr.user_login
-		FROM ".$SqlTableListObj->getSQLTableName('bouclage')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr
+		FROM ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr
 		WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND usr.user_id = bcl.user_id
-		AND bouclage_id ='".$id."'
+		AND deadline_id ='".$id."'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

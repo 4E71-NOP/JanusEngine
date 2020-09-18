@@ -76,22 +76,22 @@ $MAA_dc[$infos_article['config_id']]['s'] = " selected";
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT bouclage_id,bouclage_titre,bouclage_nom  
-FROM ".$SQL_tab_abrege['bouclage']." 
+SELECT deadline_id,deadline_title,deadline_name  
+FROM ".$SQL_tab_abrege['deadline']." 
 WHERE ws_id = '".$website['ws_id']."' 
-AND bouclage_etat != '2' 
+AND deadline_state != '2' 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
-	$MAA_b[$dbp['bouclage_id']]['t'] = $dbp['bouclage_titre'];		$MAA_b[$dbp['bouclage_id']]['db'] = $dbp['bouclage_nom'];
+	$MAA_b[$dbp['deadline_id']]['t'] = $dbp['deadline_title'];		$MAA_b[$dbp['deadline_id']]['db'] = $dbp['deadline_name'];
 }
-$MAA_b[$infos_article['arti_bouclage']]['s'] = " selected";
+$MAA_b[$infos_article['arti_deadline']]['s'] = " selected";
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_id,usr.user_login 
-FROM ".$SQL_tab_abrege['user']." usr,  ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['site_groupe']." sgp 
+FROM ".$SQL_tab_abrege['user']." usr,  ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['group_website']." sgp 
 WHERE usr.user_id = grp.user_id 
-AND grp.groupe_id = sgp.groupe_id
+AND grp.group_id = sgp.group_id
 AND sgp.ws_id = '".$website['ws_id']."'
 ;");
 
@@ -119,7 +119,7 @@ FROM ".$SQL_tab['categorie']."
 WHERE cate_type IN ('2', '3') 
 AND ws_id IN ('1', '".$website['ws_id']."') 
 AND cate_lang = '".$website['ws_lang']."' 
-AND groupe_id ".$user['clause_in_groupe']." 
+AND group_id ".$user['clause_in_groupe']." 
 AND cate_etat = '1' 
 AND cate_role = '1'
 ;");
@@ -154,7 +154,7 @@ foreach ( $MAA_dc as $A ) { $pv['PF']['o2l2'] .= "<option value='".$A['db']."' "
 $pv['PF']['o2l2'] .= "</select>\r";
 unset ($A);
 
-$pv['PF']['o2l3'] = "<select name ='M_ARTICL[bouclage]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+$pv['PF']['o2l3'] = "<select name ='M_ARTICL[deadline]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 foreach ( $MAA_b as $A ) { $pv['PF']['o2l3'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $pv['PF']['o2l3'] .= "</select>\r";
 unset ($A);

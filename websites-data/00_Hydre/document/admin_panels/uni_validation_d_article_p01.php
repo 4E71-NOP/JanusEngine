@@ -87,10 +87,10 @@ switch ($l) {
 $T = array();
 
 $dbquery = $SDDMObj->query("
-SELECT art.* , bcl.bouclage_nom 
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl 
+SELECT art.* , bcl.deadline_name 
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
 WHERE art.arti_validation_etat = '0' 
-AND bcl.bouclage_id = art.arti_bouclage 
+AND bcl.deadline_id = art.arti_deadline 
 AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
@@ -119,7 +119,7 @@ else {
 		>".$dbp['arti_nom']."</a>";
 		$T['AD']['1'][$i]['2']['cont']	= $dbp['arti_ref'];
 		$T['AD']['1'][$i]['3']['cont']	= $dbp['arti_titre'];
-		$T['AD']['1'][$i]['4']['cont']	= $dbp['bouclage_nom'];
+		$T['AD']['1'][$i]['4']['cont']	= $dbp['deadline_name'];
 	}
 }
 

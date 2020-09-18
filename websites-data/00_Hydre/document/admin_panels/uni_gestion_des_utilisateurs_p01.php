@@ -44,7 +44,7 @@ $RequestDataObj->setRequestData('RCH',
 	array(
 		'user_status'				=> 1,
 		'M_UTILIS_nbr_par_page'		=> 100,
-		'groupe_id'					=> 0,
+		'group_id'					=> 0,
 	),
 );
 
@@ -120,7 +120,7 @@ $GDU_ = array();
 
 $GDU_['nbr_par_page'] = $RequestDataObj->getRequestDataSubEntry('RCH', 'M_UTILIS_nbr_par_page');
 if ($GDU_['nbr_par_page'] < 1 ) { $GDU_['nbr_par_page'] = 10;}
-if ( $RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id') == 0 ) { $RequestDataObj->setRequestDataSubEntry('RCH', 'groupe_id', null); }
+if ( $RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') == 0 ) { $RequestDataObj->setRequestDataSubEntry('RCH', 'group_id', null); }
 
 $clause_sql_element = array();
 $clause_sql_element['1'] = "WHERE";
@@ -129,19 +129,19 @@ $clause_sql_element['2'] = $clause_sql_element['3'] = $clause_sql_element['4'] =
 $clause_sql_element_offset = 1;
 $GDU_['clause_like'] = "";
 if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'query_like'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_login LIKE '%" . $RequestDataObj->getRequestDataSubEntry('RCH', 'query_like') . "%' ";	$clause_sql_element_offset++; }
-if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id'))>0 && $RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id') != 0 )	{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." gr.groupe_id = '".$RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id')."' ";				$clause_sql_element_offset++; }
+if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'group_id'))>0 && $RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') != 0 )	{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." gr.group_id = '".$RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."' ";				$clause_sql_element_offset++; }
 if ( strlen($RequestDataObj->getRequestDataSubEntry('RCH', 'user_status'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_status = '".$RequestDataObj->getRequestDataSubEntry('RCH', 'user_status')."' ";			$clause_sql_element_offset++; }
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gr.groupe_tag != '0' ";										$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.groupe_premier = '1' ";									$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' ";	$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.user_id = usr.user_id";									$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.groupe_id = gu.groupe_id ";								$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.groupe_id = gr.groupe_id ";								$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.group_id = gu.group_id ";								$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_id = gr.group_id ";								$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_nom != 'HydreBDD'";									$clause_sql_element_offset++;
 
 $dbquery = $SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like'].";");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
 
@@ -159,7 +159,7 @@ if ( $GDU_['login_count'] > $GDU_['nbr_par_page'] ) {
 M_UTILIS_page=".$GDU_['compteur_page']."
 &amp;M_UTILIS_nbr_par_page=".$GDU_['nbr_par_page']."
 &amp;M_UTILIS_query_like=".$RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."
-&amp;M_UTILIS_groupe_id=".$RequestDataObj->getRequestDataSubEntry('RCH', 'groupe_id')."
+&amp;M_UTILIS_group_id=".$RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."
 &amp;arti_page=1
 ".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."'
 >&nbsp;".$i."&nbsp;</a> ";
@@ -173,7 +173,7 @@ M_UTILIS_page=".$GDU_['compteur_page']."
 
 $dbquery = $SDDMObj->query("
 SELECT usr.user_id,usr.user_login,user_nom,usr.user_derniere_visite,gr.groupe_titre,usr.user_status 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like']."  
 ORDER BY user_id, user_login
 
@@ -252,7 +252,7 @@ $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
 
 <tr>\r
 <td class='".$Block."_fca'>".$I18nObj->getI18nEntry('table1_2')."</td>\r
-<td class='".$Block."_fca'><select name='userForm[groupe_id]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+<td class='".$Block."_fca'><select name='userForm[group_id]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
 
@@ -262,18 +262,18 @@ $gu_select1 = array(
 );
 
 $dbquery = $SDDMObj->query("
-SELECT a.groupe_id,a.groupe_titre 
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('site_groupe')." b 
+SELECT a.group_id,a.groupe_titre 
+FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b 
 WHERE b.ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 AND a.groupe_tag != '0' 
-AND a.groupe_id = b.groupe_id ;
+AND a.group_id = b.group_id ;
 ");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-	$gu_select1[$dbp['groupe_id']]['id'] = $dbp['groupe_id'];
-	$gu_select1[$dbp['groupe_id']]['titre'] = $dbp['groupe_titre'];
+	$gu_select1[$dbp['group_id']]['id'] = $dbp['group_id'];
+	$gu_select1[$dbp['group_id']]['titre'] = $dbp['groupe_titre'];
 }
-if ( strlen($RequestDataObj->getRequestDataSubEntry('userForm', 'groupe_id'))>0 && $RequestDataObj->getRequestDataSubEntry('userForm', 'groupe_id') != 0 ) {
-	$gu_select1[$RequestDataObj->getRequestDataSubEntry('userForm', 'groupe_id')]['s'] = " selected ";
+if ( strlen($RequestDataObj->getRequestDataSubEntry('userForm', 'group_id'))>0 && $RequestDataObj->getRequestDataSubEntry('userForm', 'group_id') != 0 ) {
+	$gu_select1[$RequestDataObj->getRequestDataSubEntry('userForm', 'group_id')]['s'] = " selected ";
 }
 foreach ( $gu_select1 as $A ) { $Content .= "<option value='".$A['id']."' ".$A['s'].">".$A['titre']."</option>"; }
 $Content .= "

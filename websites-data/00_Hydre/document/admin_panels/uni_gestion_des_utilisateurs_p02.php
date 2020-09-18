@@ -366,7 +366,7 @@ $T['AD'][$curTab]['4']['1']['cont'] = $I18nObj->getI18nEntry('t2l4c1');
 $LMObj->logDebug($currentUserObj, 'currentUserObj');
 
 
-$tabGroup[$currentUserObj->getUserEntry('groupe_id')]['s'] = " selected ";
+$tabGroup[$currentUserObj->getUserEntry('group_id')]['s'] = " selected ";
 $T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabGroup as $A ) { $T['AD'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";

@@ -46,7 +46,7 @@ $LMObj->setInternalLogTarget("both");
 $RequestDataObj->setRequestData('articleForm',
 	array(
 		'SQLlang'		=> 48,
-		'SQLbouclage'	=> 4,
+		'SQLdeadline'	=> 4,
 		'SQLnom'		=> "charg",
 		'action'		=> "",
 	)
@@ -69,7 +69,7 @@ switch ($l) {
 		"col_3_txt"		=> "Langage",
 		"col_4_txt"		=> "Bouclage",
 		"tabTxt1"		=> "Informations",
-		"boucl0"		=> "Choisissez un bouclage",
+		"boucl0"		=> "Choisissez un deadline",
 		"caption"		=> "Recherche",
 		"c1l1"			=> "Nom contient",
 		"c1l2"			=> "Langue",
@@ -109,28 +109,28 @@ else { $langList[$CurrentSetObj->getDataEntry('language_id')]['s'] = "selected";
 $listDeadline = array(
 		0 => array(
 				'id' => 0,
-				'bouclage_titre' => $I18nObj->getI18nEntry('boucl0'),
+				'deadline_title' => $I18nObj->getI18nEntry('boucl0'),
 		),
 );
 
 $dbquery = $SDDMObj->query("
-SELECT bouclage_id,bouclage_nom,bouclage_titre,bouclage_etat FROM ".$SqlTableListObj->getSQLTableName('bouclage')."
+SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM ".$SqlTableListObj->getSQLTableName('deadline')."
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-	$A = $dbp['bouclage_id'];
+	$A = $dbp['deadline_id'];
 	$listDeadline[$A]['id'] = $A;
-	$listDeadline[$A]['bouclage_nom']		= $dbp['bouclage_nom'];
-	$listDeadline[$A]['bouclage_titre']		= $dbp['bouclage_titre'];
-	$listDeadline[$A]['bouclage_etat']		= $dbp['bouclage_etat'];
+	$listDeadline[$A]['deadline_name']		= $dbp['deadline_name'];
+	$listDeadline[$A]['deadline_title']		= $dbp['deadline_title'];
+	$listDeadline[$A]['deadline_state']		= $dbp['deadline_state'];
 }
 unset ( $A );
 foreach ( $listDeadline as $A ) {
-	if ( $A['bouclage_etat'] == 0 ) { $A['bouclage_titre'] = "<span class='".$Block."_err'>" . $A['bouclage_titre']; }
-	else { $A['bouclage_titre'] = "<span class='".$Block."_ok'>" . $A['bouclage_titre']; }
-	$A['bouclage_titre'] = $A['bouclage_nom'] . "</span>";
+	if ( $A['deadline_state'] == 0 ) { $A['deadline_title'] = "<span class='".$Block."_err'>" . $A['deadline_title']; }
+	else { $A['deadline_title'] = "<span class='".$Block."_ok'>" . $A['deadline_title']; }
+	$A['deadline_title'] = $A['deadline_name'] . "</span>";
 }
-if ( strlen($RequestDataObj->getRequestDataEntry('SQLbouclage')) > 0 ) { $listDeadline[$RequestDataObj->getRequestDataEntry('SQLbouclage')]['s'] = "selected"; }
+if ( strlen($RequestDataObj->getRequestDataEntry('SQLdeadline')) > 0 ) { $listDeadline[$RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected"; }
 
 // --------------------------------------------------------------------------------------------
 $Content .= "
@@ -166,11 +166,11 @@ $Content .= "</select>
 		
 <tr>\r
 <td class='" . $Block."_fca'>".$I18nObj->getI18nEntry('c1l3')."</td>\r
-<td class='" . $Block."_fca'><select name='articleForm[SQLbouclage]' class='".$Block."_t3 " . $Block."_form_1'>
+<td class='" . $Block."_fca'><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 unset ( $A , $B );
 foreach ( $listDeadline as $A ) {
-	$Content .= "<option value='".$A['id']."' ".$A['selected'].">".$A['bouclage_titre']."/".$A['bouclage_nom']."</option>\r";
+	$Content .= "<option value='".$A['id']."' ".$A['selected'].">".$A['deadline_title']."/".$A['deadline_name']."</option>\r";
 }
 $Content .= "</select></tr>\r
 </table>\r
@@ -206,15 +206,15 @@ $sqlClause = "";
 if ( $articleFormData['action'] == "AFFICHAGE" ) {
 	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_nom LIKE '%".$articleFormData['SQLnom']."%'"; }
 	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.cate_lang = '".$articleFormData['SQLlang']."'"; }
-	if ( $articleFormData['SQLbouclage'] != 0 ) { $sqlClause .= " AND bcl.bouclage_id = '".$articleFormData['SQLbouclage']."'"; }
+	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
 }
 
 
 $dbquery = $SDDMObj->query("
-SELECT art.arti_ref, art.arti_id, art.arti_nom, art.arti_titre, art.arti_page , cat.cate_lang, bcl.bouclage_nom, bcl.bouclage_titre, bcl.bouclage_etat
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl
+SELECT art.arti_ref, art.arti_id, art.arti_nom, art.arti_titre, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = cat.arti_ref
-AND art.arti_bouclage = bcl.bouclage_id
+AND art.arti_deadline = bcl.deadline_id
 
 AND art.ws_id = bcl.ws_id
 AND bcl.ws_id = cat.ws_id
@@ -237,8 +237,8 @@ if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 		$p['arti_titre']		= $dbp['arti_titre'];
 		$p['arti_page']			= $dbp['arti_page'];
 		$p['arti_lang']			= $dbp['cate_lang'];
-		$p['bouclage_etat']		= $dbp['bouclage_etat'];
-		$p['bouclage_titre']	= $dbp['bouclage_titre'];
+		$p['deadline_state']		= $dbp['deadline_state'];
+		$p['deadline_title']	= $dbp['deadline_title'];
 	}
 	
 	$colorState = array(
@@ -276,7 +276,7 @@ if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$articlePageLink .= " - ";
 			$T['AD']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
 			$T['AD']['1'][$i]['3']['tc'] = 1;
-			$T['AD']['1'][$i]['4']['cont'] = $colorState[$B['bouclage_etat']] . $B['bouclage_titre'] . "</span>";
+			$T['AD']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
 			$T['AD']['1'][$i]['4']['tc'] = 1;
 		}
 		$articlePageLink = substr ( $articlePageLink , 0 , -3 );

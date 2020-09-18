@@ -47,16 +47,16 @@ $RequestDataObj->setRequestData('test',
 );
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_bouclages_p01";
+$localisation = " / uni_gestion_des_deadlines_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_bouclages_p01");
+$LMObj->logCheckpoint("uni_gestion_des_deadlines_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_bouclages_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_deadlines_p01");
 
 switch ($l) {
 	case "fra":
 		$I18nObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les bouclages.",
+		"invite1"		=> "Cette partie va vous permettre de gérer les deadlines.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Etat",
 		"col_3_txt"		=> "Date",
@@ -83,7 +83,7 @@ switch ($l) {
 // --------------------------------------------------------------------------------------------
 $dbquery = $SDDMObj->query("
 SELECT bcl.*,usr.user_login 
-FROM ".$SqlTableListObj->getSQLTableName('bouclage')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr 
+FROM ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND usr.user_id = bcl.user_id
 ;");
@@ -119,9 +119,9 @@ else {
 	);
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= $linkId1.$dbp['bouclage_id']."'>".$dbp['bouclage_titre']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $tabState[$dbp['bouclage_etat']];
-		$T['AD']['1'][$i]['3']['cont']	= date ( "Y m d H:i:s" , $dbp['bouclage_date_limite']);
+		$T['AD']['1'][$i]['1']['cont']	= $linkId1.$dbp['deadline_id']."'>".$dbp['deadline_title']."</a>";
+		$T['AD']['1'][$i]['2']['cont']	= $tabState[$dbp['deadline_state']];
+		$T['AD']['1'][$i]['3']['cont']	= date ( "Y m d H:i:s" , $dbp['deadline_end_date']);
 		$T['AD']['1'][$i]['2']['tc']	= 1;
 		$T['AD']['1'][$i]['3']['tc']	= 1;
 	}

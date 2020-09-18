@@ -100,7 +100,7 @@ SELECT *
 FROM ".$SqlTableListObj->getSQLTableName('groupe')."
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
-	$i = $dbp['groupe_id'];
+	$i = $dbp['group_id'];
 	$groupTab[$i] = $dbp['groupe_titre'];
 }
 

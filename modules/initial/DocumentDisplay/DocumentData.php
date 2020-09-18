@@ -44,13 +44,13 @@ class DocumentData {
 			$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - No arti_ref available. Getting first article");
 			$dbquery = $SDDMObj->query ( "
 			SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
-			FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('bouclage') . " bcl
+			FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
 			WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 			AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
-			AND cat.bouclage_id = bcl.bouclage_id
-			AND bcl.bouclage_etat = '1'
+			AND cat.deadline_id = bcl.deadline_id
+			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
-			AND cat.groupe_id " . $UserObj->getUserEntry('clause_in_groupe')."
+			AND cat.group_id " . $UserObj->getUserEntry('clause_in_groupe')."
 			AND cat.cate_etat = '1'
 			AND cate_doc_premier = '1'
 			ORDER BY cat.cate_parent,cat.cate_position
@@ -73,14 +73,14 @@ class DocumentData {
 		doc.docu_createur, doc.docu_creation_date,
 		doc.docu_correcteur, doc.docu_correction_date,
 		doc.docu_origine, doc.docu_cont, sit.ws_directory
-		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl, ".$SqlTableListObj->getSQLTableName('website')." sit
+		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('deadline')." bcl, ".$SqlTableListObj->getSQLTableName('website')." sit
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."'
 		AND art.docu_id = doc.docu_id
 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND sit.ws_id = doc.docu_origine
-		AND art.arti_bouclage = bcl.bouclage_id
-		AND bcl.bouclage_etat = '1'
+		AND art.arti_deadline = bcl.deadline_id
+		AND bcl.deadline_state = '1'
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {

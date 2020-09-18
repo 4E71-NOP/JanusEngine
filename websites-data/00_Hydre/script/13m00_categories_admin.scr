@@ -24,7 +24,7 @@ add category	name "c_fra_generer_un_stylesheet"				parent "c_fra_theme"				posit
 
 add category	name "c_fra_edition"							parent "c_fra_sommaire_admin"		position 06	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Edition"								desc "Edition"										groupe "Auteurs_debutant"			article 0;
 add category	name "c_fra_redacteur_en_chef"					parent "c_fra_edition"				position 01	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "R&eacute;dacteur en chef"			desc "Le coin du REC"								groupe "Redacteur_en_chef_debutant"	article 0;
-add category	name "c_fra_gestion_des_bouclages"				parent "c_fra_redacteur_en_chef"	position 01	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Gestion des bouclages"				desc "Gestion des bouclages"						groupe "Redacteur_en_chef_debutant"	article "fra_gestion_des_bouclages";
+add category	name "c_fra_gestion_des_deadlines"				parent "c_fra_redacteur_en_chef"	position 01	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Gestion des deadlines"				desc "Gestion des deadlines"						groupe "Redacteur_en_chef_debutant"	article "fra_gestion_des_deadlines";
 
 add category	name "c_fra_chef_de_rubrique"					parent "c_fra_edition"				position 02	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Chef de rubrique"					desc "Le coin du CDR"								groupe "Chef_de_rubrique_debutant"	article 0;
 add category	name "c_fra_gestion_des_articles"				parent "c_fra_chef_de_rubrique"		position 01	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Gestion des articles"				desc "Gestion des articles"							groupe "Chef_de_rubrique_debutant"	article "fra_gestion_des_articles";
@@ -72,7 +72,7 @@ add category	name "c_eng_generer_un_stylesheet"				parent "c_eng_theme"				posit
 
 add category	name "c_eng_edition"							parent "c_eng_sommaire_admin"		position 07	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Edition"							desc "Edition"										groupe "Auteurs_debutant"			article 0;
 add category	name "c_eng_redacteur_en_chef"					parent "c_eng_edition"				position 01	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "R&eacute;dacteur en chef"		desc "Le coin du REC"								groupe "Redacteur_en_chef_debutant"	article 0;
-add category	name "c_eng_gestion_des_bouclages"				parent "c_eng_redacteur_en_chef"	position 01	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Manage deadlines"				desc "Manage deadlines"								groupe "Redacteur_en_chef_debutant"	article "eng_gestion_des_bouclages";
+add category	name "c_eng_gestion_des_deadlines"				parent "c_eng_redacteur_en_chef"	position 01	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Manage deadlines"				desc "Manage deadlines"								groupe "Redacteur_en_chef_debutant"	article "eng_gestion_des_deadlines";
 
 add category	name "c_eng_chef_de_rubrique"					parent "c_eng_edition"				position 02	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Chef de rubrique"				desc "Le coin du CDR"								groupe "Chef_de_rubrique_debutant"	article 0;
 add category	name "c_eng_gestion_des_articles"				parent "c_eng_chef_de_rubrique"		position 01	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Manage articles"					desc "Managing articles"							groupe "Chef_de_rubrique_debutant"	article "eng_gestion_des_articles";

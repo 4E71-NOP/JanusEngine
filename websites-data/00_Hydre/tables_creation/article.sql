@@ -11,7 +11,7 @@ arti_correction_etat		NON_CORRIGE 0 CORRIGE 1
 CREATE TABLE !table! (
 arti_id 					INTEGER NOT NULL,
 arti_ref					VARCHAR(255),
-arti_bouclage				INTEGER,
+arti_deadline				INTEGER,
 arti_nom					VARCHAR(255),
 arti_desc					VARCHAR(255),
 arti_titre					VARCHAR(255),
@@ -33,7 +33,7 @@ docu_id						INTEGER,
 ws_id						INTEGER,
 
 PRIMARY KEY (arti_id), 
-KEY idx_!IdxNom!_arti_bouclage (arti_bouclage),
+KEY idx_!IdxNom!_arti_deadline (arti_deadline),
 KEY idx_!IdxNom!_config_id (config_id),
 KEY idx_!IdxNom!_docu_id (docu_id),
 KEY idx_!IdxNom!_ws_id (ws_id)

@@ -61,17 +61,17 @@ $RequestDataObj->setRequestData('formGenericData',
 );
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_bouclages_p02";
+$localisation = " / uni_gestion_des_deadlines_p02";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_bouclages_p02");
+$LMObj->logCheckpoint("uni_gestion_des_deadlines_p02");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_bouclages_p02");
+$MapperObj->setSqlApplicant("uni_gestion_des_deadlines_p02");
 
 switch ($l) {
 	case "fra":
 		$I18nObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer le bouclage.",
-		"invite2"		=> "Cette partie va vous permettre de créer un bouclage.",
+		"invite1"		=> "Cette partie va vous permettre de gérer le deadline.",
+		"invite2"		=> "Cette partie va vous permettre de créer un deadline.",
 		"tabTxt1"		=> "Informations",
 		"dlState0"		=> "Hors ligne",
 		"dlState1"		=> "En ligne",
@@ -84,10 +84,10 @@ switch ($l) {
 		"t1l5c1"		=>	"Date de cr&eacute;ation",
 		"t1l6c1"		=>	"Date limite (YYYY-MM-DD hh:mm:ss)",
 		"t1l7c1"		=>	"Créateur",
-		"t1l8c1"		=>	"Articles de ce bouclage",
+		"t1l8c1"		=>	"Articles de ce deadline",
 		
 		"t1l1c2"		=>	"?",
-		"t1l2c2"		=>	"Nouveau_bouclage",
+		"t1l2c2"		=>	"Nouveau_deadline",
 		"t1l3c2"		=>	"Deadline_",
 		));
 		break;
@@ -133,7 +133,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 					
 		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND art.arti_bouclage = '".$currentArticleObj->getDeadLineEntry('bouclage_id')."'
+		AND art.arti_deadline = '".$currentArticleObj->getDeadLineEntry('deadline_id')."'
 		AND art.ws_id = cat.ws_id
 		AND art.arti_ref = cat.arti_ref
 		AND art.arti_page = '1'
@@ -164,7 +164,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		$commandType = "add";
 		$currentArticleObj->setDeadLine(
 				array(
-		'bouclage_etat'	=>	1,
+		'deadline_state'	=>	1,
 		'ws_id'		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 		'user_id'		=>	$UserObj->getUserEntry('user_id'),
 		'user_login'	=>	$UserObj->getUserEntry('user_login'),
@@ -189,7 +189,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminDeadlineManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value='deadline'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentArticleObj->getDeadLineEntry('bouclage_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentArticleObj->getDeadLineEntry('deadline_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='deadlineFrom[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('deadlineFrom', 'selectionId')."'>\r"
 		
@@ -211,11 +211,11 @@ $T['AD']['1']['8']['1']['cont'] = $I18nObj->getI18nEntry('t1l8c1');
 
 switch ( $RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 	case "edit":
-		$T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getDeadLineEntry('bouclage_id');
-		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('bouclage_nom');
-		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('bouclage_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('bouclage_date_creation'));
-		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value=\"".date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('bouclage_date_limite'))."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_id');
+		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_name');
+		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('deadline_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_creation_date'));
+		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value=\"".date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_end_date'))."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$T['AD']['1']['8']['2']['cont'] = $articleList;
 		$T['ADC']['onglet']['1']['nbr_ligne'] = 8;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
 		break;
@@ -234,7 +234,7 @@ $stateTab = array(
 		1	=>	array(	't'	=>	$I18nObj->getI18nEntry('dlState1'),	'db'	=>	"ONLINE",	),
 		2	=>	array(	't'	=>	$I18nObj->getI18nEntry('dlState2'),	'db'	=>	"DELETED",	),
 );
-$stateTab[$currentArticleObj->getDeadLineEntry('bouclage_etat')]['s'] = " selected";
+$stateTab[$currentArticleObj->getDeadLineEntry('deadline_state')]['s'] = " selected";
 $str = "<select name ='formParams[etat]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $stateTab as $A ) { $str .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $str .= "</select>\r";

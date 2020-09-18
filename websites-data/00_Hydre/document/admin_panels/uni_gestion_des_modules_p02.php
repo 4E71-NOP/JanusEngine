@@ -148,15 +148,15 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 // --------------------------------------------------------------------------------------------
 $groupTab = array();
 $dbquery = $SDDMObj->query("
-SELECT a.groupe_id,a.groupe_titre,a.groupe_nom
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('site_groupe')." b
-WHERE a.groupe_id = b.groupe_id
+SELECT a.group_id,a.groupe_titre,a.groupe_nom
+FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b
+WHERE a.group_id = b.group_id
 AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY a.groupe_titre
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
-	$i = $dbp['groupe_id'];
-	$groupTab[$i]['id']		= $dbp['groupe_id'];
+	$i = $dbp['group_id'];
+	$groupTab[$i]['id']		= $dbp['group_id'];
 	$groupTab[$i]['nom']	= $dbp['groupe_nom'];
 	$groupTab[$i]['titre']	= $dbp['groupe_titre'];
 }

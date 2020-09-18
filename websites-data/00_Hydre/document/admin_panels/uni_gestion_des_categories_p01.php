@@ -56,7 +56,7 @@ $LMObj->setInternalLogTarget("both");
 switch ($l) {
 	case "fra":
 		$I18nObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de modifier les bouclages.",
+		"invite1"		=> "Cette partie va vous permettre de modifier les deadlines.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Nom",
 		"col_3_txt"		=> "Titre",
@@ -90,7 +90,7 @@ switch ($l) {
 
 $dbquery = $SDDMObj->query("
 SELECT c.cate_lang, l.lang_original_name
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
+FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('language')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
 WHERE c.cate_type IN ('0','1')
 AND c.cate_etat = '1'
 AND c.ws_id = '2'

@@ -137,7 +137,7 @@ switch ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "create":
 		$currentGroupObj->setGroup(
 			array(
-			"groupe_id"		=> "*",
+			"group_id"		=> "*",
 			"groupe_tag"	=> 0,
 			"groupe_nom"	=> $I18nObj->getI18nEntry('t1l2c2'),
 			"groupe_titre"	=> $I18nObj->getI18nEntry('t1l2c2'),
@@ -191,7 +191,7 @@ $T['AD']['1']['6']['1']['cont'] = $I18nObj->getI18nEntry('t1l6c1');
 // );
 
 
-$T['AD']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('groupe_id');
+$T['AD']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
 $T['AD']['1']['2']['2']['cont'] = $t1l2c2;
 $T['AD']['1']['3']['2']['cont'] = $t1l3c2;
 

@@ -8,8 +8,8 @@ share document	name "doc_uni_generation_stylesheet_p01.php"			with_website "Hydr
 share document	name "doc_uni_gestion_des_articles_p01.php"				with_website "Hydr"	modification "NO";
 share document	name "doc_uni_gestion_des_articles_p02.php"				with_website "Hydr"	modification "NO";
 share document	name "doc_uni_gestion_des_articles_p03.php"				with_website "Hydr"	modification "NO";
-share document	name "doc_uni_gestion_des_bouclages_p01.php"			with_website "Hydr"	modification "NO";
-share document	name "doc_uni_gestion_des_bouclages_p02.php"			with_website "Hydr"	modification "NO";
+share document	name "doc_uni_gestion_des_deadlines_p01.php"			with_website "Hydr"	modification "NO";
+share document	name "doc_uni_gestion_des_deadlines_p02.php"			with_website "Hydr"	modification "NO";
 share document	name "doc_uni_gestion_des_categories_p01.php"			with_website "Hydr"	modification "NO";
 share document	name "doc_uni_gestion_des_categories_p02.php"			with_website "Hydr"	modification "NO";
 share document	name "doc_uni_gestion_des_decorations_p01.php"			with_website "Hydr"	modification "NO";

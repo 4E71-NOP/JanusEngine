@@ -137,12 +137,12 @@ else {
 	unset ($A);
 	
 	$dbquery = $SDDMObj->query("
-	SELECT dcm.docu_id, art.arti_id, bcl.bouclage_id, dcm.docu_nom 
-	FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('bouclage')." bcl , ".$SqlTableListObj->getSQLTableName('document')." dcm
+	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_nom 
+	FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('document')." dcm
 	WHERE art.docu_id ".$Clause." 
 	AND dcm.docu_id = art.docu_id 
-	AND art.arti_bouclage = bcl.bouclage_id 
-	AND bcl.bouclage_etat = '1' 
+	AND art.arti_deadline = bcl.deadline_id 
+	AND bcl.deadline_state = '1' 
 	AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	ORDER BY dcm.docu_id ASC 
 	;");

@@ -43,7 +43,7 @@ class ModuleSelectLanguage {
 		$language_website_ = array();
 		$Content = "";
 		if ( $WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
-			$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
+			$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
 			$pv['1'] = 1;
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 				$language_website_[$pv['1']]['lang_id']				= $dbp['lang_id'];
@@ -57,7 +57,7 @@ class ModuleSelectLanguage {
 			$language_website_support = array();
 			$dbquery = $SDDMObj->query("
 				SELECT b.lang_id
-				FROM ".$SqlTableListObj->getSQLTableName('language_website')." a, ".$SqlTableListObj->getSQLTableName('langues')." b
+				FROM ".$SqlTableListObj->getSQLTableName('language_website')." a, ".$SqlTableListObj->getSQLTableName('language')." b
 				WHERE a.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				AND a.lang_id = b.lang_id
 				;");

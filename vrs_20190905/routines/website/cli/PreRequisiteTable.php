@@ -24,7 +24,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "article",		"column" => "arti_id",			"target" => "id"),
-				array ("table" => "site_groupe",	"column" => "site_groupe_id",	"target" => "site_groupe_id")
+				array ("table" => "group_website",	"column" => "group_website_id",	"target" => "group_website_id")
 		),
 		"timeCreate" => array (
 				"creation_date",
@@ -32,7 +32,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 		"columns" => array(
 				array ( "v" => "id",					"t" => "arti_id"),
 				array ( "v" => "ref",					"t" => "arti_ref"),
-				array ( "v" => "deadline_id",			"t" => "arti_bouclage"),
+				array ( "v" => "deadline_id",			"t" => "arti_deadline"),
 				array ( "v" => "name",					"t" => "arti_nom"),
 				array ( "v" => "desc",					"t" => "arti_desc"),
 				array ( "v" => "title",					"t" => "arti_titre"),
@@ -69,11 +69,11 @@ self::$PreRequisiteTable['add']['category'] = array (
 				array ( "v" => "type",				"t" => "cate_type"),
 				array ( "v" => "ws_id",			"t" => "ws_id"),
 				array ( "v" => "lang_id",			"t" => "cate_lang"),
-				array ( "v" => "deadline_id",		"t" => "bouclage_id"),
+				array ( "v" => "deadline_id",		"t" => "deadline_id"),
 				array ( "v" => "state",				"t" => "cate_etat"),
 				array ( "v" => "parent_id",			"t" => "cate_parent"),
 				array ( "v" => "position",			"t" => "cate_position"),
-				array ( "v" => "group_id",			"t" => "groupe_id"),
+				array ( "v" => "group_id",			"t" => "group_id"),
 				array ( "v" => "last_modif",		"t" => "derniere_modif"),
 				array ( "v" => "role",				"t" => "cate_role"),
 				array ( "v" => "first_doc",			"t" => "cate_doc_premier"),
@@ -87,15 +87,15 @@ self::$PreRequisiteTable['add']['deadline'] = array (
 				
 		),
 		"nextId" => array (
-				array ("table" => "bouclage",		"column" => "bouclage_id",			"target" => "id"),
+				array ("table" => "deadline",		"column" => "deadline_id",			"target" => "id"),
 		),
 		"columns" => array(
-				array ( "v" => "id",				"t" => "bouclage_id"),
-				array ( "v" => "name",				"t" => "bouclage_nom"),
-				array ( "v" => "title",				"t" => "bouclage_titre"),
-				array ( "v" => "state",				"t" => "bouclage_etat"),
-				array ( "v" => "date_creation",		"t" => "bouclage_date_creation"),
-				array ( "v" => "date_expiration",	"t" => "bouclage_date_limite"),
+				array ( "v" => "id",				"t" => "deadline_id"),
+				array ( "v" => "name",				"t" => "deadline_name"),
+				array ( "v" => "title",				"t" => "deadline_title"),
+				array ( "v" => "state",				"t" => "deadline_state"),
+				array ( "v" => "date_creation",		"t" => "deadline_creation_date"),
+				array ( "v" => "date_expiration",	"t" => "deadline_end_date"),
 				array ( "v" => "user_id",			"t" => "user_id"),
 				array ( "v" => "ws_id",			"t" => "ws_id"),
 		),
@@ -207,14 +207,14 @@ self::$PreRequisiteTable['add']['group'] = array (
 				array("v" => "tag",			"s" => "group"),
 		),
 		"nextId" => array (
-				array ("table" => "groupe",			"column" => "groupe_id",		"target" => "id"),
-				array ("table" => "site_groupe",	"column" => "site_groupe_id",	"target" => "group_webws_id"),
+				array ("table" => "groupe",			"column" => "group_id",		"target" => "id"),
+				array ("table" => "group_website",	"column" => "group_website_id",	"target" => "group_webws_id"),
 		),
 		"timeCreate" => array (
 				"creation_date",
 		),
 		"columns" => array(
-				array ( "v" => "id",			"t" => "groupe_id"),
+				array ( "v" => "id",			"t" => "group_id"),
 				array ( "v" => "name",			"t" => "groupe_nom"),
 				array ( "v" => "groupe_parent",	"t" => "groupe_parent"),
 				array ( "v" => "tag",			"t" => "groupe_tag"),
@@ -732,7 +732,7 @@ self::$PreRequisiteTable['assign']['user'] = array (
 		),
 		"columns" => array(
 				array("v" => "groupe_user_id",						"t"	=>	"groupe_user_id"),
-				array("v" => "groupe_id",							"t"	=>	"groupe_id"),
+				array("v" => "group_id",							"t"	=>	"group_id"),
 				array("v" => "user_id",								"t"	=>	"user_id"),
 				array("v" => "primary_group",						"t"	=>	"groupe_premier"),
 		),

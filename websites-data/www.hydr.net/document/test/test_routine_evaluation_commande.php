@@ -79,7 +79,7 @@ arti_correction_etat		NON_CORRIGE 0 CORRIGE 1
 CREATE TABLE !table! (
 arti_id 					INTEGER NOT NULL,
 arti_ref					VARCHAR(255),
-arti_bouclage				INTEGER,
+arti_deadline				INTEGER,
 arti_nom					VARCHAR(255),
 arti_desc					VARCHAR(255),
 arti_titre					VARCHAR(255),

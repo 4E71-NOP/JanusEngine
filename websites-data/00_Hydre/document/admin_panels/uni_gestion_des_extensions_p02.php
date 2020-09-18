@@ -105,7 +105,7 @@ if ( $user['groupe_tag'] == 3 ) {
 //	Action
 	include_once ("routines/website/manipulation_article.php");
 	include_once ("routines/website/manipulation_article_config.php");
-	include_once ("routines/website/manipulation_bouclage.php");
+	include_once ("routines/website/manipulation_deadline.php");
 	include_once ("routines/website/manipulation_categorie.php");
 	include_once ("routines/website/manipulation_contexte.php");
 	include_once ("routines/website/manipulation_decoration.php");

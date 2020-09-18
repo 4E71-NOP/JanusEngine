@@ -67,11 +67,11 @@ switch ( $document['docu_type'] ) {
 }
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_login,s.ws_name 
-FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['site_groupe']." sg , ".$SQL_tab_abrege['website']." s 
+FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_correcteur']."' 
 AND gu.groupe_premier = '1' 
 AND usr.user_id = gu.user_id 
-AND gu.groupe_id = sg.groupe_id 
+AND gu.group_id = sg.group_id 
 AND sg.ws_id = s.ws_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
@@ -86,12 +86,12 @@ $document['edition'] = 1;
 if ( $pv['execution_script'] == 1 ) { $_REQUEST['M_DOCUME']['haxorzfree'] = 1; }
 else {
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT dcm.docu_id, art.arti_id, bcl.bouclage_id, dcm.docu_nom 
-	FROM ".$SQL_tab_abrege['article']." art, ".$SQL_tab_abrege['bouclage']." bcl , ".$SQL_tab_abrege['document']." dcm
+	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_nom 
+	FROM ".$SQL_tab_abrege['article']." art, ".$SQL_tab_abrege['deadline']." bcl , ".$SQL_tab_abrege['document']." dcm
 	WHERE art.docu_id = ".$_REQUEST['M_DOCUME']['document_selection']." 
 	AND dcm.docu_id = art.docu_id 
-	AND art.arti_bouclage = bcl.bouclage_id 
-	AND bcl.bouclage_etat = '1' 
+	AND art.arti_deadline = bcl.deadline_id 
+	AND bcl.deadline_state = '1' 
 	AND art.ws_id = '".$website['ws_id']."'
 	ORDER BY dcm.docu_id ASC 
 	;");

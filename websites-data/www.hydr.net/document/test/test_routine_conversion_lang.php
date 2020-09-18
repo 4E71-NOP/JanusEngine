@@ -20,6 +20,6 @@ $pv['test']['fra'] = conversion_expression ( $pv['test']['fra'] );
 $pv['test']['eng'] = conversion_expression ( $pv['test']['eng'] );
 
 echo ( print_r_html ( $pv['test'] ) );
-outil_debug ( $langues , "\$langues");
+outil_debug ( $language , "\$language");
 
 ?>

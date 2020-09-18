@@ -163,7 +163,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 		$currentArticleObj->setArticle(
 				array (
 					"arti_ref"						=>	"New_Article".$d,
-					"arti_bouclage"					=>	0,
+					"arti_deadline"					=>	0,
 					"arti_nom"						=>	"New_Article",
 					"arti_desc"						=>	"Article",
 					"arti_titre"					=>	"Title",
@@ -230,7 +230,7 @@ $T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[reference
 $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_sous_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
-$tabDeadline[$currentArticleObj->getArticleEntry('arti_bouclage')]['s'] = " selected ";
+$tabDeadline[$currentArticleObj->getArticleEntry('arti_deadline')]['s'] = " selected ";
 $T['AD']['1']['6']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabDeadline as $A ) { $T['AD']['1']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['6']['2']['cont'] .= "</select>\r";

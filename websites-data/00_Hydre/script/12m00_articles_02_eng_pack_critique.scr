@@ -8,8 +8,8 @@ add article	name "eng_execution_de_scripts_p01"					reference "eng_execution_de_
 add article	name "eng_gestion_des_articles_p01"					reference "eng_gestion_des_articles"			deadline initial_online		desc "Admin in English"				title "Article managment"						subtitle "Select the article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_articles_p02"					reference "eng_gestion_des_articles"			deadline initial_online		desc "Admin in English"				title "Article managment"						subtitle "Select the document"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_articles_p03"					reference "eng_gestion_des_articles"			deadline initial_online		desc "Admin in English"				title "Article managment"						subtitle "Modify the article"								page "3"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_bouclages_p01"				reference "eng_gestion_des_bouclages"			deadline initial_online		desc "Admin in English"				title "Deadline managment"						subtitle "Select the deadline"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_bouclages_p02"				reference "eng_gestion_des_bouclages"			deadline initial_online		desc "Admin in English"				title "Deadline managment"						subtitle "Modify the deadline"								page "2"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_deadlines_p01"				reference "eng_gestion_des_deadlines"			deadline initial_online		desc "Admin in English"				title "Deadline managment"						subtitle "Select the deadline"								page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_deadlines_p02"				reference "eng_gestion_des_deadlines"			deadline initial_online		desc "Admin in English"				title "Deadline managment"						subtitle "Modify the deadline"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_categories_p01"				reference "eng_gestion_des_categories"			deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Select the category"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_categories_p02"				reference "eng_gestion_des_categories"			deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Modify the category"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_decorations_p01"				reference "eng_gestion_des_decorations"			deadline initial_online		desc "Admin in English"				title "Decoration managment"					subtitle "Select the decorations"							page "1"	validation_state "VALID"	config "no_menu";
@@ -53,8 +53,8 @@ assign document name "doc_uni_ecriture_des_documents_p02.php"		to_article	"eng_e
 assign document name "doc_uni_execution_de_scripts_p01.php"			to_article	"eng_execution_de_scripts_p01";
 assign document name "doc_uni_gestion_des_articles_p01.php"			to_article	"eng_gestion_des_articles_p01";
 assign document name "doc_uni_gestion_des_articles_p02.php"			to_article	"eng_gestion_des_articles_p02";
-assign document name "doc_uni_gestion_des_bouclages_p01.php"		to_article	"eng_gestion_des_bouclages_p01";
-assign document name "doc_uni_gestion_des_bouclages_p02.php"		to_article	"eng_gestion_des_bouclages_p02";
+assign document name "doc_uni_gestion_des_deadlines_p01.php"		to_article	"eng_gestion_des_deadlines_p01";
+assign document name "doc_uni_gestion_des_deadlines_p02.php"		to_article	"eng_gestion_des_deadlines_p02";
 assign document name "doc_uni_gestion_des_categories_p01.php"		to_article	"eng_gestion_des_categories_p01";
 assign document name "doc_uni_gestion_des_categories_p02.php"		to_article	"eng_gestion_des_categories_p02";
 assign document name "doc_uni_gestion_des_decorations_p01.php"		to_article	"eng_gestion_des_decorations_p01";

@@ -73,20 +73,20 @@ case 2:
 
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT bouclage_id,bouclage_titre,bouclage_nom  
-	FROM ".$SQL_tab_abrege['bouclage']."   
+	SELECT deadline_id,deadline_title,deadline_name  
+	FROM ".$SQL_tab_abrege['deadline']."   
 	WHERE ws_id = '".$website['ws_id']."' 
-	AND bouclage_etat != '2' 
-	AND bouclage_id = '".$infos_article['arti_bouclage']."' 
+	AND deadline_state != '2' 
+	AND deadline_id = '".$infos_article['arti_deadline']."' 
 	;");
-	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l32'] = $dbp['bouclage_nom']; }
+	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l32'] = $dbp['deadline_name']; }
 
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 	SELECT usr.user_id,usr.user_login 
-	FROM ".$SQL_tab_abrege['user']." usr, ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['site_groupe']." sgp 
+	FROM ".$SQL_tab_abrege['user']." usr, ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['group_website']." sgp 
 	WHERE usr.user_id = grp.user_id 
-	AND grp.groupe_id = sgp.groupe_id
+	AND grp.group_id = sgp.group_id
 	AND sgp.ws_id = '".$website['ws_id']."'
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) {
@@ -111,7 +111,7 @@ case 2:
 	WHERE cate_type IN ('2', '3') 
 	AND ws_id IN ('1', '".$website['ws_id']."') 
 	AND cate_lang = '".$website['ws_lang']."' 
-	AND groupe_id ".$user['clause_in_groupe']." 
+	AND group_id ".$user['clause_in_groupe']." 
 	AND cate_etat = '1' 
 	AND cate_role = '1'
 	;");
@@ -140,7 +140,7 @@ case 3:
 
 	$pv['o2l12'] = "<select name ='M_ARTICL[presentation]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$pv['o2l22'] = "<select name ='M_ARTICL[config_id]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-	$pv['o2l32'] = "<select name ='M_ARTICL[bouclage]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+	$pv['o2l32'] = "<select name ='M_ARTICL[deadline]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$pv['o3l12'] = "<select name ='M_ARTICL[document]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
 	$pv['ptr'] = 0;
@@ -180,15 +180,15 @@ case 3:
 
 	$pv['ptr'] = 0;
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT bouclage_id,bouclage_titre,bouclage_nom  
-	FROM ".$SQL_tab_abrege['bouclage']."   
+	SELECT deadline_id,deadline_title,deadline_name  
+	FROM ".$SQL_tab_abrege['deadline']."   
 	WHERE ws_id = '".$website['ws_id']."' 
-	AND bouclage_etat != '2' 
+	AND deadline_state != '2' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
-		$pv['TabBouclage'][$pv['ptr']]['id'] = $dbp['bouclage_id'];
-		$pv['TabBouclage'][$pv['ptr']]['nom'] = $dbp['bouclage_nom'];
-		$pv['TabBouclage'][$pv['ptr']]['titre'] = $dbp['bouclage_titre'];
+		$pv['TabBouclage'][$pv['ptr']]['id'] = $dbp['deadline_id'];
+		$pv['TabBouclage'][$pv['ptr']]['nom'] = $dbp['deadline_name'];
+		$pv['TabBouclage'][$pv['ptr']]['titre'] = $dbp['deadline_title'];
 		$pv['ptr']++;
 	}
 	unset ( $A );

@@ -8,7 +8,7 @@
 [TR] [TDFCA1][F]type[/TD]				[TDFCB1][F]4 types sont disponible : MENU_ADMIN_RACINE MENU_ADMIN ARTICLE_RACINE ARTICLE.[/TD][/TR]
 [TR] [TDFCA1][F]lang[/TD]				[TDFCB1][F]Détermine la langue de la catégorie. Ne sera donc affiché qu'en fonction de paramètre concordant.[/TD][/TR]
 [TR] [TDFCA1][F]etat[/TD]				[TDFCB1][F]ONLINE / OFFLINE[/TD][/TR]
-[TR] [TDFCA1][F]bouclage[/TD]			[TDFCB1][F]Référence le bouclage.[/TD][/TR]
+[TR] [TDFCA1][F]deadline[/TD]			[TDFCB1][F]Référence le deadline.[/TD][/TR]
 [TR] [TDFCA1][F]titre[/TD]				[TDFCB1][F]Champ libre. Apparaît dans le menu.[/TD][/TR]
 [TR] [TDFCA1][F]desc[/TD]				[TDFCB1][F]Description.[/TD][/TR]
 [TR] [TDFCA1][F]groupe[/TD]				[TDFCB1][F]Détermine quel groupe est autorisé a voir la catégorie et donc l'utiliser.[/TD][/TR]
