@@ -60,7 +60,7 @@ class ThemeData {
 			$BlockG = "B" . $Block . "G";
 			$BlockT = "B" . $Block . "T";
 			
-			$CurrentBlock['nom'] = $this->ThemeData['theme_bloc_'.$Block.'_nom'];
+			$CurrentBlock['nom'] = $this->ThemeData['theme_block_'.$Block.'_name'];
 			
 			if ( strlen($CurrentBlock['nom']) > 0 ) {
 				$cbn = $CurrentBlock['nom'];
@@ -121,7 +121,7 @@ class ThemeData {
 			// --------------------------------------------------------------------------------------------
 			//	Specific to Caligraph decoration type.
 			// --------------------------------------------------------------------------------------------
-			$CurrentBlock['nom'] = $this->ThemeData['theme_bloc_'.$Block.'_texte'];
+			$CurrentBlock['nom'] = $this->ThemeData['theme_block_'.$Block.'_text'];
 			if ( strlen($CurrentBlock['nom']) > 0 ) {
 				$cbn = $CurrentBlock['nom'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
@@ -178,7 +178,7 @@ class ThemeData {
 
 		for($i = 0; $i <= 9; $i ++) {
 			$Block = $StringFormat->getDecorationBlockName ( "", $i, "" );
-			$CurrentBlock['nom'] = $this->ThemeData["theme_bloc_" . $Block . "_menu"];
+			$CurrentBlock['nom'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
 			if (strlen ( $CurrentBlock['nom'] ) > 0) {
 				$BlockM = "B" . $Block . "M";
 				$cbn = &$CurrentBlock['nom'];

@@ -82,7 +82,7 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 // --------------------------------------------------------------------------------------------
 
 $dbquery = $SDDMObj->query("
-SELECT s.theme_id, s.theme_nom, s.theme_titre, s.theme_date 
+SELECT s.theme_id, s.theme_name, s.theme_title, s.theme_date 
 FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." s, ".$SqlTableListObj->getSQLTableName('site_theme')." ss 
 WHERE s.theme_id = ss.theme_id 
 AND ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -108,9 +108,9 @@ else {
 			."&formGenericData[mode]=edit"
 			."&themeForm[selectionId]=".$dbp['theme_id']
 			."'>"
-			.$dbp['theme_nom']
+			.$dbp['theme_name']
 			."</a>\r";
-		$T['AD']['1'][$i]['2']['cont']	= $dbp['theme_titre'];
+		$T['AD']['1'][$i]['2']['cont']	= $dbp['theme_title'];
 		$T['AD']['1'][$i]['3']['cont']	= strftime ("%a %d %b %y - %H:%M",$dbp['theme_date'] );		
 		$T['AD']['1'][$i]['2']['tc']	= 2;
 		$T['AD']['1'][$i]['3']['tc']	= 1;

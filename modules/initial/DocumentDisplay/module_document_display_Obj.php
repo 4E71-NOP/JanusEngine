@@ -399,30 +399,35 @@ class ModuleDocumentDisplay {
 		
 		// --------------------------------------------------------------------------------------------
 		// Update document stats
-		$dbquery = $SDDMObj->query("
-		SELECT *
-		FROM ".$SqlTableListObj->getSQLTableName('stat_document')."
-		WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
-		AND  arti_page = '".$DocumentDataObj->getDocumentDataEntry('arti_page')."'
-		;");
-		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$SDDMObj->query("
-			INSERT INTO ".$SqlTableListObj->getSQLTableName('stat_document')." VALUES (
-			'".$DocumentDataObj->getDocumentDataEntry('arti_id')."',
-			'".$DocumentDataObj->getDocumentDataEntry('arti_page')."',
-			'1'
-			);");
-		}
-		elseif ( $SDDMObj->num_row_sql($dbquery) == 1 ) {
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $pv['arti_count'] = $dbp['arti_count']+1; }
-// 			$pv['arti_count']++;
-			$SDDMObj->query("
-			UPDATE ".$SqlTableListObj->getSQLTableName('stat_document')." SET
-			arti_count = '".$pv['arti_count']."'
-			WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
-			AND arti_page = '".$DocumentDataObj->getDocumentDataEntry('arti_page')."'
-			;");
-		}
+		
+		// 2020 09 18 - Change of plan
+		// stored event is the new table. Different way of doing things.
+		
+		
+// 		$dbquery = $SDDMObj->query("
+// 		SELECT *
+// 		FROM ".$SqlTableListObj->getSQLTableName('stat_document')."
+// 		WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
+// 		AND  arti_page = '".$DocumentDataObj->getDocumentDataEntry('arti_page')."'
+// 		;");
+// 		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
+// 			$SDDMObj->query("
+// 			INSERT INTO ".$SqlTableListObj->getSQLTableName('stat_document')." VALUES (
+// 			'".$DocumentDataObj->getDocumentDataEntry('arti_id')."',
+// 			'".$DocumentDataObj->getDocumentDataEntry('arti_page')."',
+// 			'1'
+// 			);");
+// 		}
+// 		elseif ( $SDDMObj->num_row_sql($dbquery) == 1 ) {
+// 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $pv['arti_count'] = $dbp['arti_count']+1; }
+// // 			$pv['arti_count']++;
+// 			$SDDMObj->query("
+// 			UPDATE ".$SqlTableListObj->getSQLTableName('stat_document')." SET
+// 			arti_count = '".$pv['arti_count']."'
+// 			WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
+// 			AND arti_page = '".$DocumentDataObj->getDocumentDataEntry('arti_page')."'
+// 			;");
+// 		}
 		
 		
 		switch ( $DocumentDataObj->getDocumentDataEntry('arti_menu_occurence') ) {

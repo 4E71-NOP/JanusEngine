@@ -24,7 +24,7 @@ class RenderStylesheet {
 	}
 	
 	/**
-	 * Reder the stylesheet based on the theme data.
+	 * Render the stylesheet based on the theme data.
 	 * @param String $tableName
 	 * @param Object $ThemeDataObj
 	 * @return string
@@ -46,9 +46,9 @@ class RenderStylesheet {
 //----------------------------------------------------------------------------
 // Hydr - Generated stylesheet
 //----------------------------------------------------------------------------
-// Theme : ".$themeArray['theme_nom']."
+// Theme : ".$themeArray['theme_name']."
 // Date : ".$TimeObj->timestampToDate(time())."
-// fileName : ".$themeArray['theme_nom'].".css
+// fileName : ".$themeArray['theme_name'].".css
 //----------------------------------------------------------------------------
 */
 ";
@@ -90,10 +90,7 @@ class RenderStylesheet {
 				$css_menu_div = ".".$tableName."menu_niv_".$p['niveau'].", ";
 				$css_menu_lnn = ".".$tableName."menu_niv_".$p['niveau']."_lien, ";
 				$css_menu_lnh = ".".$tableName."menu_niv_".$p['niveau']."_lien:hover, ";
-// 				$p['liste_bloc_bak'] = $p['liste_bloc'];
 				if ( isset ( $p['liste_niveaux'] ) ) {
-// 					$p['liste_niveaux'] = substr ( $p['liste_niveaux'] , 0 , -1 );
-// 					$p['liste_bloc'] = $p['liste_niveaux'];
 					$css_menu_div .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_niv_", "" );
 					$css_menu_lnn .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_niv_", "_lien" );
 					$css_menu_lnh .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_niv_", "_lien:hover" );
@@ -148,7 +145,7 @@ class RenderStylesheet {
 	.".$tableName."div_AdminControlSwitch {	
 		width: ". $themeArray['theme_admctrl_size_x'] ."px; 
 		height: ". $themeArray['theme_admctrl_size_y'] ."px; 
-		background-image: url(../graph/".$themeArray['theme_repertoire']."/". $themeArray['theme_admctrl_switch_bg'] ."); 
+		background-image: url(../graph/".$themeArray['theme_directory']."/". $themeArray['theme_admctrl_switch_bg'] ."); 
 		left: 0px;
 		top: 0px;
 		display: block;
@@ -167,7 +164,7 @@ class RenderStylesheet {
 		border-color: ".$themeArray['B01T']['txt_avert_col']."; 
 		margin : 0px;
 		padding : 0px;
-		background-image: url(../graph/".$themeArray['theme_repertoire']."/".$themeArray['theme_admctrl_panel_bg'].");
+		background-image: url(../graph/".$themeArray['theme_directory']."/".$themeArray['theme_admctrl_panel_bg'].");
 		visibility: hidden; 
 	}
 
@@ -189,7 +186,7 @@ class RenderStylesheet {
 		border-color: ".$themeArray['B01T']['txt_avert_col']."; 
 		margin : 0px;
 		padding : 4px;
-		background-image: url(../graph/".$themeArray['theme_repertoire']."/".$themeArray['B01T']['bgco'].");
+		background-image: url(../graph/".$themeArray['theme_directory']."/".$themeArray['B01T']['bgco'].");
 		visibility: hidden; display : none; 
 		cursor: pointer;
 	}
@@ -284,18 +281,18 @@ class RenderStylesheet {
 		
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_t_couleur_de_base",	" { color: ".$p['txt_col'] . "; } \r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft",					" { border-spacing: 0px; border: 0px;	empty-cells: show; vertical-align: middle; } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_x']."px;	height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_repertoire']."/".$p['ft1']."); } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;								height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_repertoire']."/".$p['ft2'].");	color: ".$p['txt_titre_col']."; } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_x']."px;	height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_repertoire']."/".$p['ft3']."); } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fca",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgca'].");  color: ".$p['ca_txt_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcb'].");  color: ".$p['cb_txt_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcc",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcc'].");  color: ".$p['cc_txt_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcd",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcd'].");  color: ".$p['cd_txt_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcta",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcta']."); color: ".$p['cta_txt_col']."; }\r"); 
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fctb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgctb']."); color: ".$p['ctb_txt_col']."; }\r"); 
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcsa",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcsa']."); color: ".$p['csa_txt_col']."; }\r"); 
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcsb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgcsb']."); color: ".$p['csb_txt_col']."; }\r"); 
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fco",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_repertoire']."/".$p['bgco'].");  color: ".$p['co_txt_col']."; }\r\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_x']."px;	height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_directory']."/".$p['ft1']."); } \r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;								height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_directory']."/".$p['ft2'].");	color: ".$p['txt_titre_col']."; } \r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_x']."px;	height: ".$p['ft_y']."px;	background-image: url(../graph/".$infos['theme_directory']."/".$p['ft3']."); } \r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fca",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgca'].");  color: ".$p['ca_txt_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcb'].");  color: ".$p['cb_txt_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcc",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcc'].");  color: ".$p['cc_txt_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcd",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcd'].");  color: ".$p['cd_txt_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcta",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcta']."); color: ".$p['cta_txt_col']."; }\r"); 
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fctb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgctb']."); color: ".$p['ctb_txt_col']."; }\r"); 
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcsa",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcsa']."); color: ".$p['csa_txt_col']."; }\r"); 
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fcsb",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgcsb']."); color: ".$p['csb_txt_col']."; }\r"); 
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_fco",				" { padding: 5px ; vertical-align: top; background-image: url(../graph/".$infos['theme_directory']."/".$p['bgco'].");  color: ".$p['co_txt_col']."; }\r\r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_highlight",			" { color: ".$p['txt_highlight_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_code",				" { color: ".$p['txt_code_fg_col'].";		background-color: ".$p['txt_code_bg_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ok", 				" { color: ".$p['txt_ok_col']."; }\r");
@@ -307,24 +304,24 @@ class RenderStylesheet {
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up", 			" { color: ".$p['tab_up_txt_col'].";			background-color: ".$p['tab_up_txt_bg_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down",			" { color: ".$p['tab_down_txt_col'].";		background-color: ".$p['tab_down_txt_bg_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover", 			" { color: ".$p['tab_hover_txt_col'].";		background-color: ".$p['tab_hover_txt_bg_col']."; }\r\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 							height: ".$p['s1_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		text-shadow: ".$p['s1_txt_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 							height: ".$p['s1_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	text-shadow: ".$p['s1_txt_hover_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s1_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 							height: ".$p['s2_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		text-shadow: ".$p['s2_txt_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 							height: ".$p['s2_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	text-shadow: ".$p['s2_txt_hover_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s2_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 							height: ".$p['s3_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		text-shadow: ".$p['s3_txt_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 									height: ".$p['s3_01_y']."px; background: transparent;	background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	text-shadow: ".$p['s3_txt_hover_shadow'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_repertoire']."/".$p['s3_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 							height: ".$p['s1_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		text-shadow: ".$p['s1_txt_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 							height: ".$p['s1_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	text-shadow: ".$p['s1_txt_hover_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_x']."px;	height: ".$p['s1_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s1_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 							height: ".$p['s2_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		text-shadow: ".$p['s2_txt_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 							height: ".$p['s2_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	text-shadow: ".$p['s2_txt_hover_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_x']."px;	height: ".$p['s2_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s2_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 							height: ".$p['s3_01_y']."px; background: transparent;			background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		text-shadow: ".$p['s3_txt_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 									height: ".$p['s3_01_y']."px; background: transparent;	background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	text-shadow: ".$p['s3_txt_hover_shadow'].";	}\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_x']."px;	height: ".$p['s3_01_y']."px; 									background-image: url(../graph/".$infos['theme_directory']."/".$p['s3_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");
 		$Content .= $this->makeCssIdString ($infos, "a.",		$infos['currentBlock'], "T", "_lien",				" { text-decoration: ".$p['txt_l_01_decoration']."; display: ".$p['txt_l_01_display'].";}\r	");
 		$Content .= $this->makeCssIdString ($infos, "a.",		$infos['currentBlock'], "T", "_lien:link",			" { color: ".$p['txt_l_01_fg_col'].";				background-color: ".$p['txt_l_01_bg_col']."; ".$tabLink['txt_l_01_size'].$tabLink['txt_l_01_weight']." margin-top:".$p['txt_l_01_margin_top']."px; margin-bottom:".$p['txt_l_01_margin_bottom']."px; margin-left:".$p['txt_l_01_margin_left']."px; margin-right:".$p['txt_l_01_margin_right']."px; }\r");
 		$Content .= $this->makeCssIdString ($infos, "a.",		$infos['currentBlock'], "T", "_lien:visited",		" { color: ".$p['txt_l_01_fg_visite_col'].";		background-color: ".$p['txt_l_01_bg_visite_col']."; }\r");
@@ -337,15 +334,15 @@ class RenderStylesheet {
 		$Content .= $this->makeCssIdString ($infos, "td>a.",	$infos['currentBlock'], "T", "_lien:active",		" { color: ".$p['txt_l_td_fg_active_col'].";		background-color: ".$p['txt_l_td_bg_active_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, "td>.",		$infos['currentBlock'], "T", "_form_1",				" { font-weight: normal; color: ".$p['txt_input1_td_fg_col']."; background-color: ".$p['txt_input1_td_bg_col']."; }\r");
 		$Content .= $this->makeCssIdString ($infos, "td>.",		$infos['currentBlock'], "T", "_form_2",				" { font-weight: normal; color: ".$p['txt_input2_td_fg_col']."; background-color: ".$p['txt_input2_td_bg_col']."; }\r\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_down_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									background-color: ".$p['tab_down_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_down_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	font-weight: ".$p['tab_down_txt_weight'].";		text-shadow : ".$p['tab_down_txt_shadow'].";	background-color: ".$p['tab_down_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_down_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									background-color: ".$p['tab_down_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_up_a'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									background-color: ".$p['tab_up_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_up_b'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	font-weight: ".$p['tab_up_txt_weight'].";		text-shadow : ".$p['tab_up_txt_shadow'].";		background-color: ".$p['tab_up_txt_bg_col']."; }\r" );
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",			" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_up_c'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									background-color: ".$p['tab_up_txt_bg_col']."; }\r" );
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",		" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_hover_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",		" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_hover_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	font-weight: ".$p['tab_hover_txt_weight'].";	text-shadow : ".$p['tab_hover_txt_shadow'].";	background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",		" { background-image: url(../graph/".$infos['theme_repertoire']."/".$p['tab_hover_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									background-color: ".$p['tab_hover_txt_bg_col']."; }\r\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_down_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									background-color: ".$p['tab_down_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_down_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	font-weight: ".$p['tab_down_txt_weight'].";		text-shadow : ".$p['tab_down_txt_shadow'].";	background-color: ".$p['tab_down_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_down_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									background-color: ".$p['tab_down_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_up_a'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									background-color: ".$p['tab_up_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_up_b'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	font-weight: ".$p['tab_up_txt_weight'].";		text-shadow : ".$p['tab_up_txt_shadow'].";		background-color: ".$p['tab_up_txt_bg_col']."; }\r" );
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",			" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_up_c'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									background-color: ".$p['tab_up_txt_bg_col']."; }\r" );
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",		" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_hover_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",		" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_hover_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;								height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	font-weight: ".$p['tab_hover_txt_weight'].";	text-shadow : ".$p['tab_hover_txt_shadow'].";	background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",		" { background-image: url(../graph/".$infos['theme_directory']."/".$p['tab_hover_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_x']."px;	height: ".$p['tab_y']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									background-color: ".$p['tab_hover_txt_bg_col']."; }\r\r");
 		
 		return "\r".$Content;
 	}
@@ -358,7 +355,7 @@ class RenderStylesheet {
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$Content = "";
-		$dir = $infos['theme_repertoire'];
+		$dir = $infos['theme_directory'];
 		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 	
@@ -378,7 +375,7 @@ class RenderStylesheet {
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$Content = "";
-		$dir = $infos['theme_repertoire'];
+		$dir = $infos['theme_directory'];
 		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 		
@@ -406,7 +403,7 @@ class RenderStylesheet {
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$Content = "";
-		$dir = $infos['theme_repertoire'];
+		$dir = $infos['theme_directory'];
 		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 		

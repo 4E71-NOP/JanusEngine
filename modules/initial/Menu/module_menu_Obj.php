@@ -42,7 +42,8 @@ class ModuleMenu {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$ServerInfosObj = $CurrentSetObj->getInstanceOfServerInfosObj();
  		$RenderLayoutObj = RenderLayout::getInstance();
-		
+ 		$StringFormatObj = StringFormat::getInstance();
+ 		
  		
  		
 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
@@ -66,18 +67,17 @@ class ModuleMenu {
 				3 => "../modules/initial/Menu/ModuleMenuType03_banner.php",
 		);
 		$menuType = $ThemeDataObj->getThemeBlockEntry('B00M', 'genre');
-		
 		$realpath = $ServerInfosObj->getServerInfosEntry('repertoire_courant'). "/../modules/initial/Menu/";
 		$handle = opendir( $realpath );
-
+		
 		$tmp = array();
 		while (false !== ( $f = readdir($handle))) {
 			$f_stat = stat( $realpath."/".$f );
 			if ( preg_match('/ModuleMenuType[0-9][0-9]_\w*\.php/', $f) ) {
 				if ( !is_dir($realpath."/".$f) && !is_link ($realpath."/".$f) ) {
-					$tmp[$f]['fileaname']	= $f;
+					$tmp[$f]['filename']	= $f;
 					$tmp[$f]['classname']	= substr($f, 0, 16 );
-					$tmp[$f]['fullname']	= $realpath."/".$f;
+					$tmp[$f]['fullname']	= $realpath.$f;
 					$tmp[$f]['size']		= $f_stat['size'];
 					$tmp[$f]['date']		= strftime ("%a %d %b %y - %H:%M", $f_stat['mtime'] );
 				}
@@ -93,6 +93,8 @@ class ModuleMenu {
 			$fileList[$i] = $B;
 			$i++;
 		}
+
+		$LMObj->InternalLog(__METHOD__ . "\$fileList" . $StringFormatObj->arrayToString($fileList));
 		
 		// --------------------------------------------------------------------------------------------
 		// One query to get all the necessary informations for the processing 	
@@ -148,10 +150,13 @@ class ModuleMenu {
 			switch ( $pv['test_routine'] ) {										//M Menu; J Javascript. p parent, i id (en cours) , b bloc, d dossier,
 				case 0:
 					$execClass = $fileList[$menuType]['classname'];
-					if (!class_exists($execClass)) { include ( $fileList[$menuType]['fullname'] );	}
-					$execClassObj = call_user_func ( $execClass.'::getInstance') ; 
-					$MenuData = $execClassObj->renderMenu($infos);
-					
+					if (!class_exists($execClass)) { 
+						if (file_exists($fileList[$menuType]['fullname'])) {
+							include ( $fileList[$menuType]['fullname'] );	
+							$execClassObj = call_user_func ( $execClass.'::getInstance');
+							$MenuData = $execClassObj->renderMenu($infos);
+						}
+					}
 					$Content .= "\r" . $MenuData["Content"];
 					break;
 				case 1:

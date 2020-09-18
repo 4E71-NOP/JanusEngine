@@ -227,7 +227,7 @@ else {
 	
 	if ( $UserObj->getUserEntry('pref_theme') == 0 ) { $UserObj->setUserEntry('pref_theme', $WebSiteObj->getWebSiteEntry('theme_id')); }
 	$dbquery = $SDDMObj->query("
-	SELECT a.*,b.theme_nom,b.theme_id
+	SELECT a.*,b.theme_name,b.theme_id
 	FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('theme_descriptor')." b 
 	WHERE a.user_id = '".$UserObj->getUserEntry('id')."' 
 	AND theme_id = '".$UserObj->getUserEntry('pref_theme')."' 
@@ -467,20 +467,20 @@ else {
 	$T = array();
 	if ( strlen($RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')) == 0 ) { 
 		$LMObj->InternalLog("No requested theme in the form, using the main theme.");
-		$RequestDataObj->setRequestDataSubEntry('UserProfileForm', 'SelectedTheme', $ThemeDataObj->getThemeDataEntry('theme_nom') );
+		$RequestDataObj->setRequestDataSubEntry('UserProfileForm', 'SelectedTheme', $ThemeDataObj->getThemeDataEntry('theme_name') );
 	}
 	$LMObj->InternalLog("Requested theme =`".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."`");
 	
 	$dbquery = $SDDMObj->query("
 	SELECT * 
 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b 
-	WHERE a.theme_nom = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."' 
+	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."' 
 	AND a.theme_id = b.theme_id 
 	;");
 // 	$LMObj->InternalLog("
 // 	SELECT *
 // 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
-// 	WHERE a.theme_nom = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."'
+// 	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."'
 // 	AND a.theme_id = b.theme_id
 // 	;");
 	
@@ -529,8 +529,8 @@ else {
 	$T['tab_infos']['GroupName']		= "theme";
 	$T['tab_infos']['Height']			= 1024;
 	
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
-	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
 	$ModulePaddingX = 64;
 	$ModulePaddingY = 64;
 // 	$LMObj->logDebug($PmThemeDataObj->getThemeData(), "PmThemeDataObj");
@@ -592,15 +592,15 @@ else {
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttd', "
 		<table style='height:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft_y')."px;' border='0' cellspacing='0' cellpadding='0'>\r
 		<tr>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1').");'></td>\r
-		<td style='background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft2').");'>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1').");'></td>\r
+		<td style='background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft2').");'>\r
 		<span class='".$PmBlock."_tb4' style='color:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_txt_titre_col').";'>\r
 		");
 
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttf', "
 		</span>\r
 		</td>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3').");'></td>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3').");'></td>\r
 		</tr>\r
 		</table>\r
 		");
@@ -623,14 +623,14 @@ else {
 			";
 			
 			$dbquery = $SDDMObj->query("
-			SELECT a.theme_id,a.theme_nom,theme_titre 
+			SELECT a.theme_id,a.theme_name,theme_title 
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE a.theme_id = b.theme_id  
 			AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			;");
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
-				if ( $dbp['theme_id'] == $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId') ) { $T['AD'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_id']."' selected>".$dbp['theme_titre']."</option>\r"; }
-				else { $T['AD'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_id']."'>".$dbp['theme_titre']."</option>\r"; }
+				if ( $dbp['theme_id'] == $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId') ) { $T['AD'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_id']."' selected>".$dbp['theme_title']."</option>\r"; }
+				else { $T['AD'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_id']."'>".$dbp['theme_title']."</option>\r"; }
 			}
 			
 			$T['AD'][$Tab]['1']['1']['cont'] .= "
@@ -803,7 +803,7 @@ else {
 	$T['AD'][$Tab]['1']['1']['cont'] .="<!-- Last tabs showing the specific items. -->\r";
 	$j = 0;
 	$themeDir = $PmThemeDataObj->getThemeBlockEntry('B01T', 'repertoire');
-	$themeList = array ('theme_blason', 'theme_banniere');
+	$themeList = array ('theme_logo', 'theme_banner');
 	$themeEntries = array();
 	foreach ( $themeList as $A ) {
 		if (strlen($PmThemeDataObj->getThemeDataEntry($A)) != 0) {

@@ -190,8 +190,8 @@ switch ( $RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 	case "edit":
 		$commandType = "update";
 		$currentThemeObj->getThemeDescriptorDataFromDB($RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'), $UserObj, $WebSiteObj);
-		$t1l2c2 = $currentThemeObj->getThemeDescriptorEntry('theme_nom');
-		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l2c2 = $currentThemeObj->getThemeDescriptorEntry('theme_name');
+		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -201,8 +201,8 @@ switch ( $RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 		$currentThemeObj->setThemeDescriptor(
 		array(
 		"theme_id"		=> "*",
-		"theme_nom"		=> $I18nObj->getI18nEntry('t1l2c2'),
-		"theme_titre"	=> $I18nObj->getI18nEntry('t1l2c2'),
+		"theme_name"		=> $I18nObj->getI18nEntry('t1l2c2'),
+		"theme_title"	=> $I18nObj->getI18nEntry('t1l2c2'),
 		"theme_desc"	=> $I18nObj->getI18nEntry('t1l2c2'),
 		)
 		);
@@ -235,7 +235,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminThemeManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value=''>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentThemeObj->getThemeDescriptorEntry('theme_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentThemeObj->getThemeDescriptorEntry('theme_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='themeForm[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -312,9 +312,9 @@ $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
 		"height"			=> 50,	//in %
 		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_repertoire]",
+		"formTargetId"		=> "formParams[theme_directory]",
 		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_repertoire'),
+		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_directory'),
 		"path"				=> "/graph/",
 		"restrictTo"		=> "/graph/",
 		"strRemove"			=> "/\.*\w*\//",
@@ -538,9 +538,9 @@ $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
 		"height"			=> 50,	//in %
 		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_blason]",
+		"formTargetId"		=> "formParams[theme_logo]",
 		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_blason'),
+		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_logo'),
 		"path"				=> "/graph/",
 		"restrictTo"		=> "/graph/",
 		"strRemove"			=> "/\.*\w*\//",
@@ -561,9 +561,9 @@ $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
 		"height"			=> 50,	//in %
 		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_banniere]",
+		"formTargetId"		=> "formParams[theme_banner]",
 		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_banniere'),
+		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_banner'),
 		"path"				=> "/graph/",
 		"restrictTo"		=> "/graph/",
 		"strRemove"			=> "/\.*\w*\//",
@@ -660,9 +660,9 @@ $T['AD'][$curTab]['4']['2']['cont'] .= "
 switch ( $CMObj->getConfigurationEntry('colorSelector') ){
 	case "Hydr":
 		$T['AD'][$curTab]['5']['2']['cont'] = "
-		#<input type='text' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_depart')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
-		#<input type='text' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_milieu')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
-		#<input type='text' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_fin')."\"		class='".$Block."_t3 ".$Block."_form_1'>\r
+		#<input type='text' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
+		#<input type='text' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
+		#<input type='text' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."\"		class='".$Block."_t3 ".$Block."_form_1'>\r
 		<br>\r
 		<br>\r
 		<table style='border: 1px solid black; border-collapse: collapse'>\r
@@ -670,9 +670,9 @@ switch ( $CMObj->getConfigurationEntry('colorSelector') ){
 		break;
 	case "system":
 		$T['AD'][$curTab]['5']['2']['cont'] = "
-		<input type='color' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_depart')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
-		<input type='color' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_milieu')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
-		<input type='color' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_couleur_jauge_fin')."'		oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r
+		<input type='color' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
+		<input type='color' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
+		<input type='color' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."'		oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r
 		<br>\r
 		<br>\r
 		<table style='border: 1px solid black; border-collapse: collapse'>\r

@@ -51,14 +51,14 @@ class ModuleQuickSkin {
 		$Content = "
 		<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: left;'>
 		<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>QuickSkin<br></span>\r
-		".$i18n['txt1']." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_titre')."<br></span>\r
+		".$i18n['txt1']." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 		</p>
 		";
 		$grp = $UserObj->getUserGroupEntry('groupe', $infos['module']['module_groupe_pour_utiliser']);
 		$LMObj->InternalLog( "QuickSkin module_groupe_pour_utiliser=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) );
 		if ( $grp == "1" ) {
 			$dbquery = $SDDMObj->query("
-			SELECT a.theme_id,a.theme_nom,a.theme_titre
+			SELECT a.theme_id,a.theme_name,a.theme_title
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND a.theme_id = b.theme_id
@@ -73,8 +73,8 @@ class ModuleQuickSkin {
 				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
 				";
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-					if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_nom']."' selected>".$dbp['theme_titre']."</option>\r"; }
-					else { 	$Content .= "<option value='".$dbp['theme_nom']."'>".$dbp['theme_titre']."</option>\r"; }
+					if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
+					else { 	$Content .= "<option value='".$dbp['theme_name']."'>".$dbp['theme_title']."</option>\r"; }
 				}
 				$Content .= "</select>\r
 				<br>\r

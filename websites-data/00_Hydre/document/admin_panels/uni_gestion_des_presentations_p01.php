@@ -81,7 +81,7 @@ switch ($l) {
 $Content .="<p>". $I18nObj->getI18nEntry('invite1')."</p>";
 
 $dbquery = $SDDMObj->query("
-SELECT pr.*, sd.theme_titre
+SELECT pr.*, sd.theme_title
 FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('site_theme')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
 WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND sp.theme_id = ss.theme_id 
@@ -111,7 +111,7 @@ else {
 		"&amp;arti_page=2'
 		>".$dbp['pres_nom']."</a>";
 		$T['AD']['1'][$i]['2']['cont']	= $dbp['pres_titre'];
-		$T['AD']['1'][$i]['3']['cont']	= $dbp['theme_titre'];
+		$T['AD']['1'][$i]['3']['cont']	= $dbp['theme_title'];
 	}
 }
 

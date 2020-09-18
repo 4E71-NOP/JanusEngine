@@ -395,12 +395,12 @@ break;
 }
 
 $_REQUEST['sauvegarde']['_REQUEST_bloc_01'] = $_REQUEST['bloc'];
-$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_repertoire']."/".$theme_GD_['theme_bg'];
+$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
 
 echo ("<div id='decoration_principal' class='" . $theme_tableau . $_REQUEST['bloc']."_fco' style='width: ".( ${$theme_tableau}['theme_module_largeur_interne'] - 24 ) ."px; height: ".$tab_infos['doc_height']."px; overflow: hidden;' >\r");
 for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i']++ ) { 
 
-	$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_repertoire']."/".$theme_GD_['theme_bg'];
+	$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
 	$pv['module_ecart_bordure_x'] = 128;
 	$pv['module_ecart_bordure_y'] = 32;
 	$pv['bloc_taille_y'] = "height: " . 320 ."px; ";

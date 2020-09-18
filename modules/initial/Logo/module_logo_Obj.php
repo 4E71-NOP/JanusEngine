@@ -40,7 +40,7 @@ class ModuleLogo {
 		$Content .= "
 		<div style='text-align: center;'>\r
 		<a href='".$WebSiteObj->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$SDDMObj->escapeString($i18n['tooltip'])."')\" onMouseOut=\"t.ToolTip()\">\r
-		<img src='../graph/".$ThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$ThemeDataObj->getThemeDataEntry('theme_blason')."' alt='".$WebSiteObj->getWebSiteEntry('ws_name')."' border='0'>\r
+		<img src='../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_logo')."' alt='".$WebSiteObj->getWebSiteEntry('ws_name')."' border='0'>\r
 		</a>\r
 		</div>\r
 		";

@@ -8,7 +8,7 @@ define ("userActionDisconnect" , "disconnect");
 define ("anonymousUserName" , "anonymous");
 //define ("logTargetBoth" , "both"); // deprecated
 //define ("logTargetNone" , "none"); // deprecated
-define ("logTarget" , "internal");
+define ("logTarget" , "both");		// none, both, internal, system
 define ("installLogTarget" , "system");
 
 ?>

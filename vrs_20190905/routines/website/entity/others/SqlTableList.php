@@ -16,7 +16,7 @@ class SqlTableList {
 	private static $Instance = null;
 	
 	private $TableList = array (
-			'article',					'article_tag',			'auteurs',				'article_config',
+			'article',				'article_tag',			'auteurs',
 			'bouclage',				
 			'categorie',			
 			'document',				'document_share',			'document_partage',
@@ -29,12 +29,20 @@ class SqlTableList {
 			'presentation',			'presentation_contenu',		
 			'extension',			'extension_config',			'extension_dependency',	'extension_file',
 			'pv',					
-			'website',				'website',				'site_groupe',				'site_langue',			'site_module',			'site_theme',
-			'theme_descriptor',	'theme_presentation',
+			'website',				'site_groupe',				'site_langue',			'site_module',			'site_theme',
+			'theme_descriptor',		'theme_presentation',
 			'stored_event',			'stat_navigateur',			'stat_utilisateur',
 			'tag',					
 			'user',
-			'tl_fra'
+			'tl_fra',
+			
+			'stored_event',
+			
+			'article_config',
+			
+			
+			
+			
 	);
 	
 	private $SQLTableName = array();

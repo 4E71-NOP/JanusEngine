@@ -115,15 +115,15 @@ self::$SqlQueryTable['M_PRESNT_rdp']['element']		= "Presentation";
 self::$SqlQueryTable['M_PRESNT_rep']['requete']		= "SELECT pres_id FROM ".$SqlTableListObj->getSQLTableName('presentation')." WHERE pres_nom = '<A1>';";
 self::$SqlQueryTable['M_PRESNT_rep']['element']		= "Presentation";
 self::$SqlQueryTable['M_PRESNT_rep']['colone_1']		= "pres_id";
-self::$SqlQueryTable['M_PRESNT_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_nom AS theme_nom FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_nom = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_PRESNT_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_name AS theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_PRESNT_res']['element']		= "Skin";
 self::$SqlQueryTable['M_PRESNT_res']['colone_1']		= "theme_id";
 
 // Theme
-self::$SqlQueryTable['M_THEME_rdt']['requete']		= "SELECT sd.theme_id, sd.theme_nom FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_nom = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_THEME_rdt']['requete']		= "SELECT sd.theme_id, sd.theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_THEME_rdt']['element']		= "Theme";
 self::$SqlQueryTable['M_THEME_rdt']['colone_1']		= "theme_id";
-self::$SqlQueryTable['M_THEME_ret']['requete']		= "SELECT sd.theme_id, sd.theme_nom FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_nom = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_THEME_ret']['requete']		= "SELECT sd.theme_id, sd.theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_THEME_ret']['element']		= "Theme";
 self::$SqlQueryTable['M_THEME_ret']['colone_1']		= "theme_id";
 
@@ -154,7 +154,7 @@ self::$SqlQueryTable['M_UTILIS_rdl']['element']		= "Utilisateur";
 self::$SqlQueryTable['M_UTILIS_rel']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.groupe_id = sg.groupe_id AND gu.groupe_premier = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_rel']['element']		= "Utilisateur";
 self::$SqlQueryTable['M_UTILIS_rel']['colone_1']	= "user_id";
-self::$SqlQueryTable['M_UTILIS_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_nom AS theme_nom FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_nom = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_UTILIS_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_name AS theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_res']['element']		= "Theme";
 self::$SqlQueryTable['M_UTILIS_res']['colone_1']	= "theme_id";
 self::$SqlQueryTable['M_UTILIS_reg']['requete']		= "SELECT grp.groupe_id AS groupe_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('site_groupe')." sg , ".$SqlTableListObj->getSQLTableName('website')." ws WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.ws_id = ws.ws_id AND ws.ws_id = '".$webSiteId."';";

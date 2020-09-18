@@ -28,7 +28,7 @@ class ModuleAuthentification {
 		$AUObj = AuthenticateUser::getInstance();
 		
 		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget(logTargetNone);
+		$LMObj->setInternalLogTarget(logTarget);
 		
 		$localisation = " / ModuleAuthentification";
 		$MapperObj->AddAnotherLevel($localisation );

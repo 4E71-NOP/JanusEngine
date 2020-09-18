@@ -73,8 +73,8 @@ class ModuleSelectLanguage {
 					if ( $A == $site_lang_[$A]['langue_id'] && $A != $UserObj->getUserEntry('lang') ) {
 						$pv['1'] = $WebSiteObj->getWebSiteEntry('ws_lang');
 						$pv['1'] = $site_lang_[$pv['offset']][$pv['1']];
-						if ( !file_exists ( "../graph/". $ThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$site_lang_[$A]['langue_image'] ) ) { $pv['img_src'] = "../graph/universal/".$site_lang_[$A]['langue_image']; }
-						else { $pv['img_src'] = "../graph/".$ThemeDataObj->getThemeDataEntry('theme_repertoire')."/".$site_lang_[$A]['langue_image']; }
+						if ( !file_exists ( "../graph/". $ThemeDataObj->getThemeDataEntry('theme_directory')."/".$site_lang_[$A]['langue_image'] ) ) { $pv['img_src'] = "../graph/universal/".$site_lang_[$A]['langue_image']; }
+						else { $pv['img_src'] = "../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$site_lang_[$A]['langue_image']; }
 						
 						// a.theme_princ_B30_lien
 						$Content .= "<td>
