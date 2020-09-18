@@ -44,11 +44,11 @@ $RequestDataObj->setRequestData('cate_parent', 39);
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_categories_p01";
+$localisation = " / uni_gestion_des_categorys_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_categories_p01");
+$LMObj->logCheckpoint("uni_gestion_des_categorys_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_categories_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_categorys_p01");
 
 $logTarget = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
@@ -90,9 +90,9 @@ switch ($l) {
 
 $dbquery = $SDDMObj->query("
 SELECT c.cate_lang, l.lang_original_name
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('language')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
+FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
 WHERE c.cate_type IN ('0','1')
-AND c.cate_etat = '1'
+AND c.cate_state = '1'
 AND c.ws_id = '2'
 AND c.cate_lang = l.lang_id
 AND l.lang_id = sl.lang_id
@@ -136,9 +136,9 @@ foreach ( $CateTabList as $A ) {
 }
 
 $dbquery = $SDDMObj->query("SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('language_website')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
+FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language_website')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
 WHERE c.cate_type IN (0,1) 
-AND c.cate_etat = '1' 
+AND c.cate_state = '1' 
 AND c.cate_lang IN (".$langClause.") 
 AND c.cate_lang = sl.lang_id 
 AND sl.ws_id = sw.ws_id 
@@ -169,8 +169,8 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery) ) {
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
 		."&categoryForm[selectionId]=".$dbp['cate_id']
-		."'>".$dbp['cate_nom']."</a>";
-	$T['AD'][$Tab][$l]['3']['cont'] = $dbp['cate_titre'];
+		."'>".$dbp['cate_name']."</a>";
+	$T['AD'][$Tab][$l]['3']['cont'] = $dbp['cate_title'];
 	$T['AD'][$Tab][$l]['4']['cont'] = $dbp['cate_parent'];
 	$T['AD'][$Tab][$l]['4']['tc'] = 1;
 	$T['AD'][$Tab][$l]['4']['style'] = "text-align:center;";
@@ -178,7 +178,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery) ) {
 	$T['AD'][$Tab][$l]['5']['tc'] = 1;
 	$T['AD'][$Tab][$l]['5']['style'] = "text-align:center;";
 	$T['AD'][$Tab][$l]['6']['cont'] = $buttonLink."&categoryForm[cate_id]=".$dbp['cate_id']."&categoryForm[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&categoryForm[cate_id]=".$dbp['cate_id']."&categoryForm[command]=moveDown".$buttonDown."</a>\r";
-	$T['AD'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['cate_etat']];
+	$T['AD'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['cate_state']];
 	$T['AD'][$Tab][$l]['7']['tc'] = 1;
 	$l++;
 	$CateTabList[$dbp['cate_lang']]['count'] = $CateTabList[$dbp['cate_lang']]['linePtr'] = $l;

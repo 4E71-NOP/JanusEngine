@@ -33,7 +33,7 @@ class Category {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
+			FROM ".$SqlTableListObj->getSQLTableName('category')." 
 			WHERE cate_id = '".$id."'
 			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");

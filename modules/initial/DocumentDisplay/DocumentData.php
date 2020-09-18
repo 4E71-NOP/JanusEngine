@@ -43,16 +43,16 @@ class DocumentData {
 		if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 			$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - No arti_ref available. Getting first article");
 			$dbquery = $SDDMObj->query ( "
-			SELECT cat.cate_id, cat.cate_nom, cat.arti_ref
-			FROM " . $SqlTableListObj->getSQLTableName('categorie') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
+			SELECT cat.cate_id, cat.cate_name, cat.arti_ref
+			FROM " . $SqlTableListObj->getSQLTableName('category') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
 			WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 			AND cat.cate_lang = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
 			AND cat.deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
 			AND cat.group_id " . $UserObj->getUserEntry('clause_in_group')."
-			AND cat.cate_etat = '1'
-			AND cate_doc_premier = '1'
+			AND cat.cate_state = '1'
+			AND cate_initial_document = '1'
 			ORDER BY cat.cate_parent,cat.cate_position
 			;" );
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {

@@ -93,7 +93,7 @@ self::$InitTable['checkpoint'] = function (&$a) {
 
 self::$InitTable['content'] = function (&$a) {
 	$a['params'] = array(
-			"file" => "Nouvelle categorie",
+			"file" => "Nouvelle category",
 			"into" => "",
 	);
 };

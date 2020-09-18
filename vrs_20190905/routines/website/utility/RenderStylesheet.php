@@ -140,7 +140,7 @@ class RenderStylesheet {
 		$Content .="
 
 	.".$tableName."modif_article	{ height:512px ; overflow:auto }\r
-	.".$tableName."modif_categorie	{ height:512px ; overflow:auto }\r
+	.".$tableName."modif_category	{ height:512px ; overflow:auto }\r
 
 	.".$tableName."div_AdminControlSwitch {	
 		width: ". $themeArray['theme_admctrl_size_x'] ."px; 

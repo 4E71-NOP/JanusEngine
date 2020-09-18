@@ -166,7 +166,7 @@ class StringFormat {
 		self::$ConvertTable['keyword']['to_category']			= 1;
 		self::$ConvertTable['keyword']['to_url']				= 2;
 		self::$ConvertTable['keyword']['tooltip']				= 3;
-// 		self::$ConvertTable['keyword']['to_category']			= &self::$ConvertTable['keyword']['vers_categorie'];
+// 		self::$ConvertTable['keyword']['to_category']			= &self::$ConvertTable['keyword']['vers_category'];
 // 		self::$ConvertTable['keyword']['to_url']				= &self::$ConvertTable['keyword']['vers_url'];
 // 		self::$ConvertTable['keyword']['to_tooltip'] 			= &self::$ConvertTable['keyword']['vers_aide_dynamique'];
 		

@@ -122,7 +122,7 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $SDDMObj->query("
 SELECT art.arti_id, art.arti_name
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat
 WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.arti_ref = art.arti_ref

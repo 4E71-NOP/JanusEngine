@@ -47,9 +47,9 @@ self::$SqlQueryTable['M_BOUCLG_reb']['element']		= "Bouclage";
 self::$SqlQueryTable['M_BOUCLG_reb']['colone_1']	= "deadline_id";
 
 // Categorie
-self::$SqlQueryTable['M_CATEGO_rdc']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('categorie')." WHERE ws_id = '".$webSiteId."' AND cate_nom = '<A1>';";
+self::$SqlQueryTable['M_CATEGO_rdc']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('category')." WHERE ws_id = '".$webSiteId."' AND cate_name = '<A1>';";
 self::$SqlQueryTable['M_CATEGO_rdc']['element']		= "Categorie";
-self::$SqlQueryTable['M_CATEGO_rep']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('categorie')." WHERE ws_id = '".$webSiteId."' AND cate_nom = '<A1>';";
+self::$SqlQueryTable['M_CATEGO_rep']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('category')." WHERE ws_id = '".$webSiteId."' AND cate_name = '<A1>';";
 self::$SqlQueryTable['M_CATEGO_rep']['element']		= "Categorie";
 self::$SqlQueryTable['M_CATEGO_rep']['colone_1']	= "cate_id";
 self::$SqlQueryTable['M_CATEGO_reb']['requete']		= "SELECT deadline_id FROM ".$SqlTableListObj->getSQLTableName('deadline')." WHERE deadline_name = '<A1>' AND ws_id = '".$webSiteId."';";
@@ -58,7 +58,7 @@ self::$SqlQueryTable['M_CATEGO_reb']['colone_1']	= "deadline_id";
 self::$SqlQueryTable['M_CATEGO_reg']['requete']		= "SELECT grp.group_name, grp.group_id FROM ".$SqlTableListObj->getSQLTableName('group')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg  WHERE sg.ws_id = '".$webSiteId."' AND grp.group_name = '<A1>' AND grp.group_id = sg.group_id;";
 self::$SqlQueryTable['M_CATEGO_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_CATEGO_reg']['colone_1']	= "group_id";
-self::$SqlQueryTable['M_CATEGO_rrp']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('categorie')." WHERE ws_id = '".$webSiteId."' AND cate_role = '2' AND cate_lang = '".$A['Context']['ws_lang']."';";
+self::$SqlQueryTable['M_CATEGO_rrp']['requete']		= "SELECT cate_id FROM ".$SqlTableListObj->getSQLTableName('category')." WHERE ws_id = '".$webSiteId."' AND cate_role = '2' AND cate_lang = '".$A['Context']['ws_lang']."';";
 self::$SqlQueryTable['M_CATEGO_rrp']['element']		= "Categorie";
 self::$SqlQueryTable['M_CATEGO_rrp']['colone_1']	= "cate_id";
 

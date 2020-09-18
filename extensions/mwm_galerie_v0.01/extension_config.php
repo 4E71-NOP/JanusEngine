@@ -89,7 +89,7 @@ function GalerieCheckInstall () {
 	extension_score_element ( $dp['articles'] , $liste , "M_ARTICL_rea" );
 
 	$liste = array ( "fra_galerie", "eng_galerie" );
-	extension_score_element ( $dp['categories'] , $liste , "M_CATEGO_rep" );
+	extension_score_element ( $dp['categorys'] , $liste , "M_CATEGO_rep" );
 
 // $_REQUEST['sru_ERR']
 /*

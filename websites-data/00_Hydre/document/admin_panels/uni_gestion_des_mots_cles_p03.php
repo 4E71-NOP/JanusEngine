@@ -24,7 +24,7 @@ $_REQUEST['sql_initiateur'] = "fra_gestion_des_mots_cles_p03";
 // --------------------------------------------------------------------------------------------
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT art.arti_id, art.arti_name  
-FROM ".$SQL_tab['article']." art, ".$SQL_tab['categorie']." cat 
+FROM ".$SQL_tab['article']." art, ".$SQL_tab['category']." cat 
 WHERE art.ws_id = '".$website['ws_id']."'
 AND cat.ws_id = '".$website['ws_id']."'
 AND cat.arti_ref = art.arti_ref 

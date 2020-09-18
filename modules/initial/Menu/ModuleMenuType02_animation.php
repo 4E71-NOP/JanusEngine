@@ -77,7 +77,7 @@ class ModuleMenuType02 {
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 2;
 					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_ref'];
 				}
-				$Mp['entree'][$Mp['idx']]['nom'] = $A['cate_titre'];
+				$Mp['entree'][$Mp['idx']]['nom'] = $A['cate_title'];
 				$Mp['entree'][$Mp['idx']]['id'] = $A['cate_id'];
 				
 				// --------------------------------------------------------------------------------------------

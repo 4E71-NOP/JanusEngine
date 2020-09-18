@@ -106,7 +106,7 @@ if ( $user['group_tag'] == 3 ) {
 	include_once ("routines/website/manipulation_article.php");
 	include_once ("routines/website/manipulation_article_config.php");
 	include_once ("routines/website/manipulation_deadline.php");
-	include_once ("routines/website/manipulation_categorie.php");
+	include_once ("routines/website/manipulation_category.php");
 	include_once ("routines/website/manipulation_contexte.php");
 	include_once ("routines/website/manipulation_decoration.php");
 	include_once ("routines/website/manipulation_document.php");
@@ -200,9 +200,9 @@ if ( $user['group_tag'] == 3 ) {
 		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['articles']];
 
 		$pv['i']++;
-		$tl_['eng']['dp_text'] = "Creating categories";	$tl_['fra']['dp_text'] = "Cr&eacute;ation des cat&eacute;rogies";
+		$tl_['eng']['dp_text'] = "Creating categorys";	$tl_['fra']['dp_text'] = "Cr&eacute;ation des cat&eacute;rogies";
 		$AD['1'][$pv['i']]['1']['cont'] = $tl_[$l]['dp_text'];
-		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['categories']];
+		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['categorys']];
 
 		$ADC['onglet']['1']['nbr_ligne'] = $pv['i'];	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 1;
 		$tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";

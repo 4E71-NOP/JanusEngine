@@ -4,7 +4,7 @@
 //--------------------------------------------------------------------------------
 self::$ActionTable['add']['article']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['category']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['categorie']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['category']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['category']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['deadline']." (".$a['columns'].") VALUES (".$a['values'].");");};
 

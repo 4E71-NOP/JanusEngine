@@ -51,7 +51,7 @@ class ModuleMenuType01 {
 				$menu_principal[$cate_id_index] = array (
 						"cate_id"		=> $dbp['cate_id'],
 						"cate_type"		=> $dbp['cate_type'],
-						"cate_titre"	=> $dbp['cate_titre'],
+						"cate_title"	=> $dbp['cate_title'],
 						"cate_desc"		=> $dbp['cate_desc'],
 						"cate_parent"	=> $dbp['cate_parent'],
 						"cate_position"	=> $dbp['cate_position'],
@@ -103,7 +103,7 @@ class ModuleMenuType01 {
 		foreach ( $menu_principal as $A ) {
 			if ($A['cate_parent'] == $function_parameters['cate_parent'] ) {
 				if ( $A['arti_ref'] == "0" ) {
-					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_tb3' href=\"#\">".$A['cate_titre']."</a>\r<ul style='padding-left: 5px; list-style: none;'>\r";
+					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_tb3' href=\"#\">".$A['cate_title']."</a>\r<ul style='padding-left: 5px; list-style: none;'>\r";
 					$function_parametres_save = $function_parameters['cate_parent'];
 					$function_parameters['cate_parent'] = $A['cate_id'];
 					$this->menu_affichage_statique ();
@@ -111,10 +111,10 @@ class ModuleMenuType01 {
 					$Content .= "</ul>\r</li>\r";
 				}
 				elseif ( $A['arti_ref'] == $function_parameters['arti_request'] ) {
-					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_t3' href=\"#\">".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_t3' href=\"#\">".$A['cate_title']."</a></li>\r";
 				}
 				else {
-					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$bloc_html['url_slup']."\">".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$bloc_html['url_slup']."\">".$A['cate_title']."</a></li>\r";
 				}
 			}
 		}

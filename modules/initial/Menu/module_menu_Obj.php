@@ -101,14 +101,14 @@ class ModuleMenu {
 		// --------------------------------------------------------------------------------------------
 		$infos['module_menu_requete'] = "
 		SELECT cat.*
-		FROM ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
+		FROM ".$SqlTableListObj->getSQLTableName('category')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 		WHERE cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 		AND cat.deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		AND cat.cate_type IN ('0','1')
 		AND cat.group_id ".$UserObj->getUserEntry('clause_in_group')."
-		AND cat.cate_etat = '1'
+		AND cat.cate_state = '1'
 		ORDER BY cat.cate_parent,cat.cate_position
 		;";
 		$dbquery = $SDDMObj->query($infos['module_menu_requete']);
@@ -123,7 +123,7 @@ class ModuleMenu {
 				$menuData[$cate_id_index] = array (
 					"cate_id"		=> $dbp['cate_id'],
 					"cate_type"		=> $dbp['cate_type'],
-					"cate_titre"	=> $dbp['cate_titre'],
+					"cate_title"	=> $dbp['cate_title'],
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],

@@ -10234,7 +10234,7 @@ td > .theme_princ_B20_form_2  { font-weight: normal; color: #000000; background-
  
  
  .theme_princ_modif_article { height:512px ; overflow:auto }
- .theme_princ_modif_categorie { height:512px ; overflow:auto }
+ .theme_princ_modif_category { height:512px ; overflow:auto }
 
  .theme_princ_div_AdminControlSwitch { 
   width: 96px; 

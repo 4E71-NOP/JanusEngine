@@ -61,11 +61,11 @@ $RequestDataObj->setRequestData('formGenericData',
 
 
 /*Hydre-contenu_debut*/
-$localisation = " / fra_modification_de_categorie_p02";
+$localisation = " / fra_modification_de_category_p02";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("fra_modification_de_categorie_p02");
+$LMObj->logCheckpoint("fra_modification_de_category_p02");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("fra_modification_de_categorie_p02");
+$MapperObj->setSqlApplicant("fra_modification_de_category_p02");
 
 switch ($l) {
 	case "fra":
@@ -106,7 +106,7 @@ switch ($l) {
 		
 	case "eng":
 		$I18nObj->apply(array(
-		"invite1"		=> "This part will allow you to manage categories.",
+		"invite1"		=> "This part will allow you to manage categorys.",
 		"invite2"		=> "This part will allow you to create a category.",
 		"tabTxt1"		=> "General",
 		"tabTxt2"		=> "Details",
@@ -163,7 +163,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 		$commandType = "update";
 		$currentCategoryObj->getCategoryDataFromDB($RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_nom');
+		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -173,20 +173,20 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 		$currentCategoryObj->setCategory(
 			array (
 				"cate_id"			=>	"",
-				"cate_nom"			=>	"New_Category",
-				"cate_titre"		=>	"Category title",
+				"cate_name"			=>	"New_Category",
+				"cate_title"		=>	"Category title",
 				"cate_desc"			=>	"Category",
 				"cate_type"			=>	1,
 				"ws_id"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				"cate_lang"			=>	"",
 				"deadline_id"		=>	1,
-				"cate_etat"			=>	1,
+				"cate_state"			=>	1,
 				"cate_parent"		=>	1,
 				"cate_position"		=>	1,
 				"group_id"			=>	1,
-				"derniere_modif"	=>	"",
+				"cate_last_update"	=>	"",
 				"cate_role"			=>	"",
-				"cate_doc_premier"	=>	"",
+				"cate_initial_document"	=>	"",
 				"arti_ref"			=>	"",
 			)
 		);
@@ -210,7 +210,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminCategoryManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value='category'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentCategoryObj->getCategoryEntry('cate_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentCategoryObj->getCategoryEntry('cate_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='categoryForm[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -237,8 +237,8 @@ $T['AD']['2']['5']['1']['cont'] = $I18nObj->getI18nEntry('t2l5c1');
 $T['AD']['2']['6']['1']['cont'] = $I18nObj->getI18nEntry('t2l6c1');
 
 $T['AD']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
-$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_nom');
-$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
+$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
@@ -259,7 +259,7 @@ $tabState = array(
 		0 =>	array ( "t" => $I18nObj->getI18nEntry('offline'),	"db" => "OFFLINE"),
 		1 =>	array ( "t" => $I18nObj->getI18nEntry('online'),	"db" => "ONLINE"),
 );
-$tabState[$currentCategoryObj->getCategoryEntry('cate_etat')]['s'] = " selected ";
+$tabState[$currentCategoryObj->getCategoryEntry('cate_state')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabState as $A ) { $T['AD']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['7']['2']['cont'] .= "</select>\r";
@@ -283,7 +283,7 @@ $T['AD']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Bl
 foreach ( $tabGroup as $A ) { $T['AD']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['2']['2']['cont'] .= "</select>\r";
 
-$T['AD']['2']['3']['2']['cont'] = $TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('derniere_modif'));
+$T['AD']['2']['3']['2']['cont'] = $TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
 
 
 $tabRole = array(
@@ -301,7 +301,7 @@ $tabYN = array(
 		0	=> array ( "t"=>$I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
 		1	=> array ( "t"=>$I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
 );
-$tabYN[$currentCategoryObj->getCategoryEntry('cate_doc_premier')]['s'] = " selected ";
+$tabYN[$currentCategoryObj->getCategoryEntry('cate_initial_document')]['s'] = " selected ";
 $T['AD']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabYN as $A ) { $T['AD']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['5']['2']['cont'] .= "</select>\r";

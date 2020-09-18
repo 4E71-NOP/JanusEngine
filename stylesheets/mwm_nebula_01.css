@@ -231,7 +231,7 @@ td > .theme_princ_B01_form_2, td > .theme_princ_B02_form_2, td > .theme_princ_B0
 .theme_princ_B01M_ex55, .theme_princ_B02M_ex55, .theme_princ_B03M_ex55, .theme_princ_B04M_ex55, .theme_princ_B05M_ex55, .theme_princ_B06M_ex55, .theme_princ_B07M_ex55, .theme_princ_B08M_ex55, .theme_princ_B09M_ex55 { position: absolute; background-image: url(../graph/Nebula/nebula_B02_ex55.png);  vertical-align: bottom; width: 16px; height: 16px;   background-repeat : no-repeat; overflow:hidden }
  
  .theme_princ_modif_article { height:512px ; overflow:auto }
- .theme_princ_modif_categorie { height:512px ; overflow:auto }
+ .theme_princ_modif_category { height:512px ; overflow:auto }
 
  .theme_princ_div_AdminControlSwitch { 
   width: 64px; 

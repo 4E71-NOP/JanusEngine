@@ -130,7 +130,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		unset ( $A , $B );
 		$dbquery = $SDDMObj->query("
 		SELECT art.arti_name, art.arti_title
-		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
+		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('category')." as cat
 					
 		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.arti_deadline = '".$currentArticleObj->getDeadLineEntry('deadline_id')."'

@@ -7,7 +7,7 @@ rm -rf 09m00_article_config.scr
 rm -rf 10m00_modules.scr
 rm -rf 12m00_articles_01_fra_pack_critique.scr
 rm -rf 12m00_articles_02_eng_pack_critique.scr
-rm -rf 13m00_categories_admin.scr
+rm -rf 13m00_categorys_admin.scr
 rm -rf 12m01_articles_01_eng_pack_outils.scr
 rm -rf 12m01_articles_01_fra_pack_outils.scr
 
@@ -20,4 +20,4 @@ ln -s ../../00_Hydre/script/12m00_articles_01_fra_pack_critique.scr 12m00_articl
 ln -s ../../00_Hydre/script/12m00_articles_02_eng_pack_critique.scr 12m00_articles_02_eng_pack_critique.scr
 ln -s ../../00_Hydre/script/12m01_articles_01_eng_pack_outils.scr 12m01_articles_01_eng_pack_outils.scr
 ln -s ../../00_Hydre/script/12m01_articles_01_fra_pack_outils.scr 12m01_articles_01_fra_pack_outils.scr
-ln -s ../../00_Hydre/script/13m00_categories_admin.scr 13m00_categories_admin.scr
+ln -s ../../00_Hydre/script/13m00_categorys_admin.scr 13m00_categorys_admin.scr

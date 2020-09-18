@@ -62,7 +62,7 @@ class MenuSelectTable {
 	
 	
 	/**
-	 * Returns an array for HTML "menu select" containing the list of categories in the current website context.
+	 * Returns an array for HTML "menu select" containing the list of categorys in the current website context.
 	 * @return array
 	 */
 	public function getCategoryList(){
@@ -76,16 +76,16 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('categorie')."
+			FROM ".$SqlTableListObj->getSQLTableName('category')."
 			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			ORDER BY cate_nom
+			ORDER BY cate_name
 		;");
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog("MenuSelectTable/getCategoryList() : Loading data");
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['cate_id']]['t']	=	$tab[$dbp['cate_id']]['db']	= $dbp['cate_nom'];
+				$tab[$dbp['cate_id']]['t']	=	$tab[$dbp['cate_id']]['db']	= $dbp['cate_name'];
 			}
 		}
 		else {

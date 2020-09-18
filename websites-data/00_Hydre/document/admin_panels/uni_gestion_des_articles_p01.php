@@ -212,7 +212,7 @@ if ( $articleFormData['action'] == "AFFICHAGE" ) {
 
 $dbquery = $SDDMObj->query("
 SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = cat.arti_ref
 AND art.arti_deadline = bcl.deadline_id
 
@@ -220,7 +220,7 @@ AND art.ws_id = bcl.ws_id
 AND bcl.ws_id = cat.ws_id
 AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
-AND cat.cate_etat != '2'
+AND cat.cate_state != '2'
 AND cat.cate_type IN ('1','0')
 
 ".$sqlClause."

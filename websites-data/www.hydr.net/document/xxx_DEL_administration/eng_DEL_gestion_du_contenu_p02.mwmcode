@@ -17,7 +17,7 @@ The validation is the exclusive duty of the chief of section, and he will assici
 This is the part that allows to associate a document to an article. This part also allows to associate a deadline, choose a layout and select a configuration (menus). Each article has an uniq name and host pages that link documents. The article has an associated document for each of its pages.[BR]
 [BR]
 [TB2]Category managment[/F][BR]
-The catégories are the menu entries that allow to access the article content. They are depending on deadlines. The categories can be imbricated and form pseudo folders. Each category link to an article.
+The catégories are the menu entries that allow to access the article content. They are depending on deadlines. The categorys can be imbricated and form pseudo folders. Each category link to an article.
 The interface offer several possibilities (moving in the tree, access rights, article, etc.).[BR]
 [BR]
 [TB2]Deadline managment[/F][BR]

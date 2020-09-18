@@ -115,12 +115,12 @@ $tl_['fra']['link'] = "Lien pour modifier le document associ&eacute; a cet artic
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT cate_role, cate_id, arti_ref 
-FROM ".$SQL_tab['categorie']." 
+FROM ".$SQL_tab['category']." 
 WHERE cate_type IN ('2', '3') 
 AND ws_id IN ('1', '".$website['ws_id']."') 
 AND cate_lang = '".$website['ws_lang']."' 
 AND group_id ".$user['clause_in_group']." 
-AND cate_etat = '1' 
+AND cate_state = '1' 
 AND cate_role = '1'
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { $pv['role_article_cible'] = $dbp['arti_ref']; }

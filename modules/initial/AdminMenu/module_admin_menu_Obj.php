@@ -44,22 +44,22 @@ class ModuleAdministration {
 		$Content = "";
 		$dbquery = $SDDMObj->query ("
 			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
+			FROM ".$SqlTableListObj->getSQLTableName('category')." 
 			WHERE cate_type IN ('2', '3') 
 			AND ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
 			AND group_id ".$UserObj->getUserEntry('clause_in_group')." 
-			AND cate_etat = '1' 
+			AND cate_state = '1' 
 			;");
 // 		$Content .= "<!--
 // 			ModuleAdministration:\r
 // 			SELECT * 
-// 			FROM ".$SqlTableListObj->getSQLTableName('categorie')." 
+// 			FROM ".$SqlTableListObj->getSQLTableName('category')." 
 // 			WHERE cate_type IN ('2', '3') 
 // 			AND ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
 // 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
 // 			AND group_id ".$UserObj->getUserEntry('clause_in_group')." 
-// 			AND cate_etat = '1' 
+// 			AND cate_state = '1' 
 // 			;
 // 			-->";
 		
@@ -72,7 +72,7 @@ class ModuleAdministration {
 				$infos['menuData'][$cateIdIndex] = array (
 					"cate_id"		=> $dbp['cate_id'],
 					"cate_type"		=> $dbp['cate_type'],
-					"cate_titre"	=> $dbp['cate_titre'],
+					"cate_title"	=> $dbp['cate_title'],
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
@@ -114,7 +114,7 @@ class ModuleAdministration {
 		foreach ( $infos['menuData'] as $A ) {
 			if ($A['cate_parent'] == $infos['parameters']['cate_parent'] ) {
 				if ( $A['arti_ref'] == "0" ) {
-					$Content .= "<li><a class='".$block."_lien ".$block."_tb".$infos['module']['module_deco_default_text']."' href=\"#\">".$A['cate_titre']."</a>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_tb".$infos['module']['module_deco_default_text']."' href=\"#\">".$A['cate_title']."</a>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
 					$tmp = $infos['parameters']['cate_parent'];
 					$infos['parameters']['cate_parent'] = $A['cate_id'];
 					$infos['parameters']['level']++;
@@ -124,10 +124,10 @@ class ModuleAdministration {
 					$Content .= "</ul>\r</li>\r";
 				}
 				elseif ( $A['arti_ref'] == $infos['parameters']['arti_request'] ) {
-					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"#\"><b>*</b>".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"#\"><b>*</b>".$A['cate_title']."</a></li>\r";
 				}
 				else {
-					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$A['cate_title']."</a></li>\r";
 				}
 			}
 		}

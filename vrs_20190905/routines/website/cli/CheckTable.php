@@ -96,10 +96,10 @@ self::$CheckTable['link']['article']['1']['p']	= "document";
 
 //Category
 self::$CheckTable['add']['category']['0']['d']	= 3;
-self::$CheckTable['add']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['categorie']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_nom = '".$a['params']['name']."';");};
+self::$CheckTable['add']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['name']."';");};
 self::$CheckTable['add']['category']['0']['m']	= "CLI_Category_C001";
 self::$CheckTable['add']['category']['1']['d']	= 1;
-self::$CheckTable['add']['category']['1']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['categorie']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_nom = '".$a['params']['parent']."';");};
+self::$CheckTable['add']['category']['1']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['parent']."';");};
 self::$CheckTable['add']['category']['1']['c']	= "cate_id";
 self::$CheckTable['add']['category']['1']['v']	= "parent_id";
 self::$CheckTable['add']['category']['1']['m']	= "CLI_Category_C002";
@@ -125,7 +125,7 @@ self::$CheckTable['add']['category']['4']['p']	= "language";
 
 
 self::$CheckTable['update']['category']['0']['d']	= 2;
-self::$CheckTable['update']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['categorie']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_nom = '".$a['params']['name']."';");};
+self::$CheckTable['update']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['name']."';");};
 self::$CheckTable['update']['category']['0']['c']	= "cate_id";
 self::$CheckTable['update']['category']['0']['v']	= "cate_id";
 self::$CheckTable['update']['category']['0']['m']	= "CLI_Category_C001";

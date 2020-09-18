@@ -10,8 +10,8 @@ share document	name "doc_uni_gestion_des_articles_p02.php"				with_website "root
 share document	name "doc_uni_gestion_des_articles_p03.php"				with_website "rootwave"			modification "NO";
 share document	name "doc_uni_gestion_des_deadlines_p01.php"			with_website "rootwave"			modification "NO";
 share document	name "doc_uni_gestion_des_deadlines_p02.php"			with_website "rootwave"			modification "NO";
-share document	name "doc_uni_gestion_des_categories_p01.php"			with_website "rootwave"			modification "NO";
-share document	name "doc_uni_gestion_des_categories_p02.php"			with_website "rootwave"			modification "NO";
+share document	name "doc_uni_gestion_des_categorys_p01.php"			with_website "rootwave"			modification "NO";
+share document	name "doc_uni_gestion_des_categorys_p02.php"			with_website "rootwave"			modification "NO";
 share document	name "doc_uni_gestion_des_decorations_p01.php"			with_website "rootwave"			modification "NO";
 share document	name "doc_uni_gestion_des_decorations_p02.php"			with_website "rootwave"			modification "NO";
 share document	name "doc_uni_gestion_des_documents_p01.php"			with_website "rootwave"			modification "NO";

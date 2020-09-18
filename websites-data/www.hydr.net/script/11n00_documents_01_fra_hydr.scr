@@ -51,10 +51,10 @@ insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_deadline.
 share document	name "doc_fra_DEL_administration_tab_deadline.mwmcode"	with_website Hydr	modification YES;
 update document	name "doc_fra_DEL_administration_tab_deadline.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
 
-add document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	type MWMCODE;
-insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_categorie.mwmcode"		into "doc_fra_DEL_administration_tab_categorie.mwmcode";
-share document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	with_website Hydr	modification YES;
-update document	name "doc_fra_DEL_administration_tab_categorie.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
+add document	name "doc_fra_DEL_administration_tab_category.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_category.mwmcode"		into "doc_fra_DEL_administration_tab_category.mwmcode";
+share document	name "doc_fra_DEL_administration_tab_category.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_fra_DEL_administration_tab_category.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DEL_administration_tab_cdb.mwmcode"	type MWMCODE;
 insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_cdb.mwmcode"		into "doc_fra_DEL_administration_tab_cdb.mwmcode";

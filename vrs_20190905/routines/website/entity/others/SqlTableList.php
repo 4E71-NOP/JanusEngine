@@ -18,7 +18,7 @@ class SqlTableList {
 	private $TableList = array (
 			'article',				'article_tag',			'auteurs',
 			'deadline',				
-			'categorie',			
+			'category',			
 			'document',				'document_share',			'document_partage',
 			'decoration',			'deco_10_menu',				'deco_20_caligraphe',	'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
 			'group',				'group',					'group_user',			'group_user',

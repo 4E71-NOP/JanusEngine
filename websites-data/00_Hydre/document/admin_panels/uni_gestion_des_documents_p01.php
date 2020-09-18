@@ -42,11 +42,11 @@ $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_categories_p01";
+$localisation = " / uni_gestion_des_categorys_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_categories_p01");
+$LMObj->logCheckpoint("uni_gestion_des_categorys_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_categories_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_categorys_p01");
 
 switch ($l) {
 	case "fra":
