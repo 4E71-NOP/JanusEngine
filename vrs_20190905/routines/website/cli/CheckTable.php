@@ -448,11 +448,11 @@ self::$CheckTable['delete']['module']['0']['p']	= "module";
 // https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql
 // http://mysqlserverteam.com/new-collations-in-mysql-8-0-0/
 self::$CheckTable['add']['tag']['0']['d']	= 3;
-self::$CheckTable['add']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_nom FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['tag']['0']['m']	= "CLI_Tag_C001";
 
 self::$CheckTable['assign']['tag']['0']['d']	= 2;
-self::$CheckTable['assign']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_nom FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['assign']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['assign']['tag']['0']['c']	= "tag_id";
 self::$CheckTable['assign']['tag']['0']['v']	= "tag_id";
 self::$CheckTable['assign']['tag']['0']['m']	= "CLI_Tag_A001";
@@ -469,7 +469,7 @@ self::$CheckTable['assign']['tag']['2']['m']	= "CLI_Tag_A003";
 self::$CheckTable['assign']['tag']['2']['p']	= "link";
 
 self::$CheckTable['delete']['tag']['0']['d']	= 2;
-self::$CheckTable['delete']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_nom FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['delete']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['delete']['tag']['0']['c']	= "tag_id";
 self::$CheckTable['delete']['tag']['0']['v']	= "tag_id";
 self::$CheckTable['delete']['tag']['0']['m']	= "CLI_Tag_U001";

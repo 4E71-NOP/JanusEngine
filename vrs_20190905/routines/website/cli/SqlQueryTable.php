@@ -132,9 +132,9 @@ self::$SqlQueryTable['M_THEME_ret']['colone_1']		= "theme_id";
 // Usage de BINARY à cause de la collation : utf8mb4_general_ci
 // https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql
 // http://mysqlserverteam.com/new-collations-in-mysql-8-0-0/
-self::$SqlQueryTable['M_TAG_rdt']['requete']		= "SELECT tag_id,tag_nom FROM ".$SqlTableListObj->getSQLTableName('tag')." WHERE BINARY tag_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_TAG_rdt']['requete']		= "SELECT tag_id,tag_name FROM ".$SqlTableListObj->getSQLTableName('tag')." WHERE BINARY tag_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_TAG_rdt']['element']		= "Tag";
-self::$SqlQueryTable['M_TAG_ret']['requete']		= "SELECT tag_id,tag_nom FROM ".$SqlTableListObj->getSQLTableName('tag')." WHERE BINARY tag_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_TAG_ret']['requete']		= "SELECT tag_id,tag_name FROM ".$SqlTableListObj->getSQLTableName('tag')." WHERE BINARY tag_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_TAG_ret']['element']		= "Tag";
 self::$SqlQueryTable['M_TAG_ret']['colone_1']		= "tag_id";
 self::$SqlQueryTable['M_TAG_rea']['requete']		= "SELECT arti_id,arti_nom FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_nom = '<A1>' AND ws_id = '".$webSiteId."';";

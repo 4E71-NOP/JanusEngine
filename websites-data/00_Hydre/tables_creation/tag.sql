@@ -4,7 +4,7 @@
 
 CREATE TABLE !table! (
 tag_id		INTEGER NOT NULL, 
-tag_nom		VARCHAR(64), 
+tag_name	VARCHAR(64), 
 tag_html	VARCHAR(64), 
 ws_id		INTEGER, 
 

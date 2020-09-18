@@ -42,7 +42,7 @@ self::$InitTable['article_tag'] = function (&$a) {
 			"name" => "",
 			"article_tag_id" => "",
 			"arti_nom" => "",
-			"tag_nom" => "",
+			"tag_name" => "",
 			"docutag_lang" => "Fra"
 	);
 };

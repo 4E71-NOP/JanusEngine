@@ -62,7 +62,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			$dbquery = $SDDMObj->query("
 			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page
 			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('bouclage')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
-			WHERE tag.tag_nom LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
+			WHERE tag.tag_name LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 					
 			AND at.tag_id = tag.tag_id

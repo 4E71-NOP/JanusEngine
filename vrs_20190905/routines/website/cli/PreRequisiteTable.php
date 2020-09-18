@@ -418,7 +418,7 @@ self::$PreRequisiteTable['add']['tag'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "id",			"t" => "tag_id"),
-				array ( "v" => "name",			"t" => "tag_nom"),
+				array ( "v" => "name",			"t" => "tag_name"),
 				array ( "v" => "html",			"t" => "tag_html"),
 				array ( "v" => "site",			"t" => "ws_id"),
 
