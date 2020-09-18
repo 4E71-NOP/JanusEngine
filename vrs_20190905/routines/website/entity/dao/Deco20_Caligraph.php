@@ -26,13 +26,13 @@ class Deco20_Caligraph {
 			WHERE deco_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_20_caligraphe id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for deco_20_caligraphe id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco20_Caligraph[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_20_caligraphe id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for deco_20_caligraphe id=".$id));
 		}
 		
 	}

@@ -26,13 +26,13 @@ class Deco50_Exquisite {
 			WHERE deco_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_50_exquise id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for deco_50_exquise id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco50_Exquisite[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for deco_50_exquise id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for deco_50_exquise id=".$id));
 		}
 		
 	}

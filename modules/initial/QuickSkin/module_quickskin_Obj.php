@@ -55,7 +55,7 @@ class ModuleQuickSkin {
 		</p>
 		";
 		$grp = $UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
-		$LMObj->InternalLog( "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) );
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) ));
 		if ( $grp == "1" ) {
 			$dbquery = $SDDMObj->query("
 			SELECT a.theme_id,a.theme_name,a.theme_title

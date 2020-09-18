@@ -40,7 +40,7 @@ class RenderModule {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 
-		$LMObj->InternalLog("RenderModule->render start");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "RenderModule->render start"));
 		
 		$Content = "";
 		$ModuleTable = $RenderLayoutObj->getModuleList();
@@ -63,12 +63,12 @@ class RenderModule {
 
 		$pv ['i'] = 1;
 		
-// 		$LMObj->InternalLog($StringFormatObj->arrayToString($ModuleTable));
+// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($ModuleTable));
 		foreach ( $ModuleTable as $m ) {
 			$_REQUEST['module_nbr'] = 1;
 			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
-// 			$LMObj->InternalLog($StringFormatObj->arrayToString($UserObj->getUser()));
-// 			$LMObj->InternalLog("module_group_allowed_to_see=".$UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']));
+// 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($UserObj->getUser()));
+// 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "module_group_allowed_to_see=".$UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']));
 			
 			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
@@ -96,7 +96,7 @@ class RenderModule {
 // 				Execution modes are : 0 during, 1 Before, 2 After
 				switch ( $m['module_execution'] ) {
 					case 0:
-// 						$LMObj->InternalLog($StringFormatObj->arrayToString($ModuleTable));
+// 						$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($ModuleTable));
 						$Content .= $this->selectDecoration($infos);
 						
 						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
@@ -159,7 +159,7 @@ class RenderModule {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
 		
-		$LMObj->InternalLog("RenderModule->selectDecoration start");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "RenderModule->selectDecoration start"));
 		$Content = "";
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		

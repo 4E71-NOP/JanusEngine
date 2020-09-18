@@ -60,8 +60,8 @@ class SddmMySQLI {
 			$LMObj->logSQLDetails ( array ( $SQL_temps_depart, $LMObj->getSqlQueryNumber(), $MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], "Connexion", $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $TimeObj->microtime_chrono() ) );
 			$this->errorMsg();
 			$msg = "CONNEXION ERROR : "."err_no" . $this->DBInstance->errno.", err_msg" . $this->DBInstance->connect_error;
-			$LMObj->getInternalLog($msg);
-			error_log ($msg);
+			$LMObj->InternalLog( array('level'=> loglevelError , 'msg'=> __METHOD__ . " : " . $msg));
+// 			error_log ($msg);
 			$this->report['cnxErr'] = 1;
 			
 		}
@@ -94,7 +94,8 @@ class SddmMySQLI {
 		$Niveau = $CMobj->getConfigurationEntry('DebugLevel_SQL');
 
 		if ($this->DBInstance->errno != 0) {
-			error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
+			$LMObj->InternalLog( array('level'=> loglevelError , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+// 			error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
 			$SQLlogEntry['signal'] = "ERR";
 			$Niveau = 0;
 		}

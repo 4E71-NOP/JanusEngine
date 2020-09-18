@@ -466,10 +466,10 @@ else {
 	unset ($T);
 	$T = array();
 	if ( strlen($RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')) == 0 ) { 
-		$LMObj->InternalLog("No requested theme in the form, using the main theme.");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "No requested theme in the form, using the main theme."));
 		$RequestDataObj->setRequestDataSubEntry('UserProfileForm', 'SelectedTheme', $ThemeDataObj->getThemeDataEntry('theme_name') );
 	}
-	$LMObj->InternalLog("Requested theme =`".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."`");
+	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Requested theme =`".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."`"));
 	
 	$dbquery = $SDDMObj->query("
 	SELECT * 
@@ -477,7 +477,7 @@ else {
 	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."' 
 	AND a.theme_id = b.theme_id 
 	;");
-// 	$LMObj->InternalLog("
+// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "
 // 	SELECT *
 // 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
 // 	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."'

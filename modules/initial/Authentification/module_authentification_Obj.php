@@ -41,7 +41,7 @@ class ModuleAuthentification {
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$LMObj->InternalLog("ModuleAuthentification->render start");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleAuthentification->render start"));
 		
 		$cnxResult = $AUObj->getDataEntry('errorType');
 // 		$mod_auth_demande_connexion_resultat_test = "Connexion R&eacute;ussie";
@@ -51,7 +51,7 @@ class ModuleAuthentification {
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
 		
-		$LMObj->InternalLog("ModuleAuthentification:render() : user_login=".$SMObj->getSessionEntry('user_login'));
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleAuthentification:render() : user_login=".$SMObj->getSessionEntry('user_login')));
 		
 		$Content = "";
 		if ( $SMObj->getSessionEntry('user_login') == "anonymous") {

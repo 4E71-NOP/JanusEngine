@@ -52,7 +52,7 @@ class SessionManagement {
 		if ( isset($_SESSION['last_REMOTE_ADDR']) )	{ 
 			if ($_SESSION['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
 				$this->session['err'] = TRUE; $this->report['errMsg'] = "Not the same remote IP address";
-				$LMObj->InternalLog("SessionManagement-CheckSession : Not the same remote IP address");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "SessionManagement-CheckSession : Not the same remote IP address"));
 			} 
 		}
 		else { $_SESSION['last_REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];}
@@ -63,7 +63,7 @@ class SessionManagement {
 			if ($_SESSION['last_HTTP_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Not the same HTTP user agent";
-				$LMObj->InternalLog("SessionManagement-CheckSession : Not the same HTTP user agent");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "SessionManagement-CheckSession : Not the same HTTP user agent"));
 			}
 		}
 		else {$_SESSION['last_HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];}
@@ -73,7 +73,7 @@ class SessionManagement {
 			if ($this->session['SessionAge'] > $this->session['SessionMaxAge']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Session too old";
-				$LMObj->InternalLog("SessionManagement-CheckSession : Session is too old. SessionAge=".$this->session['SessionAge']." > SessionMaxAge=".$this->session['SessionMaxAge']);
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "SessionManagement-CheckSession : Session is too old. SessionAge=".$this->session['SessionAge']." > SessionMaxAge=".$this->session['SessionMaxAge']));
 			} 
 		}
 		else {$_SESSION['last_REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];}
@@ -83,11 +83,11 @@ class SessionManagement {
 // 			if ( $_SESSION['ws'] != $RequestDataObj->getRequestDataEntry('ws')) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "No site number in \$_SESSION['ws']";
-				$LMObj->InternalLog("SessionManagement-CheckSession : No site number in \$_SESSION['ws']");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "SessionManagement-CheckSession : No site number in \$_SESSION['ws']"));
 // 			}
 		}
 		else { 
-			$LMObj->InternalLog("\$_SESSION['ws']=".$_SESSION['ws']);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "\$_SESSION['ws']=".$_SESSION['ws']));
 // 			$_SESSION['ws'] = $RequestDataObj->getRequestDataEntry('ws'); 
 			$this->session['ws'] = $_SESSION['ws'];
 			$RequestDataObj->setRequestDataEntry('ws', $_SESSION['ws'] );
@@ -96,12 +96,12 @@ class SessionManagement {
 		// Any error leads to reset!
 		if ($this->session['err'] === TRUE) { 
 			$LMObj = LogManagement::getInstance();
-			$LMObj->InternalLog("CheckSession : Session error");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "CheckSession : Session error"));
 			$this->ResetSession();
 		}
 		else {
 		$this->session['sessionMode'] = 1;
-		$LMObj->InternalLog("CheckSession : Session seems ok. ws='" . $this->session['ws']."'");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "CheckSession : Session seems ok. ws='" . $this->session['ws']."'"));
 		
 		}
 	}
@@ -132,10 +132,10 @@ class SessionManagement {
 		$RequestDataObj = RequestData::getInstance();
 		
 		
-		$LMObj->InternalLog("StoreUserCredential mode=".$mode. ". Saving user into the session");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "StoreUserCredential mode=".$mode. ". Saving user into the session"));
 		switch ($mode) {
 			case "session" :
-				$LMObj->InternalLog("StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'"); 
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'")); 
 				if ( strlen($_SESSION['user_login']) == 0 ) { $this->ResetSession(); }
 				$this->session['user_login']		= $_SESSION['user_login'];
 				$this->session['PasswordSha512']	= "";
@@ -144,7 +144,7 @@ class SessionManagement {
 				break;
 			case "form" :
 				// We save directly the data into the session.
-				$LMObj->InternalLog("Form content: " . $StringFormatObj->arrayToString($RequestDataObj->getRequestDataEntry('authentificationForm')));
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Form content: " . $StringFormatObj->arrayToString($RequestDataObj->getRequestDataEntry('authentificationForm'))));
 				$RequestDataObj = RequestData::getInstance();
 				$_SESSION['user_login']		=	$this->session['user_login']	=	$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
 				$_SESSION['ws']				=	$this->session['ws']			=	$RequestDataObj->getRequestDataEntry('ws');
@@ -159,7 +159,7 @@ class SessionManagement {
 	 */
 	public function ResetSession() {
 		$LMObj = LogManagement::getInstance();
-		$LMObj->InternalLog("ResetSession() has been called");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ResetSession() has been called"));
 		
 		$this->session = array();
 		$this->restartSession();

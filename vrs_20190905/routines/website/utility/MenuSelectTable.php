@@ -48,13 +48,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getArtiRefList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getArtiRefList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['arti_ref']]['t']	=	$tab[$dbp['arti_ref']]['db']	= $dbp['arti_ref'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getArtiRefList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getArtiRefList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -83,13 +83,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getCategoryList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getCategoryList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['cate_id']]['t']	=	$tab[$dbp['cate_id']]['db']	= $dbp['cate_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getCategoryList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getCategoryList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -118,13 +118,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getDeadlineList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getDeadlineList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['deadline_id']]['t']	=	$tab[$dbp['deadline_id']]['db']	= $dbp['deadline_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getDeadlineList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getDeadlineList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -154,13 +154,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getDocumentList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getDocumentList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['docu_id']]['t']	=	$tab[$dbp['docu_id']]['db']	= $dbp['docu_nom'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getDocumentList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getDocumentList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -189,13 +189,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getGroupList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getGroupList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['group_id']]['t']	=	$tab[$dbp['group_id']]['db']	= $dbp['group_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getGroupList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getGroupList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -227,13 +227,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getLayoutList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getLayoutList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['layout_generic_name']]['t']	=	$tab[$dbp['layout_generic_name']]['db']	= $dbp['layout_generic_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getLayoutList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getLayoutList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -262,13 +262,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getLanguageList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getLanguageList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['lang_id']]['t']	=	$tab[$dbp['lang_id']]['db']	= $dbp['lang_original_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getLanguageList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getLanguageList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -297,13 +297,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getThemeList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getThemeList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['theme_id']]['t']	=	$tab[$dbp['theme_id']]['db']	= $dbp['theme_name'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getThemeList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getThemeList() : No rows returned"));
 		}
 		
 		return $tab;
@@ -336,13 +336,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog("MenuSelectTable/getUserList() : Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getUserList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['user_id']]['t']	=	$tab[$dbp['user_id']]['db']	= $dbp['user_nom'];
 			}
 		}
 		else {
-			$LMObj->InternalLog("MenuSelectTable/getUserList() : No rows returned");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getUserList() : No rows returned"));
 		}
 		
 		return $tab;	

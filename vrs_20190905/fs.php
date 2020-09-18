@@ -80,7 +80,7 @@ $SMObj->CheckSession(); //Does NOT check login & password.
 
 // Is user_login is defined and different from 'anonymous' we consider the user is authenticated
 if ( strlen($SMObj->getSessionEntry('user_login')) == 0 && $SMObj->getSessionEntry('user_login') != "anonymous") {
-	$LMObj->InternalLog("fs.php : \$_SESSION strlen(user_login)=0");
+	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0"));
 	$SMObj->ResetSession();
 }
 
@@ -96,10 +96,10 @@ $entryPoint = $_SERVER['DOCUMENT_ROOT']."Hydr/";
 $pathToExplore	= realpath($entryPoint."/".$RequestDataObj->getRequestDataEntry('path'));
 $restrictTo		= realpath($entryPoint."/".$RequestDataObj->getRequestDataEntry('restrictTo'));
 
-$LMObj->InternalLog("fs.php brefore : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`.");
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php brefore : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
 if ( strpos($pathToExplore,	$restrictTo) === FALSE )	{ $pathToExplore = $restrictTo; }
 if ( strpos($pathToExplore,	$entryPoint) === FALSE )	{ $pathToExplore = $entryPoint; }
-$LMObj->InternalLog("fs.php   after : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`.");
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php   after : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
 
 $TfsIdx			= $RequestDataObj->getRequestDataEntry('idx');
 $selectionMode	= $RequestDataObj->getRequestDataEntry('mode');
@@ -109,7 +109,7 @@ $strRemove		= $RequestDataObj->getRequestDataEntry('strRemove');
 $strAdd			= $RequestDataObj->getRequestDataEntry('strAdd');
 $displayType	= $RequestDataObj->getRequestDataEntry('displayType');
 
-$LMObj->InternalLog("fs.php strAdd=`".$strAdd."`;strRemove=`".$strRemove."`; preg_replace=`".$strAdd.preg_replace($strRemove, '','../../dir/dir/file.php'));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php strAdd=`".$strAdd."`;strRemove=`".$strRemove."`; preg_replace=`".$strAdd.preg_replace($strRemove, '','../../dir/dir/file.php')));
 
 $pos = strrpos ($pathToExplore, "/");
 $pathToExploreUp = substr ( $pathToExplore, 0 , $pos); 
@@ -240,7 +240,7 @@ switch ($displayType){
 	case "fileList":
 		$Content .= "<table style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
 		$scoreMode = ($selectionMode == 'file') ? 0:4;
-		$LMObj->InternalLog("fs.php selectionMode=`".$selectionMode."`;scoreMode=`".$scoreMode."`.");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php selectionMode=`".$selectionMode."`;scoreMode=`".$scoreMode."`."));
 		
 		foreach ( $fileList[1] as $A ) {
 			$target = (strlen($strRemove) > 0) ? $strAdd.preg_replace($strRemove, '', $A['target']) : $strAdd.$A['target'];

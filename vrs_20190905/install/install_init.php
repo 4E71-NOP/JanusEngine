@@ -42,7 +42,7 @@ $ClassLoaderObj->provisionClass('SessionManagement');
 session_name("HydrWebsiteSessionId");
 session_start();
 $SMObj = SessionManagement::getInstance($CMObj);
-$LMObj->InternalLog("*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" ));
 
 $ClassLoaderObj->provisionClass('WebSite');
 // --------------------------------------------------------------------------------------------

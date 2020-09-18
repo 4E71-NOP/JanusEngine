@@ -47,7 +47,7 @@ class ThemeDescriptor {
 		//	"Yo dawg i heard you like admin Ungoofing so i put an admin ungoof in yo admin ungoof..."
 		// --------------------------------------------------------------------------------------------
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for theme descriptor id=".$ThemeId);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for theme descriptor id=".$ThemeId));
 		}
 		else {
 			$dbquery = $SDDMObj->query("
@@ -55,7 +55,7 @@ class ThemeDescriptor {
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')."
 			WHERE theme_id = 2
 			;");
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme.");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));
 		}
 		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) { $this->ThemeDescriptor [$A] = $B; }

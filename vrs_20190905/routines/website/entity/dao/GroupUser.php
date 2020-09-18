@@ -26,13 +26,13 @@ class GroupUser {
 			WHERE group_user_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for group_user id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for group_user id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->GroupUser[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for group_user id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for group_user id=".$id));
 		}
 		
 	}

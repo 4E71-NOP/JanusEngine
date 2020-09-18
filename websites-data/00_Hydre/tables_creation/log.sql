@@ -7,8 +7,8 @@ log_signal	ERR 0	OK 1	WARN 2	INFO 3	AUTRE 4
 
 CREATE TABLE !table! (
 log_id			INTEGER NOT NULL,
-ws_id					INTEGER,
-log_date			INTEGER,
+ws_id			INTEGER,
+log_date		INTEGER,
 log_initiator	VARCHAR(255),
 log_action		BLOB,
 log_signal		INTEGER,

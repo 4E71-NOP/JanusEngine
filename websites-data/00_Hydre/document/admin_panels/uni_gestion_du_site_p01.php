@@ -200,7 +200,7 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
-// 	$LMObj->InternalLog('AdminDashboard modification checkbox forgotten');
+// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard modification checkbox forgotten');
 // 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
 // }
 

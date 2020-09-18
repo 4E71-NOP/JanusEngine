@@ -26,13 +26,13 @@ class StoredEvent {
 				WHERE stored_event_id = '" . $id . "'
 				;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for stored_event id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for stored_event id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->StoredEvent[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for stored_event id=".$id);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for stored_event id=".$id));
 		}
 	
 	}

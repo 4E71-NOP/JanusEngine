@@ -39,13 +39,13 @@ class AdminFormTool {
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on'
 				) {
-					$LMObj->InternalLog('AdminDashboard modification checkbox forgotten');
+					$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard modification checkbox forgotten'));
 					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
 		}
 		if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboardCreate'
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'creation') != 'on' ) {
-					$LMObj->InternalLog('AdminDashboard deletion checkbox forgotten');
+					$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard deletion checkbox forgotten'));
 					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotCreation')."</p>\r";
 					$RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'create');
 					$RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
@@ -53,7 +53,7 @@ class AdminFormTool {
 		if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'delete'
 				&& $RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
-					$LMObj->InternalLog('AdminDashboard deletion checkbox forgotten');
+					$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard deletion checkbox forgotten'));
 					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotDeletion')."</p>\r";
 					$RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'edit');
 					$RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');

@@ -23,6 +23,7 @@ class ModuleSelectLanguage {
 		$CMObj = ConfigurationManagement::getInstance();
 		$SMObj = SessionManagement::getInstance(null);
 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$StringFormatObj = StringFormat::getInstance();
 		
 		$localisation = " / ModuleSelectLanguage";
 		$MapperObj->AddAnotherLevel($localisation );
@@ -39,7 +40,8 @@ class ModuleSelectLanguage {
 // 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 // 		$i18n = array();
 // 		include ("../modules/initial/Authentification/i18n/".$l.".php");
-
+		$vars = get_defined_vars();
+		
 		$language_website_ = array();
 		$Content = "";
 		if ( $WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
@@ -89,6 +91,10 @@ class ModuleSelectLanguage {
 			}
 			$Content .= "</tr></table>";
 		}
+		
+// 		$vars = get_defined_vars();
+// 		$vars = array_diff(get_defined_vars(),$vars);
+// 		$LMObj->InternalLog(array( 'level' => loglevelError, 'msg' => $StringFormatObj->arrayToString($vars)));
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,

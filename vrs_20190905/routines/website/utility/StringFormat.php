@@ -327,6 +327,7 @@ class StringFormat {
 		$str = "array(";
 		foreach ($data as $A => $B) { 
 			if ( is_array($B)) { $str .= "[".$A."]=" . $this->arrayToString ($B); }
+			elseif ( is_object($B)) { $str .= "[".$A."] is an object named `".get_class($B)."`, "; }
 			else { $str .= "[".$A."]=`".$B."`, "; }
 		}
 		$str = substr ( $str, 0 , -2 ) . "), ";

@@ -30,7 +30,7 @@ class RenderDeco50Exquisite {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		$LMObj = LogManagement::getInstance();
-		$LMObj->InternalLog("Start");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Start"));
 		
 		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
@@ -43,18 +43,18 @@ class RenderDeco50Exquisite {
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		switch ($infos['affiche_module_mode']) {
 			case "bypass":
-				$LMObj->InternalLog("display module mode is 'bypass'");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
 				// 				$Content .= "<!-- Module ".$mn." px=".$infos['admin_control']['px']."; py=" . $infos['admin_control']['py']."-->\r";
 				break;
 			case "normal":
-				$LMObj->InternalLog("display module mode is 'normal'");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'normal'"));
 				break;
 			case "menu":
 				// 				$StringFormatObj = StringFormat::getInstance();
-				// 				$LMObj->InternalLog("display module mode is 'menu' : ".$mn."<br>m=".$StringFormatObj->arrayToString($m));
-				$LMObj->InternalLog("display module mode is 'menu' : ".$mn);
+				// 				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'menu' : ".$mn."<br>m=".$StringFormatObj->arrayToString($m));
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'menu' : ".$mn));
 				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
@@ -81,7 +81,7 @@ class RenderDeco50Exquisite {
 		$L['dim_y_ex22'] = $L['pos_y3_ex22'] - $L['pos_y1_ex22'];
 		
 		// Correction des valeurs en fonction des gabarits des elements de la décoration.
-		$LMObj->InternalLog("mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']);
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
 		
 		$CV = ($L['dim_x_ex22'] - $B['ex12_x'] - $B['ex14_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
 		$CV = ($L['dim_x_ex22'] - $B['ex52_x'] - $B['ex54_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
@@ -127,7 +127,7 @@ class RenderDeco50Exquisite {
 		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 		";
 		if ( isset($infos['module']['module_container_name'] ) && strlen($infos['module']['module_container_name']) > 0 ) {
-			$LMObj->InternalLog("Adding a container DIV: ". $infos['module']['module_container_name']);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Adding a container DIV: ". $infos['module']['module_container_name']));
 			$Content .= "<div id='".$infos['module']['module_container_name']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
 		}
 		$Content .= "
@@ -154,7 +154,7 @@ class RenderDeco50Exquisite {
 
 		$GeneratedJavaScriptObj->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 50 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
-		$LMObj->InternalLog("End");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "End"));
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

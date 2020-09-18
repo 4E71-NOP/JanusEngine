@@ -177,7 +177,7 @@ $devDebug = 0;
 if ( $devDebug != 1 ) {
 	foreach ( $r as $q ){ 
 		$SDDMObj->query($q); 
-		error_log($q);
+		error_log(__METHOD__ . " : " . $q);
 	}
 	unset ($r);
 	
@@ -190,11 +190,13 @@ if ( $devDebug != 1 ) {
 	//		Lancement des scripts.
 	//
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_creation"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_creation",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
+			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInsdtallationMonitor" => 0
 	);
 	
 	$LibInstallationObj->scanDirectories($infos);
@@ -206,11 +208,13 @@ if ( $devDebug != 1 ) {
 	
 	
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_data"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_data",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
+			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInsdtallationMonitor" => 0
 	);
 	
 	$LibInstallationObj->scanDirectories($infos);
@@ -221,14 +225,15 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : Initialization of table installation"));
 	$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 	$r = array(
 			"COMMIT;",
 			"FLUSH TABLES;",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$installationStartTime."' WHERE inst_name = 'start_date';",
-			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'derniere_activite';",
+			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$RequestDataObj->getRequestDataEntry('SessionID')."' WHERE inst_name = 'SessionID';",
-			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'affichage';",
+			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 			"COMMIT;",
 	);
 	foreach ( $r as $q ){
@@ -238,11 +243,13 @@ if ( $devDebug != 1 ) {
 	unset ($r);
 	
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : commandConsole"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "commandConsole",
 			"section" => "script",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
+			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInsdtallationMonitor" => 1
 	);
 	error_log($StringFormatObj->arrayToString($infos));
 	$LibInstallationObj->scanDirectories($infos);
@@ -253,11 +260,13 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_post_install"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_post_install",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list')
+			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInsdtallationMonitor" => 1
 	);
 	$LibInstallationObj->scanDirectories($infos);
 	error_log($StringFormatObj->arrayToString($infos));
@@ -268,6 +277,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
+	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : renderConfigFile"));
 	$tabConfigFile = array();
 	$i=0;
 	error_log($StringFormatObj->arrayToString($infos));
@@ -280,7 +290,6 @@ if ( $devDebug != 1 ) {
 		}
 		$i++;
 	}
-	
 	
 // --------------------------------------------------------------------------------------------
 $SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");

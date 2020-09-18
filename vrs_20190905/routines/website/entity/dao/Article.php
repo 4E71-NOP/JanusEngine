@@ -39,13 +39,13 @@ class Article {
 			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			;");
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog(__METHOD__ . " : Loading data for article id=".$ref."/".$page);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for article id=".$ref."/".$page));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Article[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog(__METHOD__ . " : No rows returned for article id=".$ref."/".$page);
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for article id=".$ref."/".$page));
 		}
 		
 	}

@@ -120,10 +120,11 @@ class LibInstallation {
 					case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
 				}
 				$this->report['lastReportExecution'] = time();
-				$this->updateInsdtallationMonitor();
+				if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 			}
 		}
 		$SDDMObj->query("FLUSH TABLES;");
+		$SDDMObj->query("COMMIT;");
 	}
 	
 	/**
@@ -165,7 +166,7 @@ class LibInstallation {
 							case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
 						}
 						$this->report['lastReportExecution'] = time();
-						$this->updateInsdtallationMonitor();
+						if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 					}
 					$CurrentSetObj->setDataSubEntry('cli', 'websiteCreation', 0);
 				}

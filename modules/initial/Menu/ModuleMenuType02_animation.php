@@ -204,14 +204,14 @@ class ModuleMenuType02 {
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'py', ( 160 * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', ( $A['width'] * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', ( 256 * $pv['coef'] ));
-				$LMObj->InternalLog(
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 
 					"Situation A / id=".$A['id']. "; par=". $A['par'].
 					"; px=". ( 160 * $pv['coef'] ).
 					"; py=". ( 160 * $pv['coef'] ).
 					"; dx=". ( $A['width'] * $pv['coef'] ).
 					"; dy=". ( 256 * $pv['coef'] ).
 					"*"
-				);
+				));
 			}
 		}
 		
@@ -226,14 +226,14 @@ class ModuleMenuType02 {
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', $PMT['div_width']);
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']+1) ) + $PMT['ex11_y'] + $PMT['exF1_y']);
 			
-			$LMObj->InternalLog(
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 
 				"Situation B / id=".$A['id'].
 				"; px=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'px').
 				"; py=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'py').
 				"; dx=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'dx').
 				"; dy=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'dy').
 				"*"
-			);
+			));
 		}
 		
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();

@@ -173,7 +173,7 @@ class LogManagement {
 	 * @param array $data
 	 */
 	public function InternalLog($log) {
-		if ($log['level'] >= internalLoglevel) {
+		if ($log['level'] != logLevelNoLog && $log['level'] <= internalLoglevel ) {
 			$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 4 );
 			$i = 0;
 			//@formatter:off

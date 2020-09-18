@@ -98,7 +98,7 @@ $CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 session_name($CurrentSetObj->getDataEntry('sessionName'));
 session_start();
 $SMObj = SessionManagement::getInstance($CMObj);
-// $LMObj->InternalLog("*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
+// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
 
 // --------------------------------------------------------------------------------------------
 //
@@ -114,7 +114,7 @@ if ( strlen($RequestDataObj->getRequestDataEntry('formSubmitted')) == 1 && $Requ
 }
 if ( strlen($RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection")) { $firstContactScore += 8; }
 
-$LMObj->InternalLog("index.php : \$firstContactScore='". $firstContactScore ."'");
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$firstContactScore='". $firstContactScore ."'"));
 $authentificationMode = "session";
 $authentificationAction = userActionSingIn;
 switch ( $firstContactScore ) {
@@ -246,36 +246,36 @@ $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 // we have 2 variables used drive the authentification process.
 switch ( $authentificationMode ){
 	case "form":
-		$LMObj->InternalLog("index.php : Authentification with form mode");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Authentification with form mode"));
 		switch ( $authentificationAction ) {
 			case userActionDisconnect:
-				$LMObj->InternalLog("index.php : disconnect submitted");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : disconnect submitted"));
 				$SMObj->ResetSession();
 				$userName = anonymousUserName;
 				break;
 			case userActionSingIn:
-				$LMObj->InternalLog("index.php : Connection attempt");
+				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Connection attempt"));
 				$userName = $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
 				break;
 				
 		}
 		$SMObj->ResetSession();				// If a login comes from a form. The session object must be reset!
 		$UserObj->getUserDataFromDB($userName, $WebSiteObj );
-		$LMObj->InternalLog("index.php : user_login=" . $UserObj->getUserEntry('user_login'));
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : user_login=" . $UserObj->getUserEntry('user_login')));
 		$AUObj->checkUserCredential($UserObj, 'form');
-		$LMObj->InternalLog("index.php : Connection attempt end");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Connection attempt end"));
 		break;
 	case "session":
-		$LMObj->InternalLog("index.php : Authentification with session mode. user_login='" . $SMObj->getSessionEntry('user_login')."'");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Authentification with session mode. user_login='" . $SMObj->getSessionEntry('user_login')."'"));
 		
 		// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 		if ( strlen($SMObj->getSessionEntry('user_login')) == 0 ) {
-			$LMObj->InternalLog("index.php : \$_SESSION strlen(user_login)=0");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION strlen(user_login)=0"));
 			$SMObj->ResetSession();
 		}
 		$UserObj->getUserDataFromDB( $SMObj->getSessionEntry('user_login'), $WebSiteObj );
 		if ( $UserObj->getUserEntry('error_login_not_found') != 1 ) {
-			$LMObj->InternalLog("index.php : session mode : ".$StringFormatObj->arrayToString( $SMObj->getSession()));
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : session mode : ".$StringFormatObj->arrayToString( $SMObj->getSession())));
 			$AUObj->checkUserCredential($UserObj, 'session');
 		}
 		else {
@@ -287,11 +287,11 @@ switch ( $authentificationMode ){
 		break;
 }
 
-$LMObj->InternalLog("index.php : \$SMObj->getSession() :" . $StringFormatObj->arrayToString($SMObj->getSession()));
-$LMObj->InternalLog("index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$SMObj->getSession() :" . $StringFormatObj->arrayToString($SMObj->getSession())));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)));
 if ( $AUObj->getDataEntry('error') === TRUE ) { $UserObj->getUserDataFromDB("anonymous", $WebSiteObj); }
-// $LMObj->InternalLog("index.php : UserObj = " . $StringFormatObj->arrayToString($UserObj->getUser()));
-$LMObj->InternalLog("index.php : checkUserCredential end");
+// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : UserObj = " . $StringFormatObj->arrayToString($UserObj->getUser()));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : checkUserCredential end"));
 
 // --------------------------------------------------------------------------------------------
 //	
@@ -310,23 +310,23 @@ if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0 && $RequestDataObj->
 if ( strlen($UserObj->getUserEntry('lang')) != 0 && $UserObj->getUserEntry('lang') != 0 ) { $scoreLang += 2; }
 if ( strlen($WebSiteObj->getWebSiteEntry('ws_lang')) != 0 && $WebSiteObj->getWebSiteEntry('ws_lang') != 0 ) { $scoreLang += 1; }
 
-// $LMObj->InternalLog("Language list: ". $StringFormatObj->arrayToString($CMObj->getLanguageList()));
-$LMObj->InternalLog("Website : ws_lang='". $WebSiteObj->getWebSiteEntry('ws_lang')."'");
+// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language list: ". $StringFormatObj->arrayToString($CMObj->getLanguageList()));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Website : ws_lang='". $WebSiteObj->getWebSiteEntry('ws_lang')."'"));
 
 switch ($scoreLang) {
 	case 0:
-		$LMObj->InternalLog("Language selection : Error on Language");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : Error on Language"));
 		break;
 	case 1:
 		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_639_3');
-		$LMObj->InternalLog("Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")"));
 		$CurrentSetObj->setDataEntry('language', $tmp);
 		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_id') );
 		break;
 	case 2:
 	case 3:
 		$tmp = $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_639_3');
-		$LMObj->InternalLog("Language selection : User priority (Case=".$scoreLang."; ".$UserObj->getUserEntry('lang')."->".$tmp.")");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : User priority (Case=".$scoreLang."; ".$UserObj->getUserEntry('lang')."->".$tmp.")"));
 		$CurrentSetObj->setDataEntry('language', $tmp);
 		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_id'));
 		break;
@@ -335,7 +335,7 @@ switch ($scoreLang) {
 	case 6:
 	case 7:
 		$tmp = strtolower($RequestDataObj->getRequestDataEntry('l'));
-		$LMObj->InternalLog("Language selection : URL priority (Case=".$scoreLang."; ".$RequestDataObj->getRequestDataEntry('l') . "->" . $tmp . ")");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : URL priority (Case=".$scoreLang."; ".$RequestDataObj->getRequestDataEntry('l') . "->" . $tmp . ")"));
 		$CurrentSetObj->setDataEntry('language', $tmp); // URl/form asked, the king must be served!
 		$CurrentSetObj->setDataEntry('language_id', strtolower($RequestDataObj->getRequestDataEntry('l')));
 		break;
@@ -366,10 +366,10 @@ if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) 
 	$FormToCommandLineObj->analysis();
 
 	
-	$LMObj->InternalLog("FormToCommandLineObj->getCommandLineNbr() =".$FormToCommandLineObj->getCommandLineNbr());
+	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "FormToCommandLineObj->getCommandLineNbr() =".$FormToCommandLineObj->getCommandLineNbr()));
 	
 	if ( $FormToCommandLineObj->getCommandLineNbr() > 0 ) {
-		$LMObj->InternalLog("index.php script is on the bench :");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php script is on the bench :"));
 		$ClassLoaderObj->provisionClass('CommandConsole');
 
 		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj); // Set an initial website context.
@@ -384,7 +384,7 @@ if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) 
 				break;
 			case "disabled":	
 			default:
-				foreach ($Script as $A ) { $LMObj->InternalLog($A); }
+				foreach ($Script as $A ) { $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $A)); }
 				break;
 		}
 	}
@@ -671,7 +671,7 @@ Licence : Creative commons CC-by-nc-sa (http://www.creativecommons.org/)
 -->
 ";
 
-$LMObj->InternalLog("index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION));
+$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)));
 
 // --------------------------------------------------------------------------------------------
 $SDDMObj->disconnect_sql();

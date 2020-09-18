@@ -55,13 +55,13 @@ class ConfigurationManagement {
 		$SMObj = SessionManagement::getInstance(0);
 
 		$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-		$LMObj->InternalLog("ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`.");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 		$pv['ObjectMode'] = 1; //during migration avoid re-delcaring the same function.
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
 			$SMObj->ResetSession();
 			$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-			$LMObj->InternalLog("ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`.");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 			include ($configFile);
 		}
 		$CurrentConfig = returnConfig();

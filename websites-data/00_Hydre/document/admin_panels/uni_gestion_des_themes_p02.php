@@ -217,11 +217,11 @@ switch ( $RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 
 // --------------------------------------------------------------------------------------------
 // if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
-// 	$LMObj->InternalLog('AdminDashboard modification checkbox forgotten');
+// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard modification checkbox forgotten');
 // 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
 // }
 // if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
-// 	$LMObj->InternalLog('AdminDashboard deletion checkbox forgotten');
+// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard deletion checkbox forgotten');
 // 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotDeletion')."</p>\r";
 // }
 

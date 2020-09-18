@@ -41,7 +41,7 @@ class DocumentData {
 // 		Checks if we have a requested article 
 // 		if ( !isset($_REQUEST['arti_ref']) || strlen($_REQUEST['arti_ref']) == 0 ) {
 		if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
-			$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - No arti_ref available. Getting first article");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "DocumentData:getDocumentDataFromDB - No arti_ref available. Getting first article"));
 			$dbquery = $SDDMObj->query ( "
 			SELECT cat.cate_id, cat.cate_name, cat.arti_ref
 			FROM " . $SqlTableListObj->getSQLTableName('category') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
@@ -67,7 +67,7 @@ class DocumentData {
 		}
 		
 // 		We have an article to display whatever its ID is requested or forged
-		$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "DocumentData:getDocumentDataFromDB - arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`"));
 		$dbquery = $SDDMObj->query("
 		SELECT art.*, doc.docu_id, doc.docu_nom, doc.docu_type,
 		doc.docu_createur, doc.docu_creation_date,
@@ -84,7 +84,7 @@ class DocumentData {
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - article not found");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "DocumentData:getDocumentDataFromDB - article not found"));
 			
 			$dbquery = $SDDMObj->query("
 			SELECT doc.*
@@ -96,7 +96,7 @@ class DocumentData {
 		}
 		
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$LMObj->InternalLog("DocumentData:getDocumentDataFromDB - Loading data");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "DocumentData:getDocumentDataFromDB - Loading data"));
 			foreach ( $dbp as $A => $B ) { $this->DocumentData[$A] = $B; }
 		}
 		$LMObj->setInternalLogTarget($logTarget);

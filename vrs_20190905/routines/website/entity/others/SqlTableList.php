@@ -16,33 +16,26 @@ class SqlTableList {
 	private static $Instance = null;
 	
 	private $TableList = array (
-			'article',				'article_tag',			'auteurs',
-			'deadline',				
+			'article',			'article_tag',			'article_config',
 			'category',			
-			'document',				'document_share',			'document_partage',
-			'decoration',			'deco_10_menu',				'deco_20_caligraphe',	'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
-			'group',				'group',					'group_user',			'group_user',
-			'log',			'i18n',						'installation',				
-			'language',				'languages',
-			'module',				
-			'keyword',				'note_renvoit',				
-			'layout',			'layout_content',		
-			'extension',			'extension_config',			'extension_dependency',	'extension_file',
-			'pv',					
-			'website',				'group_website',				'language_website',			'module_website',			'theme_website',
-			'theme_descriptor',		'layout_theme',
-			'stored_event',			'stat_navigateur',			'stat_utilisateur',
-			'tag',					
+			'deadline',			
+			'decoration',		'deco_10_menu',			'deco_20_caligraphe',		'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
+			'document',			'document_share',		'document_partage',
+			'extension',		'extension_config',		'extension_dependency',		'extension_file',
+			'group',			'group_user',
+			'i18n',				
+			'installation',		
+			'keyword',			'note_renvoit',			
+			'language',			'language_website',		
+			'log',				
+			'module',			'module_website',		
+			'layout',			'layout_content',		'layout_theme',
+			'pv',				
+			'stored_event',		
+			'tag',				
+			'theme_descriptor',	
 			'user',
-			'tl_fra',
-			
-			'stored_event',
-			
-			'article_config',
-			
-			
-			
-			
+			'website',			'group_website',		'theme_website',
 	);
 	
 	private $SQLTableName = array();

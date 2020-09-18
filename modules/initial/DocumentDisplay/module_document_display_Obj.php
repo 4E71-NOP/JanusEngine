@@ -133,7 +133,7 @@ class ModuleDocumentDisplay {
 		AND bcl.deadline_state = '1'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
-		$LMObj->InternalLog("ModuleDocument:render - arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`");
+		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
 		
 		// --------------------------------------------------------------------------------------------
 		//	
@@ -165,7 +165,7 @@ class ModuleDocumentDisplay {
 		//
 		// 	If we have more than 1 page for this article, the menu is necessary.
 		if ( $DocumentDataObj->getDocumentDataEntry('arti_nbr_page') > 1 && $DocumentDataObj->getDocumentDataEntry('arti_menu_type') > 0 ) {
-			$LMObj->InternalLog("ModuleDocument:render - menu needed");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - menu needed"));
 			
 			$q = "
 			SELECT art.arti_id, art.arti_ref, art.arti_subtitle, art.arti_page, bcl.deadline_name 
@@ -176,7 +176,7 @@ class ModuleDocumentDisplay {
 			AND art.arti_deadline = bcl.deadline_id 
 			AND bcl.deadline_state = '1'
 			;";
-			$LMObj->InternalLog("ModuleDocument:render - q=`".$q."`");
+			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - q=`".$q."`"));
 			$dbquery = $SDDMObj->query($q);
 			
 			$pv = array();
@@ -305,7 +305,7 @@ class ModuleDocumentDisplay {
 		}
 		// --------------------------------------------------------------------------------------------
 		$analysedContent = $DocumentDataObj->getDocumentDataEntry('docu_cont');
-// 		$LMObj->InternalLog("ModuleDocument:render - docu_cont=`".$analysedContent."`");
+// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - docu_cont=`".$analysedContent."`");
 
 		$documentAnalyse = array();
 		$documentAnalyse['mode'] = "recherche";
