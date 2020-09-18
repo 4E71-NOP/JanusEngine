@@ -228,7 +228,7 @@ else {
 	if ( $UserObj->getUserEntry('pref_theme') == 0 ) { $UserObj->setUserEntry('pref_theme', $WebSiteObj->getWebSiteEntry('theme_id')); }
 	$dbquery = $SDDMObj->query("
 	SELECT a.*,b.theme_nom,b.theme_id
-	FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('theme_descripteur')." b 
+	FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('theme_descriptor')." b 
 	WHERE a.user_id = '".$UserObj->getUserEntry('id')."' 
 	AND theme_id = '".$UserObj->getUserEntry('pref_theme')."' 
 	;");
@@ -473,13 +473,13 @@ else {
 	
 	$dbquery = $SDDMObj->query("
 	SELECT * 
-	FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b 
+	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b 
 	WHERE a.theme_nom = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."' 
 	AND a.theme_id = b.theme_id 
 	;");
 // 	$LMObj->InternalLog("
 // 	SELECT *
-// 	FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
+// 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 // 	WHERE a.theme_nom = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."'
 // 	AND a.theme_id = b.theme_id
 // 	;");
@@ -624,7 +624,7 @@ else {
 			
 			$dbquery = $SDDMObj->query("
 			SELECT a.theme_id,a.theme_nom,theme_titre 
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
+			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE a.theme_id = b.theme_id  
 			AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			;");

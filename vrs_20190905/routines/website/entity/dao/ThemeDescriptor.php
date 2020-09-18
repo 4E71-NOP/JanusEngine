@@ -36,7 +36,7 @@ class ThemeDescriptor {
 		
 		$dbquery = $SDDMObj->query ( "
 			SELECT * 
-			FROM " . $SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
+			FROM " . $SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE a.theme_id = '".$Dest."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'
@@ -52,7 +52,7 @@ class ThemeDescriptor {
 		else {
 			$dbquery = $SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')."
+			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')."
 			WHERE theme_id = 2
 			;");
 			$LMObj->InternalLog(__METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme.");

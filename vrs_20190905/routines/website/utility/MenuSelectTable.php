@@ -289,7 +289,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT t.* 
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." t, ".$SqlTableListObj->getSQLTableName('site_theme')." st 
+			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." t, ".$SqlTableListObj->getSQLTableName('site_theme')." st 
 			WHERE t.theme_id = st.theme_id
 			AND st.theme_state = '1' 
 			AND st.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'

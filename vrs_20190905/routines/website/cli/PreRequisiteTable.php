@@ -432,7 +432,7 @@ self::$PreRequisiteTable['add']['theme'] = array (
 				array("v" => "admctrl_position",	"s" => "theme"),
 		),
 		"nextId" => array (
-				array ("table" => "theme_descripteur",	"column" => "theme_id",			"target" => "id"),
+				array ("table" => "theme_descriptor",	"column" => "theme_id",			"target" => "id"),
 				array ("table" => "site_theme",			"column" => "site_theme_id",	"target" => "site_theme_id"),
 		),
 		"columns" => array(

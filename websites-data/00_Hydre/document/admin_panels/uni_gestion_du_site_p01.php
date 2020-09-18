@@ -296,7 +296,7 @@ $T['AD'][$Tab]['2']['2']['cont'] .= "</select>\r";
 $T['AD'][$Tab]['3']['2']['cont'] = "<select name='formParams1[theme]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $dbquery = $SDDMObj->query("
 SELECT a.theme_id,a.theme_nom,a.theme_titre
-FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a, ".$SqlTableListObj->getSQLTableName('site_theme')." b
+FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a, ".$SqlTableListObj->getSQLTableName('site_theme')." b
 WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND a.theme_id  = b.theme_id;
 ;");

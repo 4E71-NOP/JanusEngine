@@ -163,7 +163,7 @@ $website['ws_stylesheet'] = 1; // Passe en mode dynamique
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT * 
-FROM ".$SQL_tab_abrege['theme_descripteur']."  
+FROM ".$SQL_tab_abrege['theme_descriptor']."  
 WHERE theme_id = '1' 
 ;"); //1 = one (the theme name)
 

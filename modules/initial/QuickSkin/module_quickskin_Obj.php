@@ -59,7 +59,7 @@ class ModuleQuickSkin {
 		if ( $grp == "1" ) {
 			$dbquery = $SDDMObj->query("
 			SELECT a.theme_id,a.theme_nom,a.theme_titre
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
+			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'

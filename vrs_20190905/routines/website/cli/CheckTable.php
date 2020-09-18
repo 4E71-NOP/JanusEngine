@@ -381,7 +381,7 @@ self::$CheckTable['assign']['layout']['0']['v']	= "pres_id";
 self::$CheckTable['assign']['layout']['0']['m']	= "CLI_Layout_A001";
 self::$CheckTable['assign']['layout']['0']['p']	= "layout";
 self::$CheckTable['assign']['layout']['1']['d']	= 2;
-self::$CheckTable['assign']['layout']['1']['f']	= function ($a) { return array ("SELECT sd.theme_id AS theme_id, sd.theme_nom AS theme_nom FROM ".$a['sqlTables']['theme_descripteur']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['to_theme']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['assign']['layout']['1']['f']	= function ($a) { return array ("SELECT sd.theme_id AS theme_id, sd.theme_nom AS theme_nom FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['to_theme']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['assign']['layout']['1']['c']	= "theme_id";
 self::$CheckTable['assign']['layout']['1']['v']	= "theme_id";
 self::$CheckTable['assign']['layout']['1']['m']	= "CLI_Layout_A002";
@@ -478,17 +478,17 @@ self::$CheckTable['delete']['tag']['0']['p']	= "tag";
 
 // Theme
 self::$CheckTable['add']['theme']['0']['d']	= 3;
-self::$CheckTable['add']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['theme']['0']['m']	= "CLI_Theme_C001";
 
 self::$CheckTable['update']['theme']['0']['d']	= 2;
-self::$CheckTable['update']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['theme']['0']['c']	= "theme_id";
 self::$CheckTable['update']['theme']['0']['v']	= "theme_id";
 self::$CheckTable['update']['theme']['0']['m']	= "CLI_Theme_U001";
 self::$CheckTable['update']['theme']['0']['p']	= "theme";
 self::$CheckTable['delete']['theme']['0']['d']	= 2;
-self::$CheckTable['delete']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['delete']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['delete']['theme']['0']['c']	= "theme_id";
 self::$CheckTable['delete']['theme']['0']['v']	= "theme_id";
 self::$CheckTable['delete']['theme']['0']['m']	= "CLI_Theme_D001";
@@ -496,7 +496,7 @@ self::$CheckTable['delete']['theme']['0']['p']	= "theme";
 
 
 self::$CheckTable['assign']['theme']['0']['d']	= 2;
-self::$CheckTable['assign']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['assign']['theme']['0']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_nom FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['site_theme']." ss WHERE sd.theme_nom = '".$a['params']['name']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['assign']['theme']['0']['c']	= "theme_id";
 self::$CheckTable['assign']['theme']['0']['v']	= "theme_id";
 self::$CheckTable['assign']['theme']['0']['m']	= "CLI_AssignTheme_A001";
@@ -551,7 +551,7 @@ self::$CheckTable['update']['user']['1']['m']	= "CLI_User_U002";
 self::$CheckTable['update']['user']['2']['m']	= "CLI_User_U003";
 
 self::$CheckTable['update']['user']['3']['d']	= 2;
-self::$CheckTable['update']['user']['3']['f']	= function ($a) { return array ("SELECT t.theme_id, t.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." t, ".$a['sqlTables']['site_theme']." st WHERE t.theme_nom = '".$a['params']['pref_theme']."' AND t.theme_id = st.theme_id AND st.theme_state = '1' AND st.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['user']['3']['f']	= function ($a) { return array ("SELECT t.theme_id, t.theme_nom FROM ".$a['sqlTables']['theme_descriptor']." t, ".$a['sqlTables']['site_theme']." st WHERE t.theme_nom = '".$a['params']['pref_theme']."' AND t.theme_id = st.theme_id AND st.theme_state = '1' AND st.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['user']['3']['c']	= "theme_id";
 self::$CheckTable['update']['user']['3']['v']	= "pref_theme_id";
 self::$CheckTable['update']['user']['3']['m']	= "CLI_User_U004";
