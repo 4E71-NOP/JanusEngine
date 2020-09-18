@@ -2,18 +2,18 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 /*
-groupe_tag		ANONYME 0	LECTEUR 1	STAFF 2	SENIOR_STAFF 3
+group_tag		ANONYME 0	LECTEUR 1	STAFF 2	SENIOR_STAFF 3
 */
 CREATE TABLE !table! ( 
 group_id		INTEGER NOT NULL,
-groupe_parent	INTEGER,
-groupe_tag		INTEGER,
-groupe_nom		VARCHAR (255),
-groupe_titre	VARCHAR (255),
-groupe_fichier	VARCHAR (255),
-groupe_desc		VARCHAR (255),
+group_parent	INTEGER,
+group_tag		INTEGER,
+group_name		VARCHAR (255),
+group_title	VARCHAR (255),
+group_file	VARCHAR (255),
+group_desc		VARCHAR (255),
 
 PRIMARY KEY (group_id),
-KEY idx_!IdxNom!_groupe_parent (groupe_parent)
+KEY idx_!IdxNom!_group_parent (group_parent)
 
 );

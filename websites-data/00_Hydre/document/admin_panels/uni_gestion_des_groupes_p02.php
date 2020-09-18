@@ -127,8 +127,8 @@ switch ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
 		$currentGroupObj->getGroupDataFromDB($RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
-		$t1l2c2 = $currentGroupObj->getGroupEntry('groupe_nom');
-		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('groupe_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
+		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
@@ -138,10 +138,10 @@ switch ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 		$currentGroupObj->setGroup(
 			array(
 			"group_id"		=> "*",
-			"groupe_tag"	=> 0,
-			"groupe_nom"	=> $I18nObj->getI18nEntry('t1l2c2'),
-			"groupe_titre"	=> $I18nObj->getI18nEntry('t1l2c2'),
-			"groupe_desc"	=> $I18nObj->getI18nEntry('t1l2c2'),
+			"group_tag"	=> 0,
+			"group_name"	=> $I18nObj->getI18nEntry('t1l2c2'),
+			"group_title"	=> $I18nObj->getI18nEntry('t1l2c2'),
+			"group_desc"	=> $I18nObj->getI18nEntry('t1l2c2'),
 			)
 		);
 		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -164,7 +164,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminGroupManagementP02'>\r"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>\r"
 ."<input type='hidden' name='formEntity1'				value='group'>\r"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentGroupObj->getGroupEntry('groupe_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentGroupObj->getGroupEntry('group_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='groupForm[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -204,7 +204,7 @@ $tabStateDealine = array(
 $tab = $tabStateDealine;
 
 switch ( $RequestDataObj->getRequestDataSubEntry('groupForm', 'mode') ) {
-	case "edit":	$tab[$currentGroupObj->getGroupEntry('groupe_tag')]['s'] = " selected";	break;
+	case "edit":	$tab[$currentGroupObj->getGroupEntry('group_tag')]['s'] = " selected";	break;
 	case "create":	$tab[1]['s'] = " selected";	break;
 }
 
@@ -212,7 +212,7 @@ $T['AD']['1']['4']['2']['cont'] = "<select name ='formParams[tag]' class='".$Blo
 foreach ( $tab as $A ) { $T['AD']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['4']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[desc]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('groupe_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[desc]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
 		array(
@@ -229,7 +229,7 @@ $infos['IconSelectFile'] = array(
 		"formName"			=> "groupForm",
 		"formInputId"		=> "inputFile",
 		"formInputSize"		=> 40 ,
-		"formInputVal"		=> $currentGroupObj->getGroupEntry('groupe_fichier'),
+		"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
 		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );

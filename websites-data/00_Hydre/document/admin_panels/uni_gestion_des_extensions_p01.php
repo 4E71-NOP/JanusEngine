@@ -90,7 +90,7 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 
-if ( $UserObj->getUserEntry('groupe_tag') == 3 ) {
+if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 	$extensionList = array();
 	$extensions_ = array();
 	$handle = opendir("../extensions/");

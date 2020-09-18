@@ -90,7 +90,7 @@ SELECT grp.*, sg.group_state
 FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND grp.group_id = sg.group_id 
-and grp.groupe_nom != 'Server_owner' 
+and grp.group_name != 'Server_owner' 
 ;");
 $i = 1;
 $T['AD']['1'][$i]['1']['cont']	= $I18nObj->getI18nEntry('col_1_txt');
@@ -104,11 +104,11 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
 	."&groupForm[selectionId]=".$dbp['group_id']
-	."'>".$dbp['groupe_nom']
+	."'>".$dbp['group_name']
 	."</a>";
-	$T['AD']['1'][$i]['2']['cont'] = $dbp['groupe_titre'];
+	$T['AD']['1'][$i]['2']['cont'] = $dbp['group_title'];
 	$T['AD']['1'][$i]['2']['tc'] = 2;
-	$T['AD']['1'][$i]['3']['cont'] = $tagTab[$dbp['groupe_tag']];
+	$T['AD']['1'][$i]['3']['cont'] = $tagTab[$dbp['group_tag']];
 	$T['AD']['1'][$i]['3']['tc'] = 2;
 }
 

@@ -22,8 +22,8 @@ $_REQUEST['uni_gestion_des_modules_p'] = 2;
 statistique_checkpoint ( "Demarrage gestion des extensions" );
 $_REQUEST['sql_initiateur'] = "uni_gestion_des_groupes_p0".$_REQUEST['uni_gestion_des_modules_p'].".php";
 
-if ( $user['groupe_tag'] == 3 ) {
-	//outil_debug ( $user['groupe_tag'] , "user['groupe_tag']" );
+if ( $user['group_tag'] == 3 ) {
+	//outil_debug ( $user['group_tag'] , "user['group_tag']" );
 
 	function extension_score_element ( &$cible , &$liste , $sru_requete ) {
 		unset ( $A );

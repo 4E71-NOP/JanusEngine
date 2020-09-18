@@ -85,11 +85,11 @@ self::$ActionTable['add']['user']			= function (&$a) {
 	$c=1;
 	$queries[] = "INSERT INTO ".$a['sqlTables']['user']." (".$a['columns'].") VALUES (".$a['values'].");";
 	if ($a['params']['name'] != "anonymous") {
-		$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".($a['params']['groupe_user_id']+$b)."','".$a['params']['reader_id']."','".$a['params']['id']."','1');";
+		$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".($a['params']['group_user_id']+$b)."','".$a['params']['reader_id']."','".$a['params']['id']."','1');";
 		$b++;
 		$c=0;
 	}
-	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".($a['params']['groupe_user_id']+$b)."','".$a['params']['anonymous_id']."','".$a['params']['id']."','".$c."');";
+	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".($a['params']['group_user_id']+$b)."','".$a['params']['anonymous_id']."','".$a['params']['id']."','".$c."');";
 	return $queries;
 };
 
@@ -128,9 +128,9 @@ self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE 
 self::$ActionTable['assign']['user']		= function (&$a) {
 	$queries = array();
 	if ( $a['params']['primary_group'] == 1 ) {
-		$queries[] = "UPDATE ".$a['sqlTables']['groupe_user']." SET groupe_premier = '0' WHERE user_id = '".$a['params']['user_id']."';";
+		$queries[] = "UPDATE ".$a['sqlTables']['groupe_user']." SET group_user_initial_group = '0' WHERE user_id = '".$a['params']['user_id']."';";
 	}
-	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".$a['params']['groupe_user_id']."','".$a['params']['group_id']."','".$a['params']['user_id']."','".$a['params']['primary_group']."');";
+	$queries[] = "INSERT INTO ".$a['sqlTables']['groupe_user']." VALUES ('".$a['params']['group_user_id']."','".$a['params']['group_id']."','".$a['params']['user_id']."','".$a['params']['primary_group']."');";
 	return $queries;
 };
 

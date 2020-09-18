@@ -23,7 +23,7 @@ class GroupUser {
 		$dbquery = $SDDMObj->query ( "
 			SELECT *
 			FROM " . $SqlTableListObj->getSQLTableName ('groupe_user') . "
-			WHERE groupe_user_id = '" . $id . "'
+			WHERE group_user_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog(__METHOD__ . " : Loading data for groupe_user id=".$id);

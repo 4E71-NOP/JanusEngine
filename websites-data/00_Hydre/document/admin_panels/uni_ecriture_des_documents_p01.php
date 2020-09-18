@@ -102,7 +102,7 @@ switch ($l) {
 		break;
 }
 
-$editionLevel = $i18nDoc['level'][$UserObj->getUserEntry('groupe_tag')];
+$editionLevel = $i18nDoc['level'][$UserObj->getUserEntry('group_tag')];
 
 // --------------------------------------------------------------------------------------------
 $T = array();

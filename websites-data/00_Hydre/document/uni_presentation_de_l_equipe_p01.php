@@ -61,14 +61,14 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 <br>\r
 ";
 
-$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.groupe_desc, usr.user_login, usr.user_image_avatar, grp.groupe_nom, grp.groupe_fichier
+$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_image_avatar, grp.group_name, grp.group_file
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
-WHERE gu.groupe_premier = '1' 
+WHERE gu.group_user_initial_group = '1' 
 AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND gu.user_id = usr.user_id 
 AND sg.group_id = gu.group_id 
 AND gu.group_id = grp.group_id
-AND grp.groupe_tag = '2' 
+AND grp.group_tag = '2' 
 AND usr.user_role_fonction = '2' 
 ORDER BY grp.group_id,usr.user_login ASC
 ;");
@@ -92,14 +92,14 @@ foreach ( $user_liste as $B ) {
 		foreach ( $user_liste as $A ) {
 			if ( $A['group_id'] == $CurrentGroup ) {
 				if ( $DisplayGroupName == 1 ) {
-					$Content .= "<td class='".$Block."_fcta ".$Block."_tb5' width='256'>".$A['groupe_nom'];
+					$Content .= "<td class='".$Block."_fcta ".$Block."_tb5' width='256'>".$A['group_name'];
 					if ( $pde_img_aff == 1 ) { $Content .= "<br>\r
 						<span style='float: left;'>
-						<img src='../".$A['groupe_fichier']."' height='".$pde_img_h."' width='".$pde_img_l."' alt='".$A['groupe_nom']."'>
+						<img src='../".$A['group_file']."' height='".$pde_img_h."' width='".$pde_img_l."' alt='".$A['group_name']."'>
 						</span>\r
 						"; }
 					$Content .= "
-					<span class='".$Block."_t1'>".$A['groupe_desc']."</span></td>\r";
+					<span class='".$Block."_t1'>".$A['group_desc']."</span></td>\r";
 					$DisplayGroupName = 0 ;
 				}
 				else { $Content .= "<td class='".$Block."_tb3'> &nbsp; </td>\r"; }

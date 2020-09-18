@@ -215,12 +215,12 @@ self::$PreRequisiteTable['add']['group'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "id",			"t" => "group_id"),
-				array ( "v" => "name",			"t" => "groupe_nom"),
-				array ( "v" => "groupe_parent",	"t" => "groupe_parent"),
-				array ( "v" => "tag",			"t" => "groupe_tag"),
-				array ( "v" => "title",			"t" => "groupe_titre"),
-				array ( "v" => "file",			"t" => "groupe_fichier"),
-				array ( "v" => "desc",			"t" => "groupe_desc"),
+				array ( "v" => "name",			"t" => "group_name"),
+				array ( "v" => "group_parent",	"t" => "group_parent"),
+				array ( "v" => "tag",			"t" => "group_tag"),
+				array ( "v" => "title",			"t" => "group_title"),
+				array ( "v" => "file",			"t" => "group_file"),
+				array ( "v" => "desc",			"t" => "group_desc"),
 		),
 );
 
@@ -582,7 +582,7 @@ self::$PreRequisiteTable['add']['user'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "user",			"column" => "user_id",				"target" => "id"),
-				array ("table" => "groupe_user",	"column" => "groupe_user_id",		"target" => "groupe_user_id"),
+				array ("table" => "groupe_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 		),
 		"columns" => array(
 				array("v" => "id",									"t"	=>	"user_id"),
@@ -728,13 +728,13 @@ self::$PreRequisiteTable['assign']['user'] = array (
 				array("v" => "primary_group",					"s" => "user"),
 		),
 		"nextId" => array (
-				array ("table" => "groupe_user",	"column" => "groupe_user_id",		"target" => "groupe_user_id"),
+				array ("table" => "groupe_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 		),
 		"columns" => array(
-				array("v" => "groupe_user_id",						"t"	=>	"groupe_user_id"),
+				array("v" => "group_user_id",						"t"	=>	"group_user_id"),
 				array("v" => "group_id",							"t"	=>	"group_id"),
 				array("v" => "user_id",								"t"	=>	"user_id"),
-				array("v" => "primary_group",						"t"	=>	"groupe_premier"),
+				array("v" => "primary_group",						"t"	=>	"group_user_initial_group"),
 		),
 		);
 

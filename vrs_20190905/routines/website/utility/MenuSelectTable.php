@@ -191,7 +191,7 @@ class MenuSelectTable {
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog("MenuSelectTable/getGroupList() : Loading data");
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['group_id']]['t']	=	$tab[$dbp['group_id']]['db']	= $dbp['groupe_nom'];
+				$tab[$dbp['group_id']]['t']	=	$tab[$dbp['group_id']]['db']	= $dbp['group_name'];
 			}
 		}
 		else {
@@ -323,11 +323,11 @@ class MenuSelectTable {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
 		$dbquery = $dbquery = $SDDMObj->query("
-			SELECT usr.*, g.group_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 			WHERE usr.user_id = gu.user_id
-			AND gu.groupe_premier = '1'
-			AND g.groupe_tag IN (2,3)
+			AND gu.group_user_initial_group = '1'
+			AND g.group_tag IN (2,3)
 			AND gu.group_id = g.group_id
 			AND gu.group_id = sg.group_id
 			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'

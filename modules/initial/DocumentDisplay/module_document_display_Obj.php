@@ -487,7 +487,7 @@ class ModuleDocumentDisplay {
 			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('groupe_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
 			WHERE a.user_id = b.user_id
 			AND b.group_id = c.group_id
-			AND b.groupe_premier = '1'
+			AND b.group_user_initial_group = '1'
 			ORDER BY a.user_id
 			;");
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $ADP_users[$dbp['user_id']] = $dbp['user_nom']; }

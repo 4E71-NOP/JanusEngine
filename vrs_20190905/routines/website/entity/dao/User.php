@@ -30,22 +30,22 @@ class User {
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
 // 		$LMObj->InternalLog( __METHOD__ ."() : 
-// 			SELECT usr.*, g.group_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+// 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 // 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 // 			WHERE usr.user_login = '" . $UserLogin . "'
 // 			AND usr.user_id = gu.user_id
-// 			AND gu.groupe_premier = '1'
+// 			AND gu.group_user_initial_group = '1'
 // 			AND gu.group_id = g.group_id
 // 			AND gu.group_id = sg.group_id
 // 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 // 		;"
 // 		);
 		$dbquery = $SDDMObj->query ("
-			SELECT usr.*, g.group_id, g.groupe_nom, gu.groupe_premier, g.groupe_tag
+			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
 			AND usr.user_id = gu.user_id
-			AND gu.groupe_premier = '1'
+			AND gu.group_user_initial_group = '1'
 			AND gu.group_id = g.group_id
 			AND gu.group_id = sg.group_id
 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
@@ -92,7 +92,7 @@ class User {
 
 				$this->User['user_image_avatar']		= $dbp['user_image_avatar'];
 				$this->User['user_admin_commentaire']	= $dbp['user_admin_commentaire'];
-				$this->User['groupe_tag']				= $dbp['groupe_tag'];
+				$this->User['group_tag']				= $dbp['group_tag'];
 				foreach ( $dbp as $A => $B ) { $this->User [$A] = $B; }
 			}
 
@@ -120,9 +120,9 @@ class User {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$dbquery = $SDDMObj->query ("SELECT group_id, groupe_parent
+				$dbquery = $SDDMObj->query ("SELECT group_id, group_parent
 					FROM " . $SqlTableListObj->getSQLTableName ('groupe') . "
-					WHERE groupe_parent IN " . $strGrp . "
+					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;");
 				if ($SDDMObj->num_row_sql ($dbquery) > 0) {

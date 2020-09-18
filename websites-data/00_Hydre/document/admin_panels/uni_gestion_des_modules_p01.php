@@ -101,7 +101,7 @@ FROM ".$SqlTableListObj->getSQLTableName('groupe')."
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 	$i = $dbp['group_id'];
-	$groupTab[$i] = $dbp['groupe_titre'];
+	$groupTab[$i] = $dbp['group_title'];
 }
 
 $tab_module_state = array(

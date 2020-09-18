@@ -14,7 +14,7 @@
 //	uni_ecriture_des_documents_p02.php debut
 // --------------------------------------------------------------------------------------------
 $_REQUEST['M_DOCUME']['document_selection'] = 107;
-$user['groupe_tag'] = 1;
+$user['group_tag'] = 1;
 $pv['execution_script'] = 1;
 
 
@@ -69,7 +69,7 @@ $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_login,s.ws_name 
 FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_correcteur']."' 
-AND gu.groupe_premier = '1' 
+AND gu.group_user_initial_group = '1' 
 AND usr.user_id = gu.user_id 
 AND gu.group_id = sg.group_id 
 AND sg.ws_id = s.ws_id 
@@ -99,7 +99,7 @@ else {
 		if ( $document['docu_id'] == $dbp['docu_id'] ) { $document['edition'] = 0; } 
 	}
 	$pv['level']['0'] = 2;	$pv['level']['1'] = 4;	$pv['level']['2'] = 8;	$pv['level']['3'] = 16;
-	$pv['edlvl'] = $pv['level'][$user['groupe_tag']];
+	$pv['edlvl'] = $pv['level'][$user['group_tag']];
 	$_REQUEST['M_DOCUME']['haxorzfree'] = 0;
 	switch ( $pv['edlvl'] + $document['edition'] ) {
 	case 9 :
