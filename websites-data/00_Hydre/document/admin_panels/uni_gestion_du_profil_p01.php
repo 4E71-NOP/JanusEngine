@@ -394,7 +394,7 @@ else {
 	
 	$T['AD']['4']['9']['2']['cont'] = "<select name='UserProfileForm[lang]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 	$dbqueryL = $SDDMObj->query("
-	SELECT sl.lang_id FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s 
+	SELECT sl.lang_id FROM ".$SqlTableListObj->getSQLTableName('language_website')." sl , ".$SqlTableListObj->getSQLTableName('website')." s 
 	WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 	AND sl.ws_id = s.ws_id
 	;");
@@ -404,7 +404,7 @@ else {
 	else { $langList[$PmListTheme['user_lang']]['s'] = " selected "; }
 	foreach ( $langList as $A ) { 
 		if ( $A['support'] == 1 ) {
-			$T['AD']['4']['9']['2']['cont'] .= "<option value='".$A['langue_639_3']."' ".$A['s']."> ".$A['langue_nom_original']." </option>\r"; 
+			$T['AD']['4']['9']['2']['cont'] .= "<option value='".$A['lang_639_3']."' ".$A['s']."> ".$A['lang_original_name']." </option>\r"; 
 		}
 	}
 	$T['AD']['4']['9']['2']['cont'] .= "</select>\r";

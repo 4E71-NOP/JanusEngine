@@ -45,7 +45,7 @@ class ModuleAuthentification {
 		
 		$cnxResult = $AUObj->getDataEntry('errorType');
 // 		$mod_auth_demande_connexion_resultat_test = "Connexion R&eacute;ussie";
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");

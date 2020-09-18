@@ -108,7 +108,7 @@ self::$ActionTable['assign']['document']		= function (&$a) {
 };
 
 self::$ActionTable['assign']['language']		= function (&$a) {
-	return array ("INSERT INTO ".$a['sqlTables']['site_langue']." VALUES ('".$a['params']['site_lang_id']."', '".$a['params']['ws_id']."', '".$a['params']['lang_id']."');");
+	return array ("INSERT INTO ".$a['sqlTables']['language_website']." VALUES ('".$a['params']['lang_website_id']."', '".$a['params']['ws_id']."', '".$a['params']['lang_id']."');");
 };
 
 	

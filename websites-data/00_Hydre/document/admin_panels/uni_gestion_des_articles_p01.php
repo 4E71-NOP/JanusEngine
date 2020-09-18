@@ -157,7 +157,7 @@ $Content .= "
 // unset ( $A , $B );
 foreach ( $langList as $k => $v ) {
 	if ( !is_numeric($k) ) {
-		if ( $v['support'] == 1 ) { $Content .= "<option value='".$v['langue_639_3']."' ".$v['s']."> ".$v['langue_nom_original']." </option>\r"; }
+		if ( $v['support'] == 1 ) { $Content .= "<option value='".$v['lang_639_3']."' ".$v['s']."> ".$v['lang_original_name']." </option>\r"; }
 	}
 }
 $Content .= "</select>
@@ -264,7 +264,7 @@ if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			;
 	$linkId2 = "&articleForm[selectionPage]=";
 	$tranlation = $CMObj->getLanguageListSubEntry($l, 'id');
-	$tranlation = $CMObj->getLanguageListSubEntry($tranlation, 'langue_nom_original');
+	$tranlation = $CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
 	
 	foreach ( $articleList as &$A ) {
 		$i++;

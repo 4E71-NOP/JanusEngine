@@ -49,7 +49,7 @@ class CommandConsole {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$CMObj = ConfigurationManagement::getInstance();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ("routines/website/cli/i18n/".$l.".php");
 		self::$i18n = $i18n;
@@ -71,7 +71,7 @@ class CommandConsole {
 
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$CMObj = ConfigurationManagement::getInstance();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 
 		include ("routines/website/cli/SqlQueryTable.php");
 	
@@ -348,7 +348,7 @@ class CommandConsole {
 		}
 		// langConvert ----------------------------------------
 		if ( is_array($ptr['langConvert']) ) {
-			foreach ($ptr['langConvert'] as $A) { $CCL['params'][$A['t']] = $CMobj->getLanguageListSubEntry($A['v'], 'langue_id'); }
+			foreach ($ptr['langConvert'] as $A) { $CCL['params'][$A['t']] = $CMobj->getLanguageListSubEntry($A['v'], 'lang_id'); }
 		}
 		//----------------------------------------
 		// Associate columns in a compatible syntax to use with SQL statements.

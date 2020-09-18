@@ -34,7 +34,7 @@ class ModuleGlobalReport {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
 		$LMObj->logDebug($RequestDataObj->getRequestDataArray(),	"RequestDataObj");
 		$LMObj->logDebug($infos,									"infos");

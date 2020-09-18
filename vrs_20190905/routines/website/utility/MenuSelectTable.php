@@ -255,8 +255,8 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT l.* 
-			FROM ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('site_langue')." sl 
-			WHERE l.langue_id = sl.lang_id
+			FROM ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl 
+			WHERE l.lang_id = sl.lang_id
 			AND sl.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
@@ -264,7 +264,7 @@ class MenuSelectTable {
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog("MenuSelectTable/getLanguageList() : Loading data");
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['langue_id']]['t']	=	$tab[$dbp['langue_id']]['db']	= $dbp['langue_nom_original'];
+				$tab[$dbp['lang_id']]['t']	=	$tab[$dbp['lang_id']]['db']	= $dbp['lang_original_name'];
 			}
 		}
 		else {

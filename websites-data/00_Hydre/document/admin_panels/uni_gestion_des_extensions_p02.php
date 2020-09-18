@@ -135,7 +135,7 @@ if ( $user['groupe_tag'] == 3 ) {
 	statistique_checkpoint ( "Apres remplissage table" );
 
 	$_REQUEST['site_context']['site_nom']	= $website['ws_name'];
-	$_REQUEST['site_context']['site_lang']	= $website['ws_lang'];
+	$_REQUEST['site_context']['language_website']	= $website['ws_lang'];
 	$_REQUEST['site_context']['user']		= $_REQUEST['form']['database_user_login'] = $db_['user_login'];
 	$_REQUEST['site_context']['password']	= $_REQUEST['form']['database_user_password'] = $db_['user_password'];
 	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "console de commandes";	$section = "script";

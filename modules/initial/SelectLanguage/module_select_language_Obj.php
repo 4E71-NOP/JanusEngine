@@ -36,53 +36,53 @@ class ModuleSelectLanguage {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 
-// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'langue_639_3');
+// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 // 		$i18n = array();
 // 		include ("../modules/initial/Authentification/i18n/".$l.".php");
 
-		$site_lang_ = array();
+		$language_website_ = array();
 		$Content = "";
 		if ( $WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
 			$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
 			$pv['1'] = 1;
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-				$site_lang_[$pv['1']]['langue_id']				= $dbp['langue_id'];
-				$site_lang_[$pv['1']]['langue_639_3']			= $dbp['langue_639_3'];
-				$site_lang_[$pv['1']]['langue_image']			= $dbp['langue_image'];
-				$site_lang_[$pv['1']]['langue_nom_original']	= $dbp['langue_nom_original'];
+				$language_website_[$pv['1']]['lang_id']				= $dbp['lang_id'];
+				$language_website_[$pv['1']]['lang_639_3']			= $dbp['lang_639_3'];
+				$language_website_[$pv['1']]['lang_image']			= $dbp['lang_image'];
+				$language_website_[$pv['1']]['lang_original_name']	= $dbp['lang_original_name'];
 				$pv['1']++;
 			}
 			
-// 			unset ( $site_lang_support );
-			$site_lang_support = array();
+// 			unset ( $language_website_support );
+			$language_website_support = array();
 			$dbquery = $SDDMObj->query("
-				SELECT b.langue_id
-				FROM ".$SqlTableListObj->getSQLTableName('site_langue')." a, ".$SqlTableListObj->getSQLTableName('langues')." b
+				SELECT b.lang_id
+				FROM ".$SqlTableListObj->getSQLTableName('language_website')." a, ".$SqlTableListObj->getSQLTableName('langues')." b
 				WHERE a.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-				AND a.lang_id = b.langue_id
+				AND a.lang_id = b.lang_id
 				;");
 			
 			$Content .= "<table><tr>";
 			
 			if ( $SDDMObj->num_row_sql($dbquery) > 1 ) {
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-					$pv['offset'] = $dbp['langue_id'];
-					$site_lang_support[$pv['offset']] = $pv['offset'];
+					$pv['offset'] = $dbp['lang_id'];
+					$language_website_support[$pv['offset']] = $pv['offset'];
 				}
-				foreach ( $site_lang_support as $A ) {
-					if ( $A == $site_lang_[$A]['langue_id'] && $A != $UserObj->getUserEntry('lang') ) {
+				foreach ( $language_website_support as $A ) {
+					if ( $A == $language_website_[$A]['lang_id'] && $A != $UserObj->getUserEntry('lang') ) {
 						$pv['1'] = $WebSiteObj->getWebSiteEntry('ws_lang');
-						$pv['1'] = $site_lang_[$pv['offset']][$pv['1']];
-						if ( !file_exists ( "../graph/". $ThemeDataObj->getThemeDataEntry('theme_directory')."/".$site_lang_[$A]['langue_image'] ) ) { $pv['img_src'] = "../graph/universal/".$site_lang_[$A]['langue_image']; }
-						else { $pv['img_src'] = "../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$site_lang_[$A]['langue_image']; }
+						$pv['1'] = $language_website_[$pv['offset']][$pv['1']];
+						if ( !file_exists ( "../graph/". $ThemeDataObj->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = "../graph/universal/".$language_website_[$A]['lang_image']; }
+						else { $pv['img_src'] = "../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image']; }
 						
 						// a.theme_princ_B30_lien
 						$Content .= "<td>
 						<a class='".$ThemeDataObj->getThemeName().$infos['block']."_lien'
-						href='index.php?".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sdup')."&amp;M_UTILIS[login]=".$SMObj->getSessionEntry('LoginDecoded')."&amp;M_UTILIS[lang]=".$site_lang_[$A]['langue_639_3']."&amp;UPDATE_action=UPDATE_USER&amp;M_UTILIS[confirmation_modification]=1'
-						onMouseOver=\"t.ToolTip('".$site_lang_[$A]['langue_nom_original']."')\"
+						href='index.php?".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sdup')."&amp;M_UTILIS[login]=".$SMObj->getSessionEntry('LoginDecoded')."&amp;M_UTILIS[lang]=".$language_website_[$A]['lang_639_3']."&amp;UPDATE_action=UPDATE_USER&amp;M_UTILIS[confirmation_modification]=1'
+						onMouseOver=\"t.ToolTip('".$language_website_[$A]['lang_original_name']."')\"
 						onMouseOut='t.ToolTip()'
-						><img src='".$pv['img_src']."' alt='".$site_lang_[$A]['langue_639_3']."' height='64' width='64' border='0'>
+						><img src='".$pv['img_src']."' alt='".$language_website_[$A]['lang_639_3']."' height='64' width='64' border='0'>
 						</a>\r</td>";
 					}
 				}

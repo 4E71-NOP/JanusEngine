@@ -89,13 +89,13 @@ switch ($l) {
 }
 
 $dbquery = $SDDMObj->query("
-SELECT c.cate_lang, l.langue_nom_original
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('site_langue')." sl
+SELECT c.cate_lang, l.lang_original_name
+FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('langues')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
 WHERE c.cate_type IN ('0','1')
 AND c.cate_etat = '1'
 AND c.ws_id = '2'
-AND c.cate_lang = l.langue_id
-AND l.langue_id = sl.lang_id
+AND c.cate_lang = l.lang_id
+AND l.lang_id = sl.lang_id
 AND c.ws_id = sl.ws_id
 AND c.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 GROUP BY c.cate_lang
@@ -107,7 +107,7 @@ $i = 1;
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 	$CateTabList[$dbp['cate_lang']]['tab'] = $i; 
 	$CateTabList[$dbp['cate_lang']]['id'] = $dbp['cate_lang']; 
-	$CateTabList[$dbp['cate_lang']]['nom'] = $dbp['langue_nom_original']; 
+	$CateTabList[$dbp['cate_lang']]['nom'] = $dbp['lang_original_name']; 
 	$CateTabList[$dbp['cate_lang']]['count'] = 1;
 	$CateTabList[$dbp['cate_lang']]['linePtr'] = 2;
 	$langClause .= $dbp['cate_lang'].", ";
@@ -136,7 +136,7 @@ foreach ( $CateTabList as $A ) {
 }
 
 $dbquery = $SDDMObj->query("SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('site_langue')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
+FROM ".$SqlTableListObj->getSQLTableName('categorie')." c, ".$SqlTableListObj->getSQLTableName('language_website')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
 WHERE c.cate_type IN (0,1) 
 AND c.cate_etat = '1' 
 AND c.cate_lang IN (".$langClause.") 

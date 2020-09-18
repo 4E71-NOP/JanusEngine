@@ -677,10 +677,10 @@ self::$PreRequisiteTable['assign']['document'] = array (
 
 self::$PreRequisiteTable['assign']['language'] = array (
 		"nextId" => array (
-				array ("table" => "site_langue",		"column" => "site_lang_id",				"target" => "site_lang_id"),
+				array ("table" => "language_website",		"column" => "lang_website_id",				"target" => "lang_website_id"),
 		),
 		"columns" => array(
-				array ( "v" => "site_lang_id",			"t" => "site_lang_id"),
+				array ( "v" => "lang_website_id",			"t" => "lang_website_id"),
 				array ( "v" => "ws_id",					"t" => "ws_id"),
 				array ( "v" => "lang_id",				"t" => "lang_id"),
 		),

@@ -239,7 +239,7 @@ $ws_lang_select	= array();
 
 // $dbquery = $SDDMObj->query("
 // SELECT sl.lang_id
-// FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
+// FROM ".$SqlTableListObj->getSQLTableName('language_website')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
 // WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
 // AND sl.ws_id = s.ws_id
 // ;");
@@ -279,7 +279,7 @@ $langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected ";
 
 foreach ( $langList as $k => $v ) {
 	if ( !is_numeric($k) ) {
-		if ( $v['support'] == 1 ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$v['langue_639_3']."' ".$v['s']."> ".$v['langue_nom_original']." </option>\r"; }
+		if ( $v['support'] == 1 ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$v['lang_639_3']."' ".$v['s']."> ".$v['lang_original_name']." </option>\r"; }
 	}
 }
 $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
@@ -361,9 +361,9 @@ $i++;
 $dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$B = "";
-	if ( $langList[$dbp['langue_id']]['support'] == 1 ) { $B = " checked"; }
-	$T['AD'][$Tab][$i][$j]['cont'] = "<input type='checkbox' name='formTarget2[".$dbp['langue_639_3']."]' ".$B.">\r";		$j++;
-	$T['AD'][$Tab][$i][$j]['cont'] = $dbp['langue_nom_original'];																		$j++;
+	if ( $langList[$dbp['lang_id']]['support'] == 1 ) { $B = " checked"; }
+	$T['AD'][$Tab][$i][$j]['cont'] = "<input type='checkbox' name='formTarget2[".$dbp['lang_639_3']."]' ".$B.">\r";		$j++;
+	$T['AD'][$Tab][$i][$j]['cont'] = $dbp['lang_original_name'];																		$j++;
 	if ( $j == 9 ) { $j = 1; $i++; }
 }
 $tab3NbrLine = $i;

@@ -86,24 +86,24 @@ class ConfigurationManagement {
 				// No DB data available for a short time; so we create it.
 				$this->LanguageList = array (
 					38 => array (
-					"langue_id" => 38,
-					"langue_639_3" => "eng",
-					"langue_nom_original" => "English",
-					"langue_639_2" => "eng",
-					"langue_639_1" => "en",
-					"langue_image" => "tl_eng.png",
+					"lang_id" => 38,
+					"lang_639_3" => "eng",
+					"lang_original_name" => "English",
+					"lang_639_2" => "eng",
+					"lang_639_1" => "en",
+					"lang_image" => "tl_eng.png",
 					),
-					"eng" => array ( "langue_id" => 38),
+					"eng" => array ( "lang_id" => 38),
 					48 => array 
 					(
-					"langue_id" => 48,
-					"langue_639_3" => "fra",
-					"langue_nom_original" => "Français ; langue française",
-					"langue_639_2" => "fre/fra",
-					"langue_639_1" => "fr",
-					"langue_image" => "tl_fra.png",
+					"lang_id" => 48,
+					"lang_639_3" => "fra",
+					"lang_original_name" => "Français ; langue française",
+					"lang_639_2" => "fre/fra",
+					"lang_639_1" => "fr",
+					"lang_image" => "tl_fra.png",
 					),
-					"fra" => array ("langue_id" => 48)
+					"fra" => array ("lang_id" => 48)
 				);
 				break;
 			case "render":
@@ -115,19 +115,19 @@ class ConfigurationManagement {
 // 				$RequestDataObj = RequestData::getInstance();
 				
 				$TabLangueAdmises = array();
-				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('site_langue')." WHERE ws_id = '".$SMObj->getSessionEntry('ws')."';");
+				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language_website')." WHERE ws_id = '".$SMObj->getSessionEntry('ws')."';");
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
 				sort ( $TabLangueAdmises );
 				
 				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('langues').";");
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-					$idx = $dbp['langue_id'];
+					$idx = $dbp['lang_id'];
 					$TableRendu = 0;
 					reset ( $TabLangueAdmises );
-					foreach ( $TabLangueAdmises as $B ) { if ( $B == $dbp['langue_id'] ) { $TableRendu = 1; } }
+					foreach ( $TabLangueAdmises as $B ) { if ( $B == $dbp['lang_id'] ) { $TableRendu = 1; } }
 					if ( $TableRendu == 1 ) {
 						foreach ( $dbp as $A => $B ) { $this->LanguageList[$idx][$A] = $B; }
-						$this->LanguageList[$dbp['langue_639_3']] = &$this->LanguageList[$idx];
+						$this->LanguageList[$dbp['lang_639_3']] = &$this->LanguageList[$idx];
 					}
 				}
 				
@@ -143,7 +143,7 @@ class ConfigurationManagement {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$dbquery = $SDDMObj->query("
 			SELECT sl.lang_id
-			FROM ".$SqlTableListObj->getSQLTableName('site_langue')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
+			FROM ".$SqlTableListObj->getSQLTableName('language_website')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
 			WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND sl.ws_id = s.ws_id
 			;");

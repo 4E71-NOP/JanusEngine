@@ -318,17 +318,17 @@ switch ($scoreLang) {
 		$LMObj->InternalLog("Language selection : Error on Language");
 		break;
 	case 1:
-		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'langue_639_3');
+		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_639_3');
 		$LMObj->InternalLog("Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")");
 		$CurrentSetObj->setDataEntry('language', $tmp);
-		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'langue_id') );
+		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_id') );
 		break;
 	case 2:
 	case 3:
-		$tmp = $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'langue_639_3');
+		$tmp = $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_639_3');
 		$LMObj->InternalLog("Language selection : User priority (Case=".$scoreLang."; ".$UserObj->getUserEntry('lang')."->".$tmp.")");
 		$CurrentSetObj->setDataEntry('language', $tmp);
-		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'langue_id'));
+		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_id'));
 		break;
 	case 4:
 	case 5:
