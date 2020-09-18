@@ -220,7 +220,7 @@ class MenuSelectTable {
 			FROM ".$SqlTableListObj->getSQLTableName('presentation')." p, ".$SqlTableListObj->getSQLTableName('theme_presentation')." tp, ".$SqlTableListObj->getSQLTableName('site_theme')." wt
 			WHERE p.pres_id = tp.pres_id
 			AND tp.theme_id = wt.theme_id
-			AND wt.theme_etat = '1'
+			AND wt.theme_state = '1'
 			AND wt.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.pres_nom
 		;");
@@ -291,7 +291,7 @@ class MenuSelectTable {
 			SELECT t.* 
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." t, ".$SqlTableListObj->getSQLTableName('site_theme')." st 
 			WHERE t.theme_id = st.theme_id
-			AND st.theme_etat = '1' 
+			AND st.theme_state = '1' 
 			AND st.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();

@@ -551,7 +551,7 @@ self::$CheckTable['update']['user']['1']['m']	= "CLI_User_U002";
 self::$CheckTable['update']['user']['2']['m']	= "CLI_User_U003";
 
 self::$CheckTable['update']['user']['3']['d']	= 2;
-self::$CheckTable['update']['user']['3']['f']	= function ($a) { return array ("SELECT t.theme_id, t.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." t, ".$a['sqlTables']['site_theme']." st WHERE t.theme_nom = '".$a['params']['pref_theme']."' AND t.theme_id = st.theme_id AND st.theme_etat = '1' AND st.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['user']['3']['f']	= function ($a) { return array ("SELECT t.theme_id, t.theme_nom FROM ".$a['sqlTables']['theme_descripteur']." t, ".$a['sqlTables']['site_theme']." st WHERE t.theme_nom = '".$a['params']['pref_theme']."' AND t.theme_id = st.theme_id AND st.theme_state = '1' AND st.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['user']['3']['c']	= "theme_id";
 self::$CheckTable['update']['user']['3']['v']	= "pref_theme_id";
 self::$CheckTable['update']['user']['3']['m']	= "CLI_User_U004";

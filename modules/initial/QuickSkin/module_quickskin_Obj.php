@@ -62,7 +62,7 @@ class ModuleQuickSkin {
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND a.theme_id = b.theme_id
-			AND b.theme_etat = '1'
+			AND b.theme_state = '1'
 			;");
 			
 			if ( $SDDMObj->num_row_sql($dbquery) > 0 ) {

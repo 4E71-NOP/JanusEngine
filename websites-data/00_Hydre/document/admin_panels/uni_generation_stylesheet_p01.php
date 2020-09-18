@@ -113,7 +113,7 @@ $Content .= "
 ";
 
 $dbquery = $SDDMObj->query("
-SELECT sd.theme_id,sd.theme_nom,sd.theme_titre,ss.theme_etat
+SELECT sd.theme_id,sd.theme_nom,sd.theme_titre,ss.theme_state
 FROM ".$SqlTableListObj->getSQLTableName('theme_descripteur')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss 
 WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
 AND sd.theme_id = ss.theme_id 
@@ -126,7 +126,7 @@ $SGEtat = array(
 );
 
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
-	$Content .= "<option value='".$dbp['theme_id']."'>".$dbp['theme_titre']." (".$SGEtat[$dbp['theme_etat']].") </option>\r";
+	$Content .= "<option value='".$dbp['theme_id']."'>".$dbp['theme_titre']." (".$SGEtat[$dbp['theme_state']].") </option>\r";
 }
 $Content .= "</select>\r".
 $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
