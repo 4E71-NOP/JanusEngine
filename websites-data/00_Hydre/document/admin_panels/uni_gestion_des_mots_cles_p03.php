@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-$_REQUEST['M_MOTCLE']['mot_cle_selection'] = 1 ;
+$_REQUEST['M_MOTCLE']['keyword_selection'] = 1 ;
 // --------------------------------------------------------------------------------------------
 //	2008 03 29 : fra_gestion_des_mots_cles_p03.php debut
 //	2008 00 00 : derniere modification
@@ -48,17 +48,17 @@ $tl_['eng']['l5'] = "Count";				$tl_['fra']['l5'] = "Nombre";
 $tl_['eng']['l6'] = "Type";					$tl_['fra']['l6'] = "Type";	
 $tl_['eng']['l7'] = "Data";					$tl_['fra']['l7'] = "Donn&eacute;e";	
 
-$info_mc_['mc_nom'] = "Nouveau_mot_cle-" . date ( "Y_m_j_-_G_i_s", mktime() );
-$info_mc_['mc_chaine'] = "abcd";
+$info_mc_['keyword_name'] = "Nouveau_keyword-" . date ( "Y_m_j_-_G_i_s", mktime() );
+$info_mc_['keyword_string'] = "abcd";
 $info_mc_['mc_nbr'] = 1;
-$info_mc_['mc_donnee'] = "abcd";
+$info_mc_['keyword_data'] = "abcd";
 
 $pv['o1_l2'] = "<select name='M_MOTCLE[etat]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 $tl_['eng']['ms_1_01'] = "Offline";					$tl_['fra']['ms_1_01'] = "Hors ligne";
 $tl_['eng']['ms_1_02'] = "Online";					$tl_['fra']['ms_1_02'] = "En ligne";
-$gmc_etat['0']['t'] = $tl_[$l]['ms_1_01'];		$gmc_etat['0']['s'] = "";		$gmc_etat['0']['db'] = "OFFLINE";
-$gmc_etat['1']['t'] = $tl_[$l]['ms_1_02'];		$gmc_etat['1']['s'] = "";		$gmc_etat['1']['db'] = "ONLINE";
-foreach ( $gmc_etat as $A ) { $pv['o1_l2'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
+$gkeyword_state['0']['t'] = $tl_[$l]['ms_1_01'];		$gkeyword_state['0']['s'] = "";		$gkeyword_state['0']['db'] = "OFFLINE";
+$gkeyword_state['1']['t'] = $tl_[$l]['ms_1_02'];		$gkeyword_state['1']['s'] = "";		$gkeyword_state['1']['db'] = "ONLINE";
+foreach ( $gkeyword_state as $A ) { $pv['o1_l2'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
 unset ($A);
 $pv['o1_l2'] .= "</select>\r";
 
@@ -73,10 +73,10 @@ $pv['o1_l6'] = "<select name='M_MOTCLE[type]' class='" . $theme_tableau . $_REQU
 $tl_['eng']['ms_2_01'] = "Link to a category";				$tl_['fra']['ms_2_01'] = "Vers une cat&eacute;gorie";
 $tl_['eng']['ms_2_02'] = "Link to an URL";					$tl_['fra']['ms_2_02'] = "Vers une URL";
 $tl_['eng']['ms_2_03'] = "Dynamic help";					$tl_['fra']['ms_2_03'] = "Aide dynamique";
-$gmc_type['1']['t'] = $tl_[$l]['ms_2_01'];		$gmc_type['1']['s'] = "";		$gmc_type['1']['db'] = "VERS_CATEGORIE";
-$gmc_type['2']['t'] = $tl_[$l]['ms_2_02'];		$gmc_type['2']['s'] = "";		$gmc_type['2']['db'] = "VERS_URL";
-$gmc_type['3']['t'] = $tl_[$l]['ms_2_03'];		$gmc_type['3']['s'] = "";		$gmc_type['3']['db'] = "VERS_AIDE_DYNAMIQUE";
-foreach ( $gmc_type as $A ) { $pv['o1_l6'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
+$gkeyword_type['1']['t'] = $tl_[$l]['ms_2_01'];		$gkeyword_type['1']['s'] = "";		$gkeyword_type['1']['db'] = "VERS_CATEGORIE";
+$gkeyword_type['2']['t'] = $tl_[$l]['ms_2_02'];		$gkeyword_type['2']['s'] = "";		$gkeyword_type['2']['db'] = "VERS_URL";
+$gkeyword_type['3']['t'] = $tl_[$l]['ms_2_03'];		$gkeyword_type['3']['s'] = "";		$gkeyword_type['3']['db'] = "VERS_AIDE_DYNAMIQUE";
+foreach ( $gkeyword_type as $A ) { $pv['o1_l6'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
 unset ($A);
 $pv['o1_l6'] .= "</select>\r";
 
@@ -87,7 +87,7 @@ $pv['o1_l6'] .= "</select>\r";
 $tl_['eng']['part1_invite'] = "This part will allow you to create a keyword.";
 $tl_['fra']['part1_invite'] = "Cette partie va vous permettre de cr&eacute;er un mot cl&eacute;.";
 echo ("
-<form ACTION='index.php?' method='post' name='formulaire_mot_cle'>\r
+<form ACTION='index.php?' method='post' name='formulaire_keyword'>\r
 <p>\r
 ". $tl_[$l]['part1_invite'] ."<br>\r
 <br>\r
@@ -103,13 +103,13 @@ $PF_['1']['6']['1']['cont'] = $tl_[$l]['l6'];
 $PF_['1']['7']['1']['cont'] = $tl_[$l]['l7'];
 $PF_['1']['8']['1']['cont'] = $tl_[$l]['l8'];
 
-$PF_['1']['1']['2']['cont'] = "<input type='text' name='M_MOTCLE[nom]' size='35' maxlength='255' value='".$info_mc_['mc_nom']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+$PF_['1']['1']['2']['cont'] = "<input type='text' name='M_MOTCLE[nom]' size='35' maxlength='255' value='".$info_mc_['keyword_name']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 $PF_['1']['2']['2']['cont'] = $pv['o1_l2'];
 $PF_['1']['3']['2']['cont'] = $pv['o1_l3'];
-$PF_['1']['4']['2']['cont'] = "<input type='text' name='M_MOTCLE[chaine]' size='35' maxlength='255' value='".$info_mc_['mc_chaine']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+$PF_['1']['4']['2']['cont'] = "<input type='text' name='M_MOTCLE[chaine]' size='35' maxlength='255' value='".$info_mc_['keyword_string']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 $PF_['1']['5']['2']['cont'] = "<input type='text' name='M_MOTCLE[nombre]' size='35' maxlength='255' value='".$info_mc_['mc_nbr']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 $PF_['1']['6']['2']['cont'] = $pv['o1_l6'];
-$PF_['1']['7']['2']['cont'] = "<input type='text' name='M_MOTCLE[donnee]' size='35' maxlength='255' value='".$info_mc_['mc_donnee']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+$PF_['1']['7']['2']['cont'] = "<input type='text' name='M_MOTCLE[donnee]' size='35' maxlength='255' value='".$info_mc_['keyword_data']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
 $PFC_['onglet']['1']['nbr_ligne'] = 7;
 $PFC_['onglet']['1']['nbr_cellule'] = 2;
@@ -142,7 +142,7 @@ $bloc_html['post_hidden_sw'].
 $bloc_html['post_hidden_l'].
 $bloc_html['post_hidden_arti_ref']."
 <input type='hidden' name='arti_page'				value='1'>\r
-<input type='hidden' name='M_MOTCLE[mot_cle_selection]'	value='".$_REQUEST['M_MOTCLE']['mot_cle_selection']."'>\r".
+<input type='hidden' name='M_MOTCLE[keyword_selection]'	value='".$_REQUEST['M_MOTCLE']['keyword_selection']."'>\r".
 $bloc_html['post_hidden_user_login'].
 $bloc_html['post_hidden_user_pass']."
 <input type='hidden' name='UPDATE_action'	value='ADD_KEYWORD'>\r
@@ -209,8 +209,8 @@ if ( $website['ws_info_debug'] < 10 ) {
 	unset (
 		$dbp , 
 		$dbquery , 
-		$gmc_etat, 
-		$gmc_type, 
+		$gkeyword_state, 
+		$gkeyword_type, 
 		$info_a_,
 		$PF_,
 		$PFC_,

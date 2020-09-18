@@ -30,7 +30,7 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 		}
 	}
 	$a['values2'] = substr($a['values2'], 0 , -1);
-	$a['columns2'] = "deco_nligne, deco_id, deco_variable, deco_valeur";
+	$a['columns2'] = "deco_line_number, deco_id, deco_variable_name, deco_value";
 	
 	return array (
 		"INSERT INTO ".$a['sqlTables']['decoration']." (".$a['columns'].") VALUES (".$a['values'].");",
@@ -48,7 +48,7 @@ self::$ActionTable['add']['group'] = function (&$a) { return array (
 	);
 };
 
-self::$ActionTable['add']['keyword']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['mot_cle']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['keyword']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['keyword']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout']." (".$a['columns'].") VALUES (".$a['values'].");");};
 

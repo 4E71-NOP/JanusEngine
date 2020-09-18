@@ -124,8 +124,8 @@ else {
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
 		."&decorationForm[selectionId]=".$dbp['deco_ref_id']
-		."'>".$dbp['deco_nom']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $I18nObj->getI18nEntry('state')[$dbp['deco_etat']];
+		."'>".$dbp['deco_name']."</a>";
+		$T['AD']['1'][$i]['2']['cont']	= $I18nObj->getI18nEntry('state')[$dbp['deco_state']];
 		$T['AD']['1'][$i]['3']['cont']	= $I18nObj->getI18nEntry('type')[$dbp['deco_type']];
 	}
 }

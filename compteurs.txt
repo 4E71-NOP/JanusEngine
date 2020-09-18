@@ -114,7 +114,7 @@
 144 current/routines/website/_TRASH/cc_fonctions_document.php
 97 current/routines/website/_TRASH/cc_fonctions_group.php
 156 current/routines/website/_TRASH/cc_fonctions_module.php
-115 current/routines/website/_TRASH/cc_fonctions_mot_cle.php
+115 current/routines/website/_TRASH/cc_fonctions_keyword.php
 332 current/routines/website/_TRASH/cc_fonctions_layout.php
 193 current/routines/website/_TRASH/cc_fonctions_website.php
 78 current/routines/website/_TRASH/cc_fonctions_tag.php
@@ -127,7 +127,7 @@
 26 current/routines/website/_TRASH/forge_de_commande_add_document.php
 22 current/routines/website/_TRASH/forge_de_commande_add_group.php
 29 current/routines/website/_TRASH/forge_de_commande_add_module.php
-22 current/routines/website/_TRASH/forge_de_commande_add_mot_cle.php
+22 current/routines/website/_TRASH/forge_de_commande_add_keyword.php
 18 current/routines/website/_TRASH/forge_de_commande_add_tag.php
 46 current/routines/website/_TRASH/forge_de_commande_add_theme.php
 57 current/routines/website/_TRASH/forge_de_commande_add_user.php
@@ -138,7 +138,7 @@
 16 current/routines/website/_TRASH/forge_de_commande_delete_document.php
 16 current/routines/website/_TRASH/forge_de_commande_delete_group.php
 16 current/routines/website/_TRASH/forge_de_commande_delete_module.php
-16 current/routines/website/_TRASH/forge_de_commande_delete_mot_cle.php
+16 current/routines/website/_TRASH/forge_de_commande_delete_keyword.php
 16 current/routines/website/_TRASH/forge_de_commande_delete_tag.php
 16 current/routines/website/_TRASH/forge_de_commande_delete_theme.php
 17 current/routines/website/_TRASH/forge_de_commande_delete_user.php
@@ -150,7 +150,7 @@
 125 current/routines/website/_TRASH/forge_de_commande_update_document.php
 21 current/routines/website/_TRASH/forge_de_commande_update_group.php
 29 current/routines/website/_TRASH/forge_de_commande_update_module.php
-21 current/routines/website/_TRASH/forge_de_commande_update_mot_cle.php
+21 current/routines/website/_TRASH/forge_de_commande_update_keyword.php
 17 current/routines/website/_TRASH/forge_de_commande_update_tag.php
 53 current/routines/website/_TRASH/forge_de_commande_update_theme.php
 104 current/routines/website/_TRASH/forge_de_commande_update_user.php
@@ -181,7 +181,7 @@
 474 current/routines/website/_TRASH/manipulation_document.php
 203 current/routines/website/_TRASH/manipulation_group.php
 220 current/routines/website/_TRASH/manipulation_module.php
-190 current/routines/website/_TRASH/manipulation_mot_cle.php
+190 current/routines/website/_TRASH/manipulation_keyword.php
 252 current/routines/website/_TRASH/manipulation_layout.php
 323 current/routines/website/_TRASH/manipulation_site.php
 184 current/routines/website/_TRASH/manipulation_tag.php
@@ -375,7 +375,7 @@
 247 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_extensions_p01.php
 173 websites-data/00_Hydre/document/admin_panels/uni_outil_conversion_type_p01.php
 29 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_layouts_p03.php
-467 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_historiques_p01.php
+467 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_logs_p01.php
 421 websites-data/00_Hydre/document/admin_panels/uni_validation_d_article_p02.php
 438 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_modules_p02.php
 894 websites-data/00_Hydre/document/admin_panels/uni_gestion_du_profil_p01.php

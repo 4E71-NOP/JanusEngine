@@ -748,17 +748,17 @@ class ModuleDocumentDisplay {
 
 		$dbquery = $SDDMObj->query("
 		SELECT *
-		FROM ".$SqlTableListObj->getSQLTableName('mot_cle')."
+		FROM ".$SqlTableListObj->getSQLTableName('keyword')."
 		WHERE arti_id = '".$DocumentDataObj->getDocumentDataEntry('arti_id')."'
-		AND mc_etat = '1'
+		AND keyword_state = '1'
 		AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$pv['MC']['id']		= $dbp['mc_id'];
-			$pv['MC']['chaine']	= $dbp['mc_chaine'];
+			$pv['MC']['id']		= $dbp['keyword_id'];
+			$pv['MC']['chaine']	= $dbp['keyword_string'];
 			$pv['MC']['nbr']	= $dbp['mc_nbr'];
-			$pv['MC']['type']	= $dbp['mc_type'];
-			$pv['MC']['donnee']	= $dbp['mc_donnee'];
+			$pv['MC']['type']	= $dbp['keyword_type'];
+			$pv['MC']['donnee']	= $dbp['keyword_data'];
 			switch ($pv['MC']['type'] ) {
 				case 1:
 					break;

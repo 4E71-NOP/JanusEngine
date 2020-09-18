@@ -31,8 +31,8 @@ class ThemeData {
 		FROM ". $SqlTableListObj->getSQLTableName('decoration')."
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$this->DecorationList[$dbp['deco_nom']]['deco_id']		=	$this->DecorationList[$dbp['deco_ref_id']]['deco_id']	=	$dbp['deco_id'];
-			$this->DecorationList[$dbp['deco_nom']]['deco_type']	=	$this->DecorationList[$dbp['deco_ref_id']]['deco_type']	=	$dbp['deco_type'];
+			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_ref_id']]['deco_id']	=	$dbp['deco_id'];
+			$this->DecorationList[$dbp['deco_name']]['deco_type']	=	$this->DecorationList[$dbp['deco_ref_id']]['deco_type']	=	$dbp['deco_type'];
 		}
 	}
 	
@@ -194,7 +194,7 @@ class ThemeData {
 					$p = &$this->ThemeData[$BlockM];
 					
 					while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-						$p[$dbp['deco_variable']] = $dbp['deco_valeur'];
+						$p[$dbp['deco_variable_name']] = $dbp['deco_value'];
 					}
 					
 					$p ['niveau'] = sprintf ( "%01u", $i );

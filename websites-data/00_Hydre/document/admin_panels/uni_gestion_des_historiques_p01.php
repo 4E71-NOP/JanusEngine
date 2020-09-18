@@ -55,11 +55,11 @@ $RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_historiques_p01.php";
+$localisation = " / uni_gestion_des_logs_p01.php";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_historiques_p01.php");
+$LMObj->logCheckpoint("uni_gestion_des_logs_p01.php");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_historiques_p01.php");
+$MapperObj->setSqlApplicant("uni_gestion_des_logs_p01.php");
 
 switch ($l) {
 	case "fra":
@@ -112,12 +112,12 @@ switch ($l) {
 if ( strlen($RequestDataObj->getRequestDataSubEntry('mhForm', 'action')) != 0) {
 	switch ($RequestDataObj->getRequestDataSubEntry('mhForm', 'action')) {
 	case "DELETE":
-		$DeleteSelection = " WHERE historique_id IN (";
+		$DeleteSelection = " WHERE log_id IN (";
 		foreach ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'selection') as $K => $A ) { $DeleteSelection .= $K.", "; }
 		unset ($K,$A);
 		$DeleteSelection = substr($DeleteSelection, 0, -2) . ") ";
 		$dbquery = $SDDMObj->query("
-		DELETE FROM ".$SqlTableListObj->getSQLTableName('historique'). 
+		DELETE FROM ".$SqlTableListObj->getSQLTableName('log'). 
 		$DeleteSelection."
 		;");
 		break;
@@ -142,7 +142,7 @@ else {
 }
 
 $criteriaUrl = ""; 
-$ClauseType = " AND historique_signal IN (";
+$ClauseType = " AND log_signal IN (";
 $ClauseTmp = array();
 if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'err') == "on" )	{
 	$ClauseTmp['1'] = "0"; 
@@ -281,18 +281,18 @@ $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 if ( strlen($RequestDataObj->getRequestDataSubEntry('mhForm', 'page') == 0 )) { $RequestDataObj->setRequestDataSubEntry('mhForm', 'page', 0 ); }
 
 $dbquery = $SDDMObj->query("
-SELECT COUNT(historique_id) as nbr_historique 
-FROM ".$SqlTableListObj->getSQLTableName('historique')." 
+SELECT COUNT(log_id) as nbr_log 
+FROM ".$SqlTableListObj->getSQLTableName('log')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ;");
-while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $RequestDataObj->setRequestDataSubEntry('mhForm', 'historique_count', $dbp['nbr_historique']); } 
+while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $RequestDataObj->setRequestDataSubEntry('mhForm', 'log_count', $dbp['nbr_log']); } 
 
-if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'historique_count') > $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page') ) {
+if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') > $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page') ) {
 	$RequestDataObj->setRequestDataSubEntry('mhForm', 'selection_page', "<p style='text-align: center;'>\r --\r");
-	$RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_page', $RequestDataObj->getRequestDataSubEntry('mhForm', 'historique_count') / $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
-	$RequestDataObj->setRequestDataSubEntry('mhForm', 'reste', $RequestDataObj->getRequestDataSubEntry('mhForm', 'historique_count') % $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
+	$RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_page', $RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') / $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
+	$RequestDataObj->setRequestDataSubEntry('mhForm', 'reste', $RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') % $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
 	if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'reste') != 0 ) { $RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_page', $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_page')+1); }
 	$RequestDataObj->setRequestDataSubEntry('mhForm', 'compteur_page', 0);
 	for ( $i = 1 ; $i <= $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_page') ; $i++ ) {
@@ -316,11 +316,11 @@ if ( $RequestDataObj->getRequestDataSubEntry('mhForm', 'historique_count') > $Re
 
 $dbquery = $SDDMObj->query("
 SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('historique')." 
+FROM ".$SqlTableListObj->getSQLTableName('log')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
-ORDER BY historique_date DESC, historique_id DESC 
+ORDER BY log_date DESC, log_id DESC 
 LIMIT ".($RequestDataObj->getRequestDataSubEntry('mhForm', 'page') * $RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')).",".$RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."
 ;");
 
@@ -367,24 +367,24 @@ else {
 	$T['AD'][$Tab][$lt]['7']['cont'] = $I18nObj->getI18nEntry('col_7_txt');
 
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
-		$pv['historique_action_longeur'] = strlen($dbp['historique_contenu']);
+		$pv['log_action_longeur'] = strlen($dbp['log_contenu']);
 		switch (TRUE) {
-		case ($pv['historique_action_longeur'] < 128 && $pv['historique_action_longeur'] > 64):	$dbp['historique_contenu2'] = substr ($dbp['historique_contenu'],0,59) . " [...] ";		break;
-		case ($pv['historique_action_longeur'] > 128):											$dbp['historique_contenu2'] = substr ($dbp['historique_contenu'],0,59) . " [...] " . substr ($dbp['historique_contenu'],($pv['historique_action_longeur'] - 64) ,$pv['historique_action_longeur'] );		break;
-		case ($pv['historique_action_longeur'] < 64):											$dbp['historique_contenu2'] = $dbp['historique_contenu'];	break;
+		case ($pv['log_action_longeur'] < 128 && $pv['log_action_longeur'] > 64):	$dbp['log_contenu2'] = substr ($dbp['log_contenu'],0,59) . " [...] ";		break;
+		case ($pv['log_action_longeur'] > 128):											$dbp['log_contenu2'] = substr ($dbp['log_contenu'],0,59) . " [...] " . substr ($dbp['log_contenu'],($pv['log_action_longeur'] - 64) ,$pv['log_action_longeur'] );		break;
+		case ($pv['log_action_longeur'] < 64):											$dbp['log_contenu2'] = $dbp['log_contenu'];	break;
 		}
 
 		$lt++;
-		$T['AD'][$Tab][$lt]['1']['cont'] = $dbp['historique_id']. "<br>\r<input type='checkbox' name='mhForm[selection][".$dbp['historique_id']."]'>";
-		$T['AD'][$Tab][$lt]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['historique_date'] );
-		$T['AD'][$Tab][$lt]['3']['cont'] = $tab[$dbp['historique_signal']];
-		$T['AD'][$Tab][$lt]['4']['cont'] = $dbp['historique_msgid'];
-		$T['AD'][$Tab][$lt]['5']['cont'] = $dbp['historique_initiateur'];
-		$T['AD'][$Tab][$lt]['6']['cont'] = $dbp['historique_action'];
+		$T['AD'][$Tab][$lt]['1']['cont'] = $dbp['log_id']. "<br>\r<input type='checkbox' name='mhForm[selection][".$dbp['log_id']."]'>";
+		$T['AD'][$Tab][$lt]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
+		$T['AD'][$Tab][$lt]['3']['cont'] = $tab[$dbp['log_signal']];
+		$T['AD'][$Tab][$lt]['4']['cont'] = $dbp['log_msgid'];
+		$T['AD'][$Tab][$lt]['5']['cont'] = $dbp['log_initiator'];
+		$T['AD'][$Tab][$lt]['6']['cont'] = $dbp['log_action'];
 		$T['AD'][$Tab][$lt]['7']['cont'] = "<span
 		onMouseOver=\"t.ToolTip('".
-		$SDDMObj->escapeString(htmlentities($dbp['historique_contenu']))."');\"
-		onMouseOut=\"t.ToolTip();\">\r".$dbp['historique_contenu2']."</span>\r";
+		$SDDMObj->escapeString(htmlentities($dbp['log_contenu']))."');\"
+		onMouseOut=\"t.ToolTip();\">\r".$dbp['log_contenu2']."</span>\r";
 
 		$T['AD'][$Tab][$lt]['1']['tc'] = 1;
 		$T['AD'][$Tab][$lt]['2']['tc'] = 1;

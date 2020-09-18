@@ -61,11 +61,11 @@ $RequestDataObj->setRequestData('formGenericData',
 );
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_mot_cle_p02";
+$localisation = " / uni_gestion_des_keyword_p02";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_mot_cle_p02");
+$LMObj->logCheckpoint("uni_gestion_des_keyword_p02");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_mot_cle_p02");
+$MapperObj->setSqlApplicant("uni_gestion_des_keyword_p02");
 
 switch ($l) {
 	case "fra":
@@ -150,7 +150,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 
 		$tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('mc_nom');
+		$T['AD']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_name');
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -160,14 +160,14 @@ switch ($RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 		$currentKeyWordObj->setKeyWord(
 			array (
 					
-					"mc_etat"		=>	1,
-					"mc_nom"		=>	"NewKeyword".date(),
+					"keyword_state"		=>	1,
+					"keyword_name"		=>	"NewKeyword".date(),
 					"arti_id"		=>	0,
 					"ws_id"		=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-					"mc_chaine"		=>	"",
-					"mc_compteur"	=>	1,
-					"mc_type"		=>	3,	
-					"mc_donnee"		=>	"",	
+					"keyword_string"		=>	"",
+					"keyword_count"	=>	1,
+					"keyword_type"		=>	3,	
+					"keyword_data"		=>	"",	
 			)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -188,7 +188,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminKeywordManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value='keyword'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentKeyWordObj->getKeyWordEntry('mc_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentKeyWordObj->getKeyWordEntry('keyword_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='keywordForm[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -226,9 +226,9 @@ $tabState = array(
 );
 
 
-$T['AD']['1']['1']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('mc_id');
+$T['AD']['1']['1']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_id');
 
-$tabState[$currentKeyWordObj->getKeyWordEntry('mc_etat')]['s'] = " selected ";
+$tabState[$currentKeyWordObj->getKeyWordEntry('keyword_state')]['s'] = " selected ";
 $T['AD']['1']['3']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabState as $A ) { $T['AD']['1']['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['3']['2']['cont'] .= "</select>\r";
@@ -240,20 +240,20 @@ foreach ( $tabArticle_ as $A ) { $T['AD']['1']['4']['2']['cont'] .= "<option val
 $T['AD']['1']['4']['2']['cont'] .= "</select>\r";
 
 
-$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('mc_chaine')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('mc_compteur')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_string')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabType = array(
 		1 =>	array ( "t" => $I18nObj->getI18nEntry('kwType1'),	"db" => "TO_CATEGORY"),
 		2 =>	array ( "t" => $I18nObj->getI18nEntry('kwType2'),	"db" => "TO_URL"),
 		3 =>	array ( "t" => $I18nObj->getI18nEntry('kwType3'),	"db" => "TOOLTIP"),
 );
-$tabType[$currentKeyWordObj->getKeyWordEntry('mc_type')]['s'] = " selected ";
+$tabType[$currentKeyWordObj->getKeyWordEntry('keyword_type')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabType as $A ) { $T['AD']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['7']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('mc_donnee')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_data')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 // --------------------------------------------------------------------------------------------
 //

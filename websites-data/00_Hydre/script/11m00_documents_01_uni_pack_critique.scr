@@ -98,10 +98,10 @@ insert content	file "admin_panels/uni_gestion_des_groups_p02.php"		into "doc_uni
 share document	name "doc_uni_gestion_des_groups_p02.php"	with_website Hydre	modification NO;
 update document	name "doc_uni_gestion_des_groups_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
 
-add document	name "doc_uni_gestion_des_historiques_p01.php"	type PHP;
-insert content	file "admin_panels/uni_gestion_des_historiques_p01.php"		into "doc_uni_gestion_des_historiques_p01.php";
-share document	name "doc_uni_gestion_des_historiques_p01.php"	with_website Hydre	modification NO;
-update document	name "doc_uni_gestion_des_historiques_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+add document	name "doc_uni_gestion_des_logs_p01.php"	type PHP;
+insert content	file "admin_panels/uni_gestion_des_logs_p01.php"		into "doc_uni_gestion_des_logs_p01.php";
+share document	name "doc_uni_gestion_des_logs_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_gestion_des_logs_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
 
 add document	name "doc_uni_gestion_des_modules_p01.php"	type PHP;
 insert content	file "admin_panels/uni_gestion_des_modules_p01.php"		into "doc_uni_gestion_des_modules_p01.php";

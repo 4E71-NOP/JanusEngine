@@ -26,7 +26,7 @@ $_REQUEST['uni_gestion_des_decorations_p'] = 2;
 $_REQUEST['M_DECORA']['ref_id'] = 15;
 
 $DP_['arti_page_save'] = $DP_['arti_page'];
-$pv['deco_nom_form'] = "modification";
+$pv['deco_name_form'] = "modification";
 
 /*Hydre-contenu_debut*/
 $_REQUEST['sql_initiateur'] = "uni_gestion_des_decoration_p02.php";
@@ -225,7 +225,7 @@ case 3:
 	unset ( $A );
 	$pv['o1l32'] .= "</select>\r";
 	$_REQUEST['deco_repertoire'] = "one";
-	$DEC['deco_nom'] = "deco_". date ( "Y_m_j_-_G_i_s", mktime() );
+	$DEC['deco_name'] = "deco_". date ( "Y_m_j_-_G_i_s", mktime() );
 break;
 }
 
@@ -271,11 +271,11 @@ unset ( $md_etat);
 $md_etat['0']['t'] = $tl_[$l]['md_etat1'];		$md_etat['0']['s'] = "";	$md_etat['0']['db'] = "OFFLINE";
 $md_etat['1']['t'] = $tl_[$l]['md_etat2'];		$md_etat['1']['s'] = "";	$md_etat['1']['db'] = "ONLINE";
 
-//outil_debug ( $DEC['deco_etat'] , "DEC['deco_etat']");
+//outil_debug ( $DEC['deco_state'] , "DEC['deco_state']");
 //outil_debug ( $md_etat , "md_etat");
 
-//if ( $DEC['deco_etat'] < 0 && $DEC['deco_etat'] > 2 ) { $DEC['deco_etat'] = 1; }
-$md_etat[$DEC['deco_etat']]['s'] = " selected";
+//if ( $DEC['deco_state'] < 0 && $DEC['deco_state'] > 2 ) { $DEC['deco_state'] = 1; }
+$md_etat[$DEC['deco_state']]['s'] = " selected";
 $pv['o1l22'] = "<select name='M_DECORA[etat]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 foreach ( $md_etat as $A ) { $pv['o1l22'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
 unset ( $A );
@@ -324,8 +324,8 @@ $AD['1']['2']['1']['cont'] = $tl_[$l]['o1l21'];
 $AD['1']['3']['1']['cont'] = $tl_[$l]['o1l31'];
 $AD['1']['4']['1']['cont'] = $tl_[$l]['o1l41'];
 
-if ( $GDS_mode != "creation" ) { $pv['deco_nom_form'] = " readonly "; }
-$AD['1']['1']['2']['cont'] = "<input type='text'  ".$pv['deco_nom_form']." name='M_DECORA[nom]' size='35' maxlength='255' value='".$DEC['deco_nom']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+if ( $GDS_mode != "creation" ) { $pv['deco_name_form'] = " readonly "; }
+$AD['1']['1']['2']['cont'] = "<input type='text'  ".$pv['deco_name_form']." name='M_DECORA[nom]' size='35' maxlength='255' value='".$DEC['deco_name']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 $AD['1']['2']['2']['cont'] = $pv['o1l22'];
 $AD['1']['3']['2']['cont'] = $pv['o1l32'];
 $AD['1']['4']['2']['cont'] = $pv['o1l42'];

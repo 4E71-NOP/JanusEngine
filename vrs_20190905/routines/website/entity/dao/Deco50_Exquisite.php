@@ -28,7 +28,7 @@ class Deco50_Exquisite {
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog(__METHOD__ . " : Loading data for deco_50_exquise id=".$id);
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$this->Deco50_Exquisite[$dbp['deco_variable']] = $dbp['deco_valeur'];
+				$this->Deco50_Exquisite[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {

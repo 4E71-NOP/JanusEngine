@@ -33,8 +33,8 @@ class KeyWord {
 
 		$dbquery = $SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('mot_cle')."
-			WHERE mc_id = '".$id."'
+			FROM ".$SqlTableListObj->getSQLTableName('keyword')."
+			WHERE keyword_id = '".$id."'
 			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		

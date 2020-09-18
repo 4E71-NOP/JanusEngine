@@ -47,11 +47,11 @@ $RequestDataObj->setRequestData('test',
 );
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_mot_cle_p01";
+$localisation = " / uni_gestion_des_keyword_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_mot_cle_p01");
+$LMObj->logCheckpoint("uni_gestion_des_keyword_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_mot_cle_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_keyword_p01");
 
 switch ($l) {
 	case "fra":
@@ -90,12 +90,12 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 $Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
 
 $clause = "";
-if ( strlen($RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND mc_nom like '%".$RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
+if ( strlen($RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
 $dbquery = $SDDMObj->query("
 SELECT *  
-FROM ".$SqlTableListObj->getSQLTableName('mot_cle')." 
+FROM ".$SqlTableListObj->getSQLTableName('keyword')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND mc_etat != '2' 
+AND keyword_state != '2' 
 ".$clause." 
 ;");
 
@@ -123,13 +123,13 @@ else {
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
-		&amp;M_MOTCLE[mot_cle_selection]=".$dbp['mc_id'].
+		&amp;M_MOTCLE[keyword_selection]=".$dbp['keyword_id'].
 		"&amp;M_MOTCLE[uni_gestion_des_motcle_p]=2".
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
 		&amp;arti_page=2'
-		>".$dbp['mc_nom']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $tabType[$dbp['mc_type']];
-		$T['AD']['1'][$i]['3']['cont']	= $tabState[$dbp['mc_etat']];
+		>".$dbp['keyword_name']."</a>";
+		$T['AD']['1'][$i]['2']['cont']	= $tabType[$dbp['keyword_type']];
+		$T['AD']['1'][$i]['3']['cont']	= $tabState[$dbp['keyword_state']];
 	}
 }
 

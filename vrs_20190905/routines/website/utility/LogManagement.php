@@ -57,8 +57,8 @@ class LogManagement {
 			$data['i'] = $SDDMObj->escapeString($data['i']);
 			$data['a'] = $SDDMObj->escapeString($data['a']);
 			$data['t'] = $SDDMObj->escapeString($data['t']);
-			$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('historique'), "historique_id" );
-			$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('historique')." VALUES (
+			$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('log'), "log_id" );
+			$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('log')." VALUES (
 						'".$id."', '".$WebSiteObj->getWebSiteEntry('ws_id')."', '".time ()."', '".$data['i']."',
 						'".$data['a']."', '".$data['s']."', '".$data['m']."', '".$data['t']."') ;");
 			};
@@ -307,8 +307,8 @@ class LogManagement {
 						break;
 					case "internal" :
 					default:
-						$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('historique'), "historique_id" );
-						$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('historique')." VALUES (
+						$id	= $SDDMObj->findNextId($SqlTableListObj->getSQLTableName('log'), "log_id" );
+						$SDDMObj->query("INSERT INTO ".$SqlTableListObj->getSQLTableName('log')." VALUES (
 						'".$id."', '".$WebSiteObj->getWebSiteEntry('ws_id')."', '".time ()."', '".$data['i']."',
 						'".$data['a']."', '".$data['s']."', '".$data['m']."', '".$data['t']."') ;");
 						break;

@@ -184,7 +184,7 @@ self::$CheckTable['delete']['deadline']['0']['p']	= "deadline";
 
 //Décoration
 self::$CheckTable['add']['decoration']['0']['d']	= 3;
-self::$CheckTable['add']['decoration']['0']['f']	= function ($a) { return array ("SELECT deco_nom FROM ".$a['sqlTables']['decoration']." WHERE deco_nom = '".$a['params']['name']."';");};
+self::$CheckTable['add']['decoration']['0']['f']	= function ($a) { return array ("SELECT deco_name FROM ".$a['sqlTables']['decoration']." WHERE deco_name = '".$a['params']['name']."';");};
 self::$CheckTable['add']['decoration']['0']['m']	= "CLI_Decoration_C001";
 
 
@@ -300,7 +300,7 @@ self::$CheckTable['delete']['group']['1']['p'] = "group";
 
 // KeyWord
 self::$CheckTable['add']['keyword']['0']['d']	= 3;
-self::$CheckTable['add']['keyword']['0']['f']	= function ($a) { return array ("SELECT mc_id FROM ".$a['sqlTables']['mot_cle']." WHERE mc_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['keyword']['0']['f']	= function ($a) { return array ("SELECT keyword_id FROM ".$a['sqlTables']['keyword']." WHERE keyword_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['keyword']['0']['m']	= "CLI_KeyWord_C001";
 self::$CheckTable['add']['keyword']['1']['d']	= 2;
 self::$CheckTable['add']['keyword']['1']['f']	= function ($a) { return array ("SELECT arti_id,arti_name FROM ".$a['sqlTables']['article']." WHERE arti_name = '".$a['params']['article']."' AND ws_id = '".$a['Context']['ws_id']."';");};
@@ -311,9 +311,9 @@ self::$CheckTable['add']['keyword']['1']['p']	= "article";
 
 
 self::$CheckTable['update']['keyword']['0']['d']	= 2;
-self::$CheckTable['update']['keyword']['0']['f']	= function ($a) { return array ("SELECT mc_id FROM ".$a['sqlTables']['mot_cle']." WHERE mc_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['update']['keyword']['0']['c']	= "mc_id";
-self::$CheckTable['update']['keyword']['0']['v']	= "mc_id";
+self::$CheckTable['update']['keyword']['0']['f']	= function ($a) { return array ("SELECT keyword_id FROM ".$a['sqlTables']['keyword']." WHERE keyword_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['keyword']['0']['c']	= "keyword_id";
+self::$CheckTable['update']['keyword']['0']['v']	= "keyword_id";
 self::$CheckTable['update']['keyword']['0']['m']	= "CLI_KeyWord_U002";
 self::$CheckTable['update']['keyword']['0']['p']	= "keyword";
 self::$CheckTable['update']['keyword']['1']['d']	= 2;
@@ -324,9 +324,9 @@ self::$CheckTable['update']['keyword']['1']['m']	= "CLI_KeyWord_U002";
 self::$CheckTable['update']['keyword']['1']['p']	= "article";
 
 self::$CheckTable['delete']['keyword']['0']['d']	= 2;
-self::$CheckTable['delete']['keyword']['0']['f']	= function ($a) { return array ("SELECT mc_id FROM ".$a['sqlTables']['mot_cle']." WHERE mc_nom = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['delete']['keyword']['0']['c']	= "mc_id";
-self::$CheckTable['delete']['keyword']['0']['v']	= "mc_id";
+self::$CheckTable['delete']['keyword']['0']['f']	= function ($a) { return array ("SELECT keyword_id FROM ".$a['sqlTables']['keyword']." WHERE keyword_name = '".$a['params']['name']."' AND ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['delete']['keyword']['0']['c']	= "keyword_id";
+self::$CheckTable['delete']['keyword']['0']['v']	= "keyword_id";
 self::$CheckTable['delete']['keyword']['0']['m']	= "CLI_KeyWord_D002";
 self::$CheckTable['delete']['keyword']['0']['p']	= "keyword";
 

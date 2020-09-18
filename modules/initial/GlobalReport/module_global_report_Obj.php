@@ -301,29 +301,29 @@ class ModuleGlobalReport {
 		4 => "<span class='".$block."_ok'>AUTRE</span>",
 		);
 		
-		$pv['historique_date'] = mktime();
+		$pv['log_date'] = mktime();
 		$dbquery = $SDDMObj->query("
 			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('historique')."
+			FROM ".$SqlTableListObj->getSQLTableName('log')."
 			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-			ORDER BY historique_id DESC
+			ORDER BY log_id DESC
 			LIMIT 0,15
 			;");
 		
 		$i = 2;
 		while ($dbp =  $SDDMObj->fetch_array_sql($dbquery)) {
-			$pv['historique_action_longeur'] = strlen($dbp['historique_action']);
+			$pv['log_action_longeur'] = strlen($dbp['log_action']);
 			switch (TRUE) {
-				case ($pv['historique_action_longeur'] < 128 && $pv['historique_action_longeur'] > 64):	$dbp['historique_action'] = substr ($dbp['historique_action'],0,59) . " [...] ";		break;
-				case ($pv['historique_action_longeur'] > 128):									$dbp['historique_action'] = substr ($dbp['historique_action'],0,59) . " [...] " . substr ($dbp['historique_action'],($pv['historique_action_longeur'] - 64) ,$pv['historique_action_longeur'] );		break;
+				case ($pv['log_action_longeur'] < 128 && $pv['log_action_longeur'] > 64):	$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] ";		break;
+				case ($pv['log_action_longeur'] > 128):									$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] " . substr ($dbp['log_action'],($pv['log_action_longeur'] - 64) ,$pv['log_action_longeur'] );		break;
 			}
-			$Content[$i]['1']['cont'] = $dbp['historique_id'];								$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
-			$Content[$i]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['historique_date'] );	$Content[$i]['2']['tc'] = 1;	$Content[$i]['2']['style'] = "text-align: center;";
-			$Content[$i]['3']['cont'] = $dbp['historique_initiateur'];						$Content[$i]['3']['tc'] = 2;
-			$Content[$i]['4']['cont'] = $dbp['historique_action'];							$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
-			$Content[$i]['5']['cont'] = $tabSignal[$dbp['historique_signal']];												$Content[$i]['5']['style'] = "text-align: center;";
-			$Content[$i]['6']['cont'] = $dbp['historique_msgid'];							$Content[$i]['6']['tc'] = 1;	$Content[$i]['6']['style'] = "text-align: center;";
-			$Content[$i]['7']['cont'] = $dbp['historique_contenu'];							$Content[$i]['7']['tc'] = 1;
+			$Content[$i]['1']['cont'] = $dbp['log_id'];								$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );	$Content[$i]['2']['tc'] = 1;	$Content[$i]['2']['style'] = "text-align: center;";
+			$Content[$i]['3']['cont'] = $dbp['log_initiator'];						$Content[$i]['3']['tc'] = 2;
+			$Content[$i]['4']['cont'] = $dbp['log_action'];							$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
+			$Content[$i]['5']['cont'] = $tabSignal[$dbp['log_signal']];												$Content[$i]['5']['style'] = "text-align: center;";
+			$Content[$i]['6']['cont'] = $dbp['log_msgid'];							$Content[$i]['6']['tc'] = 1;	$Content[$i]['6']['style'] = "text-align: center;";
+			$Content[$i]['7']['cont'] = $dbp['log_contenu'];							$Content[$i]['7']['tc'] = 1;
 			$i++;
 		}
 		

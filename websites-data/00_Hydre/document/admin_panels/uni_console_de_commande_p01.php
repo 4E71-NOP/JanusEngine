@@ -254,37 +254,37 @@ $tab = array (
 
 // $tab_signal= array(0 => "ERR", 1 => "OK", 2 => "WARN", 3 => "INFO", 4 => "AUTRE",);
 // $signal = $tab[$signal];
-// $historique_date = mktime();
+// $log_date = mktime();
 
 $dbquery = $SDDMObj->query("
 SELECT *
-FROM ".$SqlTableListObj->getSQLTableName('historique')."
+FROM ".$SqlTableListObj->getSQLTableName('log')."
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-ORDER BY historique_id DESC
+ORDER BY log_id DESC
 LIMIT 0,10
 ;");
 
 
 $l = 2;
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-	$historique_action_longeur = strlen($dbp['historique_action']);
+	$log_action_longeur = strlen($dbp['log_action']);
 	switch (TRUE) {
-		case ($historique_action_longeur < 128 && $historique_action_longeur > 64):	$dbp['historique_action'] = substr ($dbp['historique_action'],0,59) . " [...] ";		break;
-		case ($historique_action_longeur > 128):									$dbp['historique_action'] = substr ($dbp['historique_action'],0,59) . " [...] " . substr ($dbp['historique_action'],($historique_action_longeur - 64) ,$historique_action_longeur );		break;
+		case ($log_action_longeur < 128 && $log_action_longeur > 64):	$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] ";		break;
+		case ($log_action_longeur > 128):									$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] " . substr ($dbp['log_action'],($log_action_longeur - 64) ,$log_action_longeur );		break;
 	}
-	$T['AD']['3'][$l]['1']['cont'] = $dbp['historique_id'];
+	$T['AD']['3'][$l]['1']['cont'] = $dbp['log_id'];
 	$T['AD']['3'][$l]['1']['tc'] = 1;
-	$T['AD']['3'][$l]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['historique_date'] );
+	$T['AD']['3'][$l]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
 	$T['AD']['3'][$l]['2']['tc'] = 1;
-	$T['AD']['3'][$l]['3']['cont'] = $dbp['historique_initiateur'];
+	$T['AD']['3'][$l]['3']['cont'] = $dbp['log_initiator'];
 	$T['AD']['3'][$l]['3']['tc'] = 1;
-	$T['AD']['3'][$l]['4']['cont'] = $dbp['historique_action'];
+	$T['AD']['3'][$l]['4']['cont'] = $dbp['log_action'];
 	$T['AD']['3'][$l]['4']['tc'] = 1;
-	$T['AD']['3'][$l]['5']['cont'] = $tab[$dbp['historique_signal']];
+	$T['AD']['3'][$l]['5']['cont'] = $tab[$dbp['log_signal']];
 	$T['AD']['3'][$l]['5']['tc'] = 1;
-	$T['AD']['3'][$l]['6']['cont'] = $dbp['historique_msgid'];
+	$T['AD']['3'][$l]['6']['cont'] = $dbp['log_msgid'];
 	$T['AD']['3'][$l]['6']['tc'] = 1;
-	$T['AD']['3'][$l]['7']['cont'] = $dbp['historique_contenu'];
+	$T['AD']['3'][$l]['7']['cont'] = $dbp['log_contenu'];
 	$T['AD']['3'][$l]['7']['tc'] = 1;
 	
 // 	$tabfc_['tmp'] = $tabfc_['a'] ; $tabfc_['a'] = $tabfc_['c'] ; $tabfc_['c'] = $tabfc_['tmp'] ;

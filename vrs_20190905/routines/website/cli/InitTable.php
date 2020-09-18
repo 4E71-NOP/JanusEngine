@@ -628,7 +628,7 @@ self::$InitTable['module'] = function (&$a) {
 
 self::$InitTable['keyword'] = function (&$a) {
 	$a['params'] = array(
-			"name"		=> "nouveau_mot_cle",
+			"name"		=> "nouveau_keyword",
 			"id"		=> "",
 			"state"		=> "ONLINE",
 			"article"	=> 0,

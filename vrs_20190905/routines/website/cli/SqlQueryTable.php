@@ -63,9 +63,9 @@ self::$SqlQueryTable['M_CATEGO_rrp']['element']		= "Categorie";
 self::$SqlQueryTable['M_CATEGO_rrp']['colone_1']	= "cate_id";
 
 //decoration
-self::$SqlQueryTable['M_DECORA_rddec']['requete']	= "SELECT deco_nom FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_nom = '<A1>';";
+self::$SqlQueryTable['M_DECORA_rddec']['requete']	= "SELECT deco_name FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_name = '<A1>';";
 self::$SqlQueryTable['M_DECORA_rddec']['element']	= "Decoration";
-self::$SqlQueryTable['M_DECORA_redec']['requete']	= "SELECT deco_ref_id FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_nom = '<A1>';";
+self::$SqlQueryTable['M_DECORA_redec']['requete']	= "SELECT deco_ref_id FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_name = '<A1>';";
 self::$SqlQueryTable['M_DECORA_redec']['element']	= "Decoration";
 self::$SqlQueryTable['M_DECORA_redec']['colone_1']	= "deco_ref_id";
 
@@ -103,11 +103,11 @@ self::$SqlQueryTable['M_MODULE_regpu']['element']	= "";
 self::$SqlQueryTable['M_MODULE_regpu']['colone_1']	= "group_id";
 
 // Mot cle
-self::$SqlQueryTable['M_MOTCLE_rdmc']['requete']	= "SELECT mc_id FROM ".$SqlTableListObj->getSQLTableName('mot_cle')." WHERE mc_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_MOTCLE_rdmc']['requete']	= "SELECT keyword_id FROM ".$SqlTableListObj->getSQLTableName('keyword')." WHERE keyword_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_MOTCLE_rdmc']['element']	= "Mot cle";
-self::$SqlQueryTable['M_MOTCLE_remc']['requete']	= "SELECT mc_id FROM ".$SqlTableListObj->getSQLTableName('mot_cle')." WHERE mc_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_MOTCLE_remc']['requete']	= "SELECT keyword_id FROM ".$SqlTableListObj->getSQLTableName('keyword')." WHERE keyword_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_MOTCLE_remc']['element']	= "Mot cle";
-self::$SqlQueryTable['M_MOTCLE_remc']['colone_1']	= "mc_id";
+self::$SqlQueryTable['M_MOTCLE_remc']['colone_1']	= "keyword_id";
 
 // Presentation
 self::$SqlQueryTable['M_PRESNT_rdp']['requete']		= "SELECT layout_id,layout_name FROM ".$SqlTableListObj->getSQLTableName('layout')." WHERE layout_name = '<A1>';";
