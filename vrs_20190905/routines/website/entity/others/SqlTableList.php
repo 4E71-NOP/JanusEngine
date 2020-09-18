@@ -29,7 +29,7 @@ class SqlTableList {
 			'presentation',			'presentation_contenu',		
 			'extension',			'extension_config',			'extension_dependency',	'extension_file',
 			'pv',					
-			'website',				'site_groupe',				'site_langue',			'site_module',			'site_theme',
+			'website',				'site_groupe',				'site_langue',			'site_module',			'theme_website',
 			'theme_descriptor',		'theme_presentation',
 			'stored_event',			'stat_navigateur',			'stat_utilisateur',
 			'tag',					

@@ -73,7 +73,7 @@ self::$ActionTable['add']['tag']			= function (&$a) { return array ("INSERT INTO
 
 self::$ActionTable['add']['theme']			= function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['theme_descriptor']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_theme']." VALUES ('".$a['params']['site_theme_id']."','".$a['Context']['ws_id']."','".$a['params']['id']."','".$a['params']['state']."');");
+		"INSERT INTO ".$a['sqlTables']['theme_website']." (theme_website_id, ws_id, theme_id, theme_state) VALUES ('".$a['params']['theme_website_id']."','".$a['Context']['ws_id']."','".$a['params']['id']."','".$a['params']['state']."');");
 };
 
 

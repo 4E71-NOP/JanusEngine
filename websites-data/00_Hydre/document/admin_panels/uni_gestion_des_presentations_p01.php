@@ -82,7 +82,7 @@ $Content .="<p>". $I18nObj->getI18nEntry('invite1')."</p>";
 
 $dbquery = $SDDMObj->query("
 SELECT pr.*, sd.theme_title
-FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('site_theme')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
+FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('theme_website')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
 WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND sp.theme_id = ss.theme_id 
 AND ss.theme_id = sd.theme_id

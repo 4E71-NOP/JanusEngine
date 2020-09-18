@@ -36,7 +36,7 @@ class ThemeDescriptor {
 		
 		$dbquery = $SDDMObj->query ( "
 			SELECT * 
-			FROM " . $SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b
+			FROM " . $SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
 			WHERE a.theme_id = '".$Dest."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'

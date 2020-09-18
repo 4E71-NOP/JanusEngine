@@ -114,7 +114,7 @@ $Content .= "
 
 $dbquery = $SDDMObj->query("
 SELECT sd.theme_id,sd.theme_name,sd.theme_title,ss.theme_state
-FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd , ".$SqlTableListObj->getSQLTableName('site_theme')." ss 
+FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd , ".$SqlTableListObj->getSQLTableName('theme_website')." ss 
 WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
 AND sd.theme_id = ss.theme_id 
 ;");
@@ -164,7 +164,7 @@ $Content .= "
 if ( $RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 	$dbquery = $SDDMObj->query("
 	SELECT * 
-	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('site_theme')." b 
+	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
 	WHERE a.theme_id = '".$RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection')."' 
 	AND a.theme_id = b.theme_id 
 	;");

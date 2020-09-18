@@ -8,11 +8,11 @@ DATE_JOUR=`date "+%Y%m%d-%Hh%M"`
 FILE_LIST=`grep -Grsl $1 --exclude-dir=current *`
 
 STR="s/"$1"/"$2"/g"
-echo $STR
+echo "Chaine regexp: \'" $STR "\'"
 
 for FILE in $FILE_LIST 
 do 
-    echo "replacing " $1 " with " $2 " in " $FILE "..."
+    echo "Replacing " $1 " with " $2 " in " $FILE "..."
     sed -i $STR $FILE
 done
 echo "--------------------------------------------------------------------------------"

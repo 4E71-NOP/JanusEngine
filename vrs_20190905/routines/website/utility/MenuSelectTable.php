@@ -217,7 +217,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT p.*
-			FROM ".$SqlTableListObj->getSQLTableName('presentation')." p, ".$SqlTableListObj->getSQLTableName('theme_presentation')." tp, ".$SqlTableListObj->getSQLTableName('site_theme')." wt
+			FROM ".$SqlTableListObj->getSQLTableName('presentation')." p, ".$SqlTableListObj->getSQLTableName('theme_presentation')." tp, ".$SqlTableListObj->getSQLTableName('theme_website')." wt
 			WHERE p.pres_id = tp.pres_id
 			AND tp.theme_id = wt.theme_id
 			AND wt.theme_state = '1'
@@ -289,7 +289,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT t.* 
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." t, ".$SqlTableListObj->getSQLTableName('site_theme')." st 
+			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." t, ".$SqlTableListObj->getSQLTableName('theme_website')." st 
 			WHERE t.theme_id = st.theme_id
 			AND st.theme_state = '1' 
 			AND st.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'

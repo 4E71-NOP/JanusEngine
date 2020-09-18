@@ -433,7 +433,7 @@ self::$PreRequisiteTable['add']['theme'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "theme_descriptor",	"column" => "theme_id",			"target" => "id"),
-				array ("table" => "site_theme",			"column" => "site_theme_id",	"target" => "site_theme_id"),
+				array ("table" => "theme_website",			"column" => "theme_website_id",	"target" => "theme_website_id"),
 		),
 		"columns" => array(
 				array ( "v" => "id",						"t" => "theme_id"),

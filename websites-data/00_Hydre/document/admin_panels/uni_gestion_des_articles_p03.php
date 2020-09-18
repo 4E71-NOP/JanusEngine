@@ -52,7 +52,7 @@ unset ( $A , $B );
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT pre.pres_id,pre.pres_nom,pre.pres_nom_generique  
-FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentation']." sp , ".$SQL_tab_abrege['site_theme']." ss 
+FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentation']." sp , ".$SQL_tab_abrege['theme_website']." ss 
 WHERE pre.pres_id = sp.pres_id 
 AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 AND sp.theme_id = ss.theme_id 
