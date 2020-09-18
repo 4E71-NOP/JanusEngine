@@ -395,7 +395,7 @@ self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
 self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
 self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
 // self::$CheckTable['add']['layout_content']['1']['d']	= 2;
-// self::$CheckTable['add']['layout_content']['1']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['site_module']." sm WHERE mdl.module_nom = '".$a['params']['module']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
+// self::$CheckTable['add']['layout_content']['1']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_nom = '".$a['params']['module']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 // self::$CheckTable['add']['layout_content']['1']['c']	= "module_id";
 // self::$CheckTable['add']['layout_content']['1']['v']	= "module_id";
 // self::$CheckTable['add']['layout_content']['1']['m']	= "CLI_LayoutContent_C002";
@@ -404,7 +404,7 @@ self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
 
 // Module
 self::$CheckTable['add']['module']['0']['d']	= 3;
-self::$CheckTable['add']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['site_module']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['module']['0']['m']	= "CLI_Module_C001";
 self::$CheckTable['add']['module']['1']['d']	= 2;
 self::$CheckTable['add']['module']['1']['f']	= function ($a) { return array ("SELECT grp.groupe_id AS groupe_id, grp.groupe_nom AS groupe_nom FROM ".$a['sqlTables']['groupe']." grp, ".$a['sqlTables']['site_groupe']." sg WHERE grp.groupe_nom = '".$a['params']['group_who_can_see']."' AND grp.groupe_id = sg.groupe_id AND sg.ws_id = '".$a['Context']['ws_id']."';");};
@@ -420,7 +420,7 @@ self::$CheckTable['add']['module']['2']['m']	= "CLI_Module_C003";
 self::$CheckTable['add']['module']['2']['p']	= "user";
 
 self::$CheckTable['update']['module']['0']['d']	= 3;
-self::$CheckTable['update']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['site_module']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['module']['0']['m']	= "CLI_Module_U001";
 self::$CheckTable['update']['module']['1']['d']	= 2;
 self::$CheckTable['update']['module']['1']['f']	= function ($a) { return array ("SELECT grp.groupe_id AS groupe_id, grp.groupe_nom AS groupe_nom FROM ".$a['sqlTables']['groupe']." grp, ".$a['sqlTables']['site_groupe']." sg WHERE grp.groupe_nom = '".$a['params']['group_who_can_see']."' AND grp.groupe_id = sg.groupe_id AND sg.ws_id = '".$a['Context']['ws_id']."';");};
@@ -436,7 +436,7 @@ self::$CheckTable['update']['module']['2']['m']	= "CLI_Module_U003";
 self::$CheckTable['update']['module']['2']['p']	= "user";
 
 self::$CheckTable['delete']['module']['0']['d']	= 2;
-self::$CheckTable['delete']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['site_module']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['delete']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_nom = '".$a['params']['name']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['delete']['module']['0']['c']	= "module_id";
 self::$CheckTable['delete']['module']['0']['v']	= "module_id";
 self::$CheckTable['delete']['module']['0']['m']	= "CLI_Module_D001";

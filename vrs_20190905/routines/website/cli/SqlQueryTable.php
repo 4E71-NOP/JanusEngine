@@ -93,7 +93,7 @@ self::$SqlQueryTable['M_GROUPE_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_GROUPE_reg']['colone_1']	= "groupe_id";
 
 // Module
-self::$SqlQueryTable['M_MODULE_rdm']['requete']		= "SELECT mdl.module_id FROM ".$SqlTableListObj->getSQLTableName('module')." mdl , ".$SqlTableListObj->getSQLTableName('site_module')." sm WHERE mdl.module_nom = '<A1>' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_MODULE_rdm']['requete']		= "SELECT mdl.module_id FROM ".$SqlTableListObj->getSQLTableName('module')." mdl , ".$SqlTableListObj->getSQLTableName('module_website')." sm WHERE mdl.module_nom = '<A1>' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_MODULE_rdm']['element']		= "Module";
 self::$SqlQueryTable['M_MODULE_regpv']['requete']	= "SELECT grp.groupe_id AS groupe_id, grp.groupe_nom AS groupe_nom FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('site_groupe')." sg WHERE grp.groupe_nom = '<A1>' AND grp.groupe_id = sg.groupe_id AND sg.ws_id = '".$_REQUEST['site_context']['ws_id']."';";
 self::$SqlQueryTable['M_MODULE_regpv']['element']	= "Groupe";

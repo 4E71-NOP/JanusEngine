@@ -388,7 +388,7 @@ self::$PreRequisiteTable['add']['module'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "module",			"column" => "module_id",		"target" => "id"),
-				array ("table" => "site_module",	"column" => "site_module_id",	"target" => "site_module_id"),
+				array ("table" => "module_website",	"column" => "module_website_id",	"target" => "module_website_id"),
 		),
 		"columns" => array(
 				array ( "v" => "id",						"t" => "module_id"),

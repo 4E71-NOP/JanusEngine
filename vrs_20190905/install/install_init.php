@@ -235,9 +235,9 @@ $infos = array(
 		"module_groupe_pour_utiliser" => 31,
 		"module_adm_control" => 0,
 		"module_execution" => 0,
-		"site_module_id" => 11,
+		"module_website_id" => 11,
 		"ws_id" => 2,
-		"module_etat" => 1,
+		"module_state" => 1,
 		"module_position" => 2,
 		)
 	);

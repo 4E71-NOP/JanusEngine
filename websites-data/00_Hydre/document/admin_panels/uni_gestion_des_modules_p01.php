@@ -81,8 +81,8 @@ switch ($l) {
 $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $SDDMObj->query("
-SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_nom,a.module_titre,a.module_fichier,a.module_desc,a.module_groupe_pour_voir,a.module_groupe_pour_utiliser,a.module_adm_control,b.module_etat 
-FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('site_module')." b 
+SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_nom,a.module_titre,a.module_fichier,a.module_desc,a.module_groupe_pour_voir,a.module_groupe_pour_utiliser,a.module_adm_control,b.module_state 
+FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b 
 WHERE a.module_id = b.module_id 
 AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY b.module_position
@@ -104,7 +104,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	$groupTab[$i] = $dbp['groupe_titre'];
 }
 
-$tab_module_etat = array(
+$tab_module_state = array(
 	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$I18nObj->getI18nEntry('disabled')."</span>",
 	1 => $I18nObj->getI18nEntry('enabled'),
 	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$I18nObj->getI18nEntry('deleted')."</span>",
@@ -126,7 +126,7 @@ $T['AD']['1'][$i]['7']['cont']	= $I18nObj->getI18nEntry('col_7_txt');
 
 foreach ( $table_infos_modules AS $A1 ) {
 	$i++;
-	$A2 = $A1['module_etat'];
+	$A2 = $A1['module_state'];
 	$A3 = $A1['module_deco'];
 	$A4 = $A1['module_adm_control'];
 	$gpv = $A1['module_groupe_pour_voir'];
@@ -146,7 +146,7 @@ foreach ( $table_infos_modules AS $A1 ) {
 	."</a>\r";
 
 	$T['AD']['1'][$i]['2']['cont'] = $A1['module_desc'];
-	$T['AD']['1'][$i]['3']['cont'] = $tab_module_etat[$A2];
+	$T['AD']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
 	$T['AD']['1'][$i]['4']['cont'] = $tab_module_deco[$A3];
 	$T['AD']['1'][$i]['5']['cont'] = $gpv;
 	$T['AD']['1'][$i]['6']['cont'] = $gpu;

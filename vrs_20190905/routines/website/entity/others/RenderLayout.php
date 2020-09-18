@@ -50,10 +50,10 @@ class RenderLayout {
 		
 		$dbquery = $SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('site_module')." sm
+			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('module_website')." sm
 			WHERE sm.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND m.module_id = sm.module_id
-			AND sm.module_etat = '1'
+			AND sm.module_state = '1'
 			AND m.module_groupe_pour_voir ".$UserObj->getUserEntry('clause_in_groupe')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position

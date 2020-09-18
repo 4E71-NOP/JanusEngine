@@ -65,7 +65,7 @@ class ModuleDocumentDisplay {
 
 // 		We have now some informations about the navigation, we store/prepare it for further use.
 // 		It means some modules must be processed by priority. Document/article should be first.
-//		The priority is located in the site_module table.
+//		The priority is located in the module_website table.
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',			"<input type='hidden'	name='sw'			value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>\r" );
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l',			"<input type='hidden'	name='l'			value='".$UserObj->getUserEntry('lang')."'>\r");
 // 		$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login',	"<input type='hidden'	name='user_login'	value='".$UserObj->getUserEntry('login')."'>\r");

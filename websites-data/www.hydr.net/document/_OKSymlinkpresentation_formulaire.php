@@ -32,8 +32,8 @@ include ("routines/website/presentation_formulaire.php");
 /*
 
 $dbquery = requete_sql($_REQUEST[sql_initiateur],"
-SELECT a.*,b.module_etat 
-FROM $SQL_tab[module] a , $SQL_tab[site_module] b 
+SELECT a.*,b.module_state 
+FROM $SQL_tab[module] a , $SQL_tab[module_website] b 
 WHERE a.module_id = '".$_REQUEST[MM][id]."'  
 AND a.module_id = b.module_id 
 AND b.ws_id = '$website[ws_id]' 

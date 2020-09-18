@@ -11,3 +11,4 @@ inst_txt		VARCHAR(255),
 PRIMARY KEY (inst_name)
 
 );
+COMMIT;

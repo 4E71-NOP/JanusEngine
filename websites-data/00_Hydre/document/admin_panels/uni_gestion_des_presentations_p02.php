@@ -291,7 +291,7 @@ $pv['decotable_style02'] = $pv['decotable_style']['1'];
 // --------------------------------------------------------------------------------------------
 $dbquery = requete_sql($_REQUEST['sql_initiateur'] ,"
 SELECT * 
-FROM ".$SQL_tab_abrege['module']." m, ".$SQL_tab_abrege['site_module']." sm 
+FROM ".$SQL_tab_abrege['module']." m, ".$SQL_tab_abrege['module_website']." sm 
 WHERE sm.ws_id = '".$website['ws_id']."' 
 AND m.module_id = sm.module_id
 AND m.module_groupe_pour_voir ".$user['clause_in_groupe']." 

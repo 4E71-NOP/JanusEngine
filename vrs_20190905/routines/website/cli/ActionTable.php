@@ -65,7 +65,7 @@ self::$ActionTable['add']['log']	= function (&$a) {
 
 self::$ActionTable['add']['module'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['module']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['site_module']." VALUES ('".$a['params']['site_module_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '".$a['params']['state']."', '".$a['params']['position']."' );"
+		"INSERT INTO ".$a['sqlTables']['module_website']." VALUES ('".$a['params']['module_website_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '".$a['params']['state']."', '".$a['params']['position']."' );"
 	);
 };
 

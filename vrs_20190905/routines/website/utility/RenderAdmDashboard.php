@@ -51,10 +51,10 @@ class RenderAdmDashboard {
 		
 		$dbquery = $SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('site_module')." b
+			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('module_website')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.module_id
-			AND b.module_etat = '1'
+			AND b.module_state = '1'
 			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
@@ -63,10 +63,10 @@ class RenderAdmDashboard {
 // 		$Content .= "<!--\r
 // 			RenderAdmDashboard:Render 
 // 			SELECT *
-// 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('site_module')." b
+// 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('module_website')." b
 // 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 // 			AND a.module_id = b.module_id
-// 			AND b.module_etat = '1'
+// 			AND b.module_state = '1'
 // 			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."
 // 			AND a.module_adm_control > '0'
 // 			ORDER BY module_position

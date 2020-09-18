@@ -32,8 +32,8 @@ class Module {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
 		$dbquery = $dbquery = $SDDMObj->query("
-			SELECT a.*,b.module_etat
-			FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('site_module')." b
+			SELECT a.*,b.module_state
+			FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b
 			WHERE a.module_id = '".$id."'
 			AND a.module_id = b.module_id
 			AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'

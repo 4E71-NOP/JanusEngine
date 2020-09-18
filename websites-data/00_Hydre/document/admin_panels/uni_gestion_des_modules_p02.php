@@ -183,7 +183,7 @@ switch ( $RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 				"module_desc"					=>	$I18nObj->getI18nEntry('t1l2c2'),
 				"module_groupe_pour_voir"		=>	2,
 				"module_groupe_pour_utiliser"	=>	2,
-				"module_etat"					=>	0,
+				"module_state"					=>	0,
 				"module_position"				=>	1,
 				"module_adm_control"			=>	0,
 				"module_execution"				=>	0,
@@ -356,7 +356,7 @@ $T['AD']['2']['7']['2']['cont'] .= "</select>\r";
 $T['AD']['3']['1']['1']['cont'] = $I18nObj->getI18nEntry('t3l1c1');
 $tab = $tabLine;
 $T['AD']['3']['1']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-$tab[$currentModuleObj->getModuleEntry('module_etat')]['s'] = " selected ";
+$tab[$currentModuleObj->getModuleEntry('module_state')]['s'] = " selected ";
 foreach ( $tab as $A ) { $T['AD']['3']['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['3']['1']['2']['cont'] .= "</select>\r";
 
