@@ -217,19 +217,19 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT p.*
-			FROM ".$SqlTableListObj->getSQLTableName('presentation')." p, ".$SqlTableListObj->getSQLTableName('theme_presentation')." tp, ".$SqlTableListObj->getSQLTableName('theme_website')." wt
-			WHERE p.pres_id = tp.pres_id
+			FROM ".$SqlTableListObj->getSQLTableName('layout')." p, ".$SqlTableListObj->getSQLTableName('layout_theme')." tp, ".$SqlTableListObj->getSQLTableName('theme_website')." wt
+			WHERE p.layout_id = tp.layout_id
 			AND tp.theme_id = wt.theme_id
 			AND wt.theme_state = '1'
 			AND wt.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			ORDER BY p.pres_nom
+			ORDER BY p.layout_name
 		;");
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog("MenuSelectTable/getLayoutList() : Loading data");
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['pres_nom_generique']]['t']	=	$tab[$dbp['pres_nom_generique']]['db']	= $dbp['pres_nom_generique'];
+				$tab[$dbp['layout_generic_name']]['t']	=	$tab[$dbp['layout_generic_name']]['db']	= $dbp['layout_generic_name'];
 			}
 		}
 		else {

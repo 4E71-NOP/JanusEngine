@@ -47,11 +47,11 @@ $RequestDataObj->setRequestData('test',
 		);
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_presentations_p01";
+$localisation = " / uni_gestion_des_layouts_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_presentations_p01");
+$LMObj->logCheckpoint("uni_gestion_des_layouts_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_presentations_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_layouts_p01");
 
 switch ($l) {
 	case "fra":
@@ -82,12 +82,12 @@ $Content .="<p>". $I18nObj->getI18nEntry('invite1')."</p>";
 
 $dbquery = $SDDMObj->query("
 SELECT pr.*, sd.theme_title
-FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('theme_website')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
+FROM ".$SqlTableListObj->getSQLTableName('layout')." pr, ".$SqlTableListObj->getSQLTableName('layout_theme')." sp, ".$SqlTableListObj->getSQLTableName('theme_website')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
 WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND sp.theme_id = ss.theme_id 
 AND ss.theme_id = sd.theme_id
-AND sp.pres_id = pr.pres_id 
-ORDER BY pr.pres_id
+AND sp.layout_id = pr.layout_id 
+ORDER BY pr.layout_id
 ;");
 
 if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
@@ -105,12 +105,12 @@ else {
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "
 		<a class='".$Block."_lien' href='index.php?
-		&amp;uni_gestion_des_presentation_p=2
-		&amp;M_PRESNT[pres_id]=".$dbp['pres_id']. 
+		&amp;uni_gestion_des_layout_p=2
+		&amp;M_PRESNT[layout_id]=".$dbp['layout_id']. 
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup').
 		"&amp;arti_page=2'
-		>".$dbp['pres_nom']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $dbp['pres_titre'];
+		>".$dbp['layout_name']."</a>";
+		$T['AD']['1'][$i]['2']['cont']	= $dbp['layout_title'];
 		$T['AD']['1'][$i]['3']['cont']	= $dbp['theme_title'];
 	}
 }

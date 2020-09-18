@@ -1,6 +1,6 @@
 
 
-assign layout	name "hydr_nebula_01_presentation_par_defaut"	to_theme "hydr_nebula_01"	default YES;
+assign layout	name "hydr_nebula_01_layout_par_defaut"	to_theme "hydr_nebula_01"	default YES;
 assign layout	name "hydr_nebula_01_gestion_profil"				to_theme "hydr_nebula_01";
 assign layout	name "hydr_nebula_01_test_script"				to_theme "hydr_nebula_01";
 assign layout	name "hydr_nebula_01_gestion_decoration"			to_theme "hydr_nebula_01";

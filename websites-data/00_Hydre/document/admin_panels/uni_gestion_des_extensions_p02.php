@@ -113,7 +113,7 @@ if ( $user['groupe_tag'] == 3 ) {
 	include_once ("routines/website/manipulation_groupe.php");
 	include_once ("routines/website/manipulation_module.php");
 	include_once ("routines/website/manipulation_mot_cle.php");
-	include_once ("routines/website/manipulation_presentation.php");
+	include_once ("routines/website/manipulation_layout.php");
 	include_once ("routines/website/manipulation_site.php");
 	include_once ("routines/website/manipulation_theme.php");
 	include_once ("routines/website/manipulation_tag.php");

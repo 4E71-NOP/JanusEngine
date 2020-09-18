@@ -115,7 +115,7 @@
 97 current/routines/website/_TRASH/cc_fonctions_groupe.php
 156 current/routines/website/_TRASH/cc_fonctions_module.php
 115 current/routines/website/_TRASH/cc_fonctions_mot_cle.php
-332 current/routines/website/_TRASH/cc_fonctions_presentation.php
+332 current/routines/website/_TRASH/cc_fonctions_layout.php
 193 current/routines/website/_TRASH/cc_fonctions_website.php
 78 current/routines/website/_TRASH/cc_fonctions_tag.php
 265 current/routines/website/_TRASH/cc_fonctions_theme.php
@@ -157,7 +157,7 @@
 74 current/routines/website/_TRASH/forge_de_commande_update_website.php
 104 current/routines/website/_TRASH/forge_de_commande.php
 43 current/routines/website/_TRASH/javascript_base.php
-417 current/routines/website/_TRASH/charge_donnees_presentation.php
+417 current/routines/website/_TRASH/charge_donnees_layout.php
 56 current/routines/website/_TRASH/charge_donnees_site.php
 138 current/routines/website/_TRASH/charge_donnees_theme_stylesheet-deco_20_caligraphe.php
 52 current/routines/website/_TRASH/charge_donnees_theme_stylesheet-deco_30_1_div.php
@@ -182,7 +182,7 @@
 203 current/routines/website/_TRASH/manipulation_groupe.php
 220 current/routines/website/_TRASH/manipulation_module.php
 190 current/routines/website/_TRASH/manipulation_mot_cle.php
-252 current/routines/website/_TRASH/manipulation_presentation.php
+252 current/routines/website/_TRASH/manipulation_layout.php
 323 current/routines/website/_TRASH/manipulation_site.php
 184 current/routines/website/_TRASH/manipulation_tag.php
 203 current/routines/website/_TRASH/manipulation_theme.php
@@ -328,10 +328,10 @@
 144 extensions/mwm_galerie_v0.01/programmes/generateur_vignette_commentaires.php
 286 extensions/mwm_galerie_v0.01/programmes/generateur_vignette_20171030.php
 116 extensions/mwm_galerie_v0.01/programmes/Call_Galerie_d_images.php
-70 websites-data/00_Hydre/document/uni_presentation_de_l_activite_p01.php
+70 websites-data/00_Hydre/document/uni_layout_de_l_activite_p01.php
 78 websites-data/00_Hydre/document/uni_recrutement_p01.php
 53 websites-data/00_Hydre/document/uni_article_inexistant_p01.php
-116 websites-data/00_Hydre/document/uni_presentation_de_l_equipe_p01.php
+116 websites-data/00_Hydre/document/uni_layout_de_l_equipe_p01.php
 123 websites-data/00_Hydre/document/uni_voir_fiche_publique_p01.php
 206 websites-data/00_Hydre/document/uni_recherche_p01.php
 93 websites-data/00_Hydre/document/uni_actualite_p01.php
@@ -343,11 +343,11 @@
 313 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_groupes_p02.php
 349 websites-data/00_Hydre/document/admin_panels/uni_console_de_commande_p01.php
 224 websites-data/00_Hydre/document/admin_panels/uni_ecriture_des_documents_p01.php
-145 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_presentations_p01.php
+145 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_layouts_p01.php
 243 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_mots_cles_p01.php
 162 websites-data/00_Hydre/document/admin_panels/uni_execution_de_scripts_p01.php
 185 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_groupes_p01.php
-438 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_presentations_p02.php
+438 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_layouts_p02.php
 243 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_modules_p01.php
 202 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_documents_p01.php
 347 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_articles_p02.php
@@ -374,7 +374,7 @@
 378 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_utilisateurs_p01.php
 247 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_extensions_p01.php
 173 websites-data/00_Hydre/document/admin_panels/uni_outil_conversion_type_p01.php
-29 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_presentations_p03.php
+29 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_layouts_p03.php
 467 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_historiques_p01.php
 421 websites-data/00_Hydre/document/admin_panels/uni_validation_d_article_p02.php
 438 websites-data/00_Hydre/document/admin_panels/uni_gestion_des_modules_p02.php
@@ -384,10 +384,10 @@
 486 websites-data/00_Hydre/document/admin_panels/uni_gestion_du_site_p01.php
 78 websites-data/00_Hydre/document/test/test_001.php
 69 websites-data/00_Hydre/document/test/uni_test.php
-49 websites-data/00_Hydre/document/test/test_presentation_formulaire.php
+49 websites-data/00_Hydre/document/test/test_layout_formulaire.php
 43 websites-data/00_Hydre/document/test/Aide_dynamique_test.php
-47 websites-data/www.multiweb-manager.net/document/presentation_formulaire.php
-47 websites-data/www.multiweb-manager.net/document/_OKSymlinkpresentation_formulaire.php
+47 websites-data/www.multiweb-manager.net/document/layout_formulaire.php
+47 websites-data/www.multiweb-manager.net/document/_OKSymlinklayout_formulaire.php
 107 websites-data/www.multiweb-manager.net/document/test/test_de_base.php
 143 websites-data/www.multiweb-manager.net/document/test/test_routine_affichage_donnees.php
 137 websites-data/www.multiweb-manager.net/document/test/test_routine_evaluation_commande.php

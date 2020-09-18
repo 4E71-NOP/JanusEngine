@@ -16,12 +16,12 @@ add tag	name staff;
 add tag	name admins;
 add tag	name team;
 add tag	name membres;
-assign tag name equipe		to_article fra_presentation_de_l_equipe_p01;
-assign tag name équipe		to_article fra_presentation_de_l_equipe_p01;
-assign tag name staff		to_article fra_presentation_de_l_equipe_p01;
-assign tag name admins		to_article fra_presentation_de_l_equipe_p01;
-assign tag name team		to_article fra_presentation_de_l_equipe_p01;
-assign tag name membres		to_article fra_presentation_de_l_equipe_p01;
+assign tag name equipe		to_article fra_layout_de_l_equipe_p01;
+assign tag name équipe		to_article fra_layout_de_l_equipe_p01;
+assign tag name staff		to_article fra_layout_de_l_equipe_p01;
+assign tag name admins		to_article fra_layout_de_l_equipe_p01;
+assign tag name team		to_article fra_layout_de_l_equipe_p01;
+assign tag name membres		to_article fra_layout_de_l_equipe_p01;
 
 
 add tag	name recruter;

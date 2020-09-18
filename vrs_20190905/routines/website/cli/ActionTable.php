@@ -50,9 +50,9 @@ self::$ActionTable['add']['group'] = function (&$a) { return array (
 
 self::$ActionTable['add']['keyword']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['mot_cle']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['presentation']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['presentation_contenu']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 
 self::$ActionTable['add']['log']	= function (&$a) { 
@@ -115,9 +115,9 @@ self::$ActionTable['assign']['language']		= function (&$a) {
 self::$ActionTable['assign']['layout']		= function (&$a) {
 	$queries = array();
 	if ( $a['params']['default'] == 1 ) {
-		$queries[] = "UPDATE ".$a['sqlTables']['theme_presentation']." SET pres_defaut = '0' WHERE theme_id = '".$a['params']['theme_id']."';";
+		$queries[] = "UPDATE ".$a['sqlTables']['layout_theme']." SET default_layout_content = '0' WHERE theme_id = '".$a['params']['theme_id']."';";
 	}
-	$queries[] = "INSERT INTO ".$a['sqlTables']['theme_presentation']." VALUES ('".$a['params']['theme_pres_id']."','".$a['params']['theme_id']."','".$a['params']['pres_id']."','".$a['params']['default']."');";
+	$queries[] = "INSERT INTO ".$a['sqlTables']['layout_theme']." VALUES ('".$a['params']['layout_theme_id']."','".$a['params']['theme_id']."','".$a['params']['layout_id']."','".$a['params']['default']."');";
 	return $queries;
 };
 

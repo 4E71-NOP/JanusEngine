@@ -25,8 +25,8 @@ add article	name "eng_gestion_des_mots_cles_p01"				reference "eng_gestion_des_m
 add article	name "eng_gestion_des_mots_cles_p02"				reference "eng_gestion_des_mots_cles"			deadline initial_online		desc "Admin en English"				title "Keyword managment"						subtitle "Modify the keyword"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_extensions_p01"				reference "eng_gestion_des_extensions"			deadline initial_online		desc "Admin in English"				title "Extensions managment"					subtitle "Select the extension"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_extensions_p02"				reference "eng_gestion_des_extensions"			deadline initial_online		desc "Admin in English"				title "Extensions managment"					subtitle "Modify the extension"								page "2"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_presentations_p01"			reference "eng_gestion_des_presentations"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Select the layout"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_presentations_p02"			reference "eng_gestion_des_presentations"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Modify the layout"								page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_decoration";
+add article	name "eng_gestion_des_layouts_p01"			reference "eng_gestion_des_layouts"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Select the layout"								page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_layouts_p02"			reference "eng_gestion_des_layouts"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Modify the layout"								page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_decoration";
 add article	name "eng_gestion_des_themes_p01"					reference "eng_gestion_des_themes"				deadline initial_online		desc "Admin in English"				title "Theme managment"							subtitle "Select the theme"									page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_themes_p02"					reference "eng_gestion_des_themes"				deadline initial_online		desc "Admin in English"				title "Theme managment"							subtitle "Modify the theme"									page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_utilisateurs_p01"				reference "eng_gestion_des_utilisateurs"		deadline initial_online		desc "Admin in English"				title "User managment"							subtitle "Select the user"									page "1"	validation_state "VALID"	config "no_menu";
@@ -70,8 +70,8 @@ assign document name "doc_uni_gestion_des_mots_cles_p01.php"		to_article	"eng_ge
 assign document name "doc_uni_gestion_des_mots_cles_p02.php"		to_article	"eng_gestion_des_mots_cles_p02";
 assign document name "doc_uni_gestion_des_extensions_p01.php"		to_article	"eng_gestion_des_extensions_p01";
 assign document name "doc_uni_gestion_des_extensions_p02.php"		to_article	"eng_gestion_des_extensions_p02";
-assign document name "doc_uni_gestion_des_presentations_p01.php"	to_article	"eng_gestion_des_presentations_p01";
-assign document name "doc_uni_gestion_des_presentations_p02.php"	to_article	"eng_gestion_des_presentations_p02";
+assign document name "doc_uni_gestion_des_layouts_p01.php"	to_article	"eng_gestion_des_layouts_p01";
+assign document name "doc_uni_gestion_des_layouts_p02.php"	to_article	"eng_gestion_des_layouts_p02";
 assign document name "doc_uni_gestion_des_themes_p01.php"			to_article	"eng_gestion_des_themes_p01";
 assign document name "doc_uni_gestion_des_themes_p02.php"			to_article	"eng_gestion_des_themes_p02";
 assign document name "doc_uni_gestion_des_utilisateurs_p01.php"		to_article	"eng_gestion_des_utilisateurs_p01";

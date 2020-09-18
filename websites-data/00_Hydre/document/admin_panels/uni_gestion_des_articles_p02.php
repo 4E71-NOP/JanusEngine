@@ -169,7 +169,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 					"arti_titre"					=>	"Title",
 					"arti_sous_titre"				=>	"Sub Title",
 					"arti_page"						=>	1,
-					"pres_nom_generique"			=>	"",
+					"layout_generic_name"			=>	"",
 					"config_id"						=>	"",
 					"arti_creation_createur"		=>	$UserObj->getUserEntry("user_id"),
 					"arti_creation_date"			=>	$d,
@@ -238,8 +238,8 @@ $T['AD']['1']['6']['2']['cont'] .= "</select>\r";
 $T['AD']['1']['7']['2']['cont'] = "<input type='text' name='formParams[page]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_page')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
-$tabLayout[$currentArticleObj->getArticleEntry('pres_nom_generique')]['s'] = " selected ";
-$T['AD']['1']['8']['2']['cont'] = "<select name='formParams[pres_nom_generique]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabLayout[$currentArticleObj->getArticleEntry('layout_generic_name')]['s'] = " selected ";
+$T['AD']['1']['8']['2']['cont'] = "<select name='formParams[layout_generic_name]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabLayout as $A ) { $T['AD']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['8']['2']['cont'] .= "</select>\r";
 

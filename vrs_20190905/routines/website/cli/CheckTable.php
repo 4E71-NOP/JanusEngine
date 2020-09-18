@@ -41,9 +41,9 @@ self::$CheckTable['add']['article']['4']['v']	= "user_id_validator";
 self::$CheckTable['add']['article']['4']['m']	= "CLI_Article_C005";
 self::$CheckTable['add']['article']['4']['p']	= "user";
 self::$CheckTable['add']['article']['5']['d']	= 2;
-self::$CheckTable['add']['article']['5']['f']	= function ($a) { return array ("SELECT p.pres_id AS pres_id, p.pres_nom_generique AS pres_nom_generique FROM ".$a['sqlTables']['presentation']." p , ".$a['sqlTables']['theme_presentation']." lt WHERE p.pres_nom_generique = '".$a['params']['layout_generic_name']."' AND p.pres_id = lt.pres_id AND lt.theme_id = '".$a['Context']['theme_id']."';");};
-self::$CheckTable['add']['article']['5']['c']	= "pres_nom_generique";
-self::$CheckTable['add']['article']['5']['v']	= "pres_nom_generique";
+self::$CheckTable['add']['article']['5']['f']	= function ($a) { return array ("SELECT p.layout_id AS layout_id, p.layout_generic_name AS layout_generic_name FROM ".$a['sqlTables']['layout']." p , ".$a['sqlTables']['layout_theme']." lt WHERE p.layout_generic_name = '".$a['params']['layout_generic_name']."' AND p.layout_id = lt.layout_id AND lt.theme_id = '".$a['Context']['theme_id']."';");};
+self::$CheckTable['add']['article']['5']['c']	= "layout_generic_name";
+self::$CheckTable['add']['article']['5']['v']	= "layout_generic_name";
 self::$CheckTable['add']['article']['5']['m']	= "CLI_Article_C006";
 self::$CheckTable['add']['article']['5']['p']	= "Presentation";
 
@@ -66,9 +66,9 @@ self::$CheckTable['update']['article']['2']['v']	= "config_id";
 self::$CheckTable['update']['article']['2']['m']	= "CLI_Article_C003";
 self::$CheckTable['update']['article']['2']['p']	= "config";
 self::$CheckTable['update']['article']['3']['d']	= 2;
-self::$CheckTable['update']['article']['3']['f']	= function ($a) { return array ("SELECT usr.pres_id AS pres_id, usr.pres_nom_generique AS pres_nom_generique FROM ".$a['sqlTables']['presentation']." usr , ".$a['sqlTables']['theme_presentation']." sp WHERE pres_nom_generique = '<A1>' AND usr.pres_id = sp.pres_id AND sp.theme_id = '<A2>';");};
-self::$CheckTable['update']['article']['3']['c']	= "pres_nom_generique";
-self::$CheckTable['update']['article']['3']['v']	= "pres_nom_generique";
+self::$CheckTable['update']['article']['3']['f']	= function ($a) { return array ("SELECT usr.layout_id AS layout_id, usr.layout_generic_name AS layout_generic_name FROM ".$a['sqlTables']['layout']." usr , ".$a['sqlTables']['layout_theme']." sp WHERE layout_generic_name = '<A1>' AND usr.layout_id = sp.layout_id AND sp.theme_id = '<A2>';");};
+self::$CheckTable['update']['article']['3']['c']	= "layout_generic_name";
+self::$CheckTable['update']['article']['3']['v']	= "layout_generic_name";
 self::$CheckTable['update']['article']['3']['m']	= "CLI_Article_C004";
 self::$CheckTable['update']['article']['3']['p']	= "Presentation";
 
@@ -357,27 +357,27 @@ self::$CheckTable['add']['log']['0']['m']	= "CLI_AddLog_A001";
 
 // Layout
 self::$CheckTable['add']['layout']['0']['d']	= 3;
-self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT pres_id,pres_nom FROM ".$a['sqlTables']['presentation']." WHERE pres_nom = '".$a['params']['name']."';");};
+self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
 self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_D001";
 
 self::$CheckTable['update']['layout']['0']['d']	= 2;
-self::$CheckTable['update']['layout']['0']['f']	= function ($a) { return array ("SELECT pres_id,pres_nom FROM ".$a['sqlTables']['presentation']." WHERE pres_nom = '".$a['params']['name']."';");};
-self::$CheckTable['update']['layout']['0']['c']	= "pres_id";
-self::$CheckTable['update']['layout']['0']['v']	= "pres_id";
+self::$CheckTable['update']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
+self::$CheckTable['update']['layout']['0']['c']	= "layout_id";
+self::$CheckTable['update']['layout']['0']['v']	= "layout_id";
 self::$CheckTable['update']['layout']['0']['m']	= "CLI_Layout_U001";
 self::$CheckTable['update']['layout']['0']['p']	= "layout";
 
 self::$CheckTable['delete']['layout']['0']['d']	= 2;
-self::$CheckTable['delete']['layout']['0']['f']	= function ($a) { return array ("SELECT pres_id,pres_nom FROM ".$a['sqlTables']['presentation']." WHERE pres_nom = '".$a['params']['name']."';");};
-self::$CheckTable['delete']['layout']['0']['c']	= "pres_id";
-self::$CheckTable['delete']['layout']['0']['v']	= "pres_id";
+self::$CheckTable['delete']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
+self::$CheckTable['delete']['layout']['0']['c']	= "layout_id";
+self::$CheckTable['delete']['layout']['0']['v']	= "layout_id";
 self::$CheckTable['delete']['layout']['0']['m']	= "CLI_Layout_D001";
 self::$CheckTable['delete']['layout']['0']['p']	= "layout";
 
 self::$CheckTable['assign']['layout']['0']['d']	= 2;
-self::$CheckTable['assign']['layout']['0']['f']	= function ($a) { return array ("SELECT pres_id,pres_nom FROM ".$a['sqlTables']['presentation']." WHERE pres_nom = '".$a['params']['name']."';");};
-self::$CheckTable['assign']['layout']['0']['c']	= "pres_id";
-self::$CheckTable['assign']['layout']['0']['v']	= "pres_id";
+self::$CheckTable['assign']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
+self::$CheckTable['assign']['layout']['0']['c']	= "layout_id";
+self::$CheckTable['assign']['layout']['0']['v']	= "layout_id";
 self::$CheckTable['assign']['layout']['0']['m']	= "CLI_Layout_A001";
 self::$CheckTable['assign']['layout']['0']['p']	= "layout";
 self::$CheckTable['assign']['layout']['1']['d']	= 2;
@@ -389,8 +389,8 @@ self::$CheckTable['assign']['layout']['1']['p']	= "layout";
 
 
 self::$CheckTable['add']['layout_content']['0']['d']	= 2;
-self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT pres_id,pres_nom FROM ".$a['sqlTables']['presentation']." WHERE pres_nom = '".$a['params']['to_layout']."';");};
-self::$CheckTable['add']['layout_content']['0']['c']	= "pres_id";
+self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
+self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
 self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
 self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
 self::$CheckTable['add']['layout_content']['0']['p']	= "layout";

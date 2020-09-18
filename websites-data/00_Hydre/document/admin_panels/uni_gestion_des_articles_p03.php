@@ -51,16 +51,16 @@ unset ( $A , $B );
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT pre.pres_id,pre.pres_nom,pre.pres_nom_generique  
-FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentation']." sp , ".$SQL_tab_abrege['theme_website']." ss 
-WHERE pre.pres_id = sp.pres_id 
+SELECT pre.layout_id,pre.layout_name,pre.layout_generic_name  
+FROM ".$SQL_tab_abrege['layout']." pre, ".$SQL_tab_abrege['layout_theme']." sp , ".$SQL_tab_abrege['theme_website']." ss 
+WHERE pre.layout_id = sp.layout_id 
 AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 AND sp.theme_id = ss.theme_id 
 AND ss.ws_id = '".$website['ws_id']."'
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
-	$MAA_p[$dbp['pres_id']]['t'] = $MAA_p[$dbp['pres_id']]['db'] = $dbp['pres_nom_generique'];
-	if ($infos_article['pres_nom_generique'] == $dbp['pres_nom_generique']) { $MAA_p[$dbp['pres_id']]['s'] = " selected"; }
+	$MAA_p[$dbp['layout_id']]['t'] = $MAA_p[$dbp['layout_id']]['db'] = $dbp['layout_generic_name'];
+	if ($infos_article['layout_generic_name'] == $dbp['layout_generic_name']) { $MAA_p[$dbp['layout_id']]['s'] = " selected"; }
 }
 
 
@@ -144,7 +144,7 @@ $bloc_html['url_slup']."
 // --------------------------------------------------------------------------------------------
 // Preparation des elements
 // --------------------------------------------------------------------------------------------
-$pv['PF']['o2l1'] = "<select name ='M_ARTICL[pres_nom_generique]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+$pv['PF']['o2l1'] = "<select name ='M_ARTICL[layout_generic_name]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 foreach ( $MAA_p as $A ) { $pv['PF']['o2l1'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $pv['PF']['o2l1'] .= "</select>\r";
 unset ($A);
@@ -269,7 +269,7 @@ $tab_infos['cell_2_txt']	= $tl_[$l]['onglet2'];
 $tab_infos['cell_3_txt']	= $tl_[$l]['onglet3'];
 $tab_infos['cell_4_txt']	= $tl_[$l]['onglet4'];
 
-include ("routines/website/presentation_formulaire.php");
+include ("routines/website/layout_formulaire.php");
 
 // --------------------------------------------------------------------------------------------
 // $docu_ancien_contenu  = addslashes($MAA_['docu_cont_brut']) ;

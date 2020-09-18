@@ -1,6 +1,6 @@
 
 add category	name "eng_sommaire_user"			parent "00000000000000"				position 01	type ARTICLE_RACINE		lang eng	state ONLINE	deadline "rootwave_general"		title "Summary"					desc "Summary"					groupe Anonymous	article 0;
-add category	name "eng_presentation"				parent "eng_sommaire_user"			position 03	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Introduction"			desc "Introduction"				groupe Anonymous	article 0;
+add category	name "eng_layout"				parent "eng_sommaire_user"			position 03	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Introduction"			desc "Introduction"				groupe Anonymous	article 0;
 add category	name "eng_contenu"					parent "eng_sommaire_user"			position 04	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Content"					desc "Content"					groupe Anonymous	article 0;
 add category	name "eng_contact"					parent "eng_sommaire_user"			position 05	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Contact"					desc "Contact"					groupe Anonymous	article 0;
 add category	name "eng_news"						parent "eng_contenu"				position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "News"					desc "News"						groupe Anonymous	article 0;
@@ -15,9 +15,9 @@ add category	name "eng_langages"					parent "eng_dossier_programmation"	position
 											
 add category	name "eng_acceuil"					parent "eng_sommaire_user"			position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Welcome"					desc "Welcome"					groupe Anonymous	article "rw_fra_acceuil"	first_doc "YES";
 add category	name "eng_mon_profil"				parent "eng_sommaire_user"			position 02	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "My profil"				desc "My profil"				groupe Reader		article "fra_gestion_du_profil";
-add category	name "eng_qui_sommes_nous"			parent "eng_presentation"			position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Who are we ?"			desc "Qui sommes nous ?"		groupe Anonymous	article "fra_presentation_de_l_equipe";
-add category	name "eng_que_fait_on"				parent "eng_presentation"			position 02	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "What do we do ?"			desc "Que fait on ?"			groupe Anonymous	article "fra_presentation_de_l_activite";
-add category	name "eng_nous_rejoindre"			parent "eng_presentation"			position 03	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Join us ?"				desc "Nous rejoindre ?"			groupe Anonymous	article "fra_recrutement";
+add category	name "eng_qui_sommes_nous"			parent "eng_layout"			position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Who are we ?"			desc "Qui sommes nous ?"		groupe Anonymous	article "fra_layout_de_l_equipe";
+add category	name "eng_que_fait_on"				parent "eng_layout"			position 02	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "What do we do ?"			desc "Que fait on ?"			groupe Anonymous	article "fra_layout_de_l_activite";
+add category	name "eng_nous_rejoindre"			parent "eng_layout"			position 03	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Join us ?"				desc "Nous rejoindre ?"			groupe Anonymous	article "fra_recrutement";
 add category	name "eng_Derniere news"			parent "eng_news"					position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Latest news"				desc "Derniere news"			groupe Anonymous	article "fra_msgg_article_inexistant";
 add category	name "eng_Archives"					parent "eng_news"					position 02	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_general"		title "Archives"				desc "Archives"					groupe Anonymous	article "fra_msgg_article_inexistant";
 add category	name "eng_dessin_peinture"			parent "eng_gallery"				position 01	type ARTICLE			lang eng	state ONLINE	deadline "rootwave_galeries"	title "Drawing and painting"	desc "Dessin et peinture"		groupe Anonymous	article "fra_galerie_dessin_peinture";

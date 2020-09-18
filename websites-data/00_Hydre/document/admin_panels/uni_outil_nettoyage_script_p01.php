@@ -41,7 +41,7 @@ $logTarget = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestDataEntry('script_source',"
-add layout_content to_layout		'mwm_aqua_01_presentation_par_defaut'		module_name		'blason'
+add layout_content to_layout		'mwm_aqua_01_layout_par_defaut'		module_name		'blason'
 line	'1'	calculus_type 	'STATIC'
 				
 position_x	'0'	position_y	'0'

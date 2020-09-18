@@ -128,7 +128,7 @@ $tab_infos['cell_id']		= "tab";
 $tab_infos['document']		= "doc";
 $tab_infos['cell_1_txt']	= $tl_[$l]['onglet1'];
 
-include ("routines/website/presentation_formulaire.php");
+include ("routines/website/layout_formulaire.php");
 // --------------------------------------------------------------------------------------------
 
 $tl_['eng']['bouton1'] = "Create";	

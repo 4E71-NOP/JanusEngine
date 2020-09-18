@@ -12,7 +12,7 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 /*Hydre-contenu_debut*/
-$_REQUEST['sql_initiateur'] = "fra_test_presentation_formulaire";
+$_REQUEST['sql_initiateur'] = "fra_test_layout_formulaire";
 
 for ( $i=1 ; $i<=4 ; $i++ ) {
 	for ( $j=1 ; $j<=4 ; $j++ ) {

@@ -23,9 +23,9 @@ self::$SqlQueryTable['M_ARTICL_rev']['requete']		= "SELECT usr.user_id AS user_i
 self::$SqlQueryTable['M_ARTICL_rev']['element']		= "Validateur";
 self::$SqlQueryTable['M_ARTICL_rev']['colone_1']	= "user_id";
 
-self::$SqlQueryTable['M_ARTICL_rep']['requete']		= "SELECT usr.pres_id AS pres_id, usr.pres_nom_generique AS pres_nom_generique FROM ".$SqlTableListObj->getSQLTableName('presentation')." usr , ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp WHERE pres_nom_generique = '<A1>' AND usr.pres_id = sp.pres_id AND sp.theme_id = '<A2>';";
+self::$SqlQueryTable['M_ARTICL_rep']['requete']		= "SELECT usr.layout_id AS layout_id, usr.layout_generic_name AS layout_generic_name FROM ".$SqlTableListObj->getSQLTableName('layout')." usr , ".$SqlTableListObj->getSQLTableName('layout_theme')." sp WHERE layout_generic_name = '<A1>' AND usr.layout_id = sp.layout_id AND sp.theme_id = '<A2>';";
 self::$SqlQueryTable['M_ARTICL_rep']['element']		= "Presentation";
-self::$SqlQueryTable['M_ARTICL_rep']['colone_1']	= "pres_nom_generique";
+self::$SqlQueryTable['M_ARTICL_rep']['colone_1']	= "layout_generic_name";
 
 self::$SqlQueryTable['M_ARTICL_rea']['requete']		= "SELECT arti_id,arti_nom FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_nom = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_rea']['element']		= "Article";
@@ -110,11 +110,11 @@ self::$SqlQueryTable['M_MOTCLE_remc']['element']	= "Mot cle";
 self::$SqlQueryTable['M_MOTCLE_remc']['colone_1']	= "mc_id";
 
 // Presentation
-self::$SqlQueryTable['M_PRESNT_rdp']['requete']		= "SELECT pres_id,pres_nom FROM ".$SqlTableListObj->getSQLTableName('presentation')." WHERE pres_nom = '<A1>';";
+self::$SqlQueryTable['M_PRESNT_rdp']['requete']		= "SELECT layout_id,layout_name FROM ".$SqlTableListObj->getSQLTableName('layout')." WHERE layout_name = '<A1>';";
 self::$SqlQueryTable['M_PRESNT_rdp']['element']		= "Presentation";
-self::$SqlQueryTable['M_PRESNT_rep']['requete']		= "SELECT pres_id FROM ".$SqlTableListObj->getSQLTableName('presentation')." WHERE pres_nom = '<A1>';";
+self::$SqlQueryTable['M_PRESNT_rep']['requete']		= "SELECT layout_id FROM ".$SqlTableListObj->getSQLTableName('layout')." WHERE layout_name = '<A1>';";
 self::$SqlQueryTable['M_PRESNT_rep']['element']		= "Presentation";
-self::$SqlQueryTable['M_PRESNT_rep']['colone_1']		= "pres_id";
+self::$SqlQueryTable['M_PRESNT_rep']['colone_1']		= "layout_id";
 self::$SqlQueryTable['M_PRESNT_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_name AS theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd, ".$SqlTableListObj->getSQLTableName('theme_website')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_PRESNT_res']['element']		= "Skin";
 self::$SqlQueryTable['M_PRESNT_res']['colone_1']		= "theme_id";

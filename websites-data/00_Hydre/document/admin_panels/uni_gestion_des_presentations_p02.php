@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-$_REQUEST['M_PRESNT']['pres_id'] = 5;
+$_REQUEST['M_PRESNT']['layout_id'] = 5;
 
 /*Hydre-contenu_debut*/
 if ( $_REQUEST['M_PRESNT']['confirmation_modification_oubli'] == 1 ) {
@@ -27,15 +27,15 @@ echo ("<p>". $tl_[$l]['invite1']."</p>");
 
 $dbquery = requete_sql( $_REQUEST['sql_initiateur'],"
 SELECT pr.* 
-FROM ".$SQL_tab_abrege['presentation']." pr 
-WHERE pr.pres_id = ".$_REQUEST['M_PRESNT']['pres_id']."
+FROM ".$SQL_tab_abrege['layout']." pr 
+WHERE pr.layout_id = ".$_REQUEST['M_PRESNT']['layout_id']."
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
-	$AD['1']['1']['2']['cont'] = $dbp['pres_nom'];
-	$AD['1']['2']['2']['cont'] = $dbp['pres_titre'];
-	$AD['1']['3']['2']['cont'] = $dbp['pres_nom_generique'];
-	$AD['1']['4']['2']['cont'] = $dbp['pres_desc'];
-	$pv['onglet_deco'] = $dbp['pres_titre'] . " (" . $dbp['pres_nom'] . ")";
+	$AD['1']['1']['2']['cont'] = $dbp['layout_name'];
+	$AD['1']['2']['2']['cont'] = $dbp['layout_title'];
+	$AD['1']['3']['2']['cont'] = $dbp['layout_generic_name'];
+	$AD['1']['4']['2']['cont'] = $dbp['layout_desc'];
+	$pv['onglet_deco'] = $dbp['layout_title'] . " (" . $dbp['layout_name'] . ")";
 }
 
 $tl_['eng']['po1l1'] = "Name";			$tl_['fra']['po1l1'] = "Nom";
@@ -67,73 +67,73 @@ include ("routines/website/affichage_donnees.php");
 
 
 // --------------------------------------------------------------------------------------------
-function presentation_ligne () {
+function layout_ligne () {
 	global $l, $tl_, $pv, $theme_tableau, ${$theme_tableau}, $MP_module, $tab_infos;
-	$ptr = &$pv['pres_ligne'][$pv['ligne']];
+	$ptr = &$pv['lyoc_line'][$pv['ligne']];
 	$SoustractionCol2 =160;
 
 	$rendu = "
-	<input type='hidden' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_cont_id]'	value='".$ptr['pres_cont_id']."'>\r
+	<input type='hidden' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_id]'	value='".$ptr['lyoc_id']."'>\r
 	<div style='width : ".($tab_infos['doc_width'] - $SoustractionCol2)."px;'>
 
 	<table style='width: ".($tab_infos['doc_width'] - $SoustractionCol2)."px; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r
 	<tr>\r
-	<td ".$pv['decotable_style01'].">ID:".$ptr['pres_cont_id']."</td>\r
+	<td ".$pv['decotable_style01'].">ID:".$ptr['lyoc_id']."</td>\r
 
 	<td ".$pv['decotable_style01'].">
 	Module 
-	<select name='M_PRESNT[L".$ptr['pres_cont_id']."][module_nom]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+	<select name='M_PRESNT[L".$ptr['lyoc_id']."][module_nom]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 	";
 	unset ( $M );
 	foreach ( $MP_module as $M ) {
 		$ms = "";
-		if ( $M['module_nom'] == $ptr['pres_module_nom'] ) { $ms = " selected "; }
+		if ( $M['module_nom'] == $ptr['lyoc_module_name'] ) { $ms = " selected "; }
 		$rendu .= "<option value='".$M['module_nom']."' ".$ms.">".$M['module_nom']."</option>\r";
 	}
 	$rendu .= "
 	</select>\r
 	</td>\r
 	<td ".$pv['decotable_style01'].">Position : 
-	<input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][nouvelordre]' size='2' maxlength='3' value='".$ptr['pres_ligne']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>
+	<input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][nouvelordre]' size='2' maxlength='3' value='".$ptr['lyoc_line']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>
 	</td>\r
-	<td ".$pv['decotable_style01']."><img src='../graph/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['deco_icone_bas']."' alt='&gt;&gt;' border='0' width='24' height='24' onClick=\"CommuteAffichage ( 'Contenu_".$ptr['pres_ligne']."' );\"></td>\r
+	<td ".$pv['decotable_style01']."><img src='../graph/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['deco_icone_bas']."' alt='&gt;&gt;' border='0' width='24' height='24' onClick=\"CommuteAffichage ( 'Contenu_".$ptr['lyoc_line']."' );\"></td>\r
 	</tr>\r
 	</table>\r
 
-	<div id='Contenu_".$ptr['pres_ligne']."' style='visibility: hidden; display: none;'>
+	<div id='Contenu_".$ptr['lyoc_line']."' style='visibility: hidden; display: none;'>
 	<table style='width: ".($tab_infos['doc_width'] - $SoustractionCol2 - 8 )."px; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r
 	<tr>\r
 	<td colspan='2' ".$pv['decotable_style02'].">".$tl_[$l]['min']." X</td>\r
-	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][minimum_x]' size='2' maxlength='3' value='".$ptr['pres_minimum_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][minimum_x]' size='2' maxlength='3' value='".$ptr['lyoc_minimum_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td colspan='2' ".$pv['decotable_style02'].">".$tl_[$l]['min']." Y</td>\r
-	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][minimum_y]' size='2' maxlength='3' value='".$ptr['pres_minimum_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][minimum_y]' size='2' maxlength='3' value='".$ptr['lyoc_minimum_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	</tr>\r
 
 	<tr>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['espacement_bord_haut']."</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_espacement_bord_haut]' size='2' maxlength='3' value='".$ptr['pres_espacement_bord_haut']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_margin_top]' size='2' maxlength='3' value='".$ptr['lyoc_margin_top']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['espacement_bord_bas']."</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_espacement_bord_bas]' size='2' maxlength='3' value='".$ptr['pres_espacement_bord_bas']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_margin_bottom]' size='2' maxlength='3' value='".$ptr['lyoc_margin_bottom']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['espacement_bord_gauche']."</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_espacement_bord_gauche]' size='2' maxlength='3' value='".$ptr['pres_espacement_bord_gauche']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_margin_left]' size='2' maxlength='3' value='".$ptr['lyoc_margin_left']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['espacement_bord_droite']."</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_espacement_bord_droite]' size='2' maxlength='3' value='".$ptr['pres_espacement_bord_droite']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_margin_right]' size='2' maxlength='3' value='".$ptr['lyoc_margin_right']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	</tr>\r
 	<tr>\r
 	<td colspan='2' ".$pv['decotable_style02'].">".$tl_[$l]['dim']." X</td>\r
-	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_dimenssion_x]' size='2' maxlength='3' value='".$ptr['pres_dimenssion_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_size_x]' size='2' maxlength='3' value='".$ptr['lyoc_size_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td colspan='2' ".$pv['decotable_style02'].">".$tl_[$l]['dim']." X</td>\r
-	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_dimenssion_y]' size='2' maxlength='3' value='".$ptr['pres_dimenssion_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td colspan='2' ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_size_y]' size='2' maxlength='3' value='".$ptr['lyoc_size_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	</tr>\r
 
 	<tr>\r
 	<td colspan='8' ".$pv['decotable_style02'].">".$tl_[$l]['typcal_txt']."
-	<select name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_type_calcul]' id='pres_type_calcul_".$pv['ligne']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1' onChange='ManiPresTypCal ( this.id , ".$pv['ligne'].");'>\r
+	<select name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_calculus_type]' id='lyoc_calculus_type_".$pv['ligne']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1' onChange='ManiPresTypCal ( this.id , ".$pv['ligne'].");'>\r
 	";
 
 	$ms_tc_['0']['t'] = $tl_[$l]['typcal_s'];	$ms_tc_['0']['d'] = "STATIC";	$ms_tc_['0']['s'] = "";
 	$ms_tc_['1']['t'] = $tl_[$l]['typcal_d'];	$ms_tc_['1']['d'] = "DYNAMIC";	$ms_tc_['1']['s'] = "";
-	$ms_tc_[$ptr['pres_type_calcul']]['s'] = " selected ";
+	$ms_tc_[$ptr['lyoc_calculus_type']]['s'] = " selected ";
 	foreach ( $ms_tc_ as $TC ) { $rendu .= "<option value='".$TC['d']."' ".$TC['s'].">".$TC['t']."</option>\r"; }
 
 	if ( strlen( $ms_tc_['0']['s'] ) == 0 ) { $pv['vis']['TabCalStatic'] = "visibility: hidden; display: none;"; $pv['vis']['TabCalDynamic'] = "visibility: visible; display: block;"; }
@@ -149,9 +149,9 @@ function presentation_ligne () {
 	<table style='width: ".($tab_infos['doc_width'] - $SoustractionCol2 -8 )."px; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r
 	<tr>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['pos']." X</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_position_x]' size='2' maxlength='3' value='".$ptr['pres_position_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_position_x]' size='2' maxlength='3' value='".$ptr['lyoc_position_x']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	<td ".$pv['decotable_style02'].">".$tl_[$l]['pos']." Y</td>\r
-	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['pres_cont_id']."][pres_position_y]' size='2' maxlength='3' value='".$ptr['pres_position_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
+	<td ".$pv['decotable_style02']."><input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][lyoc_position_y]' size='2' maxlength='3' value='".$ptr['lyoc_position_y']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>px</td>\r
 	</tr>\r
 	</table>\r
 	</div>\r
@@ -174,9 +174,9 @@ function presentation_ligne () {
 		";
 		for ( $j = 1 ; $j <= 5 ; $j++ ) {
 			if ( $j != 1 ) { $rendu .= "<tr>\r"; }
-			$AncreM = "pres_module_ancre_e"  . $i . $pv['abcde'][$j];
-			$AncreX = "pres_ancre_ex" . $i . $pv['abcde'][$j];
-			$AncreY = "pres_ancre_ey" . $i . $pv['abcde'][$j];
+			$AncreM = "lyoc_module_anchor_e"  . $i . $pv['abcde'][$j];
+			$AncreX = "lyoc_anchor_ex" . $i . $pv['abcde'][$j];
+			$AncreY = "lyoc_anchor_ey" . $i . $pv['abcde'][$j];
 			$ms_hautbas_['0']['s'] = "";			$ms_hautbas_['1']['s'] = "";		$ms_hautbas_['2']['s'] = "";
 			$ms_gauchedroite_['0']['s'] = "";		$ms_gauchedroite_['1']['s'] = "";	$ms_gauchedroite_['2']['s'] = "";
 			$ms_gauchedroite_[$ptr[$AncreX]]['s'] = " selected ";	$ms_hautbas_[$ptr[$AncreY]]['s'] = " selected ";
@@ -184,7 +184,7 @@ function presentation_ligne () {
 			$rendu .= "
 			<td ".$pv['decotable_style02'].">".$j."</td>\r
 			<td ".$pv['decotable_style02'].">\r
-			<select name='M_PRESNT[L".$ptr['pres_cont_id']."][" . $AncreM . "]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+			<select name='M_PRESNT[L".$ptr['lyoc_id']."][" . $AncreM . "]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 			<option value='0'>?</option>\r
 			";
 			unset ( $M );
@@ -198,7 +198,7 @@ function presentation_ligne () {
 
 			</td>\r
 			<td colspan='2' ".$pv['decotable_style02'].">
-			<select name='M_PRESNT[L".$ptr['pres_cont_id']."][".$AncreX."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+			<select name='M_PRESNT[L".$ptr['lyoc_id']."][".$AncreX."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 			";
 			foreach ( $ms_gauchedroite_ as $k ) { $rendu .= "<option value='".$k['d']."' ".$k['s'].">".$k['t']."</option>\r"; }
 			unset ( $k );
@@ -207,7 +207,7 @@ function presentation_ligne () {
 			</select>\r
 			</td>\r
 			<td colspan='2' ".$pv['decotable_style02'].">\r
-			<select name='M_PRESNT[L".$ptr['pres_cont_id']."][".$AncreY."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+			<select name='M_PRESNT[L".$ptr['lyoc_id']."][".$AncreY."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 			";
 			foreach ( $ms_hautbas_ as $k ) { $rendu .= "<option value='".$k['d']."' ".$k['s'].">".$k['t']."</option>\r"; }
 			unset ( $k );
@@ -216,13 +216,13 @@ function presentation_ligne () {
 			</td>\r
 			";
 			if ( $j == 1 ) { 
-				$AncreX = "pres_ancre_dx" . ( $i * 10 );
-				$AncreY = "pres_ancre_dy" . ( $i * 10 );
+				$AncreX = "lyoc_anchor_dx" . ( $i * 10 );
+				$AncreY = "lyoc_anchor_dy" . ( $i * 10 );
 				$ms_hautbas_['0']['s'] = "";			$ms_hautbas_['1']['s'] = "";		$ms_hautbas_['2']['s'] = "";
 				$ms_gauchedroite_['0']['s'] = "";		$ms_gauchedroite_['1']['s'] = "";	$ms_gauchedroite_['2']['s'] = "";
 				$ms_gauchedroite_[$ptr[$AncreX]]['s'] = " selected ";	$ms_hautbas_[$ptr[$AncreY]]['s'] = " selected ";
 				$rendu .= "
-				<td colspan='2' rowspan='5' ".$pv['decotable_style02'].">".$AncreX."<select name='M_PRESNT[L".$ptr['pres_cont_id']."][".$AncreX."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+				<td colspan='2' rowspan='5' ".$pv['decotable_style02'].">".$AncreX."<select name='M_PRESNT[L".$ptr['lyoc_id']."][".$AncreX."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 				";
 				foreach ( $ms_gauchedroite_ as $k ) { $rendu .= "<option value='".$k['d']."' ".$k['s'].">".$k['t']."</option>\r"; }
 				unset ( $k );
@@ -230,7 +230,7 @@ function presentation_ligne () {
 				</select>\r
 				<br>\r
 				<br>\r
-				".$AncreY."<select name='M_PRESNT[L".$ptr['pres_cont_id']."][".$AncreY."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+				".$AncreY."<select name='M_PRESNT[L".$ptr['lyoc_id']."][".$AncreY."]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 				";
 				foreach ( $ms_hautbas_ as $k ) { $rendu .= "<option value='".$k['d']."' ".$k['s'].">".$k['t']."</option>\r"; }
 				unset ( $k );
@@ -306,21 +306,21 @@ while ($dbp = fetch_array_sql($dbquery)) {
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT * 
-FROM ".$SQL_tab_abrege['presentation_contenu']." 
-WHERE pres_id = '".$_REQUEST['M_PRESNT']['pres_id']."' 
-ORDER BY pres_ligne
+FROM ".$SQL_tab_abrege['layout_content']." 
+WHERE layout_id = '".$_REQUEST['M_PRESNT']['layout_id']."' 
+ORDER BY lyoc_line
 ;");
 
 $pv['i'] = 1;
 while ($dbp = fetch_array_sql($dbquery)) {
 	unset ( $A , $B );
-	foreach ( $dbp as $A => $B ) { $pv['pres_ligne'][$pv['i']][$A] = $B; }
+	foreach ( $dbp as $A => $B ) { $pv['lyoc_line'][$pv['i']][$A] = $B; }
 	$pv['i']++;
 }
 $pv['cssidx'] = 10;
 for ( $pv['ligne'] = 1 ; $pv['ligne'] < $pv['i'] ; $pv['ligne']++ ) { 
-	$AD['1'][$pv['ligne']]['1']['cont'] = $tl_[$l]['LignePF'] . ": " . $pv['pres_ligne'][$pv['ligne']]['pres_ligne'];
-	$AD['1'][$pv['ligne']]['2']['cont'] = presentation_ligne (); 
+	$AD['1'][$pv['ligne']]['1']['cont'] = $tl_[$l]['LignePF'] . ": " . $pv['lyoc_line'][$pv['ligne']]['lyoc_line'];
+	$AD['1'][$pv['ligne']]['2']['cont'] = layout_ligne (); 
 
 	$pv['decotable_style01'] = $pv['decotable_style'][$pv['cssidx']];
 	$pv['decotable_style02'] = $pv['decotable_style'][($pv['cssidx']+1)];
@@ -348,7 +348,7 @@ echo ("<form ACTION='index.php?' method='post' name='formulaire_gdp'>\r");
 include ("routines/website/affichage_donnees.php");
 
 // --------------------------------------------------------------------------------------------
-$tl_['eng']['text_confirm1'] = "I confirm the presentation modifications.";					$tl_['eng']['bouton1'] = "Modify";
+$tl_['eng']['text_confirm1'] = "I confirm the layout modifications.";					$tl_['eng']['bouton1'] = "Modify";
 $tl_['fra']['text_confirm1'] = "Je valide la modification de la pr&eacute;sentation.";	$tl_['fra']['bouton1'] = "Modifier";
 $bloc_html['UPDATE_action'] = "<input type='hidden' name='UPDATE_action'		value='UPDATE_DISPLAY'>\r";
 echo ("
@@ -362,8 +362,8 @@ $bloc_html['post_hidden_l'].
 $bloc_html['post_hidden_arti_ref'].
 $bloc_html['UPDATE_action']."
 <input type='hidden' name='arti_page'						value='2'>\r
-<input type='hidden' name='uni_gestion_des_presentation_p'	value='".$_REQUEST['uni_gestion_des_presentations_p']."'>\r
-<input type='hidden' name='M_PRESNT[pres_id]'						value='".$_REQUEST['M_PRESNT']['pres_id']."'>\r
+<input type='hidden' name='uni_gestion_des_layout_p'	value='".$_REQUEST['uni_gestion_des_layouts_p']."'>\r
+<input type='hidden' name='M_PRESNT[layout_id]'						value='".$_REQUEST['M_PRESNT']['layout_id']."'>\r
 ".
 $bloc_html['post_hidden_user_login'].
 $bloc_html['post_hidden_user_pass']

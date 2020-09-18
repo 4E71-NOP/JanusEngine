@@ -63,7 +63,7 @@ class RenderDeco40Elegance {
 				$L['py'] = 0;
 				break;
 		}
-		if ( $L['pres_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['pres_module_zindex']; }
+		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 // 		$B = &$S[$_REQUEST['blocG']];
 		

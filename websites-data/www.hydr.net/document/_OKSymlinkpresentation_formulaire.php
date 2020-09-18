@@ -27,7 +27,7 @@ for ( $i=1 ; $i<=3 ; $i++ ) {
 	}
 }
 
-include ("routines/website/presentation_formulaire.php");
+include ("routines/website/layout_formulaire.php");
 
 /*
 

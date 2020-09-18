@@ -67,40 +67,40 @@ class RenderLayout {
 		if ( isset($_REQUEST['arti_ref']) ) {
 			$dbquery = $SDDMObj->query("
 				SELECT
-				pr.pres_id as pr_pres_id,pr.pres_nom,pr.pres_titre,pr.pres_nom_generique,
+				pr.layout_id as pr_layout_id,pr.layout_name,pr.layout_title,pr.layout_generic_name,
 				sp.*
-				FROM ".$SqlTableListObj->getSQLTableName('presentation')." pr, ".$SqlTableListObj->getSQLTableName('theme_presentation')." sp, ".$SqlTableListObj->getSQLTableName('article')." art
+				FROM ".$SqlTableListObj->getSQLTableName('layout')." pr, ".$SqlTableListObj->getSQLTableName('layout_theme')." sp, ".$SqlTableListObj->getSQLTableName('article')." art
 				WHERE art.arti_ref = '".$_REQUEST['arti_ref']."'
 				AND art.arti_page = '".$_REQUEST['arti_page']."'
 				AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-				AND art.pres_nom_generique = pr.pres_nom_generique
-				AND pr.pres_id = sp.pres_id
+				AND art.layout_generic_name = pr.layout_generic_name
+				AND pr.layout_id = sp.layout_id
 				AND sp.theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
 				;");
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $presentation_selection = $dbp['pres_id']; }
-			if ( $presentation_selection != 0 ) { $switch_score += 1000; }
+			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
+			if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		}
-// 		$LMObj->logDebug($UserObj->getUserEntry('pres_id') , "\$UserObj->getUserEntry('pres_id')");
-		if ( $UserObj->getUserEntry('pres_id') != 0 ) { $switch_score += 100; }
+// 		$LMObj->logDebug($UserObj->getUserEntry('layout_id') , "\$UserObj->getUserEntry('layout_id')");
+		if ( $UserObj->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
 // 		echo ("switch_score=".$switch_score . "<br>\r");
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
-				$this->loadRawData ( $presentation_selection );
+				$this->loadRawData ( $layout_selection );
 				break;
 				
 			case 110 :
-				$this->loadRawData ( $UserObj->getUserEntry('pres_id') );
+				$this->loadRawData ( $UserObj->getUserEntry('layout_id') );
 				break;
 				
 			case 10 :
 				$dbquery = $SDDMObj->query("
-					SELECT pres_id
-					FROM ".$SqlTableListObj->getSQLTableName('theme_presentation')."
+					SELECT layout_id
+					FROM ".$SqlTableListObj->getSQLTableName('layout_theme')."
 					WHERE theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
-					AND pres_defaut = '1'
+					AND default_layout_content = '1'
 					;");
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['pres_id'] ); }
+				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
 				break;
 		}
 
@@ -108,38 +108,38 @@ class RenderLayout {
 //	Part 2
 // --------------------------------------------------------------------------------------------
 		foreach ( $this->PL as $A )  {
-			$m = $A['pres_module_nom'];
-			switch ( $A['pres_type_calcul'] ) {
+			$m = $A['lyoc_module_name'];
+			switch ( $A['lyoc_calculus_type'] ) {
 				case 0:
-					$this->Layout[$m]['pres_espacement_bord_gauche']	= $A['pres_espacement_bord_gauche'];
-					$this->Layout[$m]['pres_espacement_bord_droite']	= $A['pres_espacement_bord_droite'];
-					$this->Layout[$m]['pres_espacement_bord_haut']		= $A['pres_espacement_bord_haut'];
-					$this->Layout[$m]['pres_espacement_bord_bas']		= $A['pres_espacement_bord_bas'];
+					$this->Layout[$m]['lyoc_margin_left']	= $A['lyoc_margin_left'];
+					$this->Layout[$m]['lyoc_margin_right']	= $A['lyoc_margin_right'];
+					$this->Layout[$m]['lyoc_margin_top']		= $A['lyoc_margin_top'];
+					$this->Layout[$m]['lyoc_margin_bottom']		= $A['lyoc_margin_bottom'];
 					
-					$this->Layout[$m]['px']	= $A['pres_position_x']		+ $this->Layout[$m]['pres_espacement_bord_gauche'];
-					$this->Layout[$m]['py']	= $A['pres_position_y']		+ $this->Layout[$m]['pres_espacement_bord_droite'];
-					$this->Layout[$m]['dx']	= $A['pres_dimenssion_x']	- $this->Layout[$m]['pres_espacement_bord_gauche'] - $this->Layout[$m]['pres_espacement_bord_droite'];
-					$this->Layout[$m]['dy']	= $A['pres_dimenssion_y']	- $this->Layout[$m]['pres_espacement_bord_haut'] - $this->Layout[$m]['pres_espacement_bord_bas'];
+					$this->Layout[$m]['px']	= $A['lyoc_position_x']		+ $this->Layout[$m]['lyoc_margin_left'];
+					$this->Layout[$m]['py']	= $A['lyoc_position_y']		+ $this->Layout[$m]['lyoc_margin_right'];
+					$this->Layout[$m]['dx']	= $A['lyoc_size_x']	- $this->Layout[$m]['lyoc_margin_left'] - $this->Layout[$m]['lyoc_margin_right'];
+					$this->Layout[$m]['dy']	= $A['lyoc_size_y']	- $this->Layout[$m]['lyoc_margin_top'] - $this->Layout[$m]['lyoc_margin_bottom'];
 					
-					$this->Layout[$m]['cpx']	= $A['pres_position_x'];
-					$this->Layout[$m]['cpy']	= $A['pres_position_y'];
-					$this->Layout[$m]['cdx']	= $A['pres_dimenssion_x'];
-					$this->Layout[$m]['cdy']	= $A['pres_dimenssion_y'];
+					$this->Layout[$m]['cpx']	= $A['lyoc_position_x'];
+					$this->Layout[$m]['cpy']	= $A['lyoc_position_y'];
+					$this->Layout[$m]['cdx']	= $A['lyoc_size_x'];
+					$this->Layout[$m]['cdy']	= $A['lyoc_size_y'];
 					break;
 					
 				case 1:
-					$this->Layout[$m]['pres_espacement_bord_gauche']	= $A['pres_espacement_bord_gauche'];
-					$this->Layout[$m]['pres_espacement_bord_droite']	= $A['pres_espacement_bord_droite'];
-					$this->Layout[$m]['pres_espacement_bord_haut']		= $A['pres_espacement_bord_haut'];
-					$this->Layout[$m]['pres_espacement_bord_bas']		= $A['pres_espacement_bord_bas'];
+					$this->Layout[$m]['lyoc_margin_left']	= $A['lyoc_margin_left'];
+					$this->Layout[$m]['lyoc_margin_right']	= $A['lyoc_margin_right'];
+					$this->Layout[$m]['lyoc_margin_top']		= $A['lyoc_margin_top'];
+					$this->Layout[$m]['lyoc_margin_bottom']		= $A['lyoc_margin_bottom'];
 					
-					$this->Layout[$m]['cdx']	= $A['pres_dimenssion_x'];
-					$this->Layout[$m]['cdy']	= $A['pres_dimenssion_y'];
+					$this->Layout[$m]['cdx']	= $A['lyoc_size_x'];
+					$this->Layout[$m]['cdy']	= $A['lyoc_size_y'];
 					
 					$dynamic_['note'] = 0;
-					if ( strlen($A['pres_module_ancre_e10']) > 0 ) { $dynamic_['note'] += 1; }
-					if ( strlen($A['pres_module_ancre_e20']) > 0 ) { $dynamic_['note'] += 2; }
-					if ( strlen($A['pres_module_ancre_e30']) > 0 ) { $dynamic_['note'] += 4; }
+					if ( strlen($A['lyoc_module_anchor_e10']) > 0 ) { $dynamic_['note'] += 1; }
+					if ( strlen($A['lyoc_module_anchor_e20']) > 0 ) { $dynamic_['note'] += 2; }
+					if ( strlen($A['lyoc_module_anchor_e30']) > 0 ) { $dynamic_['note'] += 4; }
 					
 // 					echo ("note=".$dynamic_['note']."<br>\r");
 					switch ( $dynamic_['note'] ) {
@@ -148,25 +148,25 @@ class RenderLayout {
 						case 1:
 						case 2:
 						case 4:
-							$this->OneAnchorCalculationPrepareSourceTable ( $A['pres_module_ancre_e10'] , "x" );
-							$dynamic_['note_2'] = ( $A['pres_ancre_ex10'] - 1 ) + ( ( $A['pres_ancre_dx10'] - 1 ) * 3 );
+							$this->OneAnchorCalculationPrepareSourceTable ( $A['lyoc_module_anchor_e10'] , "x" );
+							$dynamic_['note_2'] = ( $A['lyoc_anchor_ex10'] - 1 ) + ( ( $A['lyoc_anchor_dx10'] - 1 ) * 3 );
 							$this->OneAnchorCalculation ( $dynamic_['note_2'] , $m , "x" );
 							
-							$this->OneAnchorCalculationPrepareSourceTable ( $A['pres_module_ancre_e10'] , "y" );
-							$dynamic_['note_2'] = ( $A['pres_ancre_ey10'] - 1 ) + ( ( $A['pres_ancre_dy10'] - 1 ) * 3 );
+							$this->OneAnchorCalculationPrepareSourceTable ( $A['lyoc_module_anchor_e10'] , "y" );
+							$dynamic_['note_2'] = ( $A['lyoc_anchor_ey10'] - 1 ) + ( ( $A['lyoc_anchor_dy10'] - 1 ) * 3 );
 							$this->OneAnchorCalculation ( $dynamic_['note_2'] , $m , "y" );
 // 							echo (
 // 									"module=" .$m."; ".
-// 									"module_ancre_e10=".$A['pres_module_ancre_e10']."; ".
-// 									"ancre_ex10=".$A['pres_ancre_ex10']."; ".
-// 									"ancre_dx10=".$A['pres_ancre_dx10']."; ".
+// 									"module_ancre_e10=".$A['lyoc_module_anchor_e10']."; ".
+// 									"ancre_ex10=".$A['lyoc_anchor_ex10']."; ".
+// 									"ancre_dx10=".$A['lyoc_anchor_dx10']."; ".
 // 									"note2=".$dynamic_['note_2']."<br>\r"
 // 									);
 							
-							$this->Layout[$m]['px']	= $this->Layout[$m]['cpx'] + $this->Layout[$m]['pres_espacement_bord_gauche'];
-							$this->Layout[$m]['py']	= $this->Layout[$m]['cpy'] + $this->Layout[$m]['pres_espacement_bord_haut'];
-							$this->Layout[$m]['dx']	= $this->Layout[$m]['cdx'] - $this->Layout[$m]['pres_espacement_bord_gauche'] - $this->Layout[$m]['pres_espacement_bord_droite'];
-							$this->Layout[$m]['dy']	= $this->Layout[$m]['cdy'] - $this->Layout[$m]['pres_espacement_bord_haut'] - $this->Layout[$m]['pres_espacement_bord_bas'];
+							$this->Layout[$m]['px']	= $this->Layout[$m]['cpx'] + $this->Layout[$m]['lyoc_margin_left'];
+							$this->Layout[$m]['py']	= $this->Layout[$m]['cpy'] + $this->Layout[$m]['lyoc_margin_top'];
+							$this->Layout[$m]['dx']	= $this->Layout[$m]['cdx'] - $this->Layout[$m]['lyoc_margin_left'] - $this->Layout[$m]['lyoc_margin_right'];
+							$this->Layout[$m]['dy']	= $this->Layout[$m]['cdy'] - $this->Layout[$m]['lyoc_margin_top'] - $this->Layout[$m]['lyoc_margin_bottom'];
 							break;
 							
 						// --------------------------------------------------------------------------------------------
@@ -174,24 +174,24 @@ class RenderLayout {
 						case 3:
 						case 5:
 						case 6:
-							if ( strlen($A['pres_module_ancre_e10']) > 0 ) {
-								$this->findSourceAnchor ( $A['pres_module_ancre_e10'] , $A['pres_ancre_ex10'] , $A['pres_ancre_ey10'] );
-								switch ( $A['pres_ancre_dx10'] ) {
+							if ( strlen($A['lyoc_module_anchor_e10']) > 0 ) {
+								$this->findSourceAnchor ( $A['lyoc_module_anchor_e10'] , $A['lyoc_anchor_ex10'] , $A['lyoc_anchor_ey10'] );
+								switch ( $A['lyoc_anchor_dx10'] ) {
 									case 1:	$this->align_x1x3();	break;
 									case 2:	$this->align_x2x4();	break;
 								}
-								switch ( $A['pres_ancre_dy10'] ) {
+								switch ( $A['lyoc_anchor_dy10'] ) {
 									case 1:	$this->align_y1y2();	break;
 									case 2:	$this->align_y3y4();	break;
 								}
 							}
-							if ( strlen($A['pres_module_ancre_e20']) > 0 ) {
-								$this->findSourceAnchor ( $A['pres_module_ancre_e20'] , $A['pres_ancre_ex20'] , $A['pres_ancre_ey20'] );
-								switch ( $A['pres_ancre_dx20'] ) {
+							if ( strlen($A['lyoc_module_anchor_e20']) > 0 ) {
+								$this->findSourceAnchor ( $A['lyoc_module_anchor_e20'] , $A['lyoc_anchor_ex20'] , $A['lyoc_anchor_ey20'] );
+								switch ( $A['lyoc_anchor_dx20'] ) {
 									case 1:	$this->align_x1x3();	break;
 									case 2:	$this->align_x2x4();	break;
 								}
-								switch ( $A['pres_ancre_dy20'] ) {
+								switch ( $A['lyoc_anchor_dy20'] ) {
 									case 1:	$this->align_y1y2();	break;
 									case 2:	$this->align_y3y4();	break;
 								}
@@ -199,75 +199,75 @@ class RenderLayout {
 							
 							$this->Layout[$m]['cpx']	= $this->qd['x1'];
 							$this->Layout[$m]['cpy']	= $this->qd['y1'];
-							$this->Layout[$m]['px']	= $this->qd['x1'] + $this->Layout[$m]['pres_espacement_bord_gauche'];
-							$this->Layout[$m]['py']	= $this->qd['y1'] + $this->Layout[$m]['pres_espacement_bord_haut'];
+							$this->Layout[$m]['px']	= $this->qd['x1'] + $this->Layout[$m]['lyoc_margin_left'];
+							$this->Layout[$m]['py']	= $this->qd['y1'] + $this->Layout[$m]['lyoc_margin_top'];
 							
 							if ( $this->Layout[$m]['cdx'] > 0 ) { $this->qd['x2'] = $this->qd['x4'] = $this->qd['x1'] + $this->Layout[$m]['cdx']; }
 							if ( $this->Layout[$m]['cdy'] > 0 ) { $this->qd['y3'] = $this->qd['y4'] = $this->qd['y1'] + $this->Layout[$m]['cdy']; }
 							
 							$this->Layout[$m]['cdx']	= $this->qd['x2'] - $this->qd['x1'];
 							$this->Layout[$m]['cdy']	= $this->qd['y3'] - $this->qd['y1'];
-							$this->Layout[$m]['dx']	= $this->qd['x2'] - $this->qd['x1'] - $this->Layout[$m]['pres_espacement_bord_gauche'] - $this->Layout[$m]['pres_espacement_bord_droite'];
-							$this->Layout[$m]['dy']	= $this->qd['y3'] - $this->qd['y1'] - $this->Layout[$m]['pres_espacement_bord_haut'] - $this->Layout[$m]['pres_espacement_bord_bas'];
+							$this->Layout[$m]['dx']	= $this->qd['x2'] - $this->qd['x1'] - $this->Layout[$m]['lyoc_margin_left'] - $this->Layout[$m]['lyoc_margin_right'];
+							$this->Layout[$m]['dy']	= $this->qd['y3'] - $this->qd['y1'] - $this->Layout[$m]['lyoc_margin_top'] - $this->Layout[$m]['lyoc_margin_bottom'];
 							break;
 							
 							// --------------------------------------------------------------------------------------------
 							//  3 anchors
 						case 7:
-							$this->findSourceAnchor ( $A['pres_module_ancre_e10'] , $A['pres_ancre_ex10'] , $A['pres_ancre_ey10'] );
-							switch ( $A['pres_ancre_dx10'] ) {
+							$this->findSourceAnchor ( $A['lyoc_module_anchor_e10'] , $A['lyoc_anchor_ex10'] , $A['lyoc_anchor_ey10'] );
+							switch ( $A['lyoc_anchor_dx10'] ) {
 								case 1:	$this->align_x1x3();	break;
 								case 2:	$this->align_x2x4();	break;
 							}
-							switch ( $A['pres_ancre_dy10'] ) {
+							switch ( $A['lyoc_anchor_dy10'] ) {
 								case 1:	$this->align_y1y2();	break;
 								case 2:	$this->align_y3y4();	break;
 							}
-							$this->findSourceAnchor ( $A['pres_module_ancre_e20'] , $A['pres_ancre_ex20'] , $A['pres_ancre_ey20'] );
-							switch ( $A['pres_ancre_dx20'] ) {
+							$this->findSourceAnchor ( $A['lyoc_module_anchor_e20'] , $A['lyoc_anchor_ex20'] , $A['lyoc_anchor_ey20'] );
+							switch ( $A['lyoc_anchor_dx20'] ) {
 								case 1:	$this->align_x1x3();	break;
 								case 2:	$this->align_x2x4();	break;
 							}
-							switch ( $A['pres_ancre_dy20'] ) {
+							switch ( $A['lyoc_anchor_dy20'] ) {
 								case 1:	$this->align_y1y2();	break;
 								case 2:	$this->align_y3y4();	break;
 							}
-							$this->findSourceAnchor ( $A['pres_module_ancre_e30'] , $A['pres_ancre_ex30'] , $A['pres_ancre_ey30'] );
-							switch ( $A['pres_ancre_dx30'] ) {
+							$this->findSourceAnchor ( $A['lyoc_module_anchor_e30'] , $A['lyoc_anchor_ex30'] , $A['lyoc_anchor_ey30'] );
+							switch ( $A['lyoc_anchor_dx30'] ) {
 								case 1:	$this->align_x1x3();	break;
 								case 2:	$this->align_x2x4();	break;
 							}
-							switch ( $A['pres_ancre_dy30'] ) {
+							switch ( $A['lyoc_anchor_dy30'] ) {
 								case 1:	$this->align_y1y2();	break;
 								case 2:	$this->align_y3y4();	break;
 							}
 							
 							$this->Layout[$m]['cpx']	= $this->qd['x1'];
 							$this->Layout[$m]['cpy']	= $this->qd['y1'];
-							$this->Layout[$m]['px']	= $this->qd['x1'] + $this->Layout[$m]['pres_espacement_bord_gauche'];
-							$this->Layout[$m]['py']	= $this->qd['y1'] + $this->Layout[$m]['pres_espacement_bord_haut'];
+							$this->Layout[$m]['px']	= $this->qd['x1'] + $this->Layout[$m]['lyoc_margin_left'];
+							$this->Layout[$m]['py']	= $this->qd['y1'] + $this->Layout[$m]['lyoc_margin_top'];
 							
 							if ( $this->Layout[$m]['cdx'] > 0 ) { $this->qd['x2'] = $this->qd['x4'] = $this->qd['x1'] + $this->Layout[$m]['cdx']; }
 							if ( $this->Layout[$m]['cdy'] > 0 ) { $this->qd['y3'] = $this->qd['y4'] = $this->qd['y1'] + $this->Layout[$m]['cdy']; }
 							
 							$this->Layout[$m]['cdx']	= $this->qd['x2'] - $this->qd['x1'];
 							$this->Layout[$m]['cdy']	= $this->qd['y3'] - $this->qd['y1'];
-							$this->Layout[$m]['dx']	= $this->qd['x2'] - $this->qd['x1'] - $this->Layout[$m]['pres_espacement_bord_gauche'] - $this->Layout[$m]['pres_espacement_bord_droite'];
-							$this->Layout[$m]['dy']	= $this->qd['y3'] - $this->qd['y1'] - $this->Layout[$m]['pres_espacement_bord_haut'] - $this->Layout[$m]['pres_espacement_bord_bas'];
+							$this->Layout[$m]['dx']	= $this->qd['x2'] - $this->qd['x1'] - $this->Layout[$m]['lyoc_margin_left'] - $this->Layout[$m]['lyoc_margin_right'];
+							$this->Layout[$m]['dy']	= $this->qd['y3'] - $this->qd['y1'] - $this->Layout[$m]['lyoc_margin_top'] - $this->Layout[$m]['lyoc_margin_bottom'];
 							break;
 					}
 					break;
 			}
 			
-			if ( $this->Layout[$m]['dx'] < $A['pres_minimum_x'] ) {
-				$this->Layout[$m]['dx'] = $A['pres_minimum_x'];
-				$this->Layout[$m]['cdx'] = $A['pres_minimum_x'] + $this->Layout[$m]['pres_espacement_bord_gauche'] + $this->Layout[$m]['pres_espacement_bord_droite'];
+			if ( $this->Layout[$m]['dx'] < $A['lyoc_minimum_x'] ) {
+				$this->Layout[$m]['dx'] = $A['lyoc_minimum_x'];
+				$this->Layout[$m]['cdx'] = $A['lyoc_minimum_x'] + $this->Layout[$m]['lyoc_margin_left'] + $this->Layout[$m]['lyoc_margin_right'];
 			}
-			if ( $this->Layout[$m]['dy'] < $A['pres_minimum_y'] ) {
-				$this->Layout[$m]['dy'] = $A['pres_minimum_y'];
-				$this->Layout[$m]['cdy'] = $A['pres_minimum_y'] + $this->Layout[$m]['pres_espacement_bord_haut'] + $this->Layout[$m]['pres_espacement_bord_bas'];
+			if ( $this->Layout[$m]['dy'] < $A['lyoc_minimum_y'] ) {
+				$this->Layout[$m]['dy'] = $A['lyoc_minimum_y'];
+				$this->Layout[$m]['cdy'] = $A['lyoc_minimum_y'] + $this->Layout[$m]['lyoc_margin_top'] + $this->Layout[$m]['lyoc_margin_bottom'];
 			}
-			$this->Layout[$m]['pres_module_zindex'] = $A['pres_module_zindex'];
+			$this->Layout[$m]['lyoc_module_zindex'] = $A['lyoc_module_zindex'];
 		}
 		
 		
@@ -292,51 +292,51 @@ class RenderLayout {
 	//	
 	//	
 	// --------------------------------------------------------------------------------------------
-	private function loadRawData ( $presentation_selection ) {
+	private function loadRawData ( $layout_selection ) {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$LMObj = LogManagement::getInstance();
 			
 		$dbquery = $SDDMObj->query("
 			SELECT *
-			FROM ". $SqlTableListObj->getSQLTableName('presentation_contenu')."
-			WHERE pres_id = '".$presentation_selection."'
-			ORDER BY pres_ligne
+			FROM ". $SqlTableListObj->getSQLTableName('layout_content')."
+			WHERE layout_id = '".$layout_selection."'
+			ORDER BY lyoc_line
 			;");
 // 		echo ("
 // 			SELECT *
-// 			FROM ". $SqlTableListObj->getSQLTableName('presentation_contenu')."
-// 			WHERE pres_id = '".$presentation_selection."'
-// 			ORDER BY pres_ligne
+// 			FROM ". $SqlTableListObj->getSQLTableName('layout_content')."
+// 			WHERE layout_id = '".$layout_selection."'
+// 			ORDER BY lyoc_line
 // 			;<br>\r");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$l = $dbp['pres_ligne'];
+			$l = $dbp['lyoc_line'];
 			foreach ( $dbp as $A => $B ) { $this->PL[$l][$A] = $B; }
-			$this->PL[$l]['pres_module_ancre_e10']			= "";
-			$this->PL[$l]['pres_module_ancre_e20']			= "";
-			$this->PL[$l]['pres_module_ancre_e30']			= "";
+			$this->PL[$l]['lyoc_module_anchor_e10']			= "";
+			$this->PL[$l]['lyoc_module_anchor_e20']			= "";
+			$this->PL[$l]['lyoc_module_anchor_e30']			= "";
 		}
 		
 		// Select a successor if the nominal candidate isn't available.
 		unset ($A);
 		foreach ( $this->PL as &$A ) {
-			if ( strlen($A['pres_module_ancre_e1a']) > 0 && $this->ModuleList[$A['pres_module_ancre_e1a']]['module_id'] != 0 )		{ $A['pres_module_ancre_e10']	=  $A['pres_module_ancre_e1a'];	$A['pres_ancre_ex10']	=  $A['pres_ancre_ex1a'];	$A['pres_ancre_ey10']	=  $A['pres_ancre_ey1a']; }
-			elseif ( strlen($A['pres_module_ancre_e1b']) > 0 && $this->ModuleList[$A['pres_module_ancre_e1b']]['module_id'] != 0 )	{ $A['pres_module_ancre_e10']	=  $A['pres_module_ancre_e1b'];	$A['pres_ancre_ex10']	=  $A['pres_ancre_ex1b'];	$A['pres_ancre_ey10']	=  $A['pres_ancre_ey1b']; }
-			elseif ( strlen($A['pres_module_ancre_e1c']) > 0 && $this->ModuleList[$A['pres_module_ancre_e1c']]['module_id'] != 0 )	{ $A['pres_module_ancre_e10']	=  $A['pres_module_ancre_e1c'];	$A['pres_ancre_ex10']	=  $A['pres_ancre_ex1c'];	$A['pres_ancre_ey10']	=  $A['pres_ancre_ey1c']; }
-			elseif ( strlen($A['pres_module_ancre_e1d']) > 0 && $this->ModuleList[$A['pres_module_ancre_e1d']]['module_id'] != 0 )	{ $A['pres_module_ancre_e10']	=  $A['pres_module_ancre_e1d'];	$A['pres_ancre_ex10']	=  $A['pres_ancre_ex1d'];	$A['pres_ancre_ey10']	=  $A['pres_ancre_ey1d']; }
-			elseif ( strlen($A['pres_module_ancre_e1e']) > 0 && $this->ModuleList[$A['pres_module_ancre_e1e']]['module_id'] != 0 )	{ $A['pres_module_ancre_e10']	=  $A['pres_module_ancre_e1e'];	$A['pres_ancre_ex10']	=  $A['pres_ancre_ex1e'];	$A['pres_ancre_ey10']	=  $A['pres_ancre_ey1e']; }
+			if ( strlen($A['lyoc_module_anchor_e1a']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e1a']]['module_id'] != 0 )		{ $A['lyoc_module_anchor_e10']	=  $A['lyoc_module_anchor_e1a'];	$A['lyoc_anchor_ex10']	=  $A['lyoc_anchor_ex1a'];	$A['lyoc_anchor_ey10']	=  $A['lyoc_anchor_ey1a']; }
+			elseif ( strlen($A['lyoc_module_anchor_e1b']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e1b']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e10']	=  $A['lyoc_module_anchor_e1b'];	$A['lyoc_anchor_ex10']	=  $A['lyoc_anchor_ex1b'];	$A['lyoc_anchor_ey10']	=  $A['lyoc_anchor_ey1b']; }
+			elseif ( strlen($A['lyoc_module_anchor_e1c']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e1c']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e10']	=  $A['lyoc_module_anchor_e1c'];	$A['lyoc_anchor_ex10']	=  $A['lyoc_anchor_ex1c'];	$A['lyoc_anchor_ey10']	=  $A['lyoc_anchor_ey1c']; }
+			elseif ( strlen($A['lyoc_module_anchor_e1d']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e1d']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e10']	=  $A['lyoc_module_anchor_e1d'];	$A['lyoc_anchor_ex10']	=  $A['lyoc_anchor_ex1d'];	$A['lyoc_anchor_ey10']	=  $A['lyoc_anchor_ey1d']; }
+			elseif ( strlen($A['lyoc_module_anchor_e1e']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e1e']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e10']	=  $A['lyoc_module_anchor_e1e'];	$A['lyoc_anchor_ex10']	=  $A['lyoc_anchor_ex1e'];	$A['lyoc_anchor_ey10']	=  $A['lyoc_anchor_ey1e']; }
 			
-			if ( strlen($A['pres_module_ancre_e2a']) > 0 && $this->ModuleList[$A['pres_module_ancre_e2a']]['module_id'] != 0 )		{ $A['pres_module_ancre_e20']	=  $A['pres_module_ancre_e2a'];	$A['pres_ancre_ex20']	=  $A['pres_ancre_ex2a'];	$A['pres_ancre_ey20']	=  $A['pres_ancre_ey2a']; }
-			elseif ( strlen($A['pres_module_ancre_e2b']) > 0 && $this->ModuleList[$A['pres_module_ancre_e2b']]['module_id'] != 0 )	{ $A['pres_module_ancre_e20']	=  $A['pres_module_ancre_e2b'];	$A['pres_ancre_ex20']	=  $A['pres_ancre_ex2b'];	$A['pres_ancre_ey20']	=  $A['pres_ancre_ey2b']; }
-			elseif ( strlen($A['pres_module_ancre_e2c']) > 0 && $this->ModuleList[$A['pres_module_ancre_e2c']]['module_id'] != 0 )	{ $A['pres_module_ancre_e20']	=  $A['pres_module_ancre_e2c'];	$A['pres_ancre_ex20']	=  $A['pres_ancre_ex2c'];	$A['pres_ancre_ey20']	=  $A['pres_ancre_ey2c']; }
-			elseif ( strlen($A['pres_module_ancre_e2d']) > 0 && $this->ModuleList[$A['pres_module_ancre_e2d']]['module_id'] != 0 )	{ $A['pres_module_ancre_e20']	=  $A['pres_module_ancre_e2d'];	$A['pres_ancre_ex20']	=  $A['pres_ancre_ex2d'];	$A['pres_ancre_ey20']	=  $A['pres_ancre_ey2d']; }
-			elseif ( strlen($A['pres_module_ancre_e2e']) > 0 && $this->ModuleList[$A['pres_module_ancre_e2e']]['module_id'] != 0 )	{ $A['pres_module_ancre_e20']	=  $A['pres_module_ancre_e2e'];	$A['pres_ancre_ex20']	=  $A['pres_ancre_ex2e'];	$A['pres_ancre_ey20']	=  $A['pres_ancre_ey2e']; }
+			if ( strlen($A['lyoc_module_anchor_e2a']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e2a']]['module_id'] != 0 )		{ $A['lyoc_module_anchor_e20']	=  $A['lyoc_module_anchor_e2a'];	$A['lyoc_anchor_ex20']	=  $A['lyoc_anchor_ex2a'];	$A['lyoc_anchor_ey20']	=  $A['lyoc_anchor_ey2a']; }
+			elseif ( strlen($A['lyoc_module_anchor_e2b']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e2b']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e20']	=  $A['lyoc_module_anchor_e2b'];	$A['lyoc_anchor_ex20']	=  $A['lyoc_anchor_ex2b'];	$A['lyoc_anchor_ey20']	=  $A['lyoc_anchor_ey2b']; }
+			elseif ( strlen($A['lyoc_module_anchor_e2c']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e2c']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e20']	=  $A['lyoc_module_anchor_e2c'];	$A['lyoc_anchor_ex20']	=  $A['lyoc_anchor_ex2c'];	$A['lyoc_anchor_ey20']	=  $A['lyoc_anchor_ey2c']; }
+			elseif ( strlen($A['lyoc_module_anchor_e2d']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e2d']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e20']	=  $A['lyoc_module_anchor_e2d'];	$A['lyoc_anchor_ex20']	=  $A['lyoc_anchor_ex2d'];	$A['lyoc_anchor_ey20']	=  $A['lyoc_anchor_ey2d']; }
+			elseif ( strlen($A['lyoc_module_anchor_e2e']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e2e']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e20']	=  $A['lyoc_module_anchor_e2e'];	$A['lyoc_anchor_ex20']	=  $A['lyoc_anchor_ex2e'];	$A['lyoc_anchor_ey20']	=  $A['lyoc_anchor_ey2e']; }
 			
-			if ( strlen($A['pres_module_ancre_e3a']) > 0 && $this->ModuleList[$A['pres_module_ancre_e3a']]['module_id'] != 0 )		{ $A['pres_module_ancre_e30']	=  $A['pres_module_ancre_e3a'];	$A['pres_ancre_ex30']	=  $A['pres_ancre_ex3a'];	$A['pres_ancre_ey30']	=  $A['pres_ancre_ey3a']; }
-			elseif ( strlen($A['pres_module_ancre_e3b']) > 0 && $this->ModuleList[$A['pres_module_ancre_e3b']]['module_id'] != 0 )	{ $A['pres_module_ancre_e30']	=  $A['pres_module_ancre_e3b'];	$A['pres_ancre_ex30']	=  $A['pres_ancre_ex3b'];	$A['pres_ancre_ey30']	=  $A['pres_ancre_ey3b']; }
-			elseif ( strlen($A['pres_module_ancre_e3c']) > 0 && $this->ModuleList[$A['pres_module_ancre_e3c']]['module_id'] != 0 )	{ $A['pres_module_ancre_e30']	=  $A['pres_module_ancre_e3c'];	$A['pres_ancre_ex30']	=  $A['pres_ancre_ex3c'];	$A['pres_ancre_ey30']	=  $A['pres_ancre_ey3c']; }
-			elseif ( strlen($A['pres_module_ancre_e3d']) > 0 && $this->ModuleList[$A['pres_module_ancre_e3d']]['module_id'] != 0 )	{ $A['pres_module_ancre_e30']	=  $A['pres_module_ancre_e3d'];	$A['pres_ancre_ex30']	=  $A['pres_ancre_ex3d'];	$A['pres_ancre_ey30']	=  $A['pres_ancre_ey3d']; }
-			elseif ( strlen($A['pres_module_ancre_e3e']) > 0 && $this->ModuleList[$A['pres_module_ancre_e3e']]['module_id'] != 0 )	{ $A['pres_module_ancre_e30']	=  $A['pres_module_ancre_e3e'];	$A['pres_ancre_ex30']	=  $A['pres_ancre_ex3e'];	$A['pres_ancre_ey30']	=  $A['pres_ancre_ey3e']; }
+			if ( strlen($A['lyoc_module_anchor_e3a']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e3a']]['module_id'] != 0 )		{ $A['lyoc_module_anchor_e30']	=  $A['lyoc_module_anchor_e3a'];	$A['lyoc_anchor_ex30']	=  $A['lyoc_anchor_ex3a'];	$A['lyoc_anchor_ey30']	=  $A['lyoc_anchor_ey3a']; }
+			elseif ( strlen($A['lyoc_module_anchor_e3b']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e3b']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e30']	=  $A['lyoc_module_anchor_e3b'];	$A['lyoc_anchor_ex30']	=  $A['lyoc_anchor_ex3b'];	$A['lyoc_anchor_ey30']	=  $A['lyoc_anchor_ey3b']; }
+			elseif ( strlen($A['lyoc_module_anchor_e3c']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e3c']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e30']	=  $A['lyoc_module_anchor_e3c'];	$A['lyoc_anchor_ex30']	=  $A['lyoc_anchor_ex3c'];	$A['lyoc_anchor_ey30']	=  $A['lyoc_anchor_ey3c']; }
+			elseif ( strlen($A['lyoc_module_anchor_e3d']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e3d']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e30']	=  $A['lyoc_module_anchor_e3d'];	$A['lyoc_anchor_ex30']	=  $A['lyoc_anchor_ex3d'];	$A['lyoc_anchor_ey30']	=  $A['lyoc_anchor_ey3d']; }
+			elseif ( strlen($A['lyoc_module_anchor_e3e']) > 0 && $this->ModuleList[$A['lyoc_module_anchor_e3e']]['module_id'] != 0 )	{ $A['lyoc_module_anchor_e30']	=  $A['lyoc_module_anchor_e3e'];	$A['lyoc_anchor_ex30']	=  $A['lyoc_anchor_ex3e'];	$A['lyoc_anchor_ey30']	=  $A['lyoc_anchor_ey3e']; }
 		}
 	}
 

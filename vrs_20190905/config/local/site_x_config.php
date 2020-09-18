@@ -35,7 +35,7 @@ $maid_stats_nombre_de_couleurs = 5;
 $MWM_session_max_time = (60*60*24);
 
 //--------------------------------------------------------------------------------------------
-//	websites-data/00_Hydre/document/fra_presentation_de_l_equipe_p01.php
+//	websites-data/00_Hydre/document/fra_layout_de_l_equipe_p01.php
 $pde_img_aff = 1;
 $pde_img_h = 32;																	//height
 $pde_img_l = 32;																	//width

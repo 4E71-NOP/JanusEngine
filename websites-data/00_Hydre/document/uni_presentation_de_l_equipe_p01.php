@@ -37,11 +37,11 @@
 
 /*Hydre-contenu_debut*/
 
-$localisation = " / uni_presentation_de_l_equipe_p01";
+$localisation = " / uni_layout_de_l_equipe_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_presentation_de_l_equipe_p01");
+$LMObj->logCheckpoint("uni_layout_de_l_equipe_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_presentation_de_l_equipe_p01");
+$MapperObj->setSqlApplicant("uni_layout_de_l_equipe_p01");
 
 switch ( $l ) {
 	case "fra":

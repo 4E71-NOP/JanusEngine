@@ -86,7 +86,7 @@ arti_titre					VARCHAR(255),
 arti_sous_titre				VARCHAR(255),
 arti_page					INTEGER,
 
-pres_nom_generique			VARCHAR(255),
+layout_generic_name			VARCHAR(255),
 config_id					INTEGER,
 
 arti_creation_createur		INTEGER,

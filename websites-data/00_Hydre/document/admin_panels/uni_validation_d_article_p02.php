@@ -52,15 +52,15 @@ case 2:
 
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT pre.pres_id,pre.pres_nom,pre.pres_nom_generique  
-	FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentation']." sp , ".$SQL_tab_abrege['theme_website']." ss 
-	WHERE pre.pres_id = sp.pres_id 
+	SELECT pre.layout_id,pre.layout_name,pre.layout_generic_name  
+	FROM ".$SQL_tab_abrege['layout']." pre, ".$SQL_tab_abrege['layout_theme']." sp , ".$SQL_tab_abrege['theme_website']." ss 
+	WHERE pre.layout_id = sp.layout_id 
 	AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 	AND sp.theme_id = ss.theme_id 
 	AND ss.ws_id = '".$website['ws_id']."' 
-	AND pre.pres_nom_generique = '".$infos_article['pres_nom_generique']."' 
+	AND pre.layout_generic_name = '".$infos_article['layout_generic_name']."' 
 	;");
-	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l12'] = $dbp['pres_nom_generique']; }
+	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l12'] = $dbp['layout_generic_name']; }
 
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
@@ -138,24 +138,24 @@ case 3:
 	$infos_article['arti_sous_titre']	= "<input type='text' name='M_ARTICL[sous_titre]' size='35' maxlength='255' value='-' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$infos_article['arti_page']			= "<input type='text' name='M_ARTICL[page]' size='35' maxlength='255' value='1' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
-	$pv['o2l12'] = "<select name ='M_ARTICL[presentation]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+	$pv['o2l12'] = "<select name ='M_ARTICL[layout]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$pv['o2l22'] = "<select name ='M_ARTICL[config_id]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$pv['o2l32'] = "<select name ='M_ARTICL[deadline]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$pv['o3l12'] = "<select name ='M_ARTICL[document]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
 	$pv['ptr'] = 0;
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT pre.pres_id,pre.pres_nom,pre.pres_nom_generique  
-	FROM ".$SQL_tab_abrege['presentation']." pre, ".$SQL_tab_abrege['theme_presentation']." sp , ".$SQL_tab_abrege['theme_website']." ss 
-	WHERE pre.pres_id = sp.pres_id 
+	SELECT pre.layout_id,pre.layout_name,pre.layout_generic_name  
+	FROM ".$SQL_tab_abrege['layout']." pre, ".$SQL_tab_abrege['layout_theme']." sp , ".$SQL_tab_abrege['theme_website']." ss 
+	WHERE pre.layout_id = sp.layout_id 
 	AND sp.theme_id = '".${$theme_tableau}['theme_id']."' 
 	AND sp.theme_id = ss.theme_id 
 	AND ss.ws_id = '".$website['ws_id']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
-		$pv['TabPres'][$pv['ptr']]['id'] = $dbp['pres_id'];
-		$pv['TabPres'][$pv['ptr']]['nom'] = $dbp['pres_nom'];
-		$pv['TabPres'][$pv['ptr']]['nom_generique'] = $dbp['pres_nom_generique'];
+		$pv['TabPres'][$pv['ptr']]['id'] = $dbp['layout_id'];
+		$pv['TabPres'][$pv['ptr']]['nom'] = $dbp['layout_name'];
+		$pv['TabPres'][$pv['ptr']]['nom_generique'] = $dbp['layout_generic_name'];
 		$pv['ptr']++;
 	}
 	unset ( $A );

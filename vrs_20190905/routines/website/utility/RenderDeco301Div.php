@@ -50,7 +50,7 @@ class RenderDeco301Div {
 				$L['py'] = 0;
 				break;
 		}
-		if ( $L['pres_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['pres_module_zindex']; }
+		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		
 		$L['pos_x1_22'] = $L['px'];
