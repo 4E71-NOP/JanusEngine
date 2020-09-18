@@ -344,7 +344,7 @@ $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 192;
 $tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
-$tab_infos['groupe']			= "md_grp1";
+$tab_infos['group']			= "md_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
@@ -362,7 +362,7 @@ $tab_infos['tab_comportement']	= 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']		= 548;
 $tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16;
-$tab_infos['groupe']			= "type1";
+$tab_infos['group']			= "type1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "deco";
 $tab_infos['cell_1_txt']		= $tl_[$l]['cell_1_txt'];
@@ -457,7 +457,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	break;
 	}
 
-	$pv['div_id'] = $tab_infos['groupe'] . "_" . $tab_infos['document'] . "_" . $pv['TabCon'][$pv['i']];
+	$pv['div_id'] = $tab_infos['group'] . "_" . $tab_infos['document'] . "_" . $pv['TabCon'][$pv['i']];
 	echo ("
 	<div id='".$pv['div_id']."' class='css_".$pv['div_id']."' 
 	style='position: absolute; visibility: ".$tab_infos['visible']."; 

@@ -149,7 +149,7 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $groupTab = array();
 $dbquery = $SDDMObj->query("
 SELECT a.group_id,a.group_title,a.group_name
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b
+FROM ".$SqlTableListObj->getSQLTableName('group')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b
 WHERE a.group_id = b.group_id
 AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY a.group_title

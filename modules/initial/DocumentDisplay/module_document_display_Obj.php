@@ -229,7 +229,7 @@ class ModuleDocumentDisplay {
 					$tab_infos['TypSurbrillance']	= 1; // 1:ligne, 2:cellule
 					$tab_infos['doc_height']		= 64;
 					$tab_infos['doc_width']			= floor($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/3);
-					$tab_infos['groupe']			= "arti_menu1";
+					$tab_infos['group']			= "arti_menu1";
 					$tab_infos['cell_id']			= "tab";
 					$tab_infos['document']			= "doc";
 					$tab_infos['cell_1_txt']		= $i18n['tab1'];

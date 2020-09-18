@@ -55,7 +55,7 @@ class RenderAdmDashboard {
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.module_id
 			AND b.module_state = '1'
-			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_groupe')."
+			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_group')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
 			;");
@@ -67,7 +67,7 @@ class RenderAdmDashboard {
 // 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 // 			AND a.module_id = b.module_id
 // 			AND b.module_state = '1'
-// 			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_groupe')."
+// 			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_group')."
 // 			AND a.module_adm_control > '0'
 // 			ORDER BY module_position
 // 			;
@@ -155,7 +155,7 @@ class RenderAdmDashboard {
 			$infos['module_name'] = $mn = &$m['module_name'];
 			$Content .= "<!-- _______________________________________ Debut du module ".$mn." _______________________________________ -->\r";
 			
-			if ( $UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see'] ) == 1 ) {
+			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
 					$infos['block'] = $StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}

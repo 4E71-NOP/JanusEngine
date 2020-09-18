@@ -19,7 +19,7 @@ $tl_['English']['d5_04'] = "thumbnail width";				$tl_['Français_fr']['d5_04'] =
 $tl_['English']['d5_05'] = "Thumbnail heigth";				$tl_['Français_fr']['d5_05'] = "Hauteur de la vignette";	
 $tl_['English']['d5_06'] = "Thumbnail border thickness";	$tl_['Français_fr']['d5_06'] = "Epaisseur du liserai";
 
-$pv['div_id'] = $tab_infos['groupe'] . "_" . $tab_infos['document'] . $pv['div_compteur'];
+$pv['div_id'] = $tab_infos['group'] . "_" . $tab_infos['document'] . $pv['div_compteur'];
 echo ("
 <div id='".$pv['div_id']."' style='position: absolute; visibility: hidden; height: ".$tab_infos['doc_height']."px; overflow: auto;'>\r
 <table ".$theme_princ_['tab_std_rules']." width='".$theme_SW_['tab_interieur']."'>\r

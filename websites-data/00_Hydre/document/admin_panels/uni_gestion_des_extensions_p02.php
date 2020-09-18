@@ -20,7 +20,7 @@ $_REQUEST['uni_gestion_des_modules_p'] = 2;
 
 /*Hydre-contenu_debut*/
 statistique_checkpoint ( "Demarrage gestion des extensions" );
-$_REQUEST['sql_initiateur'] = "uni_gestion_des_groupes_p0".$_REQUEST['uni_gestion_des_modules_p'].".php";
+$_REQUEST['sql_initiateur'] = "uni_gestion_des_groups_p0".$_REQUEST['uni_gestion_des_modules_p'].".php";
 
 if ( $user['group_tag'] == 3 ) {
 	//outil_debug ( $user['group_tag'] , "user['group_tag']" );
@@ -110,7 +110,7 @@ if ( $user['group_tag'] == 3 ) {
 	include_once ("routines/website/manipulation_contexte.php");
 	include_once ("routines/website/manipulation_decoration.php");
 	include_once ("routines/website/manipulation_document.php");
-	include_once ("routines/website/manipulation_groupe.php");
+	include_once ("routines/website/manipulation_group.php");
 	include_once ("routines/website/manipulation_module.php");
 	include_once ("routines/website/manipulation_mot_cle.php");
 	include_once ("routines/website/manipulation_layout.php");
@@ -214,7 +214,7 @@ if ( $user['group_tag'] == 3 ) {
 		$tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 		$tab_infos['doc_height']		= 512;
 		$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -24 ;
-		$tab_infos['groupe']			= "edc_grp1";
+		$tab_infos['group']			= "edc_grp1";
 		$tab_infos['cell_id']			= "tab";
 		$tab_infos['document']			= "doc";
 		$tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];

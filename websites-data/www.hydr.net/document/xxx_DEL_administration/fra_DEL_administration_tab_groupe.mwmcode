@@ -1,7 +1,7 @@
 /*Hydre-contenu_debut*/
-[TB2]« groupe » : Représente un groupe d'utilisateur.[/F][BR]
+[TB2]« group » : Représente un group d'utilisateur.[/F][BR]
 [TAB_STD][TW_MLI][FE]
-[TR] [TDFCTA2][COLSP]2[FE]Les arguments associés a l'élément « groupe »[/TD][/TR]
+[TR] [TDFCTA2][COLSP]2[FE]Les arguments associés a l'élément « group »[/TD][/TR]
 [TR] [TDFCA1][F]nom[/TD]		[TDFCB1][F]Nom qui servira pour le référencement.[/TD][/TR]
 [TR] [TDFCA1][F]titre[/TD]		[TDFCB1][F]Champ libre.[/TD][/TR]
 [TR] [TDFCA1][F]tag[/TD]		[TDFCB1][F]STAFF, LECTEUR, ANONYME[/TD][/TR]

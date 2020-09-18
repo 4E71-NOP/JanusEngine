@@ -134,7 +134,7 @@ else {
 	$tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 	$tab_infos['doc_height']		= $pres_[$mn]['dim_y_22'] - ${$theme_tableau}[$_REQUEST['bloc']]['tab_y'] - 32 ;
 	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'];
-	$tab_infos['groupe']			= "mb_grp1";
+	$tab_infos['group']			= "mb_grp1";
 	$tab_infos['cell_id']			= "tab";
 	$tab_infos['document']			= "doc";
 	$tab_infos['cell_1_txt']		= $tl_[$l]['onglet1'];

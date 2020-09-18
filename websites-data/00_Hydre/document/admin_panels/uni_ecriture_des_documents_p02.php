@@ -180,7 +180,7 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	$tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 	$tab_infos['doc_height']		= 160;
 	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
-	$tab_infos['groupe']			= "ed_grp1";
+	$tab_infos['group']			= "ed_grp1";
 	$tab_infos['cell_id']			= "tab";
 	$tab_infos['document']			= "doc";
 	$tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];

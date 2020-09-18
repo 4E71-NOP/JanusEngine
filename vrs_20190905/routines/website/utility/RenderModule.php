@@ -68,9 +68,9 @@ class RenderModule {
 			$_REQUEST['module_nbr'] = 1;
 			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 // 			$LMObj->InternalLog($StringFormatObj->arrayToString($UserObj->getUser()));
-// 			$LMObj->InternalLog("module_group_allowed_to_see=".$UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see']));
+// 			$LMObj->InternalLog("module_group_allowed_to_see=".$UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']));
 			
-			if ( $UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see']) == 1 ) {
+			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
 				$Block = $StringFormatObj->getDecorationBlockName( "B", $nbr , "");
 				$infos['module_name'] = $m['module_name'];

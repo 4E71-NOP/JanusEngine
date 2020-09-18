@@ -54,7 +54,7 @@ class ModuleQuickSkin {
 		".$i18n['txt1']." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 		</p>
 		";
-		$grp = $UserObj->getUserGroupEntry('groupe', $infos['module']['module_group_allowed_to_use']);
+		$grp = $UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
 		$LMObj->InternalLog( "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) );
 		if ( $grp == "1" ) {
 			$dbquery = $SDDMObj->query("

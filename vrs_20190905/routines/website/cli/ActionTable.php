@@ -43,7 +43,7 @@ self::$ActionTable['add']['document_config']	= function (&$a) { return array ("I
 self::$ActionTable['add']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['group'] = function (&$a) { return array (
-		"INSERT INTO ".$a['sqlTables']['groupe']." (".$a['columns'].") VALUES (".$a['values'].");",
+		"INSERT INTO ".$a['sqlTables']['group']." (".$a['columns'].") VALUES (".$a['values'].");",
 		"INSERT INTO ".$a['sqlTables']['group_website']." VALUES ('".$a['params']['group_webws_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '1' );"
 	);
 };

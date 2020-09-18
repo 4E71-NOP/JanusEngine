@@ -119,7 +119,7 @@ FROM ".$SQL_tab['categorie']."
 WHERE cate_type IN ('2', '3') 
 AND ws_id IN ('1', '".$website['ws_id']."') 
 AND cate_lang = '".$website['ws_lang']."' 
-AND group_id ".$user['clause_in_groupe']." 
+AND group_id ".$user['clause_in_group']." 
 AND cate_etat = '1' 
 AND cate_role = '1'
 ;");
@@ -261,7 +261,7 @@ $tab_infos['tab_comportement'] = 1;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']	= 224;
 $tab_infos['doc_width']	= ${$theme_tableau}['theme_module_largeur_interne'];
-$tab_infos['groupe']		= "maa_grp1";
+$tab_infos['group']		= "maa_grp1";
 $tab_infos['cell_id']		= "tab";
 $tab_infos['document']	= "doc";
 $tab_infos['cell_1_txt']	= $tl_[$l]['onglet1'];

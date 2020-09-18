@@ -62,11 +62,11 @@ $RequestDataObj->setRequestData('formGenericData',
 );
 		
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_groupes_p02";
+$localisation = " / uni_gestion_des_groups_p02";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_groupes_p02");
+$LMObj->logCheckpoint("uni_gestion_des_groups_p02");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_groupes_p02");
+$MapperObj->setSqlApplicant("uni_gestion_des_groups_p02");
 
 switch ($l) {
 	case "fra":
@@ -77,8 +77,8 @@ switch ($l) {
 		"staff"			=>	"Staff",
 		"seniorStaff"	=>	"Staff Sénior",
 		
-		"invite1"		=> "Cette partie va vous permettre de gérer le groupe.",
-		"invite2"		=> "Cette partie va vous permettre de créer un groupe.",
+		"invite1"		=> "Cette partie va vous permettre de gérer le group.",
+		"invite2"		=> "Cette partie va vous permettre de créer un group.",
 		"tabTxt1"		=> "Informations",
 		
 		"t1l1c1"		=>	"ID",

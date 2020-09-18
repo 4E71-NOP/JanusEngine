@@ -42,16 +42,16 @@ $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
-$localisation = " / uni_gestion_des_groupes_p01";
+$localisation = " / uni_gestion_des_groups_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_gestion_des_groupes_p01");
+$LMObj->logCheckpoint("uni_gestion_des_groups_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_gestion_des_groupes_p01");
+$MapperObj->setSqlApplicant("uni_gestion_des_groups_p01");
 
 switch ($l) {
 	case "fra":
 		$I18nObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les groupes.",
+		"invite1"		=> "Cette partie va vous permettre de gérer les groups.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Titre",
 		"col_3_txt"		=> "Tag",
@@ -87,7 +87,7 @@ $tagTab = array(
 $T = array();
 $dbquery = $SDDMObj->query("
 SELECT grp.*, sg.group_state 
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('group')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND grp.group_id = sg.group_id 
 and grp.group_name != 'Server_owner' 

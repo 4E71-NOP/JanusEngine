@@ -67,18 +67,18 @@ switch ($l) {
 		"col_6_txt"		=> "Dernière visite",
 		"tabTxt1"		=> "Informations",
 		"select1_0"		=> "No group",
-		"select1_1"		=> "Aucun groupe",
+		"select1_1"		=> "Aucun group",
 		
 		"status0"		=> "Désactivé",
 		"status1"		=> "Actif",
 		"status2"		=> "Suppprimé",
 
 		"table1_1"		=> "Chercher le login contenant",
-		"table1_2"		=> "Du groupe",
+		"table1_2"		=> "Du group",
 		"table1_3"		=> "Statut",
 		"table1_41"		=> "Affichage",
 		"table1_42"		=> "entrées par pages.",
-		"select1_0"		=> "Aucun groupe",
+		"select1_0"		=> "Aucun group",
 		"select2_0"		=> "Inactif",
 		"select2_1"		=> "Actif",
 		"select2_2"		=> "Supprimé",
@@ -95,7 +95,7 @@ switch ($l) {
 		"col_6_txt"		=> "Last visit",
 		"tabTxt1"		=> "Informations",
 		"select1_0"		=> "No group",
-		"select1_1"		=> "Aucun groupe",
+		"select1_1"		=> "Aucun group",
 		
 		"status0"		=> "Disabled",
 		"status1"		=> "Active",
@@ -141,7 +141,7 @@ $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." us
 
 $dbquery = $SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like'].";");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
 
@@ -173,7 +173,7 @@ M_UTILIS_page=".$GDU_['compteur_page']."
 
 $dbquery = $SDDMObj->query("
 SELECT usr.user_id,usr.user_login,user_nom,usr.user_derniere_visite,gr.group_title,usr.user_status 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like']."  
 ORDER BY user_id, user_login
 
@@ -263,7 +263,7 @@ $gu_select1 = array(
 
 $dbquery = $SDDMObj->query("
 SELECT a.group_id,a.group_title 
-FROM ".$SqlTableListObj->getSQLTableName('groupe')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b 
+FROM ".$SqlTableListObj->getSQLTableName('group')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b 
 WHERE b.ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 AND a.group_tag != '0' 
 AND a.group_id = b.group_id ;

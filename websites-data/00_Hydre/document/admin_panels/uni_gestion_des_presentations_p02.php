@@ -59,7 +59,7 @@ $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 128;
 $tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
-$tab_infos['groupe']			= "mp_grp1";
+$tab_infos['group']			= "mp_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
@@ -294,7 +294,7 @@ SELECT *
 FROM ".$SQL_tab_abrege['module']." m, ".$SQL_tab_abrege['module_website']." sm 
 WHERE sm.ws_id = '".$website['ws_id']."' 
 AND m.module_id = sm.module_id
-AND m.module_group_allowed_to_see ".$user['clause_in_groupe']." 
+AND m.module_group_allowed_to_see ".$user['clause_in_group']." 
 ORDER BY module_position
 ;");
 $pv['i'] = 1;
@@ -339,7 +339,7 @@ $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 512;
 $tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
-$tab_infos['groupe']			= "gp_grp2";
+$tab_infos['group']			= "gp_grp2";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $pv['onglet_deco'];

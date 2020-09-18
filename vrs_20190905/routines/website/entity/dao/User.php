@@ -31,7 +31,7 @@ class User {
 		
 // 		$LMObj->InternalLog( __METHOD__ ."() : 
 // 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 // 			WHERE usr.user_login = '" . $UserLogin . "'
 // 			AND usr.user_id = gu.user_id
 // 			AND gu.group_user_initial_group = '1'
@@ -42,7 +42,7 @@ class User {
 // 		);
 		$dbquery = $SDDMObj->query ("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
 			AND usr.user_id = gu.user_id
 			AND gu.group_user_initial_group = '1'
@@ -97,7 +97,7 @@ class User {
 			}
 
 // 			Building SQL clause for groups. Done here to avoid redoing it over and over. 
-			$this->User['clause_in_groupe'] = "";
+			$this->User['clause_in_group'] = "";
 			$groupList00 = $groupList01 = $groupList02 = array ();
 
 			// find all sons of the initial user "groupset". 
@@ -110,7 +110,7 @@ class User {
 				");
 			while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
 				$groupList01[] = $dbp ['group_id'];
-				$this->User['groupe'][$dbp ['group_id']] = 1;
+				$this->User['group'][$dbp ['group_id']] = 1;
 			}
 
 			$loopAgain = 1;
@@ -121,14 +121,14 @@ class User {
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
 				$dbquery = $SDDMObj->query ("SELECT group_id, group_parent
-					FROM " . $SqlTableListObj->getSQLTableName ('groupe') . "
+					FROM " . $SqlTableListObj->getSQLTableName ('group') . "
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;");
 				if ($SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
 						$groupList02[] = $dbp ['group_id'];
-						$this->User['groupe'][$dbp ['group_id']] = 1;
+						$this->User['group'][$dbp ['group_id']] = 1;
 						$loopAgain = 1;
 					}
 				}
@@ -141,12 +141,12 @@ class User {
 			}
 
 			// Sort entries
-			ksort ( $this->User['groupe']);
+			ksort ( $this->User['group']);
 			unset ( $A );
 			$strGrp = "";
 // 			foreach ( $groupList00 as $A ) { $strGrp .= "'" . $A . "', "; }
-			foreach ( $this->User['groupe'] as $A => $B ) { $strGrp .= "'" . $A . "', "; }
-			$this->User['clause_in_groupe'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";	
+			foreach ( $this->User['group'] as $A => $B ) { $strGrp .= "'" . $A . "', "; }
+			$this->User['clause_in_group'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";	
 			
 		} else {
 			$this->User['error_login_not_found'] == 1;

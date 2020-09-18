@@ -207,7 +207,7 @@ self::$PreRequisiteTable['add']['group'] = array (
 				array("v" => "tag",			"s" => "group"),
 		),
 		"nextId" => array (
-				array ("table" => "groupe",			"column" => "group_id",		"target" => "id"),
+				array ("table" => "group",			"column" => "group_id",		"target" => "id"),
 				array ("table" => "group_website",	"column" => "group_website_id",	"target" => "group_webws_id"),
 		),
 		"timeCreate" => array (

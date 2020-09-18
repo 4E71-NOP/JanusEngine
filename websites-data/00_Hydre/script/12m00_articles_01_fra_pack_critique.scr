@@ -16,8 +16,8 @@ add article	name "fra_gestion_des_decorations_p01"				reference "fra_gestion_des
 add article	name "fra_gestion_des_decorations_p02"				reference "fra_gestion_des_decorations"			deadline initial_online		desc "Admin en Francais"			title "Gestion des decorations"					subtitle "Choisir le document"								page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_decoration";
 add article	name "fra_gestion_des_documents_p01"				reference "fra_gestion_des_documents"			deadline initial_online		desc "Admin en Francais"			title "Gestion des documents"					subtitle "Choisir le document"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_documents_p02"				reference "fra_gestion_des_documents"			deadline initial_online		desc "Admin en Francais"			title "Gestion des documents"					subtitle "Modifier le document"								page "2"	validation_state "VALID"	config "no_menu";
-add article	name "fra_gestion_des_groupes_p01"					reference "fra_gestion_des_groupes"				deadline initial_online		desc "Admin en Francais"			title "Gestion des groupes"						subtitle "Choisir le groupe"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "fra_gestion_des_groupes_p02"					reference "fra_gestion_des_groupes"				deadline initial_online		desc "Admin en Francais"			title "Gestion des groupes"						subtitle "Modifier/cr&eacute;er un groupe"					page "2"	validation_state "VALID"	config "no_menu";
+add article	name "fra_gestion_des_groups_p01"					reference "fra_gestion_des_groups"				deadline initial_online		desc "Admin en Francais"			title "Gestion des groups"						subtitle "Choisir le group"								page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_gestion_des_groups_p02"					reference "fra_gestion_des_groups"				deadline initial_online		desc "Admin en Francais"			title "Gestion des groups"						subtitle "Modifier/cr&eacute;er un group"					page "2"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_historiques_p01"				reference "fra_gestion_des_historiques"			deadline initial_online		desc "Admin en Francais"			title "Gestion des Historiques"					subtitle "G&eacute;rer les journaux"						page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_profil";
 add article	name "fra_gestion_des_modules_p01"					reference "fra_gestion_des_modules"				deadline initial_online		desc "Admin en Francais"			title "Gestion des modules"						subtitle "Choisir le module"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_gestion_des_modules_p02"					reference "fra_gestion_des_modules"				deadline initial_online		desc "Admin en Francais"			title "Gestion des modules"						subtitle "Modifier/cr&eacute;er un module"					page "2"	validation_state "VALID"	config "no_menu";
@@ -60,8 +60,8 @@ assign	document name "doc_uni_gestion_des_decorations_p01.php"			to_article "fra
 assign	document name "doc_uni_gestion_des_decorations_p02.php"			to_article "fra_gestion_des_decorations_p02";
 assign	document name "doc_uni_gestion_des_documents_p01.php"			to_article "fra_gestion_des_documents_p01";
 assign	document name "doc_uni_gestion_des_documents_p02.php"			to_article "fra_gestion_des_documents_p02";
-assign	document name "doc_uni_gestion_des_groupes_p01.php"				to_article "fra_gestion_des_groupes_p01";
-assign	document name "doc_uni_gestion_des_groupes_p02.php"				to_article "fra_gestion_des_groupes_p02";
+assign	document name "doc_uni_gestion_des_groups_p01.php"				to_article "fra_gestion_des_groups_p01";
+assign	document name "doc_uni_gestion_des_groups_p02.php"				to_article "fra_gestion_des_groups_p02";
 assign	document name "doc_uni_gestion_des_historiques_p01.php"			to_article "fra_gestion_des_historiques_p01";
 assign	document name "doc_uni_gestion_des_modules_p01.php"				to_article "fra_gestion_des_modules_p01";
 assign	document name "doc_uni_gestion_des_modules_p02.php"				to_article "fra_gestion_des_modules_p02";

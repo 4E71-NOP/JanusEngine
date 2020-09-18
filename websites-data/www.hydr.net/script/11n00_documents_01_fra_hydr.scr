@@ -71,10 +71,10 @@ insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_document.
 share document	name "doc_fra_DEL_administration_tab_document.mwmcode"	with_website Hydr	modification YES;
 update document	name "doc_fra_DEL_administration_tab_document.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
 
-add document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	type MWMCODE;
-insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_groupe.mwmcode"		into "doc_fra_DEL_administration_tab_groupe.mwmcode";
-share document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	with_website Hydr	modification YES;
-update document	name "doc_fra_DEL_administration_tab_groupe.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
+add document	name "doc_fra_DEL_administration_tab_group.mwmcode"	type MWMCODE;
+insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_group.mwmcode"		into "doc_fra_DEL_administration_tab_group.mwmcode";
+share document	name "doc_fra_DEL_administration_tab_group.mwmcode"	with_website Hydr	modification YES;
+update document	name "doc_fra_DEL_administration_tab_group.mwmcode"	checked YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DEL_administration_tab_module.mwmcode"	type MWMCODE;
 insert content	file "xxx_DEL_administration/fra_DEL_administration_tab_module.mwmcode"		into "doc_fra_DEL_administration_tab_module.mwmcode";

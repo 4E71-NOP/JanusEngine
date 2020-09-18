@@ -19,7 +19,7 @@ Cliquez sur "soumettre".
 Lorsque l'on entre des commandes dans la console le moteur applique automatiquement les modifications au site en cours.
 Ce qui signifie qu'a chaque fois que l'on veut modifier le  site "test001", il faudra le sélectionner avec la commande "site_context".[BR]
 [BR]
-Le site qui vient d'être créé est quasiment vide. Seul un utilisateur et trois groupes (crées automatiquement) sont présents. 
+Le site qui vient d'être créé est quasiment vide. Seul un utilisateur et trois groups (crées automatiquement) sont présents. 
 Il nous faut a présent ajouter les éléments nécessaires a son fonctionnement.
 Ces éléments sont:[BR]
 -des décorations, des thèmes (skin), des présentations.[BR]
@@ -28,20 +28,20 @@ Ces éléments sont:[BR]
 [BR]
 Les autres éléments ne sont pas vitales au fonctionnement du site mais agrémentent le contenu.[BR]
 Ces éléments sont:[BR]
--des groupes et des utilisateurs supplémentaires.[BR]
+-des groups et des utilisateurs supplémentaires.[BR]
 -Les mots clé (bulle d'aide, liens).[BR]
 -Les tags (pour les recherches sur les documents).[BR]
 [BR]
 Notez bien que pour ce tutoriel on utilise l'existant. Il ne sera pas nécessaire de recréer des "décorations" et des "présentations".[BR]
 [BR]
 [BR]
-[B]Les utilisateurs et les groupes[/B][BR]
-Puisque le site repose sur un système hiérarchisé des droits utilisateur, il faut créer des groupes et des utilisateurs.
+[B]Les utilisateurs et les groups[/B][BR]
+Puisque le site repose sur un système hiérarchisé des droits utilisateur, il faut créer des groups et des utilisateurs.
 Le principe reprend, dans les grandes lignes ce qui se fait sur les architectures Unix et Linux.
-Un utilisateur appartient a un groupe et le groupe donne les droits a l'utilisateur.
-Un utilisateur peut faire parti de plusieurs groupes. 
+Un utilisateur appartient a un group et le group donne les droits a l'utilisateur.
+Un utilisateur peut faire parti de plusieurs groups. 
 Cet aspect est très important car il va nous permettre de mieux comprendre comment le moteur décide ou non d'afficher un menu (catégorie) pour un utilisateur donné. 
-Nous allons donc ajouter plusieurs groupes qui auront des droits différents.
+Nous allons donc ajouter plusieurs groups qui auront des droits différents.
 [BR]
 [CODE]
 site_context site test001 user site_owner password site_owner;[BR]
@@ -49,7 +49,7 @@ add group name "admin_du_serveur" title "RoOt" tag STAFF;[BR]
 add group name "pigistes" title "Pigistes" tag STAFF;[BR]
 [/CODE][BR]
 [BR]
-Nous allons maintenant ajouter 4 utilisateurs qui correspondent dans le cas présent au groupes.[BR]
+Nous allons maintenant ajouter 4 utilisateurs qui correspondent dans le cas présent au groups.[BR]
 [CODE]
 site_context site test001 user site_owner password site_owner;[BR]
 add user login "admintst01" perso_name "Admin" password "admintst01" status ACTIVE;[BR]
@@ -62,7 +62,7 @@ L'utilisateur "anonymous" est un peu particulier.
 C'est l'utilisateur par défaut lorsque le site n'a pas de profil utilisateur a utiliser.
 C'est aussi l'utilisateur de secours lorsque qu'une session se termine ou que la tentative d'authentification a échoué.[BR]
 [BR]
-Pour le moment rien ne lie les utilisateurs aux groupes. Nous allons créer cette relation.[BR]
+Pour le moment rien ne lie les utilisateurs aux groups. Nous allons créer cette relation.[BR]
 [CODE]
 site_context site test001 user site_owner password site_owner;[BR]
 user admintst01 join_group admin_du_serveur primary_group OUI;[BR]
@@ -72,9 +72,9 @@ user Pascal join_group pigistes primary_group OUI;[BR]
 user Pascal join_group Anonyme primary_group NON;[BR]
 user Barnabe join_group Anonyme primary_group NON;[BR]
 [/CODE][BR]
-La notion de groupe primaire permet au moteur de faire la différence dans plusieurs mécanismes. 
-La page de présentation de l'équipe, par exemple regroupe les utilisateurs dans leurs groupe premier respectif.
-Autrement on aurait une page remplie d'utilisateurs appartenant a plusieurs groupes. 
+La notion de group primaire permet au moteur de faire la différence dans plusieurs mécanismes. 
+La page de présentation de l'équipe, par exemple regroup les utilisateurs dans leurs group premier respectif.
+Autrement on aurait une page remplie d'utilisateurs appartenant a plusieurs groups. 
 C'est absolument vrai, mais peu pratique a lire.[BR]
 [BR]
 [BR]
@@ -125,21 +125,21 @@ add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de
 [/CODE][BR]
 La position des modules indique au moteur l'ordre dans lequel les modules doivent être traité. 
 Donc l'ordre dans lequel les scripts (de votre cru ou non) vont être exécutés. 
-On remarque ici qu'il y a une question de groupe pour voir et/ou utiliser les modules. 
-D'où l'intérêt de nos groupes précédemment crées. 
+On remarque ici qu'il y a une question de group pour voir et/ou utiliser les modules. 
+D'où l'intérêt de nos groups précédemment crées. 
 [BR]
 [BR]
 La suite est logique; il nous faut un menu pour avoir quelque chose de consistant a afficher.[BR]
 [CODE]
 site_context site test001 user site_owner password site_owner;[BR]
-add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" groupe Anonyme article 0;[BR]
+add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;[BR]
 [BR]
-add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Pr&eacute;sentation" desc "Pr&eacute;sentation" groupe Anonyme article "bienvenue" first_doc "YES";[BR]
+add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Pr&eacute;sentation" desc "Pr&eacute;sentation" group Anonyme article "bienvenue" first_doc "YES";[BR]
 [/CODE][BR]
 Il y a quelque particularités aux catégories qu'il faut expliquer. 
 Il y a plusieurs type de catégories: ARTICLE et ARTICLE_RACINE. 
 "ARTICLE_RACINE" Détermine ou se trouve le début du menu. Un peu comme un répertoire racine. 
-L'argument "Firt_doc" permet comme pour le groupe "Anonyme" d'avoir un article de secours en cas de problème. 
+L'argument "Firt_doc" permet comme pour le group "Anonyme" d'avoir un article de secours en cas de problème. 
 [BR]
 [BR]
 [BR]
@@ -189,9 +189,9 @@ add module name "document" title "Document" file "modules/module_affiche_documen
 add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;[BR]
 [BR]
 [BR]
-add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" groupe Anonyme article 0;[BR]
+add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;[BR]
 [BR]
-add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Pr&eacute;sentation" desc "Pr&eacute;sentation" groupe Anonyme article "bienvenue" first_doc "YES";[BR]
+add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Pr&eacute;sentation" desc "Pr&eacute;sentation" group Anonyme article "bienvenue" first_doc "YES";[BR]
 
 [/CODE][BR]
 

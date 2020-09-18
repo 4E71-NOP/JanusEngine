@@ -50,7 +50,7 @@ class DocumentData {
 			AND cat.deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
-			AND cat.group_id " . $UserObj->getUserEntry('clause_in_groupe')."
+			AND cat.group_id " . $UserObj->getUserEntry('clause_in_group')."
 			AND cat.cate_etat = '1'
 			AND cate_doc_premier = '1'
 			ORDER BY cat.cate_parent,cat.cate_position

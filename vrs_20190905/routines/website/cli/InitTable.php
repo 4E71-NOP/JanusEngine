@@ -79,7 +79,7 @@ self::$InitTable['category'] = function (&$a) {
 	);
 	
 	$a['params']['deadline_id']	= &$a['params']['deadline'];
-	$a['params']['groupe']		= &$a['params']['group_name'];
+	$a['params']['group']		= &$a['params']['group_name'];
 // 	$a['params']['group_id']	= &$a['params']['group_name'];
 };
 

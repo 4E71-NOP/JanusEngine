@@ -97,7 +97,7 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 
 $dbquery = $SDDMObj->query("
 SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('groupe')."
+FROM ".$SqlTableListObj->getSQLTableName('group')."
 ;");
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 	$i = $dbp['group_id'];

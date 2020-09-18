@@ -54,7 +54,7 @@ class RenderLayout {
 			WHERE sm.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND m.module_id = sm.module_id
 			AND sm.module_state = '1'
-			AND m.module_group_allowed_to_see ".$UserObj->getUserEntry('clause_in_groupe')."
+			AND m.module_group_allowed_to_see ".$UserObj->getUserEntry('clause_in_group')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;");

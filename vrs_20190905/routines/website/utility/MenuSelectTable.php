@@ -182,7 +182,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT grp.* 
-			FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg
+			FROM ".$SqlTableListObj->getSQLTableName('group')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = sg.group_id
 			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
@@ -324,7 +324,7 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+			FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_id = gu.user_id
 			AND gu.group_user_initial_group = '1'
 			AND g.group_tag IN (2,3)
