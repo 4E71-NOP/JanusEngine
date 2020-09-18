@@ -55,7 +55,7 @@ class RenderAdmDashboard {
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.module_id
 			AND b.module_state = '1'
-			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."
+			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_groupe')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
 			;");
@@ -67,7 +67,7 @@ class RenderAdmDashboard {
 // 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
 // 			AND a.module_id = b.module_id
 // 			AND b.module_state = '1'
-// 			AND a.module_groupe_pour_voir ". $UserObj->getUserEntry('clause_in_groupe')."
+// 			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_groupe')."
 // 			AND a.module_adm_control > '0'
 // 			ORDER BY module_position
 // 			;
@@ -80,16 +80,16 @@ class RenderAdmDashboard {
 				$module_tab_adm_[$i]['module_id']					= $dbp['module_id'];
 				$module_tab_adm_[$i]['module_deco']					= $dbp['module_deco'];
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
-				$module_tab_adm_[$i]['module_deco_txt_defaut']		= $dbp['module_deco_txt_defaut'];
-				$module_tab_adm_[$i]['module_nom']					= $dbp['module_nom'];
-				$module_tab_adm_[$i]['module_nom']					= str_replace ( $WebSiteObj->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_nom'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
+				$module_tab_adm_[$i]['module_deco_default_text']		= $dbp['module_deco_default_text'];
+				$module_tab_adm_[$i]['module_name']					= $dbp['module_name'];
+				$module_tab_adm_[$i]['module_name']					= str_replace ( $WebSiteObj->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_name'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
 				$module_tab_adm_[$i]['module_classname']			= $dbp['module_classname'];
-				$module_tab_adm_[$i]['module_titre']				= $dbp['module_titre'];
+				$module_tab_adm_[$i]['module_title']				= $dbp['module_title'];
 				$module_tab_adm_[$i]['module_directory']			= $dbp['module_directory'];
-				$module_tab_adm_[$i]['module_fichier']				= $dbp['module_fichier'];
+				$module_tab_adm_[$i]['module_file']				= $dbp['module_file'];
 				$module_tab_adm_[$i]['module_desc']					= $dbp['module_desc'];
-				$module_tab_adm_[$i]['module_groupe_pour_voir']		= $dbp['module_groupe_pour_voir'];
-				$module_tab_adm_[$i]['module_groupe_pour_utiliser']	= $dbp['module_groupe_pour_utiliser'];
+				$module_tab_adm_[$i]['module_group_allowed_to_see']		= $dbp['module_group_allowed_to_see'];
+				$module_tab_adm_[$i]['module_group_allowed_to_use']	= $dbp['module_group_allowed_to_use'];
 				$module_tab_adm_[$i]['module_adm_control']			= $dbp['module_adm_control'];
 				$i++;
 			}
@@ -103,7 +103,7 @@ class RenderAdmDashboard {
 			"blockG" => "B01G",
 			"blockT" => "B01T",
 			"deco_type" => $ThemeDataObj->getThemeBlockEntry("B01G", 'deco_type'),
-			"module_deco_txt_defaut" => $ThemeDataObj->getThemeBlockEntry("B01G", 'module_deco_txt_defaut'),
+			"module_deco_default_text" => $ThemeDataObj->getThemeBlockEntry("B01G", 'module_deco_default_text'),
 			"admin_control" => array(
 				"px" => 0,
 				"py" => 0,
@@ -115,8 +115,8 @@ class RenderAdmDashboard {
 		//find the width of the main admin div
 // 		$Content .= "<!-- RenderAdmDashboard:render()  -->";
 		foreach ( $module_tab_adm_ as $m ) {
-// 			$Content .= "<!-- ".$m['module_nom'] ." dx = ".$RenderLayoutObj->getLayoutModuleEntry($m['module_nom'], 'dx')." -->\r".
-			$dimAdmModules += $RenderLayoutObj->getLayoutModuleEntry($m['module_nom'], 'dx');
+// 			$Content .= "<!-- ".$m['module_name'] ." dx = ".$RenderLayoutObj->getLayoutModuleEntry($m['module_name'], 'dx')." -->\r".
+			$dimAdmModules += $RenderLayoutObj->getLayoutModuleEntry($m['module_name'], 'dx');
 		}
 		
 // 		$module_z_index['compteur'] = 1000;			//Contourne les Z-index venant de la présentation
@@ -152,23 +152,23 @@ class RenderAdmDashboard {
 		$RenderModuleObj = RenderModule::getInstance();
 		foreach ( $module_tab_adm_ as $m ) {
 			
-			$infos['module_nom'] = $mn = &$m['module_nom'];
+			$infos['module_name'] = $mn = &$m['module_name'];
 			$Content .= "<!-- _______________________________________ Debut du module ".$mn." _______________________________________ -->\r";
 			
-			if ( $UserObj->getUserGroupEntry('groupe', $m['module_groupe_pour_voir'] ) == 1 ) {
+			if ( $UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
 					$infos['block'] = $StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}
 				else { $infos['block'] = "B01"; }
 				$infos['blockG'] = $infos['block']."G"; 
 				$infos['blockT'] = $infos['block']."T"; 
-// 				$infos['module_deco_txt_defaut'] = $m['module_deco_txt_defaut'];
+// 				$infos['module_deco_default_text'] = $m['module_deco_default_text'];
 				
 				$infos['module'] = $m;
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
-					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_fichier'] ) ); //	str_replace used during migration so we can use both files.
+					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_file'] ) ); //	str_replace used during migration so we can use both files.
 				} else { $Content .= "!! !! !! !!"; }
 				if (class_exists($ModuleRendererName)) { $ModuleRenderer = new $ModuleRendererName(); }
 				else { $ModuleRenderer = new ModuleNotFound(); }

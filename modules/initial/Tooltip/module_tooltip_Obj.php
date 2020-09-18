@@ -34,8 +34,8 @@ class ModuleTooltip {
 		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
-		$cdx = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'cdx'); 
-		$cdy = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'cdy');
+		$cdx = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdx'); 
+		$cdy = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdy');
 		if ($cdx == 0) { $cdx = 256;}
 		if ($cdy == 0) { $cdy = 256;}
 
@@ -45,7 +45,7 @@ class ModuleTooltip {
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_conteneur_nom']."' , '".$infos['module']['module_nom']."_ex22' , '".$cdx."' , '".$cdy."' );");
+		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
 		
 		// Cleaning up
 	

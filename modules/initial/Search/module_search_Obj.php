@@ -40,10 +40,10 @@ class ModuleSearch {
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
 // 		$LMObj->logDebug($infos, "\$infos");
-// 		$LMObj->logDebug($UserObj->getUserGroupEntry('groupe', $infos['module']['module_groupe_pour_utiliser']), "module_groupe_pour_utiliser");
+// 		$LMObj->logDebug($UserObj->getUserGroupEntry('groupe', $infos['module']['module_group_allowed_to_use']), "module_group_allowed_to_use");
 
 		$Content = "";
-		if (  $UserObj->getUserGroupEntry('groupe', $infos['module']['module_groupe_pour_utiliser']) == 1 ) {
+		if (  $UserObj->getUserGroupEntry('groupe', $infos['module']['module_group_allowed_to_use']) == 1 ) {
 			$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>" . $i18n['txt1'] . "</span>
 			<form ACTION='index.php?' method='post'>\r".
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').

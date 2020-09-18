@@ -132,10 +132,10 @@ case 2:
 	}
 break;
 case 3:
-	$infos_article['arti_nom']			= "<input type='text' name='M_ARTICL[nom]' size='35' maxlength='255' value='Nouvel_article' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+	$infos_article['arti_name']			= "<input type='text' name='M_ARTICL[nom]' size='35' maxlength='255' value='Nouvel_article' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$infos_article['arti_desc']			= "<input type='text' name='M_ARTICL[desc]' size='35' maxlength='255' value='Description' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-	$infos_article['arti_titre']		= "<input type='text' name='M_ARTICL[titre]' size='35' maxlength='255' value='-' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-	$infos_article['arti_sous_titre']	= "<input type='text' name='M_ARTICL[sous_titre]' size='35' maxlength='255' value='-' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+	$infos_article['arti_title']		= "<input type='text' name='M_ARTICL[titre]' size='35' maxlength='255' value='-' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
+	$infos_article['arti_subtitle']	= "<input type='text' name='M_ARTICL[sous_titre]' size='35' maxlength='255' value='-' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 	$infos_article['arti_page']			= "<input type='text' name='M_ARTICL[page]' size='35' maxlength='255' value='1' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
 	$pv['o2l12'] = "<select name ='M_ARTICL[layout]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
@@ -271,10 +271,10 @@ $AD['4']['3']['1']['cont'] = $tl_[$l]['d4_03'];
 
 
 
-$AD['1']['1']['2']['cont'] = $infos_article['arti_nom'];
+$AD['1']['1']['2']['cont'] = $infos_article['arti_name'];
 $AD['1']['2']['2']['cont'] = $infos_article['arti_desc'];
-$AD['1']['3']['2']['cont'] = $infos_article['arti_titre'];
-$AD['1']['4']['2']['cont'] = $infos_article['arti_sous_titre'];
+$AD['1']['3']['2']['cont'] = $infos_article['arti_title'];
+$AD['1']['4']['2']['cont'] = $infos_article['arti_subtitle'];
 $AD['1']['5']['2']['cont'] = $infos_article['arti_page'];
 
 $AD['2']['1']['2']['cont'] = $pv['o2l12'];
@@ -283,9 +283,9 @@ $AD['2']['3']['2']['cont'] = $pv['o2l32'];
 
 $AD['3']['1']['2']['cont'] = $pv['o3l12'];
 
-$AD['4']['1']['2']['cont'] = $pv['user_list'][$infos_article['arti_creation_createur']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_creation_date']) ;
-$AD['4']['2']['2']['cont'] = $pv['user_list'][$infos_article['arti_validation_validateur']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_validation_date']) . "(" . $tl_[$l]['M_ARTICL_validation'][$infos_article['arti_validation_etat']] .")";
-$AD['4']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['arti_parution_date']);
+$AD['4']['1']['2']['cont'] = $pv['user_list'][$infos_article['arti_creator_id']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_creation_date']) ;
+$AD['4']['2']['2']['cont'] = $pv['user_list'][$infos_article['arti_validator_id']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_validation_date']) . "(" . $tl_[$l]['M_ARTICL_validation'][$infos_article['arti_validation_state']] .")";
+$AD['4']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['arti_release_date']);
 
 
 $ADC['onglet']['1']['nbr_ligne'] = 5;	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 2;
@@ -328,7 +328,7 @@ $tl_['eng']['text_confirm1'] = "I confirm the article validation.";		$tl_['fra']
 $pv['textebouton1'] = "<input type='checkbox' name='M_ARTICL[confirmation_modification]' value='1'>".$tl_[$l]['text_confirm1'];
 $pv['bloc_type_hidden'] = "
 <input type='hidden' name='arti_page'							value='1'>\r
-<input type='hidden' name='M_ARTICL[nom]'						value='".$infos_article['arti_nom']."'>\r
+<input type='hidden' name='M_ARTICL[nom]'						value='".$infos_article['arti_name']."'>\r
 <input type='hidden' name='M_ARTICL[ref]'						value='".$infos_article['arti_ref']."'>\r
 <input type='hidden' name='M_ARTICL[validation_etat]'			value='1'>\r
 <input type='hidden' name='M_ARTICL[validation_validateur]'		value='".$user['login_decode']."'>\r

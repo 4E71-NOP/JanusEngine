@@ -81,7 +81,7 @@ switch ($l) {
 $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $SDDMObj->query("
-SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_nom,a.module_titre,a.module_fichier,a.module_desc,a.module_groupe_pour_voir,a.module_groupe_pour_utiliser,a.module_adm_control,b.module_state 
+SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_name,a.module_title,a.module_file,a.module_desc,a.module_group_allowed_to_see,a.module_group_allowed_to_use,a.module_adm_control,b.module_state 
 FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b 
 WHERE a.module_id = b.module_id 
 AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -129,8 +129,8 @@ foreach ( $table_infos_modules AS $A1 ) {
 	$A2 = $A1['module_state'];
 	$A3 = $A1['module_deco'];
 	$A4 = $A1['module_adm_control'];
-	$gpv = $A1['module_groupe_pour_voir'];
-	$gpu = $A1['module_groupe_pour_utiliser'];
+	$gpv = $A1['module_group_allowed_to_see'];
+	$gpu = $A1['module_group_allowed_to_use'];
 	$gpv = $groupTab[$gpv];
 	$gpu = $groupTab[$gpu];
 	$T['AD']['1'][$i]['1']['cont'] = "
@@ -142,7 +142,7 @@ foreach ( $table_infos_modules AS $A1 ) {
 	."&formGenericData[mode]=edit"
 	."&moduleForm[selectionId]=".$A1['module_id']
 	."'>"
-	.$A1['module_nom']
+	.$A1['module_name']
 	."</a>\r";
 
 	$T['AD']['1'][$i]['2']['cont'] = $A1['module_desc'];

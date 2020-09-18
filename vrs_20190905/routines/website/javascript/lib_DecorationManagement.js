@@ -18,7 +18,7 @@ class DecorationManagement {
 	UpdateDecoModule ( Table , ModuleNom ) {
 		var TIM = Table[ModuleNom];
 		var T = 0; 
-		l.Log[this.dbgCalcDeco](TIM.module_nom + '/' + TIM.deco_type);
+		l.Log[this.dbgCalcDeco](TIM.module_name + '/' + TIM.deco_type);
 	
 		var Obj = elm.Gebi( ModuleNom );
 		if ( !TIM.DimConteneurX ) { 

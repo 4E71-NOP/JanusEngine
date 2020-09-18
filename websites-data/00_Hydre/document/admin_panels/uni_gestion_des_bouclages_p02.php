@@ -129,7 +129,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		$currentArticleObj->getDeadLineDataFromDB($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'selectionId'));
 		unset ( $A , $B );
 		$dbquery = $SDDMObj->query("
-		SELECT art.arti_nom, art.arti_titre
+		SELECT art.arti_name, art.arti_title
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 					
 		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -152,8 +152,8 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		
 		$articleList = "";
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$articleList	.= $linkId1."&articleForm[arti_ref_selection]=".$dbp['arti_nom']."&articleForm[arti_page_selection]=1' 
-		>".$dbp['arti_titre']."</a> - ";
+			$articleList	.= $linkId1."&articleForm[arti_ref_selection]=".$dbp['arti_name']."&articleForm[arti_page_selection]=1' 
+		>".$dbp['arti_title']."</a> - ";
 		}
 		$commandType = "update";
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";

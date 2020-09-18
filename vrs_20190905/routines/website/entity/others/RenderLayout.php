@@ -54,13 +54,13 @@ class RenderLayout {
 			WHERE sm.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND m.module_id = sm.module_id
 			AND sm.module_state = '1'
-			AND m.module_groupe_pour_voir ".$UserObj->getUserEntry('clause_in_groupe')."
+			AND m.module_group_allowed_to_see ".$UserObj->getUserEntry('clause_in_groupe')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;");
 		
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_nom']][$A] = $B; }
+			foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
 		}
 		
 		$switch_score = 10;
@@ -277,7 +277,7 @@ class RenderLayout {
 		unset ( $A );
 		foreach ( $this->ModuleList as $A ) {
 			if ( $A['module_adm_control'] == 0 ) {
-				$m = &$this->Layout[$A['module_nom']];
+				$m = &$this->Layout[$A['module_name']];
 				$pv['doc_max_x'] = ( $m['cpx'] + $m['cdx'] );	if ( $pv['doc_max_x'] > $_REQUEST['document_dx'] ) { $_REQUEST['document_dx'] = $pv['doc_max_x']; }
 				$pv['doc_max_y'] = ( $m['cpy'] + $m['cdy'] );	if ( $pv['doc_max_y'] > $_REQUEST['document_dy'] ) { $_REQUEST['document_dy'] = $pv['doc_max_y']; }
 			}

@@ -4,7 +4,7 @@
 /*
 arti_type					WMCODE 0	NOCODE 1	PHP 2	MIXED 3
 arti_show_info				SHOW_INFO_OFF 0	SHOW_INFO_ON 1
-arti_validation_etat		NON_VALIDE 0	VALIDE 1
+arti_validation_state		NON_VALIDE 0	VALIDE 1
 arti_correction_etat		NON_CORRIGE 0 CORRIGE 1
 */
 
@@ -12,23 +12,23 @@ CREATE TABLE !table! (
 arti_id 					INTEGER NOT NULL,
 arti_ref					VARCHAR(255),
 arti_deadline				INTEGER,
-arti_nom					VARCHAR(255),
+arti_name					VARCHAR(255),
 arti_desc					VARCHAR(255),
-arti_titre					VARCHAR(255),
-arti_sous_titre				VARCHAR(255),
+arti_title					VARCHAR(255),
+arti_subtitle				VARCHAR(255),
 arti_page					INTEGER,
 
 layout_generic_name			VARCHAR(255),
 config_id					INTEGER,
 
-arti_creation_createur		INTEGER,
+arti_creator_id		INTEGER,
 arti_creation_date			INTEGER,
 
-arti_validation_validateur	INTEGER,
+arti_validator_id	INTEGER,
 arti_validation_date		INTEGER,
-arti_validation_etat		INTEGER,
+arti_validation_state		INTEGER,
 
-arti_parution_date			INTEGER,
+arti_release_date			INTEGER,
 docu_id						INTEGER,
 ws_id						INTEGER,
 

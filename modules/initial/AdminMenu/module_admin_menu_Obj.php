@@ -114,7 +114,7 @@ class ModuleAdministration {
 		foreach ( $infos['menuData'] as $A ) {
 			if ($A['cate_parent'] == $infos['parameters']['cate_parent'] ) {
 				if ( $A['arti_ref'] == "0" ) {
-					$Content .= "<li><a class='".$block."_lien ".$block."_tb".$infos['module']['module_deco_txt_defaut']."' href=\"#\">".$A['cate_titre']."</a>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_tb".$infos['module']['module_deco_default_text']."' href=\"#\">".$A['cate_titre']."</a>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
 					$tmp = $infos['parameters']['cate_parent'];
 					$infos['parameters']['cate_parent'] = $A['cate_id'];
 					$infos['parameters']['level']++;
@@ -124,10 +124,10 @@ class ModuleAdministration {
 					$Content .= "</ul>\r</li>\r";
 				}
 				elseif ( $A['arti_ref'] == $infos['parameters']['arti_request'] ) {
-					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_txt_defaut']."' href=\"#\"><b>*</b>".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"#\"><b>*</b>".$A['cate_titre']."</a></li>\r";
 				}
 				else {
-					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_txt_defaut']."' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$A['cate_titre']."</a></li>\r";
+					$Content .= "<li><a class='".$block."_lien ".$block."_t".$infos['module']['module_deco_default_text']."' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$A['cate_titre']."</a></li>\r";
 				}
 			}
 		}

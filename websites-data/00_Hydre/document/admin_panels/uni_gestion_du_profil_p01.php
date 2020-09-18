@@ -424,7 +424,7 @@ else {
 	$Content .= "
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
 	<tr>\r
-	<td style='width: ".($RenderLayoutObj->getLayoutModuleEntry($infos['module_nom'], 'dim_y_ex22' ) - 200)."px;'>\r
+	<td style='width: ".($RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - 200)."px;'>\r
 	<input type='checkbox' name='UserProfileForm[confirmation_modification]' checked> ".$I18nObj->getI18nEntry('text_confirm1')."\r
 	</td>\r
 	<td style='width: 200px;'>\r
@@ -535,7 +535,7 @@ else {
 	$ModulePaddingY = 64;
 // 	$LMObj->logDebug($PmThemeDataObj->getThemeData(), "PmThemeDataObj");
 	
-	$infos['module_nomBackup']	= $infos['module_nom'];
+	$infos['module_nameBackup']	= $infos['module_name'];
 	$infos['blockBackup']		= $infos['block']; 
 	$infos['blockGBackup']		= $infos['blockG']; 
 	$infos['blockTBackup']		= $infos['blockT']; 
@@ -558,7 +558,7 @@ else {
 				'dy'	=>	($T['tab_infos']['Height'] - $ModulePaddingY)
 		);
 		$RenderLayoutObj->setLayoutEntry($mn, $BlockDataTmp);
-		$infos['module']['module_nom'] = $mn;
+		$infos['module']['module_name'] = $mn;
 		
 		$T['AD'][$Tab]['1']['1']['cont'] .= "
 		<div style='
@@ -830,7 +830,7 @@ else {
 		}
 		$T['AD'][$Tab]['1']['1']['cont'] .= "</tr>";
 	}
-	$infos['module_nom']	= $infos['module_nomBackup']; 
+	$infos['module_name']	= $infos['module_nameBackup']; 
 	$infos['block']			= $infos['blockBackup'];
 	$infos['blockG']		= $infos['blockGBackup'];
 	$infos['blockT']		= $infos['blockTBackup'];

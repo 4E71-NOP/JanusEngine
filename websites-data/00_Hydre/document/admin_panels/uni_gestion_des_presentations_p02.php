@@ -82,13 +82,13 @@ function layout_ligne () {
 
 	<td ".$pv['decotable_style01'].">
 	Module 
-	<select name='M_PRESNT[L".$ptr['lyoc_id']."][module_nom]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+	<select name='M_PRESNT[L".$ptr['lyoc_id']."][module_name]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 	";
 	unset ( $M );
 	foreach ( $MP_module as $M ) {
 		$ms = "";
-		if ( $M['module_nom'] == $ptr['lyoc_module_name'] ) { $ms = " selected "; }
-		$rendu .= "<option value='".$M['module_nom']."' ".$ms.">".$M['module_nom']."</option>\r";
+		if ( $M['module_name'] == $ptr['lyoc_module_name'] ) { $ms = " selected "; }
+		$rendu .= "<option value='".$M['module_name']."' ".$ms.">".$M['module_name']."</option>\r";
 	}
 	$rendu .= "
 	</select>\r
@@ -190,8 +190,8 @@ function layout_ligne () {
 			unset ( $M );
 			foreach ( $MP_module as $M ) {
 				$ms = "";
-				if ( $M['module_nom'] == $ptr[$AncreM] ) { $ms = " selected "; }
-				$rendu .= "<option value='".$M['module_id']."' ".$ms.">".$M['module_nom']."</option>\r";
+				if ( $M['module_name'] == $ptr[$AncreM] ) { $ms = " selected "; }
+				$rendu .= "<option value='".$M['module_id']."' ".$ms.">".$M['module_name']."</option>\r";
 			}
 			$rendu .= "
 			</select>\r
@@ -294,7 +294,7 @@ SELECT *
 FROM ".$SQL_tab_abrege['module']." m, ".$SQL_tab_abrege['module_website']." sm 
 WHERE sm.ws_id = '".$website['ws_id']."' 
 AND m.module_id = sm.module_id
-AND m.module_groupe_pour_voir ".$user['clause_in_groupe']." 
+AND m.module_group_allowed_to_see ".$user['clause_in_groupe']." 
 ORDER BY module_position
 ;");
 $pv['i'] = 1;

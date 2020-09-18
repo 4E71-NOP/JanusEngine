@@ -66,14 +66,14 @@ class RenderModule {
 // 		$LMObj->InternalLog($StringFormatObj->arrayToString($ModuleTable));
 		foreach ( $ModuleTable as $m ) {
 			$_REQUEST['module_nbr'] = 1;
-			$Content .= "<!-- __________ Module '".$m['module_nom']."' start __________ -->\r";
+			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 // 			$LMObj->InternalLog($StringFormatObj->arrayToString($UserObj->getUser()));
-// 			$LMObj->InternalLog("module_groupe_pour_voir=".$UserObj->getUserGroupEntry('groupe', $m['module_groupe_pour_voir']));
+// 			$LMObj->InternalLog("module_group_allowed_to_see=".$UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see']));
 			
-			if ( $UserObj->getUserGroupEntry('groupe', $m['module_groupe_pour_voir']) == 1 ) {
+			if ( $UserObj->getUserGroupEntry('groupe', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
 				$Block = $StringFormatObj->getDecorationBlockName( "B", $nbr , "");
-				$infos['module_nom'] = $m['module_nom'];
+				$infos['module_name'] = $m['module_name'];
 				$infos['block'] = $Block;
 				$infos['blockG'] = $Block . "G";
 				$infos['blockT'] = $Block . "T";
@@ -87,7 +87,7 @@ class RenderModule {
 				$ModuleRendererName = $m['module_classname'];
 				
 				if (!class_exists($ModuleRendererName)) {
-					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_fichier'] ) ); //	str_replace used during migration so we can use both files.
+					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_file'] ) ); //	str_replace used during migration so we can use both files.
 				} else { $Content .= "!! !! !! !!"; }
 				
 				if (class_exists($ModuleRendererName)) { $ModuleRenderer = new $ModuleRendererName(); }
@@ -99,7 +99,7 @@ class RenderModule {
 // 						$LMObj->InternalLog($StringFormatObj->arrayToString($ModuleTable));
 						$Content .= $this->selectDecoration($infos);
 						
-						if ( isset($m['module_conteneur_nom']) && strlen($m['module_conteneur_nom']) > 0 ) { $Content .= "</div>\r"; }
+						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
 						$Content .= $ModuleRenderer->render($infos);
 						$Content .= "</div>\r";
 						break;
@@ -107,17 +107,17 @@ class RenderModule {
 						$Content .= $ModuleRenderer->render($infos);
 						$Content .= $this->selectDecoration($infos);
 						
-						if ( isset($m['module_conteneur_nom']) && strlen($m['module_conteneur_nom']) > 0 ) { $Content .= "</div>\r"; }
+						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
 						$Content .= "</div>\r";
 						break;
 					case 2:
 						$Content .= $this->selectDecoration($infos);
 						
-						if ( isset($m['module_conteneur_nom']) && strlen($m['module_conteneur_nom']) > 0 ) { $Content .= "</div>\r"; }
+						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
 						$Content .= "</div>\r";
 						
 						$Content .= $ModuleRenderer->render($infos);
-//						if (file_exists($m['module_fichier'])) { include ($m['module_fichier']); } else { $Content .= "!! !! !! !!"; }
+//						if (file_exists($m['module_file'])) { include ($m['module_file']); } else { $Content .= "!! !! !! !!"; }
 						break;
 				}
 			}
@@ -127,7 +127,7 @@ class RenderModule {
 // 				unset ( $affiche_module_ );
 // 			}
 			
-			$Content .= "<!-- __________ Module '".$m['module_nom']."' end __________ -->\r\r\r\r\r";
+			$Content .= "<!-- __________ Module '".$m['module_name']."' end __________ -->\r\r\r\r\r";
 			$pv['i']++;
 			$infos['module_z_index'] += 2;
 
@@ -164,7 +164,7 @@ class RenderModule {
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		
 		$err = FALSE;
-		$_REQUEST['div_id']['un_div'] = $_REQUEST['div_id']['ex22'] = "id='".$infos['module']['module_nom']."' ";
+		$_REQUEST['div_id']['un_div'] = $_REQUEST['div_id']['ex22'] = "id='".$infos['module']['module_name']."' ";
 		switch ( $infos['deco_type'] ) {
 			case 30:	
 			case "1_div":
@@ -187,7 +187,7 @@ class RenderModule {
 				$RenderDeco = RenderDeco60Elysion::getInstance();
 				break;
 			default:
-				$mn = $infos['module_nom'];
+				$mn = $infos['module_name'];
 				$Content .= "<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['Block']."_div_std' style='position: absolute; left:".
 					$RenderLayoutObj->getLayoutModuleEntry($mn, 'px')."px; top:".
 					$RenderLayoutObj->getLayoutModuleEntry($mn, 'py')."px; width:".
@@ -221,7 +221,7 @@ class ModuleNotFound {
 				"m"=>"RenderModule001",
 				"t"=>"No class found for this module",
 		));
-		error_log ("No class found for module " . $infos['module_nom'] . "; ClassName : ");
+		error_log ("No class found for module " . $infos['module_name'] . "; ClassName : ");
 	}
 }
 

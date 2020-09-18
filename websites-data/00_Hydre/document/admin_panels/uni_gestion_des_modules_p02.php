@@ -177,12 +177,12 @@ switch ( $RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 				"module_id"	=> "",
 				"module_deco"					=>	1,
 				"module_deco_nbr"				=>	1,
-				"module_nom"					=>	$I18nObj->getI18nEntry('t1l2c2'),
-				"module_titre"					=>	$I18nObj->getI18nEntry('t1l2c2'),
-				"module_fichier"				=>	"",
+				"module_name"					=>	$I18nObj->getI18nEntry('t1l2c2'),
+				"module_title"					=>	$I18nObj->getI18nEntry('t1l2c2'),
+				"module_file"				=>	"",
 				"module_desc"					=>	$I18nObj->getI18nEntry('t1l2c2'),
-				"module_groupe_pour_voir"		=>	2,
-				"module_groupe_pour_utiliser"	=>	2,
+				"module_group_allowed_to_see"		=>	2,
+				"module_group_allowed_to_use"	=>	2,
 				"module_state"					=>	0,
 				"module_position"				=>	1,
 				"module_adm_control"			=>	0,
@@ -207,7 +207,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminModuleManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value='module'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentModuleObj->getModuleEntry('module_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentModuleObj->getModuleEntry('module_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='moduleForm[selectionId]'	value='".$RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -228,14 +228,14 @@ $T['AD']['1']['4']['1']['cont'] = $I18nObj->getI18nEntry('t1l4c1');
 $T['AD']['1']['1']['2']['cont'] = $currentModuleObj->getModuleEntry('module_id');
 switch ( $RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 	case "edit":
-		$T['AD']['1']['2']['2']['cont'] = $currentModuleObj->getModuleEntry('module_nom');
+		$T['AD']['1']['2']['2']['cont'] = $currentModuleObj->getModuleEntry('module_name');
 		break;
 	case "create":
 		$T['AD']['1']['1']['2']['cont'] = "*";
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formTarget[name]' size='35' maxlength='255' value=\"".$currentModuleObj->getModuleEntry('module_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formTarget[name]' size='35' maxlength='255' value=\"".$currentModuleObj->getModuleEntry('module_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		break;
 }
-$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]' size='35' maxlength='255' value=\"".$currentModuleObj->getModuleEntry('module_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]' size='35' maxlength='255' value=\"".$currentModuleObj->getModuleEntry('module_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]' size='35' maxlength='255' value=\"".$currentModuleObj->getModuleEntry('module_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
@@ -254,9 +254,9 @@ $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
 		"height"			=> 50,	//in %
 		"formName"			=> "moduleForm",
-		"formTargetId"		=> "formParams[module_fichier]",
+		"formTargetId"		=> "formParams[module_file]",
 		"formInputSize"		=> 40 ,
-		"formInputVal"		=> $currentModuleObj->getModuleEntry('module_fichier'),
+		"formInputVal"		=> $currentModuleObj->getModuleEntry('module_file'),
 		"path"				=> "/modules/",
 		"restrictTo"		=> "/modules/",
 		"strRemove"			=> "",
@@ -313,7 +313,7 @@ $T['AD']['2']['3']['2']['cont'] .= "</select>\r";
 
 
 
-$index_selection = array( $currentModuleObj->getModuleEntry('module_groupe_pour_voir') => " selected" );
+$index_selection = array( $currentModuleObj->getModuleEntry('module_group_allowed_to_see') => " selected" );
 $T['AD']['2']['4']['2']['cont'] = "<select name='formParams[group_who_can_see]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $groupTab as $A1 ) {
 	$T['AD']['2']['4']['2']['cont'] .= "<option value='".$A1['nom']."' ".$index_selection[$A1['id']]."> ".$A1['titre']." </option>\r";
@@ -324,7 +324,7 @@ $T['AD']['2']['4']['2']['cont'] .= "</select>\r";
 
 $T['AD']['2']['5']['2']['cont'] = "<select name='formParams[group_who_can_use]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 unset ($index_selection);
-$index_selection = array( $currentModuleObj->getModuleEntry('module_groupe_pour_utiliser') => " selected" );
+$index_selection = array( $currentModuleObj->getModuleEntry('module_group_allowed_to_use') => " selected" );
 foreach ( $groupTab as $A1 ) {
 	$T['AD']['2']['5']['2']['cont'] .= "<option value='".$A1['nom']."' ".$index_selection[$A1['id']]."> ".$A1['titre']." </option>\r";
 }

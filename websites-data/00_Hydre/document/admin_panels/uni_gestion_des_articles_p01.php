@@ -204,14 +204,14 @@ $articleFormData = $RequestDataObj->getRequestDataEntry('articleForm');
 $sqlClause = "";
 
 if ( $articleFormData['action'] == "AFFICHAGE" ) {
-	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_nom LIKE '%".$articleFormData['SQLnom']."%'"; }
+	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_name LIKE '%".$articleFormData['SQLnom']."%'"; }
 	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.cate_lang = '".$articleFormData['SQLlang']."'"; }
 	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
 }
 
 
 $dbquery = $SDDMObj->query("
-SELECT art.arti_ref, art.arti_id, art.arti_nom, art.arti_titre, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
+SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = cat.arti_ref
 AND art.arti_deadline = bcl.deadline_id
@@ -233,8 +233,8 @@ if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 		$p = &$articleList[$dbp['arti_ref']][$dbp['arti_id']];
 		$p['arti_ref']			= $dbp['arti_ref'];
 		$p['arti_id']			= $dbp['arti_id'];
-		$p['arti_nom']			= $dbp['arti_nom'];
-		$p['arti_titre']		= $dbp['arti_titre'];
+		$p['arti_name']			= $dbp['arti_name'];
+		$p['arti_title']		= $dbp['arti_title'];
 		$p['arti_page']			= $dbp['arti_page'];
 		$p['arti_lang']			= $dbp['cate_lang'];
 		$p['deadline_state']		= $dbp['deadline_state'];

@@ -136,8 +136,8 @@ class ModuleMenu {
 				"arti_request"	=> $CurrentSetObj->getDataSubEntry('document', 'arti_ref'),
 				"cate_parent" 	=> $racine_menu,
 				"module_z"		=> $infos['module_z_index'] + 1,
-				"origine_x"		=> $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'pos_x_ex22'),
-				"origine_y"		=> $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'pos_y_ex22'),
+				"origine_x"		=> $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'pos_x_ex22'),
+				"origine_y"		=> $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'pos_y_ex22'),
 				"init_x"		=> 0,
 				"init_y"		=> 0
 			);

@@ -240,7 +240,7 @@ class ModuleMenuType02 {
 		
 		unset ( $A );
 		reset ( $menuDiv );
-		$infos['backup']['module_nom']		= $infos['module']['module_nom'];
+		$infos['backup']['module_name']		= $infos['module']['module_name'];
 		$infos['backup']['module_z_index']	= $infos['module']['module_z_index'];
 		$level = 0;
 		
@@ -266,7 +266,7 @@ class ModuleMenuType02 {
 			
 			$pv['NiveauZero'] = "";
 			if ( $A['niv'] != 0 ) {
-				$infos['module']['module_nom'] = $A['id'];
+				$infos['module']['module_name'] = $A['id'];
 			
 				$infos['affiche_module_mode'] = 'menu';
 				$infos['module_z_index'] = $A['niv'] + 100;
@@ -342,7 +342,7 @@ class ModuleMenuType02 {
 		}
 		
 		
-		$infos['module']['module_nom'] = $infos['backup']['module_nom'];
+		$infos['module']['module_name'] = $infos['backup']['module_name'];
 		$infos['module']['module_z_index'] = $infos['backup']['module_z_index'];
 		
 		$name = "TabMenuArbre";

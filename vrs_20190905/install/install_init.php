@@ -224,15 +224,15 @@ $infos = array(
 		"module_id" => 11,
 		"module_deco" => 1,
 		"module_deco_nbr" => 2,
-		"module_deco_txt_defaut" => 3,
-		"module_nom" => "Admin_install_B1",
+		"module_deco_default_text" => 3,
+		"module_name" => "Admin_install_B1",
 		"module_classname" => "",
-		"module_titre" => "",
-		"module_fichier" => "",
+		"module_title" => "",
+		"module_file" => "",
 		"module_desc" => "",
-		"module_conteneur_nom" => "",
-		"module_groupe_pour_voir" => 31,
-		"module_groupe_pour_utiliser" => 31,
+		"module_container_name" => "",
+		"module_group_allowed_to_see" => 31,
+		"module_group_allowed_to_use" => 31,
 		"module_adm_control" => 0,
 		"module_execution" => 0,
 		"module_website_id" => 11,
@@ -244,10 +244,10 @@ $infos = array(
 
 $block = $ThemeDataObj->getThemeName().$infos['block'];
 
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "px", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "py", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dy", 112 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 0 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 112 );
 
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 $DocContent .= $RenderDeco->render($infos);
@@ -255,16 +255,16 @@ $DocContent .= "<p class='".$block."_tb7' style='text-align: center;'>".$i18n['b
 
 // --------------------------------------------------------------------------------------------
 
-$infos['module']['module_nom'] = "Admin_install_B2";
+$infos['module']['module_name'] = "Admin_install_B2";
 $infos['block'] = "B01";
 $infos['blockG'] = "B01G";
 $infos['blockT'] = "B01T";
 $infos['deco_type'] = 40;
 
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "px", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "py", 120 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dy", 816+64 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 120 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 816+64 );
 
 $RenderDeco = RenderDeco40Elegance::getInstance();
 $DocContent .= $RenderDeco->render($infos);
@@ -301,8 +301,8 @@ $DocContent .= "</div>\r</div>\r";
 // --------------------------------------------------------------------------------------------
 // Aide dynamique
 // --------------------------------------------------------------------------------------------
-$infos['module']['module_conteneur_nom'] = "tooltipContainer";
-$infos['module']['module_nom'] = "ToolTip";
+$infos['module']['module_container_name'] = "tooltipContainer";
+$infos['module']['module_name'] = "ToolTip";
 $infos['module']['module_deco_nbr'] = 20;
 $infos['module_z_index'] = 99;
 $infos['block'] = "B20";
@@ -310,22 +310,22 @@ $infos['blockG'] = "B20G";
 $infos['blockT'] = "B20T";
 $infos['deco_type'] = 40;
 
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "px", 8 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "py", 4 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dx", 320 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dy", 192 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 8 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 4 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", 320 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 192 );
 
 $RenderDeco = RenderDeco40Elegance::getInstance();
 $DocContent .= $RenderDeco->render($infos)."</div>\r</div>\r";
 
 // $GeneratedJavaScriptObj->insertJavaScript('Data' , "var DivInitial = LocaliseElement ( 'initial_div' );");
-// $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tinitAdyn('".$infos['module']['module_conteneur_nom']."' , '".$infos['module']['module_nom']."_ex22' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'dx')."' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'dy')."' );");
+// $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tinitAdyn('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dx')."' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dy')."' );");
 
 $GeneratedJavaScriptObj->insertJavaScript('Data' , "var TabInfoModule = new Array();\r");
 
 $GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
 $GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
-$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_conteneur_nom']."' , '".$infos['module']['module_nom']."_ex22' , '".$cdx."' , '".$cdy."' );");
+$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
 
 
 // --------------------------------------------------------------------------------------------

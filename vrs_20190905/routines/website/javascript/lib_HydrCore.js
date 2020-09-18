@@ -536,7 +536,7 @@ class ModuleManagement {
 	 * Add a generic table into the TabInfoModule array 
 	 */
 	AddModule ( ModuleName, DecoType ) {
-		TabInfoModule[ModuleName] = { 'module_nom':ModuleName, 'deco_type':DecoType, 'DimConteneurX':'', 'DimConteneurY':'' };
+		TabInfoModule[ModuleName] = { 'module_name':ModuleName, 'deco_type':DecoType, 'DimConteneurX':'', 'DimConteneurY':'' };
 		TabInfoModule[ModuleName]['ex11'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
 		TabInfoModule[ModuleName]['ex12'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
 		TabInfoModule[ModuleName]['ex13'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};

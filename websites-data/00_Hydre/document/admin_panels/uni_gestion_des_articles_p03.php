@@ -216,19 +216,19 @@ $PF_['4']['1']['1']['cont'] = $tl_[$l]['d4_01'];
 $PF_['4']['2']['1']['cont'] = $tl_[$l]['d4_02'];
 
 
-$PF_['1']['1']['2']['cont'] = $infos_article['arti_nom'];
+$PF_['1']['1']['2']['cont'] = $infos_article['arti_name'];
 $PF_['1']['2']['2']['cont'] = "<input type='text' name='M_ARTICL[desc]' value=\"".$infos_article['arti_desc']."\" size='35' maxlength='255' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-$PF_['1']['3']['2']['cont'] = "<input type='text' name='M_ARTICL[titre]' value=\"".$infos_article['arti_titre']."\" size='35' maxlength='255' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'></td>\r";
-$PF_['1']['4']['2']['cont'] = "<input type='text' name='M_ARTICL[sous_titre]' value=\"".$infos_article['arti_sous_titre']."\" size='35' maxlength='255' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'></td>\r";
+$PF_['1']['3']['2']['cont'] = "<input type='text' name='M_ARTICL[titre]' value=\"".$infos_article['arti_title']."\" size='35' maxlength='255' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'></td>\r";
+$PF_['1']['4']['2']['cont'] = "<input type='text' name='M_ARTICL[sous_titre]' value=\"".$infos_article['arti_subtitle']."\" size='35' maxlength='255' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'></td>\r";
 $PF_['1']['5']['2']['cont'] = $infos_article['arti_page'];
 
 $PF_['2']['1']['2']['cont'] = $pv['PF']['o2l1'];
 $PF_['2']['2']['2']['cont'] = $pv['PF']['o2l2'];
 $PF_['2']['3']['2']['cont'] = $pv['PF']['o2l3'];
 
-$PF_['3']['1']['2']['cont'] = $user_list[$infos_article['arti_creation_createur']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_creation_date']) ;
-$PF_['3']['2']['2']['cont'] = $user_list[$infos_article['arti_validation_validateur']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_validation_date']) . "(" . $MA_validation[$l][$infos_article['arti_validation_etat']] .")";
-$PF_['3']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['arti_parution_date']);
+$PF_['3']['1']['2']['cont'] = $user_list[$infos_article['arti_creator_id']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_creation_date']) ;
+$PF_['3']['2']['2']['cont'] = $user_list[$infos_article['arti_validator_id']]['user_login'] . " - " . strftime ("%a %d %b %y - %H:%M", $infos_article['arti_validation_date']) . "(" . $MA_validation[$l][$infos_article['arti_validation_state']] .")";
+$PF_['3']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['arti_release_date']);
 
 $PF_['4']['1']['2']['cont'] = $pv['PF']['o4l1'];
 $PF_['4']['2']['2']['cont'] = $pv['PF']['o4l2'];
@@ -289,7 +289,7 @@ $bloc_html['post_hidden_arti_page'].
 $bloc_html['post_hidden_user_login'].
 $bloc_html['post_hidden_user_pass']."
 
-<input type='hidden' name='M_ARTICL[nom]'						value='".$infos_article['arti_nom']."'>\r
+<input type='hidden' name='M_ARTICL[nom]'						value='".$infos_article['arti_name']."'>\r
 <input type='hidden' name='M_ARTICL[ref]'						value='".$infos_article['arti_ref']."'>\r
 <input type='hidden' name='UPDATE_action'				value='UPDATE_ARTICLE'>\r
 

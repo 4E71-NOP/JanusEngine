@@ -89,7 +89,7 @@ $T = array();
 $dbquery = $SDDMObj->query("
 SELECT art.* , bcl.deadline_name 
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
-WHERE art.arti_validation_etat = '0' 
+WHERE art.arti_validation_state = '0' 
 AND bcl.deadline_id = art.arti_deadline 
 AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
@@ -116,9 +116,9 @@ else {
 		&amp;M_ARTICL[arti_page_selection]=".$dbp['arti_page'].
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
 		&amp;arti_page=2'
-		>".$dbp['arti_nom']."</a>";
+		>".$dbp['arti_name']."</a>";
 		$T['AD']['1'][$i]['2']['cont']	= $dbp['arti_ref'];
-		$T['AD']['1'][$i]['3']['cont']	= $dbp['arti_titre'];
+		$T['AD']['1'][$i]['3']['cont']	= $dbp['arti_title'];
 		$T['AD']['1'][$i]['4']['cont']	= $dbp['deadline_name'];
 	}
 }
@@ -129,7 +129,7 @@ $T['tab_infos']['NbrOfTabs']		= 1;
 $T['tab_infos']['TabBehavior']		= 0;
 $T['tab_infos']['RenderMode']		= 1;
 $T['tab_infos']['HighLightType']	= 1;
-$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_nom'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
 $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "art";

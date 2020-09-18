@@ -76,7 +76,7 @@ class ModuleGlobalReport {
 		);
 		
 		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('ws_info_debug')];
-		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_nom'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
+		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
 		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 		$T['tab_infos']['GroupName']		= "gr";
 		$Content .= $RenderTablesObj->render($infos, $T);

@@ -60,7 +60,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 	switch ($RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType')) {
 		case "T":
 			$dbquery = $SDDMObj->query("
-			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page
+			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page
 			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat
 			WHERE tag.tag_name LIKE '%".$RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -74,12 +74,12 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			AND cat.arti_ref = art.arti_ref
 			AND cat.cate_etat = '1'
 			AND cat.cate_lang = '".$CurrentSetObj->getDataEntry('language_id')."'
-			ORDER BY art.arti_titre
+			ORDER BY art.arti_title
 			;");
 			break;
 		case "A":
 			$dbquery = $SDDMObj->query("
-			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_titre, art.arti_sous_titre, art.arti_page, doc.docu_cont
+			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page, doc.docu_cont
 			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('categorie')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
 			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND doc.docu_id = art.docu_id
@@ -115,10 +115,10 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			$pv['titre_article'] = 0;
 			foreach ( $A as $B ) {
 				if ( $pv['titre_article'] == 0 ) {
-					$T['AD']['1'][$ligne]['1']['cont']	= "<a class='".$Block."_lien ".$Block."_tb4' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_titre']."</a>";
+					$T['AD']['1'][$ligne]['1']['cont']	= "<a class='".$Block."_lien ".$Block."_tb4' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_title']."</a>";
 					$pv['titre_article'] = 1;
 				}
-				$T['AD']['1'][$ligne]['2']['cont'] = "<a class='".$Block."_lien ".$Block."_tb3' href=\"index.php?arti_ref=".$B['arti_ref']."&amp;arti_page=".$B['arti_page'].$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_sous_titre']."</a><br>\r";
+				$T['AD']['1'][$ligne]['2']['cont'] = "<a class='".$Block."_lien ".$Block."_tb3' href=\"index.php?arti_ref=".$B['arti_ref']."&amp;arti_page=".$B['arti_page'].$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_subtitle']."</a><br>\r";
 				switch ( $RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType') ) {
 					case "A":
 						$pv['taille_extrait'] = 92;
@@ -164,7 +164,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 		$T['tab_infos']['TabBehavior']		= 0;
 		$T['tab_infos']['RenderMode']		= 1;
 		$T['tab_infos']['HighLightType']	= 1;
-		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_nom'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
 		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 		$T['tab_infos']['GroupName']		= "list";
 		$T['tab_infos']['CellName']			= "grp";

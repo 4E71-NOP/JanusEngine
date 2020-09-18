@@ -41,7 +41,7 @@ class MenuSelectTable {
 		$dbquery = $dbquery = $SDDMObj->query("
 			SELECT DISTINCT arti_ref 
 			FROM ".$SqlTableListObj->getSQLTableName('article')." 
-			WHERE arti_validation_etat = '1'
+			WHERE arti_validation_state = '1'
 			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY arti_ref
 		;");

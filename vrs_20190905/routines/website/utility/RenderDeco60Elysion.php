@@ -32,7 +32,7 @@ class RenderDeco60Elysion {
 		$LMObj = LogManagement::getInstance();
 		$LMObj->InternalLog("Start");
 		
-		$mn = $infos['module']['module_nom'];
+		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
 		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
@@ -55,7 +55,7 @@ class RenderDeco60Elysion {
 				// 				$StringFormatObj = StringFormat::getInstance();
 				// 				$LMObj->InternalLog("display module mode is 'menu' : ".$mn."<br>m=".$StringFormatObj->arrayToString($m));
 				$LMObj->InternalLog("display module mode is 'menu' : ".$mn);
-				$mnd = $infos['backup']['module_nom'];
+				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
 				$L['py'] = 0;
@@ -155,9 +155,9 @@ class RenderDeco60Elysion {
 		$Content = "
 	<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 	";
-		if ( isset($infos['module']['module_conteneur_nom'] ) && strlen($infos['module']['module_conteneur_nom']) > 0 ) {
-			$LMObj->InternalLog("Adding a container DIV: ". $infos['module']['module_conteneur_nom']);
-			$Content .= "<div id='".$infos['module']['module_conteneur_nom']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
+		if ( isset($infos['module']['module_container_name'] ) && strlen($infos['module']['module_container_name']) > 0 ) {
+			$LMObj->InternalLog("Adding a container DIV: ". $infos['module']['module_container_name']);
+			$Content .= "<div id='".$infos['module']['module_container_name']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
 		}
 		$Content .= "
 	<div ".$DivIdList['ex11']." class='".$TN . $infos['block']."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
@@ -195,7 +195,7 @@ class RenderDeco60Elysion {
 		if ( $B['in54_e'] == 1 ) { $Content .= "<div ".$DivIdList['in54']." class='".$TN . $infos['block']."_in54' style='left: ".$L['pos_x_in54']."px;	top: ".$L['pos_y_in54']."px; width:".$L['in54_x']."px;		height:".$B['in54_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		if ( $B['in55_e'] == 1 ) { $Content .= "<div ".$DivIdList['in55']." class='".$TN . $infos['block']."_in55' style='left: ".$L['pos_x_in55']."px;	top: ".$L['pos_y_in55']."px; width:".$L['in55_x']."px;		height:".$B['in55_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		$Content .= "
-	<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22 ".$TN.$infos['block']."_t".$m[$mn]['module_deco_txt_defaut']." ".$TN.$infos['block']."_t_couleur_de_base' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
+	<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22 ".$TN.$infos['block']."_t".$m[$mn]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 	<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 	";
 		

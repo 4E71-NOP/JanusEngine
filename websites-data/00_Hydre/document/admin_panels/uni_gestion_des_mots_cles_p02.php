@@ -121,7 +121,7 @@ $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 
 $dbquery = $SDDMObj->query("
-SELECT art.arti_id, art.arti_nom
+SELECT art.arti_id, art.arti_name
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('categorie')." cat
 WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -132,7 +132,7 @@ AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 ;");
 $tabArticle_ = array();
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-	$tabArticle_[$dbp['arti_id']]['t']	=	$tabArticle_[$dbp['arti_id']]['db']	= $dbp['arti_nom'];
+	$tabArticle_[$dbp['arti_id']]['t']	=	$tabArticle_[$dbp['arti_id']]['db']	= $dbp['arti_name'];
 }
 
 // --------------------------------------------------------------------------------------------

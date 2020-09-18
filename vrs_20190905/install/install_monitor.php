@@ -225,15 +225,15 @@ $infos = array(
 			"module_id" => 11,
 			"module_deco" => 1,
 			"module_deco_nbr" => 2,
-			"module_deco_txt_defaut" => 3,
-			"module_nom" => "Admin_install_B2",
+			"module_deco_default_text" => 3,
+			"module_name" => "Admin_install_B2",
 			"module_classname" => "",
-			"module_titre" => "",
-			"module_fichier" => "",
+			"module_title" => "",
+			"module_file" => "",
 			"module_desc" => "",
-			"module_conteneur_nom" => "",
-			"module_groupe_pour_voir" => 31,
-			"module_groupe_pour_utiliser" => 31,
+			"module_container_name" => "",
+			"module_group_allowed_to_see" => 31,
+			"module_group_allowed_to_use" => 31,
 			"module_adm_control" => 0,
 			"module_execution" => 0,
 			"module_website_id" => 11,
@@ -245,10 +245,10 @@ $infos = array(
 
 $block = $ThemeDataObj->getThemeName().$infos['block'];
 
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "px", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "py", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur"));
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dy", 320 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 0 );
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur"));
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 320 );
 
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 

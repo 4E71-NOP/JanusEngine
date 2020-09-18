@@ -58,7 +58,7 @@ function creation_tableau_javascript ( $mn ) {
 }
 
 // Repertorie les modules
-// s'accompagne de Javascript : CalculeDecoModule ( '$j' , '$GD_module_['module_nom']' , 'formulaire_gdd' );
+// s'accompagne de Javascript : CalculeDecoModule ( '$j' , '$GD_module_['module_name']' , 'formulaire_gdd' );
 $_REQUEST['tableau_javascript_liste_module'] = array();
 $TJLM = &$_REQUEST['tableau_javascript_liste_module'];
 $_REQUEST['TJLM_ptr'] = 0;
@@ -82,12 +82,12 @@ function ligne_formulaire_deco_graphique ( $div , $nom_div , $x , $y , $b ,$p, $
 	".$_REQUEST['td_fca']."
 	");
 	if ( $x == 1 ) {
-		$ChdimX = "M_DECORA[".$GD_module_['module_nom']."_".$div."_dimx]";
+		$ChdimX = "M_DECORA[".$GD_module_['module_name']."_".$div."_dimx]";
 		echo ("
-		<input type='text' name='M_DECORA[".$GD_module_['module_nom']."_".$div."_dimx]' size='2' maxlength='3' value='".$pv["deco_".$div.'_x_'.$j]."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
+		<input type='text' name='M_DECORA[".$GD_module_['module_name']."_".$div."_dimx]' size='2' maxlength='3' value='".$pv["deco_".$div.'_x_'.$j]."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
 		onChange=\"
-		elm.Gebi('".$GD_module_['module_nom']."_".$div."').style.width = this.value+'px';\r
-		CalculeDecoModule ( '".$j."' , '".$GD_module_['module_nom']."'  , 'formulaire_gdd' );
+		elm.Gebi('".$GD_module_['module_name']."_".$div."').style.width = this.value+'px';\r
+		CalculeDecoModule ( '".$j."' , '".$GD_module_['module_name']."'  , 'formulaire_gdd' );
 		\">px\r
 		");
 	}
@@ -96,12 +96,12 @@ function ligne_formulaire_deco_graphique ( $div , $nom_div , $x , $y , $b ,$p, $
 	".$_REQUEST['td_fca']."
 	");
 	if ( $y == 1 ) {
-		$ChdimY = "M_DECORA[".$GD_module_['module_nom']."_".$div."_dimy]";
+		$ChdimY = "M_DECORA[".$GD_module_['module_name']."_".$div."_dimy]";
 		echo ("
-		<input type='text' name='M_DECORA[".$GD_module_['module_nom']."_".$div."_dimy]' size='2' maxlength='3' value='".$pv["deco_".$div.'_y_'.$j]."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
+		<input type='text' name='M_DECORA[".$GD_module_['module_name']."_".$div."_dimy]' size='2' maxlength='3' value='".$pv["deco_".$div.'_y_'.$j]."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
 		onChange=\"
-		elm.Gebi('".$GD_module_['module_nom']."_".$div."').style.height = this.value+'px';\r
-		CalculeDecoModule ( '".$j."' , '".$GD_module_['module_nom']."' , 'formulaire_gdd' );
+		elm.Gebi('".$GD_module_['module_name']."_".$div."').style.height = this.value+'px';\r
+		CalculeDecoModule ( '".$j."' , '".$GD_module_['module_name']."' , 'formulaire_gdd' );
 		\">px\r
 		");
 	}
@@ -110,7 +110,7 @@ function ligne_formulaire_deco_graphique ( $div , $nom_div , $x , $y , $b ,$p, $
 	".$_REQUEST['td_fca']."
 	");
 	if ( $b == 1 ) {
-		echo generation_icone_selecteur_image ( 3 , "formulaire_gdd" , "M_DECORA[".$GD_module_['module_nom']."_".$div."_bg]" , $ChdimX , $ChdimY , "M_DECORA[repertoire]" , $pv["deco_".$div."_".$j] , $GD_module_['module_nom'] , "CalculeDecoModule" , $j );
+		echo generation_icone_selecteur_image ( 3 , "formulaire_gdd" , "M_DECORA[".$GD_module_['module_name']."_".$div."_bg]" , $ChdimX , $ChdimY , "M_DECORA[repertoire]" , $pv["deco_".$div."_".$j] , $GD_module_['module_name'] , "CalculeDecoModule" , $j );
 	}
 	echo ("
 	</td>\r
@@ -118,8 +118,8 @@ function ligne_formulaire_deco_graphique ( $div , $nom_div , $x , $y , $b ,$p, $
 	");
 	if ( $p == 1 ) {
 		echo ("
-		<select name='M_DECORA[".$GD_module_['module_nom']."_".$div."_bgp]' 
-		onChange=\"elm.Gebi('".$GD_module_['module_nom']."_".$div."').style.backgroundPosition = this.value;\r
+		<select name='M_DECORA[".$GD_module_['module_name']."_".$div."_bgp]' 
+		onChange=\"elm.Gebi('".$GD_module_['module_name']."_".$div."').style.backgroundPosition = this.value;\r
 		\">\r
 		<option value='top left'>top left</option>\r
 		<option value='top center'>top center</option>\r
@@ -435,8 +435,8 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	break;
 	}
 
-	$GD_module_['module_nom'] = "Bloc_GD_". $pv['TabCon'][$pv['i']]; 
-	$mn = &$GD_module_['module_nom'];
+	$GD_module_['module_name'] = "Bloc_GD_". $pv['TabCon'][$pv['i']]; 
+	$mn = &$GD_module_['module_name'];
 
 	switch ( $DEC['deco_type'] ) {
 	case 10:	
@@ -486,7 +486,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		include ("routines/website/module_deco_10_menu_decoration.php");
 		foreach ( $tab_infos_bakup as $K => $V ) { $tab_infos[$K] = $V; }
 		unset ($tab_infos_bakup, $K, $V );
-		TJLM_insertion ( 1 , $j , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJLM_insertion ( 1 , $j , $GD_module_['module_name'] , 'formulaire_gdd' );
 		//$JavaScriptInitCommandes[] = "CalculeDecoModule ( '".$md_type[$pv['deco_type_backup']]['db']."' , '".$mn."' , 'formulaire_gdd' );";
 	echo ("
 	</td>\r
@@ -509,7 +509,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		unset ( $K, $V );
 		foreach ( $tab_infos_bakup as $K => $V ) { $tab_infos[$K] = $V; }
 		unset ($tab_infos_bakup, $K, $V );
-		TJLM_insertion ( 2 , $j , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJLM_insertion ( 2 , $j , $GD_module_['module_name'] , 'formulaire_gdd' );
 		$_REQUEST['bloc'] = $pv['backup_bloc'];
 	echo ("
 	</td>\r
@@ -526,17 +526,17 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 
 			if ( $tous == 1 ) {
 				$allWidth = "
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_blw]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_brw]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_btw]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_bbw]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_blw]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_brw]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_btw]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_bbw]' , this.value );
 				";
-				//M_DECORA[".$GD_module_['module_nom']."_".$div."_dimx]
+				//M_DECORA[".$GD_module_['module_name']."_".$div."_dimx]
 				$allStyle = "
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_bls]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_brs]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_bts]' , this.value );
-				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_nom']."_bbs]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_bls]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_brs]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_bts]' , this.value );
+				modifie_INPUT ( 'formulaire_gdd' , 'M_DECORA[".$GD_module_['module_name']."_bbs]' , this.value );
 				";
 			}
 
@@ -554,11 +554,11 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			<tr>\r
 			<td class='" . $theme_tableau . $_REQUEST['bloc']."_fcta'>".$titre."</td>\r
 			".$_REQUEST['td_fca']."
-			<input type='text' name='M_DECORA[".$GD_module_['module_nom']."_".$input."w]' id='M_DECORA[".$GD_module_['module_nom']."_".$input."w]' size='3' maxlength='3' 
+			<input type='text' name='M_DECORA[".$GD_module_['module_name']."_".$input."w]' id='M_DECORA[".$GD_module_['module_name']."_".$input."w]' size='3' maxlength='3' 
 			value='".str_replace("#" , "" , $pv['deco_'.$label.'_width_1_div'])."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1' onChange=\"".$allWidth." GestionDecorationOneDiv ();\">\rpx
 			</td>\r
 			".$_REQUEST['td_fca']."
-			<select name='M_DECORA[".$GD_module_['module_nom']."_".$input."s]' id='M_DECORA[".$GD_module_['module_nom']."_".$input."s]' onChange=\"".$allStyle." GestionDecorationOneDiv ();\">\r
+			<select name='M_DECORA[".$GD_module_['module_name']."_".$input."s]' id='M_DECORA[".$GD_module_['module_name']."_".$input."s]' onChange=\"".$allStyle." GestionDecorationOneDiv ();\">\r
 			<option value='solid'>solid</option>\r
 			<option value='none'>none</option>\r
 			<option value='dotted'>dotted</option>\r
@@ -571,19 +571,19 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			</select>\r
 			</td>\r
 			".$_REQUEST['td_fca']."
-			#<input type='text' name='M_DECORA[".$GD_module_['module_nom']."_".$input."c]' id='M_DECORA[".$GD_module_['module_nom']."_".$input."c]' size='5' maxlength='6' value='".str_replace("#" , "" , $pv['deco_'.$label.'_color_1_div'])."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
+			#<input type='text' name='M_DECORA[".$GD_module_['module_name']."_".$input."c]' id='M_DECORA[".$GD_module_['module_name']."_".$input."c]' size='5' maxlength='6' value='".str_replace("#" , "" , $pv['deco_'.$label.'_color_1_div'])."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r
 			</td>\r
 			</tr>\r
 			");
-			TJED_insertion ( "M_DECORA[".$GD_module_['module_nom']."_".$input."w]" , $GD_module_['module_nom'] , "border".$bord."Width" , "GestionDecorationOneDiv" );
-			TJED_insertion ( "M_DECORA[".$GD_module_['module_nom']."_".$input."s]" , $GD_module_['module_nom'] , "border".$bord."Style" , "GestionDecorationOneDiv" );
-			TJED_insertion ( "M_DECORA[".$GD_module_['module_nom']."_".$input."c]" , $GD_module_['module_nom'] , "border".$bord."Color" , "GestionDecorationOneDiv" );
+			TJED_insertion ( "M_DECORA[".$GD_module_['module_name']."_".$input."w]" , $GD_module_['module_name'] , "border".$bord."Width" , "GestionDecorationOneDiv" );
+			TJED_insertion ( "M_DECORA[".$GD_module_['module_name']."_".$input."s]" , $GD_module_['module_name'] , "border".$bord."Style" , "GestionDecorationOneDiv" );
+			TJED_insertion ( "M_DECORA[".$GD_module_['module_name']."_".$input."c]" , $GD_module_['module_name'] , "border".$bord."Color" , "GestionDecorationOneDiv" );
 
-			$pv['TabTJED'][] = "M_DECORA[".$GD_module_['module_nom']."_".$input."c]";
+			$pv['TabTJED'][] = "M_DECORA[".$GD_module_['module_name']."_".$input."c]";
 		}
 
 		if ( !function_exists("module_deco_30_1_div") ) { include ("routines/website/module_deco_30_1_div.php"); }		
-		$_REQUEST['div_id']['un_div'] = "id='".$GD_module_['module_nom']. "'";		
+		$_REQUEST['div_id']['un_div'] = "id='".$GD_module_['module_name']. "'";		
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
 		module_deco_30_1_div ("theme_GD_" , "GD_pres_" , "GD_module_", 0 );		
 
@@ -631,8 +631,8 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			</tr>\r
 			<td colspan='4' class='".$theme_tableau.$_REQUEST['bloc']."_fca'>\r
 			".$tl_[$l]['md_bgc']."
-			#<input type='text' name='M_DECORA[".$GD_module_['module_nom']."_bgc]' id='M_DECORA[".$GD_module_['module_nom']."_bgc]' size='5' maxlength='6' value='555555' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
-			onChange=\"elm.Gebi('".$GD_module_['module_nom']."').style.backgroundColor = '#'+this.value;\"
+			#<input type='text' name='M_DECORA[".$GD_module_['module_name']."_bgc]' id='M_DECORA[".$GD_module_['module_name']."_bgc]' size='5' maxlength='6' value='555555' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'
+			onChange=\"elm.Gebi('".$GD_module_['module_name']."').style.backgroundColor = '#'+this.value;\"
 			>\r
 			</td>\r
 			</tr>\r
@@ -640,7 +640,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			<tr>\r
 			<td colspan='4' class='" . $theme_tableau . $_REQUEST['bloc']."_fca'>\r
 			". $tl_[$l]['md_bgi'] .
-			generation_icone_selecteur_image ( 3 , "formulaire_gdd" , "M_DECORA[".$GD_module_['module_nom']."_bgi]" , 0, 0, "M_DECORA[repertoire]" , $pv['deco_background_url_1_div'] , $GD_module_['module_nom'] , "GestionDecorationOneDiv" , 1 )
+			generation_icone_selecteur_image ( 3 , "formulaire_gdd" , "M_DECORA[".$GD_module_['module_name']."_bgi]" , 0, 0, "M_DECORA[repertoire]" , $pv['deco_background_url_1_div'] , $GD_module_['module_name'] , "GestionDecorationOneDiv" , 1 )
 			. "
 			</td>\r
 			</tr>\r
@@ -652,9 +652,9 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</div>\r
 		");
 
-		TJED_insertion ( "M_DECORA[".$GD_module_['module_nom']."_bgc]" , $GD_module_['module_nom'] , "backgroundColor" , "GestionDecorationOneDiv" );
-		TJED_insertion ( "M_DECORA[".$GD_module_['module_nom']."_bgi]" , $GD_module_['module_nom'] , "backgroundImage" , "GestionDecorationOneDiv" );
-		TJLM_insertion ( 3 , $j , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJED_insertion ( "M_DECORA[".$GD_module_['module_name']."_bgc]" , $GD_module_['module_name'] , "backgroundColor" , "GestionDecorationOneDiv" );
+		TJED_insertion ( "M_DECORA[".$GD_module_['module_name']."_bgi]" , $GD_module_['module_name'] , "backgroundImage" , "GestionDecorationOneDiv" );
+		TJLM_insertion ( 3 , $j , $GD_module_['module_name'] , 'formulaire_gdd' );
 
 	break;
 	// --------------------------------------------------------------------------------------------
@@ -662,17 +662,17 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	case "elegance":
 		if ( !function_exists("module_deco_40_elegance") ) { include ("routines/website/module_deco_40_elegance.php"); }
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
-		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_nom']."_ex11'";
-		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_nom']."_ex12'";
-		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_nom']."_ex13'";
+		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
+		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_name']."_ex12'";
+		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_name']."_ex13'";
 
-		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_nom']."_ex21'";
-		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_nom']."_ex22'";
-		$_REQUEST['div_id']['ex23'] = "id='".$GD_module_['module_nom']."_ex23'";
+		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_name']."_ex21'";
+		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_name']."_ex22'";
+		$_REQUEST['div_id']['ex23'] = "id='".$GD_module_['module_name']."_ex23'";
 
-		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_nom']."_ex31'";
-		$_REQUEST['div_id']['ex32'] = "id='".$GD_module_['module_nom']."_ex32'";
-		$_REQUEST['div_id']['ex33'] = "id='".$GD_module_['module_nom']."_ex33'";
+		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_name']."_ex31'";
+		$_REQUEST['div_id']['ex32'] = "id='".$GD_module_['module_name']."_ex32'";
+		$_REQUEST['div_id']['ex33'] = "id='".$GD_module_['module_name']."_ex33'";
 
 		module_deco_40_elegance ("theme_GD_" , "GD_pres_" , "GD_module_", 0 );
 		creation_tableau_javascript ( $mn );
@@ -723,7 +723,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</table>\r
 		</div>\r
 		");
-		TJLM_insertion ( 3 , 'elegance' , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJLM_insertion ( 3 , 'elegance' , $GD_module_['module_name'] , 'formulaire_gdd' );
 	break;
 
 	// --------------------------------------------------------------------------------------------
@@ -732,27 +732,27 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		if ( !function_exists("module_deco_50_exquise") ) { include ("routines/website/module_deco_50_exquise.php"); }	
 
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
-		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_nom']."_ex11'";
-		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_nom']."_ex12'";
-		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_nom']."_ex13'";
-		$_REQUEST['div_id']['ex14'] = "id='".$GD_module_['module_nom']."_ex14'";
-		$_REQUEST['div_id']['ex15'] = "id='".$GD_module_['module_nom']."_ex15'";
+		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
+		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_name']."_ex12'";
+		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_name']."_ex13'";
+		$_REQUEST['div_id']['ex14'] = "id='".$GD_module_['module_name']."_ex14'";
+		$_REQUEST['div_id']['ex15'] = "id='".$GD_module_['module_name']."_ex15'";
 
-		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_nom']."_ex21'";
-		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_nom']."_ex22'";
-		$_REQUEST['div_id']['ex25'] = "id='".$GD_module_['module_nom']."_ex25'";
+		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_name']."_ex21'";
+		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_name']."_ex22'";
+		$_REQUEST['div_id']['ex25'] = "id='".$GD_module_['module_name']."_ex25'";
 
-		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_nom']."_ex31'";
-		$_REQUEST['div_id']['ex35'] = "id='".$GD_module_['module_nom']."_ex35'";
+		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_name']."_ex31'";
+		$_REQUEST['div_id']['ex35'] = "id='".$GD_module_['module_name']."_ex35'";
 
-		$_REQUEST['div_id']['ex41'] = "id='".$GD_module_['module_nom']."_ex41'";
-		$_REQUEST['div_id']['ex45'] = "id='".$GD_module_['module_nom']."_ex45'";
+		$_REQUEST['div_id']['ex41'] = "id='".$GD_module_['module_name']."_ex41'";
+		$_REQUEST['div_id']['ex45'] = "id='".$GD_module_['module_name']."_ex45'";
 
-		$_REQUEST['div_id']['ex51'] = "id='".$GD_module_['module_nom']."_ex51'";
-		$_REQUEST['div_id']['ex52'] = "id='".$GD_module_['module_nom']."_ex52'";
-		$_REQUEST['div_id']['ex53'] = "id='".$GD_module_['module_nom']."_ex53'";
-		$_REQUEST['div_id']['ex54'] = "id='".$GD_module_['module_nom']."_ex54'";
-		$_REQUEST['div_id']['ex55'] = "id='".$GD_module_['module_nom']."_ex55'";
+		$_REQUEST['div_id']['ex51'] = "id='".$GD_module_['module_name']."_ex51'";
+		$_REQUEST['div_id']['ex52'] = "id='".$GD_module_['module_name']."_ex52'";
+		$_REQUEST['div_id']['ex53'] = "id='".$GD_module_['module_name']."_ex53'";
+		$_REQUEST['div_id']['ex54'] = "id='".$GD_module_['module_name']."_ex54'";
+		$_REQUEST['div_id']['ex55'] = "id='".$GD_module_['module_name']."_ex55'";
 
 		module_deco_50_exquise ("theme_GD_" , "GD_pres_" , "GD_module_", 0 );	
 		creation_tableau_javascript ( $mn );
@@ -813,7 +813,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</table>\r
 		</div>\r
 		");
-		TJLM_insertion ( 3 , 'exquise' , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJLM_insertion ( 3 , 'exquise' , $GD_module_['module_name'] , 'formulaire_gdd' );
 	echo ("</div>\r");
 	break;
 
@@ -823,40 +823,40 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		if ( !function_exists("module_deco_60_elysion") ) { include ("routines/website/module_deco_60_elysion.php"); }
 
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
-		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_nom']."_ex11'";
-		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_nom']."_ex12'";
-		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_nom']."_ex13'";
-		$_REQUEST['div_id']['ex14'] = "id='".$GD_module_['module_nom']."_ex14'";
-		$_REQUEST['div_id']['ex15'] = "id='".$GD_module_['module_nom']."_ex15'";
-		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_nom']."_ex21'";
-		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_nom']."_ex22'";
-		$_REQUEST['div_id']['ex25'] = "id='".$GD_module_['module_nom']."_ex25'";
-		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_nom']."_ex31'";
-		$_REQUEST['div_id']['ex35'] = "id='".$GD_module_['module_nom']."_ex35'";
-		$_REQUEST['div_id']['ex41'] = "id='".$GD_module_['module_nom']."_ex41'";
-		$_REQUEST['div_id']['ex45'] = "id='".$GD_module_['module_nom']."_ex45'";
-		$_REQUEST['div_id']['ex51'] = "id='".$GD_module_['module_nom']."_ex51'";
-		$_REQUEST['div_id']['ex52'] = "id='".$GD_module_['module_nom']."_ex52'";
-		$_REQUEST['div_id']['ex53'] = "id='".$GD_module_['module_nom']."_ex53'";
-		$_REQUEST['div_id']['ex54'] = "id='".$GD_module_['module_nom']."_ex54'";
-		$_REQUEST['div_id']['ex55'] = "id='".$GD_module_['module_nom']."_ex55'";
+		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
+		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_name']."_ex12'";
+		$_REQUEST['div_id']['ex13'] = "id='".$GD_module_['module_name']."_ex13'";
+		$_REQUEST['div_id']['ex14'] = "id='".$GD_module_['module_name']."_ex14'";
+		$_REQUEST['div_id']['ex15'] = "id='".$GD_module_['module_name']."_ex15'";
+		$_REQUEST['div_id']['ex21'] = "id='".$GD_module_['module_name']."_ex21'";
+		$_REQUEST['div_id']['ex22'] = "id='".$GD_module_['module_name']."_ex22'";
+		$_REQUEST['div_id']['ex25'] = "id='".$GD_module_['module_name']."_ex25'";
+		$_REQUEST['div_id']['ex31'] = "id='".$GD_module_['module_name']."_ex31'";
+		$_REQUEST['div_id']['ex35'] = "id='".$GD_module_['module_name']."_ex35'";
+		$_REQUEST['div_id']['ex41'] = "id='".$GD_module_['module_name']."_ex41'";
+		$_REQUEST['div_id']['ex45'] = "id='".$GD_module_['module_name']."_ex45'";
+		$_REQUEST['div_id']['ex51'] = "id='".$GD_module_['module_name']."_ex51'";
+		$_REQUEST['div_id']['ex52'] = "id='".$GD_module_['module_name']."_ex52'";
+		$_REQUEST['div_id']['ex53'] = "id='".$GD_module_['module_name']."_ex53'";
+		$_REQUEST['div_id']['ex54'] = "id='".$GD_module_['module_name']."_ex54'";
+		$_REQUEST['div_id']['ex55'] = "id='".$GD_module_['module_name']."_ex55'";
 
-		$_REQUEST['div_id']['in11'] = "id='".$GD_module_['module_nom']."_in11'";
-		$_REQUEST['div_id']['in12'] = "id='".$GD_module_['module_nom']."_in12'";
-		$_REQUEST['div_id']['in13'] = "id='".$GD_module_['module_nom']."_in13'";
-		$_REQUEST['div_id']['in14'] = "id='".$GD_module_['module_nom']."_in14'";
-		$_REQUEST['div_id']['in15'] = "id='".$GD_module_['module_nom']."_in15'";
-		$_REQUEST['div_id']['in21'] = "id='".$GD_module_['module_nom']."_in21'";
-		$_REQUEST['div_id']['in25'] = "id='".$GD_module_['module_nom']."_in25'";
-		$_REQUEST['div_id']['in31'] = "id='".$GD_module_['module_nom']."_in31'";
-		$_REQUEST['div_id']['in35'] = "id='".$GD_module_['module_nom']."_in35'";
-		$_REQUEST['div_id']['in41'] = "id='".$GD_module_['module_nom']."_in41'";
-		$_REQUEST['div_id']['in45'] = "id='".$GD_module_['module_nom']."_in45'";
-		$_REQUEST['div_id']['in51'] = "id='".$GD_module_['module_nom']."_in51'";
-		$_REQUEST['div_id']['in52'] = "id='".$GD_module_['module_nom']."_in52'";
-		$_REQUEST['div_id']['in53'] = "id='".$GD_module_['module_nom']."_in53'";
-		$_REQUEST['div_id']['in54'] = "id='".$GD_module_['module_nom']."_in54'";
-		$_REQUEST['div_id']['in55'] = "id='".$GD_module_['module_nom']."_in55'";
+		$_REQUEST['div_id']['in11'] = "id='".$GD_module_['module_name']."_in11'";
+		$_REQUEST['div_id']['in12'] = "id='".$GD_module_['module_name']."_in12'";
+		$_REQUEST['div_id']['in13'] = "id='".$GD_module_['module_name']."_in13'";
+		$_REQUEST['div_id']['in14'] = "id='".$GD_module_['module_name']."_in14'";
+		$_REQUEST['div_id']['in15'] = "id='".$GD_module_['module_name']."_in15'";
+		$_REQUEST['div_id']['in21'] = "id='".$GD_module_['module_name']."_in21'";
+		$_REQUEST['div_id']['in25'] = "id='".$GD_module_['module_name']."_in25'";
+		$_REQUEST['div_id']['in31'] = "id='".$GD_module_['module_name']."_in31'";
+		$_REQUEST['div_id']['in35'] = "id='".$GD_module_['module_name']."_in35'";
+		$_REQUEST['div_id']['in41'] = "id='".$GD_module_['module_name']."_in41'";
+		$_REQUEST['div_id']['in45'] = "id='".$GD_module_['module_name']."_in45'";
+		$_REQUEST['div_id']['in51'] = "id='".$GD_module_['module_name']."_in51'";
+		$_REQUEST['div_id']['in52'] = "id='".$GD_module_['module_name']."_in52'";
+		$_REQUEST['div_id']['in53'] = "id='".$GD_module_['module_name']."_in53'";
+		$_REQUEST['div_id']['in54'] = "id='".$GD_module_['module_name']."_in54'";
+		$_REQUEST['div_id']['in55'] = "id='".$GD_module_['module_name']."_in55'";
 
 		module_deco_60_elysion ("theme_GD_" , "GD_pres_" , "GD_module_", 0 );
 		creation_tableau_javascript ( $mn );
@@ -930,7 +930,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</table>\r
 		</div>\r
 		");
-		TJLM_insertion ( 3 , 'elysion' , $GD_module_['module_nom'] , 'formulaire_gdd' );
+		TJLM_insertion ( 3 , 'elysion' , $GD_module_['module_name'] , 'formulaire_gdd' );
 	echo ("</div>\r");
 	break;
 	default:
@@ -939,7 +939,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		?!?!?! \r
 		ERR sur numero $pv['i'] <br>\r
 		Bloc : $_REQUEST['bloc'] <br>\r
-		GD_module_['module_nom'] : $GD_module_['module_nom'] <br>\r
+		GD_module_['module_name'] : $GD_module_['module_name'] <br>\r
 		theme_GD_[_REQUEST['bloc']]['type'] : ".$theme_GD_[$_REQUEST['bloc']]['type']." <br>\r
 		?!?!?! \r
 		"); 

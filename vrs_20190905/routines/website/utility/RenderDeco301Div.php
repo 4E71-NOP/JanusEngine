@@ -30,7 +30,7 @@ class RenderDeco301Div {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
-		$mn = $infos['module']['module_nom'];
+		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
 		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
 		$TN = $ThemeDataObj->getThemeName();
@@ -76,8 +76,8 @@ class RenderDeco301Div {
 		$Content = "
 	<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 	";
-		if ( isset($m['module_conteneur_nom']) && strlen($m['module_conteneur_nom']) > 0 ) { $Content .= "<div id='".$m['module_conteneur_nom']."' style='visibility: hidden; position: absolute; top: 0px; left: 0px;'>\r"; }
-		$Content .= "<div ".$DivIdList['un_div']." class='".$TN . $infos['block']."_1_div ".$TN . $infos['block']."_t".$m['module_deco_txt_defaut']." ".$TN . $infos['block']."_t_couleur_de_base' style='position: absolute; left: ".$L['pos_x1_22']."px;	top: ".$L['pos_y1_22']."px;  width: ".$L['dim_x_22']."px ;	height: ".$L['dim_y_22']."px; line-height: normal; overflow: auto; ";
+		if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "<div id='".$m['module_container_name']."' style='visibility: hidden; position: absolute; top: 0px; left: 0px;'>\r"; }
+		$Content .= "<div ".$DivIdList['un_div']." class='".$TN . $infos['block']."_1_div ".$TN . $infos['block']."_t".$m['module_deco_default_text']." ".$TN . $infos['block']."_t_couleur_de_base' style='position: absolute; left: ".$L['pos_x1_22']."px;	top: ".$L['pos_y1_22']."px;  width: ".$L['dim_x_22']."px ;	height: ".$L['dim_y_22']."px; line-height: normal; overflow: auto; ";
 		if ( isset($infos['module_z_index']) ) { $Content .= " z-index: ".$infos['module_z_index']."; "; }
 		$Content .= "
 	background-repeat: repeat;'>\r

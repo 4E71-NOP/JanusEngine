@@ -33,7 +33,7 @@ class RenderDeco40Elegance {
 
 		$LMObj->InternalLog("********** RenderDeco40Elegance Start **********");
 		
-		$mn = $infos['module']['module_nom'];
+		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
 		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
@@ -57,7 +57,7 @@ class RenderDeco40Elegance {
 // 				$StringFormatObj = StringFormat::getInstance();
 // 				$LMObj->InternalLog("display module mode is 'menu' : ".$mn."<br>m=".$StringFormatObj->arrayToString($m));
 				$LMObj->InternalLog("display module mode is 'menu' : ".$mn);
-				$mnd = $infos['backup']['module_nom'];
+				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
 				$L['py'] = 0;
@@ -115,9 +115,9 @@ class RenderDeco40Elegance {
 		$Content .= "
 	<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 	";
-		if ( isset($infos['module']['module_conteneur_nom'] ) && strlen($infos['module']['module_conteneur_nom']) > 0 ) { 
-			$LMObj->InternalLog("Adding a container DIV: ". $infos['module']['module_conteneur_nom']);
-			$Content .= "<div id='".$infos['module']['module_conteneur_nom']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
+		if ( isset($infos['module']['module_container_name'] ) && strlen($infos['module']['module_container_name']) > 0 ) { 
+			$LMObj->InternalLog("Adding a container DIV: ". $infos['module']['module_container_name']);
+			$Content .= "<div id='".$infos['module']['module_container_name']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
 		}
 		$Content .= "
 		<div ".$DivIdList['ex11']." class='".$TN . $infos['block']."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex11_x']."px; 			height:".$B['ex11_y']."px;'></div>\r
@@ -128,7 +128,7 @@ class RenderDeco40Elegance {
 		<div ".$DivIdList['ex31']." class='".$TN . $infos['block']."_ex31' style='left: ".$L['pos_x_ex31']."px;	top: ".$L['pos_y_ex31']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex31_x']."px; 			height:".$B['ex31_y']."px;'></div>\r
 		<div ".$DivIdList['ex32']." class='".$TN . $infos['block']."_ex32' style='left: ".$L['pos_x_ex32']."px;	top: ".$L['pos_y_ex32']."px; z-index: ".$infos['module_z_index']."; width: ".$L['dim_x_ex22']."px;		height:".$B['ex32_y']."px;'></div>\r
 		<div ".$DivIdList['ex33']." class='".$TN . $infos['block']."_ex33' style='left: ".$L['pos_x_ex33']."px;	top: ".$L['pos_y_ex33']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex33_x']."px; 			height:".$B['ex33_y']."px;'></div>\r
-		<div ".$DivIdList['ex22']." class='".$TN . $infos['block']."_ex22 ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_txt_defaut']." ".$TN.$infos['block']."_t_couleur_de_base' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
+		<div ".$DivIdList['ex22']." class='".$TN . $infos['block']."_ex22 ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
 

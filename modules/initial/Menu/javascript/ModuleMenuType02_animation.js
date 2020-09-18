@@ -556,7 +556,7 @@ function TailleHorizontale ( Obj , da , db ) {
 	}
 	dm.UpdateDecoModule ( TabInfoModule , Obj.id );
 
-	str = 'Obj.id:' + Obj.id + '; ModuleNom:' + TabInfoModule[Obj.id]['module_nom'] +'; DimConteneurX:' + TabInfoModule[Obj.id]['DimConteneurX'];
+	str = 'Obj.id:' + Obj.id + '; ModuleNom:' + TabInfoModule[Obj.id]['module_name'] +'; DimConteneurX:' + TabInfoModule[Obj.id]['DimConteneurX'];
 	l.Log[dbgPopMenu](str);
 
 }

@@ -4,7 +4,7 @@
 // Search Duplicate Article
 // Search if Exists Article
 // Articles
-self::$SqlQueryTable['M_ARTICL_rda']['requete']		= "SELECT arti_id,arti_nom FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_rda']['requete']		= "SELECT arti_id,arti_name FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_rda']['element']		= "Article";
 
 self::$SqlQueryTable['M_ARTICL_reb']['requete']		= "SELECT deadline_id FROM ".$SqlTableListObj->getSQLTableName('deadline')." WHERE deadline_name = '<A1>' AND ws_id = '".$webSiteId."';";
@@ -27,7 +27,7 @@ self::$SqlQueryTable['M_ARTICL_rep']['requete']		= "SELECT usr.layout_id AS layo
 self::$SqlQueryTable['M_ARTICL_rep']['element']		= "Presentation";
 self::$SqlQueryTable['M_ARTICL_rep']['colone_1']	= "layout_generic_name";
 
-self::$SqlQueryTable['M_ARTICL_rea']['requete']		= "SELECT arti_id,arti_nom FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_rea']['requete']		= "SELECT arti_id,arti_name FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_rea']['element']		= "Article";
 self::$SqlQueryTable['M_ARTICL_rea']['colone_1']	= "arti_id";
 
@@ -93,7 +93,7 @@ self::$SqlQueryTable['M_GROUPE_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_GROUPE_reg']['colone_1']	= "group_id";
 
 // Module
-self::$SqlQueryTable['M_MODULE_rdm']['requete']		= "SELECT mdl.module_id FROM ".$SqlTableListObj->getSQLTableName('module')." mdl , ".$SqlTableListObj->getSQLTableName('module_website')." sm WHERE mdl.module_nom = '<A1>' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_MODULE_rdm']['requete']		= "SELECT mdl.module_id FROM ".$SqlTableListObj->getSQLTableName('module')." mdl , ".$SqlTableListObj->getSQLTableName('module_website')." sm WHERE mdl.module_name = '<A1>' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_MODULE_rdm']['element']		= "Module";
 self::$SqlQueryTable['M_MODULE_regpv']['requete']	= "SELECT grp.group_id AS group_id, grp.groupe_nom AS groupe_nom FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE grp.groupe_nom = '<A1>' AND grp.group_id = sg.group_id AND sg.ws_id = '".$_REQUEST['site_context']['ws_id']."';";
 self::$SqlQueryTable['M_MODULE_regpv']['element']	= "Groupe";
@@ -137,7 +137,7 @@ self::$SqlQueryTable['M_TAG_rdt']['element']		= "Tag";
 self::$SqlQueryTable['M_TAG_ret']['requete']		= "SELECT tag_id,tag_name FROM ".$SqlTableListObj->getSQLTableName('tag')." WHERE BINARY tag_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_TAG_ret']['element']		= "Tag";
 self::$SqlQueryTable['M_TAG_ret']['colone_1']		= "tag_id";
-self::$SqlQueryTable['M_TAG_rea']['requete']		= "SELECT arti_id,arti_nom FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_TAG_rea']['requete']		= "SELECT arti_id,arti_name FROM ".$SqlTableListObj->getSQLTableName('article')." WHERE arti_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_TAG_rea']['element']		= "Article";
 self::$SqlQueryTable['M_TAG_rea']['colone_1']		= "arti_id";
 self::$SqlQueryTable['M_TAG_rela']['requete']		= "SELECT tag_id FROM ".$SqlTableListObj->getSQLTableName('article_tag')." WHERE tag_id = '<A1>' AND arti_id = '<A2>';";

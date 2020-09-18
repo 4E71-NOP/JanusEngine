@@ -41,7 +41,7 @@ self::$InitTable['article_tag'] = function (&$a) {
 	$a['params'] = array(
 			"name" => "",
 			"article_tag_id" => "",
-			"arti_nom" => "",
+			"arti_name" => "",
 			"tag_name" => "",
 			"docutag_lang" => "Fra"
 	);

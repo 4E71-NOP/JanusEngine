@@ -151,7 +151,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 			$RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionPage')
 		);
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_nom');
+		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -164,19 +164,19 @@ switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 				array (
 					"arti_ref"						=>	"New_Article".$d,
 					"arti_deadline"					=>	0,
-					"arti_nom"						=>	"New_Article",
+					"arti_name"						=>	"New_Article",
 					"arti_desc"						=>	"Article",
-					"arti_titre"					=>	"Title",
-					"arti_sous_titre"				=>	"Sub Title",
+					"arti_title"					=>	"Title",
+					"arti_subtitle"				=>	"Sub Title",
 					"arti_page"						=>	1,
 					"layout_generic_name"			=>	"",
 					"config_id"						=>	"",
-					"arti_creation_createur"		=>	$UserObj->getUserEntry("user_id"),
+					"arti_creator_id"		=>	$UserObj->getUserEntry("user_id"),
 					"arti_creation_date"			=>	$d,
-					"arti_validation_validateur"	=>	$UserObj->getUserEntry("user_id"),
+					"arti_validator_id"	=>	$UserObj->getUserEntry("user_id"),
 					"arti_validation_date"			=>	$d,
-					"arti_validation_etat"			=>	0,
-					"arti_parution_date"			=>	$d,
+					"arti_validation_state"			=>	0,
+					"arti_release_date"			=>	$d,
 					"docu_id"						=>	"",
 					"ws_id"						=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				)
@@ -225,10 +225,10 @@ $T['AD']['2']['6']['1']['cont'] = $I18nObj->getI18nEntry('t2l6c1');
 
 
 $T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_id');
-$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_nom');
+$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
 $T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[reference]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_ref')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_sous_titre')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_subtitle')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabDeadline[$currentArticleObj->getArticleEntry('arti_deadline')]['s'] = " selected ";
 $T['AD']['1']['6']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -251,7 +251,7 @@ foreach ( $tabDocument as $A ) { $T['AD']['1']['9']['2']['cont'] .= "<option val
 $T['AD']['1']['9']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
-$T['AD']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_createur')]['t'];
+$T['AD']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
 $T['AD']['2']['2']['2']['cont'] = $TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
 $T['AD']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
 $T['AD']['2']['4']['2']['cont'] = $TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
@@ -260,12 +260,12 @@ $tabState = array(
 		0 =>	array ( "t" => $I18nObj->getI18nEntry('offline'),	"db" => "OFFLINE"),
 		1 =>	array ( "t" => $I18nObj->getI18nEntry('online'),	"db" => "ONLINE"),
 );
-$tabState[$currentArticleObj->getArticleEntry('arti_validation_etat')]['s'] = " selected ";
+$tabState[$currentArticleObj->getArticleEntry('arti_validation_state')]['s'] = " selected ";
 $T['AD']['2']['5']['2']['cont'] = "<select name='formParams[validation_state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabState as $A ) { $T['AD']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['5']['2']['cont'] .= "</select>\r";
 
-$T['AD']['2']['6']['2']['cont'] = $TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_parution_date'));
+$T['AD']['2']['6']['2']['cont'] = $TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_release_date'));
 
 
 // --------------------------------------------------------------------------------------------

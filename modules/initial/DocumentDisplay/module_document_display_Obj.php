@@ -82,7 +82,7 @@ class ModuleDocumentDisplay {
 // 		We have a document object. Now we have to process it.
 		$DocumentDataObj->setDocumentDataEntry ('arti_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_creation_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('arti_validation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_validation_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('arti_parution_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_parution_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('arti_release_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_release_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_creation_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_correction_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_correction_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_cont_brut',		$DocumentDataObj->getDocumentDataEntry('docu_cont'));
@@ -90,10 +90,10 @@ class ModuleDocumentDisplay {
 		$liste_document = array();
 		$LD_idx = 1;
 		$liste_document[$LD_idx]['arti_id']						= $DocumentDataObj->getDocumentDataEntry('arti_id');
-		$liste_document[$LD_idx]['arti_titre']					= $DocumentDataObj->getDocumentDataEntry('arti_titre');
-		$liste_document[$LD_idx]['arti_creation_createur']		= $DocumentDataObj->getDocumentDataEntry('arti_creation_createur');
+		$liste_document[$LD_idx]['arti_title']					= $DocumentDataObj->getDocumentDataEntry('arti_title');
+		$liste_document[$LD_idx]['arti_creator_id']		= $DocumentDataObj->getDocumentDataEntry('arti_creator_id');
 		$liste_document[$LD_idx]['arti_creation_date']			= $DocumentDataObj->getDocumentDataEntry('arti_creation_date');
-		$liste_document[$LD_idx]['arti_validation_validateur']	= $DocumentDataObj->getDocumentDataEntry('arti_validation_validateur');
+		$liste_document[$LD_idx]['arti_validator_id']	= $DocumentDataObj->getDocumentDataEntry('arti_validator_id');
 		$liste_document[$LD_idx]['arti_validation_date']		= $DocumentDataObj->getDocumentDataEntry('arti_validation_date');
 		$LD_idx++;
 		$liste_document[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
@@ -149,12 +149,12 @@ class ModuleDocumentDisplay {
 		<table class='".$Block."_ft'>\r
 		<tr>\r
 		<td class='".$Block."_ft1'></td>\r
-		<td class='".$Block."_ft2 ".$Block."_tb7'>".$DocumentDataObj->getDocumentDataEntry('arti_titre')."</td>\r
+		<td class='".$Block."_ft2 ".$Block."_tb7'>".$DocumentDataObj->getDocumentDataEntry('arti_title')."</td>\r
 		<td class='".$Block."_ft3'></td>\r
 		</tr>\r
 		</table>\r
 		<br>\r
-		<span class='".$Block."_tb4'>". $DocumentDataObj->getDocumentDataEntry('arti_sous_titre') ."</span>
+		<span class='".$Block."_tb4'>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</span>
 		<br>\r
 		<br>\r
 		<div id='document_contenu' class='".$Block."_div_std'>
@@ -168,10 +168,10 @@ class ModuleDocumentDisplay {
 			$LMObj->InternalLog("ModuleDocument:render - menu needed");
 			
 			$q = "
-			SELECT art.arti_id, art.arti_ref, art.arti_sous_titre, art.arti_page, bcl.deadline_name 
+			SELECT art.arti_id, art.arti_ref, art.arti_subtitle, art.arti_page, bcl.deadline_name 
 			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."' 
-			AND art.arti_validation_etat = '1' 
+			AND art.arti_validation_state = '1' 
 			AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND art.arti_deadline = bcl.deadline_id 
 			AND bcl.deadline_state = '1'
@@ -188,16 +188,16 @@ class ModuleDocumentDisplay {
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 				$P2P_tab_[$pv['1']]['arti_id']			= $dbp['arti_id'];
 				$P2P_tab_[$pv['1']]['arti_ref']			= $dbp['arti_ref'];
-				$P2P_tab_[$pv['1']]['arti_sous_titre']	= $dbp['arti_sous_titre'];
+				$P2P_tab_[$pv['1']]['arti_subtitle']	= $dbp['arti_subtitle'];
 				$P2P_tab_[$pv['1']]['arti_page']		= $dbp['arti_page'];
 				$P2P_tab_[$pv['1']]['arti_ref']			= $dbp['arti_ref'];
 				$P2P_tab_[$pv['1']]['lien']				= "
 				<a class='".$Block."_lien ".$Block."_t2'
 				href='index.php?sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('ws_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$UserObj->getUserEntry('login')."&amp;user_pass=".$UserObj->getUserEntry('pass')."'
-				onMouseOver=\"t.ToolTip('-> ". addslashes($dbp['arti_sous_titre']) .", en page ".$dbp['arti_page']."');\"
-				onMouseOut=\"t.ToolTip();\">".$dbp['arti_page']." ".$dbp['arti_sous_titre']."</a>\r
+				onMouseOver=\"t.ToolTip('-> ". addslashes($dbp['arti_subtitle']) .", en page ".$dbp['arti_page']."');\"
+				onMouseOut=\"t.ToolTip();\">".$dbp['arti_page']." ".$dbp['arti_subtitle']."</a>\r
 				";
-				$P2P_tab_[$pv['1']]['menu_select']		= "<option value='".$dbp['arti_page']."' ".$tab_menu_selected[$pv['1']].">".$dbp['arti_page']." - ".$dbp['arti_sous_titre']."</option>\r";
+				$P2P_tab_[$pv['1']]['menu_select']		= "<option value='".$dbp['arti_page']."' ".$tab_menu_selected[$pv['1']].">".$dbp['arti_page']." - ".$dbp['arti_subtitle']."</option>\r";
 				$pv['1']++;
 			}
 			
@@ -213,7 +213,7 @@ class ModuleDocumentDisplay {
 					$i = 1;
 					foreach ( $P2P_tab_ as $A ) {
 						if ( $A['arti_page'] == $DocumentDataObj->getDocumentDataEntry ('arti_page') ) {
-							$AD['1'][$i]['1']['cont'] = $A['arti_page']." ".$A['arti_sous_titre'];
+							$AD['1'][$i]['1']['cont'] = $A['arti_page']." ".$A['arti_subtitle'];
 							$pv['p2p_marque'] = $A['arti_page'];
 						}
 						else { $AD['1'][$i]['1']['cont'] = $A['lien']; }
@@ -501,9 +501,9 @@ class ModuleDocumentDisplay {
 			$pv['LD_1er'] = 1;
 			foreach ( $liste_document as $A ) {
 				if ( $pv['LD_1er'] == 1 ) {
-					$pv['C'] = "<b>'" . $A['arti_titre'] . "'</b><br>\r" . $i18n['auteurs_par'] . $ADP_users[$A['arti_creation_createur']] .
+					$pv['C'] = "<b>'" . $A['arti_title'] . "'</b><br>\r" . $i18n['auteurs_par'] . $ADP_users[$A['arti_creator_id']] .
 					$i18n['auteurs_date'] . $A['arti_creation_date'] . " - " .
-					$i18n['auteurs_update'] . $A['arti_validation_date'] . $i18n['auteurs_par'] . $ADP_users[$A['arti_validation_validateur']] . "<br>\r";
+					$i18n['auteurs_update'] . $A['arti_validation_date'] . $i18n['auteurs_par'] . $ADP_users[$A['arti_validator_id']] . "<br>\r";
 					$pv['LD_1er'] = 0;
 				}
 				else {

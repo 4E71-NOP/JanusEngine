@@ -93,15 +93,15 @@ class ModuleOffLineMessage {
 				"module_id" => 11,
 				"module_deco" => 1,
 				"module_deco_nbr" => 2,
-				"module_deco_txt_defaut" => 3,
-				"module_nom" => "OfflineMessage",
+				"module_deco_default_text" => 3,
+				"module_name" => "OfflineMessage",
 				"module_classname" => "",
-				"module_titre" => "",
-				"module_fichier" => "",
+				"module_title" => "",
+				"module_file" => "",
 				"module_desc" => "",
-				"module_conteneur_nom" => "",
-				"module_groupe_pour_voir" => 31,
-				"module_groupe_pour_utiliser" => 31,
+				"module_container_name" => "",
+				"module_group_allowed_to_see" => 31,
+				"module_group_allowed_to_use" => 31,
 				"module_adm_control" => 0,
 				"module_execution" => 0,
 				"module_website_id" => 11,
@@ -115,14 +115,14 @@ class ModuleOffLineMessage {
 		
 		// --------------------------------------------------------------------------------------------
 		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "py", 128 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dx", 512 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_nom'], "dy", 256 );
+		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
+		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 128 );
+		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", 512 );
+		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 256 );
 		
 		$RenderLayoutObj->setModuleList(
 			array(
-				$infos['module']['module_nom'] => array ('module_deco_txt_defaut'	=>	6 ),
+				$infos['module']['module_name'] => array ('module_deco_default_text'	=>	6 ),
 			)
 		);
 		
@@ -142,7 +142,7 @@ class ModuleOffLineMessage {
 			"'>\r".
 			$RenderDeco->render($infos).
 			$WebSiteObj->getWebSiteEntry('sw_message')."<br>\r".
-			$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_nom'], 'module_deco_txt_defaut')."<br>\r".
+			$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'module_deco_default_text')."<br>\r".
 			"
 			</div>\r
 			</div>\r
