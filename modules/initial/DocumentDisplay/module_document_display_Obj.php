@@ -484,7 +484,7 @@ class ModuleDocumentDisplay {
 			$ADP_users = array();
 			$dbquery = $SDDMObj->query("
 			SELECT a.user_id,a.user_nom
-			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('groupe_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
+			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('group_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
 			WHERE a.user_id = b.user_id
 			AND b.group_id = c.group_id
 			AND b.group_user_initial_group = '1'

@@ -62,7 +62,7 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 ";
 
 $dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_image_avatar, grp.group_name, grp.group_file
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe')." grp, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE gu.group_user_initial_group = '1' 
 AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND gu.user_id = usr.user_id 

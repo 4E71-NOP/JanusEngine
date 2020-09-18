@@ -31,7 +31,7 @@ class User {
 		
 // 		$LMObj->InternalLog( __METHOD__ ."() : 
 // 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 // 			WHERE usr.user_login = '" . $UserLogin . "'
 // 			AND usr.user_id = gu.user_id
 // 			AND gu.group_user_initial_group = '1'
@@ -42,7 +42,7 @@ class User {
 // 		);
 		$dbquery = $SDDMObj->query ("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'groupe_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
+			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'groupe' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
 			AND usr.user_id = gu.user_id
 			AND gu.group_user_initial_group = '1'
@@ -103,7 +103,7 @@ class User {
 			// find all sons of the initial user "groupset". 
 			$dbquery = $SDDMObj->query ("
 				SELECT group_id
-				FROM " . $SqlTableListObj->getSQLTableName ('groupe_user') . "
+				FROM " . $SqlTableListObj->getSQLTableName ('group_user') . "
 				WHERE user_id = '" . $this->User['user_id'] . "'
 				ORDER BY group_id
 				;

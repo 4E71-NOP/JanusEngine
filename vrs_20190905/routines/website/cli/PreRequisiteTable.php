@@ -582,7 +582,7 @@ self::$PreRequisiteTable['add']['user'] = array (
 		),
 		"nextId" => array (
 				array ("table" => "user",			"column" => "user_id",				"target" => "id"),
-				array ("table" => "groupe_user",	"column" => "group_user_id",		"target" => "group_user_id"),
+				array ("table" => "group_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 		),
 		"columns" => array(
 				array("v" => "id",									"t"	=>	"user_id"),
@@ -728,7 +728,7 @@ self::$PreRequisiteTable['assign']['user'] = array (
 				array("v" => "primary_group",					"s" => "user"),
 		),
 		"nextId" => array (
-				array ("table" => "groupe_user",	"column" => "group_user_id",		"target" => "group_user_id"),
+				array ("table" => "group_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 		),
 		"columns" => array(
 				array("v" => "group_user_id",						"t"	=>	"group_user_id"),

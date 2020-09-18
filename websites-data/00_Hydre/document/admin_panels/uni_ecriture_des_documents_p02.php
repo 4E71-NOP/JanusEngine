@@ -67,7 +67,7 @@ switch ( $document['docu_type'] ) {
 }
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_login,s.ws_name 
-FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['groupe_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
+FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['group_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_correcteur']."' 
 AND gu.group_user_initial_group = '1' 
 AND usr.user_id = gu.user_id 

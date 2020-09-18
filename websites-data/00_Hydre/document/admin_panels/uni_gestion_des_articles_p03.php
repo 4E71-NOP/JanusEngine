@@ -89,7 +89,7 @@ $MAA_b[$infos_article['arti_deadline']]['s'] = " selected";
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_id,usr.user_login 
-FROM ".$SQL_tab_abrege['user']." usr,  ".$SQL_tab_abrege['groupe_user']." grp , ".$SQL_tab_abrege['group_website']." sgp 
+FROM ".$SQL_tab_abrege['user']." usr,  ".$SQL_tab_abrege['group_user']." grp , ".$SQL_tab_abrege['group_website']." sgp 
 WHERE usr.user_id = grp.user_id 
 AND grp.group_id = sgp.group_id
 AND sgp.ws_id = '".$website['ws_id']."'

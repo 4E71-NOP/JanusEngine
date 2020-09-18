@@ -15,11 +15,11 @@ self::$SqlQueryTable['M_ARTICL_reac']['requete']	= "SELECT config_id FROM ".$Sql
 self::$SqlQueryTable['M_ARTICL_reac']['element']	= "Article_config";
 self::$SqlQueryTable['M_ARTICL_reac']['colone_1']	= "config_id";
 
-self::$SqlQueryTable['M_ARTICL_rec']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_rec']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_rec']['element']		= "Createur";
 self::$SqlQueryTable['M_ARTICL_rec']['colone_1']	= "user_id";
 
-self::$SqlQueryTable['M_ARTICL_rev']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_rev']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_rev']['element']		= "Validateur";
 self::$SqlQueryTable['M_ARTICL_rev']['colone_1']	= "user_id";
 
@@ -149,9 +149,9 @@ self::$SqlQueryTable['M_TAG_rela']['element']		= "Liaison";
 // Recherche Existence Site
 // Recherche Existence Groupe
 // Recherche Existence Relation (Groupe_user)
-self::$SqlQueryTable['M_UTILIS_rdl']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_UTILIS_rdl']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_rdl']['element']		= "Utilisateur";
-self::$SqlQueryTable['M_UTILIS_rel']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('groupe_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_UTILIS_rel']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_rel']['element']		= "Utilisateur";
 self::$SqlQueryTable['M_UTILIS_rel']['colone_1']	= "user_id";
 self::$SqlQueryTable['M_UTILIS_res']['requete']		= "SELECT sd.theme_id AS theme_id, sd.theme_name AS theme_name FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd , ".$SqlTableListObj->getSQLTableName('theme_website')." ss WHERE sd.theme_name = '<A1>' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$webSiteId."';";
@@ -160,7 +160,7 @@ self::$SqlQueryTable['M_UTILIS_res']['colone_1']	= "theme_id";
 self::$SqlQueryTable['M_UTILIS_reg']['requete']		= "SELECT grp.group_id AS group_id FROM ".$SqlTableListObj->getSQLTableName('groupe')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg , ".$SqlTableListObj->getSQLTableName('website')." ws WHERE grp.group_name = '<A1>' AND grp.group_id = sg.group_id AND sg.ws_id = ws.ws_id AND ws.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_reg']['element']		= "Groupe";
 self::$SqlQueryTable['M_UTILIS_reg']['colone_1']	= "group_id";
-self::$SqlQueryTable['M_UTILIS_rer']['requete']		= "SELECT group_user_id, group_id, user_id, group_user_initial_group FROM ".$SqlTableListObj->getSQLTableName('groupe_user')." WHERE group_id = '<A1>' AND user_id = '<A2>';";
+self::$SqlQueryTable['M_UTILIS_rer']['requete']		= "SELECT group_user_id, group_id, user_id, group_user_initial_group FROM ".$SqlTableListObj->getSQLTableName('group_user')." WHERE group_id = '<A1>' AND user_id = '<A2>';";
 self::$SqlQueryTable['M_UTILIS_rer']['element']		= "Relation";
 
 

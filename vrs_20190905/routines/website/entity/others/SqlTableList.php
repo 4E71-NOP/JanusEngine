@@ -21,7 +21,7 @@ class SqlTableList {
 			'categorie',			
 			'document',				'document_share',			'document_partage',
 			'decoration',			'deco_10_menu',				'deco_20_caligraphe',	'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
-			'groupe',				'group',					'groupe_user',			'group_user',
+			'groupe',				'group',					'group_user',			'group_user',
 			'historique',			'i18n',						'installation',				
 			'language',				'languages',
 			'module',				
