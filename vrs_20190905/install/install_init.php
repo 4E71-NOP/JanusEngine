@@ -115,7 +115,7 @@ $CMObj->setExecutionContext("installation");
 $CMObj->PopulateLanguageList();
 
 // --------------------------------------------------------------------------------------------
-//	Mise en place d'un stylesheet et d'un entete HTML
+//	HTML header and Stylesheet
 // --------------------------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------------------------
@@ -299,7 +299,7 @@ switch ( $RequestDataObj->getRequestDataEntry('PageInstall') ) {
 $DocContent .= "</div>\r</div>\r";
 
 // --------------------------------------------------------------------------------------------
-// Aide dynamique
+// Tooltip
 // --------------------------------------------------------------------------------------------
 $infos['module']['module_container_name'] = "tooltipContainer";
 $infos['module']['module_name'] = "ToolTip";
@@ -329,7 +329,7 @@ $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['
 
 
 // --------------------------------------------------------------------------------------------
-// Fichier Javascript
+// Javascript files
 // --------------------------------------------------------------------------------------------
 unset ($A);
 

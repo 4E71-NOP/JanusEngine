@@ -41,7 +41,7 @@ class FormToCommandLine {
 		$cln = 0;
 		
 		switch ($RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
-			// Analyse the origin of the form
+			// Analyze the origin of the form
 			case "ModuleQuickSkin":
 				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleQuickSkin submitted a form."));
 // 				$a = $RequestDataObj->getRequestDataEntry('user');

@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-//Fonctions dédiées a la gestion des décorations.
+// Decorations management
 
 function ManiPresTypCal ( MenuSelect , Ligne ) {
 	var MsObj = elm.Gebi( MenuSelect );

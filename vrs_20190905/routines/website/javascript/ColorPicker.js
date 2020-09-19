@@ -201,13 +201,13 @@ function GestionHUECurseur ( mode , hue , sat , val ) {
 	if  ( MWMCP.debug == 1 ) {	DbgRGB.indivY = Ty;	}
 }
 // --------------------------------------------------------------------------------------------
-// Palette rapide Col1
+// Fast color palette : Col1
 function MWMCP_PR_C1_OnMouseDown ()	{	MWMCP.MWM_CP_PR_col_1.OMClick = 1;	return false; }
 function MWMCP_PR_C1_OnMouseUp ()	{	MWMCPOnMouseUpReset ();	return false; }
 function MWMCP_PR_C1_OnMouseOver ()	{	return false; }
 function MWMCP_PR_C1_OnMouseOut ()	{	return false; }
 
-// Palette rapide dégradé
+// Fast color palette : gradient
 function MWMCP_PR_PR_OnMouseOver ()	{	SourisCurseurCrosshair(); MWMCP.MWM_CP_PR_PR.OMOver = 1; }
 function MWMCP_PR_PR_OnMouseOut ()	{	SourisCurseurDefault(); MWMCP.MWM_CP_PR_PR.OMOver = 0; }
 function MWMCP_PR_PR_OnMouseDown () {
@@ -227,7 +227,7 @@ function MWMCP_PR_PR_OnMouseUp () {
 	MWMCPOnMouseUpReset ();
 }
 
-// Icone "mode" dans Palettte rapide
+// Icon "mode" in Fast color palette
 function MWMCP_PR_IM_OnMouseOver ()		{	SourisCurseurPointer(); }
 function MWMCP_PR_IM_OnMouseOut ()		{	SourisCurseurDefault(); }
 function MWMCP_PR_IM_OnMouseDown () 	{	MWMCP.MWM_CP_PR_icone_mode.OMClick = 1;	return false; }
@@ -245,19 +245,19 @@ function MWMCP_PR_IM_OnMouseUp ( e ) {
 	return false;
 }
 
-// Palette complete degrade
+// complete gradient palette
 function MWMCP_PC_D_OnMouseOver ()	{	SourisCurseurCrosshair();  MWMCP.MWM_CP_PC_degrade.OMOver = 1;	}
 function MWMCP_PC_D_OnMouseOut ()	{	SourisCurseurDefault();  MWMCP.MWM_CP_PC_degrade.OMOver = 0;	}
 function MWMCP_PC_D_OnMouseDown ()	{	MWMCP.MWM_CP_PC_degrade.OMClick = 1;	GestionPaletteComplete ();	return false;	}
 function MWMCP_PC_D_OnMouseUp ()	{	GestionPaletteComplete ();	MWMCPOnMouseUpReset ();	return false;	}
 
-// Palette complete hue
+// complete color palette hue
 function MWMCP_PC_H_OnMouseOver ()	{	SourisCurseurPointer();  MWMCP.MWM_CP_PC_hue.OMOver = 1;	}
 function MWMCP_PC_H_OnMouseOut ()	{	SourisCurseurDefault();  MWMCP.MWM_CP_PC_hue.OMOver = 0;	}
 function MWMCP_PC_H_OnMouseDown ()	{	MWMCP.MWM_CP_PC_hue.OMClick = 1;	GestionHUECurseur ( 1 , 0 , 0 , 0 );	return false;	}
 function MWMCP_PC_H_OnMouseUp ()	{	GestionHUECurseur ( 1 , 0 , 0 , 0 );	MWMCPOnMouseUpReset ();	return false;	}
 
-// Icone "mode" dans Palettte rapide
+// Icon "mode" in Fast color palette
 function MWMCP_PC_IM_OnMouseOver ()		{	SourisCurseurPointer(); }
 function MWMCP_PC_IM_OnMouseOut ()		{	SourisCurseurDefault(); }
 function MWMCP_PC_IM_OnMouseDown () 	{	MWMCP.MWM_CP_PC_icone_mode.OMClick = 1;	return false; }
@@ -292,7 +292,7 @@ function MWMCP_PC_BAN_OnMouseUp () {
 }
 
 // --------------------------------------------------------------------------------------------
-// Fonction communes 
+// Common functions 
 function MWMCPOnMouseUpReset () {
 	MWMCP.MWM_CP_PR_col_1.OMClick = 0;
 	MWMCP.MWM_CP_PR_PR.OMClick = 0;
@@ -474,7 +474,7 @@ MWMCP.selection_b = 0;
 MWMCP.selection_str = '';
 
 MWMCP.DivBorder = 1;
-MWMCP.TypePositionnement = 1; // 1 Element , 2 centré sur l'écran
+MWMCP.TypePositionnement = 1; // 1 Element , 2 centered
 
 MWMCP.mode = 1;
 MWMCP.debug = 1;

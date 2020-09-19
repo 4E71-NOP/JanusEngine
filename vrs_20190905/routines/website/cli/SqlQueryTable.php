@@ -143,12 +143,12 @@ self::$SqlQueryTable['M_TAG_rea']['colone_1']		= "arti_id";
 self::$SqlQueryTable['M_TAG_rela']['requete']		= "SELECT tag_id FROM ".$SqlTableListObj->getSQLTableName('article_tag')." WHERE tag_id = '<A1>' AND arti_id = '<A2>';";
 self::$SqlQueryTable['M_TAG_rela']['element']		= "Liaison";
 
-// Utilisateur
-// Recherche Doublon Login
-// Recherche Existence Login
-// Recherche Existence Site
-// Recherche Existence Groupe
-// Recherche Existence Relation (Groupe_user)
+// User
+// Look for duplicate Login
+// check if Login exists
+// check if Site exists
+// check if Groupe exists
+// check if Relation (Groupe_user) exists
 self::$SqlQueryTable['M_UTILIS_rdl']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_UTILIS_rdl']['element']		= "Utilisateur";
 self::$SqlQueryTable['M_UTILIS_rel']['requete']		= "SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg WHERE usr.user_login = '<A1>' AND usr.user_id = gu.user_id AND gu.group_id = sg.group_id AND gu.group_user_initial_group = '1' AND sg.ws_id = '".$webSiteId."';";

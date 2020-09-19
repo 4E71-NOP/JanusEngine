@@ -338,7 +338,7 @@ if ( $RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['ins
 $DocContent .= "</div>\r";
 
 // --------------------------------------------------------------------------------------------
-// Fichier Javascript
+// Javascript files
 // --------------------------------------------------------------------------------------------
 $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_HydrCore.js');
 // $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_statique.js');

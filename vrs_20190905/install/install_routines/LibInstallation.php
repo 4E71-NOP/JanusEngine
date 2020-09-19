@@ -266,27 +266,27 @@ class LibInstallation {
 			if ( $K <= 99990 ) {
 				$directive = $CaseMatrix[$FCMode][$A];
 				switch ( $directive ) {
-					case 1:		$FCMode = 1;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// passe en mode commentaire
-					case 3:		$FCMode = 2;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// passe en mode commentaire multiligne
-					case 4:		$err = 1;																				break;		// erreur , Stocke tableau le msg erreur
-					case 5:		$FCMode = 3;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// passe en mode citation1
-					case 6:		$FCMode = 4;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// passe en mode citation2
-					case 12:	$FCMode = 0;															$Ptr = $K+1;	break;		// passe en mode initial
-					case 24:	$FCMode = 0;															$Ptr = $K+2;	break;		// passe en mode initial
+					case 1:		$FCMode = 1;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set comment mode
+					case 3:		$FCMode = 2;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set multiline comment mode
+					case 4:		$err = 1;																				break;		// error
+					case 5:		$FCMode = 3;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set citation1  mode
+					case 6:		$FCMode = 4;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set citation2 mode
+					case 12:	$FCMode = 0;															$Ptr = $K+1;	break;		// set initial mode
+					case 24:	$FCMode = 0;															$Ptr = $K+2;	break;		// set initial mode
 					case 35:
-					case 46:	$FCMode = 0;																			break;		// passe en mode initial
+					case 46:	$FCMode = 0;																			break;		// set initial mode
 					case 98:
-						$FCMode = 0;																								// passe en mode initial
-						$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));															// Copie le dernier segment valide.
+						$FCMode = 0;																								// set initial mode
+						$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));															// Copy last valid segment.
 						$compilation = str_replace ( $TabRch01 , $TabRpl01 , $compilation );										//
 						$Dest[$idx]['cont'] = $compilation;																			//
 						$compilation = "";																							//
-						$Ptr = $K+1;																								// Aligne les pointeurs
+						$Ptr = $K+1;																								// Align pointers
 						$idx++;
 						break;
 					case 99:
 						$FCMode = 0;												// Back to initial mode
-						$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));			// Copy last valid segement
+						$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));			// Copy last valid segment
 						$Ptr = $K+1;												// Align pointers
 						$EOF = 1;
 						break;

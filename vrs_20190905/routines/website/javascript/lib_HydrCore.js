@@ -14,46 +14,9 @@
 // Internet explorer IS NOT SUPPORTED. But for the sake of flexibility the special case of MSIE is handled. It will enable the code to be adaptable to any future issue with browsers.
 // Do not mix up MS Edge and MSIE!
 
-// Pas vraiment le plus beau des javascript du monde mais celui ci est facile a lire.
-// Internet exploere N'EST PAS SUPPORTE. Pour le maintien de la flexibilité le cas spécial de MSIE est conservé. Cela permettra au code de pouvoir s'adapter à n'importe lequel des probleme de navigateur
-// Ne pas confondre Edge et MSIE!
-
-
-// Objects
-
-//		Souris
-//			PosX
-//			PosY
-//			bg
-//			bm
-//			bd
-//			DerniereExec
-//			Frequence
-
-//cliEnv
-//    os
-//    screen
-//    browser
-//        agent
-//        version
-//        support
-//    document
-//        documentElement
-//        domConfig
-//        inputEncoding
-//        implementation
-//        URI
-//        domain
-//        mode
-//        width
-//        height
-
-//if ( window != top ) { top.location.href = location.href; }
-
-
 // --------------------------------------------------------------------------------------------
 //
-//	Fonction de deboggage
+//	Deboggaging function
 //
 // --------------------------------------------------------------------------------------------
 class HydrGlobalConfig {
@@ -79,7 +42,7 @@ class Log {
 
 // --------------------------------------------------------------------------------------------
 //
-// Détection du navigateur | Browser detection
+// Browser detection
 //
 // --------------------------------------------------------------------------------------------
 class DetectionEnvironment {
@@ -109,30 +72,37 @@ class DetectionEnvironment {
 		};
 
 		this.BrowserSupportList = {
-			'Chrome':		{
-				'60':'DOM',		'61':'DOM',		'62':'DOM',		'63':'DOM',		'64':'DOM',		'65':'DOM',		'66':'DOM',		'67':'DOM',		'68':'DOM',		'69':'DOM',	
-				'70':'DOM',		'71':'DOM',		'72':'DOM',		'73':'DOM',		'74':'DOM',		'75':'DOM',		'76':'DOM',		'77':'DOM',		'78':'DOM',		'79':'DOM',	
-				'80':'DOM'
-			},
-			'Explorer':		{	'5':'MSIE5',	'6':'MSIE6',	'7':'MSIE7',	'8':'MSIE8',	'9':'MSIE9',
-								'10':'MSIE10',	'11':'MSIE11'},
-			'Firefox':		{
-				'50':'DOM',		'51':'DOM',		'52':'DOM',		'53':'DOM',		'54':'DOM',		'55':'DOM',		'56':'DOM',		'57':'DOM',		'58':'DOM',		'59':'DOM',	
-				'60':'DOM',		'61':'DOM',		'62':'DOM',		'63':'DOM',		'64':'DOM',		'65':'DOM',		'66':'DOM',		'67':'DOM',		'68':'DOM',		'69':'DOM',	
-				'70':'DOM',		'71':'DOM',		'72':'DOM',		'73':'DOM',		'74':'DOM',		'75':'DOM',		'76':'DOM',		'77':'DOM',		'78':'DOM',		'79':'DOM',	
-				'80':'DOM'
-			},
-			'Konqueror':	{	'1':'--',		'2':'--',	 	'3':'DOM',	 	'4':'DOM',		'5':'DOM',	
-								'6':'DOM',		'7':'DOM',		'8':'DOM',		'9':'DOM',		'10':'DOM' },
-			'Netscape':		{	'4':'--'													},
-			'Opera':		{	'5':'DOM',		'6':'DOM',		'7':'DOM',		'7.55':'DOM',	'8':'DOM',
-								'9':'DOM',		'10':'DOM',		'11':'DOM',		'12':'DOM',		'13':'DOM',
-								'14':'DOM',		'15':'DOM'	},
-			'Safari':		{	'1':'--',		'2':'--',	 	'3':'DOM',	 	'4':'DOM',		'5':'DOM',	
-								'6':'DOM',		'7':'DOM',		'8':'DOM',		'9':'DOM',		'10':'DOM' },
-			'inconnu':		{	'1':'DOM',		'2':'DOM',	 	'3':'DOM',	 	'4':'DOM'	}
+			'Chrome':		{},
+			'Explorer':		{},
+			'Firefox':		{},
+			'Konqueror':	{	'1':'--',		'2':'--' },
+			'Netscape':		{	'4':'--' },
+			'Opera':		{},
+			'Safari':		{	'1':'--',		'2':'--' },
+			'inconnu':		{}
 		};
 
+		var browserSection = this.BrowserSupportList.Chrome;
+		for (let i=60 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+		
+		browserSection = this.BrowserSupportList.Explorer;
+		for (let i=5 ; i<=15 ; i++ ) { browserSection[i] = "MSIE"+i; }
+
+		var browserSection = this.BrowserSupportList.Firefox;
+		for (let i=60 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+
+		var browserSection = this.BrowserSupportList.Konqueror;
+		for (let i=3 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+		
+		var browserSection = this.BrowserSupportList.Opera;
+		for (let i=5 ; i<=100; i++ ) { browserSection[i] = "DOM"; }
+
+		var browserSection = this.BrowserSupportList.Safari;
+		for (let i=3 ; i<=50; i++ ) { browserSection[i] = "DOM"; }
+
+		var browserSection = this.BrowserSupportList.inconnu;
+		for (let i=1 ; i<=100; i++ ) { browserSection[i] = "DOM"; }
+		
 		this.cliEnv = {
 			'os':{ 'platform':this.SearchString(this.OSList, 0 )},
 			'screen':{ 'width':window.screen.width, 'height':window.screen.height },
@@ -430,7 +400,7 @@ class ElementHandling {
 
 // --------------------------------------------------------------------------------------------
 //
-//	Convertion de nombre
+//	Number conversion
 //
 // --------------------------------------------------------------------------------------------
 class StringFormat {
@@ -524,11 +494,11 @@ class MouseManagement {
 
 //--------------------------------------------------------------------------------------------
 //
-//	Creation de la table de gestion des décorations des modules.
+//	Decoration managment
 //
 // --------------------------------------------------------------------------------------------
 
-//Dans affiche_module.php : var TabInfoModule = new Array();
+//In affiche_module.php : var TabInfoModule = new Array();
 class ModuleManagement {
 	constructor (){}
 	
@@ -609,4 +579,5 @@ de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 document.onkeypress = k.stopRKey;
 document.onmousemove = function (e) { m.LocateMouse(e);};
 
-
+l.Log[1]("Tables");
+l.Log[1](de.BrowserSupportList);

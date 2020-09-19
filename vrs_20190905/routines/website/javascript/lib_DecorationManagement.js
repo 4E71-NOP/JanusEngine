@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-//Fonctions dédiées a la gestion des décorations.
+//Decoration management functions
 class DecorationManagement {
 	constructor (){
 		this.dbgCalcDeco = 0;

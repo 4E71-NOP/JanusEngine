@@ -44,7 +44,7 @@ include ("install/i18n/install_page_02_".$l.".php");
 // --------------------------------------------------------------------------------------------
 //
 //
-// Mode Web (URL)
+// Method POST
 //
 //
 // --------------------------------------------------------------------------------------------
@@ -113,29 +113,29 @@ $r = array();
 switch ( $CMObj->getConfigurationSubEntry('db','database_profil') ) {
 case "hostplan":
 	switch ( $CMObj->getConfigurationEntry('dal') ) {
-	case "MYSQLI":		break;	//Rien a faire : PHP
-	case "PDOMYSQL":	break;	//Rien a faire : PHP
+	case "MYSQLI":		break;	//Nothing to do : PHP
+	case "PDOMYSQL":	break;	//Nothing to do : PHP
 	case "SQLITE":		break;
 	case "ADODB":		break;
 	case "PEARDB":			
 	case "PEARSQLITE":	
-		$r[] = "SET SESSION query_cache_type = OFF;";				// Sensé inhiber l'utilisation du cache
+		$r[] = "SET SESSION query_cache_type = OFF;";				// forbids cache usage
 		$r[] = "USE ".$CMObj->getConfigurationEntry('dbprefix').";";
 		unset ( $A );
 		$db->loadModule('Manager');
 		foreach ( $db->listTables( $CMObj->getConfigurationEntry('dbprefix') ) as $A ) { $r[] = "DROP TABLE ". $A .";"; }
-		$r[] = "FLUSH TABLES;";										// Sensé remettre a zero les query_cache
+		$r[] = "FLUSH TABLES;";										// clean query_cache
 		$db->loadModule('Native');
 	break;
 	}
 break; 
 case "absolute":
-	$r[] = "DROP DATABASE IF EXISTS ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";	// Détruit la base
-	$r[] = "FLUSH TABLES;";										// Sensé remettre a zero les query_cache
+	$r[] = "DROP DATABASE IF EXISTS ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";	// Kill database
+	$r[] = "FLUSH TABLES;";										// clean query_cache
 	$r[] = "FLUSH PRIVILEGES;";
-	$r[] = "CREATE DATABASE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";				// Création de la base
-	$r[] = "USE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";							// Et on utilise
-	$r[] = "SET SESSION query_cache_type = ON;";				// Sensé initier l'utilisation du query_cache
+	$r[] = "CREATE DATABASE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";				// Create DB
+	$r[] = "USE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";							// Use it
+	$r[] = "SET SESSION query_cache_type = ON;";				// clean query_cache
 	$r[] = "SET GLOBAL query_cache_size = 67108864;";			// 16 777 216;
 	$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 	$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;
@@ -152,7 +152,7 @@ case "oui":
 	$r[] = "CREATE USER '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' IDENTIFIED BY '".$CMObj->getConfigurationSubEntry('db','database_user_password')."';";
 	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-	$r[] = "FLUSH TABLES;";										// Sensé remettre a zero les query_cache
+	$r[] = "FLUSH TABLES;";										// clean query_cache 
 	$r[] = "FLUSH PRIVILEGES;";
 	$monSQLn += 8;
 break;
@@ -187,7 +187,7 @@ if ( $devDebug != 1 ) {
 
 	// --------------------------------------------------------------------------------------------
 	//
-	//		Lancement des scripts.
+	//		Launching scripts.
 	//
 	// --------------------------------------------------------------------------------------------
 	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_creation"));

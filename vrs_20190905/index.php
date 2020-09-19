@@ -32,15 +32,7 @@ $RequestDataObj = RequestData::getInstance();
 // --------------------------------------------------------------------------------------------
 $Content = "";
 // --------------------------------------------------------------------------------------------
-
 $LMObj->setStoreStatisticsStateOn();
-// $_REQUEST['StatistiqueInsertion'] = 1;
-// $statistiques_index = -1;
-// $localisation = " / idx";
-// $_REQUEST['localisation'] .= $localisation;
-// statistique_checkpoint ("Index");
-
-// $MapperObj->AddAnotherLevel(" / idx");
 $LMObj->logCheckpoint( "Index" );
 
 // --------------------------------------------------------------------------------------------
@@ -53,13 +45,7 @@ ini_set('error_log' , "/var/log/apache2/error.log");
 $Navigator = getenv("HTTP_USER_AGENT");
 
 if ( strpos($Navigator, "MSIE" ) !== FALSE ) {
-	if ( strpos($Navigator, "MSIE 5" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 6" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 7" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 8" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 9" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 10" )	!== FALSE )	{ $obsoleteBrowser = 1; }
-	if ( strpos($Navigator, "MSIE 11" )	!== FALSE )	{ $obsoleteBrowser = 1; }
+	if ( strpos($Navigator, "DOM" )	!== FALSE )	{ $obsoleteBrowser = 1; }
 }
 
 if ( $obsoleteBrowser == 1 ) {
@@ -587,7 +573,7 @@ $Content.= $RenderModuleObj->render($directives);
 
 // --------------------------------------------------------------------------------------------
 // 
-// statistique_checkpoint ("index_avant_stat");
+// Checkpoint ("index_before_stat");
 // 
 // 
 $localisation = " (Stats)";
@@ -596,7 +582,7 @@ $LMObj->logCheckpoint("Stats");
 $MapperObj->RemoveThisLevel($localisation);
 $MapperObj->setSqlApplicant("Stats");
 
-$LMObj->logCheckpoint("index_avant_stats");
+$LMObj->logCheckpoint("index_before_stat");
 $MapperObj->RemoveThisLevel( "/ idx" );
 
 
@@ -611,8 +597,8 @@ $Content .= $RenderAdmDashboardObj->render();
 
 
 // --------------------------------------------------------------------------------------------
-//	Affichage des selecteurs de fichier si necessaire
-// $module_z_index['compteur'] = 500;		//Contourne les Z-index venant de la présentation
+//	creating file selector if necessary
+// $module_z_index['compteur'] = 500;		//bypass Z-index from layout
 // $pv['sdftotal'] = $_REQUEST['FS_index'];
 
 $sdftotal = $CurrentSetObj->getDataEntry('fsIdx');

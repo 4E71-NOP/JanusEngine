@@ -39,7 +39,7 @@ class CommandForge {
 			return $RenderingCommandLine;
 		} else {
 			$LMObj = LogManagement::getInstance();
-			//journalisation 
+			//Logging 
 		}
 	}
 }

@@ -15,7 +15,7 @@
 
 /**
  * @author faust
- * This class is responssible for the Javascript code redered at the end of the HTML script. 
+ * This class is responssible for the Javascript code rendered at the end of the HTML script. 
  *  
  */
 class GeneratedJavaScript {

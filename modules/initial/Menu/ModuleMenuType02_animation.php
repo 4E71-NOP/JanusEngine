@@ -58,7 +58,7 @@ class ModuleMenuType02 {
 		// Mi = Menu Index (the current one)
 		foreach ( $menuData as $A ) {
 			if ( $A['cate_parent'] != 0 ) {
-				if ( $A['arti_ref'] == "0" ) {									// dossier
+				if ( $A['arti_ref'] == "0" ) {									// folder
 					$Mi = &$menuDiv[$A['cate_id']];
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mi['niv']		= ( $Mp['niv'] + 1 );
@@ -87,42 +87,42 @@ class ModuleMenuType02 {
 				// Jd "Json directory"
 				// Jp "Json Parent"
 				// --------------------------------------------------------------------------------------------
-				if ( $A['cate_type'] != 0 ) {									// evite le menu root
+				if ( $A['cate_type'] != 0 ) {									// avoid root menu
 					$J = &$renderJSON['a_menu_'.$A['cate_id']];			// section 'a'
 					
 					$J['menu'] 		= $J['id'] = 'a_menu_'.$A['cate_id'];
 					$J['par']		= $Mp['id'];								// Parent
-					$J['niv']		= $Mp['niv'];								// Niveau dans l'arborescence
+					$J['niv']		= $Mp['niv'];								// Level in the tree (deep)
 					if ( $J['niv'] > 0 ) { $J['deco'] = $StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($J['niv'], 'deco_type'), "M"); }
 					
-					$J['animation']	= $Spb['menu_anim'];						// Type d'animation
-					$J['entree']	= $A['cate_position'];						// N° dans l'ordre
-					$J['typ']		= "a";										// type
-					$J['dos']		= 0;										// dossier
+					$J['animation']	= $Spb['menu_anim'];						// Animation type
+					$J['entree']	= $A['cate_position'];						// Position amongst other
+					$J['typ']		= "a";										// Type
+					$J['dos']		= 0;										// Folder
 					
 					$Jbn = $StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
 					$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
 					$J['animation'] = $Jb['animation'];
 					$J['le'] = ( $Jb['txt_l_01_margin_top'] + $Jb['txt_l_01_margin_bottom'] + $Jb['a_line_height'] );
 					
-					if ( $A['cate_parent'] != 0 ) {								// Evite la référence à la root.
-						$Jp = &$renderJSON['d_menu_'.$A['cate_parent']];	// ajout du fils au parent.
+					if ( $A['cate_parent'] != 0 ) {								// Avoid to set a reference to root
+						$Jp = &$renderJSON['d_menu_'.$A['cate_parent']];		// add a children to it
 						$Jp['fils'][] = "a_menu_" . $A['cate_id'];
 						$Jp['nf']++;
 					}
 					
-					if ( $A['arti_ref'] == "0" ) {								// dossier, creation du d_menu
+					if ( $A['arti_ref'] == "0" ) {								// folder, creation of d_menu
 						$J['dos'] = 1;
 						$Jd = &$renderJSON['d_menu_'.$A['cate_id']];
 						$Jd['menu'] 			= $Jd['id'] = "d_menu_".$A['cate_id'];
 						$Jd['par']				= $J['id'];								// Parent
-						$Jd['niv']				= ( $J['niv'] + 1 );					// Niveau dans l'arborescence
+						$Jd['niv']				= ( $J['niv'] + 1 );					// Level in the tree (deep)
 						if ( $Jd['niv'] > 0 ) { $Jd['deco'] = $StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($Jd['niv'], 'deco_type'), "M"); }
-						$Jd['entree']			= $A['cate_position'];					// N° dans l'ordre
-						$Jd['typ']				= "div";								// type
+						$Jd['entree']			= $A['cate_position'];					// Position amongst other
+						$Jd['typ']				= "div";								// Type
 						$Jbn = $StringFormatObj->getDecorationBlockName("B", $Jd['niv'], "M");
 						$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
-						$Jd['animation']		= $Jb['animation'];						// Type d'animation
+						$Jd['animation']		= $Jb['animation'];						// Animation type
 						$Jd['width']			= $Jb['div_width'];
 						$Jd['dock_cible']		= $Jb['dock_cible'];
 						$Jd['dock_decal_x']		= $Jb['dock_decal_x'];
@@ -145,20 +145,20 @@ class ModuleMenuType02 {
 				$J = &$renderJSON['d_menu_'.$A['cate_id']];
 				$J['menu']			= $J['id'] = "d_menu_".$A['cate_id'];
 				$J['par']			= "root";										// Parent
-				$J['niv']			= 0;											// Niveau dans l'arborescence
-				$J['entree']		= $A['cate_position'];							// N° dans l'ordre
-				$J['typ']			= "div";										// type
-				$J['dos']			= 0;											// dossier
+				$J['niv']			= 0;											// Level in the tree (deep)
+				$J['entree']		= $A['cate_position'];							// Position amongst other
+				$J['typ']			= "div";										// Type
+				$J['dos']			= 0;											// Folder
 				$Jbn = $StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
 				$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
-				$J['animation']		= $Jb['animation'];								// Type d'animation
+				$J['animation']		= $Jb['animation'];								// Animation type
 				$J['width']			= $Jb['div_width'];
 				$J['le']			= ( $Jb['a_line_height'] + $Jb['a_margin_bottom'] );
 			}
 		}
 		// --------------------------------------------------------------------------------------------
-		//	Prepare une table qui permet le calcul des positions des différents div des menus
-		// cible
+		//	Prepare a table allowing to calculate the position of the many different div and menus
+		// target
 		// 0  8  4
 		// 2  10 6
 		// 1  9  5
@@ -215,9 +215,8 @@ class ModuleMenuType02 {
 			}
 		}
 		
-		// Calcule de la taille des divs contenant les decorations et menu.
-		// C'est mieux que de le faire dans le Javascript qui produira un effet de "flickering"
-		
+		// Find the div size containing the decoration and the menus
+		// It's better to do it here than in JavaScript who will produce some kind of flickering effect
 		unset ( $A );
 		foreach ( $renderJSON as $A ) {
 			$lvl = $StringFormatObj->getDecorationBlockName("B", $A['niv'], "M");
@@ -307,7 +306,7 @@ class ModuleMenuType02 {
 			
 			if ( $Ab['a_line_height'] > 0 ) { $pv['supLH'] = "; line-height:". $Ab['a_line_height']."px;"; }
 			
-			// position: absolute; est nécessaire sinon les DIVs se retrouvent en haut à gauche.
+			// position: absolute; is necessary otherwise the DIVs will be located on top left.
 			$pv['style_niveau_en_cours'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
 			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'px')."px; top: ".
 			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'py')."px; width: ".

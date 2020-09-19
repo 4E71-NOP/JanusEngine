@@ -295,7 +295,7 @@ class ModuleDocumentDisplay {
 			}
 		}
 		// --------------------------------------------------------------------------------------------
-		//	Evalutation du document et affichage
+		//	Document evaluation and display
 		// --------------------------------------------------------------------------------------------
 		switch ( $DocumentDataObj->getDocumentDataEntry('arti_menu_occurence') ) {
 			case "1":

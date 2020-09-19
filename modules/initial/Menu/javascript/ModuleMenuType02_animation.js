@@ -102,7 +102,7 @@ function CreationAnimation ( Liste , ArgsA , ArgsB , ECA , ECD , SCA , SCD ) {
 function InitMenuDiv ( Tab , ModuleInfo ) {
 	var menuX = 0 , menuY = 0;
 
-// Trouve la position du premier menu qui servira de base.
+// Finds the level 0 menu that will be used as base
 	for ( var Rcn in Tab ) {
 		switch ( Tab[Rcn].typ ) {
 		case 'div':	
@@ -137,7 +137,7 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 		Obj.Hdr_Parent				= elm.Gebi ( Tab[ptr].p );
 		Obj.Hdr_StopPropagation		= 1;
 
-// Ajoute des sentinelles d'évennement au lieu de remplacer (Obj.onmouseover='xxx') pour laisser les animations déjà en place.
+// Adds sentinels instead of replacing them to keep those already declared intact.
 		if( Obj.addEventListener ) { 
 			Obj.addEventListener('mouseover' , CustomEventMouseOver,false); 
 			Obj.addEventListener('mouseout' , CustomEventMouseOut,false); 
@@ -304,8 +304,8 @@ function CustomEventMouseClick ( e ) {
 // ----------------------------------------------------------------------------------------------------------------------------
 //Tab = window[Tab];
 //Np Nettoyage parent
-//AParents Action sur parent 0 ferme / 1 ouvre
-//NPoB pose timer pour animation / 0 out , 1 in
+//AParents Action on parent 0 close / 1 open
+//NPoB set timer for animation / 0 out , 1 in
 function GestionMenu ( Obj , TypeEve ) {
 	var a = 0, b = '', c = '', Np = 0, AParents = 0, AFils = 0, Secu = 0;
 

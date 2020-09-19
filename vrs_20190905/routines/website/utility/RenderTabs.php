@@ -65,7 +65,7 @@ class RenderTabs {
 				$TabPosDim[$i]['pc'] += $compensation;
 				$TabPosDim[$i]['db'] += $compensation;
 				$TabPosDim[$i]['dd'] += $compensation;
-			}		//Compense le problème de calcul ne tombant pas sur des entiers.
+			}		//Compensate sub pixel calculations that does NOT end well. Like 2+2 = 3.99999e1 (Thank you Chrome!!!) 
 		}
 		
 		for ( $i = 1 ; $i <= $tab_infos['NbrOfTabs'] ; $i++ ) {

@@ -444,7 +444,7 @@ self::$CheckTable['delete']['module']['0']['p']	= "module";
 
 
 // Tag
-// Usage de BINARY à cause de la collation : utf8mb4_general_ci
+// Usage of 'BINARY' because of collation : utf8mb4_general_ci
 // https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql
 // http://mysqlserverteam.com/new-collations-in-mysql-8-0-0/
 self::$CheckTable['add']['tag']['0']['d']	= 3;

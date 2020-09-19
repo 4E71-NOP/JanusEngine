@@ -8,7 +8,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.com
 //
 // --------------------------------------------------------------------------------------------
-//Fonctions dédiées a la gestion des thèmes.
+// Theme managment
 
 function JaugeMAJ ( Groupe , ColDeb , ColMil, ColFin , NbrCellules ) {
 	var tab = {}

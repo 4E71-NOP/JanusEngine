@@ -12,10 +12,10 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-// Creation d'elements à la demande dee certaine page.
-// Celles qui intègre le color picket doivent utiliser cette partie et l'appeller en conséquence. 
-// Utilisateurs actuelle 2017 11 02
-//		uni_gestion_des_themes_p02.php debut
+// Element creation on page demand
+// those who use ColorPicker must use this part and call it.
+// Known users
+//		uni_gestion_des_themes_p02.php (top)
 
 echo ("
 <div id='MWM_CP_Palette_Rapide' style='position: absolute; visibility: hidden; display: block;

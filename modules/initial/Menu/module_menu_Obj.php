@@ -50,13 +50,13 @@ class ModuleMenu {
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
-		// 20110131 ajouter une colone sur la table tab_deco_10_menu = type
-		// le type donne l'index du menu a aller chercher.
+		// 20110131 add a column on tab_deco_10_menu = type
+		// the type gives the menu index du menu to find.
 		// 00 = no menu / Offline
-		// 01 = statique
-		// 02 = Div Animé
+		// 01 = static
+		// 02 = Div Animated
 		// 03 = banner style
-		// 1xx = Non officiel
+		// 1xx = Non official
 		
 		// 2019 09 30 - Create a routine that scans the directory and store the filename in an array.
 		// This will allow to add more scripts without modifying the code.  

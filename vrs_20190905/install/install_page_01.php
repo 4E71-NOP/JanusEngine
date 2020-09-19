@@ -48,7 +48,7 @@ include ("install/i18n/install_page_01_".$l.".php");
 
 // --------------------------------------------------------------------------------------------
 //
-// Récupération information serveur
+// Server info
 //
 // --------------------------------------------------------------------------------------------
 
@@ -468,7 +468,7 @@ $T['AD'][$CurrentTab][$lt]['4']['cont'] = $i18n['t4l'.$lt.'c4'];
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-// Selection Type de BDD
+// DB Type selection
 unset ($tab_);
 $tab_[$CMObj->getConfigurationEntry('type')] = " selected ";
 $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];
@@ -481,7 +481,7 @@ $T['AD'][$CurrentTab][$lt]['4']['cont'] = $i18n['t4l'.$lt.'c4'];
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-// Profil d'hébergement
+// Hosting plan
 $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = $i18n['t4l'.$lt.'c2'];
 
@@ -494,7 +494,7 @@ $T['AD'][$CurrentTab][$lt]['4']['cont'] = $i18n['t4l'.$lt.'c4'];
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-// Serveur de la BDD
+// DB Server
 $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = $i18n['t4l'.$lt.'c2'];
 $T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[host]' size='20' maxlength='255' value='".$CMObj->getConfigurationEntry('host')."'  class='" . $block."_form_1'>";
@@ -502,7 +502,7 @@ $T['AD'][$CurrentTab][$lt]['4']['cont'] = $i18n['t4l'.$lt.'c4'];
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-// Préfixe
+// Prefix
 $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"InsereValeur ( this.value , '".$FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\"  class='" . $block."_form_1'>";
 $T['AD'][$CurrentTab][$lt]['3']['cont'] = "";
@@ -510,7 +510,7 @@ $T['AD'][$CurrentTab][$lt]['4']['cont'] = $i18n['t4l'.$lt.'c4'];
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-// Nom de la BDD
+// DB name
 $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_1]' size='10' maxlength='255' value=''  class='" . $block."_form_1'>";
 $T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[dbprefix]' size='20' maxlength='32' value='".$CMObj->getConfigurationEntry('dbprefix')."'  class='" . $block."_form_1'>";
@@ -695,7 +695,7 @@ $CurrentFrame++;
 
 // --------------------------------------------------------------------------------------------
 //
-//	Cadre 06
+//	Frame 06
 //
 // --------------------------------------------------------------------------------------------
 
