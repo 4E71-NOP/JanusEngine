@@ -134,7 +134,13 @@ class DetectionEnvironment {
 			if (str && str.indexOf(ptrn) != -1) { 
 				if (extraction == 1) {
 					if (data[i].patternExtraction) {ptrn = data[i].patternExtraction;}
-					idx = str.indexOf(ptrn) + ptrn.length + Number(data[i].offset);		//ex 'Firefox/3.0' -> "Firefox".length + 1 = "3"
+					idx = str.indexOf(ptrn) + ptrn.length + Number(data[i].offset);		// ex
+																						// 'Firefox/3.0'
+																						// ->
+																						// "Firefox".length
+																						// + 1
+																						// =
+																						// "3"
 					res = str.substring(idx , (idx + data[i].length) );
 				}
 				else { res = data[i].response; }
@@ -149,13 +155,13 @@ class DetectionEnvironment {
 // --------------------------------------------------------------------------------------------
 //
 // Element handling.
-//	getElement, hide/show, ressize etc.
+// getElement, hide/show, ressize etc.
 //
 // --------------------------------------------------------------------------------------------
 // At this point instead of creating new object
 // 'cfg'(as HydrGlobalConfig type).
-// 'de'	(as DetectionEnvironment type).
-// 'l'	(as Log type).
+// 'de' (as DetectionEnvironment type).
+// 'l' (as Log type).
 
 class ElementHandling {
 	constructor(){
@@ -182,9 +188,9 @@ class ElementHandling {
 				}
 			};
 		
-		// 0 	8	4
-		// 2	10	6
-		// 1	9	5
+		// 0 8 4
+		// 2 10 6
+		// 1 9 5
 		this.AdminSwitchLocationTab = {
 			'aspX': { 
 				 '0':function (){		return 0; },
@@ -247,16 +253,16 @@ class ElementHandling {
 					de.cliEnv.document.width = x;
 					de.cliEnv.document.height = y;
 				}
-//				var str = 'UpdateWindowSize : x=' + x + '; y=' + y +"; Client: width=" + de.cliEnv.document.width + ", height=" + de.cliEnv.document.height;
-//				l.Log[cfg.CoreDbg](str);
+// var str = 'UpdateWindowSize : x=' + x + '; y=' + y +"; Client: width=" +
+// de.cliEnv.document.width + ", height=" + de.cliEnv.document.height;
+// l.Log[cfg.CoreDbg](str);
 			break;
 		}
 	}
 	
 	/**
-	 * Locate an element and returns an array containing all position infirmation.
-	 * 0 screen absolute
-	 * 1 relative to parent
+	 * Locate an element and returns an array containing all position
+	 * infirmation. 0 screen absolute 1 relative to parent
 	 */
 	LocateElement (ObjId) {
 		var Obj = this.Gebi (ObjId);
@@ -302,7 +308,8 @@ class ElementHandling {
 			case 'DOM':		var ScrollY = window.pageYOffset;		break;
 			case 'MSIE7':	var ScrollY = document.body.scrollTop;	break;
 			}
-			// It must be visible in order for offsetWidth to be processed properly (!=0). Keep the commands order!
+			// It must be visible in order for offsetWidth to be processed
+			// properly (!=0). Keep the commands order!
 			obj.style.visibility = 'visible';
 			obj.style.display = 'block';
 			obj.style.left = Math.floor(( de.cliEnv.document.width - obj.offsetWidth ) / 2 ) + "px";
@@ -338,7 +345,7 @@ class ElementHandling {
 	}
 	
 	/**
-	 * Fills the screen by resizing a DIV 
+	 * Fills the screen by resizing a DIV
 	 */
 	FillScreenDiv (Div, action) {
 		switch (action) {
@@ -400,7 +407,7 @@ class ElementHandling {
 
 // --------------------------------------------------------------------------------------------
 //
-//	Number conversion
+// Number conversion
 //
 // --------------------------------------------------------------------------------------------
 class StringFormat {
@@ -421,9 +428,9 @@ class StringFormat {
 	H2d ( h ) { return parseInt( String(h) , 16 ); }
 }
 
-//--------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 //
-//	Keyboard
+// Keyboard
 //
 // --------------------------------------------------------------------------------------------
 class KeyboardManagement {
@@ -432,17 +439,18 @@ class KeyboardManagement {
 	/**
 	 * 
 	 */
-	stopRKey (evt) {
-		evt  = (evt) ? evt : ((event) ? event : null);
-		var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-		l.Log[cfg.CoreDbg]("RightCick");
-		if ((evt.keyCode == 13) && (node.type=="text")) { return false; }
-		else { return true; }
+	listenToKeyPressed(){
+			document.onkeypress = function(e) {
+			var kCode = (typeof e.which == "number") ? e.which : e.keyCode;
+			if (kCode > 0) {
+				l.Log[cfg.CoreDbg]("key pressed: code="+kCode + " : " + String.fromCharCode(kCode)); 
+			}
+		};
 	}
 }
 
 
-//--------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 //
 // Mouse management
 //
@@ -458,7 +466,8 @@ class MouseManagement {
 	}
 	
 	/**
-	 * Every object added to the list of 'things to do' MUST have a method called 'MouseEvent()'.
+	 * Every object added to the list of 'things to do' MUST have a method
+	 * called 'MouseEvent()'.
 	 */
 	LocateMouse (e) {
 		switch (de.cliEnv.browser.support ) {
@@ -476,13 +485,15 @@ class MouseManagement {
 		var now = MTime - this.mouseData.lastExec;
 		if ( now > this.mouseData.Frequency ) {
 			for ( var i in this.mouseFunctionList ) {
-//				l.Log[cfg.CoreDbg]("LocateMouse : " + this.mouseFunctionList[i].obj+"; method:"+this.mouseFunctionList[i].method);
+// l.Log[cfg.CoreDbg]("LocateMouse : " + this.mouseFunctionList[i].obj+";
+// method:"+this.mouseFunctionList[i].method);
 				var obj = this.mouseFunctionList[i].obj;
 				obj.MouseEvent();
 			}
 			this.mouseData.lastExec = MTime;
 		}
-//		l.Log[cfg.CoreDbg]("Mouse Location: PosX="+this.mouseData.PosX+"PosY="+this.mouseData.PosY);
+// l.Log[cfg.CoreDbg]("Mouse Location:
+// PosX="+this.mouseData.PosX+"PosY="+this.mouseData.PosY);
 	}
 	
 	SetCursorDefault ()		{ document.body.style.cursor = 'default'; }
@@ -492,18 +503,18 @@ class MouseManagement {
 }
 
 
-//--------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 //
-//	Decoration managment
+// Decoration managment
 //
 // --------------------------------------------------------------------------------------------
 
-//In affiche_module.php : var TabInfoModule = new Array();
+// In affiche_module.php : var TabInfoModule = new Array();
 class ModuleManagement {
 	constructor (){}
 	
 	/**
-	 * Add a generic table into the TabInfoModule array 
+	 * Add a generic table into the TabInfoModule array
 	 */
 	AddModule ( ModuleName, DecoType ) {
 		TabInfoModule[ModuleName] = { 'module_name':ModuleName, 'deco_type':DecoType, 'DimConteneurX':'', 'DimConteneurY':'' };
@@ -547,9 +558,9 @@ class ModuleManagement {
 }
 
 
-//--------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------
 //	
-//	Initialization
+// Initialization
 
 var cfg	= new HydrGlobalConfig();
 var l	= new Log();
@@ -561,22 +572,31 @@ var mod = new ModuleManagement();
 var sf	= new StringFormat();
 
 elm.DivInitial = elm.LocateElement ('initial_div'); 
+k.listenToKeyPressed();
 
-//elm.UpdateWindowSize();
+// elm.UpdateWindowSize();
 if ( !window.onresize ) {
 	window.onresize = function () { elm.UpdateWindowSize(); };
-	// An anonymous function calling the class.method() is better than assinging a class.method.
+	// An anonymous function calling the class.method() is better than assinging
+	// a class.method.
 	// in this 2nd case the function will loose the object.method status.
-	// therfore it will not be able to call other methods in the same class using the word 'this' as this function thinks its alone. 
+	// therfore it will not be able to call other methods in the same class
+	// using the word 'this' as this function thinks its alone.
 
 }
 de.cliEnv.document.width	= elm.UpdateWindowSize('x');
 de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 
-//l.Log[cfg.CoreDbg]("_______________________Migration Javascript_______________________");
-//l.Log[cfg.CoreDbg](cliEnv);
+// l.Log[cfg.CoreDbg]("_______________________Migration
+// Javascript_______________________");
+// l.Log[cfg.CoreDbg](cliEnv);
 
-document.onkeypress = k.stopRKey;
+// document.onkeypress = k.stopRKey;
 document.onmousemove = function (e) { m.LocateMouse(e);};
 
-//l.Log[1](de.BrowserSupportList);
+// If you need to get the keycode typed.
+//k.listenToKeyPressed();
+
+
+
+// l.Log[1](de.BrowserSupportList);

@@ -25,7 +25,6 @@ $_REQUEST['sql_initiateur'] = "generateur_vignette.php";
 $_REQUEST['debug_option']['SQL_debug_level']		= 0;				// Préparatif_sql.php
 $_REQUEST['StatistiqueInsertion'] = 0;
 $_REQUEST['localisation'] = "";
-$b4dbprefix = "";
 $statistiques_ = array();
 $statistiques_index = 0;
 

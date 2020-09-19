@@ -32,8 +32,7 @@ class SddmMySQLI {
 	}
 	
 	public function connect() {
-		// Take a look at $b4dbprefix and remove the 'global one'
-		global $db_, $b4dbprefix;
+		global $db_;
 		$LMObj = LogManagement::getInstance();
 		$TimeObj = Time::getInstance();
 		$CMobj = ConfigurationManagement::getInstance();
