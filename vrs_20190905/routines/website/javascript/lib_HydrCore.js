@@ -439,13 +439,16 @@ class KeyboardManagement {
 	/**
 	 * 
 	 */
-	listenToKeyPressed(){
+	ListenToKeyPressed(){
 			document.onkeypress = function(e) {
 			var kCode = (typeof e.which == "number") ? e.which : e.keyCode;
 			if (kCode > 0) {
 				l.Log[cfg.CoreDbg]("key pressed: code="+kCode + " : " + String.fromCharCode(kCode)); 
 			}
 		};
+	}
+	StopListeningToKeyPressed(){
+		document.onkeypress = null;
 	}
 }
 
@@ -572,7 +575,6 @@ var mod = new ModuleManagement();
 var sf	= new StringFormat();
 
 elm.DivInitial = elm.LocateElement ('initial_div'); 
-k.listenToKeyPressed();
 
 // elm.UpdateWindowSize();
 if ( !window.onresize ) {
@@ -595,7 +597,7 @@ de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 document.onmousemove = function (e) { m.LocateMouse(e);};
 
 // If you need to get the keycode typed.
-//k.listenToKeyPressed();
+//k.ListenToKeyPressed();
 
 
 

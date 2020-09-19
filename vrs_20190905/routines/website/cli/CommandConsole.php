@@ -276,6 +276,8 @@ class CommandConsole {
 								if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
 									$msg = str_replace ( '<A1>', $A['p'] , self::$i18n['elementNotFound'] );
 									$LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
+									$LMObj->InternalLog( array( 'level' => loglevelError, 'msg' => __METHOD__ ."Error On " . $CCL['CommandString'] . " / ".$A['m'] ." / ".$msg));
+									
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: 0 results</span>";
 								}
@@ -291,6 +293,7 @@ class CommandConsole {
 								if ( $CCL['errFlag'] != 1 && $SDDMObj->num_row_sql($dbquery) > 0 ) {
 									$msg = str_replace ( '<A1>', $CCL['target'] , self::$i18n['duplicateFound'] );
 									$LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
+									$LMObj->InternalLog( array( 'level' => loglevelError, 'msg' => __METHOD__ ."Error On " . $CCL['CommandString'] . " / ".$A['m'] ." / ".$msg));
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: Duplicate found</span>";
 								}
