@@ -141,7 +141,7 @@ else {
 	FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('document')." dcm
 	WHERE art.docu_id ".$Clause." 
 	AND dcm.docu_id = art.docu_id 
-	AND art.arti_deadline = bcl.deadline_id 
+	AND art.deadline_id = bcl.deadline_id 
 	AND bcl.deadline_state = '1' 
 	AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	ORDER BY dcm.docu_id ASC 

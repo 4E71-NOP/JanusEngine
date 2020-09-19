@@ -32,7 +32,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 		"columns" => array(
 				array ( "v" => "id",					"t" => "arti_id"),
 				array ( "v" => "ref",					"t" => "arti_ref"),
-				array ( "v" => "deadline_id",			"t" => "arti_deadline"),
+				array ( "v" => "deadline_id",			"t" => "deadline_id"),
 				array ( "v" => "name",					"t" => "arti_name"),
 				array ( "v" => "desc",					"t" => "arti_desc"),
 				array ( "v" => "title",					"t" => "arti_title"),

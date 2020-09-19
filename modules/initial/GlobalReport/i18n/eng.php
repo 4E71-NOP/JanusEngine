@@ -24,6 +24,9 @@ $tabI18n = array(
 	't1l111'	=>	"Browser",
 	't1l121'	=>	"Process Owner",
 
+	'tGraphLabelM'	=>	"Memory",
+	'tGraphLabelT'	=>	"Time",
+
 	't2l11'	=>	"Pos",
 	't2l12'	=>	"Checkpoint",
 	't2l13'	=>	"Time",

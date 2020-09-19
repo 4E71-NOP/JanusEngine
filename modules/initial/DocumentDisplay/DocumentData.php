@@ -79,7 +79,7 @@ class DocumentData {
 		AND art.docu_id = doc.docu_id
 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND sit.ws_id = doc.docu_origine
-		AND art.arti_deadline = bcl.deadline_id
+		AND art.deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		;");
 		

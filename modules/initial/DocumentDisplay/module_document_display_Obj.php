@@ -129,7 +129,7 @@ class ModuleDocumentDisplay {
 		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND art.arti_deadline = bcl.deadline_id
+		AND art.deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
@@ -173,7 +173,7 @@ class ModuleDocumentDisplay {
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."' 
 			AND art.arti_validation_state = '1' 
 			AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND art.arti_deadline = bcl.deadline_id 
+			AND art.deadline_id = bcl.deadline_id 
 			AND bcl.deadline_state = '1'
 			;";
 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - q=`".$q."`"));

@@ -24,7 +24,10 @@ $tabI18n = array(
 	't1l111'	=>	"Navigateur",
 	't1l121'	=>	"Utilisateur du process",
 
-	't2l11'	=>	"Pos",
+	'tGraphLabelM'	=>	"Mémoire",
+	'tGraphLabelT'	=>	"Temps",
+		
+		't2l11'	=>	"Pos",
 	't2l12'	=>	"Point de contr&ocirc;le",
 	't2l13'	=>	"Temps",
 	't2l14'	=>	"M&eacute;moire",

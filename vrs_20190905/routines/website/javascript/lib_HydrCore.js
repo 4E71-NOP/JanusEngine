@@ -579,5 +579,4 @@ de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 document.onkeypress = k.stopRKey;
 document.onmousemove = function (e) { m.LocateMouse(e);};
 
-l.Log[1]("Tables");
-l.Log[1](de.BrowserSupportList);
+//l.Log[1](de.BrowserSupportList);

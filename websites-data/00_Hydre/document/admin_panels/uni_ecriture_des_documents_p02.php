@@ -90,7 +90,7 @@ else {
 	FROM ".$SQL_tab_abrege['article']." art, ".$SQL_tab_abrege['deadline']." bcl , ".$SQL_tab_abrege['document']." dcm
 	WHERE art.docu_id = ".$_REQUEST['M_DOCUME']['document_selection']." 
 	AND dcm.docu_id = art.docu_id 
-	AND art.arti_deadline = bcl.deadline_id 
+	AND art.deadline_id = bcl.deadline_id 
 	AND bcl.deadline_state = '1' 
 	AND art.ws_id = '".$website['ws_id']."'
 	ORDER BY dcm.docu_id ASC 

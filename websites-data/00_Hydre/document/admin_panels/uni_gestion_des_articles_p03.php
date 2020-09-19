@@ -84,7 +84,7 @@ AND deadline_state != '2'
 while ($dbp = fetch_array_sql($dbquery)) {
 	$MAA_b[$dbp['deadline_id']]['t'] = $dbp['deadline_title'];		$MAA_b[$dbp['deadline_id']]['db'] = $dbp['deadline_name'];
 }
-$MAA_b[$infos_article['arti_deadline']]['s'] = " selected";
+$MAA_b[$infos_article['deadline_id']]['s'] = " selected";
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"

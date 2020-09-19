@@ -133,7 +133,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('category')." as cat
 					
 		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND art.arti_deadline = '".$currentArticleObj->getDeadLineEntry('deadline_id')."'
+		AND art.deadline_id = '".$currentArticleObj->getDeadLineEntry('deadline_id')."'
 		AND art.ws_id = cat.ws_id
 		AND art.arti_ref = cat.arti_ref
 		AND art.arti_page = '1'

@@ -77,7 +77,7 @@ case 2:
 	FROM ".$SQL_tab_abrege['deadline']."   
 	WHERE ws_id = '".$website['ws_id']."' 
 	AND deadline_state != '2' 
-	AND deadline_id = '".$infos_article['arti_deadline']."' 
+	AND deadline_id = '".$infos_article['deadline_id']."' 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l32'] = $dbp['deadline_name']; }
 

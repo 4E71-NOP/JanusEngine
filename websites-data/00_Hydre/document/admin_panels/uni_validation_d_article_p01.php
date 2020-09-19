@@ -90,7 +90,7 @@ $dbquery = $SDDMObj->query("
 SELECT art.* , bcl.deadline_name 
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
 WHERE art.arti_validation_state = '0' 
-AND bcl.deadline_id = art.arti_deadline 
+AND bcl.deadline_id = art.deadline_id 
 AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 

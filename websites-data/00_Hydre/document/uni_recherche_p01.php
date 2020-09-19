@@ -68,7 +68,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			AND at.tag_id = tag.tag_id
 			AND at.arti_id = art.arti_id
 					
-			AND art.arti_deadline = bcl.deadline_id
+			AND art.deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 					
 			AND cat.arti_ref = art.arti_ref
@@ -85,7 +85,7 @@ if ( strlen( $RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) >
 			AND doc.docu_id = art.docu_id
 					
 			AND art.ws_id = cat.ws_id
-			AND art.arti_deadline = bcl.deadline_id
+			AND art.deadline_id = bcl.deadline_id
 			AND art.arti_ref = cat.arti_ref
 					
 			AND bcl.deadline_state = '1'

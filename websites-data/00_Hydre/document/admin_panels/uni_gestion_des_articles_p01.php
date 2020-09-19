@@ -214,7 +214,7 @@ $dbquery = $SDDMObj->query("
 SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = cat.arti_ref
-AND art.arti_deadline = bcl.deadline_id
+AND art.deadline_id = bcl.deadline_id
 
 AND art.ws_id = bcl.ws_id
 AND bcl.ws_id = cat.ws_id

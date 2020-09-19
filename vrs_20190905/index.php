@@ -457,7 +457,7 @@ $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->g
 //	Prepare data for theme and layout
 //	
 //	
-$localisation = " (Them&Layout)";
+$localisation = " (Theme&Layout)";
 $MapperObj->AddAnotherLevel($localisation);
 $LMObj->logCheckpoint("Prepare Theme & Layout");
 $MapperObj->RemoveThisLevel($localisation);

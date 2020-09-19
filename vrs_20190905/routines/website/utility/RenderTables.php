@@ -26,11 +26,11 @@ class  RenderTables {
 	
 	/**
 	 * Takes the array and render it as a chart (option : with tabs).
-	 * tc = font size
-	 * cc = caption class
-	 * sc = selection class
-	 * b = bold font required
-	 * class = specific class you name
+	 * tc = font size;
+	 * cc = caption class;
+	 * sc = selection class;
+	 * b  = bold font required;
+	 * class = specific class you name;
 	 * 
 	 * @param array $infos
 	 * @param array $T
@@ -41,7 +41,7 @@ class  RenderTables {
 // 	$T as Table containing all needed information for rendering the table and tabs.
 
 // 		$MapperObj = Mapper::getInstance();
-// 		$LMObj = LogManagement::getInstance();
+		$LMObj = LogManagement::getInstance();
 		$CMObj = ConfigurationManagement::getInstance();
 // 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
@@ -62,7 +62,6 @@ class  RenderTables {
 // 		$CurL = $NumLangues_[$WebSiteObj->getWebSiteEntry('ws_lang')];
 		
 		$Content = "<!-- Render Table Begin -->\r";
-		
 		if ( $T['tab_infos']['NbrOfTabs'] == 0 ) { $T['tab_infos']['NbrOfTabs'] = 1; }
 		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
 			$ClassLoaderObj = ClassLoader::getInstance();
@@ -84,6 +83,7 @@ class  RenderTables {
 		$ADC = &$T['ADC'];
 		$AD = &$T['AD'];
 		$tab_infos = &$T['tab_infos'];
+		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			switch ( $ADC['onglet'][$CurT]['legende'] ) {
@@ -162,6 +162,11 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
+ 				$LMObj->InternalLog(array( 'level' => loglevelBreakpoint, 'msg' => __METHOD__ .
+ 						"\$ADC['onglet'][\$CurT]['nbr_ligne']=`".$ADC['onglet'][$CurT]['nbr_ligne'].
+ 						"`; HighLightType=`". $ADC['onglet'][$CurT]['HighLightType'])."`" );
+				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
+
 				$Content .= "<table class='".$block."_t3' style='width:".$TableWidth."px; empty-cells: show; border-spacing: 1px;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
@@ -228,6 +233,7 @@ class  RenderTables {
 				}
 				$Content .= "</table>\r";
 			}
+			$tab_infos['HighLightType'] = $tab_infos['HighLightTypeBackup'];
 			if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }
 		}
 		if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }

@@ -182,16 +182,69 @@ class ModuleGlobalReport {
 	 * @return array
 	 */
 	private function reportTab02 (&$infos){
-		$Content = "image";
+		$CurrentSetObj = CurrentSet::getInstance();
+		$LMObj = LogManagement::getInstance();
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+		$I18nObj = I18n::getInstance();
+		
+		// This will be implemented with "'" at the end of the string 
+		$GeneratedJavaScriptObj->insertJavaScript('File', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
+		
+		$log = $LMObj->getStatisticsLog();
+		$strLabels = "'labels':[\r";
+		$strDatasetMemory = "[{\r\t\t\t'label':'".$I18nObj->getI18nEntry('tGraphLabelM')."',\r\t\t\t'data':[\r";
+		$strDatasetTime = "[{\r\t\t\t'label':'".$I18nObj->getI18nEntry('tGraphLabelT')."',\r\t\t\t'data':[\r";
+		$stepOne = true;
+		$timeStart = 0;
+		foreach ( $log as $l ) {
+			$strLabels .= "\t\t\t'".$l['context']."',\r";
+			$strDatasetMemory .= "\t\t\t\t'".($l['memoire']/1024/1024)."',\r";
+			if ( $stepOne === true ) { 
+				$timeStart = $l['temps'];
+				$stepOne = !$stepOne;
+				$strDatasetTime .= "\t\t\t\t'0',\r"; 
+			}
+			else { $strDatasetTime .= "\t\t\t\t'".round(($l['temps'] - $timeStart),4)."',\r"; }
+		}
+		$strLabels .= "\t\t]";
+		$strDatasetMemory	.= "\t\t\t],\r\t\t\t'fill':false,\r\t\t\t'borderColor': 'rgb(75, 192, 192)',\t\t}]\r";
+		$strDatasetTime		.= "\t\t\t],\r\t\t\t'fill':false,\r\t\t\t'borderColor': 'rgb(75, 192, 192)',\t\t}]\r";
+
+		$javaScriptForChartJs = "var Chart01 = new Chart(document.getElementById('statChart1'), {\r
+\ttype: 'line',
+\tdata: {\r
+\t\t".$strLabels.",\r
+\t\t'datasets':".$strDatasetMemory."
+\t},\r
+\toptions: {}\r
+});\r\r
+
+var Chart02 = new Chart(document.getElementById('statChart2'), {\r
+\ttype: 'line',
+\tdata: {\r
+\t\t".$strLabels.",\r
+\t\t'datasets':".$strDatasetTime."\r
+\t},\r
+\toptions: {}\r
+});\r\r
+";
+		
+		$GeneratedJavaScriptObj->insertJavaScript('Data',$javaScriptForChartJs."\r");
+		$Content = array();
+		$Content['1']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['2']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		
 		$config = array(
-				"nbr_ligne" => 1,
+				"nbr_ligne" => 2,
 				"nbr_cellule" => 1,
 				"legende" => 0,
+				"HighLightType" => 0,
+				
 		);
-		
 		$package = array ("content" => $Content , "config" => $config);
-		
-	}
+		return $package ;
+}
 	
 	/**
 	 * Returns the Stats report into an array for RenderTables:render()
