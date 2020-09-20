@@ -78,7 +78,7 @@ assign	document name "doc_uni_gestion_des_utilisateurs_p02.php"		to_article "fra
 assign	document name "doc_uni_gestion_du_profil_p01.php"				to_article "fra_gestion_du_profil_p01";
 assign	document name "doc_uni_gestion_du_site_p01.php"					to_article "fra_gestion_du_site_p01";
 assign	document name "doc_uni_generation_stylesheet_p01.php"			to_article "fra_generation_stylesheet_p01";
-assign	document name "doc_uni_liste_des_sites_p01.php"					to_article "fra_liste_des_sites_p01";
+assign	document name "doc_uni_websiteList_p01.php"					to_article "fra_liste_des_sites_p01";
 assign	document name "doc_uni_informations_utiles_p01.php"				to_article "fra_informations_utiles_p01";
 assign	document name "doc_uni_outil_conversion_type_p01.php"			to_article "fra_outil_conversion_type_p01";
 assign	document name "doc_uni_outil_nettoyage_script_p01.php"			to_article "fra_outil_nettoyage_script_p01";

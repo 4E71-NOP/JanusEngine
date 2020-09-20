@@ -41,11 +41,11 @@ $logTarget = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 /*Hydre-contenu_debut*/
-$localisation = " / uni_liste_des_sites_p01";
+$localisation = " / uni_websiteList_p01";
 $MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_liste_des_sites_p01");
+$LMObj->logCheckpoint("uni_websiteList_p01");
 $MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_liste_des_sites_p01");
+$MapperObj->setSqlApplicant("uni_websiteList_p01");
 
 switch ($l) {
 	case "fra":

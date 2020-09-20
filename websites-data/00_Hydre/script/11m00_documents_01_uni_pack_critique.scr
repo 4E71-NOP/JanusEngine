@@ -178,10 +178,10 @@ insert content	file "admin_panels/uni_informations_utiles_p01.php"		into "doc_un
 share document	name "doc_uni_informations_utiles_p01.php"	with_website Hydre	modification NO;
 update document	name "doc_uni_informations_utiles_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
 
-add document	name "doc_uni_liste_des_sites_p01.php"	type PHP;
-insert content	file "admin_panels/uni_liste_des_sites_p01.php"		into "doc_uni_liste_des_sites_p01.php";
-share document	name "doc_uni_liste_des_sites_p01.php"	with_website Hydre	modification NO;
-update document	name "doc_uni_liste_des_sites_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+add document	name "doc_uni_websiteList_p01.php"	type PHP;
+insert content	file "admin_panels/uni_websiteList_p01.php"		into "doc_uni_websiteList_p01.php";
+share document	name "doc_uni_websiteList_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_websiteList_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
 
 add document	name "doc_uni_outil_conversion_type_p01.php"	type PHP;
 insert content	file "admin_panels/uni_outil_conversion_type_p01.php"		into "doc_uni_outil_conversion_type_p01.php";

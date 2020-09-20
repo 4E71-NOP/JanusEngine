@@ -35,7 +35,7 @@ share document	name "doc_uni_gestion_du_profil_p01.php"				with_website "Hydr"	m
 share document	name "doc_uni_gestion_du_site_p01.php"					with_website "Hydr"	modification "NO";
 
 share document	name "doc_uni_informations_utiles_p01.php"				with_website "Hydr"	modification "NO";
-share document	name "doc_uni_liste_des_sites_p01.php"					with_website "Hydr"	modification "NO";
+share document	name "doc_uni_websiteList_p01.php"					with_website "Hydr"	modification "NO";
 share document	name "doc_uni_test_d_article_p01.php"					with_website "Hydr"	modification "NO";
 share document	name "doc_uni_outil_conversion_type_p01.php"			with_website "Hydr"	modification "NO";
 share document	name "doc_uni_outil_nettoyage_script_p01.php"			with_website "Hydr"	modification "NO";
