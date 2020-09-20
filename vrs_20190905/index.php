@@ -584,6 +584,7 @@ $MapperObj->setSqlApplicant("Stats");
 
 $LMObj->logCheckpoint("index_before_stat");
 $MapperObj->RemoveThisLevel( "/ idx" );
+$CurrentSetObj->setDataSubEntry('timeStat', 'end', $TimeObj->microtime_chrono());				// We get time for later use in the stats.
 
 
 // $localisation = " / idx";

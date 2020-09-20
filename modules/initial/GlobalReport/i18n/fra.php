@@ -26,8 +26,10 @@ $tabI18n = array(
 
 	'tGraphLabelM'	=>	"Mémoire",
 	'tGraphLabelT'	=>	"Temps",
+	'tGraphLabelM2'	=>	"% Mémoire",
+	'tGraphLabelT2'	=>	"% Temps",
 		
-		't2l11'	=>	"Pos",
+	't2l11'	=>	"Pos",
 	't2l12'	=>	"Point de contr&ocirc;le",
 	't2l13'	=>	"Temps",
 	't2l14'	=>	"M&eacute;moire",

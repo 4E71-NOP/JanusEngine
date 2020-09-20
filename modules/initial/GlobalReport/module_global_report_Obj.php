@@ -192,51 +192,63 @@ class ModuleGlobalReport {
 		$GeneratedJavaScriptObj->insertJavaScript('File', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
 		
 		$log = $LMObj->getStatisticsLog();
-		$strLabels = "'labels':[\r";
-		$strDatasetMemory = "[{\r\t\t\t'label':'".$I18nObj->getI18nEntry('tGraphLabelM')."',\r\t\t\t'data':[\r";
-		$strDatasetTime = "[{\r\t\t\t'label':'".$I18nObj->getI18nEntry('tGraphLabelT')."',\r\t\t\t'data':[\r";
 		$stepOne = true;
 		$timeStart = 0;
+		
+		$dataObjectChart1 = $this->initializeChartJsArray();
+		$dataObjectChart2 = $this->initializeChartJsArray();
+		$dataObjectChart3 = $this->initializeChartJsArray();
+		$dataObjectChart3['data']['datasets'][1] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
+		
+		$dataObjectChart1['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelM');
+		$dataObjectChart2['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelT');
+		$dataObjectChart3['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelM2');
+		$dataObjectChart3['data']['datasets'][1]['label'] = $I18nObj->getI18nEntry('tGraphLabelT2');
+		
+		$mainTimeEnd = $CurrentSetObj->getDataSubEntry('timeStat', 'end');
+		
 		foreach ( $log as $l ) {
-			$strLabels .= "\t\t\t'".$l['context']."',\r";
-			$strDatasetMemory .= "\t\t\t\t'".($l['memoire']/1024/1024)."',\r";
-			if ( $stepOne === true ) { 
+			
+			$curMemory = round(($l['memoire']/1024/1024),4);
+			$highestMemory = round(memory_get_peak_usage()/1024/1024);
+			
+			$dataObjectChart1['data']['datasets'][0]['data'][] = $curMemory;
+			$dataObjectChart1['data']['labels'][] = $l['context'];
+			
+			if ( $stepOne === true ) {
 				$timeStart = $l['temps'];
 				$stepOne = !$stepOne;
-				$strDatasetTime .= "\t\t\t\t'0',\r"; 
+				$dataObjectChart2['data']['datasets'][0]['data'][] = 0;
+				$mainTimeSpent = ($mainTimeEnd-$l['temps']);
 			}
-			else { $strDatasetTime .= "\t\t\t\t'".round(($l['temps'] - $timeStart),4)."',\r"; }
+			else { 
+				$dataObjectChart2['data']['datasets'][0]['data'][] = round(($l['temps'] - $timeStart),4);
+			}
+			$dataObjectChart2['data']['labels'][] = $l['context'];
+			$dataObjectChart3['data']['datasets'][0]['data'][] = ($curMemory/$highestMemory)*100;
+			$dataObjectChart3['data']['datasets'][1]['data'][] = round((($l['temps'] - $timeStart)/$mainTimeSpent)*100,4);
+			$dataObjectChart3['data']['labels'][] = $l['context'];
+			
 		}
-		$strLabels .= "\t\t]";
-		$strDatasetMemory	.= "\t\t\t],\r\t\t\t'fill':false,\r\t\t\t'borderColor': 'rgb(75, 192, 192)',\t\t}]\r";
-		$strDatasetTime		.= "\t\t\t],\r\t\t\t'fill':false,\r\t\t\t'borderColor': 'rgb(75, 192, 192)',\t\t}]\r";
+		
+		$dataObjectEncoded1 = json_encode($dataObjectChart1,JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+		$dataObjectEncoded2 = json_encode($dataObjectChart2,JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+		$dataObjectEncoded3 = json_encode($dataObjectChart3,JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
 
-		$javaScriptForChartJs = "var Chart01 = new Chart(document.getElementById('statChart1'), {\r
-\ttype: 'line',
-\tdata: {\r
-\t\t".$strLabels.",\r
-\t\t'datasets':".$strDatasetMemory."
-\t},\r
-\toptions: {}\r
-});\r\r
-
-var Chart02 = new Chart(document.getElementById('statChart2'), {\r
-\ttype: 'line',
-\tdata: {\r
-\t\t".$strLabels.",\r
-\t\t'datasets':".$strDatasetTime."\r
-\t},\r
-\toptions: {}\r
-});\r\r
+		$javaScriptForChartJs = "
+var Chart01 = new Chart(document.getElementById('statChart1'), ".$dataObjectEncoded1 ."\r);\r\r
+var Chart02 = new Chart(document.getElementById('statChart2'), ".$dataObjectEncoded2 ."\r);\r\r
+var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEncoded3 ."\r);\r\r
 ";
 		
 		$GeneratedJavaScriptObj->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['2']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['1']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['2']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['3']['1']['cont'] = "<canvas id='statChart3' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		
 		$config = array(
-				"nbr_ligne" => 2,
+				"nbr_ligne" => 3,
 				"nbr_cellule" => 1,
 				"legende" => 0,
 				"HighLightType" => 0,
@@ -245,6 +257,24 @@ var Chart02 = new Chart(document.getElementById('statChart2'), {\r
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 }
+
+	private function initializeChartJsArray () {
+		return array(
+				'type' => 'line',
+				'data' => array(
+						'labels' => array(),
+						'datasets' => array(
+								'0' => array(
+										'label' => 'Label',
+										'data' => array(),
+										'fill' => 'false',
+										'borderColor' => '#80a0C0'
+								),
+						)
+				),
+		);
+	}
+
 	
 	/**
 	 * Returns the Stats report into an array for RenderTables:render()
