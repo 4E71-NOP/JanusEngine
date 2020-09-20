@@ -63,7 +63,7 @@ $tab_infos['group']			= "mp_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 
 // --------------------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $pv['onglet_deco'];
 
 echo ("<form ACTION='index.php?' method='post' name='formulaire_gdp'>\r");
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 // --------------------------------------------------------------------------------------------
 $tl_['eng']['text_confirm1'] = "I confirm the layout modifications.";					$tl_['eng']['bouton1'] = "Modify";
@@ -417,7 +417,7 @@ echo ("<br>\r&nbsp;</td>\r
 <br>\r
 ");
 
-$JavaScriptFichier[] = "routines/website/javascript/lib_LayoutManagement.js";
+$JavaScriptFichier[] = "engine/javascript/lib_LayoutManagement.js";
 
 if ( $website['ws_info_debug'] < 10 ) {
 	unset (

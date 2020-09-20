@@ -89,7 +89,7 @@ switch ($l) {
 		));
 		break;
 }
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_ConvertTool.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_ConvertTool.js');
 
 // --------------------------------------------------------------------------------------------
 // Preparation des tables

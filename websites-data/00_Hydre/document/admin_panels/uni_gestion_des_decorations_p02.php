@@ -171,10 +171,10 @@ WHERE theme_id = '1'
 // $DEC est crée dans charge_donnees_theme_tableau.php
 $pv['gestion_deco'] = 1;		// active le segment de script dédié dans charge_donnée_tableau
 $theme_tableau = "theme_GD_";
-include ("routines/website/charge_donnees_theme_tableau.php");
+include ("engine/charge_donnees_theme_tableau.php");
 $theme_tableau_a_ecrire = "theme_GD_";
 $stylesheet_entete = "";
-include ("routines/website/charge_donnees_theme_stylesheet.php");
+include ("engine/charge_donnees_theme_stylesheet.php");
 echo ( $stylesheet . "\r");
 
 // Faire une requete pour retrouver le theme d'origine qui permettra de charger quelques information comme le fond (BG)
@@ -348,7 +348,7 @@ $tab_infos['group']			= "md_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 
 
@@ -483,7 +483,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		$tab_infos_bakup = array();
 		foreach ( $tab_infos as $K => $V ) { $tab_infos_bakup[$K] = $V; }
 //		$pv['div_compteur_2'] = 1;
-		include ("routines/website/module_deco_10_menu_decoration.php");
+		include ("engine/module_deco_10_menu_decoration.php");
 		foreach ( $tab_infos_bakup as $K => $V ) { $tab_infos[$K] = $V; }
 		unset ($tab_infos_bakup, $K, $V );
 		TJLM_insertion ( 1 , $j , $GD_module_['module_name'] , 'formulaire_gdd' );
@@ -505,7 +505,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		$pv['backup_bloc'] = $_REQUEST['bloc'];
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];	
 		//$pv['div_compteur_2'] = 1;
-		include ("routines/website/module_deco_20_caligraphe_decoration.php");
+		include ("engine/module_deco_20_caligraphe_decoration.php");
 		unset ( $K, $V );
 		foreach ( $tab_infos_bakup as $K => $V ) { $tab_infos[$K] = $V; }
 		unset ($tab_infos_bakup, $K, $V );
@@ -582,7 +582,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			$pv['TabTJED'][] = "M_DECORA[".$GD_module_['module_name']."_".$input."c]";
 		}
 
-		if ( !function_exists("module_deco_30_1_div") ) { include ("routines/website/module_deco_30_1_div.php"); }		
+		if ( !function_exists("module_deco_30_1_div") ) { include ("engine/module_deco_30_1_div.php"); }		
 		$_REQUEST['div_id']['un_div'] = "id='".$GD_module_['module_name']. "'";		
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
 		module_deco_30_1_div ("theme_GD_" , "GD_pres_" , "GD_module_", 0 );		
@@ -660,7 +660,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	// --------------------------------------------------------------------------------------------
 	case 40:	
 	case "elegance":
-		if ( !function_exists("module_deco_40_elegance") ) { include ("routines/website/module_deco_40_elegance.php"); }
+		if ( !function_exists("module_deco_40_elegance") ) { include ("engine/module_deco_40_elegance.php"); }
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
 		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
 		$_REQUEST['div_id']['ex12'] = "id='".$GD_module_['module_name']."_ex12'";
@@ -729,7 +729,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	// --------------------------------------------------------------------------------------------
 	case 50:	
 	case "exquise":		
-		if ( !function_exists("module_deco_50_exquise") ) { include ("routines/website/module_deco_50_exquise.php"); }	
+		if ( !function_exists("module_deco_50_exquise") ) { include ("engine/module_deco_50_exquise.php"); }	
 
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
 		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
@@ -820,7 +820,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	// --------------------------------------------------------------------------------------------
 	case 60:	
 	case "elysion":
-		if ( !function_exists("module_deco_60_elysion") ) { include ("routines/website/module_deco_60_elysion.php"); }
+		if ( !function_exists("module_deco_60_elysion") ) { include ("engine/module_deco_60_elysion.php"); }
 
 		$_REQUEST['bloc'] = $_REQUEST['blocN'];
 		$_REQUEST['div_id']['ex11'] = "id='".$GD_module_['module_name']."_ex11'";
@@ -1114,8 +1114,8 @@ closedir($handledir);
 
 $JavaScriptInitDonnees[] = $pv['FSJavaScript'];
 
-$JavaScriptFichier[] = "routines/website/javascript_gestion_decoration.js";
-$JavaScriptFichier[] = "routines/website/javascript_ColorPicker.js";
+$JavaScriptFichier[] = "engine/javascript_gestion_decoration.js";
+$JavaScriptFichier[] = "engine/javascript_ColorPicker.js";
 
 
 if ( count($TJED) > 0 ) {

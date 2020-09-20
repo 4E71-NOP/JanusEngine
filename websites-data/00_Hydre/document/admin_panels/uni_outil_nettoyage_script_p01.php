@@ -73,7 +73,7 @@ switch ($l) {
 		));
 		break;
 }
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_HydrScriptFormatTool.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
 
 $Content .= $I18nObj->getI18nEntry('Invite1').
 "<br>\r

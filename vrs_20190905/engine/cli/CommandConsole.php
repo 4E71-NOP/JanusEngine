@@ -51,7 +51,7 @@ class CommandConsole {
 		$CMObj = ConfigurationManagement::getInstance();
 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
-		include ("routines/website/cli/i18n/".$l.".php");
+		include ("engine/cli/i18n/".$l.".php");
 		self::$i18n = $i18n;
 	}
 	
@@ -73,7 +73,7 @@ class CommandConsole {
 		$CMObj = ConfigurationManagement::getInstance();
 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 
-		include ("routines/website/cli/SqlQueryTable.php");
+		include ("engine/cli/SqlQueryTable.php");
 	
 	}
 	
@@ -83,7 +83,7 @@ class CommandConsole {
 	 *
 	 */
 	private static function makeInitTable () {
-		include ("routines/website/cli/InitTable.php");
+		include ("engine/cli/InitTable.php");
 	}
 
 	/**
@@ -92,7 +92,7 @@ class CommandConsole {
 	 *  
 	 */
 	private static function makeCheckTable () {
-		include ("routines/website/cli/CheckTable.php");
+		include ("engine/cli/CheckTable.php");
 	}
 
 	/**
@@ -101,7 +101,7 @@ class CommandConsole {
 	 * 
 	 */
 	private static function makePreRequisiteTable () {
-		include ("routines/website/cli/PreRequisiteTable.php");
+		include ("engine/cli/PreRequisiteTable.php");
 	}
 
 	/**
@@ -110,7 +110,7 @@ class CommandConsole {
 	 *
 	 */
 	 private static function makeActionTable () {
-		include ("routines/website/cli/ActionTable.php");
+		include ("engine/cli/ActionTable.php");
 		
 	}
 	

@@ -29,7 +29,7 @@
 //	$tab_infos['cell_4_txt']		= $tl_[$l]['onglet_4'];
 //	$tab_infos['cell_5_txt']		= $tl_[$l]['onglet_5'];
 //	$tab_infos['cell_6_txt']		= $tl_[$l]['onglet_6'];
-//	include ("routines/website/affichage_donnees.php");
+//	include ("engine/affichage_donnees.php");
 //	$pv['onglet']++;
 //	$ADC['onglet'][$pv['onglet']]['nbr_ligne'] = 5;	$ADC['onglet'][$pv['onglet']]['nbr_cellule'] = 4;	$ADC['onglet'][$pv['onglet']]['legende'] = 1;
 //	$lt = 1;
@@ -137,7 +137,7 @@ $tab_infos['cell_5_txt']		= 5;
 $tab_infos['cell_6_txt']		= 6;
 $tab_infos['cell_7_txt']		= 7;
 $tab_infos['cell_8_txt']		= 8;
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 
 ?>

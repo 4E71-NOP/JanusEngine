@@ -13,7 +13,7 @@
 /*Hydre-licence-fin*/
 include ("define.php");
 
-include ("routines/website/utility/ClassLoader.php");
+include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 $ClassLoaderObj->provisionClass('Time');
 $ClassLoaderObj->provisionClass('LogManagement');
@@ -340,8 +340,8 @@ $DocContent .= "</div>\r";
 // --------------------------------------------------------------------------------------------
 // Javascript files
 // --------------------------------------------------------------------------------------------
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_HydrCore.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_statique.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrCore.js');
+// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'MWMbody' ).style.visibility = 'visible';");
 

@@ -236,7 +236,7 @@ class ModuleDocumentDisplay {
 					$tab_infos['mode_rendu']		= 1;
 
 					
-// 					if (!class_exists("RenderTables")) { include ("routines/website/utility/RenderTables.php"); }
+// 					if (!class_exists("RenderTables")) { include ("engine/utility/RenderTables.php"); }
 					$ClassLoaderObj->provisionClass('RenderTables');
 					$RenderTables = RenderTables::getInstance();
 					$ContentMenu .= $RenderTables->render($infos, $T);

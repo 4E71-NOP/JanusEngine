@@ -13,7 +13,7 @@
 /*Hydre-licence-fin*/
 include ("define.php");
 
-include ("routines/website/utility/ClassLoader.php");
+include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 $ClassLoaderObj->provisionClass('Time');
 $ClassLoaderObj->provisionClass('LogManagement');
@@ -158,7 +158,7 @@ $MapperObj->RemoveThisLevel($localisation );
 $MapperObj->setSqlApplicant("Prepare JavaScript Object");
 
 $ClassLoaderObj->provisionClass('GeneratedJavaScript');
-// include ("routines/website/entity/others/GeneratedJavaScript.php");
+// include ("engine/entity/others/GeneratedJavaScript.php");
 $CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
 $GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 
@@ -281,11 +281,11 @@ $MapperObj->RemoveThisLevel($localisation );
 $MapperObj->setSqlApplicant("Page");
 
 $ClassLoaderObj->provisionClass('RenderTables');
-// include ("routines/website/utility/RenderTables.php");
+// include ("engine/utility/RenderTables.php");
 $RenderTablesObj = RenderTables::getInstance();
 
 $ClassLoaderObj->provisionClass('InteractiveElements');
-// include ("routines/website/utility/InteractiveElements.php");
+// include ("engine/utility/InteractiveElements.php");
 $InteractiveElementsObj = InteractiveElements::getInstance();
 
 $T = array();
@@ -333,16 +333,16 @@ $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['
 // --------------------------------------------------------------------------------------------
 unset ($A);
 
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_HydrCore.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrCore.js');
 $GeneratedJavaScriptObj->insertJavaScript('File', 'install/install_routines/install_test_db.js');
 $GeneratedJavaScriptObj->insertJavaScript('File', 'install/install_routines/install_fonctions.js');
 $GeneratedJavaScriptObj->insertJavaScript('File', '../modules/initial/Tooltip/lib_tooltip.js');
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_onglet.js');
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_lib_calculs_decoration.js');
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_ElementAnimation.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_statique.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_Aide_dynamique.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_lib_calculs_decoration.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_onglet.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_ElementAnimation.js');
+// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
+// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_Aide_dynamique.js');
+// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
 
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'MWMbody' ).style.visibility = 'visible';");

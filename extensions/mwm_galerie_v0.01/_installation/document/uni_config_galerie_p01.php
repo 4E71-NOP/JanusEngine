@@ -98,7 +98,7 @@ $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
 
 echo ("<form ACTION='index.php?' method='post' name='formulaire_GG_config'>\r");
 
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 echo (
 $bloc_html['post_hidden_sw'].

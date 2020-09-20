@@ -15,7 +15,7 @@ include ("define.php");
 
 // --------------------------------------------------------------------------------------------
 
-include ("routines/website/utility/ClassLoader.php");
+include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
 $ClassLoaderObj->provisionClass('Time');
@@ -49,7 +49,7 @@ if ( strpos($Navigator, "MSIE" ) !== FALSE ) {
 }
 
 if ( $obsoleteBrowser == 1 ) {
-	include ( "routines/website/staticPages/UnsupportedBrowserBanner.php");
+	include ( "engine/staticPages/UnsupportedBrowserBanner.php");
 	exit();
 }
 unset ( $Navigator );
@@ -499,8 +499,8 @@ $MapperObj->setSqlApplicant("Prepare JavaScript Object");
 $ClassLoaderObj->provisionClass('GeneratedJavaScript');
 $CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
 $GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_HydrCore.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_lib_calculs_decoration.js');
+$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrCore.js');
+// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi('HydrBody').style.visibility = 'visible';");
 
 

@@ -318,7 +318,7 @@ $tab_infos['cell_3_txt']		= $tl_[$l]['onglet_3'];
 $tab_infos['cell_4_txt']		= $tl_[$l]['onglet_4'];
 $tab_infos['cell_5_txt']		= $tl_[$l]['onglet_5'];
 $tab_infos['cell_6_txt']		= $tl_[$l]['onglet_6'];
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 // --------------------------------------------------------------------------------------------
 switch ( $_REQUEST['uni_gestion_des_articles_p'] ) {

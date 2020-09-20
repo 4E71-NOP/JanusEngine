@@ -66,9 +66,9 @@ class  RenderTables {
 		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('RenderTabs');
-// 			if (!class_exists("RenderTabs")) { include ("routines/website/utility/RenderTabs.php"); }
+// 			if (!class_exists("RenderTabs")) { include ("engine/utility/RenderTabs.php"); }
 			$RenderTabsObj = RenderTabs::getInstance();
-			$GeneratedJavaScriptObj->insertJavaScript('File', "routines/website/javascript/lib_TabsManagement.js");
+			$GeneratedJavaScriptObj->insertJavaScript('File', "engine/javascript/lib_TabsManagement.js");
 			$Content .= $RenderTabsObj->render($infos, $T); 
 		}
 		

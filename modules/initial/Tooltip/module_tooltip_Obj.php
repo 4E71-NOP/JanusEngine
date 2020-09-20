@@ -40,8 +40,8 @@ class ModuleTooltip {
 		if ($cdy == 0) { $cdy = 256;}
 
 		$GeneratedJavaScriptObj->insertJavaScript('File', '../modules/initial/Tooltip/lib_tooltip.js');
-// 		$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript_lib_calculs_decoration.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'routines/website/javascript/lib_DecorationManagement.js');
+// 		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
+		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_DecorationManagement.js');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');

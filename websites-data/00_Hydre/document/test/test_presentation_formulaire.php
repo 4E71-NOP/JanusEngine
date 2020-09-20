@@ -43,7 +43,7 @@ $tab_infos['document']			= "doc";
 $tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
 $tab_infos['cell_2_txt']		= $tl_[$l]['onglet_2'];
 $tab_infos['cell_3_txt']		= $tl_[$l]['onglet_3'];
-include ("routines/website/affichage_donnees.php");
+include ("engine/affichage_donnees.php");
 
 /*Hydre-contenu_fin*/
 ?>

@@ -103,28 +103,28 @@ if ( $user['group_tag'] == 3 ) {
 	}
 // --------------------------------------------------------------------------------------------
 //	Action
-	include_once ("routines/website/manipulation_article.php");
-	include_once ("routines/website/manipulation_article_config.php");
-	include_once ("routines/website/manipulation_deadline.php");
-	include_once ("routines/website/manipulation_category.php");
-	include_once ("routines/website/manipulation_contexte.php");
-	include_once ("routines/website/manipulation_decoration.php");
-	include_once ("routines/website/manipulation_document.php");
-	include_once ("routines/website/manipulation_group.php");
-	include_once ("routines/website/manipulation_module.php");
-	include_once ("routines/website/manipulation_keyword.php");
-	include_once ("routines/website/manipulation_layout.php");
-	include_once ("routines/website/manipulation_site.php");
-	include_once ("routines/website/manipulation_theme.php");
-	include_once ("routines/website/manipulation_tag.php");
-	include_once ("routines/website/manipulation_utilisateur.php");
-	include_once ("routines/website/console_de_commande.php");
+	include_once ("engine/manipulation_article.php");
+	include_once ("engine/manipulation_article_config.php");
+	include_once ("engine/manipulation_deadline.php");
+	include_once ("engine/manipulation_category.php");
+	include_once ("engine/manipulation_contexte.php");
+	include_once ("engine/manipulation_decoration.php");
+	include_once ("engine/manipulation_document.php");
+	include_once ("engine/manipulation_group.php");
+	include_once ("engine/manipulation_module.php");
+	include_once ("engine/manipulation_keyword.php");
+	include_once ("engine/manipulation_layout.php");
+	include_once ("engine/manipulation_site.php");
+	include_once ("engine/manipulation_theme.php");
+	include_once ("engine/manipulation_tag.php");
+	include_once ("engine/manipulation_utilisateur.php");
+	include_once ("engine/console_de_commande.php");
 
 	$_REQUEST['sql_initiateur']			= "Installation extension";
 	$_REQUEST['contexte_d_execution']	= "Extension_installation";
 	$_REQUEST['mode_operatoire'] 		= "connexion_directe";
 //	include_once ("install/install_routines/fonction_install.php");
-	include_once ("routines/website/formattage_commande.php");
+	include_once ("engine/formattage_commande.php");
 
 	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "filename";	$section = "tables_creation";
 	include ("install/install_routines/admin_creation_database.php");
@@ -218,7 +218,7 @@ if ( $user['group_tag'] == 3 ) {
 		$tab_infos['cell_id']			= "tab";
 		$tab_infos['document']			= "doc";
 		$tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
-		include ("routines/website/affichage_donnees.php");
+		include ("engine/affichage_donnees.php");
 	break;
 	case "Retirer":
 	break;

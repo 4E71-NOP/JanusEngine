@@ -706,7 +706,7 @@ $Content .= $RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 
-$GeneratedJavaScriptObj->insertJavaScript('File', "routines/website/javascript/lib_themeManagement.js");
+$GeneratedJavaScriptObj->insertJavaScript('File', "engine/javascript/lib_themeManagement.js");
 $GeneratedJavaScriptObj->insertJavaScript('Onload', 'GestionThemeMAJJauge();');
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

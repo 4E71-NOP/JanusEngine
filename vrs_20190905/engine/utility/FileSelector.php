@@ -103,7 +103,7 @@ class FileSelector {
 		$RootUri = strpos( $_SERVER['REQUEST_URI'] , "/current/index.php" );
 		$Uri = substr ( $_SERVER['REQUEST_URI'] , 0 , $RootUri );
 		
-		$GeneratedJavaScriptObj->insertJavaScript('File' , "routines/website/javascript/FileSelector.js");
+		$GeneratedJavaScriptObj->insertJavaScript('File' , "engine/javascript/FileSelector.js");
 		$GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"".$Uri. "\"");
 		$GeneratedJavaScriptObj->insertJavaScript('Init' , "var fs = new FileSelector('FileSelectorLines');");
 		

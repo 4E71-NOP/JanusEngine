@@ -40,24 +40,24 @@ class DalFacade {
 			case "MYSQLI" :
 				$ClassLoaderObj->provisionClass('SddmMySQLI');
 				$this->DALInstance = SddmMySQLI::getInstance ();
-// 				include ("routines/website/sddm/SddmMySQLI.php");
+// 				include ("engine/sddm/SddmMySQLI.php");
 				break;
 			case "PDOMYSQL" :
 				$ClassLoaderObj->provisionClass('SddmPDO');
 				$this->DALInstance = SddmPDO::getInstance();
-// 				include ("routines/website/sddm/SddmPDO.php");
+// 				include ("engine/sddm/SddmPDO.php");
 				break;
 			case "SQLITE" :
 				break;
 			case "ADODB" :
 				$ClassLoaderObj->provisionClass('SddmADODB');
 				$this->DALInstance = SddmADODB::getInstance();
-// 				include ("routines/website/sddm/SddmADODB.php");
+// 				include ("engine/sddm/SddmADODB.php");
 				break;
 			case "PEARDB" :
 				$ClassLoaderObj->provisionClass('SddmPEARDB');
 				$this->DALInstance = SddmPEARDB::getInstance();
-// 				include ("routines/website/sddm/SddmPEARDB.php");
+// 				include ("engine/sddm/SddmPEARDB.php");
 				break;
 			case "PEARSQLITE" :
 				break;

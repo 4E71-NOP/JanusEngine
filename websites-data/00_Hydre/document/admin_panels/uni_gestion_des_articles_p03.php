@@ -269,7 +269,7 @@ $tab_infos['cell_2_txt']	= $tl_[$l]['onglet2'];
 $tab_infos['cell_3_txt']	= $tl_[$l]['onglet3'];
 $tab_infos['cell_4_txt']	= $tl_[$l]['onglet4'];
 
-include ("routines/website/layout_formulaire.php");
+include ("engine/layout_formulaire.php");
 
 // --------------------------------------------------------------------------------------------
 // $docu_ancien_contenu  = addslashes($MAA_['docu_cont_brut']) ;

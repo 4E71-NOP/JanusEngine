@@ -197,7 +197,7 @@ if ( file_exists($_REQUEST['WM_VFA_script_file']) ) {
 	$document_tableau_save = $ThemeDataObj->getThemeName();
 	$document_tableau = "VFA_";
 	${$document_tableau}['docu_cont'] = file_get_contents ($_REQUEST['WM_VFA_script_file']);
-	include ("routines/website/module_affiche_document_convert.php");
+	include ("engine/module_affiche_document_convert.php");
 	$Content .= "<hr>";
 	$Content .= ${$document_tableau}['docu_cont'];
 	$Content .= "<hr>";

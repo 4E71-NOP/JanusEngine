@@ -37,11 +37,11 @@ $statistiques_ = array();
 $statistiques_index = 0;
 
 include ("../../../version_actuelle/".$_REQUEST['fc']);
-include ("../../../version_actuelle/routines/website/fonctions_universelles.php");
+include ("../../../version_actuelle/engine/fonctions_universelles.php");
 $SQL_tab = array();
 $SQL_tab_abrege = array();
 config_variable();
-include ("../../../version_actuelle/routines/website/preparatifs_sql.php");
+include ("../../../version_actuelle/engine/preparatifs_sql.php");
 
 function statistique_checkpoint ( $routine ) {
 	if ( $_REQUEST['StatistiqueInsertion'] == 1 ) {

@@ -29,7 +29,7 @@ Parcour de la chaine encodée pour selectionner les modes et vérifier que la ch
 */
 
 
-include ("routines/website/formattage_commande.php");
+include ("engine/formattage_commande.php");
 
 $tampon_commande = '
 // fluffy the world destroyer is about to kill something. We will see if he gonna do the marshmallow.
