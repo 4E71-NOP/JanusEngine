@@ -96,7 +96,7 @@ function layout_ligne () {
 	<td ".$pv['decotable_style01'].">Position : 
 	<input type='text' name='M_PRESNT[L".$ptr['lyoc_id']."][nouvelordre]' size='2' maxlength='3' value='".$ptr['lyoc_line']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>
 	</td>\r
-	<td ".$pv['decotable_style01']."><img src='../graph/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['deco_icone_bas']."' alt='&gt;&gt;' border='0' width='24' height='24' onClick=\"CommuteAffichage ( 'Contenu_".$ptr['lyoc_line']."' );\"></td>\r
+	<td ".$pv['decotable_style01']."><img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['deco_icone_bas']."' alt='&gt;&gt;' border='0' width='24' height='24' onClick=\"CommuteAffichage ( 'Contenu_".$ptr['lyoc_line']."' );\"></td>\r
 	</tr>\r
 	</table>\r
 

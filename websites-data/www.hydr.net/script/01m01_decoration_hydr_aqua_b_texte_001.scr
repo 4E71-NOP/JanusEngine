@@ -71,7 +71,7 @@ s2_h01	'aqua_B01_submit_s2_h01.png'	s2_h02	'aqua_B01_submit_s2_h02.png'	s2_h03	'
 s3_n01	'aqua_B01_submit_s3_n01.png'	s3_n02	'aqua_B01_submit_s3_n02.png'	s3_n03	'aqua_B01_submit_s3_n03.png'		
 s3_h01	'aqua_B01_submit_s3_h01.png'	s3_h02	'aqua_B01_submit_s3_h02.png'	s3_h03	'aqua_B01_submit_s3_h03.png'		
 							
-tab_y	'32'	tab_a_x	'16'	tab_c_x	'16'		
+tab_y	'32'	tab_a_x	'8'	tab_c_x	'8'		
 tab_down_a	'aqua_B01_tab_up_a.png'	tab_down_b	'aqua_B01_tab_up_b.png'	tab_down_c	'aqua_B01_tab_up_c.png'		
 tab_up_a	'aqua_B01_tab_down_a.png'	tab_up_b	'aqua_B01_tab_down_b.png'	tab_up_c	'aqua_B01_tab_down_c.png'		
 tab_hover_a	'aqua_B01_tab_hover_a.png'	tab_hover_b	'aqua_B01_tab_hover_b.png'	tab_hover_c	'aqua_B01_tab_hover_c.png'		

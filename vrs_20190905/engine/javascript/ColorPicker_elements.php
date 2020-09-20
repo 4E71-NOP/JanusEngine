@@ -26,8 +26,8 @@ z-index: 90;
 <table border='0' cellspacing='0' cellpadding='0'>\r
 <tr>\r
 <td><div id='MWM_CP_PR_col_1' style='width: 64px; height: 64px;'></div></td>\r
-<td><div id='MWM_CP_PR_PR' style='width: 300px; height: 64px; background-image: url(../graph/universal/palette_rapide.png);'></div></td>\r
-<td><div id='MWM_CP_PR_icone_mode' style='width: 64px; height: 64px; background-image: url(../graph/universal/icone_switch_colorpicker.png); background-color: #A0A0A0; background-repeat: no-repeat; background-position: center;'></div></td>\r
+<td><div id='MWM_CP_PR_PR' style='width: 300px; height: 64px; background-image: url(../gfx/universal/palette_rapide.png);'></div></td>\r
+<td><div id='MWM_CP_PR_icone_mode' style='width: 64px; height: 64px; background-image: url(../gfx/universal/icone_switch_colorpicker.png); background-color: #A0A0A0; background-repeat: no-repeat; background-position: center;'></div></td>\r
 </tr>\r
 </table>\r
 </div>\r
@@ -71,12 +71,12 @@ border-color: #000000; border: 1px; border-style: solid;
 z-index: 90;'>
 
 <div id='MWM_CP_PC_degrade' style='position: absolute; left: ".$cpd_deg['x']."px; top: ".$cpd_deg['y']."px; width: 256px; height: 256px; 
-background-image: url(../graph/universal/colorpicker_degrade_alpha.png); background-color: #FF0000; border-color: #000000; border: 1px; border-style: solid;'></div>
+background-image: url(../gfx/universal/colorpicker_degrade_alpha.png); background-color: #FF0000; border-color: #000000; border: 1px; border-style: solid;'></div>
 
 <div id='MWM_CP_PC_hue_curseur' style='position: absolute; left: ".($cpd_hue['x']-6)."px; top: ".($cpd_hue['y']-2)."px; width: 46px; height: 6px; 
-background-image: url(../graph/universal/HUE_curseur_001.png);'></div>
+background-image: url(../gfx/universal/HUE_curseur_001.png);'></div>
 <div id='MWM_CP_PC_hue' style='position: absolute; left: ".$cpd_hue['x']."px; top: ".$cpd_hue['y']."px; width: 32px; height: 252px; 
-background-image: url(../graph/universal/hue.png); border-color: #000000; border: 1px; border-style: solid;'></div>
+background-image: url(../gfx/universal/hue.png); border-color: #000000; border: 1px; border-style: solid;'></div>
 
 
 <div id='MWM_CP_PC_col_11' style='position: absolute; left: ".($cpd_ctl['x']+1)."px; top: ".($cpd_ctl['y']+1)."px; width: 64px; height: 32px; 
@@ -99,6 +99,6 @@ B:<input type='text' size='2' value='00' id='MWM_CP_PC_col_b_input'></div>
 <button id='MWM_CP_PC_ban' style='position: absolute; left: ".$cpd_bcl['x']."px; top: ".$cpd_bcl['y']."px; width: ".$cpd_bcl['tx']."px; height: ".$cpd_bcl['ty']."px;'>Cancel</button>
 
 
-<div id='MWM_CP_PC_icone_mode' style='position: absolute; left: ".$cpd_swm['x']."px; top: ".$cpd_swm['y']."px;	width: 16px; height: 16px; background-image: url(../graph/universal/icone_switch_colorpicker.png); background-repeat: no-repeat; background-position: center;'>
+<div id='MWM_CP_PC_icone_mode' style='position: absolute; left: ".$cpd_swm['x']."px; top: ".$cpd_swm['y']."px;	width: 16px; height: 16px; background-image: url(../gfx/universal/icone_switch_colorpicker.png); background-repeat: no-repeat; background-position: center;'>
 </div>\r
 ");

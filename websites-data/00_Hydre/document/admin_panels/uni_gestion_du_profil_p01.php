@@ -529,8 +529,8 @@ else {
 	$T['tab_infos']['GroupName']		= "theme";
 	$T['tab_infos']['Height']			= 1024;
 	
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
-	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', "../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', "../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', "../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
 	$ModulePaddingX = 64;
 	$ModulePaddingY = 64;
 // 	$LMObj->logDebug($PmThemeDataObj->getThemeData(), "PmThemeDataObj");
@@ -592,15 +592,15 @@ else {
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttd', "
 		<table style='height:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft_y')."px;' border='0' cellspacing='0' cellpadding='0'>\r
 		<tr>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1').");'></td>\r
-		<td style='background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft2').");'>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1_x')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1').");'></td>\r
+		<td style='background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft2').");'>\r
 		<span class='".$PmBlock."_tb4' style='color:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_txt_titre_col').";'>\r
 		");
 
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttf', "
 		</span>\r
 		</td>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3_x')."px;	background-image: url(../graph/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3').");'></td>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3_x')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3').");'></td>\r
 		</tr>\r
 		</table>\r
 		");
@@ -735,7 +735,7 @@ else {
 		reset ($iconList);
 		foreach ( $iconList as $A ) {
 			if ( strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)) != 0 ) {
-				$PmIcon[$j] = "background-image: url(../graph/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
+				$PmIcon[$j] = "background-image: url(../gfx/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
 			}
 			$j++;
 		}
@@ -807,7 +807,7 @@ else {
 	$themeEntries = array();
 	foreach ( $themeList as $A ) {
 		if (strlen($PmThemeDataObj->getThemeDataEntry($A)) != 0) {
-			$themeEntries[$j] = "background-image: url(../graph/".$themeDir."/".$PmThemeDataObj->getThemeDataEntry($A).");";
+			$themeEntries[$j] = "background-image: url(../gfx/".$themeDir."/".$PmThemeDataObj->getThemeDataEntry($A).");";
 			$j++;
 		}
 	}

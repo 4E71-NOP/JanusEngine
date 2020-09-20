@@ -255,8 +255,8 @@ class ModuleMenuType02 {
 				$GeneratedJavaScriptObj->insertJavaScript ( "Onload" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
 			if ( $Ab['affiche_icones'] == 1 ) {
-				if ( strlen ($Ab['icone_repertoire']) > 0 ) { $Micone_rep =		"<img src='../graph/".$Ab['repertoire']."/".$Ab['icone_repertoire']."'	width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
-				if ( strlen ($Ab['icone_fichier']) > 0 ) { $Micone_fichier =	"<img src='../graph/".$Ab['repertoire']."/".$Ab['icone_fichier']."'		width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
+				if ( strlen ($Ab['icone_repertoire']) > 0 ) { $Micone_rep =		"<img src='../gfx/".$Ab['repertoire']."/".$Ab['icone_repertoire']."'	width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
+				if ( strlen ($Ab['icone_fichier']) > 0 ) { $Micone_fichier =	"<img src='../gfx/".$Ab['repertoire']."/".$Ab['icone_fichier']."'		width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
 			}
 			
 			$infos['backup']['affiche_module_mode']	= $infos['affiche_module_mode'];

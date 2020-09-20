@@ -241,7 +241,7 @@ $fsi['height']					= 512;
 $fsi['js_cs']					= "GDGestionRepertoire();";
 $fsi['formulaire']				= "formulaire_gdd";
 $fsi['champs']					= "M_DECORA[repertoire]";
-$fsi['lsdf_chemin']				= "../graph";
+$fsi['lsdf_chemin']				= "../gfx";
 $fsi['mode_selection']			= "repertoire";
 $fsi['lsdf_mode']				= "repertoire";
 $fsi['lsdf_nivmax']				= 0;
@@ -395,12 +395,12 @@ break;
 }
 
 $_REQUEST['sauvegarde']['_REQUEST_bloc_01'] = $_REQUEST['bloc'];
-$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
+$theme_GD_['background_image'] = "../gfx/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
 
 echo ("<div id='decoration_principal' class='" . $theme_tableau . $_REQUEST['bloc']."_fco' style='width: ".( ${$theme_tableau}['theme_module_largeur_interne'] - 24 ) ."px; height: ".$tab_infos['doc_height']."px; overflow: hidden;' >\r");
 for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i']++ ) { 
 
-	$theme_GD_['background_image'] = "../graph/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
+	$theme_GD_['background_image'] = "../gfx/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
 	$pv['module_ecart_bordure_x'] = 128;
 	$pv['module_ecart_bordure_y'] = 32;
 	$pv['bloc_taille_y'] = "height: " . 320 ."px; ";
@@ -608,7 +608,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</tr>\r
 
 		<tr>\r
-		<td style='background-image: url(../graph/universal/noir_50prct.png);'>\r
+		<td style='background-image: url(../gfx/universal/noir_50prct.png);'>\r
 			<table style='
 			width:".$pv['60pc']."px; 
 			margin-left:".$pv['decalage_60pc']."px;
@@ -689,7 +689,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</tr>\r
 
 		<tr>\r
-		<td style='background-image: url(../graph/universal/noir_50prct.png);'>\r
+		<td style='background-image: url(../gfx/universal/noir_50prct.png);'>\r
 			<table style='
 			width:".$pv['60pc']."px; 
 			margin-left:".$pv['decalage_60pc']."px;
@@ -769,7 +769,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</tr>\r
 
 		<tr>\r
-		<td style='background-image: url(../graph/universal/noir_50prct.png);'>\r
+		<td style='background-image: url(../gfx/universal/noir_50prct.png);'>\r
 			<table style='
 			width:".$pv['60pc']."px; 
 			margin-left:".$pv['decalage_60pc']."px;
@@ -873,7 +873,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		</tr>\r
 
 		<tr>\r
-		<td style='background-image: url(../graph/universal/noir_50prct.png);'>\r
+		<td style='background-image: url(../gfx/universal/noir_50prct.png);'>\r
 			<table style='
 			width:".$pv['60pc']."px; 
 			margin-left:".$pv['decalage_60pc']."px;
@@ -1061,16 +1061,16 @@ $pv['TabValInitiales'] = substr( $pv['TabValInitiales'], 0 , -2 ) . "\r};\r";
 if ( $pv['tvi_cmpt'] > 0 ) { $JavaScriptInitDonnees[] = $pv['TabValInitiales']; }
 
 // --------------------------------------------------------------------------------------------
-$handledir = opendir("../graph/");
+$handledir = opendir("../gfx/");
 $pv['FSJavaScript'] = "var TabFSJS = {\r";
 while (false !== ($pv['entrydir'] = readdir($handledir))) {
-	if ( $pv['entrydir'] != "." && $pv['entrydir'] != ".." && !is_file("../graph/".$entrysir)  ) {
+	if ( $pv['entrydir'] != "." && $pv['entrydir'] != ".." && !is_file("../gfx/".$entrysir)  ) {
 		$pv['FSJavaScript'] .= "\"".$pv['entrydir']."\": { \r";
-		$handlefile = opendir("../graph/".$pv['entrydir']."/");
+		$handlefile = opendir("../gfx/".$pv['entrydir']."/");
 		$pv['fcount'] = 0;
 		$pv['fichiertrouve'] = 0;
 		while (false !== ($pv['entryfile'] = readdir($handlefile))) {
-			if ( $pv['entryfile'] != "." && $pv['entryfile'] != ".." && !is_dir("../graph/".$pv['entrydir']."/".$pv['entryfile']) ) {
+			if ( $pv['entryfile'] != "." && $pv['entryfile'] != ".." && !is_dir("../gfx/".$pv['entrydir']."/".$pv['entryfile']) ) {
 				if ( stripos($pv['entryfile'], ".gif") != FALSE || stripos($pv['entryfile'], ".jpg") != FALSE || stripos($pv['entryfile'], ".jpeg") != FALSE || stripos($pv['entryfile'], ".png") != FALSE ) {
 					$pv['listefichierdir'][$pv['entrydir']][] = $pv['entryfile'];
 					$pv['fichiertrouve'] = 1;
@@ -1083,7 +1083,7 @@ while (false !== ($pv['entrydir'] = readdir($handledir))) {
 			$B = &$pv['listefichierdir'][$pv['entrydir']];
 			foreach ( $B as $A ) {
 				$pv['FSJavaScript'] .= "	\"".$pv['fcount']."\": { \"nomfichier\":\"".$A."\", ";
-				list($pv['imgW'], $pv['imgH'], $pv['imgT'] , $pv['imgA'] ) = getimagesize("../graph/".$pv['entrydir']."/".$A );
+				list($pv['imgW'], $pv['imgH'], $pv['imgT'] , $pv['imgA'] ) = getimagesize("../gfx/".$pv['entrydir']."/".$A );
 				$pv['ix'] = $pv['imgW'];
 				$pv['iy'] = $pv['imgH'];
 				$pv['imgScore'] = 0;

@@ -74,7 +74,7 @@ $LangageSelector = array(
 );
 $DocContent .= "<p  class='" . $block."_tb3' style='text-align: center;'>\r";
 foreach ( $LangageSelector as $A ) {
-	$DocContent .= "<a href='install.php?l=".$A['code']."'><img src='../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
+	$DocContent .= "<a href='install.php?l=".$A['code']."'><img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
 }
 $DocContent .= "</p><br>\r";
 unset ($LangageSelector);
@@ -101,13 +101,13 @@ $FrameContent = "FrameContent_";
 $FrameContent = "FrameContent_";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 60 , 0.25, ".$T['tab_infos']['Height']." );");
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F1_title']."
 </div>\r
 <br>\r
@@ -122,8 +122,8 @@ $DocContent .= "
 $pv['a'] = "<span class='" . $block."_avert'>";
 $pv['b'] = "</span>";
 
-$pv['iconGoNoGoOk'] = "<img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>";
-$pv['iconGoNoGoNok'] = "<img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>";
+$pv['iconGoNoGoOk'] = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>";
+$pv['iconGoNoGoNok'] = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>";
 
 $Support['response'] .= $i18n['PHP_support_title'];
 
@@ -289,20 +289,20 @@ $T['tab_infos']['CellName']			= "cadre02";
 $T['tab_infos']['DocumentName']		= "doc";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 30 , 0.25, ".$T['tab_infos']['Height']." );");
 
 $CurrentTab = 1;
 $lt = 1;
 $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 2;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0;
 
-$bubbleBegin = "<img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_question') . "' width='16' height='16' border='0' onMouseOver=\"t.ToolTip('";
+$bubbleBegin = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_question') . "' width='16' height='16' border='0' onMouseOver=\"t.ToolTip('";
 $bubbleEnd = "')\" onMouseOut=\"t.ToolTip()\">";
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F2_title']."
 </div>\r
 <br>\r
@@ -335,8 +335,8 @@ $T['tab_infos']['CellName']			= "cadre03";
 $T['tab_infos']['DocumentName']		= "doc";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 30, 0.25, ".$T['tab_infos']['Height']." );");
 
 $CurrentTab = 1;
@@ -345,7 +345,7 @@ $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 2;	$T['ADC']['onglet'][$CurrentT
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F3_title']."
 </div>\r
 <br>\r
@@ -425,8 +425,8 @@ $T['tab_infos']['CellName']			= "cadre03";
 $T['tab_infos']['DocumentName']		= "doc";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 30, 0.25, ".$T['tab_infos']['Height']." );");
 
 $CurrentTab = 1;
@@ -435,7 +435,7 @@ $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 2;	$T['ADC']['onglet'][$CurrentT
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F4_title']."
 </div>\r
 <br>\r
@@ -550,10 +550,10 @@ $T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['t4l'.$lt.'c1'];	$T['AD'][$Curre
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = $i18n['t4l'.$lt.'c2'];	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 2;
 $T['AD'][$CurrentTab][$lt]['3']['cont'] = $InteractiveElementsObj->renderSubmitButton($SB);	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 2;
 $T['AD'][$CurrentTab][$lt]['4']['cont'] = $pv['div_cnx_db'] . "
-	<div id='TstBDD_1_ok' style='visibilty: hidden; display : none; position; realtive;'><img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4aok']."</div>
-	<div id='TstBDD_1_ko' style='visibilty: hidden; display : none; position; realtive;'><img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4ako']."</div>
-	<div id='TstBDD_2_ok' style='visibilty: hidden; display : none; position; realtive;'><img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4bok']."</div>
-	<div id='TstBDD_2_ko' style='visibilty: hidden; display : none; position; realtive;'><img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4bko']."</div>
+	<div id='TstBDD_1_ok' style='visibilty: hidden; display : none; position; realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4aok']."</div>
+	<div id='TstBDD_1_ko' style='visibilty: hidden; display : none; position; realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4ako']."</div>
+	<div id='TstBDD_2_ok' style='visibilty: hidden; display : none; position; realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_ok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4bok']."</div>
+	<div id='TstBDD_2_ko' style='visibilty: hidden; display : none; position; realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_nok') . "' width='16' height='16' border='0'>".$i18n['t4l10c4bko']."</div>
 	";
 
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 2;
@@ -587,8 +587,8 @@ $T['tab_infos']['CellName']			= "cadre03";
 $T['tab_infos']['DocumentName']		= "doc";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 30 , 0.25, ".$T['tab_infos']['Height']." );");
 
 
@@ -598,7 +598,7 @@ $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 0;	$T['ADC']['onglet'][$CurrentT
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F5_title']."
 </div>\r
 <br>\r
@@ -710,8 +710,8 @@ $T['tab_infos']['CellName']			= "cadre03";
 $T['tab_infos']['DocumentName']		= "doc";
 
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "ADDA_div_init ( '".$FrameContent.$CurrentFrame."' , 'titre_cadre_".$CurrentFrame."_img', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
-'../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_bas') ."', 
+'../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') ."', 
 1, 60 , 0.25, ".$T['tab_infos']['Height']." );");
 
 $CurrentTab = 1;
@@ -720,7 +720,7 @@ $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 3;	$T['ADC']['onglet'][$CurrentT
 
 $DocContent .= "
 <div id='titre_cadre_".$CurrentFrame."' class='" . $block."_tb5 ".$block."_fcta' style='width: ".$T['tab_infos']['Width']."px; vertical-align: middle;' >\r
-<img id='titre_cadre_".$CurrentFrame."_img' src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
+<img id='titre_cadre_".$CurrentFrame."_img' src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_haut') . "' width='32' height='32' border='0' style='vertical-align: middle;' onclick=\"animation_document_div_accordeon( '".$FrameContent.$CurrentFrame."' );\">\r
 ".$i18n['F6_title']."
 </div>\r
 <br>\r

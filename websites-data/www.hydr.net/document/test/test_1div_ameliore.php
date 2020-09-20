@@ -20,17 +20,17 @@ echo ( "
 <div style='
 width:256px; height:384px;
 background : 
-url(../graph/Aqua/aqua_B01_ex11.png) no-repeat left top,
-url(../graph/Aqua/aqua_B01_ex13.png) no-repeat right top,
-url(../graph/Aqua/aqua_B01_ex31.png) no-repeat left bottom,
-url(../graph/Aqua/aqua_B01_ex33.png) no-repeat right bottom,
+url(../gfx/Aqua/aqua_B01_ex11.png) no-repeat left top,
+url(../gfx/Aqua/aqua_B01_ex13.png) no-repeat right top,
+url(../gfx/Aqua/aqua_B01_ex31.png) no-repeat left bottom,
+url(../gfx/Aqua/aqua_B01_ex33.png) no-repeat right bottom,
 
-url(../graph/Aqua/aqua_B01_ex12.png) repeat-x center top,
-url(../graph/Aqua/aqua_B01_ex21.png) repeat-y left center,
-url(../graph/Aqua/aqua_B01_ex23.png) repeat-y right center,
-url(../graph/Aqua/aqua_B01_ex32.png) repeat-x center bottom,
+url(../gfx/Aqua/aqua_B01_ex12.png) repeat-x center top,
+url(../gfx/Aqua/aqua_B01_ex21.png) repeat-y left center,
+url(../gfx/Aqua/aqua_B01_ex23.png) repeat-y right center,
+url(../gfx/Aqua/aqua_B01_ex32.png) repeat-x center bottom,
 
-url(../graph/Aqua/aqua_B01_ex22.png) center center
+url(../gfx/Aqua/aqua_B01_ex22.png) center center
 ;
 
 box-shadow: 0px 8px 10px #808080;

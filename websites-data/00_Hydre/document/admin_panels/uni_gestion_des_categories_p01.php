@@ -152,8 +152,8 @@ $stateTab = array(
 );
 
 $buttonLink = "<a href='index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article', 'arti_page'); 
-$buttonUp = "'><img src='../graph/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_haut')."' width='16' height='16'>"; 
-$buttonDown = "'><img src='../graph/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_bas')."' width='16' height='16'>";
+$buttonUp = "'><img src='../gfx/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_haut')."' width='16' height='16'>"; 
+$buttonDown = "'><img src='../gfx/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_bas')."' width='16' height='16'>";
 
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery) ) {
 	$Tab = $CateTabList[$dbp['cate_lang']]['tab'];

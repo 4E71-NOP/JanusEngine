@@ -142,7 +142,7 @@ class ThemeData {
 								if ( $BlockT == "B01T" ) {
 									$this->ThemeData['stylesheet_at_fontface'] = "
 									@font-face {
-										font-family: '".$this->ThemeData['B01T']['txt_fonte_dl_nom']."'; src: url('../graph/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_fonte_dl_url']."') format('truetype');
+										font-family: '".$this->ThemeData['B01T']['txt_fonte_dl_nom']."'; src: url('../gfx/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_fonte_dl_url']."') format('truetype');
 										font-weight: normal;
 										font-style: normal;
 									}\r\r

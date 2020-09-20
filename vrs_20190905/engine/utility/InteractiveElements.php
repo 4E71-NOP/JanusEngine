@@ -102,13 +102,13 @@ class InteractiveElements {
 		$contenu_A = "
 			<input type='text' readonly name='".$i['formTargetId']."' id='".$i['formTargetId']."' size='".$i['formInputSize']."' maxlength='255' value='".$i['formInputVal']."' class='".$Block."_t3 " . $Block."_form_1' style='text-align:right;' >\r
 			<span class='".$Block."_lien ".$Block."_t3' Onclick=\"fs.getDirectoryContent(".$i['array'].", '".$i['path']."', 0); elm.FillScreenDiv('FileSelectorDarkFade', 1 ); elm.SwitchDisplayCenter('FileSelectorFrame')\">\r
-			<img src='../graph/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_repertoire') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_repertoire') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>
 			";
 		
 		$contenu_B = "
 			<span class='".$Block."_lien ".$Block."_t3' Onclick=\"document.forms['".$i['formName']."'].elements['".$i['formTargetId']."'].value = '';\">
-			<img src='../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_efface') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_efface') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>\r
 			";
 		
@@ -130,7 +130,7 @@ class InteractiveElements {
 		$contenu_A = "
 	<input type='text' name='".$ForgeFormElement."' id='".$ForgeFormElement."' size='20' maxlength='255' value='".$InputVal."' class='".$theme_tableau.$_REQUEST['bloc']."_form_1'
 	onChange=\"
-	var NewU = 'url(\'../graph/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
+	var NewU = 'url(\'../gfx/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
 	elm.Gebi('".$DivCible."').style.backgroundImage = NewU;\r
 	\">\r
 			
@@ -140,7 +140,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	RenderFSJS('".$FormNom."','".$ForgeFormElement."', '".$ForgeFormElementX."', '".$ForgeFormElementY."', document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value , 'FSJavaScript' , 'FSJS_C_' , '".$JavascriptRoutine."' )\">
-	<img src='../graph/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
+	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
 	";
 		
 		$contenu_B = "
@@ -149,7 +149,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	".$JavascriptRoutine."();\">\r
-	<img src='../graph/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_efface'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
+	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_efface'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
 	";
 		
 		$contenu_R = "";

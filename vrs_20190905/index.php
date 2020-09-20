@@ -550,7 +550,7 @@ switch ( $WebSiteObj->getWebSiteEntry('ws_stylesheet') ) {
 $Content .= "<body id='HydrBody' ";
 if ( strlen ($ThemeDataObj->getThemeBlockEntry('B01T','txt_col')) > 0 ) { $html_body .= "text='".$ThemeDataObj->getThemeBlockEntry('B01T','txt_col')."' link='".${$theme_tableau}['B01T']['txt_col']."' vlink='".${$theme_tableau}['B01T']['txt_col']."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T','txt_col')."' "; }
 $Content .= "style='";
-if ( strlen ($ThemeDataObj->getThemeDataEntry('theme_bg')) > 0 ) { $Content .= "background-image: url(../graph/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_bg_repeat')."; "; }
+if ( strlen ($ThemeDataObj->getThemeDataEntry('theme_bg')) > 0 ) { $Content .= "background-image: url(../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_bg_repeat')."; "; }
 if ( strlen ($ThemeDataObj->getThemeDataEntry('theme_bg_color')) > 0 ) { $Content .= "background-color: #".$ThemeDataObj->getThemeDataEntry('theme_bg_color').";"; }
 $Content .= " visibility: hidden;'>\r ";
 
