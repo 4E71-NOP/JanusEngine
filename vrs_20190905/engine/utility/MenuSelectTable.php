@@ -331,14 +331,14 @@ class MenuSelectTable {
 			AND gu.group_id = g.group_id
 			AND gu.group_id = sg.group_id
 			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-			ORDER BY usr.user_nom
+			ORDER BY usr.user_name
 		;");
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getUserList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['user_id']]['t']	=	$tab[$dbp['user_id']]['db']	= $dbp['user_nom'];
+				$tab[$dbp['user_id']]['t']	=	$tab[$dbp['user_id']]['db']	= $dbp['user_name'];
 			}
 		}
 		else {

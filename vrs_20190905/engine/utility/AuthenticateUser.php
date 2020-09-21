@@ -113,14 +113,14 @@ class AuthenticateUser {
 				
 				$SDDMObj->query ( "
 				UPDATE " . $SqlTableListObj->getSQLTableName ('user') . " SET
-				user_derniere_ip = '".$_SERVER['REMOTE_ADDR']."',
-				user_derniere_visite = '".$_SERVER['REQUEST_TIME']."'
+				user_last_ip = '".$_SERVER['REMOTE_ADDR']."',
+				user_last_visit = '".$_SERVER['REQUEST_TIME']."'
 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'
 				;" );
 // 				$SDDMObj->query ( "
 // 				UPDATE " . $SqlTableListObj->getSQLTableName ('user') . " SET
-// 				user_derniere_ip = '".$_SESSION['last_REMOTE_ADDR']."',
-// 				user_derniere_visite = '".$_SESSION['last_REQUEST_TIME']."'
+// 				user_last_ip = '".$_SESSION['last_REMOTE_ADDR']."',
+// 				user_last_visit = '".$_SESSION['last_REQUEST_TIME']."'
 // 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'
 // 				;" );
 			}

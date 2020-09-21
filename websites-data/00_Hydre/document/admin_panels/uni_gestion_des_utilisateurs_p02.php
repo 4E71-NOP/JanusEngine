@@ -201,7 +201,7 @@ switch ( $RequestDataObj->getRequestDataSubEntry('userForm', 'mode') ) {
 	case "edit":
 		$commandType = "update";
 		$currentUserObj->getUserDataFromDB($RequestDataObj->getRequestDataSubEntry('userForm', 'selectionName'), $WebSiteObj);
-		$t1l2c2 = $currentUserObj->getUserEntry('user_nom');
+		$t1l2c2 = $currentUserObj->getUserEntry('user_name');
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -211,39 +211,39 @@ switch ( $RequestDataObj->getRequestDataSubEntry('userForm', 'mode') ) {
 		$currentThemeObj->setUser(
 				array(
 					"user_id"									=>	"33",
-					"user_nom"									=>	"dieu",
+					"user_name"									=>	"dieu",
 					"user_login"								=>	"dieu",
 					"user_password"								=>	"",
-					"user_date_inscription"						=>	"1581612801",
+					"user_subscription_date"						=>	"1581612801",
 					"user_status"								=>	1,
-					"user_role_fonction"						=>	1,
-					"user_droit_forum"							=>	1,
+					"user_role_function"						=>	1,
+					"user_forum_access"							=>	1,
 					"user_email"								=>	"NA",
 					"user_msn"									=>	"NA",
 					"user_aim"									=>	"NA",
 					"user_icq"									=>	"NA",
 					"user_yim"									=>	"NA",
 					"user_website"								=>	"NA",
-					"user_perso_nom"							=>	"dieu",
-					"user_perso_pays"							=>	"NA",
-					"user_perso_ville"							=>	"NA",
+					"user_perso_name"							=>	"dieu",
+					"user_perso_country"							=>	"NA",
+					"user_perso_town"							=>	"NA",
 					"user_perso_occupation"						=>	"NA",
-					"user_perso_interet"						=>	"NA",
-					"user_derniere_visite"						=>	0,
-					"user_derniere_ip"							=>	"0.0.0.0",
+					"user_perso_interest"						=>	"NA",
+					"user_last_visit"						=>	0,
+					"user_last_ip"							=>	"0.0.0.0",
 					"user_timezone"								=>	1,
 					"user_lang"									=>	0,
 					"user_pref_theme"							=>	"NULL",
 					"user_pref_newsletter"						=>	1,
-					"user_pref_montre_email"					=>	0,
-					"user_pref_montre_status_online"			=>	0,
-					"user_pref_notification_reponse_forum"		=>	1,
-					"user_pref_notification_nouveau_pm"			=>	1,
-					"user_pref_autorise_bbcode"					=>	1,
-					"user_pref_autorise_html"					=>	1,
+					"user_pref_show_email"					=>	0,
+					"user_pref_show_online_status"			=>	0,
+					"user_pref_forum_notification"		=>	1,
+					"user_pref_forum_pm"			=>	1,
+					"user_pref_allow_bbcode"					=>	1,
+					"user_pref_allow_html"					=>	1,
 					"user_pref_autorise_smilies"				=>	1,
-					"user_image_avatar"							=>	"../websites-datas/00_Hydre/data/images/avatars/public/dieu.gif",
-					"user_admin_commentaire"					=>	"Null",
+					"user_avatar_image"							=>	"../websites-datas/00_Hydre/data/images/avatars/public/dieu.gif",
+					"user_admin_comment"					=>	"Null",
 				)
 		);
 		$t1l2c2 = "<input type='text' name='formTarget[name]' size='45' maxlength='255' value=\"".$I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -307,7 +307,7 @@ $Content .= "
 ."<input type='hidden' name='formGenericData[section]'	value='AdminUserManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
 ."<input type='hidden' name='formEntity1'				value=''>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentUserObj->getUserEntry('user_nom')."'>\r"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentUserObj->getUserEntry('user_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<input type='hidden' name='userForm[selectionId]'		value='".$RequestDataObj->getRequestDataSubEntry('userForm', 'selectionId')."'>\r"
 ."<p>\r"
@@ -326,16 +326,16 @@ $T['AD'][$curTab]['6']['1']['cont'] = $I18nObj->getI18nEntry('t1l6c1');
 
 
 $T['AD'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
-$T['AD'][$curTab]['2']['2']['cont'] = $currentUserObj->getUserEntry('user_nom');
+$T['AD'][$curTab]['2']['2']['cont'] = $currentUserObj->getUserEntry('user_name');
 $T['AD'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
 		"height"			=> 50,	//in %
 		"formName"			=> "userForm",
-		"formTargetId"		=> "formParams[user_image_avatar]",
+		"formTargetId"		=> "formParams[user_avatar_image]",
 		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentUserObj->getUserEntry('user_image_avatar'),
+		"formInputVal"		=> $currentUserObj->getUserEntry('user_avatar_image'),
 		"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
 		"restrictTo"		=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
 		"strRemove"			=> "/\.*\w*\//",
@@ -352,8 +352,8 @@ $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$Fil
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['AD'][$curTab]['4']['2']['cont']		= $InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['AD'][$curTab]['5']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_date_inscription'));
-$T['AD'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_commentaire]' cols='50' rows='10'>".$currentUserObj->getUserEntry('user_admin_commentaire')."</textarea>";
+$T['AD'][$curTab]['5']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
+$T['AD'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_comment]' cols='50' rows='10'>".$currentUserObj->getUserEntry('user_admin_comment')."</textarea>";
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
@@ -387,14 +387,14 @@ $tabRole = array(
 		1	=> array ( "t"=>$I18nObj->getI18nEntry('public'),	"db"=>"PUBLIC" ),
 		2	=> array ( "t"=>$I18nObj->getI18nEntry('private'),	"db"=>"PRIVATE" ),
 );
-$tabRole[$currentUserObj->getUserEntry('user_role_fonction')]['s'] = " selected ";
+$tabRole[$currentUserObj->getUserEntry('user_role_function')]['s'] = " selected ";
 $T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[role]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabRole as $A ) { $T['AD'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['3']['2']['cont'] .= "</select>\r";
 
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_droit_forum')]['s'] = " selected ";
+$tabTmp[$currentUserObj->getUserEntry('user_forum_access')]['s'] = " selected ";
 $T['AD'][$curTab]['4']['2']['cont'] = "<select name='formParams[forums]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['4']['2']['cont'] .= "</select>\r";
@@ -445,8 +445,8 @@ $T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_lang]' clas
 foreach ( $tabLanguage as $A ) { $T['AD'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";
 
-$T['AD'][$curTab]['2']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_derniere_visite'));
-$T['AD'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_derniere_ip');
+$T['AD'][$curTab]['2']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_last_visit'));
+$T['AD'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_last_ip');
 $T['AD'][$curTab]['4']['2']['cont'] = $timezone[$currentUserObj->getUserEntry('user_timezone')];
 
 // --------------------------------------------------------------------------------------------
@@ -478,38 +478,38 @@ foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['2']['2']['cont'] .= "<option valu
 $T['AD'][$curTab]['2']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_montre_email')]['s'] = " selected ";
-$T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[user_pref_montre_email]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_show_email')]['s'] = " selected ";
+$T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[user_pref_show_email]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['3']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_montre_status_online')]['s'] = " selected ";
-$T['AD'][$curTab]['4']['2']['cont'] = "<select name='formParams[user_pref_montre_status_online]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_show_online_status')]['s'] = " selected ";
+$T['AD'][$curTab]['4']['2']['cont'] = "<select name='formParams[user_pref_show_online_status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['4']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_notification_reponse_forum')]['s'] = " selected ";
-$T['AD'][$curTab]['5']['2']['cont'] = "<select name='formParams[user_pref_notification_reponse_forum]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_forum_notification')]['s'] = " selected ";
+$T['AD'][$curTab]['5']['2']['cont'] = "<select name='formParams[user_pref_forum_notification]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['5']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_notification_nouveau_pm')]['s'] = " selected ";
-$T['AD'][$curTab]['6']['2']['cont'] = "<select name='formParams[user_pref_notification_nouveau_pm]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_forum_pm')]['s'] = " selected ";
+$T['AD'][$curTab]['6']['2']['cont'] = "<select name='formParams[user_pref_forum_pm]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['6']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_autorise_bbcode')]['s'] = " selected ";
-$T['AD'][$curTab]['7']['2']['cont'] = "<select name='formParams[user_pref_autorise_bbcode]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_allow_bbcode')]['s'] = " selected ";
+$T['AD'][$curTab]['7']['2']['cont'] = "<select name='formParams[user_pref_allow_bbcode]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['7']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
-$tabTmp[$currentUserObj->getUserEntry('user_pref_autorise_html')]['s'] = " selected ";
-$T['AD'][$curTab]['8']['2']['cont'] = "<select name='formParams[user_pref_autorise_html]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$tabTmp[$currentUserObj->getUserEntry('user_pref_allow_html')]['s'] = " selected ";
+$T['AD'][$curTab]['8']['2']['cont'] = "<select name='formParams[user_pref_allow_html]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD'][$curTab]['8']['2']['cont'] .= "</select>\r";
 

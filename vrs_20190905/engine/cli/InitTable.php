@@ -21,9 +21,9 @@ self::$InitTable['article'] = function (&$a) {
 			"config" => "par_defaut",
 			"config_id" => 0,
 			
-			"creator" => $a['Initiator']['user_nom'],
+			"creator" => $a['Initiator']['user_name'],
 			"creation_date" => 0,
-			"validator" => $a['Initiator']['user_nom'],
+			"validator" => $a['Initiator']['user_name'],
 			"validation_date" => 0,
 			"validation_state" => "NON_VALIDE",
 			

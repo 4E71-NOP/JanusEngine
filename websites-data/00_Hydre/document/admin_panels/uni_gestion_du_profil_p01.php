@@ -243,9 +243,9 @@ else {
 			"width"				=> 80,	//in %
 			"height"			=> 50,	//in %
 			"formName"			=> "UserProfileForm",
-			"formTargetId"		=> "UserProfileForm[user_image_avatar]",
+			"formTargetId"		=> "UserProfileForm[user_avatar_image]",
 			"formInputSize"		=> 40 ,
-			"formInputVal"		=> $UserObj->getUserEntry('user_image_avatar'),
+			"formInputVal"		=> $UserObj->getUserEntry('user_avatar_image'),
 			"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/images/avatars/",
 			"restrictTo"		=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/images/avatars/",
 			"strRemove"			=> "",
@@ -269,7 +269,7 @@ else {
 	
 	$T['AD']['1']['1']['2']['cont'] = "<input type='text' name='UserProfileForm[login]' value='".$UserObj->getUserEntry('user_login')."' size='15' maxlength='255' class='" . $Block."_t3 " . $Block."_t3 " . $Block."_form_1'  disabled> (ne sera pas modifié)";
 	
-	if ( strlen($PmListTheme['user_image_avatar']) != 1024 ) { $T['AD']['1']['2']['2']['cont'] = "<img src='".$PmListTheme['user_image_avatar']."' width='48' height='48' alt='[Avatar]'>"; }
+	if ( strlen($PmListTheme['user_avatar_image']) != 1024 ) { $T['AD']['1']['2']['2']['cont'] = "<img src='".$PmListTheme['user_avatar_image']."' width='48' height='48' alt='[Avatar]'>"; }
 	else { $T['AD']['1']['2']['2']['cont'] = "N/A"; }
 	$T['AD']['1']['2']['2']['cont'] .=	$InteractiveElementsObj->renderIconSelectFile($infos);
 	$T['AD']['1']['3']['2']['cont'] = "<input type='hidden' name='MAX_FILE_SIZE' value='32768'> 
@@ -298,11 +298,11 @@ else {
 	$T['AD']['3']['4']['1']['cont'] = $I18nObj->getI18nEntry('t3_l4');
 	$T['AD']['3']['5']['1']['cont'] = $I18nObj->getI18nEntry('t3_l5');
 	
-	$T['AD']['3']['1']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_nom]' value='".			$UserObj->getUserEntry('user_perso_nom')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
-	$T['AD']['3']['2']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_pays]' value='".			$UserObj->getUserEntry('user_perso_pays')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
-	$T['AD']['3']['3']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_ville]' value='".			$UserObj->getUserEntry('user_perso_ville')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
+	$T['AD']['3']['1']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_nom]' value='".			$UserObj->getUserEntry('user_perso_name')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
+	$T['AD']['3']['2']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_pays]' value='".			$UserObj->getUserEntry('user_perso_country')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
+	$T['AD']['3']['3']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_ville]' value='".			$UserObj->getUserEntry('user_perso_town')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
 	$T['AD']['3']['4']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_occupation]' value='".	$UserObj->getUserEntry('user_perso_occupation')	."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
-	$T['AD']['3']['5']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_interet]' value='".		$UserObj->getUserEntry('user_perso_interet')	."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
+	$T['AD']['3']['5']['2']['cont'] = "<input type='text' name='UserProfileForm[perso_interet]' value='".		$UserObj->getUserEntry('user_perso_interest')	."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
 // --------------------------------------------------------------------------------------------
 
 	$T['AD']['4']['1']['1']['cont'] = $I18nObj->getI18nEntry('t4_l1');
@@ -336,7 +336,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_montre_email')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_show_email')]['s'] = "selected";
 	$T['AD']['4']['2']['2']['cont'] = "<select name='UserProfileForm[pref_montre_email]' class='" . $Block."_t3 " . $Block."_form_1'>\r 
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
@@ -344,7 +344,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_montre_status_online')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_show_online_status')]['s'] = "selected";
 	$T['AD']['4']['3']['2']['cont'] = "<select name='UserProfileForm[pref_montre_status_online]' class='" . $Block."_t3 " . $Block."_form_1'>\r 
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
@@ -352,7 +352,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_notification_reponse_forum')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_forum_notification')]['s'] = "selected";
 	$T['AD']['4']['4']['2']['cont'] = "<select name='UserProfileForm[pref_notification_reponse_forum]' class='" . $Block."_t3 " . $Block."_form_1'>\r
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
@@ -360,7 +360,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_notification_nouveau_pm')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_forum_pm')]['s'] = "selected";
 	$T['AD']['4']['5']['2']['cont'] = "<select name='UserProfileForm[pref_notification_nouveau_pm]' class='" . $Block."_t3 " . $Block."_form_1'>\r
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
@@ -368,7 +368,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_autorise_bbcode')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_allow_bbcode')]['s'] = "selected";
 	$T['AD']['4']['6']['2']['cont'] = "<select name='UserProfileForm[pref_autorise_bbcode]' class='" . $Block."_t3 " . $Block."_form_1'>\r 
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
@@ -376,7 +376,7 @@ else {
 	"</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_autorise_html')]['s'] = "selected";
+	$TSO[$UserObj->getUserEntry('user_pref_allow_html')]['s'] = "selected";
 	$T['AD']['4']['7']['2']['cont'] = "<select name='UserProfileForm[pref_autorise_html]' class='" . $Block."_t3 " . $Block."_form_1'>\r
 	".
 	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].

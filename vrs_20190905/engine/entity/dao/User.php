@@ -54,44 +54,44 @@ class User {
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->User['id']					= $dbp['user_id'];
 				$this->User['user_id']				= $dbp['user_id'];
-				$this->User['nom']					= $dbp['user_nom'];
+				$this->User['nom']					= $dbp['user_name'];
 				$this->User['db_login']				= $dbp['user_login'];
 				$this->User['user_login']			= $dbp['user_login'];
 				$this->User['db_pass']				= $dbp['user_password'];
 // 				$this->User['user_login']			= $dbp['user_login'];
 // 				$this->User['user_password']		= $dbp['user_password'];
 
-				$this->User['date_inscription']		= $dbp['user_date_inscription'];
+				$this->User['date_inscription']		= $dbp['user_subscription_date'];
 				$this->User['status']				= $dbp['user_status'];
-				$this->User['droit_forum']			= $dbp['user_droit_forum'];
+				$this->User['droit_forum']			= $dbp['user_forum_access'];
 				$this->User['email']				= $dbp['user_email'];
 				$this->User['msn']					= $dbp['user_msn'];
 				$this->User['aim']					= $dbp['user_aim'];
 				$this->User['icq']					= $dbp['user_icq'];
 				$this->User['yim']					= $dbp['user_yim'];
 				$this->User['website']				= $dbp['user_website'];
-				$this->User['perso_nom']			= $dbp['user_perso_nom'];
-				$this->User['perso_pays']			= $dbp['user_perso_pays'];
-				$this->User['perso_ville']			= $dbp['user_perso_ville'];
+				$this->User['perso_nom']			= $dbp['user_perso_name'];
+				$this->User['perso_pays']			= $dbp['user_perso_country'];
+				$this->User['perso_ville']			= $dbp['user_perso_town'];
 				$this->User['perso_occupation']		= $dbp['user_perso_occupation'];
-				$this->User['perso_interet']		= $dbp['user_perso_interet'];
-				$this->User['derniere_visite']		= $dbp['user_derniere_visite'];
-				$this->User['derniere_ip']			= $dbp['user_derniere_ip'];
+				$this->User['perso_interet']		= $dbp['user_perso_interest'];
+				$this->User['derniere_visite']		= $dbp['user_last_visit'];
+				$this->User['derniere_ip']			= $dbp['user_last_ip'];
 				$this->User['timezone']				= $dbp['user_timezone'];
 				$this->User['lang']					= $dbp['user_lang'];
 
 				$this->User['pref_theme']						= $dbp['user_pref_theme'];
 				$this->User['pref_newsletter']					= $dbp['user_pref_newsletter'];
-				$this->User['pref_montre_email']				= $dbp['user_pref_montre_email'];
-				$this->User['pref_montre_status_online']		= $dbp['user_pref_montre_status_online'];
-				$this->User['pref_notification_reponse_forum']	= $dbp['user_pref_notification_reponse_forum'];
-				$this->User['pref_notification_nouveau_pm']		= $dbp['user_pref_notification_nouveau_pm'];
-				$this->User['pref_autorise_bbcode']				= $dbp['user_pref_autorise_bbcode'];
-				$this->User['pref_autorise_html']				= $dbp['user_pref_autorise_html'];
+				$this->User['pref_montre_email']				= $dbp['user_pref_show_email'];
+				$this->User['pref_montre_status_online']		= $dbp['user_pref_show_online_status'];
+				$this->User['pref_notification_reponse_forum']	= $dbp['user_pref_forum_notification'];
+				$this->User['pref_notification_nouveau_pm']		= $dbp['user_pref_forum_pm'];
+				$this->User['pref_autorise_bbcode']				= $dbp['user_pref_allow_bbcode'];
+				$this->User['pref_autorise_html']				= $dbp['user_pref_allow_html'];
 				$this->User['pref_autorise_smilies']			= $dbp['user_pref_autorise_smilies'];
 
-				$this->User['user_image_avatar']		= $dbp['user_image_avatar'];
-				$this->User['user_admin_commentaire']	= $dbp['user_admin_commentaire'];
+				$this->User['user_avatar_image']		= $dbp['user_avatar_image'];
+				$this->User['user_admin_comment']	= $dbp['user_admin_comment'];
 				$this->User['group_tag']				= $dbp['group_tag'];
 				foreach ( $dbp as $A => $B ) { $this->User [$A] = $B; }
 			}

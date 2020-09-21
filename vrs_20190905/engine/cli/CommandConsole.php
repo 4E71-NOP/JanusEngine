@@ -415,7 +415,7 @@ class CommandConsole {
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
 					"user_id" => $UserObj->getUserEntry('id'),
-					"user_nom" => $UserObj->getUserEntry('nom'),				// 2020 01 06 - Change this by user_login
+					"user_name" => $UserObj->getUserEntry('nom'),				// 2020 01 06 - Change this by user_login
 					"db_login" => $TabConfig['db_user_login'],
 					"db_pass" => $TabConfig['db_user_password'],
 				);

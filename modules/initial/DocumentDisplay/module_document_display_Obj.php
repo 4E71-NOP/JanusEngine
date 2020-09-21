@@ -483,14 +483,14 @@ class ModuleDocumentDisplay {
 		if ( ( $DocumentDataObj->getDocumentDataEntry('arti_montre_info_modification') + $DocumentDataObj->getDocumentDataEntry('arti_montre_info_parution') ) != 0 ) {
 			$ADP_users = array();
 			$dbquery = $SDDMObj->query("
-			SELECT a.user_id,a.user_nom
+			SELECT a.user_id,a.user_name
 			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('group_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
 			WHERE a.user_id = b.user_id
 			AND b.group_id = c.group_id
 			AND b.group_user_initial_group = '1'
 			ORDER BY a.user_id
 			;");
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $ADP_users[$dbp['user_id']] = $dbp['user_nom']; }
+			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $ADP_users[$dbp['user_id']] = $dbp['user_name']; }
 			
 			$Content .= "
 			<hr>\r

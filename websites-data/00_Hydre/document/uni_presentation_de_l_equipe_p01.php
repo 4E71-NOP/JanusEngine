@@ -61,7 +61,7 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 <br>\r
 ";
 
-$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_image_avatar, grp.group_name, grp.group_file
+$dbquery = $SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_avatar_image, grp.group_name, grp.group_file
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." grp, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE gu.group_user_initial_group = '1' 
 AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -69,7 +69,7 @@ AND gu.user_id = usr.user_id
 AND sg.group_id = gu.group_id 
 AND gu.group_id = grp.group_id
 AND grp.group_tag = '2' 
-AND usr.user_role_fonction = '2' 
+AND usr.user_role_function = '2' 
 ORDER BY grp.group_id,usr.user_login ASC
 ;");
 $user_liste= array();
@@ -104,7 +104,7 @@ foreach ( $user_liste as $B ) {
 				}
 				else { $Content .= "<td class='".$Block."_tb3'> &nbsp; </td>\r"; }
 				$Content .= "<td class='".$Block."_fca ".$Block."_t3'> ";
-				if ( strlen($A['user_user_image_avatar']) != 0 ) { $Content .= "<img src='".$A['user_user_image_avatar']."' alt='Avatar'>"; }
+				if ( strlen($A['user_user_avatar_image']) != 0 ) { $Content .= "<img src='".$A['user_user_avatar_image']."' alt='Avatar'>"; }
 				$Content .= $A['user_login']."<br>&nbsp </td>\r</tr>\r";
 			}
 		}

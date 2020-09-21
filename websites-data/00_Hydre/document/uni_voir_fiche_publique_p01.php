@@ -85,8 +85,8 @@ $T['AD']['1']['2']['1']['cont'] = $i18nDoc['l_2_txt'];
 $T['AD']['1']['3']['1']['cont'] = $i18nDoc['l_3_txt'];
 
 $T['AD']['1']['1']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
-$T['AD']['1']['2']['2']['cont'] = "<img src='".$currentUserObj->getUserEntry('user_image_avatar')."' width='128' height='128' alt='Avatar'>";
-$T['AD']['1']['3']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_date_inscription'));
+$T['AD']['1']['2']['2']['cont'] = "<img src='".$currentUserObj->getUserEntry('user_avatar_image')."' width='128' height='128' alt='Avatar'>";
+$T['AD']['1']['3']['2']['cont'] = $TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
 
 $T['tab_infos']['EnableTabs']		= 1;
 $T['tab_infos']['NbrOfTabs']		= 1;

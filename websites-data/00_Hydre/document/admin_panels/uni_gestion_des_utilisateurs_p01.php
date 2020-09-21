@@ -137,7 +137,7 @@ $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.user_id = usr.user_id";									$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.group_id = gu.group_id ";								$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_id = gr.group_id ";								$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_nom != 'HydreBDD'";									$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_name != 'HydreBDD'";									$clause_sql_element_offset++;
 
 $dbquery = $SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
@@ -172,7 +172,7 @@ M_UTILIS_page=".$GDU_['compteur_page']."
 }
 
 $dbquery = $SDDMObj->query("
-SELECT usr.user_id,usr.user_login,user_nom,usr.user_derniere_visite,gr.group_title,usr.user_status 
+SELECT usr.user_id,usr.user_login,user_name,usr.user_last_visit,gr.group_title,usr.user_status 
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like']."  
 ORDER BY user_id, user_login
@@ -204,14 +204,14 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 	."&formGenericData[mode]=edit"
 	."&userForm[selectionId]=".$dbp['user_id']
 	."'>"
-	.$dbp['user_nom']
+	.$dbp['user_name']
 	."</a>\r";
 	
 	$T['AD']['1'][$i]['4']['cont'] = $dbp['group_title'];
 	$T['AD']['1'][$i]['4']['tc'] = 1;
 	$T['AD']['1'][$i]['5']['cont'] = $I18nObj->getI18nEntry('status'.$dbp['user_status']);
 	$T['AD']['1'][$i]['5']['tc'] = 1;
-	$lastVisit = date ("Y M d - H:i:s",$dbp['user_derniere_visite']);
+	$lastVisit = date ("Y M d - H:i:s",$dbp['user_last_visit']);
 	$T['AD']['1'][$i]['6']['cont'] = $lastVisit;
 	$T['AD']['1'][$i]['6']['tc'] = 1;
 }
