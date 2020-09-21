@@ -15,6 +15,16 @@ include ("define.php");
 
 // --------------------------------------------------------------------------------------------
 
+/*
+Good practice for the main script when it's ready to think about saving memory... more. 
+	$varsStart = array_keys(get_defined_vars());
+	[...]
+	$varsEnd = array_keys(get_defined_vars());
+	$varsSum = array_diff ($varsEnd,  $varsStart);
+	foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
+*/
+
+
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
@@ -43,16 +53,13 @@ ini_set('error_log' , "/var/log/apache2/error.log");
 // --------------------------------------------------------------------------------------------
 // MSIE must die!!! Still thinking about Edge
 $Navigator = getenv("HTTP_USER_AGENT");
-
 if ( strpos($Navigator, "MSIE" ) !== FALSE ) {
-	if ( strpos($Navigator, "DOM" )	!== FALSE )	{ $obsoleteBrowser = 1; }
+	if ( strpos($Navigator, "DOM" )	!== FALSE )	{ 
+		include ( "engine/staticPages/UnsupportedBrowserBanner.php");
+		exit();
+	}
 }
-
-if ( $obsoleteBrowser == 1 ) {
-	include ( "engine/staticPages/UnsupportedBrowserBanner.php");
-	exit();
-}
-unset ( $Navigator );
+unset ( $Navigator);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('StringFormat');
@@ -90,7 +97,6 @@ $SMObj = SessionManagement::getInstance($CMObj);
 //
 //	Scoring on what we recieved (or what's at disposal)
 //
-
 $firstContactScore = 0;
 
 if ( session_status() === PHP_SESSION_ACTIVE ) { $firstContactScore++; }

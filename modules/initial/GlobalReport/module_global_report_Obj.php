@@ -46,7 +46,6 @@ class ModuleGlobalReport {
 		$LMObj->logDebug($ThemeDataObj->getThemeData(),				"ThemeDataObj->getThemeData()");
 		$LMObj->logDebug($RenderLayoutObj->getLayout(),				"RenderLayoutObj->getLayout()");
 		
-		
 		$T = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		$I18nObj->apply($tabI18n);

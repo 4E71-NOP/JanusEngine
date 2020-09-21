@@ -18,7 +18,6 @@ class ModuleSelectLanguage {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$varsStart = array_keys(get_defined_vars());
 		$MapperObj = Mapper::getInstance();
 		$LMObj = LogManagement::getInstance();
 		$CMObj = ConfigurationManagement::getInstance();
@@ -87,9 +86,6 @@ class ModuleSelectLanguage {
 			$Content .= "</tr></table>";
 		}
 		
-		$varsEnd = array_keys(get_defined_vars());
-		$varsSum = array_diff ($varsEnd,  $varsStart);
-		foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
 
 		return $Content;
 	}

@@ -40,7 +40,7 @@ class RenderLayout {
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$LMObj = LogManagement::getInstance();
-	
+		
 // 		$CurrentSet = CurrentSet::getInstance();
 // 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();
@@ -80,9 +80,7 @@ class RenderLayout {
 			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
 			if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		}
-// 		$LMObj->logDebug($UserObj->getUserEntry('layout_id') , "\$UserObj->getUserEntry('layout_id')");
 		if ( $UserObj->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
-// 		echo ("switch_score=".$switch_score . "<br>\r");
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
@@ -141,7 +139,6 @@ class RenderLayout {
 					if ( strlen($A['lyoc_module_anchor_e20']) > 0 ) { $dynamic_['note'] += 2; }
 					if ( strlen($A['lyoc_module_anchor_e30']) > 0 ) { $dynamic_['note'] += 4; }
 					
-// 					echo ("note=".$dynamic_['note']."<br>\r");
 					switch ( $dynamic_['note'] ) {
 						case 0:		break;
 						
@@ -155,13 +152,6 @@ class RenderLayout {
 							$this->OneAnchorCalculationPrepareSourceTable ( $A['lyoc_module_anchor_e10'] , "y" );
 							$dynamic_['note_2'] = ( $A['lyoc_anchor_ey10'] - 1 ) + ( ( $A['lyoc_anchor_dy10'] - 1 ) * 3 );
 							$this->OneAnchorCalculation ( $dynamic_['note_2'] , $m , "y" );
-// 							echo (
-// 									"module=" .$m."; ".
-// 									"module_ancre_e10=".$A['lyoc_module_anchor_e10']."; ".
-// 									"ancre_ex10=".$A['lyoc_anchor_ex10']."; ".
-// 									"ancre_dx10=".$A['lyoc_anchor_dx10']."; ".
-// 									"note2=".$dynamic_['note_2']."<br>\r"
-// 									);
 							
 							$this->Layout[$m]['px']	= $this->Layout[$m]['cpx'] + $this->Layout[$m]['lyoc_margin_left'];
 							$this->Layout[$m]['py']	= $this->Layout[$m]['cpy'] + $this->Layout[$m]['lyoc_margin_top'];
@@ -268,6 +258,7 @@ class RenderLayout {
 				$this->Layout[$m]['cdy'] = $A['lyoc_minimum_y'] + $this->Layout[$m]['lyoc_margin_top'] + $this->Layout[$m]['lyoc_margin_bottom'];
 			}
 			$this->Layout[$m]['lyoc_module_zindex'] = $A['lyoc_module_zindex'];
+
 		}
 		
 		

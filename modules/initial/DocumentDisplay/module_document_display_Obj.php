@@ -18,7 +18,6 @@ class ModuleDocumentDisplay {
 	public function __construct(){}
 	
 	public function render($infos) {
-		$varsStart = array_keys(get_defined_vars());
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('AdminFormTool');
 		$ClassLoaderObj->provisionClass('RenderTables');			//Make sure it's there
@@ -546,9 +545,6 @@ class ModuleDocumentDisplay {
 // 		$LMObj->logDebug( $DocumentDataObj->getDocumentData() , "\$DocumentDataObj->getDocumentData()");
 // 		$LMObj->logDebug( $CurrentSetObj->getData() , "\$CurrentSetObj->getData()");
 		$LMObj->setInternalLogTarget($logTarget);
-		$varsEnd = array_keys(get_defined_vars());
-		$varsSum = array_diff ($varsEnd,  $varsStart);
-		foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
 		
 		return $Content;
 	}
@@ -558,7 +554,6 @@ class ModuleDocumentDisplay {
 	 * This function converts all tags into HTML code
 	 */
 	private function documentConvertion (&$inputContent, $infos) {
-		$varsStart = array_keys(get_defined_vars());
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
@@ -672,9 +667,6 @@ class ModuleDocumentDisplay {
 		$s[$ptr] = "[/F]";			$r[$ptr] = "</span>";							$ptr++;
 		
 		$inputContent = str_replace ($s,$r,$inputContent);
-		$varsEnd = array_keys(get_defined_vars());
-		$varsSum = array_diff ($varsEnd,  $varsStart);
-		foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != '$inputContent' && !is_object($$C) ) { unset ($$C); } }
 	}
 	
 	/**
@@ -743,7 +735,6 @@ class ModuleDocumentDisplay {
 	
 	
 	private function documentPostProcessing (&$inputContent , $infos) {
-		$varsStart = array_keys(get_defined_vars());
 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
@@ -780,9 +771,6 @@ class ModuleDocumentDisplay {
 					break;
 			}
 		}
-		$varsEnd = array_keys(get_defined_vars());
-		$varsSum = array_diff ($varsEnd,  $varsStart);
-		foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != '$inputContent' && !is_object($$C) ) { unset ($$C); } }
 		
 	}
 

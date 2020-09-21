@@ -133,9 +133,6 @@ class RenderStylesheet {
 			}
 		}
 		
-		
-		
-		
 		// --------------------------------------------------------------------------------
 		$Content .="
 
@@ -167,7 +164,6 @@ class RenderStylesheet {
 		background-image: url(../gfx/".$themeArray['theme_directory']."/".$themeArray['theme_admctrl_panel_bg'].");
 		visibility: hidden; 
 	}
-
 
 	.".$tableName."div_SelecteurDeFichierConteneur {
 		position: absolute; 
@@ -214,7 +210,6 @@ class RenderStylesheet {
 		overflow:hidden;
 	}
 
-
 	.div_std {
 	font-family: ".$themeArray['B01T']['txt_fonte'].";
 	font-weight: normal;
@@ -230,9 +225,7 @@ class RenderStylesheet {
 
 
 @media print { BODY { font-size: ".$themeArray['B01T']['txt_fonte_size_min']."pt; } }\r\r-->\r</style>\r";
-
 		return $Content;
-		
 	}
 	
 	
@@ -241,25 +234,25 @@ class RenderStylesheet {
 		$fontSizeRange= $p['txt_fonte_size_max'] - $p['txt_fonte_size_min'];
 		$fontCoef	= $fontSizeRange / 6;
 		$fontSizeStart = $p['txt_fonte_size_min'];
-
+		
 		$Content = "";
 		for ( $i=1; $i<=7; $i++) {
 			$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], "T", "_t" .$i, "{ font-size: ".floor ($fontSizeStart + ($fontCoef*($i-1)))."px; font-family: ".$p['txt_fonte'] . "; letter-spacing : 0px; word-spacing : 0px; font-weight: normal; } \r");
 			$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], "T", "_tb".$i, "{ font-size: ".floor ($fontSizeStart + ($fontCoef*($i-1)))."px; font-family: ".$p['txt_fonte'] . "; letter-spacing : 0px; word-spacing : 0px; font-weight: bold; } \r");
 			$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], "T", "_th".$i, "{ font-size: ".floor ($fontSizeStart + ($fontCoef*($i-1)))."px; vertical-align: top; font-weight: normal;}\r");
 		}
-
+		
 		$tabLink= array(
 			"txt_l_01_size"			=>	( $p['txt_l_01_size'] != 0 )				? "font-size: "		.$p['txt_l_01_size']."px; "         : "",
 			"txt_l_01_weight"		=>	( $p['txt_l_01_weight'] != "normal" )		? "font-weight: "	.$p['txt_l_01_weight']."px; "     : "",
 			"txt_l_01_hover_size"	=>	( $p['txt_l_01_hover_size'] != 0 )			? "font-size: "		.$p['txt_l_01_hover_size']."px; "   : "",
 			"txt_l_01_hover_weight"	=>	( $p['txt_l_01_hover_weight'] != "normal" )	? "font-weight: "	.$p['txt_l_01_hover_weight']."; " : "",
-
+		
 			"txt_l_ts_size"			=>	( $p['txt_l_td_size'] != 0 )				? "font-size: "		.$p['txt_l_td_size']."px; "         : "",
 			"txt_l_ts_weight"		=>	( $p['txt_l_td_weight'] != "normal" )		? "font-weight: "	.$p['txt_l_td_weight']."px; "     : "",
 			"txt_l_ts_hover_size"	=>	( $p['txt_l_td_hover_size'] != 0 )			? "font-size: "		.$p['txt_l_td_hover_size']."px; "   : "",
 			"txt_l_ts_hover_weight"	=>	( $p['txt_l_td_hover_weight'] != "normal" )	? "font-weight: "	.$p['txt_l_td_hover_weight']."; " : "",
-
+		
 			"txt_l_01_hover_decoration"	=>	"text-decoration: ".$p['txt_l_01_hover_decoration']."; ",
 			"txt_l_td_hover_decoration"	=>	"text-decoration: ".$p['txt_l_td_hover_decoration']."; ",
 		);

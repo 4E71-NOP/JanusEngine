@@ -42,6 +42,7 @@ class ThemeData {
 	 * Make sure no decoration gets loaded 2 times.
 	 */
 	public function renderBlockData() {
+		
 		$LMObj = LogManagement::getInstance();
 		
 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
@@ -279,6 +280,7 @@ class ThemeData {
 		}
 		
 		$this->ThemeData['tableStdRules'] = " style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' ";
+		
 	}
 	
 	/**
