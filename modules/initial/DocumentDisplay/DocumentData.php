@@ -69,16 +69,16 @@ class DocumentData {
 // 		We have an article to display whatever its ID is requested or forged
 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "DocumentData:getDocumentDataFromDB - arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`"));
 		$dbquery = $SDDMObj->query("
-		SELECT art.*, doc.docu_id, doc.docu_nom, doc.docu_type,
-		doc.docu_createur, doc.docu_creation_date,
-		doc.docu_correcteur, doc.docu_correction_date,
-		doc.docu_origine, doc.docu_cont, sit.ws_directory
+		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
+		doc.docu_creator, doc.docu_creation_date,
+		doc.docu_examiner, doc.docu_examination_date,
+		doc.docu_origin, doc.docu_cont, sit.ws_directory
 		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('deadline')." bcl, ".$SqlTableListObj->getSQLTableName('website')." sit
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."'
 		AND art.docu_id = doc.docu_id
 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND sit.ws_id = doc.docu_origine
+		AND sit.ws_id = doc.docu_origin
 		AND art.deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		;");
@@ -89,7 +89,7 @@ class DocumentData {
 			$dbquery = $SDDMObj->query("
 			SELECT doc.*
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
-			WHERE doc.docu_nom LIKE '%article_inexistant%'
+			WHERE doc.docu_name LIKE '%article_inexistant%'
 			AND ds.docu_id = doc.docu_id
 			AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			;");

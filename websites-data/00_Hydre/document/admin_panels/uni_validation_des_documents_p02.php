@@ -27,7 +27,7 @@ FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." 
 WHERE part.ws_id = '".$website['ws_id']."' 
 AND doc.docu_id = '".$_REQUEST['M_DOCUME']['document_selection']."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$website['ws_id']."' 
+AND doc.docu_origin = '".$website['ws_id']."' 
 ;");
 if ( num_row_sql($dbquery) == 0 ) { 
 	$tl_['eng']['perm_err'] = "You don't have the permission to modify this document";
@@ -37,7 +37,7 @@ if ( num_row_sql($dbquery) == 0 ) {
 else {
 	while ($dbp = fetch_array_sql($dbquery)) { 
 		foreach ( $dbp as $A => $B ) { $document[$A] = $B; }
-		$document['docu_correction_date']	= strftime ("%a %d %b %y - %H:%M", $dbp['docu_correction_date'] );
+		$document['docu_examination_date']	= strftime ("%a %d %b %y - %H:%M", $dbp['docu_examination_date'] );
 	}
 
 	$tl_['eng']['doc_type0'] = "MWM code";		$tl_['eng']['doc_type1'] = "No code";			$tl_['eng']['doc_type2'] = "PHP";		$tl_['eng']['doc_type3'] = "Mixed";
@@ -46,8 +46,8 @@ else {
 	$tl_['eng']['docu_modif0'] = "No";			$tl_['eng']['docu_modif1'] = "Yes";
 	$tl_['fra']['docu_modif0'] = "Non";		$tl_['fra']['docu_modif1'] = "Oui";
 
-	$tl_['eng']['docu_correction0'] = "Not checked";			$tl_['eng']['docu_correction1'] = "Checked";
-	$tl_['fra']['docu_correction0'] = "Non corrig&eacute;";	$tl_['fra']['docu_correction1'] = "corrig&eacute;";
+	$tl_['eng']['docu_examination0'] = "Not checked";			$tl_['eng']['docu_examination1'] = "Checked";
+	$tl_['fra']['docu_examination0'] = "Non corrig&eacute;";	$tl_['fra']['docu_examination1'] = "corrig&eacute;";
 
 	$tab_type['0']['t'] = $tl_[$l]['doc_type0'];	$tab_type['0']['db'] = "WMCODE";
 	$tab_type['1']['t'] = $tl_[$l]['doc_type1'];	$tab_type['1']['db'] = "NOCODE";
@@ -57,8 +57,8 @@ else {
 	$tab_modif['0']['t'] = $tl_[$l]['docu_modif0'];	$tab_modif['0']['db'] = "NO";
 	$tab_modif['1']['t'] = $tl_[$l]['docu_modif1'];	$tab_modif['1']['db'] = "YES";
 
-	$tab_correction['0']['t'] = $tl_[$l]['docu_correction0'];	$tab_correction['0']['db'] = "NO";
-	$tab_correction['1']['t'] = $tl_[$l]['docu_correction1'];	$tab_correction['1']['db'] = "YES";
+	$tab_correction['0']['t'] = $tl_[$l]['docu_examination0'];	$tab_correction['0']['db'] = "NO";
+	$tab_correction['1']['t'] = $tl_[$l]['docu_examination1'];	$tab_correction['1']['db'] = "YES";
 
 // --------------------------------------------------------------------------------------------
 // Preparation des elements
@@ -79,7 +79,7 @@ else {
 	$pv['o1l42'] .= "</select>\r";
 
 	$pv['o1l52'] = "<select name ='M_DOCUME[correction]' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-	$tab_correction[$document['docu_correction']]['s'] = " selected";
+	$tab_correction[$document['docu_examination']]['s'] = " selected";
 	foreach ( $tab_correction as $A ) { $pv['o1l52'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 	$pv['o1l52'] .= "</select>\r";
 
@@ -93,8 +93,8 @@ else {
 	}
 
 	if ( $_REQUEST['M_DOCUME']['modification_effectuee'] == 1 ){ 
-		$tl_['eng']['err1'] = "The document named ".$document['docu_nom']." has been updated.";
-		$tl_['fra']['err1'] = "Le document ".$document['docu_nom']." a &eacute;t&eacute; mis a jour.";
+		$tl_['eng']['err1'] = "The document named ".$document['docu_name']." has been updated.";
+		$tl_['fra']['err1'] = "Le document ".$document['docu_name']." a &eacute;t&eacute; mis a jour.";
 		echo ("<p class='" . $theme_tableau . $_REQUEST['bloc']."_avert'>".$tl_[$l]['err1']."</p><br>\r<hr>\r"); 
 	}
 
@@ -117,7 +117,7 @@ else {
 	$AD['1']['5']['1']['cont'] = $tl_[$l]['l51'];
 
 	$AD['1']['1']['2']['cont'] = $document['docu_id'];
-	$AD['1']['2']['2']['cont'] = $document['docu_nom'];
+	$AD['1']['2']['2']['cont'] = $document['docu_name'];
 	$AD['1']['3']['2']['cont'] = $pv['o1l32'];
 	$AD['1']['4']['2']['cont'] = $pv['o1l42'];
 	$AD['1']['5']['2']['cont'] = $pv['o1l52'];
@@ -158,7 +158,7 @@ else {
 	</tr>\r
 	</table>\r
 
-	<input type='hidden' name='M_DOCUME[nom]'						value='".$document['docu_nom']."'>\r
+	<input type='hidden' name='M_DOCUME[nom]'						value='".$document['docu_name']."'>\r
 	<input type='hidden' name='UPDATE_action'				value='UPDATE_DOCUMENT'>\r
 	<input type='hidden' name='M_DOCUME[correction_activation]'	value='1'>\r
 	<input type='hidden' name='M_DOCUME[correction]'				value='YES'>\r

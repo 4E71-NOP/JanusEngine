@@ -70,7 +70,7 @@ FROM ".$SQL_tab_abrege['article_config']."
 WHERE ws_id = '".$website['ws_id']."' 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) {
-	$MAA_dc[$dbp['config_id']]['t'] = $MAA_dc[$dbp['config_id']]['db'] = $dbp['config_nom'];
+	$MAA_dc[$dbp['config_id']]['t'] = $MAA_dc[$dbp['config_id']]['db'] = $dbp['config_name'];
 }
 $MAA_dc[$infos_article['config_id']]['s'] = " selected";
 
@@ -101,12 +101,12 @@ while ($dbp = fetch_array_sql($dbquery)) {
 
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
+SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
 WHERE shr.ws_id = '".$website['ws_id']."' 
 AND shr.docu_id = doc.docu_id 
 ;");
-while ($dbp = fetch_array_sql($dbquery)) { $document_list[$dbp['docu_id']]['nom'] = $dbp['docu_nom']; }
+while ($dbp = fetch_array_sql($dbquery)) { $document_list[$dbp['docu_id']]['nom'] = $dbp['docu_name']; }
 $document_list[$infos_article['docu_id']]['s'] = " selected";
 
 
@@ -126,7 +126,7 @@ AND cate_role = '1'
 while ($dbp = fetch_array_sql($dbquery)) { $pv['role_article_cible'] = $dbp['arti_ref']; }
 
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-SELECT  docu_id,docu_nom
+SELECT  docu_id,docu_name
 FROM ".$SQL_tab_abrege['document']." 
 WHERE  docu_id = '".$infos_article['docu_id']."'
 ;");

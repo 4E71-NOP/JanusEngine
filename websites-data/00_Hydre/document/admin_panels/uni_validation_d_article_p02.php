@@ -69,7 +69,7 @@ case 2:
 	WHERE ws_id = '".$website['ws_id']."' 
 	AND config_id = '".$infos_article['config_id']."' 
 	;");
-	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l22'] = $dbp['config_nom']; }
+	while ($dbp = fetch_array_sql($dbquery)) { $pv['o2l22'] = $dbp['config_name']; }
 
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
@@ -94,12 +94,12 @@ case 2:
 	}
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
+	SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 	FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." part 
 	WHERE shr.ws_id = '".$website['ws_id']."' 
 	AND shr.docu_id = doc.docu_id 
 	;");
-	while ($dbp = fetch_array_sql($dbquery)) { $pv['document_list'][$dbp['docu_id']]['nom'] = $dbp['docu_nom']; }
+	while ($dbp = fetch_array_sql($dbquery)) { $pv['document_list'][$dbp['docu_id']]['nom'] = $dbp['docu_name']; }
 	$pv['document_list'][$infos_article['docu_id']]['s'] = " selected";
 
 	$tl_['eng']['link'] = "Link for modifying the associated document (".$pv['document_list'][$infos_article['docu_id']]['nom'].").";
@@ -118,7 +118,7 @@ case 2:
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['role_article_cible'] = $dbp['arti_ref']; }
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT  docu_id,docu_nom
+	SELECT  docu_id,docu_name
 	FROM ".$SQL_tab_abrege['document']."  
 	WHERE  docu_id = '".$infos_article['docu_id']."'
 	;");
@@ -170,7 +170,7 @@ case 3:
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
 		$pv['TabConfig'][$pv['ptr']]['id'] = $dbp['config_id'];
-		$pv['TabConfig'][$pv['ptr']]['nom'] = $dbp['config_nom'];
+		$pv['TabConfig'][$pv['ptr']]['nom'] = $dbp['config_name'];
 		$pv['ptr']++;
 	}
 	unset ( $A );
@@ -198,14 +198,14 @@ case 3:
 
 	$pv['ptr'] = 0;
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
+	SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 	FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." shr 
 	WHERE shr.ws_id = '".$website['ws_id']."' 
 	AND shr.docu_id = doc.docu_id 
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { 
 		$pv['TabDocument'][$pv['ptr']]['id'] = $dbp['docu_id'];
-		$pv['TabDocument'][$pv['ptr']]['nom'] = $dbp['docu_nom'];
+		$pv['TabDocument'][$pv['ptr']]['nom'] = $dbp['docu_name'];
 		$pv['ptr']++;
 	}
 	unset ( $A );

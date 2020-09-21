@@ -297,8 +297,8 @@ case 2:
 	}
 
 	if ( $_REQUEST['M_DECORA']['modification_effectuee'] == 1 ) { 
-		$tl_['eng']['err1'] = "The decoration named ".$document['docu_nom']." has been updated.";
-		$tl_['fra']['err1'] = "La d&eacute;coration ".$document['docu_nom']." a &eacute;t&eacute; mise a jour.";
+		$tl_['eng']['err1'] = "The decoration named ".$document['docu_name']." has been updated.";
+		$tl_['fra']['err1'] = "La d&eacute;coration ".$document['docu_name']." a &eacute;t&eacute; mise a jour.";
 		echo ("<p class='" . $theme_tableau . $_REQUEST['bloc']."_avert'>".$tl_[$l]['err1']."</p>\r"); 
 	}
 	$tl_['eng']['bouton1'] = "Modify a decoration";

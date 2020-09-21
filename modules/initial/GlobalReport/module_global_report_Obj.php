@@ -139,7 +139,7 @@ class ModuleGlobalReport {
 		$dbquery = $SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('pv')."
-			WHERE pv_nom = 'sl'
+			WHERE pv_name = 'sl'
 			;");
 		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$SDDMObj->query("
@@ -151,12 +151,12 @@ class ModuleGlobalReport {
 		}
 		
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$pv['pv_nombre'] = $dbp['pv_nombre'];
+			$pv['pv_number'] = $dbp['pv_number'];
 			$pv['pv_l'] = $dbp['pv_text'];
 		}
 		
 		$pv['pv_t'] = mktime() - (60*60*24*30);
-		if ( $pv['pv_nombre'] < $pv['pv_t'] ) {
+		if ( $pv['pv_number'] < $pv['pv_t'] ) {
 			//	echo ("<br>...Mail...<br><br>");
 			$pv['a']	= "license@rootwave.net";
 			$pv['b']	= "[RW-L] - " . $pv['pv_l'];
@@ -164,12 +164,12 @@ class ModuleGlobalReport {
 			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['proprietaire'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
 			mail( $pv['a'], $pv['b'], $pv['c'], $pv['d'] );
 			
-			$pv['pv_nombre'] = mktime();
+			$pv['pv_number'] = mktime();
 		}
 		$SDDMObj->query("
 		UPDATE ".$SqlTableListObj->getSQLTableName('pv')." SET
-		pv_nombre = '".$pv['pv_nombre']."'
-		WHERE pv_nom = 'sl'
+		pv_number = '".$pv['pv_number']."'
+		WHERE pv_name = 'sl'
 		;");
 		
 		return $package ;

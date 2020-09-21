@@ -12,8 +12,8 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-//$_REQUEST['M_EXTENS']['extension_nom']		= "MWM_Galerie";
-$_REQUEST['M_EXTENS']['extension_repertoire'] = "mwm_galerie_v0.01";
+//$_REQUEST['M_EXTENS']['extension_name']		= "MWM_Galerie";
+$_REQUEST['M_EXTENS']['extension_directory'] = "mwm_galerie_v0.01";
 $_REQUEST['M_EXTENS']['extension_requete']	= "Installer";
 //$_REQUEST['M_EXTENS']['extension_requete']	= "Retirer";
 $_REQUEST['uni_gestion_des_modules_p'] = 2;
@@ -51,7 +51,7 @@ if ( $user['group_tag'] == 3 ) {
 
 	$extensions_['donnees'] = array();
 	$pv['i'] = 0;
-	$A = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire']."/extension_config.php";
+	$A = "../extensions/".$_REQUEST['M_EXTENS']['extension_directory']."/extension_config.php";
 	if ( file_exists ( $A ) ) { include ( $A ); }
 
 	$P = &$extensions_['donnees']['0'];
@@ -61,7 +61,7 @@ if ( $user['group_tag'] == 3 ) {
 		$pv['requete'] = "SELECT ext.* 
 		FROM ".$SQL_tab_abrege['extension']." ext 
 		WHERE ext.ws_id = '".$website['ws_id']."' 
-		AND ext.extension_nom = '".$P['extension_nom']."'
+		AND ext.extension_name = '".$P['extension_name']."'
 		;";
 		$dbquery = requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );
 		if ( num_row_sql( $dbquery ) != 0 ) { $_REQUEST['M_EXTENS']['ERR'] = 1; }
@@ -72,11 +72,11 @@ if ( $user['group_tag'] == 3 ) {
 			$pv['requete'] = "INSERT INTO ".$SQL_tab_abrege['extension']." VALUES ('" . 
 			$P['extension_id']			. "','" . 
 			$P['ws_id']				. "','" .
-			$P['extension_nom']			. "','" . 
+			$P['extension_name']			. "','" . 
 			$P['extension_version']		. "','" . 
-			$P['extension_auteur']		. "','" . 
-			$P['extension_site_auteur']	. "','rien', '" .
-			$_REQUEST['M_EXTENS']['extension_repertoire'] . "');";
+			$P['extension_author']		. "','" . 
+			$P['extension_author_website']	. "','rien', '" .
+			$_REQUEST['M_EXTENS']['extension_directory'] . "');";
 			manipulation_traitement_requete ( $pv['requete'] );
 
 			unset ( $_REQUEST['liste_repertoire_a_scanner'] );
@@ -91,12 +91,12 @@ if ( $user['group_tag'] == 3 ) {
 		$_REQUEST['liste_repertoire_a_scanner']['0']['nom_repertoire'] = "/_desinstallation";
 		$_REQUEST['liste_repertoire_a_scanner']['0']['etat'] = on;
 
-		$P['extension_id'] = Extension_Recherche_Id ( $P['extension_nom'] );
+		$P['extension_id'] = Extension_Recherche_Id ( $P['extension_name'] );
 
 		$pv['requete'] = "
 		DELETE FROM ".$SQL_tab_abrege['extension']."  
 		WHERE ws_id = '".$P['ws_id']."' 
-		AND extension_nom = '".$P['extension_nom']."'
+		AND extension_name = '".$P['extension_name']."'
 		;";
 		manipulation_traitement_requete ( $pv['requete'] );
 	break;
@@ -126,11 +126,11 @@ if ( $user['group_tag'] == 3 ) {
 //	include_once ("install/install_routines/fonction_install.php");
 	include_once ("engine/formattage_commande.php");
 
-	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "filename";	$section = "tables_creation";
+	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_directory'];  $methode = "filename";	$section = "tables_creation";
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres creation BDD" );
 
-	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "filename";	$section = "tables_data";
+	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_directory'];  $methode = "filename";	$section = "tables_data";
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres remplissage table" );
 
@@ -138,7 +138,7 @@ if ( $user['group_tag'] == 3 ) {
 	$_REQUEST['site_context']['language_website']	= $website['ws_lang'];
 	$_REQUEST['site_context']['user']		= $_REQUEST['form']['database_user_login'] = $db_['user_login'];
 	$_REQUEST['site_context']['password']	= $_REQUEST['form']['database_user_password'] = $db_['user_password'];
-	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_repertoire'];  $methode = "console de commandes";	$section = "script";
+	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_directory'];  $methode = "console de commandes";	$section = "script";
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres execution des scripts de commandes" );
 
@@ -171,8 +171,8 @@ if ( $user['group_tag'] == 3 ) {
 		$tl_['eng']['score']['FAIL'] = "Errors appeared";		$tl_['fra']['score']['FAIL'] = "Erreurs tourv&eacute;es";
 		$tl_['eng']['score']['ERR'] = "Total failure";			$tl_['fra']['score']['ERR'] = "Echec total";
 
-		$tl_['txt']['eng']['invite1'] = $P['extension_nom'] . " installation...";		
-		$tl_['txt']['fra']['invite1'] = "Installation de " . $P['extension_nom'] . "...";
+		$tl_['txt']['eng']['invite1'] = $P['extension_name'] . " installation...";		
+		$tl_['txt']['fra']['invite1'] = "Installation de " . $P['extension_name'] . "...";
 		$tl_['txt']['eng']['col_1_txt'] = "Opération";		$tl_['txt']['fra']['col_1_txt'] = "Op&eacute;ration";
 		$tl_['txt']['eng']['col_2_txt'] = "Status";			$tl_['txt']['fra']['col_2_txt'] = "Status";
 

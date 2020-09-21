@@ -19,7 +19,7 @@ $GAL_nom = "Image de synth&egrave;se";
 
 if (!isset($_REQUEST['GAL_page_selection'])) { $_REQUEST['GAL_page_selection'] = 1; }
 
-$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_nombre = 1 WHERE pv_nom = 'galerie_ticket';";
+$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_number = 1 WHERE pv_name = 'galerie_ticket';";
 manipulation_traitement_requete ( $pv['requete'] );
 $pv['i'] = 1;
 
@@ -32,7 +32,7 @@ $GAL_taille_nom = 24;
 $GAL_nom = "Example";
 $GAL_dir = "../websites-datas/".$website['ws_directory']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
 if (!isset($_REQUEST['GAL_page_selection'])) { $_REQUEST['GAL_page_selection'] = 1; }
-$pv['galerie_album'] = "../extensions/".$PA['extension_repertoire']."/programmes/".$PLF['Galerie']['fichier_nom'];
+$pv['galerie_album'] = "../extensions/".$PA['extension_directory']."/programmes/".$PLF['Galerie']['fichier_nom'];
 include ( $pv['galerie_album'] );
 
 

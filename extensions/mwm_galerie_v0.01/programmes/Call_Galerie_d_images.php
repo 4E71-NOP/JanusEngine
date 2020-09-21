@@ -22,7 +22,7 @@ if ( $GALdebug == 1 ) {
 //	On cherche des fichiers dans le rep specifié et on range ca dans un tableau
 // --------------------------------------------------------------------------------------------
 
-$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_nombre = 1 WHERE pv_nom = 'galerie_ticket';";
+$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_number = 1 WHERE pv_name = 'galerie_ticket';";
 //manipulation_traitement_requete ( $pv['requete'] );
 requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );
 
@@ -64,7 +64,7 @@ if ( is_dir( $GAL_dir ) ) {
 	//	Construction de la table qui affiche les vignettes
 	// --------------------------------------------------------------------------------------------
 
-	$pv['fichier'] = "../extensions/".$PA['extension_repertoire']."/programmes/".$PLF['vignette']['fichier_nom'];
+	$pv['fichier'] = "../extensions/".$PA['extension_directory']."/programmes/".$PLF['vignette']['fichier_nom'];
 	$pv['i'] = 1;
 	for ( $nline = 0 ; $nline < $GAL_table_lignes ; $nline ++ ) {
 		echo ("<tr>\r");

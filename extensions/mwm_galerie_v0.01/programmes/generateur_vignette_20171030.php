@@ -88,8 +88,8 @@ if ( isset($_REQUEST['GAL_debug']) ) {
 $pv['ticket_valide'] = 0;
 $pv['compteur'] = 1;
 while ( $pv['ticket_valide'] == 0 && $pv['compteur'] < 100 ) {
-	$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM ".$SQL_tab_abrege['pv']." WHERE pv_nom = 'galerie_ticket';" );
-	while ($dbp = fetch_array_sql($dbquery)) { $_REQUEST['n_comp'] = $dbp['pv_nombre']; }
+	$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM ".$SQL_tab_abrege['pv']." WHERE pv_name = 'galerie_ticket';" );
+	while ($dbp = fetch_array_sql($dbquery)) { $_REQUEST['n_comp'] = $dbp['pv_number']; }
 	if ( $_REQUEST['n_comp'] ==  $_REQUEST['n'] ) { $pv['ticket_valide'] = 1; }
 	else { usleep(100000); }
 	$pv['compteur']++;
@@ -272,7 +272,7 @@ if ( $pv['echec'] < 100 ) {
 }
 
 $_REQUEST['n']++;
-$dbquery = requete_sql($_REQUEST['sql_initiateur'], "UPDATE ".$SQL_tab['pv']." SET pv_nombre = '".$_REQUEST['n']."' WHERE pv_nom = 'galerie_ticket';");
+$dbquery = requete_sql($_REQUEST['sql_initiateur'], "UPDATE ".$SQL_tab['pv']." SET pv_number = '".$_REQUEST['n']."' WHERE pv_name = 'galerie_ticket';");
 $db->close();
 
 unset (

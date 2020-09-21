@@ -149,14 +149,14 @@ class MenuSelectTable {
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." dp
 			WHERE doc.docu_id = dp.docu_id
 			AND dp.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-			ORDER BY doc.docu_nom
+			ORDER BY doc.docu_name
 		;");
 		$tab = array();
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "MenuSelectTable/getDocumentList() : Loading data"));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['docu_id']]['t']	=	$tab[$dbp['docu_id']]['db']	= $dbp['docu_nom'];
+				$tab[$dbp['docu_id']]['t']	=	$tab[$dbp['docu_id']]['db']	= $dbp['docu_name'];
 			}
 		}
 		else {

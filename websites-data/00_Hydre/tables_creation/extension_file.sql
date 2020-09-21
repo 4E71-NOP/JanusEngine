@@ -5,9 +5,9 @@
 CREATE TABLE !table! ( 
 file_id					INTEGER NOT NULL, 
 extension_id			INTEGER,
-extension_nom			VARCHAR(255), 
-file_nom				VARCHAR(255), 
-file_nom_generique		VARCHAR(255), 
+extension_name			VARCHAR(255), 
+file_name				VARCHAR(255), 
+file_generic_name		VARCHAR(255), 
 file_type				INTEGER, 
 
 PRIMARY KEY (file_id),

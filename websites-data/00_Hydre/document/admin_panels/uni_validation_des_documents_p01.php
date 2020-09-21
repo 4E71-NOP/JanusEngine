@@ -93,12 +93,12 @@ switch ($l) {
 // --------------------------------------------------------------------------------------------
 
 $dbquery = $SDDMObj->query("
-SELECT doc.docu_id,doc.docu_nom,doc.docu_type,shr.share_modification 
+SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
 WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_correction = '0' 
-AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND doc.docu_examination = '0' 
+AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $tab_modif = array(
@@ -125,7 +125,7 @@ else {
 	$T['AD']['1'][$i]['3']['cont']	= $I18nObj->getI18nEntry('col_3_txt');
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien " . $Block."_t1' href='index.php?&amp;M_DOCUME[document_selection]=".$dbp['docu_id'].$bloc_html['url_sldup']."&amp;arti_page=2'>".$dbp['docu_nom']."</a>";
+		$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien " . $Block."_t1' href='index.php?&amp;M_DOCUME[document_selection]=".$dbp['docu_id'].$bloc_html['url_sldup']."&amp;arti_page=2'>".$dbp['docu_name']."</a>";
 		$T['AD']['1'][$i]['2']['cont']	= $tab_type[$dbp['docu_type']];
 		$T['AD']['1'][$i]['3']['cont']	= $tab_modif[$dbp['part_modification']];
 	}

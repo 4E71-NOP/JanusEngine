@@ -13,7 +13,7 @@ echo "Chaine regexp: \'" $STR "\'"
 for FILE in $FILE_LIST 
 do 
     echo "Replacing " $1 " with " $2 " in " $FILE "..."
-    # sed -i $STR $FILE
+    sed -i $STR $FILE
 done
 echo "--------------------------------------------------------------------------------"
 echo ""

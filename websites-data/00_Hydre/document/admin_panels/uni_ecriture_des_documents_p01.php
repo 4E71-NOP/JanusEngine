@@ -108,11 +108,11 @@ $editionLevel = $i18nDoc['level'][$UserObj->getUserEntry('group_tag')];
 $T = array();
 
 $dbquery = $SDDMObj->query("
-SELECT doc.docu_id, doc.docu_nom, doc.docu_type, shr.share_modification 
+SELECT doc.docu_id, doc.docu_name, doc.docu_type, shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
 WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY docu_id, docu_type, part_modification ASC
 ;");
 $docList = array();
@@ -125,7 +125,7 @@ if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
 }
 else {
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-		$docList[$dbp['docu_id']]['docu_nom']			= $dbp['docu_nom'];
+		$docList[$dbp['docu_id']]['docu_name']			= $dbp['docu_name'];
 		$docList[$dbp['docu_id']]['docu_id']			= $dbp['docu_id'];
 		$docList[$dbp['docu_id']]['docu_type']			= $dbp['docu_type'];
 		$docList[$dbp['docu_id']]['part_modification']	= $dbp['part_modification'];
@@ -137,7 +137,7 @@ else {
 	unset ($A);
 	
 	$dbquery = $SDDMObj->query("
-	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_nom 
+	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_name 
 	FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('document')." dcm
 	WHERE art.docu_id ".$Clause." 
 	AND dcm.docu_id = art.docu_id 
@@ -166,10 +166,10 @@ else {
 			$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien' href='index.php?
 			&amp;M_DOCUME[document_selection]=".$A['docu_id'].
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
-			&amp;arti_page=2'>".$A['docu_nom']."</a>";
+			&amp;arti_page=2'>".$A['docu_name']."</a>";
 		break;
 		default:
-			$T['AD']['1'][$i]['1']['cont'] = $A['docu_nom'];
+			$T['AD']['1'][$i]['1']['cont'] = $A['docu_name'];
 		break;
 		} 
 		$T['AD']['1'][$i]['2']['cont']	= $i18nDoc['type'][$A['docu_type']];

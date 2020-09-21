@@ -25,7 +25,7 @@ class SqlTableList {
 			'group',			'group_user',
 			'i18n',				
 			'installation',		
-			'keyword',			'note_renvoit',			
+			'keyword',			'returnnote',			
 			'language',			'language_website',		
 			'log',				
 			'module',			'module_website',		

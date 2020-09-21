@@ -11,7 +11,7 @@ self::$SqlQueryTable['M_ARTICL_reb']['requete']		= "SELECT deadline_id FROM ".$S
 self::$SqlQueryTable['M_ARTICL_reb']['element']		= "Bouclage";
 self::$SqlQueryTable['M_ARTICL_reb']['colone_1']	= "deadline_id";
 
-self::$SqlQueryTable['M_ARTICL_reac']['requete']	= "SELECT config_id FROM ".$SqlTableListObj->getSQLTableName('article_config')." WHERE config_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_reac']['requete']	= "SELECT config_id FROM ".$SqlTableListObj->getSQLTableName('article_config')." WHERE config_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_reac']['element']	= "Article_config";
 self::$SqlQueryTable['M_ARTICL_reac']['colone_1']	= "config_id";
 
@@ -31,12 +31,12 @@ self::$SqlQueryTable['M_ARTICL_rea']['requete']		= "SELECT arti_id,arti_name FRO
 self::$SqlQueryTable['M_ARTICL_rea']['element']		= "Article";
 self::$SqlQueryTable['M_ARTICL_rea']['colone_1']	= "arti_id";
 
-self::$SqlQueryTable['M_ARTICL_red']['requete']		= "SELECT doc.docu_id AS docu_id, doc.docu_nom AS docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." doc , ".$SqlTableListObj->getSQLTableName('document_share')." dp WHERE doc.docu_nom = '<A1>' AND dp.docu_id = doc.docu_id AND dp.ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTICL_red']['requete']		= "SELECT doc.docu_id AS docu_id, doc.docu_name AS docu_name FROM ".$SqlTableListObj->getSQLTableName('document')." doc , ".$SqlTableListObj->getSQLTableName('document_share')." dp WHERE doc.docu_name = '<A1>' AND dp.docu_id = doc.docu_id AND dp.ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTICL_red']['element']		= "Document";
 self::$SqlQueryTable['M_ARTICL_red']['colone_1']	= "docu_id";
 
 // Article config
-self::$SqlQueryTable['M_ARTCFG_rdac']['requete']	= "SELECT config_id FROM ".$SqlTableListObj->getSQLTableName('article_config')." WHERE config_nom = '<A1>' AND ws_id = '".$webSiteId."';";
+self::$SqlQueryTable['M_ARTCFG_rdac']['requete']	= "SELECT config_id FROM ".$SqlTableListObj->getSQLTableName('article_config')." WHERE config_name = '<A1>' AND ws_id = '".$webSiteId."';";
 self::$SqlQueryTable['M_ARTCFG_rdac']['element']	= "Article_config";
 
 // Bouclage
@@ -74,9 +74,9 @@ self::$SqlQueryTable['M_DECORA_redec']['colone_1']	= "deco_ref_id";
 //	self::$SqlQueryTable['M_DECORA_rtdec']['colone_1']	= "deco_type";
 
 // Document
-self::$SqlQueryTable['M_DOCUME_rdd']['requete']		= "SELECT docu_id,docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." WHERE docu_nom = '<A1>';";
+self::$SqlQueryTable['M_DOCUME_rdd']['requete']		= "SELECT docu_id,docu_name FROM ".$SqlTableListObj->getSQLTableName('document')." WHERE docu_name = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_rdd']['element']		= "Document";
-self::$SqlQueryTable['M_DOCUME_red']['requete']		= "SELECT docu_id,docu_nom FROM ".$SqlTableListObj->getSQLTableName('document')." WHERE docu_nom = '<A1>';";
+self::$SqlQueryTable['M_DOCUME_red']['requete']		= "SELECT docu_id,docu_name FROM ".$SqlTableListObj->getSQLTableName('document')." WHERE docu_name = '<A1>';";
 self::$SqlQueryTable['M_DOCUME_red']['element']		= "Document";
 self::$SqlQueryTable['M_DOCUME_red']['colone_1']	= "docu_id";
 self::$SqlQueryTable['M_DOCUME_res']['requete']		= "SELECT ws_id FROM ".$SqlTableListObj->getSQLTableName('website')." WHERE ws_name = '<A1>';";

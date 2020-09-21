@@ -136,7 +136,7 @@ switch ($RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 		$commandType = "update";
 		$currentDocumentObj->getDocumentDataFromDB($RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_nom');
+		$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
 		$Content .= "<p>".$I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -147,14 +147,14 @@ switch ($RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 		$currentDocumentObj->setDocument(
 				array (
 					"docu_id"				=>	"",
-					"docu_nom"				=>	"NewDocument",
+					"docu_name"				=>	"NewDocument",
 					"docu_type"				=>	0,
-					"docu_origine"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-					"docu_createur"			=>	$UserObj->getUserEntry('user_id'),
+					"docu_origin"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
+					"docu_creator"			=>	$UserObj->getUserEntry('user_id'),
 					"docu_creation_date"	=>	date(),
-					"docu_correction"		=>	0,
-					"docu_correcteur"		=>	"",
-					"docu_correction_date"	=>	0,
+					"docu_examination"		=>	0,
+					"docu_examiner"		=>	"",
+					"docu_examination_date"	=>	0,
 					"docu_cont"				=>	"",
 				)
 		);
@@ -192,7 +192,7 @@ $T['AD']['1']['5']['1']['cont'] = $I18nObj->getI18nEntry('t1l5c1');
 
 
 $T['AD']['1']['1']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_id');
-$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_nom');
+$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
 
 
 $tabType = array(
@@ -217,7 +217,7 @@ $T['AD']['1']['4']['2']['cont'] = "<select name='formParams[modification]' class
 foreach ( $tab as $A ) { $T['AD']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['1']['4']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocumentEntry('docu_correcteur')]['t'];
+$T['AD']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocumentEntry('docu_examiner')]['t'];
 
 
 

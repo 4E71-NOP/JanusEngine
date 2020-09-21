@@ -117,7 +117,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			SELECT ext.* 
 			FROM ".$SqlTableListObj->getSQLTableName('extension')." ext 
 			WHERE ext.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND ext.extension_nom = '".$A['extension_nom']."'
+			AND ext.extension_name = '".$A['extension_name']."'
 			;");
 			if ( $SDDMObj->num_row_sql($dbquery) != 0 ) { $A['extension_etat'] = 1; }
 		}
@@ -134,7 +134,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 	foreach ( $extensions_['donnees'] as $A ) {
 		if ( $A['introuvable'] != 1 ) {
 			$i++;
-			$T['AD']['1'][$i]['1']['cont'] = $A['extension_nom'];
+			$T['AD']['1'][$i]['1']['cont'] = $A['extension_name'];
 			$T['AD']['1'][$i]['2']['cont'] = $A['extension_version'];
 			$T['AD']['1'][$i]['3']['cont'] = $I18nObj->getI18nEntry('tab1'.$A['extension_etat']);
 			
@@ -157,8 +157,8 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')."
 			<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_nom]'			value='".$A['extension_nom']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_repertoire]'	value='".$A['extension_repertoire']."'>\r
+			<input type='hidden' name='M_EXTENS[extension_name]'			value='".$A['extension_name']."'>\r
+			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Installer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
 			". $InteractiveElementsObj->renderSubmitButton($SB).
@@ -183,8 +183,8 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')."
 			<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_nom]'			value='".$A['extension_nom']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_repertoire]'	value='".$A['extension_repertoire']."'>\r
+			<input type='hidden' name='M_EXTENS[extension_name]'			value='".$A['extension_name']."'>\r
+			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Supprimer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
 			". $InteractiveElementsObj->renderSubmitButton($SB).
@@ -210,7 +210,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 			"<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_repertoire]'	value='".$A['extension_repertoire']."'>\r
+			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Retirer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
 			". $InteractiveElementsObj->renderSubmitButton($SB).

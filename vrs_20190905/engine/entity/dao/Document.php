@@ -37,7 +37,7 @@ class Document {
 			WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
 			AND shr.docu_id = doc.docu_id 
-			AND doc.docu_origine = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 		;");
 		
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {

@@ -15,11 +15,11 @@ $pv['tab'] = &$extensions_['donnees'][$pv['i']];
 
 $pv['tab']['ws_id']					= $website['ws_id'];
 $pv['tab']['extension_id']				= 0;
-$pv['tab']['extension_nom']				= "MWM_Galerie";
+$pv['tab']['extension_name']				= "MWM_Galerie";
 $pv['tab']['extension_version']			= "0.01";
-$pv['tab']['extension_auteur']			= "Faust MDA";
-$pv['tab']['extension_site_auteur']		= "www.multiweb-manager.net";
-$pv['tab']['extension_repertoire']		= "mwm_galerie_v0.01";
+$pv['tab']['extension_author']			= "Faust MDA";
+$pv['tab']['extension_author_website']		= "www.multiweb-manager.net";
+$pv['tab']['extension_directory']		= "mwm_galerie_v0.01";
 $pv['tab']['extension_etat']			= 0;
 $pv['tab']['extension_dep']				= array ( 1 => 0 );
 $pv['tab']['F_CheckInstall']			= "GalerieCheckInstall";
@@ -41,8 +41,8 @@ function GalerieConfiguration () {
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'table_lignes', '3' );";		$id++;
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'fichier_tag', 'thumb_' );";
 	$id = manipulation_trouve_id_suivant ( $SQL_tab_abrege['extension_fichiers'] , "fichier_id" );
-	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_fichiers']." VALUES ( '".$id."', '".$P['extension_id']."', '".$P['extension_nom']."', 'Call_Galerie_d_images.php', 'Galerie', '0'  );"; $id++;	// 0 exec, 1 librarie
-	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_fichiers']." VALUES ( '".$id."', '".$P['extension_id']."', '".$P['extension_nom']."', 'generateur_vignette.php', 'vignette', '0'  );"; 			// 0 exec, 1 librarie
+	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_fichiers']." VALUES ( '".$id."', '".$P['extension_id']."', '".$P['extension_name']."', 'Call_Galerie_d_images.php', 'Galerie', '0'  );"; $id++;	// 0 exec, 1 librarie
+	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_fichiers']." VALUES ( '".$id."', '".$P['extension_id']."', '".$P['extension_name']."', 'generateur_vignette.php', 'vignette', '0'  );"; 			// 0 exec, 1 librarie
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['pv']." VALUES ('galerie_ticket', '1', '');"; // Ticket
 	unset ( $A );
 	foreach ( $requete as $A ) { manipulation_traitement_requete ( $A ); }
@@ -53,7 +53,7 @@ function GalerieEffaceConfiguration () {
 	$P = &$extensions_['donnees']['0'];
 	$requete[] = "DELETE FROM ".$SQL_tab_abrege['extension_config']." WHERE ws_id = '".$P['ws_id']."' AND extension_id = '".$P['extension_id']."';";
 	$requete[] = "DELETE FROM ".$SQL_tab_abrege['extension_fichiers']." WHERE extension_id = '".$P['extension_id']."';";
-	$requete[] = "DELETE FROM ".$SQL_tab_abrege['pv']." WHERE pv_nom = 'galerie_ticket';";
+	$requete[] = "DELETE FROM ".$SQL_tab_abrege['pv']." WHERE pv_name = 'galerie_ticket';";
 	unset ( $A );
 	foreach ( $requete as $A ) { manipulation_traitement_requete ( $A ); }
 }
@@ -64,7 +64,7 @@ function GalerieCheckInstall () {
 	$dp = &$pv['diagnostic_extension'];
 
 	// Vérifie l'enregistrement du extension
-	$pv['requete'] = "SELECT ext.* FROM ".$SQL_tab_abrege['extension']." ext WHERE ext.ws_id = '".$P['ws_id']."' AND ext.extension_nom = '".$P['extension_nom']."';";
+	$pv['requete'] = "SELECT ext.* FROM ".$SQL_tab_abrege['extension']." ext WHERE ext.ws_id = '".$P['ws_id']."' AND ext.extension_name = '".$P['extension_name']."';";
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'], $pv['requete'] );
 	if ( num_row_sql( $dbquery ) == 1 ) { $dp['extension_enregistrement'] = "ok"; }
 

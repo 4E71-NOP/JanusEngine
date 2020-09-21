@@ -84,7 +84,7 @@ class ModuleDocumentDisplay {
 		$DocumentDataObj->setDocumentDataEntry ('arti_validation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_validation_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('arti_release_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_release_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_creation_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('docu_correction_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_correction_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('docu_examination_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_examination_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_cont_brut',		$DocumentDataObj->getDocumentDataEntry('docu_cont'));
 		
 		$liste_document = array();
@@ -97,11 +97,11 @@ class ModuleDocumentDisplay {
 		$liste_document[$LD_idx]['arti_validation_date']		= $DocumentDataObj->getDocumentDataEntry('arti_validation_date');
 		$LD_idx++;
 		$liste_document[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
-		$liste_document[$LD_idx]['docu_nom']					= $DocumentDataObj->getDocumentDataEntry('docu_nom');
-		$liste_document[$LD_idx]['docu_createur']				= $DocumentDataObj->getDocumentDataEntry('docu_createur');
+		$liste_document[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
+		$liste_document[$LD_idx]['docu_creator']				= $DocumentDataObj->getDocumentDataEntry('docu_creator');
 		$liste_document[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-		$liste_document[$LD_idx]['docu_correcteur']				= $DocumentDataObj->getDocumentDataEntry('docu_correcteur');
-		$liste_document[$LD_idx]['docu_correction_date']		= $DocumentDataObj->getDocumentDataEntry('docu_correction_date');
+		$liste_document[$LD_idx]['docu_examiner']				= $DocumentDataObj->getDocumentDataEntry('docu_examiner');
+		$liste_document[$LD_idx]['docu_examination_date']		= $DocumentDataObj->getDocumentDataEntry('docu_examination_date');
 		$LD_idx++;
 		
 		$position_float =array( '0' => "none", '1' => "left", '2' => "right");
@@ -115,11 +115,11 @@ class ModuleDocumentDisplay {
 			$DocumentDataObj->setDocumentDataEntry ('arti_menu_style',					$dbp['config_menu_style']);
 			$DocumentDataObj->setDocumentDataEntry ('config_menu_float_position',		$dbp['config_menu_float_position']);
 			$DocumentDataObj->setDocumentDataEntry ('arti_menu_float_position',			$position_float[$DocumentDataObj->getDocumentDataEntry ('config_menu_float_position')] );
-			$DocumentDataObj->setDocumentDataEntry ('arti_menu_float_taille_x',			$dbp['config_menu_float_taille_x']);
-			$DocumentDataObj->setDocumentDataEntry ('arti_menu_float_taille_y',			$dbp['config_menu_float_taille_y']);
+			$DocumentDataObj->setDocumentDataEntry ('arti_menu_float_taille_x',			$dbp['config_menu_float_size_x']);
+			$DocumentDataObj->setDocumentDataEntry ('arti_menu_float_taille_y',			$dbp['config_menu_float_size_y']);
 			$DocumentDataObj->setDocumentDataEntry ('arti_menu_occurence',				$dbp['config_menu_occurence']);
-			$DocumentDataObj->setDocumentDataEntry ('arti_montre_info_parution',		$dbp['config_montre_info_parution']);
-			$DocumentDataObj->setDocumentDataEntry ('arti_montre_info_modification',	$dbp['config_montre_info_modification']);
+			$DocumentDataObj->setDocumentDataEntry ('arti_montre_info_parution',		$dbp['config_show_release_info']);
+			$DocumentDataObj->setDocumentDataEntry ('arti_montre_info_modification',	$dbp['config_show_info_update']);
 		}
 
 		// --------------------------------------------------------------------------------------------
@@ -323,19 +323,19 @@ class ModuleDocumentDisplay {
 				$documentAnalyse['docu_type']			= 0; //MWMCODE
 				$documentAnalyse['stop']				= stripos( $analysedContent , "[/INCLUDE]");
 				$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
-				$documentAnalyse['include_docu_nom']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
+				$documentAnalyse['include_docu_name']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
 				$dbquery = $SDDMObj->query("
-				SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_createur, doc.docu_creation_date, doc.docu_correcteur, doc.docu_correction_date
+				SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_examiner, doc.docu_examination_date
 				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
-				WHERE doc.docu_nom = '".$documentAnalyse['include_docu_nom']."'
+				WHERE doc.docu_name = '".$documentAnalyse['include_docu_name']."'
 				AND doc.docu_id = dp.docu_id
 				AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				;");
 				
 				if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
 //					Probleme : On ne peut pas nomer le document dans I18N sans 
-//					$tl_['eng']['err'] = "The specified sub-article (" . $analyse_document['include_docu_nom'] . ") could not be found for including.";
-//					$tl_['fra']['err'] = "Le sous-article mention&eacute; (" . $analyse_document['include_docu_nom'] . ") pour inclusion n'a pas &eacute;t&eacute; trouv&eacute;";
+//					$tl_['eng']['err'] = "The specified sub-article (" . $analyse_document['include_docu_name'] . ") could not be found for including.";
+//					$tl_['fra']['err'] = "Le sous-article mention&eacute; (" . $analyse_document['include_docu_name'] . ") pour inclusion n'a pas &eacute;t&eacute; trouv&eacute;";
 //					journalisation_evenement ( 1 , $_REQUEST['sql_initiateur'] , "MADP" , "ERR" , "MADP_0009" , $i18n['err']  );
 					$LMObj->log(array( "i"=>"MADP render", "a"=>"MADP", "s"=> "ERR", "m"=>"MADP_0009", "t"=>$i18n['err']));
 					$documentAnalyse['contenu_include']	= " ";
@@ -346,11 +346,11 @@ class ModuleDocumentDisplay {
 						$documentAnalyse['contenu_include']	= $dbp['docu_cont'];
 						$documentAnalyse['docu_type']		= $dbp['docu_type'];
 						$liste_document[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
-						$liste_document[$LD_idx]['docu_nom']					= $DocumentDataObj->getDocumentDataEntry('docu_nom');
-						$liste_document[$LD_idx]['docu_createur']				= $DocumentDataObj->getDocumentDataEntry('docu_createur');
+						$liste_document[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
+						$liste_document[$LD_idx]['docu_creator']				= $DocumentDataObj->getDocumentDataEntry('docu_creator');
 						$liste_document[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-						$liste_document[$LD_idx]['docu_correcteur']				= $DocumentDataObj->getDocumentDataEntry('docu_correcteur');
-						$liste_document[$LD_idx]['docu_correction_date']		= $DocumentDataObj->getDocumentDataEntry('docu_correction_date');
+						$liste_document[$LD_idx]['docu_examiner']				= $DocumentDataObj->getDocumentDataEntry('docu_examiner');
+						$liste_document[$LD_idx]['docu_examination_date']		= $DocumentDataObj->getDocumentDataEntry('docu_examination_date');
 						$LD_idx++;
 					}
 				}
@@ -507,9 +507,9 @@ class ModuleDocumentDisplay {
 					$pv['LD_1er'] = 0;
 				}
 				else {
-					$pv['C'] = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $i18n['auteurs_par'] . $ADP_users[$A['docu_createur']] .
+					$pv['C'] = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $i18n['auteurs_par'] . $ADP_users[$A['docu_creator']] .
 					$i18n['auteurs_date'] . $A['docu_creation_date'] . " - " .
-					$i18n['auteurs_update'] . $A['docu_correction_date'] . $i18n['auteurs_par'] . $ADP_users[$A['docu_correcteur']] . "<br>\r";
+					$i18n['auteurs_update'] . $A['docu_examination_date'] . $i18n['auteurs_par'] . $ADP_users[$A['docu_examiner']] . "<br>\r";
 				}
 				$Content .= $pv['C'];
 			}

@@ -40,12 +40,12 @@ FROM ".$SQL_tab_abrege['document']." doc, ".$SQL_tab_abrege['document_share']." 
 WHERE shr.ws_id = '".$website['ws_id']."' 
 AND doc.docu_id = '".$_REQUEST['M_DOCUME']['document_selection']."' 
 AND shr.docu_id = doc.docu_id 
-AND doc.docu_origine = '".$website['ws_id']."' 
+AND doc.docu_origin = '".$website['ws_id']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 
 	foreach ( $dbp as $A => $B ) { $document[$A] = $B; }
-	$document['docu_correction_date']	= strftime ("%a %d %b %y - %H:%M", $dbp['docu_correction_date'] );
+	$document['docu_examination_date']	= strftime ("%a %d %b %y - %H:%M", $dbp['docu_examination_date'] );
 	$document['docu_type_pres']		= $tl_[$l]['doc_type'][$dbp['docu_type']];
 	$document['part_modification']	= $tl_[$l]['docu_modif'][$dbp['part_modification']];
 }
@@ -68,15 +68,15 @@ switch ( $document['docu_type'] ) {
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT usr.user_login,s.ws_name 
 FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['group_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
-WHERE usr.user_id = '".$document['docu_correcteur']."' 
+WHERE usr.user_id = '".$document['docu_examiner']."' 
 AND gu.group_user_initial_group = '1' 
 AND usr.user_id = gu.user_id 
 AND gu.group_id = sg.group_id 
 AND sg.ws_id = s.ws_id 
 ;");
 while ($dbp = fetch_array_sql($dbquery)) { 
-	$document['docu_correcteur_login']	= $dbp['user_login'];
-	$document['docu_correcteur_site']	= $dbp['ws_name'];
+	$document['docu_examiner_login']	= $dbp['user_login'];
+	$document['docu_examiner_site']	= $dbp['ws_name'];
 }
 $document['edition'] = 1;
 
@@ -86,7 +86,7 @@ $document['edition'] = 1;
 if ( $pv['execution_script'] == 1 ) { $_REQUEST['M_DOCUME']['haxorzfree'] = 1; }
 else {
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_nom 
+	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_name 
 	FROM ".$SQL_tab_abrege['article']." art, ".$SQL_tab_abrege['deadline']." bcl , ".$SQL_tab_abrege['document']." dcm
 	WHERE art.docu_id = ".$_REQUEST['M_DOCUME']['document_selection']." 
 	AND dcm.docu_id = art.docu_id 
@@ -120,7 +120,7 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	$tl_['eng']['l41'] = "Can be modified by another site";			$tl_['fra']['l41'] = "Modifiable par un autre site";
 	$tl_['eng']['l51'] = "Checked by";								$tl_['fra']['l51'] = "Corrig&eacute; par";
 
-	$pv['o1l52'] = "/ ". $document['docu_correcteur_site'] . " / " . $document['docu_correcteur_login'] . " : " . $document['docu_correction_date']; 
+	$pv['o1l52'] = "/ ". $document['docu_examiner_site'] . " / " . $document['docu_examiner_login'] . " : " . $document['docu_examination_date']; 
 	$tl_['eng']['doc_type']['0'] = "MWM code";						$tl_['fra']['doc_type']['0'] = "Code MWM";	
 	$tl_['eng']['doc_type']['1'] = "No code";						$tl_['fra']['doc_type']['1'] = "Pas de code";
 	$tl_['eng']['doc_type']['2'] = "PHP";							$tl_['fra']['doc_type']['2'] = "PHP";
@@ -143,8 +143,8 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	}
 	
 	if ( $_REQUEST['M_DOCUME']['modification_effectuee'] == 1 ){ 
-		$tl_['eng']['err1'] = "The document named ".$document['docu_nom']." has been updated.";
-		$tl_['fra']['err1'] = "Le document ".$document['docu_nom']." a &eacute;t&eacute; mis a jour.";
+		$tl_['eng']['err1'] = "The document named ".$document['docu_name']." has been updated.";
+		$tl_['fra']['err1'] = "Le document ".$document['docu_name']." a &eacute;t&eacute; mis a jour.";
 		echo ("<p class='" . $theme_tableau . $_REQUEST['bloc']."_avert'>".$tl_[$l]['err1']."</p><br>\r<hr>\r"); 
 	}
 	
@@ -162,7 +162,7 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	$AD['1']['5']['1']['cont'] = $tl_[$l]['l51'];
 	
 	$AD['1']['1']['2']['cont'] = $document['docu_id'];
-	$AD['1']['2']['2']['cont'] = $document['docu_nom'];
+	$AD['1']['2']['2']['cont'] = $document['docu_name'];
 	$AD['1']['3']['2']['cont'] = $document['docu_type_pres'];
 	$AD['1']['4']['2']['cont'] = $document['part_modification'];
 	$AD['1']['5']['2']['cont'] = $pv['o1l52'];
@@ -307,7 +307,7 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."'>\r
 	<tr>\r
 
-	<input type='hidden' name='M_DOCUME[nom]'				value='".$document['docu_nom']."'>\r
+	<input type='hidden' name='M_DOCUME[nom]'				value='".$document['docu_name']."'>\r
 	<input type='hidden' name='M_DOCUME[type]'			value='".$document['docu_type']."'>\r
 	<input type='hidden' name='UPDATE_action'		value='UPDATE_DOCUMENT'>\r".
 	$bloc_html['post_hidden_sw'].

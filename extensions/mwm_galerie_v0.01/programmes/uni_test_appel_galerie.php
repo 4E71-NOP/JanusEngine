@@ -23,7 +23,7 @@ $_REQUEST['GG']['tag'] = "Thumbplouf_";
 /*MWM-file_content*/
 $_REQUEST['sql_initiateur'] = "Test du plugin MWMGalerie";
 
-$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_nombre = 1 WHERE pv_nom = 'galerie_ticket';";
+$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_number = 1 WHERE pv_name = 'galerie_ticket';";
 manipulation_traitement_requete ( $pv['requete'] );
 $pv['i'] = 1;
 
