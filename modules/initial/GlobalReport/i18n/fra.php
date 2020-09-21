@@ -28,6 +28,8 @@ $tabI18n = array(
 	'tGraphLabelT'	=>	"Temps",
 	'tGraphLabelM2'	=>	"% Mémoire",
 	'tGraphLabelT2'	=>	"% Temps",
+	'tMemoryMaxMemUsed' => "Total mémoire utilisée",
+	'tMemoryMb' => "Mo" ,
 		
 	't2l11'	=>	"Pos",
 	't2l12'	=>	"Point de contr&ocirc;le",

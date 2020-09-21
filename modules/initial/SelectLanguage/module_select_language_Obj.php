@@ -18,6 +18,7 @@ class ModuleSelectLanguage {
 	public function __construct(){}
 	
 	public function render ($infos) {
+		$varsStart = array_keys(get_defined_vars());
 		$MapperObj = Mapper::getInstance();
 		$LMObj = LogManagement::getInstance();
 		$CMObj = ConfigurationManagement::getInstance();
@@ -37,10 +38,6 @@ class ModuleSelectLanguage {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 
-// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-// 		$i18n = array();
-// 		include ("../modules/initial/Authentification/i18n/".$l.".php");
-		$vars = get_defined_vars();
 		
 		$language_website_ = array();
 		$Content = "";
@@ -55,7 +52,6 @@ class ModuleSelectLanguage {
 				$pv['1']++;
 			}
 			
-// 			unset ( $language_website_support );
 			$language_website_support = array();
 			$dbquery = $SDDMObj->query("
 				SELECT b.lang_id
@@ -78,7 +74,6 @@ class ModuleSelectLanguage {
 						if ( !file_exists ( "../gfx/". $ThemeDataObj->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = "../gfx/universal/".$language_website_[$A]['lang_image']; }
 						else { $pv['img_src'] = "../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image']; }
 						
-						// a.theme_princ_B30_lien
 						$Content .= "<td>
 						<a class='".$ThemeDataObj->getThemeName().$infos['block']."_lien'
 						href='index.php?".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sdup')."&amp;M_UTILIS[login]=".$SMObj->getSessionEntry('LoginDecoded')."&amp;M_UTILIS[lang]=".$language_website_[$A]['lang_639_3']."&amp;UPDATE_action=UPDATE_USER&amp;M_UTILIS[confirmation_modification]=1'
@@ -92,24 +87,10 @@ class ModuleSelectLanguage {
 			$Content .= "</tr></table>";
 		}
 		
-// 		$vars = get_defined_vars();
-// 		$vars = array_diff(get_defined_vars(),$vars);
-// 		$LMObj->InternalLog(array( 'level' => loglevelError, 'msg' => $StringFormatObj->arrayToString($vars)));
-		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
-			unset (
-				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
-				$CurrentSetObj,
-				$WebSiteObj,
-				$ThemeDataObj,
-				$SqlTableListObj,
-				$UserObj,
-				$CMObj,
-				$pv
-				);
-		}
+		$varsEnd = array_keys(get_defined_vars());
+		$varsSum = array_diff ($varsEnd,  $varsStart);
+		foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
+
 		return $Content;
 	}
 }

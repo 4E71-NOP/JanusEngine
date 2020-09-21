@@ -198,6 +198,7 @@ class ModuleGlobalReport {
 		$dataObjectChart1 = $this->initializeChartJsArray();
 		$dataObjectChart2 = $this->initializeChartJsArray();
 		$dataObjectChart3 = $this->initializeChartJsArray();
+		$dataObjectChart2['data']['datasets'][0] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		$dataObjectChart3['data']['datasets'][1] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		
 		$dataObjectChart1['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelM');
@@ -209,8 +210,8 @@ class ModuleGlobalReport {
 		
 		foreach ( $log as $l ) {
 			
-			$curMemory = round(($l['memoire']/1024/1024),4);
-			$highestMemory = round(memory_get_peak_usage()/1024/1024);
+			$curMemory = round(($l['memoire']/1024/1024),6);
+			$highestMemory = round(memory_get_peak_usage()/1024/1024,6);
 			
 			$dataObjectChart1['data']['datasets'][0]['data'][] = $curMemory;
 			$dataObjectChart1['data']['labels'][] = $l['context'];
@@ -243,12 +244,13 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		
 		$GeneratedJavaScriptObj->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['2']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['3']['1']['cont'] = "<canvas id='statChart3' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['1']['1']['cont'] = $I18nObj->getI18nEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $I18nObj->getI18nEntry('tMemoryMb');
+		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		
 		$config = array(
-				"nbr_ligne" => 3,
+				"nbr_ligne" => 4,
 				"nbr_cellule" => 1,
 				"legende" => 0,
 				"HighLightType" => 0,
