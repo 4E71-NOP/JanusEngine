@@ -17,14 +17,13 @@ class AuthenticateUser {
 	
 	private $data = array();
 	private $report = array();
-	
-	//deprecated begin
-// 	private $AuthenticateUserError = FALSE;
-// 	private $AuthenticateUserErrorInternalLog = array();
-	//deprecated end
 
 	public function __construct(){	}
 
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return AuthenticateUser
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new AuthenticateUser();

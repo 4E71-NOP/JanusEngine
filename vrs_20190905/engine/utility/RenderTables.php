@@ -13,9 +13,13 @@
 /*Hydre-licence-fin*/
 class  RenderTables {
 	private static $Instance = null;
-
+	
 	public function __construct() {}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderTables
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderTables ();

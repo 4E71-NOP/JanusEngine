@@ -13,11 +13,10 @@
 /* Hydre-licence-fin */
 
 /**
- * 
- * @author Faust
- * This class is a necessary pseudo-facade to be able to reuse the code as much as possible. 
+ * This class is a necessary facade to be able to reuse the code as much as possible. 
  * Interfaces and Abstract classes will NOT provide the desired level of reusabitlity.
  * SDDM as "Sql Database Dialog Management"
+ * @author Faust
  *
  */
 class DalFacade {
@@ -26,6 +25,10 @@ class DalFacade {
 	private function __construct() {
 	}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return DalFacade
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new DalFacade ();
@@ -33,6 +36,9 @@ class DalFacade {
 		return self::$Instance;
 	}
 	
+	/**
+	 * Will load the desired class depending on configuration.
+	 */
 	public function createDALInstance () {
 		$cs = CommonSystem::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();				// Make sure it's loaded
@@ -61,6 +67,10 @@ class DalFacade {
 		$this->DALInstance->connect ();
 	}
 	
+	/**
+	 * Returns the current Database Abstraction Layer class instance. 
+	 * @return SddmMySQLI|SddmPDO|SddmADODB|SddmPEARDB
+	 */
 	public function getDALInstance() {
 		return $this->DALInstance;
 	}

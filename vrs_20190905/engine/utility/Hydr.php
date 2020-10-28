@@ -17,8 +17,7 @@ class Hydr {
 	}
 
 	/**
-	 * Returns the intance of this class.
-	 *
+	 * Singleton : Will return the instance of this class.
 	 * @return Hydr
 	 */
 	public static function getInstance() {

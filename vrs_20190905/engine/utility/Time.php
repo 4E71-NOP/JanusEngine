@@ -17,6 +17,10 @@ class Time {
 	
 	private function __construct() {}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return Time
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new Time();
@@ -24,11 +28,19 @@ class Time {
 		return self::$Instance;
 	}
 	
-	
+	/**
+	 * Returns the time to the millisecond.
+	 * @return mixed
+	 */
 	public function microtime_chrono() {
 		return microtime ( TRUE );
 	}
 
+	/**
+	 * Returns a date from a string.
+	 * @param String $date
+	 * @return number
+	 */
 	public function mktimeFromCanonical($date) {
 		$tab_rch = array ("-", ":");		
 		$tab_rpl = array (" ", " ");
@@ -38,6 +50,11 @@ class Time {
 		return $date;
 	}
 	
+	/**
+	 * Returns a date from a timestamp.
+	 * @param Number $data
+	 * @return string
+	 */
 	public function timestampToDate ( $data ) {
 		return date ("Y-m-j G:i:s", $data);
 	}

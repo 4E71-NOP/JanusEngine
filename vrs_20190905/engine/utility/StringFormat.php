@@ -17,6 +17,10 @@ class StringFormat {
 
 	private static $ConvertTable = array();
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return StringFormat
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new StringFormat ();

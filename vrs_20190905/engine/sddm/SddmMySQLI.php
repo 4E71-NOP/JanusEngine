@@ -24,6 +24,10 @@ class SddmMySQLI {
 		$this->SDDMTools = SddmTools::getInstance();
 	}
 
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return SddmMySQLI
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new SddmMySQLI();
@@ -31,6 +35,9 @@ class SddmMySQLI {
 		return self::$Instance;
 	}
 	
+	/**
+	 * Connects to the database.
+	 */
 	public function connect() {
 		$cs = CommonSystem::getInstance();
 		
@@ -65,12 +72,15 @@ class SddmMySQLI {
 		}
 	}
 	
+	/**
+	 * Disconnects from the database.
+	 */
 	public function disconnect_sql () {
 		$this->DBInstance->close();
 	}
 	
 	/**
-	 * 
+	 * Sends a query to the database and manage errors
 	 * @param String $q
 	 * @return mysqli_result|boolean
 	 */
@@ -124,20 +134,39 @@ class SddmMySQLI {
 		return $db_result;
 	}
 
+	/**
+	 * Returns the number of row from the given resultset. 
+	 * @param Array $data
+	 * @return Number
+	 */
 	public function num_row_sql($data) {
 		$nbr = mysqli_num_rows ($data);
 		if ( $nbr == 0 ) { $this->SDDMTools->SLMEmptyResult (); }
 		return $nbr;
 	}
 
+	/**
+	 * Returns the Nth row from a result. 
+	 * @param Array $data
+	 * @return Array
+	 */
 	public function fetch_array_sql($data) {
 		return $data->fetch_assoc ();
 	}
 
+	/**
+	 * Returns a escaped string.
+	 * @param String $data
+	 * @return String
+	 */
 	public function escapeString($data) {
 		return $this->DBInstance->real_escape_string($data);
 	}
 	
+	/**
+	 * Returns the err string.
+	 * @return string
+	 */
 	public function errorMsg() {
 		return "err";
 	}

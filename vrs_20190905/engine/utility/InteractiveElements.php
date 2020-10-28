@@ -17,6 +17,10 @@ class InteractiveElements {
 
 	public function __construct() {}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return InteractiveElements
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new InteractiveElements ();

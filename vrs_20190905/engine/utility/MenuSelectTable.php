@@ -17,6 +17,10 @@ class MenuSelectTable {
 	
 	private function __construct(){}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return MenuSelectTable
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new MenuSelectTable();

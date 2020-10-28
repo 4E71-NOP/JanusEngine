@@ -16,7 +16,11 @@ class RenderDeco10Menu {
 	private static $Instance = null;
 	
 	private function __construct(){}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderDeco10Menu
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderDeco10Menu();

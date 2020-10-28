@@ -14,9 +14,9 @@
 
 /**
  * 
- * This object will store any volatile data.<br><br>
- * It will provide access to any script or class that require to use/access the current XX (User, ThemeData etc).<br><br>
- * Also it stores some variables in an array ($data)<br><br>
+ * This object will store any volatile data.
+ * It will provide access to any script or class that require to use/access the current XX (User, ThemeData etc).
+ * Also it stores some variables in an array ($data)
  * @author faust
  * 
  */

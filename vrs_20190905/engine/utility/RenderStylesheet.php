@@ -15,7 +15,11 @@ class RenderStylesheet {
 	private static $Instance = null;
 
 	public function __construct() {}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderStylesheet
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderStylesheet ();

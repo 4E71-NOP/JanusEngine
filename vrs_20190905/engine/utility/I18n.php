@@ -18,7 +18,11 @@ class I18n {
 	private $i18n = array();
 	
 	private function __construct(){}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return I18n
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new I18n();

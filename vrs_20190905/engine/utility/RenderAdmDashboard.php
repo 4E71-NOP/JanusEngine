@@ -15,12 +15,17 @@
 class RenderAdmDashboard {
 	private static $Instance = null;
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderAdmDashboard
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderAdmDashboard ();
 		}
 		return self::$Instance;
 	}
+	
 	
 	public function render(){
 		$cs = CommonSystem::getInstance();

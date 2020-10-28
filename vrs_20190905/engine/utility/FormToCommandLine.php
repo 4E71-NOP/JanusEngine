@@ -17,7 +17,11 @@ class FormToCommandLine {
 	private $CommandLineNbr = 0;
 
 	public function __construct() {}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return FormToCommandLine
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new FormToCommandLine ();

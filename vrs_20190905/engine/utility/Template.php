@@ -17,6 +17,10 @@ class Template {
 
 	private static $ConvertTable = array();
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return Template
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new Template ();

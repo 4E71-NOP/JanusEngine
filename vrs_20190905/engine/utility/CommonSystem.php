@@ -13,7 +13,7 @@
 /*Hydre-licence-fin*/
 
 /**
- * Facade for multiple internal tools.
+ * Aggregator of multiple internal tools.
  * @author faust
  *
  */
@@ -72,6 +72,10 @@ class CommonSystem {
 		
 	}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return CommonSystem
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new CommonSystem();
@@ -79,12 +83,14 @@ class CommonSystem {
 		return self::$Instance;
 	}
 	
+	/**
+	 * Loads and prepare the command console class. 
+	 */
 	public function InitCommandConsole() {
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('CommandConsole');
 		$this->CommandConsole			= CommandConsole::getInstance();
 	}
-	
 	
 	/**
 	 * Sets the session management instance.
@@ -92,11 +98,10 @@ class CommonSystem {
 	 */
 	public function initSmObj (){
 		$this->SMObj					= SessionManagement::getInstance($this->CMObj);
-		
 	}
 	
 	/**
-	 * Sets the DAL instance
+	 * Sets the DAL instance.
 	 * This require a valid configuration to be loaded. So it's not set when this class is loaded.
 	 */
 	public function initSddmObj(){

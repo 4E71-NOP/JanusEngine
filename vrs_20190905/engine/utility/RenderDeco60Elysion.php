@@ -16,7 +16,11 @@ class RenderDeco60Elysion {
 	private static $Instance = null;
 	
 	private function __construct(){}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderDeco60Elysion
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderDeco60Elysion();

@@ -17,6 +17,10 @@ class DetectPEAR {
 	
 	private function __construct(){}
 	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return DetectPEAR
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new DetectPEAR();

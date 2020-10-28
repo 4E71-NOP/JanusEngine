@@ -34,7 +34,12 @@ class SessionManagement {
 		$this->session['SessionMaxAge'] = $data->getConfigurationEntry('SessionMaxAge');
 		$this->session['err'] = FALSE;
 	}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @param unknown $data
+	 * @return SessionManagement
+	 */
 	public static function getInstance($data) {
 		if (self::$Instance == null) {
 			self::$Instance = new SessionManagement($data);

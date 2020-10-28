@@ -16,7 +16,11 @@ class RenderDeco20Caligraph {
 	private static $Instance = null;
 	
 	private function __construct(){}
-
+	
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return RenderDeco20Caligraph
+	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new RenderDeco20Caligraph();
