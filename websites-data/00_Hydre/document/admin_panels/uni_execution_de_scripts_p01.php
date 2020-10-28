@@ -37,14 +37,14 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $CurrentSetObj->setDataEntry('TestMode', 1 ); 
 $CurrentSetObj->setDataEntry('formScrExec', array(
 // 		"inputFile"	=>	"../websites-data/00_Hydre/document/uni_actualite_p01.php",
-		"inputFile"	=>	"../websites-data/www.multiweb-manager.net/document/eng_acceuil_p01.mwmcode",
-) 
+		"inputFile"	=>	"../websites-data/www.multiweb-manager.net/document/eng_acceuil_p01.htm",
+	)
 );
 
 $RequestDataObj->setRequestData('formGenericData',
@@ -65,16 +65,22 @@ $MapperObj->setSqlApplicant("uni_execution_de_scripts_p01");
 
 switch ($l) {
 	case "fra":
-		$i18nDoc = array(
-		"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Entrez un nom de fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
-		"tf1"			=> "Passage en mode MWM",
-		);
+		$I18nObj->apply(
+			array(
+				"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Sélectionnez un fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
+				"processing"	=> "Traitement de : ",
+				"mode"			=> "Mode : "
+				)
+			);
 		break;
 	case "eng":
-		$i18nDoc = array(
-		"invite1"		=> "This part will help you test some PHP code. Enter a filename and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
-		"tf1"			=> "MWM code mode",
-		);
+		$I18nObj->apply(
+			array(
+				"invite1"		=> "This part will help you test some PHP code. Select a file and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
+				"processing"	=> "Processing : ",
+				"mode"			=> "Mode : "
+				)
+			);
 		break;
 }
 
@@ -153,25 +159,36 @@ $Content .= "
 <hr>\r
 ";
 
-$path = $_SERVER['DOCUMENT_ROOT']."Hydr/websites-data/";
+$path = $_SERVER['DOCUMENT_ROOT']."websites-data/";
 $fileName = $path.$formInputFile;
 $StringFormat = StringFormat::getInstance();
 // $Content .= $StringFormat->print_r_html($formData);
 
 if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
-	if ( strpos($fileName ,".mwmcode") !== FALSE ) {
-		$fileHandle = fopen($fileName,"r");
-		$fileData = fread($fileHandle,filesize($fileName));
-		if ($fileData === FALSE) {$Content .= "ERRRRRRR<br>\r";}
-		$this->documentConvertion($fileData, $infos);		// ModuleDocument->documentConvertion()
-		$Content .= $I18nObj->getI18nEntry('tf1')."<br>\r".$formInputFile."<hr>\r".$fileData ;
-		fclose($fileHandle);
+	$Content .= "<p>".$I18nObj->getI18nEntry('processing').$formInputFile."</p>\r";
+	switch ( true ) {
+		case ( strpos($fileName ,".htm") ):
+			$Content .= "<p>".$I18nObj->getI18nEntry('mode')." HTML</p>\r<hr>\r";
+			$fileHandle = fopen($fileName,"r");
+			$fileData = fread($fileHandle,filesize($fileName));
+			if ($fileData === FALSE) {$Content .= "ERRRRRRR<br>\r";}
+// 			$this->documentConvertion($fileData, $infos);		// ModuleDocument->documentConvertion()
+			fclose($fileHandle);
+		break;
+		case ( strpos($fileName ,".php") ):
+			$Content .= "<p>".$I18nObj->getI18nEntry('mode')."PHP</p>\r<hr>\r";
+			$fileData = include ($fileName);
+		break;
+		case ( strpos($fileName ,".mvmcode") ):
+			// removed
+		break;
 	}
-	else { include ($fileName); }
+	$Content .= $fileData;
+	
 }
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

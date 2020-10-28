@@ -1,0 +1,24 @@
+/*Hydre-contenu_debut*/
+<p>« category » : Designate menu elements.</p>
+<table class='{[block]}_Table01'>
+<caption>Associated arguments of « category »</caption>
+<tr><td>name / nom</td>					<td>Name used as internal reference.</td></tr>
+<tr><td>parent</td>						<td>Defines parent category.</td></tr>
+<tr><td>position</td>					<td>Defines category postion in the menu branch.</td></tr>
+<tr><td>type</td>						<td>4 aviable types : MENU_ADMIN_RACINE MENU_ADMIN ARTICLE_RACINE ARTICLE.</td></tr>
+<tr><td>lang</td>						<td>Defines category language. It will appears in the menu only if matching language have been selected.</td></tr>
+<tr><td>state / etat</td>				<td>ONLINE / OFFLINE</td></tr>
+<tr><td>deadline / deadline</td>		<td>Defines the associated deadline.</td></tr>
+<tr><td>title / titre</td>				<td>Text field. Appears in the menu.</td></tr>
+<tr><td>desc</td>						<td>Description.</td></tr>
+<tr><td>group / group</td>				<td>Defines which group is authorized to see the category (and to use it).</td></tr>
+<tr><td>doc_premier / first_doc</td>	<td>Define the article to use incase of none has been selected during navigation.</td></tr>
+<tr><td>article</td>					<td>Use 0 to make it a directory; else, define the article reference.</td></tr>
+<tr><td>filter		</td>				<td>Text field. Enable filtering on the internal name of the target elements for the "show" command line.</td></tr>
+</table>
+<p>Exemple:</p> 
+<code>
+> site_context "MultiWeb_Engine";<br>
+> add category name "fr_sommaire_admin" parent "0" position "01" type "MENU_ADMIN_RACINE" lang "FRA" state "ONLINE" deadline "initial_online" title "Sommaire" desc "Root menu" group "Anonyme" article "0" first_doc "YES";<br>
+</code>
+/*Hydre-contenu_fin*/

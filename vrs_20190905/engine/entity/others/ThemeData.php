@@ -214,15 +214,15 @@ class ThemeData {
 					unset($DecoTmpObj);
 					
 					// --------------------------------------------------------------------------------------------
-					$pv ['fonte_plage'] = $p ['deco_txt_fonte_size_max'] - $p ['deco_txt_fonte_size_min'];
-					$pv ['fonte_coef'] = $pv ['fonte_plage'] / 6;
-					$pv ['fonte_depart'] = $p ['deco_txt_fonte_size_min'];
-					$pv ['taille_liens'] = floor ( $pv ['fonte_depart'] + ($pv ['fonte_coef'] * 2) ); // Equivalent T3
+// 					$pv ['fonte_plage'] = $p ['deco_txt_fonte_size_max'] - $p ['deco_txt_fonte_size_min'];
+// 					$pv ['fonte_coef'] = $pv ['fonte_plage'] / 6;
+// 					$pv ['fonte_depart'] = $p ['deco_txt_fonte_size_min'];
+// 					$pv ['taille_liens'] = floor ( $pv ['fonte_depart'] + ($pv ['fonte_coef'] * 2) ); // Equivalent T3
 					
-					if ($p ['txt_l_01_size'] == 0)			{ $p['txt_l_01_size']			= $pv['taille_liens']; }
-					if ($p ['txt_l_01_hover_size'] == 0)	{ $p['txt_l_01_hover_size']	= $pv['taille_liens']; }
-					if ($p ['txt_l_td_size'] == 0)			{ $p['txt_l_td_size']			= $pv['taille_liens']; }
-					if ($p ['txt_l_td_hover_size'] == 0)	{ $p['txt_l_td_hover_size']	= $pv['taille_liens']; }
+// 					if ($p ['txt_l_01_size'] == 0)			{ $p['txt_l_01_size']			= $pv['taille_liens']; }
+// 					if ($p ['txt_l_01_hover_size'] == 0)	{ $p['txt_l_01_hover_size']	= $pv['taille_liens']; }
+// 					if ($p ['txt_l_td_size'] == 0)			{ $p['txt_l_td_size']			= $pv['taille_liens']; }
+// 					if ($p ['txt_l_td_hover_size'] == 0)	{ $p['txt_l_td_hover_size']	= $pv['taille_liens']; }
 					
 					$CurrentBlock ['deco_id'] = $this->DecorationList[$p ['graphique']]['deco_id'];
 					$p['deco_type'] = $CurrentBlock ['deco_type'] = $this->DecorationList [$p ['graphique']] ['deco_type'];

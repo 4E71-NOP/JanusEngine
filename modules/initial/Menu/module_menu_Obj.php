@@ -94,7 +94,7 @@ class ModuleMenu {
 			$i++;
 		}
 
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . "\$fileList" . $StringFormatObj->arrayToString($fileList)));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "\$fileList" . $StringFormatObj->arrayToString($fileList)));
 		
 		// --------------------------------------------------------------------------------------------
 		// One query to get all the necessary informations for the processing 	

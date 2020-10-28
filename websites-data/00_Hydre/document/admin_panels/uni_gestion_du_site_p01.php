@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestData('formGenericData',
@@ -81,19 +81,28 @@ switch ($l) {
 		"select_t1_01_1_3"		=> "Maintenance",
 		"select_t1_01_1_1000"	=> "Vérrouillé",
 		
-		"select_t2_04_1"	=> "Synthèse basique",
-		"select_t2_04_2"	=> "Graphique",
-		"select_t2_04_3"	=> "Statistique",
-		"select_t2_04_4"	=> "Logs",
-		"select_t2_04_5"	=> "N/A",
-		"select_t2_04_6"	=> "N/A",
-		"select_t2_04_7"	=> "Requête",
-		"select_t2_04_8"	=> "Commandes",
-		"select_t2_04_9"	=> "Internes",
-		"select_t2_04_10"	=> "Variables",
-	
-		"select_t2_05_0"	=> "Statique",
-		"select_t2_05_1"	=> "Dynamique",
+// 		"select_t2_04_1"	=> "Synthèse basique",
+// 		"select_t2_04_2"	=> "Graphique",
+// 		"select_t2_04_3"	=> "Statistique",
+// 		"select_t2_04_4"	=> "Logs",
+// 		"select_t2_04_5"	=> "N/A",
+// 		"select_t2_04_6"	=> "N/A",
+// 		"select_t2_04_7"	=> "Requête",
+// 		"select_t2_04_8"	=> "Commandes",
+// 		"select_t2_04_9"	=> "Internes",
+// 		"select_t2_04_10"	=> "Variables",
+
+		"select_t2_04_0"	=> "Statique",
+		"select_t2_04_1"	=> "Dynamique",
+
+		"checkbox_t2_05_default"		=> "Défaut",
+		"checkbox_t2_05_graph"			=> "Graphiques",
+		"checkbox_t2_05_stats"			=> "Stats",
+		"checkbox_t2_05_sql"			=> "Requêtes SQL",
+		"checkbox_t2_05_commandbuffer"	=> "Tampon des commandes",
+		"checkbox_t2_05_commandlogs"	=> "Journaux des commandes",
+		"checkbox_t2_05_internallogs"	=> "Journaux Internes",
+		"checkbox_t2_05_variables"		=> "Variables",
 		
 		"updateDone1"		=> "You have modified the site state.<br>\r<br>\rUse this URL to get back on this page:<br>\r",
 		"updateDone2"		=> "Return to the site administration page",
@@ -103,14 +112,13 @@ switch ($l) {
 		't1_l1'				=> "Nom",
 		't1_l2'				=> "Nom abrégé",
 		't1_l3'				=> "Titre de fenêtre",
-		't1_l4'				=> "Barre de status",
-		't1_l5'				=> "URL home",
+		't1_l4'				=> "URL home",
 		
 		"t2_l1"				=> "Langue par defaut",
 		"t2_l2"				=> "Choix du language pour l'utilisateur",
 		"t2_l3"				=> "theme par defaut",
-		"t2_l4"				=> "Niveau de debug",
-		"t2_l5"				=> "Stylesheet",
+		"t2_l4"				=> "Stylesheet",
+		"t2_l5"				=> "Niveau de debug",
 		
 		't3_l1'				=> "Modifer le support des language.",
 		
@@ -139,20 +147,29 @@ switch ($l) {
 		"select_t1_01_1_3"		=> "Maintenance",
 		"select_t1_01_1_1000"	=> "Locked",
 		
-		"select_t2_04_1"	=> "Basic report",
-		"select_t2_04_2"	=> "Graph",
-		"select_t2_04_3"	=> "Stats",
-		"select_t2_04_4"	=> "Logs",
-		"select_t2_04_5"	=> "N/A",
-		"select_t2_04_6"	=> "N/A",
-		"select_t2_04_7"	=> "Queries",
-		"select_t2_04_8"	=> "Commands",
-		"select_t2_04_9"	=> "Internal",
-		"select_t2_04_10"	=> "Variables",
+// 		"select_t2_04_1"	=> "Basic report",
+// 		"select_t2_04_2"	=> "Graph",
+// 		"select_t2_04_3"	=> "Stats",
+// 		"select_t2_04_4"	=> "Logs",
+// 		"select_t2_04_5"	=> "N/A",
+// 		"select_t2_04_6"	=> "N/A",
+// 		"select_t2_04_7"	=> "Queries",
+// 		"select_t2_04_8"	=> "Commands",
+// 		"select_t2_04_9"	=> "Internal",
+// 		"select_t2_04_10"	=> "Variables",
 
-		"select_t2_05_0"	=> "Static",
-		"select_t2_05_1"	=> "Dynamic",
+		"select_t2_04_0"	=> "Static",
+		"select_t2_04_1"	=> "Dynamic",
 
+		"checkbox_t2_05_default"		=> "Default",
+		"checkbox_t2_05_graph"			=> "Graphs",
+		"checkbox_t2_05_stats"			=> "Stats",
+		"checkbox_t2_05_sql"			=> "SQL queries",
+		"checkbox_t2_05_commandbuffer"	=> "Command buffer",
+		"checkbox_t2_05_commandlogs"	=> "Command logs",
+		"checkbox_t2_05_internallogs"	=> "Internal logs",
+		"checkbox_t2_05_variables"		=> "Variables",
+		
 		"updateDone1"		=> "Vous avez modifi&eacute; l'&eacute;tat du site.<br>\r<br>\rPour revenir a cette partie du site utilisez l'URL suivante:<br>\r",
 		"updateDone2"		=> "Revenir a l'administration du site",
 		"updateDone3"		=> "Utilisez le lien pour en faire un signet.",
@@ -161,14 +178,13 @@ switch ($l) {
 		't1_l1'				=> "Name",
 		't1_l2'				=> "Short name",
 		't1_l3'				=> "Window title",
-		't1_l4'				=> "Status bar",
-		't1_l5'				=> "Homepage URL",
+		't1_l4'				=> "Homepage URL",
 		
 		"t2_l1"				=> "Default laguage",
 		"t2_l2"				=> "User can choose language",
 		"t2_l3"				=> "Default theme",
-		"t2_l4"				=> "Debug level",
-		"t2_l5"				=> "Stylesheet",
+		"t2_l4"				=> "Stylesheet",
+		"t2_l5"				=> "Debug level",
 		
 		't3_l1'				=> "Modify language support.",
 		
@@ -200,7 +216,7 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // if ( $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
-// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 'AdminDashboard modification checkbox forgotten');
+// 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard modification checkbox forgotten');
 // 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
 // }
 
@@ -213,10 +229,10 @@ $Content .= "
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 ."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
-."<input type='hidden' name='formGenericData[section]'		value='WebsiteManagementP01'>"
-."<input type='hidden' name='formCommand1'					value='update'>"
-."<input type='hidden' name='formEntity1'					value='website'>"
-."<input type='hidden' name='formTarget1[name]'				value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
+."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"
+."<input type='hidden' name='formCommand1'				value='update'>"
+."<input type='hidden' name='formEntity1'				value='website'>"
+."<input type='hidden' name='formTarget1[name]'			value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
 ."<p>\r"
 ;
@@ -254,14 +270,12 @@ $T['AD'][$Tab]['1']['1']['cont'] = $I18nObj->getI18nEntry('t1_l1');
 $T['AD'][$Tab]['2']['1']['cont'] = $I18nObj->getI18nEntry('t1_l2');
 $T['AD'][$Tab]['3']['1']['cont'] = $I18nObj->getI18nEntry('t1_l3');
 $T['AD'][$Tab]['4']['1']['cont'] = $I18nObj->getI18nEntry('t1_l4');
-$T['AD'][$Tab]['5']['1']['cont'] = $I18nObj->getI18nEntry('t1_l5');
 
 // $T['AD'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_name')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
 $T['AD'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['AD'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[barre_status]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('sw_barre_status')."'	class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['AD'][$Tab]['5']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['AD'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 
 
 // --------------------------------------------------------------------------------------------
@@ -307,34 +321,56 @@ while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 $T['AD'][$Tab]['3']['2']['cont'] .= "</select>\r";
 
 
-
-$T['AD'][$Tab]['4']['2']['cont'] = "<select name='formParams1[info_debug]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$sw_niv_debug = array(
-		1	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_1'),		"s" => "",		"cmd" => "1"),
-		2	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_2'),		"s" => "",		"cmd" => "2"),
-		3	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_3'),		"s" => "",		"cmd" => "3"),
-		4	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_4'),		"s" => "",		"cmd" => "4"),
-		5	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_5'),		"s" => "",		"cmd" => "5"),
-		6	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_6'),		"s" => "",		"cmd" => "6"),
-		7	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_7'),		"s" => "",		"cmd" => "7"),
-		8	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_8'),		"s" => "",		"cmd" => "8"),
-		9	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
-		10	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
-);
-$sw_niv_debug[$WebSiteObj->getWebSiteEntry('ws_info_debug')]['s'] = " selected ";
-foreach ( $sw_niv_debug as $A ) { $T['AD'][$Tab]['4']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
-$T['AD'][$Tab]['4']['2']['cont'] .= "</select>\r";
-$T['AD'][$Tab]['5']['2']['cont'] = "<select name='formParams1[stylesheet]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-
-
-
+$T['AD'][$Tab]['4']['2']['cont'] = "<select name='formParams1[stylesheet]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $sw_CSS = Array(
-		0	=>	array("t" => $I18nObj->getI18nEntry('select_t2_05_0'),		"s" => "",		"cmd" => "STATIC"),
-		1	=>	array("t" => $I18nObj->getI18nEntry('select_t2_05_1'),		"s" => "",		"cmd" => "DYNAMIC"),
+		0	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_0'),		"s" => "",		"cmd" => "STATIC"),
+		1	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_1'),		"s" => "",		"cmd" => "DYNAMIC"),
 		);
 $sw_CSS[$WebSiteObj->getWebSiteEntry('ws_stylesheet')]['s'] = " selected ";
-foreach ( $sw_CSS as $A ) { $T['AD'][$Tab]['5']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
-$T['AD'][$Tab]['5']['2']['cont'] .= "</select>\r";
+foreach ( $sw_CSS as $A ) { $T['AD'][$Tab]['4']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
+$T['AD'][$Tab]['4']['2']['cont'] .= "</select>\r";
+
+
+
+$wsdbg = $WebSiteObj->getWebSiteEntry('ws_info_debug');
+$arrayDbg = array(
+		2 => (($wsdbg & 2 ) != 0 ) ? "checked":"", 
+		3 => (($wsdbg & 4 ) != 0 ) ? "checked":"", 
+		4 => (($wsdbg & 8 ) != 0 ) ? "checked":"", 
+		5 => (($wsdbg & 16 ) != 0 ) ? "checked":"", 
+		6 => (($wsdbg & 32 ) != 0 ) ? "checked":"", 
+		7 => (($wsdbg & 16384 ) != 0 ) ? "checked":"", 
+		8 => (($wsdbg & 32768 ) != 0 ) ? "checked":"", 
+);
+
+$T['AD'][$Tab]['5']['2']['cont'] = "
+<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_default')."<br>\r 
+<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_graph')."<br>\r 
+<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_stats')."<br>\r 
+<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_sql')."<br>\r 
+<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_commandbuffer')."<br>\r 
+<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_commandlogs')."<br>\r 
+<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_internallogs')."<br>\r 
+<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$I18nObj->getI18nEntry('checkbox_t2_05_variables')."<br>\r 
+";
+
+// <select name='formParams1[info_debug]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
+// $sw_niv_debug = array(
+// 		1	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_1'),		"s" => "",		"cmd" => "1"),
+// 		2	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_2'),		"s" => "",		"cmd" => "2"),
+// 		3	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_3'),		"s" => "",		"cmd" => "3"),
+// 		4	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_4'),		"s" => "",		"cmd" => "4"),
+// 		5	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_5'),		"s" => "",		"cmd" => "5"),
+// 		6	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_6'),		"s" => "",		"cmd" => "6"),
+// 		7	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_7'),		"s" => "",		"cmd" => "7"),
+// 		8	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_8'),		"s" => "",		"cmd" => "8"),
+// 		9	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
+// 		10	=>	array("t" => $I18nObj->getI18nEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
+// );
+// $sw_niv_debug[$WebSiteObj->getWebSiteEntry('ws_info_debug')]['s'] = " selected ";
+// foreach ( $sw_niv_debug as $A ) { $T['AD'][$Tab]['5']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
+// $T['AD'][$Tab]['5']['2']['cont'] .= "</select>\r";
+
 
 // --------------------------------------------------------------------------------------------
 // Tab 03
@@ -399,9 +435,9 @@ $T['AD'][$Tab]['1']['2']['cont'] .= "</select>";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $RenderTablesObj->getDefaultDocumentConfig($infos, 10, 5);
+$T['tab_infos'] = $RenderTablesObj->getDefaultDocumentConfig($infos, 13, 5);
 $T['ADC']['onglet'] = array(
-		1	=>	$RenderTablesObj->getDefaultTableConfig(5,2,2),
+		1	=>	$RenderTablesObj->getDefaultTableConfig(4,2,2),
 		2	=>	$RenderTablesObj->getDefaultTableConfig(5,2,2),
 		3	=>	$RenderTablesObj->getDefaultTableConfig($tab3NbrLine,8,1),
 		4	=>	$RenderTablesObj->getDefaultTableConfig(1,2,2),
@@ -419,9 +455,39 @@ $Content .= $RenderTablesObj->render($infos, $T);
 <input type='hidden' name='FormWebSite[banner_bypass]'	value='1'>\r
 
 */
+
+
+// A Javascript is inserted for computing the final 'info_debug' value. 
+// This is a specific case that does not require a separated script file.
 $Content .= "
+<input type='hidden' id='formParams1_info_debug' name='formParams1[info_debug]'				value='UPDATE_WEBSITE'>\r
+
+<script type='text/javascript'>\r
+function computeInfoDebug () {\r
+	const listInfoDebug = {\r
+	'1' : { 'n' : 'info_debug_graph',			'v' : '2' },\r
+	'2' : { 'n' : 'info_debug_stats',			'v' : '4' },\r
+	'3' : { 'n' : 'info_debug_sql',				'v' : '8' },\r
+	'4' : { 'n' : 'info_debug_commandbuffer',	'v' : '16' },\r
+	'5' : { 'n' : 'info_debug_commandlogs',		'v' : '32' },\r
+	'6' : { 'n' : 'info_debug_internallogs',	'v' : '16384' },\r
+	'7' : { 'n' : 'info_debug_variables',		'v' : '32768' }\r
+	};\r
+	\r
+	var scoreInfoDebug = 1;\r
+	for (let f in listInfoDebug) {\r
+		// console.log ('processing: ' + listInfoDebug[f].n) \r
+		if ( elm.Gebi(listInfoDebug[f].n).checked ) {\r
+			scoreInfoDebug += Number(listInfoDebug[f].v);\r
+		}\r
+	}\r
+	elm.Gebi('formParams1_info_debug').value = scoreInfoDebug;\r
+	// console.log ('formParams1_info_debug=' + elm.Gebi('formParams1_info_debug').value );\r
+}\r
+</script>\r
+\r
 <input type='hidden' name='site_context[ws_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
-<input type='hidden' name='site_context[site_nom]'		value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
+<input type='hidden' name='site_context[site_nom]'	value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
 
 <table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>
 <tr>\r
@@ -451,6 +517,6 @@ $Content .= "
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

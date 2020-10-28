@@ -1,0 +1,97 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+Les instructions du mc680x0 de A a B<br>
+<br>
+<table>
+<tr><td >ABCD</td><td ><justify>Addition décimale avec le bit d'extension. Addition en binaire codé décimal avec le bit d'extension de deux registres de données ou de deux cases mémoire adressées par pré-décrémentation : ABCD Ds,Dd ou ABCD -(As),-(Ad). L'opération ne porte que sur des octets.<br>&nbsp;</td></tr>
+
+<tr><td >ADD</td><td ><justify>Addition binaire entre une opérande et un registre donnée : ADD <AE>,Dn ou ADD Dn,<AE>.<br>
+Variantes :<br>
+Addition avec un registre d'adresse : ADDA <AE>,An (en .W ou .L).<br>
+Addition avec une donnée immédiate : ADDI #,<AE>.<br>
+Addition rapide : ADDQ #,<AE>, La donnée est une valeur de 1 à 8 (ou 8 est codé 000 de manière interne).<br>
+Addition avec le bit d'extension : ADDX Ds,Dd ou ADDX -(As),-(Ad).<br>&nbsp;</td></tr>
+
+<tr><td >AND</td><td ><justify>ET logique. Réalisation d'un ET logique entre l'opérande source et l'opérande destination et rangement du résultat dans l'emplacement destination. AND <AE>,Dn ou AND Dn,<AE>.<br>
+Variantes :<br>
+Réalisation d'un ET logique entre la donnée immédiate et l'opérande destination. ANDI #,Dn.<br>
+Réalisation d'un ET logique entre la donnée immédiate et le SR. Cette instruction nécessite obligatoirement le mode superviseur du processeur ANDI #,SR.<br>
+<br>&nbsp;</td></tr>
+
+<tr><td >ASL</td><td ><justify>Décalage arithmétique gauche. Décalage arithmétique vers la gauche de l'opérande. Le bit de poids fort est copié dans les bits C et X du CCR, Le bit de poids faible est mis à 0. Si l'opérande est un registre on spécifie le nombre de décalages, soit par un registre (ASL Dn,Dd Décale Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ASL #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul décalage s'effectue et l'opérande ne peut être qu'un mot. : ASL <AE><br>&nbsp;</td></tr>
+<tr><td >ASR</td><td ><justify>Décalage arithmétique droit. Décalage arithmétique vers la droite de l'opérande. Le bit de poids faible est copié dans les bits C et X du CCR, Le bit de poids fort est mis à 0. Si l'opérande est un registre on spécifie le nombre de décalages, soit par un registre (ASR Dn,Dd Décale Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ASR #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul décalage s'effectue et l'opérande ne peut être qu'un mot. : ASR <AE>. <br>&nbsp;</td></tr>
+<tr><td >BSET</td><td ><justify>Test d'un bit et mise à 1. Test d'un bit de l'opérande destination. BSET positionne le bit Z dans l'état complémentaire de ce bit, puis le bit testé est mis à 1 dans l'emplacement destination. Le numéro du bit est indiqué, soit par un registre de données si l'on désire pouvoir modifier le numéro du bit, soit par une donnée immédiate. Si l'adresse effective est un registre de données l'instruction agit obligatoirement sur un mot long ('.L'), pour tous les autres modes d'adressage, l'opérande est l'octet ('.B') : BSET Dn,<AE> ou BSET #,<AE>.<br>&nbsp;</td></tr>
+<tr><td >BCLR</td><td ><justify>Test d'un bit et mise à 0. Test d'un bit de l'opérande destination. BCLR positionne le bit Z dans l'état complémentaire de ce bit, puis le bit testé est mis à 0 dans l'emplacement destination. Le numéro du bit est indiqué, soit par un registre de données si l'on désire pouvoir modifier le numéro du bit, soit par une donnée immédiate. Si l'adresse effective est un registre de données l'instruction agit obligatoirement sur un mot long ('.L'), pour tous les autres modes d'adressage, l'opérande est l'octet ('.B') : BCLR Dn,<AE> ou BCLR #,<AE>.<br>&nbsp;</td></tr>
+<tr><td >BCHG</td><td ><justify>Test d'un bit et modification. Test d'un bit de l'opérande destination. BCHG positionne le bit Z dans l'état complémentaire de ce bit, puis le bit testé est mis dans le même état complémentaire dans l'emplacement destination. Le numéro du bit est indiqué, soit par un registre de données si l'on désire pouvoir modifier le numéro du bit, soit par une donnée immédiate. Si l'adresse effective est un registre de données l'instruction agit obligatoirement sur un mot long ('.L'), pour tous les autres modes d'adressage, l'opérande est l'octet ('.B') : BCHG Dn,<AE> ou BCHG #,<AE>.<br>&nbsp;</td></tr>
+<tr><td >BTST</td><td ><justify>Test d'un bit. Test d'un bit de l'opérande destination. BTST positionne le bit Z dans l'état complémentaire de ce bit. Le numéro du bit est indiqué, soit par un registre de données si l'on désire pouvoir modifier le numéro du bit, soit par une donnée immédiate. Si l'adresse effective est un registre de données l'instruction agit obligatoirement sur un mot long ('.L'), pour tous les autres modes d'adressage, l'opérande est l'octet ('.B') : BTST Dn,<AE> ou BTST #,<AE>.<br>&nbsp;</td></tr>
+<tr><td >Bcc</td><td ><justify>Branchement conditionnel. Branchement relatif à l'étiquette indiquée (l'adresse PC+déplacement signé) si la condition cc est remplie sinon l'instruction suivante est exécutée. La condition cc est l'une des suivantes CC, CS, EQ, GE, GT, HI, LE, LS, LT, MI, NE, PL, VC, VS. Le déplacement signé est soit court (sur un octet) soit long (sur un mot) : Bcc Etiquette<br>&nbsp;</td></tr>
+<tr><td >BRA</td><td ><justify>Branchement. Branchement sans condition à l'étiquette spécifiée. Le déplacement signé est soit court (sur un octet) soit long (sur un mot) : BRA Etiquette<br>&nbsp;</td></tr>
+<tr><td >BSR</td><td ><justify>Branchement à une sous-routine. Branchement relatif à une sous-routine grâce au déplacement spécifié (Codé sur 8 ou 16 bits). Le PC est sauvegardé sur la pile puis le branchement est effectué : BSR <AE>.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+</table>
+<br>
+
+<table>
+<tr><td  colspan='6' >Etat du SR pour les instrcutions</td></tr>
+<tr><td >Instruction</td>					<td >X</td>	<td >N</td>	<td >Z</td>	<td >V</td>	<td >C</td></tr>
+<tr><td >
+	ABCD Ds,Dd<br>
+	ABCD -(As),-(Ad)								</td><td >P</td>	<td >?</td>	<td >P</td>	<td >?</td>	<td >P</td></tr>
+<tr><td >
+	ADD	<AE>,Dn ou Dn,<AE><br>
+	ADDA <AE>,An ou An,<AE><br>
+	ADDI #<donnée>,<AE><br>	
+	ADDQ #<donnée>,<AE><br>
+	ADDX Ds,Dd ou ADDX -(As),-(Ad)<br>				</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+
+<tr><td >
+	AND <AE>,Dn<br>
+	AND Dn,<AE><br>
+	ANDI #<Donnée>,<AE>			</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+
+<tr><td >
+	ASL <AE><br>
+	ASL Dn,Dd<br>
+	ASL #<Donnée>,Dd					</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+
+<tr><td >
+	ASR <AE><br>
+	ASR Dn,Dd<br>
+	ASR #<Donnée>,Dd					</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+<tr><td >
+	BSET Dn,<AE><br>
+	BSET #<Donnée>,<AE>
+													</td><td >		</td><td >	</td><td >P	</td><td >	</td><td >	</td></tr>
+
+<tr><td >
+	BCLR Dn,<AE><br>
+	BCLR #<Donnée>,<AE>
+													</td><td >		</td><td >	</td><td >P	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	BCHG
+	BCHG Dn,<AE><br>
+	BCHG #<Donnée>,<AE>
+													</td><td >		</td><td >	</td><td >P	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	BTST Dn,<AE><br>
+	BTST #<Donnée>,<AE>
+													</td><td >		</td><td >	</td><td >P	</td><td >	</td><td >	</td></tr>
+
+<tr><td >
+	Bcc	<étiquette>							</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+<tr><td >
+	BRA	<étiquette>							</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	BSR	<étiquette>							</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+</table>
+<br>
+
+
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+<br>
+<br>
+</justify>
+/*Hydre-contenu_fin*/

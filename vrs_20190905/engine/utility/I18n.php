@@ -31,19 +31,18 @@ class I18n {
 	 * @param string $package
 	 */
 	public function getI18nFromDB ($package = 'initial' ) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$cs = CommonSystem::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		if (strlen($package) == 0 ) { $package = "initial"; }
-		$dbquery = $SDDMObj->query ("
+		$dbquery = $cs->SDDMObj->query ("
 		SELECT i18n_name, i18n_text FROM ".$SqlTableListObj->getSQLTableName('i18n')."
 		WHERE i18n_package = '".$package."'
 		AND lang_id = '".$CurrentSetObj->getDataEntry('language_id')."' 
 		");
 		$tab0 = $this->i18n;
 		$tab1 = array();
-		while ( $dbp = $SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
+		while ( $dbp = $cs->SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
 		$this->i18n = array_merge ($tab0, $tab1);
 	}
 	

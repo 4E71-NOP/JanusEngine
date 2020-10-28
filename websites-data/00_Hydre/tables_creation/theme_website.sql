@@ -21,7 +21,6 @@ PRIMARY KEY (theme_website_id),
 KEY idx_!IdxNom!_ws_id (ws_id),
 KEY idx_!IdxNom!_theme_id (theme_id)
 );
-COMMIT;
 CREATE TRIGGER `entryInsert` 
 BEFORE INSERT ON !table! FOR EACH ROW 
 SET NEW.entry_date = CURRENT_TIMESTAMP(), NEW.entry_user_date = CURRENT_USER();
@@ -29,3 +28,5 @@ SET NEW.entry_date = CURRENT_TIMESTAMP(), NEW.entry_user_date = CURRENT_USER();
 CREATE TRIGGER `entryUpdate` 
 BEFORE UPDATE ON !table! FOR EACH ROW 
 SET NEW.entry_update = CURRENT_TIMESTAMP(), NEW.entry_user_update = CURRENT_USER();
+
+COMMIT;

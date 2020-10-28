@@ -3,7 +3,9 @@ name "rw_aqua_texte_003"
 type	'caligraph'						
 repertoire	'Aqua'						
 							
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Arial, Helvetica, Sans-serif'						
+txt_fonte_size	'14'
 							
 txt_l_01_display	'block'						
 				txt_l_01_decoration	'none'		

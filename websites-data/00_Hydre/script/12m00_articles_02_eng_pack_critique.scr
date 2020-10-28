@@ -1,5 +1,5 @@
 
-add article	name "eng_console_de_commande_p01"					reference "eng_console_de_commande"				deadline initial_online		desc "Admin in English"				title "Command console"							subtitle "Interface"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name gestion_profil;
+add article	name "eng_command_console_p01"						reference "eng_command_console"					deadline initial_online		desc "Admin in English"				title "Command console"							subtitle "Interface"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name default_layout;
 add article	name "eng_validation_des_documents_p01"				reference "eng_validation_des_documents"		deadline initial_online		desc "Admin in English"				title "Document check"							subtitle "Check"											page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_validation_des_documents_p02"				reference "eng_validation_des_documents"		deadline initial_online		desc "Admin in English"				title "Document check"							subtitle "Check"											page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_ecriture_des_documents_p01"				reference "eng_ecriture_des_documents"			deadline initial_online		desc "Admin in English"				title "Document writing"						subtitle "Writing"											page "1"	validation_state "VALID"	config "no_menu";
@@ -16,17 +16,17 @@ add article	name "eng_gestion_des_decorations_p01"				reference "eng_gestion_des
 add article	name "eng_gestion_des_decorations_p02"				reference "eng_gestion_des_decorations"			deadline initial_online		desc "Admin in English"				title "Decoration managment"					subtitle "Modify the decorations"							page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name gestion_decoration;				
 add article	name "eng_gestion_des_documents_p01"				reference "eng_gestion_des_documents"			deadline initial_online		desc "Admin in English"				title "Document managment"						subtitle "Select the document"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_documents_p02"				reference "eng_gestion_des_documents"			deadline initial_online		desc "Admin in English"				title "Document managment"						subtitle "Modify the document"								page "2"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_groups_p01"					reference "eng_gestion_des_groups"				deadline initial_online		desc "Admin in English"				title "Group managment"							subtitle "Select the group"									page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_groups_p02"					reference "eng_gestion_des_groups"				deadline initial_online		desc "Admin in English"				title "Group managment"							subtitle "Modify the group"									page "2"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_logs_p01"				reference "eng_gestion_des_logs"			deadline initial_online		desc "Admin in English"				title "Log managment"							subtitle "Managing the logs"								page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name gestion_profil;
+add article	name "eng_gestion_des_groupes_p01"					reference "eng_gestion_des_groupes"				deadline initial_online		desc "Admin in English"				title "Group managment"							subtitle "Select the group"									page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_groupes_p02"					reference "eng_gestion_des_groupes"				deadline initial_online		desc "Admin in English"				title "Group managment"							subtitle "Modify the group"									page "2"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_logs_p01"						reference "eng_gestion_des_logs"				deadline initial_online		desc "Admin in English"				title "Log managment"							subtitle "Managing the logs"								page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name gestion_profil;
 add article	name "eng_gestion_des_modules_p01"					reference "eng_gestion_des_modules"				deadline initial_online		desc "Admin in English"				title "Modules managment"						subtitle "Choose the module"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_modules_p02"					reference "eng_gestion_des_modules"				deadline initial_online		desc "Admin in English"				title "Modules managment"						subtitle "Modify the module"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_mots_cles_p01"				reference "eng_gestion_des_mots_cles"			deadline initial_online		desc "Admin en English"				title "Keyword managment"						subtitle "Select the keyword"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_mots_cles_p02"				reference "eng_gestion_des_mots_cles"			deadline initial_online		desc "Admin en English"				title "Keyword managment"						subtitle "Modify the keyword"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_extensions_p01"				reference "eng_gestion_des_extensions"			deadline initial_online		desc "Admin in English"				title "Extensions managment"					subtitle "Select the extension"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_extensions_p02"				reference "eng_gestion_des_extensions"			deadline initial_online		desc "Admin in English"				title "Extensions managment"					subtitle "Modify the extension"								page "2"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_layouts_p01"			reference "eng_gestion_des_layouts"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Select the layout"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_gestion_des_layouts_p02"			reference "eng_gestion_des_layouts"		deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Modify the layout"								page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_decoration";
+add article	name "eng_gestion_des_layouts_p01"					reference "eng_gestion_des_layouts"				deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Select the layout"								page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_gestion_des_layouts_p02"					reference "eng_gestion_des_layouts"				deadline initial_online		desc "Admin en English"				title "Layout managment"						subtitle "Modify the layout"								page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "gestion_decoration";
 add article	name "eng_gestion_des_themes_p01"					reference "eng_gestion_des_themes"				deadline initial_online		desc "Admin in English"				title "Theme managment"							subtitle "Select the theme"									page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_themes_p02"					reference "eng_gestion_des_themes"				deadline initial_online		desc "Admin in English"				title "Theme managment"							subtitle "Modify the theme"									page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_gestion_des_utilisateurs_p01"				reference "eng_gestion_des_utilisateurs"		deadline initial_online		desc "Admin in English"				title "User managment"							subtitle "Select the user"									page "1"	validation_state "VALID"	config "no_menu";
@@ -41,11 +41,11 @@ add article	name "eng_outil_nettoyage_script_p01"				reference "eng_outil_nettoy
 add article	name "eng_outil_url_utiles_p01"						reference "eng_outil_url_utiles"				deadline initial_online		desc "Admin in English"				title "Useful URLs"								subtitle "Web ressources"									page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_validation_d_article_p01"					reference "eng_validation_d_article"			deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Select the article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_validation_d_article_p02"					reference "eng_validation_d_article"			deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Validate the article"								page "2"	validation_state "VALID"	config "no_menu";
-add article	name "eng_article_inexistant_p01"					reference "eng_article_inexistant_p01"			deadline initial_online		desc "Article not available"		title "404 - Article not available"				subtitle "Page do not exists"								page "1"	validation_state "VALID"	config "nothing";
+add article	name "eng_article_not_found_p01"					reference "eng_article_not_found"				deadline initial_online		desc "Article not available"		title "404 - Article not available"				subtitle "Page do not exists"								page "1"	validation_state "VALID"	config "nothing";
 add article	name "eng_admin_authentification_p01"				reference "eng_admin_authentification"			deadline initial_online		desc "Admin authentification"		title "Authentification"						subtitle "Admin user"										page "1"	validation_state "VALID"	config "nothing";
 
 
-assign document name "doc_uni_console_de_commande_p01.php"			to_article	"eng_console_de_commande_p01";
+assign document name "doc_uni_command_console_p01.php"				to_article	"eng_command_console_p01";
 assign document name "doc_uni_validation_des_documents_p01.php"		to_article	"eng_validation_des_documents_p01";
 assign document name "doc_uni_validation_des_documents_p02.php"		to_article	"eng_validation_des_documents_p02";
 assign document name "doc_uni_ecriture_des_documents_p01.php"		to_article	"eng_ecriture_des_documents_p01";
@@ -61,17 +61,17 @@ assign document name "doc_uni_gestion_des_decorations_p01.php"		to_article	"eng_
 assign document name "doc_uni_gestion_des_decorations_p02.php"		to_article	"eng_gestion_des_decorations_p02";
 assign document name "doc_uni_gestion_des_documents_p01.php"		to_article	"eng_gestion_des_documents_p01";
 assign document name "doc_uni_gestion_des_documents_p02.php"		to_article	"eng_gestion_des_documents_p02";
-assign document name "doc_uni_gestion_des_groups_p01.php"			to_article	"eng_gestion_des_groups_p01";
-assign document name "doc_uni_gestion_des_groups_p02.php"			to_article	"eng_gestion_des_groups_p02";
-assign document name "doc_uni_gestion_des_logs_p01.php"		to_article	"eng_gestion_des_logs_p01";
+assign document name "doc_uni_gestion_des_groupes_p01.php"			to_article	"eng_gestion_des_groupes_p01";
+assign document name "doc_uni_gestion_des_groupes_p02.php"			to_article	"eng_gestion_des_groupes_p02";
+assign document name "doc_uni_gestion_des_logs_p01.php"				to_article	"eng_gestion_des_logs_p01";
 assign document name "doc_uni_gestion_des_modules_p01.php"			to_article	"eng_gestion_des_modules_p01";
 assign document name "doc_uni_gestion_des_modules_p02.php"			to_article	"eng_gestion_des_modules_p02";
 assign document name "doc_uni_gestion_des_mots_cles_p01.php"		to_article	"eng_gestion_des_mots_cles_p01";
 assign document name "doc_uni_gestion_des_mots_cles_p02.php"		to_article	"eng_gestion_des_mots_cles_p02";
 assign document name "doc_uni_gestion_des_extensions_p01.php"		to_article	"eng_gestion_des_extensions_p01";
 assign document name "doc_uni_gestion_des_extensions_p02.php"		to_article	"eng_gestion_des_extensions_p02";
-assign document name "doc_uni_gestion_des_layouts_p01.php"	to_article	"eng_gestion_des_layouts_p01";
-assign document name "doc_uni_gestion_des_layouts_p02.php"	to_article	"eng_gestion_des_layouts_p02";
+assign document name "doc_uni_gestion_des_layouts_p01.php"			to_article	"eng_gestion_des_layouts_p01";
+assign document name "doc_uni_gestion_des_layouts_p02.php"			to_article	"eng_gestion_des_layouts_p02";
 assign document name "doc_uni_gestion_des_themes_p01.php"			to_article	"eng_gestion_des_themes_p01";
 assign document name "doc_uni_gestion_des_themes_p02.php"			to_article	"eng_gestion_des_themes_p02";
 assign document name "doc_uni_gestion_des_utilisateurs_p01.php"		to_article	"eng_gestion_des_utilisateurs_p01";
@@ -79,14 +79,14 @@ assign document name "doc_uni_gestion_des_utilisateurs_p02.php"		to_article	"eng
 assign document name "doc_uni_gestion_du_profil_p01.php"			to_article	"eng_gestion_du_profil_p01";
 assign document name "doc_uni_gestion_du_site_p01.php"				to_article	"eng_gestion_du_site_p01";
 assign document name "doc_uni_generation_stylesheet_p01.php"		to_article	"eng_generation_stylesheet_p01";
-assign document name "doc_uni_websiteList_p01.php"				to_article	"eng_liste_des_sites_p01";
+assign document name "doc_uni_websiteList_p01.php"					to_article	"eng_liste_des_sites_p01";
 assign document name "doc_uni_informations_utiles_p01.php"			to_article	"eng_informations_utiles_p01";
 assign document name "doc_uni_outil_conversion_type_p01.php"		to_article	"eng_outil_conversion_type_p01";
 assign document name "doc_uni_outil_nettoyage_script_p01.php"		to_article	"eng_outil_nettoyage_script_p01";
 assign document name "doc_uni_outil_url_utiles_p01.php"				to_article	"eng_outil_url_utiles_p01";
 assign document name "doc_uni_validation_d_article_p01.php"			to_article	"eng_validation_d_article_p01";
 assign document name "doc_uni_validation_d_article_p02.php"			to_article	"eng_validation_d_article_p02";
-assign document name "doc_uni_article_inexistant_p01.php"			to_article	"eng_article_inexistant_p01";
+assign document name "doc_uni_article_not_found_p01.php"			to_article	"eng_article_not_found_p01";
 assign document name "doc_uni_admin_authentification_p01.php"		to_article	"eng_admin_authentification_p01";
 
 

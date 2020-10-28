@@ -24,6 +24,7 @@ class CommandForge {
 	}
 	
 	public function forge($data) {
+		$cs = CommonSystem::getInstance();
 		$error = FALSE;
 		if (strlen ( $data ['command'] ) == 0) { $error = TRUE; }
 		if (strlen ( $data ['type'] ) == 0) { $error = TRUE; }
@@ -38,7 +39,7 @@ class CommandForge {
 			}
 			return $RenderingCommandLine;
 		} else {
-			$LMObj = LogManagement::getInstance();
+			$cs->LMObj = LogManagement::getInstance();
 			//Logging 
 		}
 	}

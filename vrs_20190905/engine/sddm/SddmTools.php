@@ -36,9 +36,10 @@ class SddmTools {
 	}
 	
 	public function SLMEmptyResult() {
-		global $l, $WebSiteObj;
+		global $l, $WebSiteObj;		// revoir cela. Il devrait venir d'un objet depuis $currenSet.
+		$cs = CommonSystem::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
+		$cs->LMObj = LogManagement::getInstance();
 		
 		if (strlen($l) == 0 ) { $l = $WebSiteObj->getWebSiteEntry('ws_lang'); }		// failsafe on language selection. Back to the website default language.
 		switch ($_REQUEST ['contexte_d_execution']) {
@@ -52,7 +53,7 @@ class SddmTools {
 				$data [5] = $this->i18n_ [$l] ['err_no'];
 				$data [6] = $this->i18n_ [$l] ['requete'];
 // 				outil_debug( $data, "SddmTools i18n" );
-				$LMObj->logSQLMoreDetailsOnLast( $data );
+				$cs->LMObj->logSQLMoreDetailsOnLast( $data );
 				break;
 		}
 	}

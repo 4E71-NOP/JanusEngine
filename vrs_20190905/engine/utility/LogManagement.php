@@ -41,15 +41,15 @@ class LogManagement {
 			$CurrentSetObj = CurrentSet::getInstance ();
 			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 			$SqlTableListObj = SqlTableList::getInstance ( '', '' );
-
+			
 			$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 			$data ['i'] = $SDDMObj->escapeString ( $data ['i'] );
 			$data ['a'] = $SDDMObj->escapeString ( $data ['a'] );
 			$data ['t'] = $SDDMObj->escapeString ( $data ['t'] );
 			$id = $SDDMObj->findNextId ( $SqlTableListObj->getSQLTableName ( 'log' ), "log_id" );
 			$SDDMObj->query ( "INSERT INTO " . $SqlTableListObj->getSQLTableName ( 'log' ) . " VALUES (
-						'" . $id . "', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
-						'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
+				'" . $id . "', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
+				'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
 		};
 		self::$logFunctions ['default'] ['system'] = function ($a) {
 			error_log ( html_entity_decode ( $a ), 0 );
@@ -57,33 +57,32 @@ class LogManagement {
 		self::$logFunctions ['default'] ['echo'] = function ($a) {
 			echo ($a);
 		};
-
+		
 		self::$logFunctions ['installation'] ['internal'] = function ($a) {
 		};
 		self::$logFunctions ['installation'] ['system'] = &self::$logFunctions ['default'] ['system'];
 		self::$logFunctions ['installation'] ['echo'] = &self::$logFunctions ['default'] ['echo'];
-
+		
 		self::$logFunctions ['render'] ['internal'] = function ($a) {
 		};
 		self::$logFunctions ['render'] ['system'] = &self::$logFunctions ['default'] ['system'];
 		self::$logFunctions ['render'] ['echo'] = &self::$logFunctions ['default'] ['echo'];
-
+		
 		self::$logFunctions ['adminMenu'] [''] = function ($a) {
 		};
 		self::$logFunctions ['adminMenu'] ['system'] = &self::$logFunctions ['default'] ['system'];
 		self::$logFunctions ['adminMenu'] ['echo'] = &self::$logFunctions ['default'] ['echo'];
-
+		
 		self::$logFunctions ['extenssion'] [''] = function ($a) {
 		};
 		self::$logFunctions ['extenssion'] ['system'] = &self::$logFunctions ['default'] ['system'];
 		self::$logFunctions ['extenssion'] ['echo'] = &self::$logFunctions ['default'] ['echo'];
 	}
 	public function logCheckpoint($routine) {
-		// if ($_REQUEST ['StatistiqueInsertion'] == 1) {
 		if ($this->StoreStatisticsState == 1) {
 			$TimeObj = Time::getInstance ();
 			$MapperObj = Mapper::getInstance ();
-
+			
 			// Deprecated begin
 			global $statistiques_, $statistiques_index;
 			$statistiques_index ++;
@@ -96,7 +95,7 @@ class LogManagement {
 			$statistiques_ [$i] ['SQL_err'] = 0;
 			$statistiques_ [$i] ['SQL_queries'] = 0;
 			// Deprecated end
-
+			
 			$this->StatisticsIndex ++;
 			$this->StatisticsLog [$this->StatisticsIndex] ['position'] = $this->StatisticsIndex;
 			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $MapperObj->getWhereWeAreAt ();
@@ -172,41 +171,44 @@ class LogManagement {
 	 *
 	 * @param array $data
 	 */
-	public function InternalLog($log) {
-		if ($log['level'] != logLevelNoLog && $log['level'] <= internalLoglevel ) {
+	public function InternalLog($log, $origin=false) {
+		if ( $log['level'] <= INTERNAL_LOG_LEVEL ) {
 			$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 4 );
 			$i = 0;
+			$dbgString = "";
 			//@formatter:off
-			foreach ( $dbg as $A ) {
-				if ($i > 0) { $dbgString .= $A ['function'] . "() <-"; }
-				$i ++;
+			if ( $origin == true ) {
+				foreach ( $dbg as $A ) {
+					if ($i > 0) { $dbgString = $A ['function'] . "() <-"; }
+					$i ++;
+				}
 			}
 			$data = array (
-					"nbr" => $this->InternalLogIdx,
-					"origin" => $dbgString,
-					"message" => $log['msg']
+				"nbr" => $this->InternalLogIdx,
+				"origin" => $dbgString,
+				"message" => $log['msg']
 			);
 			$src = array ( "<b>", "</b>", "<br>", "\r" );
 			$rpl = array ( "", "", " <- ", "" );
+			$data['origin'] = str_replace ( $src, $rpl, $data ['origin'] );
 			//@formatter:on
 
 			switch ($this->InternalLogTarget) {
 				case 'internal' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
-					$this->InternalLogIdx ++;
 					break;
 				case 'system' :
-					error_log ( "InternalLog N " . $data ['nbr'] . "; " . $data ['message'] . "; " . str_replace ( $src, $rpl, $data ['origin'] ) );
+					error_log ( $log['level']."<=".INTERNAL_LOG_LEVEL ."; InternalLog N " . $data ['nbr'] . "; " . $data ['message'] . "; " . $data['origin'] );
 					break;
 				case 'both' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
-					$this->InternalLogIdx ++;
 					error_log ( "InternalLog N " . $data ['nbr'] . "; " . $data ['message'] . "; " . str_replace ( $src, $rpl, $data ['origin'] ) );
 					break;
 				case "none" :
 				default :
 					break;
 			}
+			$this->InternalLogIdx ++;
 		}
 	}
 
@@ -253,13 +255,10 @@ class LogManagement {
 	public function log($data) {
 		$CMobj = ConfigurationManagement::getInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( '', '' );
-
+		
 		$CurrentSetObj = CurrentSet::getInstance ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
-
-		// $this->logDebug($CMobj->getConfigurationEntry('contexte_d_execution'), "Context d'execution");
-		// $this->logDebug($CMobj->getConfigurationEntry('LogTarget'), "LogTarget");
-
+		
 		$tabSignal = array (
 				"ERR" => 1,
 				"WARN" => 2,

@@ -11,40 +11,25 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
+$application = 'monitor';
 include ("define.php");
 
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
-$ClassLoaderObj->provisionClass('Time');
-$ClassLoaderObj->provisionClass('LogManagement');
-$ClassLoaderObj->provisionClass('Mapper');
-$ClassLoaderObj->provisionClass('RequestData');
 
+$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is extended by others.
+$cs = CommonSystem::getInstance();
+$cs->LMObj->setDebugLogEcho(1);
+$cs->LMObj->setInternalLogTarget(LOG_TARGET);
+$cs->CMObj->InitBasicSettings();
 
-$TimeObj = Time::getInstance();
-
-$LMObj = LogManagement::getInstance();
-$LMObj->setDebugLogEcho(1);
-$LMObj->setInternalLogTarget(logTarget);
-
-$RequestDataObj = RequestData::getInstance();
-$MapperObj = Mapper::getInstance();
-
-$ClassLoaderObj->provisionClass('ConfigurationManagement');
-$CMObj = ConfigurationManagement::getInstance();
-$CMObj->InitBasicSettings();
-
-$ClassLoaderObj->provisionClass('StringFormat');
-$StringFormatObj = StringFormat::getInstance();
-
-
-$ClassLoaderObj->provisionClass('SessionManagement');
 session_name("HydrInstallMonitorSessionId");
 session_start();
-$SMObj = SessionManagement::getInstance($CMObj);
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Install_monitor : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" ));
+$cs->initSmObj();
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Install_monitor : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)." *** \$cs->SMObj->getSession() = ".$cs->StringFormatObj->arrayToString($cs->SMObj->getSession()). " *** EOL" ));
 
 $ClassLoaderObj->provisionClass('WebSite');
+
 // --------------------------------------------------------------------------------------------
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('log_errors', "On");
@@ -68,16 +53,13 @@ $WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 $WebSiteObj->setInstallationInstance();
 $CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj);
 
-$ClassLoaderObj->provisionClass('StringFormat');
-$StringFormatObj = StringFormat::getInstance();
-
 // --------------------------------------------------------------------------------------------
 //
 //	Loading the configuration file associated with this website
 //
-$CMObj->LoadConfigFile();
-$CMObj->setExecutionContext("installation");
-$CMObj->PopulateLanguageList();
+$cs->CMObj->LoadConfigFile();
+$cs->CMObj->setExecutionContext("installation");
+$cs->CMObj->PopulateLanguageList();
 
 // --------------------------------------------------------------------------------------------
 //
@@ -101,13 +83,13 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 // &l=eng
 // &SessionID=1576417445
 
-$form = $RequestDataObj->getRequestDataEntry('form');
+$form = $cs->RequestDataObj->getRequestDataEntry('form');
 $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['dbprefix'],$form['tabprefix']) );
 
-$CMObj->setConfigurationEntry('dal', $form['database_dal_choix']);
-$CMObj->setConfigurationEntry('host', $form['host']);
-$CMObj->setConfigurationEntry('db_user_login', $form['db_admin_user']);
-$CMObj->setConfigurationEntry('db_user_password', $form['db_admin_password']);
+$cs->CMObj->setConfigurationEntry('dal', $form['database_dal_choix']);
+$cs->CMObj->setConfigurationEntry('host', $form['host']);
+$cs->CMObj->setConfigurationEntry('db_user_login', $form['db_admin_user']);
+$cs->CMObj->setConfigurationEntry('db_user_password', $form['db_admin_password']);
 
 $DALFacade = DalFacade::getInstance();
 $DALFacade->createDALInstance();		// It connects too.
@@ -128,22 +110,22 @@ if ( $SDDMObj->num_row_sql($dbquery) > 0 ) {
 		$tmp[$dbp['inst_name']]['inst_nbr']			= $dbp['inst_nbr'];
 		$tmp[$dbp['inst_name']]['inst_txt']			= $dbp['inst_txt'];
 	}
-	if ( $RequestDataObj->getRequestDataEntry('SessionID') == $tmp['SessionID']['inst_nbr'] ) {
+	if ( $cs->RequestDataObj->getRequestDataEntry('SessionID') == $tmp['SessionID']['inst_nbr'] ) {
 		$itd = $tmp; 
 	}
 }
 
 // --------------------------------------------------------------------------------------------
 include ("../stylesheets/css_admin_install.php");
-$theme_tableau = "theme_princ_";
+$theme_tableau = "mt_";
 ${$theme_tableau}['theme_module_largeur_interne'] = 512;
 ${$theme_tableau}['theme_module_largeur'] = 512;
 
 $ClassLoaderObj->provisionClass('ThemeData');
 $CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 $ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-$ThemeDataObj->setThemeData($theme_princ_);					//Better to give an array than the object itself.
-$ThemeDataObj->setThemeName('theme_princ_');
+$ThemeDataObj->setThemeData($mt_);					//Better to give an array than the object itself.
+$ThemeDataObj->setThemeName('mt_');
 
 $ClassLoaderObj->provisionClass('ThemeDescriptor');
 $CurrentSetObj->setInstanceOfThemeDescriptorObj(new ThemeDescriptor());
@@ -184,20 +166,23 @@ $refresh.
 "<title>".$WebSiteObj->getWebSiteEntry('sw_title')."</title>\r
 ".$stylesheet."\r
 </head>\r
-<body id='MWMbody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
 ";
 
 // --------------------------------------------------------------------------------------------
 
-if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0){
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('l')) != 0){
 	$langComp = array ("fra" ,"eng");
 	unset ( $A );
-	foreach ( $langComp as $A ) { if ( $A == $RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
+	foreach ( $langComp as $A ) { if ( $A == $cs->RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
 }
-if ( $langHit == 1 ) { $l = $RequestDataObj->getRequestDataEntry('l'); }
+if ( $langHit == 1 ) { $l = $cs->RequestDataObj->getRequestDataEntry('l'); }
 else { $l = "eng"; }
 
+$i18n ="";
 include ("install/i18n/install_monitor_".$l.".php");
+$cs->I18nObj->apply($i18n);
+unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
 $div_initial_bg = "";
@@ -253,10 +238,10 @@ $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 32
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 
 $DocContent .= $RenderDeco->render($infos);
-// $Content .= "<p class='".$block."_tb7' style='text-align: center;'>".$i18n['b01Invite']."</p>
+// $Content .= "<p class='".$block."_tb7' style='text-align: center;'>".$cs->I18nObj->getI18nEntry('b01Invite']."</p>
 
 // --------------------------------------------------------------------------------------------
-$DocContent .= "<p class='".$block."_tb7' style='text-align: center;'>".$i18n['title']."</p>\r";
+$DocContent .= "<h1 style='text-align: center;'>".$cs->I18nObj->getI18nEntry('title')."</h1>\r";
 
 // --------------------------------------------------------------------------------------------
 $CurrentTab = 1;
@@ -281,9 +266,9 @@ $T['tab_infos']['DocumentName']		= "doc";
 // 2 SessionID nok		finished
 // 3 SessionID ok		finished
 
-if ( $RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) {
+if ( $cs->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) {
 	$score = 0;
-	if ( $RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) { $score +=1; }
+	if ( $cs->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) { $score +=1; }
 	if ( $itd['end_date']['inst_nbr'] > 0 ) { $score +=2; }
 	
 	switch ($score) {
@@ -293,45 +278,43 @@ if ( $RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['ins
 			break;
 		case 1: 
 			$time = (time() - $itd['last_activity']['inst_nbr']);
-			if ( $time > 60 ) { $status = "<span class='".$block."_erreur ".$block."_tb4'>" .$i18n['inactive'] . ": " . $time . "s.</span>"; }
-			else { $status = $i18n['installState1']; }
+			if ( $time > 60 ) { $status = "<span class='".$block."_erreur ".$block."_tb4'>" .$cs->I18nObj->getI18nEntry('inactive') . ": " . $time . "s.</span>"; }
+			else { $status = $cs->I18nObj->getI18nEntry('installState1'); }
 			break;	
-		case 3: $status = $i18n['installState2'];	break;
+		case 3: $status = $cs->I18nObj->getI18nEntry('installState2');	break;
 	}
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['status'];												$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $status;														$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = "<b>".$cs->I18nObj->getI18nEntry('status')."</b>";				
+	$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<b>".$status."</b>";												
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['SQL_query_count'];										$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];							$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('SQL_query_count');					
+	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['command_count'];										$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];							$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('command_count');						
+	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['start_date'];											$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('start_date');							
+	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $cs->TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	
 	
 	$isInactive = time() - $itd['last_activity']['inst_nbr'];
 	if ( $isInactive > 10 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['inactive'];										$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $isInactive;												$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('inactive');						$T['AD'][$CurrentTab][$lt]['1']['class'] = $block."_error";
+		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";												$T['AD'][$CurrentTab][$lt]['2']['class'] = $block."_error"; 
 	}
 	
 	if ($itd['end_date']['inst_nbr'] != 0 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $i18n['end_date'];										$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
+		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('end_date');						
+		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $cs->TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	
 	}
 	
 	$T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = $lt;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 2;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 1;
 	
-	$ClassLoaderObj->provisionClass('RenderTables');
-	$RenderTablesObj = RenderTables::getInstance();
-	$DocContent .= $RenderTablesObj->render($infos, $T)."</div>\r";
+	$DocContent .= $cs->RenderTablesObj->render($infos, $T)."</div>\r";
 }
 
 // --------------------------------------------------------------------------------------------
@@ -343,7 +326,7 @@ $DocContent .= "</div>\r";
 $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrCore.js');
 // $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'MWMbody' ).style.visibility = 'visible';");
+$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
 
 $JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptDecoratedMode("File", "<script type='text/javascript' src='", "'></script>\r");
 $JavaScriptContent .= "<script type='text/javascript'>\r";
@@ -360,7 +343,7 @@ $DocContent .= $JavaScriptContent;
 // --------------------------------------------------------------------------------------------
 $DocContent .= "</body>\r</html>\r";
 echo ($DocContent);
-// echo ($StringFormatObj->print_r_html($ThemeDataObj->getThemeDataEntry('B02G')));
+// echo ($cs->StringFormatObj->print_r_html($ThemeDataObj->getThemeDataEntry('B02G')));
 
 $SDDMObj->disconnect_sql();
 

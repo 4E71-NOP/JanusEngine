@@ -3,9 +3,11 @@ name "rw_hal9000_texte_090"
 type	'caligraph'						
 repertoire	'HAL-9000'						
 							
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Arial, Helvetica, Sans-serif'						
 							
 txt_l_01_display	'block'						
+txt_fonte_size	'14'
 				txt_l_01_decoration	'none'		
 txt_l_01_margin_top	'000000'	txt_l_01_margin_bottom	'000000'	txt_l_01_margin_left	'000000'	txt_l_01_margin_right	'000000'
 							

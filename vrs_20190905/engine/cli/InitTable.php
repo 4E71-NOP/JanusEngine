@@ -17,7 +17,7 @@ self::$InitTable['article'] = function (&$a) {
 			"subtitle" => "",
 			"page" => "1",
 			
-			"layout_generic_name" => "Presentation_par_defaut",
+			"layout_generic_name" => "default_layout",
 			"config" => "par_defaut",
 			"config_id" => 0,
 			
@@ -103,6 +103,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"name"			=> "New Decoration",
 			"ref_id"		=> "",
 			"repertoire"	=> "",
+			"directory"		=> "",
 			"state"			=> "ONLINE",
 			"type"			=> "1_div",
 			
@@ -216,7 +217,10 @@ self::$InitTable['decoration'] = function (&$a) {
 			"s3_n01" => "vide.gif",	"s3_n02" => "vide.gif",	"s3_n03" => "vide.gif",
 			"s3_h01" => "vide.gif",	"s3_h02" => "vide.gif",	"s3_h03" => "vide.gif",
 			
-			"txt_fonte" => "Arial, Helvetica, Sans-serif",					"txt_fonte_size_min" => 12,	"txt_fonte_size_max" => 24,
+			"main_unit" =>	"mm",	"txt_font_unit" =>	"px",
+			"txt_fonte" => "Arial, Helvetica, Sans-serif",					
+			"txt_fonte_size_min" => 12,	"txt_fonte_size_max" => 24,
+			"txt_fonte_size" => 12,
 			"txt_fonte_dl_nom" => "",	"txt_fonte_dl_url" => "",
 			"p_txt_indent" => 0,		"p_txt_align" => "justify",
 			
@@ -239,7 +243,12 @@ self::$InitTable['decoration'] = function (&$a) {
 			"txt_input2_fg_col" => "000000",	"txt_input2_bg_col" => "ffffff",
 			"txt_input1_td_fg_col" => "000000",	"txt_input1_td_bg_col" => "ffffff",
 			"txt_input2_td_fg_col" => "000000",	"txt_input2_td_bg_col" => "ffffff",
-			"txt_code_fg_col" => "000000",		"txt_code_bg_col" => "ffffff",
+
+			"code_font" => "",				"code_fg_col" => "000000",	"code_bg_col" => "ffffff",
+			"code_mrg_top" => 0,			"code_mrg_bottom" => 0,		"code_mrg_left" => 0,				"code_mrg_right" => 0,
+			"code_pad_top" => 0,			"code_pad_bottom" => 0,		"code_pad_left" => 0,				"code_pad_right" => 0,
+			"code_special" => "",
+			
 			"ca_txt_col" => "000000",			"ca_txt_bg_col" => "transparent",
 			"cb_txt_col" => "000000",			"cb_txt_bg_col" => "transparent",
 			"cc_txt_col" => "000000",			"cc_txt_bg_col" => "transparent",
@@ -276,6 +285,91 @@ self::$InitTable['decoration'] = function (&$a) {
 			
 			"p_mrg_top" => 0,		"p_mrg_bottom" => 0,		"p_mrg_left" => 0,				"p_mrg_right" => 0,
 			"p_pad_top" => 0,		"p_pad_bottom" => 5,		"p_pad_left" => 0,				"p_pad_right" => 0,
+			
+			// New style----------------------------------------------------------------------------
+			"main_unit" => 	"mm", 	"txt_font_unit" => 	"px",
+			"txt_font" => 	"Arial", 	"txt_font_size" => 	"14",
+			"txt_font_dl_name" => 	"", 	"txt_font_dl_url" => 	"",
+			
+			"p_txt_indent" => 	"", 	"p_txt_align" => 	"",
+			"p_mrg_top" => 	"", 	"p_mrg_bottom" => 	"", 	"p_mrg_left" => 	"", 	"p_mrg_right" => 	"",
+			"p_pad_top" => 	"", 	"p_pad_bottom" => 	"", 	"p_pad_left" => 	"", 	"p_pad_right" => 	"",
+			"p_special" => 	"",
+			
+			"txt_col" => 	"000000", 	"txt_highlight_col" => 	"", 	"txt_bg_col" => 	"", 	"txt_title_col" => 	"",
+			"txt_ok_col" => 	"", 	"txt_warning_col" => 	"", 	"txt_error_col" => 	"", 	"txt_fade_col" => 	"",
+			
+			"a_fg_col" => 	"", 	"a_bg_col" => 	"", 	"a_decoration" => 	"", 	"a_special" => 	"",
+			"a_hover_fg_col" => 	"", 	"a_hover_bg_col" => 	"", 	"a_hover_decoration" => 	"", 	"a_hover_special" => 	"",
+			"a_active_fg_col" => 	"", 	"a_active_bg_col" => 	"", 	"a_active_decoration" => 	"", 	"a_active_special" => 	"",
+			"a_visited_fg_col" => 	"", 	"a_visited_bg_col" => 	"", 	"a_visited_decoration" => 	"", 	"a_visited_special" => 	"",
+			
+			"table_rules" => 	"border-spacing:0px; cellspacing:0px; width:100%",
+			"t01_caption_fg_col" => 	"", 	"t01_caption_bg_col" => 	"", 	"t01_caption_special" => 	"",
+			"t01_txt_col" => 	"",
+			"t01_tr_bg_col" => 	"", 	"t01_td_bg_odd_col" => 	"",
+			"t01_tr_bg_odd_col" => 	"", 	"t01_td_bg_even_col" => 	"",
+			"t01_tr_bg_even_col" => 	"", 	"t01_td_special" => 	"",
+			"t01_tr_bg_hover_col" => 	"",
+			"t01_tr_special" => 	"",
+			"t01_legend_txt_col" => 	"", 	"t01_legend_bg_col" => 	"", 	"t01_legend_special" => 	"",
+			
+			"td_a_fg_col" => 	"", 	"td_a_bg_col" => 	"", 	"td_a_decoration" => 	"", 	"td_a_display" => 	"",
+			"td_a_hover_fg_col" => 	"", 	"td_a_hover_bg_col" => 	"", 	"td_a_hover_decoration" => 	"", 	"td_a_hover_display" => 	"",
+			"td_a_active_fg_col" => 	"", 	"td_a_active_bg_col" => 	"", 	"td_a_active_decoration" => 	"", 	"td_a_active_display" => 	"",
+			"td_a_visited_fg_col" => 	"", 	"td_a_visited_bg_col" => 	"", 	"td_a_visited_decoration" => 	"", 	"td_a_visited_display" => 	"",
+			
+			"code_font" => 	"", 	"code_fg_col" => 	"FFFFFF", 	"code_bg_col" => 	"000000", 		"",
+			"code_mrg_top" => 	"", 	"code_mrg_bottom" => 	"", 	"code_mrg_left" => 	"", 	"code_mrg_right" => 	"",
+			"code_pad_top" => 	"", 	"code_pad_bottom" => 	"", 	"code_pad_left" => 	"", 	"code_pad_right" => 	"",
+			"code_special" => 	"",
+			
+			"input_fg_col" => 	"", 	"input_bg_col" => 	"", 	"input_special" => 	"",
+			"td_input_fg_col" => 	"", 	"td_input_bg_col" => 	"", 	"td_input_special" => 	"",
+			
+			"s1_txt_col" => 	"", 	"s2_txt_col" => 	"", 	"s3_txt_col" => 	"",
+			"s1_txt_weight" => 	"", 	"s2_txt_weight" => 	"", 	"s3_txt_weight" => 	"",
+			"s1_txt_special" => 	"", 	"s2_txt_special" => 	"", 	"s2_txt_special" => 	"",
+			"s1_txt_hover_col" => 	"", 	"s2_txt_hover_col" => 	"", 	"s3_txt_hover_col" => 	"",
+			"s1_txt_hover_weight" => 	"", 	"s2_txt_hover_weight" => 	"", 	"s3_txt_hover_weight" => 	"",
+			"s1_txt_hover_special" => 	"", 	"s2_txt_hover_special" => 	"", 	"s3_txt_hover_special" => 	"",
+			
+			"s1_01_width" => 	"8", 	"s1_01_height" => 	"32", 	"s1_03_width" => 	"8",
+			"s1_n01" => 	"", 	"s1_n02" => 	"", 	"s1_n03" => 	"",
+			"s1_h01" => 	"", 	"s1_h02" => 	"", 	"s1_h03" => 	"",
+			
+			"s2_01_width" => 	"8", 	"s2_01_height" => 	"32", 	"s2_03_width" => 	"8",
+			"s2_n01" => 	"", 	"s2_n02" => 	"", 	"s2_n03" => 	"",
+			"s2_h01" => 	"", 	"s2_h02" => 	"", 	"s2_h03" => 	"",
+			
+			"s3_01_width" => 	"8", 	"s3_01_height" => 	"32", 	"s3_03_width" => 	"8",
+			"s3_n01" => 	"", 	"s3_n02" => 	"", 	"s3_n03" => 	"",
+			"s3_h01" => 	"", 	"s3_h02" => 	"", 	"s3_h03" => 	"",
+			
+			"tab_up_txt_col" => 	"", 	"tab_up_txt_bg_col" => 	"", 	"tab_up_txt_weight" => 	"", 	"tab_up_txt_special" => 	"",
+			"tab_down_txt_col" => 	"", 	"tab_down_txt_bg_col" => 	"", 	"tab_down_txt_weight" => 	"", 	"tab_down_txt_special" => 	"",
+			"tab_hover_txt_col" => 	"", 	"tab_hover_txt_bg_col" => 	"", 	"tab_hover_txt_weight" => 	"", 	"tab_hover_txt_special" => 	"",
+			"tab_height" => 	"32", 	"tab_a_width" => 	"16", 	"tab_c_width" => 	"16",
+			"tab_down_a" => 	"", 	"tab_down_b" => 	"", 	"tab_down_c" => 	"",
+			"tab_up_a" => 	"", 	"tab_up_b" => 	"", 	"tab_up_c" => 	"",
+			"tab_hover_a" => 	"", 	"tab_hover_b" => 	"", 	"tab_hover_c" => 	"",
+			"tab_frame_bg_col" => 	"", 	"tab_frame_bg_img" => 	"",
+			
+			"ft2_font" => 	"", 	"ft2_font_size" => 	"20", 	"ft2_fg_col" => 	"", 	"ft2_special" => 	"",
+			"ft1_bg" => 	"", 	"ft2_bg" => 	"", 	"ft3_bg" => 	"",
+			"ft1_width" => 	"16", 	"ft3_width" => 	"16", 	"ft_height" => 	"32",
+			
+			"icon_directory" => 	"", 	"icon_erase" => 	"",
+			"icon_ok" => 	"", 	"icon_nok" => 	"",
+			"icon_left" => 	"", 	"icon_right" => 	"", 	"icon_top" => 	"", 	"icon_bottom" => 	"",
+			"icon_question" => 	"", 	"icon_notification" => 	"",
+			"transparent_8x8" => 	"",
+			"icon_width" => 	"32",
+			"icon_height" => 	"32",
+			
+			
+			
+			// end new style------------------------------------------------
 			
 			
 			"niveau"			=> 0,
@@ -336,10 +430,13 @@ self::$InitTable['decoration'] = function (&$a) {
 			),
 			"20" => array (
 					"repertoire",
+					"directory",
 					"txt_fonte",			"txt_fonte_size_min",		"txt_fonte_size_max",
+					"txt_fonte_size",		
 					"txt_fonte_dl_nom",		"txt_fonte_dl_url",
 					"p_txt_indent",			"p_txt_align",
 					
+					"main_unit",			"txt_font_unit",
 					"txt_col",				"txt_highlight_col",		"txt_bg_col",		"txt_titre_col",
 					"txt_ok_col",			"txt_avert_col",			"txt_erreur_col",	"txt_fade_col",
 					"txt_l_01_display",		"txt_l_01_size",			"txt_l_01_weight",	"txt_l_01_decoration",
@@ -361,7 +458,26 @@ self::$InitTable['decoration'] = function (&$a) {
 					"txt_input1_td_fg_col",	"txt_input1_td_bg_col",
 					"txt_input2_td_fg_col",	"txt_input2_td_bg_col",
 					
-					"txt_code_fg_col",		"txt_code_bg_col",
+					"code_font",		"code_fg_col",			"code_bg_col",
+					"code_mrg_top",		"code_mrg_bottom",		"code_mrg_left",				"code_mrg_right",
+					"code_pad_top",		"code_pad_bottom",		"code_pad_left",				"code_pad_right",
+					"code_special"		,
+					
+					"table_rules"			,
+					"t01_txt_col"			,
+					"t01_caption_fg_col"	,
+					"t01_caption_bg_col"	,
+					"t01_caption_special"	,
+					"t01_tr_bg_col"			,
+					"t01_tr_bg_odd_col"		,
+					"t01_tr_bg_even_col"	,
+					"t01_tr_bg_hover_col"	,
+					"t01_tr_special"		,
+					"t01_td_bg_odd_col"		,
+					"t01_td_bg_even_col"	,
+					"t01_td_special"		,
+					
+					
 					
 					"ca_txt_col",			"ca_txt_bg_col",
 					"cb_txt_col",			"cb_txt_bg_col",
@@ -411,7 +527,109 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icone_ok",			"icone_nok",
 					"icone_question",	"icone_notification",
 					"transparent_8x8",
-					"icone_dim_x",		"icone_dim_y"
+					"icone_dim_x",		"icone_dim_y",
+					
+					
+					// new style
+					
+					"main_unit", 		"txt_font_unit",
+					"txt_font", 		"txt_font_size",
+					"txt_font_dl_name", 		"txt_font_dl_url",
+					
+					"p_txt_indent", 		"p_txt_align",
+					"p_mrg_top", 		"p_mrg_bottom", 		"p_mrg_left", 		"p_mrg_right",
+					"p_pad_top", 		"p_pad_bottom", 		"p_pad_left", 		"p_pad_right",
+					"p_special",
+					
+					"txt_col", 		"txt_highlight_col", 		"txt_bg_col", 		"txt_title_col",
+					"txt_ok_col", 		"txt_warning_col", 		"txt_error_col", 		"txt_fade_col",
+					
+					"a_fg_col", 		"a_bg_col", 		"a_decoration", 		"a_special",
+					"a_hover_fg_col", 		"a_hover_bg_col", 		"a_hover_decoration", 		"a_hover_special",
+					"a_active_fg_col", 		"a_active_bg_col", 		"a_active_decoration", 		"a_active_special",
+					"a_visited_fg_col", 		"a_visited_bg_col", 		"a_visited_decoration", 		"a_visited_special",
+					
+					"table_rules",
+					"t01_caption_fg_col", 		"t01_caption_bg_col", 		"t01_caption_special",
+					"t01_txt_col",
+					"t01_tr_bg_col", 		"t01_td_bg_odd_col",
+					"t01_tr_bg_odd_col", 		"t01_td_bg_even_col",
+					"t01_tr_bg_even_col", 		"t01_td_special",
+					"t01_tr_bg_hover_col",
+					"t01_tr_special",
+					"t01_legend_txt_col", 	"t01_legend_bg_col", 	"t01_legend_special",
+					
+					"a_fg_col", 		"a_bg_col", 		"a_decoration", 		"a_display",
+					"a_hover_fg_col", 		"a_hover_bg_col", 		"a_hover_decoration", 		"a_hover_display",
+					"a_active_fg_col", 		"a_active_bg_col", 		"a_active_decoration", 		"a_active_display",
+					"a_visited_fg_col", 		"a_visited_bg_col", 		"a_visited_decoration", 		"a_visited_display",
+					
+					"td_a_fg_col", 		"td_a_bg_col", 		"td_a_decoration", 		"td_a_display",
+					"td_a_hover_fg_col", 		"td_a_hover_bg_col", 		"td_a_hover_decoration", 		"td_a_hover_display",
+					"td_a_active_fg_col", 		"td_a_active_bg_col", 		"td_a_active_decoration", 		"td_a_active_display",
+					"td_a_visited_fg_col", 		"td_a_visited_bg_col", 		"td_a_visited_decoration", 		"td_a_visited_display",
+					
+					"code_font", 		"code_fg_col", 		"code_bg_col",
+					"code_mrg_top", 		"code_mrg_bottom", 		"code_mrg_left", 		"code_mrg_right",
+					"code_pad_top", 		"code_pad_bottom", 		"code_pad_left", 		"code_pad_right",
+					"code_special",
+					
+					"input_fg_col", 		"input_bg_col", 		"input_special",
+					"td_input_fg_col", 		"td_input_bg_col", 		"td_input_special",
+					
+					"s1_txt_col", 		"s2_txt_col", 		"s3_txt_col",
+					"s1_txt_weight", 		"s2_txt_weight", 		"s3_txt_weight",
+					"s1_txt_special", 		"s2_txt_special", 		"s2_txt_special",
+					"s1_txt_hover_col", 		"s2_txt_hover_col", 		"s3_txt_hover_col",
+					"s1_txt_hover_weight", 		"s2_txt_hover_weight", 		"s3_txt_hover_weight",
+					"s1_txt_hover_special", 		"s2_txt_hover_special", 		"s3_txt_hover_special",
+					
+					"s1_01_width", 		"s1_01_height", 		"s1_03_width",
+					"s1_n01", 		"s1_n02", 		"s1_n03",
+					"s1_h01", 		"s1_h02", 		"s1_h03",
+					
+					"s2_01_width", 		"s2_01_height", 		"s2_03_width",
+					"s2_n01", 		"s2_n02", 		"s2_n03",
+					"s2_h01", 		"s2_h02", 		"s2_h03",
+					
+					"s3_01_width", 		"s3_01_height", 		"s3_03_width",
+					"s3_n01", 		"s3_n02", 		"s3_n03",
+					"s3_h01", 		"s3_h02", 		"s3_h03",
+					
+					"tab_up_txt_col", 		"tab_up_txt_bg_col", 		"tab_up_txt_weight", 		"tab_up_txt_special",
+					"tab_down_txt_col", 		"tab_down_txt_bg_col", 		"tab_down_txt_weight", 		"tab_down_txt_special",
+					"tab_hover_txt_col", 		"tab_hover_txt_bg_col", 		"tab_hover_txt_weight", 		"tab_hover_txt_special",
+					"tab_height", 		"tab_a_width", 		"tab_c_width",
+					"tab_down_a", 		"tab_down_b", 		"tab_down_c",
+					"tab_up_a", 		"tab_up_b", 		"tab_up_c",
+					"tab_hover_a", 		"tab_hover_b", 		"tab_hover_c",
+					"tab_frame_bg_col",		"tab_frame_bg_img",
+					
+					"ft2_font", 		"ft2_font_size", 		"ft2_fg_col", 		"ft2_special",
+					"ft1_bg", 		"ft2_bg", 		"ft3_bg",
+					"ft1_width", 		"ft3_width", 		"ft_height",
+					
+					"icon_directory", 		"icon_erase",
+					"icon_ok", 		"icon_nok",
+					"icon_left", 		"icon_right", 		"icon_top", 		"icon_bottom",
+					"icon_question", 		"icon_notification",
+					"transparent_8x8",
+					"icon_width",
+					"icon_height",
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					// end new style
+					
+					
+					
+					
 			),
 			"30" => array (
 					"background_color",
@@ -620,7 +838,8 @@ self::$InitTable['module'] = function (&$a) {
 			"state"					=> "ONLINE",
 			"position"				=> 1,
 			"adm_control"			=> "NO",
-			"container"				=> "",
+			"container_name"		=> "",
+			"container_style"		=> "",
 			"execution"				=> "DURING",
 	);
 	
@@ -843,7 +1062,6 @@ self::$InitTable['website'] = function (&$a) {
 			"theme_id"			=> 1,
 			"theme"				=> "",
 			"title"				=> "New Website",
-			"status_bar"		=> "New Website",
 			"home"				=> "www.newwebsite.com",
 			"directory"			=> "NA",
 			"info_debug"		=> "3",

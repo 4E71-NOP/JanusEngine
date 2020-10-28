@@ -44,8 +44,8 @@ class LibInstallationReport {
 			}
 			foreach ( $style['cols'] as $B ) {
 				$R[$l][$c]['tc']	= $style['tc'];
-				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_avert" ;	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
-				if ( $B == "ERR"  && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_erreur";	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
+				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_warning" ;	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
+				if ( $B == "ERR"  && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_error";	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
 				$R[$l][$c]['cont']	= $A[$B];
 				if ($c != 1 ) { $counters[$B] += $A[$B]; }
 				$c++;
@@ -58,8 +58,8 @@ class LibInstallationReport {
 		foreach ( $style['cols'] as $B ) {			
 			if ($c != 1 ) {
 				$R[$l][$c]['tc']	= $style['tc'];
-				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_avert" ;	$R[$l][$c]['tc'] +=2; }
-				if ( $B == "ERR" && $A[$B] > 0 )  { $R[$l][$c]['class'] = $style['block'] . "_erreur";	$R[$l][$c]['tc'] +=2; }
+				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_warning" ;	$R[$l][$c]['tc'] +=2; }
+				if ( $B == "ERR" && $A[$B] > 0 )  { $R[$l][$c]['class'] = $style['block'] . "_error";	$R[$l][$c]['tc'] +=2; }
 				$R[$l][$c]['cont']	= $counters[$B];
 				$R[$l][$c]['b'] =1;
 			}

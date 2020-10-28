@@ -25,13 +25,12 @@ class FormToCommandLine {
 		return self::$Instance;
 	}
 	
-	
+	/**
+	 * Analyze a form to create a commande line.
+	 */
 	public function analysis () {
-// 		$CMObj = ConfigurationManagement::getInstance();
-		$RequestDataObj = RequestData::getInstance();
-		$LMObj = LogManagement::getInstance();
-		
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "FormToCommandLine/analysis(): Analysis started"));
+		$cs = CommonSystem::getInstance();
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "FormToCommandLine/analysis(): Analysis started"));
 
 		$CurrentSetObj = CurrentSet::getInstance();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
@@ -40,36 +39,35 @@ class FormToCommandLine {
 		$cln = &$this->CommandLineNbr;
 		$cln = 0;
 		
-		switch ($RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
+		switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
 			// Analyze the origin of the form
 			case "ModuleQuickSkin":
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleQuickSkin submitted a form."));
-// 				$a = $RequestDataObj->getRequestDataEntry('user');
-				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " pref_theme '".$RequestDataObj->getRequestDataSubEntry('userForm','user_pref_theme')."';";
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleQuickSkin submitted a form."));
+				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " pref_theme '".$cs->RequestDataObj->getRequestDataSubEntry('userForm','user_pref_theme')."';";
 				$cln++;
 				break;
 				
 			// All AdminDashboard will provide the necessary elements to build a set of command line.
 			case "AdminDashboard":
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "AdminDashboard submitted a form."));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "AdminDashboard submitted a form."));
 				$n = 1;
 				while ( $n != 0 ) {
-					if ( strlen($RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
-						$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Processing formCommand".$n));
+					if ( strlen($cs->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
+						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Processing formCommand".$n));
 						
-						$formCommand	= $RequestDataObj->getRequestDataEntry('formCommand'.$n);
-						$formEntity		= $RequestDataObj->getRequestDataEntry('formEntity'.$n);
-						$formTarget		= $RequestDataObj->getRequestDataEntry('formTarget'.$n);
-						$formParams		= $RequestDataObj->getRequestDataEntry('formParams'.$n);
+						$formCommand	= $cs->RequestDataObj->getRequestDataEntry('formCommand'.$n);
+						$formEntity		= $cs->RequestDataObj->getRequestDataEntry('formEntity'.$n);
+						$formTarget		= $cs->RequestDataObj->getRequestDataEntry('formTarget'.$n);
+						$formParams		= $cs->RequestDataObj->getRequestDataEntry('formParams'.$n);
 						switch ($formCommand.$formEntity) {
 							case "assignlanguage":
 								// This one is an additive from website manipulation
-								$scr[$cln] = "reset languages on_website ".$RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
+								$scr[$cln] = "reset languages on_website ".$cs->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
 								$cln++;
 								$n++;
 								foreach ($formTarget as $k => $v ) {
-									$str = "assign language ".$k." to_website ".$RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
-									$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "(assignlanguage) Processed =".$str));
+									$str = "assign language ".$k." to_website ".$cs->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
+									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "(assignlanguage) Processed =".$str));
 									$scr[$cln] = $str;
 									$cln++;
 									$n++;
@@ -80,7 +78,7 @@ class FormToCommandLine {
 								foreach ($formTarget as $k => $v) { $str .= $k." '".$v."' ";}
 								foreach ($formParams as $k => $v) { $str .= $k." '".$v."' ";}
 								$str .= ";";
-								$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Processed =".$str));
+								$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Processed =".$str));
 								$scr[$cln] = $str;
 								$cln++;
 								$n++;

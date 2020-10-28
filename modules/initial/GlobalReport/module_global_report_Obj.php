@@ -29,6 +29,7 @@ class ModuleGlobalReport {
 		$RequestDataObj		= RequestData::getInstance();
 		$I18nObj			= I18n::getInstance();
 		$SMObj				= SessionManagement::getInstance($CMObj);
+		$LMObj				= LogManagement::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -56,16 +57,26 @@ class ModuleGlobalReport {
 		
 		$T['tab_infos'] = $RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
 		
+		$dbgLvl = $WebSiteObj->getWebSiteEntry('ws_info_debug');
 		$Content = "";
 		
-		$CurrentTab = 1;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 1 )	{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 2;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 2 )	{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 3;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 3 )	{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 4;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 4 )	{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 5;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 7 )	{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 6;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 8 )	{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 7;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 9 )	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-		$CurrentTab = 8;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 10 )	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 1;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 1 )	{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 2;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 2 )	{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 3;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 3 )	{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 4;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 4 )	{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 5;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 7 )	{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 6;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 8 )	{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 7;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 9 )	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+// 		$CurrentTab = 8;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 10 )	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
+
+		$CurrentTab = 1;	if ( ($dbgLvl & 1 ) != 0)		{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 2;	if ( ($dbgLvl & 2 ) != 0)		{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 3;	if ( ($dbgLvl & 4 ) != 0)		{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 4;	if ( ($dbgLvl & 8 ) != 0)		{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 5;	if ( ($dbgLvl & 16 ) != 0)		{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 6;	if ( ($dbgLvl & 32 ) != 0)		{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 7;	if ( ($dbgLvl & 16384 ) != 0)	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 8;	if ( ($dbgLvl & 32768 ) != 0)	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
 		
 		$tabDbgLvl = array(
 			1 => 1,			2 => 2,			3 => 3,
@@ -74,7 +85,7 @@ class ModuleGlobalReport {
 			10=> 8
 		);
 		
-		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('ws_info_debug')];
+// 		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('ws_info_debug')];
 		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
 		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 		$T['tab_infos']['GroupName']		= "gr";
@@ -159,7 +170,7 @@ class ModuleGlobalReport {
 		if ( $pv['pv_number'] < $pv['pv_t'] ) {
 			//	echo ("<br>...Mail...<br><br>");
 			$pv['a']	= "license@rootwave.net";
-			$pv['b']	= "[RW-L] - " . $pv['pv_l'];
+			$pv['b']	= "[HYDR-L] - " . $pv['pv_l'];
 			$pv['c']	= "\r\n" . $_SERVER . "\r\n";
 			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['proprietaire'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
 			mail( $pv['a'], $pv['b'], $pv['c'], $pv['d'] );
@@ -380,7 +391,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$tabSignal = array(
 		0 => "<span class='".$block."_erreur'>ERR</span>",
 		1 => "<span class='".$block."_ok'>OK</span>",
-		2 => "<span class='".$block."_avert'>WARN</span>",
+		2 => "<span class='".$block."_warning'>WARN</span>",
 		3 => "<span class='".$block."_ok'>INFO</span>",
 		4 => "<span class='".$block."_ok'>AUTRE</span>",
 		);
@@ -467,7 +478,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			if ( isset ($A['signal']) && $A['signal'] != "OK")	{
 				// 		outil_debug($A, "A");
 				$Content[$i]['4']['cont']	.= "<br>\r" . $A['err_no']." : ".$A['err_msg'];
-				$Content[$i]['4']['class']	= $block."_avert";
+				$Content[$i]['4']['class']	= $block."_warning";
 				$Content[$i]['4']['style']	= "font-weight: bold";
 				$Content[$i]['4']['tc']		= 2;
 			}
@@ -574,7 +585,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		$TabUnits = array(
 				"<span class='" . $block."_ok'>b</span>",
-				"<span class='" . $block."_avert'>Kb</span>",
+				"<span class='" . $block."_warning'>Kb</span>",
 				"<span class='" . $block."_erreur " . $block."_tb3'>MB</span>",
 				"<span class='" . $block."_erreur " . $block."_tb4'>GB</span>"
 		);

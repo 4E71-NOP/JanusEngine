@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
@@ -51,7 +51,7 @@ $MapperObj->setSqlApplicant("uni_gestion_des_groups_p01");
 switch ($l) {
 	case "fra":
 		$I18nObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les groups.",
+		"invite1"		=> "Cette partie va vous permettre de gérer les groupes.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Titre",
 		"col_3_txt"		=> "Tag",
@@ -98,14 +98,16 @@ $T['AD']['1'][$i]['2']['cont']	= $I18nObj->getI18nEntry('col_2_txt');
 $T['AD']['1'][$i]['3']['cont']	= $I18nObj->getI18nEntry('col_3_txt');
 while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
-	$T['AD']['1'][$i]['1']['cont'] = "<a class='".$Block."_lien' href='index.php?"
-	.$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')
-	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-	."&arti_page=2"
-	."&formGenericData[mode]=edit"
-	."&groupForm[selectionId]=".$dbp['group_id']
-	."'>".$dbp['group_name']
-	."</a>";
+	$T['AD']['1'][$i]['link'] = "index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=2&formGenericData[mode]=edit&groupForm[selectionId]=".$dbp['group_id'];
+// 	$T['AD']['1'][$i]['1']['cont'] = "<a class='".$Block."_lien' href='index.php?"
+// 	.$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')
+// 	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
+// 	."&arti_page=2"
+// 	."&formGenericData[mode]=edit"
+// 	."&groupForm[selectionId]=".$dbp['group_id']
+// 	."'>".$dbp['group_name']
+// 	."</a>";
+	$T['AD']['1'][$i]['1']['cont'] =$dbp['group_name'];
 	$T['AD']['1'][$i]['2']['cont'] = $dbp['group_title'];
 	$T['AD']['1'][$i]['2']['tc'] = 2;
 	$T['AD']['1'][$i]['3']['cont'] = $tagTab[$dbp['group_tag']];
@@ -131,6 +133,6 @@ $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

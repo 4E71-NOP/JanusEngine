@@ -3,7 +3,9 @@ name "hydr_abysses_texte_002"
 type	'caligraph'						
 repertoire	'Abysses'						
 							
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Dungeon'						
+txt_fonte_size	'14'
 							
 txt_l_01_display	'block'						
 		txt_l_01_weight	'normal'	txt_l_01_decoration	'none'		

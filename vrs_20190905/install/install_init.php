@@ -11,49 +11,38 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
+$application = 'install';
 include ("define.php");
 
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
-$ClassLoaderObj->provisionClass('Time');
-$ClassLoaderObj->provisionClass('LogManagement');
-$ClassLoaderObj->provisionClass('Mapper');
-$ClassLoaderObj->provisionClass('RequestData');
-$ClassLoaderObj->provisionClass('I18n');
 
-$TimeObj = Time::getInstance();
+$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is extended by others.
+$cs = CommonSystem::getInstance();
 
-$LMObj = LogManagement::getInstance();
-$LMObj->setDebugLogEcho(1);
-$LMObj->setInternalLogTarget(installLogTarget);
-
-$RequestDataObj = RequestData::getInstance();
-$MapperObj = Mapper::getInstance();
-
-$ClassLoaderObj->provisionClass('ConfigurationManagement');
-$CMObj = ConfigurationManagement::getInstance();
-$CMObj->InitBasicSettings();
-
-$ClassLoaderObj->provisionClass('StringFormat');
-$StringFormatObj = StringFormat::getInstance();
-
+$cs->LMObj->setDebugLogEcho(1);
+$cs->LMObj->setInternalLogTarget(INSTALL_LOG_TARGET);
+$cs->CMObj->InitBasicSettings();
 
 $ClassLoaderObj->provisionClass('SessionManagement');
 session_name("HydrWebsiteSessionId");
 session_start();
-$SMObj = SessionManagement::getInstance($CMObj);
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" ));
+$cs->initSmObj();
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$cs->StringFormatObj->arrayToString($cs->SMObj->getSession()). " *** EOL" ));
 
 $ClassLoaderObj->provisionClass('WebSite');
+
+// $I18nObj = I18n::getInstance();
+
 // --------------------------------------------------------------------------------------------
 
-$LMObj->setStoreStatisticsStateOn();
+$cs->LMObj->setStoreStatisticsStateOn();
 
 $localisation = " / inst";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint( "Install Init" );
-$MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("Install Init");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint( "Install Init" );
+$cs->MapperObj->RemoveThisLevel($localisation );
+$cs->MapperObj->setSqlApplicant("Install Init");
 
 // --------------------------------------------------------------------------------------------
 //	Install options
@@ -97,7 +86,7 @@ $ClassLoaderObj->provisionClass('SddmTools');
 $ClassLoaderObj->provisionClass('DalFacade');
 $ClassLoaderObj->provisionClass('SqlTableList');
 
-$form = $RequestDataObj->getRequestDataEntry('form');
+$form = $cs->RequestDataObj->getRequestDataEntry('form');
 $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['dbprefix'],$form['tabprefix']) );
 
 // We have a POST so we set RAM and execution time limit immediately.
@@ -110,9 +99,9 @@ if ( isset($form['memory_limit'])) {
 //
 //	Loading the configuration file associated with this website
 //
-$CMObj->LoadConfigFile();
-$CMObj->setExecutionContext("installation");
-$CMObj->PopulateLanguageList();
+$cs->CMObj->LoadConfigFile();
+$cs->CMObj->setExecutionContext("installation");
+$cs->CMObj->PopulateLanguageList();
 
 // --------------------------------------------------------------------------------------------
 //	HTML header and Stylesheet
@@ -120,7 +109,7 @@ $CMObj->PopulateLanguageList();
 
 // --------------------------------------------------------------------------------------------
 include ("../stylesheets/css_admin_install.php");
-$theme_tableau = "theme_princ_";
+$theme_tableau = "mt_";
 ${$theme_tableau}['theme_module_largeur_interne'] = 896;
 ${$theme_tableau}['theme_module_largeur'] = 896;
 
@@ -128,8 +117,8 @@ ${$theme_tableau}['theme_module_largeur'] = 896;
 $ClassLoaderObj->provisionClass('ThemeData');
 $CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 $ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-$ThemeDataObj->setThemeData($theme_princ_); //Better to give an array than the object itself.
-$ThemeDataObj->setThemeName('theme_princ_');
+$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
+$ThemeDataObj->setThemeName('mt_');
 
 $ClassLoaderObj->provisionClass('ThemeDescriptor');
 $CurrentSetObj->setInstanceOfThemeDescriptorObj(new ThemeDescriptor());
@@ -142,7 +131,6 @@ $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 $ClassLoaderObj->provisionClass('RenderLayout');
 $RenderLayoutObj = RenderLayout::getInstance();
 
-
 $ClassLoaderObj->provisionClass('RenderDeco40Elegance');
 $ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
 
@@ -152,10 +140,10 @@ $ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
 //
 //
 $localisation = "Prepare JavaScript Object";
-$MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("Prepare JavaScript Object");
-$MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("Prepare JavaScript Object");
+$cs->MapperObj->AddAnotherLevel($localisation );
+$cs->LMObj->logCheckpoint("Prepare JavaScript Object");
+$cs->MapperObj->RemoveThisLevel($localisation );
+$cs->MapperObj->setSqlApplicant("Prepare JavaScript Object");
 
 $ClassLoaderObj->provisionClass('GeneratedJavaScript');
 // include ("engine/entity/others/GeneratedJavaScript.php");
@@ -165,14 +153,15 @@ $GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 $module_['module_deco'] = 1;
 
 // --------------------------------------------------------------------------------------------
+// <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
+
 $DocContent = "<!DOCTYPE html> 
 <html>\r
 <head>\r
-<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
-<title>".$WebSiteObj->getWebSiteEntry('sw_title')."</title>\r
+<title>INSTALL</title>\r
 ".$stylesheet."\r
 </head>\r
-<body id='MWMbody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
 ";
 
 // --------------------------------------------------------------------------------------------
@@ -183,22 +172,23 @@ $DocContent = "<!DOCTYPE html>
 //
 // --------------------------------------------------------------------------------------------
 $localisation = "Content";
-$MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("Content");
-$MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("Content");
+$cs->MapperObj->AddAnotherLevel($localisation );
+$cs->LMObj->logCheckpoint("Content");
+$cs->MapperObj->RemoveThisLevel($localisation );
+$cs->MapperObj->setSqlApplicant("Content");
 
 
-if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0){
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('l')) != 0){
 	$langComp = array ("fra" ,"eng");
 	unset ( $A );
-	foreach ( $langComp as $A ) { if ( $A == $RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
+	foreach ( $langComp as $A ) { if ( $A == $cs->RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
 }
-if ( $langHit == 1 ) { $l = $RequestDataObj->getRequestDataEntry('l'); }
+if ( $langHit == 1 ) { $l = $cs->RequestDataObj->getRequestDataEntry('l'); }
 else { $l = "eng"; }
 
 include ("install/i18n/install_init_".$l.".php");
-
+$cs->I18nObj->apply($i18n);
+unset ($i18n);
 // --------------------------------------------------------------------------------------------
 if ( strlen($ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $div_initial_bg = "background-image: url(../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ;}
 if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
@@ -219,6 +209,8 @@ $infos = array(
 	"blockG" => "B02G",
 	"blockT" => "B02T",
 	"deco_type" => 50,
+	"fontSizeMin" => 10,
+	"fontCoef" => 1.3, 
 	"module" => Array
 		(
 		"module_id" => 11,
@@ -251,7 +243,7 @@ $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 11
 
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 $DocContent .= $RenderDeco->render($infos);
-$DocContent .= "<p class='".$block."_tb7' style='text-align: center;'>".$i18n['b01Invite']."</p></div>\r";
+$DocContent .= "<h1 style='text-align: center;'>".$cs->I18nObj->getI18nEntry('b01Invite')."</h1></div>\r";
 
 // --------------------------------------------------------------------------------------------
 
@@ -275,24 +267,16 @@ $DocContent .= $RenderDeco->render($infos);
 //
 // --------------------------------------------------------------------------------------------
 $localisation = "Page";
-$MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("Page");
-$MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("Page");
-
-$ClassLoaderObj->provisionClass('RenderTables');
-// include ("engine/utility/RenderTables.php");
-$RenderTablesObj = RenderTables::getInstance();
-
-$ClassLoaderObj->provisionClass('InteractiveElements');
-// include ("engine/utility/InteractiveElements.php");
-$InteractiveElementsObj = InteractiveElements::getInstance();
+$cs->MapperObj->AddAnotherLevel($localisation );
+$cs->LMObj->logCheckpoint("Page");
+$cs->MapperObj->RemoveThisLevel($localisation );
+$cs->MapperObj->setSqlApplicant("Page");
 
 $T = array();
 
-if ( $RequestDataObj->getRequestDataEntry('PageInstall') == null ) { $RequestDataObj->setRequestData( 'PageInstall', 1 ); }
+if ( $cs->RequestDataObj->getRequestDataEntry('PageInstall') == null ) { $cs->RequestDataObj->setRequestData( 'PageInstall', 1 ); }
 
-switch ( $RequestDataObj->getRequestDataEntry('PageInstall') ) {
+switch ( $cs->RequestDataObj->getRequestDataEntry('PageInstall') ) {
 	case "1":	include ( "install/install_page_01.php");	break;
 	case "2":	include ( "install/install_page_02.php");	break;
 }
@@ -345,7 +329,7 @@ $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_Element
 // $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
 
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'MWMbody' ).style.visibility = 'visible';");
+$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
 
 
 $GeneratedJavaScriptObj->insertJavaScript('Onload', "console.log ( TabInfoModule );");

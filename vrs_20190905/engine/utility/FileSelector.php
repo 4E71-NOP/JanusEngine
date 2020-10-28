@@ -36,9 +36,6 @@ class FileSelector {
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
-// 		$TreeData = $CurrentSetObj->getDataEntry('fs');
-// 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		
 		$Content = "";
 		$zIndex = 500;
 		
@@ -62,33 +59,30 @@ class FileSelector {
 				break;
 		}
 		
-		$Block = $infos['block'];
-		$tableStdRules = $ThemeDataObj->getThemeDataEntry('tableStdRules'); 
 		$Content.= "
 			<div id='FileSelectorDarkFade'
-			class ='".$ThemeDataObj->getThemeName()."div_SelecteurDeFichierConteneur'
+			class ='".$ThemeDataObj->getThemeName()."FileSelectorContainer'
 			style='display:none; visibility:hidden; z-index:".$zIndex.";'
 			OnClick=\"elm.wpsa[0][de.cliEnv.browser.support](); elm.Hide( this.id ); elm.Hide('FileSelectorFrame');\">\r
 			</div>\r
 			
 			<div id='FileSelectorFrame'
-			class ='".$ThemeDataObj->getThemeName()."div_SelecteurDeFichier'
+			class ='".$ThemeDataObj->getThemeName()."FileSelector'
 			style='left:10px;		top:10px;
-			width:768px ;	height:512px;
+			width:75%;	height:50%;
 			display:none; visibility:hidden; z-index:".($zIndex+1).";
 			line-height:normal; overflow:auto;
 			background-color:#".$ThemeDataObj->getThemeData('theme_bg_color').";'>\r
 			
 			<div id='FileSelectorCaption'>
 			
-			<table ".$tableStdRules." width='100%'>\r
-			<tr>\r
-			<td colspan='3' class='".$Block."_fcta ".$Block."_tb3'>".$i18nDoc['title']."</td>\r
+			<table class='".$infos['block'].CLASS_Table01." ".$infos['block'].CLASS_TblLgnd_Top."' style='width='100%;'>\r
+			<caption>".$i18nDoc['title']."</caption>\r
 			</tr>\r
 			<tr>\r
-			<td class='".$Block."_fctb ".$Block."_t3' width='65%'>".$i18nDoc['c1']."</td>\r
-			<td class='".$Block."_fctb ".$Block."_t3' width='10%'>".$i18nDoc['c2']."</td>\r
-			<td class='".$Block."_fctb ".$Block."_t3' width='25%'>".$i18nDoc['c3']."</td>\r
+			<td width='65%'>".$i18nDoc['c1']."</td>\r
+			<td width='10%'>".$i18nDoc['c2']."</td>\r
+			<td width='25%'>".$i18nDoc['c3']."</td>\r
 			</tr>\r
 			</table>\r
 			

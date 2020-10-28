@@ -7,7 +7,7 @@ add article	name "fra_actualite_p01"					reference "fra_actualite"					deadline 
 add article	name "fra_telechargement_p01"				reference "fra_telechargement"				deadline "initial_online"		desc "T&eacute;l&eacute;chargement"		title "T&eacute;l&eacute;chargement"				subtitle "click / sauvegarder"			page "1"	validation_state "VALID"	config "no_menu";
 
 assign document name "doc_uni_presentation_de_l_equipe_p01.php"		to_article "fra_presentation_de_l_equipe_p01";
-assign document name "doc_uni_presentation_de_l_activite_p01.php"	to_article "fra_ de_l_activite_p01";
+assign document name "doc_uni_presentation_de_l_activite_p01.php"	to_article "fra_presentation_de_l_activite_p01";
 assign document name "doc_uni_recherche_p01.php"					to_article "fra_recherche_p01";					
 assign document name "doc_uni_voir_fiche_publique_p01.php"			to_article "fra_voir_fiche_publique_p01";		
 assign document name "doc_uni_recrutement_p01.php"					to_article "fra_recrutement_p01";				

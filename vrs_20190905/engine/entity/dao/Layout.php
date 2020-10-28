@@ -26,13 +26,13 @@ class Layout {
 			WHERE layout_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Layout[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for layout id=".$id));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layout id=".$id));
 		}
 	}
 

@@ -42,20 +42,24 @@ class ModuleQuickSkin {
 		
 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
+		$I18nObj = I18n::getInstance();
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-
-		$logTarget = $LMObj->getInternalLogTarget();
+		$I18nObj->apply($i18n);
+		
+		$LOG_TARGET = $LMObj->getInternalLogTarget();
 		$LMObj->setInternalLogTarget("none");
 		
+// 		<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: left;'>
+// 		<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>QuickSkin<br></span>\r
 		$Content = "
-		<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: left;'>
-		<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>QuickSkin<br></span>\r
-		".$i18n['txt1']." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
-		</p>
+		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."'>\r
+		<tr>\r<td>\r
+		".$I18nObj->getI18nEntry('txt1')." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
+		</td>\r</tr>\r
 		";
 		$grp = $UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) ));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) ));
 		if ( $grp == "1" ) {
 			$dbquery = $SDDMObj->query("
 			SELECT a.theme_id,a.theme_name,a.theme_title
@@ -65,11 +69,16 @@ class ModuleQuickSkin {
 			AND b.theme_state = '1'
 			;");
 			
+// 			<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: center;'>
+			
 			if ( $SDDMObj->num_row_sql($dbquery) > 0 ) {
 				$Content .= "
 				<form ACTION='index.php?' method='post'>\r
-				<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: center;'>
-				".$i18n['txt2']."
+				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
+				<tr>\r<td>\r
+				".$I18nObj->getI18nEntry('txt2')."
+				</td>\r</tr>\r
+				<tr>\r<td>\r
 				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
 				";
 				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
@@ -77,47 +86,49 @@ class ModuleQuickSkin {
 					else { 	$Content .= "<option value='".$dbp['theme_name']."'>".$dbp['theme_title']."</option>\r"; }
 				}
 				$Content .= "</select>\r
-				<br>\r
+				</td>\r</tr>\r
+				
 				<input type='hidden' name='theme_activation' value='1'>\r".
 				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
 				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 				"
-				<input type='hidden' name='arti_ref'						value='".$DocumentDataObj->getDocumentDataEntry('arti_ref')."'>\r
-				<input type='hidden' name='arti_page'						value='".$DocumentDataObj->getDocumentDataEntry('arti_page')."'>
-				<input type='hidden' name='formSubmitted'					value='1'>
-				<input type='hidden' name='formGenericData[origin]'			value='ModuleQuickSkin'>
-				<input type='hidden' name='formGenericData[modification]'	value='on'>
-
-				</p>\r
-								
-				<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
-				<tr>\r
-				<td>\r
+				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
+				<tr>\r<td>\r
+				<center>
 				";
 				
 // 				$SB as Submit Button
 				$SB = array(
 					"id"				=> "bouton_module_quicktheme",
 					"type"				=> "submit",
-					"initialStyle"		=> "" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
-					"hoverStyle"		=> "" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
+					"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
+					"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
 					"onclick"			=> "",
-					"message"			=> $i18n['bouton'],
+					"message"			=> $I18nObj->getI18nEntry('bouton'),
 					"mode"				=> 0,
 					"size" 				=> 0,
 					"lastSize"			=> 0,
 				);
 				$Content .= $InteractiveElementsObj->renderSubmitButton($SB);
 				$Content .= "
-				</td>\r
-				</tr>\r
-				</table>\r
+				</center>
+				</td>\r</tr>\r
+				<input type='hidden' name='arti_ref'						value='".$DocumentDataObj->getDocumentDataEntry('arti_ref')."'>\r
+				<input type='hidden' name='arti_page'						value='".$DocumentDataObj->getDocumentDataEntry('arti_page')."'>
+				<input type='hidden' name='formSubmitted'					value='1'>
+				<input type='hidden' name='formGenericData[origin]'			value='ModuleQuickSkin'>
+				<input type='hidden' name='formGenericData[modification]'	value='on'>
+
 				</form>\r
-				<br>\r
-				<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p' style='text-align: left;'>
-				<a class='" . $ThemeDataObj->getThemeName().$infos['block']."_lien " . $ThemeDataObj->getThemeName().$infos['block']."_t3' href='index.php?arti_ref=fra_gestion_du_profil&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML','url_slup')."'>".$i18n['txt4']."</a>
-				</p>\r
+				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
+
+				<tr>\r<td>\r
+				<a href='index.php?arti_ref=fra_gestion_du_profil&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML','url_slup')."'>".$I18nObj->getI18nEntry('txt4')."</a>
+				</td>\r</tr>\r
+				</table>\r
 				";
+// 				<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p' style='text-align: left;'>
+// 				</p>\r
 			}
 		}
 		
@@ -137,7 +148,7 @@ class ModuleQuickSkin {
 					);
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
+		$LMObj->setInternalLogTarget($LOG_TARGET);
 		return $Content;
 	
 	}

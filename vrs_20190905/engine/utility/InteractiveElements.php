@@ -30,8 +30,8 @@ class InteractiveElements {
 	 * <table style='border: solid 1px #00000040;'>
 	 * <tr><td style='background-color: #FFFFFF60;'><b>id			</b></td>	<td style='background-color: #FFFFFF60;'>Defines the button's name</td></tr>
 	 * <tr><td style='background-color: #FFFFFF60;'><b>type			</b></td>	<td style='background-color: #FFFFFF60;'>Defines the command (ex Submit) of the button.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>initialStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines if initial behavior.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>hoverStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines if onmouseover behavior. Changing style.</td></tr>
+	 * <tr><td style='background-color: #FFFFFF60;'><b>initialStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines initial behavior.</td></tr>
+	 * <tr><td style='background-color: #FFFFFF60;'><b>hoverStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines onmouseover behavior. Changing style.</td></tr>
 	 * <tr><td style='background-color: #FFFFFF60;'><b>onclick		</b></td>	<td style='background-color: #FFFFFF60;'>If not empty define the javascript used when clicking on the button.</td></tr>
 	 * <tr><td style='background-color: #FFFFFF60;'><b>message		</b></td>	<td style='background-color: #FFFFFF60;'>Defines the button text</td></tr>
 	 * <tr><td style='background-color: #FFFFFF60;'><b>mode			</b></td>	<td style='background-color: #FFFFFF60;'>1 set the size (if!=0) and save it into 'lastSize'. 0 will clear 'lastSize' and no button size will be set.</td></tr>
@@ -43,16 +43,15 @@ class InteractiveElements {
 	 * 
 	 */
 	public function renderSubmitButton (&$infos) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		if ( strlen($infos['hoverStyle']) > 0 ) { 
 			$animation = " onmouseover=\"elm.ButtonHover('".$infos['id']."', '".$infos['hoverStyle']."');\" onmouseout=\"elm.ButtonHover('".$infos['id']."', '".$infos['initialStyle']."');\" ";
 		}
+		$bareTableClass = $ThemeDataObj->getThemeName()."bareTable";
 		$Content = "
-		<table cellpadding='0' cellspacing='0'  
-		style='
-		border-width: 0px 0px 0px 0px; 
-		border-spacing: 0px; 
-		border-style: none none none none;
-		'>\r 
+		<table class='".$bareTableClass."'>\r 
 		<tr>\r
 		<td			id='".$infos['id']."01' class='".$infos['initialStyle']."01' ".$animation."></td>\r
 		<td><input	id='".$infos['id']."02' class='".$infos['initialStyle']."02' ".$animation." 
@@ -69,7 +68,7 @@ class InteractiveElements {
 			case FALSE:	$infos['lastSize'] = 0 ;	break;
 		}
 	
-		$Content .= "border: 0px; padding: 0px; margin: 0px'></td>\r
+		$Content .= "border:0px; padding:0px; margin:0px'></td>\r
 		<td id='".$infos['id']."03' class='".$infos['initialStyle']."03' ".$animation."></td>\r
 		</tr>\r
 		</table>\r
@@ -93,22 +92,22 @@ class InteractiveElements {
 		$i = &$infos['IconSelectFile'];
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
-		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_dim_x');
-		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icone_dim_y');
+		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_width');
+		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_height');
 		
 		// 			<span class='".$Block."_lien ".$Block."_t3' Onclick=\"SDFTabRepCourant ( ".$i['table']." , ".$i['table']." , 'selecteur_de_fichier_dynamique' ); elm.FillScreenDiv('selecteur_de_fichier_FondNoir', 1 ); elm.SwitchDisplayCenter('selecteur_de_fichier_cadre')\">\r
 		if ( !isset($i['update']) ) { $i['update'] = 0;} //default
 		
 		$contenu_A = "
-			<input type='text' readonly name='".$i['formTargetId']."' id='".$i['formTargetId']."' size='".$i['formInputSize']."' maxlength='255' value='".$i['formInputVal']."' class='".$Block."_t3 " . $Block."_form_1' style='text-align:right;' >\r
-			<span class='".$Block."_lien ".$Block."_t3' Onclick=\"fs.getDirectoryContent(".$i['array'].", '".$i['path']."', 0); elm.FillScreenDiv('FileSelectorDarkFade', 1 ); elm.SwitchDisplayCenter('FileSelectorFrame')\">\r
-			<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_repertoire') . "' width='".$X."' height='".$Y."' border='0'>
+			<input type='text' readonly name='".$i['formTargetId']."' id='".$i['formTargetId']."' size='".$i['formInputSize']."' maxlength='255' value='".$i['formInputVal']."' style='text-align:right;' >\r
+			<span Onclick=\"fs.getDirectoryContent(".$i['array'].", '".$i['path']."', 0); elm.FillScreenDiv('FileSelectorDarkFade', 1 ); elm.SwitchDisplayCenter('FileSelectorFrame')\">\r
+			<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>
 			";
 		
 		$contenu_B = "
-			<span class='".$Block."_lien ".$Block."_t3' Onclick=\"document.forms['".$i['formName']."'].elements['".$i['formTargetId']."'].value = '';\">
-			<img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_efface') . "' width='".$X."' height='".$Y."' border='0'>
+			<span Onclick=\"document.forms['".$i['formName']."'].elements['".$i['formTargetId']."'].value = '';\">
+			<img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>\r
 			";
 		
@@ -122,34 +121,50 @@ class InteractiveElements {
 	}
 	
 	// --------------------------------------------------------------------------------------------
+	/**
+	 * 
+	 * MUST UPDATE !!!! 
+	 * 
+	 * @param unknown $cas
+	 * @param unknown $FormNom
+	 * @param unknown $ForgeFormElement
+	 * @param unknown $ForgeFormElementX
+	 * @param unknown $ForgeFormElementY
+	 * @param unknown $FormRepertoire
+	 * @param unknown $InputVal
+	 * @param unknown $DivCible
+	 * @param unknown $JavascriptRoutine
+	 * @param unknown $ModType
+	 * @return string
+	 */
 	public function renderIconSelectImage ( $cas , $FormNom , $ForgeFormElement, $ForgeFormElementX, $ForgeFormElementY, $FormRepertoire , $InputVal , $DivCible , $JavascriptRoutine , $ModType ) {
 		global $theme_tableau, ${$theme_tableau};
-		$X = ${$theme_tableau}[$_REQUEST['blocT']]['icone_dim_x'];
-		$Y = ${$theme_tableau}[$_REQUEST['blocT']]['icone_dim_y'];
+		$X = ${$theme_tableau}[$_REQUEST['blocT']]['icon_width'];
+		$Y = ${$theme_tableau}[$_REQUEST['blocT']]['icon_height'];
 		
 		$contenu_A = "
-	<input type='text' name='".$ForgeFormElement."' id='".$ForgeFormElement."' size='20' maxlength='255' value='".$InputVal."' class='".$theme_tableau.$_REQUEST['bloc']."_form_1'
+	<input type='text' name='".$ForgeFormElement."' id='".$ForgeFormElement."' size='20' maxlength='255' value='".$InputVal."' 
 	onChange=\"
 	var NewU = 'url(\'../gfx/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
 	elm.Gebi('".$DivCible."').style.backgroundImage = NewU;\r
 	\">\r
 			
-	<span class='".$theme_tableau.$_REQUEST['bloc']."_lien ".$theme_tableau.$_REQUEST['bloc']."_t3'
+	<span 
 	Onclick=\"
 	CDMExec.ModType = '".$ModType."';
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	RenderFSJS('".$FormNom."','".$ForgeFormElement."', '".$ForgeFormElementX."', '".$ForgeFormElementY."', document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value , 'FSJavaScript' , 'FSJS_C_' , '".$JavascriptRoutine."' )\">
-	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
+	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
 	";
 		
 		$contenu_B = "
-	<span class='".$theme_tableau.$_REQUEST['bloc']."_lien' Onclick=\"document.forms['".$FormNom."'].elements['".$ForgeFormElement."'].value = '';
+	<span Onclick=\"document.forms['".$FormNom."'].elements['".$ForgeFormElement."'].value = '';
 	CDMExec.ModType = '".$ModType."';
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	".$JavascriptRoutine."();\">\r
-	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icone_efface'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
+	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_erase'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
 	";
 		
 		$contenu_R = "";

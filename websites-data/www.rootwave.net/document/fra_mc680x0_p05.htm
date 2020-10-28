@@ -1,0 +1,64 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+Les instructions du mc680x0 de O à R<br>
+<br>
+<table>
+<tr><td >OR</td><td ><justify>Ou exclusif. Réalisation d'un OU logique entre l'opérande source et l'opérande destination et rangement du résultat dans l'emplacement destination. OR <AE>,Dn ou OR Dn,<AE>.<br>
+Variantes :<br>
+Réalisation d'un OU logique entre la donnée immédiate et l'opérande destination. ORI #,Dn.<br>
+Réalisation d'un OU logique entre la donnée immédiate et le SR. Cette instruction nécessite obligatoirement le mode superviseur du processeur ORI #,SR.<br><br>&nbsp;</td></tr>
+<tr><td >PEA</td><td ><justify>Sauvegarde de l'adresse effective sur la pile (SP ou A7). Empilement de l'adresse effective. L'opérande concerne toujours les 32 bits du registre : PEA <AE>.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+<tr><td >RESET</td><td ><justify>Remise à zéro de tous les circuits extérieurs. Aucun autre état du processeur n'est affecté. L'exécution se poursuit a l'instruction suivante.<br>&nbsp;</td></tr>
+<tr><td >ROL</td><td ><justify>Rotation gauche. Rotation vers la gauche de l'opérande. Le bit de poids fort est dupliqué dans le bit C du CCR. Si l'opérande est un registre on spécifie le nombre de tours, soit par un registre (ROL Dn,Dd permute Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ROL #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul tour s'effectue et l'opérande ne peut être qu'un mot. : ROL <AE>.<br>&nbsp;</td></tr>
+<tr><td >ROR</td><td ><justify>Rotation droite. Rotation vers la droite de l'opérande. Le bit de poids faible est dupliqué dans le bit C du CCR. Si l'opérande est un registre on spécifie le nombre de tours, soit par un registre (ROR Dn,Dd permute Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ROR #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul tour s'effectue et l'opérande ne peut être qu'un mot. : ROR <AE>.<br>&nbsp;</td></tr>
+<tr><td >ROXL</td><td ><justify>Rotation gauche avec le bit d'extension. Rotation étendue vers la gauche de l'opérande. Le bit de poids fort est dupliqué dans les bits C et X du CCR qui, a son tour, est dupliqué dans le bit de poids faible de l'opérande traité. Si l'opérande est un registre on spécifie le nombre de tours, soit par un registre (ROXL Dn,Dd permute Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ROXL #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul tour s'effectue et l'opérande ne peut être qu'un mot. : ROXL <AE>.<br>&nbsp;</td></tr>
+<tr><td >ROXR</td><td ><justify>Rotation droite avec le bit d'extension. Rotation étendue vers la droite de l'opérande. Le bit de poids faible est dupliqué dans les bits C et X du CCR qui, a son tour, est dupliqué dans le bit de poids fort de l'opérande traité. Si l'opérande est un registre on spécifie le nombre de tours, soit par un registre (ROXR Dn,Dd permute Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (ROXR #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul tour s'effectue et l'opérande ne peut être qu'un mot. : ROXR <AE>.<br>&nbsp;</td></tr>
+<tr><td >RTE</td><td ><justify>Retour d'exception. Le registre SR est pris sur la pile, puis le PC est a son tour dépilé.<br>&nbsp;</td></tr>
+<tr><td >RTS</td><td ><justify>Retour d'une sous routine. Le PC est récupéré sur la pile en le dépilant.<br>&nbsp;</td></tr>
+<tr><td >RTR</td><td ><justify>Retour d'une sous routine et restauration de l'état initial du CCR (CCR lors de l'appel). Le PC et le CCR sont récupérés sur la pile en les dépilant.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+</table>
+<br>
+<table>
+<tr><td  colspan='6' >Etat du SR pour les instrcutions</td></tr>
+<tr><td >Instruction</td>					<td >X</td>	<td >N</td>	<td >Z</td>	<td >V</td>	<td >C</td></tr>
+
+<tr><td >
+	OR <AE>,Dn<br>
+	OR Dn,<AE>
+	ORI #<Donnée>,<AE>
+								</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+<tr><td >PEA <AE>	</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >RESET			</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	ROL Dn,Dd<br>
+	ROL #<Donnée>,Dd<br>
+	ROL <AE>
+								</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >
+	ROR Dn,Dd<br>
+	ROR #<Donnée>,Dd<br>
+	ROR <AE>
+								</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >
+	ROXL Dn,Dd<br>
+	ROXL #<Donnée>,Dd<br>
+	ROXL <AE>
+								</td><td >P		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >
+	ROXR Dn,Dd<br>
+	ROXR #<Donnée>,Dd<br>
+	ROXR <AE>
+								</td><td >P		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >RTE				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >RTS				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >RTR				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+</table>
+<br>
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+<br>
+<br>
+</justify>
+/*Hydre-contenu_fin*/

@@ -44,13 +44,6 @@ class StringFormat {
 		self::$ConvertTable['article']['examined']				= 1;
 		self::$ConvertTable['article']['show_info_off']			= 0;
 		self::$ConvertTable['article']['show_info_on']			= 1;
-// 		self::$ConvertTable['article']['sans_info']				= &self::$ConvertTable['article']['show_info_off'];
-// 		self::$ConvertTable['article']['avec_info']				= &self::$ConvertTable['article']['show_info_on'];
-// 		self::$ConvertTable['article']['non_valide']			= &self::$ConvertTable['article']['not_valid'];
-// 		self::$ConvertTable['article']['valide']				= &self::$ConvertTable['article']['valid'];
-// 		self::$ConvertTable['article']['non_corrige']			= &self::$ConvertTable['article']['not_examined'];
-// 		self::$ConvertTable['article']['corrige']				= &self::$ConvertTable['article']['examined'];
-
 		
 		self::$ConvertTable['category']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['category']['yes']					= &self::$ConvertTable['universal']['yes'];
@@ -84,15 +77,6 @@ class StringFormat {
 		self::$ConvertTable['decoration']['top-center']			= 8;
 		self::$ConvertTable['decoration']['bottom-center']		= 9;
 		self::$ConvertTable['decoration']['center-center']		= 10;
-// 		self::$ConvertTable['decoration']['haut-gauche']		= &self::$ConvertTable['decoration']['top-left'];
-// 		self::$ConvertTable['decoration']['bas-gauche']			= &self::$ConvertTable['decoration']['bottom-left'];
-// 		self::$ConvertTable['decoration']['centre-gauche']		= &self::$ConvertTable['decoration']['center-left'];
-// 		self::$ConvertTable['decoration']['haut-droite']		= &self::$ConvertTable['decoration']['top-right'];
-// 		self::$ConvertTable['decoration']['bas-droite']			= &self::$ConvertTable['decoration']['bottom-right'];
-// 		self::$ConvertTable['decoration']['centre-droite']		= &self::$ConvertTable['decoration']['center-right'];
-// 		self::$ConvertTable['decoration']['haut-centre']		= &self::$ConvertTable['decoration']['top-center'];
-// 		self::$ConvertTable['decoration']['bas-centre']			= &self::$ConvertTable['decoration']['bottom-center'];
-// 		self::$ConvertTable['decoration']['centre-centre']		= &self::$ConvertTable['decoration']['center-center'];
 		self::$ConvertTable['decoration']['bottom-banner']		= 10;
 
 		self::$ConvertTable['decoration']['menu']				= 10;
@@ -101,8 +85,6 @@ class StringFormat {
 		self::$ConvertTable['decoration']['elegance']			= 40;
 		self::$ConvertTable['decoration']['exquisite']			= 50;
 		self::$ConvertTable['decoration']['elysion']			= 60;
-// 		self::$ConvertTable['decoration']['exquise']			= &self::$ConvertTable['decoration']['exquise'];
-// 		self::$ConvertTable['decoration']['caligraphe']			= &self::$ConvertTable['decoration']['caligraph'];
 		
 		self::$ConvertTable['document_config']['no']				= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['document_config']['yes']				= &self::$ConvertTable['universal']['yes'];
@@ -120,33 +102,18 @@ class StringFormat {
 		self::$ConvertTable['document_config']['bottom']			= 2;
 		self::$ConvertTable['document_config']['both']				= 3;
 		self::$ConvertTable['document_config']['store']				= 4;
-		// 		self::$ConvertTable['article_config']['aucune']				= &self::$ConvertTable['article_config']['none'];
-		// 		self::$ConvertTable['article_config']['gauche']				= &self::$ConvertTable['article_config']['left'];
-		// 		self::$ConvertTable['article_config']['droite']				= &self::$ConvertTable['article_config']['right'];
-		// 		self::$ConvertTable['article_config']['sans_menu']			= &self::$ConvertTable['article_config']['no_menu'];
-		// 		self::$ConvertTable['article_config']['entete']				= &self::$ConvertTable['article_config']['top'];
-		// 		self::$ConvertTable['article_config']['pied_de_page']		= &self::$ConvertTable['article_config']['bottom'];
-		// 		self::$ConvertTable['article_config']['haut_et_bas']		= &self::$ConvertTable['article_config']['both'];
 		
 		
 		self::$ConvertTable['document']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['document']['yes']					= &self::$ConvertTable['universal']['yes'];
-		self::$ConvertTable['document']['mwmcode']				= 0;
-		self::$ConvertTable['document']['wmcode']				= 0;
-		self::$ConvertTable['document']['nocode']				= 1;
-		self::$ConvertTable['document']['php']					= 2;
-		self::$ConvertTable['document']['mixed']				= 3;
-// 		self::$ConvertTable['document']['codemwm']				= &self::$ConvertTable['document']['mwmcode'];
-// 		self::$ConvertTable['document']['sanscode']				= &self::$ConvertTable['document']['nocode'];
-// 		self::$ConvertTable['document']['mixe']					= &self::$ConvertTable['document']['mixed'];
+		self::$ConvertTable['document']['html']					= 0;
+		self::$ConvertTable['document']['php']					= 1;
+		self::$ConvertTable['document']['mixed']				= 2;
 		
 		self::$ConvertTable['group']['anonymous']				= 0;
 		self::$ConvertTable['group']['reader']					= 1;
 		self::$ConvertTable['group']['staff']					= 2;
 		self::$ConvertTable['group']['senior_staff']			= 3;
-// 		self::$ConvertTable['group']['anonymous']				= &self::$ConvertTable['group']['anonyme'];
-// 		self::$ConvertTable['group']['reader']					= &self::$ConvertTable['group']['lecteur'];
-// 		self::$ConvertTable['group']['staff_senior']			= &self::$ConvertTable['group']['senior_staff'];
 		
 		self::$ConvertTable['module']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['module']['yes']					= &self::$ConvertTable['universal']['yes'];
@@ -157,18 +124,12 @@ class StringFormat {
 		self::$ConvertTable['module']['before']					= 1;
 		self::$ConvertTable['module']['after']					= 2;
 		self::$ConvertTable['module']['during']					= 0;
-// 		self::$ConvertTable['module']['avant']					= &self::$ConvertTable['module']['before'];
-// 		self::$ConvertTable['module']['apres']					= &self::$ConvertTable['module']['after'];
-// 		self::$ConvertTable['module']['pendant']				= &self::$ConvertTable['module']['during'];
 		
 		self::$ConvertTable['keyword']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['keyword']['online']				= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['keyword']['to_category']			= 1;
 		self::$ConvertTable['keyword']['to_url']				= 2;
 		self::$ConvertTable['keyword']['tooltip']				= 3;
-// 		self::$ConvertTable['keyword']['to_category']			= &self::$ConvertTable['keyword']['vers_category'];
-// 		self::$ConvertTable['keyword']['to_url']				= &self::$ConvertTable['keyword']['vers_url'];
-// 		self::$ConvertTable['keyword']['to_tooltip'] 			= &self::$ConvertTable['keyword']['vers_aide_dynamique'];
 		
 		self::$ConvertTable['layout']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['layout']['yes']					= &self::$ConvertTable['universal']['yes'];

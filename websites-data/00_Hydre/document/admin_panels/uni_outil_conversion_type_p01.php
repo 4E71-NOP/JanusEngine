@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestData('CONV',

@@ -26,13 +26,13 @@ class Deco30_1Div {
 			WHERE deco_id = '" . $id . "'
 			;" );
 		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : Loading data for deco_30_1_div id=".$id));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_30_1_div id=".$id));
 			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco30_1Div[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => __METHOD__ . " : No rows returned for deco_30_1_div id=".$id));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_30_1_div id=".$id));
 		}
 		
 	}

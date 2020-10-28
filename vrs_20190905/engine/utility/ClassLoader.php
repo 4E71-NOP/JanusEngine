@@ -17,6 +17,7 @@ class ClassLoader {
 	private $classTab = array(
 		"AdminFormTool"				=> "engine/utility/AdminFormTool.php",
 		"AuthenticateUser"			=> "engine/utility/AuthenticateUser.php",
+		"CommonSystem"				=> "engine/utility/CommonSystem.php",
 		"DetectPEAR"				=> "engine/utility/DetectPEAR.php",
 		"FileSelector"				=> "engine/utility/FileSelector.php",
 		"FormToCommandLine"			=> "engine/utility/FormToCommandLine.php",

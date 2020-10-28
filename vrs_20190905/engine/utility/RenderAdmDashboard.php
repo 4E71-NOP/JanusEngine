@@ -23,33 +23,27 @@ class RenderAdmDashboard {
 	}
 	
 	public function render(){
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$LMObj = LogManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$StringFormatObj = StringFormat::getInstance();
 		
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
-		$MapperObj = Mapper::getInstance();
-		
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$CMObj = ConfigurationManagement::getInstance();
+		$cs->CMObj = ConfigurationManagement::getInstance();
 		
 		$localisation = " / ModuleMenu";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleMenu");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleMenu");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleMenu");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleMenu");
 		
-		
-		$ModuleTable = $RenderLayoutObj->getModuleList();
 		$Content = "";
 		
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('module_website')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
@@ -60,23 +54,11 @@ class RenderAdmDashboard {
 			ORDER BY module_position
 			;");
 		
-// 		$Content .= "<!--\r
-// 			RenderAdmDashboard:Render 
-// 			SELECT *
-// 			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('module_website')." b
-// 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
-// 			AND a.module_id = b.module_id
-// 			AND b.module_state = '1'
-// 			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_group')."
-// 			AND a.module_adm_control > '0'
-// 			ORDER BY module_position
-// 			;
-// 			-->";
-
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
+		
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$module_tab_adm_ = array();
 			$i = 1;
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$module_tab_adm_[$i]['module_id']					= $dbp['module_id'];
 				$module_tab_adm_[$i]['module_deco']					= $dbp['module_deco'];
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
@@ -112,14 +94,10 @@ class RenderAdmDashboard {
 				),
 		);
 
-		//find the width of the main admin div
-// 		$Content .= "<!-- RenderAdmDashboard:render()  -->";
 		foreach ( $module_tab_adm_ as $m ) {
-// 			$Content .= "<!-- ".$m['module_name'] ." dx = ".$RenderLayoutObj->getLayoutModuleEntry($m['module_name'], 'dx')." -->\r".
 			$dimAdmModules += $RenderLayoutObj->getLayoutModuleEntry($m['module_name'], 'dx');
 		}
 		
-// 		$module_z_index['compteur'] = 1000;			//Contourne les Z-index venant de la présentation
 		$Content .= "
 			<div id='AdminControlSwitch'
 			class ='".$ThemeDataObj->getThemeName()."div_AdminControlSwitch'
@@ -128,7 +106,7 @@ class RenderAdmDashboard {
 			</div>\r
 							
 			<div id='AdminControlBG'
-			class ='".$ThemeDataObj->getThemeName()."div_SelecteurDeFichierConteneur'
+			class ='".$ThemeDataObj->getThemeName()."FileSelectorContainer'
 			style='display:none; visibility:hidden; z-index:".($infos['module_z_index']+1).";'
 			OnClick=\"elm.SwitchDisplay('AdmDashboard'); elm.FillScreenDiv('AdminControlBG',0);\">\r
 			</div>\r
@@ -149,7 +127,6 @@ class RenderAdmDashboard {
 		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_size_x').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_size_y').");");
 		
 		$n = 1;
-		$RenderModuleObj = RenderModule::getInstance();
 		foreach ( $module_tab_adm_ as $m ) {
 			
 			$infos['module_name'] = $mn = &$m['module_name'];
@@ -157,13 +134,11 @@ class RenderAdmDashboard {
 			
 			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
-					$infos['block'] = $StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
+					$infos['block'] = $cs->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}
 				else { $infos['block'] = "B01"; }
 				$infos['blockG'] = $infos['block']."G"; 
 				$infos['blockT'] = $infos['block']."T"; 
-// 				$infos['module_deco_default_text'] = $m['module_deco_default_text'];
-				
 				$infos['module'] = $m;
 				
 				$ModuleRendererName = $m['module_classname'];
@@ -174,11 +149,10 @@ class RenderAdmDashboard {
 				else { $ModuleRenderer = new ModuleNotFound(); }
 				
 				// No need to execute before decoration or after. Render inside !
-				$Content .= $RenderModuleObj->selectDecoration($infos);
+				$Content .= $cs->RenderModuleObj->selectDecoration($infos);
 				$Content .= $ModuleRenderer->render($infos);
 				
-				// $infos['affiche_module_mode'] = $infos['affiche_module_mode_backup'];
-				$Content .= "</div>\r<!-- _______________________________________ Fin du module ".$mn." _______________________________________ -->\r\r\r\r\r";
+				$Content .= "</div>\r</div>\r<!-- _______________________________________ Fin du module ".$mn." _______________________________________ -->\r\r\r\r\r";
 				$n++;
 				
 			}

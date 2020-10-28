@@ -2,7 +2,9 @@ add decoration
 name	'rw_aqua_texte_002'						
 repertoire	'Aqua'						
 type	'caligraph'						
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Arial, Helvetica, Sans-serif'	txt_fonte_size_min	'10'	txt_fonte_size_max	'22'		
+txt_fonte_size	'14'
 							
 p_txt_indent	'0'						
 							
@@ -25,7 +27,7 @@ txt_input1_fg_col	'000000'	txt_input1_bg_col	'FFFFFF'
 txt_input2_fg_col	'000000'	txt_input2_bg_col	'FFFFFF'				
 txt_input1_td_fg_col	'000000'	txt_input1_td_bg_col	'FFFFFF'				
 txt_input2_td_fg_col	'000000'	txt_input2_td_bg_col	'FFFFFF'				
-txt_code_fg_col	'008000'	txt_code_bg_col	'000000'				
+txt_code_fg_col	'008000'	txt_code_bg_col	'000000CC'				
 							
 ca_txt_col	'000000'	ca_txt_bg_col	'transparent'				
 cb_txt_col	'000000'	cb_txt_bg_col	'transparent'				
@@ -50,7 +52,7 @@ tab_down_txt_col	'DDDDDD'	tab_down_txt_bg_col	'transparent'			tab_down_txt_shado
 tab_hover_txt_col	'FFFFFF'	tab_hover_txt_bg_col	'transparent'	tab_hover_txt_weight	'bold'	tab_hover_txt_shadow	'0px 0px 5px #FFFFFF'
 							
 p_mrg_top	'0'	p_mrg_bottom	'0'	p_mrg_left	'0'	p_mrg_right	'0'
-p_pad_top	'5'	p_pad_bottom	'5'	p_pad_left	'8'	p_pad_right	'8'
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 							
 ft1	'aqua_B01_ft1.png'	ft2	'aqua_B01_ft2.png'	ft3	'aqua_B01_ft3.png'		
 ft1_x	'32'	ft3_x	'32'	ft_y	'64'		

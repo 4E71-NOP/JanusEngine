@@ -46,6 +46,7 @@ if ( $pv['ObjectMode'] == 1 ) {
 		$tab['type']				= "mysql";
 		$tab['host']				= "localhost";
 		$tab['dal']					= "MYSQLI";
+		$tab['charset']				= "utf8mb4";
 		$tab['db_user_login']		= "HydreBDD";
 		$tab['db_user_password']	= "Celeste";
 		$tab['dbprefix']			= "Hdr";

@@ -126,8 +126,8 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array("v" => "in55_e",			"s" => "decoration"),
 		),
 		"nextId" => array (
-				array ("table" => "decoration",				"column" => "deco_id",			"target" => "id"),
-				array ("table" => "decoration",				"column" => "deco_ref_id",		"target" => "deco_ref_id"),
+				array ("table" => "decoration",				"column" => "deco_id",				"target" => "id"),
+				array ("table" => "decoration",				"column" => "deco_ref_id",			"target" => "deco_ref_id"),
 				array ("table" => "deco_10_menu",			"column" => "deco_line_number",		"target" => "10_id"),
 				array ("table" => "deco_20_caligraphe",		"column" => "deco_line_number",		"target" => "20_id"),
 				array ("table" => "deco_30_1_div",			"column" => "deco_line_number",		"target" => "30_id"),
@@ -387,7 +387,7 @@ self::$PreRequisiteTable['add']['module'] = array (
 				array("v" => "execution",		"s" => "module"),
 		),
 		"nextId" => array (
-				array ("table" => "module",			"column" => "module_id",		"target" => "id"),
+				array ("table" => "module",			"column" => "module_id",			"target" => "id"),
 				array ("table" => "module_website",	"column" => "module_website_id",	"target" => "module_website_id"),
 		),
 		"columns" => array(
@@ -405,6 +405,7 @@ self::$PreRequisiteTable['add']['module'] = array (
 				array ( "v" => "group_allowed_to_use_id",	"t" => "module_group_allowed_to_use"),
 				array ( "v" => "adm_control",				"t" => "module_adm_control"),
 				array ( "v" => "container_name",			"t" => "module_container_name"),
+				array ( "v" => "container_style",			"t" => "module_container_style"),
 				array ( "v" => "execution",					"t" => "module_execution"),
 		),
 );
@@ -648,7 +649,6 @@ self::$PreRequisiteTable['add']['website'] = array (
 				array ( "v" => "lang_select",	"t" => "ws_lang_select"),
 				array ( "v" => "theme_id",		"t" => "theme_id"),
 				array ( "v" => "title",			"t" => "ws_title"),
-				array ( "v" => "status_bar",	"t" => "ws_status_bar"),
 				array ( "v" => "home",			"t" => "ws_home"),
 				array ( "v" => "directory",		"t" => "ws_directory"),
 				array ( "v" => "state",			"t" => "ws_state"),
@@ -823,7 +823,6 @@ self::$PreRequisiteTable['update']['website']['columns']			= array(
 		array ( "v" => "lang_select",	"t" => "ws_lang_select"),
 		array ( "v" => "theme_id",		"t" => "theme_id"),
 		array ( "v" => "title",			"t" => "ws_title"),
-		array ( "v" => "status_bar",	"t" => "ws_status_bar"),
 		array ( "v" => "home",			"t" => "ws_home"),
 		array ( "v" => "directory",		"t" => "ws_directory"),
 		array ( "v" => "state",			"t" => "ws_state"),

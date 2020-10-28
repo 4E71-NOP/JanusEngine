@@ -2,7 +2,9 @@ add decoration
 name	'hydre_texte_001'						
 repertoire	'Hydre'						
 type	'caligraph'						
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Arial, Helvetica, Sans-serif'	txt_fonte_size_min	'10'	txt_fonte_size_max	'22'		
+txt_fonte_size	'12'
 							
 p_txt_indent	'0'						
 							

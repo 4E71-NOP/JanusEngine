@@ -1,7 +1,7 @@
 assign theme name "rw_hal9000_01"	to_website "rootwave";
 
-assign layout	name "rw_hal9000_01_layout_par_defaut"	to_theme "rw_hal9000_01"	default YES;
-assign layout	name "rw_hal9000_01_gestion_profil"				to_theme "rw_hal9000_01";
-assign layout	name "rw_hal9000_01_test_script"				to_theme "rw_hal9000_01";
-assign layout	name "rw_hal9000_01_gestion_decoration"			to_theme "rw_hal9000_01";
+assign layout	name "rw_hal9000_01_default_layout"			to_theme "rw_hal9000_01"	default YES;
+assign layout	name "rw_hal9000_01_gestion_profil"			to_theme "rw_hal9000_01";
+assign layout	name "rw_hal9000_01_test_script"			to_theme "rw_hal9000_01";
+assign layout	name "rw_hal9000_01_gestion_decoration"		to_theme "rw_hal9000_01";
 

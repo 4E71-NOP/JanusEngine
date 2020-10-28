@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
@@ -235,6 +235,6 @@ else { $Content .= "!!!!!!!!!!!!!!!!"; }
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

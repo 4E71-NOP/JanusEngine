@@ -1,0 +1,82 @@
+/*Hydre-contenu_debut*/
+<justify>
+<span style='text-weigh:bold;'>Les variables et le calcul<br>
+Nous allons faire un petit programme de conversion qui va nous permettre de calculer le coût d'un kilométrage par exemple. Ce genre d'application est assez simple. Il s'agit en général d'une fonction affine de type f(x)= a . x + b.<br>
+<br>
+Ici nous allons dire qu'un kilomètre coûte 2 francs et que l'on veut calculer le coût sur une distance de 300 kilomètres. Accessoirement nous allons afficher le coût du kilométrage que pour des intervalles de 20 kilomètres.<br>
+<br>
+Voyons le programme.<br>
+<br>
+<br>
+<hr>
+<code>
+#include <stdio.h><br>
+/* Affiche d'une fonction f(x)=a.x+b avec b=0 */<br>
+main()<br>
+{<br>
+[TAB]int nbr_km, cout_km, cout_distance;<br>
+[TAB]int mini, maxi, intervalle;<br>
+<br>
+[TAB]mini = 0;<br>
+[TAB]maxi = 300;<br>
+[TAB]intervalle = 20;<br>
+[TAB]nbr_km = mini;<br>
+[TAB]cout_km = 2;<br>
+<br>
+[TAB]while (nbr_km <= maxi ) {<br>
+[TAB][TAB]cout_distance = nbr_km * cout_km;<br>
+[TAB][TAB]printf (\"%d km | %d frs\n\", nbr_km, cout_distance);<br>
+[TAB][TAB]nbr_km = nbr_km + intervalle;<br>
+[TAB]}<br>
+}<br>
+</code>
+<hr>
+<br>
+<br>
+On passera les opération de compilations que vous devez maintenant connaître. Le source en lui meme est simple. Le but n'est pas de faire un ersatz de 'hello world' mais d'initier à la notion de boucle et de calcul et d'affichage de variables.<br>
+<br>
+<b>Int nom,nom,nom;</b><br>
+Cette instruction sert a définir une variable. Une variable est un emplacement mémoire de différentes dimensions possibles dans lequel on pourra stocker des données. Ceci s'oppose à la définition de constante.<br>
+<br>
+Il existe plusieurs type de variables.<br>
+<br>
+-Char : caractère (un seul octet)<br>
+-Short : nombre entier court<br>
+-Int : nombre entier<br>
+-Long : nombre entier long<br>
+-Float : nombre a virgule flottante<br>
+-Double : nombre a virgule flottante en double précision<br>
+<br>
+Tout ces type fondamentaux sont dédiés à un type d'utilisation donné.<br>
+<br>
+<b>Nom = n ;</b><br>
+Le programme débute par l'affectation de valeurs aux variables déclarées plus haut.La syntaxe est assez simple et pratiquement mathématique.<br>
+<br>
+Ici on defini les variables utilisées dans la boucle 'while'.<br>
+<br>
+<b>while (nbr_km <= maxi ) {</b><br>
+Cette instruction défini le début d'une boucle. Une boucle fonctionne de la manière suivante :<br>
+-Evaluation de la condition entre parenthèses.<br>
+Deux cas possible vrai/faux.<br>
+Cas vrai : Execution des instructions comprises entre accolades.<br>
+Cas faux : la boucle se termine et le programme reprends la suite des opération.<br>
+<br>
+Cette fonctionnalité du C va nous permettre de traiter la fonction (ax+b) sur ces différentes valeurs. Il existe d'autres type de boucles que nous verrons dans un autre chapitre. Ici nous n'aurons besoin que de l'instruction 'while'.<br>
+<br>
+<b>Nom = nom * n ;</b><br>
+Il est possible d'affecter des résultats d'opération à une variable. Ceci est l'un des atouts au service de la puissance syntaxique du C. On peut aussi utiliser une fonction pour une affectation. Ex : nom = sin(x) + 10; Vous pourrez constater que cette possibilité sera des plus utiles lors de vos futurs développements.<br>
+<br>
+Dans cet exemple nous avons la fonction affine: ''cout_distance = nbr_km * cout_km;'' que nous traduisons de manière générique par ''f(x) = x * a (avec b = 0)''.<br>
+<br>
+Il n'y a plus qu'a afficher le résultat.<br>
+<br>
+La fonction 'printf' à déjà été vue au chapitre précédent. Le système d'affichage de cet exemple est le même.<br>
+<br>
+<b>nbr_km = nbr_km + intervalle;</b><br>
+Cette itération représente l'incrément de 'nbr_km' par lui même à qui on ajoute une valeur. Donc cela donne la traduction suivante. Calcul de la somme de 'nbr_km' et de 'intervalle' que l'on stocke dans 'nbr_km'. Il existe d'autre syntaxe possible pour incrémenter une variable mais ici nous mettons l'accent sur la simplicité de lecture.<br>
+<br>
+Ici l'affectation d'une valeur a 'nbr_km' n'est pas seulement le propos. Nous rappelons que le C est un langage évolué mais il ne fait pas le ménage ni la vaisselle. Dans une boucle dont le cycle est défini autour d'une condition précise. Il ne faut pas oublier que cette condition doit passer d'un état vrai à faux (ou l'inverse) pour permettre au programme de sortir de la boucle et de continuer. Sans quoi il se produira une boucle, qui boucle, qui boucle, qui boucle... et votre programme part en vrille. Ceci peut aussi être dommageable au système si on utilise des fonctions qui travaillent plus en profondeur au sein dudit système.<br>
+<br>
+Le programmeur C doit éviter ce genre d'erreur par un peu de rigueur et de méthode.
+</justify>
+/*Hydre-contenu_fin*/

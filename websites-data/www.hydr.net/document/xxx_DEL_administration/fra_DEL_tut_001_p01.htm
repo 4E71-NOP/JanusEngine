@@ -1,0 +1,218 @@
+/*Hydre-contenu_debut*/
+<h2>Créer un site basique</h2>
+<p>Le tutoriel suivant va vous permettre de créer pas a pas un nouveau site web a partir de l'existant. 
+Cet exemple prends l'option d'utiliser les lignes de commande.
+</p>
+<h3>L'utilisation des lignes de commande</h3>
+<p>
+L'utilisation des lignes de commande est la façon la plus puissante pour créer et manipuler les sites ou des éléments de ceux-ci.
+</p>
+<h3>Créer le site</h3>
+<p>
+Pour commencer, il faut créer un nouveau site et un utilisateur. Allez dans la console de commande et tapez les commandes suivantes.
+</p>
+<code>
+> add site name test001 abrege tst1 home "www.rootwave.net" debug_info_level 5 stylesheet DYNAMIC state ONLINE user site_owner password site_owner group site_owner;<br>
+</code>
+<p>
+Cliquez sur "soumettre".
+</p>
+<p>
+Lorsque l'on entre des commandes dans la console le moteur applique automatiquement les modifications au site en cours. 
+Ce qui signifie qu'a chaque fois que l'on veut modifier le  site "test001", il faudra le sélectionner avec la commande "site_context".
+</p>
+<p>
+Le site qui vient d'être créé est quasiment vide. Seul un utilisateur et trois groupes (crées automatiquement) sont présents.  
+Il nous faut a présent ajouter les éléments nécessaires a son fonctionnement. 
+</p>
+<p>
+Ces éléments sont:
+</p>
+<ul>
+<li>des décorations, des thèmes (skin), des présentations.</li>
+<li>des modules</li>
+<li>des documents, des articles, des configurations d'article, des deadlines, des catégories.</li>
+</ul>
+<p>
+Les autres éléments ne sont pas vitales au fonctionnement du site mais agrémentent le contenu.
+</p>
+<p>
+Ces éléments sont:
+</p>
+<ul>
+<li>des groupes et des utilisateurs supplémentaires.</li>
+<li>Les mots clé (bulle d'aide, liens).</li>
+<li>Les tags (pour les recherches sur les documents).</li>
+</ul>
+<p>
+Notez bien que pour ce tutoriel on utilise l'existant. Il ne sera pas nécessaire de recréer des "décorations" et des "présentations".
+</p>
+<h3>Les utilisateurs et les groupes</h3>
+<p>
+Puisque le site repose sur un système hiérarchisé des droits utilisateur, il faut créer des groupes et des utilisateurs.
+Le principe reprend, dans les grandes lignes ce qui se fait sur les architectures Unix et Linux.
+Un utilisateur appartient a un group et le group donne les droits a l'utilisateur.
+Un utilisateur peut faire parti de plusieurs groupes. 
+Cet aspect est très important car il va nous permettre de mieux comprendre comment le moteur décide ou non d'afficher un menu (catégorie) pour un utilisateur donné. 
+Nous allons donc ajouter plusieurs groupes qui auront des droits différents.
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> add group name "admin_du_serveur" title "RoOt" tag STAFF;<br>
+> add group name "pigistes" title "Pigistes" tag STAFF;<br>
+</code>
+<p>
+Nous allons maintenant ajouter 4 utilisateurs qui correspondent dans le cas présent au groupes.
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> add user login "admintst01" perso_name "Admin" password "admintst01" status ACTIVE;<br>
+> add user login "Pascal" perso_name "Pascal" password "Pascal" status ACTIVE;<br>
+> add user login "Barnabe" perso_name "Barnabe" password "Barnabe" status ACTIVE;<br>
+> add user login "anonymous" perso_name "anonymous" password "anonymous" status ACTIVE;<br>
+</code>
+<p>
+L'utilisateur "anonymous" est un peu particulier.
+C'est l'utilisateur par défaut lorsque le site n'a pas de profil utilisateur a utiliser.
+C'est aussi l'utilisateur de secours lorsque qu'une session se termine ou que la tentative d'authentification a échoué.<br>
+</p>
+<p>
+Pour le moment rien ne lie les utilisateurs aux groupes. Nous allons créer cette relation.
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> user admintst01 join_group admin_du_serveur primary_group OUI;<br>
+> user admintst01 join_group pigistes primary_group NON;<br>
+> user admintst01 join_group Anonyme primary_group NON;<br>
+> user Pascal join_group pigistes primary_group OUI;<br>
+> user Pascal join_group Anonyme primary_group NON;<br>
+> user Barnabe join_group Anonyme primary_group NON;<br>
+</code>
+<p>
+La notion de group primaire permet au moteur de faire la différence dans plusieurs mécanismes. 
+La page de présentation de l'équipe, par exemple regroup les utilisateurs dans leurs group premier respectif.
+Autrement on aurait une page remplie d'utilisateurs appartenant a plusieurs groupes. 
+C'est absolument vrai, mais peu pratique a lire.
+</p>
+<h3>Le contenu</h3>
+<p>
+Pour tout site qui se respecte, il faut un contenu. Nous allons créer les éléments nécessaires a l'affichage d'un contenu.
+</p>
+<p>
+Le nécessaire se compose des éléments suivants.
+</p>
+<ul>
+<li>des documents.</li>
+<li>des articles et au moins une configuration d'article.</li>
+<li>des deadlines.</li>
+</ul>
+<p>
+Les catégories et les modules (pour le menu) viendront après. Nous allons donc créer ces éléments.
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> add deadline name "initial_tst"	title "test de mise en ligne" etat ONLINE;<br>
+<br>
+> add document name "doc_bienvenue" type MWMCODE cont "Bienvenue sur ce site.";<br>
+> share_document name "doc_bienvenue" with_site test001 modification NO;<br>
+> update document name "doc_bienvenue" checked YES examiner "admintst01" from_site test001;<br>
+<br>
+> add document_config	name par_defaut menu_type MENU_SELECT menu_style FLOAT menu_float_position RIGHT menu_float_taille_x 0 menu_float_taille_y 0 menu_occurence TOP show_info_parution YES show_info_modification YES;<br>
+> add article	name "bienvenue_p01" reference "bienvenue" deadline initial_tst desc "bienvenue" title "Bienvenue" sub_title "hey!" page "1" validation_state "VALID" config "par_defaut";<br>
+> link article "bienvenue_p01" document "doc_bienvenue";<br>
+</code>
+<p>
+La relation entre une configuration d'article et un article est simple. 
+La configuration d'article permet de décider de tous les paramètres techniques pour les affichages annexes a l'article. 
+La position du menu (quand il y a plusieurs pages) ou son affichage peuvent être réglé par cette configuration.
+</p>
+<p>
+Dans cet exemple le site en question n'aura pas de menu d'administration puisque nous n'en définissons pas. 
+La réalisation d'un site comporte plus d'éléments. 
+Cet exemple est ici allégé pour faciliter la compréhension. 
+Les scripts sont a disposition dans les répertoires "websites-data". 
+</p>
+<h3>Structure du site</h3>
+<p>
+Maintenant que nous avons des articles prêts pour affichage, il faut de quoi les afficher. 
+Les catégories et les modules vont permettre de faire cela. 
+Les catégories sont le contenu du menu et les modules sont des cadres qui affichent un contenu. 
+Le contenu du module peut être n'importe quoi mais ici nous allons faire en sorte d'utiliser un script qui affiche le menu ainsi que d'afficher le document choisi. 
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> add module name "document" title "Document" file "modules/module_affiche_document.php" desc "Affichage des documents" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 1;<br>
+> add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
+</code>
+<p>
+La position des modules indique au moteur l'ordre dans lequel les modules doivent être traité. 
+Donc l'ordre dans lequel les scripts (de votre cru ou non) vont être exécutés. 
+On remarque ici qu'il y a une question de group pour voir et/ou utiliser les modules. 
+D'où l'intérêt de nos groupes précédemment crées. 
+</p>
+<p>
+La suite est logique; il nous faut un menu pour avoir quelque chose de consistant a afficher.
+</p>
+<code>
+> site_context site test001 user site_owner password site_owner;<br>
+> add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
+<br>
+> add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
+</code>
+<p>
+Il y a quelque particularités aux catégories qu'il faut expliquer. 
+Il y a plusieurs type de catégories: ARTICLE et ARTICLE_RACINE. 
+"ARTICLE_RACINE" Détermine ou se trouve le début du menu. Un peu comme un répertoire racine. 
+L'argument "Firt_doc" permet comme pour le group "Anonyme" d'avoir un article de secours en cas de problème. 
+</p>
+<p>
+En utilisant le panneau d'administration on peut voir dans la liste des sites qu'il y a un nouveau site.
+Ce nouveau site n'est que très rudimentaire mais cela fonctionne.
+Vous pourrez loisir vous inspirer des scripts déjà présents pour vos propres créations. 
+</p>
+<h3>Le script complet</h3>
+<code>
+> add site name test001 abrege tst1 home "www.rootwave.net" debug_info_level 5 stylesheet DYNAMIC state ONLINE user site_owner password site_owner group site_owner;<br>
+<br>
+<br>
+> site_context site test001 user site_owner password site_owner;<br>
+> add group name "admin_du_serveur" title "RoOt" tag STAFF;<br>
+> add group name "pigistes" title "Pigistes" tag STAFF;<br>
+<br>
+<br>
+> add user login "admintst01" perso_name "Admin" password "admintst01" status ACTIVE;<br>
+> add user login "Pascal" perso_name "Pascal" password "Pascal" status ACTIVE;<br>
+> add user login "Barnabe" perso_name "Barnabe" password "Barnabe" status ACTIVE;<br>
+> add user login "anonymous" perso_name "anonymous" password "anonymous" status ACTIVE;<br>
+<br>
+<br>
+> user admintst01 join_group admin_du_serveur primary_group OUI;<br>
+> user admintst01 join_group pigistes primary_group NON;<br>
+> user admintst01 join_group Anonyme primary_group NON;<br>
+> user Pascal join_group pigistes primary_group OUI;<br>
+> user Pascal join_group Anonyme primary_group NON;<br>
+> user Barnabe join_group Anonyme primary_group NON;<br>
+<br>
+<br>
+> add deadline name "initial_tst"	title "test de mise en ligne" etat ONLINE;<br>
+<br>
+<br>
+> add document name "doc_bienvenue" type MWMCODE cont "Bienvenue sur ce site.";<br>
+> share_document name "doc_bienvenue" with_site test001 modification NO;<br>
+> update document name "doc_bienvenue" checked YES examiner "admintst01" from_site test001;<br>
+<br>
+<br>
+> add document_config	name par_defaut menu_type MENU_SELECT menu_style FLOAT menu_float_position RIGHT menu_float_taille_x 0 menu_float_taille_y 0 menu_occurence TOP show_info_parution YES show_info_modification YES;<br>
+> add article	name "bienvenue_p01" reference "bienvenue" deadline initial_tst desc "bienvenue" title "Bienvenue" sub_title "hey!" page "1" validation_state "VALID" config "par_defaut";<br>
+> link article "bienvenue_p01" document "doc_bienvenue";<br>
+<br>
+<br>
+> add module name "document" title "Document" file "modules/module_affiche_document.php" desc "Affichage des documents" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 1;<br>
+> add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
+<br>
+<br>
+> add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
+<br>
+> add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
+</code>
+/*Hydre-contenu_fin*/

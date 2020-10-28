@@ -44,7 +44,7 @@ add translation	lang	"eng"		package	"initial"		name	"load"			text	"load";
 add translation	lang	"eng"		package	"initial"		name	"upload"		text	"upload";
 add translation	lang	"eng"		package	"initial"		name	"download"		text	"download";
 
-add translation	lang	"eng"		package	"initial"		name	"nothingToDisplay"	text	"Rien à afficher";
+add translation	lang	"eng"		package	"initial"		name	"nothingToDisplay"	text	"Nothing to display";
 
 add translation	lang	"eng"		package	"initial"		name	"createEditConfirm"	text	"Create and edit";
 add translation	lang	"eng"		package	"initial"		name	"updateConfirm"		text	"I confirm the changes";

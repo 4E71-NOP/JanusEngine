@@ -29,7 +29,7 @@ class User {
 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
-// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' =>  __METHOD__ ."() : 
+// 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  __METHOD__ ."() : 
 // 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 // 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 // 			WHERE usr.user_login = '" . $UserLogin . "'

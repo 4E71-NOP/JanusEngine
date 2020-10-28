@@ -44,7 +44,7 @@ add translation	lang	"fra"		package	"initial"		name	"load"			text	"charger";
 add translation	lang	"fra"		package	"initial"		name	"upload"		text	"téléverser";
 add translation	lang	"fra"		package	"initial"		name	"download"		text	"télécharger";
 
-add translation	lang	"fra"		package	"initial"		name	"nothingToDisplay"	text	"Nothign to display";
+add translation	lang	"fra"		package	"initial"		name	"nothingToDisplay"	text	"Rien à afficher";
 
 add translation	lang	"fra"		package	"initial"		name	"createEditConfirm"	text	"Créer et modifier";
 add translation	lang	"fra"		package	"initial"		name	"updateConfirm"		text	"Je confirme les modifications";

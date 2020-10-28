@@ -1,5 +1,7 @@
 <?php 
-$i18n['0'] = "Non";
-$i18n['1'] = "Oui";
-$i18n['b01Invite'] = "Bienvenue sur Hydre";
+$i18n = array(
+	'0'				=>		"Non",
+	'1'				=>		"Oui",
+	'b01Invite'		=>		"Bienvenue sur Hydre",
+);
 ?>

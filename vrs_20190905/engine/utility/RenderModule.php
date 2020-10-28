@@ -25,22 +25,15 @@ class RenderModule {
 	}
 	
 	public function render($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$StringFormatObj = StringFormat::getInstance();
+		$cs = CommonSystem::getInstance();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "RenderModule->render start"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "";
 		$ModuleTable = $RenderLayoutObj->getModuleList();
@@ -63,16 +56,18 @@ class RenderModule {
 
 		$pv ['i'] = 1;
 		
-// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($ModuleTable));
+// 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => $cs->StringFormatObj->arrayToString($ModuleTable)));
 		foreach ( $ModuleTable as $m ) {
 			$_REQUEST['module_nbr'] = 1;
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
-// 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($UserObj->getUser()));
-// 			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "module_group_allowed_to_see=".$UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']));
 			
 			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
-				$Block = $StringFormatObj->getDecorationBlockName( "B", $nbr , "");
+				$Block = $cs->StringFormatObj->getDecorationBlockName( "B", $nbr , "");
 				$infos['module_name'] = $m['module_name'];
 				$infos['block'] = $Block;
 				$infos['blockG'] = $Block . "G";
@@ -82,7 +77,6 @@ class RenderModule {
 				$fontSizeRange= $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
 				$infos['fontSizeMin'] = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
 				$infos['fontCoef'] = $fontSizeRange / 6;
-						
 				
 				$ModuleRendererName = $m['module_classname'];
 				
@@ -96,36 +90,24 @@ class RenderModule {
 // 				Execution modes are : 0 during, 1 Before, 2 After
 				switch ( $m['module_execution'] ) {
 					case 0:
-// 						$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $StringFormatObj->arrayToString($ModuleTable));
 						$Content .= $this->selectDecoration($infos);
 						
-						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
 						$Content .= $ModuleRenderer->render($infos);
-						$Content .= "</div>\r";
+						$Content .= "</div>\r</div>\r";
 						break;
 					case 1:
 						$Content .= $ModuleRenderer->render($infos);
 						$Content .= $this->selectDecoration($infos);
-						
-						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
-						$Content .= "</div>\r";
+						$Content .= "</div>\r</div>\r";
 						break;
 					case 2:
 						$Content .= $this->selectDecoration($infos);
-						
-						if ( isset($m['module_container_name']) && strlen($m['module_container_name']) > 0 ) { $Content .= "</div>\r"; }
-						$Content .= "</div>\r";
+						$Content .= "</div>\r</div>\r";
 						
 						$Content .= $ModuleRenderer->render($infos);
-//						if (file_exists($m['module_file'])) { include ($m['module_file']); } else { $Content .= "!! !! !! !!"; }
 						break;
 				}
 			}
-
-// 			if ( isset ( $affiche_module_['contenu_apres_module'] ) ) {
-// 				$Content .= $affiche_module_['contenu_apres_module'];
-// 				unset ( $affiche_module_ );
-// 			}
 			
 			$Content .= "<!-- __________ Module '".$m['module_name']."' end __________ -->\r\r\r\r\r";
 			$pv['i']++;
@@ -135,11 +117,11 @@ class RenderModule {
 			if (strlen($extraContent)>0) { $Content .= $extraContent; }
 			$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
 		}
-		$_REQUEST['localisation'] = substr ( $_REQUEST['localisation'] , 0 , (0 - strlen( $localisation_module )) );
 		
 		$Content .= "</div>\r
 			<!-- __________ Modules end __________ -->\r
 			";
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;
@@ -149,22 +131,17 @@ class RenderModule {
 	
 	public function selectDecoration ($infos) {
 		$ClassLoaderObj = ClassLoader::getInstance();
-		
 		$LMObj = LogManagement::getInstance();
 		$RenderLayoutObj = RenderLayout::getInstance();
-		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ServerInfos = $CurrentSetObj->getInstanceOfServerInfosObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
-		
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "RenderModule->selectDecoration start"));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		$Content = "";
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		
 		$err = FALSE;
-		$_REQUEST['div_id']['un_div'] = $_REQUEST['div_id']['ex22'] = "id='".$infos['module']['module_name']."' ";
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
 		switch ( $infos['deco_type'] ) {
 			case 30:	
 			case "1_div":
@@ -188,21 +165,28 @@ class RenderModule {
 				break;
 			default:
 				$mn = $infos['module_name'];
-				$Content .= "<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['Block']."_div_std' style='position: absolute; left:".
+				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
+				$Content .= "
+					<div class='".$ThemeDataObj->getThemeName().$infos['block']."'>\r
+					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std' style='position: absolute; left:
+					".
 					$RenderLayoutObj->getLayoutModuleEntry($mn, 'px')."px; top:".
 					$RenderLayoutObj->getLayoutModuleEntry($mn, 'py')."px; width:".
 					$RenderLayoutObj->getLayoutModuleEntry($mn, 'dx')."px; height:".
-					$RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')."px; '>\r"
+					$RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')."px;' 
+					>\r
+					"
 					;
 				$ThemeDataObj->setThemeDataEntry('theme_module_largeur_interne', $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx'));
 				$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $RenderLayoutObj->getLayoutModuleEntry($mn, 'dy'));
-				$err = TRUE;		// Most likely something went wrong. So the system use a default behavior.
+				$err = TRUE;		// Most likely no decoration. Or something went wrong. So the system use a default behavior.
 				break;
 		}
 		if ( $err == FALSE ) {
 			$Content .= $RenderDeco->render($infos);
 			unset ($RenderDeco);
 		}
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
 		
 		return $Content;
 	}

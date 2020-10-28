@@ -11,6 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
+$application = 'website';
 include ("define.php");
 
 // --------------------------------------------------------------------------------------------
@@ -23,27 +24,17 @@ Good practice for the main script when it's ready to think about saving memory..
 	$varsSum = array_diff ($varsEnd,  $varsStart);
 	foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
 */
-
-
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
-$ClassLoaderObj->provisionClass('Time');
-$ClassLoaderObj->provisionClass('LogManagement');
-$ClassLoaderObj->provisionClass('Mapper');
-$ClassLoaderObj->provisionClass('RequestData');
+$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is extended by others.
+$cs = CommonSystem::getInstance();
 
-// Time and memory measurment (with checkpoints)
-$TimeObj = Time::getInstance();
-$LMObj = LogManagement::getInstance();
-$LMObj->setInternalLogTarget(logTarget);
-$MapperObj = Mapper::getInstance();
-$RequestDataObj = RequestData::getInstance();
 // --------------------------------------------------------------------------------------------
 $Content = "";
 // --------------------------------------------------------------------------------------------
-$LMObj->setStoreStatisticsStateOn();
-$LMObj->logCheckpoint( "Index" );
+$cs->LMObj->setStoreStatisticsStateOn();
+$cs->LMObj->logCheckpoint( "Index" );
 
 // --------------------------------------------------------------------------------------------
 error_reporting(E_ALL ^ E_NOTICE);
@@ -62,10 +53,6 @@ if ( strpos($Navigator, "MSIE" ) !== FALSE ) {
 unset ( $Navigator);
 
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('StringFormat');
-$StringFormatObj = StringFormat::getInstance();
-
-// --------------------------------------------------------------------------------------------
 //
 //	CurrentSet
 //
@@ -82,16 +69,12 @@ $CurrentSetObj->setDataEntry('fsIdx', 0);								//Useful for FileSelector
 //	Session management
 //
 //
-$ClassLoaderObj->provisionClass('SessionManagement');
-$ClassLoaderObj->provisionClass('ConfigurationManagement');
-$CMObj = ConfigurationManagement::getInstance();
-$CMObj->InitBasicSettings();
-
 $CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 session_name($CurrentSetObj->getDataEntry('sessionName'));
 session_start();
-$SMObj = SessionManagement::getInstance($CMObj);
-// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "*** index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$StringFormatObj->arrayToString($SMObj->getSession()). " *** EOL" );
+$cs->initSmObj();
+
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)." *** \$cs->SMObj->getSession() = ".$cs->StringFormatObj->arrayToString($cs->SMObj->getSession()). " *** EOL" ));
 
 // --------------------------------------------------------------------------------------------
 //
@@ -100,26 +83,26 @@ $SMObj = SessionManagement::getInstance($CMObj);
 $firstContactScore = 0;
 
 if ( session_status() === PHP_SESSION_ACTIVE ) { $firstContactScore++; }
-if ( strlen($RequestDataObj->getRequestDataEntry('ws')) != 0 ) { $firstContactScore += 2;}
-if ( strlen($RequestDataObj->getRequestDataEntry('formSubmitted')) == 1 && $RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == "ModuleAuthentification" ) {
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('ws')) != 0 ) { $firstContactScore += 2;}
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('formSubmitted')) == 1 && $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == "ModuleAuthentification" ) {
 	$firstContactScore += 4;
 }
-if ( strlen($RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection")) { $firstContactScore += 8; }
+if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection")) { $firstContactScore += 8; }
 
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$firstContactScore='". $firstContactScore ."'"));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : \$firstContactScore='". $firstContactScore ."'"));
 $authentificationMode = "session";
-$authentificationAction = userActionSingIn;
+$authentificationAction = USER_ACTION_SIGN_IN;
 switch ( $firstContactScore ) {
 	case 0:
-		$SMObj->ResetSession();
+		$cs->SMObj->ResetSession();
 		break;
 	case 6:
 	case 7:
 		$authentificationMode = "form";
 	case 2:
 	case 3:
-		$SMObj->ResetSession();
-		$SMObj->setSessionEntry('ws', $RequestDataObj->getRequestDataEntry('ws'));
+		$cs->SMObj->ResetSession();
+		$cs->SMObj->setSessionEntry('ws', $cs->RequestDataObj->getRequestDataEntry('ws'));
 	break;
 	
 	case 8:
@@ -131,10 +114,10 @@ switch ( $firstContactScore ) {
 	case 14:
 	case 15:
 		$authentificationMode = "form";
-		$authentificationAction = userActionDisconnect;
+		$authentificationAction = USER_ACTION_DISCONNECT;
 		break;
 	case 1:
-		$SMObj->CheckSession();
+		$cs->SMObj->CheckSession();
 		break;
 }
 
@@ -143,20 +126,15 @@ switch ( $firstContactScore ) {
 //	Loading the configuration file associated with this website
 //
 $localisation = " (Start)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Start");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Loading website data");
-
-// $fichier_config = "config/current/site_" . $_REQUEST['ws'] . "_config.php";
-// include ($fichier_config);
-// $SQL_tab = array();
-// $SQL_tab_abrege = array();
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Start");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Loading website data");
 
 // A this point we have a ws in the session so we don't use the URI parameter anymore.
-$CMObj->LoadConfigFile();
-$CMObj->setConfigurationEntry('execution_context',		"render");
-$LMObj->setDebugLogEcho(0);
+$cs->CMObj->LoadConfigFile();
+$cs->CMObj->setConfigurationEntry('execution_context',		"render");
+$cs->LMObj->setDebugLogEcho(0);
 
 
 // --------------------------------------------------------------------------------------------
@@ -164,7 +142,7 @@ $LMObj->setDebugLogEcho(0);
 //	Creating the necessary arrays for Sql Db Dialog Management
 //
 $ClassLoaderObj->provisionClass('SqlTableList');
-$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $CMObj->getConfigurationEntry('dbprefix'), $CMObj->getConfigurationEntry('tabprefix') ));
+$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $cs->CMObj->getConfigurationEntry('dbprefix'), $cs->CMObj->getConfigurationEntry('tabprefix') ));
 $SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 
 // --------------------------------------------------------------------------------------------
@@ -174,11 +152,9 @@ $SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 //
 $ClassLoaderObj->provisionClass('SddmTools');
 $ClassLoaderObj->provisionClass('DalFacade');
+$cs->initSddmObj();
 
-$DALFacade = DalFacade::getInstance();
-$DALFacade->createDALInstance();		// It connects too.
-$SDDMObj = DalFacade::getInstance()->getDALInstance();
-if ( $SDDMObj->getReportEntry('cnxErr') == 1 ) { 
+if ( $cs->SDDMObj->getReportEntry('cnxErr') == 1 ) { 
 	include ("../modules/initial/OfflineMessage/OfflineMessage.php");
 	$ModuleOffLineMessageObj = new ModuleOffLineMessage();
 	$ModuleOffLineMessageObj->render(
@@ -189,7 +165,7 @@ if ( $SDDMObj->getReportEntry('cnxErr') == 1 ) {
 	);
 }
 
-$CMObj->PopulateLanguageList();		// Not before we have access to the DB. Better isn't it?
+$cs->CMObj->PopulateLanguageList();		// Not before we have access to the DB. Better isn't it?
 
 // --------------------------------------------------------------------------------------------
 //
@@ -197,10 +173,10 @@ $CMObj->PopulateLanguageList();		// Not before we have access to the DB. Better 
 //
 //
 $localisation = " (Initialization)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("WebSite initialization");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("WebSite initialization");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("WebSite initialization");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("WebSite initialization");
 
 // $theme_tableau = "theme_princ_";
 $ClassLoaderObj->provisionClass('WebSite');
@@ -215,7 +191,7 @@ case 99:		//	Verouillé
 	$WebSiteObj->setWebSiteEntry('banner_offline', 1); include ("../modules/initial/OfflineMessage/OfflineMessage.php");
 break;
 }
-$CMObj->setLangSupport();			// will set support=1 in the languagelist if website supports the language.  
+$cs->CMObj->setLangSupport();			// will set support=1 in the languagelist if website supports the language.  
 
 // --------------------------------------------------------------------------------------------
 //
@@ -223,67 +199,66 @@ $CMObj->setLangSupport();			// will set support=1 in the languagelist if website
 //
 //
 $localisation = " (Authentification)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Authentification");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Authentification");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Authentification");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Authentification");
 
 $ClassLoaderObj->provisionClass('AuthenticateUser');
 $ClassLoaderObj->provisionClass('User');
 
-$AUObj = AuthenticateUser::getInstance();
 $CurrentSetObj->setInstanceOfUserObj(new User());
 $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 
 // we have 2 variables used drive the authentification process.
 switch ( $authentificationMode ){
 	case "form":
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Authentification with form mode"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : Authentification with form mode"));
 		switch ( $authentificationAction ) {
-			case userActionDisconnect:
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : disconnect submitted"));
-				$SMObj->ResetSession();
-				$userName = anonymousUserName;
+			case USER_ACTION_DISCONNECT:
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : disconnect submitted"));
+				$cs->SMObj->ResetSession();
+				$userName = ANONYMOUS_USER_NAME;
 				break;
-			case userActionSingIn:
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Connection attempt"));
-				$userName = $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
+			case USER_ACTION_SIGN_IN:
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : Connection attempt"));
+				$userName = $cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
 				break;
 				
 		}
-		$SMObj->ResetSession();				// If a login comes from a form. The session object must be reset!
+		$cs->SMObj->ResetSession();				// If a login comes from a form. The session object must be reset!
 		$UserObj->getUserDataFromDB($userName, $WebSiteObj );
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : user_login=" . $UserObj->getUserEntry('user_login')));
-		$AUObj->checkUserCredential($UserObj, 'form');
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Connection attempt end"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : user_login=" . $UserObj->getUserEntry('user_login')));
+		$cs->AUObj->checkUserCredential($UserObj, 'form');
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : Connection attempt end"));
 		break;
 	case "session":
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : Authentification with session mode. user_login='" . $SMObj->getSessionEntry('user_login')."'"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : Authentification with session mode. user_login='" . $cs->SMObj->getSessionEntry('user_login')."'"));
 		
 		// Assuming a session is valid (whatever it's 'anonymous' or someone else).
-		if ( strlen($SMObj->getSessionEntry('user_login')) == 0 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION strlen(user_login)=0"));
-			$SMObj->ResetSession();
+		if ( strlen($cs->SMObj->getSessionEntry('user_login')) == 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : \$_SESSION strlen(user_login)=0"));
+			$cs->SMObj->ResetSession();
 		}
-		$UserObj->getUserDataFromDB( $SMObj->getSessionEntry('user_login'), $WebSiteObj );
+		$UserObj->getUserDataFromDB( $cs->SMObj->getSessionEntry('user_login'), $WebSiteObj );
 		if ( $UserObj->getUserEntry('error_login_not_found') != 1 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : session mode : ".$StringFormatObj->arrayToString( $SMObj->getSession())));
-			$AUObj->checkUserCredential($UserObj, 'session');
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : session mode : ".$cs->StringFormatObj->arrayToString( $cs->SMObj->getSession())));
+			$cs->AUObj->checkUserCredential($UserObj, 'session');
 		}
 		else {
 			// No form then no user found it's defintely an anonymous user
-			$SMObj->ResetSession();
+			$cs->SMObj->ResetSession();
 			$UserObj->resetUser();
 			$UserObj->getUserDataFromDB('anonymous', $WebSiteObj);
 		}
 		break;
 }
 
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$SMObj->getSession() :" . $StringFormatObj->arrayToString($SMObj->getSession())));
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)));
-if ( $AUObj->getDataEntry('error') === TRUE ) { $UserObj->getUserDataFromDB("anonymous", $WebSiteObj); }
-// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : UserObj = " . $StringFormatObj->arrayToString($UserObj->getUser()));
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : checkUserCredential end"));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : \$SMObj->getSession() :" . $cs->StringFormatObj->arrayToString($cs->SMObj->getSession())));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)));
+if ( $cs->AUObj->getDataEntry('error') === TRUE ) { $UserObj->getUserDataFromDB("anonymous", $WebSiteObj); }
+// $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : UserObj = " . $cs->StringFormatObj->arrayToString($UserObj->getUser())));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : checkUserCredential end"));
 
 // --------------------------------------------------------------------------------------------
 //	
@@ -291,45 +266,45 @@ $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : 
 //	
 //	
 $localisation = " (Language selection)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Language selection");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Language selection");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Language selection");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Language selection");
 
 $scoreLang = 0;
 
-if ( strlen($RequestDataObj->getRequestDataEntry('l')) != 0 && $RequestDataObj->getRequestDataEntry('l') != 0 ) { $scoreLang += 4; }
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('l')) != 0 && $cs->RequestDataObj->getRequestDataEntry('l') != 0 ) { $scoreLang += 4; }
 if ( strlen($UserObj->getUserEntry('lang')) != 0 && $UserObj->getUserEntry('lang') != 0 ) { $scoreLang += 2; }
 if ( strlen($WebSiteObj->getWebSiteEntry('ws_lang')) != 0 && $WebSiteObj->getWebSiteEntry('ws_lang') != 0 ) { $scoreLang += 1; }
 
-// $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language list: ". $StringFormatObj->arrayToString($CMObj->getLanguageList()));
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Website : ws_lang='". $WebSiteObj->getWebSiteEntry('ws_lang')."'"));
+// $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language list: ". $cs->StringFormatObj->arrayToString($cs->CMObj->getLanguageList())));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Website : ws_lang='". $WebSiteObj->getWebSiteEntry('ws_lang')."'"));
 
 switch ($scoreLang) {
 	case 0:
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : Error on Language"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language selection : Error on Language"));
 		break;
 	case 1:
-		$tmp = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_639_3');
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")"));
+		$tmp = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_639_3');
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language selection : Website priority (Case=".$scoreLang."; ".$WebSiteObj->getWebSiteEntry('ws_lang')."->".$tmp.")"));
 		$CurrentSetObj->setDataEntry('language', $tmp);
-		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_id') );
+		$CurrentSetObj->setDataEntry('language_id', $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'),'lang_id') );
 		break;
 	case 2:
 	case 3:
-		$tmp = $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_639_3');
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : User priority (Case=".$scoreLang."; ".$UserObj->getUserEntry('lang')."->".$tmp.")"));
+		$tmp = $cs->CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_639_3');
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language selection : User priority (Case=".$scoreLang."; ".$UserObj->getUserEntry('lang')."->".$tmp.")"));
 		$CurrentSetObj->setDataEntry('language', $tmp);
-		$CurrentSetObj->setDataEntry('language_id', $CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_id'));
+		$CurrentSetObj->setDataEntry('language_id', $cs->CMObj->getLanguageListSubEntry($UserObj->getUserEntry('lang'),'lang_id'));
 		break;
 	case 4:
 	case 5:
 	case 6:
 	case 7:
-		$tmp = strtolower($RequestDataObj->getRequestDataEntry('l'));
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Language selection : URL priority (Case=".$scoreLang."; ".$RequestDataObj->getRequestDataEntry('l') . "->" . $tmp . ")"));
+		$tmp = strtolower($cs->RequestDataObj->getRequestDataEntry('l'));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language selection : URL priority (Case=".$scoreLang."; ".$cs->RequestDataObj->getRequestDataEntry('l') . "->" . $tmp . ")"));
 		$CurrentSetObj->setDataEntry('language', $tmp); // URl/form asked, the king must be served!
-		$CurrentSetObj->setDataEntry('language_id', strtolower($RequestDataObj->getRequestDataEntry('l')));
+		$CurrentSetObj->setDataEntry('language_id', strtolower($cs->RequestDataObj->getRequestDataEntry('l')));
 		break;
 }
 
@@ -337,7 +312,8 @@ $ClassLoaderObj->provisionClass('I18n');
 $I18nObj = I18n::getInstance();
 $I18nObj->getI18nFromDB();
 
-$LMObj->restoreLastInternalLogTarget();
+$cs->LMObj->restoreLastInternalLogTarget();
+
 // --------------------------------------------------------------------------------------------
 //
 //	Form Management for commandLine interface
@@ -345,12 +321,15 @@ $LMObj->restoreLastInternalLogTarget();
 //
 
 // Do we have a user submitting from the auth form ?
-if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) == 'on' || $RequestDataObj->getRequestDataSubEntry('formGenericData','deletion' ) == 'on' ) {
+if ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) == 'on' 
+		|| $cs->RequestDataObj->getRequestDataSubEntry('formGenericData','deletion' ) == 'on' 
+		&& $UserObj->getUserEntry('user_login') != 'anonymous'
+		) {
 	$localisation = " (CLI)";
-	$MapperObj->AddAnotherLevel($localisation);
-	$LMObj->logCheckpoint("CLI");
-	$MapperObj->RemoveThisLevel($localisation);
-	$MapperObj->setSqlApplicant("CLI");
+	$cs->MapperObj->AddAnotherLevel($localisation);
+	$cs->LMObj->logCheckpoint("CLI");
+	$cs->MapperObj->RemoveThisLevel($localisation);
+	$cs->MapperObj->setSqlApplicant("CLI");
 	
 	
 	$ClassLoaderObj->provisionClass('FormToCommandLine');
@@ -358,30 +337,30 @@ if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) 
 	$FormToCommandLineObj->analysis();
 
 	
-	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "FormToCommandLineObj->getCommandLineNbr() =".$FormToCommandLineObj->getCommandLineNbr()));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "FormToCommandLineObj->getCommandLineNbr() =".$FormToCommandLineObj->getCommandLineNbr()));
 	
 	if ( $FormToCommandLineObj->getCommandLineNbr() > 0 ) {
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php script is on the bench :"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php script is on the bench :"));
 		$ClassLoaderObj->provisionClass('CommandConsole');
 
 		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj); // Set an initial website context.
 		$CommandConsole = CommandConsole::getInstance();
 		
-		$CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// 20200205 - For now we only log the command line in the logs.
+		$cs->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// 20200205 - For now we only log the command line in the logs.
 // 		$CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'disabled');		// 20200205 - For now we only log the command line in the logs.
 		$Script = $FormToCommandLineObj->getCommandLineScript();
-		switch ($CMObj->getConfigurationSubEntry('commandLineEngine', 'state')) {
+		switch ($cs->CMObj->getConfigurationSubEntry('commandLineEngine', 'state')) {
 			case "enabled":
 				foreach ($Script as $A ) { $CommandConsole->executeCommand($A); }
 				break;
 			case "disabled":	
 			default:
-				foreach ($Script as $A ) { $LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => $A)); }
+				foreach ($Script as $A ) { $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => $A)); }
 				break;
 		}
 	}
 	
-	switch ($RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin').$RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')) {
+	switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin').$cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')) {
 		case "ModuleQuickSkin":
 			$UserObj->getUserDataFromDB( $UserObj->getUserEntry('user_login'), $WebSiteObj);	//We need to reload the user data in order to update the current user_pref_theme variable. 
 			break;
@@ -400,20 +379,17 @@ if ( $RequestDataObj->getRequestDataSubEntry('formGenericData','modification' ) 
 //	The so called route is based on the arti_ref transmitted 
 //
 $localisation = " (CurrentSet)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Prepare CurrentSet");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Prepare CurrentSet");
-
-// $_REQUEST['contexte_d_execution']	= "Rendu";
-
-//	Special block HTML >> ne pas etre autre part<<
-// $document_tableau = "DP_";
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Prepare CurrentSet");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Prepare CurrentSet");
 
 // --------------------------------------------------------------------------------------------
-// If no article reference is given we take the first article of the current website. 
-if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
-	$dbquery = $SDDMObj->query ( "
+//	Checking the article call 
+//	If no article reference is given we take the first article of the current website. 
+// 
+if ( strlen($cs->RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
+	$dbquery = $cs->SDDMObj->query ( "
 		SELECT cat.cate_id, cat.cate_name, cat.arti_ref
 		FROM " . $SqlTableListObj->getSQLTableName('category') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
 		WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
@@ -426,14 +402,32 @@ if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 		AND cate_initial_document = '1'
 		ORDER BY cat.cate_parent,cat.cate_position
 		;");
-	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { 
+	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
 		$CurrentSetObj->setDataSubEntry('article', 'arti_ref',$dbp['arti_ref']);
 	}
 	$CurrentSetObj->setDataSubEntry('article', 'arti_page',1);
 }
 else {
-	$CurrentSetObj->setDataSubEntry('article', 'arti_ref',$RequestDataObj->getRequestDataEntry('arti_ref'));
-	$CurrentSetObj->setDataSubEntry('article', 'arti_page',$RequestDataObj->getRequestDataEntry('arti_page'));
+//	Is the user can read this article ?
+	$dbquery = $cs->SDDMObj->query ("
+			SELECT *
+			FROM ".$SqlTableListObj->getSQLTableName('category')."
+			WHERE ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."')
+			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
+			AND group_id ".$UserObj->getUserEntry('clause_in_group')."
+			AND cate_state = '1'
+			AND arti_ref = '".$cs->RequestDataObj->getRequestDataEntry('arti_ref')."' 
+			;");
+	if ( $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
+		$CurrentSetObj->setDataSubEntry('article', 'arti_ref',$cs->RequestDataObj->getRequestDataEntry('arti_ref'));
+		$CurrentSetObj->setDataSubEntry('article', 'arti_page',$cs->RequestDataObj->getRequestDataEntry('arti_page'));
+	}
+	else {
+		$CurrentSetObj->setDataSubEntry('article', 'arti_ref', $CurrentSetObj->getDataEntry('language') .'_article_not_found');
+		$cs->RequestDataObj->setRequestDataEntry('arti_ref', $CurrentSetObj->getDataEntry('language') .'_article_not_found');
+		$CurrentSetObj->setDataSubEntry('article', 'arti_page',$cs->RequestDataObj->getRequestDataEntry('arti_page'));
+		
+	}
 }
 
 // --------------------------------------------------------------------------------------------
@@ -441,22 +435,16 @@ else {
 
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws',				"<input type='hidden'	name='ws'			value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l',				"<input type='hidden'	name='l'			value='".$CurrentSetObj->getDataEntry('language')."'>\r");
-$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login',		"<input type='hidden'	name='user_login'	value='".$SMObj->getSessionEntry('user_login')."'>\r");
-$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass',		"<input type='hidden'	name='user_pass'	value='".$SMObj->getSessionEntry('user_password')."'>\r");
+$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login',		"<input type='hidden'	name='user_login'	value='".$cs->SMObj->getSessionEntry('user_login')."'>\r");
+$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass',		"<input type='hidden'	name='user_pass'	value='".$cs->SMObj->getSessionEntry('user_password')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_ref',		"<input type='hidden'	name='arti_ref'		value='".$CurrentSetObj->getDataSubEntry('article','arti_ref')."'>\r");
 $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page',		"<input type='hidden'	name='arti_page'	value='".$CurrentSetObj->getDataSubEntry('article','arti_page')."'>\r");
 
 $urlUsrPass = "";
-// if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login')."&amp;user_pass=".$SMObj->getSessionEntry('user_password'); }
-// $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&l=".$CurrentSetObj->getDataEntry('language').$urlUsrPass );																			// Site Lang User Pass
-if ( $SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$SMObj->getSessionEntry('user_login'); }
+if ( $cs->SMObj->getSessionEntry('sessionMode') != 1 ) { $urlUsrPass = "&amp;user_login=".$cs->SMObj->getSessionEntry('user_login'); }
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_slup',		"");																			// Site Lang User Pass
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sldup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&l=".$CurrentSetObj->getDataEntry('language')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page').$urlUsrPass);		// Site Lang Article User Pass
 $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article','arti_page'). $urlUsrPass);							// Site Article User Pass
-
-
-// $_REQUEST['FS_index'] = 0;
-// $_REQUEST['FS_table'] = array();
 
 // --------------------------------------------------------------------------------------------
 //	
@@ -464,10 +452,10 @@ $CurrentSetObj->setDataSubEntry('block_HTML', 'url_sdup',		"&sw=".$WebSiteObj->g
 //	
 //	
 $localisation = " (Theme&Layout)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Prepare Theme & Layout");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Prepare Theme & Layout");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Prepare Theme & Layout");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Prepare Theme & Layout");
 
 // Those are ENTITY (DAO) classes, they're not UTILITY classes.
 $ClassLoaderObj->provisionClass('Deco10_Menu');
@@ -497,10 +485,10 @@ $ThemeDataObj->renderBlockData();
 //
 //
 $localisation = " (JavaScript)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Prepare JavaScript Object");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Prepare JavaScript Object");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Prepare JavaScript Object");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Prepare JavaScript Object");
 
 $ClassLoaderObj->provisionClass('GeneratedJavaScript');
 $CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
@@ -516,10 +504,10 @@ $GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi('HydrBody').styl
 //
 //
 $localisation = " / Modules";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Module Processing");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Module Processing");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Module Processing");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Module Processing");
 
 $ClassLoaderObj->provisionClass('InteractiveElements');			// Responsible for rendering buttons
 $ClassLoaderObj->provisionClass('RenderLayout');
@@ -536,7 +524,7 @@ $stylesheet = $RenderStylesheetObj->render("mt_", $ThemeDataObj );
 
 $Content .= "<!DOCTYPE html>\r";
 switch ( $WebSiteObj->getWebSiteEntry('ws_stylesheet') ) {
-	case 1: // dynamique
+	case 1: // dynamic
 		$Content .= "
 			<head>\r
 			<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
@@ -575,33 +563,26 @@ $directives = array (
 
 $Content.= $RenderModuleObj->render($directives);
 
-// $module_['compteur'] = 1;
-
 // --------------------------------------------------------------------------------------------
 // 
 // Checkpoint ("index_before_stat");
 // 
 // 
 $localisation = " (Stats)";
-$MapperObj->AddAnotherLevel($localisation);
-$LMObj->logCheckpoint("Stats");
-$MapperObj->RemoveThisLevel($localisation);
-$MapperObj->setSqlApplicant("Stats");
+$cs->MapperObj->AddAnotherLevel($localisation);
+$cs->LMObj->logCheckpoint("Stats");
+$cs->MapperObj->RemoveThisLevel($localisation);
+$cs->MapperObj->setSqlApplicant("Stats");
 
-$LMObj->logCheckpoint("index_before_stat");
-$MapperObj->RemoveThisLevel( "/ idx" );
-$CurrentSetObj->setDataSubEntry('timeStat', 'end', $TimeObj->microtime_chrono());				// We get time for later use in the stats.
+$cs->LMObj->logCheckpoint("index_before_stat");
+$cs->MapperObj->RemoveThisLevel( "/ idx" );
+$CurrentSetObj->setDataSubEntry('timeStat', 'end', $cs->TimeObj->microtime_chrono());				// We get time for later use in the stats.
 
-
-// $localisation = " / idx";
-// $_REQUEST['localisation'] = substr ( $_REQUEST['localisation'] , 0 , (0 - strlen( $localisation )) );
-// $_REQUEST['StatistiqueInsertion'] = 0;
-$LMObj->setStoreStatisticsStateOff();
+$cs->LMObj->setStoreStatisticsStateOff();
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('RenderAdmDashboard');
 $RenderAdmDashboardObj = RenderAdmDashboard::getInstance();
 $Content .= $RenderAdmDashboardObj->render();
-
 
 // --------------------------------------------------------------------------------------------
 //	creating file selector if necessary
@@ -664,10 +645,10 @@ Licence : Creative commons CC-by-nc-sa (http://www.creativecommons.org/)
 -->
 ";
 
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "index.php : \$_SESSION :" . $StringFormatObj->arrayToString($_SESSION)));
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)));
 
 // --------------------------------------------------------------------------------------------
-$SDDMObj->disconnect_sql();
+$cs->SDDMObj->disconnect_sql();
 session_write_close();
 
 echo ( $Content . $JavaScriptContent . $licence . "</body>\r</html>\r");

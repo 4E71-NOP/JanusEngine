@@ -1,11 +1,13 @@
 <?php 
-$i18n['title']				= "Installation monitor";
-$i18n['status']				= "Status";
-$i18n['installState1']		= "Installation in progress";
-$i18n['installState2']		= "Installation done";
-$i18n['SQL_query_count']	= "SQL action count";
-$i18n['command_count']		= "Command count";
-$i18n['SQL_not_ready']		= "Not available for now.";
-$i18n['start_date']			= "Start date";
-$i18n['end_date']			= "End date";
-$i18n['inactive']			= "Inactive since";
+$i18n = array(
+	'title'				=> "Installation monitor",
+	'status'			=> "Status",
+	'installState1'		=> "Installation in progress",
+	'installState2'		=> "Installation done",
+	'SQL_query_count'	=> "SQL action count",
+	'command_count'		=> "Command count",
+	'SQL_not_ready'		=> "Not available for now.",
+	'start_date'		=> "Start date",
+	'end_date'			=> "End date",
+	'inactive'			=> "Inactive since",
+);

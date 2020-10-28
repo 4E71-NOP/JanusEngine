@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestData('categoryForm',
@@ -336,6 +336,6 @@ $Content .= $TemplateObj->renderAdminFormButtons($infos, $i18nDoc);
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

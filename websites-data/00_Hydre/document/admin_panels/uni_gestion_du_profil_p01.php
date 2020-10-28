@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
@@ -76,11 +76,11 @@ $LMObj->logCheckpoint("uni_gestion_du_profil_p01.php");
 $MapperObj->RemoveThisLevel($localisation );
 $MapperObj->setSqlApplicant("uni_gestion_du_profil_p01.php");
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 
-switch ($l) {
+switch ($CurrentSetObj->getDataEntry('language')) {
 	case "fra":
 		$I18nObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
@@ -466,10 +466,10 @@ else {
 	unset ($T);
 	$T = array();
 	if ( strlen($RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')) == 0 ) { 
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "No requested theme in the form, using the main theme."));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
 		$RequestDataObj->setRequestDataSubEntry('UserProfileForm', 'SelectedTheme', $ThemeDataObj->getThemeDataEntry('theme_name') );
 	}
-	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Requested theme =`".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."`"));
+	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme =`".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."`"));
 	
 	$dbquery = $SDDMObj->query("
 	SELECT * 
@@ -477,7 +477,7 @@ else {
 	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."' 
 	AND a.theme_id = b.theme_id 
 	;");
-// 	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "
+// 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "
 // 	SELECT *
 // 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
 // 	WHERE a.theme_name = '".$RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')."'
@@ -502,12 +502,13 @@ else {
 	
 	
 	$Content .= $RenderStylesheetObj->render($PmThemeName, $PmThemeDataObj );
-	$iconList = array ('icone_repertoire','icone_efface','icone_gauche','icone_droite','icone_haut','icone_bas','icone_ok','icone_nok','icone_question','icone_notification');
+	$iconList = array ('icon_directory','icon_erase','icon_left','icon_right','icon_top','icon_bottom','icon_ok','icon_nok','icon_question','icon_notification');
 
 	$ListThemeBlock= array();
 	for ( $i = 1; $i < 31; $i++ ) {
-		$TmpBlockEntry = "theme_bloc_".$StringFormatObj->getDecorationBlockName("", $i, "")."_nom";
+		$TmpBlockEntry = "theme_block_".$StringFormatObj->getDecorationBlockName("", $i, "")."_name";
 		$TmpBlockName = $PmThemeDescriptorObj->getThemeDescriptorEntry($TmpBlockEntry);
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $TmpBlockName));
 // 		$TmpBlock = $PmThemeDataObj->getThemeData($TmpBlockName);
 		if ( strlen($TmpBlockName) > 0 ) {
 			$err = 0;
@@ -543,6 +544,7 @@ else {
 	$Tab = 1;
 	unset ( $A );
 	foreach ( $ListThemeBlock as $A ) {
+		
 		$infos['block']		= $StringFormatObj->getDecorationBlockName("B", $A['pos'] , "");
 		$infos['blockG']	= $infos['block']."G";
 		$infos['blockT']	= $infos['block']."T";
@@ -551,6 +553,7 @@ else {
 		// As the class RenderLayout is a singleton (and it's better like that), we insert the necessary module data (X,Y) into the dataset for later use in RenderDecoXXXX classes.
 		// We know the RenderDeco classes are provisionned.
 		$mn = "MpBlock0".$Tab;
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $mn));
 		$BlockDataTmp = array(
 				'px'	=>	$ModulePaddingX / 2 ,
 				'py'	=>	$ModulePaddingY / 2 ,
@@ -590,17 +593,15 @@ else {
 		
 		
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttd', "
-		<table style='height:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft_y')."px;' border='0' cellspacing='0' cellpadding='0'>\r
-		<tr>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1_x')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft1').");'></td>\r
-		<td style='background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft2').");'>\r
-		<span class='".$PmBlock."_tb4' style='color:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_txt_titre_col').";'>\r
+		<table style='height:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft_height')."px; width:auto;' border='0' cellspacing='0' cellpadding='0'>\r
+		<tr style='background-color:transparent;'>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_width')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_bg').");'></td>\r
+		<td class='".$PmBlock."_ft2' style='background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft2_bg').");'>\r
 		");
 
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttf', "
-		</span>\r
 		</td>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3_x')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'deco_ft3').");'></td>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_width')."px;	background-image: url(../gfx/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_bg').");'></td>\r
 		</tr>\r
 		</table>\r
 		");
@@ -610,16 +611,16 @@ else {
 		if ( $Tab == 1 ) {
 			$T['AD'][$Tab]['1']['1']['cont'] .= "
 			<form ACTION='index.php?' method='post'>\r
-			<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; '>
-			<tr>\r
-			<td class='".$PmBlock."_t3'>\r
+			<table class='".$PmBlock.CLASS_TableStd."'>
+			<tr style='background-color:transparent;'>\r
+			<td>\r
 			Je veux 
 			<select name='UPDATE_action' class='".$PmBlock."_t3 ".$PmBlock."_form_1'>\r
 			<option value='AUCUNE'>Voir</option>\r
 			<option value='UPDATE_USER'>Activer</option>\r
 			</select>\r
 			le th&egrave;me 
-			<select name='UserProfileForm[SelectedThemeId]' class='".$PmBlock."_t3 ".$PmBlock."_form_1'>\r
+			<select name='UserProfileForm[SelectedThemeId]'>\r
 			";
 			
 			$dbquery = $SDDMObj->query("
@@ -668,27 +669,26 @@ else {
 			";
 		}
 		$T['AD'][$Tab]['1']['1']['cont'] .= "
-		<p class='".$PmBlock."_t3'>\r
+		<p class='".$PmBlock."'>\r
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #".$Tab.". 
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #".$Tab.". 
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #".$Tab.". 
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #".$Tab.". 
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #".$Tab.". <br>\r
 		<br>\r
-		<a class='".$PmBlock."_lien ".$PmBlock."_t3'>Exemple de lien simple</a><br>\r
+		<a>Exemple de lien simple</a><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' class='".$PmBlock."_form_1 ".$PmBlock."_t3'><br>\r
+		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' ><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' class='".$PmBlock."_form_2 ".$PmBlock."_t3'><br>\r
+		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		<br>\r
 		</p>
 
-		<table style='margin-left:auto; margin-right:auto;'>\r
-		<tr>\r
+		<table>\r
+		<tr style='background-color:transparent;'>\r
 		<td>\r
-
-		<p align='left' class='".$PmBlock."_code'>
-		<code class='".$PmBlock."_code ".$PmBlock."_t3'>
+		
+		<code>\r
 		/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */<br>\r
 		#include &lt;stdio.h&gt;<br>\r
 		#include &lt;mylib.h&gt;<br>\r
@@ -699,28 +699,28 @@ else {
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf ('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');<br>\r
 		}<br>\r
 		</code>\r
-		</p>\r
 		</td>\r
 
 		<td>\r
-		<table>\r
+		<table class='".$PmBlock.CLASS_Table01."'>\r
+		<caption>Lorem ipsum dolor sit amet</caption>
 		<tr>\r
-		<td class='".$PmBlock."_fcta ".$PmBlock."_t3' colspan='2'>\r Lorem ipsum dolor sit amet, consectetur adipiscing elit (A)  </td>\r
-		<td class='".$PmBlock."_fctb ".$PmBlock."_t3' colspan='2'>\r Lorem ipsum dolor sit amet, consectetur adipiscing elit (B)</td>\r
+		<td colspan='2'>\r Lorem ipsum dolor sit amet, consectetur adipiscing elit (A)</td>\r
+		<td colspan='2'>\r Lorem ipsum dolor sit amet, consectetur adipiscing elit (B)</td>\r
 		</tr>\r
 		<tr>\r
-		<td class='".$PmBlock."_fca ".$PmBlock."_t3'>\r Lorem ipsum.  a </td>\r
-		<td class='".$PmBlock."_fcb ".$PmBlock."_t3'>\r Lorem ipsum.  b </td>\r
-		<td class='".$PmBlock."_fcc ".$PmBlock."_t3'>\r Lorem ipsum.  c </td>\r
-		<td class='".$PmBlock."_fcd ".$PmBlock."_t3'>\r Lorem ipsum.  d </td>\r
+		<td>\r Lorem ipsum.  a </td>\r
+		<td>\r Lorem ipsum.  b </td>\r
+		<td>\r Lorem ipsum.  c </td>\r
+		<td>\r Lorem ipsum.  d </td>\r
 		</tr>\r
 		<tr>\r
-		<td class='".$PmBlock."_fca ".$PmBlock."_t3' colspan='4'>\r
-		<a class='".$PmBlock."_lien ".$PmBlock."_t3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</a><br>\r
+		<td colspan='4'>\r
+		<a>Lorem ipsum dolor sit amet, consectetur adipiscing elit</a><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' class='".$PmBlock."_form_1 ".$PmBlock."_t3'><br>\r
+		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' class='".$PmBlock."_form_2 ".$PmBlock."_t3'><br>\r
+		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 
 		</td>\r
 		</tr>\r
@@ -735,7 +735,7 @@ else {
 		reset ($iconList);
 		foreach ( $iconList as $A ) {
 			if ( strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)) != 0 ) {
-				$PmIcon[$j] = "background-image: url(../gfx/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
+				$PmIcon[$j] = "background-image: url(../gfx/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
 			}
 			$j++;
 		}
@@ -743,18 +743,18 @@ else {
 		$maxCells = 3;
 		$maxLines = 4;
 		$lineCount = 1;
-		$pv['icone_div_taille'] = floor($PmThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/4)-8 ;
-		if ( $pv['icone_div_taille'] > 128 ) { $pv['icone_div_taille'] = 128; }
+		$pv['icon_div_size'] = floor($PmThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/4)-8 ;
+		if ( $pv['icon_div_size'] > 128 ) { $pv['icon_div_size'] = 128; }
 		$j = 0;
 		$T['AD'][$Tab]['1']['1']['cont'] .= "<table style='margin-left:auto; margin-right:auto;' border='0' >\r";
 		for ( $lineCount = 1 ; $lineCount <= $maxLines ; $lineCount++ ) {
-			$T['AD'][$Tab]['1']['1']['cont'] .= "<tr>";
+			$T['AD'][$Tab]['1']['1']['cont'] .= "<tr style='background-color:transparent;'>";
 			for ( $cellCount = 1 ; $cellCount <= $maxCells ; $cellCount++ ) {
 				$T['AD'][$Tab]['1']['1']['cont'] .= "<td style='
 				width: 136px; height: 136px; 
 				border-style: solid; border-width: 1px; border-color: #000000;'>\r
 				<div style='
-				width: ".$pv['icone_div_taille']."px; height: ".$pv['icone_div_taille']."px;
+				width: ".$pv['icon_div_size']."px; height: ".$pv['icon_div_size']."px;
 				margin:auto; 
 				background-repeat: no-repeat; background-position:center; 
 				".$PmIcon[$j]."'></div>\r
@@ -802,7 +802,7 @@ else {
 //
 	$T['AD'][$Tab]['1']['1']['cont'] .="<!-- Last tabs showing the specific items. -->\r";
 	$j = 0;
-	$themeDir = $PmThemeDataObj->getThemeBlockEntry('B01T', 'repertoire');
+	$themeDir = $PmThemeDataObj->getThemeBlockEntry('B01T', 'directory');
 	$themeList = array ('theme_logo', 'theme_banner');
 	$themeEntries = array();
 	foreach ( $themeList as $A ) {
@@ -847,13 +847,13 @@ else {
 	$CurrentSetObj->restoreInstanceOfThemeDataObj();
 	$Content .= $RenderTablesObj->render($infos, $T);
 	
-	$LMObj->setInternalLogTarget($logTarget);
+	$LMObj->setInternalLogTarget($LOG_TARGET);
 	
 // --------------------------------------------------------------------------------------------
 }
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

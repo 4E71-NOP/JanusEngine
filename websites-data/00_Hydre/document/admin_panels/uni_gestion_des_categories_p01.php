@@ -37,7 +37,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestData('cate_parent', 39);
@@ -50,7 +50,7 @@ $LMObj->logCheckpoint("uni_gestion_des_categorys_p01");
 $MapperObj->RemoveThisLevel($localisation );
 $MapperObj->setSqlApplicant("uni_gestion_des_categorys_p01");
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 switch ($l) {
@@ -220,6 +220,6 @@ $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

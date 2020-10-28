@@ -1,0 +1,70 @@
+/*Hydre-contenu_debut*/
+<h3>Decorations</h3>
+<p>
+These are the element that truely emphasize the content. Ther are several decoration type. It can be definitions for module frameworks or text behavior (size, color). These also define the working directory, where lies the graphics. 
+Decorations are not depending on anything. These can exist in the database without any link to the reste of it. These are stored in different tables depending on the type. Tese are not bound to a website in particular. So a theme can use it even if it was created for another theme of another website on the same server. 
+Please note that it is encouraged to produce CSS stylesheet (using website administration) to minimize the downloads. A MWM CSS stylsheet can easely have more than 1000 lines. 
+</p>
+<h3>Différent decoration type</h3>
+<p>
+Decoration have been named to ease comprehenssion.
+</p>
+
+<h3>1_div</h3>
+<p>
+It is a DIV (HTML) which attributes are customizable. It is often used for tooltips. 
+</p>
+
+<h3>Elegance</h3>
+<p>
+This one use a set of DIVs that surround the content. It is organized in line and column to ease comprehenssion. 
+</p>
+
+<table class='{[block]}__TableStd'>
+<tr>
+<td><a href='{[DataLocation]}fra_doc_concepts_decoration_elegance_schema_001.png'><img style='display:block;' width='100%' height='100%' src='{[DataLocation]}fra_doc_concepts_decoration_elegance_schema_001.png'></a></td>
+</tr>
+</table>
+
+<h3>Exquise</h3>
+<p>
+This one use a set of DIVs that surround the content. It is organized in line and column to ease comprehenssion. The difference is this decoration use more DIVs. 
+</p>
+
+<table class='{[block]}_TableStd'>
+<tr>
+<td><a href='{[DataLocation]}fra_doc_concepts_decoration_exquise_schema_001.png'><img style='display:block;' width='100%' height='100%' src='{[DataLocation]}fra_doc_concepts_decoration_exquise_schema_001.png'></a></td>
+</tr>
+</table>
+
+<h3>Elysion</h3>
+<p>
+This one use a set of DIVs that surround the content. To this it adds a set of DIVs that will be placed over the content DIV. It is organized in line and column and <b>IN</b>ternal and <b>EX</b>ternal types to ease comprehenssion. 
+</p>
+
+<table class='{[block]}_TableStd'>
+<tr>
+<td><a href='{[DataLocation]}fra_doc_concepts_decoration_elysion_schema_001.png'><img style='display:block;' width='100%' height='100%' src='{[DataLocation]}fra_doc_concepts_decoration_elysion_schema_001.png'></a></td>
+</tr>
+</table>
+
+<h3>Les thèmes (ou skin)</h3>
+<p>
+These elements are like some sort of directories that link to decorations. These also define the use of CSS stylesheet files, logos (blason module), or some element of the administration panel. Each theme is linked with only one website. 
+There are no sharing option for themes. In the mean time use of scripts facilitate the copy to another website. 
+To understand this system you must understand how the website works. When a page is browsed, the engine will search for module to render. Each module defnine if there is a decoration to render and what is its number. The theme contains definitions that are compatible with this system.  
+</p>
+<p>Ex:</p>
+<code>
+> block_01_name 'one_block_001'		block_01_text	'one_texte_001'<br>
+block_02_name 'one_block_002'		block_02_text	'one_texte_002'<br>
+etc.<br>
+</code>
+
+<table class='{[block]}_TableStd'>
+<tr>
+<td><a href='{[DataLocation]}Schema_theme_001_001.png'><img style='display:block;' width='100%' height='100%' src='{[DataLocation]}Schema_theme_001_001.png'></a></td>
+</tr>
+</table>
+
+/*Hydre-contenu_fin*/

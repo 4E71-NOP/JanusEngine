@@ -55,13 +55,13 @@ class ConfigurationManagement {
 		$SMObj = SessionManagement::getInstance(0);
 
 		$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 		$pv['ObjectMode'] = 1; //during migration avoid re-delcaring the same function.
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
 			$SMObj->ResetSession();
 			$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 			include ($configFile);
 		}
 		$CurrentConfig = returnConfig();
@@ -108,19 +108,17 @@ class ConfigurationManagement {
 				break;
 			case "render":
 			default:
+				$cs = CommonSystem::getInstance();
 				$this->LanguageList = array ();
-				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 				$SqlTableListObj = SqlTableList::getInstance(null, null);
-				$SMObj = SessionManagement::getInstance(0);
-// 				$RequestDataObj = RequestData::getInstance();
 				
 				$TabLangueAdmises = array();
-				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language_website')." WHERE ws_id = '".$SMObj->getSessionEntry('ws')."';");
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
+				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language_website')." WHERE ws_id = '".$cs->SMObj->getSessionEntry('ws')."';");
+				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
 				sort ( $TabLangueAdmises );
 				
-				$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
+				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 					$idx = $dbp['lang_id'];
 					$TableRendu = 0;
 					reset ( $TabLangueAdmises );
@@ -130,7 +128,6 @@ class ConfigurationManagement {
 						$this->LanguageList[$dbp['lang_639_3']] = &$this->LanguageList[$idx];
 					}
 				}
-				
 				break;
 		}
 	}

@@ -25,12 +25,13 @@ class RenderDeco50Exquisite {
 	}
 	
 	public function render ( $infos ){
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Start"));
+		
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
@@ -40,40 +41,44 @@ class RenderDeco50Exquisite {
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
 		
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
+		$mcn = $infos['module']['module_container_name'];
 		switch ($infos['affiche_module_mode']) {
 			case "bypass":
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'bypass'"));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
-				// 				$Content .= "<!-- Module ".$mn." px=".$infos['admin_control']['px']."; py=" . $infos['admin_control']['py']."-->\r";
 				break;
 			case "normal":
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'normal'"));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
 				break;
 			case "menu":
-				// 				$StringFormatObj = StringFormat::getInstance();
-				// 				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'menu' : ".$mn."<br>m=".$StringFormatObj->arrayToString($m));
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "display module mode is 'menu' : ".$mn));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
 				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
 				$L['py'] = 0;
+				$mcn .= "_" . $infos['module']['module_name'];
 				break;
 		}
 		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		// x1 x2
 		// x3 x4
-// 		$B = &$S[$_REQUEST['blocG']];
+		// $B = &$S[$_REQUEST['blocG']];
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		
-		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
-		$L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
-		$L['pos_x2_ex22'] = $L['px'] + $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
+// 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
+// 		$L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
+// 		$L['pos_x2_ex22'] = $L['px'] + $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
+		$L['pos_x1_ex22'] = max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
+		$L['pos_y1_ex22'] = max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
+		$L['pos_x2_ex22'] = $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
 		$L['pos_y2_ex22'] = &$L['pos_y1_ex22'];
 		$L['pos_x3_ex22'] = &$L['pos_x1_ex22'];
-		$L['pos_y3_ex22'] = $L['py'] + $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
+// 		$L['pos_y3_ex22'] = $L['py'] + $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
+		$L['pos_y3_ex22'] = $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
 		$L['pos_x4_ex22'] = &$L['pos_x2_ex22'];
 		$L['pos_y4_ex22'] = &$L['pos_y3_ex22'];
 		
@@ -81,7 +86,7 @@ class RenderDeco50Exquisite {
 		$L['dim_y_ex22'] = $L['pos_y3_ex22'] - $L['pos_y1_ex22'];
 		
 		// Adjust values depending on decoration 
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
 		
 		$CV = ($L['dim_x_ex22'] - $B['ex12_x'] - $B['ex14_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
 		$CV = ($L['dim_x_ex22'] - $B['ex52_x'] - $B['ex54_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
@@ -126,11 +131,9 @@ class RenderDeco50Exquisite {
 		$Content .= "
 		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 		";
-		if ( isset($infos['module']['module_container_name'] ) && strlen($infos['module']['module_container_name']) > 0 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Adding a container DIV: ". $infos['module']['module_container_name']));
-			$Content .= "<div id='".$infos['module']['module_container_name']."' style='visibility: hidden; position:absolute; top: 0px; left: 0px;'>\r";
-		}
+		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
 		$Content .= "
+		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle .";' class='".$TN . $infos['block']."'>\r
 		<div ".$DivIdList['ex11']." class='".$TN . $infos['block']."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
 		<div ".$DivIdList['ex12']." class='".$TN . $infos['block']."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
 		<div ".$DivIdList['ex13']." class='".$TN . $infos['block']."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
@@ -148,13 +151,13 @@ class RenderDeco50Exquisite {
 		<div ".$DivIdList['ex54']." class='".$TN . $infos['block']."_ex54' style='left: ".$L['pos_x_ex54']."px;	top: ".$L['pos_y_ex54']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex54_x']."px;		height:".$B['ex54_y']."px;'></div>\r
 		<div ".$DivIdList['ex55']." class='".$TN . $infos['block']."_ex55' style='left: ".$L['pos_x_ex55']."px;	top: ".$L['pos_y_ex55']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex55_x']."px;		height:".$B['ex55_y']."px;'></div>\r
 				
-		<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22 ".$TN.$infos['block']."_t".$m[$mn]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
+		<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-
+		// ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base
 		$GeneratedJavaScriptObj->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 50 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "End"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

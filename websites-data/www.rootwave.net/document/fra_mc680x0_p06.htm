@@ -1,0 +1,56 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+Les instructions du mc680x0 de S à T<br>
+<br>
+<table>
+<tr><td >SBCD</td><td ><justify>Soustraction décimale avec le bit d'extension. Soustraction en binaire codé décimal avec le bit d'extension de deux registres de données ou de deux cases mémoire adressées par pré-décrémentation : SBCD Ds,Dd ou ABCD -(As),-(Ad). L'opération ne porte que sur des octets.<br>&nbsp;</td></tr>
+<tr><td >Scc</td><td ><justify>Positionnement selon condition. Cette instruction teste la condition spécifiée. Si celle-ci est vérifie, l'octet pointé par l'adresse effective est mis a $FF, sinon il est mis a $00. La condition cc est l'une des suivantes F, T, CC, CS, EQ, GE, GT, HI, LE, LS, LT, MI, NE, PL, VC, VS.<br>&nbsp;</td></tr>
+<tr><td >STOP</td><td ><justify>Chargement du SR et arrêt. Chargement su SR avec la donnée immédiate (16 bits) indiquée et arrêt de l'exécution jusqu'à l'arrivée d'une exception. Exception ' Trace ' si le bit T de SR a été mis à 1 par la donnée immédiate. Exception ' Interruption ' s'il arrive une interruption de priorité supérieure à celle indiqué par le masque I0, I1, I2 de SR. Exception 'Initialisation ' externe.<br>
+Remarque :<br>
+Si le bit S est mis à 0, l'exécution de STOP provoque une exception ' Violation de privilège '. En effet le processeur se retrouve en mode utilisateur alors que le mode superviseur est nécessaire.<br>&nbsp;</td></tr>
+<tr><td >SUB</td><td ><justify>Soustraction binaire de l'opérande source à l'opérande destination : SUB <AE>,Dn ou SUB Dn,<AE>.<br>
+Variantes :<br>
+Soustraction avec un registre d'adresse : SUBA <AE>,An (en .W ou .L).<br>
+Soustraction avec une donnée immédiate : SUBI #,<AE>.<br>
+Soustraction rapide : SUBQ #,<AE>, La donnée est une valeur de 1 à 8 (ou 8 est codé 000 de manière interne).<br>
+Soustraction avec le bit d'extension : SUBX Ds,Dd ou SUBX -(As),-(Ad).<br>&nbsp;</td></tr>
+<tr><td >SWAP</td><td ><justify>Echange interne. Echange les mots de poids fort et de poids faible d'un registre de données : SWAP Dn.<br>&nbsp;</td></tr>
+<tr><td >TAS</td><td ><justify>Test d'un octet. Test de l'octet opérande désigné par l'adresse effective. Le registre du CCR est mis à jour, puis le bit 7 de l'octet est mis a 1. Cette opération est indivisible et s'exécute en un seul cycle mémoire, lecture, écriture et permet ainsi la synchronisation de plusieurs processeurs : TAS <AE>.<br>&nbsp;</td></tr>
+<tr><td >TRAP</td><td ><justify>Branchement à l'adresse indiquée par le vecteur d'expection n. Le PC ainsi que le SR sont sauvegardés sur la pile. Le mode superviseur est automatiquement mis en vigueur: TRAP #n<br>&nbsp;</td></tr>
+<tr><td >TRAPV</td><td ><justify>Procédure d'expetion s'il y a dépassement de capacités. Branchement à l'adresse indiquée par le vecteur d'expection TRAPV. Le PC ainsi que le SR sont sauvegardés sur la pile. Le mode superviseur est automatiquement mis en vigueur: TRAP #n<br>&nbsp;</td></tr>
+<tr><td >TST</td><td ><justify>Test d'un opérande. Comparaison à 0. Le registre du CCR est mis a jour, mais aucun résultat n'est conservé : TST Dn.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+</table>
+<br>
+<table>
+<tr><td  colspan='6' >Etat du SR pour les instrcutions</td></tr>
+<tr><td >Instruction</td>					<td >X</td>	<td >N</td>	<td >Z</td>	<td >V</td>	<td >C</td></tr>
+
+<tr><td >SBCD				</td><td >P		</td><td >?	</td><td >P	</td><td >?	</td><td >P	</td></tr>
+<tr><td >Scc				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+<tr><td >STOP				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	SUB <AE>,Dn<br>
+	SUB Dn,<AE><br>
+	SUBA <AE>,An<br>
+	SUBI #<Donnée>,<AE><br>
+	SUBQ #<Donnée>,<AE><br>
+	SUBX -(As),-(Ad)
+								</td><td >P		</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+
+<tr><td >SWAP				</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+<tr><td >TAS <AE>	</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+
+
+<tr><td >TRAP				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >TRAPV			</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >TST Dn			</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+</table>
+<br>
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+<br>
+<br>
+</justify>
+/*Hydre-contenu_fin*/

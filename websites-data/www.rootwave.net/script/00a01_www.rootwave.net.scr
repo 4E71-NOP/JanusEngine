@@ -12,10 +12,9 @@ short				RW
 lang				fra
 lang_select			YES 
 title				"R o o t w a v e" 
-status_bar			"www.rootwave.net" 
 home				"www.rootwave.net" 
 directory			"www.rootwave.net" 
-info_debug			"10"
+info_debug			"49215"
 stylesheet			DYNAMIC 
 state				ONLINE
 group				"Server_owner" 

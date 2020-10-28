@@ -1,0 +1,85 @@
+/*Hydre-contenu_debut*/
+<justify>
+<span style='text-weigh:bold;'>Hello World<br>
+Il s'entend bien évidemment que ces programmes d'exemple auront plus de chance de fonctionner sur des plates-formes UniX sachant qu'il ont été développés et testés sur ces plates-formes. Un minimum de connaissances Unix seront nécessaires (utiliser un shell etc.). Pour d'autre systèmes se référer aux documents de programmation idoines (ou à un spécialiste) de leur système.<br>
+<br>
+Affichage de 'Hello world'. Le programme est relativement simple. Le mécanisme généré par ce programme au sein du système l'est un peu moins. Mais nous n'entrerons pas dans les détails ici. Prenez un éditeur de texte (ex : vi ou emacs) et recopiez le script ci dessous.<br>
+<br>
+<hr>
+<br>
+<code>
+/* Affichage du texte 'hello world' vers la sortie standard */<br>
+<br>
+#include <stdio.h><br>
+main ()<br>
+{<br>
+[TAB][TAB]printf (\"Hello world ! \\n\");<br>
+}<br>
+<br>
+</code>
+<hr>
+Sauvegardez ce texte dans un fichier (ex : hello.c) et compilez le (cc hello.c ou gcc suivant les plates-formes). Vous obtenez un fichier 'a.out' dans le répertoire courant.<br>
+<br>
+Utilisez votre shell pour lancer le programme obtenu avec la commande suivante.<br>
+<br>
+<code>
+root@home dir > ./a.out<br>
+</code>
+<br>
+Ceci affichera dans la fenêtre de votre terminal la phrase 'hello world'. Ok jusque la ça a l'air simplet. Passons à l'étude du source de ce programme.<br>
+<br>
+Ce programme se caractérise pas sa simplicité de lecture mais il pose les bases de l'articulation général du langage C.<br>
+<br>
+<b>#include <stdio.h></b><br>
+Ceci indique au compilateur d'inclure les informations de la librairie 'stdio.h' (Standart In-Out). Nous décrirons cette librairie dans un autre chapitre. Globalement elle permet de définir, gérer et ou canaliser les flux de données résultant d'un programme vers les entrées / sorties disponibles (ex : STDOUT qui est la sortie standard).<br>
+<br>
+<b>main ()</b><br>
+C'est la fonction principale du programme. Une image de ce qu'est 'main()' par rapport à l'ensemble du programme est ce qu'est un tronc pour un arbre. Dans le langage C, le tronc du programme n'échappe pas a la règle en étant une fonction appelée par votre shell. Libre au programmeur d'appeler d'autres fonctions depuis 'main()' elle seront simplement assujetties à 'main()'. Nous verrons plus loin l'imbrication des fonctions.<br>
+<br>
+La fonction 'main()' s'articule de la manière suivante.<br>
+<br>
+<code>
+Nom ()<br>
+{<br>
+[TAB][TAB]itération ;<br>
+}<br>
+</code>
+<br>
+-Les parenthèses après 'Nom' servent a transmettre les arguments à la fonction appelée. Ici et dans ce cas 'main()' n'en a pas besoin.<br>
+-Les instructions qui composent une fonction figurent entre accolades { }.<br>
+-Chaque instruction se termine par un point-virgule ; .<br>
+<br>
+<b>printf (\"Hello world ! \n\");</b><br>
+'printf' est une fonction. Le paramètre qui lui est passé est l'expression 'Hello world ! \n'. On appelle une fonction par son nom, suivit d'une liste d'arguments entre parenthèses. L'expression entre guillemets passée à la fonction 'printf' s'appelle 'une chaîne de caractères' (ou character string) et est de type 'char'. La séquence '\n' est un caractère de contrôle permettant le passage à la ligne suivante (n comme newline). On remarquera que si cette séquence est omise on n'a pas de retour à la ligne mais surtout que cela permet de construire des phrases au pas à pas. Ceci pourra être utile pour de futurs développements qui imposeront d'afficher un résultat en fonction de paramètres variables.<br>
+<br>
+En revanche on ne peut pas écrire : <br>
+<code>
+printf (\"Hello world !<br>
+\");<br>
+</code>
+<br>
+Le compilateur C ne sait pas passer à la ligne automatiquement et produira un message d'erreur lors de la compilation.<br>
+<br>
+Maintenant on pourrait aussi bien écrire le premier programme de la manière suivante:<br>
+<br>
+<hr>
+<code>
+/* Affichage du texte 'hello world' vers la sortie standard */<br>
+<br>
+#include <stdio.h><br>
+main ()<br>
+{<br>
+[TAB][TAB]printf (\"Hello \");<br>
+[TAB][TAB]printf (\"world ! \");<br>
+[TAB][TAB]printf (\"\n\");<br>
+}<br>
+</code>
+<hr>
+<br>
+Et il produirait un résultat identique au premier programme.<br>
+<br>
+Remarquez que la séquence '\n' est codée sur un seul caractère dans la chaîne lors de la compilation. Cette séquence fait partie de ce que l'on appelle les séquences d'échappement (escape sequence ou escape characters) qui permettent de représenter des caractères non imprimable du fait de leur nullité calligraphique (retour chariot) ou des caractères difficiles a taper. Ce mécanisme est extensible à d'autres utilisations.<br>
+<br>
+Voilà ! Avec un programme de quelques lignes on a pu appréhender l'articulation syntaxique du langage C. Bien sur les différents sujet abordés ici (fonctions, type de données, librairie, etc.) seront approfondis dans les chapitres suivants.
+</justify>
+/*Hydre-contenu_fin*/

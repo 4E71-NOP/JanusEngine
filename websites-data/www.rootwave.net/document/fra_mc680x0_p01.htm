@@ -1,0 +1,115 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+<br>
+<b>Architecture des 680x0</b><br>
+La famille des MC680x0 propose aux programmeurs 8 registres de données sur 32 bits numérotés de D0 à D7. Le traitement des données s'effectue sur respectivement 32, 16 et 8 bits. Sur 8 ou 16 bits on ne peut accéder qu'au poids faible des octets ou mots ; pour les poids forts une rotation ou un décalage vers la gauche sera nécessaire. Il existe des variantes et des déclinaisons de ses processeurs qui présentent des caractéristiques supplémentaires mais la base reste.<br>
+<br>
+8 registres d'adresses sont aussi présents. Ils sont numérotés de A0 à A7. Le registre A7 joue un rôle particulier, il sert de pointeur de pile.<br>
+<br>
+Le compteur programme (Program Counter : PC) est aussi un registre 32 bits limité dans son adressage par la taille du bus d'adresses (24bits pour les premières générations). Les instructions étant codées sur un mot au minimum, le PC doit contenir une adresse paire.<br>
+<br>
+<hr>
+<br>
+<b>Le Stack Register (SR)</b><br>
+Le registre d'état (Stack Register : SR) est un registre 16 bits dont seul 10 bits sont utilisés. Il est divisé en deux parties d'un octet chacun prévu pour les 2 modes possibles du processeur.<br>
+L'octet Utilisateur (poids faible de SR) appelé aussi registre des codes conditions (Condition Code Register ou CCR) contient les bits positionnés lors des opérations arithmétiques ou de comparaisons.<br>
+L'octet Superviseur contient :<br>
+-3 bits (I0, I1, I2) représentant l'état des lignes d'interruptions IPL0, IPL1, IPL2.<br>
+-Bit d'état Superviseur / Utilisateur.<br>
+-Bit du mode trace. Permet d'exécuter un saut à une étiquette lors de chaque exécution d'une instruction. Utilisé pour les logiciels débuggeurs ou les protections.<br>
+<br>
+<center>
+<table>
+<tr><td  colspan='8'>Octet superviseur</td></tr>
+<tr>
+<td >15</td>
+<td >14</td>
+<td >13</td>
+<td >12</td>
+<td >11</td>
+<td >10</td>
+<td >09</td>
+<td >08</td>
+</tr>
+<tr>
+<td >T</td>
+<td >-</td>
+<td >S</td>
+<td >-</td>
+<td >-</td>
+<td >I2</td>
+<td >I1</td>
+<td >I0</td>
+</tr>
+<tr>
+<td >Trace</td>
+<td >-</td>
+<td >Superviseur</td>
+<td >-</td>
+<td >-</td>
+<td colspan='3'>Masque d'interruption</td>
+</tr>
+
+<tr><td  colspan='8'>Octet utilisateur</td></tr>
+<tr>
+<td >07</td>
+<td >06</td>
+<td >05</td>
+<td >04</td>
+<td >03</td>
+<td >02</td>
+<td >01</td>
+<td >00</td>
+</tr>
+<tr>
+<td >-</td>
+<td >-</td>
+<td >-</td>
+<td >X</td>
+<td >N</td>
+<td >Z</td>
+<td >V</td>
+<td >C</td>
+</tr>
+
+<tr>
+<td >-</td>
+<td >-</td>
+<td >-</td>
+<td >eXtenssion</td>
+<td >Negatif</td>
+<td >Zero</td>
+<td >oVerflow</td>
+<td >Carry</td>
+</tr>
+
+</table>
+</center>
+<br>
+C = 1 Si une retenue est générée.<br>
+V = 1 S'il y a dépassement 250*2 sur 8 bits.<br>
+Z = 1 Si le résultat d'une opération est nul.<br>
+N = 1 Copie du bit de signe de l'opérande destination.<br>
+X = 1 Identique a C avec une variante. Il sert notamment de retenue pour les rotations.<br>
+<br>
+<hr>
+<br>
+<justify><b>Les modes d'adressage</b><br>
+La famille des MC680x0 ne possède pas beaucoup d'instructions de base mais elles sont utilisables pour la grande majorité dans les 14 modes d'adressage ou tout du moins dans une bonne dizaine d'entre eux, ainsi qu'effectuer les opérations sur les différents types de données ( '.B' pour un octet, '.W' pour un mot, '.L' pour un mot long). Plus de mille instructions sont ainsi disponibles.<br>
+<br>
+Rappelons que :<br>
+-Une adresse d'octet est paire ou impaire.<br>
+-Une adresse de mot est paire.<br>
+-Une adresse de mot long est paire mais pas forcement un multiple de 4.<br>
+-L'extension du signe est la recopie du bit fort d'un octet ou d'un mot vers les bits fort de la taille de donné supérieure. Ex : 8 -> 16 => bit 7 recopié sur les bits 8 à 15 ; 16 -> 32 => bit 15 recopié sur les bits 15 à 31.<br>
+-Le suffixe d'instruction '.W' est pris par défaut par les assembleurs s'il n'est pas indiqué dans le source.<br>
+<br>
+Les adressages donc!<br>
+<br>
+<br>
+
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+
+</justify>
+/*Hydre-contenu_fin*/

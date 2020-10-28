@@ -31,12 +31,12 @@ class RenderTabs {
 		$tab_infos = &$T['tab_infos'];
 		
 		$pv= array();
-		$widthA = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_a_x');
-		$widthC = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_c_x');
+		$widthA = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_a_width');
+		$widthC = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_c_width');
 		$widthB = floor(($tab_infos['Width']-(($widthA+$widthC)*$tab_infos['NbrOfTabs'])) / $tab_infos['NbrOfTabs']);
 		$widthD = $widthA + $widthB + $widthC;
 		
-		$HeightABCD = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_y');
+		$HeightABCD = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_height');
 		
 		$c_id_a = $tab_infos['GroupName']."_".$tab_infos['CellName']."_a"; // decoration
 		$c_id_b = $tab_infos['GroupName']."_".$tab_infos['CellName']."_b";
@@ -65,7 +65,7 @@ class RenderTabs {
 				$TabPosDim[$i]['pc'] += $compensation;
 				$TabPosDim[$i]['db'] += $compensation;
 				$TabPosDim[$i]['dd'] += $compensation;
-			}		//Compensate sub pixel calculations that does NOT end well. Like 2+2 = 3.99999e1 (Thank you Chrome!!!) 
+			}		//Compensate sub pixel calculations that does NOT end well. Like 2+2 = 3.99999e1 (Thank you Chrome!!! You cunt!!!) 
 		}
 		
 		for ( $i = 1 ; $i <= $tab_infos['NbrOfTabs'] ; $i++ ) {

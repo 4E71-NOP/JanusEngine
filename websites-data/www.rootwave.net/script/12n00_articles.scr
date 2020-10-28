@@ -1,5 +1,5 @@
 add article	name rw_fra_acceuil_p01								reference rw_fra_acceuil						deadline initial_online				desc "Admin en Francais"	title Acceuil										sub_title Bienvenue								page 1	validation_state VALID;
-assign document name	doc_rw_fra_acceuil_p01.mwmcode	to_article rw_fra_acceuil_p01;
+assign document name	doc_rw_fra_acceuil_p01.htm	to_article rw_fra_acceuil_p01;
 
 add article	name "fra_galerie_dessin_peinture_p01"				reference "fra_galerie_dessin_peinture"			deadline "rootwave_galeries"		desc "Article"				title "Galerie dessin et peinture"					sub_title "S&eacute;lection"					page 1	validation_state VALID;
 add article	name "fra_galerie_photographie_p01"					reference "fra_galerie_photographie"			deadline "rootwave_galeries"		desc "Article"				title "Galerie photographie"						sub_title "S&eacute;lection"					page 1	validation_state VALID;
@@ -24,17 +24,17 @@ add article	name "fra_langage_c_p03"							reference "fra_langage_c"						deadli
 assign document name	"doc_fra_galerie_dessin_peinture.php"	to_article "fra_galerie_dessin_peinture_p01";
 assign document name	"doc_fra_galerie_photographie.php"		to_article "fra_galerie_photographie_p01";
 assign document name	"doc_fra_galerie_image_de_synthese.php"	to_article "fra_galerie_image_de_synthese_p01";
-assign document name	"doc_fra_dessiner_p01.mwmcode"			to_article "fra_dessiner_p01";
-assign document name	"doc_fra_dessiner_p02.mwmcode"			to_article "fra_dessiner_p02";
-assign document name	"doc_fra_dessiner_p03.mwmcode"			to_article "fra_dessiner_p03";
-assign document name	"doc_fra_dessiner_p04.mwmcode"			to_article "fra_dessiner_p04";
-assign document name	"doc_fra_dessiner_p05.mwmcode"			to_article "fra_dessiner_p05";
-assign document name	"doc_fra_mc680x0_p01.mwmcode"			to_article "fra_mc680x0_p01";
-assign document name	"doc_fra_mc680x0_p02.mwmcode"			to_article "fra_mc680x0_p02";
-assign document name	"doc_fra_mc680x0_p03.mwmcode"			to_article "fra_mc680x0_p03";
-assign document name	"doc_fra_mc680x0_p04.mwmcode"			to_article "fra_mc680x0_p04";
-assign document name	"doc_fra_mc680x0_p05.mwmcode"			to_article "fra_mc680x0_p05";
-assign document name	"doc_fra_mc680x0_p06.mwmcode"			to_article "fra_mc680x0_p06";
-assign document name	"doc_fra_langage_c_p01.mwmcode"			to_article "fra_langage_c_p01";
-assign document name	"doc_fra_langage_c_p02.mwmcode"			to_article "fra_langage_c_p02";
-assign document name	"doc_fra_langage_c_p03.mwmcode"			to_article "fra_langage_c_p03";
+assign document name	"doc_fra_dessiner_p01.htm"				to_article "fra_dessiner_p01";
+assign document name	"doc_fra_dessiner_p02.htm"				to_article "fra_dessiner_p02";
+assign document name	"doc_fra_dessiner_p03.htm"				to_article "fra_dessiner_p03";
+assign document name	"doc_fra_dessiner_p04.htm"				to_article "fra_dessiner_p04";
+assign document name	"doc_fra_dessiner_p05.htm"				to_article "fra_dessiner_p05";
+assign document name	"doc_fra_mc680x0_p01.htm"				to_article "fra_mc680x0_p01";
+assign document name	"doc_fra_mc680x0_p02.htm"				to_article "fra_mc680x0_p02";
+assign document name	"doc_fra_mc680x0_p03.htm"				to_article "fra_mc680x0_p03";
+assign document name	"doc_fra_mc680x0_p04.htm"				to_article "fra_mc680x0_p04";
+assign document name	"doc_fra_mc680x0_p05.htm"				to_article "fra_mc680x0_p05";
+assign document name	"doc_fra_mc680x0_p06.htm"				to_article "fra_mc680x0_p06";
+assign document name	"doc_fra_langage_c_p01.htm"				to_article "fra_langage_c_p01";
+assign document name	"doc_fra_langage_c_p02.htm"				to_article "fra_langage_c_p02";
+assign document name	"doc_fra_langage_c_p03.htm"				to_article "fra_langage_c_p03";

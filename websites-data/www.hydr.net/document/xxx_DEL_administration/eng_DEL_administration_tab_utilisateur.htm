@@ -1,0 +1,41 @@
+/*Hydre-contenu_debut*/
+<p>« user » : Designate a utilisateur.</p>
+<table class='{[block]}_Table01'>
+<caption>Associated arguments of « user »</caption>
+<tr><td>name</td>								<td>Text field. Name used as internal reference.</td></tr>
+<tr><td>login</td>								<td>Text field (must be unique).</td></tr>
+<tr><td>password</td>							<td>Text field.</td></tr>
+<tr><td>status</td>								<td>INACTIF, ACTIF, SUPPRIME</td></tr>
+<tr><td>forum_access</td>						<td>YES / NO</td></tr>
+<tr><td>email</td>								<td>Text field.</td></tr>
+<tr><td>msn</td>								<td>Text field.</td></tr>
+<tr><td>aim</td>								<td>Text field.</td></tr>
+<tr><td>Icq</td>								<td>Text field.</td></tr>
+<tr><td>yim</td>								<td>Text field.</td></tr>
+<tr><td>website</td>							<td>Text field.</td></tr>
+<tr><td>perso_name</td>							<td>Text field.</td></tr>
+<tr><td>perso_country</td>						<td>Text field.</td></tr>
+<tr><td>perso_town</td>							<td>Text field.</td></tr>
+<tr><td>perso_occupation</td>					<td>Text field.</td></tr>
+<tr><td>perso_interest</td>						<td>Text field.</td></tr>
+<tr><td>lang</td>								<td>Defines language preference.</td></tr>
+<tr><td>pref_theme</td>							<td>Defines theme preference.</td></tr>
+<tr><td>pref_newsletter</td>					<td>YES / NO</td></tr>
+<tr><td>pref_show_email</td>					<td>YES / NO</td></tr>
+<tr><td>pref_show_online_status</td>			<td>YES / NO</td></tr>
+<tr><td>pref_notification_forum_answer</td>		<td>YES / NO</td></tr>
+<tr><td>pref_notification_new_pm</td>			<td>YES / NO</td></tr>
+<tr><td>pref_allow_bbcode</td>					<td>YES / NO</td></tr>
+<tr><td>pref_allow_html</td>					<td>YES / NO</td></tr>
+<tr><td>pref_allow_smilies</td>					<td>YES / NO</td></tr>
+<tr><td>avatar</td>								<td>File field. Defines avatar icon.</td></tr>
+<tr><td>admin_comment</td>						<td>Text field.</td></tr>
+<tr><td>filter</td>								<td>Text field. Enable filtering on the internal name of the target elements for the "show" command line.</td></tr>
+</table>
+<p>Exemple:</p>
+<code>
+> site_context "MultiWeb_Engine";<br>
+> add user login "dev_senior" perso_name "Dev senior" password "drowssap" status "ACTIVE" image_avatar "../websites-datas/00_mwm/data/images/avatars/public/dieu.gif";<br>
+> user dev_senior join_group Developpeurs_senior primary_group OUI;<br>
+</code>
+/*Hydre-contenu_fin*/

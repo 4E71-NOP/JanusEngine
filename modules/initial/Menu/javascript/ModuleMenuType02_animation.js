@@ -219,16 +219,18 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 		}
 
 		l.Log[dbgPopMenu](
-		'Id='				+ Tab[ptr].id +
-		', p='				+ Tab[ptr].p +
-		', niv='			+ Tab[ptr].niv +
-		', dos='			+ Tab[ptr].dos +
-		', typ='			+ Tab[ptr].typ +
-		', EtatMenu='		+ Tab[ptr].EtatMenu +
-		', AnimPrevue='		+ Tab[ptr].AnimPrevue +
-		', Progression='	+ Tab[ptr].Progression +
-		', Sens='			+ Tab[ptr].Sens +
-		', f='				+ Tab[ptr].f);
+			'Id='				+ Tab[ptr].id +
+			', p='				+ Tab[ptr].p +
+			', niv='			+ Tab[ptr].niv +
+			', dos='			+ Tab[ptr].dos +
+			', typ='			+ Tab[ptr].typ +
+			', EtatMenu='		+ Tab[ptr].EtatMenu +
+			', AnimPrevue='		+ Tab[ptr].AnimPrevue +
+			', Progression='	+ Tab[ptr].Progression +
+			', Sens='			+ Tab[ptr].Sens +
+			', f='				+ Tab[ptr].f
+		);
+		l.Log[dbgPopMenu](Obj);
 	}
 }
 
@@ -243,15 +245,16 @@ function CustomEventMouseOver ( e ) {
 			e.cancelBubble = true;	
 			e.returnValue = false;	
 			if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
-			else { var CibleFinale = e.srcElement.parentNode; }	
+			else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 		break;
 		default:		
 			e.stopPropagation();	
 			e.preventDefault();
 			if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
-			else { var CibleFinale = e.target.parentNode; }	
+			else { var CibleFinale = e.target.parentNode.parentNode; }	
 		break;
 		}
+		l.Log[dbgPopMenu]("CustomEventMouseOver IN on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
 		GestionMenu ( CibleFinale , 1 );
 	break;
 	}
@@ -264,15 +267,16 @@ function CustomEventMouseOut ( e ) {
 		e.cancelBubble = true;	
 		e.returnValue = false;	
 		if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
-		else { var CibleFinale = e.srcElement.parentNode; }	
+		else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 	break;
 	default:		
 		e.stopPropagation();	
 		e.preventDefault();
 		if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
-		else { var CibleFinale = e.target.parentNode; }	
+		else { var CibleFinale = e.target.parentNode.parentNode; }	
 	break;
 	}
+	l.Log[dbgPopMenu]("CustomEventMouseOut OUT on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
 	GestionMenu ( CibleFinale , 0 );
 }
 
@@ -287,15 +291,16 @@ function CustomEventMouseClick ( e ) {
 			e.cancelBubble = true;	
 			e.returnValue = false;	
 			if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
-			else { var CibleFinale = e.srcElement.parentNode; }	
+			else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 		break;
 		default:		
 			e.stopPropagation();	
 			e.preventDefault();
 			if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
-			else { var CibleFinale = e.target.parentNode; }	
+			else { var CibleFinale = e.target.parentNode.parentNode; }	
 		break;
 		}
+		l.Log[dbgPopMenu]("CustomEventMouseClick CLICK on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
 		GestionMenu ( CibleFinale , 1 );
 	break;
 	}
@@ -310,6 +315,8 @@ function GestionMenu ( Obj , TypeEve ) {
 	var a = 0, b = '', c = '', Np = 0, AParents = 0, AFils = 0, Secu = 0;
 
 	if ( TypeEve == 1 ) { a = a + 32; b += '32_'; }
+	l.Log[dbgPopMenu]("GestionMenu id="+Obj.id+"; Type:"+Obj.Hdr_Type);
+
 	switch ( Obj.Hdr_Type ) {
 	case 'a':		
 		a = a + 16; b += '16_';

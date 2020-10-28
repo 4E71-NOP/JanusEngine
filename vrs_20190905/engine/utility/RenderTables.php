@@ -22,15 +22,19 @@ class  RenderTables {
 		}
 		return self::$Instance;
 	}
-
 	
 	/**
-	 * Takes the array and render it as a chart (option : with tabs).
-	 * tc = font size;
-	 * cc = caption class;
-	 * sc = selection class;
-	 * b  = bold font required;
-	 * class = specific class you name;
+	 * Takes the array and render it as a chart (option : with tabs).<br>
+	 * The renderer is reactive to specific definitions in the array. Ex: $myArray[1][2][3][tc] is defining the font size to use when rendering the cell at tab 1, line 2, cell 3.<br>
+	 * <br>
+	 * <b>TD level:</b><br>
+	 * cc : Defines caption class.<br>
+	 * DEPRECATED sc : Defines the "selection class" when hover.<br>
+	 * b  : Enables bold font.<br>
+	 * class : if not empty tells the renderer to use the specified classname.<br>
+	 * <br>
+	 * <b>TR level:</b><br>
+	 * link : Enable the TR to be clickable as a link
 	 * 
 	 * @param array $infos
 	 * @param array $T
@@ -38,35 +42,23 @@ class  RenderTables {
 	 * 
 	 */
 	public function render($infos, $T) {
+// 	 * tc : Define font size class from 1 to 7. Default is 3.<br>
+		$cs = CommonSystem::getInstance(); 
 // 	$T as Table containing all needed information for rendering the table and tabs.
 
-// 		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-// 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
-// 		$localisation = " / ModuleDocument";
-// 		$MapperObj->AddAnotherLevel($localisation );
-// 		$LMObj->logCheckpoint("ModuleDocument");
-// 		$MapperObj->RemoveThisLevel($localisation );
-// 		$MapperObj->setSqlApplicant("ModuleDocument");
-		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
-// 		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-// 		$CurL = $NumLangues_[$WebSiteObj->getWebSiteEntry('ws_lang')];
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "<!-- Render Table Begin -->\r";
 		if ( $T['tab_infos']['NbrOfTabs'] == 0 ) { $T['tab_infos']['NbrOfTabs'] = 1; }
 		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('RenderTabs');
-// 			if (!class_exists("RenderTabs")) { include ("engine/utility/RenderTabs.php"); }
 			$RenderTabsObj = RenderTabs::getInstance();
 			$GeneratedJavaScriptObj->insertJavaScript('File', "engine/javascript/lib_TabsManagement.js");
 			$Content .= $RenderTabsObj->render($infos, $T); 
@@ -85,60 +77,46 @@ class  RenderTables {
 		$tab_infos = &$T['tab_infos'];
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
+// 		$legendClasses = "";
+		$block = $ThemeDataObj->getThemeName().$infos['block'];
+		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
 			switch ( $ADC['onglet'][$CurT]['legende'] ) {
-				case 1: // top
-					for ( $CurC = 1 ; $CurC <= $ADC['onglet'][$CurT]['nbr_cellule'] ; $CurC++ ) { $AD[$CurT]['1'][$CurC]['cc'] = 1; }
-					break;
-				case 2: // left
-					for ( $CurL = 1 ; $CurL <= $ADC['onglet'][$CurT]['nbr_ligne'] ; $CurL++ ) { $AD[$CurT][$CurL]['1']['cc'] = 1; }
-					break;
-				case 3: // right
-					$CurC = $ADC['onglet'][$CurT]['nbr_cellule'];
-					for ( $CurL = 1 ; $CurL <= $ADC['onglet'][$CurT]['nbr_ligne'] ; $CurL++ ) { $AD[$CurT][$CurL][$CurC]['cc'] = 1; }
-					break;
-				case 4: // bottom
-					$CurL = $ADC['onglet'][$CurT]['nbr_ligne'];
-					for ( $CurC = 1 ; $CurC <= $ADC['onglet'][$CurT]['nbr_cellule'] ; $CurC++ ) { $AD[$CurT][$CurL][$CurC]['cc'] = 1; }
-					break;
-				case 5: // left&right
-					for ( $CurL = 1 ; $CurL <= $ADC['onglet'][$CurT]['nbr_ligne'] ; $CurL++ ) { $AD[$CurT][$CurL]['1']['cc'] = 1; }
-					$CurC = $ADC['onglet'][$CurT]['nbr_cellule'];
-					for ( $CurL = 1 ; $CurL <= $ADC['onglet'][$CurT]['nbr_ligne'] ; $CurL++ ) { $AD[$CurT][$CurL][$CurC]['cc'] = 1; }
-					break;
-				case 6: // top&bottom
-					for ( $CurC = 1 ; $CurC <= $ADC['onglet'][$CurT]['nbr_cellule'] ; $CurC++ ) { $AD[$CurT]['1'][$CurC]['cc'] = 1; }
-					$CurL = $ADC['onglet'][$CurT]['nbr_ligne'];
-					for ( $CurC = 1 ; $CurC <= $ADC['onglet'][$CurT]['nbr_cellule'] ; $CurC++ ) { $AD[$CurT][$CurL][$CurC]['cc'] = 1; }
-					break;
+				case 1: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Top;									break;// top
+				case 2: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Left;								break;// left
+				case 3: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Right;								break;// right
+				case 4: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Bottom;								break;// bottom
+				case 5: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Left." ".$block.CLASS_TblLgnd_Right;	break;// left&right
+				case 6:		$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Top." ".$block.CLASS_TblLgnd_Bottom;	break;// top&bottom
 			}
 		}
 		// --------------------------------------------------------------------------------------------
 		//
 		//	Display
 		//
-		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		if ( $tab_infos['EnableTabs'] != 0 ) {
 			$Height = ($tab_infos['Height'] > 0) ? "height:".$tab_infos['Height']."px; " : "height:auto; ";
-			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$block."_fco' style='position:relative; overflow:hidden; width:".($tab_infos['Width']-10) ."px; ".$Height."' >\r"; // overflow:hidden;
+			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$block."_tabFrame' style='position:relative; overflow:hidden; width:".($tab_infos['Width']-10) ."px; ".$Height."' >\r"; // overflow:hidden;
 		}
-		$classTab= array (
-			0  =>	$block."_fca",
-			1  =>	$block."_fcb",
-			2  =>	$block."_fcc",
-			3  =>	$block."_fcd",
+// 		$classTab= array (
+// 			0  =>	$block."_fca",
+// 			1  =>	$block."_fcb",
+// 			2  =>	$block."_fcc",
+// 			3  =>	$block."_fcd",
 
-			4  =>	$block."_fcsa",
-			5  =>	$block."_fcsb",
-			6  =>	$block."_fcsa",
-			7  =>	$block."_fcsb",
+// 			4  =>	$block."_fcsa",
+// 			5  =>	$block."_fcsb",
+// 			6  =>	$block."_fcsa",
+// 			7  =>	$block."_fcsb",
 				
-			8  =>	$block."_fcta",
-			9  =>	$block."_fctb",
-			10 =>	$block."_fcta",
-			11 =>	$block."_fctb",
-		);
+// 			8  =>	$block."_fcta",
+// 			9  =>	$block."_fctb",
+// 			10 =>	$block."_fcta",
+// 			11 =>	$block."_fctb",
+// 		);
 		
 		
 		$TableWidth = ($tab_infos['Width']-32);
@@ -162,18 +140,17 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
- 				$LMObj->InternalLog(array( 'level' => loglevelBreakpoint, 'msg' => __METHOD__ .
+				$cs->LMObj->InternalLog(array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ .
  						"\$ADC['onglet'][\$CurT]['nbr_ligne']=`".$ADC['onglet'][$CurT]['nbr_ligne'].
  						"`; HighLightType=`". $ADC['onglet'][$CurT]['HighLightType'])."`" );
 				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
 
-				$Content .= "<table class='".$block."_t3' style='width:".$TableWidth."px; empty-cells: show; border-spacing: 1px;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
+				$Content .= "<table class='".$block.CLASS_Table01." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
-					$captionClass = $block."_tb4 ".$block."_fcta";
-					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass .= $AD[$CurT]['caption']['class']; }
-					if ( isset($AD[$CurT]['caption']['syle']) ) { $CaptionStyle = $AD[$CurT]['caption']['style']; }
-					$Content .= "<caption class='".$captionClass."' style='".$CaptionStyle."'>".$AD[$CurT]['caption']['cont']."</caption>\r";
+					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass .= "class='".$AD[$CurT]['caption']['class']."' "; }
+					if ( isset($AD[$CurT]['caption']['syle']) ) { $CaptionStyle = "style='".$AD[$CurT]['caption']['style']."' "; }
+					$Content .= "<caption ".$captionClass.$CaptionStyle.">".$AD[$CurT]['caption']['cont']."</caption>\r";
 				}
 				
 				$TRidx = 0;
@@ -182,10 +159,12 @@ class  RenderTables {
 					if ( $CurL == $ADC['onglet'][$CurT]['tbodyD'] ) { $Content .= "<tbody style='display:block; width:".$TableWidth."px; height:".($tab_infos['Height']-64)."px; overflow-y:scroll;'>\r"; }		//display:block;
 					if ( $CurL == $ADC['onglet'][$CurT]['tfootD'] ) { $Content .= "<tfoot>\r"; }
 					
+					$trLink = "";
+					if (isset($AD[$CurT][$CurL]['link'])) { $trLink = "onclick=\"document.location = '".$AD[$CurT][$CurL]['link']."';\""; }
 					if ( $tab_infos['HighLightType'] == 1 ) {
-						$strTR = "<tr class='".$classTab[$TRidx]."' style='vertical-align:middle;' onMouseOver=\"this.className='".$classTab[($TRidx+4)]."'\" onMouseOut=\"this.className='".$classTab[$TRidx]."'\">\r";
+						$strTR = "<tr style='vertical-align:middle;' ".$trLink." >\r";
 					}
-					else { $strTR = "<tr class='".$classTab[$TRidx]."' style='vertical-align:middle;' >\r"; }
+					else { $strTR = "<tr style='vertical-align:middle;' ".$trLink." >\r"; }
 					$Content .= $strTR;
 					
 					$TRidx = $TRidx;
@@ -193,10 +172,13 @@ class  RenderTables {
 						if ( $AD[$CurT][$CurL][$CurC]['desactive'] == 0 ) {
 							
 							$strDeco = " class='";
-							$bold = ($AD[$CurT][$CurL][$CurC]['b'] == 1 ) ? "b" : "";
-							if ( isset($AD[$CurT][$CurL][$CurC]['tc']) )	{ $strDeco .= $block."_t".$bold.$AD[$CurT][$CurL][$CurC]['tc']." "; }
-							if ( isset($AD[$CurT][$CurL][$CurC]['cc']) )	{ $strDeco .= $classTab[( ($AD[$CurT][$CurL][$CurC]['cc']*8) + $TRidx + $TRidx )]." "; }
-							if ( isset($AD[$CurT][$CurL][$CurC]['sc']) )	{ $strDeco .= $classTab[$AD[$CurT][$CurL][$CurC]['sc']]." "; }
+							$boldB = $boldE = "";
+							if ($AD[$CurT][$CurL][$CurC]['b'] == 1 ) {
+								$boldB = "<b>";
+								$boldE = "</b>"; 
+							}
+							if ( isset($AD[$CurT][$CurL][$CurC]['cc']) )	{ $strDeco .= $AD[$CurT][$CurL][$CurC]['cc']; }
+// 							if ( isset($AD[$CurT][$CurL][$CurC]['sc']) )	{ $strDeco .= $classTab[$AD[$CurT][$CurL][$CurC]['sc']]." "; }
 							if ( isset($AD[$CurT][$CurL][$CurC]['class']) )	{ $strDeco .= $AD[$CurT][$CurL][$CurC]['class']." "; }
 							if ( $strDeco == " class='" ) { $strDeco = ""; }
 							else  { $strDeco = substr( $strDeco, 0, -1 ) . "'"; }
@@ -219,8 +201,7 @@ class  RenderTables {
 									$tdTmp .= " colspan='".$AD[$CurT][$CurL][$CurC]['colspan']." rowspan='".$AD[$CurT][$CurL][$CurC]['rowspan']."'";
 									break;
 							}
-							$Content .= $tdTmp .">".$AD[$CurT][$CurL][$CurC]['cont']."</td>\r";
-// 							if ( $spanScore == 0 ) {}
+							$Content .= $tdTmp .">".$boldB.$AD[$CurT][$CurL][$CurC]['cont'].$boldE."</td>\r";
 						}
 						else { $Content .= "<td></td>\r"; }
 						$TRidx ^= 1;
@@ -250,7 +231,8 @@ class  RenderTables {
 			case 1:			return $Content;							break;
 		}
 		
-		//if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
+		
 	}
 	
 	/**

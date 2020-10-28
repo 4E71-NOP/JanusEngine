@@ -37,10 +37,10 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
-$logTarget = $LMObj->getInternalLogTarget();
+$LOG_TARGET = $LMObj->getInternalLogTarget();
 $LMObj->setInternalLogTarget("both");
 
 $RequestDataObj->setRequestData('groupForm',
@@ -70,7 +70,7 @@ $MapperObj->setSqlApplicant("uni_gestion_des_groups_p02");
 
 switch ($l) {
 	case "fra":
-// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "Merging i18n data. Language selection=".$l);
+// 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Merging i18n data. Language selection=".$l);
 		$I18nObj->apply(array(
 		"anonymous"		=>	"Anonyme",
 		"reader"		=>	"Lecteur",
@@ -294,6 +294,6 @@ $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
 /*Hydre-contenu_fin*/
 
-$LMObj->setInternalLogTarget($logTarget);
+$LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

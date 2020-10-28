@@ -1,0 +1,28 @@
+/*Hydre-contenu_debut*/
+<p>« document » : Designate a document.</p>
+<table class='{[block]}_Table01'>
+<caption>Associated arguments of « document »</caption>
+<tr> <td>name</td>						<td>Name used as internal reference.</td></tr>
+<tr> <td>state</td>						<td>ONLINE / OFFLINE</td></tr>
+<tr> <td>type</td>						<td>PHP, MIXED, WMCODE, NOCODE</td></tr>
+<tr> <td>filter</td>					<td>Text field. Enable filtering on the internal name of the target elements for the "show" command line.</td></tr>
+<tr> <td colspan='2'>Used for inserting content (insert_content)</td></tr>
+<tr> <td>file</td>						<td>Defines the file to be used.</td></tr>
+<tr> <td>to</td>						<td>Define the target document.</td></tr>
+<tr> <td colspan='2'>Used for sharing (share_document).</td></tr>
+<tr> <td>with_site</td>					<td>website</td></tr>
+<tr> <td>modification</td>				<td>OUI/NON (YES/NO)</td></tr>
+<tr> <td colspan='2'>Used for updating (updfate)</td></tr>
+<tr> <td>checked</td>					<td>OUI/NON (YES/NO)</td></tr>
+<tr> <td>examiner</td>					<td>login</td></tr>
+<tr> <td>from_site</td>					<td>website</td></tr>
+</table>
+
+<p>Example:</p>
+<code>
+> site_context "MultiWeb_Engine";<br>
+> add document name "doc_uni_correction_des_documents_p01.php" type "PHP";<br>
+> insert_content file "uni_correction_des_documents_p01.php" to "doc_uni_correction_des_documents_p01.php";<br>
+> update document name "doc_uni_correction_des_documents_p01.php" checked "YES" examiner "dieu" from_site "MultiWeb_Manager";<br>
+</code>
+/*Hydre-contenu_fin*/

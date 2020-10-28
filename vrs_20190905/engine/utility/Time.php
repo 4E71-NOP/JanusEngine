@@ -42,7 +42,5 @@ class Time {
 	public function timestampToDate ( $data ) {
 		return date ("Y-m-j G:i:s", $data);
 	}
-	
-	
 }
 ?>

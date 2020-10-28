@@ -38,7 +38,7 @@ class ModuleDocumentDisplay {
 		$TimeObj				= Time::getInstance();
 
 		
-		$logTarget = $LMObj->getInternalLogTarget();
+		$LOG_TARGET = $LMObj->getInternalLogTarget();
 // 		$LMObj->setInternalLogTarget("both");
 		
 		$localisation = " / ModuleDocument";
@@ -91,9 +91,9 @@ class ModuleDocumentDisplay {
 		$LD_idx = 1;
 		$liste_document[$LD_idx]['arti_id']						= $DocumentDataObj->getDocumentDataEntry('arti_id');
 		$liste_document[$LD_idx]['arti_title']					= $DocumentDataObj->getDocumentDataEntry('arti_title');
-		$liste_document[$LD_idx]['arti_creator_id']		= $DocumentDataObj->getDocumentDataEntry('arti_creator_id');
+		$liste_document[$LD_idx]['arti_creator_id']				= $DocumentDataObj->getDocumentDataEntry('arti_creator_id');
 		$liste_document[$LD_idx]['arti_creation_date']			= $DocumentDataObj->getDocumentDataEntry('arti_creation_date');
-		$liste_document[$LD_idx]['arti_validator_id']	= $DocumentDataObj->getDocumentDataEntry('arti_validator_id');
+		$liste_document[$LD_idx]['arti_validator_id']			= $DocumentDataObj->getDocumentDataEntry('arti_validator_id');
 		$liste_document[$LD_idx]['arti_validation_date']		= $DocumentDataObj->getDocumentDataEntry('arti_validation_date');
 		$LD_idx++;
 		$liste_document[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
@@ -133,7 +133,7 @@ class ModuleDocumentDisplay {
 		AND bcl.deadline_state = '1'
 		;");
 		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
 		
 		// --------------------------------------------------------------------------------------------
 		//	
@@ -149,15 +149,12 @@ class ModuleDocumentDisplay {
 		<table class='".$Block."_ft'>\r
 		<tr>\r
 		<td class='".$Block."_ft1'></td>\r
-		<td class='".$Block."_ft2 ".$Block."_tb7'>".$DocumentDataObj->getDocumentDataEntry('arti_title')."</td>\r
+		<td class='".$Block."_ft2'>".$DocumentDataObj->getDocumentDataEntry('arti_title')."</td>\r
 		<td class='".$Block."_ft3'></td>\r
 		</tr>\r
 		</table>\r
-		<br>\r
-		<span class='".$Block."_tb4'>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</span>
-		<br>\r
-		<br>\r
-		<div id='document_contenu' class='".$Block."_div_std'>
+		<h2>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</h2>
+			<div id='document_contenu' class='".$Block."_div_std'>
 		";
 		
 		// --------------------------------------------------------------------------------------------
@@ -165,7 +162,7 @@ class ModuleDocumentDisplay {
 		//
 		// 	If we have more than 1 page for this article, the menu is necessary.
 		if ( $DocumentDataObj->getDocumentDataEntry('arti_nbr_page') > 1 && $DocumentDataObj->getDocumentDataEntry('arti_menu_type') > 0 ) {
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - menu needed"));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " menu needed"));
 			
 			$q = "
 			SELECT art.arti_id, art.arti_ref, art.arti_subtitle, art.arti_page, bcl.deadline_name 
@@ -176,7 +173,7 @@ class ModuleDocumentDisplay {
 			AND art.deadline_id = bcl.deadline_id 
 			AND bcl.deadline_state = '1'
 			;";
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - q=`".$q."`"));
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " q=`".$q."`"));
 			$dbquery = $SDDMObj->query($q);
 			
 			$pv = array();
@@ -250,16 +247,13 @@ class ModuleDocumentDisplay {
 					$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 // 					$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_login').
 // 					$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_pass').
-					"<table style='border:1px solid #000000; box-shadow:8px 5px 5px #80808080;'>\r
-					<tr>\r
-					<td class='".$Block."_fcta ".$Block."_tb5'>
-					Index
-					</td>\r
+					"<table class='".$Block.CLASS_Table01." ".$Block.CLASS_TblLgnd_Top."' style='border:1px solid #000000; box-shadow:8px 5px 5px #80808080;'>\r
+					<tr>
+					<td>Index</td>\r
 					</tr>\r
-					
 					<tr>\r
 					<td class='".$Block."_fca ".$Block."_tb5'>
-					<select name='arti_page' class='".$Block."_form_1 ".$Block."_t3' style='padding:5px;' onChange=\"javascript:this.form.submit();\">\r";
+					<select name='arti_page' class='".$Block."_form_1' style='padding:5px;' onChange=\"javascript:this.form.submit();\">\r";
 					$pv['1'] = 1;
 					foreach ( $P2P_tab_ as $A ) {
 						if ( $A['arti_page'] == $DocumentDataObj->getDocumentDataEntry('arti_page') ) { $pv['p2p_marque'] = $A['arti_page']; }
@@ -305,30 +299,33 @@ class ModuleDocumentDisplay {
 		}
 		// --------------------------------------------------------------------------------------------
 		$analysedContent = $DocumentDataObj->getDocumentDataEntry('docu_cont');
-// 		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleDocument:render - docu_cont=`".$analysedContent."`");
-
+		
 		$documentAnalyse = array();
 		$documentAnalyse['mode'] = "recherche";
 		$documentAnalyse['nbr'] = 1 ;
+
+		// If another type is added this table must change accordingly.
+		// 0:HTML	1:PHP(exec)	2:MIXED(PHP/HTML)
 		$ad = array();
-		$ad['0']['0'] = 0;	$ad['1']['0'] = 0;	$ad['2']['0'] = 3;	$ad['3']['0'] = 3;
-		$ad['0']['1'] = 0;	$ad['1']['1'] = 1;	$ad['2']['1'] = 3;	$ad['3']['1'] = 3;
-		$ad['0']['2'] = 3;	$ad['1']['2'] = 3;	$ad['2']['2'] = 2;	$ad['3']['2'] = 3;
-		$ad['0']['3'] = 3;	$ad['1']['3'] = 3;	$ad['2']['3'] = 3;	$ad['3']['3'] = 3;
+		$ad['0']['0'] = 0;	$ad['1']['0'] = 2;	$ad['2']['0'] = 2;
+		$ad['0']['1'] = 2;	$ad['1']['1'] = 1;	$ad['2']['1'] = 2;
+		$ad['0']['2'] = 2;	$ad['1']['2'] = 2;	$ad['2']['2'] = 2;
 		
 		while ( $documentAnalyse['mode'] == "recherche" ) {
 			$documentAnalyse['start'] = stripos( $analysedContent , "[INCLUDE]");
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=". $documentAnalyse['nbr'] ));
 			if ( $documentAnalyse['start'] !== FALSE ) {
 				$documentAnalyse['contenu_include']	= "";
 				$documentAnalyse['docu_type']			= 0; //MWMCODE
-				$documentAnalyse['stop']				= stripos( $analysedContent , "[/INCLUDE]");
+				$documentAnalyse['stop']				= stripos( $analysedContent , "[/INCLUDE]", $documentAnalyse['start']+9);
 				$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
 				$documentAnalyse['include_docu_name']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
+				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : ". $documentAnalyse['include_docu_name'] ));
 				$dbquery = $SDDMObj->query("
 				SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_examiner, doc.docu_examination_date
 				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 				WHERE doc.docu_name = '".$documentAnalyse['include_docu_name']."'
-				AND doc.docu_id = dp.docu_id
+				AND doc.docu_id = ds.docu_id
 				AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				;");
 				
@@ -338,6 +335,7 @@ class ModuleDocumentDisplay {
 //					$tl_['fra']['err'] = "Le sous-article mention&eacute; (" . $analyse_document['include_docu_name'] . ") pour inclusion n'a pas &eacute;t&eacute; trouv&eacute;";
 //					journalisation_evenement ( 1 , $_REQUEST['sql_initiateur'] , "MADP" , "ERR" , "MADP_0009" , $i18n['err']  );
 					$LMObj->log(array( "i"=>"MADP render", "a"=>"MADP", "s"=> "ERR", "m"=>"MADP_0009", "t"=>$i18n['err']));
+					$LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document asked by INCLUDE." ));
 					$documentAnalyse['contenu_include']	= " ";
 					$documentAnalyse['docu_type']			= 0; //MWMCODE
 				}
@@ -356,15 +354,33 @@ class ModuleDocumentDisplay {
 				}
 				$x = $DocumentDataObj->getDocumentDataEntry('docu_type');
 				$y = $documentAnalyse['docu_type'];
+				
+				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Document is now in the case N=". $ad[$x][$y] ));
 				$DocumentDataObj->setDocumentDataEntry('docu_type', $ad[$x][$y]);
 				
 				$documentAnalyse['stop2'] = $documentAnalyse['stop'] + 10;
 				$documentAnalyse['taille_fin'] = strlen($analysedContent) - $documentAnalyse['stop2'];
-				$analysedContent = substr( $Content , 0, $documentAnalyse['start'] ) . $documentAnalyse['contenu_include'] . substr($Content ,$documentAnalyse['stop2'] , $documentAnalyse['taille_fin']) ;
+				$phpMarkupB = ($documentAnalyse['docu_type'] == 1) ? " <?php\r ": ""; 
+				$phpMarkupE = ($documentAnalyse['docu_type'] == 1) ? " ?>\r ": ""; 
+				
+				// Will allow modular document to use external ressources from the included document
+				$search = array ("{[DataLocation]}");
+				$replace = array("../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$liste_document[$LD_idx]['docu_name']."/");
+				$documentAnalyse['contenu_include'] = str_replace($search, $replace, $documentAnalyse['contenu_include']);
+				
+				$analysedContent = substr( $analysedContent , 0, $documentAnalyse['start'] ) .$phpMarkupB. $documentAnalyse['contenu_include'] .$phpMarkupE. substr($analysedContent ,$documentAnalyse['stop2'] , $documentAnalyse['taille_fin']) ;
+				
+				
 			}
+			else{ $documentAnalyse['mode'] = "sortie"; }
 			if ( $documentAnalyse['nbr'] == 15 ) { $documentAnalyse['mode'] = "sortie"; }
 			$documentAnalyse['nbr']++;
 		}
+		
+// 		We need to modify the css classnames expressions in the script
+		$search = array (	'{[block]}',	"{[DataLocation]}");
+		$replace = array(	$Block,			"../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$DocumentDataObj->getDocumentDataEntry('docu_name')."/");
+		$analysedContent = str_replace($search, $replace, $analysedContent);
 		
 //		$LMObj->logDebug($analyse_document, "\$analyse_document");
 		
@@ -380,16 +396,15 @@ class ModuleDocumentDisplay {
 		//	3: Mixed; Execution & simple display
 		switch ( $DocumentDataObj->getDocumentDataEntry('docu_type')) {
 			case 0 :
-				$result = $this->documentPostProcessing($analysedContent, $infos);
-				$result = $this->documentConvertion($analysedContent, $infos);
-				$result = &$analysedContent;
+				$result = $analysedContent;
+// 				$result = $this->documentPostProcessing($analysedContent, $infos);
+// 				$result = $this->documentConvertion($analysedContent, $infos);
+// 				$result = &$analysedContent;
 				break;
 			case 1 :
-				break;
-			case 2 :
 				$result = eval ($analysedContent);
 				break;
-			case 3 :
+			case 2 :
 				$result = $this->documentExecution($analysedContent);
 				break;
 		}
@@ -443,7 +458,7 @@ class ModuleDocumentDisplay {
 		$Content .= "
 		<br>\r
 		</div>\r
-		<div id='document_pied_de_page' style='width: ".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px;' class='" . $Block."_div_std'>\r
+		<div id='document_pied_de_page' style='width: ".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px;'>\r
 		";
 		
 		if ( $pv['p2p_count'] > 1 ) {
@@ -451,24 +466,24 @@ class ModuleDocumentDisplay {
 			switch ($pv['p2p_marque']) {
 				case "1":
 					$Content .= "
-					<a class='" . $Block."_lien " . $Block."_t1'
+					<a 
 					href='index.php?&amp;arti_ref=".$DocumentDataObj->getDocumentDataEntry('arti_ref')."&amp;arti_page=".($DocumentDataObj->getDocumentDataEntry('arti_page') + 1).$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."'>".$i18n['suivant1']."</a>\r
 					";
 					break;
 					
 				case $pv['p2p_count']:
 					$Content .= "
-					<a class='" . $Block."_lien " . $Block."_t1'
+					<a 
 					href='index.php?&amp;arti_ref=".$DocumentDataObj->getDocumentDataEntry('arti_ref')."&amp;arti_page=".($DocumentDataObj->getDocumentDataEntry('arti_page') - 1).$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."'>".$i18n['precedent1']."</a>\r
 					";
 					break;
 					
 				default:
 					$Content .= "
-					<a class='" . $Block."_lien " . $Block."_t1'
+					<a 
 					href='index.php?&amp;arti_ref=".$DocumentDataObj->getDocumentDataEntry('arti_ref')."&amp;arti_page=".($DocumentDataObj->getDocumentDataEntry('arti_page') - 1).$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."'>".$i18n['precedent1']."</a>\r
 					-
-					<a class='" . $Block."_lien " . $Block."_t1'
+					<a 
 					href='index.php?&amp;arti_ref=".$DocumentDataObj->getDocumentDataEntry('arti_ref')."&amp;arti_page=".($DocumentDataObj->getDocumentDataEntry('arti_page') + 1).$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."'>".$i18n['suivant1']."</a>\r
 					";
 					break;
@@ -494,8 +509,12 @@ class ModuleDocumentDisplay {
 			
 			$Content .= "
 			<hr>\r
-			<div id='document_infos' class='" . $Block."_div_std' style='position: absolute;'>\r
-			<span class='" . $Block."_t1 " . $Block."_fade'>
+			<div 
+				class='".$Block.CLASS_Txt_Fade."' 
+				style='font-size:".floor($ThemeDataObj->getThemeBlockEntry($infos['block']."T", "txt_font_size")*0.75)."px'
+				id='document_infos' style='position: absolute;'
+			>\r
+
 			";
 			
 			$pv['LD_1er'] = 1;
@@ -514,7 +533,6 @@ class ModuleDocumentDisplay {
 				$Content .= $pv['C'];
 			}
 			$Content .= "
-			</span>\r
 			</div>\r
 			";
 		}
@@ -544,14 +562,14 @@ class ModuleDocumentDisplay {
 		}
 // 		$LMObj->logDebug( $DocumentDataObj->getDocumentData() , "\$DocumentDataObj->getDocumentData()");
 // 		$LMObj->logDebug( $CurrentSetObj->getData() , "\$CurrentSetObj->getData()");
-		$LMObj->setInternalLogTarget($logTarget);
+		$LMObj->setInternalLogTarget($LOG_TARGET);
 		
 		return $Content;
 	}
 	
 	/**
 	 * 
-	 * This function converts all tags into HTML code
+	 * <b>DEPRECATED</b> : This function converts all tags into HTML code
 	 */
 	private function documentConvertion (&$inputContent, $infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -720,7 +738,7 @@ class ModuleDocumentDisplay {
 				$SearchAction = "ON";																			// Allow more parsing of the document
 				if ( $EndPos == false ) {																		// Will display an error message if no mark up are found
 					$SearchAction = "OFF";																		// Enable to exit if no ['WM'] are found
-					$Content .= "<span class='skin_princ_".$infos['bloc']."_tb2 skin_princ_".$infos['bloc']."_avert' style='font-weight: bold'>ERR : ['/WM']/['WM']. STOP!</span>";
+					$Content .= "<span class='skin_princ_".$infos['bloc']."_tb2 skin_princ_".$infos['bloc']."_warning' style='font-weight: bold'>ERR : ['/WM']/['WM']. STOP!</span>";
 				}
 				$pv['wm_code'] = substr( $inputContent , $StartPos + 4 , $EndPos - $StartPos -4);				// Copy the code
 				$Content .= eval ($pv['wm_code']);																				// Execute the code segment

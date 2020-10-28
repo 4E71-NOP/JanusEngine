@@ -13,6 +13,7 @@
 /* Hydre-licence-fin */
 
 // --------------------------------------------------------------------------------------------
+$application = 'website';
 include ("define.php");
 
 include ("engine/utility/ClassLoader.php");
@@ -26,7 +27,7 @@ $ClassLoaderObj->provisionClass('RequestData');
 // Time and memory measurment (with checkpoints)
 $TimeObj = Time::getInstance();
 $LMObj = LogManagement::getInstance();
-$LMObj->setInternalLogTarget(logTarget);
+$LMObj->setInternalLogTarget(LOG_TARGET);
 $MapperObj = Mapper::getInstance();
 $RequestDataObj = RequestData::getInstance();
 // --------------------------------------------------------------------------------------------
@@ -36,24 +37,11 @@ $Content = "";
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('log_errors', "On");
 ini_set('error_log' , "/var/log/apache2/error.log");
-
-// --------------------------------------------------------------------------------------------
-//
-//	Loading the configuration file associated with this website
-//
-
-$ClassLoaderObj->provisionClass('ConfigurationManagement');
-$CMObj = ConfigurationManagement::getInstance();
-$CMObj->LoadConfigFile();
-$CMObj->setConfigurationEntry('execution_context',		"render");
-$LMObj->setDebugLogEcho(0);
-
 // --------------------------------------------------------------------------------------------
 //
 //	CurrentSet
 //
 //
-
 $ClassLoaderObj->provisionClass('ServerInfos');
 $ClassLoaderObj->provisionClass('CurrentSet');
 $CurrentSetObj = CurrentSet::getInstance();
@@ -67,10 +55,23 @@ $CurrentSetObj->setDataEntry('fsIdx', 0);								//Useful for FileSelector
 //	
 //	
 $ClassLoaderObj->provisionClass('SessionManagement');
-session_name("Hydr_Ws".$RequestDataObj->getRequestDataEntry('sw'));
+// session_name("Hydr_Ws".$RequestDataObj->getRequestDataEntry('sw'));
+$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
+$ClassLoaderObj->provisionClass('ConfigurationManagement');
+$CMObj = ConfigurationManagement::getInstance();
+$CMObj->InitBasicSettings();
+session_name($CurrentSetObj->getDataEntry('sessionName'));
 session_start();
 $SMObj = SessionManagement::getInstance($CMObj);
 $SMObj->CheckSession(); //Does NOT check login & password. 
+
+// --------------------------------------------------------------------------------------------
+//
+//	Loading the configuration file associated with this website
+//
+$CMObj->LoadConfigFile();
+$CMObj->setConfigurationEntry('execution_context',		"render");
+$LMObj->setDebugLogEcho(0);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -80,7 +81,7 @@ $SMObj->CheckSession(); //Does NOT check login & password.
 
 // Is user_login is defined and different from 'anonymous' we consider the user is authenticated
 if ( strlen($SMObj->getSessionEntry('user_login')) == 0 && $SMObj->getSessionEntry('user_login') != "anonymous") {
-	$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0"));
+	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0"));
 	$SMObj->ResetSession();
 }
 
@@ -89,17 +90,30 @@ if ( strlen($SMObj->getSessionEntry('user_login')) == 0 && $SMObj->getSessionEnt
 //	Content
 //
 //
+
+
+// http://www.local-hydr.net/current/fs.php
+// ?idx=0
+// &mode=file
+// &formName=UserProfileForm
+// &formTargetId=UserProfileForm[user_avatar_image]
+// &displayType=fileList
+// &strAdd=../
+// &strRemove=
+// &path=websites-data/www.hydr.net/data/images/avatars/
+// &restrictTo=websites-data/www.hydr.net/data/images/avatars/
+
 $ClassLoaderObj->provisionClass('StringFormat');
 $StringFormatObj = StringFormat::getInstance();
 
-$entryPoint = $_SERVER['DOCUMENT_ROOT']."Hydr/";
+$entryPoint = $_SERVER['DOCUMENT_ROOT'];
 $pathToExplore	= realpath($entryPoint."/".$RequestDataObj->getRequestDataEntry('path'));
 $restrictTo		= realpath($entryPoint."/".$RequestDataObj->getRequestDataEntry('restrictTo'));
 
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php brefore : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
+$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php brefore : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
 if ( strpos($pathToExplore,	$restrictTo) === FALSE )	{ $pathToExplore = $restrictTo; }
 if ( strpos($pathToExplore,	$entryPoint) === FALSE )	{ $pathToExplore = $entryPoint; }
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php   after : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
+$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php   after : entryPoint=`".$entryPoint."`, pathToExplore=`".$pathToExplore."`, restrictTo=`".$restrictTo."`."));
 
 $TfsIdx			= $RequestDataObj->getRequestDataEntry('idx');
 $selectionMode	= $RequestDataObj->getRequestDataEntry('mode');
@@ -109,7 +123,7 @@ $strRemove		= $RequestDataObj->getRequestDataEntry('strRemove');
 $strAdd			= $RequestDataObj->getRequestDataEntry('strAdd');
 $displayType	= $RequestDataObj->getRequestDataEntry('displayType');
 
-$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php strAdd=`".$strAdd."`;strRemove=`".$strRemove."`; preg_replace=`".$strAdd.preg_replace($strRemove, '','../../dir/dir/file.php')));
+$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php strAdd=`".$strAdd."`;strRemove=`".$strRemove."`; preg_replace=`".$strAdd.preg_replace($strRemove, '','../../dir/dir/file.php')));
 
 $pos = strrpos ($pathToExplore, "/");
 $pathToExploreUp = substr ( $pathToExplore, 0 , $pos); 
@@ -117,8 +131,9 @@ $fileList = array();
 $fileList[0] = array();
 $fileList[1]['.']	= array ("name"	=> ".",		"target"	=> str_replace ($entryPoint, "", $pathToExplore),);
 $fileList[1]['..']	= array ("name"	=> "..",	"target"	=> str_replace ($entryPoint, "", $pathToExploreUp),);
-
+// exit();
 $handle = opendir($pathToExplore);
+$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "exploring : " . $pathToExplore) );
 while (false !== ( $f = readdir($handle))) {
 	if ( $f != "." && $f != ".." ) {
 		$currentFile = $pathToExplore."/".$f;
@@ -172,11 +187,11 @@ $ImagePerLine	= 4;
 switch ($displayType){
 	case "imageMosaic":
 		$baseURI = "http://".$_SERVER['HTTP_HOST']."/Hydr/";
-		$Content .= "<table style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
+		$Content .= "<table class='mt_B01".CLASS_Table01."' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
 		$x = 0;
 		foreach ( $fileList[1] as $A ) {
 			if ($x == 0) { $Content .= "<tr>\r"; }
-			$Content .= "<td class='".$Block."tb3' 
+			$Content .= "<td  
 				style='
 				width:".$cellWidth."px; height:".$cellHeight."px; 
 				vertical-align:middle; text-align:center; 
@@ -211,7 +226,7 @@ switch ($displayType){
 					</td>\r";
 			}
 			else {
-				$Content .= "<td class='".$Block."t1'
+				$Content .= "<td 
 					style='
 					border-style:solid; border-width:1px; border-color:#00000080;
 					background-color:#00000040;
@@ -238,18 +253,18 @@ switch ($displayType){
 
 // --------------------------------------------------------------------------------------------
 	case "fileList":
-		$Content .= "<table style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
+		$Content .= "<table class='mt_B01".CLASS_Table01."' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
 		$scoreMode = ($selectionMode == 'file') ? 0:4;
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "fs.php selectionMode=`".$selectionMode."`;scoreMode=`".$scoreMode."`."));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php selectionMode=`".$selectionMode."`;scoreMode=`".$scoreMode."`."));
 		
 		foreach ( $fileList[1] as $A ) {
 			$target = (strlen($strRemove) > 0) ? $strAdd.preg_replace($strRemove, '', $A['target']) : $strAdd.$A['target'];
 			switch ($scoreMode) {
 				case 0:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."tb3'><td  onClick=\"fs.getDirectoryContent ( tableFileSelector[".$TfsIdx."], '".$A['target']."', 1)\">[".$A['name']."]</td><td>&nbsp;</td><td>&nbsp;</td></tr>\r";
+					$Content .= "<tr><td  onClick=\"fs.getDirectoryContent ( tableFileSelector[".$TfsIdx."], '".$A['target']."', 1)\">[".$A['name']."]</td><td>&nbsp;</td><td>&nbsp;</td></tr>\r";
 					break;
 				case 4:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."tb3'><td width='65%' onClick=\"elm.SetFormInputValue ( '".$formName."' , '".$formTargetId."', '".$target."' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">[".$A['name']."]</td><td width='10%'>".$A['size']."</td><td class='".$Block."t1'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr><td width='65%' onClick=\"elm.SetFormInputValue ( '".$formName."' , '".$formTargetId."', '".$target."' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">[".$A['name']."]</td><td width='10%'>".$A['size']."</td><td>".$A['time']."</td></tr>\r";
 					break;
 			}
 			$i ^= 1;
@@ -261,26 +276,26 @@ switch ($displayType){
 			switch ($score) {
 				//	File section
 				case 0:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3'><td width='65%' onClick=\"elm.SetFormInputValue ( '".$formName."' , '".$formTargetId."', '".$target."' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">".$A['name']."</td><td width='10%'>".$A['size']."</td><td class='".$Block."t1'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr><td width='65%' onClick=\"elm.SetFormInputValue ( '".$formName."' , '".$formTargetId."', '".$target."' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">".$A['name']."</td><td width='10%'>".$A['size']."</td><td>".$A['time']."</td></tr>\r";
 					break;
 				case 1:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3 ".$Block."avert'><td width='65%'>".$A['name']."</td><td width='10%'></td><td class='".$Block."t1' width='25%'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr class='".$Block.CLASS_Txt_Warning."'><td width='65%'>".$A['name']."</td><td width='10%'></td><td width='25%'>".$A['time']."</td></tr>\r";
 					"<i>".$A['name']."</i>(".$A['target'].")<br>";
 					break;
 				case 2:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3 ".$Block."erreur'><td width='65%'>".$A['name']."</td><td width='10%'></td><td class='".$Block."t1' width='25%'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr class='".$Block.CLASS_Txt_Error."'><td width='65%'>".$A['name']."</td><td width='10%'></td><td width='25%'>".$A['time']."</td></tr>\r";
 					break;
 					
 					//	Directory section
 				case 4:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3'><td width='65%'>".$cellContent."</td><td width='10%'>".$A['size']."</td><td class='".$Block."t1'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr><td width='65%'>".$cellContent."</td><td width='10%'>".$A['size']."</td><td>".$A['time']."</td></tr>\r";
 					break;
 				case 5:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3 ".$Block."avert'><td width='65%'>".$A['name']."</td><td width='10%'></td><td class='".$Block."t1' width='25%'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr class='".$Block.CLASS_Txt_Warning."'><td width='65%'>".$A['name']."</td><td width='10%'></td><td width='25%'>".$A['time']."</td></tr>\r";
 					"<i>".$A['name']."</i>(".$A['target'].")<br>";
 					break;
 				case 6:
-					$Content .= "<tr class='".$Block."fc".$cell[$i]." ".$Block."t3 ".$Block."erreur'><td width='65%'>".$A['name']."</td><td width='10%'></td><td class='".$Block."t1' width='25%'>".$A['time']."</td></tr>\r";
+					$Content .= "<tr class='".$Block.CLASS_Txt_Error."'><td width='65%'>".$A['name']."</td><td width='10%'></td><td width='25%'>".$A['time']."</td></tr>\r";
 					break;
 			}
 			$i ^= 1;

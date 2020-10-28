@@ -1,0 +1,85 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+Les instructions du mc680x0 de J à N<br>
+<br>
+<table>
+<tr><td >JMP</td><td ><justify>Saut. Saute à l'adresse indiquée : JMP <AE>.<br>&nbsp;</td></tr>
+<tr><td >JSR</td><td ><justify>Saute à une sous-routine. Le PC est sauvegardé sur la pile puis le branchement est effectué : JSR <'AE'>.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+<tr><td >LEA</td><td ><justify>Chargement de l'adresse effective. Chargement du registre d'adresses spécifié avec l'adresse effective. L'opérande concerne toujours les 32 bits du registre : LEA <AE>,An.<br>&nbsp;</td></tr>
+<tr><td >LSL</td><td ><justify>Décalage logique gauche. Décalage logique vers la gauche de l'opérande. Le bit de poids fort est copié dans les bits C et X du CCR, Le bit de poids faible est mis à 0. Si l'opérande est un registre on spécifie le nombre de décalages, soit par un registre (LSL Dn,Dd Décale Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (LSL #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul décalage s'effectue et l'opérande ne peut être qu'un mot. : LSL <AE>.<br>&nbsp;</td></tr>
+<tr><td >LSR</td><td ><justify>Décalage logique droit. Décalage logique vers la droite de l'opérande. Le bit de poids faible est copié dans les bits C et X du CCR, Le bit de poids fort est mis à 0. Si l'opérande est un registre on spécifie le nombre de décalages, soit par un registre (LSR Dn,Dd Décale Dd le nombre de fois indiqué par Dn), soit par une donnée immédiate (LSR #,Dd avec une valeur de 0 a 7 pour la donnée). Si l'opérande est une case mémoire, un seul décalage s'effectue et l'opérande ne peut être qu'un mot. : LSR <AE>.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+<tr><td >MOVE</td><td ><justify>Transfert de données. Transfert le contenu d'un emplacement source à un emplacement destination : MOVE <AE>,<AE>.<br>&nbsp;<br>
+Variantes :<br>
+Transfert le contenu d'un emplacement source vers un registre d'adresses : MOVE <AE>,An. Transfert d'une donnée immédiate (sur 8 bits étendue a 32) vers un registre de données: MOVEQ #,Dd. Transfert le contenu d'un emplacement source vers le SR. Cette instruction nécessite obligatoirement le mode superviseur du processeur MOVE <AE>,SR. MOVE USP<br>&nbsp;</td></tr>
+<tr><td >MOVEM</td><td ><justify>Transfert de registres multiples. Transfert multiple de registres vers la mémoire ou de la mémoire vers les registres : MOVEM <AE>,Liste de registres ou MOVEM Liste de registres,<AE>.<br>&nbsp;</td></tr>
+<tr><td >MOVEP</td><td ><justify>Transfert de données. Transfert d'une donnée (mot ou mot long) entre la mémoire et un registre de données. Cette opération s'effectue à partir de l'adresse indiquée en mode indirect avec déplacement en s'incrémentant de 2 à chaque transfert. Dans ce cas précis les adresse impaires sont autorisées pour les transferts de mots ou de mots longs : MOVEP Ds,d(Ad) ou MOVEP d(As),Dd.<br>&nbsp;</td></tr>
+<tr><td >MULS</td><td ><justify>Multiplication signée. Multiplication des deux opérandes 16 bits signés. MULS fourni un résultat sur 32 bits signé dans le registre destination Dn : MULS <AE>,Dn.<br>&nbsp;</td></tr>
+<tr><td >MULU</td><td ><justify>Multiplication non signée. Multiplication des deux opérandes 16 bits non signés. MULU fourni un résultat sur 32 bits non signé dans le registre destination Dn : MULU <AE>,Dn.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+<tr><td >NBCD</td><td ><justify>Complémentation décimale avec le bit d'extension. Soustraction de l'opérande destination et du bit X à 0. L'opération ne porte que sur un octet : NBCD <AE>.<br>&nbsp;</td></tr>
+<tr><td >NEG</td><td ><justify>Négation. Soustraction de l'opérande destination à 0. Le résultat est stocké dans l'emplacement destination : NEG <AE>.<br>
+Variantes :<br>
+Soustraction de l'opérande destination et du bit X (du CCR) à 0 : NEGX <AE>.<br>&nbsp;</td></tr>
+<tr><td >NOP</td><td ><justify>Pas d'opérations. Seul le PC est incrémenté pour passer à l'instruction suivante.<br>&nbsp;</td></tr>
+<tr><td >NOT</td><td ><justify>Complément à 1. Réalisation de la complémentation à 1 de l'opérande destination. Le résultat est rangé dans l'emplacement destination : NOT <AE>.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+</table>
+<br>
+
+<table>
+<tr><td  colspan='6' >Etat du SR pour les instrcutions</td></tr>
+<tr><td >Instruction</td>					<td >X</td>	<td >N</td>	<td >Z</td>	<td >V</td>	<td >C</td></tr>
+
+<tr><td >JMP <AE>
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >JSR <AE>
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >LEA <AE>,An
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	LSL #<Donnée>,Dn<br>
+	LSL <AE>
+								</td><td >P		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >
+	LSR #<Donnée>,Dn<br>
+	LSR <AE>
+								</td><td >P		</td><td >P	</td><td >P	</td><td >0	</td><td >P	</td></tr>
+<tr><td >
+	MOVE <AE>,<AE><br>
+	MOVEA <AE>,An<br>
+	MOVEQ #<Donnée>,Dn
+								</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+
+<tr><td >
+	MOVEM <AE>,liste de registres<br>
+	MOVEM liste de registres,<AE>
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >
+	MOVEP Ds,d(Ad)<br>
+	MOVEP d(As),Dd
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+<tr><td >
+	MULS <AE>,Dn
+								</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >0	</td></tr>
+<tr><td >
+	MULU <AE>,Dn
+								</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >0	</td></tr>
+
+<tr><td >NBCD <AE>	</td><td >P		</td><td >?	</td><td >P	</td><td >?	</td><td >P	</td></tr>
+<tr><td >NEG <AE>	</td><td >P		</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+
+<tr><td >NOP				</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+<tr><td >NOT <AE>	</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+
+</table>
+
+<br>
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+<br>
+<br>
+</justify>
+/*Hydre-contenu_fin*/

@@ -1,0 +1,24 @@
+/*Hydre-contenu_debut*/
+<p>« category » : Représente les éléments d'un menu.</p>
+<table class='{[block]}_Table01'>
+<caption>Les arguments associés a l'élément « catégorie »</caption>
+<tr><td>nom</td>			<td>Nom qui servira pour le référencement.</td></tr>
+<tr><td>parent</td>			<td>Détermine la catégorie parente.</td></tr>
+<tr><td>position</td>		<td>Détermine la position de la catégorie dans la branche du menu.</td></tr>
+<tr><td>type</td>			<td>4 types sont disponible : MENU_ADMIN_RACINE MENU_ADMIN ARTICLE_RACINE ARTICLE.</td></tr>
+<tr><td>lang</td>			<td>Détermine la langue de la catégorie. Ne sera donc affiché qu'en fonction de paramètre concordant.</td></tr>
+<tr><td>etat</td>			<td>ONLINE / OFFLINE</td></tr>
+<tr><td>deadline</td>		<td>Référence le deadline.</td></tr>
+<tr><td>titre</td>			<td>Champ libre. Apparaît dans le menu.</td></tr>
+<tr><td>desc</td>			<td>Description.</td></tr>
+<tr><td>group</td>			<td>Détermine quel group est autorisé a voir la catégorie et donc l'utiliser.</td></tr>
+<tr><td>doc_premier</td>	<td>Détermine l'article a utiliser si aucun n'est spécifié durant la navigation.</td></tr>
+<tr><td>article</td>		<td>Utiliser 0 pour en faire un répertoire; sinon donner le nom de l'article.</td></tr>
+<tr><td>filtre</td>			<td>Champ libre. Permet de filter le résultat de la commande "show" sur le nom interne des éléments cible.</td></tr>
+</table>
+<p>Exemple:</p> 
+<code>
+> site_context "MultiWeb_Engine";<br>
+> add category name "fr_sommaire_admin" parent "0" position "01" type "MENU_ADMIN_RACINE" lang "FRA" state "ONLINE" deadline "initial_online" title "Sommaire" desc "Root menu" group "Anonyme" article "0" first_doc "YES";<br>
+</code>
+/*Hydre-contenu_fin*/

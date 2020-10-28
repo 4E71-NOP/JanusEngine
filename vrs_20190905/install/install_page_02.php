@@ -40,6 +40,8 @@
 
 $installationStartTime = time();
 include ("install/i18n/install_page_02_".$l.".php");
+$cs->I18nObj->apply($i18n);
+unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -50,8 +52,8 @@ include ("install/i18n/install_page_02_".$l.".php");
 // --------------------------------------------------------------------------------------------
 $tab_index = 1 ;
 
-if ( $RequestDataObj->getRequestDataEntry('resume_detail_desc') == "on") { $tab_index++; }
-if ( $RequestDataObj->getRequestDataEntry('resume_detail_execsql') == "on") { $tab_index += 2; }
+if ( $cs->RequestDataObj->getRequestDataEntry('resume_detail_desc') == "on") { $tab_index++; }
+if ( $cs->RequestDataObj->getRequestDataEntry('resume_detail_execsql') == "on") { $tab_index += 2; }
 
 $tab_fc['1'] = $block."_fca ".$block."_t1";
 $tab_fc['2'] = $block."_fca ".$block."_t1";
@@ -67,10 +69,10 @@ $tab_fc3 = $tab_fc[$tab_index];	$tab_index++;
 $tab_fc4 = $tab_fc[$tab_index];
 
 
-$form = $RequestDataObj->getRequestDataEntry('form');
-$CMObj->setConfigurationEntry('operating_mode', $form['operating_mode'] );
+$form = $cs->RequestDataObj->getRequestDataEntry('form');
+$cs->CMObj->setConfigurationEntry('operating_mode', $form['operating_mode'] );
 
-$CMObj->setConfigurationEntry('db',
+$cs->CMObj->setConfigurationEntry('db',
 	array(
 		"type"						=> $form['database_type_choix'],
 		"dal"						=> $form['dal'],
@@ -88,31 +90,29 @@ $CMObj->setConfigurationEntry('db',
 	)
 );
 
-$CMObj->setConfigurationEntry('type',					$form['database_type_choix']);
-$CMObj->setConfigurationEntry('host',					$form['host']);
-$CMObj->setConfigurationEntry('dal',					$form['database_type_choix']);
-$CMObj->setConfigurationEntry('db_user_login',			$form['db_hosting_prefix'].$form['db_admin_user'] );
-$CMObj->setConfigurationEntry('db_user_password',		$form['db_admin_password']);
-$CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);
-$CMObj->setConfigurationEntry('tabprefix',				$form['tabprefix']);
+$cs->CMObj->setConfigurationEntry('type',					$form['database_type_choix']);
+$cs->CMObj->setConfigurationEntry('host',					$form['host']);
+$cs->CMObj->setConfigurationEntry('dal',					$form['database_type_choix']);
+$cs->CMObj->setConfigurationEntry('db_user_login',			$form['db_hosting_prefix'].$form['db_admin_user'] );
+$cs->CMObj->setConfigurationEntry('db_user_password',		$form['db_admin_password']);
+$cs->CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);
+$cs->CMObj->setConfigurationEntry('tabprefix',				$form['tabprefix']);
 
-$CMObj->setConfigurationEntry('execution_context',		'installation');
+$cs->CMObj->setConfigurationEntry('execution_context',		'installation');
 
 
-if ( $form['db_detail_log_err'] == "on" )	{ $CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
-if ( $form['db_detail_log_warn'] == "on" )	{ $CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
+if ( $form['db_detail_log_err'] == "on" )	{ $cs->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
+if ( $form['db_detail_log_warn'] == "on" )	{ $cs->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
 
-$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $CMObj->getConfigurationSubEntry('db','dbprefix'), $CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
+$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $cs->CMObj->getConfigurationSubEntry('db','dbprefix'), $cs->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
-$CMObj->setConfigurationEntry('dal', $CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
-$DALFacade = DalFacade::getInstance();
-$DALFacade->createDALInstance();		// It connects too.
-
+$cs->CMObj->setConfigurationEntry('dal', $cs->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
+$cs->initSddmObj();
 
 $r = array();
-switch ( $CMObj->getConfigurationSubEntry('db','database_profil') ) {
+switch ( $cs->CMObj->getConfigurationSubEntry('db','database_profil') ) {
 case "hostplan":
-	switch ( $CMObj->getConfigurationEntry('dal') ) {
+	switch ( $cs->CMObj->getConfigurationEntry('dal') ) {
 	case "MYSQLI":		break;	//Nothing to do : PHP
 	case "PDOMYSQL":	break;	//Nothing to do : PHP
 	case "SQLITE":		break;
@@ -120,21 +120,21 @@ case "hostplan":
 	case "PEARDB":			
 	case "PEARSQLITE":	
 		$r[] = "SET SESSION query_cache_type = OFF;";				// forbids cache usage
-		$r[] = "USE ".$CMObj->getConfigurationEntry('dbprefix').";";
+		$r[] = "USE ".$cs->CMObj->getConfigurationEntry('dbprefix').";";
 		unset ( $A );
 		$db->loadModule('Manager');
-		foreach ( $db->listTables( $CMObj->getConfigurationEntry('dbprefix') ) as $A ) { $r[] = "DROP TABLE ". $A .";"; }
+		foreach ( $db->listTables( $cs->CMObj->getConfigurationEntry('dbprefix') ) as $A ) { $r[] = "DROP TABLE ". $A .";"; }
 		$r[] = "FLUSH TABLES;";										// clean query_cache
 		$db->loadModule('Native');
 	break;
 	}
 break; 
 case "absolute":
-	$r[] = "DROP DATABASE IF EXISTS ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";	// Kill database
+	$r[] = "DROP DATABASE IF EXISTS ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').";";	// Kill database
 	$r[] = "FLUSH TABLES;";										// clean query_cache
 	$r[] = "FLUSH PRIVILEGES;";
-	$r[] = "CREATE DATABASE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";				// Create DB
-	$r[] = "USE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";							// Use it
+	$r[] = "CREATE DATABASE ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').";";				// Create DB
+	$r[] = "USE ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').";";							// Use it
 	$r[] = "SET SESSION query_cache_type = ON;";				// clean query_cache
 	$r[] = "SET GLOBAL query_cache_size = 67108864;";			// 16 777 216;
 	$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
@@ -144,26 +144,25 @@ case "absolute":
 break;
 }
 
-switch ( $CMObj->getConfigurationSubEntry('db','database_user_recreate') ) {
+switch ( $cs->CMObj->getConfigurationSubEntry('db','database_user_recreate') ) {
 case "oui":
-	$r[] = "DROP USER IF EXISTS '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%';";
-	$r[] = "DROP USER IF EXISTS '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost';";
-	$r[] = "CREATE USER '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' IDENTIFIED BY '".$CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-	$r[] = "CREATE USER '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' IDENTIFIED BY '".$CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+	$r[] = "DROP USER IF EXISTS '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%';";
+	$r[] = "DROP USER IF EXISTS '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost';";
+	$r[] = "CREATE USER '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' IDENTIFIED BY '".$cs->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
+	$r[] = "CREATE USER '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' IDENTIFIED BY '".$cs->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
+	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 	$r[] = "FLUSH TABLES;";										// clean query_cache 
 	$r[] = "FLUSH PRIVILEGES;";
 	$monSQLn += 8;
 break;
 }
 $r[] = "COMMIT;";
-$r[] = "USE ".$CMObj->getConfigurationSubEntry('db','dbprefix').";";
+$r[] = "USE ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').";";
 
 
 // --------------------------------------------------------------------------------------------
-
-$SDDMObj = DalFacade::getInstance()->getDALInstance();
+$cs->InitCommandConsole();
 $ClassLoaderObj->provisionClass('LibInstallation');
 $LibInstallationObj = LibInstallation::getInstance();
 $t = time();
@@ -176,26 +175,24 @@ $LibInstallationObj->setReport(array(
 $devDebug = 0;
 if ( $devDebug != 1 ) {
 	foreach ( $r as $q ){ 
-		$SDDMObj->query($q); 
+		$cs->SDDMObj->query($q); 
 		error_log(__METHOD__ . " : " . $q);
 	}
 	unset ($r);
 	
 	// --------------------------------------------------------------------------------------------
-	$ClassLoaderObj->provisionClass('CommandConsole');
-	$CommandConsole = CommandConsole::getInstance();
 
 	// --------------------------------------------------------------------------------------------
 	//
 	//		Launching scripts.
 	//
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_creation"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_creation"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_creation",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"directory_list" => $cs->RequestDataObj->getRequestDataEntry('directory_list'),
 			"updateInsdtallationMonitor" => 0
 	);
 	
@@ -208,12 +205,12 @@ if ( $devDebug != 1 ) {
 	
 	
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_data"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_data"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_data",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"directory_list" => $cs->RequestDataObj->getRequestDataEntry('directory_list'),
 			"updateInsdtallationMonitor" => 0
 	);
 	
@@ -225,33 +222,33 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : Initialization of table installation"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
 	$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 	$r = array(
 			"COMMIT;",
 			"FLUSH TABLES;",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$installationStartTime."' WHERE inst_name = 'start_date';",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';",
-			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$RequestDataObj->getRequestDataEntry('SessionID')."' WHERE inst_name = 'SessionID';",
+			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$cs->RequestDataObj->getRequestDataEntry('SessionID')."' WHERE inst_name = 'SessionID';",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 			"COMMIT;",
 	);
 	foreach ( $r as $q ){
-		$SDDMObj->query($q);
+		$cs->SDDMObj->query($q);
 // 		error_log($q);
 	}
 	unset ($r);
 	
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : commandConsole"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : commandConsole"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "commandConsole",
 			"section" => "script",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"directory_list" => $cs->RequestDataObj->getRequestDataEntry('directory_list'),
 			"updateInsdtallationMonitor" => 1
 	);
-	error_log($StringFormatObj->arrayToString($infos));
+	error_log($cs->StringFormatObj->arrayToString($infos));
 	$LibInstallationObj->scanDirectories($infos);
 	foreach ( $infos['directory_list'] as $A ) {
 		if ( isset ($A['filesFound'] ) ) {
@@ -260,16 +257,16 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : tables_post_install"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_post_install"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_post_install",
-			"directory_list" => $RequestDataObj->getRequestDataEntry('directory_list'),
+			"directory_list" => $cs->RequestDataObj->getRequestDataEntry('directory_list'),
 			"updateInsdtallationMonitor" => 1
 	);
 	$LibInstallationObj->scanDirectories($infos);
-	error_log($StringFormatObj->arrayToString($infos));
+	error_log($cs->StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $A ) {
 		if ( isset ($A['filesFound'] ) ) {
 			$LibInstallationObj->executeContent($infos, $A);
@@ -277,10 +274,10 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$LMObj->InternalLog( array( 'level' => loglevelBreakpoint, 'msg' => "install_page_p02 : renderConfigFile"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : renderConfigFile"));
 	$tabConfigFile = array();
 	$i=0;
-	error_log($StringFormatObj->arrayToString($infos));
+	error_log($cs->StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $k => $v ) {
 		if ( isset ($A['filesFound'] ) ) {
 			$infos = array ( "n" => $i, );
@@ -292,7 +289,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 // --------------------------------------------------------------------------------------------
-$SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");
+$cs->SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");
 }
 
 // --------------------------------------------------------------------------------------------
@@ -310,13 +307,13 @@ sort ( $installationReport['tables_post_install']);
 $style1 = array (
 	"block" => $block,
 	"tc"=>1,
-	"titles" => array($i18n['t1c1'],	$i18n['t1c2'],	$i18n['t1c3'],	$i18n['t1c4'],	),
+	"titles" => array($cs->I18nObj->getI18nEntry('t1c1'),	$cs->I18nObj->getI18nEntry('t1c2'),	$cs->I18nObj->getI18nEntry('t1c3'),	$cs->I18nObj->getI18nEntry('t1c4'),	),
 	"cols" => array( 'file', 'OK', 'WARN', 'ERR'),
 );
 $style2 = array (
 	"block" => $block,
 	"tc"=>1,
-	"titles" => array($i18n['t9c1'],	$i18n['t9c2'],	$i18n['t9c3'],	$i18n['t9c4'],	$i18n['t9c5'],	),
+	"titles" => array($cs->I18nObj->getI18nEntry('t9c1'),	$cs->I18nObj->getI18nEntry('t9c2'),	$cs->I18nObj->getI18nEntry('t9c3'),	$cs->I18nObj->getI18nEntry('t9c4'),	$cs->I18nObj->getI18nEntry('t9c5'),	),
 	"cols" => array('temps_debut', 'nbr', 'nom', 'signal', 'err_no', 'err_msg', 'temps_fin'),
 );
 
@@ -343,12 +340,12 @@ $SB['type']				= "button";
 $SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
 $SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s2_h";
 $SB['onclick']			= "";
-$SB['message']			= $i18n['t5Btn'];
+$SB['message']			= $cs->I18nObj->getI18nEntry('t5Btn');
 $SB['mode']				= 1;
 $SB['size'] 			= 92;
 $SB['lastSize']			= 92;
 
-$T['AD'][$CurrentTab]['1']['1']['cont'] = $i18n['t5c1'];
+$T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t5c1');
 $Cl = 2;
 foreach ($tabConfigFile as $A ) {
 	$SB['id']		=	"SelectBtn".$A['name'];
@@ -368,7 +365,7 @@ foreach ($tabConfigFile as $A ) {
 
 			<tr>\r
 			<td style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-256)."px;'>&nbsp;</td>\r
-			<td>\r".$InteractiveElementsObj->renderSubmitButton($SB)."</td>\r
+			<td>\r".$cs->InteractiveElementsObj->renderSubmitButton($SB)."</td>\r
 			</tr>\r
 			</table>\r
 			"
@@ -419,24 +416,24 @@ $infos = array(
 );
 
 
-$T['tab_infos'] = $RenderTablesObj->getDefaultDocumentConfig($infos, 30, 5);
-$T['tab_infos']['tabTxt1']			= $i18n['tab_1'];
-$T['tab_infos']['tabTxt2']			= $i18n['tab_2'];
-$T['tab_infos']['tabTxt3']			= $i18n['tab_3'];
-$T['tab_infos']['tabTxt4']			= $i18n['tab_4'];
-$T['tab_infos']['tabTxt5']			= $i18n['tab_5'];
-$T['tab_infos']['tabTxt6']			= $i18n['tab_6'];
-$T['tab_infos']['tabTxt7']			= $i18n['tab_7'];
+$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 30, 5);
+$T['tab_infos']['tabTxt1']			= $cs->I18nObj->getI18nEntry('tab_1');
+$T['tab_infos']['tabTxt2']			= $cs->I18nObj->getI18nEntry('tab_2');
+$T['tab_infos']['tabTxt3']			= $cs->I18nObj->getI18nEntry('tab_3');
+$T['tab_infos']['tabTxt4']			= $cs->I18nObj->getI18nEntry('tab_4');
+$T['tab_infos']['tabTxt5']			= $cs->I18nObj->getI18nEntry('tab_5');
+$T['tab_infos']['tabTxt6']			= $cs->I18nObj->getI18nEntry('tab_6');
+$T['tab_infos']['tabTxt7']			= $cs->I18nObj->getI18nEntry('tab_7');
 
 
 $T['ADC']['onglet'] = array(
-		1	=>	$RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
-		2	=>	$RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
-		3	=>	$RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),
-		4	=>	$RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2	,4,6),
-		5	=>	$RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1								,4,6),
+		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
+		2	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
+		3	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),
+		4	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2	,4,6),
+		5	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1								,4,6),
 );
 
-$DocContent .= $RenderTablesObj->render($infos, $T);
+$DocContent .= $cs->RenderTablesObj->render($infos, $T);
 
 ?>

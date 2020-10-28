@@ -53,7 +53,7 @@ class ModuleMenuType02 {
 		$pv = array();
 		$menuDiv = array();
 		$renderJSON = array();
-		// 		unset ( $A );
+		// unset ( $A );
 		// Mp = Menu Parent
 		// Mi = Menu Index (the current one)
 		foreach ( $menuData as $A ) {
@@ -204,7 +204,7 @@ class ModuleMenuType02 {
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'py', ( 160 * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', ( $A['width'] * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', ( 256 * $pv['coef'] ));
-				$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 
+				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 
 					"Situation A / id=".$A['id']. "; par=". $A['par'].
 					"; px=". ( 160 * $pv['coef'] ).
 					"; py=". ( 160 * $pv['coef'] ).
@@ -225,7 +225,7 @@ class ModuleMenuType02 {
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', $PMT['div_width']);
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']+1) ) + $PMT['ex11_y'] + $PMT['exF1_y']);
 			
-			$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => 
+			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 
 				"Situation B / id=".$A['id'].
 				"; px=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'px').
 				"; py=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'py').
@@ -307,6 +307,7 @@ class ModuleMenuType02 {
 			if ( $Ab['a_line_height'] > 0 ) { $pv['supLH'] = "; line-height:". $Ab['a_line_height']."px;"; }
 			
 			// position: absolute; is necessary otherwise the DIVs will be located on top left.
+// 			$infos['module']['module_container_style'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
 			$pv['style_niveau_en_cours'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
 			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'px')."px; top: ".
 			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'py')."px; width: ".
@@ -314,17 +315,15 @@ class ModuleMenuType02 {
 			"px; height: ". $A['div_height_calc'] . "px;
 			visibility: ".$visibility."; ".$pv['supLH']."'";
 			
-			$contentTarget .= "<div id='".$A['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."' " . $pv['style_niveau_en_cours'] . " ".$pv['NiveauZero']." >\r" . $ModuleDecoration ;
-			
-			
+			$contentTarget .= "<div id='".$A['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."' " . $pv['style_niveau_en_cours'] . " ".$pv['NiveauZero']." >\r" . $ModuleDecoration ;
 			
 			if ( is_array ( $A['entree'] ) ) {
 				unset ( $B );
 				foreach ( $A['entree'] as $B ) {
 					switch ( $B['deco_type'] ) {
-						case 1: $contentTarget .= "<span id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' style='display: block;'>".$Micone_rep." ".$B['nom']."</span>\r";																												break;
-						case 2: $contentTarget .= "<a id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1\" style='display: block;'>".$Micone_fichier." ".$B['nom']."</a>\r";	break;
-						case 3: $contentTarget .= "<span id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_niv_".$A['niv']."_lien' style='display: block;'>".$Micone_fichier." ".$B['nom']."</span>\r";																											break;
+						case 1: $contentTarget .= "<span	id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' >".$Micone_rep." ".$B['nom']."</span>\r";											break;
+						case 2: $contentTarget .= "<a		id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1\" '>".$Micone_fichier.$B['nom']."</a>\r";			break;
+						case 3: $contentTarget .= "<span	id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' >".$Micone_fichier." ".$B['nom']."</span>\r";										break;
 					}
 				}
 			}
@@ -334,7 +333,7 @@ class ModuleMenuType02 {
 			$infos['block']					= $infos['backup']['block'];
 			$infos['module_z_index']		= $infos['backup']['module_z_index'];
 			
-			if ( $A['niv'] != 0 ) { $contentTarget .= "\r</div>\r"; }
+			if ( $A['niv'] != 0 ) { $contentTarget .= "\r</div>\r</div>\r"; }
 			$level++;
 			if ($level != 0) { $contentTarget = &$extraContent; }
 			

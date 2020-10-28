@@ -32,17 +32,13 @@ class SddmMySQLI {
 	}
 	
 	public function connect() {
-		global $db_;
-		$LMObj = LogManagement::getInstance();
-		$TimeObj = Time::getInstance();
-		$CMobj = ConfigurationManagement::getInstance();
-		$MapperObj = Mapper::getInstance();
-
-		$TabConfig = $CMobj->getConfiguration();
-		$LMObj->getInternalLog($CMobj->toStringConfiguration());
-		$SQL_temps_depart = $TimeObj->microtime_chrono ();
+		$cs = CommonSystem::getInstance();
 		
-		switch ( $CMobj->getConfigurationEntry('execution_context')) {
+		$TabConfig = $cs->CMObj->getConfiguration();
+		$cs->LMObj->getInternalLog($cs->CMObj->toStringConfiguration());
+		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
+		
+		switch ( $cs->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
 				$this->DBInstance = new mysqli( $TabConfig['host'] , $TabConfig['db_user_login'] , $TabConfig['db_user_password'] );
 				break;
@@ -56,10 +52,10 @@ class SddmMySQLI {
 			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 			$SQLlogEntry['err_msg'] = $this->DBInstance->connect_error;
 			$SQLlogEntry['signal'] = "ERR";
-			$LMObj->logSQLDetails ( array ( $SQL_temps_depart, $LMObj->getSqlQueryNumber(), $MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], "Connexion", $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $TimeObj->microtime_chrono() ) );
+			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $cs->SQLlogEntry['signal'], "Connexion", $cs->SQLlogEntry['err_no_expr'], $cs->SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono() ) );
 			$this->errorMsg();
 			$msg = "CONNEXION ERROR : "."err_no" . $this->DBInstance->errno.", err_msg" . $this->DBInstance->connect_error;
-			$LMObj->InternalLog( array('level'=> loglevelError , 'msg'=> __METHOD__ . " : " . $msg));
+			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
 // 			error_log ($msg);
 			$this->report['cnxErr'] = 1;
 			
@@ -68,58 +64,58 @@ class SddmMySQLI {
 			$this->DBInstance->autocommit(TRUE);
 		}
 	}
-
+	
 	public function disconnect_sql () {
 		$this->DBInstance->close();
 	}
-
+	
+	/**
+	 * 
+	 * @param String $q
+	 * @return mysqli_result|boolean
+	 */
 	public function query($q) {
-		$TimeObj = Time::getInstance();
-		$timeBegin = $TimeObj->microtime_chrono();
-		$LMObj = LogManagement::getInstance();
-		$CMobj = ConfigurationManagement::getInstance();
-		$MapperObj = Mapper::getInstance();
+		$cs = CommonSystem::getInstance();
+		$timeBegin = $cs->TimeObj->microtime_chrono();
 		
-		$SQL_temps_depart = $TimeObj->microtime_chrono ();
-		
-		$LMObj->increaseSqlQueryNumber();
+		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
+		$cs->LMObj->increaseSqlQueryNumber();
 		$db_result = $this->DBInstance->query ( $q );
-
+		
 		$SQLlogEntry['err_no'] = $this->DBInstance->errno;
 		$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 		$SQLlogEntry['err_msg'] = $this->DBInstance->error;
 		$SQLlogEntry['signal'] = "OK";
-
-		$Niveau = $CMobj->getConfigurationEntry('DebugLevel_SQL');
-
+		
+		$Niveau = $cs->CMObj->getConfigurationEntry('DebugLevel_SQL');
+		
 		if ($this->DBInstance->errno != 0) {
-			$LMObj->InternalLog( array('level'=> loglevelError , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
 // 			error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
 			$SQLlogEntry['signal'] = "ERR";
 			$Niveau = 0;
 		}
-
-		if ($CMobj->getConfigurationEntry('InsertStatistics') == 1) { $LMObj->IncreaseSqlQueries(); }
-
-		if ($CMobj->getConfigurationEntry('DebugLevel_SQL') >= $Niveau) {
-			$LMObj->logSQLDetails ( array ( $SQL_temps_depart, $LMObj->getSqlQueryNumber(), $MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $TimeObj->microtime_chrono () ) );
+		
+		if ($cs->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $cs->LMObj->IncreaseSqlQueries(); }
+		if ($cs->CMObj->getConfigurationEntry('DebugLevel_SQL') >= $Niveau) {
+			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono () ) );
 		}
-
-		switch ($CMobj->getConfigurationEntry('execution_context')) {
+		
+		switch ($cs->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation" :
 				$StringFormatObj = StringFormat::getInstance();
-				$LMObj->increaseSqlQueryNumber();
+				$cs->LMObj->increaseSqlQueryNumber();
 				$q = $StringFormatObj->shorteningExpression($q, 256);
-				$LMObj->logSQLDetails(
+				$cs->LMObj->logSQLDetails(
 					array (
 						$timeBegin,
-						$LMObj->getSqlQueryNumber(),
-						$MapperObj->getWhereWeAreAt(),
+							$cs->LMObj->getSqlQueryNumber(),
+							$cs->MapperObj->getWhereWeAreAt(),
 						$SQLlogEntry['signal'],
 						$q,
 						$SQLlogEntry['err_no_expr'],
 						$SQLlogEntry['err_msg'],
-						$TimeObj->microtime_chrono(),
+							$cs->TimeObj->microtime_chrono(),
 					)
 				);
 				
@@ -145,9 +141,8 @@ class SddmMySQLI {
 	public function errorMsg() {
 		return "err";
 	}
-		
 	
-
+	
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
 	 * It will always add 1. It won't find a free number.
@@ -168,14 +163,11 @@ class SddmMySQLI {
 	
 	//@formatter:off
 	
-
 	public function getReport() {return $this->report;}
 	public function getReportEntry($data) {return $this->report[$data];}
 
 	public function setReport($report) {$this->report = $report;}
 	//@formatter:on
-	
-	
 	
 }
 

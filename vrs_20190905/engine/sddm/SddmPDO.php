@@ -20,58 +20,156 @@ class SddmPDO {
 	private $SDDMTools = 0;
 	
 	public function __construct(){
-		$this->SDDMTools = new SddmTools();
+		$this->SDDMTools = SddmTools::getInstance();
 	}
 	
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new SddmMySQLI();
+			self::$Instance = new SddmPDO();
 		}
 		return self::$Instance;
 	}
 	
-	public function connect(){}
+	public function connect(){
+		$cs = CommonSystem::getInstance();
+		
+		$TabConfig = $cs->CMObj->getConfiguration();
+		$cs->LMObj->getInternalLog($cs->CMObj->toStringConfiguration());
+		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
+		
+		$dsn = 
+		"mysql:host=".$TabConfig['host'].
+		";dbname=".$TabConfig['dbprefix'].
+		";charset=".$TabConfig['charset'];
+		$options = [
+				PDO::ATTR_ERRMODE				=> PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC,
+				PDO::ATTR_EMULATE_PREPARES		=> false,
+		];
+
+		switch ( $cs->CMObj->getConfigurationEntry('execution_context')) {
+			case "installation":
+				$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
+				break;
+			case "render":
+			default:
+				$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
+				break;
+		}
+		// List of error code
+		// https://docstore.mik.ua/orelly/java-ent/jenut/ch08_06.htm
+		if ( $this->DBInstance->errorCode() != '00000' ) {
+			$SQLlogEntry['err_no'] = $this->DBInstance->errorCode();
+			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
+			$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
+			$SQLlogEntry['signal'] = "ERR";
+			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $cs->SQLlogEntry['signal'], "Connexion", $cs->SQLlogEntry['err_no_expr'], $cs->SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono() ) );
+			$this->errorMsg();
+			$msg = "CONNEXION ERROR : "."err_no" . $this->DBInstance->errorCode().", err_msg" . $this->DBInstance->errorInfo();
+			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
+			// 			error_log ($msg);
+			$this->report['cnxErr'] = 1;
+			
+		}
+	}
 	
+	public function disconnect_sql () {
+		$this->DBInstance = null;		// this is the way PDO works. https://www.php.net/manual/en/pdo.connections.php
+	}
+	/**
+	 * 
+	 * @param String $q
+	 * @return PDOStatement
+	 */
 	public function query($q) {
-		global $SQL_requete, $db, $db_, $statistiques_, $statistiques_index, $LMObj, $TimeObj;
-		$SQL_temps_depart = $TimeObj->microtime_chrono ();
+		$cs = CommonSystem::getInstance();
+		$timeBegin = $cs->TimeObj->microtime_chrono();
 		
-		$SQL_index = $SQL_requete['nbr'];
-		$db_result = $db->prepare($q); $db_result->execute();
-		$SQLlog['err_no'] = $db->errorCode();
-		$SQLlog['err_no_expr'] = "PHP PDO Err : " . $SQLlog['err_no'];
-		$SQLlog['err_msg'] = $db->errorInfo();
+		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
+		$cs->LMObj->increaseSqlQueryNumber();
+		$db_result = $this->DBInstance->query($q);
 		
-		$SQLlog['signal'] = "OK";
-		$Niveau = $_REQUEST['debug_option']['SQL_debug_level'];
-		if ( $db->errorCode() != 0 )			{ $SQLlog['signal'] = "ERR"; $Niveau = 0; };
+		$SQLlogEntry['err_no'] = $this->DBInstance->errorCode();
+		$SQLlogEntry['err_no_expr'] = "PHP PDO Err : " . $SQLlogEntry['err_no'];
+		$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
+		$SQLlogEntry['signal'] = "OK";
 		
-		if ( $_REQUEST['StatistiqueInsertion'] == 1 ) { $statistiques_[$statistiques_index]['SQL_queries']++; }
+		$Niveau = $cs->CMObj->getConfigurationEntry('DebugLevel_SQL');
 		
-		if ( $_REQUEST['debug_option']['SQL_debug_level'] >= $Niveau ) {
-			$LMObj->logSQLDetails ( array ( $SQL_temps_depart, $SQL_requete ['nbr'], $i, $SQLlog ['signal'], $q, $SQLlog ['err_no_expr'], $SQLlog ['err_msg'], $TimeObj->microtime_chrono () ) );
+		if ($this->DBInstance->errorCode() != 0) {
+			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errorCode() . " " . $this->DBInstance->errorInfo() . " Query : " . $q ));
+// 			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+			$SQLlogEntry['signal'] = "ERR";
+			$Niveau = 0;
 		}
 		
-		switch ( $_REQUEST['contexte_d_execution'] ) {
-			case "Installation":
-				$_REQUEST['moniteur']['SQL_requete_nbr']++;
-				$q = tronquage_expression ( $q , 256 );
-				journalisation_evenement ( 2 , $i , $q , $SQLlog['signal'] , $SQLlog['err_no'] , $SQL_requete[$SQL_index]['err_msg'] );
+		if ($cs->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $cs->LMObj->IncreaseSqlQueries(); }
+		if ($cs->CMObj->getConfigurationEntry('DebugLevel_SQL') >= $Niveau) {
+			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono () ) );
+		}
+		
+		switch ($cs->CMObj->getConfigurationEntry('execution_context')) {
+			case "installation" :
+				$StringFormatObj = StringFormat::getInstance();
+				$cs->LMObj->increaseSqlQueryNumber();
+				$q = $StringFormatObj->shorteningExpression($q, 256);
+				$cs->LMObj->logSQLDetails(
+						array (
+								$timeBegin,
+								$cs->LMObj->getSqlQueryNumber(),
+								$cs->MapperObj->getWhereWeAreAt(),
+								$SQLlogEntry['signal'],
+								$q,
+								$SQLlogEntry['err_no_expr'],
+								$SQLlogEntry['err_msg'],
+								$cs->TimeObj->microtime_chrono(),
+						)
+						);
+				
 				break;
 		}
 		return $db_result;
-		
 	}
+
 	public function num_row_sql($res) {
-		return $res->rowCount();
+		return $res->rowCount();			//Only work because we have "PDO::FETCH_ASSOC". Don't change it.
 	}
 	public function fetch_array_sql($res) {
 		return $res->fetch(PDO::FETCH_ASSOC);
 	}
 	public function escapeString($res) {
-		global  $db;
-		$db->real_escape_string($res);
+		$this->DBInstance->quote($res);
 	}
+	
+	public function errorMsg() {
+		return "err";
+	}
+	
+	/**
+	 * Returns the next (as greater number) ID number of any given table.
+	 * It will always add 1. It won't find a free number.
+	 *
+	 * @param string $table
+	 * @param string $column
+	 * @return number
+	 */
+	public function findNextId ($table , $column ) {
+		$val = 0;
+		$dbquery = $this->query("SELECT ".$column." FROM ".$table." ORDER BY ".$column." DESC LIMIT 1;");
+		while ($dbp = $this->fetch_array_sql($dbquery)) {
+			if ( $dbp[$column] > $val ) { $val = $dbp[$column]; }
+		}
+		$val++;
+		return $val;
+	}
+	
+	//@formatter:off
+	
+	public function getReport() {return $this->report;}
+	public function getReportEntry($data) {return $this->report[$data];}
+	
+	public function setReport($report) {$this->report = $report;}
+	//@formatter:on
 	
 }
 

@@ -1,0 +1,159 @@
+/*Hydre-contenu_debut*/
+<h3>Decoration</h3>
+<p>« décoration » : Designate a decoration.</p>
+<table class='{[block]}_Table01'>
+
+<caption>Associated arguments of « decoration »</caption>
+<tr><td>name</td>		<td>Name used as internal reference.</td></tr>
+<tr><td>state</td>		<td>5 aviable types: caligraph, 1_div, elegance, exquisite, elysion</td></tr>
+<tr><td>directory</td>	<td>Defines the working directory.</td></tr>
+<tr><td>filter</td>		<td>Text field. Enable filtering on the internal name of the target elements for the "show" command line.</td></tr>
+</table>
+<p>Depending on the selected type, the command changes. The last part of the command is mainly difinitions. For the 1_div type the selection can be on all borders. Ex: border_all_width '10', border_left_width '5'</p>
+
+<p>Example:</p> 
+<code>
+> site_context "MultiWeb_Engine";<br>
+> add decoration 
+name "deco_test_block_002" 
+type "exquise" 
+directory	 "Aqua"			
+
+ex11 "aqua_B02_ex11.png"	ex12 "aqua_B02_ex12.png"	ex13 "aqua_B02_ex13.png"	ex14 "aqua_B02_ex13.png"	ex15 "aqua_B02_ex15.png" 
+ex21 "aqua_B02_ex21.png"	ex22 "aqua_B02_ex22.png"															ex25 "aqua_B02_ex25.png" 
+ex31 "aqua_B02_ex21.png"																						ex35 "aqua_B02_ex25.png" 
+ex41 "aqua_B02_ex21.png"																						ex45 "aqua_B02_ex25.png" 
+ex51 "aqua_B02_ex51.png"	ex52 "aqua_B02_ex52.png"	ex53 "aqua_B02_ex52.png"	ex54 "aqua_B02_ex52.png"	ex55 "aqua_B02_ex55.png" 
+ex11_x "24"		ex11_y "28" 
+ex12_x "32"		ex12_y "28" 
+ex13_x "8"		ex13_y "28" 
+ex14_x "8"		ex14_y "28" 
+ex15_x "24"		ex15_y "28" 
+
+ex21_x "24"		ex21_y "8" 
+ex22_x "8"		ex22_y "8" 
+ex25_x "24"		ex25_y "8" 
+ex31_x "24"		ex31_y "8" 
+ex35_x "24"		ex35_y "8" 
+ex41_x "24"		ex41_y "8" 
+ex45_x "24"		ex45_y "8" 
+
+ex51_x "24"		ex51_y "12" 
+ex52_x "8"		ex52_y "12" 
+ex53_x "8"		ex53_y "12" 
+ex54_x "8"		ex54_y "12" 
+ex55_x "24"		ex55_y "12" 
+;
+</code>
+
+<h3>Types</h3>
+<p>
+Color : is shaped like « AABBCC » or « transparent ». "#" isn't necessary.<br>
+Size: Always as pixels.<br>
+File : Target file.<br>
+</p>
+
+<p>« caligraphe » : représente le type de décoration Caligraphe.</p>
+<table class='{[block]}_Table01'>
+<caption>Type : caligraph</caption>
+<tr> <td>	txt_fonte,  txt_fonte_size_min,  txt_fonte_size_max,  txt_fonte_dl_nom,  txt_fonte_dl_url	</td>																								<td>	Définition pour la fonte a utiliser	</td></tr>
+<tr> <td>	p_txt_indent,  p_txt_align,  p_mrg_top,  p_mrg_bottom,  p_mrg_left,  p_mrg_right,  p_pad_top,  p_pad_bottom,  p_pad_left,  p_pad_right	</td>													<td>	Définition pour le paragraphe. 	</td></tr>
+<tr> <td>	txt_col,  txt_highlight_col,  txt_bg_col,  txt_titre_col,  txt_ok_col,  txt_avert_col,  txt_erreur_col	</td>																					<td>	Champ de type couleur. Définition de la couleur du texte normal. bg se rapporte au fond (background), fg se rapporte a l'avant plan (foreground).	</td></tr>
+<tr> <td>	txt_l_01_fg_col,  txt_l_01_fg_hover_col,  txt_l_01_fg_active_col,  txt_l_01_fg_visite_col txt_l_01_bg_col,  txt_l_01_bg_hover_col,  txt_l_01_bg_active_col,  txt_l_01_bg_visite_col	</td>		<td>	Champ de type couleur. Définition de la couleur du texte pour les liens.	</td></tr>
+<tr> <td>	txt_l_td_fg_col,  txt_l_td_fg_hover_col,  txt_l_td_fg_active_col,  txt_l_td_fg_visite_col,  txt_l_td_bg_col,  txt_l_td_bg_hover_col,  txt_l_td_bg_active_col,  txt_l_td_bg_visite_col	</td>	<td>	Champ de type couleur. Définition de la couleur du texte pour les liens dans les cellules. l_ se rapporte au liens, td_ se rapporte a la cellule	</td></tr>
+<tr> <td>	txt_input1_fg_col,  txt_input1_bg_col,  txt_input2_fg_col,  txt_input2_bg_col,  txt_input1_td_fg_col,  txt_input1_td_bg_col,  txt_input2_td_fg_col,  txt_input2_td_bg_col	</td>				<td>	Champ de type couleur. Définition de la couleur du texte pour les champs d'insertion.	</td></tr>
+<tr> <td>	txt_code_fg_col,  txt_code_bg_col	</td>																																						<td>	Champ de type couleur. Définition de la couleur du texte pour le type « code »	</td></tr>
+<tr> <td>	c1_txt_col,  c1_txt_bg_col,  c2_txt_col,  c2_txt_bg_col,  c3_txt_col,  c3_txt_bg_col,  c4_txt_col,  c4_txt_bg_col	</td>																		<td>	Champ de type couleur. Définition pour le texte dans les cellule avec fond.	</td></tr>
+<tr> <td>	ct1_txt_col,  ct1_txt_bg_col,  ct2_txt_col,  ct2_txt_bg_col	</td>																																<td>	Champ de type couleur. Définition pour le texte dans les cellule titre avec fond.	</td></tr>
+<tr> <td>	s1_txt_col,  s2_txt_col,  s3_txt_col	</td>																																					<td>	Champ de type couleur. Définition de la couleur du texte dans les boutons.	</td></tr>
+<tr> <td>	tab_up_txt_col,  tab_up_txt_bg_col,  tab_down_txt_col,  tab_down_txt_bg_col,  tab_hover_txt_col,  tab_hover_txt_bg_col	</td>																	<td>	Champ de type couleur. Définition de la couleur du texte dans les onglets.	</td></tr>
+<tr> <td>	ft1,  ft2,  ft3	</td>																																											<td>	Champ de type fichier. Définition des fichier a utiliser pour les éléments du bloc « titre » du document.	</td></tr>
+<tr> <td>	ft1_x,  ft3_x,  ft_y	</td>																																									<td>	Champ de type taille. Définition de la taille des éléments d. 	</td></tr>
+<tr> <td>	bgc1,  bgc2,  bgc3,  bgc4,  bgct1,  bgct2	</td>																																				<td>	Champ de type fichier. Définition des fichier a utiliser pour les éléments des cellule avec fond.	</td></tr>
+<tr> <td>	s1_01_x,  s1_01_y,  s1_03_x,  s2_01_x,  s2_01_y,  s2_03_x,  s3_01_x,  s3_01_y,  s3_03_x	</td>																									<td>	Champ de type taille. Définition de la taille des éléments des boutons. 	</td></tr>
+<tr> <td>	s1_n01,  s1_n02,  s1_n03,  s1_h01,  s1_h02,  s1_h03,  s2_n01,  s2_n02,  s2_n03,  s2_h01,  s2_h02,  s2_h03,  s3_n01,  s3_n02,  s3_n03,  s3_h01,  s3_h02,  s3_h03	</td>							<td>	Champ de type fichier. Définition des fichier a utiliser pour les éléments des boutons. 	</td></tr>
+<tr> <td>	tab_y,  tab_a_x,  tab_c_x	</td>																																								<td>	Champ de type taille. Définition de la taille des éléments des onglets. 	</td></tr>
+<tr> <td>	tab_down_a,  tab_down_b,  tab_down_c,  tab_up_a,  tab_up_b,  tab_up_c,  tab_hover_a,  tab_hover_b,  tab_hover_c	</td>																			<td>	Champ de type fichier. Définition des fichier a utiliser pour les éléments des onglets.	</td></tr>
+</table>
+
+<h3>Blocks</h3>
+<p>Blocks are part of décoration and allow to define a style for a module (le contenu, le menu, etc.).</p>
+
+<p>« 1_div » : defines the decoration type 1_div.</p>
+<table class='{[block]}_Table01'>
+<caption>Type : « 1_div »</caption>
+<tr><td>background_color</td>					<td>Color type argument</td></tr>
+<tr><td>border_&lt;selection&gt;_width</td>		<td>Size type argument</td></tr>
+<tr><td>border_&lt;selection&gt;_color</td>		<td>Color type argument</td></tr>
+<tr><td>border_&lt;selection&gt;_style</td>		<td>Accept following values: solid , none , dotted , dashed , double , groove , ridge , inset , outset </td></tr>
+<tr><td>padding_&lt;selection&gt;</td>			<td>Size type argument</td></tr>
+<tr><td>margin_&lt;selection&gt;</td>			<td>Size type argument</td></tr>
+</table>
+
+
+<p>« elegance » : defines the decoration type elegance.</p>
+<p>"N°" means accepted numbers by the engine for this decoration. The decoration named « elegance » accepts the following numbers : 11, 12, 13, 21, 22, 23, 31,32, 33.</p>
+<table class='{[block]}_Table01'>
+<caption>Type : elegance</caption>
+<tr><td>ex_&lt;N°&gt;		</td><td>File type argument</td></tr>
+<tr><td>ex_&lt;N°&gt;_x		</td><td>Size type argument</td></tr>
+<tr><td>ex_&lt;N°&gt;_y		</td><td>Size type argument</td></tr>
+</table>
+
+<p>Disposition</p>
+<table class='{[block]}_Table01'>
+<caption>Framework organization</caption>
+<tr class='centered'><td>ex_11</td><td>ex_12</td><td >ex_13</td></tr>
+<tr class='centered'><td>ex_21</td><td>ex_22 (No need to define the DIV 22. thought setting it doesn't raise an error.</td><td >ex_23</td></tr>
+<tr class='centered'><td>ex_31</td><td>ex_32</td><td >ex_33</td></tr>
+</table>
+
+
+<p>« exquise » : defines the decoration type exquise.</p>
+<p>"N°" means accepted numbers by the engine for this decoration. The decoration named « exquisite » accepts the following numbers : 11, 12, 13, 14, 15, 21, 22, 25, 31,35, 41, 45, 51, 52, 53, 54, 55.</p>
+<table class='{[block]}_Table01'>
+<caption>Type : exquise</caption>
+<tr><td >ex_&lt;N°&gt;		</td><td>File type argument</td></tr>
+<tr><td >ex_&lt;N°&gt;_x	</td><td>Size type argument</td></tr>
+<tr><td >ex_&lt;N°&gt;_y	</td><td>Size type argument</td></tr>
+</table>
+
+<p>Disposition</p>
+<table class='{[block]}_Table01'>
+<caption>Framework organization</caption>
+<tr class='centered'><td>ex_11</td><td >ex_12</td><td >ex_13 (no need to define the width)</td><td >ex_14</td><td >ex_15</td></tr>
+<tr class='centered'><td>ex_21</td><td colspan='3' rowspan='3'>ex_22</td>																	<td >ex_25</td></tr>
+<tr class='centered'><td>ex_31 (No need to define height)</td>																				<td >ex_35 (No need to define height)</td></tr>
+<tr class='centered'><td>ex_41</td>																											<td >ex_45</td></tr>
+<tr class='centered'><td>ex_51</td><td >ex_52</td><td >ex_53 (no need to define the width)</td><td >ex_54</td><td >ex_55</td></tr>
+</table>
+
+<p>« elysion » : defines the decoration type elysion.</p>
+<table class='{[block]}_Table01'>
+<caption>Type : elysion</caption>
+<tr><td>ex_&lt;N°&gt;		</td><td>File type argument</td></tr>
+<tr><td>ex_&lt;N°&gt;_x		</td><td>Size type argument</td></tr>
+<tr><td>ex_&lt;N°&gt;_y		</td><td>Size type argument</td></tr>
+</table>
+
+<p>Disposition 1/2</p>
+<table class='{[block]}_Table01'>
+<caption>Framework organization</caption>
+<tr class='centered'><td>ex_11</td><td >ex_12</td><td >ex_13 (no need to define the width)</td><td >ex_14</td><td >ex_15</td></tr>
+<tr class='centered'><td>ex_21</td><td colspan='3' rowspan='3'>ex_22</td>																	<td >ex_25</td></tr>
+<tr class='centered'><td>ex_31 (No need to define height)</td>																				<td >ex_35 (No need to define height)</td></tr>
+<tr class='centered'><td>ex_41</td>																											<td >ex_45</td></tr>
+<tr class='centered'><td>ex_51</td><td >ex_52</td><td >ex_53 (no need to define the width)</td><td >ex_54</td><td >ex_55</td></tr>
+</table>
+
+<p>Disposition 2/2</p>
+<table class='{[block]}_Table01'>
+<caption>inside ex_22</caption>
+<tr class='centered'><td>in_11</td><td >in_12</td><td >in_13 (no need to define the width)</td><td >in_14</td><td >in_15</td></tr>
+<tr class='centered'><td>in_21</td><td colspan='3' rowspan='3'>in_22</td>																	<td >in_25</td></tr>
+<tr class='centered'><td>in_31 (No need to define height)</td>																				<td >in_35 (No need to define height)</td></tr>
+<tr class='centered'><td>in_41</td>																											<td >in_45</td></tr>
+<tr class='centered'><td>in_51</td><td >in_52</td><td >in_53 (no need to define the width)</td><td >in_54</td><td >in_55</td></tr>
+</table>
+
+/*Hydre-contenu_fin*/

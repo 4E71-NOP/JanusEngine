@@ -27,8 +27,8 @@ class ModuleAuthentification {
 		$RequestDataObj = RequestData::getInstance();
 		$AUObj = AuthenticateUser::getInstance();
 		
-		$logTarget = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget(logTarget);
+		$LOG_TARGET = $LMObj->getInternalLogTarget();
+		$LMObj->setInternalLogTarget(LOG_TARGET);
 		
 		$localisation = " / ModuleAuthentification";
 		$MapperObj->AddAnotherLevel($localisation );
@@ -41,7 +41,7 @@ class ModuleAuthentification {
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleAuthentification->render start"));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleAuthentification->render start"));
 		
 		$cnxResult = $AUObj->getDataEntry('errorType');
 // 		$mod_auth_demande_connexion_resultat_test = "Connexion R&eacute;ussie";
@@ -51,7 +51,7 @@ class ModuleAuthentification {
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
 		
-		$LMObj->InternalLog( array( 'level' => loglevelStatement, 'msg' => "ModuleAuthentification:render() : user_login=".$SMObj->getSessionEntry('user_login')));
+		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleAuthentification:render() : user_login=".$SMObj->getSessionEntry('user_login')));
 		
 		$Content = "";
 		if ( $SMObj->getSessionEntry('user_login') == "anonymous") {
@@ -59,7 +59,7 @@ class ModuleAuthentification {
 					$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
 					$RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
 					) {
-				$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_avert' style='text-align: center;'>". $i18n['cnxResult'][$cnxResult] ."</span>"; 
+				$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_warning' style='text-align: center;'>". $i18n['cnxResult'][$cnxResult] ."</span>"; 
 			}
 
 			$Content .= "
@@ -176,7 +176,7 @@ class ModuleAuthentification {
 		
 		}
 		
-		$LMObj->setInternalLogTarget($logTarget);
+		$LMObj->setInternalLogTarget($LOG_TARGET);
 		// Cleaning up
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) { 
 			unset (

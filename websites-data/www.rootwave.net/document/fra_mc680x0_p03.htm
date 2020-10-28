@@ -1,0 +1,64 @@
+/*Hydre-contenu_debut*/
+
+<justify>
+Les instructions du mc680x0 de C à E<br>
+<br>
+<table>
+<tr><td >CHK</td><td ><justify>Test des limites d'un registre. Examen du contenu d'un registre de données Dn (mot de poids faible pour voir s'il appartient à un intervalle précis (exprimé en complément à 2). La borne 'inférieur' est 0 et la borne supérieure est indiquée par le contenu de l'adresse effective. Si la valeur du registre est inférieure à 0 ou supérieur à la borne supérieure, le processeur génère l'exception CHK.<br>&nbsp;</td></tr>
+<tr><td >CLR</td><td ><justify>Remise à zéro d'un opérande destination. CLR <AE>.<br>&nbsp;</td></tr>
+<tr><td >CMP</td><td ><justify>Comparaison avec 0 après soustraction binaire de l'opérande source à l'opérande destination. Le résultat n'est pas conservé : CMP <AE>,Dn.<br>
+Variantes :<br>
+Comparaison avec un registre d'adresse : CMPA <AE>,An (en .W ou .L).<br>
+Comparaison avec une donnée immédiate : CMPI #,<AE>.<br>
+Comparaison mémoire : CMPM (As)+,(Ad)+.<br>
+<br>&nbsp;</td></tr>
+<tr><td >DBcc</td><td ><justify>Test condition avec décrémentation et branchement. Test de la condition. Si la condition n'est pas remplie (sinon exécution de l'instruction suivante), le registre de données spécifié est décrémenté. Si celui-ci est égal à -1 l'instruction suivante est exécutée, sinon branchement à l'étiquette spécifiée. En résumé le branchement est effectué tant que la condition cc n'est pas remplie ou que l'on n'a pas Dn = -1. La condition cc est l'une des suivantes F, T, CC, CS, EQ, GE, GT, HI, LE, LS, LT, MI, NE, PL, VC, VS. Le déplacement signé est sur un mot.<br>
+Remarque : Les assembleurs et aussi les débuggeurs admettent l'expression DBRA Dn,Etiquette au lieu de DBF Dn,Etiquette.<br>&nbsp;</td></tr>
+<tr><td >DIVS</td><td ><justify>Division de l'opérande destination par l'opérande source (16 bits) en arithmétique signé. Le mot de poids faible de Dn contient le quotient, le mot de poids fort contient le reste qui, s'il n'est pas nul, présente le même signe que le dividende : DIVS <AE>,Dn.<br>&nbsp;</td></tr>
+<tr><td >DIVU</td><td ><justify>Division de l'opérande destination par l'opérande source (16 bits) en arithmétique non signé. Le mot de poids faible de Dn contient le quotient, le mot de poids fort contient le reste qui, s'il n'est pas nul, présente le même signe que le dividende : DIVU <AE>,Dn.<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+<tr><td >EOR</td><td ><justify>Ou exclusif. Réalisation d'un OU exclusif logique entre l'opérande source et l'opérande destination et rangement du résultat dans l'emplacement destination. EOR <AE>,Dn ou EOR Dn,<AE>.Variantes :Réalisation d'un OU exclusif logique entre la donnée immédiate et l'opérande destination. EORI #,Dn. Réalisation d'un OU exclusif logique entre la donnée immédiate et le SR. Cette instruction nécessite obligatoirement le mode superviseur du processeur EORI #,SR.<br>&nbsp;</td></tr>
+<tr><td >EXG</td><td ><justify>Echange de registre. Echange le contenu de deux registres ? On peut échanger le contenu de deux registres de données, deux registres d'adresses, ou encore, un registre d'adresses et un registre de données : EXG Rx,Ry.<br>&nbsp;</td></tr>
+<tr><td >EXT</td><td ><justify>Extension du signe. Extension du bit de signe du registre de donnée Dn indiqué. L'extension est faite soit de l'octet (8 bits) au mot (16 bits ; bit 7 recopié sur les 8 bits de poids supérieur : 8 a 15) ou du mot au mot long (32 bits ; bit 15 recopié sur les bits 16 à 31).<br>&nbsp;</td></tr>
+<tr><td ></td><td ><justify><br>&nbsp;</td></tr>
+</table>
+<br>
+
+
+<table>
+<tr><td  colspan='6' >Etat du SR pour les instrcutions</td></tr>
+<tr><td >Instruction</td>					<td >X</td>	<td >N</td>	<td >Z</td>	<td >V</td>	<td >C</td></tr>
+
+<tr><td >CHK				</td><td >		</td><td >P	</td><td >?	</td><td >?	</td><td >?	</td></tr>
+<tr><td >CLR <AE>	</td><td >		</td><td >0	</td><td >1	</td><td >0	</td><td >0	</td></tr>
+<tr><td >
+	CMP <AE>,Dn<br>
+	CMPI <AE>,An<br>
+	CMPA #<Donnée>,<AE><br>
+	CMPM (As)+,(Ad)+
+								</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >P	</td></tr>
+<tr><td >
+	DBcc <étiquette>
+								</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+<tr><td >DIVS <AE>,Dn
+								</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >0	</td></tr>
+<tr><td >DIVU <AE>,Dn
+								</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >0	</td></tr>
+<tr><td >
+EOR <AE>,Dn<br>
+EOR Dn,<AE><br>
+EORI #<Donnée>,<AE>
+								</td><td >		</td><td >P	</td><td >P	</td><td >0	</td><td >0	</td></tr>
+<tr><td >EXG Rx,Ry		</td><td >		</td><td >	</td><td >	</td><td >	</td><td >	</td></tr>
+
+<tr><td >EXT Dn			</td><td >		</td><td >P	</td><td >P	</td><td >P	</td><td >0	</td></tr>
+
+</table>
+<br>
+<br>
+[INCLUDE]doc_fra_sd_mc680x0_tableau_p01.htm[/INCLUDE]
+<br>
+<br>
+</justify>
+/*Hydre-contenu_fin*/

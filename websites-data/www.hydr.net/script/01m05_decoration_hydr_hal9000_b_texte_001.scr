@@ -3,7 +3,9 @@ name "hydr_hal9000_texte_001"
 type	'caligraph'						
 repertoire	'HAL-9000'						
 							
+main_unit	'mm'	txt_font_unit	'px'
 txt_fonte	'Arial, Helvetica, Sans-serif'	txt_fonte_size_min	'10'	txt_fonte_size_max	'22'		
+txt_fonte_size	'14'
 							
 p_txt_indent	'000000'	p_txt_align	'justify'				
 							
@@ -47,7 +49,7 @@ tab_down_txt_col	'CCCCCC'	tab_down_txt_bg_col	'transparent'
 tab_hover_txt_col	'FFFFFF'	tab_hover_txt_bg_col	'transparent'				
 							
 p_mrg_top	'000000'	p_mrg_bottom	'000000'	p_mrg_left	'000000'	p_mrg_right	'000000'
-p_pad_top	'000000'	p_pad_bottom	'000000'	p_pad_left	'000000'	p_pad_right	'000000'
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 							
 ft1	'hal-9000_B01_ft1.png'	ft2	'hal-9000_B01_ft2.png'	ft3	'hal-9000_B01_ft3.png'		
 ft1_x	'8'	ft3_x	'8'	ft_y	'32'		

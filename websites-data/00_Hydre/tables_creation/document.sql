@@ -3,6 +3,8 @@
 /* ---------------------------------------- */
 /*
 docu_type					WMCODE 0	NOCODE 1	PHP 2	MIXED 3
+docu_type					0:HTML	1:PHP(exec)	2:MIXED(PHP/HTML)
+
 origine = ws_id mais n est pas une clé étrangère 
 juste un renseignement sur le site a qui appartien tout les droits de ce document.
 */
