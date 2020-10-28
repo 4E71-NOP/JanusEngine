@@ -28,7 +28,7 @@ class Hydr {
 	}
 	
 	/**
-	 * Render the whole thing.
+	 * Renders the whole thing.
 	 * The choice of making a main class is to help IDEs to process sources.
 	 *
 	 * @return string
