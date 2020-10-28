@@ -8,15 +8,15 @@ This project is ment to help people to implement website with more graphics and 
 ## Source
 Downlad the source from this place and play. I believe you know whet you're doing.
 
-## Archives
+## Archives
 You can download 2 types of packages from the online archive:
 * **Minimal**     : only installs the engine. You'll have to provide the scripts to create a website.
 * **Jumstart**    : Install the Hydr website (so you get the docs and script you can mimic).
 
+Note: The link aren't ready yet. So. Please be patient.
+
 ## Tools
 There is a set of tools to help creators to implement the graphics (cutting one image in many components).
-
-
 
 # Install 
 ## Project setup : Direct installation

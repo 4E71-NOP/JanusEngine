@@ -9,6 +9,13 @@ define ( "USER_ACTION_DISCONNECT", "disconnect" );
 define ( "ANONYMOUS_USER_NAME", "anonymous" );
 
 // --------------------------------------------------------------------------------------------
+// ClassLoader
+define ("UtilityDirectory"	, "engine/utility/");
+define ("SddmDirectory"		, "engine/sddm/");
+define ("EntityDirectory"	, "engine/entity/");
+
+
+// --------------------------------------------------------------------------------------------
 // Logs
 define ( "LOGLEVEL_BREAKPOINT",		5 ); // You definitely like to read or you're a crappy programmer
 define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like i'm the <class::method> and i recieved this data

@@ -36,10 +36,9 @@ class SddmTools {
 	}
 	
 	public function SLMEmptyResult() {
-		global $l, $WebSiteObj;		// revoir cela. Il devrait venir d'un objet depuis $currenSet.
 		$cs = CommonSystem::getInstance();
-		
-		$cs->LMObj = LogManagement::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance ();
+		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
 		if (strlen($l) == 0 ) { $l = $WebSiteObj->getWebSiteEntry('ws_lang'); }		// failsafe on language selection. Back to the website default language.
 		switch ($_REQUEST ['contexte_d_execution']) {
