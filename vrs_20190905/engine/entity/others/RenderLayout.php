@@ -37,18 +37,12 @@ class RenderLayout {
 	 * @param ThemeDescriptor $ThemeDescriptorObj
 	 */
 	public function render( User $UserObj, WebSite $WebSiteObj, ThemeDescriptor $ThemeDescriptorObj){
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$cs = CommonSystem::getInstance();
+		
+// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		$LMObj = LogManagement::getInstance();
 		
-// 		$CurrentSet = CurrentSet::getInstance();
-// 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
-// 		$UserObj = $CurrentSet->getInstanceOfUserObj();
-// 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
-// 		$ServerInfosObj = $CurrentSet->getInstanceOfServerInfosObj();
-		
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('module_website')." sm
 			WHERE sm.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -59,13 +53,13 @@ class RenderLayout {
 			ORDER BY module_position
 			;");
 		
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
 		}
 		
 		$switch_score = 10;
 		if ( isset($_REQUEST['arti_ref']) ) {
-			$dbquery = $SDDMObj->query("
+			$dbquery = $cs->SDDMObj->query("
 				SELECT
 				pr.layout_id as pr_layout_id,pr.layout_name,pr.layout_title,pr.layout_generic_name,
 				sp.*
@@ -77,7 +71,7 @@ class RenderLayout {
 				AND pr.layout_id = sp.layout_id
 				AND sp.theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
 				;");
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
 			if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		}
 		if ( $UserObj->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
@@ -92,13 +86,13 @@ class RenderLayout {
 				break;
 				
 			case 10 :
-				$dbquery = $SDDMObj->query("
+				$dbquery = $cs->SDDMObj->query("
 					SELECT layout_id
 					FROM ".$SqlTableListObj->getSQLTableName('layout_theme')."
 					WHERE theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
 					AND default_layout_content = '1'
 					;");
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
+				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
 				break;
 		}
 
@@ -107,10 +101,10 @@ class RenderLayout {
 // --------------------------------------------------------------------------------------------
 		foreach ( $this->PL as $A )  {
 			$m = $A['lyoc_module_name'];
-			switch ( $A['lyoc_calculus_type'] ) {
+			switch ( $A['lyoc_calculation_type'] ) {
 				case 0:
-					$this->Layout[$m]['lyoc_margin_left']	= $A['lyoc_margin_left'];
-					$this->Layout[$m]['lyoc_margin_right']	= $A['lyoc_margin_right'];
+					$this->Layout[$m]['lyoc_margin_left']		= $A['lyoc_margin_left'];
+					$this->Layout[$m]['lyoc_margin_right']		= $A['lyoc_margin_right'];
 					$this->Layout[$m]['lyoc_margin_top']		= $A['lyoc_margin_top'];
 					$this->Layout[$m]['lyoc_margin_bottom']		= $A['lyoc_margin_bottom'];
 					
@@ -258,13 +252,13 @@ class RenderLayout {
 				$this->Layout[$m]['cdy'] = $A['lyoc_minimum_y'] + $this->Layout[$m]['lyoc_margin_top'] + $this->Layout[$m]['lyoc_margin_bottom'];
 			}
 			$this->Layout[$m]['lyoc_module_zindex'] = $A['lyoc_module_zindex'];
-
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Layout calulation for module '".$m."'. Layout[".$m."]= ". $cs->StringFormatObj->arrayToString($this->Layout[$m])));
 		}
 		
 		
 		// 2019 12 29 : remove as it doesn't seems necessary anymore
-		$_REQUEST['document_dx'] = 100;
-		$_REQUEST['document_dy'] = 100;
+// 		$_REQUEST['document_dx'] = 100;
+// 		$_REQUEST['document_dy'] = 100;
 		unset ( $A );
 		foreach ( $this->ModuleList as $A ) {
 			if ( $A['module_adm_control'] == 0 ) {
@@ -284,11 +278,13 @@ class RenderLayout {
 	//	
 	// --------------------------------------------------------------------------------------------
 	private function loadRawData ( $layout_selection ) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$cs = CommonSystem::getInstance();
+		
+// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		$LMObj = LogManagement::getInstance();
+// 		$LMObj = LogManagement::getInstance();
 			
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ". $SqlTableListObj->getSQLTableName('layout_content')."
 			WHERE layout_id = '".$layout_selection."'
@@ -300,7 +296,7 @@ class RenderLayout {
 // 			WHERE layout_id = '".$layout_selection."'
 // 			ORDER BY lyoc_line
 // 			;<br>\r");
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			$l = $dbp['lyoc_line'];
 			foreach ( $dbp as $A => $B ) { $this->PL[$l][$A] = $B; }
 			$this->PL[$l]['lyoc_module_anchor_e10']			= "";

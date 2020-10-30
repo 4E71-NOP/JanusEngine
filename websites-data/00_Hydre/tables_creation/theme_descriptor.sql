@@ -76,8 +76,8 @@ theme_block_09_menu		VARCHAR(128),
 
 theme_admctrl_panel_bg		VARCHAR(128),
 theme_admctrl_switch_bg		VARCHAR(128),
-theme_admctrl_size_x		INTEGER,
-theme_admctrl_size_y		INTEGER,
+theme_admctrl_width			INTEGER,
+theme_admctrl_height		INTEGER,
 theme_admctrl_position		INTEGER,
 
 theme_gradient_start_color	VARCHAR(10),

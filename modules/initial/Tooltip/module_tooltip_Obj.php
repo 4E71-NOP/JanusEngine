@@ -18,19 +18,15 @@ class ModuleTooltip {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-// 		$CMObj = ConfigurationManagement::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$localisation = " / ModuleTooltip";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleTooltip");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleTooltip");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleTooltip");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleTooltip");
 		
 		$CurrentSet = CurrentSet::getInstance();
-// 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
-// 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
@@ -40,7 +36,6 @@ class ModuleTooltip {
 		if ($cdy == 0) { $cdy = 256;}
 
 		$GeneratedJavaScriptObj->insertJavaScript('File', '../modules/initial/Tooltip/lib_tooltip.js');
-// 		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
 		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_DecorationManagement.js');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');

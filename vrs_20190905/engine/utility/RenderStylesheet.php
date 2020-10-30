@@ -37,11 +37,11 @@ class RenderStylesheet {
 		$cs = CommonSystem::getInstance();
 		$cs->LMObj->InternalLog(array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." Start"));
 		
-		$StringFormat = StringFormat::getInstance();
+// 		$StringFormat = StringFormat::getInstance();
 		
 		$themeArray = $ThemeDataObj->getThemeData();
 		$themeArray['tableName'] = $tableName;
-		$TimeObj = Time::getInstance();
+// 		$TimeObj = Time::getInstance();
 		
 		$Content = "
 <style type='text/css'>
@@ -51,14 +51,14 @@ class RenderStylesheet {
 // Hydr - Generated stylesheet
 //----------------------------------------------------------------------------
 // Theme : ".$themeArray['theme_name']."
-// Date : ".$TimeObj->timestampToDate(time())."
+// Date : ".$cs->TimeObj->timestampToDate(time())."
 // fileName : ".$themeArray['theme_name'].".css
 //----------------------------------------------------------------------------
 */
 ";
 		$blockIdList = &$themeArray['blockTFirstInLineId'];
 		for ( $i = 1 ; $i <= $themeArray['blockTCount'] ; $i++ ) {
-			$themeArray['currentBlock']	= $StringFormat->getDecorationBlockName( "B", $blockIdList[$i] , "");
+			$themeArray['currentBlock']	= $cs->StringFormatObj->getDecorationBlockName( "B", $blockIdList[$i] , "");
 			if ( is_array($themeArray[$themeArray['currentBlock']."T"]) ) {
 				$Content .= $this->renderStylesheetDeco20($themeArray);
 			}
@@ -66,7 +66,7 @@ class RenderStylesheet {
 		
 		$blockIdList = &$themeArray['blockGFirstInLineId'];
 		for ( $i = 1 ; $i <= $themeArray['blockGCount'] ; $i++ ) {
-			$themeArray['currentBlock']	= $StringFormat->getDecorationBlockName( "B", $blockIdList[$i] , "");
+			$themeArray['currentBlock']	= $cs->StringFormatObj->getDecorationBlockName( "B", $blockIdList[$i] , "");
 			$themeArray['currentBlockType'] = "G";
 			if ( is_array($themeArray[$themeArray['currentBlock']."G"]) ) {
 				switch ( $themeArray[$themeArray['currentBlock']."G"]['deco_type'] ) {
@@ -86,7 +86,7 @@ class RenderStylesheet {
 		$Content .= "\r\r\r";
 		$blockIdList = &$themeArray['blockMFirstInLineId'];
 		for ( $i = 1 ; $i <= $themeArray['blockMCount'] ; $i++ ) {
-			$themeArray['currentBlock']	= $StringFormat->getDecorationBlockName( "B", $blockIdList[$i] , "");
+			$themeArray['currentBlock']	= $cs->StringFormatObj->getDecorationBlockName( "B", $blockIdList[$i] , "");
 			$themeArray['currentBlockType'] = "M";
 			if ( is_array($themeArray[$themeArray['currentBlock']."M"]) ) {
 				$p = &$themeArray[$themeArray['currentBlock']."M"];
@@ -165,8 +165,8 @@ class RenderStylesheet {
 	.".$tableName."modif_category	{ height:512px ; overflow:auto }\r
 
 	.".$tableName.CLASS_ADM_Ctrl_Switch." {	
-		width: ". $themeArray['theme_admctrl_size_x'] ."px; 
-		height: ". $themeArray['theme_admctrl_size_y'] ."px; 
+		width: ". $themeArray['theme_admctrl_width'] ."px; 
+		height: ". $themeArray['theme_admctrl_height'] ."px; 
 		background-image: url(../gfx/".$themeArray['theme_directory']."/". $themeArray['theme_admctrl_switch_bg'] ."); 
 		left: 0px;
 		top: 0px;
@@ -176,11 +176,11 @@ class RenderStylesheet {
 		background-repeat: repeat;
 		position: fixed;
 	}\r
-
+	
 	.".$tableName.CLASS_ADM_Ctrl_Panel." {
 		position: absolute; 
-		top: ". floor( $themeArray['theme_admctrl_size_y']/ 2 )."px; 
-		left: ".floor( $themeArray['theme_admctrl_size_x']/ 2 )."px; 
+		top: ". floor( $themeArray['theme_admctrl_width']/ 2 )."px; 
+		left: ".floor( $themeArray['theme_admctrl_height']/ 2 )."px; 
 		border-style: solid; 
 		border-width: 8px; 
 		border-color: ".$themeArray['B01T']['txt_warning_col']."; 
@@ -189,7 +189,7 @@ class RenderStylesheet {
 		background-image: url(../gfx/".$themeArray['theme_directory']."/".$themeArray['theme_admctrl_panel_bg'].");
 		visibility: hidden; 
 	}
-
+	
 	.".$tableName.CLASS_File_Selector_Container." {
 		position: absolute; 
 		border-style: solid; 
@@ -208,14 +208,14 @@ class RenderStylesheet {
 		margin : 0mm;
 		padding : 0.5mm;".
 		((strlen($themeArray['B01T']['txt_font'])>0) ? "font-family:".$themeArray['B01T']['txt_font'].";":"").
-		((strlen($themeArray['B01T']['txt_font_size'])>0) ? "font-size:".$themeArray['B01T']['txt_font_size'].";":"").
+		((strlen($themeArray['B01T']['txt_font_size'])>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
 		((strlen($themeArray['B01T']['txt_col'])>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
 		((strlen($themeArray['B01T']['tab_frame_bg_img'])>0) ? "background-image: url(../gfx/".$themeArray['theme_directory']."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
 		((strlen($themeArray['B01T']['tab_frame_bg_col'])>0) ? "background-color: ".$themeArray['B01T']['tab_frame_bg_col'].";":"")."
 		visibility: hidden; display : none; 
 		cursor: pointer;
 	}
-
+	
 	.div_std {
 	font-family: ".$themeArray['B01T']['txt_font'].";
 	font-weight: normal;
@@ -226,7 +226,7 @@ class RenderStylesheet {
 	word-spacing : 0px;
 	overflow: auto;
 	}\r
-
+	
 	\r	/* Media screen */
 
 
@@ -247,39 +247,38 @@ class RenderStylesheet {
 		
 		$Content = "";
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft",					" { border-spacing: 0px; border: 0px;	empty-cells: show; vertical-align: middle; } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft1_bg'].");" :"")."	".$p['ft2_special']. " } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;									height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft3_bg'].");" :"")."	".$p['ft2_special']. " } \r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																										background-color: ".$p['tab_down_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	".((strlen($p['tab_down_txt_weight'])>0) ? "font-weight:".$p['tab_down_txt_weight'].";":"")."		background-color: ".$p['tab_down_txt_bg_col'].";	".$p['tab_down_txt_special']."	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																										background-color: ".$p['tab_down_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_a'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																										background-color: ".$p['tab_up_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_b'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	".((strlen($p['tab_up_txt_weight'])>0) ? "font-weight:".$p['tab_up_txt_weight'].";":"")."			background-color: ".$p['tab_up_txt_bg_col'].";		".$p['tab_up_txt_special']."	}\r" );
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_c'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																										background-color: ".$p['tab_up_txt_bg_col']."; }\r" );
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																										background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	".((strlen($p['tab_hover_txt_weight'])>0) ? "font-weight:".$p['tab_hover_txt_weight'].";":"")."		background-color: ".$p['tab_hover_txt_bg_col'].";	".$p['tab_hover_txt_special']."	}\r");
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																										background-color: ".$p['tab_hover_txt_bg_col']."; }\r");
+		// If no background image is defined the style isn't rendered.
+		if ( strlen($p['ft1_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft1_bg'].");" :"")."	".$p['ft1_special']. " } \r");																												}
+		if ( strlen($p['ft2_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;									height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");									}
+		if ( strlen($p['ft3_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft3_bg'] )>0)? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['ft3_bg'].");" :"")."	".$p['ft3_special']. " } \r");																												}
+		if ( strlen($p['s1_n01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																						}
+		if ( strlen($p['s1_n02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";	}\r");		}
+		if ( strlen($p['s1_n03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																						}
+		if ( strlen($p['s1_h01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s1_h02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	}\r");	}
+		if ( strlen($p['s1_h03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s1_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s2_n01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																						}
+		if ( strlen($p['s2_n02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";	}\r");		}
+		if ( strlen($p['s2_n03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																						}
+		if ( strlen($p['s2_h01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s2_h02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	}\r");	}
+		if ( strlen($p['s2_h03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s2_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s3_n01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																						}
+		if ( strlen($p['s3_n02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";	}\r");		}
+		if ( strlen($p['s3_n03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_n03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																						}
+		if ( strlen($p['s3_h01'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h01'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s3_h02'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h02'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	}\r");	}
+		if ( strlen($p['s3_h03'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(../gfx/".$infos['theme_directory']."/".$p['s3_h03'].");	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");																				}
+		if ( strlen($p['tab_down_a'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		)."; }\r");										}
+		if ( strlen($p['tab_down_b'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	".((strlen($p['tab_down_txt_weight'])>0) ? "font-weight:".$p['tab_down_txt_weight'].";":"")."	".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		).";	".$p['tab_down_txt_special']."	}\r");	}
+		if ( strlen($p['tab_down_c'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_down_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	: ""	)."; }\r");										}
+		if ( strlen($p['tab_up_a'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_a'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r");										}
+		if ( strlen($p['tab_up_b'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_b'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	".((strlen($p['tab_up_txt_weight'])>0) ? "font-weight:".$p['tab_up_txt_weight'].";":"")."		".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	).";	".$p['tab_up_txt_special']."	}\r" );	}
+		if ( strlen($p['tab_up_c'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",			" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_up_c'].");		padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r" );									}
+		if ( strlen($p['tab_hover_a'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
+		if ( strlen($p['tab_hover_b'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	".((strlen($p['tab_hover_txt_weight'])>0) ? "font-weight:".$p['tab_hover_txt_weight'].";":"")."	".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	).";	".$p['tab_hover_txt_special']."	}\r");	}
+		if ( strlen($p['tab_hover_c'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",		" { background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_hover_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: top left;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tabFrame",			" { padding: 5px ; vertical-align: top; ".((strlen($p['tab_frame_bg_img'])>0) ? "background-image: url(../gfx/".$infos['theme_directory']."/".$p['tab_frame_bg_img'].");" : "")."  ".((strlen($p['tab_frame_bg_col'])>0) ? "background-color: ".$p['tab_frame_bg_col'].";":"")." }\r\r");
-		
-		
 		
 		// New stylsheet
 		
@@ -570,8 +569,11 @@ class RenderStylesheet {
 				case "pad_left":
 				case "pad_right":
 				case "txt_indent":
-					if ( $p[$elm.'_'.$A] != 0 )	{ $str .= $tab[$A] .":".$p[$elm.'_'.$A]."; ";}
-					if ( strpos($p[$elm.'_'.$A], 'auto') === false ) { $str .= " ".$mainUnit."; ";}
+					if ( $p[$elm.'_'.$A] != 0 )	{ 
+						$str .= $tab[$A] .":".$p[$elm.'_'.$A];
+						if ( strpos($p[$elm.'_'.$A], 'auto') === false ) { $str .= $mainUnit;}
+						$str .= "; ";
+					}
 					break;
 				case "fonte_size":
 				case "font_size":

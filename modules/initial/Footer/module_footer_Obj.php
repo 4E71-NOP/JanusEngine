@@ -18,20 +18,18 @@ class ModuleFooter {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$localisation = " / ModuleFooter";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleFooter");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleFooter");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleFooter");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleFooter");
 		
 		$CurrentSet = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
@@ -45,18 +43,14 @@ class ModuleFooter {
 		</tr>\r
 		</table>\r
 		";
-
+		
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$i18n,
 				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
 				$CurrentSet,
 				$WebSiteObj,
 				$ThemeDataObj,
-				$CMObj
 				);
 		}
 		return $Content;

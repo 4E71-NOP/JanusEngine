@@ -18,16 +18,13 @@ class ModuleLogo {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		
+		$cs = CommonSystem::getInstance();
+
 		$localisation = " / ModuleCoatOfArms";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleCoatOfArms");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleCoatOfArms");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleLogo");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleLogo");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -35,11 +32,13 @@ class ModuleLogo {
 		$l = $CurrentSetObj->getDataEntry('language');
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
+		$cs->I18nObj->apply($i18n);
+		unset ($i18n);
 		$Content = "";
-
+		
 		$Content .= "
 		<div style='text-align: center;'>\r
-		<a href='".$WebSiteObj->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$SDDMObj->escapeString($i18n['tooltip'])."')\" onMouseOut=\"t.ToolTip()\">\r
+		<a href='".$WebSiteObj->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$cs->SDDMObj->escapeString($cs->I18nObj->getI18nEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
 		<img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_logo')."' alt='".$WebSiteObj->getWebSiteEntry('ws_name')."' border='0'>\r
 		</a>\r
 		</div>\r
@@ -48,15 +47,10 @@ class ModuleLogo {
 		// Cleaning up
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
-				$i18n,
 				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
 				$CurrentSetObj,
 				$WebSiteObj,
 				$ThemeDataObj,
-				$CMObj
 				);
 		}
 		

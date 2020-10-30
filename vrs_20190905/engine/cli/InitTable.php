@@ -304,7 +304,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"a_active_fg_col" => 	"", 	"a_active_bg_col" => 	"", 	"a_active_decoration" => 	"", 	"a_active_special" => 	"",
 			"a_visited_fg_col" => 	"", 	"a_visited_bg_col" => 	"", 	"a_visited_decoration" => 	"", 	"a_visited_special" => 	"",
 			
-			"table_rules" => 	"border-spacing:0px; cellspacing:0px; width:100%",
+			"table_rules" => 	"border-spacing:0px; border-collapse:collapse; width:100%",
 			"t01_caption_fg_col" => 	"", 	"t01_caption_bg_col" => 	"", 	"t01_caption_special" => 	"",
 			"t01_txt_col" => 	"",
 			"t01_tr_bg_col" => 	"", 	"t01_td_bg_odd_col" => 	"",
@@ -963,7 +963,7 @@ self::$InitTable['theme'] = function (&$a) {
 			"bg"			=> "",
 			"bg_repeat" 	=> "repeat",
 			"bg_color" 		=> "",
-			"coatofarms"	=> "",
+			"logo"			=> "",
 			"banner"		=> "",
 			
 			"divinitial_bg"		=> "",
@@ -973,8 +973,8 @@ self::$InitTable['theme'] = function (&$a) {
 			
 			"admctrl_panel_bg"			=> "vide.gif",
 			"admctrl_switch_bg"			=> "vide.gif",
-			"admctrl_size_x"			=> 32,
-			"admctrl_size_y"			=> 32,
+			"admctrl_width"				=> 32,
+			"admctrl_height"			=> 32,
 			"admctrl_position"			=> 1,
 			"color_gradient_start"		=> "000000",
 			"color_gradient_middle"		=> "808000",

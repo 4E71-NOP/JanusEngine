@@ -49,18 +49,18 @@ margin-right: auto;
 '>
 <tr>
 <td style='text-align:left;'>Eng:</td>
-<td style='text-align:left;'>Internet Explorer isn't supported anymore. You should update. Here are some options</td>
+<td style='text-align:left;'>Internet Explorer isn't supported anymore. You should use another browser. Here are some options</td>
 </tr>
 <tr>
 <td style='text-align:left;'>Fra:</td>
-<td style='text-align:left;'>Internet Explorer n'est plus supporté. Vous devriez mettre à jour.</td>
+<td style='text-align:left;'>Internet Explorer n'est plus supporté. Vous devriez utiliser un autre navigateur. Voici quelques options</td>
 </tr>
 </table>
 
 <table style='
 margin-left: auto; 
 margin-right: auto;
-margin-top: 192px; 
+margin-top: 220px; 
 margin-bottom: auto;
 border-spacing: 32px;
 '>

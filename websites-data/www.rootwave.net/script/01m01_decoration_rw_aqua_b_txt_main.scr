@@ -1,5 +1,5 @@
 add decoration 							
-name	'hydr_aqua_texte_002'						
+name	'rw_aqua_txt_main'						
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
@@ -14,12 +14,12 @@ txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'14'
 txt_col	'000000'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
 txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
 							
-a_fg_col	'000000'			a_decoration	'none'
-a_hover_fg_col	'000000'
+a_fg_col	'000000'			a_decoration	'none'	a_special	'display:block;'
+a_hover_fg_col	'000000'					a_hover_special	'font-weight:bold;display:block;'
 a_active_fg_col	'000000'						
 a_visited_fg_col	'000000'						
 							
-table_rules	'border-spacing:0px; cellspacing:0px; width:100%'						
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
@@ -30,8 +30,8 @@ t01_tr_bg_hover_col	'ACEDD4'
 		t01_legend_bg_col	'FFFFE0'				
 							
 td_a_fg_col	'000000'			td_a_decoration	'none'		
-td_a_hover_fg_col	'000000'
-td_a_active_fg_col	'000000'						
+td_a_hover_fg_col	'000000'					td_a_hover_special	'font-weight:bold;display:block'
+td_a_active_fg_col	'000000'					td_a_active_special	'color:inherit;'
 td_a_visited_fg_col	'000000'						
 							
 code_font	'courier, monospace'	code_fg_col	'008000'	code_bg_col	'000000CC'		

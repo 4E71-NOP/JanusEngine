@@ -18,21 +18,14 @@ class ModuleQuickSkin {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$StringFormatObj = StringFormat::getInstance();
-// 		$SMObj = SessionManagement::getInstance(null);
 		
 		$localisation = " / ModuleQuickSkin";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleQuickSkin");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleQuickSkin");
-		
-		$InteractiveElementsObj = InteractiveElements::getInstance();
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleQuickSkin");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleQuickSkin");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -40,18 +33,16 @@ class ModuleQuickSkin {
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 		
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
 		$I18nObj = I18n::getInstance();
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		$I18nObj->apply($i18n);
 		
-		$LOG_TARGET = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("none");
+		$LOG_TARGET = $cs->LMObj->getInternalLogTarget();
+		$cs->LMObj->setInternalLogTarget("none");
 		
-// 		<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: left;'>
-// 		<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>QuickSkin<br></span>\r
 		$Content = "
 		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."'>\r
 		<tr>\r<td>\r
@@ -59,9 +50,9 @@ class ModuleQuickSkin {
 		</td>\r</tr>\r
 		";
 		$grp = $UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$StringFormatObj->arrayToString($UserObj->getUser()) ));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$cs->StringFormatObj->arrayToString($UserObj->getUser()) ));
 		if ( $grp == "1" ) {
-			$dbquery = $SDDMObj->query("
+			$dbquery = $cs->SDDMObj->query("
 			SELECT a.theme_id,a.theme_name,a.theme_title
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
 			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -69,9 +60,7 @@ class ModuleQuickSkin {
 			AND b.theme_state = '1'
 			;");
 			
-// 			<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p " . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: center;'>
-			
-			if ( $SDDMObj->num_row_sql($dbquery) > 0 ) {
+			if ( $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
 				$Content .= "
 				<form ACTION='index.php?' method='post'>\r
 				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
@@ -81,7 +70,7 @@ class ModuleQuickSkin {
 				<tr>\r<td>\r
 				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
 				";
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 					if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
 					else { 	$Content .= "<option value='".$dbp['theme_name']."'>".$dbp['theme_title']."</option>\r"; }
 				}
@@ -109,7 +98,7 @@ class ModuleQuickSkin {
 					"size" 				=> 0,
 					"lastSize"			=> 0,
 				);
-				$Content .= $InteractiveElementsObj->renderSubmitButton($SB);
+				$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
 				$Content .= "
 				</center>
 				</td>\r</tr>\r
@@ -127,8 +116,6 @@ class ModuleQuickSkin {
 				</td>\r</tr>\r
 				</table>\r
 				";
-// 				<p class='" . $ThemeDataObj->getThemeName().$infos['block']."_p' style='text-align: left;'>
-// 				</p>\r
 			}
 		}
 		
@@ -136,19 +123,14 @@ class ModuleQuickSkin {
 			unset (
 					$i18n,
 					$localisation,
-					$MapperObj,
-					$LMObj,
-					$MapperObj,
-					$InteractiveElementsObj,
 					$CurrentSetObj,
 					$WebSiteObj,
 					$ThemeDataObj,
-					$CMObj,
 					$SB
 					);
 		}
 		
-		$LMObj->setInternalLogTarget($LOG_TARGET);
+		$cs->LMObj->setInternalLogTarget($LOG_TARGET);
 		return $Content;
 	
 	}

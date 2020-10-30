@@ -18,30 +18,23 @@ class ModuleSearch {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$localisation = " / ModuleSearch";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleSearch");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleSearch");
-
-		$InteractiveElementsObj = InteractiveElements::getInstance();
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleSearch");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleSearch");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
-// 		$LMObj->logDebug($infos, "\$infos");
-// 		$LMObj->logDebug($UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']), "module_group_allowed_to_use");
-
 		$Content = "";
 		if (  $UserObj->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']) == 1 ) {
 			$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>" . $i18n['txt1'] . "</span>
@@ -90,7 +83,7 @@ class ModuleSearch {
 				"size" 				=> 0,
 				"lastSize"			=> 0,
 			);
-			$Content .= $InteractiveElementsObj->renderSubmitButton($SB);
+			$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
 			$Content .= "
 			</td>\r
 			</tr>\r
@@ -106,14 +99,9 @@ class ModuleSearch {
 			unset (
 				$i18n,
 				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
-				$InteractiveElementsObj,
 				$CurrentSetObj,
 				$WebSiteObj,
 				$ThemeDataObj,
-				$CMObj,
 				$SB
 				);
 		}

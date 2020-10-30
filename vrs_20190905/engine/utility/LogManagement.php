@@ -177,37 +177,39 @@ class LogManagement {
 	 * @param array $data
 	 */
 	public function InternalLog($log, $origin=false) {
-		if ( $log['level'] <= INTERNAL_LOG_LEVEL ) {
-			$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 4 );
-			$i = 0;
-			$dbgString = "";
-			//@formatter:off
-			if ( $origin == true ) {
-				foreach ( $dbg as $A ) {
-					if ($i > 0) { $dbgString = $A ['function'] . "() <-"; }
-					$i ++;
-				}
-			}
-			$data = array (
+		$cs = CommonSystem::getInstance();
+		$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 20 );
+		$originStr = "";
+		$i = 0;
+		foreach ( $dbg as $A ) {
+			if ($i > 0) { $originStr .= $A['class'].$A['type'].$A['function']."()@".$A['line'] . " "; }
+			$i ++;
+		}
+		
+		if (isset($log['level'])) { $msgFlag=1; $logLevel = $log['level']; }
+		else { $msgFlag=0; $logLevel=0; $origin = true; }
+		
+		$data = array (
 				"nbr" => $this->InternalLogIdx,
-				"origin" => $dbgString,
-				"message" => $log['msg']
-			);
+				"origin" => ( $origin === false ) ? "": $originStr,
+				"message" => ($msgFlag == 1) ? $log['msg']: "EMPTY LOG !!!!",
+		);
+		
+		if ( $logLevel <= INTERNAL_LOG_LEVEL ) { 
 			$src = array ( "<b>", "</b>", "<br>", "\r" );
 			$rpl = array ( "", "", " <- ", "" );
-			$data['origin'] = str_replace ( $src, $rpl, $data ['origin'] );
-			//@formatter:on
-
+			$data['origin'] = str_replace ( $src, $rpl, $data['origin'] );
+			
 			switch ($this->InternalLogTarget) {
 				case 'internal' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
 					break;
 				case 'system' :
-					error_log ( $log['level']."<=".INTERNAL_LOG_LEVEL ."; InternalLog N " . $data ['nbr'] . "; " . $data ['message'] . "; " . $data['origin'] );
+					error_log ( $log['level']."<=".INTERNAL_LOG_LEVEL ."; InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
 					break;
 				case 'both' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
-					error_log ( "InternalLog N " . $data ['nbr'] . "; " . $data ['message'] . "; " . str_replace ( $src, $rpl, $data ['origin'] ) );
+					error_log ( "InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
 					break;
 				case "none" :
 				default :
@@ -224,17 +226,18 @@ class LogManagement {
 	 * @param string $name
 	 */
 	public function logDebug($data, $name) {
-		$CMobj = ConfigurationManagement::getInstance ();
-		switch ($CMobj->getExecutionContext ()) {
+		$cs = CommonSystem::getInstance();
+// 		$CMobj = ConfigurationManagement::getInstance ();
+		switch ($cs->CMObj->getExecutionContext ()) {
 			case "render" :
 				$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 5 );
-				$MapperObj = Mapper::getInstance ();
+				$cs->MapperObj = Mapper::getInstance ();
 				$dbgString = "";
 				foreach ( $dbg as $A ) {
 					$dbgString .= $A ['function'] . "() from " . substr ( $A ['file'], strrpos ( $A ['file'], "/" ) + 1 ) . "<br>\r";
 				}
-
-				$this->DebugLog [$this->DebugLogIdx] ['name'] = str_replace ( "->", "<br>->\r", $name ) . "<br>\r" . $MapperObj->getWhereWeAreAt () . "<br>\r" . $dbgString;
+				
+				$this->DebugLog [$this->DebugLogIdx] ['name'] = str_replace ( "->", "<br>->\r", $name ) . "<br>\r" . $cs->MapperObj->getWhereWeAreAt() . "<br>\r" . $dbgString;
 				$this->DebugLog [$this->DebugLogIdx] ['data'] = $data;
 				$this->DebugLogIdx ++;
 				break;

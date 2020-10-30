@@ -10,7 +10,7 @@ stylesheet_2 "hydre_01_popmenu.css"
 bg			"hydre_bg.jpg"	
 bg_repeat	"repeat"	
 logo		"hydre_logo.gif"	
-banniere	"hydre_banniere.gif"	
+banner		"hydre_banniere.gif"	
 
 block_01_name	"hydre_block_003"		block_01_text	"hydre_texte_002"	
 block_02_name	"hydre_block_003"		block_02_text	"hydre_texte_002"	
@@ -37,8 +37,8 @@ block_09_menu	"hydre_menu_002"
 
 admctrl_panel_bg "hydre_s01_bgc_1.gif"	
 admctrl_switch_bg "admctrl_switch_bg.gif"	
-admctrl_size_x 64	
-admctrl_size_y 64	
+admctrl_width 64	
+admctrl_height 64	
 admctrl_position "top-left"	
 
 color_gradient_start "00AA00"	

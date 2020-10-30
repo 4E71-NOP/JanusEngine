@@ -705,13 +705,21 @@ self::$CheckTable['update']['website']['0']['v']	= "ws_id";
 self::$CheckTable['update']['website']['0']['m']	= "CLI_Website_U001";
 self::$CheckTable['update']['website']['0']['p']	= "site";
 self::$CheckTable['update']['website']['0']['s']	= "name";
-self::$CheckTable['update']['website']['2']['d']	= 1;
-self::$CheckTable['update']['website']['2']['f']	= function ($a) { return array ( "SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';"); };
-self::$CheckTable['update']['website']['2']['c']	= "lang_id";
-self::$CheckTable['update']['website']['2']['v']	= "lang_id";
-self::$CheckTable['update']['website']['2']['m']	= "CLI_Website_U002";
-self::$CheckTable['update']['website']['2']['p']	= "language";
-self::$CheckTable['update']['website']['2']['s']	= "lang";
+self::$CheckTable['update']['website']['1']['d']	= 1;
+self::$CheckTable['update']['website']['1']['f']	= function ($a) { return array ( "SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';"); };
+self::$CheckTable['update']['website']['1']['c']	= "lang_id";
+self::$CheckTable['update']['website']['1']['v']	= "lang_id";
+self::$CheckTable['update']['website']['1']['m']	= "CLI_Website_U002";
+self::$CheckTable['update']['website']['1']['p']	= "language";
+self::$CheckTable['update']['website']['1']['s']	= "lang";
+self::$CheckTable['update']['website']['2']['d']	= 2;
+self::$CheckTable['update']['website']['2']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_name FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['theme_website']." ss WHERE sd.theme_name = '".$a['params']['theme']."' AND sd.theme_id = ss.theme_id AND ss.ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['update']['website']['2']['c']	= "theme_id";
+self::$CheckTable['update']['website']['2']['v']	= "theme_id";
+self::$CheckTable['update']['website']['2']['m']	= "CLI_Website_U003";
+self::$CheckTable['update']['website']['2']['p']	= "theme";
+self::$CheckTable['update']['website']['2']['s']	= "name";
+
 
 // Variable
 self::$CheckTable['set']['variable']['0']['d']	= 4;

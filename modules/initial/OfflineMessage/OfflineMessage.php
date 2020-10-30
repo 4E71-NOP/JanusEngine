@@ -18,22 +18,23 @@ class ModuleOffLineMessage {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$ClassLoaderObj = ClassLoader::getInstance();
-		$ClassLoaderObj->provisionClass('ThemeData');
-		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-		$ClassLoaderObj->provisionClass('RenderLayout');
-		$ClassLoaderObj->provisionClass('WebSite');
+		$cs = CommonSystem::getInstance();
+// 		$ClassLoaderObj = ClassLoader::getInstance();
+// 		$ClassLoaderObj->provisionClass('ThemeData');
+// 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
+// 		$ClassLoaderObj->provisionClass('RenderLayout');
+// 		$ClassLoaderObj->provisionClass('WebSite');
 		
 		
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
+// 		$MapperObj = Mapper::getInstance();
+// 		$LMObj = LogManagement::getInstance();
+// 		$CMObj = ConfigurationManagement::getInstance();
 		
 		$localisation = " / ModuleOffLineMessage";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleOffLineMessage");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleOffLineMessage");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleOffLineMessage");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleOffLineMessage");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$l = "eng";
@@ -62,17 +63,15 @@ class ModuleOffLineMessage {
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$ThemeDataObj->setThemeData($theme_princ_); //Better to give an array than the object itself.
-		$ThemeDataObj->setThemeName('theme_princ_');
+		$ThemeDataObj->setThemeName('mt_');
 		
 		$RenderLayoutObj = RenderLayout::getInstance();
 
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
 		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
 		
-		
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', 512);
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', 1024);
-		
 		
 		$Content = "<!-- __________ start of modules __________ -->\r
 		<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: hidden;

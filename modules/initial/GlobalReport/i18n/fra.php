@@ -1,5 +1,5 @@
 <?php 
-$tabI18n = array(
+$i18n = array(
 	'kb'	=>	"Ko",
 
 	'tabTxt1'	=>	"Général",

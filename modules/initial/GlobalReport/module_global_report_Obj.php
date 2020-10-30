@@ -21,62 +21,45 @@ class ModuleGlobalReport {
 	 * @return string
 	 */
 	public function render (&$infos){
-		$ClassLoaderObj = ClassLoader::getInstance();
+		$cs = CommonSystem::getInstance();
 		
-		$CMObj				= ConfigurationManagement::getInstance();
-		$LMObj				= LogManagement::getInstance();
 		$RenderLayoutObj	= RenderLayout::getInstance();
-		$RequestDataObj		= RequestData::getInstance();
-		$I18nObj			= I18n::getInstance();
-		$SMObj				= SessionManagement::getInstance($CMObj);
-		$LMObj				= LogManagement::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
-		$LMObj->logDebug($RequestDataObj->getRequestDataArray(),	"RequestDataObj");
-		$LMObj->logDebug($infos,									"infos");
-		$LMObj->logDebug($CurrentSetObj->getData(),					"CurrentSetObj->getData()");
-		$LMObj->logDebug($CMObj->ConfigDump(),						"CMObj->ConfigDump()");
-		$LMObj->logDebug($SMObj->getSession(),						"SMObj->getSession()");
-		$LMObj->logDebug($I18nObj->getI18n(),						"I18nObj->getI18n()");
-		$LMObj->logDebug($ThemeDescriptorObj->getThemeDescriptor(),	"ThemeDescriptorObj->getThemeDescriptor()");
-		$LMObj->logDebug($ThemeDataObj->getThemeData(),				"ThemeDataObj->getThemeData()");
-		$LMObj->logDebug($RenderLayoutObj->getLayout(),				"RenderLayoutObj->getLayout()");
+		$cs->LMObj->logDebug($cs->RequestDataObj->getRequestDataArray(),	"RequestDataObj");
+		$cs->LMObj->logDebug($infos,										"infos");
+		$cs->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
+		$cs->LMObj->logDebug($cs->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
+		$cs->LMObj->logDebug($cs->SMObj->getSession(),						"SMObj->getSession()");
+		$cs->LMObj->logDebug($cs->I18nObj->getI18n(),						"I18nObj->getI18n()");
+		$cs->LMObj->logDebug($ThemeDescriptorObj->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
+		$cs->LMObj->logDebug($ThemeDataObj->getThemeData(),					"ThemeDataObj->getThemeData()");
+		$cs->LMObj->logDebug($RenderLayoutObj->getLayout(),					"RenderLayoutObj->getLayout()");
 		
 		$T = array();
+		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$I18nObj->apply($tabI18n);
+		$cs->I18nObj->apply($i18n);
+		unset ($i18n);
 		
-		
-		$ClassLoaderObj->provisionClass('RenderTables');
-		$RenderTablesObj = RenderTables::getInstance();
-		
-		$T['tab_infos'] = $RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
+		$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
 		
 		$dbgLvl = $WebSiteObj->getWebSiteEntry('ws_info_debug');
 		$Content = "";
 		
-// 		$CurrentTab = 1;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 1 )	{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 2;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 2 )	{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 3;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 3 )	{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 4;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 4 )	{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 5;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 7 )	{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 6;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 8 )	{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 7;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 9 )	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-// 		$CurrentTab = 8;	if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') >= 10 )	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); }
-
-		$CurrentTab = 1;	if ( ($dbgLvl & 1 ) != 0)		{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 2;	if ( ($dbgLvl & 2 ) != 0)		{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 3;	if ( ($dbgLvl & 4 ) != 0)		{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 4;	if ( ($dbgLvl & 8 ) != 0)		{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 5;	if ( ($dbgLvl & 16 ) != 0)		{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 6;	if ( ($dbgLvl & 32 ) != 0)		{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 7;	if ( ($dbgLvl & 16384 ) != 0)	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
-		$CurrentTab = 8;	if ( ($dbgLvl & 32768 ) != 0)	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 1;	if ( ($dbgLvl & 1 ) != 0)		{ $tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 2;	if ( ($dbgLvl & 2 ) != 0)		{ $tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 3;	if ( ($dbgLvl & 4 ) != 0)		{ $tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 4;	if ( ($dbgLvl & 8 ) != 0)		{ $tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 5;	if ( ($dbgLvl & 16 ) != 0)		{ $tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 6;	if ( ($dbgLvl & 32 ) != 0)		{ $tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 7;	if ( ($dbgLvl & 16384 ) != 0)	{ $tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
+		$CurrentTab = 8;	if ( ($dbgLvl & 32768 ) != 0)	{ $tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; }	else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('defaut'); $T['tab_infos']['NbrOfTabs']++;}
 		
 		$tabDbgLvl = array(
 			1 => 1,			2 => 2,			3 => 3,
@@ -85,11 +68,10 @@ class ModuleGlobalReport {
 			10=> 8
 		);
 		
-// 		$T['tab_infos']['NbrOfTabs']		= $tabDbgLvl[$WebSiteObj->getWebSiteEntry('ws_info_debug')];
 		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
 		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 		$T['tab_infos']['GroupName']		= "gr";
-		$Content .= $RenderTablesObj->render($infos, $T);
+		$Content .= $cs->RenderTablesObj->render($infos, $T);
 		return $Content;
 	}
 	
@@ -99,7 +81,8 @@ class ModuleGlobalReport {
 	 * @return array
 	 */
 	private function reportTab01 (&$infos){
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
+		
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -108,18 +91,18 @@ class ModuleGlobalReport {
 		$I18nObj = I18n::getInstance();
 		$Content = array();
 		
-		$Content['1']['1']['cont']		= $I18nObj->getI18nEntry('t1l11');
-		$Content['2']['1']['cont']		= $I18nObj->getI18nEntry('t1l21');
-		$Content['3']['1']['cont']		= $I18nObj->getI18nEntry('t1l31');
-		$Content['4']['1']['cont']		= $I18nObj->getI18nEntry('t1l41');
-		$Content['5']['1']['cont']		= $I18nObj->getI18nEntry('t1l51');
-		$Content['6']['1']['cont']		= $I18nObj->getI18nEntry('t1l61');
-		$Content['7']['1']['cont']		= $I18nObj->getI18nEntry('t1l71');
-		$Content['8']['1']['cont']		= $I18nObj->getI18nEntry('t1l81');
-		$Content['9']['1']['cont']		= $I18nObj->getI18nEntry('t1l91');
-		$Content['10']['1']['cont']		= $I18nObj->getI18nEntry('t1l101');
-		$Content['11']['1']['cont']		= $I18nObj->getI18nEntry('t1l111');
-		$Content['12']['1']['cont']		= $I18nObj->getI18nEntry('t1l121');
+		$Content['1']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l11');
+		$Content['2']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l21');
+		$Content['3']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l31');
+		$Content['4']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l41');
+		$Content['5']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l51');
+		$Content['6']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l61');
+		$Content['7']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l71');
+		$Content['8']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l81');
+		$Content['9']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l91');
+		$Content['10']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l101');
+		$Content['11']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l111');
+		$Content['12']['1']['cont']		= $cs->I18nObj->getI18nEntry('t1l121');
 		
 		$memory_			= array();
 		$memory_['peak']	= memory_get_peak_usage();
@@ -147,13 +130,13 @@ class ModuleGlobalReport {
 		$package = array ("content" => $Content , "config" => $config);
 		
 		// --------------------------------------------------------------------------------------------
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('pv')."
 			WHERE pv_name = 'sl'
 			;");
-		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$SDDMObj->query("
+		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
+			$cs->SDDMObj->query("
 			INSERT INTO ".$SqlTableListObj->getSQLTableName('pv')." VALUES (
 			'sl',
 			'0',
@@ -161,7 +144,7 @@ class ModuleGlobalReport {
 			);");
 		}
 		
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['pv_number'] = $dbp['pv_number'];
 			$pv['pv_l'] = $dbp['pv_text'];
 		}
@@ -177,7 +160,7 @@ class ModuleGlobalReport {
 			
 			$pv['pv_number'] = mktime();
 		}
-		$SDDMObj->query("
+		$cs->SDDMObj->query("
 		UPDATE ".$SqlTableListObj->getSQLTableName('pv')." SET
 		pv_number = '".$pv['pv_number']."'
 		WHERE pv_name = 'sl'
@@ -192,16 +175,16 @@ class ModuleGlobalReport {
 	 * @return array
 	 */
 	private function reportTab02 (&$infos){
+		$cs = CommonSystem::getInstance();
+		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$LMObj = LogManagement::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$I18nObj = I18n::getInstance();
 		
 		// This will be implemented with "'" at the end of the string 
 		$GeneratedJavaScriptObj->insertJavaScript('File', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
 		
-		$log = $LMObj->getStatisticsLog();
+		$log = $cs->LMObj->getStatisticsLog();
 		$stepOne = true;
 		$timeStart = 0;
 		
@@ -211,10 +194,10 @@ class ModuleGlobalReport {
 		$dataObjectChart2['data']['datasets'][0] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		$dataObjectChart3['data']['datasets'][1] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		
-		$dataObjectChart1['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelM');
-		$dataObjectChart2['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelT');
-		$dataObjectChart3['data']['datasets'][0]['label'] = $I18nObj->getI18nEntry('tGraphLabelM2');
-		$dataObjectChart3['data']['datasets'][1]['label'] = $I18nObj->getI18nEntry('tGraphLabelT2');
+		$dataObjectChart1['data']['datasets'][0]['label'] = $cs->I18nObj->getI18nEntry('tGraphLabelM');
+		$dataObjectChart2['data']['datasets'][0]['label'] = $cs->I18nObj->getI18nEntry('tGraphLabelT');
+		$dataObjectChart3['data']['datasets'][0]['label'] = $cs->I18nObj->getI18nEntry('tGraphLabelM2');
+		$dataObjectChart3['data']['datasets'][1]['label'] = $cs->I18nObj->getI18nEntry('tGraphLabelT2');
 		
 		$mainTimeEnd = $CurrentSetObj->getDataSubEntry('timeStat', 'end');
 		
@@ -254,7 +237,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		
 		$GeneratedJavaScriptObj->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = $I18nObj->getI18nEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $I18nObj->getI18nEntry('tMemoryMb');
+		$Content['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $cs->I18nObj->getI18nEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
@@ -294,30 +277,28 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @return array
 	 */
 	private function reportTab03 (&$infos){
-		$LMObj = LogManagement::getInstance();
-		$TimeObj = Time::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$I18nObj = I18n::getInstance();
 		$Content = array();
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $I18nObj->getI18nEntry('t2l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $I18nObj->getI18nEntry('t2l12');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont'] = $I18nObj->getI18nEntry('t2l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $I18nObj->getI18nEntry('t2l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $I18nObj->getI18nEntry('t2l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-		$Content['1']['6']['cont'] = $I18nObj->getI18nEntry('t2l16');	$Content['1']['6']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('t2l12');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont'] = $cs->I18nObj->getI18nEntry('t2l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
+		$Content['1']['4']['cont'] = $cs->I18nObj->getI18nEntry('t2l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $cs->I18nObj->getI18nEntry('t2l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
+		$Content['1']['6']['cont'] = $cs->I18nObj->getI18nEntry('t2l16');	$Content['1']['6']['class'] = $block."_tb3";
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
-		$sg['TempsMin'] = $TimeObj->microtime_chrono(); 
+		$sg['TempsMin'] = $cs->TimeObj->microtime_chrono(); 
 		$sg['TempsMax'] = 0;
 		
-		$TableStats = $LMObj->getStatisticsLog();
+		$TableStats = $cs->LMObj->getStatisticsLog();
 		reset ( $TableStats );
 		
 		foreach ( $TableStats as &$A ) {
@@ -329,14 +310,10 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		$i = 2;
 		foreach ( $TableStats as &$A ) {
-// 			$A['memX'] = floor (( ($pv['i']-2) * $sg['GraphPasX']) + $sg['bordG'] );
-// 			$A['memY'] = floor (($sg['y']-$sg['bordB']) - (($A['SgMem']-$sg['MemoireMin'])/$sg['memcoef']));
 			
 			if ( $i == 2 ) { $sg['tempsAV'] = $A['temps']; }
 			$A['TempsPerf'] =  round ( ($A['temps'] - $sg['tempsAV']), 4 );
 			$A['TempsCheckpoint'] =  round ($A['temps'] - $sg['TempsMin'], 4 );
-// 			$A['tempsX'] = floor ((( ($pv['i']-2) * $sg['GraphPasX']) + $sg['bordG']) - (($sg['GraphPasX']*$sg['barre_coef'])/2) );
-// 			$A['tempsY'] = floor (($sg['y']-$sg['bordB']) - (($A['temps']-$sg['tempsAV'])/$sg['tempscoef']));
 			$sg['tempsAV'] = $A['temps'];
 			
 			$A['MemoireSegment'] = ( $A['memoire'] - $pv['mem_b4'] );
@@ -368,25 +345,24 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @return array
 	 */
 	private function reportTab04 (&$infos){
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$I18nObj = I18n::getInstance();
 		$Content = array();
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $I18nObj->getI18nEntry('t3l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $I18nObj->getI18nEntry('t3l12');	$Content['1']['2']['class'] = $block."_tb3";	$Content['1']['2']['style'] = "text-align: center;";
-		$Content['1']['3']['cont'] = $I18nObj->getI18nEntry('t3l13');	$Content['1']['3']['class'] = $block."_tb3";
-		$Content['1']['4']['cont'] = $I18nObj->getI18nEntry('t3l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $I18nObj->getI18nEntry('t3l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['5']['style'] = "text-align: center;";
-		$Content['1']['6']['cont'] = $I18nObj->getI18nEntry('t3l16');	$Content['1']['6']['class'] = $block."_tb3";	$Content['1']['6']['style'] = "text-align: center;";
-		$Content['1']['7']['cont'] = $I18nObj->getI18nEntry('t3l17');	$Content['1']['7']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t3l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('t3l12');	$Content['1']['2']['class'] = $block."_tb3";	$Content['1']['2']['style'] = "text-align: center;";
+		$Content['1']['3']['cont'] = $cs->I18nObj->getI18nEntry('t3l13');	$Content['1']['3']['class'] = $block."_tb3";
+		$Content['1']['4']['cont'] = $cs->I18nObj->getI18nEntry('t3l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $cs->I18nObj->getI18nEntry('t3l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['5']['style'] = "text-align: center;";
+		$Content['1']['6']['cont'] = $cs->I18nObj->getI18nEntry('t3l16');	$Content['1']['6']['class'] = $block."_tb3";	$Content['1']['6']['style'] = "text-align: center;";
+		$Content['1']['7']['cont'] = $cs->I18nObj->getI18nEntry('t3l17');	$Content['1']['7']['class'] = $block."_tb3";
 		
 		$tabSignal = array(
 		0 => "<span class='".$block."_erreur'>ERR</span>",
@@ -397,7 +373,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		);
 		
 		$pv['log_date'] = mktime();
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('log')."
 			WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -406,7 +382,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			;");
 		
 		$i = 2;
-		while ($dbp =  $SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp =  $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['log_action_longeur'] = strlen($dbp['log_action']);
 			switch (TRUE) {
 				case ($pv['log_action_longeur'] < 128 && $pv['log_action_longeur'] > 64):	$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] ";		break;
@@ -448,27 +424,24 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @return array
 	 */
 	private function reportTab07 (&$infos){
-		$LMObj = LogManagement::getInstance();
-		$StringFormatObj = StringFormat::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$I18nObj = I18n::getInstance();
 		$Content = array();
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']		= $I18nObj->getI18nEntry('t6l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";  
-		$Content['1']['2']['cont']		= $I18nObj->getI18nEntry('t6l12');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont']		= $I18nObj->getI18nEntry('t6l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['3']['style'] = "text-align: center;";  
-		$Content['1']['4']['cont']		= $I18nObj->getI18nEntry('t6l14');	$Content['1']['4']['class'] = $block."_tb3";
+		$Content['1']['1']['cont']		= $cs->I18nObj->getI18nEntry('t6l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";  
+		$Content['1']['2']['cont']		= $cs->I18nObj->getI18nEntry('t6l12');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont']		= $cs->I18nObj->getI18nEntry('t6l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['3']['style'] = "text-align: center;";  
+		$Content['1']['4']['cont']		= $cs->I18nObj->getI18nEntry('t6l14');	$Content['1']['4']['class'] = $block."_tb3";
 		
 		$i = 2;
-		foreach ( $LMObj->getSqlQueryLog() as $A ) {
-			$query = $StringFormatObj->ConvertToHtml($A['requete']);
+		foreach ( $cs->LMObj->getSqlQueryLog() as $A ) {
+			$query = $cs->StringFormatObj->ConvertToHtml($A['requete']);
 			
 			$queryTime = round( ( $A['temps_fin'] - $A['temps_debut'] ) , 4);
-// 			$queryTimeTotal += $queryTime;
 			
 			$Content[$i]['1']['cont'] = $A['nbr'];				$Content[$i]['1']['style'] = "text-align: center;"; $Content[$i]['1']['tc'] = 1;
 			$Content[$i]['2']['cont'] = $A['nom'];																	$Content[$i]['2']['tc'] = 2;
@@ -504,21 +477,20 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @param array $infos
 	 * @return array
 	 */private function reportTab09 (&$infos){
-		$LMObj = LogManagement::getInstance();
+	 	$cs = CommonSystem::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$I18nObj = I18n::getInstance();
 		$Content = array();
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']	= $I18nObj->getI18nEntry('t9l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont']	= $I18nObj->getI18nEntry('t9l12');	$Content['1']['2']['class'] = $block."_tb2";
-		$Content['1']['3']['cont']	= $I18nObj->getI18nEntry('t9l13');	$Content['1']['3']['class'] = $block."_tb2";	$Content['1']['3']['style'] = "text-align: center;";
+		$Content['1']['1']['cont']	= $cs->I18nObj->getI18nEntry('t9l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont']	= $cs->I18nObj->getI18nEntry('t9l12');	$Content['1']['2']['class'] = $block."_tb2";
+		$Content['1']['3']['cont']	= $cs->I18nObj->getI18nEntry('t9l13');	$Content['1']['3']['class'] = $block."_tb2";	$Content['1']['3']['style'] = "text-align: center;";
 		
 		$i = 2;
-		foreach ( $LMObj->getInternalLog() as $A ) {
+		foreach ( $cs->LMObj->getInternalLog() as $A ) {
 			$Content[$i]['1']['cont'] = $A['nbr'];			$Content[$i]['1']['tc'] = 1;
 			$Content[$i]['2']['cont'] = $A['origin'];		$Content[$i]['2']['tc'] = 1;	$Content[$i]['2']['style'] = "white-space:nowrap;";
 			$Content[$i]['3']['cont'] = $A['message'];		$Content[$i]['3']['tc'] = 1;
@@ -541,25 +513,23 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @return array
 	 */
 	private function reportTab10 (&$infos){
-		$LMObj = LogManagement::getInstance();
-		$StringFormatObj = StringFormat::getInstance();
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$I18nObj = I18n::getInstance();
 		$block = $ThemeDataObj->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $I18nObj->getI18nEntry('t10l11');	$Content['1']['1']['class'] = $block."_tb3";
-		$Content['1']['2']['cont'] = $I18nObj->getI18nEntry('t10l12');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t10l11');
+		$Content['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('t10l12');
 		
 		$i = 2;
 		
-		foreach ( $LMObj->getDebugLog() as $A ) {
+		foreach ( $cs->LMObj->getDebugLog() as $A ) {
 			$Content[$i]['1']['cont'] = $A['name'];
-			$Content[$i]['2']['cont'] = $StringFormatObj->print_r_html($A['data']);
-			$Content[$i]['1']['style'] = "vertical-align:top;";
-			$Content[$i]['2']['tc'] = 1;
+			$Content[$i]['2']['cont'] = $cs->StringFormatObj->print_r_html($A['data']);
+			$Content[$i]['1']['style'] = "vertical-align:top;font-size:10px;";
+			$Content[$i]['2']['style'] = "font-size:10px;";
 			$i++;
 		}
 		

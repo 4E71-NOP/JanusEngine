@@ -1,5 +1,5 @@
 add decoration 							
-name	'hydr_aqua_texte_001'						
+name	'hydr_aqua_txt_menu'						
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
@@ -19,7 +19,7 @@ a_hover_fg_col	'000000'	a_hover_bg_col	'B0E0FF'			a_hover_special	'font-weight:b
 							
 							
 							
-table_rules	'border-spacing:0px; cellspacing:0px; width:100%'						
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
@@ -31,8 +31,8 @@ t01_tr_bg_hover_col	'ACEDD4'
 							
 td_a_fg_col	'000000'			td_a_decoration	'none'		
 td_a_hover_fg_col	'FFFFFF'	td_a_hover_bg_col	'004080'			td_a_hover_special	'font-weight:bold;display:block'
-td_a_active_special	'color:inherit;'						
-
+td_a_active_fg_col	'000000'					td_a_active_special	'color:inherit;'
+td_a_visited_fg_col	'000000'						
 							
 code_font	'courier, monospace'	code_fg_col	'008000'	code_bg_col	'000000CC'		
 							

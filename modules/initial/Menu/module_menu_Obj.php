@@ -23,17 +23,18 @@ class ModuleMenu {
 	 * @return string
 	 */
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
+//		$MapperObj = Mapper::getInstance();
+//		$LMObj = LogManagement::getInstance();
+//		$CMObj = ConfigurationManagement::getInstance();
+//		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		
 		$localisation = " / ModuleMenu";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleMenu");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleMenu");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleMenu");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleMenu");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -42,11 +43,9 @@ class ModuleMenu {
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$ServerInfosObj = $CurrentSetObj->getInstanceOfServerInfosObj();
  		$RenderLayoutObj = RenderLayout::getInstance();
- 		$StringFormatObj = StringFormat::getInstance();
+//  		$StringFormatObj = StringFormat::getInstance();
  		
- 		
- 		
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
@@ -94,7 +93,7 @@ class ModuleMenu {
 			$i++;
 		}
 
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "\$fileList" . $StringFormatObj->arrayToString($fileList)));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "\$fileList" . $cs->StringFormatObj->arrayToString($fileList)));
 		
 		// --------------------------------------------------------------------------------------------
 		// One query to get all the necessary informations for the processing 	
@@ -111,14 +110,14 @@ class ModuleMenu {
 		AND cat.cate_state = '1'
 		ORDER BY cat.cate_parent,cat.cate_position
 		;";
-		$dbquery = $SDDMObj->query($infos['module_menu_requete']);
+		$dbquery = $cs->SDDMObj->query($infos['module_menu_requete']);
 		$Content = "";
 		$menuData = &$infos['menuData'];
 		
-		$StringFormatObj = StringFormat::getInstance();
-		if ( $SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
+// 		$cs->StringFormatObj = StringFormat::getInstance();
+		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
 		else {
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$cate_id_index = $infos['cate_id_index'] = $dbp['cate_id'];
 				$menuData[$cate_id_index] = array (
 					"cate_id"		=> $dbp['cate_id'],
@@ -181,13 +180,9 @@ class ModuleMenu {
 			unset (
 				$i18n,
 				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
 				$CurrentSetObj,
 				$WebSiteObj,
 				$ThemeDataObj,
-				$CMObj,
 				$menuData,
 				$cate_id_index,
 				$FPRM,

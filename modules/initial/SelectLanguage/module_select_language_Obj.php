@@ -18,18 +18,13 @@ class ModuleSelectLanguage {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SMObj = SessionManagement::getInstance(null);
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$StringFormatObj = StringFormat::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$localisation = " / ModuleSelectLanguage";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleSelectLanguage");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleSelectLanguage");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleSelectLanguage");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleSelectLanguage");
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -41,9 +36,9 @@ class ModuleSelectLanguage {
 		$language_website_ = array();
 		$Content = "";
 		if ( $WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
-			$dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
+			$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
 			$pv['1'] = 1;
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$language_website_[$pv['1']]['lang_id']				= $dbp['lang_id'];
 				$language_website_[$pv['1']]['lang_639_3']			= $dbp['lang_639_3'];
 				$language_website_[$pv['1']]['lang_image']			= $dbp['lang_image'];
@@ -52,7 +47,7 @@ class ModuleSelectLanguage {
 			}
 			
 			$language_website_support = array();
-			$dbquery = $SDDMObj->query("
+			$dbquery = $cs->SDDMObj->query("
 				SELECT b.lang_id
 				FROM ".$SqlTableListObj->getSQLTableName('language_website')." a, ".$SqlTableListObj->getSQLTableName('language')." b
 				WHERE a.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -61,8 +56,8 @@ class ModuleSelectLanguage {
 			
 			$Content .= "<table><tr>";
 			
-			if ( $SDDMObj->num_row_sql($dbquery) > 1 ) {
-				while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			if ( $cs->SDDMObj->num_row_sql($dbquery) > 1 ) {
+				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 					$pv['offset'] = $dbp['lang_id'];
 					$language_website_support[$pv['offset']] = $pv['offset'];
 				}
@@ -75,7 +70,7 @@ class ModuleSelectLanguage {
 						
 						$Content .= "<td>
 						<a class='".$ThemeDataObj->getThemeName().$infos['block']."_lien'
-						href='index.php?".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sdup')."&amp;M_UTILIS[login]=".$SMObj->getSessionEntry('LoginDecoded')."&amp;M_UTILIS[lang]=".$language_website_[$A]['lang_639_3']."&amp;UPDATE_action=UPDATE_USER&amp;M_UTILIS[confirmation_modification]=1'
+						href='index.php?".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sdup')."&amp;M_UTILIS[login]=".$cs->SMObj->getSessionEntry('LoginDecoded')."&amp;M_UTILIS[lang]=".$language_website_[$A]['lang_639_3']."&amp;UPDATE_action=UPDATE_USER&amp;M_UTILIS[confirmation_modification]=1'
 						onMouseOver=\"t.ToolTip('".$language_website_[$A]['lang_original_name']."')\"
 						onMouseOut='t.ToolTip()'
 						><img src='".$pv['img_src']."' alt='".$language_website_[$A]['lang_639_3']."' height='64' width='64' border='0'>

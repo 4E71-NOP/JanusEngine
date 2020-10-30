@@ -26,7 +26,6 @@ class RenderAdmDashboard {
 		return self::$Instance;
 	}
 	
-	
 	public function render(){
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -129,7 +128,7 @@ class RenderAdmDashboard {
 		// 1	9	5
 		//if ( !isset ( ${$theme_tableau}['theme_admctrl_position'] ) ) {}
 		
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_size_x').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_size_y').");");
+		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		
 		$n = 1;
 		foreach ( $module_tab_adm_ as $m ) {

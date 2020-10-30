@@ -21,43 +21,52 @@ class ThemeDescriptor {
 	 * @param integer $id
 	 */
 	public function getThemeDescriptorDataFromDB($ThemeId, $UserObj, $WebSiteObj) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$cs = CommonSystem::getInstance();
+		
+// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$RequestDataObj = RequestData::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$Dest = $ThemeId;
-
-		$LMObj = LogManagement::getInstance();
 		
 		if ( $Dest == "mt_" ) {
-			if ( $UserObj->getUserEntry('pref_theme') != 0 ) { $Dest = $UserObj->getUserEntry('pref_theme'); }	// By default the user theme is prefered
-			else { $Dest = $WebSiteObj->getWebSiteEntry('theme_id'); }											// Problem with the prefered user theme
+			if ( $UserObj->getUserEntry('pref_theme') != 0 ) { 
+				$Dest = $UserObj->getUserEntry('pref_theme'); 	// By default the user theme is prefered
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. Id=".$Dest ));
+			}
+			else { 
+				$Dest = $WebSiteObj->getWebSiteEntry('theme_id'); // Problem with the prefered user theme
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. Id=".$Dest ));
+			}											
 		}
-		else { $Dest = $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId'); }			// Case for displaying another theme to the user (browsing and choosing).
+		else { 
+			$Dest = $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId'); 			// Case for displaying another theme to the user (browsing and choosing).
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. Id=".$Dest ));
+		}
 		
-		$dbquery = $SDDMObj->query ( "
-			SELECT * 
+		$q = "SELECT * 
 			FROM " . $SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
 			WHERE a.theme_id = '".$Dest."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'
-			;" );
+			;";
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor id=".$ThemeId .". \$q = `".$q."`"));
+		$dbquery = $cs->SDDMObj->query ( $q );
 		
 		// --------------------------------------------------------------------------------------------
 		//	Case when an admin goofs (murphy's law) even though an admin cannot goof.
 		//	"Yo dawg i heard you like admin Ungoofing so i put an admin ungoof in yo admin ungoof..."
 		// --------------------------------------------------------------------------------------------
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor id=".$ThemeId));
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
 		}
 		else {
-			$dbquery = $SDDMObj->query("
+			$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')."
-			WHERE theme_id = 2
+			WHERE theme_id = '2'
 			;");
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));
 		}
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) { $this->ThemeDescriptor [$A] = $B; }
 		}
 		$this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);

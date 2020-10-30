@@ -47,8 +47,8 @@ class  RenderTables {
 	 */
 	public function render($infos, $T) {
 // 	 * tc : Define font size class from 1 to 7. Default is 3.<br>
-		$cs = CommonSystem::getInstance(); 
 // 	$T as Table containing all needed information for rendering the table and tabs.
+		$cs = CommonSystem::getInstance(); 
 
 		$CurrentSetObj = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
@@ -144,9 +144,7 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
-				$cs->LMObj->InternalLog(array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ .
- 						"\$ADC['onglet'][\$CurT]['nbr_ligne']=`".$ADC['onglet'][$CurT]['nbr_ligne'].
- 						"`; HighLightType=`". $ADC['onglet'][$CurT]['HighLightType'])."`" );
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
 				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
 
 				$Content .= "<table class='".$block.CLASS_Table01." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;

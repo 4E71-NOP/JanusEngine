@@ -23,14 +23,15 @@ class ThemeData {
 	 * Creates a list of all decorations that will be used against incoming data from the theme.
 	 */
 	public function setDecorationListFromDB () {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$cs = CommonSystem::getInstance();
+// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
-		$dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 		SELECT *
 		FROM ". $SqlTableListObj->getSQLTableName('decoration')."
 		;");
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_ref_id']]['deco_id']	=	$dbp['deco_id'];
 			$this->DecorationList[$dbp['deco_name']]['deco_type']	=	$this->DecorationList[$dbp['deco_ref_id']]['deco_type']	=	$dbp['deco_type'];
 		}
@@ -42,10 +43,9 @@ class ThemeData {
 	 * Make sure no decoration gets loaded 2 times.
 	 */
 	public function renderBlockData() {
+		$cs = CommonSystem::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
-		
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$StringFormat = StringFormat::getInstance();
 		$CurrentBlock = array();
@@ -57,6 +57,7 @@ class ThemeData {
 		$this->ThemeData['blockGCount'] = 0;
 		
 		for ( $i = 1 ; $i <= 30 ; $i++ ) {
+			
 			$Block = $StringFormat->getDecorationBlockName( "", $i , "");
 			$BlockG = "B" . $Block . "G";
 			$BlockT = "B" . $Block . "T";
@@ -64,6 +65,7 @@ class ThemeData {
 			$CurrentBlock['nom'] = $this->ThemeData['theme_block_'.$Block.'_name'];
 			
 			if ( strlen($CurrentBlock['nom']) > 0 ) {
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing ".$CurrentBlock['nom']));
 				$cbn = $CurrentBlock['nom'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
@@ -187,14 +189,14 @@ class ThemeData {
 				
 				$cbal = &$BlockAlreadyLoaded['10'][$CurrentBlock ['deco_id']];
 				if (!isset ( $cbal )) {
-					$dbquery = $SDDMObj->query ( "
+					$dbquery = $cs->SDDMObj->query ( "
 						SELECT *
 						FROM " . $SqlTableListObj->getSQLTableName ( 'deco_10_menu' ) . "
 						WHERE deco_id = '" . $CurrentBlock['deco_id'] . "'
 						;" );
 					$p = &$this->ThemeData[$BlockM];
 					
-					while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+					while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 						$p[$dbp['deco_variable_name']] = $dbp['deco_value'];
 					}
 					

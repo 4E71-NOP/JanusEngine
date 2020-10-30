@@ -18,20 +18,18 @@ class ModuleCalendar {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$localisation = " / ModuleCalendar";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleCalendar");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleCalendar");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleCalendar");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleCalendar");
 		
 		$CurrentSet = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-		$l = $CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		
 		$i18n = array();
 		include ("../modules/initial/Calendar/i18n/".$l.".php");
@@ -66,13 +64,9 @@ class ModuleCalendar {
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,
-				$MapperObj,
-				$LMObj,
-				$MapperObj,
 				$CurrentSet,
 				$WebSiteObj,
 				$ThemeDataObj,
-				$CMObj,
 				$CurrentDate,
 				$date,
 				$pv

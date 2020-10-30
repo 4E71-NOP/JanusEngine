@@ -18,31 +18,22 @@ class ModuleAdministration {
 	public function __construct(){}
 	
 	public function render (&$infos) {
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-// 		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$StringFormatObj = StringFormat::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleAdministration";
-		$MapperObj->AddAnotherLevel($localisation );
-		$LMObj->logCheckpoint("ModuleAdministration");
-		$MapperObj->RemoveThisLevel($localisation );
-		$MapperObj->setSqlApplicant("ModuleAdministration");
+		$cs->MapperObj->AddAnotherLevel($localisation );
+		$cs->LMObj->logCheckpoint("ModuleAdministration");
+		$cs->MapperObj->RemoveThisLevel($localisation );
+		$cs->MapperObj->setSqlApplicant("ModuleAdministration");
 		
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-// 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$l = $CurrentSetObj->getDataEntry('language');
-		
-// 		$i18n = array();
-// 		include ("../modules/initial/Authentification/i18n/".$l.".php");
 		
 		$Content = "";
-		$dbquery = $SDDMObj->query ("
+		$dbquery = $cs->SDDMObj->query ("
 			SELECT * 
 			FROM ".$SqlTableListObj->getSQLTableName('category')." 
 			WHERE cate_type IN ('2', '3') 
@@ -51,23 +42,13 @@ class ModuleAdministration {
 			AND group_id ".$UserObj->getUserEntry('clause_in_group')." 
 			AND cate_state = '1' 
 			;");
-// 		$Content .= "<!--
-// 			ModuleAdministration:\r
-// 			SELECT * 
-// 			FROM ".$SqlTableListObj->getSQLTableName('category')." 
-// 			WHERE cate_type IN ('2', '3') 
-// 			AND ws_id IN ('1', '".$WebSiteObj->getWebSiteEntry('ws_id')."') 
-// 			AND cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."' 
-// 			AND group_id ".$UserObj->getUserEntry('clause_in_group')." 
-// 			AND cate_state = '1' 
-// 			;
-// 			-->";
+
 		
-		if ( $SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
+		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
 		else {
 			$Content .= "<ul id='Admin_Menu_Simple' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";
 			$infos['menuData'] = array();
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$cateIdIndex = $dbp['cate_id'];
 				$infos['menuData'][$cateIdIndex] = array (
 					"cate_id"		=> $dbp['cate_id'],
@@ -95,11 +76,8 @@ class ModuleAdministration {
 		
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
-					$menu_principal ,
-					$function_parametres ,
 					$dbquery ,
 					$dbp,
-					$pv
 					);
 		}
 		return $Content;

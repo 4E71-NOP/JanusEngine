@@ -314,7 +314,7 @@ self::$PreRequisiteTable['add']['layout_content'] = array (
 				array ( "v" => "minimum_x",				"t" => "lyoc_minimum_x"),
 				array ( "v" => "minimum_y",				"t" => "lyoc_minimum_y"),
 				array ( "v" => "module",				"t" => "lyoc_module_name"),
-				array ( "v" => "calculation_type",		"t" => "lyoc_calculus_type"),
+				array ( "v" => "calculation_type",		"t" => "lyoc_calculation_type"),
 				array ( "v" => "position_x",			"t" => "lyoc_position_x"),
 				array ( "v" => "position_y",			"t" => "lyoc_position_y"),
 				array ( "v" => "dimenssion_x",			"t" => "lyoc_size_x"),
@@ -433,7 +433,7 @@ self::$PreRequisiteTable['add']['theme'] = array (
 				array("v" => "admctrl_position",	"s" => "theme"),
 		),
 		"nextId" => array (
-				array ("table" => "theme_descriptor",	"column" => "theme_id",			"target" => "id"),
+				array ("table" => "theme_descriptor",		"column" => "theme_id",			"target" => "id"),
 				array ("table" => "theme_website",			"column" => "theme_website_id",	"target" => "theme_website_id"),
 		),
 		"columns" => array(
@@ -459,13 +459,13 @@ self::$PreRequisiteTable['add']['theme'] = array (
 				array ( "v" => "divinitial_dy",				"t" => "theme_divinitial_dy"),
 				array ( "v" => "admctrl_panel_bg",			"t" => "theme_admctrl_panel_bg"),
 				array ( "v" => "admctrl_switch_bg",			"t" => "theme_admctrl_switch_bg"),
-				array ( "v" => "admctrl_size_x",			"t" => "theme_admctrl_size_x"),
-				array ( "v" => "admctrl_size_y",			"t" => "theme_admctrl_size_y"),
+				array ( "v" => "admctrl_width",				"t" => "theme_admctrl_width"),
+				array ( "v" => "admctrl_height",			"t" => "theme_admctrl_height"),
 				array ( "v" => "admctrl_position",			"t" => "theme_admctrl_position"),
 				array ( "v" => "color_gradient_start",		"t" => "theme_gradient_start_color"),
 				array ( "v" => "color_gradient_middle",		"t" => "theme_gradient_middle_color"),
 				array ( "v" => "color_gradient_end",		"t" => "theme_gradient_end_color"),
-
+				
 				array ( "v" => "block_01_name",		"t" => "theme_block_01_name"),
 				array ( "v" => "block_02_name",		"t" => "theme_block_02_name"),
 				array ( "v" => "block_03_name",		"t" => "theme_block_03_name"),
