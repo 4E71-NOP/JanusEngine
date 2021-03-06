@@ -17,14 +17,15 @@ include ("define.php");
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
-$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is extended by others.
+$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is used by others.
 $cs = CommonSystem::getInstance();
 $cs->LMObj->setDebugLogEcho(1);
 $cs->LMObj->setInternalLogTarget(LOG_TARGET);
 $cs->CMObj->InitBasicSettings();
 
 session_name("HydrInstallMonitorSessionId");
-session_start();
+// session_start();
+$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "Install_monitor : **!!** Break **!!**"));
 $cs->initSmObj();
 $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Install_monitor : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)." *** \$cs->SMObj->getSession() = ".$cs->StringFormatObj->arrayToString($cs->SMObj->getSession()). " *** EOL" ));
 
@@ -103,7 +104,7 @@ $itd = array();											// ITD for Installation Table Data
 $tmp = array();
 $itd['end_date']['inst_nbr'] = 0;
 $dbquery = $SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('installation'). ";");
-if ( $SDDMObj->num_row_sql($dbquery) > 0 ) { 
+if ( $dbquery != false && $SDDMObj->num_row_sql($dbquery) > 0 ) { 
 	while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
 		$tmp[$dbp['inst_name']]['inst_display']		= $dbp['inst_display'];
 		$tmp[$dbp['inst_name']]['inst_name']		= $dbp['inst_name'];
@@ -163,10 +164,10 @@ $DocContent = "<!DOCTYPE html>
 <head>\r
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r".
 $refresh.
-"<title>".$WebSiteObj->getWebSiteEntry('sw_title')."</title>\r
+"<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 ".$stylesheet."\r
 </head>\r
-<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' vlink='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' alink='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' background='../media/theme/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
 ";
 
 // --------------------------------------------------------------------------------------------
@@ -186,7 +187,7 @@ unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
 $div_initial_bg = "";
-if ( strlen($ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $div_initial_bg = "background-image: url(../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ;}
+if ( strlen($ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $div_initial_bg = "background-image: url(../media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ;}
 if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
 if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
 
@@ -347,6 +348,6 @@ echo ($DocContent);
 
 $SDDMObj->disconnect_sql();
 
-session_write_close();
+// session_write_close();
 
 ?>

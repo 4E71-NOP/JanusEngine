@@ -16,7 +16,7 @@ class AdminFormTool {
 	private static $Instance = null;
 	
 	private function __construct(){}
-
+	
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new AdminFormTool();

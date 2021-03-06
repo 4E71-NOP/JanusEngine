@@ -1,7 +1,7 @@
 add	decoration
 name	'rw_nebula_menu_002'
-graphique	'rw_nebula_block_002'
-texte	'rw_nebula_texte_002'
+graphique	'rw_nebula_block_001'
+texte	'rw_nebula_txt_menu'
 type	'menu'
 directory	'Nebula'
 	

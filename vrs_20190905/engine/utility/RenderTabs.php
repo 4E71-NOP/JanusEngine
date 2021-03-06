@@ -30,8 +30,7 @@ class RenderTabs {
 	public function render($infos, $T) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-	
+		
 		$tab_infos = &$T['tab_infos'];
 		
 		$pv= array();

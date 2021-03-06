@@ -1,7 +1,11 @@
 <?php
 // --------------------------------------------------------------------------------------------
 // THE DEFINE SECTION IS SET HERE AND IT IS FINE.
-// If you're slow : Meaning don't 'define' anyhere else!
+// If you're slow : Meaning, don't 'define' anyhere else!
+
+/* @var $application String */
+
+define ( "DEFAULT_ERROR_REPORTING", (E_ALL ^ E_WARNING ^ E_NOTICE) );
 define ( "DEFAULT_SITE_ID", 2 );
 
 define ( "USER_ACTION_SIGN_IN", "singIn" );
@@ -13,7 +17,6 @@ define ( "ANONYMOUS_USER_NAME", "anonymous" );
 define ("UtilityDirectory"	, "engine/utility/");
 define ("SddmDirectory"		, "engine/sddm/");
 define ("EntityDirectory"	, "engine/entity/");
-
 
 // --------------------------------------------------------------------------------------------
 // Logs
@@ -32,11 +35,16 @@ define ( "INSTALL_LOG_TARGET", "system" );
 $ll = 0;
 switch ($application) {
 	case 'install' :
-	case 'monitor' :
 		$ll = LOGLEVEL_WARNING;
-// 		$ll = LOGLEVEL_STATEMENT;
+		$ll = LOGLEVEL_STATEMENT;
+// 		$ll = LOGLEVEL_BREAKPOINT;
+		break;
+	case 'monitor' :
+		$ll = LOGLEVEL_ERROR;
+// 		$ll = LOGLEVEL_WARNING;
 		break;
 	case 'website':
+		$ll = LOGLEVEL_WARNING;
 		$ll = LOGLEVEL_STATEMENT;
 		break;
 	default :
@@ -45,7 +53,7 @@ switch ($application) {
 		break;
 }
 define ( "INTERNAL_LOG_LEVEL", $ll ) ;
-error_log("Log level is set to : ". INTERNAL_LOG_LEVEL);
+// error_log("Log level is set to : ". INTERNAL_LOG_LEVEL);
 unset ($ll);
 
 

@@ -44,7 +44,7 @@ if ( $pv['ObjectMode'] == 1 ) {
 	function returnConfig () {
 		$tab = array();
 		$tab['type']				= "mysql";
-		$tab['host']				= "localhost";
+		$tab['host']				= "mysql";
 		$tab['dal']					= "MYSQLI";
 		$tab['charset']				= "utf8mb4";
 		$tab['db_user_login']		= "HydreBDD";

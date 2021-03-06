@@ -19,16 +19,12 @@ class ModuleOffLineMessage {
 	
 	public function render ($infos) {
 		$cs = CommonSystem::getInstance();
-// 		$ClassLoaderObj = ClassLoader::getInstance();
-// 		$ClassLoaderObj->provisionClass('ThemeData');
-// 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-// 		$ClassLoaderObj->provisionClass('RenderLayout');
-// 		$ClassLoaderObj->provisionClass('WebSite');
-		
-		
-// 		$MapperObj = Mapper::getInstance();
-// 		$LMObj = LogManagement::getInstance();
-// 		$CMObj = ConfigurationManagement::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ClassLoaderObj = ClassLoader::getInstance();
+		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
+		$ClassLoaderObj->provisionClass('RenderLayout');
+		$ClassLoaderObj->provisionClass('ThemeData');
+		$ClassLoaderObj->provisionClass('WebSite');
 		
 		$localisation = " / ModuleOffLineMessage";
 		$cs->MapperObj->AddAnotherLevel($localisation );
@@ -36,37 +32,38 @@ class ModuleOffLineMessage {
 		$cs->MapperObj->RemoveThisLevel($localisation );
 		$cs->MapperObj->setSqlApplicant("ModuleOffLineMessage");
 		
-		$CurrentSetObj = CurrentSet::getInstance();
 		$l = "eng";
 		// --------------------------------------------------------------------------------------------
 		$WebSiteObj = new WebSite();
+		
 		if ( $infos['SQLFatalError'] == 1 ) {
-			$ClassLoaderObj->provisionClass('WebSite');
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " SQLFatalError=1 The website is offline."));
 			$WebSiteObj->setWebSiteEntry('ws_name', "Doh!!!");
-			$WebSiteObj->setWebSiteEntry('sw_message', "Database connexion error!");
+			$WebSiteObj->setWebSiteEntry('ws_message', "Database connexion error!");
 			$WebSiteObj->setWebSiteEntry('ws_title', "Doh!!!");
 		}
 		
 		if ( $infos['bannerOffline'] == 1 ) {
-			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-			$WebSiteObj->setWebSiteEntry('sw_message', "FR : Le site est hors ligne.<br><br>ENG: The website is offline.");
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
+// 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+// 			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+			$WebSiteObj->setWebSiteEntry('ws_message', "FR : Le site est hors ligne.<br><br>ENG: The website is offline.");
 		}
 		
 		// --------------------------------------------------------------------------------------------
 		
 		include ("../stylesheets/css_admin_install.php");
-		$theme_tableau = "theme_princ_";
+		$theme_tableau = "mt_";
 		${$theme_tableau}['theme_module_largeur_interne'] = 896;
 		${$theme_tableau}['theme_module_largeur'] = 896;
 		
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$ThemeDataObj->setThemeData($theme_princ_); //Better to give an array than the object itself.
+		$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
 		$ThemeDataObj->setThemeName('mt_');
 		
 		$RenderLayoutObj = RenderLayout::getInstance();
-
+		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
 		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
 		
@@ -78,7 +75,7 @@ class ModuleOffLineMessage {
 		width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px;
 		height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;".
 		"'>\r";
-
+		
 		$infos = array(
 			"mode" => 1,
 			"affiche_module_mode" => "normal",
@@ -130,17 +127,18 @@ class ModuleOffLineMessage {
 			<html>\r
 			<head>\r
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
-			<title>".$WebSiteObj->getWebSiteEntry('sw_title')."</title>\r
+			<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 			".$stylesheet."\r
 			</head>\r
-			<body id='MWMbody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+			<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../media/theme/".$ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg' )."'>\r\r
 			<!-- __________ start of modules __________ -->\r
 			<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: visible;
 			width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px; 
-			height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;".
-			"'>\r".
+			height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;
+			'>\r".
 			$RenderDeco->render($infos).
-			$WebSiteObj->getWebSiteEntry('sw_message')."<br>\r".
+			"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>".
+			$WebSiteObj->getWebSiteEntry('ws_message')."</span><br>\r".
 			$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'module_deco_default_text')."<br>\r".
 			"
 			</div>\r

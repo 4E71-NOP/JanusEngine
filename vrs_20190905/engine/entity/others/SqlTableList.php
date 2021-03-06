@@ -19,7 +19,7 @@ class SqlTableList {
 			'article',			'article_tag',			'article_config',
 			'category',			
 			'deadline',			
-			'decoration',		'deco_10_menu',			'deco_20_caligraphe',		'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquise',			'deco_60_elysion',					
+			'decoration',		'deco_10_menu',			'deco_20_caligraph',		'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquisite',			'deco_60_elysion',					
 			'document',			'document_share',		'document_partage',
 			'extension',		'extension_config',		'extension_dependency',		'extension_file',
 			'group',			'group_user',

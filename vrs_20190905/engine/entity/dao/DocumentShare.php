@@ -16,28 +16,27 @@ class DocumentShare {
 	public function __construct() {
 	}
 	public function getDocumentShareDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
-		$dbquery = $SDDMObj->query ( "" );
-		while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$dbquery = $cs->SDDMObj->query ( "" );
+		while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) { $this->DocumentShare [$A] = $B; }
 		}
 		
-		$LMObj = LogManagement::getInstance();
-		$dbquery = $SDDMObj->query ( "
+		$dbquery = $cs->SDDMObj->query ( "
 			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('document_share') . "
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('document_share') . "
 			WHERE share_id = '" . $id . "'
 			;" );
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document_share id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document_share id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->DocumentShare[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document_share id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document_share id=".$id));
 		}
 		
 	}

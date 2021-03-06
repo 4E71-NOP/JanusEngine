@@ -14,7 +14,7 @@
 
 class CommandConsole {
 	private static $Instance = null;
-	private static $i18n = array();
+// 	private static $i18n = array();
 	private static $SqlQueryTable = array();
 
 	private static $InitTable = array();
@@ -29,7 +29,7 @@ class CommandConsole {
 			self::$Instance = new CommandConsole ();
 			self::loadI18n();
 
-			self::makeQueryTable();
+// 			self::makeQueryTable();
 
 			self::makeInitTable();
 			self::makeCheckTable();
@@ -40,7 +40,7 @@ class CommandConsole {
 		}
 		return self::$Instance;
 	}
-
+	
 	/**
 	 * Load the I18n file and fill the array.
 	 * 
@@ -48,34 +48,34 @@ class CommandConsole {
 	private static function loadI18n () {
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ("engine/cli/i18n/".$l.".php");
-		self::$i18n = $i18n;
+		$cs->I18nObj->apply($i18n);
+		unset ($i18n);
+// 		self::$i18n = $i18n;
 	}
 	
-
+	
 	/**
 	 * 2020 02 26 - DEPRECATED
 	 * Artefact from the old system. Kept here for migration purposes 
 	 * Fill the $SqlQueryTable with all the necessary assets to test if a command can be executed or not.
 	 * 
 	 */
-	private static function makeQueryTable () {
-		$cs = CommonSystem::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-
-		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
-		$webSiteId = $WebSiteContextObj->getWebSiteEntry('ws_id');
-
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-
-		include ("engine/cli/SqlQueryTable.php");
+// 	private static function makeQueryTable () {
+// 		$cs = CommonSystem::getInstance();
+// 		$CurrentSetObj = CurrentSet::getInstance();
+// 		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
+// // 		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
+// // 		$webSiteId = $WebSiteContextObj->getWebSiteEntry('ws_id');
+// // 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		
+// 		include ("engine/cli/SqlQueryTable.php");
 	
-	}
+// 	}
 	
 	/**
 	 * Initialize the values of the entity.
@@ -237,16 +237,17 @@ class CommandConsole {
 	 */	
 	private function commandValidation (&$CCL) {
 		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$CCL['sqlTables'] = $SqlTableListObj->getSQLWholeTableName();
+// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$CCL['sqlTables'] = $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLWholeTableName();
 
 		//----------------------------------------
 		// Execute specific functions
 		$execute = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']]['execute'];
 		if ( is_callable($execute) ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ ." : Prerequisite execute is a callable function."));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Prerequisite execute is a callable function."));
 			$execute($CCL); 
 		}
 		
@@ -257,6 +258,7 @@ class CommandConsole {
 				if ($CCL['errFlag'] != 1) {						// Saves time if a previous error occured. We stop at first error.
 					$af = $A['f'];
 					switch ($A['d']) {
+						// Directive = 1 : Return the data in a variable. No error message.
 						case 1:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
@@ -266,12 +268,13 @@ class CommandConsole {
 								}
 							}
 							break;
+						// Directive = 2 : Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
 						case 2:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
 								$dbquery = $cs->SDDMObj->query($q['0']);
 								if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
-									$msg = str_replace ( '<A1>', $A['p'] , self::$i18n['elementNotFound'] );
+									$msg = str_replace ( '<A1>', $A['p'] , $cs->I18nObj->getI18nEntry('elementNotFound') );
 									$cs->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
 									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									
@@ -283,12 +286,13 @@ class CommandConsole {
 								}
 							}
 							break;
+						// Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
 						case 3:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
 								$dbquery = $cs->SDDMObj->query($q['0']);
 								if ( $CCL['errFlag'] != 1 && $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
-									$msg = str_replace ( '<A1>', $CCL['target'] , self::$i18n['duplicateFound'] );
+									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $cs->I18nObj->getI18nEntry('duplicateFound') );
 									$cs->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
 									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									$CCL['errFlag'] = 1;
@@ -296,6 +300,7 @@ class CommandConsole {
 								}
 							}
 							break;
+						// Directive = 4 : Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
 						case 4:
 							$result = $af($CCL);
 							if ( $result == 0 ) { $CCL['errFlag'] = 1; }
@@ -316,7 +321,9 @@ class CommandConsole {
 	 */
 	private function prepareSQLStatement (&$CCL) {
 		$cs = CommonSystem::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		//----------------------------------------
 		// Convert selected values to a compatible format with the DB model.
 		$ptr = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']];
@@ -326,7 +333,7 @@ class CommandConsole {
 		}
 		// Next Id ----------------------------------------
 		if ( is_array($ptr['nextId']) ) {
-			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $cs->SDDMObj->findNextId($SqlTableListObj->getSQLTableName($A['table']), $A['column']); }
+			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $cs->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
 		}
 		//timeCreate ----------------------------------------
 		$time = time ();
@@ -397,7 +404,7 @@ class CommandConsole {
 
 		if ( is_array(self::$ActionTable[$CCL['init']['cmd']]) ) {
 			if ( is_callable(self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']])) {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
 					"user_id" => $UserObj->getUserEntry('id'),

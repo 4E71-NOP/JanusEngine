@@ -12,27 +12,28 @@
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
 class Deco20_Caligraph {
-	private $Deco20_Caligraph = array ();
+	private $Deco20_Caligraph = array (
+			"txt_fonte_dl_nom" => null,
+		);
 	public function __construct() {
 	}
 	public function getDeco20_CaligraphDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
-		$dbquery = $SDDMObj->query ( "
+		$dbquery = $cs->SDDMObj->query ( "
 			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('deco_20_caligraphe') . "
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_20_caligraph') . "
 			WHERE deco_id = '" . $id . "'
 			;" );
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_20_caligraphe id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_20_caligraph id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco20_Caligraph[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_20_caligraphe id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_20_caligraph id=".$id));
 		}
 		
 	}

@@ -30,21 +30,17 @@ class RenderModule {
 	
 	public function render($infos) {
 		$cs = CommonSystem::getInstance();
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-
+		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "";
 		$ModuleTable = $RenderLayoutObj->getModuleList();
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
 
-		$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
-
-		if ( strlen( $ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $pv['div_initial_bg'] = "background-image: url(../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ; }
+		if ( strlen( $ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $pv['div_initial_bg'] = "background-image: url(../media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ; }
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $_REQUEST['document_dx']); }
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $_REQUEST['document_dy']); }
 
@@ -55,21 +51,22 @@ class RenderModule {
 				<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility:" . $pv ['initial_div_vis'] . ";
 				width:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') . "px;
 				height:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') . "px;" . $pv ['div_initial_bg'] . "'>\r"; // width = Always define otherwise it won't work..
-
-		$GeneratedJavaScriptObj->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-
+		
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+		
 		$pv ['i'] = 1;
 		
-// 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => $cs->StringFormatObj->arrayToString($ModuleTable)));
 		foreach ( $ModuleTable as $m ) {
-			$_REQUEST['module_nbr'] = 1;
+			$_REQUEST['module_nbr'] = 1; // <-- A virer
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $cs->StringFormatObj->arrayToString($m)));
 			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 			
-			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$m['module_group_allowed_to_see'] = " . $m['module_group_allowed_to_see'] ." and usergroup is " .$cs->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group'))));
+			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
 				$Block = $cs->StringFormatObj->getDecorationBlockName( "B", $nbr , "");
 				$infos['module_name'] = $m['module_name'];
@@ -85,17 +82,24 @@ class RenderModule {
 				$ModuleRendererName = $m['module_classname'];
 				
 				if (!class_exists($ModuleRendererName)) {
-					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_file'] ) ); //	str_replace used during migration so we can use both files.
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
+					include ($m['module_directory'].$m['module_file']);
 				} else { $Content .= "!! !! !! !!"; }
 				
-				if (class_exists($ModuleRendererName)) { $ModuleRenderer = new $ModuleRendererName(); }
-				else { $ModuleRenderer = new ModuleNotFound(); }
+				if (class_exists($ModuleRendererName)) { 
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+					$ModuleRenderer = new $ModuleRendererName(); 
+				}
+				else {
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
+					$infos['ModuleRendererName'] = $m['module_classname'];
+					$ModuleRenderer = new ModuleNotFound(); 
+				}
 				
 // 				Execution modes are : 0 during, 1 Before, 2 After
 				switch ( $m['module_execution'] ) {
 					case 0:
 						$Content .= $this->selectDecoration($infos);
-						
 						$Content .= $ModuleRenderer->render($infos);
 						$Content .= "</div>\r</div>\r";
 						break;
@@ -116,11 +120,16 @@ class RenderModule {
 			$Content .= "<!-- __________ Module '".$m['module_name']."' end __________ -->\r\r\r\r\r";
 			$pv['i']++;
 			$infos['module_z_index'] += 2;
-
+			
 			$extraContent = $CurrentSetObj->getDataSubEntry('RenderModule', 'extraContent' );
 			if (strlen($extraContent)>0) { $Content .= $extraContent; }
 			$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
+			
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " >> END rendering of '".$m['module_name']. "' module is done"));
+			
 		}
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." All module rendered. Getting out of foreach"));
+		
 		
 		$Content .= "</div>\r
 			<!-- __________ Modules end __________ -->\r
@@ -134,18 +143,18 @@ class RenderModule {
 	}
 	
 	public function selectDecoration ($infos) {
+		$cs = CommonSystem::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$LMObj = LogManagement::getInstance();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		$Content = "";
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		
 		$err = FALSE;
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
 		switch ( $infos['deco_type'] ) {
 			case 30:	
 			case "1_div":
@@ -169,7 +178,7 @@ class RenderModule {
 				break;
 			default:
 				$mn = $infos['module_name'];
-				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
 				$Content .= "
 					<div class='".$ThemeDataObj->getThemeName().$infos['block']."'>\r
 					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std' style='position: absolute; left:
@@ -190,7 +199,7 @@ class RenderModule {
 			$Content .= $RenderDeco->render($infos);
 			unset ($RenderDeco);
 		}
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
 		
 		return $Content;
 	}
@@ -201,15 +210,17 @@ class RenderModule {
 class ModuleNotFound {
 	public function __construct(){}
 	public function render ($infos) {
-		$LMObj = LogManagement::getInstance();
-		$LMObj->log(array(
+		$cs = CommonSystem::getInstance();
+		$cs->LMObj->log(array(
 				"i"=>"ModuleNotFound",
 				"a"=>"render()",
 				"s"=>"ERR",
 				"m"=>"RenderModule001",
 				"t"=>"No class found for this module",
 		));
-		error_log ("No class found for module " . $infos['module_name'] . "; ClassName : ");
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : No class found for module " . $infos['module_name'] . "; ClassName : `". $infos['ModuleRendererName']."`"));
+		
+// 		error_log ("No class found for module " . $infos['module_name'] . "; ClassName : ");
 	}
 }
 

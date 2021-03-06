@@ -39,12 +39,12 @@ class Template {
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$bareTableClass = $ThemeDataObj->getThemeName()."bareTable";
+// 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+// 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
-			<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px; border-spacing: 16px;'>\r
+			<table style=' width:".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')."px; border-spacing: 16px;'>\r
 			<tr>\r
 			<td>
 		";
@@ -166,9 +166,9 @@ class Template {
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$bareTableClass = $ThemeDataObj->getThemeName()."bareTable";
+// 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
 			<table class='".$bareTableClass."' style='padding:16px'>

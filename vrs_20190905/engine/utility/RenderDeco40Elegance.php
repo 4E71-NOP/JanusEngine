@@ -32,7 +32,7 @@ class RenderDeco40Elegance {
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+// 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
@@ -137,7 +137,7 @@ class RenderDeco40Elegance {
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
 		// ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base
-		$GeneratedJavaScriptObj->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		

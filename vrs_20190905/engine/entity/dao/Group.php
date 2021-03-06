@@ -23,30 +23,25 @@ class Group {
 	 * @param integer $id
 	 */
 	public function getGroupDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$LMObj = LogManagement::getInstance();
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$dbquery = $dbquery = $SDDMObj->query("
+		$dbquery = $dbquery = $cs->SDDMObj->query("
 			SELECT grp.* 
-			FROM ".$SqlTableListObj->getSQLTableName('group')." grp , ".$SqlTableListObj->getSQLTableName('group_website')." sg
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = '".$id."'
 			AND grp.group_id = sg.group_id
-			AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Group[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for group id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for group id=".$id));
 		}
 		
 	}

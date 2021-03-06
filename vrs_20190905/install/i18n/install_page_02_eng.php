@@ -4,8 +4,8 @@ $i18n = array(
 	'tab_2' => "Load SQL data",
 	'tab_3' => "Script",
 	'tab_4' => "Load more SQL data",
-	'tab_5' => "Files",
-	'tab_6' => "6",
+	'tab_5' => "Performances",
+	'tab_6' => "Files",
 	'tab_7' => "7",
 
 	't1c1' => "File",
@@ -20,7 +20,13 @@ Make sure it's on the server. Make sure you edit it carfully. And make sure 'All
 <br>\r
 ",
 	't5Btn' => "Select",
-
+	
+	"perfTab01"	=>	"N",
+	"perfTab02"	=>	"Point de contrôle",
+	"perfTab03"	=>	"Temps",
+	"perfTab04"	=>	"Mémoire",
+	"perfTab05"	=>	"Requêtes",
+	
 	't9c1' => "A",
 	't9c2' => "B",
 	't9c3' => "C",

@@ -1,11 +1,11 @@
-add article	name hydr_fra_acceuil_p01							reference hydr_fra_acceuil						deadline initial_online		desc "Admin en Francais"	title Acceuil					subtitle Bienvenue								page 1	validation_state VALID;
+add article	name hydr_fra_home_p01								reference hydr_fra_home							deadline initial_online		desc "Admin en Francais"	title Bienvenue					subtitle Bienvenue									page 1	validation_state VALID;
 
 add article	name fra_doc_concepts_p01							reference fra_doc_concepts						deadline initial_online		desc "Admin en Francais"	title "Concept"					subtitle "Concept utilisateur"					page 1	validation_state VALID;
 add article	name fra_doc_concepts_p02							reference fra_doc_concepts						deadline initial_online		desc "Admin en Francais"	title "Concept"					subtitle "Concept documents"					page 2	validation_state VALID;
 add article	name fra_doc_concepts_p03							reference fra_doc_concepts						deadline initial_online		desc "Admin en Francais"	title "Concept"					subtitle "Concept décoration"					page 3	validation_state VALID;
 
-add article	name fra_doc_gestion_du_contenu_p01					reference fra_doc_gestion_du_contenu			deadline initial_online		desc "Admin en Francais"	title "Gestion du contenu"		subtitle "Hiérarchie des éléments"				page 1	validation_state VALID;
-add article	name fra_doc_gestion_du_contenu_p02					reference fra_doc_gestion_du_contenu			deadline initial_online		desc "Admin en Francais"	title "Gestion du contenu"		subtitle "Cycle de vie d'un contenu"			page 2	validation_state VALID;
+add article	name fra_doc_content_management_p01					reference fra_doc_content_management			deadline initial_online		desc "Admin en Francais"	title "Gestion du contenu"		subtitle "Hiérarchie des éléments"				page 1	validation_state VALID;
+add article	name fra_doc_content_management_p02					reference fra_doc_content_management			deadline initial_online		desc "Admin en Francais"	title "Gestion du contenu"		subtitle "Cycle de vie d'un contenu"			page 2	validation_state VALID;
 
 add article	name fra_doc_administration_p01						reference fra_doc_administration				deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Présentation"							page 1	validation_state VALID;
 add article	name fra_doc_administration_p02						reference fra_doc_administration				deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Interface - Site"						page 2	validation_state VALID;
@@ -16,21 +16,21 @@ add article	name fra_doc_administration_p06						reference fra_doc_administratio
 add article	name fra_doc_administration_p07						reference fra_doc_administration				deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Ligne de commande - Utilisateurs"		page 7	validation_state VALID;
 add article	name fra_doc_administration_p08						reference fra_doc_administration				deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Ligne de commande - Document"			page 8	validation_state VALID;
 add article	name fra_doc_administration_p09						reference fra_doc_administration				deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Ligne de commande - Decoration"		page 9	validation_state VALID;
-add article	name fra_DEL_tut_001_p01							reference fra_DEL_tut_001						deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Tutoriel"								page 1	validation_state VALID;
+add article	name fra_doc_tut_001_p01							reference fra_doc_tut_001						deadline initial_online		desc "Admin en Francais"	title Administration			subtitle "Tutoriel"								page 1	validation_state VALID;
 
-assign document name doc_hydr_fra_acceuil_p01.htm			to_article	hydr_fra_acceuil_p01;
-assign document name doc_fra_DEL_concepts_p01.htm			to_article	fra_doc_concepts_p01;
-assign document name doc_fra_DEL_concepts_p02.htm			to_article	fra_doc_concepts_p02;
-assign document name doc_fra_DEL_concepts_p03.htm			to_article	fra_doc_concepts_p03;
-assign document name doc_fra_DEL_gestion_du_contenu_p01.htm	to_article	fra_doc_gestion_du_contenu_p01;
-assign document name doc_fra_DEL_gestion_du_contenu_p02.htm	to_article	fra_doc_gestion_du_contenu_p02;
-assign document name doc_fra_DEL_administration_p01.htm		to_article	fra_doc_administration_p01;
-assign document name doc_fra_DEL_administration_p02.htm		to_article	fra_doc_administration_p02;
-assign document name doc_fra_DEL_administration_p03.htm		to_article	fra_doc_administration_p03;
-assign document name doc_fra_DEL_administration_p04.htm		to_article	fra_doc_administration_p04;
-assign document name doc_fra_DEL_administration_p05.htm		to_article	fra_doc_administration_p05;
-assign document name doc_fra_DEL_administration_p06.htm		to_article	fra_doc_administration_p06;
-assign document name doc_fra_DEL_administration_p07.htm		to_article	fra_doc_administration_p07;
-assign document name doc_fra_DEL_administration_p08.htm		to_article	fra_doc_administration_p08;
-assign document name doc_fra_DEL_administration_p09.htm		to_article	fra_doc_administration_p09;
-assign document name doc_fra_DEL_tut_001_p01.htm			to_article	fra_DEL_tut_001_p01;
+assign document name doc_hydr_fra_home_p01.htm				to_article	hydr_fra_home_p01;
+assign document name doc_fra_DOC_concepts_p01.htm			to_article	fra_doc_concepts_p01;
+assign document name doc_fra_DOC_concepts_p02.htm			to_article	fra_doc_concepts_p02;
+assign document name doc_fra_DOC_concepts_p03.htm			to_article	fra_doc_concepts_p03;
+assign document name doc_fra_DOC_content_management_p01.htm	to_article	fra_doc_content_management_p01;
+assign document name doc_fra_DOC_content_management_p02.htm	to_article	fra_doc_content_management_p02;
+assign document name doc_fra_DOC_administration_p01.htm		to_article	fra_doc_administration_p01;
+assign document name doc_fra_DOC_administration_p02.htm		to_article	fra_doc_administration_p02;
+assign document name doc_fra_DOC_administration_p03.htm		to_article	fra_doc_administration_p03;
+assign document name doc_fra_DOC_administration_p04.htm		to_article	fra_doc_administration_p04;
+assign document name doc_fra_DOC_administration_p05.htm		to_article	fra_doc_administration_p05;
+assign document name doc_fra_DOC_administration_p06.htm		to_article	fra_doc_administration_p06;
+assign document name doc_fra_DOC_administration_p07.htm		to_article	fra_doc_administration_p07;
+assign document name doc_fra_DOC_administration_p08.htm		to_article	fra_doc_administration_p08;
+assign document name doc_fra_DOC_administration_p09.htm		to_article	fra_doc_administration_p09;
+assign document name doc_fra_DOC_tut_001_p01.htm			to_article	fra_doc_tut_001_p01;

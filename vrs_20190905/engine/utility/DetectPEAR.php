@@ -50,7 +50,7 @@ class DetectPEAR {
 	// Doctrine = /usr/share/php/Doctrine/lib/Doctrine
 	
 	public function detectSupport () {
-		$B = "";
+		$B = "EXECNOTFOUND: The exec function isn't available. The test will not be performed.";
 		if ( function_exists( 'exec' ) ) {
 			$pv['exec_state'] = 1;
 			exec ( "/usr/bin/pear list" , $PEAR , $pv['exec_state'] );
@@ -64,13 +64,6 @@ class DetectPEAR {
 		}
 		return ( $B );
 	}
-
 }
-
-
-
-
-
-
 
 ?>

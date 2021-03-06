@@ -4,8 +4,8 @@ $i18n = array(
 	'tab_2' => "Chargement SQL",
 	'tab_3' => "Script",
 	'tab_4' => "Chargement SQL supplémentaire",
-	'tab_5' => "Fichiers",
-	'tab_6' => "6",
+	'tab_5' => "Performances",
+	'tab_6' => "Fichiers",
 	'tab_7' => "7",
 
 	't1c1' => "Fichier",
@@ -20,7 +20,13 @@ Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer a
 <br>\r
 ",
 	't5Btn' => "Sélectionner",
-
+	
+	"perfTab01"	=>	"N",
+	"perfTab02"	=>	"Checkpoint",
+	"perfTab03"	=>	"Time",
+	"perfTab04"	=>	"Memory",
+	"perfTab05"	=>	"Queries",
+	
 	't9c1' => "A",
 	't9c2' => "B",
 	't9c3' => "C",

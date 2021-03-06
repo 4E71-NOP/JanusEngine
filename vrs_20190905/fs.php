@@ -19,6 +19,10 @@ include ("define.php");
 include ("engine/utility/ClassLoader.php");
 $ClassLoaderObj = ClassLoader::getInstance();
 
+$ClassLoaderObj->provisionClass ( 'CommonSystem' ); // First of them all as it is used by others.
+$cs = CommonSystem::getInstance ();
+
+
 $ClassLoaderObj->provisionClass('Time');
 $ClassLoaderObj->provisionClass('LogManagement');
 $ClassLoaderObj->provisionClass('Mapper');

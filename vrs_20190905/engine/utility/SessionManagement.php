@@ -1,5 +1,5 @@
 <?php
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -28,23 +28,62 @@ class SessionManagement {
 	private $session = array();
 	private $report = array();
 	
-	private function __construct(ConfigurationManagement $data){
-		$this->session = $_SESSION;
-// 		foreach ( $_SESSION as $A => $B ) { $this->session[$A] = $B; }
-		$this->session['SessionMaxAge'] = $data->getConfigurationEntry('SessionMaxAge');
-		$this->session['err'] = FALSE;
+	private function __construct(){
+		$this->InitializeSession();
+		$this->session = array_merge($this->session, $_SESSION);
 	}
 	
 	/**
 	 * Singleton : Will return the instance of this class.
-	 * @param unknown $data
 	 * @return SessionManagement
 	 */
-	public static function getInstance($data) {
+	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new SessionManagement($data);
+			self::$Instance = new SessionManagement();
 		}
 		return self::$Instance;
+	}
+	
+	/**
+	 * Initialize the session array with default values
+	 */
+	public function InitializeSession(){
+		$cs = CommonSystem::getInstance();
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : InitializeSession has been called"));
+		
+		$this->session['SessionMaxAge']			= $cs->CMObj->getConfigurationEntry('SessionMaxAge');
+		$this->session['user_login']			= "anonymous";
+		$this->session['ws']					= DEFAULT_SITE_ID;
+		$this->session['err']					= FALSE;
+		$this->session['last_REMOTE_ADDR']		= $_SERVER['REMOTE_ADDR'];
+		$this->session['last_REMOTE_PORT']		= $_SERVER['REMOTE_PORT'];
+		$this->session['last_HTTP_USER_AGENT']	= $_SERVER['HTTP_USER_AGENT'];
+		$this->session['last_REQUEST_TIME']		= $_SERVER['REQUEST_TIME'];
+	}
+	
+	/**
+	 * Returns the state of the session plus the session ID
+	 * @return string
+	 */
+	public function getInfoSessionState(){
+		$str =  __METHOD__ . ": Status=";
+		//@formatter:off
+		switch (session_status()) {
+			case 0:		$str .= "`Disabled`. ";			break;
+			case 1:		$str .= "`None`. ";				break;
+			case 2:		$str .= "`Active`. ";			break;
+		}
+		//@formatter:on
+		if ( !empty(session_id())) { $str .= "Id=`".session_id()."`. "; }
+		
+		return $str;
+	}
+	
+	/**
+	 * Updates the superglobal array $_SESSION with the attribute data.
+	 */
+	public function UpdatePhpSession(){
+		$_SESSION = array_merge($_SESSION,$this->session);
 	}
 	
 	/**
@@ -52,6 +91,8 @@ class SessionManagement {
 	 */
 	public function CheckSession() {
 		$cs = CommonSystem::getInstance();
+
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession. \$_SESSION = " . $cs->StringFormatObj->arrayToString($_SESSION)));
 		
 		if ( isset($_SESSION['last_REMOTE_ADDR']) )	{ 
 			if ($_SESSION['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
@@ -82,23 +123,12 @@ class SessionManagement {
 		}
 		else {$_SESSION['last_REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];}
 		
-		// A valid session holds a ws (website) number
-		if (!isset($_SESSION['ws']) )	{ 
-				$this->session['err'] = TRUE;
-				$this->report['errMsg'] = "No site number in \$_SESSION['ws']";
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession : No site number in \$_SESSION['ws']"));
-		}
-		else { 
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$_SESSION['ws']=".$_SESSION['ws']));
-			$this->session['ws'] = $_SESSION['ws'];
-			$cs->RequestDataObj->setRequestDataEntry('ws', $_SESSION['ws'] );
-		}
-		
 		// Any error leads to reset!
 		if ($this->session['err'] === TRUE) { 
 			$cs->LMObj = LogManagement::getInstance();
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "CheckSession : Session error"));
 			$this->ResetSession();
+			$this->UpdatePhpSession();
 		}
 		else {
 		$this->session['sessionMode'] = 1;
@@ -108,7 +138,7 @@ class SessionManagement {
 	}
 
 	/**
-	 * Restart the session by cleaning and restarting it.
+	 * Restart the session by cleaning up and restarting it.
 	 */
 	private function restartSession() {
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -119,6 +149,17 @@ class SessionManagement {
 		setcookie(session_name(),'',0,'/');
 		session_start();
 		session_regenerate_id(true);
+	}
+
+	/**
+	 * Reset the session
+	 */
+	public function ResetSession() {
+		$cs = CommonSystem::getInstance();
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ResetSession() has been called"));
+		$this->restartSession();
+		$this->session['user_login'] = "anonymous";
+		$this->InitializeSession();
 	}
 	
 	
@@ -134,7 +175,6 @@ class SessionManagement {
 		switch ($mode) {
 			case "session" :
 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'")); 
-				if ( strlen($_SESSION['user_login']) == 0 ) { $this->ResetSession(); }
 				$this->session['user_login']		= $_SESSION['user_login'];
 				$this->session['PasswordSha512']	= "";
 				$this->session['ws']				= $_SESSION['ws'];
@@ -143,33 +183,14 @@ class SessionManagement {
 			case "form" :
 				// We save directly the data into the session.
 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Form content: " . $cs->StringFormatObj->arrayToString($cs->RequestDataObj->getRequestDataEntry('authentificationForm'))));
-				$RequestDataObj = RequestData::getInstance();
-				$_SESSION['user_login']		=	$this->session['user_login']	=	$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
-				$_SESSION['ws']				=	$this->session['ws']			=	$RequestDataObj->getRequestDataEntry('ws');
-				// Hash512 Password was saved during development. Is removed as of 2020 09 15.
-// 				$_SESSION['user_password']	=	$this->session['PasswordSha512']	=	hash("sha512",stripslashes($RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password')));
+				$this->InitializeSession();
+				$this->session['user_login']	=	$cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
+				$this->session['ws']			=	$cs->RequestDataObj->getRequestDataEntry('ws');
+				$this->UpdatePhpSession();
 				break;
 		}
-	}
-	
-	/**
-	 * Reset the session
-	 */
-	public function ResetSession() {
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ResetSession() has been called"));
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$_SESSION is now : ". $cs->StringFormatObj->arrayToString($_SESSION)));
 		
-		$this->session = array();
-		$this->restartSession();
-
-		$_SESSION['user_login']		= "anonymous";
-// 		$_SESSION['user_password']	= hash("sha512",stripslashes("anonymous"));
-		$_SESSION['ws']				= DEFAULT_SITE_ID;
-
-		$this->session					= $_SESSION;
-		$this->session['user_password']	= hash("sha512",stripslashes("anonymous"));
-		$this->session['err']			= FALSE;				// in case it come from CheckSession()
-
 	}
 	
 	//@formatter:off
@@ -180,7 +201,8 @@ class SessionManagement {
 	public function getSession() {return $this->session;}
 	public function getSessionEntry($data) {return $this->session[$data];}
 	
-	public function setSessionEntry($entry, $data) {$this->session[$entry] = $data;}
+	public function setSessionEntry($entry, $data) {
+		$this->session[$entry] = $data;}
 	
 	public function setReport($report) {$this->report = $report;}
 	public function setSession($session) {$this->session = $session;}

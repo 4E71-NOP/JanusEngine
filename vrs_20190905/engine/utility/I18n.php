@@ -36,13 +36,14 @@ class I18n {
 	 */
 	public function getI18nFromDB ($package = 'initial' ) {
 		$cs = CommonSystem::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$CurrentSetObj = CurrentSet::getInstance();
+// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
 		$dbquery = $cs->SDDMObj->query ("
-		SELECT i18n_name, i18n_text FROM ".$SqlTableListObj->getSQLTableName('i18n')."
+		SELECT i18n_name, i18n_text FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
 		WHERE i18n_package = '".$package."'
-		AND lang_id = '".$CurrentSetObj->getDataEntry('language_id')."' 
+		AND lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
 		");
 		$tab0 = $this->i18n;
 		$tab1 = array();

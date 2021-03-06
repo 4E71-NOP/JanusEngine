@@ -23,29 +23,24 @@ class Category {
 	 * @param integer $id
 	 */
 	public function getCategoryDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$LMObj = LogManagement::getInstance();
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$dbquery = $dbquery = $SDDMObj->query("
+		$dbquery = $dbquery = $cs->SDDMObj->query("
 			SELECT * 
-			FROM ".$SqlTableListObj->getSQLTableName('category')." 
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." 
 			WHERE cate_id = '".$id."'
-			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for category id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for category id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Category[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for category id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for category id=".$id));
 		}
 		
 	}

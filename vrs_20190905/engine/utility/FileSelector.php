@@ -33,7 +33,7 @@ class FileSelector {
 	 */
 	public function render (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();		// we use it this way for syntaxic ease. instead of $CurrentSetObj->getInstanceOfThemeDataObj()->xxxx()
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		
 		$Content = "";
@@ -101,10 +101,9 @@ class FileSelector {
 		$GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"".$Uri. "\"");
 		$GeneratedJavaScriptObj->insertJavaScript('Init' , "var fs = new FileSelector('FileSelectorLines');");
 		
+		unset ( $ThemeDataObj , $GeneratedJavaScriptObj );
 		return $Content;
 	}
 }
-
-
 
 ?>

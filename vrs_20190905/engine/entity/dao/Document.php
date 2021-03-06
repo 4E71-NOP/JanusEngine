@@ -23,31 +23,26 @@ class Document {
 	 * @param integer $id
 	 */
 	public function getDocumentDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$LMObj = LogManagement::getInstance();
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$dbquery = $dbquery = $SDDMObj->query("
+		$dbquery = $dbquery = $cs->SDDMObj->query("
 			SELECT doc.*, part.part_modification 
-			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-			WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
+			WHERE shr.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
 			AND shr.docu_id = doc.docu_id 
-			AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND doc.docu_origin = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Document[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
 		}
 		
 	}
@@ -59,7 +54,7 @@ class Document {
 	public function setDocumentEntry ($entry, $data) { 
 		if ( isset($this->Document[$entry])) { $this->Document[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
-
+	
 	public function setDocument($Document) { $this->Document = $Document; }
 	//@formatter:off
 

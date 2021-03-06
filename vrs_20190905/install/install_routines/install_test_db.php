@@ -14,7 +14,7 @@
 //	Test DB cnx
 // --------------------------------------------------------------------------------------------
 $debug = 0;
-$debug_en_ligne = 0;
+$displayDebug = 0;
 
 switch ( $debug ) {
 	case 1:
@@ -48,18 +48,18 @@ case 1:
 	case "MYSQLI":		error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
 	case "PHPPDO":		error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
 	case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
-	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);											break;
+	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
 	}
 	error_log ( "fin log : " . $db_['dal'] ."/". $db_['type'] );
 }
-
+$dbError = "<hr>\r";
 switch ( $db_['dal'] ) {
 case "MYSQLI":
 	$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix2'] );
-	if ($db1->connect_error) { $_REQUEST['SQL_tst']['1'] = 0; }
+	if ($db1->connect_error) { $_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; }
 
 	$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
-	if ($db2->connect_error) { $_REQUEST['SQL_tst']['2'] = 0; }
+	if ($db2->connect_error) { $_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2->connect_error; }
 break;
 
 case "PHPPDO":
@@ -108,11 +108,11 @@ case 1 :	$reponse .= "TST2-OK<br>\r";	break;
 echo ( $reponse );
 
 // --------------------------------------------------------------------------------------------
-switch ( $debug_en_ligne ) {
+switch ( $displayDebug ) {
 	case 1:
 		echo("<br>\r");
 		switch ( $db_['dal'] ) {
-		case "MYSQLI":	echo ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);								break;
+			case "MYSQLI":	echo ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type'] . $dbError);				break;
 		case "PHPPDO":	echo ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] . $db_['user_login'] . $db_['user_password'] .")" . $e ." | type = ". $db_['type']);		break;
 		case "ADODB":	echo ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);				break;
 		case "PEARDB":	echo ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;

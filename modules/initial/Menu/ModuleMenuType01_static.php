@@ -25,28 +25,18 @@ class ModuleMenuType01 {
 	}
 	
 	public function renderMenu(&$infos){
-		$MapperObj = Mapper::getInstance();
-		$LMObj = LogManagement::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
-		$CurrentSet = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
-		$UserObj = $CurrentSet->getInstanceOfUserObj();
-		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
-		$DocumentDataObj = $CurrentSet->getInstanceOfDocumentDataObj();
-		
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
 		echo ("plop");
 		
 		$menu_principal = array();
-		$dbquery = $SDDMObj->query($infos['module_menu_requete'] );
+		$dbquery = $cs->SDDMObj->query($infos['module_menu_requete'] );
 		$Content .= "<ul id='Admin_Menu_' style='padding-left: 0px; margin-left: 0px; list-style: none;'>\r";
 
-		if ( $SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
+		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
 		else {
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$cate_id_index = $dbp['cate_id'];
 				$menu_principal[$cate_id_index] = array (
 						"cate_id"		=> $dbp['cate_id'],
@@ -62,7 +52,7 @@ class ModuleMenuType01 {
 			}
 			
 			$infos['function_parameters'] = array (
-					"arti_request"	=> $DocumentDataObj->getDocumentData('arti_ref'),
+					"arti_request"	=> $CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentData('arti_ref'),
 					"cate_parent" 	=> $racine_menu,
 					"espacement" 	=> 0
 			);
@@ -71,13 +61,11 @@ class ModuleMenuType01 {
 		}
 		$Content .= "</ul>";
 		
-		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$menu_principal ,
-					$function_parametres ,
 					$dbquery ,
 					$dbp,
-					$pv
 					);
 		}
 // 		$LMObj->logDebug($infos, "\$infos");

@@ -27,6 +27,7 @@ class LogManagement {
 	private $InternalLogIdx = 0;
 	private $InternalLog = array ();
 	private static $logFunctions = array ();
+	
 	private function __construct() {
 	}
 	
@@ -41,19 +42,18 @@ class LogManagement {
 		}
 		return self::$Instance;
 	}
+	
 	private static function makeLogFunctions() {
 		self::$logFunctions ['default'] ['internal'] = function ($data) {
+			$cs = CommonSystem::getInstance();
 			$CurrentSetObj = CurrentSet::getInstance ();
-			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
-			$SqlTableListObj = SqlTableList::getInstance ( '', '' );
 			
-			$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-			$data ['i'] = $SDDMObj->escapeString ( $data ['i'] );
-			$data ['a'] = $SDDMObj->escapeString ( $data ['a'] );
-			$data ['t'] = $SDDMObj->escapeString ( $data ['t'] );
-			$id = $SDDMObj->findNextId ( $SqlTableListObj->getSQLTableName ( 'log' ), "log_id" );
-			$SDDMObj->query ( "INSERT INTO " . $SqlTableListObj->getSQLTableName ( 'log' ) . " VALUES (
-				'" . $id . "', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
+			$data ['i'] = $cs->SDDMObj->escapeString ( $data ['i'] );
+			$data ['a'] = $cs->SDDMObj->escapeString ( $data ['a'] );
+			$data ['t'] = $cs->SDDMObj->escapeString ( $data ['t'] );
+			$id = $cs->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+			$cs->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
+				'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 				'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
 		};
 		self::$logFunctions ['default'] ['system'] = function ($a) {
@@ -83,61 +83,33 @@ class LogManagement {
 		self::$logFunctions ['extenssion'] ['system'] = &self::$logFunctions ['default'] ['system'];
 		self::$logFunctions ['extenssion'] ['echo'] = &self::$logFunctions ['default'] ['echo'];
 	}
+	
 	public function logCheckpoint($routine) {
 		if ($this->StoreStatisticsState == 1) {
-			$TimeObj = Time::getInstance ();
-			$MapperObj = Mapper::getInstance ();
-			
-			// Deprecated begin
-			global $statistiques_, $statistiques_index;
-			$statistiques_index ++;
-			$i = &$statistiques_index;
-			$statistiques_ [$i] ['position'] = $i;
-			$statistiques_ [$i] ['context'] = $MapperObj->getWhereWeAreAt ();
-			$statistiques_ [$i] ['routine'] = $routine;
-			$statistiques_ [$i] ['temps'] = $TimeObj->microtime_chrono ();
-			$statistiques_ [$i] ['memoire'] = memory_get_usage ();
-			$statistiques_ [$i] ['SQL_err'] = 0;
-			$statistiques_ [$i] ['SQL_queries'] = 0;
-			// Deprecated end
-			
+			$cs = CommonSystem::getInstance();
 			$this->StatisticsIndex ++;
+			
+			error_log ("inserting ".$cs->MapperObj->getWhereWeAreAt() . " at position :" . $this->StatisticsIndex);
+			
 			$this->StatisticsLog [$this->StatisticsIndex] ['position'] = $this->StatisticsIndex;
-			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $MapperObj->getWhereWeAreAt ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $cs->MapperObj->getWhereWeAreAt ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['routine'] = $routine;
-			$this->StatisticsLog [$this->StatisticsIndex] ['temps'] = $TimeObj->microtime_chrono ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['temps'] = $cs->TimeObj->microtime_chrono ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['memoire'] = memory_get_usage ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_err'] = 0;
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_queries'] = 0;
 		}
 	}
+	
 	public function getStatisticsEntry($data) {
 		return $this->StatisticsLog [$data];
 	}
+	
 	public function IncreaseSqlQueries() {
 		$this->StatisticsLog [$this->StatisticsIndex] ['SQL_queries'] ++;
-
-		// Deprecated begin
-		global $statistiques_, $statistiques_index;
-		$i = &$statistiques_index;
-		$statistiques_ [$i] ['SQL_queries'] ++;
-		// Deprecated end
 	}
+	
 	public function logSQLDetails($data) {
-		// Deprecated begin
-		global $SQL_requete;
-		$idx = $this->SlmSqlIdx;
-		$SQL_requete [$idx] ['temps_debut'] = $data [0];
-		$SQL_requete [$idx] ['nbr'] = $data [1];
-		$SQL_requete [$idx] ['nom'] = $data [2];
-		$SQL_requete [$idx] ['signal'] = $data [3];
-		$SQL_requete [$idx] ['requete'] = $data [4];
-		$SQL_requete [$idx] ['err_no'] = $data [5];
-		$SQL_requete [$idx] ['err_msg'] = $data [6];
-		$SQL_requete [$idx] ['temps_fin'] = $data [7];
-		$SQL_requete [$idx] ++;
-		// Deprecated end
-
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['temps_debut'] = $data [0];
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['nbr'] = $data [1];
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['nom'] = $data [2];
@@ -148,36 +120,34 @@ class LogManagement {
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['temps_fin'] = $data [7];
 		$this->SlmSqlIdx ++;
 	}
+	
 	public function logSQLMoreDetailsOnLast($data) {
-		global $SQL_requete;
 		$idx = $this->SlmSqlIdx - 1;
-		// Deprecated begin
-		$SQL_requete [$idx] ['signal'] = $data [3];
-		$SQL_requete [$idx] ['err_no'] = $data [5];
-		$SQL_requete [$idx] ['err_msg'] .= ". " . $data [6];
-		// Deprecated end
-
+		
 		$this->SqlQueryLog [$idx] ['signal'] = $data [3];
 		$this->SqlQueryLog [$idx] ['err_no'] = $data [5];
 		$this->SqlQueryLog [$idx] ['err_msg'] = ". " . $data [6];
 	}
+	
 	public function getLastSQLDetails() {
 		return $this->SqlQueryLog [($this->SlmSqlIdx - 1)];
 	}
+	
 	public function increaseSqlQueryNumber() {
 		$this->SqlQueryNumber ++;
 	}
+	
 	public function getSqlQueryLogEntry($data) {
 		return $this->SqlQueryLog [$data];
 	}
-
+	
 	/**
 	 * Inserts into the $this->InternalLog array a new line.
 	 *
 	 * @param array $data
 	 */
 	public function InternalLog($log, $origin=false) {
-		$cs = CommonSystem::getInstance();
+		error_reporting(0);
 		$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 20 );
 		$originStr = "";
 		$i = 0;
@@ -217,8 +187,9 @@ class LogManagement {
 			}
 			$this->InternalLogIdx ++;
 		}
+		error_reporting(DEFAULT_ERROR_REPORTING);
 	}
-
+	
 	/**
 	 * Inserts into the $this->DebugLog array a new line.
 	 *
@@ -250,6 +221,7 @@ class LogManagement {
 	}
 
 	/**
+	 * DEPRECATED
 	 * Log the messages depending on the configuration and context (install, render, etc.).
 	 *
 	 * i=Initiator
@@ -260,12 +232,10 @@ class LogManagement {
 	 *
 	 * @param array $data
 	 */
-	public function log($data) {
-		$CMobj = ConfigurationManagement::getInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( '', '' );
-		
+	public function logDEPRECATED($data) {
+// 	public function log($data) {
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance ();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 		
 		$tabSignal = array (
 				"ERR" => 1,
@@ -274,11 +244,11 @@ class LogManagement {
 		);
 		$data ['s'] = $tabSignal [$data ['s']];
 
-		switch ($CMobj->getConfigurationEntry ( 'execution_context' )) {
+		switch ($cs->CMObj->getConfigurationEntry ( 'execution_context' )) {
 			case 'installation' :
-				switch ($CMobj->getConfigurationEntry ( 'LogTarget' )) {
+				switch ($cs->CMObj->getConfigurationEntry ( 'LogTarget' )) {
 					case "system" :
-						$A = "MWM_Engine_log: " . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
+						$A = "MWM_Engine_log: " . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
 						error_log ( html_entity_decode ( $A ), 0 );
 						break;
 					case "echo" :
@@ -292,24 +262,23 @@ class LogManagement {
 			case "Rendu" :
 			case "render" :
 			default :
-				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-				$data ['i'] = $SDDMObj->escapeString ( $data ['i'] );
-				$data ['a'] = $SDDMObj->escapeString ( $data ['a'] );
-				$data ['t'] = $SDDMObj->escapeString ( $data ['t'] );
-				switch ($CMobj->getConfigurationEntry ( 'LogTarget' )) {
+				$data ['i'] = $cs->SDDMObj->escapeString ( $data ['i'] );
+				$data ['a'] = $cs->SDDMObj->escapeString ( $data ['a'] );
+				$data ['t'] = $cs->SDDMObj->escapeString ( $data ['t'] );
+				switch ($cs->CMObj->getConfigurationEntry ( 'LogTarget' )) {
 					case "systeme" :
 					case "system" :
-						$A = "MWM_Engine_log: " . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
+						$A = "MWM_Engine_log: " . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
 						error_log ( html_entity_decode ( $A ), 0 );
 						break;
 					case "echo" :
-						echo ("MWM_Engine_log: " . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'] . "<br>");
+						echo ("MWM_Engine_log: " . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'] . "<br>");
 						break;
 					case "internal" :
 					default :
-						$id = $SDDMObj->findNextId ( $SqlTableListObj->getSQLTableName ( 'log' ), "log_id" );
-						$SDDMObj->query ( "INSERT INTO " . $SqlTableListObj->getSQLTableName ( 'log' ) . " VALUES (
-						'" . $id . "', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
+						$id = $cs->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+						$cs->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
+						'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 						'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
 						break;
 				}

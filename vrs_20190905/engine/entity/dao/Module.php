@@ -23,30 +23,25 @@ class Module {
 	 * @param integer $id
 	 */
 	public function getModuleDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$LMObj = LogManagement::getInstance();
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		$dbquery = $dbquery = $SDDMObj->query("
+		$dbquery = $cs->SDDMObj->query("
 			SELECT a.*,b.module_state
-			FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
 			WHERE a.module_id = '".$id."'
 			AND a.module_id = b.module_id
-			AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Module[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module id=".$id));
 		}
 		
 	}

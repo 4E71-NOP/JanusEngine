@@ -14,7 +14,8 @@
 class  RenderTables {
 	private static $Instance = null;
 	
-	public function __construct() {}
+	private function __construct() {
+	}
 	
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -46,14 +47,10 @@ class  RenderTables {
 	 * 
 	 */
 	public function render($infos, $T) {
-// 	 * tc : Define font size class from 1 to 7. Default is 3.<br>
-// 	$T as Table containing all needed information for rendering the table and tabs.
+// 		$T as Table containing all needed information for rendering the table and tabs.
 		$cs = CommonSystem::getInstance(); 
-
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+		error_reporting (0);
 		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
@@ -61,11 +58,8 @@ class  RenderTables {
 		if ( $T['tab_infos']['NbrOfTabs'] == 0 ) { $T['tab_infos']['NbrOfTabs'] = 1; }
 		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
-			$ClassLoaderObj = ClassLoader::getInstance();
-			$ClassLoaderObj->provisionClass('RenderTabs');
-			$RenderTabsObj = RenderTabs::getInstance();
-			$GeneratedJavaScriptObj->insertJavaScript('File', "engine/javascript/lib_TabsManagement.js");
-			$Content .= $RenderTabsObj->render($infos, $T); 
+			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "engine/javascript/lib_TabsManagement.js");
+			$Content .= $cs->RenderTabsObj->render($infos, $T); 
 		}
 		
 		// --------------------------------------------------------------------------------------------
@@ -83,7 +77,7 @@ class  RenderTables {
 		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
 // 		$legendClasses = "";
-		$block = $ThemeDataObj->getThemeName().$infos['block'];
+		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
@@ -144,7 +138,9 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType']));
+// 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
+// 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
 
 				$Content .= "<table class='".$block.CLASS_Table01." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
@@ -234,7 +230,7 @@ class  RenderTables {
 		}
 		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
-		
+		error_reporting(DEFAULT_ERROR_REPORTING);
 	}
 	
 	/**
@@ -248,9 +244,8 @@ class  RenderTables {
 	 * @return array
 	 */
 	public function getDefaultDocumentConfig (&$infos, $lines=10, $NbrOfTabs=1, $TabBehavior=1, $HighLightType=1, $TabTxt="tabTxt") {
-		$I18nObj = I18n::getInstance();
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
 		$tab = array(	
 		"EnableTabs"		=> 1,
@@ -259,13 +254,13 @@ class  RenderTables {
 		"RenderMode"		=> 1,
 		"HighLightType"		=> $HighLightType,
 		"Height"			=> floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * $lines, //T3 is default; total padding = 10; nbr line +1
-		"Width"				=> $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne'),
+		"Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne'),
 		"GroupName"			=> "l",
 		"CellName"			=> "c",
 		"DocumentName"		=> "d",
 		);
 		for ($i=1; $i<=$NbrOfTabs; $i++ ){
-			$tab["tabTxt".$i] = $I18nObj->getI18nEntry($TabTxt.$i);
+			$tab["tabTxt".$i] = $cs->I18nObj->getI18nEntry($TabTxt.$i);
 		}
 		
 		return $tab;

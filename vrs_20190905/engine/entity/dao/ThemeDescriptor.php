@@ -20,35 +20,44 @@ class ThemeDescriptor {
 	 * Gets theme descriptor data from the database.<br>
 	 * @param integer $id
 	 */
-	public function getThemeDescriptorDataFromDB($ThemeId, $UserObj, $WebSiteObj) {
+	//$UserObj, $WebSiteObj
+	public function getThemeDescriptorDataFromDB($ThemeId) {
 		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$RequestDataObj = RequestData::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$q ="";
 		$Dest = $ThemeId;
-		
 		if ( $Dest == "mt_" ) {
-			if ( $UserObj->getUserEntry('pref_theme') != 0 ) { 
-				$Dest = $UserObj->getUserEntry('pref_theme'); 	// By default the user theme is prefered
+			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme') != 0 ) { 
+				$Dest = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. Id=".$Dest ));
 			}
 			else { 
-				$Dest = $WebSiteObj->getWebSiteEntry('theme_id'); // Problem with the prefered user theme
+				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('theme_id'); // Problem with the prefered user theme
 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. Id=".$Dest ));
 			}											
-		}
-		else { 
-			$Dest = $RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedThemeId'); 			// Case for displaying another theme to the user (browsing and choosing).
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. Id=".$Dest ));
-		}
-		
-		$q = "SELECT * 
-			FROM " . $SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
+			// By default we use ID
+			$q = "SELECT *
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
 			WHERE a.theme_id = '".$Dest."'
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'
 			;";
+			
+		}
+		else { 
+			// Case for displaying another theme to the user (browsing and choosing).
+			// in this case we use names as this was eventually sent to a command line which only uses names. 
+			$Dest = $cs->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme');
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. Id=".$Dest ));
+			$q = "SELECT *
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
+			WHERE a.theme_name = '".$Dest."'
+			AND a.theme_id = b.theme_id
+			AND b.theme_state = '1'
+			;";
+		}
+		
 		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor id=".$ThemeId .". \$q = `".$q."`"));
 		$dbquery = $cs->SDDMObj->query ( $q );
 		
@@ -61,7 +70,7 @@ class ThemeDescriptor {
 		else {
 			$dbquery = $cs->SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')."
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
 			WHERE theme_id = '2'
 			;");
 			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));

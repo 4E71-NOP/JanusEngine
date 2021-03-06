@@ -1,34 +1,33 @@
 <?php
- /*Hydre-licence-debut*/
+/* Hydre-licence-debut */
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
-//	Sous licence Creative Common	
-//	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
-//	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
+// Hydre - Le petit moteur de web
+// Sous licence Creative Common
+// Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
+// CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 //
-//	(c)Faust MARIA DE AREVALO faust@club-internet.fr
+// (c)Faust MARIA DE AREVALO faust@club-internet.fr
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
-
-
+/* Hydre-licence-fin */
 class HydrInstall {
 	private static $Instance = null;
-	
-	private function __construct() {}
-	
+	private function __construct() {
+	}
+
 	/**
 	 * Singleton : Will return the instance of this class.
+	 *
 	 * @return HydrInstall
 	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new HydrInstall();
+			self::$Instance = new HydrInstall ();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Renders the whole thing.
 	 * The choice of making a main class is to help IDEs to process sources.
@@ -36,198 +35,214 @@ class HydrInstall {
 	 * @return string
 	 */
 	public function render() {
-
 		$application = 'install';
 		include ("define.php");
-		
+
 		include ("engine/utility/ClassLoader.php");
-		$ClassLoaderObj = ClassLoader::getInstance();
-		
-		$ClassLoaderObj->provisionClass('CommonSystem');		// First of them all as it is extended by others.
-		$cs = CommonSystem::getInstance();
-		
-		$cs->LMObj->setDebugLogEcho(1);
-		$cs->LMObj->setInternalLogTarget(INSTALL_LOG_TARGET);
-		$cs->CMObj->InitBasicSettings();
-		
-		$ClassLoaderObj->provisionClass('SessionManagement');
-		session_name("HydrWebsiteSessionId");
-		session_start();
-		$cs->initSmObj();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString($_SESSION)." *** \$SMObj->getSession() = ".$cs->StringFormatObj->arrayToString($cs->SMObj->getSession()). " *** EOL" ));
-		
-		$ClassLoaderObj->provisionClass('WebSite');
-		
+		$ClassLoaderObj = ClassLoader::getInstance ();
+
+		$ClassLoaderObj->provisionClass ( 'CommonSystem' ); // First of them all as it is used by others.
+		$cs = CommonSystem::getInstance ();
+
+		$cs->LMObj->setDebugLogEcho ( 1 );
+		$cs->LMObj->setInternalLogTarget ( INSTALL_LOG_TARGET );
+		$cs->CMObj->InitBasicSettings ();
+
+		$ClassLoaderObj->provisionClass ( 'SessionManagement' );
+// 		session_name ( "HydrWebsiteSessionId" );
+// 		session_start ();
+		$cs->initSmObj ();
+		$cs->LMObj->InternalLog ( array (
+				'level' => LOGLEVEL_STATEMENT,
+				'msg' => "*** index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $cs->StringFormatObj->arrayToString ( $cs->SMObj->getSession () ) . " *** EOL"
+		) );
+
+		$ClassLoaderObj->provisionClass ( 'WebSite' );
+
 		// $I18nObj = I18n::getInstance();
-		
+
 		// --------------------------------------------------------------------------------------------
-		
-		$cs->LMObj->setStoreStatisticsStateOn();
-		
+
+		$cs->LMObj->setStoreStatisticsStateOn ();
+
 		$localisation = " / inst";
-		$cs->MapperObj->AddAnotherLevel($localisation);
-		$cs->LMObj->logCheckpoint( "Install Init" );
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("Install Init");
-		
+		$cs->MapperObj->AddAnotherLevel ( $localisation );
+		$cs->LMObj->logCheckpoint ( "Install Init" );
+		$cs->MapperObj->RemoveThisLevel ( $localisation );
+		$cs->MapperObj->setSqlApplicant ( "Install Init" );
+
 		// --------------------------------------------------------------------------------------------
-		//	Install options
+		// Install options
 		// --------------------------------------------------------------------------------------------
-		
-		error_reporting(E_ALL ^ E_NOTICE);
-		ini_set('log_errors', "On");
-		ini_set('error_log' , "/var/log/apache2/error.log");
+
+		// error_reporting(E_ERROR | E_PARSE);
+// 		error_reporting ( DEFAULT_ERROR_REPORTING );
+		ini_set ( 'log_errors', "On" );
+		ini_set ( 'error_log', "/var/log/apache2/error.log" );
+		ini_set ( 'display_errors', 0 );
 		// error_log ("(OoO)");
 		// error_log ("(OoO)");
 		// error_log ("(OoO)");
 		// error_log ("(OoO)");
 		// error_log ("(OoO)");
-		error_log ("********** Hydr installation Begin**********");
-		
+		error_log ( "********** Hydr installation Begin**********" );
+
 		// --------------------------------------------------------------------------------------------
 		//
-		//	CurrentSet
+		// CurrentSet
 		//
 		//
-		
-		$ClassLoaderObj->provisionClass('ServerInfos');
-		$ClassLoaderObj->provisionClass('CurrentSet');
-		
-		$CurrentSetObj = CurrentSet::getInstance();
-		$CurrentSetObj->setInstanceOfServerInfosObj(new ServerInfos() );
-		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
-		
-		$CurrentSetObj->setInstanceOfWebSiteObj(new WebSite());
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$WebSiteObj->setInstallationInstance();
-		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj);
-		
+
+		$ClassLoaderObj->provisionClass ( 'ServerInfos' );
+		$ClassLoaderObj->provisionClass ( 'CurrentSet' );
+
+		$CurrentSetObj = CurrentSet::getInstance ();
+		$CurrentSetObj->setInstanceOfServerInfosObj ( new ServerInfos () );
+		$CurrentSetObj->getInstanceOfServerInfosObj ()->getInfosFromServer ();
+
+		$CurrentSetObj->setInstanceOfWebSiteObj ( new WebSite () );
+		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
+		$WebSiteObj->setInstallationInstance ();
+		$CurrentSetObj->setInstanceOfWebSiteContextObj ( $WebSiteObj );
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// SQL DB dialog Management.
 		//
 		//
-		
-		$ClassLoaderObj->provisionClass('SddmTools');
-		$ClassLoaderObj->provisionClass('DalFacade');
-		$ClassLoaderObj->provisionClass('SqlTableList');
-		
-		$form = $cs->RequestDataObj->getRequestDataEntry('form');
-		$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['dbprefix'],$form['tabprefix']) );
-		
+
+		$ClassLoaderObj->provisionClass ( 'SddmTools' );
+		$ClassLoaderObj->provisionClass ( 'DalFacade' );
+		$ClassLoaderObj->provisionClass ( 'SqlTableList' );
+
+		$form = $cs->RequestDataObj->getRequestDataEntry ( 'form' );
+		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $form ['dbprefix'], $form ['tabprefix'] ) );
+
 		// We have a POST so we set RAM and execution time limit immediately.
-		if ( isset($form['memory_limit'])) {
-			ini_set( 'memory_limit', $form['memory_limit']."M" );
-			ini_set( 'max_execution_time', $form['time_limit'] );
+		if (isset ( $form ['memory_limit'] )) {
+			ini_set ( 'memory_limit', $form ['memory_limit'] . "M" );
+			ini_set ( 'max_execution_time', $form ['time_limit'] );
 		}
-		
+
 		// --------------------------------------------------------------------------------------------
 		//
-		//	Loading the configuration file associated with this website
+		// Loading the configuration file associated with this website
 		//
-		$cs->CMObj->LoadConfigFile();
-		$cs->CMObj->setExecutionContext("installation");
-		$cs->CMObj->PopulateLanguageList();
-		
+		$cs->CMObj->LoadConfigFile ();
+		$cs->CMObj->setExecutionContext ( "installation" );
+		$cs->CMObj->PopulateLanguageList ();
+
 		// --------------------------------------------------------------------------------------------
-		//	HTML header and Stylesheet
+		// HTML header and Stylesheet
 		// --------------------------------------------------------------------------------------------
-		
+
 		// --------------------------------------------------------------------------------------------
 		include ("../stylesheets/css_admin_install.php");
 		$theme_tableau = "mt_";
-		${$theme_tableau}['theme_module_largeur_interne'] = 896;
-		${$theme_tableau}['theme_module_largeur'] = 896;
-		
-		
-		$ClassLoaderObj->provisionClass('ThemeData');
-		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
-		$ThemeDataObj->setThemeName('mt_');
-		
-		$ClassLoaderObj->provisionClass('ThemeDescriptor');
-		$CurrentSetObj->setInstanceOfThemeDescriptorObj(new ThemeDescriptor());
-		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj();
-		
-		$ClassLoaderObj->provisionClass('User');
-		$CurrentSetObj->setInstanceOfUserObj(new User());
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-		
-		$ClassLoaderObj->provisionClass('RenderLayout');
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
-		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-		$ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
-		
+		${$theme_tableau} ['theme_module_largeur_interne'] = 896;
+		${$theme_tableau} ['theme_module_largeur'] = 896;
+
+		$ClassLoaderObj->provisionClass ( 'ThemeData' );
+		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj->setThemeData ( $mt_ ); // Better to give an array than the object itself.
+		$ThemeDataObj->setThemeName ( 'mt_' );
+
+		$ClassLoaderObj->provisionClass ( 'ThemeDescriptor' );
+		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
+		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
+
+		$ClassLoaderObj->provisionClass ( 'User' );
+		$CurrentSetObj->setInstanceOfUserObj ( new User () );
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+
+		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
+		$RenderLayoutObj = RenderLayout::getInstance ();
+
+		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
+		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );
+
 		// --------------------------------------------------------------------------------------------
 		//
-		//	JavaScript Object
+		// JavaScript Object
 		//
 		//
 		$localisation = "Prepare JavaScript Object";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("Prepare JavaScript Object");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("Prepare JavaScript Object");
-		
-		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
+		$cs->MapperObj->AddAnotherLevel ( $localisation );
+		$cs->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
+		$cs->MapperObj->RemoveThisLevel ( $localisation );
+		$cs->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+
+		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
 		// include ("engine/entity/others/GeneratedJavaScript.php");
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		
-		$module_['module_deco'] = 1;
-		
+		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
+
+		$module_ ['module_deco'] = 1;
+
 		// --------------------------------------------------------------------------------------------
 		// <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
-		
+
 		$DocContent = "<!DOCTYPE html>
 			<html>\r
 			<head>\r
 			<title>INSTALL</title>\r
-			".$stylesheet."\r
+			" . $stylesheet . "\r
 			</head>\r
-			<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col')."' background='../gfx/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . "' background='../media/theme/" . ${$theme_tableau} ['theme_directory'] . "/" . ${$theme_tableau} ['theme_bg'] . "'>\r\r
 			";
-		
+
 		// --------------------------------------------------------------------------------------------
 		//
 		//
-		//	Start of the block to be displayed.
+		// Start of the block to be displayed.
 		//
 		//
 		// --------------------------------------------------------------------------------------------
 		$localisation = "Content";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("Content");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("Content");
-		
-		
-		if ( strlen($cs->RequestDataObj->getRequestDataEntry('l')) != 0){
-			$langComp = array ("fra" ,"eng");
+		$cs->MapperObj->AddAnotherLevel ( $localisation );
+		$cs->LMObj->logCheckpoint ( "Content" );
+		$cs->MapperObj->RemoveThisLevel ( $localisation );
+		$cs->MapperObj->setSqlApplicant ( "Content" );
+
+		if (strlen ( $cs->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0) {
+			$langComp = array (
+					"fra",
+					"eng"
+			);
 			unset ( $A );
-			foreach ( $langComp as $A ) { if ( $A == $cs->RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
+			foreach ( $langComp as $A ) {
+				if ($A == $cs->RequestDataObj->getRequestDataEntry ( 'l' )) {
+					$langHit = 1;
+				}
+			}
 		}
-		if ( $langHit == 1 ) { $l = $cs->RequestDataObj->getRequestDataEntry('l'); }
-		else { $l = "eng"; }
-		
-		include ("install/i18n/install_init_".$l.".php");
-		$cs->I18nObj->apply($i18n);
-		unset ($i18n);
+		if ($langHit == 1) {
+			$l = $cs->RequestDataObj->getRequestDataEntry ( 'l' );
+		} else {
+			$l = "eng";
+		}
+
+		include ("install/i18n/install_init_" . $l . ".php");
+		$cs->I18nObj->apply ( $i18n );
+		unset ( $i18n );
 		// --------------------------------------------------------------------------------------------
-		if ( strlen($ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $div_initial_bg = "background-image: url(../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ;}
-		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
-		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
-		
+		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
+			$div_initial_bg = "background-image: url(../media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
+		}
+		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) == 0) {
+			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_largeur' ) + 16 );
+		}
+		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) == 0) {
+			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry ( 'theme_module_largeur' ) + 16 );
+		}
+
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
 			<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: hidden;
-			width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px;
-			height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;" .
-			$div_initial_bg.
-			"'>\r";
-		
-			$infos = array(
+			width:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) . "px;
+			height:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) . "px;" . $div_initial_bg . "'>\r";
+
+		$infos = array (
 				"mode" => 1,
 				"affiche_module_mode" => "normal",
 				"module_z_index" => 2,
@@ -237,168 +252,160 @@ class HydrInstall {
 				"deco_type" => 50,
 				"fontSizeMin" => 10,
 				"fontCoef" => 1.3,
-				"module" => Array
-				(
-					"module_id" => 11,
-					"module_deco" => 1,
-					"module_deco_nbr" => 2,
-					"module_deco_default_text" => 3,
-					"module_name" => "Admin_install_B1",
-					"module_classname" => "",
-					"module_title" => "",
-					"module_file" => "",
-					"module_desc" => "",
-					"module_container_name" => "",
-					"module_group_allowed_to_see" => 31,
-					"module_group_allowed_to_use" => 31,
-					"module_adm_control" => 0,
-					"module_execution" => 0,
-					"module_website_id" => 11,
-					"ws_id" => 2,
-					"module_state" => 1,
-					"module_position" => 2,
-					)
-			);
+				"module" => Array (
+						"module_id" => 11,
+						"module_deco" => 1,
+						"module_deco_nbr" => 2,
+						"module_deco_default_text" => 3,
+						"module_name" => "Admin_install_B1",
+						"module_classname" => "",
+						"module_title" => "",
+						"module_file" => "",
+						"module_desc" => "",
+						"module_container_name" => "",
+						"module_group_allowed_to_see" => 31,
+						"module_group_allowed_to_use" => 31,
+						"module_adm_control" => 0,
+						"module_execution" => 0,
+						"module_website_id" => 11,
+						"ws_id" => 2,
+						"module_state" => 1,
+						"module_position" => 2
+				)
+		);
 
-		$block = $ThemeDataObj->getThemeName().$infos['block'];
-		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 112 );
-		
-		$RenderDeco = RenderDeco50Exquisite::getInstance();
-		$DocContent .= $RenderDeco->render($infos);
-		$DocContent .= "<h1 style='text-align: center;'>".$cs->I18nObj->getI18nEntry('b01Invite')."</h1></div>\r";
-		
+		$block = $ThemeDataObj->getThemeName () . $infos ['block'];
+
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 0 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_largeur" ) );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 112 );
+
+		$RenderDeco = RenderDeco50Exquisite::getInstance ();
+		$DocContent .= $RenderDeco->render ( $infos );
+		$DocContent .= "<h1 style='text-align: center;'>" . $cs->I18nObj->getI18nEntry ( 'b01Invite' ) . "</h1></div>\r";
+
 		// --------------------------------------------------------------------------------------------
-		
-		$infos['module']['module_name'] = "Admin_install_B2";
-		$infos['block'] = "B01";
-		$infos['blockG'] = "B01G";
-		$infos['blockT'] = "B01T";
-		$infos['deco_type'] = 40;
-		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 120 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur") );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 816+64 );
-		
-		$RenderDeco = RenderDeco40Elegance::getInstance();
-		$DocContent .= $RenderDeco->render($infos);
-		
+
+		$infos ['module'] ['module_name'] = "Admin_install_B2";
+		$infos ['block'] = "B01";
+		$infos ['blockG'] = "B01G";
+		$infos ['blockT'] = "B01T";
+		$infos ['deco_type'] = 40;
+
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 120 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_largeur" ) );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 816 + 64 );
+
+		$RenderDeco = RenderDeco40Elegance::getInstance ();
+		$DocContent .= $RenderDeco->render ( $infos );
+
 		// --------------------------------------------------------------------------------------------
 		//
-		//		Pages - Diplaying informations
+		// Pages - Diplaying informations
 		//
 		// --------------------------------------------------------------------------------------------
 		$localisation = "Page";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("Page");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("Page");
-		
-		$T = array();
-		
-		if ( $cs->RequestDataObj->getRequestDataEntry('PageInstall') == null ) { $cs->RequestDataObj->setRequestData( 'PageInstall', 1 ); }
-		
-		switch ( $cs->RequestDataObj->getRequestDataEntry('PageInstall') ) {
-			case "1":	include ( "install/install_page_01.php");	break;
-			case "2":	include ( "install/install_page_02.php");	break;
+		$cs->MapperObj->AddAnotherLevel ( $localisation );
+		$cs->LMObj->logCheckpoint ( "Page" );
+		$cs->MapperObj->RemoveThisLevel ( $localisation );
+		$cs->MapperObj->setSqlApplicant ( "Page" );
+
+		$T = array ();
+
+		if ($cs->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
+			$cs->RequestDataObj->setRequestData ( 'PageInstall', 1 );
+		}
+
+		switch ($cs->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
+			case "1" :
+				include ("install/install_page_01.php");
+				break;
+			case "2" :
+				include ("install/install_page_02.php");
+				break;
 		}
 		$DocContent .= "</div>\r</div>\r";
-		
+
 		// --------------------------------------------------------------------------------------------
 		// Tooltip
 		// --------------------------------------------------------------------------------------------
-		$infos['module']['module_container_name'] = "tooltipContainer";
-		$infos['module']['module_name'] = "ToolTip";
-		$infos['module']['module_deco_nbr'] = 20;
-		$infos['module_z_index'] = 99;
-		$infos['block'] = "B20";
-		$infos['blockG'] = "B20G";
-		$infos['blockT'] = "B20T";
-		$infos['deco_type'] = 40;
-		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 8 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 4 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", 320 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 192 );
-		
-		$RenderDeco = RenderDeco40Elegance::getInstance();
-		$DocContent .= $RenderDeco->render($infos)."</div>\r</div>\r";
-		
+		$infos ['module'] ['module_container_name'] = "tooltipContainer";
+		$infos ['module'] ['module_name'] = "ToolTip";
+		$infos ['module'] ['module_deco_nbr'] = 20;
+		$infos ['module_z_index'] = 99;
+		$infos ['block'] = "B20";
+		$infos ['blockG'] = "B20G";
+		$infos ['blockT'] = "B20T";
+		$infos ['deco_type'] = 40;
+
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 8 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 4 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", 320 );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 192 );
+
+		$RenderDeco = RenderDeco40Elegance::getInstance ();
+		$DocContent .= $RenderDeco->render ( $infos ) . "</div>\r</div>\r";
+
 		// $GeneratedJavaScriptObj->insertJavaScript('Data' , "var DivInitial = LocaliseElement ( 'initial_div' );");
 		// $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tinitAdyn('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dx')."' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dy')."' );");
-		
-		$GeneratedJavaScriptObj->insertJavaScript('Data' , "var TabInfoModule = new Array();\r");
-		
-		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
-		$GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
-		
-		
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Data', "var TabInfoModule = new Array();\r" );
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var t = new ToolTip();' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tt.InitToolTip('" . $infos ['module'] ['module_container_name'] . "' , '" . $infos ['module'] ['module_name'] . "_ex22' , '" . $cdx . "' , '" . $cdy . "' );" );
+
 		// --------------------------------------------------------------------------------------------
 		// Javascript files
 		// --------------------------------------------------------------------------------------------
-		unset ($A);
-		
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrCore.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'install/install_routines/install_test_db.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'install/install_routines/install_fonctions.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', '../modules/initial/Tooltip/lib_tooltip.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_onglet.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_ElementAnimation.js');
+		unset ( $A );
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_HydrCore.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'install/install_routines/install_test_db.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'install/install_routines/install_fonctions.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', '../modules/initial/Tooltip/lib_tooltip.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_ElementAnimation.js' );
+// 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript_onglet.js' );
 		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
 		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_Aide_dynamique.js');
 		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
-		
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
-		
-		
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "console.log ( TabInfoModule );");
-		
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
+
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptDecoratedMode("File", "<script type='text/javascript' src='", "'></script>\r");
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptDecoratedMode ( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
-		
+
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("Data");
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("Command");
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("Init");
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnload () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("Onload");
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
 		$JavaScriptContent .= "
 		}\r
 		window.onload = WindowOnload;\r\r
 		</script>\r";
-		
+
 		$DocContent .= $JavaScriptContent;
-		
-		
+
 		// --------------------------------------------------------------------------------------------
 		$DocContent .= "</body>\r</html>\r";
 		echo ($DocContent);
-		
-		error_log (
-				"> memory_get_peak_usage (real)=".floor((memory_get_peak_usage($real_usage = TRUE)/1024))."Kb".
-				"; memory_get_usage (real)=".floor((memory_get_usage($real_usage = TRUE)/1024))."Kb"
-				);
-		error_log(
-				"> memory_get_peak_usage=".floor((memory_get_peak_usage()/1024))."Kb".
-				"; memory_get_usage=".floor((memory_get_usage()/1024))."Kb"
-				);
-		error_log ( "********** Hydr installation End **********");
-		session_write_close();
-		
+
+		error_log ( "> memory_get_peak_usage (real)=" . floor ( (memory_get_peak_usage ( $real_usage = TRUE ) / 1024) ) . "Kb" . "; memory_get_usage (real)=" . floor ( (memory_get_usage ( $real_usage = TRUE ) / 1024) ) . "Kb" );
+		error_log ( "> memory_get_peak_usage=" . floor ( (memory_get_peak_usage () / 1024) ) . "Kb" . "; memory_get_usage=" . floor ( (memory_get_usage () / 1024) ) . "Kb" );
+		error_log ( "********** Hydr installation End **********" );
+		session_write_close ();
 	}
 }
-
-
-
 ?>

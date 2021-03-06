@@ -11,27 +11,19 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE's work.
-/* @var $CMObj ConfigurationManagement              */
-/* @var $ClassLoaderObj ClassLoader                 */
-/* @var $LMObj LogManagement                        */
-/* @var $MapperObj Mapper                           */
-/* @var $InteractiveElementsObj InteractiveElements */
-/* @var $RenderTablesObj RenderTables               */
-/* @var $RequestDataObj RequestData                 */
-/* @var $SDDMObj DalFacade                          */
-/* @var $SqlTableListObj SqlTableList               */
-/* @var $StringFormatObj StringFormat               */
-/* @var $TimeObj Time                               */
-
+/* @var $cs CommonSystem                            */
 /* @var $CurrentSetObj CurrentSet                   */
-/* @var $DocumentDataObj DocumentData               */
-/* @var $RenderLayoutObj RenderLayout               */
-/* @var $ThemeDataObj ThemeData                     */
+/* @var $ClassLoaderObj ClassLoader                 */
+
+/* @var $SqlTableListObj SqlTableList               */
 /* @var $UserObj User                               */
 /* @var $WebSiteObj WebSite                         */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $ThemeDataObj ThemeData                     */
 
+/* @var $Content String                             */
 /* @var $Block String                               */
-/* @var $infos array                                */
+/* @var $infos Array                                */
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 

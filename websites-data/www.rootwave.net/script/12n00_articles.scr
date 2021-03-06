@@ -1,5 +1,5 @@
-add article	name rw_fra_acceuil_p01								reference rw_fra_acceuil						deadline initial_online				desc "Admin en Francais"	title Acceuil										sub_title Bienvenue								page 1	validation_state VALID;
-assign document name	doc_rw_fra_acceuil_p01.htm	to_article rw_fra_acceuil_p01;
+add article	name rw_fra_home_p01								reference rw_fra_home						deadline initial_online				desc "Admin en Francais"	title Acceuil										sub_title Bienvenue								page 1	validation_state VALID;
+assign document name	doc_rw_fra_home_p01.htm	to_article rw_fra_home_p01;
 
 add article	name "fra_galerie_dessin_peinture_p01"				reference "fra_galerie_dessin_peinture"			deadline "rootwave_galeries"		desc "Article"				title "Galerie dessin et peinture"					sub_title "S&eacute;lection"					page 1	validation_state VALID;
 add article	name "fra_galerie_photographie_p01"					reference "fra_galerie_photographie"			deadline "rootwave_galeries"		desc "Article"				title "Galerie photographie"						sub_title "S&eacute;lection"					page 1	validation_state VALID;

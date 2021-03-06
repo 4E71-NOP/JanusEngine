@@ -15,7 +15,11 @@
 class RequestData {
 	private static $Instance = null;
 	
-	private $RequestDataArray = array();
+	private $RequestDataArray = array(
+			"ws" => null,
+			"formSubmitted" => null,
+			"formGenericData" => null,
+	);
 
 	private function __construct(){
 		foreach ( $_REQUEST as $A => $B ) {

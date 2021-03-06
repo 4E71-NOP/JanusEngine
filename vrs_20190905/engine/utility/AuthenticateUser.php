@@ -1,5 +1,5 @@
 <?php
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -37,16 +37,17 @@ class AuthenticateUser {
 	 * @param String $mode
 	 */
 	public function checkUserCredential ( User $UserObj, $mode ) {
-		$LMObj = LogManagement::getInstance();
+		$cs = CommonSystem::getInstance();
+// 		$cs->LMObj = LogManagement::getInstance();
 
 		if ( strlen($UserObj->getUserEntry('error_login_not_found')) == 0 ) {
 // 			$CMobj = ConfigurationManagement::getInstance ();
-			$RequestDataObj = RequestData::getInstance ();
-			$SMObj = SessionManagement::getInstance ( null );
+// 			$RequestDataObj = RequestData::getInstance ();
+// 			$SMObj = SessionManagement::getInstance ( null );
 			$CurrentSetObj = CurrentSet::getInstance();
 			$CurrentSetObj->setDataSubEntry('autentification', 'mode', $mode);
 			
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "checkUserCredential mode:".$mode));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "checkUserCredential mode:".$mode));
 			switch ($mode) {
 				case "session" :
 					if ($UserObj->getUserEntry('user_login') != $_SESSION['user_login'] ) {
@@ -61,57 +62,57 @@ class AuthenticateUser {
 // 						$this->data['errorType'] = 1;
 // 						$this->data['errorInternalLog'][] = "Wrong password";
 // 					}
-					$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :            user_login='".$UserObj->getUserEntry ('user_login')."'"));
-					$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :    session user_login='".$_SESSION['user_login']."'"));
-					$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :         user_password='".$UserObj->getUserEntry ('user_password')."'"));
-// 					$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials : session user_password='".$_SESSION['user_password']."'");
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :            user_login='".$UserObj->getUserEntry ('user_login')."'"));
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :    session user_login='".$_SESSION['user_login']."'"));
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials :         user_password='".$UserObj->getUserEntry ('user_password')."'"));
+// 					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "session checkUserCredentials : session user_password='".$_SESSION['user_password']."'");
 					$this->report['user_login'] = $_SESSION['user_login'];
 					break;
 				case "form" :
-					if ( $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous") {
-						if ($UserObj->getUserEntry ('user_login') != $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') ) {
+					if ( $cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous") {
+						if ($UserObj->getUserEntry ('user_login') != $cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') ) {
 							$this->data['error'] = TRUE;
 							$this->data['errorType'] = 2;
 							$this->data['errorInternalLog'][] = "UserObj/user_login != authentificationForm/user_login";
 						}
-						if ($UserObj->getUserEntry ('user_password') != hash("sha512",stripslashes($RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password'))) )  {
+						if ($UserObj->getUserEntry ('user_password') != hash("sha512",stripslashes($cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password'))) )  {
 							$this->data['error'] = TRUE;
 							$this->data['errorType'] = 1;
 							$this->data['errorInternalLog'][] = "Wrong password";
 						}
-						$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :         user_login='".$UserObj->getUserEntry ('user_login')."'"));
-						$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :    form user_login='".$RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login')."'"));
-						$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :      user_password='".$UserObj->getUserEntry ('user_password')."'"));
-						$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials : form user_password='".hash("sha512",stripslashes($RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password')))."'"));
-						$this->report['user_login'] = $RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
+						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :         user_login='".$UserObj->getUserEntry ('user_login')."'"));
+						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :    form user_login='".$cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login')."'"));
+						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials :      user_password='".$UserObj->getUserEntry ('user_password')."'"));
+						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "form checkUserCredentials : form user_password='".hash("sha512",stripslashes($cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_password')))."'"));
+						$this->report['user_login'] = $cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
 						
 					}
 					else {
 						$this->data['error'] = TRUE;
 						$this->data['errorType'] = 0;
 						$this->data['errorInternalLog'][] = "anonymous is trying to log in... again.";
-						$RequestDataObj->setRequestData('connection_attempt', 0);
+						$cs->RequestDataObj->setRequestData('connection_attempt', 0);
 					}
 					
 					break;
 			}
 			
 			if ( $this->data['error'] === TRUE ) {
-				foreach ( $this->data['errorInternalLog'] as $A ) { $LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Athentification Error : " . $A )); } // only for debug purpose
-				$SMObj->ResetSession();
-				$CurrentSetObj = CurrentSet::getInstance();
+				foreach ( $this->data['errorInternalLog'] as $A ) { $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Athentification Error : " . $A )); } // only for debug purpose
+				$cs->SMObj->ResetSession();
+// 				$CurrentSetObj = CurrentSet::getInstance();
 
 				$UserObj->resetUser();
 				$CurrentSetObj->setDataSubEntry('article', 'arti_ref', 0);	// Auth fails, so the admin panels shouldn't be visible. Back to square one.
 			}
 			else {
-				$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "checkUserCredential = The user `".$this->report['user_login']."` has successfuly authenticated"));
-				$SMObj->StoreUserCredential();
-				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-				$SqlTableListObj = SqlTableList::getInstance ( null, null );
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "checkUserCredential = The user `".$this->report['user_login']."` has successfuly authenticated"));
+				$cs->SMObj->StoreUserCredential();
+// 				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+// 				$SqlTableListObj = SqlTableList::getInstance ( null, null );
 				
-				$SDDMObj->query ( "
-				UPDATE " . $SqlTableListObj->getSQLTableName ('user') . " SET
+				$cs->SDDMObj->query ( "
+				UPDATE " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('user') . " SET
 				user_last_ip = '".$_SERVER['REMOTE_ADDR']."',
 				user_last_visit = '".$_SERVER['REQUEST_TIME']."'
 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'

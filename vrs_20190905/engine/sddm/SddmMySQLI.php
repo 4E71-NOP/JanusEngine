@@ -55,13 +55,14 @@ class SddmMySQLI {
 				break;
 		}
 		if ($this->DBInstance->connect_error) {
-			$SQLlogEntry['err_no'] = $this->DBInstance->errno;
+			$SQLlogEntry = array();
+			$SQLlogEntry['err_no'] = $this->DBInstance->connect_error;
 			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 			$SQLlogEntry['err_msg'] = $this->DBInstance->connect_error;
 			$SQLlogEntry['signal'] = "ERR";
 			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $cs->SQLlogEntry['signal'], "Connexion", $cs->SQLlogEntry['err_no_expr'], $cs->SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono() ) );
 			$this->errorMsg();
-			$msg = "CONNEXION ERROR : "."err_no" . $this->DBInstance->errno.", err_msg" . $this->DBInstance->connect_error;
+			$msg = "CONNEXION ERROR : err_msg" . $this->DBInstance->connect_error;
 			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
 // 			error_log ($msg);
 			$this->report['cnxErr'] = 1;
@@ -91,7 +92,7 @@ class SddmMySQLI {
 		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
 		$cs->LMObj->increaseSqlQueryNumber();
 		$db_result = $this->DBInstance->query ( $q );
-		
+		$SQLlogEntry = array();
 		$SQLlogEntry['err_no'] = $this->DBInstance->errno;
 		$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 		$SQLlogEntry['err_msg'] = $this->DBInstance->error;

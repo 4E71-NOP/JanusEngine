@@ -16,25 +16,23 @@ class StoredEvent {
 	public function __construct() {
 	}
 	public function getStoredEventDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
-		$dbquery = $SDDMObj->query ( "
+		$dbquery = $cs->SDDMObj->query ( "
 				SELECT *
-				FROM " . $SqlTableListObj->getSQLTableName ('stored_event') . "
+				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('stored_event') . "
 				WHERE stored_event_id = '" . $id . "'
 				;" );
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for stored_event id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for stored_event id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->StoredEvent[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for stored_event id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for stored_event id=".$id));
 		}
-	
 	}
 	
 	//@formatter:off

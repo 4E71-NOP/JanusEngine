@@ -16,23 +16,22 @@ class Deco60_Elysion {
 	public function __construct() {
 	}
 	public function getDeco60_ElysionDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
-		$dbquery = $SDDMObj->query ( "
+		$dbquery = $cs->SDDMObj->query ( "
 			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('deco_60_elysion') . "
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_60_elysion') . "
 			WHERE deco_id = '" . $id . "'
 			;" );
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_60_elysion id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_60_elysion id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco60_Elysion[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_60_elysion id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_60_elysion id=".$id));
 		}
 		
 	}

@@ -1,13 +1,13 @@
-add tag	name	acceuil;
+add tag	name	home;
 add tag	name	debut;
 add tag	name	début;
 add tag	name	homepage;
 add tag	name	mwm;
-assign	tag	name	acceuil		to_article	rw_fra_acceuil_p01;
-assign	tag	name	debut		to_article	rw_fra_acceuil_p01;
-assign	tag	name	début		to_article	rw_fra_acceuil_p01;
-assign	tag	name	homepage	to_article	rw_fra_acceuil_p01;
-assign	tag	name	mwm			to_article	rw_fra_acceuil_p01;
+assign	tag	name	home		to_article	rw_fra_home_p01;
+assign	tag	name	debut		to_article	rw_fra_home_p01;
+assign	tag	name	début		to_article	rw_fra_home_p01;
+assign	tag	name	homepage	to_article	rw_fra_home_p01;
+assign	tag	name	mwm			to_article	rw_fra_home_p01;
 
 
 add tag	name	equipe;
@@ -16,19 +16,19 @@ add tag	name	staff;
 add tag	name	admins;
 add tag	name	team;
 add tag	name	membres;
-assign	tag	name	equipe		to_article	fra_presentation_de_l_equipe_p01;
-assign	tag	name	équipe		to_article	fra_presentation_de_l_equipe_p01;
-assign	tag	name	staff		to_article	fra_presentation_de_l_equipe_p01;
-assign	tag	name	admins		to_article	fra_presentation_de_l_equipe_p01;
-assign	tag	name	team		to_article	fra_presentation_de_l_equipe_p01;
-assign	tag	name	membres		to_article	fra_presentation_de_l_equipe_p01;
+assign	tag	name	equipe		to_article	fra_staff_member_list_p01;
+assign	tag	name	équipe		to_article	fra_staff_member_list_p01;
+assign	tag	name	staff		to_article	fra_staff_member_list_p01;
+assign	tag	name	admins		to_article	fra_staff_member_list_p01;
+assign	tag	name	team		to_article	fra_staff_member_list_p01;
+assign	tag	name	membres		to_article	fra_staff_member_list_p01;
 
 
 add tag	name	recruter;
 add tag	name	recrutements;
 add tag	name	embauches;
 add tag	name	offres;
-assign	tag	name	recruter		to_article	fra_recrutement_p01;
-assign	tag	name	recrutements	to_article	fra_recrutement_p01;
-assign	tag	name	embauches		to_article	fra_recrutement_p01;
-assign	tag	name	offres			to_article	fra_recrutement_p01;
+assign	tag	name	recruter		to_article	fra_enroll_p01;
+assign	tag	name	recrutements	to_article	fra_enroll_p01;
+assign	tag	name	embauches		to_article	fra_enroll_p01;
+assign	tag	name	offres			to_article	fra_enroll_p01;

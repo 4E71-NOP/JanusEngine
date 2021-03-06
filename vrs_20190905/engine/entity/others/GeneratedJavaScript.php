@@ -50,7 +50,6 @@ class GeneratedJavaScript {
 		}
 		return  $Content."\r";
 	}
-
 }
 
 ?>

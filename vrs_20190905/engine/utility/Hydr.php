@@ -36,9 +36,9 @@ class Hydr {
 	public function render() {
 		$application = 'website';
 		include ("define.php");
-
+		
 		// --------------------------------------------------------------------------------------------
-
+		
 		/*
 		 * Good practice for the main script when it's ready to think about saving memory... more.
 		 * $varsStart = array_keys(get_defined_vars());
@@ -50,7 +50,7 @@ class Hydr {
 		include ("engine/utility/ClassLoader.php");
 		$ClassLoaderObj = ClassLoader::getInstance ();
 		
-		$ClassLoaderObj->provisionClass ( 'CommonSystem' ); // First of them all as it is extended by others.
+		$ClassLoaderObj->provisionClass ( 'CommonSystem' ); // First of them all as it is used by others.
 		$cs = CommonSystem::getInstance ();
 		
 		// --------------------------------------------------------------------------------------------
@@ -60,9 +60,11 @@ class Hydr {
 		$cs->LMObj->logCheckpoint ( "Index" );
 		
 		// --------------------------------------------------------------------------------------------
-		error_reporting ( E_ALL ^ E_NOTICE );
+// 		error_reporting ( E_ALL ^ E_NOTICE );
+		error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
 		ini_set ( 'log_errors', "On" );
 		ini_set ( 'error_log', "/var/log/apache2/error.log" );
+		ini_set ( 'display_errors', 0 );
 		
 		// --------------------------------------------------------------------------------------------
 		// MSIE must die!!! Still thinking about Edge
@@ -80,12 +82,12 @@ class Hydr {
 		// CurrentSet
 		//
 		//
-		$ClassLoaderObj->provisionClass ( 'ServerInfos' );
-		$ClassLoaderObj->provisionClass ( 'CurrentSet' );
-		$CurrentSetObj = CurrentSet::getInstance ();
-		$CurrentSetObj->setInstanceOfServerInfosObj ( new ServerInfos () );
-		$CurrentSetObj->getInstanceOfServerInfosObj ()->getInfosFromServer ();
-		$CurrentSetObj->setDataEntry ( 'fsIdx', 0 ); // Useful for FileSelector
+		$ClassLoaderObj->provisionClass( 'ServerInfos' );
+		$ClassLoaderObj->provisionClass( 'CurrentSet' );
+		$CurrentSetObj = CurrentSet::getInstance();
+		$CurrentSetObj->setInstanceOfServerInfosObj( new ServerInfos() );
+		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
+		$CurrentSetObj->setDataEntry( 'fsIdx', 0 );		// Useful for FileSelector
 		
 		// --------------------------------------------------------------------------------------------
 		//
@@ -93,10 +95,10 @@ class Hydr {
 		//
 		//
 		$CurrentSetObj->setDataEntry ( 'sessionName', 'HydrWebsiteSessionId' );
-		session_name ( $CurrentSetObj->getDataEntry ( 'sessionName' ) );
-		session_start ();
+// 		session_name ( $CurrentSetObj->getDataEntry ( 'sessionName' ) );
+// 		session_start ();
 		$cs->initSmObj ();
-
+		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $cs->SMObj->getInfoSessionState()));
 		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $cs->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$cs->SMObj->getSession() = " . $cs->StringFormatObj->arrayToString ( $cs->SMObj->getSession () ) . " *** EOL") );
 
 		// --------------------------------------------------------------------------------------------
@@ -123,17 +125,24 @@ class Hydr {
 		$authentificationAction = USER_ACTION_SIGN_IN;
 		switch ($firstContactScore) {
 			case 0 :
-				$cs->SMObj->ResetSession ();
+// 				$cs->SMObj->ResetSession ();
+				$cs->SMObj->InitializeSession();
+				$cs->SMObj->UpdatePhpSession();
 				break;
+			case 1 :
+				$cs->SMObj->CheckSession ();
+				break;
+			case 2 :
+			case 3 :
+				$cs->SMObj->setSessionEntry ( 'ws', $cs->RequestDataObj->getRequestDataEntry ( 'ws' ) );
+				$cs->SMObj->CheckSession ();
+				break;
+			case 4 :
+			case 5 :
 			case 6 :
 			case 7 :
 				$authentificationMode = "form";
-			case 2 :
-			case 3 :
-				$cs->SMObj->ResetSession ();
-				$cs->SMObj->setSessionEntry ( 'ws', $cs->RequestDataObj->getRequestDataEntry ( 'ws' ) );
 				break;
-
 			case 8 :
 			case 9 :
 			case 10 :
@@ -145,11 +154,9 @@ class Hydr {
 				$authentificationMode = "form";
 				$authentificationAction = USER_ACTION_DISCONNECT;
 				break;
-			case 1 :
-				$cs->SMObj->CheckSession ();
-				break;
 		}
-
+		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $cs->SMObj->getInfoSessionState()));
+		
 		// --------------------------------------------------------------------------------------------
 		//
 		// Loading the configuration file associated with this website
@@ -246,7 +253,8 @@ class Hydr {
 				switch ($authentificationAction) {
 					case USER_ACTION_DISCONNECT :
 						$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : disconnect submitted") );
-						$cs->SMObj->ResetSession ();
+// 						$cs->SMObj->ResetSession ();
+ 						$cs->SMObj->InitializeSession();
 						$userName = ANONYMOUS_USER_NAME;
 						break;
 					case USER_ACTION_SIGN_IN :
@@ -254,7 +262,8 @@ class Hydr {
 						$userName = $cs->RequestDataObj->getRequestDataSubEntry ( 'authentificationForm', 'user_login' );
 						break;
 				}
-				$cs->SMObj->ResetSession (); // If a login comes from a form. The session object must be reset!
+// 				$cs->SMObj->ResetSession (); // If a login comes from a form. The session object must be reset!
+				$cs->SMObj->InitializeSession(); // If a login comes from a form. The session object must be reset!
 				$UserObj->getUserDataFromDB ( $userName, $WebSiteObj );
 				$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : user_login=" . $UserObj->getUserEntry ( 'user_login' )) );
 				$cs->AUObj->checkUserCredential ( $UserObj, 'form' );
@@ -266,7 +275,8 @@ class Hydr {
 				// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 				if (strlen ( $cs->SMObj->getSessionEntry ( 'user_login' ) ) == 0) {
 					$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION strlen(user_login)=0") );
-					$cs->SMObj->ResetSession ();
+// 					$cs->SMObj->ResetSession ();
+// 					$cs->SMObj->InitializeSession();
 				}
 				$UserObj->getUserDataFromDB ( $cs->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
 				if ($UserObj->getUserEntry ( 'error_login_not_found' ) != 1) {
@@ -274,13 +284,14 @@ class Hydr {
 					$cs->AUObj->checkUserCredential ( $UserObj, 'session' );
 				} else {
 					// No form then no user found it's defintely an anonymous user
-					$cs->SMObj->ResetSession ();
+// 					$cs->SMObj->ResetSession ();
+					$cs->SMObj->InitializeSession();
 					$UserObj->resetUser ();
 					$UserObj->getUserDataFromDB ( 'anonymous', $WebSiteObj );
 				}
 				break;
 		}
-
+		
 		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$SMObj->getSession() :" . $cs->StringFormatObj->arrayToString ( $cs->SMObj->getSession () )) );
 		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION :" . $cs->StringFormatObj->arrayToString ( $_SESSION )) );
 		if ($cs->AUObj->getDataEntry ( 'error' ) === TRUE) {
@@ -288,7 +299,7 @@ class Hydr {
 		}
 		// $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : UserObj = " . $cs->StringFormatObj->arrayToString($UserObj->getUser())));
 		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
-
+		
 		// --------------------------------------------------------------------------------------------
 		//
 		// Language selection
@@ -299,9 +310,9 @@ class Hydr {
 		$cs->LMObj->logCheckpoint ( "Language selection" );
 		$cs->MapperObj->RemoveThisLevel ( $localisation );
 		$cs->MapperObj->setSqlApplicant ( "Language selection" );
-
+		
 		$scoreLang = 0;
-
+		
 		if (strlen ( $cs->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0 && $cs->RequestDataObj->getRequestDataEntry ( 'l' ) != 0) {
 			$scoreLang += 4;
 		}
@@ -362,39 +373,43 @@ class Hydr {
 			$cs->LMObj->logCheckpoint ( "CLI" );
 			$cs->MapperObj->RemoveThisLevel ( $localisation );
 			$cs->MapperObj->setSqlApplicant ( "CLI" );
-
+			
 			$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
 			$FormToCommandLineObj = FormToCommandLine::getInstance ();
 			$FormToCommandLineObj->analysis ();
-
+			
 			$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
-
+			
 			if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
 				$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
+				
 				$ClassLoaderObj->provisionClass ( 'CommandConsole' );
-
 				$CurrentSetObj->setInstanceOfWebSiteContextObj ( $WebSiteObj ); // Set an initial website context.
 				$CommandConsole = CommandConsole::getInstance ();
-
-				$cs->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // 20200205 - For now we only log the command line in the logs.
-				                                                                                  // $CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'disabled'); // 20200205 - For now we only log the command line in the logs.
+				
+				$cs->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
 				$Script = $FormToCommandLineObj->getCommandLineScript ();
 				switch ($cs->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
 					case "enabled" :
 						foreach ( $Script as $A ) {
+							$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ExecuteCommand - ".$A) );
 							$CommandConsole->executeCommand ( $A );
 						}
 						break;
 					case "disabled" :
 					default :
 						foreach ( $Script as $A ) {
+							$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
 							$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
 						}
 						break;
 				}
+				$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
+				
 			}
-
+			
 			switch ($cs->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) . $cs->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'section' )) {
+				case "AdminDashboardUserProfileForm" :
 				case "ModuleQuickSkin" :
 					$UserObj->getUserDataFromDB ( $UserObj->getUserEntry ( 'user_login' ), $WebSiteObj ); // We need to reload the user data in order to update the current user_pref_theme variable.
 					break;
@@ -500,7 +515,7 @@ class Hydr {
 		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
 		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
 
-		$ThemeDescriptorObj->getThemeDescriptorDataFromDB ( "mt_", $UserObj, $WebSiteObj );
+		$ThemeDescriptorObj->getThemeDescriptorDataFromDB ( "mt_" );
 
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
@@ -543,7 +558,7 @@ class Hydr {
 		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
 
 		$RenderLayoutObj = RenderLayout::getInstance ();
-		$RenderLayoutObj->render ( $UserObj, $WebSiteObj, $ThemeDescriptorObj );
+		$RenderLayoutObj->render ();
 
 		// --------------------------------------------------------------------------------------------
 		// StyleSheet
@@ -573,11 +588,11 @@ class Hydr {
 		}
 		$Content .= "<body id='HydrBody' ";
 		if (strlen ( $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) ) > 0) {
-			$html_body .= "text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . ${$theme_tableau} ['B01T'] ['txt_col'] . "' vlink='" . ${$theme_tableau} ['B01T'] ['txt_col'] . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
+			$html_body .= "text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
 		}
 		$Content .= "style='";
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) ) > 0) {
-			$Content .= "background-image: url(../gfx/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) . "; ";
+			$Content .= "background-image: url(../media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) . "; ";
 		}
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0) {
 			$Content .= "background-color: #" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . ";";
@@ -597,7 +612,7 @@ class Hydr {
 				'module_z_index' => 0
 		);
 		$Content .= $RenderModuleObj->render ( $directives );
-
+		
 		// --------------------------------------------------------------------------------------------
 		//
 		// Checkpoint ("index_before_stat");
@@ -608,25 +623,25 @@ class Hydr {
 		$cs->LMObj->logCheckpoint ( "Stats" );
 		$cs->MapperObj->RemoveThisLevel ( $localisation );
 		$cs->MapperObj->setSqlApplicant ( "Stats" );
-
+		
 		$cs->LMObj->logCheckpoint ( "index_before_stat" );
 		$cs->MapperObj->RemoveThisLevel ( "/ idx" );
 		$CurrentSetObj->setDataSubEntry ( 'timeStat', 'end', $cs->TimeObj->microtime_chrono () ); // We get time for later use in the stats.
-
+		
 		$cs->LMObj->setStoreStatisticsStateOff ();
 		// --------------------------------------------------------------------------------------------
 		$ClassLoaderObj->provisionClass ( 'RenderAdmDashboard' );
 		$RenderAdmDashboardObj = RenderAdmDashboard::getInstance ();
 		$Content .= $RenderAdmDashboardObj->render ();
-
+		
 		// --------------------------------------------------------------------------------------------
 		// creating file selector if necessary
 		// $module_z_index['compteur'] = 500; //bypass Z-index from layout
 		// $pv['sdftotal'] = $_REQUEST['FS_index'];
-
+		
 		$sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {
-
+		
 			$ClassLoaderObj->provisionClass ( 'FileSelector' );
 			$FileSelectorObj = FileSelector::getInstance ();
 			$infos ['block'] = $ThemeDataObj->getThemeName () . "B01";
@@ -682,8 +697,6 @@ class Hydr {
 
 		// --------------------------------------------------------------------------------------------
 		$cs->SDDMObj->disconnect_sql ();
-		session_write_close ();
-
 		return ($Content . $JavaScriptContent . $licence . "</body>\r</html>\r");
 	}
 }

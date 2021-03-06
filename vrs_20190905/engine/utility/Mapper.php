@@ -49,7 +49,7 @@ class Mapper {
 
 	//@formatter:off
 	public function getWhereWeAreAt() { return $this->WhereWeAreAt; }
-// 	public function setWhereWeAreAt($WhereAreWeAt) { $this->WhereWeAreAt = $WhereAreWeAt; }
+	public function setWhereWeAreAt($WhereAreWeAt) { $this->WhereWeAreAt = $WhereAreWeAt; }
 
 	public function getSqlApplicant() { return $this->SqlApplicant; }
 	public function setSqlApplicant($SqlApplicant) { $this->SqlApplicant = $SqlApplicant; }

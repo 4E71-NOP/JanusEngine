@@ -1,0 +1,85 @@
+add decoration 							
+name	'hydr_magma_txt_menu'						
+directory	'Magma'						
+type	'caligraph'						
+main_unit	'mm'	txt_font_unit	'px'				
+txt_font	'Harrington, Arial'	txt_font_size	'18'				
+txt_font_dl_name	'Harrington'	txt_font_dl_url	'HARNGTON.TTF'				
+							
+		p_txt_align	'justify'				
+							
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+							
+							
+txt_col	'FF5000'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
+txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'000000'
+							
+a_fg_col	'FF5000'			a_decoration	'none'	a_special	'display:block;'
+a_hover_fg_col	'FF8000'					a_hover_special	'display:block;'
+a_active_fg_col	'FF5000'						
+a_visited_fg_col	'FF5000'						
+							
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
+t01_caption_fg_col	'FFFFFF'	t01_caption_bg_col	'404040'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
+t01_txt_col	'FFFFFF'						
+t01_tr_bg_col	'60608080'	t01_td_bg_odd_col	'FFFFFF20'				
+							
+t01_tr_bg_even_col	'8080A080'						
+t01_tr_bg_hover_col	'FE62CD80'						
+							
+t01_legend_txt_col	'000000'	t01_legend_bg_col	'FFE08080'				
+							
+td_a_fg_col	'FFFFFF'			td_a_decoration	'none'		
+td_a_hover_fg_col	'FFFFFF'					td_a_hover_special	'font-weight:bold;'
+td_a_active_fg_col	'FFFFFF'					td_a_active_special	'color:inherit;'
+td_a_visited_fg_col	'FFFFFF'						
+							
+code_font	'courier, monospace'	code_fg_col	'A0FFA0'	code_bg_col	'000000CC'		
+							
+code_pad_top	'3'	code_pad_bottom	'5'	code_pad_left	'3'	code_pad_right	'3'
+code_special	'display:block; border-radius:2.5mm;'						
+							
+input_fg_col	'000000'	input_bg_col	'FFFFFF'				
+							
+		td_input_bg_col	'E8F8FF'				
+							
+s1_txt_col	'EEEEEE'	s2_txt_col	'EEEEEE'	s3_txt_col	'EEEEEE'		
+s1_txt_weight	'bold'	s2_txt_weight	'bold'	s3_txt_weight	'bold'		
+s1_txt_special	'text-shadow:0px 0px 4px #000000;'	s2_txt_special	'text-shadow:0px 0px 4px #000000;'	s2_txt_special	'text-shadow:0px 0px 4px #000000;'		
+s1_txt_hover_col	'FFFFFF'	s2_txt_hover_col	'FFFFFF'	s3_txt_hover_col	'FFFFFF'		
+s1_txt_hover_weight	'bold'	s2_txt_hover_weight	'bold'	s3_txt_hover_weight	'bold'		
+s1_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s2_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s3_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'		
+							
+s1_01_width	'24'	s1_01_height	'32'	s1_03_width	'24'		
+s1_n01	'magma_B01_submit_s1_n01.png'	s1_n02	'magma_B01_submit_s1_n02.png'	s1_n03	'magma_B01_submit_s1_n03.png'		
+s1_h01	'magma_B01_submit_s1_h01.png'	s1_h02	'magma_B01_submit_s1_h02.png'	s1_h03	'magma_B01_submit_s1_h03.png'		
+							
+s2_01_width	'24'	s2_01_height	'32'	s2_03_width	'24'		
+s2_n01	'magma_B01_submit_s2_n01.png'	s2_n02	'magma_B01_submit_s2_n02.png'	s2_n03	'magma_B01_submit_s2_n03.png'		
+s2_h01	'magma_B01_submit_s2_h01.png'	s2_h02	'magma_B01_submit_s2_h02.png'	s2_h03	'magma_B01_submit_s2_h03.png'		
+							
+s3_01_width	'24'	s3_01_height	'32'	s3_03_width	'24'		
+s3_n01	'magma_B01_submit_s3_n01.png'	s3_n02	'magma_B01_submit_s3_n02.png'	s3_n03	'magma_B01_submit_s3_n03.png'		
+s3_h01	'magma_B01_submit_s3_h01.png'	s3_h02	'magma_B01_submit_s3_h02.png'	s3_h03	'magma_B01_submit_s3_h03.png'		
+							
+tab_up_txt_col	'FFFFFF'			tab_up_txt_weight	'bold'	tab_up_txt_special	'text-shadow:0px 0px 5px #000000;'
+tab_down_txt_col	'DDDDDD'					tab_down_txt_special	'text-shadow:0px 0px 5px #000000;'
+tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'	tab_hover_txt_special	'text-shadow:0px 0px 5px #FFFFFF;'
+tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'		
+tab_down_a	'magma_B01_tab_up_a.png'	tab_down_b	'magma_B01_tab_up_b.png'	tab_down_c	'magma_B01_tab_up_c.png'		
+tab_up_a	'magma_B01_tab_down_a.png'	tab_up_b	'magma_B01_tab_down_b.png'	tab_up_c	'magma_B01_tab_down_c.png'		
+tab_hover_a	'magma_B01_tab_hover_a.png'	tab_hover_b	'magma_B01_tab_hover_b.png'	tab_hover_c	'magma_B01_tab_hover_c.png'		
+tab_frame_bg_col	'55749280'						
+							
+		ft2_font_size	'26'	ft2_fg_col	'FFFFFF'	ft2_special	'font-weight:bold;'
+ft1_bg	'magma_B01_ft1.png'	ft2_bg	'magma_B01_ft2.png'	ft3_bg	'magma_B01_ft3.png'		
+ft1_width	'24'	ft3_width	'24'	ft_height	'32'		
+							
+icon_directory	'magma_B01_icone_repertoire.png'	icon_erase	'magma_B01_icone_efface.png'				
+icon_ok	'magma_B01_icone_ok.png'	icon_nok	'magma_B01_icone_nok.png'				
+icon_left	'magma_B01_icone_gauche.png'	icon_right	'magma_B01_icone_droite.png'	icon_top	'magma_B01_icone_haut.png'	icon_bottom	'magma_B01_icone_bas.png'
+icon_question	'magma_B01_icone_question.png'	icon_notification	'magma_B01_icone_notification.png'				
+transparent_8x8	'empty.gif'						
+icon_width	'32'						
+icon_height	'32'						
+;							

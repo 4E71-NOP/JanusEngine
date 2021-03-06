@@ -17,19 +17,31 @@ class ThemeData {
 	private $ThemeData = array();
 	private $DecorationList = array();
 	
-	public function __construct() {}
+	public function __construct() {
+		for ( $i=0; $i<=30; $i++) {
+			$b = sprintf("%02u",$i);
+			$this->ThemeData["B".$b."T"] = $this->ThemeData["B".$b."G"] = array( "liste_doublon" => "", "liste_bloc" => "", "liste_niveaux" => "", );
+			if ($i<10) {
+				$this->ThemeData["B".$b."M"] = array( "liste_doublon" => "", "liste_bloc_menu" => "", "liste_niveaux" => "", );
+			}
+			
+		}
+		
+	}
 
 	/**
 	 * Creates a list of all decorations that will be used against incoming data from the theme.
 	 */
 	public function setDecorationListFromDB () {
 		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
 // 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$dbquery = $cs->SDDMObj->query("
 		SELECT *
-		FROM ". $SqlTableListObj->getSQLTableName('decoration')."
+		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
 		;");
 		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_ref_id']]['deco_id']	=	$dbp['deco_id'];
@@ -44,10 +56,12 @@ class ThemeData {
 	 */
 	public function renderBlockData() {
 		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
 		
 // 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		$StringFormat = StringFormat::getInstance();
+// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+// 		$StringFormat = StringFormat::getInstance();
 		$CurrentBlock = array();
 		$pv = array();
 		
@@ -58,7 +72,7 @@ class ThemeData {
 		
 		for ( $i = 1 ; $i <= 30 ; $i++ ) {
 			
-			$Block = $StringFormat->getDecorationBlockName( "", $i , "");
+			$Block = $cs->StringFormatObj->getDecorationBlockName( "", $i , "");
 			$BlockG = "B" . $Block . "G";
 			$BlockT = "B" . $Block . "T";
 			
@@ -135,7 +149,7 @@ class ThemeData {
 					$cbal = $BlockT;
 					switch ( $CurrentBlock['deco_type'] ) {
 						case 20:	
-						case "caligraphe":	
+						case "caligraph":	
 							$DecoTmpObj = new Deco20_Caligraph();
 							$DecoTmpObj->getDeco20_CaligraphDataFromDB($CurrentBlock ['deco_id'] );
 							$this->ThemeData[$BlockT] = $DecoTmpObj->getDeco20_Caligraph();
@@ -145,7 +159,7 @@ class ThemeData {
 								if ( $BlockT == "B01T" ) {
 									$this->ThemeData['stylesheet_at_fontface'] = "
 									@font-face {
-										font-family: '".$this->ThemeData['B01T']['txt_fonte_dl_nom']."'; src: url('../gfx/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_fonte_dl_url']."') format('truetype');
+										font-family: '".$this->ThemeData['B01T']['txt_fonte_dl_nom']."'; src: url('../media/theme/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_fonte_dl_url']."') format('truetype');
 										font-weight: normal;
 										font-style: normal;
 									}\r\r
@@ -180,7 +194,7 @@ class ThemeData {
 		$BlockAlreadyLoaded = array ();
 
 		for($i = 0; $i <= 9; $i ++) {
-			$Block = $StringFormat->getDecorationBlockName ( "", $i, "" );
+			$Block = $cs->StringFormatObj->getDecorationBlockName ( "", $i, "" );
 			$CurrentBlock['nom'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
 			if (strlen ( $CurrentBlock['nom'] ) > 0) {
 				$BlockM = "B" . $Block . "M";
@@ -191,7 +205,7 @@ class ThemeData {
 				if (!isset ( $cbal )) {
 					$dbquery = $cs->SDDMObj->query ( "
 						SELECT *
-						FROM " . $SqlTableListObj->getSQLTableName ( 'deco_10_menu' ) . "
+						FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'deco_10_menu' ) . "
 						WHERE deco_id = '" . $CurrentBlock['deco_id'] . "'
 						;" );
 					$p = &$this->ThemeData[$BlockM];
@@ -248,7 +262,7 @@ class ThemeData {
 							unset ( $DecoTmpObj );
 							break;
 						case 50 :
-						case "exquise" :
+						case "exquisite" :
 							$DecoTmpObj = new Deco50_Exquisite ();
 							$DecoTmpObj->getDeco50_ExquisiteDataFromDB ( $CurrentBlock ['deco_id'] );
 							$this->ThemeData[$BlockM] = array_merge( $this->ThemeData[$BlockM] , $DecoTmpObj->getDeco50_Exquisite ());

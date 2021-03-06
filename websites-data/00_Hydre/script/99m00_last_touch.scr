@@ -1,0 +1,5 @@
+add log name "Test" type "ERR" 	message "TST001 message";
+add log name "Test" type "WARN"	message "TST001 message";
+set checkpoint name "Core - All done";
+
+

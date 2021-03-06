@@ -26,22 +26,10 @@ class ModuleMenuType02 {
 	
 	public function renderMenu(&$infos){
 		$cs = CommonSystem::getInstance();
-		$ClassLoaderObj = ClassLoader::getInstance();
-		
-// 		$MapperObj = Mapper::getInstance();
-// 		$LMObj = LogManagement::getInstance();
-// 		$CMObj = ConfigurationManagement::getInstance();
-// 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-// 		$StringFormatObj = StringFormat::getInstance();
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-// 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$ClassLoaderObj = ClassLoader::getInstance();
+		$RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-// 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
 		
 		$menuData = &$infos['menuData'];
 		$FPRM = &$infos['FPRM'];
@@ -205,8 +193,7 @@ class ModuleMenuType02 {
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'py', ( 160 * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', ( $A['width'] * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', ( 256 * $pv['coef'] ));
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 
-					__METHOD__ .
+				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  __METHOD__ .
 					" Situation A / id=".$A['id']. "; par=". $A['par'].
 					"; px=". ( 160 * $pv['coef'] ).
 					"; py=". ( 160 * $pv['coef'] ).
@@ -238,8 +225,6 @@ class ModuleMenuType02 {
 			));
 		}
 		
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		
 		unset ( $A );
 		reset ( $menuDiv );
 		$infos['backup']['module_name']		= $infos['module']['module_name'];
@@ -255,11 +240,11 @@ class ModuleMenuType02 {
 			
 			$visibility = "hidden";
 			if ( $A['niv'] == 0 ) {
-				$GeneratedJavaScriptObj->insertJavaScript ( "Onload" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
+				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Onload" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
 			if ( $Ab['affiche_icones'] == 1 ) {
-				if ( strlen ($Ab['icone_repertoire']) > 0 ) { $Micone_rep =		"<img src='../gfx/".$Ab['repertoire']."/".$Ab['icone_repertoire']."'	width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
-				if ( strlen ($Ab['icone_fichier']) > 0 ) { $Micone_fichier =	"<img src='../gfx/".$Ab['repertoire']."/".$Ab['icone_fichier']."'		width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
+				if ( strlen ($Ab['icone_repertoire']) > 0 ) { $Micone_rep =		"<img src='../media/theme/".$Ab['repertoire']."/".$Ab['icone_repertoire']."'	width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
+				if ( strlen ($Ab['icone_fichier']) > 0 ) { $Micone_fichier =	"<img src='../media/theme/".$Ab['repertoire']."/".$Ab['icone_fichier']."'		width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
 			}
 			
 			$infos['backup']['affiche_module_mode']	= $infos['affiche_module_mode'];
@@ -302,7 +287,7 @@ class ModuleMenuType02 {
 					$ModuleDecoration = $MenuRenderer->render($infos);
 				}
 				
-				$GeneratedJavaScriptObj->insertJavaScript ( "Command", "dm.UpdateDecoModule ( TabInfoModule , '".$A['id']."' );");
+				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Command", "dm.UpdateDecoModule ( TabInfoModule , '".$A['id']."' );");
 			}
 			
 			$A['div_height_calc'] = (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']) ) + $PMT['ex11_y'] + $PMT['exF1_y'];
@@ -310,7 +295,7 @@ class ModuleMenuType02 {
 			
 			if ( $Ab['a_line_height'] > 0 ) { $pv['supLH'] = "; line-height:". $Ab['a_line_height']."px;"; }
 			
-			// position: absolute; is necessary otherwise the DIVs will be located on top left.
+// 			position: absolute; is necessary otherwise the DIVs will be located on top left.
 // 			$infos['module']['module_container_style'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
 			$pv['style_niveau_en_cours'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
 			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'px')."px; top: ".

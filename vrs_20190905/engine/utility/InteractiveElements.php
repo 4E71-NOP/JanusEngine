@@ -49,7 +49,7 @@ class InteractiveElements {
 	public function renderSubmitButton (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+// 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		if ( strlen($infos['hoverStyle']) > 0 ) { 
 			$animation = " onmouseover=\"elm.ButtonHover('".$infos['id']."', '".$infos['hoverStyle']."');\" onmouseout=\"elm.ButtonHover('".$infos['id']."', '".$infos['initialStyle']."');\" ";
 		}
@@ -77,6 +77,7 @@ class InteractiveElements {
 		</tr>\r
 		</table>\r
 		";
+		unset ( $ThemeDataObj);
 		return $Content;
 	}
 
@@ -94,7 +95,7 @@ class InteractiveElements {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$i = &$infos['IconSelectFile'];
-		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+// 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_width');
 		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_height');
@@ -105,13 +106,13 @@ class InteractiveElements {
 		$contenu_A = "
 			<input type='text' readonly name='".$i['formTargetId']."' id='".$i['formTargetId']."' size='".$i['formInputSize']."' maxlength='255' value='".$i['formInputVal']."' style='text-align:right;' >\r
 			<span Onclick=\"fs.getDirectoryContent(".$i['array'].", '".$i['path']."', 0); elm.FillScreenDiv('FileSelectorDarkFade', 1 ); elm.SwitchDisplayCenter('FileSelectorFrame')\">\r
-			<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>
 			";
 		
 		$contenu_B = "
 			<span Onclick=\"document.forms['".$i['formName']."'].elements['".$i['formTargetId']."'].value = '';\">
-			<img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='../media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>\r
 			";
 		
@@ -121,6 +122,7 @@ class InteractiveElements {
 			case 2 :	$contenu_R = $contenu_B; 				break;
 			case 3 :	$contenu_R = $contenu_A . $contenu_B;	break;
 		}
+		unset($ThemeDataObj);
 		return $contenu_R;
 	}
 	
@@ -149,7 +151,7 @@ class InteractiveElements {
 		$contenu_A = "
 	<input type='text' name='".$ForgeFormElement."' id='".$ForgeFormElement."' size='20' maxlength='255' value='".$InputVal."' 
 	onChange=\"
-	var NewU = 'url(\'../gfx/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
+	var NewU = 'url(\'../media/theme/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
 	elm.Gebi('".$DivCible."').style.backgroundImage = NewU;\r
 	\">\r
 			
@@ -159,7 +161,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	RenderFSJS('".$FormNom."','".$ForgeFormElement."', '".$ForgeFormElementX."', '".$ForgeFormElementY."', document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value , 'FSJavaScript' , 'FSJS_C_' , '".$JavascriptRoutine."' )\">
-	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
+	<img src='../media/theme/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
 	";
 		
 		$contenu_B = "
@@ -168,7 +170,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	".$JavascriptRoutine."();\">\r
-	<img src='../gfx/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_erase'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
+	<img src='../media/theme/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_erase'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
 	";
 		
 		$contenu_R = "";

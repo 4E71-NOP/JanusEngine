@@ -26,25 +26,19 @@ class DocumentData {
 	public function __construct() {}
 	
 	public function getDocumentDataFromDB (){
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$RequestDataObj = RequestData::getInstance();
-		$LMObj = LogManagement::getInstance();
-		
-		$LOG_TARGET = $LMObj->getInternalLogTarget();
-		$LMObj->setInternalLogTarget("both");
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
-
+// 		$LOG_TARGET = $cs->LMObj->getInternalLogTarget();
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
+		
 // 		Checks if we have a requested article 
 // 		if ( !isset($_REQUEST['arti_ref']) || strlen($_REQUEST['arti_ref']) == 0 ) {
-		if ( strlen($RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
-			$dbquery = $SDDMObj->query ( "
+		if ( strlen($cs->RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
+			$dbquery = $cs->SDDMObj->query ( "
 			SELECT cat.cate_id, cat.cate_name, cat.arti_ref
 			FROM " . $SqlTableListObj->getSQLTableName('category') . " cat, " . $SqlTableListObj->getSQLTableName('deadline') . " bcl
 			WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
@@ -52,25 +46,25 @@ class DocumentData {
 			AND cat.deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
-			AND cat.group_id " . $UserObj->getUserEntry('clause_in_group')."
+			AND cat.group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND cat.cate_state = '1'
 			AND cate_initial_document = '1'
 			ORDER BY cat.cate_parent,cat.cate_position
 			;" );
-			while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 				$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());
 				$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $dbp['arti_ref']);
 			}
 			$CurrentSetObj->setDataSubEntry('document', 'arti_page', 1);
 		}
 		else {
-			$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $RequestDataObj->getRequestDataEntry('arti_ref'));
-			$CurrentSetObj->setDataSubEntry('document', 'arti_page', $RequestDataObj->getRequestDataEntry('arti_page'));
+			$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $cs->RequestDataObj->getRequestDataEntry('arti_ref'));
+			$CurrentSetObj->setDataSubEntry('document', 'arti_page', $cs->RequestDataObj->getRequestDataEntry('arti_page'));
 		}
 		
 // 		We have an article to display whatever its ID is requested or forged
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`"), false );
-		$dbquery = $SDDMObj->query("
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`"), false );
+		$dbquery = $cs->SDDMObj->query("
 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
 		doc.docu_creator, doc.docu_creation_date,
 		doc.docu_examiner, doc.docu_examination_date,
@@ -85,10 +79,10 @@ class DocumentData {
 		AND bcl.deadline_state = '1'
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " article not found"), false );
+		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " article not found"), false );
 			
-			$dbquery = $SDDMObj->query("
+			$dbquery = $cs->SDDMObj->query("
 			SELECT doc.*
 			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_name LIKE '%article_inexistant%'
@@ -97,13 +91,13 @@ class DocumentData {
 			;");
 		}
 		
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Loading data"), false );
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Loading data"), false );
 			foreach ( $dbp as $A => $B ) { $this->DocumentData[$A] = $B; }
 		}
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " End"), false );
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " End"), false );
 
-		$LMObj->setInternalLogTarget($LOG_TARGET);
+// 		$cs->LMObj->setInternalLogTarget($LOG_TARGET);
 	}
 	
 	//@formatter:off

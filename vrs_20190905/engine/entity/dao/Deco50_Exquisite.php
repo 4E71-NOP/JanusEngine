@@ -16,23 +16,22 @@ class Deco50_Exquisite {
 	public function __construct() {
 	}
 	public function getDeco50_ExquisiteDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$LMObj = LogManagement::getInstance();
-		$dbquery = $SDDMObj->query ( "
+		$dbquery = $cs->SDDMObj->query ( "
 			SELECT *
-			FROM " . $SqlTableListObj->getSQLTableName ('deco_50_exquise') . "
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_50_exquisite') . "
 			WHERE deco_id = '" . $id . "'
 			;" );
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_50_exquise id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_50_exquisite id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco50_Exquisite[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_50_exquise id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_50_exquisite id=".$id));
 		}
 		
 	}

@@ -23,29 +23,24 @@ class KeyWord {
 	 * @param integer $id
 	 */
 	public function getKeyWordDataFromDB($id) {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$LMObj = LogManagement::getInstance();
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-
-		$dbquery = $SDDMObj->query("
+		
+		$dbquery = $cs->SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('keyword')."
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')."
 			WHERE keyword_id = '".$id."'
-			AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for keyword id=".$id));
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for keyword id=".$id));
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->KeyWord[$A] = $B; }
 			}
 		}
 		else {
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for keyword id=".$id));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for keyword id=".$id));
 		}
 		
 	}

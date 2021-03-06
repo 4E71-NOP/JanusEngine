@@ -1,36 +1,40 @@
-add decoration		
-name 'hydr_magma_block_002'		
-type 'elysion'		
-directory 'Magma'		
-		
-ex11 'magma_B02_ex11.png'	ex11_x '16'	ex11_y '20'
-ex12 'magma_B02_ex12.png'	ex12_x '24'	ex12_y '20'
-ex13 'magma_B02_ex13.png'	ex13_x '448'	ex13_y '20'
-ex14 'magma_B02_ex14.png'	ex14_x '8'	ex14_y '20'
-ex15 'magma_B02_ex15.png'	ex15_x '16'	ex15_y '20'
-ex21 'magma_B02_ex21.png'	ex21_x '16'	ex21_y '12'
-ex22 'magma_B02_ex22.png'	ex22_x '480'	ex22_y '476'
-ex25 'magma_B02_ex25.png'	ex25_x '16'	ex25_y '12'
-ex31 'magma_B02_ex31.png'	ex31_x '16'	ex31_y '456'
-ex35 'magma_B02_ex35.png'	ex35_x '16'	ex35_y '456'
-ex41 'magma_B02_ex41.png'	ex41_x '16'	ex41_y '8'
-ex45 'magma_B02_ex45.png'	ex45_x '16'	ex45_y '8'
-ex51 'magma_B02_ex51.png'	ex51_x '16'	ex51_y '16'
-ex52 'magma_B02_ex52.png'	ex52_x '16'	ex52_y '16'
-ex53 'magma_B02_ex53.png'	ex53_x '448'	ex53_y '16'
-ex54 'magma_B02_ex54.png'	ex54_x '16'	ex54_y '16'
-ex55 'magma_B02_ex55.png'	ex55_x '16'	ex55_y '16'
-		
-in11 'magma_B02_in11.png'	in11_x '8'	in11_y '12'
-in12 'magma_B02_in12.png'	in12_x '8'	in12_y '12'
-in13 'magma_B02_in13.png'	in13_x '448'	in13_y '12'
-in14 'magma_B02_in14.png'	in14_x '8'	in14_y '12'
-in15 'magma_B02_in15.png'	in15_x '8'	in15_y '12'
-		
-in11_e ONLINE
-in12_e ONLINE
-in13_e ONLINE
-in14_e ONLINE
-in15_e ONLINE
-
-;
+add decoration			
+name 'hydr_magma_block_002'			
+type 'elysion'			
+directory 'Magma'			
+			
+ex11 'magma_B02_ex11.png'	ex11_x '16'	ex11_y '20'	
+ex12 'magma_B02_ex12.png'	ex12_x '24'	ex12_y '20'	
+ex13 'magma_B02_ex13.png'	ex13_x '448'	ex13_y '20'	
+ex14 'magma_B02_ex14.png'	ex14_x '8'	ex14_y '20'	
+ex15 'magma_B02_ex15.png'	ex15_x '16'	ex15_y '20'	
+ex21 'magma_B02_ex21.png'	ex21_x '16'	ex21_y '12'	
+ex22 'magma_B02_ex22.png'	ex22_x '480'	ex22_y '476'	
+ex25 'magma_B02_ex25.png'	ex25_x '16'	ex25_y '12'	
+ex31 'magma_B02_ex31.png'	ex31_x '16'	ex31_y '456'	
+ex35 'magma_B02_ex35.png'	ex35_x '16'	ex35_y '456'	
+ex41 'magma_B02_ex41.png'	ex41_x '16'	ex41_y '8'	
+ex45 'magma_B02_ex45.png'	ex45_x '16'	ex45_y '8'	
+ex51 'magma_B02_ex51.png'	ex51_x '16'	ex51_y '16'	
+ex52 'magma_B02_ex52.png'	ex52_x '16'	ex52_y '16'	
+ex53 'magma_B02_ex53.png'	ex53_x '448'	ex53_y '16'	
+ex54 'magma_B02_ex54.png'	ex54_x '16'	ex54_y '16'	
+ex55 'magma_B02_ex55.png'	ex55_x '16'	ex55_y '16'	
+			
+in11 'magma_B02_in11.png'	in11_x '8'	in11_y '12'	in11_e 'ONLINE'
+in12 'magma_B02_in12.png'	in12_x '8'	in12_y '12'	in12_e 'ONLINE'
+in13 'magma_B02_in13.png'	in13_x '448'	in13_y '12'	in13_e 'ONLINE'
+in14 'magma_B02_in14.png'	in14_x '8'	in14_y '12'	in14_e 'ONLINE'
+in15 'magma_B02_in15.png'	in15_x '8'	in15_y '12'	in15_e 'ONLINE'
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+;			

@@ -1,5 +1,5 @@
 <?php
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -32,6 +32,7 @@ class CommonSystem {
 	public $InteractiveElementsObj;
 	public $RenderModuleObj;
 	public $RenderTablesObj;
+	public $RenderTabsObj;
 	public $CommandConsole;
 	
 	private static $Instance = null;
@@ -54,6 +55,7 @@ class CommonSystem {
 		$ClassLoaderObj->provisionClass('InteractiveElements');
 		$ClassLoaderObj->provisionClass('RenderModule');
 		$ClassLoaderObj->provisionClass('RenderTables');
+		$ClassLoaderObj->provisionClass('RenderTabs');
 		
 		$this->TimeObj					= Time::getInstance();
 		$this->LMObj					= LogManagement::getInstance();
@@ -69,7 +71,7 @@ class CommonSystem {
 		$this->InteractiveElementsObj	= InteractiveElements::getInstance();
 		$this->RenderModuleObj			= RenderModule::getInstance();
 		$this->RenderTablesObj			= RenderTables::getInstance();
-		
+		$this->RenderTabsObj			= RenderTabs::getInstance();
 	}
 	
 	/**
@@ -97,12 +99,13 @@ class CommonSystem {
 	 * It is donne this ways because the session isn't initialized right away at the start or when this class is loaded.
 	 */
 	public function initSmObj (){
-		$this->SMObj					= SessionManagement::getInstance($this->CMObj);
+// 		$this->SMObj					= SessionManagement::getInstance($this->CMObj);
+		$this->SMObj					= SessionManagement::getInstance();
 	}
 	
 	/**
 	 * Sets the DAL instance.
-	 * This require a valid configuration to be loaded. So it's not set when this class is loaded.
+	 * This require a valid configuration to be loaded. In most cases the configuration isn't ready when this class is loaded.
 	 */
 	public function initSddmObj(){
 		$DALFacade = DalFacade::getInstance();

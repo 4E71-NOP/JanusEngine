@@ -129,10 +129,10 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array ("table" => "decoration",				"column" => "deco_id",				"target" => "id"),
 				array ("table" => "decoration",				"column" => "deco_ref_id",			"target" => "deco_ref_id"),
 				array ("table" => "deco_10_menu",			"column" => "deco_line_number",		"target" => "10_id"),
-				array ("table" => "deco_20_caligraphe",		"column" => "deco_line_number",		"target" => "20_id"),
+				array ("table" => "deco_20_caligraph",		"column" => "deco_line_number",		"target" => "20_id"),
 				array ("table" => "deco_30_1_div",			"column" => "deco_line_number",		"target" => "30_id"),
 				array ("table" => "deco_40_elegance",		"column" => "deco_line_number",		"target" => "40_id"),
-				array ("table" => "deco_50_exquise",		"column" => "deco_line_number",		"target" => "50_id"),
+				array ("table" => "deco_50_exquisite",		"column" => "deco_line_number",		"target" => "50_id"),
 				array ("table" => "deco_60_elysion",		"column" => "deco_line_number",		"target" => "60_id"),
 		),
 		"columns" => array(
@@ -561,8 +561,8 @@ self::$PreRequisiteTable['add']['user'] = array (
 			if ( $a['params']['password'] == "*user_install*" ) { $a['params']['password'] = hash("sha512",stripslashes($a['Initiator']['db_pass']));}
 			if ( $a['params']['password'] == "anonymous" ) { $a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));}
 			if ( $a['params']['password'] == "*standard_user_password*" ) { 
-				$CMObj = ConfigurationManagement::getInstance();
-				$a['params']['password'] = hash("sha512",stripslashes($CMObj->getConfigurationSubEntry('db', 'standard_user_password'))); 
+				$cs = CommonSystem::getInstance();
+				$a['params']['password'] = hash("sha512",stripslashes($cs->CMObj->getConfigurationSubEntry('db', 'standard_user_password'))); 
 			}
 			if ( strlen($a['params']['login'] == 0 )){ $a['params']['login'] = $a['params']['name'];}
 // 			$a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));

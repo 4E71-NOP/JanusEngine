@@ -25,7 +25,7 @@ password			"*user_install*"
 website context name Hydre				user "*user_install*"	password "*user_install*";
 
 //show debug_off;
-set checkpoint name "Base critique - Debut";
+set checkpoint name "Core - Begin";
 set variable name "installMonitor"		value "1";
 set variable name "DebugLevel_CC"		value "1";
 

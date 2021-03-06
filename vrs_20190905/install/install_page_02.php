@@ -11,26 +11,33 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work.
-/* @var $CMObj ConfigurationManagement              */
-/* @var $ClassLoaderObj ClassLoader                 */
-/* @var $LMObj LogManagement                        */
-/* @var $MapperObj Mapper                           */
-/* @var $InteractiveElementsObj InteractiveElements */
-/* @var $RenderTablesObj RenderTables               */
-/* @var $RequestDataObj RequestData                 */
-/* @var $SDDMObj DalFacade                          */
-/* @var $SqlTableListObj SqlTableList               */
-/* @var $StringFormatObj StringFormat               */
+/* $CMObj ConfigurationManagement              */
+/* $LMObj LogManagement                        */
+/* $MapperObj Mapper                           */
+/* $InteractiveElementsObj InteractiveElements */
+/* $RenderTablesObj RenderTables               */
+/* $RequestDataObj RequestData                 */
+/* $SDDMObj DalFacade                          */
+/* $StringFormatObj StringFormat               */
+/* $RenderLayoutObj RenderLayout               */
 
+/*Hydre-IDE-end*/
+
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
+/* @var $cs CommonSystem                            */
 /* @var $CurrentSetObj CurrentSet                   */
-/* @var $DocumentDataObj DocumentData               */
-/* @var $RenderLayoutObj RenderLayout               */
-/* @var $ThemeDataObj ThemeData                     */
+/* @var $ClassLoaderObj ClassLoader                 */
+
+/* @var $SqlTableListObj SqlTableList               */
 /* @var $UserObj User                               */
 /* @var $WebSiteObj WebSite                         */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $ThemeDataObj ThemeData                     */
 
+/* @var $Content String                             */
 /* @var $Block String                               */
-/* @var $infos array                                */
+/* @var $infos Array                                */
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
@@ -140,7 +147,7 @@ case "absolute":
 	$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 	$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;
 
-	$monSQLn += 9;
+// 	$monSQLn += 9;
 break;
 }
 
@@ -154,7 +161,7 @@ case "oui":
 	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$cs->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$cs->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 	$r[] = "FLUSH TABLES;";										// clean query_cache 
 	$r[] = "FLUSH PRIVILEGES;";
-	$monSQLn += 8;
+// 	$monSQLn += 8;
 break;
 }
 $r[] = "COMMIT;";
@@ -240,7 +247,7 @@ if ( $devDebug != 1 ) {
 	unset ($r);
 	
 	// --------------------------------------------------------------------------------------------
-	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : commandConsole"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "commandConsole",
@@ -257,7 +264,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_post_install"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
 	$infos = array (
 			"path" => "../websites-data/",
 			"method" =>  "filename",
@@ -274,7 +281,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : renderConfigFile"));
+	$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
 	$tabConfigFile = array();
 	$i=0;
 	error_log($cs->StringFormatObj->arrayToString($infos));
@@ -318,21 +325,37 @@ $style2 = array (
 );
 
 // --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'] = array();
+
+// --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'][$CurrentTab] = $cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2 ,4,6);
 $T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_creation']		, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'][$CurrentTab] = $cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2 ,4,6);
 $T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_data']			, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'][$CurrentTab] = $cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2 ,4,6);
 $T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['script']				, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'][$CurrentTab] = $cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2 ,4,6);
 $T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_post_install']	, $style1 );
 $CurrentTab++;
 
+// --------------------------------------------------------------------------------------------
+$tmp = $LibInstallationReportObj->renderPerfomanceReport();
+$T['AD'][$CurrentTab] = $tmp['content'];
+$T['ADC']['onglet'] [$CurrentTab]= $tmp['config'];
+unset ($tmp);
+
+// error_log ("adcTab06: " . $cs->StringFormatObj->arrayToString($adcTab06));
+// error_log ("\$T['AD'][\$CurrentTab]: " . $cs->StringFormatObj->arrayToString($T['AD'][$CurrentTab]));
+$CurrentTab++;
 // --------------------------------------------------------------------------------------------
 $SB = array();
 $SB['id']				= "SelectBtn";
@@ -345,6 +368,7 @@ $SB['mode']				= 1;
 $SB['size'] 			= 92;
 $SB['lastSize']			= 92;
 
+$T['ADC']['onglet'][$CurrentTab] = $cs->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1 ,4,6);
 $T['AD'][$CurrentTab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t5c1');
 $Cl = 2;
 foreach ($tabConfigFile as $A ) {
@@ -372,7 +396,8 @@ foreach ($tabConfigFile as $A ) {
 			;
 	$Cl++;
 }
-// $CurrentTab++;
+
+$CurrentTab++;
 
 
 // --------------------------------------------------------------------------------------------
@@ -381,7 +406,7 @@ foreach ($tabConfigFile as $A ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$fontSizeRange = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
+// $fontSizeRange = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
 
 $infos = array(
 		"mode" => 1,
@@ -416,7 +441,7 @@ $infos = array(
 );
 
 
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 30, 5);
+$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 30, 6);
 $T['tab_infos']['tabTxt1']			= $cs->I18nObj->getI18nEntry('tab_1');
 $T['tab_infos']['tabTxt2']			= $cs->I18nObj->getI18nEntry('tab_2');
 $T['tab_infos']['tabTxt3']			= $cs->I18nObj->getI18nEntry('tab_3');
@@ -426,13 +451,14 @@ $T['tab_infos']['tabTxt6']			= $cs->I18nObj->getI18nEntry('tab_6');
 $T['tab_infos']['tabTxt7']			= $cs->I18nObj->getI18nEntry('tab_7');
 
 
-$T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
-		2	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
-		3	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),
-		4	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2	,4,6),
-		5	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1								,4,6),
-);
+// $T['ADC']['onglet'] = array(
+// 		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
+// 		2	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
+// 		3	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),
+// 		4	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2	,4,6),
+// 		5	=>	$adcTab06,
+// 		6	=>	$cs->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1								,4,6),
+// );
 
 $DocContent .= $cs->RenderTablesObj->render($infos, $T);
 

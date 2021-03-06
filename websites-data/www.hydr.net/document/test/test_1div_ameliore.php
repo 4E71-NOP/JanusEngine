@@ -20,17 +20,17 @@ echo ( "
 <div style='
 width:256px; height:384px;
 background : 
-url(../gfx/Aqua/aqua_B01_ex11.png) no-repeat left top,
-url(../gfx/Aqua/aqua_B01_ex13.png) no-repeat right top,
-url(../gfx/Aqua/aqua_B01_ex31.png) no-repeat left bottom,
-url(../gfx/Aqua/aqua_B01_ex33.png) no-repeat right bottom,
+url(../media/theme/Aqua/aqua_B01_ex11.png) no-repeat left top,
+url(../media/theme/Aqua/aqua_B01_ex13.png) no-repeat right top,
+url(../media/theme/Aqua/aqua_B01_ex31.png) no-repeat left bottom,
+url(../media/theme/Aqua/aqua_B01_ex33.png) no-repeat right bottom,
 
-url(../gfx/Aqua/aqua_B01_ex12.png) repeat-x center top,
-url(../gfx/Aqua/aqua_B01_ex21.png) repeat-y left center,
-url(../gfx/Aqua/aqua_B01_ex23.png) repeat-y right center,
-url(../gfx/Aqua/aqua_B01_ex32.png) repeat-x center bottom,
+url(../media/theme/Aqua/aqua_B01_ex12.png) repeat-x center top,
+url(../media/theme/Aqua/aqua_B01_ex21.png) repeat-y left center,
+url(../media/theme/Aqua/aqua_B01_ex23.png) repeat-y right center,
+url(../media/theme/Aqua/aqua_B01_ex32.png) repeat-x center bottom,
 
-url(../gfx/Aqua/aqua_B01_ex22.png) center center
+url(../media/theme/Aqua/aqua_B01_ex22.png) center center
 ;
 
 box-shadow: 0px 8px 10px #808080;

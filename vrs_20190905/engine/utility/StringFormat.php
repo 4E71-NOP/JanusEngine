@@ -33,7 +33,7 @@ class StringFormat {
 	/**
 	 * Feed a table with the expression that will be used to convert expressions.
 	 */
-	private function makeConvertTable () {
+	private static function makeConvertTable () {
 		self::$ConvertTable['universal']['no']					= "0";
 		self::$ConvertTable['universal']['yes']					= 1;
 		self::$ConvertTable['universal']['offline']				= "0";
@@ -366,7 +366,31 @@ class StringFormat {
 		return $R;
 	}
 	
-
+	/**
+	 * Convert a size in a human readdable fashion
+	 * @param array $infos
+	 * @param number $size
+	 * @return string
+	 */
+	public function makeSizeHumanFriendly( $infos, $size ) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$TabUnits = array(
+				"<span class='" . $block."_ok'>b</span>",
+				"<span class='" . $block."_warning'>Kb</span>",
+				"<span class='" . $block."_erreur " . $block."_tb3'>MB</span>",
+				"<span class='" . $block."_erreur " . $block."_tb4'>GB</span>"
+		);
+		if ($size == 0 ) {
+			return "0<span class='" . $block."_erreur " . $block."_tb3'>Kb</span>";
+		}
+		else {
+			if ( $size < 0 ) { return "-".round(abs($size)/pow(1024,($i=floor(log(abs($size),1024)))),2)." ".$TabUnits[$i]; }
+			else { return round(abs($size)/pow(1024,($i=floor(log(abs($size),1024)))),2).' '.$TabUnits[$i]; }
+		}
+	}
+	
 }
 	
 ?>

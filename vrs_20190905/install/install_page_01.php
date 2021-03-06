@@ -76,7 +76,7 @@ $LangageSelector = array(
 );
 $DocContent .= "<p  class='" . $block."_tb3' style='text-align: center;'>\r";
 foreach ( $LangageSelector as $A ) {
-	$DocContent .= "<a href='install.php?l=".$A['code']."'><img src='../gfx/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
+	$DocContent .= "<a href='install.php?l=".$A['code']."'><img src='../media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
 }
 $DocContent .= "</p><br>\r";
 unset ($LangageSelector);
@@ -102,8 +102,8 @@ $CurrentTab = 1;
 $pv['a'] = "<span class='" . $block."_warning'>";
 $pv['b'] = "</span>";
 
-$pv['iconGoNoGoOk'] = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>";
-$pv['iconGoNoGoNok'] = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>";
+$pv['iconGoNoGoOk'] = "<img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>";
+$pv['iconGoNoGoNok'] = "<img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>";
 
 $Support['response'] .= $cs->I18nObj->getI18nEntry('PHP_support_title');
 
@@ -250,7 +250,7 @@ $CurrentTab++;
 //
 $lt = 1;
 
-$bubbleBegin = "<img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='16' height='16' border='0' onMouseOver=\"t.ToolTip('";
+$bubbleBegin = "<img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='16' height='16' border='0' onMouseOver=\"t.ToolTip('";
 $bubbleEnd = "')\" onMouseOut=\"t.ToolTip()\">";
 
 $T['AD'][$CurrentTab]['caption']['cont'] = $cs->I18nObj->getI18nEntry('F2_intro');
@@ -429,10 +429,10 @@ $T['AD'][$CurrentTab][$lt]['1']['cont'] = $cs->I18nObj->getI18nEntry('t4l'.$lt.'
 $T['AD'][$CurrentTab][$lt]['2']['cont'] = $cs->I18nObj->getI18nEntry('t4l'.$lt.'c2');	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 2;
 $T['AD'][$CurrentTab][$lt]['3']['cont'] = $cs->InteractiveElementsObj->renderSubmitButton($SB);	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 2;
 $T['AD'][$CurrentTab][$lt]['4']['cont'] = $pv['div_cnx_db'] . "
-	<div id='TstBDD_1_ok' style='visibilty: hidden; display : none; position: realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4aok')."</div>
-	<div id='TstBDD_1_ko' style='visibilty: hidden; display : none; position: realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4ako')."</div>
-	<div id='TstBDD_2_ok' style='visibilty: hidden; display : none; position: realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4bok')."</div>
-	<div id='TstBDD_2_ko' style='visibilty: hidden; display : none; position: realtive;'><img src='../gfx/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4bko')."</div>
+	<div id='TstBDD_1_ok' style='visibilty: hidden; display : none; position: realtive;'><img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4aok')."</div>
+	<div id='TstBDD_1_ko' style='visibilty: hidden; display : none; position: realtive;'><img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4ako')."</div>
+	<div id='TstBDD_2_ok' style='visibilty: hidden; display : none; position: realtive;'><img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4bok')."</div>
+	<div id='TstBDD_2_ko' style='visibilty: hidden; display : none; position: realtive;'><img src='../media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "' width='16' height='16' border='0'>".	$cs->I18nObj->getI18nEntry('t4l10c4bko')."</div>
 	";
 
 $T['AD'][$CurrentTab][$lt]['4']['tc'] = 2;

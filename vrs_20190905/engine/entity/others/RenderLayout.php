@@ -32,23 +32,19 @@ class RenderLayout {
 	}
 	/**
 	 * Renders the layout that will be used for rendering the modules.
-	 * @param User $UserObj
-	 * @param WebSite $WebSiteObj
-	 * @param ThemeDescriptor $ThemeDescriptorObj
 	 */
-	public function render( User $UserObj, WebSite $WebSiteObj, ThemeDescriptor $ThemeDescriptorObj){
+	public function render( ){
 		$cs = CommonSystem::getInstance();
-		
-// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
+		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$dbquery = $cs->SDDMObj->query("
 			SELECT *
 			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('module_website')." sm
-			WHERE sm.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			WHERE sm.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			AND m.module_id = sm.module_id
 			AND sm.module_state = '1'
-			AND m.module_group_allowed_to_see ".$UserObj->getUserEntry('clause_in_group')."
+			AND m.module_group_allowed_to_see ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;");
@@ -66,15 +62,15 @@ class RenderLayout {
 				FROM ".$SqlTableListObj->getSQLTableName('layout')." pr, ".$SqlTableListObj->getSQLTableName('layout_theme')." sp, ".$SqlTableListObj->getSQLTableName('article')." art
 				WHERE art.arti_ref = '".$_REQUEST['arti_ref']."'
 				AND art.arti_page = '".$_REQUEST['arti_page']."'
-				AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+				AND art.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 				AND art.layout_generic_name = pr.layout_generic_name
 				AND pr.layout_id = sp.layout_id
-				AND sp.theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
+				AND sp.theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 				;");
 			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
 			if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		}
-		if ( $UserObj->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
+		if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
@@ -82,14 +78,14 @@ class RenderLayout {
 				break;
 				
 			case 110 :
-				$this->loadRawData ( $UserObj->getUserEntry('layout_id') );
+				$this->loadRawData ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('layout_id') );
 				break;
 				
 			case 10 :
 				$dbquery = $cs->SDDMObj->query("
 					SELECT layout_id
 					FROM ".$SqlTableListObj->getSQLTableName('layout_theme')."
-					WHERE theme_id = '".$ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
+					WHERE theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 					AND default_layout_content = '1'
 					;");
 				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }

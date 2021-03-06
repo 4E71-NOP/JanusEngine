@@ -59,6 +59,7 @@ class SddmPDO {
 		// List of error code
 		// https://docstore.mik.ua/orelly/java-ent/jenut/ch08_06.htm
 		if ( $this->DBInstance->errorCode() != '00000' ) {
+			$SQLlogEntry = array();
 			$SQLlogEntry['err_no'] = $this->DBInstance->errorCode();
 			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 			$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
@@ -88,7 +89,7 @@ class SddmPDO {
 		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
 		$cs->LMObj->increaseSqlQueryNumber();
 		$db_result = $this->DBInstance->query($q);
-		
+		$SQLlogEntry = array();
 		$SQLlogEntry['err_no'] = $this->DBInstance->errorCode();
 		$SQLlogEntry['err_no_expr'] = "PHP PDO Err : " . $SQLlogEntry['err_no'];
 		$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();

@@ -11,10 +11,10 @@ self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT
 self::$ActionTable['add']['decoration']			= function (&$a) {
 	switch ( $a['params']['type']) {
 		case 10:	$targetTable = "deco_10_menu";			$idv="10_id";	break;
-		case 20:	$targetTable = "deco_20_caligraphe";	$idv="20_id";	break;
+		case 20:	$targetTable = "deco_20_caligraph";	$idv="20_id";	break;
 		case 30:	$targetTable = "deco_30_1_div";			$idv="30_id";	break;
 		case 40:	$targetTable = "deco_40_elegance";		$idv="40_id";	break;
-		case 50:	$targetTable = "deco_50_exquise";		$idv="50_id";	break;
+		case 50:	$targetTable = "deco_50_exquisite";		$idv="50_id";	break;
 		case 60:	$targetTable = "deco_60_elysion";		$idv="60_id";	break;
 	}
 	
@@ -56,8 +56,9 @@ self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("IN
 
 
 self::$ActionTable['add']['log']	= function (&$a) { 
-	$LMObj = LogManagement::getInstance();
-	$LMObj->log($a);
+	$cs = CommonSystem::getInstance();
+// 	$LMObj = LogManagement::getInstance();
+	$cs->LMObj->log($a);
 };
 
 
@@ -162,8 +163,9 @@ self::$ActionTable['update']['user']		= function (&$a) { return array ("UPDATE "
 //	Insert
 //--------------------------------------------------------------------------------
 self::$ActionTable['insert']['content']		= function (&$a) {
-	$CMObj = ConfigurationManagement::getInstance();
-	switch ( $CMObj->getConfigurationEntry("execution_context") ) {
+	$cs = CommonSystem::getInstance();
+// 	$CMObj = ConfigurationManagement::getInstance();
+	switch ( $cs->CMObj->getConfigurationEntry("execution_context") ) {
 		case "render" :																																				break;
 		case "installation" :			$a['params']['file'] = "../websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];					break;
 		case "extension_installation":	$a['params']['file'] = "../extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
@@ -203,14 +205,16 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 
 // Directive 4
 self::$ActionTable['set']['checkpoint']		= function (&$a) { 
-	$LMObj = LogManagement::getInstance();
-	$LMObj->logCheckpoint($a['params']['name']);
+	$cs = CommonSystem::getInstance();
+	$cs->MapperObj->setWhereWeAreAt($a['params']['name']);
+	$cs->LMObj->logCheckpoint($a['params']['name']);
+// 	error_log("--------------------------------------------------------------> chekpoint : " . $a['params']['name']);
 };
 
 // Directive 4
 self::$ActionTable['set']['variable']		= function (&$a) { 
-	$CMObj = ConfigurationManagement::getInstance();
-	$CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
+	$cs = CommonSystem::getInstance();
+	$cs->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
 };
 
 

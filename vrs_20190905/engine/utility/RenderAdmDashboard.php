@@ -29,15 +29,8 @@ class RenderAdmDashboard {
 	public function render(){
 		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
-		
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$cs->CMObj = ConfigurationManagement::getInstance();
 		
 		$localisation = " / ModuleMenu";
 		$cs->MapperObj->AddAnotherLevel($localisation );
@@ -49,11 +42,11 @@ class RenderAdmDashboard {
 		
 		$dbquery = $cs->SDDMObj->query("
 			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('module')." a, ".$SqlTableListObj->getSQLTableName('module_website')." b
-			WHERE b.ws_id = '".$WebSiteObj->getWebSiteEntry ('ws_id')."'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
+			WHERE b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.module_id
 			AND b.module_state = '1'
-			AND a.module_group_allowed_to_see ". $UserObj->getUserEntry('clause_in_group')."
+			AND a.module_group_allowed_to_see ". $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
 			;");
@@ -66,15 +59,15 @@ class RenderAdmDashboard {
 				$module_tab_adm_[$i]['module_id']					= $dbp['module_id'];
 				$module_tab_adm_[$i]['module_deco']					= $dbp['module_deco'];
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
-				$module_tab_adm_[$i]['module_deco_default_text']		= $dbp['module_deco_default_text'];
+				$module_tab_adm_[$i]['module_deco_default_text']	= $dbp['module_deco_default_text'];
 				$module_tab_adm_[$i]['module_name']					= $dbp['module_name'];
-				$module_tab_adm_[$i]['module_name']					= str_replace ( $WebSiteObj->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_name'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
+				$module_tab_adm_[$i]['module_name']					= str_replace ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_name'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
 				$module_tab_adm_[$i]['module_classname']			= $dbp['module_classname'];
 				$module_tab_adm_[$i]['module_title']				= $dbp['module_title'];
 				$module_tab_adm_[$i]['module_directory']			= $dbp['module_directory'];
-				$module_tab_adm_[$i]['module_file']				= $dbp['module_file'];
+				$module_tab_adm_[$i]['module_file']					= $dbp['module_file'];
 				$module_tab_adm_[$i]['module_desc']					= $dbp['module_desc'];
-				$module_tab_adm_[$i]['module_group_allowed_to_see']		= $dbp['module_group_allowed_to_see'];
+				$module_tab_adm_[$i]['module_group_allowed_to_see']	= $dbp['module_group_allowed_to_see'];
 				$module_tab_adm_[$i]['module_group_allowed_to_use']	= $dbp['module_group_allowed_to_use'];
 				$module_tab_adm_[$i]['module_adm_control']			= $dbp['module_adm_control'];
 				$i++;
@@ -128,15 +121,20 @@ class RenderAdmDashboard {
 		// 1	9	5
 		//if ( !isset ( ${$theme_tableau}['theme_admctrl_position'] ) ) {}
 		
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		
 		$n = 1;
 		foreach ( $module_tab_adm_ as $m ) {
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $cs->StringFormatObj->arrayToString($m)));
 			
 			$infos['module_name'] = $mn = &$m['module_name'];
-			$Content .= "<!-- _______________________________________ Debut du module ".$mn." _______________________________________ -->\r";
+			$Content .= "<!-- _______________________________________ Start ".$mn." _______________________________________ -->\r";
 			
-			if ( $UserObj->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
+			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
 					$infos['block'] = $cs->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}
@@ -147,12 +145,21 @@ class RenderAdmDashboard {
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
-					include ( $m['module_directory'].str_replace(".php", "_Obj.php",$m['module_file'] ) ); //	str_replace used during migration so we can use both files.
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
+					include ($m['module_directory'].$m['module_file']);
 				} else { $Content .= "!! !! !! !!"; }
-				if (class_exists($ModuleRendererName)) { $ModuleRenderer = new $ModuleRendererName(); }
-				else { $ModuleRenderer = new ModuleNotFound(); }
 				
-				// No need to execute before decoration or after. Render inside !
+				if (class_exists($ModuleRendererName)) { 
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+					$ModuleRenderer = new $ModuleRendererName(); 
+				}
+				else { 
+					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
+					$infos['ModuleRendererName'] = $m['module_classname'];
+					$ModuleRenderer = new ModuleNotFound(); 
+				}
+				
+				// No need to execute before decoration or after. Render is inside !
 				$Content .= $cs->RenderModuleObj->selectDecoration($infos);
 				$Content .= $ModuleRenderer->render($infos);
 				
@@ -167,7 +174,7 @@ class RenderAdmDashboard {
 		}
 		
 		$Content .= "</div>\r";
-		$GeneratedJavaScriptObj->insertJavaScript('Command', "elm.ResizeDiv ( 'AdmDashboard' , ".$infos['admin_control']['dx']." , ".$infos['admin_control']['dy']." );");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "elm.ResizeDiv ( 'AdmDashboard' , ".$infos['admin_control']['dx']." , ".$infos['admin_control']['dy']." );");
 
 		return $Content;
 		}

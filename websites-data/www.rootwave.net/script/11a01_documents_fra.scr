@@ -1,8 +1,8 @@
 
-add document	name "doc_rw_fra_acceuil_p01.htm"	type HTML;
-insert content	file "rw_fra_acceuil_p01.htm"		into "doc_rw_fra_acceuil_p01.htm";
-share document	name "doc_rw_fra_acceuil_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_rw_fra_acceuil_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+add document	name "doc_rw_fra_home_p01.htm"	type HTML;
+insert content	file "rw_fra_home_p01.htm"		into "doc_rw_fra_home_p01.htm";
+share document	name "doc_rw_fra_home_p01.htm"	with_website rootwave	modification YES;
+update document	name "doc_rw_fra_home_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
 
 
 

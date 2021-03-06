@@ -1,0 +1,174 @@
+<?php
+/*Hydre-licence-begin*/
+// --------------------------------------------------------------------------------------------
+//
+//	Hydre - Le petit moteur de web
+//	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
+//	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
+//
+// --------------------------------------------------------------------------------------------
+/*Hydre-licence-fin*/
+
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
+/* @var $cs CommonSystem                            */
+/* @var $CurrentSetObj CurrentSet                   */
+/* @var $ClassLoaderObj ClassLoader                 */
+
+/* @var $SqlTableListObj SqlTableList               */
+/* @var $UserObj User                               */
+/* @var $WebSiteObj WebSite                         */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $ThemeDataObj ThemeData                     */
+
+/* @var $Content String                             */
+/* @var $Block String                               */
+/* @var $infos Array                                */
+/* @var $l String                                   */
+/*Hydre-IDE-end*/
+
+// $LOG_TARGET = $LMObj->getInternalLogTarget();
+// $LMObj->setInternalLogTarget("both");
+
+$cs->RequestDataObj->setRequestData('test',
+		array(
+				'test'		=> 1,
+		)
+);
+
+/*Hydre-contenu_debut*/
+$localisation = " / uni_keyword_management_p01";
+$cs->MapperObj->AddAnotherLevel($localisation );
+$cs->LMObj->logCheckpoint("uni_keyword_management_p01.php");
+$cs->MapperObj->RemoveThisLevel($localisation );
+$cs->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
+
+switch ($l) {
+	case "fra":
+		$cs->I18nObj->apply(array(
+		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
+		"col_1_txt"		=> "Nom",
+		"col_2_txt"		=> "Type",
+		"col_3_txt"		=> "Etat",
+		"tabTxt1"		=> "Informations",
+		"kwState0"		=> "Hors ligne",
+		"kwState1"		=> "En ligne",
+		"kwType1"		=> "Vers une category",
+		"kwType2"		=> "Vers une URL",
+		"kwType3"		=> "Tooltip",
+		));
+		break;
+	case "eng":
+		$cs->I18nObj->apply(array(
+		"invite1"		=> "This part will allow you to manage keywords.",
+		"col_1_txt"		=> "Name",
+		"col_2_txt"		=> "Type",
+		"col_3_txt"		=> "State",
+		"tabTxt1"		=> "Informations",
+		"kwState0"		=> "Offline",
+		"kwState0"		=> "Online",
+		"kwType1"		=> "Link to a category",
+		"kwType2"		=> "Link to an URL",
+		"kwType3"		=> "Tooltip",
+		));
+		break;
+}
+
+$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+
+// --------------------------------------------------------------------------------------------
+$Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
+
+$clause = "";
+if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$cs->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
+$dbquery = $cs->SDDMObj->query("
+SELECT *  
+FROM ".$SqlTableListObj->getSQLTableName('keyword')." 
+WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND keyword_state != '2' 
+".$clause." 
+;");
+
+if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
+	$i = 1;
+	$T['AD']['1'][$i]['1']['cont'] = $cs->I18nObj->getI18nEntry('raf1');
+	$T['AD']['1'][$i]['2']['cont'] = "";
+	$T['AD']['1'][$i]['3']['cont'] = "";
+}
+else {
+	
+	$tabState = array(
+			0	=> $cs->I18nObj->getI18nEntry('kwState0'),
+			1	=> $cs->I18nObj->getI18nEntry('kwState1'),
+	);
+	$tabType = array(
+			1	=> $cs->I18nObj->getI18nEntry('kwType1'),
+			2	=> $cs->I18nObj->getI18nEntry('kwType2'),
+			3	=> $cs->I18nObj->getI18nEntry('kwType3'),
+	);
+	$i = 1;
+	$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
+	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+		$i++;
+		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
+		&amp;M_MOTCLE[keyword_selection]=".$dbp['keyword_id'].
+		"&amp;M_MOTCLE[uni_gestion_des_motcle_p]=2".
+		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
+		&amp;arti_page=2'
+		>".$dbp['keyword_name']."</a>";
+		$T['AD']['1'][$i]['2']['cont']	= $tabType[$dbp['keyword_type']];
+		$T['AD']['1'][$i]['3']['cont']	= $tabState[$dbp['keyword_state']];
+	}
+}
+
+
+$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
+$T['ADC']['onglet'] = array(
+		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,3,1),
+);
+$Content .= $cs->RenderTablesObj->render($infos, $T);
+
+// --------------------------------------------------------------------------------------------
+
+$Content .= 
+$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
+$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
+$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
+"<input type='hidden' name='arti_page'	value='2'>\r
+<br>\r
+<table width='100%' cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
+<tr>\r
+<td>\r <input type='text' name='keywordForm[filter]' size='35' maxlength='255' value='".$cs->RequestDataObj->getRequestDataSubEntry('keywordForm','filter')."' class='".$Block."_t3 ".$Block."_form_1'>\r
+</td>\r
+
+<td align='right'>\r";
+$SB = array(
+		"id"				=> "filterButton",
+		"type"				=> "submit",
+		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
+		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
+		"onclick"			=> "",
+		"message"			=> $cs->I18nObj->getI18nEntry('btnFilter'),
+		"mode"				=> 1,
+		"size" 				=> 128,
+		"lastSize"			=> 0,
+);
+$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= "</form>\r
+</td>\r
+</tr>\r
+</table>\r
+";
+
+// --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+$Content .= $TemplateObj->renderAdminCreateButton($infos);
+
+/*Hydre-contenu_fin*/
+
+// $LMObj->setInternalLogTarget($LOG_TARGET);
+
+?>

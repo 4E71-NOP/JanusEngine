@@ -31,6 +31,17 @@ class ServerInfos {
 		$this->ServerInfos['register_globals']		= ini_get('register_globals');
 		$this->ServerInfos['post_max_size']			= ini_get('post_max_size');
 		$this->ServerInfos['max_execution_time']	= ini_get('max_execution_time');
+
+		$this->ServerInfos['current_dir']			= getcwd();
+		$this->ServerInfos['owner']					= get_current_user();
+		$this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
+		$this->ServerInfos['srv_host']				= $_SERVER['HTTP_HOST'];
+		$this->ServerInfos['sslState']				= 0;
+		
+		if ( isset($_SERVER['HTTPS']) ) {
+			if ( isset($_SERVER['SERVER_PORT'] ) && ( $_SERVER['SERVER_PORT'] == '443' ) ) { $this->ServerInfos['sslState'] = 1; }
+		}
+		
 	}
 	
 	
@@ -53,7 +64,4 @@ class ServerInfos {
 	
 	
 }
-
-
-
 ?>

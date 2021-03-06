@@ -40,12 +40,16 @@ class SddmTools {
 		$CurrentSetObj = CurrentSet::getInstance ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-		if (strlen($l) == 0 ) { $l = $WebSiteObj->getWebSiteEntry('ws_lang'); }		// failsafe on language selection. Back to the website default language.
-		switch ($_REQUEST ['contexte_d_execution']) {
+		
+		$l = $WebSiteObj->getWebSiteEntry('ws_lang'); 
+		
+// 		if (strlen($l) == 0 ) { }		// failsafe on language selection. Back to the website default language.
+		switch ($_REQUEST ['execution_context']) {
 			case "admin_menu" :
 			case "Admin_menu" :
 			case "Extension_installation" :
 			case "Rendu" :
+			case "render" :
 			default :
 				$data = array();
 				$data [3] = "WARN";

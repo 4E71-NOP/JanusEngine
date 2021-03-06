@@ -3,11 +3,11 @@ add tag	name debut;
 add tag	name début;
 add tag	name homepage;
 add tag	name hydr;
-assign tag	name acceuil  to_article hydr_fra_acceuil_p01;
-assign tag	name debut    to_article hydr_fra_acceuil_p01;
-assign tag	name début    to_article hydr_fra_acceuil_p01;
-assign tag	name homepage to_article hydr_fra_acceuil_p01;
-assign tag	name hydr      to_article hydr_fra_acceuil_p01;
+assign tag	name acceuil  to_article hydr_fra_home_p01;
+assign tag	name debut    to_article hydr_fra_home_p01;
+assign tag	name début    to_article hydr_fra_home_p01;
+assign tag	name homepage to_article hydr_fra_home_p01;
+assign tag	name hydr     to_article hydr_fra_home_p01;
 
 
 add tag	name equipe;
@@ -16,22 +16,22 @@ add tag	name staff;
 add tag	name admins;
 add tag	name team;
 add tag	name membres;
-assign tag name equipe		to_article fra_presentation_de_l_equipe_p01;
-assign tag name équipe		to_article fra_presentation_de_l_equipe_p01;
-assign tag name staff		to_article fra_presentation_de_l_equipe_p01;
-assign tag name admins		to_article fra_presentation_de_l_equipe_p01;
-assign tag name team		to_article fra_presentation_de_l_equipe_p01;
-assign tag name membres		to_article fra_presentation_de_l_equipe_p01;
+assign tag name equipe		to_article fra_staff_member_list_p01;
+assign tag name équipe		to_article fra_staff_member_list_p01;
+assign tag name staff		to_article fra_staff_member_list_p01;
+assign tag name admins		to_article fra_staff_member_list_p01;
+assign tag name team		to_article fra_staff_member_list_p01;
+assign tag name membres		to_article fra_staff_member_list_p01;
 
 
 add tag	name recruter;
 add tag	name recrutements;
 add tag	name embauches;
 add tag	name offres;
-assign tag	name recruter		to_article fra_recrutement_p01;
-assign tag	name recrutements   to_article fra_recrutement_p01;
-assign tag	name embauches      to_article fra_recrutement_p01;
-assign tag	name offres         to_article fra_recrutement_p01;
+assign tag	name recruter		to_article fra_enroll_p01;
+assign tag	name recrutements   to_article fra_enroll_p01;
+assign tag	name embauches      to_article fra_enroll_p01;
+assign tag	name offres         to_article fra_enroll_p01;
 
 
 add tag name administration;
@@ -60,8 +60,8 @@ assign tag name concept to_article fra_doc_concepts_p03;
 
 add tag name gestion;
 add tag name contenu;
-assign tag name gestion to_article fra_doc_gestion_du_contenu_p01;
-assign tag name contenu to_article fra_doc_gestion_du_contenu_p01;
-assign tag name gestion to_article fra_doc_gestion_du_contenu_p02;
-assign tag name contenu to_article fra_doc_gestion_du_contenu_p02;
+assign tag name gestion to_article fra_doc_content_management_p01;
+assign tag name contenu to_article fra_doc_content_management_p01;
+assign tag name gestion to_article fra_doc_content_management_p02;
+assign tag name contenu to_article fra_doc_content_management_p02;
 

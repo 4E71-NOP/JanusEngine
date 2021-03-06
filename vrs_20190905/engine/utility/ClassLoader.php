@@ -119,7 +119,7 @@ class ClassLoader {
 	 */
 	public function provisionClass($ClassName) {
 		$ret="OK";
-		if  ( isset ( $this->classTab[$ClassName])) {
+		if ( isset ( $this->classTab[$ClassName])) {
 			if ( !class_exists($ClassName) ) { include ($this->classTab[$ClassName]); }
 		}
 		else { $ret = "ERR"; }

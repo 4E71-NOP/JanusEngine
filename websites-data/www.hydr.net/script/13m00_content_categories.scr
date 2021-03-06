@@ -1,0 +1,52 @@
+
+add category	name "c_fra_summary_user"			parent 00000000000000			position 01	type ARTICLE_RACINE		lang fra	state ONLINE	deadline initial_online	title "Sommaire"						desc "Sommaire"										group Anonymous			article 0;
+
+add category	name "c_fra_home"					parent "c_fra_summary_user"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Bienvenue"						desc "Bienvenue"									group Anonymous			article "hydr_fra_home"	first_doc "YES";
+add category	name "c_fra_my_profile"				parent "c_fra_summary_user"		position 02	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Mon profil"						desc "Mon profil"									group Reader			article "fra_profile_management";
+add category	name "c_fra_introduction"			parent "c_fra_summary_user"		position 03	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Présentation"					desc "Présentation"									group Anonymous			article 0;
+add category	name "c_fra_content"				parent "c_fra_summary_user"		position 04	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Contenu"							desc "Contenu"										group Anonymous			article 0;
+add category	name "c_fra_online_help"			parent "c_fra_summary_user"		position 05	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Aide en ligne"					desc "Documentation"								group Anonymous			article 0;
+add category	name "c_fra_download"				parent "c_fra_summary_user"		position 06	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Téléchargement"					desc "Téléchargement"								group Anonymous			article "fra_download";
+add category	name "c_fra_donation"				parent "c_fra_summary_user"		position 07	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Donation"						desc "Donation"										group Anonymous			article "fra_doc_tut_001";
+add category	name "c_fra_test_niv0"				parent "c_fra_summary_user"		position 08	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Test"							desc "Test"											group Admins_debutant	article 0;
+add category	name "c_fra_test_niv1"				parent "c_fra_test_niv0"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Test"							desc "Test"											group Admins_debutant	article 0;
+add category	name "c_fra_test_niv2"				parent "c_fra_test_niv1"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Test"							desc "Test"											group Admins_debutant	article 0;
+add category	name "c_fra_test_niv3"				parent "c_fra_test_niv2"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Test"							desc "Test"											group Admins_debutant	article 0;
+add category	name "c_fra_test_niv4"				parent "c_fra_test_niv3"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Test"							desc "Test"											group Admins_debutant	article "hydr_fra_home";
+
+add category	name "c_fra_staff_member_list"		parent "c_fra_introduction"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Qui sommes nous ?"				desc "Présentation du staff"						group Anonymous			article "fra_staff_member_list";
+add category	name "c_fra_what_we_do"				parent "c_fra_introduction"		position 02	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Que fait on ?"					desc "Présentation de l''activité"					group Anonymous			article "fra_what_we_do";
+add category	name "c_fra_enroll"					parent "c_fra_introduction"		position 03	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Nous rejoindre"					desc "Remplir des cases"							group Anonymous			article "fra_enroll";
+add category	name "c_fra_hydr_news"				parent "c_fra_content"			position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Actualité"						desc "hydr_actualite"								group Anonymous			article "fra_news";
+
+add category	name "c_fra_concepts"				parent "c_fra_online_help"		position 01	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Concepts"						desc "Concepts"										group Anonymous			article "fra_doc_concepts";
+add category	name "c_fra_content_management"		parent "c_fra_online_help"		position 02	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Gestion du contenu"				desc "Gestion du contenu"							group Anonymous			article "fra_doc_content_management";
+add category	name "c_fra_administration"			parent "c_fra_online_help"		position 03	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Administration"					desc "Administration"								group Anonymous			article "fra_doc_administration";
+add category	name "c_fra_DOC_tut_001"			parent "c_fra_online_help"		position 04	type ARTICLE			lang fra	state ONLINE	deadline initial_online	title "Tutoriels"						desc "Tutoriels"									group Anonymous			article "fra_doc_tut_001";
+
+
+
+
+
+
+add category	name "c_eng_summary_user"			parent 00000000000000			position 01	type ARTICLE_RACINE		lang eng	state ONLINE	deadline initial_online	title "Summary"							desc "Summary"										group Anonymous			article 0;
+
+add category	name "c_eng_home"					parent "c_eng_summary_user"		position 01	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Welcome"							desc "Welcome"										group Anonymous			article "hydr_eng_home"	first_doc "YES";
+add category	name "c_eng_my_profile"				parent "c_eng_summary_user"		position 02	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "My profile"						desc "My profile"									group Reader			article "eng_profile_management";
+add category	name "c_eng_introduction"			parent "c_eng_summary_user"		position 02	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Introduction"					desc "Introduction"									group Anonymous			article 0;
+add category	name "c_eng_content"				parent "c_eng_summary_user"		position 03	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Content"							desc "Content"										group Anonymous			article 0;
+add category	name "c_eng_online_help"			parent "c_eng_summary_user"		position 04	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Documentation"					desc "Documentation"								group Anonymous			article 0;
+add category	name "c_eng_download"				parent "c_eng_summary_user"		position 05	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Downloads"						desc "Downloads"									group Anonymous			article "eng_download";
+add category	name "c_eng_donation"				parent "c_eng_summary_user"		position 06	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Donation"						desc "Donation"										group Anonymous			article 0;
+
+add category	name "c_eng_staff_member_list"		parent "c_eng_introduction"		position 01	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Who are we ?"					desc "Who are we ?"									group Anonymous			article "eng_staff_member_list";
+add category	name "c_eng_what_we_do"				parent "c_eng_introduction"		position 02	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "What do we do ?"					desc "What do we do ?"								group Anonymous			article "eng_what_we_do";
+add category	name "c_eng_enroll"					parent "c_eng_introduction"		position 03	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Join us"							desc "Join us"										group Anonymous			article "eng_enroll";
+add category	name "c_eng_hydr_news"				parent "c_eng_content"			position 01	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "News"							desc "hydr_news"									group Anonymous			article "eng_news";
+
+add category	name "c_eng_concepts"				parent "c_eng_online_help"		position 01	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Concepts"						desc "Concepts"										group Anonymous			article "eng_doc_concepts";
+add category	name "c_eng_content_management"		parent "c_eng_online_help"		position 02	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Content managment"				desc "Content managment"							group Anonymous			article "eng_doc_content_management";
+add category	name "c_eng_administration"			parent "c_eng_online_help"		position 03	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Administration"					desc "Administration"								group Anonymous			article "eng_doc_administration";
+add category	name "c_eng_DOC_tut_001"			parent "c_eng_online_help"		position 04	type ARTICLE			lang eng	state ONLINE	deadline initial_online	title "Tutorials"						desc "Tutorial"										group Anonymous			article "eng_doc_tut_001";
+
+

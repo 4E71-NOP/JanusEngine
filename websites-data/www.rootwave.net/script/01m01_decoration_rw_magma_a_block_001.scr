@@ -1,6 +1,6 @@
 add decoration		
 name 'rw_magma_block_001'		
-type 'exquisite'		
+type 'exquise'		
 directory 'Magma'		
 		
 ex11 'magma_B01_ex11.png'	ex11_x '12'	ex11_y '20'

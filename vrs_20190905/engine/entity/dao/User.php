@@ -12,7 +12,45 @@
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
 class User {
-	private $User = array();
+	private $User = array(
+			"user_id" => null,
+			"user_name" => null,
+			"user_login" => null,
+			"user_password" => null,
+			"user_subscription_date" => null,
+			"user_status" => null,
+			"user_role_function" => null,
+			"user_forum_access" => null,
+			"user_email" => null,
+			"user_msn" => null,
+			"user_aim" => null,
+			"user_icq" => null,
+			"user_yim" => null,
+			"user_website" => null,
+			"user_perso_name" => null,
+			"user_perso_country" => null,
+			"user_perso_town" => null,
+			"user_perso_occupation" => null,
+			"user_perso_interest" => null,
+			"user_last_visit" => null,
+			"user_last_ip" => null,
+			"user_timezone" => null,
+			"user_lang" => null,
+			"user_pref_theme" => null,
+			"user_pref_newsletter" => null,
+			"user_pref_show_email" => null,
+			"user_pref_show_online_status" => null,
+			"user_pref_forum_notification" => null,
+			"user_pref_forum_pm" => null,
+			"user_pref_allow_bbcode" => null,
+			"user_pref_allow_html" => null,
+			"user_pref_autorise_smilies" => null,
+			"user_avatar_image" => null,
+			"user_admin_comment" => null,
+			
+			"clause_in_group" => "",
+			"error_login_not_found" => null,
+	);
 
 	public function __construct() {}
 
@@ -25,22 +63,11 @@ class User {
 	 * @param WebSite $WebSiteObj
 	 */
 	public function getUserDataFromDB($UserLogin , $WebSiteObj) {
-		$LMObj = LogManagement::getInstance();
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
-// 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  __METHOD__ ."() : 
-// 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-// 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
-// 			WHERE usr.user_login = '" . $UserLogin . "'
-// 			AND usr.user_id = gu.user_id
-// 			AND gu.group_user_initial_group = '1'
-// 			AND gu.group_id = g.group_id
-// 			AND gu.group_id = sg.group_id
-// 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
-// 		;"
-// 		);
-		$dbquery = $SDDMObj->query ("
+
+		$dbquery = $cs->SDDMObj->query ("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
@@ -50,49 +77,8 @@ class User {
 			AND gu.group_id = sg.group_id
 			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;");
-		if ($SDDMObj->num_row_sql ( $dbquery ) != 0) {
-			while ( $dbp = $SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$this->User['id']					= $dbp['user_id'];
-				$this->User['user_id']				= $dbp['user_id'];
-				$this->User['nom']					= $dbp['user_name'];
-				$this->User['db_login']				= $dbp['user_login'];
-				$this->User['user_login']			= $dbp['user_login'];
-				$this->User['db_pass']				= $dbp['user_password'];
-// 				$this->User['user_login']			= $dbp['user_login'];
-// 				$this->User['user_password']		= $dbp['user_password'];
-
-				$this->User['date_inscription']		= $dbp['user_subscription_date'];
-				$this->User['status']				= $dbp['user_status'];
-				$this->User['droit_forum']			= $dbp['user_forum_access'];
-				$this->User['email']				= $dbp['user_email'];
-				$this->User['msn']					= $dbp['user_msn'];
-				$this->User['aim']					= $dbp['user_aim'];
-				$this->User['icq']					= $dbp['user_icq'];
-				$this->User['yim']					= $dbp['user_yim'];
-				$this->User['website']				= $dbp['user_website'];
-				$this->User['perso_nom']			= $dbp['user_perso_name'];
-				$this->User['perso_pays']			= $dbp['user_perso_country'];
-				$this->User['perso_ville']			= $dbp['user_perso_town'];
-				$this->User['perso_occupation']		= $dbp['user_perso_occupation'];
-				$this->User['perso_interet']		= $dbp['user_perso_interest'];
-				$this->User['derniere_visite']		= $dbp['user_last_visit'];
-				$this->User['derniere_ip']			= $dbp['user_last_ip'];
-				$this->User['timezone']				= $dbp['user_timezone'];
-				$this->User['lang']					= $dbp['user_lang'];
-
-				$this->User['pref_theme']						= $dbp['user_pref_theme'];
-				$this->User['pref_newsletter']					= $dbp['user_pref_newsletter'];
-				$this->User['pref_montre_email']				= $dbp['user_pref_show_email'];
-				$this->User['pref_montre_status_online']		= $dbp['user_pref_show_online_status'];
-				$this->User['pref_notification_reponse_forum']	= $dbp['user_pref_forum_notification'];
-				$this->User['pref_notification_nouveau_pm']		= $dbp['user_pref_forum_pm'];
-				$this->User['pref_autorise_bbcode']				= $dbp['user_pref_allow_bbcode'];
-				$this->User['pref_autorise_html']				= $dbp['user_pref_allow_html'];
-				$this->User['pref_autorise_smilies']			= $dbp['user_pref_autorise_smilies'];
-
-				$this->User['user_avatar_image']		= $dbp['user_avatar_image'];
-				$this->User['user_admin_comment']	= $dbp['user_admin_comment'];
-				$this->User['group_tag']				= $dbp['group_tag'];
+		if ($cs->SDDMObj->num_row_sql ( $dbquery ) != 0) {
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->User [$A] = $B; }
 			}
 
@@ -101,14 +87,14 @@ class User {
 			$groupList00 = $groupList01 = $groupList02 = array ();
 
 			// find all sons of the initial user "groupset". 
-			$dbquery = $SDDMObj->query ("
+			$dbquery = $cs->SDDMObj->query ("
 				SELECT group_id
 				FROM " . $SqlTableListObj->getSQLTableName ('group_user') . "
 				WHERE user_id = '" . $this->User['user_id'] . "'
 				ORDER BY group_id
 				;
 				");
-			while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
+			while ( $dbp = $cs->SDDMObj->fetch_array_sql ($dbquery) ) {
 				$groupList01[] = $dbp ['group_id'];
 				$this->User['group'][$dbp ['group_id']] = 1;
 			}
@@ -120,13 +106,13 @@ class User {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$dbquery = $SDDMObj->query ("SELECT group_id, group_parent
+				$dbquery = $cs->SDDMObj->query ("SELECT group_id, group_parent
 					FROM " . $SqlTableListObj->getSQLTableName ('group') . "
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;");
-				if ($SDDMObj->num_row_sql ($dbquery) > 0) {
-					while ( $dbp = $SDDMObj->fetch_array_sql ($dbquery) ) {
+				if ($cs->SDDMObj->num_row_sql ($dbquery) > 0) {
+					while ( $dbp = $cs->SDDMObj->fetch_array_sql ($dbquery) ) {
 						$groupList02[] = $dbp ['group_id'];
 						$this->User['group'][$dbp ['group_id']] = 1;
 						$loopAgain = 1;
@@ -146,7 +132,8 @@ class User {
 			$strGrp = "";
 // 			foreach ( $groupList00 as $A ) { $strGrp .= "'" . $A . "', "; }
 			foreach ( $this->User['group'] as $A => $B ) { $strGrp .= "'" . $A . "', "; }
-			$this->User['clause_in_group'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";	
+			$this->User['clause_in_group'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : user = " . $cs->StringFormatObj->arrayToString($this->User)));
 			
 		} else {
 			$this->User['error_login_not_found'] == 1;
@@ -163,8 +150,14 @@ class User {
 	}
 
 	//@formatter:off
-	public function getUserEntry( $data ) { return $this->User[$data]; }
-	public function getUserGroupEntry ($lvl1, $lvl2) { return $this->User[$lvl1][$lvl2]; }
+	public function getUserEntry( $data ) { 
+		if ( isset($this->User[$data])) {return $this->User[$data];}
+		else { return null; }
+	}
+	public function getUserGroupEntry ($lvl1, $lvl2) { 
+		if ( isset($this->User[$lvl1][$lvl2])) { return $this->User[$lvl1][$lvl2];}
+		else { return null; }
+	}
 	public function getUser() { return $this->User; }
 	public function resetUser () { $this->User = array(); }
 	

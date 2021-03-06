@@ -63,11 +63,12 @@ class LibInstallation {
 	 * @param array $list
 	 */
 	public function executeContent (&$infos, &$list) {
-		$CMobj = ConfigurationManagement::getInstance();
+		$cs = CommonSystem::getInstance();
+		
 		foreach ( $list['filelist'] as $A ) {
 			$infos['currentFileName'] = $A;
 			$path = $infos['path'].$list['name']."/".$infos['section']."/".$A;
-			$infos['currentTableName']= $CMobj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
+			$infos['currentTableName']= $cs->CMObj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
 			$infos['currentFileStat'] = stat($path);
 			$infos['currentFileContent'] = file($path);
 			$infos['TabAnalyse'] = array();
@@ -76,6 +77,8 @@ class LibInstallation {
 			$this->report[$infos['section']][$infos['currentFileName']]['OK']	= 0;	
 			$this->report[$infos['section']][$infos['currentFileName']]['WARN']	= 0;	
 			$this->report[$infos['section']][$infos['currentFileName']]['ERR']	= 0;	
+			
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : processing file : `".$this->report[$infos['section']][$infos['currentFileName']]['file']."`"));
 			
 			unset ( $infos['FormattedCommand']);
 			switch ( $infos['method'] ) {
@@ -95,8 +98,7 @@ class LibInstallation {
 	 * @param array $infos
 	*/
 	private function methodFilename (&$infos) {
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$LMObj = LogManagement::getInstance();
+		$cs = CommonSystem::getInstance();
 		
 		$Tmp = "";
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
@@ -112,8 +114,8 @@ class LibInstallation {
 		
 		foreach ( $infos['FormattedCommand'] as $C ) {
 			if ( !isset($C['ordre']) ) {
-				$SDDMObj->query($C['cont']);
-				$res = $LMObj->getLastSQLDetails();
+				$cs->SDDMObj->query($C['cont']);
+				$res = $cs->LMObj->getLastSQLDetails();
 				switch ( $res['signal'] ) {
 					case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
 					case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
@@ -123,8 +125,8 @@ class LibInstallation {
 				if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 			}
 		}
-		$SDDMObj->query("FLUSH TABLES;");
-		$SDDMObj->query("COMMIT;");
+		$cs->SDDMObj->query("FLUSH TABLES;");
+		$cs->SDDMObj->query("COMMIT;");
 	}
 	
 	/**
@@ -132,7 +134,6 @@ class LibInstallation {
 	 * @param array $infos
 	 */
 	private function methodCommand (&$infos) {
-// 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$CommandConsole = CommandConsole::getInstance();
 		
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
@@ -145,7 +146,7 @@ class LibInstallation {
 			// the space case happens when some tab & spaces are after a ";" and no command is found before EOF.
 			if ( !isset($C['ordre']) && $C['cont'] != " " ) {
 				$CommandConsole->executeCommand($C['cont']);
-
+				
 				switch ( $CommandConsole->getReportEntry('signal') ) {
 					case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
 					case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
@@ -178,19 +179,18 @@ class LibInstallation {
 	 * 
 	 */
 	private function updateInsdtallationMonitor(){
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$cs = CommonSystem::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
 		if ( ($this->report['lastReportExecution'] - $this->report['lastReportExecutionSaved']) > 3 ) {
 			$CommandConsole = CommandConsole::getInstance();
-			$SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
+			$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
 			$this->report['lastReportExecutionSaved'] = $this->report['lastReportExecution'];
 
-			$LMObj = LogManagement::getInstance();
-			$SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
+			$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$cs->LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
 			$this->report['lastSQLExecutionSaved'] = $this->report['lastSQLExecution'];
 		}
-		$SDDMObj->query("UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
+		$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
 	}
 
 	/**
@@ -312,13 +312,8 @@ class LibInstallation {
 	 * @return string
 	 */
 	public function renderConfigFile (&$infos) {
-// 		$CLassLoaderObj = ClassLoader::getInstance();
-// 		$ClassLoaderObj->provisionClass('StringFormat');
-// 		$ClassLoaderObj->provisionClass('Time');
-// 		$StringFormatObj = StringFormat::getInstance();
-		$TimeObj = Time::getInstance();
-		$CMObj = ConfigurationManagement::getInstance();
-
+		$cs = CommonSystem::getInstance();
+// 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "
 <?php
 /*Hydre-licence-begin*/
@@ -331,7 +326,7 @@ class LibInstallation {
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 //	This config file has been generated.
-//	Date		:	".$TimeObj->timestampToDate($TimeObj->microtime_chrono())."
+//	Date		:	".$cs->TimeObj->timestampToDate($cs->TimeObj->microtime_chrono())."
 //	Filename	:	site_".$infos['n']."_config.php
 //	
 //	
@@ -341,13 +336,13 @@ class LibInstallation {
 if ( \$pv['ObjectMode'] == 1 ) {
 	function returnConfig () {
 		\$tab = array();
-		\$tab['type']				= \"".$CMObj->getConfigurationSubEntry('db', 'type')."\";
-		\$tab['host']				= \"".$CMObj->getConfigurationSubEntry('db', 'host')."\";
-		\$tab['dal']				= \"".$CMObj->getConfigurationSubEntry('db', 'dal')."\";
-		\$tab['db_user_login']		= \"".$CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
-		\$tab['db_user_password']	= \"".$CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
-		\$tab['dbprefix']			= \"".$CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
-		\$tab['tabprefix']			= \"".$CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
+		\$tab['type']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'type')."\";
+		\$tab['host']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'host')."\";
+		\$tab['dal']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'dal')."\";
+		\$tab['db_user_login']		= \"".$cs->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
+		\$tab['db_user_password']	= \"".$cs->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
+		\$tab['dbprefix']			= \"".$cs->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
+		\$tab['tabprefix']			= \"".$cs->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
 		\$tab['maid_stats_nombre_de_couleurs'] = 5;
 		\$tab['SessionMaxAge']	= (60*60*24);
 		\$tab['pde_img_aff']	= 1;
@@ -376,8 +371,6 @@ if ( \$pv['ObjectMode'] == 1 ) {
 	
 	return $Content;
 	}
-	
-	
 	
 	//@formatter:off
 	public function getReport() { return $this->report; }

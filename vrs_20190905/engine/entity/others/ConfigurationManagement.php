@@ -51,17 +51,17 @@ class ConfigurationManagement {
 	 * 
 	 */
 	public function LoadConfigFile() {
-		$LMObj = LogManagement::getInstance();
-		$SMObj = SessionManagement::getInstance(0);
-
-		$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
+		$cs = CommonSystem::getInstance();
+// 		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$configFile = "config/current/site_" . $cs->SMObj->getSessionEntry('ws') . "_config.php";
+		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 		$pv['ObjectMode'] = 1; //during migration avoid re-delcaring the same function.
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
-			$SMObj->ResetSession();
-			$configFile = "config/current/site_" . $SMObj->getSessionEntry('ws') . "_config.php";
-			$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
+			$cs->SMObj->ResetSession();
+			$configFile = "config/current/site_" . $cs->SMObj->getSessionEntry('ws') . "_config.php";
+			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ConfigurationManagement-LoadConfigFile : config file =`".$configFile."`."));
 			include ($configFile);
 		}
 		$CurrentConfig = returnConfig();
@@ -109,15 +109,16 @@ class ConfigurationManagement {
 			case "render":
 			default:
 				$cs = CommonSystem::getInstance();
+				$CurrentSetObj = CurrentSet::getInstance();
 				$this->LanguageList = array ();
-				$SqlTableListObj = SqlTableList::getInstance(null, null);
+// 				$SqlTableListObj = SqlTableList::getInstance(null, null);
 				
 				$TabLangueAdmises = array();
-				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language_website')." WHERE ws_id = '".$cs->SMObj->getSessionEntry('ws')."';");
+				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." WHERE ws_id = '".$cs->SMObj->getSessionEntry('ws')."';");
 				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['lang_id']; }
 				sort ( $TabLangueAdmises );
 				
-				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
+				$dbquery = $cs->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language').";");
 				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 					$idx = $dbp['lang_id'];
 					$TableRendu = 0;
@@ -133,21 +134,18 @@ class ConfigurationManagement {
 	}
 	
 	public function setLangSupport () {
-		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
+		$cs = CommonSystem::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$dbquery = $SDDMObj->query("
+		
+		$dbquery = $cs->SDDMObj->query("
 			SELECT sl.lang_id
-			FROM ".$SqlTableListObj->getSQLTableName('language_website')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
-			WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." sl , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." s
+			WHERE s.ws_id ='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			AND sl.ws_id = s.ws_id
 			;");
-		while ($dbp = $SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['lang_id']]['support'] = 1; }
+		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['lang_id']]['support'] = 1; }
 		
 	}
-	
 	
 	//@formatter:off
 	public function getConfigurationEntry ($data) { return $this->Configuration[$data];}
