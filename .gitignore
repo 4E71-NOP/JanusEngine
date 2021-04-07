@@ -1,6 +1,5 @@
 .metadata
 .project
-
 devTools/cherche_expression.sh
 devTools/compteur_code_stats.sh
 devTools/sed_execute.sh
@@ -9,3 +8,4 @@ devTools/testcss.htm
 devTools/infos.php
 devTools/compteurs.txt
 DeveloperDocs/*
+.phpdoc/*
