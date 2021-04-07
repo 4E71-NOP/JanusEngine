@@ -8,5 +8,4 @@ devTools/sed_prepare.sh
 devTools/testcss.htm
 devTools/infos.php
 devTools/compteurs.txt
-
-DeveloperDocs/
+DeveloperDocs/*
