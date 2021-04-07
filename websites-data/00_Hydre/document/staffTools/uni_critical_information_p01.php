@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -32,14 +32,14 @@
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_critical_information_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_critical_information_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_critical_information_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_critical_information_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_critical_information_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"url_bypass" => "<p class='".Block."_tb4'>Acc&eacute;der aux panneaux d'administration:</p>\r
 			Le moteur fonctionne avec un syst&egrave;me d'authentification. Si votre site n'a pas besoin d'utilisateur, et donc n'a pas besoin d'avoir le module pr&eacute;sent, vous ne pourrez plus vous authentifier de mani&egrave;re classique. Pour contourner ce petit probl&egrave;me, vous pouvez utiliser une URL qui fera en sorte que le moteur vous authentifie.<br>\r
 			<br>\r
@@ -50,7 +50,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"url_bypass" => "<p class='".$Block."_tb4'>Accessing Admin panels:</p>\r
 			The engine works with a athentification system. If your website do not have the need to register users and by the way do not need to have the authentification module 'online', you will not be able to login either (classical way). To bypass this little problem, you can can use an URL that will make the engine perform the authification.<br>\r
 			<br>\r
@@ -62,7 +62,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('url_bypass') . "
+$Content .= $bts->I18nObj->getI18nEntry('url_bypass') . "
 
 <span class='".$Block."_tb4'><a class='".$Block."_lien' href='
 index.php?
@@ -70,7 +70,7 @@ index.php?
 &amp;l=".$UserObj->getUserEntry('lang')."
 &amp;arti_ref=fra_admin_authentification
 &amp;arti_page=1
-'>".$cs->I18nObj->getI18nEntry('url_bypass_nom')."
+'>".$bts->I18nObj->getI18nEntry('url_bypass_nom')."
 </a>
 </span>
 <br>\r

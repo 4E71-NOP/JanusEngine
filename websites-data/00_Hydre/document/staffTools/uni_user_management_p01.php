@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('RCH',
+$bts->RequestDataObj->setRequestData('RCH',
 	array(
 		'user_status'				=> 1,
 		'M_UTILIS_nbr_par_page'		=> 100,
@@ -40,14 +40,14 @@ $cs->RequestDataObj->setRequestData('RCH',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_user_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_user_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_user_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_user_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_user_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Login",
@@ -75,7 +75,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage users.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Login",
@@ -103,14 +103,14 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $GDU_ = array();
 
-$GDU_['nbr_par_page'] = $cs->RequestDataObj->getRequestDataSubEntry('RCH', 'M_UTILIS_nbr_par_page');
+$GDU_['nbr_par_page'] = $bts->RequestDataObj->getRequestDataSubEntry('RCH', 'M_UTILIS_nbr_par_page');
 if ($GDU_['nbr_par_page'] < 1 ) { $GDU_['nbr_par_page'] = 10;}
-if ( $cs->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') == 0 ) { $cs->RequestDataObj->setRequestDataSubEntry('RCH', 'group_id', null); }
+if ( $bts->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('RCH', 'group_id', null); }
 
 $clause_sql_element = array();
 $clause_sql_element['1'] = "WHERE";
@@ -118,9 +118,9 @@ $clause_sql_element['2'] = $clause_sql_element['3'] = $clause_sql_element['4'] =
 
 $clause_sql_element_offset = 1;
 $GDU_['clause_like'] = "";
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_login LIKE '%" . $cs->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like') . "%' ";	$clause_sql_element_offset++; }
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id'))>0 && $cs->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') != 0 )	{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." gr.group_id = '".$cs->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."' ";					$clause_sql_element_offset++; }
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('RCH', 'user_status'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_status = '".$cs->RequestDataObj->getRequestDataSubEntry('RCH', 'user_status')."' ";			$clause_sql_element_offset++; }
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_login LIKE '%" . $bts->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like') . "%' ";	$clause_sql_element_offset++; }
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id') != 0 )	{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." gr.group_id = '".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."' ";					$clause_sql_element_offset++; }
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('RCH', 'user_status'))>0 )																		{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_status = '".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'user_status')."' ";			$clause_sql_element_offset++; }
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gr.group_tag != '0' ";										$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_user_initial_group = '1' ";							$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' ";		$clause_sql_element_offset++;
@@ -129,11 +129,11 @@ $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_id = gr.group_id ";									$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_name != 'HydreBDD'";									$clause_sql_element_offset++;
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like'].";");
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
 
 // --------------------------------------------------------------------------------------------
 if ( $GDU_['login_count'] > $GDU_['nbr_par_page'] ) {
@@ -148,8 +148,8 @@ if ( $GDU_['login_count'] > $GDU_['nbr_par_page'] ) {
 			<a class='" . $Block."_lien' style='display: inline;' href='index.php?
 M_UTILIS_page=".$GDU_['compteur_page']."
 &amp;M_UTILIS_nbr_par_page=".$GDU_['nbr_par_page']."
-&amp;M_UTILIS_query_like=".$cs->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."
-&amp;M_UTILIS_group_id=".$cs->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."
+&amp;M_UTILIS_query_like=".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."
+&amp;M_UTILIS_group_id=".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'group_id')."
 &amp;arti_page=1
 ".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."'
 >&nbsp;".$i."&nbsp;</a> ";
@@ -161,26 +161,26 @@ M_UTILIS_page=".$GDU_['compteur_page']."
 	$Content .= $GDU_['selection_page'];
 }
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT usr.user_id,usr.user_login,user_name,usr.user_last_visit,gr.group_title,usr.user_status 
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 ".$GDU_['clause_like']."  
 ORDER BY user_id, user_login
 
-LIMIT ".($GDU_['nbr_par_page'] * $cs->RequestDataObj->getRequestDataSubEntry('RCH', 'M_UTILIS_page')).",".$GDU_['nbr_par_page']." 
+LIMIT ".($GDU_['nbr_par_page'] * $bts->RequestDataObj->getRequestDataSubEntry('RCH', 'M_UTILIS_page')).",".$GDU_['nbr_par_page']." 
 ;");
 
-$GDU_['nbr_par_page_reel'] = $cs->SDDMObj->num_row_sql ( $dbquery );
+$GDU_['nbr_par_page_reel'] = $bts->SDDMObj->num_row_sql ( $dbquery );
 
 $T = array();
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $cs->I18nObj->getI18nEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $cs->I18nObj->getI18nEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $cs->I18nObj->getI18nEntry('col_6_txt');
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
+$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
+$T['AD']['1'][$i]['6']['cont']	= $bts->I18nObj->getI18nEntry('col_6_txt');
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
 // 	if ( $dbp['user_status'] == 2 ) { $trr['tableau'][$i]['c_2_txt'] .= "style='font-style: italic; text-decoration: line-through; font-weight: lighter;'"; }
 	$T['AD']['1'][$i]['1']['cont'] = $dbp['user_id'];
@@ -199,7 +199,7 @@ while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 	
 	$T['AD']['1'][$i]['4']['cont'] = $dbp['group_title'];
 	$T['AD']['1'][$i]['4']['tc'] = 1;
-	$T['AD']['1'][$i]['5']['cont'] = $cs->I18nObj->getI18nEntry('status'.$dbp['user_status']);
+	$T['AD']['1'][$i]['5']['cont'] = $bts->I18nObj->getI18nEntry('status'.$dbp['user_status']);
 	$T['AD']['1'][$i]['5']['tc'] = 1;
 	$lastVisit = date ("Y M d - H:i:s",$dbp['user_last_visit']);
 	$T['AD']['1'][$i]['6']['cont'] = $lastVisit;
@@ -213,11 +213,11 @@ while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,6,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,6,1),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 
 // --------------------------------------------------------------------------------------------
@@ -236,34 +236,34 @@ $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
 "<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r
 <tr>\r
-<td class='".$Block."_fca'>".$cs->I18nObj->getI18nEntry('table1_1')."</td>\r
-<td class='".$Block."_fca'><input type='text' name='userForm[query_like]' size='15' value='".$cs->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."' class='".$Block."_t3 ".$Block."_form_1'></td>\r
+<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_1')."</td>\r
+<td class='".$Block."_fca'><input type='text' name='userForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."' class='".$Block."_t3 ".$Block."_form_1'></td>\r
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$cs->I18nObj->getI18nEntry('table1_2')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_2')."</td>\r
 <td class='".$Block."_fca'><select name='userForm[group_id]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
 
 $gu_select1 = array(
-	0 => array("id" => 0, 'titre' => $cs->I18nObj->getI18nEntry('select1_0')),
-	1 => array("id" => 1, 'titre' => $cs->I18nObj->getI18nEntry('select1_1')),
+	0 => array("id" => 0, 'titre' => $bts->I18nObj->getI18nEntry('select1_0')),
+	1 => array("id" => 1, 'titre' => $bts->I18nObj->getI18nEntry('select1_1')),
 );
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT a.group_id,a.group_title 
 FROM ".$SqlTableListObj->getSQLTableName('group')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b 
 WHERE b.ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 AND a.group_tag != '0' 
 AND a.group_id = b.group_id ;
 ");
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$gu_select1[$dbp['group_id']]['id'] = $dbp['group_id'];
 	$gu_select1[$dbp['group_id']]['titre'] = $dbp['group_title'];
 }
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id'))>0 && $cs->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id') != 0 ) {
-	$gu_select1[$cs->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id')]['s'] = " selected ";
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id') != 0 ) {
+	$gu_select1[$bts->RequestDataObj->getRequestDataSubEntry('userForm', 'group_id')]['s'] = " selected ";
 }
 foreach ( $gu_select1 as $A ) { $Content .= "<option value='".$A['id']."' ".$A['s'].">".$A['titre']."</option>"; }
 $Content .= "
@@ -272,7 +272,7 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$cs->I18nObj->getI18nEntry('table1_3')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_3')."</td>\r
 <td class='".$Block."_fca'>
 <select name='userForm[user_status]' class='".$Block."_t3 ".$Block."_form_1'>\r
 ";
@@ -281,10 +281,10 @@ $Content .= "
 //	Test explicite pour chaque cas. Il pourra y en avoir d'autre dans l'avenir
 // --------------------------------------------------------------------------------------------
 $gu_usestatus = array();
-$gu_usestatus['0']['i'] = 0;		$gu_usestatus['0']['t'] = $cs->I18nObj->getI18nEntry('select2_0');		$gu_usestatus['0']['s'] = "";		$gu_usestatus['0']['db'] = "DISABLED";
-$gu_usestatus['1']['i'] = 1;		$gu_usestatus['1']['t'] = $cs->I18nObj->getI18nEntry('select2_1');		$gu_usestatus['1']['s'] = "";		$gu_usestatus['1']['db'] = "ACTIVE";
-$gu_usestatus['2']['i'] = 2;		$gu_usestatus['2']['t'] = $cs->I18nObj->getI18nEntry('select2_2');		$gu_usestatus['2']['s'] = "";		$gu_usestatus['2']['db'] = "DELETED";
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status'))>0 && $cs->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status') != 0 ) { $gu_usestatus[$cs->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status')]['s'] = " selected "; }
+$gu_usestatus['0']['i'] = 0;		$gu_usestatus['0']['t'] = $bts->I18nObj->getI18nEntry('select2_0');		$gu_usestatus['0']['s'] = "";		$gu_usestatus['0']['db'] = "DISABLED";
+$gu_usestatus['1']['i'] = 1;		$gu_usestatus['1']['t'] = $bts->I18nObj->getI18nEntry('select2_1');		$gu_usestatus['1']['s'] = "";		$gu_usestatus['1']['db'] = "ACTIVE";
+$gu_usestatus['2']['i'] = 2;		$gu_usestatus['2']['t'] = $bts->I18nObj->getI18nEntry('select2_2');		$gu_usestatus['2']['s'] = "";		$gu_usestatus['2']['db'] = "DELETED";
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status') != 0 ) { $gu_usestatus[$bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status')]['s'] = " selected "; }
 else {$gu_usestatus['1']['s'] = " selected ";}
 foreach ( $gu_usestatus as $A ) { $Content .= "<option value='".$A['i']."' ".$A['s'].">".$A['t']."</option>"; } 
 $Content .= "</select>\r";
@@ -294,9 +294,9 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$cs->I18nObj->getI18nEntry('table1_41')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_41')."</td>\r
 <td class='".$Block."_fca'><input type='text' name='userForm[nbrPerPage]' size='2' value='".$GDU_['nbr_par_page']."' class='".$Block."_t3 ".$Block."_form_1'> 
-".$cs->I18nObj->getI18nEntry('table1_42')."
+".$bts->I18nObj->getI18nEntry('table1_42')."
 </td>\r
 </tr>\r
 </table>\r
@@ -311,12 +311,12 @@ $SB2 = array(
 		"id"				=> "refreshButton",
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-		"message"			=> $cs->I18nObj->getI18nEntry('btnFilter'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btnFilter'),
 // 		"size" 				=> 0,
 );
 $SB = array_merge($SB,$SB2);
 
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
 $Content .= "
 </td>\r

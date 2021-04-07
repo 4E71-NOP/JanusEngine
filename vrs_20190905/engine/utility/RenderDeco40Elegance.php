@@ -29,13 +29,13 @@ class RenderDeco40Elegance {
 	}
 	
 	public function render ( $infos ){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
@@ -45,20 +45,20 @@ class RenderDeco40Elegance {
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
 		switch ($infos['affiche_module_mode']) {
 			case "bypass":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
 				break;
 			case "normal":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
 				break;
 			case "menu":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
 				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
@@ -87,7 +87,7 @@ class RenderDeco40Elegance {
 		$L['dim_y_ex22'] = $L['pos_y3_ex22'] - $L['pos_y1_ex22'];
 		
 		// Adjust values depending on decoration 
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
 		
 		$CV = ($L['dim_x_ex22'] );	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
 		$CV = ($L['dim_x_ex22'] );	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
@@ -139,7 +139,7 @@ class RenderDeco40Elegance {
 		// ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

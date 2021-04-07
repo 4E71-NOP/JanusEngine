@@ -22,16 +22,19 @@ var xmlhttp;
 if ( window.XMLHttpRequest ) { xmlhttp = new XMLHttpRequest(); }		// IE7+, Firefox, Chrome, Opera, Safari
 else { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }				// IE6, IE5
 
+
+
+// This will trigger on a state change of xmlhttp
 xmlhttp.onreadystatechange = function () {
-	if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) { 
-		if ( xmlhttp.responseText.search('TST1-OK') > 0 ) { affichage_TstBDD ( 'TstBDD_1_' , 1 ); }
-		else { affichage_TstBDD ( 'TstBDD_1_' , 2 );} 
-		if ( xmlhttp.responseText.search('TST2-OK') > 0 ) { affichage_TstBDD ( 'TstBDD_2_' , 1 ); }
-		else { affichage_TstBDD ( 'TstBDD_2_' , 2 );} 
+	if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+		res = JSON.parse(xmlhttp.response);
+		toggleDiv ( 'cnxToDB', res.cnxToDB);
+		toggleDiv ( 'HydrDBAlreadyExist', res.HydrDBAlreadyExist);
 	}
 	l.Log[dbgTstDb]( "install_test_db :  response = " + xmlhttp.responseText );
 }
 
+// Call the URL. This URL is build with the form data. 
 function test_cnx_db () {
 	var debug = "";
 	var DBTypeElm = elm.Gebi("form[database_type_choix]"); 
@@ -52,34 +55,11 @@ function test_cnx_db () {
 	xmlhttp.send();
 }
 
-function affichage_TstBDD ( NomRacine , Configuration ) {
-	var DivOK = NomRacine + 'ok';
-	var DivKO = NomRacine + 'ko';
+// Toggle the display and visibility of a set of div (ok & ko).
+function toggleDiv ( id , toggle ) {
+	var DivOK = id + 'ok';
+	var DivKO = id + 'ko';
 	l.Log[dbgTstDb]( "DivOK=" + DivOK + "; DivKO=" + DivKO);
-
-	switch ( Configuration ) {
-	case 0:
-		elm.Gebi(DivOK).style.visibility = 'hidden';	elm.Gebi(DivOK).style.display = 'none';
-		elm.Gebi(DivKO).style.visibility = 'hidden';	elm.Gebi(DivKO).style.display = 'none';
-	break;
-	case 1:
-		elm.Gebi(DivOK).style.visibility = 'visible';	elm.Gebi(DivOK).style.display = 'block';
-		elm.Gebi(DivKO).style.visibility = 'hidden';	elm.Gebi(DivKO).style.display = 'none';
-	break;
-	case 2:
-		elm.Gebi(DivOK).style.visibility = 'hidden';	elm.Gebi(DivOK).style.display = 'none';
-		elm.Gebi(DivKO).style.visibility = 'visible';	elm.Gebi(DivKO).style.display = 'block';
-	break;
-	case 3:
-		elm.Gebi(DivOK).style.visibility = 'visible';	elm.Gebi(DivOK).style.display = 'block';
-		elm.Gebi(DivKO).style.visibility = 'visible';	elm.Gebi(DivKO).style.display = 'block';
-	break;
-	}
+	elm.Gebi(DivOK).style.visibility = (toggle==true) ? 'visible':'hidden';	elm.Gebi(DivOK).style.display = (toggle==true) ? 'block':'none';
 }
-
-
-
-
-
-
 

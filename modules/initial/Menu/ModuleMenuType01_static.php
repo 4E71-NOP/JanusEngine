@@ -25,18 +25,18 @@ class ModuleMenuType01 {
 	}
 	
 	public function renderMenu(&$infos){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		echo ("plop");
 		
 		$menu_principal = array();
-		$dbquery = $cs->SDDMObj->query($infos['module_menu_requete'] );
+		$dbquery = $bts->SDDMObj->query($infos['module_menu_requete'] );
 		$Content .= "<ul id='Admin_Menu_' style='padding-left: 0px; margin-left: 0px; list-style: none;'>\r";
 
-		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
 		else {
-			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$cate_id_index = $dbp['cate_id'];
 				$menu_principal[$cate_id_index] = array (
 						"cate_id"		=> $dbp['cate_id'],

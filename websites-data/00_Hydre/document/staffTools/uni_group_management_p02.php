@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -33,12 +33,12 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('groupForm',
+$bts->RequestDataObj->setRequestData('groupForm',
 		array(
 				'selectionId'	=>	30,
 		)
 );
-$cs->RequestDataObj->setRequestData('formGenericData',
+$bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'AdminGroupManagementP02',
@@ -53,15 +53,15 @@ $cs->RequestDataObj->setRequestData('formGenericData',
 		
 /*Hydre-contenu_debut*/
 $localisation = " / uni_group_management_p02";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_group_management_p02.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_group_management_p02.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_group_management_p02.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_group_management_p02.php");
 
 switch ($l) {
 	case "fra":
 // 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Merging i18n data. Language selection=".$l);
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"anonymous"		=>	"Anonyme",
 		"reader"		=>	"Lecteur",
 		"staff"			=>	"Staff",
@@ -83,7 +83,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"anonymous"		=>	"Anonymous",
 		"reader"		=>	"Reader",
 		"staff"			=>	"Staff",
@@ -115,14 +115,14 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Group');
 $currentGroupObj = new Group();
-switch ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
-		$currentGroupObj->getGroupDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
+		$currentGroupObj->getGroupDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
 		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
 		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -131,17 +131,17 @@ switch ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') 
 			array(
 			"group_id"		=> "*",
 			"group_tag"	=> 0,
-			"group_name"	=> $cs->I18nObj->getI18nEntry('t1l2c2'),
-			"group_title"	=> $cs->I18nObj->getI18nEntry('t1l2c2'),
-			"group_desc"	=> $cs->I18nObj->getI18nEntry('t1l2c2'),
+			"group_name"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
+			"group_title"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
+			"group_desc"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
 			)
 		);
-		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$cs->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$cs->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "add";
 		$processStep = "Create";
 		$processTarget = "edit";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
 		break;
 }
 
@@ -158,19 +158,19 @@ $Content .= "
 ."<input type='hidden' name='formEntity1'				value='group'>\r"
 ."<input type='hidden' name='formTarget1[name]'			value='".$currentGroupObj->getGroupEntry('group_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='groupForm[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId')."'>\r"
+."<input type='hidden' name='groupForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId')."'>\r"
 ."<p>\r"
 ;
 
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l6c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
 
 // $tabYN = array(
 // 		0	=> array ( "t"=>$I18nObj->getI18nEntry('no'],		"db"=>"NO" ),
@@ -188,14 +188,14 @@ $T['AD']['1']['2']['2']['cont'] = $t1l2c2;
 $T['AD']['1']['3']['2']['cont'] = $t1l3c2;
 
 $tabStateDealine = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('anonymous'),		"db"=>"ANONYMOUS" ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('reader'),			"db"=>"READER" ),
-		2	=> array ( "t"=>$cs->I18nObj->getI18nEntry('staff'),			"db"=>"STAFF" ),
-		3	=> array ( "t"=>$cs->I18nObj->getI18nEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('anonymous'),		"db"=>"ANONYMOUS" ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('reader'),			"db"=>"READER" ),
+		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('staff'),			"db"=>"STAFF" ),
+		3	=> array ( "t"=>$bts->I18nObj->getI18nEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
 );
 $tab = $tabStateDealine;
 
-switch ( $cs->RequestDataObj->getRequestDataSubEntry('groupForm', 'mode') ) {
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'mode') ) {
 	case "edit":	$tab[$currentGroupObj->getGroupEntry('group_tag')]['s'] = " selected";	break;
 	case "create":	$tab[1]['s'] = " selected";	break;
 }
@@ -226,7 +226,7 @@ $infos['IconSelectFile'] = array(
 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD']['1']['6']['2']['cont'] = $cs->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['AD']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 // --------------------------------------------------------------------------------------------
@@ -235,11 +235,11 @@ $T['AD']['1']['6']['2']['cont'] = $cs->InteractiveElementsObj->renderIconSelectF
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 8);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(5,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 
 // --------------------------------------------------------------------------------------------

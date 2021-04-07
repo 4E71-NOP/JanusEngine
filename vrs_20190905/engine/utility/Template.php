@@ -36,7 +36,7 @@ class Template {
 	 * @return string
 	 */
 	public function renderAdminFormButtons (&$infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 // 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
@@ -49,10 +49,10 @@ class Template {
 			<td>
 		";
 		
-		switch ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
+		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
-			case "edit":	$Content .= "<input type='checkbox' name='formGenericData[modification]'>".$cs->I18nObj->getI18nEntry('updateConfirm');		break;
-			case "create":	$Content .= "<input type='checkbox' name='formGenericData[creation]' 	>".$cs->I18nObj->getI18nEntry('createEditConfirm');		break;
+			case "edit":	$Content .= "<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nObj->getI18nEntry('updateConfirm');		break;
+			case "create":	$Content .= "<input type='checkbox' name='formGenericData[creation]' 	>".$bts->I18nObj->getI18nEntry('createEditConfirm');		break;
 		}
 		$Content .= "
 		</td>\r
@@ -60,9 +60,9 @@ class Template {
 		";
 				
 		$btnTxtTab = array(
-				"delete"	=>	$cs->I18nObj->getI18nEntry('btnDelete'),
-				"edit"		=>	$cs->I18nObj->getI18nEntry('btnUpdate'),
-				"create"	=>	$cs->I18nObj->getI18nEntry('btnCreate'),
+				"delete"	=>	$bts->I18nObj->getI18nEntry('btnDelete'),
+				"edit"		=>	$bts->I18nObj->getI18nEntry('btnUpdate'),
+				"create"	=>	$bts->I18nObj->getI18nEntry('btnCreate'),
 		);
 		
 		$SB = array(
@@ -71,12 +71,12 @@ class Template {
 				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 				"onclick"			=> "",
-				"message"			=> $btnTxtTab[$cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')],
+				"message"			=> $btnTxtTab[$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')],
 				"mode"				=> 1,
 				"size" 				=> 192,
 				"lastSize"			=> 0,
 		);
-		$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
 		$Content .= "</td>\r
 		</tr>\r"
@@ -86,9 +86,10 @@ class Template {
 		<form ACTION='index.php?' method='post'>\r"
 // 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws')
 // 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-		."<input type='hidden'	name='arti_page'							value='1'>"
-		."<input type='hidden'	name='formGenericData[origin]'				value='AdminDashboard'>\r"
+// 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
+// 		."<input type='hidden'	name='formGenericData[origin]'				value='AdminDashboard'>\r"
+		."<input type='hidden'	name='newRoute[arti_slug]'							value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
+		."<input type='hidden'	name='newRoute[arti_page]'							value='1'>\r"
 		."
 		<tr>\r
 		<td>\r
@@ -101,20 +102,20 @@ class Template {
 				"id"				=> "returnButton",
 				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-				"message"			=> $cs->I18nObj->getI18nEntry('btnReturn'),
+				"message"			=> $bts->I18nObj->getI18nEntry('btnReturn'),
 				"mode"				=> 1,
 				"size" 				=> 0,
 		);
 		$SB = array_merge($SB, $SB2);		//OverWrites the $SB array with $SB2.
 		
-		$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
 		$Content .= "</td>\r
 		</tr>\r
 		</form>\r
 		";
 		
-		switch ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
+		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
 			case "edit":
 				$Content .= "
@@ -122,15 +123,17 @@ class Template {
 				<form ACTION='index.php?' method='post'>\r"
 // 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws')
 // 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-				."<input type='hidden' name='arti_page'								value='2'>\r"
+// 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
+// 				."<input type='hidden' name='arti_page'								value='2'>\r"
+				."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
+				."<input type='hidden'	name='newRoute[arti_page]'					value='1'>\r"
 				."<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard'>\r"
 				."<input type='hidden' name='formGenericData[mode]'					value='delete'>\r"
-				."<input type='hidden' name='".$infos['formName']."[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId')."'>\r"
+				."<input type='hidden' name='".$infos['formName']."[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId')."'>\r"
 				."
 				<tr>\r
 				<td>\r
-				<input type='checkbox' name='formGenericData[deletion]'>".$cs->I18nObj->getI18nEntry('deleteConfirm')."
+				<input type='checkbox' name='formGenericData[deletion]'>".$bts->I18nObj->getI18nEntry('deleteConfirm')."
 				</td>\r
 				<td align='right'>\r
 				";
@@ -140,13 +143,13 @@ class Template {
 						"id"				=> "deleteButton",
 						"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
 						"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
-						"message"			=> $cs->I18nObj->getI18nEntry('btnDelete'),
+						"message"			=> $bts->I18nObj->getI18nEntry('btnDelete'),
 						"mode"				=> 1,
 						"size" 				=> 0,
 				);
 				$SB = array_merge($SB, $SB2);		//OverWrites the $SB array with $SB2.
 				
-				$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+				$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 				
 				$Content .= "
 				</td>\r
@@ -163,37 +166,35 @@ class Template {
 	}
 	
 	public function renderAdminCreateButton (&$infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
-			<table class='".$bareTableClass."' style='padding:16px'>
+			<table class='".$bareTableClass."' style='padding:16px'>\r
 			<tr>\r
 			<td>\r
-			<form ACTION='index.php?' method='post'>\r".
-// 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
-// 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-			."<input type='hidden' name='formGenericData[mode]'	value='create'>"
-			."<input type='hidden' name='arti_page'	value='2'>\r"
+			<form ACTION='' method='post'>\r"
+			."<input type='hidden'	name='formSubmitted'						value='1'>\r"
+			."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
+			."<input type='hidden'	name='newRoute[arti_page]'					value='2'>\r"
+			."<input type='hidden'	name='formGenericData[mode]'				value='create'>\r"
 			;
-			
+		
 		$SB = array(
 				"id"				=> "createButton",
 				"type"				=> "submit",
 				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 				"onclick"			=> "",
-				"message"			=> $cs->I18nObj->getI18nEntry('btnCreate'),
+				"message"			=> $bts->I18nObj->getI18nEntry('btnCreate'),
 				"mode"				=> 1,
 				"size" 				=> 128,
 				"lastSize"			=> 0,
 		);
-		$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
 		$Content .= "<br>\r&nbsp;
 		</form>\r
@@ -204,7 +205,5 @@ class Template {
 		";
 		return $Content;
 	}
-		
-	
 	
 }

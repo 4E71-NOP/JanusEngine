@@ -18,25 +18,26 @@ class ModuleQuickSkin {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
 		$localisation = " / ModuleQuickSkin";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleQuickSkin");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleQuickSkin");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleQuickSkin");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleQuickSkin");
 		
-		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
 		$I18nObj = I18n::getInstance();
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		$I18nObj->apply($i18n);
 		
-		$LOG_TARGET = $cs->LMObj->getInternalLogTarget();
-		$cs->LMObj->setInternalLogTarget("none");
+		$LOG_TARGET = $bts->LMObj->getInternalLogTarget();
+		$bts->LMObj->setInternalLogTarget("none");
 		
 		$Content = "
 		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."'>\r
@@ -45,9 +46,9 @@ class ModuleQuickSkin {
 		</td>\r</tr>\r
 		";
 		$grp = $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$cs->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUser()) ));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$bts->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUser()) ));
 		if ( $grp == "1" ) {
-			$dbquery = $cs->SDDMObj->query("
+			$dbquery = $bts->SDDMObj->query("
 			SELECT a.theme_id,a.theme_name,a.theme_title
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
 			WHERE b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
@@ -55,9 +56,9 @@ class ModuleQuickSkin {
 			AND b.theme_state = '1'
 			;");
 			
-			if ( $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
+			if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 				$Content .= "
-				<form ACTION='index.php?' method='post'>\r
+				<form ACTION='/' method='post'>\r
 				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 				<tr>\r<td>\r
 				".$I18nObj->getI18nEntry('txt2')."
@@ -65,7 +66,7 @@ class ModuleQuickSkin {
 				<tr>\r<td>\r
 				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
 				";
-				while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
 					else { 	$Content .= "<option value='".$dbp['theme_name']."'>".$dbp['theme_title']."</option>\r"; }
 				}
@@ -73,8 +74,8 @@ class ModuleQuickSkin {
 				</td>\r</tr>\r
 				
 				<input type='hidden' name='theme_activation' value='1'>\r".
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
+// 				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
+// 				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
 				"
 				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 				<tr>\r<td>\r
@@ -93,13 +94,16 @@ class ModuleQuickSkin {
 					"size" 				=> 0,
 					"lastSize"			=> 0,
 				);
-				$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+				$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 				$Content .= "
 				</center>
 				</td>\r</tr>\r
-				<input type='hidden' name='arti_ref'						value='".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_ref')."'>\r
-				<input type='hidden' name='arti_page'						value='".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_page')."'>
-				<input type='hidden' name='formSubmitted'					value='1'>
+				".
+// 				$CurrentSetObj->getDataSubEntry('block_HTML', 'arti_ref').
+// 				$CurrentSetObj->getDataSubEntry('block_HTML', 'arti_page').
+// 				<input type='hidden' name='arti_ref'						value='".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_ref')."'>\r
+// 				<input type='hidden' name='arti_page'						value='".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_page')."'>
+				"<input type='hidden' name='formSubmitted'					value='1'>
 				<input type='hidden' name='formGenericData[origin]'			value='ModuleQuickSkin'>
 				<input type='hidden' name='formGenericData[modification]'	value='on'>
 
@@ -124,7 +128,7 @@ class ModuleQuickSkin {
 					);
 		}
 		
-		$cs->LMObj->setInternalLogTarget($LOG_TARGET);
+		$bts->LMObj->setInternalLogTarget($LOG_TARGET);
 		return $Content;
 	
 	}

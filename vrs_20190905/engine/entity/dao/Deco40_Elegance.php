@@ -16,22 +16,22 @@ class Deco40_Elegance {
 	public function __construct() {
 	}
 	public function getDeco40_EleganceDataFromDB($id) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $cs->SDDMObj->query ( "
+		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_40_elegance') . "
 			WHERE deco_id = '" . $id . "'
 			;" );
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_40_elegance id=".$id));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_40_elegance id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco40_Elegance[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_40_elegance id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_40_elegance id=".$id));
 		}
 		
 	}

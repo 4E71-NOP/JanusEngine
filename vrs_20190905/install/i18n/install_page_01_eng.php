@@ -90,7 +90,7 @@ $i18n = array(
 	't4l10c2'	=> "",
 	't4l10c4aok'	=> "The database connection suceeded.",
 	't4l10c4ako'	=> "The database connection failed.",
-	't4l10c4bok'	=> "A Hydr database has been found.",
+	't4l10c4bok'	=> "WARNING A Hydr database has been found. The install process will erase this DB if you continue. Change the DB name if you want to keep the existing DB.",
 	't4l10c4bko'	=> "Hydr database not found.",
 
 

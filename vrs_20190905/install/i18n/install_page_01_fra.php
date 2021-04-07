@@ -90,7 +90,7 @@ $i18n = array(
 	't4l10c2'		=> "",
 	't4l10c4aok'		=> "La connexion à la base a réussi.",
 	't4l10c4ako'		=> "La connexion à la base a échoué.",
-	't4l10c4bok'		=> "Une BDD Hydr est déjà présente.",
+	't4l10c4bok'		=> "ATTENTION: Une BDD Hydr est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
 	't4l10c4bko'		=> "BDD Hydr non trouvée.",
 
 

@@ -23,10 +23,10 @@ class Module {
 	 * @param integer $id
 	 */
 	public function getModuleDataFromDB($id) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $cs->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT a.*,b.module_state
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
 			WHERE a.module_id = '".$id."'
@@ -34,14 +34,14 @@ class Module {
 			AND b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module id=".$id));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Module[$A] = $B; }
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module id=".$id));
 		}
 		
 	}

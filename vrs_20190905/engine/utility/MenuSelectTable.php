@@ -34,10 +34,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getArtiRefList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT DISTINCT arti_ref 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')." 
 			WHERE arti_validation_state = '1'
@@ -46,14 +46,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getArtiRefList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['arti_ref']]['t']	=	$tab[$dbp['arti_ref']]['db']	= $dbp['arti_ref'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getArtiRefList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -64,10 +64,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getCategoryList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT * 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')."
 			WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
@@ -75,14 +75,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getCategoryList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['cate_id']]['t']	=	$tab[$dbp['cate_id']]['db']	= $dbp['cate_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getCategoryList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -93,10 +93,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getDeadlineList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')."
 			WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
@@ -104,14 +104,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getDeadlineList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['deadline_id']]['t']	=	$tab[$dbp['deadline_id']]['db']	= $dbp['deadline_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getDeadlineList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -122,10 +122,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getDocumentList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." dp
 			WHERE doc.docu_id = dp.docu_id
@@ -134,14 +134,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getDocumentList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['docu_id']]['t']	=	$tab[$dbp['docu_id']]['db']	= $dbp['docu_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getDocumentList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -153,10 +153,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getGroupList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT grp.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = sg.group_id
@@ -164,14 +164,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getGroupList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['group_id']]['t']	=	$tab[$dbp['group_id']]['db']	= $dbp['group_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getGroupList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -183,10 +183,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getLayoutList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT p.*
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." p, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_theme')." tp, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." wt
 			WHERE p.layout_id = tp.layout_id
@@ -197,14 +197,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getLayoutList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['layout_generic_name']]['t']	=	$tab[$dbp['layout_generic_name']]['db']	= $dbp['layout_generic_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getLayoutList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -216,10 +216,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getLanguageList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT l.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." sl 
 			WHERE l.lang_id = sl.lang_id
@@ -227,14 +227,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getLanguageList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['lang_id']]['t']	=	$tab[$dbp['lang_id']]['db']	= $dbp['lang_original_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getLanguageList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -245,10 +245,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getThemeList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT t.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." st 
 			WHERE t.theme_id = st.theme_id
@@ -257,14 +257,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getThemeList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['theme_id']]['t']	=	$tab[$dbp['theme_id']]['db']	= $dbp['theme_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getThemeList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -275,10 +275,10 @@ class MenuSelectTable {
 	 * @return array
 	 */
 	public function getUserList(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." usr, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')." gu, " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group_website' ) . " sg , " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_id = gu.user_id
@@ -291,14 +291,14 @@ class MenuSelectTable {
 		;");
 		$tab = array();
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getUserList() : Loading data"));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['user_id']]['t']	=	$tab[$dbp['user_id']]['db']	= $dbp['user_name'];
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "MenuSelectTable/getUserList() : No rows returned"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;	

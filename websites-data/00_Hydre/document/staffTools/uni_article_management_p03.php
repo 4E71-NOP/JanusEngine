@@ -118,7 +118,7 @@ SELECT cate_role, cate_id, arti_ref
 FROM ".$SQL_tab['category']." 
 WHERE cate_type IN ('2', '3') 
 AND ws_id IN ('1', '".$website['ws_id']."') 
-AND cate_lang = '".$website['ws_lang']."' 
+AND lang_id = '".$website['ws_lang']."' 
 AND group_id ".$user['clause_in_group']." 
 AND cate_state = '1' 
 AND cate_role = '1'

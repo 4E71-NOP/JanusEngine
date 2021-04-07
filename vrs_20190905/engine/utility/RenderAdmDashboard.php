@@ -27,20 +27,20 @@ class RenderAdmDashboard {
 	}
 	
 	public function render(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
 		$localisation = " / ModuleMenu";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleMenu");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleMenu");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleMenu");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleMenu");
 		
 		$Content = "";
 		
-		$dbquery = $cs->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
 			WHERE b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
@@ -52,10 +52,10 @@ class RenderAdmDashboard {
 			;");
 		
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$module_tab_adm_ = array();
 			$i = 1;
-			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$module_tab_adm_[$i]['module_id']					= $dbp['module_id'];
 				$module_tab_adm_[$i]['module_deco']					= $dbp['module_deco'];
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
@@ -125,18 +125,18 @@ class RenderAdmDashboard {
 		
 		$n = 1;
 		foreach ( $module_tab_adm_ as $m ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $cs->StringFormatObj->arrayToString($m)));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 			
 			$infos['module_name'] = $mn = &$m['module_name'];
 			$Content .= "<!-- _______________________________________ Start ".$mn." _______________________________________ -->\r";
 			
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
-					$infos['block'] = $cs->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
+					$infos['block'] = $bts->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}
 				else { $infos['block'] = "B01"; }
 				$infos['blockG'] = $infos['block']."G"; 
@@ -145,22 +145,22 @@ class RenderAdmDashboard {
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
 					include ($m['module_directory'].$m['module_file']);
 				} else { $Content .= "!! !! !! !!"; }
 				
 				if (class_exists($ModuleRendererName)) { 
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
 					$ModuleRenderer = new $ModuleRendererName(); 
 				}
 				else { 
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
 					$infos['ModuleRendererName'] = $m['module_classname'];
 					$ModuleRenderer = new ModuleNotFound(); 
 				}
 				
 				// No need to execute before decoration or after. Render is inside !
-				$Content .= $cs->RenderModuleObj->selectDecoration($infos);
+				$Content .= $bts->RenderModuleObj->selectDecoration($infos);
 				$Content .= $ModuleRenderer->render($infos);
 				
 				$Content .= "</div>\r</div>\r<!-- _______________________________________ Fin du module ".$mn." _______________________________________ -->\r\r\r\r\r";

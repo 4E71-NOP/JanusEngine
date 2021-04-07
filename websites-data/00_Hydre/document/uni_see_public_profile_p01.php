@@ -28,7 +28,7 @@
 /*Hydre-IDE-end*/
 
 // $RequestDataObj->setRequestDataEntry('script_source',"");
-$cs->RequestDataObj->setRequestDataEntry('publicProfil',
+$bts->RequestDataObj->setRequestDataEntry('publicProfil',
 		array(
 				'userLogin' => "dieu",
 				'userId' => 1,
@@ -36,10 +36,10 @@ $cs->RequestDataObj->setRequestDataEntry('publicProfil',
 );
 /*Hydre-contenu_debut*/
 $localisation = " / uni_see_public_profile_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_see_public_profile_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_see_public_profile_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_see_public_profile_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_see_public_profile_p01.php");
 
 switch ($l) {
 	case "fra":
@@ -69,7 +69,7 @@ switch ($l) {
 //
 // --------------------------------------------------------------------------------------------
 $currentUserObj = new User();
-$currentUserObj->getUserDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('publicProfil', 'userLogin'), $WebSiteObj);
+$currentUserObj->getUserDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('publicProfil', 'userLogin'), $WebSiteObj);
 
 $T = array();
 $T['AD']['1']['1']['1']['cont'] = $i18nDoc['l_1_txt'];
@@ -78,7 +78,7 @@ $T['AD']['1']['3']['1']['cont'] = $i18nDoc['l_3_txt'];
 
 $T['AD']['1']['1']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
 $T['AD']['1']['2']['2']['cont'] = "<img src='".$currentUserObj->getUserEntry('user_avatar_image')."' width='128' height='128' alt='Avatar'>";
-$T['AD']['1']['3']['2']['cont'] = $cs->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
+$T['AD']['1']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
 $RenderLayoutObj = RenderLayout::getInstance();
 $T['tab_infos']['EnableTabs']		= 1;
 $T['tab_infos']['NbrOfTabs']		= 1;
@@ -105,7 +105,7 @@ $config = array(
 		"deco_type"	=> 50,
 		"module"	=> $infos['module'],
 );
-$Content .= $cs->RenderTablesObj->render($config, $T);
+$Content .= $bts->RenderTablesObj->render($config, $T);
 
 
 

@@ -219,17 +219,17 @@ class ElementHandling {
 	}
 	
 	/**
-	 * 
+	 * Get element by Id
 	 */
 	Gebi (id) { return document.getElementById(id); }
 	
 	/**
-	 * 
+	 * Get element by name
 	 */
 	Gebn (name) { return document.getElementsByTagName(name); }
 	
 	/**
-	 * 
+	 * Updates windows size (o returns information depending on 'mode')
 	 */
 	UpdateWindowSize (mode) {
 		var x,y;
@@ -262,7 +262,7 @@ class ElementHandling {
 	
 	/**
 	 * Locate an element and returns an array containing all position
-	 * infirmation. 0 screen absolute 1 relative to parent
+	 * information. 0 screen absolute 1 relative to parent
 	 */
 	LocateElement (ObjId) {
 		var Obj = this.Gebi (ObjId);
@@ -318,7 +318,7 @@ class ElementHandling {
 	}
 	
 	/**
-	 * 
+	 * Resize a div with 2 imputs
 	 */
 	ResizeDiv (DivID, DivX, DivY) {
 		this.Gebi( DivID ).style.width = DivX + 'px';
@@ -326,17 +326,17 @@ class ElementHandling {
 	}
 	
 	/**
-	 * 
+	 * Makes an element visible
 	 */
 	Show (DivID) { this.Gebi( DivID ).style.visibility = 'visible';	this.Gebi( DivID ).style.display = 'block'; }
 
 	/**
-	 * 
+	 * Hides an element using visibility
 	 */
 	Hide (DivID) { this.Gebi( DivID ).style.visibility = 'none';	this.Gebi( DivID ).style.display = 'none'; }
 	
 	/**
-	 * 
+	 * Change the classname upon hiver on the buttons (3 divs button)
 	 */
 	ButtonHover (Name , Style) { 
 		this.Gebi( Name + '01').className = Style +'01';
@@ -414,7 +414,7 @@ class StringFormat {
 	constructor(){}
 	
 	/**
-	 * 
+	 * Converts a decimal number to Hexadecimal
 	 */
 	D2h ( d ) {
 		var dc = Number(d).toString(16); // buggy all the way long!
@@ -423,7 +423,7 @@ class StringFormat {
 	}
 	
 	/**
-	 * 
+	 * Converts a Hexadecimal number to decimal
 	 */
 	H2d ( h ) { return parseInt( String(h) , 16 ); }
 }

@@ -56,9 +56,9 @@ self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("IN
 
 
 self::$ActionTable['add']['log']	= function (&$a) { 
-	$cs = CommonSystem::getInstance();
+	$bts = BaseToolSet::getInstance();
 // 	$LMObj = LogManagement::getInstance();
-	$cs->LMObj->log($a);
+	$bts->LMObj->log($a);
 };
 
 
@@ -163,12 +163,12 @@ self::$ActionTable['update']['user']		= function (&$a) { return array ("UPDATE "
 //	Insert
 //--------------------------------------------------------------------------------
 self::$ActionTable['insert']['content']		= function (&$a) {
-	$cs = CommonSystem::getInstance();
+	$bts = BaseToolSet::getInstance();
 // 	$CMObj = ConfigurationManagement::getInstance();
-	switch ( $cs->CMObj->getConfigurationEntry("execution_context") ) {
-		case "render" :																																				break;
-		case "installation" :			$a['params']['file'] = "../websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];					break;
-		case "extension_installation":	$a['params']['file'] = "../extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
+	switch ( $bts->CMObj->getConfigurationEntry("execution_context") ) {
+		case "render" :																																			break;
+		case "installation" :			$a['params']['file'] = "websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];				break;
+		case "extension_installation":	$a['params']['file'] = "extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
 	}
 	
 	if ( file_exists($a['params']['file']) ) {
@@ -205,16 +205,16 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 
 // Directive 4
 self::$ActionTable['set']['checkpoint']		= function (&$a) { 
-	$cs = CommonSystem::getInstance();
-	$cs->MapperObj->setWhereWeAreAt($a['params']['name']);
-	$cs->LMObj->logCheckpoint($a['params']['name']);
+	$bts = BaseToolSet::getInstance();
+	$bts->MapperObj->setWhereWeAreAt($a['params']['name']);
+	$bts->LMObj->logCheckpoint($a['params']['name']);
 // 	error_log("--------------------------------------------------------------> chekpoint : " . $a['params']['name']);
 };
 
 // Directive 4
 self::$ActionTable['set']['variable']		= function (&$a) { 
-	$cs = CommonSystem::getInstance();
-	$cs->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
+	$bts = BaseToolSet::getInstance();
+	$bts->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
 };
 
 

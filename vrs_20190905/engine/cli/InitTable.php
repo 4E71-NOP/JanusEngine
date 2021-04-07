@@ -75,6 +75,7 @@ self::$InitTable['category'] = function (&$a) {
 			"role" => "NO",
 			"first_doc" => "NO",
 			"article" => 1,
+			"slug" => "",
 			"last_modif" => time(),
 	);
 	
@@ -743,7 +744,7 @@ self::$InitTable['deadline'] = function (&$a) {
 	$a['params'] = array(
 			"id" => "",
 			"name" => "New DeadLine",
-			"title" => "Nouveau titre",
+			"title" => "New deadline title",
 			"state" => 0,
 			"date_creation" => $date,
 			"date_expiration" => $date + (60*60*24*31*12*10),
@@ -800,7 +801,7 @@ self::$InitTable['group'] = function (&$a) {
 			"parent" => "reader",
 			"tag" => 1,
 			"title" => "New group",
-			"file" => "graph/universal/icone_developpeur_001.jpg",
+			"file" => "media/img/universal/icone_developpeur_001.jpg",
 			"desc" => "New group"
 	);
 };

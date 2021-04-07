@@ -1,6 +1,9 @@
-<?php 
+<?php
 
 // d=Directive
+//		Directive = 1 : Return the data in a variable. No error message.
+//		Directive = 2 : Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
+//		Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
 // f=Function
 // c=Column
 // v=Variable (destination)
@@ -186,12 +189,12 @@ self::$CheckTable['insert']['content']['2']['p']	= "user";
 self::$CheckTable['insert']['content']['2']['s']	= "validator";
 self::$CheckTable['insert']['content']['3']['d'] 	= 4;
 self::$CheckTable['insert']['content']['3']['f'] 	= function ($a) {
-	$cs = CommonSystem::getInstance();
+	$bts = BaseToolSet::getInstance();
 // 	$CMObj = ConfigurationManagement::getInstance();
-	switch ( $cs->CMObj->getConfigurationEntry("execution_context") ) {
-		case "render" :																																				break;
-		case "installation" :			$a['params']['file'] = "../websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];				break;
-		case "extension_installation":	$a['params']['file'] = "../extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
+	switch ( $bts->CMObj->getConfigurationEntry("execution_context") ) {
+		case "render" :																																			break;
+		case "installation" :			$a['params']['file'] = "websites-data/".$a['Context']['ws_directory']."/document/".$a['params']['file'];				break;
+		case "extension_installation":	$a['params']['file'] = "extensions/".$a['Context']['ws_directory']."/_installation/document/".$a['params']['file'];		break;
 	}
 	$ret = 0;
 	if ( file_exists($a['params']['file']) ) { $ret = 1; } // Signal is the minimum required.
@@ -638,19 +641,26 @@ self::$CheckTable['update']['user']['0']['d']	= 2;
 self::$CheckTable['update']['user']['0']['c']	= "user_id";
 self::$CheckTable['update']['user']['0']['v']	= "id";
 self::$CheckTable['update']['user']['0']['m']	= "CLI_User_U001";
-self::$CheckTable['update']['user']['2']['p']	= "user";
-
 
 self::$CheckTable['update']['user']['1']['m']	= "CLI_User_U002";
+self::$CheckTable['update']['user']['2']['p']	= "user";
 self::$CheckTable['update']['user']['2']['m']	= "CLI_User_U003";
 
-self::$CheckTable['update']['user']['3']['d']	= 2;
+self::$CheckTable['update']['user']['3']['d']	= 1;
 self::$CheckTable['update']['user']['3']['f']	= function ($a) { return array ("SELECT t.theme_id, t.theme_name FROM ".$a['sqlTables']['theme_descriptor']." t, ".$a['sqlTables']['theme_website']." st WHERE t.theme_name = '".$a['params']['pref_theme']."' AND t.theme_id = st.theme_id AND st.theme_state = '1' AND st.ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['user']['3']['c']	= "theme_id";
 self::$CheckTable['update']['user']['3']['v']	= "pref_theme_id";
 self::$CheckTable['update']['user']['3']['m']	= "CLI_User_U004";
 self::$CheckTable['update']['user']['3']['p']	= "theme";
 self::$CheckTable['update']['user']['3']['s']	= "pref_theme";
+
+self::$CheckTable['update']['user']['4']['d']	= 1;
+self::$CheckTable['update']['user']['4']['f']	= function ($a) { if ($a['params']['lang'] != 0 ) { return array ("SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';");} else {	return array ("SELECT (0);");} };
+self::$CheckTable['update']['user']['4']['c']	= "lang_id";
+self::$CheckTable['update']['user']['4']['v']	= "lang";
+self::$CheckTable['update']['user']['4']['m']	= "CLI_User_U005";
+self::$CheckTable['update']['user']['4']['p']	= "language";
+self::$CheckTable['update']['user']['4']['s']	= "lang";
 
 
 self::$CheckTable['assign']['user']['0']['d']	= 2;

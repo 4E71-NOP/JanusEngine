@@ -16,21 +16,21 @@ class ArticleConfig {
 	public function __construct() {
 	}
 	public function getArticleConfigDataFromDB($id) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		
-		$dbquery = $cs->SDDMObj->query ( "
+		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
 			FROM " . CurrentSet::getInstance()->getInstanceOfSqlTableListObj()->getSQLTableName ('article_config') . "
 			WHERE config_id = '" . $id . "'
 			;" );
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article_config id=".$id));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article_config id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->ArticleConfig[$A] = $B; }
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article_config id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article_config id=".$id));
 		}
 		
 	}

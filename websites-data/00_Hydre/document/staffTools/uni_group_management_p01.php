@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -33,14 +33,14 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
 $localisation = " / uni_group_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_group_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_group_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_group_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_group_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les groupes.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Titre",
@@ -53,7 +53,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage groups.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Title",
@@ -68,14 +68,14 @@ switch ($l) {
 }
 
 $tagTab = array(
-	0 => $cs->I18nObj->getI18nEntry('tag0'),
-	1 => $cs->I18nObj->getI18nEntry('tag1'),
-	2 => $cs->I18nObj->getI18nEntry('tag2'),
-	3 => $cs->I18nObj->getI18nEntry('tag3'),
+	0 => $bts->I18nObj->getI18nEntry('tag0'),
+	1 => $bts->I18nObj->getI18nEntry('tag1'),
+	2 => $bts->I18nObj->getI18nEntry('tag2'),
+	3 => $bts->I18nObj->getI18nEntry('tag3'),
 );
 
 $T = array();
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT grp.*, sg.group_state 
 FROM ".$SqlTableListObj->getSQLTableName('group')." grp, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -83,10 +83,10 @@ AND grp.group_id = sg.group_id
 and grp.group_name != 'Server_owner' 
 ;");
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
 	$T['AD']['1'][$i]['link'] = "index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=2&formGenericData[mode]=edit&groupForm[selectionId]=".$dbp['group_id'];
 // 	$T['AD']['1'][$i]['1']['cont'] = "<a class='".$Block."_lien' href='index.php?"
@@ -110,11 +110,11 @@ while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,3,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

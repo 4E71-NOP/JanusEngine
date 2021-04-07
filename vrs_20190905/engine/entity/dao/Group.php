@@ -23,10 +23,10 @@ class Group {
 	 * @param integer $id
 	 */
 	public function getGroupDataFromDB($id) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $cs->SDDMObj->query("
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT grp.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = '".$id."'
@@ -34,14 +34,14 @@ class Group {
 			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group id=".$id));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->Group[$A] = $B; }
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for group id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for group id=".$id));
 		}
 		
 	}

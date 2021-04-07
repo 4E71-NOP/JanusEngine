@@ -13,11 +13,11 @@
 /*Hydre-licence-fin*/
 
 /**
- * Aggregator of multiple internal tools.
+ * Regroupment of multiple internal tools.
  * @author faust
  *
  */
-class CommonSystem {
+class BaseToolSet {
 	public $TimeObj;
 	public $LMObj;
 	public $MapperObj;
@@ -27,18 +27,21 @@ class CommonSystem {
 	public $CMObj;
 	public $SMObj;
 	public $AUObj;
+	public $SddmToolsObj;
 	public $SDDMObj;
 	public $I18nObj;
 	public $InteractiveElementsObj;
+	public $RenderFormObj;
 	public $RenderModuleObj;
 	public $RenderTablesObj;
 	public $RenderTabsObj;
+	public $Router;
 	public $CommandConsole;
 	
 	private static $Instance = null;
 	
 	private function __construct() {
-		include_once ("engine/utility/ClassLoader.php");			// Make sure we got this loaded.
+		include_once ("current/engine/utility/ClassLoader.php");			// Make sure we got this loaded.
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('LogManagement');
 		$ClassLoaderObj->provisionClass('Time');
@@ -53,9 +56,11 @@ class CommonSystem {
 		$ClassLoaderObj->provisionClass('DalFacade');
 		$ClassLoaderObj->provisionClass('I18n');
 		$ClassLoaderObj->provisionClass('InteractiveElements');
+		$ClassLoaderObj->provisionClass('RenderForm');
 		$ClassLoaderObj->provisionClass('RenderModule');
 		$ClassLoaderObj->provisionClass('RenderTables');
 		$ClassLoaderObj->provisionClass('RenderTabs');
+		$ClassLoaderObj->provisionClass('Router');
 		
 		$this->TimeObj					= Time::getInstance();
 		$this->LMObj					= LogManagement::getInstance();
@@ -67,20 +72,23 @@ class CommonSystem {
 		$this->CMObj					= ConfigurationManagement::getInstance();
 		$this->CMObj->InitBasicSettings();
 		$this->AUObj					= AuthenticateUser::getInstance();
+		$this->SddmToolsObj				= SddmTools::getInstance();
 		$this->I18nObj					= I18n::getInstance();
 		$this->InteractiveElementsObj	= InteractiveElements::getInstance();
+		$this->RenderFormObj			= RenderForm::getInstance();
 		$this->RenderModuleObj			= RenderModule::getInstance();
 		$this->RenderTablesObj			= RenderTables::getInstance();
 		$this->RenderTabsObj			= RenderTabs::getInstance();
+		$this->Router					= Router::getInstance();
 	}
 	
 	/**
 	 * Singleton : Will return the instance of this class.
-	 * @return CommonSystem
+	 * @return BaseToolSet
 	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new CommonSystem();
+			self::$Instance = new BaseToolSet();
 		}
 		return self::$Instance;
 	}

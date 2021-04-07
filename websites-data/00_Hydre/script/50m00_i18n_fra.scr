@@ -62,4 +62,9 @@ add translation	lang	"fra"		package	"initial"		name	"userForgotConfirmation"	tex
 add translation	lang	"fra"		package	"initial"		name	"userForgotDeletion"		text	"Vous avez oublié de confirmer suppression.";
 add translation	lang	"fra"		package	"initial"		name	"userForgotCreation"		text	"Vous avez oublié de confirmer création.";
 
+add translation	lang	"fra"		package	"initial"		name	"fileSelectorTitle"			text	"Sélecteur de fichier";
+add translation	lang	"fra"		package	"initial"		name	"fileSelectorC1"			text	"Nom";
+add translation	lang	"fra"		package	"initial"		name	"fileSelectorC2"			text	"Taille";
+add translation	lang	"fra"		package	"initial"		name	"fileSelectorC3"			text	"Date";
+
 

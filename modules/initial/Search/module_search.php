@@ -18,17 +18,18 @@ class ModuleSearch {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleSearch";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleSearch");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleSearch");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleSearch");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleSearch");
 		
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $CurrentSetObj->getDataEntry ( 'language');
 
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
@@ -81,7 +82,7 @@ class ModuleSearch {
 				"size" 				=> 0,
 				"lastSize"			=> 0,
 			);
-			$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+			$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 			$Content .= "
 			</td>\r
 			</tr>\r

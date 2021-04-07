@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -33,14 +33,14 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
 $localisation = " / uni_module_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_module_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_module_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_module_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_module_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de créer un module.",
 		"invite2"		=> "Cette partie va vous permettre de gérer les modules.",
 		"col_1_txt"		=> "Name",
@@ -54,7 +54,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to create a module.",
 		"invite2"		=> "This part will allow you to manage modules.",
 		"col_1_txt"		=> "Name",
@@ -68,9 +68,9 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_name,a.module_title,a.module_file,a.module_desc,a.module_group_allowed_to_see,a.module_group_allowed_to_use,a.module_adm_control,b.module_state 
 FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b 
 WHERE a.module_id = b.module_id 
@@ -80,39 +80,39 @@ ORDER BY b.module_position
 
 $groupTab = array();
 $table_infos_modules = array();
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$module_id_index = $dbp['module_id'];
 	foreach ( $dbp as $A => $B ) { $table_infos_modules[$module_id_index][$A] = $B; }
 }
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT * 
 FROM ".$SqlTableListObj->getSQLTableName('group')."
 ;");
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i = $dbp['group_id'];
 	$groupTab[$i] = $dbp['group_title'];
 }
 
 $tab_module_state = array(
-	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$cs->I18nObj->getI18nEntry('disabled')."</span>",
-	1 => $cs->I18nObj->getI18nEntry('enabled'),
-	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$cs->I18nObj->getI18nEntry('deleted')."</span>",
+	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nObj->getI18nEntry('disabled')."</span>",
+	1 => $bts->I18nObj->getI18nEntry('enabled'),
+	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nObj->getI18nEntry('deleted')."</span>",
 );
 		
 $tab_module_deco = array(
-	0 => $cs->I18nObj->getI18nEntry('no'),
-	1 => $cs->I18nObj->getI18nEntry('yes'),
+	0 => $bts->I18nObj->getI18nEntry('no'),
+	1 => $bts->I18nObj->getI18nEntry('yes'),
 );
 
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $cs->I18nObj->getI18nEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $cs->I18nObj->getI18nEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $cs->I18nObj->getI18nEntry('col_6_txt');
-$T['AD']['1'][$i]['7']['cont']	= $cs->I18nObj->getI18nEntry('col_7_txt');
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
+$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
+$T['AD']['1'][$i]['6']['cont']	= $bts->I18nObj->getI18nEntry('col_6_txt');
+$T['AD']['1'][$i]['7']['cont']	= $bts->I18nObj->getI18nEntry('col_7_txt');
 
 foreach ( $table_infos_modules AS $A1 ) {
 	$i++;
@@ -148,11 +148,11 @@ foreach ( $table_infos_modules AS $A1 ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,7,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,7,1),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

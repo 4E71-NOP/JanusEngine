@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,14 +30,14 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('keywordForm',
+$bts->RequestDataObj->setRequestData('keywordForm',
 		array(
 				'mode'			=> 'edit',
 // 	 			'mode'			=> 'create',
 				'selectionId'	=> 1,
 		)
 );
-$cs->RequestDataObj->setRequestData('formGenericData',
+$bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'AdminKeywordManagementP02',
@@ -52,14 +52,14 @@ $cs->RequestDataObj->setRequestData('formGenericData',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_keyword_management_p02";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_keyword_management_p02.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_keyword_management_p02.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_keyword_management_p02.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_keyword_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
 		"invite2"		=> "Cette partie va vous permettre de créer un mot clé.",
 		"tabTxt1"	=> "Informations",
@@ -83,7 +83,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage keywords.",
 		"invite2"		=> "This part will allow you to create a keyword.",
 		"tabTxt1"	=> "Informations",
@@ -107,10 +107,10 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT art.arti_id, art.arti_name
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat
 WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -118,10 +118,10 @@ AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND cat.arti_ref = art.arti_ref
 AND cat.arti_ref != '0'
 AND cat.cate_type IN ('0','1')
-AND cat.cate_lang = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
+AND cat.lang_id = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 ;");
 $tabArticle_ = array();
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$tabArticle_[$dbp['arti_id']]['t']	=	$tabArticle_[$dbp['arti_id']]['db']	= $dbp['arti_name'];
 }
 
@@ -135,15 +135,15 @@ $T = array();
 
 $ClassLoaderObj->provisionClass('KeyWord');
 $currentKeyWordObj = new KeyWord();
-switch ($cs->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
+switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentKeyWordObj->getKeyWordDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId'));
+		$currentKeyWordObj->getKeyWordDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId'));
 
 		$tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_name');
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -163,7 +163,7 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 			)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -182,21 +182,21 @@ $Content .= "
 ."<input type='hidden' name='formEntity1'				value='keyword'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$currentKeyWordObj->getKeyWordEntry('keyword_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='keywordForm[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId')."'>\r"
+."<input type='hidden' name='keywordForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId')."'>\r"
 ."<p>\r"
 ;
 
 
 // --------------------------------------------------------------------------------------------
 
-$T['AD']['1']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l8c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
 
 
 // $tabYN = array(
@@ -204,17 +204,17 @@ $T['AD']['1']['8']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l8c1');
 // 		1	=> array ( "t"=>$I18nObj->getI18nEntry('yes'],	"db"=>"YES" ),
 // );
 $tabLine = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
-		2	=> array ( "t"=>$cs->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
+		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
 );
 // $tabStatus = array(
 // 		0	=> array ( "t"=>$I18nObj->getI18nEntry('disabled'],	"db"=>"DISABLED" ),
 // 		1	=> array ( "t"=>$I18nObj->getI18nEntry('enabled'],	"db"=>"ENABLED" ),
 // );
 $tabState = array(
-		0 =>	array ( "t" => $cs->I18nObj->getI18nEntry('kwState0'),	"db" => "OFFLINE"),
-		1 =>	array ( "t" => $cs->I18nObj->getI18nEntry('kwState1'),	"db" => "ONLINE"),
+		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwState0'),	"db" => "OFFLINE"),
+		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwState1'),	"db" => "ONLINE"),
 );
 
 
@@ -236,9 +236,9 @@ $T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' 
 $T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabType = array(
-		1 =>	array ( "t" => $cs->I18nObj->getI18nEntry('kwType1'),	"db" => "TO_CATEGORY"),
-		2 =>	array ( "t" => $cs->I18nObj->getI18nEntry('kwType2'),	"db" => "TO_URL"),
-		3 =>	array ( "t" => $cs->I18nObj->getI18nEntry('kwType3'),	"db" => "TOOLTIP"),
+		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType1'),	"db" => "TO_CATEGORY"),
+		2 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType2'),	"db" => "TO_URL"),
+		3 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType3'),	"db" => "TOOLTIP"),
 );
 $tabType[$currentKeyWordObj->getKeyWordEntry('keyword_type')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -253,11 +253,11 @@ $T['AD']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' s
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 9);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 9);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(8,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

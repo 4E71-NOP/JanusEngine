@@ -35,19 +35,19 @@ class I18n {
 	 * @param string $package
 	 */
 	public function getI18nFromDB ($package = 'initial' ) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 // 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
-		$dbquery = $cs->SDDMObj->query ("
+		$dbquery = $bts->SDDMObj->query ("
 		SELECT i18n_name, i18n_text FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
 		WHERE i18n_package = '".$package."'
 		AND lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
 		");
 		$tab0 = $this->i18n;
 		$tab1 = array();
-		while ( $dbp = $cs->SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
 		$this->i18n = array_merge ($tab0, $tab1);
 	}
 	

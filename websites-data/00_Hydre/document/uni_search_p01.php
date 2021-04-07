@@ -27,13 +27,13 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$cs->RequestDataObj->setRequestDataEntry('searchForm' ,
+$bts->RequestDataObj->setRequestDataEntry('searchForm' ,
 	array(
 		"searchType"	=>	"A",
 		"search"		=>	"utilisat",
 	),
 );
-$cs->RequestDataObj->setRequestDataEntry('searchForm' ,
+$bts->RequestDataObj->setRequestDataEntry('searchForm' ,
 	array(
 		"searchType"	=>	"T",
 		"search"		=>	"concep",
@@ -43,19 +43,19 @@ $cs->RequestDataObj->setRequestDataEntry('searchForm' ,
 /* -------------------------------------------------------------------------------------------- */
 /*Hydre-contenu_debut*/
 $localisation = " / uni_search_p01.php";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_search_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_search_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_search_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_search_p01.php");
 
 
-if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) > 3 ) {
-	switch ($cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType')) {
+if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) > 3 ) {
+	switch ($bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType')) {
 		case "T":
-			$dbquery = $cs->SDDMObj->query("
+			$dbquery = $bts->SDDMObj->query("
 			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page
 			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('category')." as cat
-			WHERE tag.tag_name LIKE '%".$cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
+			WHERE tag.tag_name LIKE '%".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 					
 			AND at.tag_id = tag.tag_id
@@ -66,12 +66,12 @@ if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')
 					
 			AND cat.arti_ref = art.arti_ref
 			AND cat.cate_state = '1'
-			AND cat.cate_lang = '".$CurrentSetObj->getDataEntry('language_id')."'
+			AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
 			ORDER BY art.arti_title
 			;");
 			break;
 		case "A":
-			$dbquery = $cs->SDDMObj->query("
+			$dbquery = $bts->SDDMObj->query("
 			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page, doc.docu_cont
 			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('category')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
 			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -83,8 +83,8 @@ if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')
 					
 			AND bcl.deadline_state = '1'
 			AND cat.cate_type IN ('0','1')
-			AND cat.cate_lang = '".$CurrentSetObj->getDataEntry('language_id')."'
-			AND docu_cont LIKE '%".$cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
+			AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
+			AND docu_cont LIKE '%".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			;");
 			break;
 	}
@@ -92,8 +92,8 @@ if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')
 	$tag_recherche = $pv = array();
 // 	$Content = "";
 	$T = array();
-	if ( $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
-		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+	if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['i'] = $dbp['arti_ref'];
 			$pv['j'] = $dbp['arti_id'];
 			foreach ( $dbp as $A => $B ) { $tag_recherche[$pv['i']][$pv['j']][$A] = $B; }
@@ -112,15 +112,15 @@ if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')
 					$pv['titre_article'] = 1;
 				}
 				$T['AD']['1'][$ligne]['2']['cont'] = "<a class='".$Block."_lien ".$Block."_tb3' href=\"index.php?arti_ref=".$B['arti_ref']."&amp;arti_page=".$B['arti_page'].$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_subtitle']."</a><br>\r";
-				switch ( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType') ) {
+				switch ( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType') ) {
 					case "A":
 						$pv['taille_extrait'] = 92;
-						$pv['position_expr'] = strpos ( $B['docu_cont'] , $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') );
+						$pv['position_expr'] = strpos ( $B['docu_cont'] , $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') );
 						if ( $pv['position_expr'] <= ($pv['taille_extrait'] / 2) ) { $pv['extrait_debut'] = 0 ; }
 						else { $pv['extrait_debut'] = $pv['position_expr'] - ($pv['taille_extrait'] / 2); }
 						$pv['extrait'] = "..." . substr ( $B['docu_cont'] , $pv['extrait_debut'] , $pv['taille_extrait'] ) . "...";
-						$pv['expression_remplacante'] = "<span class='".$Block."_avert ".$Block."_tb3'>".$cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."</span>";
-						$pv['extrait'] = str_replace ( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') , $pv['expression_remplacante'] , $pv['extrait'] );
+						$pv['expression_remplacante'] = "<span class='".$Block."_avert ".$Block."_tb3'>".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."</span>";
+						$pv['extrait'] = str_replace ( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') , $pv['expression_remplacante'] , $pv['extrait'] );
 						$T['AD']['1'][$ligne]['2']['cont'] .= "<span style='font-style:italic;'>".$pv['extrait']."</span><br>\r<br>\r";
 						break;
 					case "T":
@@ -183,7 +183,7 @@ if ( strlen( $cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')
 			<p class='".$Block."_p'>
 			<span class='".$Block."_tb4'>" .
 				$i18nDoc['result'] .
-				$cs->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."</span><br>\r<br>\r
+				$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."</span><br>\r<br>\r
 			<span class='".$Block."_t3'>" .
 				$i18nDoc['noResult'] .
 				"</span><br>\r<br>\r

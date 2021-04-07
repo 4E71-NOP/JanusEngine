@@ -69,25 +69,25 @@ class LibInstallationReport {
 	}
 	
 	public function renderPerfomanceReport () {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('perfTab01');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('perfTab02');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont'] = $cs->I18nObj->getI18nEntry('perfTab03');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $cs->I18nObj->getI18nEntry('perfTab04');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $cs->I18nObj->getI18nEntry('perfTab05');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-// 		$Content['1']['6']['cont'] = $cs->I18nObj->getI18nEntry('perfTab06');	$Content['1']['6']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('perfTab01');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('perfTab02');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('perfTab03');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
+		$Content['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('perfTab04');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('perfTab05');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
+// 		$Content['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('perfTab06');	$Content['1']['6']['class'] = $block."_tb3";
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
-		$sg['TempsMin'] = $cs->TimeObj->microtime_chrono();
+		$sg['TempsMin'] = $bts->TimeObj->microtime_chrono();
 		$sg['TempsMax'] = 0;
 		
-		$TableStats = $cs->LMObj->getStatisticsLog();
+		$TableStats = $bts->LMObj->getStatisticsLog();
 		reset ( $TableStats );
 		
 		foreach ( $TableStats as &$A ) {
@@ -113,10 +113,10 @@ class LibInstallationReport {
 			$Content[$i]['1']['cont'] = $A['position'];																$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
 			$Content[$i]['2']['cont'] = $A['routine'];																$Content[$i]['2']['tc'] = 1;
 			$Content[$i]['3']['cont'] = $A['TempsPerf'];															$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";
-			$Content[$i]['4']['cont'] = $cs->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
+			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
 			$Content[$i]['5']['cont'] = $A['SQL_queries'];															$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
 // 			$Content[$i]['6']['cont'] = $A['context'];																$Content[$i]['6']['tc'] = 1;
-// 			error_log("----------------------->inserted : " . $cs->StringFormatObj->arrayToString($Content[$i]));
+// 			error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
 
 			$SQLQueries += $A['SQL_queries'];
 			$memoryUsed += $A['MemoireSegment'];
@@ -126,7 +126,7 @@ class LibInstallationReport {
 		
 		$timeSpent = round ($tLast - $t0, 4);
 		
-		$memoryUsed = $cs->StringFormatObj->makeSizeHumanFriendly($infos, $memoryUsed);
+		$memoryUsed = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $memoryUsed);
 		$Content[$i]['1']['cont'] = "";								$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
 		$Content[$i]['2']['cont'] = "";								$Content[$i]['2']['tc'] = 1;
 		$Content[$i]['3']['cont'] = $timeSpent;						$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";

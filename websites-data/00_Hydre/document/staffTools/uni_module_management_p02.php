@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,14 +30,14 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('moduleForm',
+$bts->RequestDataObj->setRequestData('moduleForm',
 	array(
 			'mode'			=> 'edit',
 // 			'mode'			=> 'create',
 			'selectionId'	=>	14,
 	)
 );
-$cs->RequestDataObj->setRequestData('formGenericData',
+$bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'AdminModuleManagementP02',
@@ -52,14 +52,14 @@ $cs->RequestDataObj->setRequestData('formGenericData',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_module_management_p02";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_module_management_p02.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_module_management_p02.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_module_management_p02.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_module_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"before"		=>	"Avant",
 		"during"		=>	"Pendant",
 		"after"			=>	"Après",
@@ -95,7 +95,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"before"		=>	"Before",
 		"during"		=>	"During",
 		"after"			=>	"After",
@@ -139,14 +139,14 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 // Table preparation
 // --------------------------------------------------------------------------------------------
 $groupTab = array();
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT a.group_id,a.group_title,a.group_name
 FROM ".$SqlTableListObj->getSQLTableName('group')." a , ".$SqlTableListObj->getSQLTableName('group_website')." b
 WHERE a.group_id = b.group_id
 AND ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY a.group_title
 ;");
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i = $dbp['group_id'];
 	$groupTab[$i]['id']		= $dbp['group_id'];
 	$groupTab[$i]['nom']	= $dbp['group_name'];
@@ -155,11 +155,11 @@ while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
 
 $ClassLoaderObj->provisionClass('Module');
 $currentModuleObj = new Module();
-switch ( $cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 	case "edit":
-		$currentModuleObj->getModuleDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId'));
+		$currentModuleObj->getModuleDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId'));
 		$commandType = "update";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -169,10 +169,10 @@ switch ( $cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 				"module_id"	=> "",
 				"module_deco"					=>	1,
 				"module_deco_nbr"				=>	1,
-				"module_name"					=>	$cs->I18nObj->getI18nEntry('t1l2c2'),
-				"module_title"					=>	$cs->I18nObj->getI18nEntry('t1l2c2'),
+				"module_name"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
+				"module_title"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
 				"module_file"				=>	"",
-				"module_desc"					=>	$cs->I18nObj->getI18nEntry('t1l2c2'),
+				"module_desc"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
 				"module_group_allowed_to_see"		=>	2,
 				"module_group_allowed_to_use"	=>	2,
 				"module_state"					=>	0,
@@ -182,7 +182,7 @@ switch ( $cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 			)
 		);
 		$commandType = "add";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -201,7 +201,7 @@ $Content .= "
 ."<input type='hidden' name='formEntity1'				value='module'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$currentModuleObj->getModuleEntry('module_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='moduleForm[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId')."'>\r"
+."<input type='hidden' name='moduleForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId')."'>\r"
 ."<p>\r"
 ;
 
@@ -210,15 +210,15 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
 
 
 
 $T['AD']['1']['1']['2']['cont'] = $currentModuleObj->getModuleEntry('module_id');
-switch ( $cs->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 	case "edit":
 		$T['AD']['1']['2']['2']['cont'] = $currentModuleObj->getModuleEntry('module_name');
 		break;
@@ -233,13 +233,13 @@ $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]' si
 
 // --------------------------------------------------------------------------------------------
 
-$T['AD']['2']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l6c1');
-$T['AD']['2']['7']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l7c1');
+$T['AD']['2']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l1c1');
+$T['AD']['2']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l2c1');
+$T['AD']['2']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l3c1');
+$T['AD']['2']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l4c1');
+$T['AD']['2']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l5c1');
+$T['AD']['2']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l6c1');
+$T['AD']['2']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l7c1');
 
 
 $FileSelectorConfig = array(
@@ -263,20 +263,20 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD']['2']['1']['2']['cont']		= $cs->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['AD']['2']['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $tabYN = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
 );
 $tabLine = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
-		2	=> array ( "t"=>$cs->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
+		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
 );
 // $tabStatus = array(
-// 		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('disabled'],	"db"=>"DISABLED" ),
-// 		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('enabled'],	"db"=>"ENABLED" ),
+// 		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('disabled'],	"db"=>"DISABLED" ),
+// 		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('enabled'],	"db"=>"ENABLED" ),
 // );
 
 
@@ -293,7 +293,7 @@ $T['AD']['2']['3']['2']['cont'] = "<select name='formParams[deco_nbr]' class='".
 $tab = array();
 for ( $i =1; $i<=30; $i++ ) {
 	$tab[$i] = array(
-			"t"		=>	$i." - ".$ThemeDataObj->getThemeDataEntry($cs->StringFormatObj->getDecorationBlockName('theme_bloc_', $i, '_nom')) ,
+			"t"		=>	$i." - ".$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_bloc_', $i, '_nom')) ,
 			"db"	=>	$i,
 			"s"		=>	($i == $currentModuleObj->getModuleEntry('deco_nbr')) ? "selected" : "",
 	);
@@ -332,9 +332,9 @@ $T['AD']['2']['6']['2']['cont'] .= "</select>\r";
 
 
 $tab = array (
-		0	=>	array("t" => $cs->I18nObj->getI18nEntry('during'),	"db" => "DURING",),
-		1	=>	array("t" => $cs->I18nObj->getI18nEntry('before'),	"db" => "BEFORE",),
-		2	=>	array("t" => $cs->I18nObj->getI18nEntry('after'),		"db" => "AFTER",),
+		0	=>	array("t" => $bts->I18nObj->getI18nEntry('during'),	"db" => "DURING",),
+		1	=>	array("t" => $bts->I18nObj->getI18nEntry('before'),	"db" => "BEFORE",),
+		2	=>	array("t" => $bts->I18nObj->getI18nEntry('after'),		"db" => "AFTER",),
 );
 
 $T['AD']['2']['7']['2']['cont'] = "<select name='formParams[execution]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -345,7 +345,7 @@ foreach ( $tab as $A1 ) {
 $T['AD']['2']['7']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
-$T['AD']['3']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t3l1c1');
+$T['AD']['3']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l1c1');
 $tab = $tabLine;
 $T['AD']['3']['1']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 $tab[$currentModuleObj->getModuleEntry('module_state')]['s'] = " selected ";
@@ -359,13 +359,13 @@ $T['AD']['3']['1']['2']['cont'] .= "</select>\r";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 8, 3);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8, 3);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(4,2,2),
-		2	=>	$cs->RenderTablesObj->getDefaultTableConfig(7,2,2),
-		3	=>	$cs->RenderTablesObj->getDefaultTableConfig(1,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
+		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(7,2,2),
+		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,2,2),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

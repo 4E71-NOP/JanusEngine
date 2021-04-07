@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -28,11 +28,11 @@
 /*Hydre-IDE-end*/
 
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $cs->LMObj->setInternalLogTarget("both");
+// $bts->LMObj->setInternalLogTarget("both");
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
-$cs->LMObj->setInternalLogTarget("both");
+$bts->LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('articleForm',
+$bts->RequestDataObj->setRequestData('articleForm',
 	array(
 		'SQLlang'		=> 48,
 		'SQLdeadline'	=> 4,
@@ -44,14 +44,14 @@ $cs->RequestDataObj->setRequestData('articleForm',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_article_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_article_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_article_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_article_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_article_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Pages",
@@ -67,7 +67,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to modify articles.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Pages",
@@ -83,30 +83,30 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-$langList = $cs->CMObj->getLanguageList();
+$langList = $bts->CMObj->getLanguageList();
 
 // --------------------------------------------------------------------------------------------
 //	Form
 // --------------------------------------------------------------------------------------------
 
-if ( strlen($cs->RequestDataObj->getRequestDataEntry('SQLlang')) > 0 ) { $langList[$cs->RequestDataObj->getRequestDataEntry('SQLlang')]['s'] = "selected"; }
+if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLlang')) > 0 ) { $langList[$bts->RequestDataObj->getRequestDataEntry('SQLlang')]['s'] = "selected"; }
 else { $langList[$CurrentSetObj->getDataEntry('language_id')]['s'] = "selected"; }
 
 $listDeadline = array(
 		0 => array(
 				'id' => 0,
-				'deadline_title' => $cs->I18nObj->getI18nEntry('boucl0'),
+				'deadline_title' => $bts->I18nObj->getI18nEntry('boucl0'),
 		),
 );
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM ".$SqlTableListObj->getSQLTableName('deadline')."
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['deadline_id'];
 	$listDeadline[$A]['id'] = $A;
 	$listDeadline[$A]['deadline_name']		= $dbp['deadline_name'];
@@ -119,29 +119,26 @@ foreach ( $listDeadline as $A ) {
 	else { $A['deadline_title'] = "<span class='".$Block."_ok'>" . $A['deadline_title']; }
 	$A['deadline_title'] = $A['deadline_name'] . "</span>";
 }
-if ( strlen($cs->RequestDataObj->getRequestDataEntry('SQLdeadline')) > 0 ) { $listDeadline[$cs->RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected"; }
+if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLdeadline')) > 0 ) { $listDeadline[$bts->RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected"; }
 
 // --------------------------------------------------------------------------------------------
 $Content .= "
-<form id='MH_001' ACTION='index.php?' method='post'>\r"
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-."<input type='hidden' name='formGenericData[mode]'	value='create'>"
-."<input type='hidden' name='arti_page'	value='2'>\r"
-."<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px'>\r
+<form id='MH_001' ACTION='/' method='post'>\r
+<input type='hidden' name='formGenericData[mode]'	value='create'>
+<input type='hidden' name='arti_page'	value='2'>\r
+<table class='".$Block.CLASS_Table01." ".$Block.CLASS_TblLgnd_Top."'>\r
 <tr>\r
-<td class='" . $Block."_fcta' colspan='2'>".$cs->I18nObj->getI18nEntry('caption')."</td>\r
+<td colspan='2'>".$bts->I18nObj->getI18nEntry('caption')."</td>\r
 </tr>\r
 		
 <tr>\r
-<td class='" . $Block."_fca'>".$cs->I18nObj->getI18nEntry('c1l1')."</td>\r
-<td class='" . $Block."_fca'><input type='text' name='articleForm[SQLnom]' size='15' value='".$cs->RequestDataObj->getRequestDataEntry('SQLnom')."' class='".$Block."_t3 " . $Block."_form_1'></td>\r
+<td>".$bts->I18nObj->getI18nEntry('c1l1')."</td>\r
+<td><input type='text' name='articleForm[SQLnom]' size='15' value='".$bts->RequestDataObj->getRequestDataEntry('SQLnom')."' class='".$Block."_t3 " . $Block."_form_1'></td>\r
 </tr>\r
 		
 <tr>\r
-<td class='" . $Block."_fca'>".$cs->I18nObj->getI18nEntry('c1l2')."</td>\r
-<td class='" . $Block."_fca'><select name='articleForm[SQLlang]' class='".$Block."_t3 " . $Block."_form_1'>
+<td>".$bts->I18nObj->getI18nEntry('c1l2')."</td>\r
+<td><select name='articleForm[SQLlang]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 // unset ( $A , $B );
 foreach ( $langList as $k => $v ) {
@@ -154,8 +151,8 @@ $Content .= "</select>
 </tr>\r
 		
 <tr>\r
-<td class='" . $Block."_fca'>".$cs->I18nObj->getI18nEntry('c1l3')."</td>\r
-<td class='" . $Block."_fca'><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
+<td>".$bts->I18nObj->getI18nEntry('c1l3')."</td>\r
+<td><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 unset ( $A , $B );
 foreach ( $listDeadline as $A ) {
@@ -175,12 +172,12 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "",
-		"message"			=> $cs->I18nObj->getI18nEntry('btnRefresh'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btnRefresh'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,
 );
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $Content .= "
 </td>\r
 </tr>\r
@@ -189,18 +186,18 @@ $Content .= "
 ";
 // --------------------------------------------------------------------------------------------
 
-$articleFormData = $cs->RequestDataObj->getRequestDataEntry('articleForm');
+$articleFormData = $bts->RequestDataObj->getRequestDataEntry('articleForm');
 $sqlClause = "";
 
 if ( $articleFormData['action'] == "AFFICHAGE" ) {
 	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_name LIKE '%".$articleFormData['SQLnom']."%'"; }
-	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.cate_lang = '".$articleFormData['SQLlang']."'"; }
+	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.lang_id = '".$articleFormData['SQLlang']."'"; }
 	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
 }
 
 
-$dbquery = $cs->SDDMObj->query("
-SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.cate_lang, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
+$dbquery = $bts->SDDMObj->query("
+SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.lang_id, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = cat.arti_ref
 AND art.deadline_id = bcl.deadline_id
@@ -217,16 +214,16 @@ ORDER BY art.arti_ref,art.arti_page
 ;");
 $T = array();
 $articleList = array();
-if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$p = &$articleList[$dbp['arti_ref']][$dbp['arti_id']];
 		$p['arti_ref']			= $dbp['arti_ref'];
 		$p['arti_id']			= $dbp['arti_id'];
 		$p['arti_name']			= $dbp['arti_name'];
 		$p['arti_title']		= $dbp['arti_title'];
 		$p['arti_page']			= $dbp['arti_page'];
-		$p['arti_lang']			= $dbp['cate_lang'];
-		$p['deadline_state']		= $dbp['deadline_state'];
+		$p['arti_lang']			= $dbp['lang_id'];
+		$p['deadline_state']	= $dbp['deadline_state'];
 		$p['deadline_title']	= $dbp['deadline_title'];
 	}
 	
@@ -238,22 +235,23 @@ if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	
 	unset ($A,$B);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $cs->I18nObj->getI18nEntry('col_4_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
 	
-	$linkId1 = "<a class='".$Block."_lien' href='index.php?"
-			."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-			."&l=".$CurrentSetObj->getDataEntry('language')
-			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-			."&arti_page=2"
-			."&formGenericData[mode]=edit"
-			."&articleForm[selectionRef]="
-			;
+	$linkId1 = "<a href='".
+	$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
+	"index.php?HydrLink=1".
+	"&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug').
+	"&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref').
+	"&arti_page=2".
+	"&formGenericData[mode]=edit".
+	"&articleForm[selectionRef]=";
+	
 	$linkId2 = "&articleForm[selectionPage]=";
-	$tranlation = $cs->CMObj->getLanguageListSubEntry($l, 'id');
-	$tranlation = $cs->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
+	$tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
+	$tranlation = $bts->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
 	
 	foreach ( $articleList as &$A ) {
 		$i++;
@@ -264,9 +262,9 @@ if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$articlePageLink .= $linkId1.$B['arti_ref'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
 			$articlePageLink .= " - ";
 			$T['AD']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
-			$T['AD']['1'][$i]['3']['tc'] = 1;
+// 			$T['AD']['1'][$i]['3']['tc'] = 1;
 			$T['AD']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
-			$T['AD']['1'][$i]['4']['tc'] = 1;
+// 			$T['AD']['1'][$i]['4']['tc'] = 1;
 		}
 		$articlePageLink = substr ( $articlePageLink , 0 , -3 );
 		$T['AD']['1'][$i]['2']['cont'] = $articlePageLink;
@@ -278,11 +276,12 @@ if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,4,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,4,1),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
+$Content .= "<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
@@ -291,6 +290,6 @@ $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydre-contenu_fin*/
 
-// $cs->LMObj->setInternalLogTarget($LOG_TARGET);
+// $bts->LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

@@ -18,7 +18,7 @@ class ModuleOffLineMessage {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
@@ -27,24 +27,24 @@ class ModuleOffLineMessage {
 		$ClassLoaderObj->provisionClass('WebSite');
 		
 		$localisation = " / ModuleOffLineMessage";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleOffLineMessage");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleOffLineMessage");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleOffLineMessage");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleOffLineMessage");
 		
 		$l = "eng";
 		// --------------------------------------------------------------------------------------------
 		$WebSiteObj = new WebSite();
 		
 		if ( $infos['SQLFatalError'] == 1 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " SQLFatalError=1 The website is offline."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " SQLFatalError=1 The website is offline."));
 			$WebSiteObj->setWebSiteEntry('ws_name', "Doh!!!");
 			$WebSiteObj->setWebSiteEntry('ws_message', "Database connexion error!");
 			$WebSiteObj->setWebSiteEntry('ws_title', "Doh!!!");
 		}
 		
 		if ( $infos['bannerOffline'] == 1 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
 // 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 // 			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 			$WebSiteObj->setWebSiteEntry('ws_message', "FR : Le site est hors ligne.<br><br>ENG: The website is offline.");

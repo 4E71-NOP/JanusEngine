@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -27,7 +27,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$cs->RequestDataObj->setRequestData('test',
+$bts->RequestDataObj->setRequestData('test',
 		array(
 				'test'		=> 1,
 		)
@@ -35,10 +35,10 @@ $cs->RequestDataObj->setRequestData('test',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_document_editor_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_document_editor_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_document_editor_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_document_editor_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_document_editor_p01.php");
 
 switch ($l) {
 	case "fra":
@@ -100,7 +100,7 @@ $editionLevel = $i18nDoc['level'][$UserObj->getUserEntry('group_tag')];
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT doc.docu_id, doc.docu_name, doc.docu_type, shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
 WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -109,7 +109,7 @@ AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ORDER BY docu_id, docu_type, part_modification ASC
 ;");
 $docList = array();
-if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
+if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
 	$T['AD']['1'][$i]['1']['cont'] = $i18nDoc['raf1'];
 	$T['AD']['1'][$i]['2']['cont'] = "";
@@ -117,7 +117,7 @@ if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$T['AD']['1'][$i]['4']['cont'] = "";
 }
 else {
-	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$docList[$dbp['docu_id']]['docu_name']			= $dbp['docu_name'];
 		$docList[$dbp['docu_id']]['docu_id']			= $dbp['docu_id'];
 		$docList[$dbp['docu_id']]['docu_type']			= $dbp['docu_type'];
@@ -129,7 +129,7 @@ else {
 	$Clause = substr( $Clause , 0 , -2 ) . ") ";
 	unset ($A);
 	
-	$dbquery = $cs->SDDMObj->query("
+	$dbquery = $bts->SDDMObj->query("
 	SELECT dcm.docu_id, art.arti_id, bcl.deadline_id, dcm.docu_name 
 	FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('document')." dcm
 	WHERE art.docu_id ".$Clause." 
@@ -139,7 +139,7 @@ else {
 	AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	ORDER BY dcm.docu_id ASC 
 	;");
-	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $docList[$dbp['docu_id']]['edition'] = 0; }
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $docList[$dbp['docu_id']]['edition'] = 0; }
 	
 	$trr['nbr_col'] = 4;
 	
@@ -177,7 +177,7 @@ $T['tab_infos']['NbrOfTabs']		= 1;
 $T['tab_infos']['TabBehavior']		= 0;
 $T['tab_infos']['RenderMode']		= 1;
 $T['tab_infos']['HighLightType']	= 1;
-$T['tab_infos']['Height']			= $cs->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['tab_infos']['Height']			= $bts->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
 $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "dl";
@@ -202,7 +202,7 @@ $config = array(
 		"module" => $infos['module'],
 );
 
-$Content .= $cs->RenderTablesObj->render($config, $T);
+$Content .= $bts->RenderTablesObj->render($config, $T);
 
 $Content .= "<br>\r&nbsp;
 </form>\r

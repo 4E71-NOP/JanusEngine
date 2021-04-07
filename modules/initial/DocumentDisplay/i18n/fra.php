@@ -1,14 +1,14 @@
 <?php
-$i18n['parution1'] = "Edit&eacute; en ";
-$i18n['par1'] = " par ";
-$i18n['maj1'] = " mise a jour : ";
+$i18n['parutionDate'] = "Edité en ";
+$i18n['by'] = " par ";
+$i18n['update'] = " mise a jour : ";
 $i18n['tab1'] = "Index";
-$i18n['err'] = "Un sous-article mention&eacute; pour inclusion n'a pas &eacute;t&eacute; trouv&eacute;";
+$i18n['err'] = "Un sous-article mentioné pour inclusion n'a pas été trouvé";
 
-$i18n['precedent1']	= " Page précédente ";
-$i18n['suivant1']		= "Page suivante ";
-$i18n['auteurs_par'] = " par ";
-$i18n['auteurs_date'] = " le ";
-$i18n['auteurs_update'] = " mis &agrave; jour  ";
+$i18n['previous1']	= "Page précédente";
+$i18n['next1']		= "Page suivante";
+$i18n['authors_by'] = " par ";
+$i18n['authors_date'] = " le ";
+$i18n['authors_update'] = " mis à jour  ";
 
 ?>

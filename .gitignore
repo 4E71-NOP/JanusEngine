@@ -1,11 +1,12 @@
+.metadata
 .project
 
-cherche_expression.sh
-compteur_code_stats.sh
-sed_execute.sh
-sed_prepare.sh
-testcss.htm
-infos.php
-compteurs.txt
+devTools/cherche_expression.sh
+devTools/compteur_code_stats.sh
+devTools/sed_execute.sh
+devTools/sed_prepare.sh
+devTools/testcss.htm
+devTools/infos.php
+devTools/compteurs.txt
 
 DeveloperDocs/

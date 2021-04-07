@@ -14,13 +14,13 @@ session_start ();
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
 
-include ("engine/utility/Hydr.php");
+include ("current/engine/utility/Hydr.php");
 $R = Hydr::getInstance();
 echo ( $R->render() ) ;
 
 if ( session_write_close () === false ){
-	$cs = CommonSystem::getInstance ();
-	$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => $cs->SMObj->getInfoSessionState()) );
-	$cs->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => "session_write_close() returned false. Something went wrong.") );
+	$bts = BaseToolSet::getInstance();
+	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()) );
+	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => "session_write_close() returned false. Something went wrong.") );
 }
 ?>

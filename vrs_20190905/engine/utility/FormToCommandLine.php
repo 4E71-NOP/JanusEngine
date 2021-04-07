@@ -33,8 +33,8 @@ class FormToCommandLine {
 	 * Analyze a form to create a commande line.
 	 */
 	public function analysis () {
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "FormToCommandLine/analysis(): Analysis started"));
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "FormToCommandLine/analysis(): Analysis started."));
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
@@ -43,35 +43,40 @@ class FormToCommandLine {
 		$cln = &$this->CommandLineNbr;
 		$cln = 0;
 		
-		switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
+		switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
 			// Analyze the origin of the form
 			case "ModuleQuickSkin":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleQuickSkin submitted a form."));
-				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " pref_theme '".$cs->RequestDataObj->getRequestDataSubEntry('userForm','user_pref_theme')."';";
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleQuickSkin submitted a form."));
+				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " pref_theme '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_pref_theme')."'";
+				$cln++;
+				break;
+			case "ModuleSelectLanguage":
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleSelectLanguage submitted a form."));
+				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " lang '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_lang')."'";
 				$cln++;
 				break;
 				
 			// All AdminDashboard will provide the necessary elements to build a set of command line.
 			case "AdminDashboard":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "AdminDashboard submitted a form."));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "AdminDashboard submitted a form."));
 				$n = 1;
 				while ( $n != 0 ) {
-					if ( strlen($cs->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
-						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing formCommand".$n));
+					if ( strlen($bts->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
+						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing formCommand".$n));
 						
-						$formCommand	= $cs->RequestDataObj->getRequestDataEntry('formCommand'.$n);
-						$formEntity		= $cs->RequestDataObj->getRequestDataEntry('formEntity'.$n);
-						$formTarget		= $cs->RequestDataObj->getRequestDataEntry('formTarget'.$n);
-						$formParams		= $cs->RequestDataObj->getRequestDataEntry('formParams'.$n);
+						$formCommand	= $bts->RequestDataObj->getRequestDataEntry('formCommand'.$n);
+						$formEntity		= $bts->RequestDataObj->getRequestDataEntry('formEntity'.$n);
+						$formTarget		= $bts->RequestDataObj->getRequestDataEntry('formTarget'.$n);
+						$formParams		= $bts->RequestDataObj->getRequestDataEntry('formParams'.$n);
 						switch ($formCommand.$formEntity) {
 							case "assignlanguage":
 								// This one is an additive from website manipulation
-								$scr[$cln] = "reset languages on_website ".$cs->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
+								$scr[$cln] = "reset languages on_website ".$bts->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
 								$cln++;
 								$n++;
 								foreach ($formTarget as $k => $v ) {
-									$str = "assign language ".$k." to_website ".$cs->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
-									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "(assignlanguage) Processed =".$str));
+									$str = "assign language ".$k." to_website ".$bts->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
+									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "(assignlanguage) Processed =".$str));
 									$scr[$cln] = $str;
 									$cln++;
 									$n++;
@@ -85,7 +90,7 @@ class FormToCommandLine {
 								foreach ($formTarget as $k => $v) { $str .= $k." '".$v."' ";}
 								foreach ($formParams as $k => $v) { $str .= $k." '".$v."' ";}
 								$str .= ";";
-								$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, __METHOD__ . 'msg' => "Processed =".$str));
+								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, __METHOD__ . 'msg' => "Processed =".$str));
 								$scr[$cln] = $str;
 								$cln++;
 								$n++;

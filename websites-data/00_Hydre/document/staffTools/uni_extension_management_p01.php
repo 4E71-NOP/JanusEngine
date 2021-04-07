@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -34,14 +34,14 @@
 /*Hydre-contenu_debut*/
 
 $localisation = " / uni_extension_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_extension_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_extension_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_extension_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_extension_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les extensions.",
 		"col_1_txt"		=> "Extensions disponibles",
 		"col_2_txt"		=> "Version",
@@ -58,7 +58,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage extensions.",
 		"col_1_txt"		=> "Available extensions",
 		"col_2_txt"		=> "Version",
@@ -76,7 +76,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 
@@ -103,30 +103,30 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 	unset ( $A );
 	foreach ( $extensions_['donnees'] as &$A ) {
 		if ( $A['introuvable'] != 1 ) {
-			$dbquery = $cs->SDDMObj->query("
+			$dbquery = $bts->SDDMObj->query("
 			SELECT ext.* 
 			FROM ".$SqlTableListObj->getSQLTableName('extension')." ext 
 			WHERE ext.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND ext.extension_name = '".$A['extension_name']."'
 			;");
-			if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) { $A['extension_etat'] = 1; }
+			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) { $A['extension_etat'] = 1; }
 		}
 	}
 
 
 	unset ( $A );
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $cs->I18nObj->getI18nEntry('col_4_txt');
-	$T['AD']['1'][$i]['5']['cont']	= $cs->I18nObj->getI18nEntry('col_5_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
+	$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
 	foreach ( $extensions_['donnees'] as $A ) {
 		if ( $A['introuvable'] != 1 ) {
 			$i++;
 			$T['AD']['1'][$i]['1']['cont'] = $A['extension_name'];
 			$T['AD']['1'][$i]['2']['cont'] = $A['extension_version'];
-			$T['AD']['1'][$i]['3']['cont'] = $cs->I18nObj->getI18nEntry('tab1'.$A['extension_etat']);
+			$T['AD']['1'][$i]['3']['cont'] = $bts->I18nObj->getI18nEntry('tab1'.$A['extension_etat']);
 			
 			$SB = array(
 					"id"				=> "installButton",
@@ -134,7 +134,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 					"onclick"			=> "",
-					"message"			=> $cs->I18nObj->getI18nEntry('tab2'.$A['extension_etat']),
+					"message"			=> $bts->I18nObj->getI18nEntry('tab2'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,
@@ -151,7 +151,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Installer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $cs->InteractiveElementsObj->renderSubmitButton($SB).
+			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"</form>\r";
 
 			$SB = array(
@@ -160,7 +160,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 					"onclick"			=> "",
-					"message"			=> $cs->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
+					"message"			=> $bts->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,
@@ -177,7 +177,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Supprimer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $cs->InteractiveElementsObj->renderSubmitButton($SB).
+			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"</form>\r";
 		}
 		if ( $A['extension_etat'] == 1 ) {
@@ -187,7 +187,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
 					"onclick"			=> "",
-					"message"			=> $cs->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
+					"message"			=> $bts->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,
@@ -203,7 +203,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Retirer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $cs->InteractiveElementsObj->renderSubmitButton($SB).
+			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"</form>\r";
 		}
 	}
@@ -214,11 +214,11 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 	//
 	//
 	// --------------------------------------------------------------------------------------------
-	$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+	$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 	$T['ADC']['onglet'] = array(
-			1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,5,1),
+			1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,5,1),
 	);
-	$Content .= $cs->RenderTablesObj->render($infos, $T);
+	$Content .= $bts->RenderTablesObj->render($infos, $T);
 }
 else { $Content .= "!!!!!!!!!!!!!!!!"; }
 

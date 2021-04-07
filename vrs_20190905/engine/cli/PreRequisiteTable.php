@@ -32,6 +32,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 		"columns" => array(
 				array ( "v" => "id",					"t" => "arti_id"),
 				array ( "v" => "ref",					"t" => "arti_ref"),
+				array ( "v" => "slug",					"t" => "arti_slug"),
 				array ( "v" => "deadline_id",			"t" => "deadline_id"),
 				array ( "v" => "name",					"t" => "arti_name"),
 				array ( "v" => "desc",					"t" => "arti_desc"),
@@ -47,7 +48,7 @@ self::$PreRequisiteTable['add']['article'] = array (
 				array ( "v" => "validation_state",		"t" => "arti_validation_state"),
 				array ( "v" => "parution_date",			"t" => "arti_release_date"),
 				array ( "v" => "docu_id",				"t" => "docu_id"),
-				array ( "v" => "ws_id",				"t" => "ws_id"),
+				array ( "v" => "ws_id",					"t" => "ws_id"),
 		),
 );
 
@@ -67,8 +68,8 @@ self::$PreRequisiteTable['add']['category'] = array (
 				array ( "v" => "title",				"t" => "cate_title"),
 				array ( "v" => "desc",				"t" => "cate_desc"),
 				array ( "v" => "type",				"t" => "cate_type"),
-				array ( "v" => "ws_id",			"t" => "ws_id"),
-				array ( "v" => "lang_id",			"t" => "cate_lang"),
+				array ( "v" => "ws_id",				"t" => "ws_id"),
+				array ( "v" => "lang_id",			"t" => "lang_id"),
 				array ( "v" => "deadline_id",		"t" => "deadline_id"),
 				array ( "v" => "state",				"t" => "cate_state"),
 				array ( "v" => "parent_id",			"t" => "cate_parent"),
@@ -78,6 +79,7 @@ self::$PreRequisiteTable['add']['category'] = array (
 				array ( "v" => "role",				"t" => "cate_role"),
 				array ( "v" => "first_doc",			"t" => "cate_initial_document"),
 				array ( "v" => "article",			"t" => "arti_ref"),
+				array ( "v" => "slug",				"t" => "arti_slug"),
 		),
 );
 
@@ -561,8 +563,8 @@ self::$PreRequisiteTable['add']['user'] = array (
 			if ( $a['params']['password'] == "*user_install*" ) { $a['params']['password'] = hash("sha512",stripslashes($a['Initiator']['db_pass']));}
 			if ( $a['params']['password'] == "anonymous" ) { $a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));}
 			if ( $a['params']['password'] == "*standard_user_password*" ) { 
-				$cs = CommonSystem::getInstance();
-				$a['params']['password'] = hash("sha512",stripslashes($cs->CMObj->getConfigurationSubEntry('db', 'standard_user_password'))); 
+				$bts = BaseToolSet::getInstance();
+				$a['params']['password'] = hash("sha512",stripslashes($bts->CMObj->getConfigurationSubEntry('db', 'standard_user_password'))); 
 			}
 			if ( strlen($a['params']['login'] == 0 )){ $a['params']['login'] = $a['params']['name'];}
 // 			$a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));

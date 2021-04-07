@@ -22,7 +22,8 @@ $i18n = array(
 	't1l91'	=>	"Groupe",
 	't1l101'	=>	"Num&eacute;ro de tache",
 	't1l111'	=>	"Navigateur",
-	't1l121'	=>	"Utilisateur du process",
+	't1l112'	=>	"Utilisateur du process",
+	't1l113'	=>	"Requête URI",
 
 	'tGraphLabelM'	=>	"Mémoire",
 	'tGraphLabelT'	=>	"Temps",

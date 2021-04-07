@@ -22,7 +22,8 @@ $i18n = array(
 	't1l91'	=>	"Groupe ID",
 	't1l101'	=>	"Process ID",
 	't1l111'	=>	"Browser",
-	't1l121'	=>	"Process Owner",
+	't1l112'	=>	"Process Owner",
+	't1l113'	=>	"Resquested URI",
 
 	'tGraphLabelM'	=>	"Memory",
 	'tGraphLabelT'	=>	"Time",

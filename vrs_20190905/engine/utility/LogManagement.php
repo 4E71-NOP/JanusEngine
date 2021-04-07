@@ -45,14 +45,14 @@ class LogManagement {
 	
 	private static function makeLogFunctions() {
 		self::$logFunctions ['default'] ['internal'] = function ($data) {
-			$cs = CommonSystem::getInstance();
+			$bts = BaseToolSet::getInstance();
 			$CurrentSetObj = CurrentSet::getInstance ();
 			
-			$data ['i'] = $cs->SDDMObj->escapeString ( $data ['i'] );
-			$data ['a'] = $cs->SDDMObj->escapeString ( $data ['a'] );
-			$data ['t'] = $cs->SDDMObj->escapeString ( $data ['t'] );
-			$id = $cs->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
-			$cs->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
+			$data ['i'] = $bts->SDDMObj->escapeString ( $data ['i'] );
+			$data ['a'] = $bts->SDDMObj->escapeString ( $data ['a'] );
+			$data ['t'] = $bts->SDDMObj->escapeString ( $data ['t'] );
+			$id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+			$bts->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
 				'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 				'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
 		};
@@ -86,15 +86,16 @@ class LogManagement {
 	
 	public function logCheckpoint($routine) {
 		if ($this->StoreStatisticsState == 1) {
-			$cs = CommonSystem::getInstance();
+			$bts = BaseToolSet::getInstance();
 			$this->StatisticsIndex ++;
 			
-			error_log ("inserting ".$cs->MapperObj->getWhereWeAreAt() . " at position :" . $this->StatisticsIndex);
+// 			error_log ("inserting ".$bts->MapperObj->getWhereWeAreAt() . " at position :" . $this->StatisticsIndex);
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : inserting ".$bts->MapperObj->getWhereWeAreAt() . " at position :" . $this->StatisticsIndex));
 			
 			$this->StatisticsLog [$this->StatisticsIndex] ['position'] = $this->StatisticsIndex;
-			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $cs->MapperObj->getWhereWeAreAt ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $bts->MapperObj->getWhereWeAreAt ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['routine'] = $routine;
-			$this->StatisticsLog [$this->StatisticsIndex] ['temps'] = $cs->TimeObj->microtime_chrono ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['temps'] = $bts->TimeObj->microtime_chrono ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['memoire'] = memory_get_usage ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_err'] = 0;
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_queries'] = 0;
@@ -197,18 +198,18 @@ class LogManagement {
 	 * @param string $name
 	 */
 	public function logDebug($data, $name) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 // 		$CMobj = ConfigurationManagement::getInstance ();
-		switch ($cs->CMObj->getExecutionContext ()) {
+		switch ($bts->CMObj->getExecutionContext ()) {
 			case "render" :
 				$dbg = debug_backtrace ( DEBUG_BACKTRACE_IGNORE_ARGS, 5 );
-				$cs->MapperObj = Mapper::getInstance ();
+				$bts->MapperObj = Mapper::getInstance ();
 				$dbgString = "";
 				foreach ( $dbg as $A ) {
 					$dbgString .= $A ['function'] . "() from " . substr ( $A ['file'], strrpos ( $A ['file'], "/" ) + 1 ) . "<br>\r";
 				}
 				
-				$this->DebugLog [$this->DebugLogIdx] ['name'] = str_replace ( "->", "<br>->\r", $name ) . "<br>\r" . $cs->MapperObj->getWhereWeAreAt() . "<br>\r" . $dbgString;
+				$this->DebugLog [$this->DebugLogIdx] ['name'] = str_replace ( "->", "<br>->\r", $name ) . "<br>\r" . $bts->MapperObj->getWhereWeAreAt() . "<br>\r" . $dbgString;
 				$this->DebugLog [$this->DebugLogIdx] ['data'] = $data;
 				$this->DebugLogIdx ++;
 				break;
@@ -234,7 +235,7 @@ class LogManagement {
 	 */
 	public function logDEPRECATED($data) {
 // 	public function log($data) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance ();
 		
 		$tabSignal = array (
@@ -244,9 +245,9 @@ class LogManagement {
 		);
 		$data ['s'] = $tabSignal [$data ['s']];
 
-		switch ($cs->CMObj->getConfigurationEntry ( 'execution_context' )) {
+		switch ($bts->CMObj->getConfigurationEntry ( 'execution_context' )) {
 			case 'installation' :
-				switch ($cs->CMObj->getConfigurationEntry ( 'LogTarget' )) {
+				switch ($bts->CMObj->getConfigurationEntry ( 'LogTarget' )) {
 					case "system" :
 						$A = "MWM_Engine_log: " . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
 						error_log ( html_entity_decode ( $A ), 0 );
@@ -262,10 +263,10 @@ class LogManagement {
 			case "Rendu" :
 			case "render" :
 			default :
-				$data ['i'] = $cs->SDDMObj->escapeString ( $data ['i'] );
-				$data ['a'] = $cs->SDDMObj->escapeString ( $data ['a'] );
-				$data ['t'] = $cs->SDDMObj->escapeString ( $data ['t'] );
-				switch ($cs->CMObj->getConfigurationEntry ( 'LogTarget' )) {
+				$data ['i'] = $bts->SDDMObj->escapeString ( $data ['i'] );
+				$data ['a'] = $bts->SDDMObj->escapeString ( $data ['a'] );
+				$data ['t'] = $bts->SDDMObj->escapeString ( $data ['t'] );
+				switch ($bts->CMObj->getConfigurationEntry ( 'LogTarget' )) {
 					case "systeme" :
 					case "system" :
 						$A = "MWM_Engine_log: " . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "|" . time () . "|" . $data ['i'] . "|" . $data ['a'] . "|" . $data ['s'] . "|" . $data ['m'] . "|" . $data ['t'];
@@ -276,8 +277,8 @@ class LogManagement {
 						break;
 					case "internal" :
 					default :
-						$id = $cs->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
-						$cs->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
+						$id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+						$bts->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
 						'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 						'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
 						break;

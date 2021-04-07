@@ -20,6 +20,7 @@ class ServerInfos {
 	public function getInfosFromServer () {
 		$this->ServerInfos['srv_hostname']			= php_uname('s') . " " . php_uname('n') . " ". php_uname('m') . " / " . $this->get_real_ip();
 		$this->ServerInfos['repertoire_courant']	= getcwd();
+		$this->ServerInfos['DOCUMENT_ROOT']			= $_SERVER['DOCUMENT_ROOT'];
 		$this->ServerInfos['include_path']			= get_include_path();
 		$this->ServerInfos['uid']					= getmyuid();
 		$this->ServerInfos['gid']					= getmygid();
@@ -41,9 +42,11 @@ class ServerInfos {
 		if ( isset($_SERVER['HTTPS']) ) {
 			if ( isset($_SERVER['SERVER_PORT'] ) && ( $_SERVER['SERVER_PORT'] == '443' ) ) { $this->ServerInfos['sslState'] = 1; }
 		}
+		$this->ServerInfos['request_uri']			= "http".((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')?"s":"")."://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+		$this->ServerInfos['base_url']				= "http".(($this->ServerInfos['sslState']== 1 ) ? "s" : "")."://".$this->ServerInfos['srv_host']."/";
 		
-	}
 	
+	}
 	
 	private function get_real_ip() {
 		if (isset($_SERVER['HTTP_CLIENT_IP']))				{ return $_SERVER['HTTP_CLIENT_IP']; }

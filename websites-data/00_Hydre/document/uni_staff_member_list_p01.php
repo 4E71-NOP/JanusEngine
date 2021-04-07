@@ -30,10 +30,10 @@
 /*Hydre-contenu_debut*/
 
 $localisation = " / uni_staff_member_list_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_staff_member_list_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_staff_member_list_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_staff_member_list_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_staff_member_list_p01.php");
 
 switch ( $l ) {
 	case "fra":
@@ -53,7 +53,7 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 <br>\r
 ";
 
-$dbquery = $cs->SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_avatar_image, grp.group_name, grp.group_file
+$dbquery = $bts->SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_avatar_image, grp.group_name, grp.group_file
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." grp, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
 WHERE gu.group_user_initial_group = '1' 
 AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -65,7 +65,7 @@ AND usr.user_role_function = '2'
 ORDER BY grp.group_id,usr.user_login ASC
 ;");
 $user_liste= array();
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i = $dbp['user_id'];
 	foreach ( $dbp as $A => $B ) { $user_liste[$i][$A] = $B; }
 }

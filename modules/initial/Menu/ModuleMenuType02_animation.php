@@ -18,14 +18,14 @@ class ModuleMenuType02 {
 	public function __construct() {}
 	
 	public static function getInstance() {
-		if (self::$Instance == null) {
-			self::$Instance = new ModuleMenuType02 ();
+		if (ModuleMenuType02::$Instance == null) {
+			ModuleMenuType02::$Instance = new ModuleMenuType02 ();
 		}
-		return self::$Instance;
+		return ModuleMenuType02::$Instance;
 	}
 	
 	public function renderMenu(&$infos){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$RenderLayoutObj = RenderLayout::getInstance();
@@ -47,6 +47,7 @@ class ModuleMenuType02 {
 		// Mi = Menu Index (the current one)
 		foreach ( $menuData as $A ) {
 			if ( $A['cate_parent'] != 0 ) {
+// 				if ( $A['arti_ref'] == "0" ) {									// folder
 				if ( $A['arti_ref'] == "0" ) {									// folder
 					$Mi = &$menuDiv[$A['cate_id']];
 					$Mp = &$menuDiv[$A['cate_parent']];
@@ -57,6 +58,7 @@ class ModuleMenuType02 {
 					$Mi['width']	= $A['div_width'];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 1;
 				}
+// 				elseif ( $A['arti_ref'] == $FPRM['arti_request'] ) {
 				elseif ( $A['arti_ref'] == $FPRM['arti_request'] ) {
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 3;
@@ -64,7 +66,8 @@ class ModuleMenuType02 {
 				else {
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 2;
-					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_ref'];
+// 					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_ref'];
+					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_slug'];
 				}
 				$Mp['entree'][$Mp['idx']]['nom'] = $A['cate_title'];
 				$Mp['entree'][$Mp['idx']]['id'] = $A['cate_id'];
@@ -82,14 +85,14 @@ class ModuleMenuType02 {
 					$J['menu'] 		= $J['id'] = 'a_menu_'.$A['cate_id'];
 					$J['par']		= $Mp['id'];								// Parent
 					$J['niv']		= $Mp['niv'];								// Level in the tree (deep)
-					if ( $J['niv'] > 0 ) { $J['deco'] = $cs->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($J['niv'], 'deco_type'), "M"); }
+					if ( $J['niv'] > 0 ) { $J['deco'] = $bts->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($J['niv'], 'deco_type'), "M"); }
 					
 					$J['animation']	= $Spb['menu_anim'];						// Animation type
 					$J['entree']	= $A['cate_position'];						// Position amongst other
 					$J['typ']		= "a";										// Type
 					$J['dos']		= 0;										// Folder
 					
-					$Jbn = $cs->StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
+					$Jbn = $bts->StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
 					$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
 					$J['animation'] = $Jb['animation'];
 					$J['le'] = ( $Jb['txt_l_01_margin_top'] + $Jb['txt_l_01_margin_bottom'] + $Jb['a_line_height'] );
@@ -100,16 +103,17 @@ class ModuleMenuType02 {
 						$Jp['nf']++;
 					}
 					
-					if ( $A['arti_ref'] == "0" ) {								// folder, creation of d_menu
+// 					if ( $A['arti_ref'] == "0" ) {								// folder, creation of d_menu
+					if ( $A['arti_slug'] == "0" ) {								// folder, creation of d_menu
 						$J['dos'] = 1;
 						$Jd = &$renderJSON['d_menu_'.$A['cate_id']];
 						$Jd['menu'] 			= $Jd['id'] = "d_menu_".$A['cate_id'];
 						$Jd['par']				= $J['id'];								// Parent
 						$Jd['niv']				= ( $J['niv'] + 1 );					// Level in the tree (deep)
-						if ( $Jd['niv'] > 0 ) { $Jd['deco'] = $cs->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($Jd['niv'], 'deco_type'), "M"); }
+						if ( $Jd['niv'] > 0 ) { $Jd['deco'] = $bts->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($Jd['niv'], 'deco_type'), "M"); }
 						$Jd['entree']			= $A['cate_position'];					// Position amongst other
 						$Jd['typ']				= "div";								// Type
-						$Jbn = $cs->StringFormatObj->getDecorationBlockName("B", $Jd['niv'], "M");
+						$Jbn = $bts->StringFormatObj->getDecorationBlockName("B", $Jd['niv'], "M");
 						$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
 						$Jd['animation']		= $Jb['animation'];						// Animation type
 						$Jd['width']			= $Jb['div_width'];
@@ -138,7 +142,7 @@ class ModuleMenuType02 {
 				$J['entree']		= $A['cate_position'];							// Position amongst other
 				$J['typ']			= "div";										// Type
 				$J['dos']			= 0;											// Folder
-				$Jbn = $cs->StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
+				$Jbn = $bts->StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
 				$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
 				$J['animation']		= $Jb['animation'];								// Animation type
 				$J['width']			= $Jb['div_width'];
@@ -153,7 +157,7 @@ class ModuleMenuType02 {
 		// 1  9  5
 		$PositionMenuTable = array(); 
 		for ( $i = 0 ; $i < 10 ; $i++) {
-			$lvl = $cs->StringFormatObj->getDecorationBlockName("B", $i, "M");
+			$lvl = $bts->StringFormatObj->getDecorationBlockName("B", $i, "M");
 			$Pm = $ThemeDataObj->getThemeDataEntry($lvl);
 			
 			$PMT = &$PositionMenuTable[$lvl];
@@ -193,7 +197,7 @@ class ModuleMenuType02 {
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'py', ( 160 * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', ( $A['width'] * $pv['coef'] ));
 				$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', ( 256 * $pv['coef'] ));
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  __METHOD__ .
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  __METHOD__ .
 					" Situation A / id=".$A['id']. "; par=". $A['par'].
 					"; px=". ( 160 * $pv['coef'] ).
 					"; py=". ( 160 * $pv['coef'] ).
@@ -208,13 +212,13 @@ class ModuleMenuType02 {
 		// It's better to do it here than in JavaScript who will produce some kind of flickering effect
 		unset ( $A );
 		foreach ( $renderJSON as $A ) {
-			$lvl = $cs->StringFormatObj->getDecorationBlockName("B", $A['niv'], "M");
+			$lvl = $bts->StringFormatObj->getDecorationBlockName("B", $A['niv'], "M");
 			
 			$PMT = &$PositionMenuTable[$lvl];
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dx', $PMT['div_width']);
 			$RenderLayoutObj->setLayoutModuleEntry($A['id'], 'dy', (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']+1) ) + $PMT['ex11_y'] + $PMT['exF1_y']);
 			
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 
 				__METHOD__ .
 				" Situation B / id=".$A['id'].
 				"; px=". $RenderLayoutObj->getLayoutModuleEntry($A['id'],'px').
@@ -235,7 +239,7 @@ class ModuleMenuType02 {
 		$contentTarget = &$moduleContent;
 		
 		foreach ( $menuDiv as $A ) {
-			$Abn = $cs->StringFormatObj->getDecorationBlockName("B", $A['niv'], "M");
+			$Abn = $bts->StringFormatObj->getDecorationBlockName("B", $A['niv'], "M");
 			$Ab = $ThemeDataObj->getThemeDataEntry($Abn);
 			
 			$visibility = "hidden";
@@ -257,7 +261,7 @@ class ModuleMenuType02 {
 				$infos['affiche_module_mode'] = 'menu';
 				$infos['module_z_index'] = $A['niv'] + 100;
 				
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processing ".$infos['module']['module_name']." with mode " . $infos['affiche_module_mode'] . " and deco type is ". $Ab['deco_type']));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processing ".$infos['module']['module_name']." with mode " . $infos['affiche_module_mode'] . " and deco type is ". $Ab['deco_type']));
 				
 				switch ( $Ab['deco_type'] ) {
 					case 30:
@@ -311,7 +315,8 @@ class ModuleMenuType02 {
 				foreach ( $A['entree'] as $B ) {
 					switch ( $B['deco_type'] ) {
 						case 1: $contentTarget .= "<span	id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' >".$Micone_rep." ".$B['nom']."</span>\r";											break;
-						case 2: $contentTarget .= "<a		id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1\" >".$Micone_fichier.$B['nom']."</a>\r";			break;
+// 						case 2: $contentTarget .= "<a		id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' href=\"index.php?arti_ref=".$B['ref']."&amp;arti_page=1\" >".$Micone_fichier.$B['nom']."</a>\r";			break;
+						case 2: $contentTarget .= "<a		id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' href=\"/".$B['ref']."/1\" >".$Micone_fichier.$B['nom']."</a>\r";			break;
 						case 3: $contentTarget .= "<span	id='a_menu_".$B['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."_link' >".$Micone_fichier." ".$B['nom']."</span>\r";										break;
 					}
 				}

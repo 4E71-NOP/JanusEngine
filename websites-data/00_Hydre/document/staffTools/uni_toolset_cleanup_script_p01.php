@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestDataEntry('script_source',"
+$bts->RequestDataObj->setRequestDataEntry('script_source',"
 add layout_content to_layout		'mwm_aqua_01_layout_par_defaut'		module_name		'blason'
 line	'1'	calculus_type 	'STATIC'
 				
@@ -42,30 +42,30 @@ module_zindex	'10';
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_toolset_cleanup_script_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_toolset_cleanup_script_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_toolset_cleanup_script_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_toolset_cleanup_script_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_toolset_cleanup_script_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"Formatting tool for text copied from LibreOffice.",
 		"btn1"			=>	"Convertir",
 		"instruction"	=>	"Insérer le texte à convertir",
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"Outil de formattage de texte issu de copi&eacute;/coll&eacute; depuis LibreOffice.",
 		"btn1"			=>	"Convert",
 		"instruction"	=>	"Insert here the text you want to convert",
 		));
 		break;
 }
-$cs->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
+$bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
 
-$Content .= $cs->I18nObj->getI18nEntry('Invite1').
+$Content .= $bts->I18nObj->getI18nEntry('Invite1').
 "<br>\r
 <form name='formConvert' ACTION='index.php?' method='post'>\r
 
@@ -73,7 +73,7 @@ $Content .= $cs->I18nObj->getI18nEntry('Invite1').
 <tr>\r
 <td>\r
 <textarea name='script_source' id='script_source' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/ $ThemeDataObj->getThemeDataEntry('fonte_size_n3') ) * 1.35 )."' rows='16' class='".$Block."_t3 ".$Block."_form_1'>
-".$cs->RequestDataObj->getRequestDataEntry('script_source')."</textarea>\r
+".$bts->RequestDataObj->getRequestDataEntry('script_source')."</textarea>\r
 </td>\r
 </tr>\r
 
@@ -100,13 +100,13 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "FormattageScriptMWM ( 'formConvert' , 'script_source' , 'script_resultat' );",
-		"message"			=> $cs->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,
 );
 
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $Content .= "
 </td>\r
 </tr>\r

@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -39,7 +39,7 @@
 $_REQUEST['CC']['fichier'] = "";
 $_REQUEST['requete_insert'] = "show user";
 
-$cs->RequestDataObj->setRequestData('formCommand',
+$bts->RequestDataObj->setRequestData('formCommand',
 		array(
 				'command'		=> 'show user',
 		)
@@ -47,10 +47,10 @@ $cs->RequestDataObj->setRequestData('formCommand',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_command_console_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_command_console_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_command_console_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_command_console_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_command_console_p01.php");
 
 switch ($l) {
 	case "fra":
@@ -183,7 +183,7 @@ $SB = array(
 		"size" 				=> 0,
 		"lastSize"			=> 0,
 );
-$T['AD']['1']['7']['1']['cont'] .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$T['AD']['1']['7']['1']['cont'] .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $T['AD']['1']['7']['1']['class'] = $Block."_fcd";
 
 
@@ -219,7 +219,7 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1);
 
 $T['AD']['2']['1']['1']['cont'] = $i18nDoc['t2_l1'];
 
-$T['AD']['2']['2']['1']['cont'] = $cs->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['AD']['2']['2']['1']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $T['AD']['2']['3']['1']['cont'] = $i18nDoc['t2_l3'];
 $T['AD']['2']['3']['1']['tc'] = 1;
@@ -249,7 +249,7 @@ $tab = array (
 // $signal = $tab[$signal];
 // $log_date = mktime();
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT *
 FROM ".$SqlTableListObj->getSQLTableName('log')."
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
@@ -259,7 +259,7 @@ LIMIT 0,10
 
 
 $l = 2;
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$log_action_longeur = strlen($dbp['log_action']);
 	switch (TRUE) {
 		case ($log_action_longeur < 128 && $log_action_longeur > 64):	$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] ";		break;
@@ -299,7 +299,7 @@ $T['tab_infos']['NbrOfTabs']		= 4;
 $T['tab_infos']['TabBehavior']		= 1;
 $T['tab_infos']['RenderMode']		= 1;
 $T['tab_infos']['HighLightType']	= 0;
-$T['tab_infos']['Height']			= $cs->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['tab_infos']['Height']			= $bts->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
 $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "dl";
@@ -320,7 +320,7 @@ $config = array(
 		"module" => $infos['module'],
 );
 
-$Content .= $cs->RenderTablesObj->render($config, $T);
+$Content .= $bts->RenderTablesObj->render($config, $T);
 
 $Content .= "
 <input type='hidden' name='CC_interface'				value='1'>\r

@@ -31,22 +31,68 @@ class GeneratedJavaScript {
 	public function getGeneratedJavaScript () { return $this->GeneratedJavaScript; }
 	public function getGeneratedJavaScriptEntry ($data) { return $this->GeneratedJavaScript[$data]; }
 
-	public function renderJavaScriptDecoratedMode ( $section, $left, $right ) {
+	/**
+	 * Render a JavaScript to get a local website ressource (ie Hydr scripts)
+	 * @param String $section
+	 * @param String $left
+	 * @param String $right
+	 * @return string
+	 */
+	public function renderJavaScriptFile ( $section, $left, $right ) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
 		$Content = "";
 		if ( isset($this->GeneratedJavaScript[$section])) {
 			reset ($this->GeneratedJavaScript[$section]);
 			$tab = &$this->GeneratedJavaScript[$section];
-			foreach ($tab as $A ) { $Content .= $left . $A . $right; }
+			$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+			foreach ($tab as $A ) { 
+				$Content .= $left .$baseUrl.$A . $right;
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left.$baseUrl.$A . $right."`. and ".$_SERVER['HTTP_HOST']));
+			}
 		}
 		return  $Content."\r";
 	}
 	
-	public function renderJavaScriptCrudeMode ( $section ) {
+	/**
+	 * Renders a JavaScript to get an external ressource (third party script)
+	 * @param String $section
+	 * @param String $left
+	 * @param String $right
+	 * @return string
+	 */
+	public function renderJavaScriptExternalRessource ( $section, $left, $right ) {
+// 		$bts = BaseToolSet::getInstance();
 		$Content = "";
 		if ( isset($this->GeneratedJavaScript[$section])) {
 			reset ($this->GeneratedJavaScript[$section]);
 			$tab = &$this->GeneratedJavaScript[$section];
-			foreach ($tab as $A ) { $Content .= $A . "\r"; }
+			foreach ($tab as $A ) { 
+				$Content .= $left .$A . $right;
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left . $A . $right."`"));
+				
+			}
+		}
+		return  $Content."\r";
+	}
+	
+	
+	/**
+	 * Renders the JavaScript with no modifications.
+	 * @param String $section
+	 * @return string
+	 */
+	public function renderJavaScriptCrudeMode ( $section ) {
+// 		$bts = BaseToolSet::getInstance();
+		$Content = "";
+		if ( isset($this->GeneratedJavaScript[$section])) {
+			reset ($this->GeneratedJavaScript[$section]);
+			$tab = &$this->GeneratedJavaScript[$section];
+			foreach ($tab as $A ) { 
+				$Content .= $A . "\r"; 
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$A ."`"));
+			}
 		}
 		return  $Content."\r";
 	}

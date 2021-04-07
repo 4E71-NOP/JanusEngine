@@ -40,9 +40,9 @@ class DalFacade {
 	 * Will load the desired class depending on configuration.
 	 */
 	public function createDALInstance () {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();				// Make sure it's loaded
-		switch ( $cs->CMObj->getConfigurationEntry('dal')) {
+		switch ( $bts->CMObj->getConfigurationEntry('dal')) {
 			case "MYSQLI" :
 				$ClassLoaderObj->provisionClass('SddmMySQLI');
 				$this->DALInstance = SddmMySQLI::getInstance ();

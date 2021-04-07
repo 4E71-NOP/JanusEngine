@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -31,21 +31,21 @@
 // $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
-$cs->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
-$cs->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
+$bts->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
+$bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
 $localisation = " / uni_document_validation_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_document_validation_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_document_validation_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_document_validation_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_document_validation_p01.php");
 
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de modifier les documents.",
 		"type0"			=>	"Hydr",
 		"type1"			=>	"Pas de code",
@@ -62,7 +62,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"This part will allow you to modify documents.",
 		"type0"			=>	"Hydr",
 		"type1"			=>	"No code",
@@ -82,7 +82,7 @@ switch ($l) {
 
 // --------------------------------------------------------------------------------------------
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
 WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -92,28 +92,28 @@ AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 
 $tab_modif = array(
-		0 => $cs->I18nObj->getI18nEntry('modif0'),
-		1 => $cs->I18nObj->getI18nEntry('modif1'),
+		0 => $bts->I18nObj->getI18nEntry('modif0'),
+		1 => $bts->I18nObj->getI18nEntry('modif1'),
 );
 $tab_type = array(
-		0 => $cs->I18nObj->getI18nEntry('type0'),
-		1 => $cs->I18nObj->getI18nEntry('type1'),
-		2 => $cs->I18nObj->getI18nEntry('type2'),
-		3 => $cs->I18nObj->getI18nEntry('type3'),
+		0 => $bts->I18nObj->getI18nEntry('type0'),
+		1 => $bts->I18nObj->getI18nEntry('type1'),
+		2 => $bts->I18nObj->getI18nEntry('type2'),
+		3 => $bts->I18nObj->getI18nEntry('type3'),
 );
 
 $T = array();
 $i = 1;
-if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
-	$T['AD']['1'][$i]['1']['cont'] = $cs->I18nObj->getI18nEntry('nothingToDisplay');
+if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
-	$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien " . $Block."_t1' href='index.php?&amp;M_DOCUME[document_selection]=".$dbp['docu_id'].$bloc_html['url_sldup']."&amp;arti_page=2'>".$dbp['docu_name']."</a>";
 		$T['AD']['1'][$i]['2']['cont']	= $tab_type[$dbp['docu_type']];
@@ -126,12 +126,12 @@ $T['tab_infos']['NbrOfTabs']		= 1;
 $T['tab_infos']['TabBehavior']		= 0;
 $T['tab_infos']['RenderMode']		= 1;
 $T['tab_infos']['HighLightType']	= 1;
-$T['tab_infos']['Height']			= $cs->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['tab_infos']['Height']			= $bts->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
 $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "dl";
 $T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $cs->I18nObj->getI18nEntry('cell_1_txt');
+$T['tab_infos']['cell_1_txt']		= $bts->I18nObj->getI18nEntry('cell_1_txt');
 
 $T['ADC']['onglet']['1']['nbr_ligne']	= $i;
 $T['ADC']['onglet']['1']['nbr_cellule']	= 3;
@@ -147,7 +147,7 @@ $config = array(
 		"deco_type" => 50,
 		"module" => $infos['module'],
 );
-$Content .= $cs->RenderTablesObj->render($config, $T);
+$Content .= $bts->RenderTablesObj->render($config, $T);
 
 // --------------------------------------------------------------------------------------------
 $Content .= "
@@ -172,12 +172,12 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "",
-		"message"			=> $cs->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
 		"mode"				=> 0,
 		"size" 				=> 0,
 		"lastSize"			=> 0,
 );
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
 $Content .= "<br>\r&nbsp;
 </form>\r

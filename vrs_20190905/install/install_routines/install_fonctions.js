@@ -1,4 +1,4 @@
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -49,7 +49,7 @@ function VerifieChampsFomulaire ( Tab , Langue , SessionID ) {
 		var DBTypeElm = elm.Gebi("form[dal]"); 
 		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var URLamp = "&";
-		var URLvar = "http://" + document.domain + RequestURI + "/current/install_monitor.php?form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
+		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
 		for ( var ptr in ListeChampsTstDB ) {
 			URLvar += URLamp + ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[ListeChampsTstDB[ptr]].value;
 		}

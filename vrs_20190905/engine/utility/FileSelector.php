@@ -32,6 +32,8 @@ class FileSelector {
 	 * @return string
 	 */
 	public function render (&$infos) {
+		$bts = BaseToolSet::getInstance();
+		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();		// we use it this way for syntaxic ease. instead of $CurrentSetObj->getInstanceOfThemeDataObj()->xxxx()
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
@@ -39,25 +41,30 @@ class FileSelector {
 		$Content = "";
 		$zIndex = 500;
 		
-		switch ($CurrentSetObj->getDataEntry('language_id')) {
-			case 38:
-				$i18nDoc = array(
-				"title"	=> "File selector",
-				"c1"	=> "Name",
-				"c2"	=> "Size",
-				"c3"	=> "Date",
-				);
-				break;
-			case 48:
-				$i18nDoc = array(
-				"title"	=> "Sélecteur de fichier",
-				"c1"	=> "Nom",
-				"c2"	=> "Taille",
-				"c3"	=> "Date",
-				);
+		
+// 		switch ($CurrentSetObj->getDataEntry('language_id')) {
+// 			case 38:
+// 				$bts->I18nObj->setI18nEntry('FileSelector', 
+// 					array(
+// 					"title"	=> "File selector",
+// 					"c1"	=> "Name",
+// 					"c2"	=> "Size",
+// 					"c3"	=> "Date",
+// 					)
+// 				);
+// 				break;
+// 			case 48:
+// 				$bts->I18nObj->setI18nEntry('FileSelector',
+// 					array(
+// 						"title"	=> "Sélecteur de fichier",
+// 						"c1"	=> "Nom",
+// 						"c2"	=> "Taille",
+// 						"c3"	=> "Date",
+// 					)
+// 				);
 				
-				break;
-		}
+// 				break;
+// 		}
 		
 		$Content.= "
 			<div id='FileSelectorDarkFade'
@@ -77,12 +84,12 @@ class FileSelector {
 			<div id='FileSelectorCaption'>
 			
 			<table class='".$infos['block'].CLASS_Table01." ".$infos['block'].CLASS_TblLgnd_Top."' style='width='100%;'>\r
-			<caption>".$i18nDoc['title']."</caption>\r
+			<caption>".$bts->I18nObj->getI18nEntry('fileSelectorTitle')."</caption>\r
 			</tr>\r
 			<tr>\r
-			<td width='65%'>".$i18nDoc['c1']."</td>\r
-			<td width='10%'>".$i18nDoc['c2']."</td>\r
-			<td width='25%'>".$i18nDoc['c3']."</td>\r
+			<td width='65%'>".$bts->I18nObj->getI18nEntry('fileSelectorC1')."</td>\r
+			<td width='10%'>".$bts->I18nObj->getI18nEntry('fileSelectorC2')."</td>\r
+			<td width='25%'>".$bts->I18nObj->getI18nEntry('fileSelectorC3')."</td>\r
 			</tr>\r
 			</table>\r
 			
@@ -94,10 +101,10 @@ class FileSelector {
 		";
 		
 		$Uri = $_SERVER['REQUEST_URI'];
-		$RootUri = strpos( $_SERVER['REQUEST_URI'] , "/current/index.php" );
+		$RootUri = strpos( $_SERVER['REQUEST_URI'] , "/index.php" );
 		$Uri = substr ( $_SERVER['REQUEST_URI'] , 0 , $RootUri );
 		
-		$GeneratedJavaScriptObj->insertJavaScript('File' , "engine/javascript/FileSelector.js");
+		$GeneratedJavaScriptObj->insertJavaScript('File' , "current/engine/javascript/FileSelector.js");
 		$GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"".$Uri. "\"");
 		$GeneratedJavaScriptObj->insertJavaScript('Init' , "var fs = new FileSelector('FileSelectorLines');");
 		

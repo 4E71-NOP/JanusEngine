@@ -30,10 +30,10 @@
 /*Hydre-contenu_debut*/
 
 $localisation = " / uni_download_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_download_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_download_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_download_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_download_p01.php");
 
 switch ($l) {
 	case "fra":
@@ -95,7 +95,7 @@ $T['tab_infos']['CellName']			= "c";
 $T['tab_infos']['DocumentName']		= "d";
 $T['tab_infos']['cell_1_txt']		= $i18nDoc['tab1'];
 
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 /*Hydre-contenu_fin*/
 ?>

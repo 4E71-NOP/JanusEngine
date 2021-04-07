@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -31,16 +31,16 @@
 // $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
-$cs->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
-$cs->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
+$bts->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
+$bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
 $localisation = " / uni_article_test_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_article_test_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_article_test_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_article_test_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_article_test_p01.php");
 
 $colone_taille = 48;
 $colone_modification = 128;
@@ -48,7 +48,7 @@ $colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de tester du code Hydr (BBCode like).<br>\r
 <br>\r
 Entrez un nom de fichier qui contient un script wmode et vous pourrez le tester directement dans l'interface de MWM.<br>\r
@@ -61,7 +61,7 @@ Le fichier doit se trouver dans le repertoire 'article.wmcode'.<br>\r",
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=>	"This part will help you test Hydr code (BBcode like).<br>\r
 <br>\r
 Enter the filename containing a Hydr script and you will be able to test it directly into this interface.<br>\r
@@ -83,7 +83,7 @@ $colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -
 
 $Content .= "
 <p>
-".$cs->I18nObj->getI18nEntry('invite1')."
+".$bts->I18nObj->getI18nEntry('invite1')."
 <br>\r
 <br>\r
 
@@ -171,12 +171,12 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 		"onclick"			=> "",
-		"message"			=> $cs->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
 		"mode"				=> 0,
 		"size" 				=> 0,
 		"lastSize"			=> 0,
 );
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $Content .= "
 </form>
 <hr>

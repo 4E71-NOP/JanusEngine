@@ -18,42 +18,41 @@ class ModuleAuthentification {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleAuthentification";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleAuthentification");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleAuthentification");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleAuthentification");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleAuthentification");
 
-// 		$LOG_TARGET = $cs->LMObj->getInternalLogTarget();
-		$cs->LMObj->setInternalLogTarget(LOG_TARGET);
+		$bts->LMObj->setInternalLogTarget(LOG_TARGET);
 		
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleAuthentification->render start"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
 		
-		$cnxResult = $cs->AUObj->getDataEntry('errorType');
-		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$cnxResult = $bts->AUObj->getDataEntry('errorType');
+		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleAuthentification:render() : user_login=".$cs->SMObj->getSessionEntry('user_login')));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionEntry('user_login')));
 		
 		$Content = "";
-		if ( $cs->SMObj->getSessionEntry('user_login') == "anonymous") {
-			if ( $cs->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && 
-					$cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
-					$cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
+		if ( $bts->SMObj->getSessionEntry('user_login') == "anonymous") {
+			if ( $bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && 
+					$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
+					$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
 					) {
 				$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3 " . $ThemeDataObj->getThemeName().$infos['block']."_warning' style='text-align: center;'>". $i18n['cnxResult'][$cnxResult] ."</span>"; 
 			}
 
 			$Content .= "
-			<form ACTION='index.php?' method='post'>\r
+			<form ACTION='/' method='post'>\r
 		
 			<table style='width:".(
 					$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-16)."px; margin-right: auto; margin-left: auto'>\r
@@ -61,12 +60,7 @@ class ModuleAuthentification {
 			<tr>\r<td class='".$ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align:center; padding-bottom:8px;'><input class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3' type='text' name='authentificationForm[user_login]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
 			<tr>\r<td class='".$ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align:center;'>".$i18n['ps']."</td>\r</tr>\r
 			<tr>\r<td class='".$ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align:center; padding-bottom:8px;'><input class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3' type='password' name='authentificationForm[user_password]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
-			</table>\r".
-			
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
-			"
+			</table>\r
 			<input type='hidden' name='formSubmitted'				value='1'>
 			<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
 			<input type='hidden' name='formGenericData[action]' 	value='connectionAttempt'>\r
@@ -88,7 +82,7 @@ class ModuleAuthentification {
 				"size" 				=> 0,
 				"lastSize"			=> 0,
 			);
-			$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB); 
+			$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB); 
 			$Content .= "
 			</td>\r
 			</tr>\r
@@ -119,15 +113,9 @@ class ModuleAuthentification {
 			$pv['table_hauteur'] = 128;
 		
 			$Content .= "
-			<form ACTION='index.php?' method='post'>\r
+			<form ACTION='/' method='post'>\r
 			<input type='hidden' name='user_login' value='anonymous'>\r
 			<input type='hidden' name='user_pass' value=''>\r
-			".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			"
-			<input type='hidden' name='arti_ref' value=''>\r".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')."
 			<input type='hidden' name='formSubmitted'				value='1'>
 			<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
 			<input type='hidden' name='formGenericData[action]' 	value='disconnection'>\r
@@ -137,7 +125,7 @@ class ModuleAuthentification {
 			<tr>\r
 			<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: center;'>\r".
 			$i18n['txt1'].
-			"<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb3'>".$cs->SMObj->getSessionEntry('user_login')."</span>\r
+			"<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb3'>".$bts->SMObj->getSessionEntry('user_login')."</span>\r
 			</td>\r
 			</tr>\r
 			
@@ -145,7 +133,7 @@ class ModuleAuthentification {
 			<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3' style='text-align: center;'>\r
 			<span style='text-align: center;'>\r
 			" .
-			$cs->InteractiveElementsObj->renderSubmitButton($SB).
+			$bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"
 			</span>\r
 			</td>\r
@@ -163,7 +151,6 @@ class ModuleAuthentification {
 		
 		}
 		
-// 		$cs->LMObj->setInternalLogTarget($LOG_TARGET);
 		// Cleaning up
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) { 
 			unset (

@@ -35,8 +35,11 @@ class SddmTools {
 		return self::$Instance;
 	}
 	
+	/**
+	 * 
+	 */
 	public function SLMEmptyResult() {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
@@ -56,11 +59,37 @@ class SddmTools {
 				$data [5] = $this->i18n_ [$l] ['err_no'];
 				$data [6] = $this->i18n_ [$l] ['requete'];
 // 				outil_debug( $data, "SddmTools i18n" );
-				$cs->LMObj->logSQLMoreDetailsOnLast( $data );
+				$bts->LMObj->logSQLMoreDetailsOnLast( $data );
 				break;
 		}
 	}
-
+	
+	/**
+	 * Returns 3 strings in an array that can be used in SET & UPDATE SQL queries. 
+	 * Only the columns stated in the argument array will be processed.
+	 * @param array $columns
+	 * @param array $values
+	 * @return array
+	 */
+	public function makeQueryColumnDescription ($columns, $values) {
+		$tab = array(
+			'equality' => '',
+			'columns' => '',
+			'values' => '',
+		);
+		foreach ($columns as $k => $v) {
+// 			error_log($k .": (".strlen($values[$k]).") `".$values[$k]."`");
+			if ( strlen($values[$k]) > 0 ) {
+				$tab['equality'] .= $k. "='".$values[$k]."', ";
+				$tab['columns'] .= $k. ", ";
+				$tab['values'] .= "'".$values[$k]. "', ";
+			}
+		}
+		$tab['equality'] = substr ($tab['equality'], 0,-2);
+		$tab['columns'] = substr ($tab['columns'], 0,-2);
+		$tab['values'] = substr ($tab['values'], 0,-2);
+		return $tab;
+	}
 }
 ?>
 

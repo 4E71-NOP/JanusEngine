@@ -53,16 +53,34 @@ case 1:
 	error_log ( "fin log : " . $db_['dal'] ."/". $db_['type'] );
 }
 $dbError = "<hr>\r";
-switch ( $db_['dal'] ) {
-case "MYSQLI":
-	$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix2'] );
-	if ($db1->connect_error) { $_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; }
 
+$jsonApiResponse = array(
+		"cnxToDB"					=>	true,
+		"HydrDBAlreadyExist"		=>	false,
+		"HydrBDDuserPermission"		=>	false,
+	// 	"HydrBDDuserExists"			=>	false,
+);
+
+switch ( $db_['dal'] ) {
+//	PHP/Mysqli ------------------------------------------------------------------------------------
+	case "MYSQLI":
+	$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix2'] );
+	if ($db1->connect_error) { 
+		$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
+		$jsonApiResponse['cnxToDB']	= false;
+	}
+	
 	$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
-	if ($db2->connect_error) { $_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2->connect_error; }
+	if ($db2->connect_error) { 
+		$_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2->connect_error;
+	}
+	else {
+		$jsonApiResponse['HydrDBAlreadyExist']	= true;
+	}
 break;
 
-case "PHPPDO":
+//	PHP/PDO ------------------------------------------------------------------------------------
+	case "PHPPDO":
 	try {
 	$db = new PDO( $db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $db_['dbprefix2'] , $db_['user_login'] , $db_['user_password'] ); }
 	catch (PDOException $e) { $_REQUEST['SQL_tst']['1'] = 0; }
@@ -96,16 +114,24 @@ break;
 }
 
 // --------------------------------------------------------------------------------------------
+
+
 $reponse = "<br>\r";
 switch ( $_REQUEST['SQL_tst']['1'] ) {
-case 0 :	$reponse .= "TST1-NOK<br>\r";	break;
-case 1 :	$reponse .= "TST1-OK<br>\r";	break;
+	case 0 :	$reponse .= "TST1-NOK<br>\r";	break;
+	case 1 :	$reponse .= "TST1-OK<br>\r";	break;
+	
 }
 switch ( $_REQUEST['SQL_tst']['2'] ) {
-case 0 :	$reponse .= "TST2-NOK<br>\r";	break;
-case 1 :	$reponse .= "TST2-OK<br>\r";	break;
+	case 0 :	$reponse .= "TST2-NOK<br>\r";	break;
+	case 1 :	$reponse .= "TST2-OK<br>\r";	break;
+	
 }
-echo ( $reponse );
+
+// --------------------------------------------------------------------------------------------
+header('Content-Type: application/json');
+echo json_encode($jsonApiResponse);
+// echo ( $reponse );
 
 // --------------------------------------------------------------------------------------------
 switch ( $displayDebug ) {

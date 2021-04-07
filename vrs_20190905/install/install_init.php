@@ -36,57 +36,42 @@ class HydrInstall {
 	 */
 	public function render() {
 		$application = 'install';
-		include ("define.php");
-
-		include ("engine/utility/ClassLoader.php");
+		include ("current/define.php");
+		
+		include ("current/engine/utility/ClassLoader.php");
 		$ClassLoaderObj = ClassLoader::getInstance ();
-
-		$ClassLoaderObj->provisionClass ( 'CommonSystem' ); // First of them all as it is used by others.
-		$cs = CommonSystem::getInstance ();
-
-		$cs->LMObj->setDebugLogEcho ( 1 );
-		$cs->LMObj->setInternalLogTarget ( INSTALL_LOG_TARGET );
-		$cs->CMObj->InitBasicSettings ();
-
+		
+		$ClassLoaderObj->provisionClass ( 'BaseToolSet' ); // First of them all as it is used by others.
+		$bts = BaseToolSet::getInstance();
+		
+		$bts->LMObj->setDebugLogEcho ( 1 );
+		$bts->LMObj->setInternalLogTarget ( INSTALL_LOG_TARGET );
+		$bts->CMObj->InitBasicSettings ();
+		
 		$ClassLoaderObj->provisionClass ( 'SessionManagement' );
-// 		session_name ( "HydrWebsiteSessionId" );
-// 		session_start ();
-		$cs->initSmObj ();
-		$cs->LMObj->InternalLog ( array (
-				'level' => LOGLEVEL_STATEMENT,
-				'msg' => "*** index.php : \$_SESSION :" . $cs->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $cs->StringFormatObj->arrayToString ( $cs->SMObj->getSession () ) . " *** EOL"
-		) );
-
+		$bts->initSmObj ();
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		
 		$ClassLoaderObj->provisionClass ( 'WebSite' );
-
-		// $I18nObj = I18n::getInstance();
-
+		
 		// --------------------------------------------------------------------------------------------
-
-		$cs->LMObj->setStoreStatisticsStateOn ();
-
+		$bts->LMObj->setStoreStatisticsStateOn ();
+		
 		$localisation = " / inst";
-		$cs->MapperObj->AddAnotherLevel ( $localisation );
-		$cs->LMObj->logCheckpoint ( "Install Init" );
-		$cs->MapperObj->RemoveThisLevel ( $localisation );
-		$cs->MapperObj->setSqlApplicant ( "Install Init" );
-
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Install Init" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Install Init" );
+		
 		// --------------------------------------------------------------------------------------------
 		// Install options
 		// --------------------------------------------------------------------------------------------
-
-		// error_reporting(E_ERROR | E_PARSE);
-// 		error_reporting ( DEFAULT_ERROR_REPORTING );
+		
 		ini_set ( 'log_errors', "On" );
 		ini_set ( 'error_log', "/var/log/apache2/error.log" );
 		ini_set ( 'display_errors', 0 );
-		// error_log ("(OoO)");
-		// error_log ("(OoO)");
-		// error_log ("(OoO)");
-		// error_log ("(OoO)");
-		// error_log ("(OoO)");
-		error_log ( "********** Hydr installation Begin**********" );
-
+		error_log ( "********** Hydr installation Begin **********" );
+		
 		// --------------------------------------------------------------------------------------------
 		//
 		// CurrentSet
@@ -115,7 +100,7 @@ class HydrInstall {
 		$ClassLoaderObj->provisionClass ( 'DalFacade' );
 		$ClassLoaderObj->provisionClass ( 'SqlTableList' );
 
-		$form = $cs->RequestDataObj->getRequestDataEntry ( 'form' );
+		$form = $bts->RequestDataObj->getRequestDataEntry ( 'form' );
 		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $form ['dbprefix'], $form ['tabprefix'] ) );
 
 		// We have a POST so we set RAM and execution time limit immediately.
@@ -128,16 +113,16 @@ class HydrInstall {
 		//
 		// Loading the configuration file associated with this website
 		//
-		$cs->CMObj->LoadConfigFile ();
-		$cs->CMObj->setExecutionContext ( "installation" );
-		$cs->CMObj->PopulateLanguageList ();
+		$bts->CMObj->LoadConfigFile ();
+		$bts->CMObj->setExecutionContext ( "installation" );
+		$bts->CMObj->PopulateLanguageList ();
 
 		// --------------------------------------------------------------------------------------------
 		// HTML header and Stylesheet
 		// --------------------------------------------------------------------------------------------
 
 		// --------------------------------------------------------------------------------------------
-		include ("../stylesheets/css_admin_install.php");
+		include ("stylesheets/css_admin_install.php");
 		$theme_tableau = "mt_";
 		${$theme_tableau} ['theme_module_largeur_interne'] = 896;
 		${$theme_tableau} ['theme_module_largeur'] = 896;
@@ -168,10 +153,10 @@ class HydrInstall {
 		//
 		//
 		$localisation = "Prepare JavaScript Object";
-		$cs->MapperObj->AddAnotherLevel ( $localisation );
-		$cs->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
-		$cs->MapperObj->RemoveThisLevel ( $localisation );
-		$cs->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
 
 		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
 		// include ("engine/entity/others/GeneratedJavaScript.php");
@@ -189,7 +174,7 @@ class HydrInstall {
 			<title>INSTALL</title>\r
 			" . $stylesheet . "\r
 			</head>\r
-			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . "' background='../media/theme/" . ${$theme_tableau} ['theme_directory'] . "/" . ${$theme_tableau} ['theme_bg'] . "'>\r\r
+			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . "' background='media/theme/" . ${$theme_tableau} ['theme_directory'] . "/" . ${$theme_tableau} ['theme_bg'] . "'>\r\r
 			";
 
 		// --------------------------------------------------------------------------------------------
@@ -200,35 +185,35 @@ class HydrInstall {
 		//
 		// --------------------------------------------------------------------------------------------
 		$localisation = "Content";
-		$cs->MapperObj->AddAnotherLevel ( $localisation );
-		$cs->LMObj->logCheckpoint ( "Content" );
-		$cs->MapperObj->RemoveThisLevel ( $localisation );
-		$cs->MapperObj->setSqlApplicant ( "Content" );
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Content" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Content" );
 
-		if (strlen ( $cs->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0) {
+		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0) {
 			$langComp = array (
 					"fra",
 					"eng"
 			);
 			unset ( $A );
 			foreach ( $langComp as $A ) {
-				if ($A == $cs->RequestDataObj->getRequestDataEntry ( 'l' )) {
+				if ($A == $bts->RequestDataObj->getRequestDataEntry ( 'l' )) {
 					$langHit = 1;
 				}
 			}
 		}
 		if ($langHit == 1) {
-			$l = $cs->RequestDataObj->getRequestDataEntry ( 'l' );
+			$l = $bts->RequestDataObj->getRequestDataEntry ( 'l' );
 		} else {
 			$l = "eng";
 		}
 
-		include ("install/i18n/install_init_" . $l . ".php");
-		$cs->I18nObj->apply ( $i18n );
+		include ("current/install/i18n/install_init_" . $l . ".php");
+		$bts->I18nObj->apply ( $i18n );
 		unset ( $i18n );
 		// --------------------------------------------------------------------------------------------
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
-			$div_initial_bg = "background-image: url(../media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
+			$div_initial_bg = "background-image: url(media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
 		}
 		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) == 0) {
 			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_largeur' ) + 16 );
@@ -283,7 +268,7 @@ class HydrInstall {
 
 		$RenderDeco = RenderDeco50Exquisite::getInstance ();
 		$DocContent .= $RenderDeco->render ( $infos );
-		$DocContent .= "<h1 style='text-align: center;'>" . $cs->I18nObj->getI18nEntry ( 'b01Invite' ) . "</h1></div>\r";
+		$DocContent .= "<h1 style='text-align: center;'>" . $bts->I18nObj->getI18nEntry ( 'b01Invite' ) . "</h1></div>\r";
 
 		// --------------------------------------------------------------------------------------------
 
@@ -307,23 +292,23 @@ class HydrInstall {
 		//
 		// --------------------------------------------------------------------------------------------
 		$localisation = "Page";
-		$cs->MapperObj->AddAnotherLevel ( $localisation );
-		$cs->LMObj->logCheckpoint ( "Page" );
-		$cs->MapperObj->RemoveThisLevel ( $localisation );
-		$cs->MapperObj->setSqlApplicant ( "Page" );
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Page" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Page" );
 
 		$T = array ();
 
-		if ($cs->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
-			$cs->RequestDataObj->setRequestData ( 'PageInstall', 1 );
+		if ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
+			$bts->RequestDataObj->setRequestData ( 'PageInstall', 1 );
 		}
 
-		switch ($cs->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
+		switch ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
 			case "1" :
-				include ("install/install_page_01.php");
+				include ("current/install/install_page_01.php");
 				break;
 			case "2" :
-				include ("install/install_page_02.php");
+				include ("current/install/install_page_02.php");
 				break;
 		}
 		$DocContent .= "</div>\r</div>\r";
@@ -362,12 +347,12 @@ class HydrInstall {
 		// --------------------------------------------------------------------------------------------
 		unset ( $A );
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_HydrCore.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'install/install_routines/install_test_db.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'install/install_routines/install_fonctions.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', '../modules/initial/Tooltip/lib_tooltip.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_DecorationManagement.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript/lib_ElementAnimation.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_test_db.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_fonctions.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'modules/initial/Tooltip/lib_tooltip.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_ElementAnimation.js' );
 // 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript_onglet.js' );
 		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
 		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_Aide_dynamique.js');
@@ -379,7 +364,7 @@ class HydrInstall {
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptDecoratedMode ( "File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
@@ -400,12 +385,12 @@ class HydrInstall {
 
 		// --------------------------------------------------------------------------------------------
 		$DocContent .= "</body>\r</html>\r";
-		echo ($DocContent);
 
 		error_log ( "> memory_get_peak_usage (real)=" . floor ( (memory_get_peak_usage ( $real_usage = TRUE ) / 1024) ) . "Kb" . "; memory_get_usage (real)=" . floor ( (memory_get_usage ( $real_usage = TRUE ) / 1024) ) . "Kb" );
 		error_log ( "> memory_get_peak_usage=" . floor ( (memory_get_peak_usage () / 1024) ) . "Kb" . "; memory_get_usage=" . floor ( (memory_get_usage () / 1024) ) . "Kb" );
 		error_log ( "********** Hydr installation End **********" );
-		session_write_close ();
+// 		session_write_close ();
+		return ($DocContent);
 	}
 }
 ?>

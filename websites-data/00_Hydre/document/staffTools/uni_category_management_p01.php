@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,22 +30,22 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('cate_parent', 39);
+$bts->RequestDataObj->setRequestData('cate_parent', 39);
 
 // --------------------------------------------------------------------------------------------
 /*Hydre-contenu_debut*/
 $localisation = " / uni_category_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_category_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_category_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_category_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_category_management_p01.php");
 
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de modifier les deadlines.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Nom",
@@ -61,7 +61,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to modify deadlines.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Name",
@@ -78,33 +78,33 @@ switch ($l) {
 		break;
 }
 
-$dbquery = $cs->SDDMObj->query("
-SELECT c.cate_lang, l.lang_original_name
+$dbquery = $bts->SDDMObj->query("
+SELECT c.lang_id, l.lang_original_name
 FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
 WHERE c.cate_type IN ('0','1')
 AND c.cate_state = '1'
 AND c.ws_id = '2'
-AND c.cate_lang = l.lang_id
+AND c.lang_id = l.lang_id
 AND l.lang_id = sl.lang_id
 AND c.ws_id = sl.ws_id
 AND c.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-GROUP BY c.cate_lang
+GROUP BY c.lang_id
 ;");
 
 $CateTabList = array();
 $langClause = "";
 $i = 1;
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
-	$CateTabList[$dbp['cate_lang']]['tab'] = $i; 
-	$CateTabList[$dbp['cate_lang']]['id'] = $dbp['cate_lang']; 
-	$CateTabList[$dbp['cate_lang']]['nom'] = $dbp['lang_original_name']; 
-	$CateTabList[$dbp['cate_lang']]['count'] = 1;
-	$CateTabList[$dbp['cate_lang']]['linePtr'] = 2;
-	$langClause .= $dbp['cate_lang'].", ";
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+	$CateTabList[$dbp['lang_id']]['tab'] = $i; 
+	$CateTabList[$dbp['lang_id']]['id'] = $dbp['lang_id']; 
+	$CateTabList[$dbp['lang_id']]['nom'] = $dbp['lang_original_name']; 
+	$CateTabList[$dbp['lang_id']]['count'] = 1;
+	$CateTabList[$dbp['lang_id']]['linePtr'] = 2;
+	$langClause .= $dbp['lang_id'].", ";
 	$i++;
 }
 
-$cs->LMObj->logDebug($CateTabList, "CateTabList");
+$bts->LMObj->logDebug($CateTabList, "CateTabList");
 
 $langClause = substr($langClause, 0, -2);
 $nbrTabs = $i-1;
@@ -116,38 +116,38 @@ reset ($CateTabList);
 unset ($A);
 foreach ( $CateTabList as $A ) {
 	$Tab = $A['tab'];
-	$T['AD'][$Tab]['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD'][$Tab]['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD'][$Tab]['1']['3']['cont'] = $cs->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD'][$Tab]['1']['4']['cont'] = $cs->I18nObj->getI18nEntry('col_4_txt');
-	$T['AD'][$Tab]['1']['5']['cont'] = $cs->I18nObj->getI18nEntry('col_5_txt');
-	$T['AD'][$Tab]['1']['6']['cont'] = $cs->I18nObj->getI18nEntry('col_6_txt');
-	$T['AD'][$Tab]['1']['7']['cont'] = $cs->I18nObj->getI18nEntry('col_7_txt');
+	$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD'][$Tab]['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD'][$Tab]['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD'][$Tab]['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('col_4_txt');
+	$T['AD'][$Tab]['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('col_5_txt');
+	$T['AD'][$Tab]['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('col_6_txt');
+	$T['AD'][$Tab]['1']['7']['cont'] = $bts->I18nObj->getI18nEntry('col_7_txt');
 }
 
-$dbquery = $cs->SDDMObj->query("SELECT * 
+$dbquery = $bts->SDDMObj->query("SELECT * 
 FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language_website')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
 WHERE c.cate_type IN (0,1) 
 AND c.cate_state = '1' 
-AND c.cate_lang IN (".$langClause.") 
-AND c.cate_lang = sl.lang_id 
+AND c.lang_id IN (".$langClause.") 
+AND c.lang_id = sl.lang_id 
 AND sl.ws_id = sw.ws_id 
 AND sw.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-ORDER BY c.cate_lang, c.cate_parent, c.cate_position 
+ORDER BY c.lang_id, c.cate_parent, c.cate_position 
 ;");
 
 $stateTab = array(
-	0	=>	$cs->I18nObj->getI18nEntry('disabled'),
-	1	=>	$cs->I18nObj->getI18nEntry('enabled'),
+	0	=>	$bts->I18nObj->getI18nEntry('disabled'),
+	1	=>	$bts->I18nObj->getI18nEntry('enabled'),
 );
 
 $buttonLink = "<a href='index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article', 'arti_page'); 
 $buttonUp = "'><img src='../media/theme/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_haut')."' width='16' height='16'>"; 
 $buttonDown = "'><img src='../media/theme/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'repertoire')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icone_bas')."' width='16' height='16'>";
 
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery) ) {
-	$Tab = $CateTabList[$dbp['cate_lang']]['tab'];
-	$l = $CateTabList[$dbp['cate_lang']]['linePtr'];
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) {
+	$Tab = $CateTabList[$dbp['lang_id']]['tab'];
+	$l = $CateTabList[$dbp['lang_id']]['linePtr'];
 	$T['AD'][$Tab][$l]['1']['cont'] = $dbp['cate_id'];
 	$T['AD'][$Tab][$l]['1']['tc'] = 1;
 	$T['AD'][$Tab][$l]['1']['style'] = "text-align:center;";
@@ -171,7 +171,7 @@ while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery) ) {
 	$T['AD'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['cate_state']];
 	$T['AD'][$Tab][$l]['7']['tc'] = 1;
 	$l++;
-	$CateTabList[$dbp['cate_lang']]['count'] = $CateTabList[$dbp['cate_lang']]['linePtr'] = $l;
+	$CateTabList[$dbp['lang_id']]['count'] = $CateTabList[$dbp['lang_id']]['linePtr'] = $l;
 }
 
 
@@ -185,11 +185,11 @@ reset ($CateTabList);
 unset ($A);
 foreach ( $CateTabList as $A ) {
 	$Tab = $A['tab'];
-	$T['ADC']['onglet'][$Tab] = $cs->RenderTablesObj->getDefaultTableConfig($A['count']-1,7,1);
-	$cs->I18nObj->setI18nEntry('tabTxt'.$Tab, $A['nom']);
+	$T['ADC']['onglet'][$Tab] = $bts->RenderTablesObj->getDefaultTableConfig($A['count']-1,7,1);
+	$bts->I18nObj->setI18nEntry('tabTxt'.$Tab, $A['nom']);
 }
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 15,$nbrTabs );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15,$nbrTabs );
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 // DEPRECATED : 

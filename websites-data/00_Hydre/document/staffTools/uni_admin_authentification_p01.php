@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -28,7 +28,7 @@
 /*Hydre-IDE-end*/
 
 // $RequestDataObj->setRequestDataEntry('script_source',"");
-$cs->RequestDataObj->setRequestDataEntry('RenderCSS',
+$bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 	array(
 		'CssSelection' => 2,
 		'go' => 1,
@@ -38,26 +38,26 @@ $cs->RequestDataObj->setRequestDataEntry('RenderCSS',
 /*Hydre-contenu_debut*/
 $localisation = " / uni_admin_authentification_p01";
 
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_admin_authentification_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_admin_authentification_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_admin_authentification_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_admin_authentification_p01.php");
 
 switch ($l) {
 	case "fra":
 		$i18nDoc = array(
-		"invite1"		=>	"Cette partie va vous permettre de g&eacute;n&eacute;rer un script au format CSS (Cascading StyleSheet) pour un des thèmes de Hydr.<br>\r<br>\r",
+		"invite1"		=>	"Module d'authentification<br>\r<br>\r",
 		);
 		break;
 	case "eng":
 		$i18nDoc = array(
-		"invite1"		=>	"This part will allow you to create dedicated Stylesheet (Cascading StyleSheet) for a MWM theme.",
+		"invite1"		=>	"Authentification module.",
 		);
 		break;
 }
 
 if ( !class_exists('ModuleAuthentification')) {
-	include ("../../modules/Authentification/module_authentification_Obj.php");
+	include ("modules/Authentification/module_authentification_Obj.php");
 }
 $obj = new ModuleAuthentification();
 $Content .= $obj->render($infos);

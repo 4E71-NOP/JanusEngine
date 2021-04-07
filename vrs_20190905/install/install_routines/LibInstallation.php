@@ -63,12 +63,12 @@ class LibInstallation {
 	 * @param array $list
 	 */
 	public function executeContent (&$infos, &$list) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		
 		foreach ( $list['filelist'] as $A ) {
 			$infos['currentFileName'] = $A;
 			$path = $infos['path'].$list['name']."/".$infos['section']."/".$A;
-			$infos['currentTableName']= $cs->CMObj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
+			$infos['currentTableName']= $bts->CMObj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
 			$infos['currentFileStat'] = stat($path);
 			$infos['currentFileContent'] = file($path);
 			$infos['TabAnalyse'] = array();
@@ -78,7 +78,7 @@ class LibInstallation {
 			$this->report[$infos['section']][$infos['currentFileName']]['WARN']	= 0;	
 			$this->report[$infos['section']][$infos['currentFileName']]['ERR']	= 0;	
 			
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : processing file : `".$this->report[$infos['section']][$infos['currentFileName']]['file']."`"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : processing file : `".$this->report[$infos['section']][$infos['currentFileName']]['file']."`"));
 			
 			unset ( $infos['FormattedCommand']);
 			switch ( $infos['method'] ) {
@@ -98,7 +98,7 @@ class LibInstallation {
 	 * @param array $infos
 	*/
 	private function methodFilename (&$infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		
 		$Tmp = "";
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
@@ -114,8 +114,8 @@ class LibInstallation {
 		
 		foreach ( $infos['FormattedCommand'] as $C ) {
 			if ( !isset($C['ordre']) ) {
-				$cs->SDDMObj->query($C['cont']);
-				$res = $cs->LMObj->getLastSQLDetails();
+				$bts->SDDMObj->query($C['cont']);
+				$res = $bts->LMObj->getLastSQLDetails();
 				switch ( $res['signal'] ) {
 					case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
 					case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
@@ -125,8 +125,8 @@ class LibInstallation {
 				if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 			}
 		}
-		$cs->SDDMObj->query("FLUSH TABLES;");
-		$cs->SDDMObj->query("COMMIT;");
+		$bts->SDDMObj->query("FLUSH TABLES;");
+		$bts->SDDMObj->query("COMMIT;");
 	}
 	
 	/**
@@ -179,18 +179,18 @@ class LibInstallation {
 	 * 
 	 */
 	private function updateInsdtallationMonitor(){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		if ( ($this->report['lastReportExecution'] - $this->report['lastReportExecutionSaved']) > 3 ) {
 			$CommandConsole = CommandConsole::getInstance();
-			$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
+			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
 			$this->report['lastReportExecutionSaved'] = $this->report['lastReportExecution'];
 
-			$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$cs->LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
+			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$bts->LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
 			$this->report['lastSQLExecutionSaved'] = $this->report['lastSQLExecution'];
 		}
-		$cs->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
+		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
 	}
 
 	/**
@@ -312,7 +312,7 @@ class LibInstallation {
 	 * @return string
 	 */
 	public function renderConfigFile (&$infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 // 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "
 <?php
@@ -326,7 +326,7 @@ class LibInstallation {
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 //	This config file has been generated.
-//	Date		:	".$cs->TimeObj->timestampToDate($cs->TimeObj->microtime_chrono())."
+//	Date		:	".$bts->TimeObj->timestampToDate($bts->TimeObj->microtime_chrono())."
 //	Filename	:	site_".$infos['n']."_config.php
 //	
 //	
@@ -336,13 +336,13 @@ class LibInstallation {
 if ( \$pv['ObjectMode'] == 1 ) {
 	function returnConfig () {
 		\$tab = array();
-		\$tab['type']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'type')."\";
-		\$tab['host']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'host')."\";
-		\$tab['dal']				= \"".$cs->CMObj->getConfigurationSubEntry('db', 'dal')."\";
-		\$tab['db_user_login']		= \"".$cs->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
-		\$tab['db_user_password']	= \"".$cs->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
-		\$tab['dbprefix']			= \"".$cs->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
-		\$tab['tabprefix']			= \"".$cs->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
+		\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
+		\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
+		\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";
+		\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
+		\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
+		\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
+		\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
 		\$tab['maid_stats_nombre_de_couleurs'] = 5;
 		\$tab['SessionMaxAge']	= (60*60*24);
 		\$tab['pde_img_aff']	= 1;

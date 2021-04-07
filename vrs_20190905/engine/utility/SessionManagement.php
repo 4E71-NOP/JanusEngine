@@ -30,7 +30,9 @@ class SessionManagement {
 	
 	private function __construct(){
 		$this->InitializeSession();
-		$this->session = array_merge($this->session, $_SESSION);
+		if ( !empty($_SESSION)) {
+			$this->session = array_merge($this->session, $_SESSION);
+		}
 	}
 	
 	/**
@@ -48,10 +50,10 @@ class SessionManagement {
 	 * Initialize the session array with default values
 	 */
 	public function InitializeSession(){
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : InitializeSession has been called"));
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : InitializeSession has been called"));
 		
-		$this->session['SessionMaxAge']			= $cs->CMObj->getConfigurationEntry('SessionMaxAge');
+		$this->session['SessionMaxAge']			= $bts->CMObj->getConfigurationEntry('SessionMaxAge');
 		$this->session['user_login']			= "anonymous";
 		$this->session['ws']					= DEFAULT_SITE_ID;
 		$this->session['err']					= FALSE;
@@ -80,24 +82,17 @@ class SessionManagement {
 	}
 	
 	/**
-	 * Updates the superglobal array $_SESSION with the attribute data.
-	 */
-	public function UpdatePhpSession(){
-		$_SESSION = array_merge($_SESSION,$this->session);
-	}
-	
-	/**
 	 * Checks if the session (last saved state) is consistant with the actual server data. It does NOT check login and password. 
 	 */
 	public function CheckSession() {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession. \$_SESSION = " . $cs->StringFormatObj->arrayToString($_SESSION)));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
 		
 		if ( isset($_SESSION['last_REMOTE_ADDR']) )	{ 
 			if ($_SESSION['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
 				$this->session['err'] = TRUE; $this->report['errMsg'] = "Not the same remote IP address";
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession : Not the same remote IP address"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Not the same remote IP address"));
 			} 
 		}
 		else { $_SESSION['last_REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];}
@@ -108,7 +103,7 @@ class SessionManagement {
 			if ($_SESSION['last_HTTP_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Not the same HTTP user agent";
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession : Not the same HTTP user agent"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Not the same HTTP user agent"));
 			}
 		}
 		else {$_SESSION['last_HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];}
@@ -118,21 +113,21 @@ class SessionManagement {
 			if ($this->session['SessionAge'] > $this->session['SessionMaxAge']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Session too old";
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "SessionManagement-CheckSession : Session is too old. SessionAge=".$this->session['SessionAge']." > SessionMaxAge=".$this->session['SessionMaxAge']));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session is too old. SessionAge=".$this->session['SessionAge']." > SessionMaxAge=".$this->session['SessionMaxAge']));
 			} 
 		}
 		else {$_SESSION['last_REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];}
 		
 		// Any error leads to reset!
 		if ($this->session['err'] === TRUE) { 
-			$cs->LMObj = LogManagement::getInstance();
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "CheckSession : Session error"));
+			$bts->LMObj = LogManagement::getInstance();
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session error"));
 			$this->ResetSession();
-			$this->UpdatePhpSession();
+			$this->syncSuperGlobalSession();
 		}
 		else {
 		$this->session['sessionMode'] = 1;
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "CheckSession : Session seems ok. ws='" . $this->session['ws']."'"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session seems ok. ws='" . $this->session['ws']."'"));
 		
 		}
 	}
@@ -155,8 +150,8 @@ class SessionManagement {
 	 * Reset the session
 	 */
 	public function ResetSession() {
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ResetSession() has been called"));
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ResetSession() has been called"));
 		$this->restartSession();
 		$this->session['user_login'] = "anonymous";
 		$this->InitializeSession();
@@ -167,30 +162,61 @@ class SessionManagement {
 	 * Depending on the selected mode, stores the user information in an array or the session
 	 */
 	public function StoreUserCredential() {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$mode = $CurrentSetObj->getDataSubEntry('autentification', 'mode');
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredential mode=".$mode. ". Saving user into the session"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredential mode=".$mode. ". Saving user into the session"));
 		switch ($mode) {
 			case "session" :
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'")); 
-				$this->session['user_login']		= $_SESSION['user_login'];
-				$this->session['PasswordSha512']	= "";
-				$this->session['ws']				= $_SESSION['ws'];
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredentials : \$_SESSION['user_login']='" . $_SESSION['user_login']. "'")); 
+// 				$this->session['user_login']		= $_SESSION['user_login'];
+// 				$this->session['PasswordSha512']	= "";
+// 				$this->session['ws']				= $_SESSION['ws'];
 				
+				$this->syncClassSession();
 				break;
 			case "form" :
 				// We save directly the data into the session.
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Form content: " . $cs->StringFormatObj->arrayToString($cs->RequestDataObj->getRequestDataEntry('authentificationForm'))));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form content: " . $bts->StringFormatObj->arrayToString($bts->RequestDataObj->getRequestDataEntry('authentificationForm'))));
 				$this->InitializeSession();
-				$this->session['user_login']	=	$cs->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
-				$this->session['ws']			=	$cs->RequestDataObj->getRequestDataEntry('ws');
-				$this->UpdatePhpSession();
+				$this->session['user_login']	=	$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
+// 				$this->session['ws']			=	$bts->RequestDataObj->getRequestDataEntry('ws');
+				$this->syncSuperGlobalSession();
 				break;
 		}
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$_SESSION is now : ". $cs->StringFormatObj->arrayToString($_SESSION)));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION is now : ". $bts->StringFormatObj->arrayToString($_SESSION)));
 		
+	}
+	
+	/**
+	 * Backup the current route information. 
+	 * We assume we have a superglobal $_SESSION enabled and valid
+	 */
+	public function backupRoute () {
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Backing up the last route"));
+		$this->session['previousRoute'] = $this->session['currentRoute'];
+		$this->session['currentRoute'] = array();
+		$this->syncSuperGlobalSession();
+	}
+	
+	/**
+	 * Sync data from $_SESSION to local class attribute
+	 */
+	public function syncClassSession () {
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Syncing local attribute data using \$_SESSION"));
+		$this->session = array_merge($this->session, $_SESSION);
+	}
+	
+	/**
+	 * Updates the superglobal array $_SESSION with the class attribute data.
+	 */
+	public function syncSuperGlobalSession(){
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Syncing \$_SESSION using local attribute data"));
+		$_SESSION = array_merge($_SESSION,$this->session);
 	}
 	
 	//@formatter:off
@@ -200,9 +226,10 @@ class SessionManagement {
 	
 	public function getSession() {return $this->session;}
 	public function getSessionEntry($data) {return $this->session[$data];}
+	public function getSessionSubEntry($lvl1, $lvl2) { return $this->session[$lvl1][$lvl2]; }
 	
-	public function setSessionEntry($entry, $data) {
-		$this->session[$entry] = $data;}
+	public function setSessionEntry($entry, $data) {$this->session[$entry] = $data;}
+	public function setSessionSubEntry($lvl1, $lvl2, $data) { $this->session[$lvl1][$lvl2] = $data; }
 	
 	public function setReport($report) {$this->report = $report;}
 	public function setSession($session) {$this->session = $session;}

@@ -39,13 +39,13 @@ class SddmMySQLI {
 	 * Connects to the database.
 	 */
 	public function connect() {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		
-		$TabConfig = $cs->CMObj->getConfiguration();
-		$cs->LMObj->getInternalLog($cs->CMObj->toStringConfiguration());
-		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
+		$TabConfig = $bts->CMObj->getConfiguration();
+		$bts->LMObj->getInternalLog($bts->CMObj->toStringConfiguration());
+		$SQL_temps_depart = $bts->TimeObj->microtime_chrono ();
 		
-		switch ( $cs->CMObj->getConfigurationEntry('execution_context')) {
+		switch ( $bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
 				$this->DBInstance = new mysqli( $TabConfig['host'] , $TabConfig['db_user_login'] , $TabConfig['db_user_password'] );
 				break;
@@ -60,10 +60,10 @@ class SddmMySQLI {
 			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 			$SQLlogEntry['err_msg'] = $this->DBInstance->connect_error;
 			$SQLlogEntry['signal'] = "ERR";
-			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $cs->SQLlogEntry['signal'], "Connexion", $cs->SQLlogEntry['err_no_expr'], $cs->SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono() ) );
+			$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono() ) );
 			$this->errorMsg();
 			$msg = "CONNEXION ERROR : err_msg" . $this->DBInstance->connect_error;
-			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
+			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
 // 			error_log ($msg);
 			$this->report['cnxErr'] = 1;
 			
@@ -86,11 +86,11 @@ class SddmMySQLI {
 	 * @return mysqli_result|boolean
 	 */
 	public function query($q) {
-		$cs = CommonSystem::getInstance();
-		$timeBegin = $cs->TimeObj->microtime_chrono();
+		$bts = BaseToolSet::getInstance();
+		$timeBegin = $bts->TimeObj->microtime_chrono();
 		
-		$SQL_temps_depart = $cs->TimeObj->microtime_chrono ();
-		$cs->LMObj->increaseSqlQueryNumber();
+		$SQL_temps_depart = $bts->TimeObj->microtime_chrono ();
+		$bts->LMObj->increaseSqlQueryNumber();
 		$db_result = $this->DBInstance->query ( $q );
 		$SQLlogEntry = array();
 		$SQLlogEntry['err_no'] = $this->DBInstance->errno;
@@ -98,35 +98,35 @@ class SddmMySQLI {
 		$SQLlogEntry['err_msg'] = $this->DBInstance->error;
 		$SQLlogEntry['signal'] = "OK";
 		
-		$Niveau = $cs->CMObj->getConfigurationEntry('DebugLevel_SQL');
+		$Niveau = $bts->CMObj->getConfigurationEntry('DebugLevel_SQL');
 		
 		if ($this->DBInstance->errno != 0) {
-			$cs->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
 // 			error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
 			$SQLlogEntry['signal'] = "ERR";
 			$Niveau = 0;
 		}
 		
-		if ($cs->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $cs->LMObj->IncreaseSqlQueries(); }
-		if ($cs->CMObj->getConfigurationEntry('DebugLevel_SQL') >= $Niveau) {
-			$cs->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $cs->LMObj->getSqlQueryNumber(), $cs->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $cs->TimeObj->microtime_chrono () ) );
+		if ($bts->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $bts->LMObj->IncreaseSqlQueries(); }
+		if ($bts->CMObj->getConfigurationEntry('DebugLevel_SQL') >= $Niveau) {
+			$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono () ) );
 		}
 		
-		switch ($cs->CMObj->getConfigurationEntry('execution_context')) {
+		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation" :
 				$StringFormatObj = StringFormat::getInstance();
-				$cs->LMObj->increaseSqlQueryNumber();
+				$bts->LMObj->increaseSqlQueryNumber();
 				$q = $StringFormatObj->shorteningExpression($q, 256);
-				$cs->LMObj->logSQLDetails(
+				$bts->LMObj->logSQLDetails(
 					array (
 						$timeBegin,
-							$cs->LMObj->getSqlQueryNumber(),
-							$cs->MapperObj->getWhereWeAreAt(),
+							$bts->LMObj->getSqlQueryNumber(),
+							$bts->MapperObj->getWhereWeAreAt(),
 						$SQLlogEntry['signal'],
 						$q,
 						$SQLlogEntry['err_no_expr'],
 						$SQLlogEntry['err_msg'],
-							$cs->TimeObj->microtime_chrono(),
+							$bts->TimeObj->microtime_chrono(),
 					)
 				);
 				

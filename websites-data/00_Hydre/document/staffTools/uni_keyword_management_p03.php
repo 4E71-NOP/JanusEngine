@@ -30,7 +30,7 @@ AND cat.ws_id = '".$website['ws_id']."'
 AND cat.arti_ref = art.arti_ref 
 AND cat.arti_ref != '0' 
 AND cat.cate_type IN ('0','1') 
-AND cat.cate_lang = '".$website['ws_lang']."' 
+AND cat.lang_id = '".$website['ws_lang']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 

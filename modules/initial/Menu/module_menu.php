@@ -23,18 +23,18 @@ class ModuleMenu {
 	 * @return string
 	 */
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleMenu";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleMenu");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleMenu");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleMenu");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleMenu");
 		
  		$RenderLayoutObj = RenderLayout::getInstance();
  		
- 		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+ 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		
@@ -50,12 +50,12 @@ class ModuleMenu {
 		// This will allow to add more scripts without modifying the code.  
 		$menuTypeTab = array(
 				0 => "Offline",
-				1 => "../modules/initial/Menu/ModuleMenuType01_static.php",
-				2 => "../modules/initial/Menu/ModuleMenuType02_animation.php",
-				3 => "../modules/initial/Menu/ModuleMenuType03_banner.php",
+				1 => "modules/initial/Menu/ModuleMenuType01_static.php",
+				2 => "modules/initial/Menu/ModuleMenuType02_animation.php",
+				3 => "modules/initial/Menu/ModuleMenuType03_banner.php",
 		);
 		$menuType = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeBlockEntry('B00M', 'genre');
-		$realpath = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('repertoire_courant'). "/../modules/initial/Menu/";
+		$realpath = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('repertoire_courant'). "/modules/initial/Menu/";
 		$handle = opendir( $realpath );
 		
 		$tmp = array();
@@ -82,7 +82,7 @@ class ModuleMenu {
 			$i++;
 		}
 
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "\$fileList" . $cs->StringFormatObj->arrayToString($fileList)));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "\$fileList" . $bts->StringFormatObj->arrayToString($fileList)));
 		
 		// --------------------------------------------------------------------------------------------
 		// One query to get all the necessary informations for the processing 	
@@ -91,7 +91,7 @@ class ModuleMenu {
 		SELECT cat.*
 		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." cat, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." bcl
 		WHERE cat.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-		AND cat.cate_lang = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang')."'
+		AND cat.lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."'
 		AND cat.deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		AND cat.cate_type IN ('0','1')
@@ -99,14 +99,14 @@ class ModuleMenu {
 		AND cat.cate_state = '1'
 		ORDER BY cat.cate_parent,cat.cate_position
 		;";
-		$dbquery = $cs->SDDMObj->query($infos['module_menu_requete']);
+		$dbquery = $bts->SDDMObj->query($infos['module_menu_requete']);
 		$Content = "";
 		$menuData = &$infos['menuData'];
 		
-// 		$cs->StringFormatObj = StringFormat::getInstance();
-		if ( $cs->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
+// 		$bts->StringFormatObj = StringFormat::getInstance();
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
 		else {
-			while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$cate_id_index = $infos['cate_id_index'] = $dbp['cate_id'];
 				$menuData[$cate_id_index] = array (
 					"cate_id"		=> $dbp['cate_id'],
@@ -115,13 +115,14 @@ class ModuleMenu {
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
-					"group_id" 	=> $dbp['group_id'],
-					"arti_ref"		=> $dbp['arti_ref']
+					"group_id" 		=> $dbp['group_id'],
+					"arti_ref"		=> $dbp['arti_ref'],
+					"arti_slug"		=> $dbp['arti_slug'],
 				);
 				if ( $dbp['cate_type'] == $menu_racine ) { $racine_menu = $dbp['cate_id']; }
 			}
 			$infos['FPRM'] = array (
-				"arti_request"	=> $CurrentSetObj->getDataSubEntry('document', 'arti_ref'),
+				"arti_request"	=> $CurrentSetObj->getDataSubEntry('article', 'arti_ref'),
 				"cate_parent" 	=> $racine_menu,
 				"module_z"		=> $infos['module_z_index'] + 1,
 				"origine_x"		=> $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'pos_x_ex22'),
@@ -159,7 +160,7 @@ class ModuleMenu {
 		}
 		
 // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "../modules/initial/Menu/javascript/ModuleMenuType02_animation.js");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "modules/initial/Menu/javascript/ModuleMenuType02_animation.js");
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data', $MenuData['JavaScriptData']. "var ZindexDepart = ".($infos['module_z_index'] + 1).";\r");
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\tInitMenuDiv ( ".$MenuData['JavaScriptJSONName'].", TabInfoModule );");
 		

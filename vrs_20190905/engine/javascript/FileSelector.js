@@ -55,7 +55,7 @@ class FileSelector {
 		
 //		l.Log[this.dbgFS](data);
 		let URLvar = "http://" + document.domain + RequestURI
-		+"/current/fs.php?idx="+d.idx
+		+"/fs.php?idx="+d.idx
 		+"&mode="+d.selectionMode
 		+"&formName="+d.formName
 		+"&formTargetId="+d.formTargetId

@@ -18,21 +18,23 @@ class ModuleCalendar {
 	public function __construct(){}
 	
 	public function render ($infos) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleCalendar";
-		$cs->MapperObj->AddAnotherLevel($localisation );
-		$cs->LMObj->logCheckpoint("ModuleCalendar");
-		$cs->MapperObj->RemoveThisLevel($localisation );
-		$cs->MapperObj->setSqlApplicant("ModuleCalendar");
+		$bts->MapperObj->AddAnotherLevel($localisation );
+		$bts->LMObj->logCheckpoint("ModuleCalendar");
+		$bts->MapperObj->RemoveThisLevel($localisation );
+		$bts->MapperObj->setSqlApplicant("ModuleCalendar");
 		
 		$CurrentSet = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-		$l = $cs->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
 		$i18n = array();
-		include ("../modules/initial/Calendar/i18n/".$l.".php");
+		include ("modules/initial/Calendar/i18n/".$l.".php");
 	
 		$CurrentDate = mktime(0,0,0,date('m'), date('d'), date('Y'));
 		$date = array(
@@ -42,21 +44,21 @@ class ModuleCalendar {
 		);
 		
 		$pv = array(
-			'table_hauteur' => 64 ,
-			'table_largeur' => 72,
+			'table_height' => 64 ,
+			'table_width' => 72,
 		);
-		$pv['table_margintop'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_hauteur_interne') - $pv['table_hauteur'] ) /2);
-		$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - $pv['table_largeur'] ) /2);
+		$pv['table_margintop'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_hauteur_interne') - $pv['table_height'] ) /2);
+		$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - $pv['table_width'] ) /2);
 		
 		$Content = "
-		<table cellpadding='0' cellspacing='0' style='height: ".$pv['table_hauteur']."px; margin-top: ".$pv['table_margintop']."px; margin-left: auto; margin-right: auto;'>
+		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
 						
 		<tr>\r
-		<td rowspan='2' style='font-size: ".( $pv['table_hauteur'] - 8 )."px; font-weight: bold; vertical-align: middle;'>\r".$date['number']."</td>\r
-		<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t4'>\r".$i18n['day'][$date['day']]."</td>\r
+		<td style='font-size:150%'>\r".$i18n['day'][$date['day']]."</td>\r
+		<td rowspan='2' style='font-size: ".( $pv['table_height'] - 8 )."px; font-weight: bold; vertical-align: middle;'>\r".$date['number']."</td>\r
 		</tr>\r
 		<tr>\r
-		<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb6'>\r".$i18n['month'][$date['month']]."</td>\r
+		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_Txt_Fade."'>\r".$i18n['month'][$date['month']]."</td>\r
 		</tr>\r
 		</table>\r
 		";

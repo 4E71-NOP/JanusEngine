@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -32,14 +32,14 @@
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_website_list_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_website_list_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_website_list_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_website_list_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_website_list_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de voir les sites.",
 		"col_1_txt"	=> "Id",
 		"col_2_txt"	=> "Nom",
@@ -49,7 +49,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will show you the websites.",
 		"col_1_txt"	=> "Id",
 		"col_2_txt"	=> "Name",
@@ -60,27 +60,27 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 $T = array();
 $i = 1;
-$T['AD']['1'][$i]['1']['cont'] = $cs->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont'] = $cs->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont'] = $cs->I18nObj->getI18nEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont'] = $cs->I18nObj->getI18nEntry('col_4_txt');
+$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont'] = $bts->I18nObj->getI18nEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont'] = $bts->I18nObj->getI18nEntry('col_3_txt');
+$T['AD']['1'][$i]['4']['cont'] = $bts->I18nObj->getI18nEntry('col_4_txt');
 $i++;
 
-$dbquery = $cs->SDDMObj->query("
+$dbquery = $bts->SDDMObj->query("
 SELECT ws_id, ws_name, ws_directory 
 FROM ".$SqlTableListObj->getSQLTableName('website')." 
 ORDER BY ws_id
 ;");
 
-while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$T['AD']['1'][$i]['1']['cont'] = $dbp['ws_id'];
 	$T['AD']['1'][$i]['2']['cont'] = $dbp['ws_name'];
 	$T['AD']['1'][$i]['3']['cont'] = $dbp['ws_directory'];
-	$T['AD']['1'][$i]['4']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$cs->I18nObj->getI18nEntry('link')."</a>";
+	$T['AD']['1'][$i]['4']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$bts->I18nObj->getI18nEntry('link')."</a>";
 	$i++;
 }
 $RenderLayoutObj = RenderLayout::getInstance ();
@@ -94,10 +94,10 @@ $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_larg
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "site";
 $T['tab_infos']['DocumentName']		= "doc";
-// $T['tab_infos']['cell_1_txt']		= $cs->I18nObj->getI18nEntry('col_1_txt'];
-// $T['tab_infos']['cell_2_txt']		= $cs->I18nObj->getI18nEntry('col_2_txt'];
-// $T['tab_infos']['cell_3_txt']		= $cs->I18nObj->getI18nEntry('col_3_txt'];
-// $T['tab_infos']['cell_4_txt']		= $cs->I18nObj->getI18nEntry('col_4_txt'];
+// $T['tab_infos']['cell_1_txt']		= $bts->I18nObj->getI18nEntry('col_1_txt'];
+// $T['tab_infos']['cell_2_txt']		= $bts->I18nObj->getI18nEntry('col_2_txt'];
+// $T['tab_infos']['cell_3_txt']		= $bts->I18nObj->getI18nEntry('col_3_txt'];
+// $T['tab_infos']['cell_4_txt']		= $bts->I18nObj->getI18nEntry('col_4_txt'];
 
 $T['ADC']['onglet']['1']['nbr_ligne']	= $i-1;	
 $T['ADC']['onglet']['1']['nbr_cellule']	= 4;	
@@ -114,7 +114,7 @@ $config = array(
 		"module" => $infos['module'],
 );
 
-$Content .= $cs->RenderTablesObj->render($config, $T);
+$Content .= $bts->RenderTablesObj->render($config, $T);
 
 /*Hydre-contenu_fin*/
 ?>

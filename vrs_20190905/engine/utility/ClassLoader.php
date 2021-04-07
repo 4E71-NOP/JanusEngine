@@ -17,7 +17,7 @@ class ClassLoader {
 	private $classTab = array(
 		"AdminFormTool"				=> UtilityDirectory."AdminFormTool.php",
 		"AuthenticateUser"			=> UtilityDirectory."AuthenticateUser.php",
-		"CommonSystem"				=> UtilityDirectory."CommonSystem.php",
+		"BaseToolSet"				=> UtilityDirectory."BaseToolSet.php",
 		"DetectPEAR"				=> UtilityDirectory."DetectPEAR.php",
 		"FileSelector"				=> UtilityDirectory."FileSelector.php",
 		"FormToCommandLine"			=> UtilityDirectory."FormToCommandLine.php",
@@ -27,6 +27,7 @@ class ClassLoader {
 		"Mapper"					=> UtilityDirectory."Mapper.php",
 		"MenuSelectTable"			=> UtilityDirectory."MenuSelectTable.php",
 		"RenderAdmDashboard"		=> UtilityDirectory."RenderAdmDashboard.php",
+		"RenderForm"				=> UtilityDirectory."RenderForm.php",
 		"RenderDeco10Menu"			=> UtilityDirectory."RenderDeco10Menu.php",
 		"RenderDeco20Caligraph"		=> UtilityDirectory."RenderDeco20Caligraph.php",
 		"RenderDeco301Div"			=> UtilityDirectory."RenderDeco301Div.php",
@@ -37,6 +38,7 @@ class ClassLoader {
 		"RenderStylesheet"			=> UtilityDirectory."RenderStylesheet.php",
 		"RenderTables"				=> UtilityDirectory."RenderTables.php",
 		"RenderTabs"				=> UtilityDirectory."RenderTabs.php",
+		"Router"					=> UtilityDirectory."Router.php",
 		"SessionManagement"			=> UtilityDirectory."SessionManagement.php",
 		"StringFormat"				=> UtilityDirectory."StringFormat.php",
 		"Template"					=> UtilityDirectory."Template.php",
@@ -93,10 +95,10 @@ class ClassLoader {
 		"User"						=> EntityDirectory."dao/User.php",
 		"WebSite"					=> EntityDirectory."dao/WebSite.php",
 		
-		"CommandConsole"			=> "engine/cli/CommandConsole.php",
+		"CommandConsole"			=> "current/engine/cli/CommandConsole.php",
 		
-		"LibInstallation"			=> "install/install_routines/LibInstallation.php",
-		"LibInstallationReport"		=> "install/install_routines/LibInstallationReport.php",
+		"LibInstallation"			=> "current/install/install_routines/LibInstallation.php",
+		"LibInstallationReport"		=> "current/install/install_routines/LibInstallationReport.php",
 		);
 	
 	public function __construct() {}
@@ -120,10 +122,19 @@ class ClassLoader {
 	public function provisionClass($ClassName) {
 		$ret="OK";
 		if ( isset ( $this->classTab[$ClassName])) {
-			if ( !class_exists($ClassName) ) { include ($this->classTab[$ClassName]); }
+			if ( !class_exists($ClassName) ) { 
+				if ( file_exists($this->classTab[$ClassName])) { 
+// 					error_log("ClassLoader::provisionClass : including " . $this->classTab[$ClassName]);
+					include ($this->classTab[$ClassName]); 
+				}
+				else { 
+// 					error_log("ClassLoader::provisionClass : File " . $this->classTab[$ClassName] ." doesn't exist."); 
+				}
+			}
 		}
-		else { $ret = "ERR"; }
+		else { 
+// 			error_log("ClassLoader::provisionClass : " . $ClassName ." doesn't exist.");
+			$ret = "ERR"; }
 		return $ret;
 	}
-	
 }

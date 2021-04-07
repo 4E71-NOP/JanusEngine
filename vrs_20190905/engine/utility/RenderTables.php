@@ -34,9 +34,10 @@ class  RenderTables {
 	 * <br>
 	 * <b>TD level:</b><br>
 	 * cc : Defines caption class.<br>
-	 * DEPRECATED sc : Defines the "selection class" when hover.<br>
 	 * b  : Enables bold font.<br>
 	 * class : if not empty tells the renderer to use the specified classname.<br>
+	 * DEPRECATED tc : Defines font size.<br>
+	 * DEPRECATED sc : Defines the "selection class" when hover.<br>
 	 * <br>
 	 * <b>TR level:</b><br>
 	 * link : Enable the TR to be clickable as a link
@@ -48,18 +49,18 @@ class  RenderTables {
 	 */
 	public function render($infos, $T) {
 // 		$T as Table containing all needed information for rendering the table and tabs.
-		$cs = CommonSystem::getInstance(); 
+		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
 		error_reporting (0);
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "<!-- Render Table Begin -->\r";
 		if ( $T['tab_infos']['NbrOfTabs'] == 0 ) { $T['tab_infos']['NbrOfTabs'] = 1; }
 		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "engine/javascript/lib_TabsManagement.js");
-			$Content .= $cs->RenderTabsObj->render($infos, $T); 
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
+			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "current/engine/javascript/lib_TabsManagement.js");
+			$Content .= $bts->RenderTabsObj->render($infos, $T); 
 		}
 		
 		// --------------------------------------------------------------------------------------------
@@ -75,12 +76,12 @@ class  RenderTables {
 		$tab_infos = &$T['tab_infos'];
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
 // 		$legendClasses = "";
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
 			switch ( $ADC['onglet'][$CurT]['legende'] ) {
 				case 1: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Top;									break;// top
 				case 2: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Left;								break;// left
@@ -138,9 +139,9 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType']));
-// 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
-// 				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType']));
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
 
 				$Content .= "<table class='".$block.CLASS_Table01." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
@@ -214,6 +215,7 @@ class  RenderTables {
 			}
 			$tab_infos['HighLightType'] = $tab_infos['HighLightTypeBackup'];
 			if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End of tab :". $CurT));
 		}
 		if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }
 		
@@ -224,12 +226,13 @@ class  RenderTables {
 		);
 		$Content .= "<!-- Render Table End -->\r";
 		
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$tab_infos['RenderMode']:". $tab_infos['RenderMode']));
 		switch ( $tab_infos['RenderMode'] ) {
 			case 0:			echo ($Content);	unset ($Content);		break;
 			case 1:			return $Content;							break;
 		}
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		error_reporting(DEFAULT_ERROR_REPORTING);
 	}
 	
@@ -244,7 +247,7 @@ class  RenderTables {
 	 * @return array
 	 */
 	public function getDefaultDocumentConfig (&$infos, $lines=10, $NbrOfTabs=1, $TabBehavior=1, $HighLightType=1, $TabTxt="tabTxt") {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$tab = array(	
@@ -260,7 +263,7 @@ class  RenderTables {
 		"DocumentName"		=> "d",
 		);
 		for ($i=1; $i<=$NbrOfTabs; $i++ ){
-			$tab["tabTxt".$i] = $cs->I18nObj->getI18nEntry($TabTxt.$i);
+			$tab["tabTxt".$i] = $bts->I18nObj->getI18nEntry($TabTxt.$i);
 		}
 		
 		return $tab;

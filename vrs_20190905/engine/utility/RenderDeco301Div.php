@@ -29,13 +29,13 @@ class RenderDeco301Div {
 	}
 
 	public function render ( $infos ){
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
 		$m = $RenderLayoutObj->getModuleList();
@@ -45,20 +45,20 @@ class RenderDeco301Div {
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
 		
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 
 		switch ($infos['affiche_module_mode']) {
 			case "bypass":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
 				break;
 			case "normal":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
 				break;
 			case "menu":
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
 				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
@@ -107,7 +107,7 @@ class RenderDeco301Div {
 		
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 30 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

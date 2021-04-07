@@ -30,23 +30,23 @@ class WebSite {
 	 * @param integer $id
 	 */
 	public function getWebSiteDataFromDB() {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		if ( $cs->SMObj->getSessionEntry('ws') > 1 ){
-			$dbquery = $cs->SDDMObj->query ( "
+		if ( $bts->SMObj->getSessionEntry('ws') > 1 ){
+			$dbquery = $bts->SDDMObj->query ( "
 				SELECT * 
 				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('website') . " 
-				WHERE ws_id = '" . $cs->SMObj->getSessionEntry('ws') . "'
+				WHERE ws_id = '" . $bts->SMObj->getSessionEntry('ws') . "'
 				;" );
-			if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$cs->SMObj->getSessionEntry('ws')));
-				while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$bts->SMObj->getSessionEntry('ws')));
+				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 					foreach ( $dbp as $A => $B ) { $this->WebSite[$A] = $B; }
 				}
 			}
 			else {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$cs->SMObj->getSessionEntry('ws')));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$bts->SMObj->getSessionEntry('ws')));
 			}
 			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
 		}
@@ -61,22 +61,22 @@ class WebSite {
 	 * @param integer $id
 	 */
 	public function changeWebSiteContext( $id ) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $cs->SDDMObj->query ( 
+		$dbquery = $bts->SDDMObj->query ( 
 			"SELECT * 
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." 
 			WHERE ws_id = '" . $id. "'
 			;");
-		if ( $cs->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$id));
-			while ( $dbp = $cs->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { $this->WebSite[$A] = $B; }
 			}
 		}
 		else {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$id));
 		}
 		
 	}

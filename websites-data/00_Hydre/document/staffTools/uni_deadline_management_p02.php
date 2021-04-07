@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,14 +30,14 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('deadlineForm',
+$bts->RequestDataObj->setRequestData('deadlineForm',
 	array(
 			'mode'			=> 'edit',
 // 			'mode'			=> 'create',
 			'selectionId'	=>	4,
 	)
 );
-$cs->RequestDataObj->setRequestData('formGenericData',
+$bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'				=> 'AdminDashboard',
 				'section'				=> 'AdminDeadlineManagementP02',
@@ -52,20 +52,20 @@ $cs->RequestDataObj->setRequestData('formGenericData',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_deadline_management_p02";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_deadline_management_p02.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_deadline_management_p02.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_deadline_management_p02.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_deadline_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer le deadline.",
 		"invite2"		=> "Cette partie va vous permettre de créer un deadline.",
 		"tabTxt1"		=> "Informations",
 		"dlState0"		=> "Hors ligne",
 		"dlState1"		=> "En ligne",
-		"dlState2"		=> "Supprimé",
+		"dlState2"		=> "Désactivé",
 		
 		"t1l1c1"		=>	"ID",
 		"t1l2c1"		=>	"Nom",
@@ -82,13 +82,13 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage this deadline.",
 		"invite2"		=> "This part will allow you to create a deadline.",
 		"tabTxt1"		=> "Informations",
 		"dlState0"		=> "Offline",
 		"dlState1"		=> "Online",
-		"dlState2"		=> "Deleted",
+		"dlState2"		=> "Disabled",
 		
 		"t1l1c1"		=>	"ID",
 		"t1l2c1"		=>	"Name",
@@ -115,12 +115,12 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $ClassLoaderObj->provisionClass('DeadLine');
 $currentArticleObj = new DeadLine();
 
-switch ($cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
+switch ($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentArticleObj->getDeadLineDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'selectionId'));
+		$currentArticleObj->getDeadLineDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'selectionId'));
 		unset ( $A , $B );
-		$dbquery = $cs->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 		SELECT art.arti_name, art.arti_title
 		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('category')." as cat
 					
@@ -131,7 +131,7 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		AND art.arti_page = '1'
 					
 		AND cat.cate_type IN ('0','1')
-		AND cat.cate_lang = '".$CurrentSetObj->getDataEntry('language_id')."'
+		AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
 		;");
 
 		$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="
@@ -143,12 +143,12 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 				;
 		
 		$articleList = "";
-		while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$articleList	.= $linkId1."&articleForm[arti_ref_selection]=".$dbp['arti_name']."&articleForm[arti_page_selection]=1' 
 		>".$dbp['arti_title']."</a> - ";
 		}
 		$commandType = "update";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -163,7 +163,7 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 				),
 		);
 		$commandType = "add";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -183,7 +183,7 @@ $Content .= "
 ."<input type='hidden' name='formEntity1'				value='deadline'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$currentArticleObj->getDeadLineEntry('deadline_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='deadlineFrom[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry('deadlineFrom', 'selectionId')."'>\r"
+."<input type='hidden' name='deadlineFrom[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('deadlineFrom', 'selectionId')."'>\r"
 		
 ."<p>\r"
 ;
@@ -192,16 +192,16 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l8c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
 
-switch ( $cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 	case "edit":
 		$T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_id');
 		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_name');
@@ -212,9 +212,9 @@ switch ( $cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 		$T['ADC']['onglet']['1']['nbr_ligne'] = 8;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
 		break;
 	case "create":
-		$T['AD']['1']['1']['2']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$cs->I18nObj->getI18nEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $cs->I18nObj->getI18nEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$bts->I18nObj->getI18nEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $bts->I18nObj->getI18nEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , mktime() ) ;
 		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value='".date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$T['ADC']['onglet']['1']['nbr_ligne'] = 7;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
@@ -222,9 +222,9 @@ switch ( $cs->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 }
 
 $stateTab = array(
-		0	=>	array(	't'	=>	$cs->I18nObj->getI18nEntry('dlState0'),	'db'	=>	"OFFLINE",	),
-		1	=>	array(	't'	=>	$cs->I18nObj->getI18nEntry('dlState1'),	'db'	=>	"ONLINE",	),
-		2	=>	array(	't'	=>	$cs->I18nObj->getI18nEntry('dlState2'),	'db'	=>	"DELETED",	),
+		0	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState0'),	'db'	=>	"OFFLINE",	),
+		1	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState1'),	'db'	=>	"ONLINE",	),
+		2	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState2'),	'db'	=>	"DELETED",	),
 );
 $stateTab[$currentArticleObj->getDeadLineEntry('deadline_state')]['s'] = " selected";
 $str = "<select name ='formParams[etat]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -240,11 +240,11 @@ $T['AD']['1']['7']['2']['cont'] = $currentArticleObj->getDeadLineEntry('user_log
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 12);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 12);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(8,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

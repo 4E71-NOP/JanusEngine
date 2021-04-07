@@ -40,6 +40,7 @@ class StringFormat {
 		self::$ConvertTable['universal']['online']				= 1;
 		self::$ConvertTable['universal']['off']					= "0";
 		self::$ConvertTable['universal']['on']					= 1;
+		self::$ConvertTable['universal']['disabled']			= 2;
 		
 		self::$ConvertTable['article']['show_info_on']			= 1;
 		self::$ConvertTable['article']['not_valid']				= 0;
@@ -66,6 +67,7 @@ class StringFormat {
 		self::$ConvertTable['deadline']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['deadline']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['deadline']['online']				= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['deadline']['disabled']				= &self::$ConvertTable['universal']['disabled'];
 		
 		
 		self::$ConvertTable['decoration']['no']					= &self::$ConvertTable['universal']['no'];
@@ -331,7 +333,7 @@ class StringFormat {
 	}
 	
 	/**
-	 * Returns the walue selected in a table with $section and $val
+	 * Returns the value selected in a table with $section and $val
 	 * @param string $val
 	 * @param string $section
 	 * @return mixed

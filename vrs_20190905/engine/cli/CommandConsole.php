@@ -46,13 +46,13 @@ class CommandConsole {
 	 * 
 	 */
 	private static function loadI18n () {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 // 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
-		include ("engine/cli/i18n/".$l.".php");
-		$cs->I18nObj->apply($i18n);
+		include ("current/engine/cli/i18n/".$l.".php");
+		$bts->I18nObj->apply($i18n);
 		unset ($i18n);
 // 		self::$i18n = $i18n;
 	}
@@ -65,15 +65,15 @@ class CommandConsole {
 	 * 
 	 */
 // 	private static function makeQueryTable () {
-// 		$cs = CommonSystem::getInstance();
+// 		$bts = BaseToolSet::getInstance();
 // 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$l = $cs->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 // // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 // // 		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
 // // 		$webSiteId = $WebSiteContextObj->getWebSiteEntry('ws_id');
 // // 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
-// 		include ("engine/cli/SqlQueryTable.php");
+// 		include ("current/engine/cli/SqlQueryTable.php");
 	
 // 	}
 	
@@ -83,7 +83,7 @@ class CommandConsole {
 	 *
 	 */
 	private static function makeInitTable () {
-		include ("engine/cli/InitTable.php");
+		include ("current/engine/cli/InitTable.php");
 	}
 
 	/**
@@ -92,7 +92,7 @@ class CommandConsole {
 	 *  
 	 */
 	private static function makeCheckTable () {
-		include ("engine/cli/CheckTable.php");
+		include ("current/engine/cli/CheckTable.php");
 	}
 
 	/**
@@ -101,7 +101,7 @@ class CommandConsole {
 	 * 
 	 */
 	private static function makePreRequisiteTable () {
-		include ("engine/cli/PreRequisiteTable.php");
+		include ("current/engine/cli/PreRequisiteTable.php");
 	}
 
 	/**
@@ -110,7 +110,7 @@ class CommandConsole {
 	 *
 	 */
 	 private static function makeActionTable () {
-		include ("engine/cli/ActionTable.php");
+		include ("current/engine/cli/ActionTable.php");
 	}
 	
 	/**
@@ -172,8 +172,8 @@ class CommandConsole {
 	 *        
 	 */
 	private function linkTerms($CCL) {
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
 		$assocArray = array ();
 		$ptr = 0;
@@ -195,7 +195,7 @@ class CommandConsole {
 			}
 			$ptr ++;
 		}
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 		return $assocArray;
 	}
 	
@@ -204,8 +204,8 @@ class CommandConsole {
 	 * Initalize the necessary default values for an entity.
 	 */
 	private function commandInitialization (&$CCL) {
-		$cs = CommonSystem::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
 		$SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$af  = self::$InitTable[$CCL['init']['entity']];
@@ -220,7 +220,7 @@ class CommandConsole {
 				break;
 		}
 		foreach ($CCL['incoming'] as $A => $B ) {$CCL['params'][$A] = $SDDMObj->escapeString($B);}
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 	}
 	
 	/**
@@ -236,9 +236,9 @@ class CommandConsole {
 	 * @param array $CCL
 	 */	
 	private function commandValidation (&$CCL) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
 // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		$CCL['sqlTables'] = $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLWholeTableName();
@@ -247,7 +247,7 @@ class CommandConsole {
 		// Execute specific functions
 		$execute = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']]['execute'];
 		if ( is_callable($execute) ) {
-			$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Prerequisite execute is a callable function."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Prerequisite execute is a callable function."));
 			$execute($CCL); 
 		}
 		
@@ -262,9 +262,9 @@ class CommandConsole {
 						case 1:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
-								$dbquery = $cs->SDDMObj->query($q['0']);
-								if ( $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
-									while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $CCL['params'][$A['v']] = $dbp[$A['c']]; }
+								$dbquery = $bts->SDDMObj->query($q['0']);
+								if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+									while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $CCL['params'][$A['v']] = $dbp[$A['c']]; }
 								}
 							}
 							break;
@@ -272,17 +272,17 @@ class CommandConsole {
 						case 2:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
-								$dbquery = $cs->SDDMObj->query($q['0']);
-								if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
-									$msg = str_replace ( '<A1>', $A['p'] , $cs->I18nObj->getI18nEntry('elementNotFound') );
-									$cs->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
-									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
+								$dbquery = $bts->SDDMObj->query($q['0']);
+								if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
+									$msg = str_replace ( '<A1>', $A['p'] , $bts->I18nObj->getI18nEntry('elementNotFound') );
+// 									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
+									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: 0 results</span>";
 								}
 								else {
-									while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { $CCL['params'][$A['v']] = $dbp[$A['c']]; }
+									while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $CCL['params'][$A['v']] = $dbp[$A['c']]; }
 								}
 							}
 							break;
@@ -290,11 +290,11 @@ class CommandConsole {
 						case 3:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
-								$dbquery = $cs->SDDMObj->query($q['0']);
-								if ( $CCL['errFlag'] != 1 && $cs->SDDMObj->num_row_sql($dbquery) > 0 ) {
-									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $cs->I18nObj->getI18nEntry('duplicateFound') );
-									$cs->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
-									$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
+								$dbquery = $bts->SDDMObj->query($q['0']);
+								if ( $CCL['errFlag'] != 1 && $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $bts->I18nObj->getI18nEntry('duplicateFound') );
+									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
+									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: Duplicate found</span>";
 								}
@@ -306,13 +306,13 @@ class CommandConsole {
 							if ( $result == 0 ) { $CCL['errFlag'] = 1; }
 							break;
 					}
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : ".$q['0']));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : ".$q['0']));
 				}
 				$idx++;
 				if ( $CCL['errFlag'] == 1) { $CCL['params'][$A['v']] = "0";}
 			}
 		}
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 	}
 	
 	/**
@@ -320,7 +320,7 @@ class CommandConsole {
 	 * @param array $CCL
 	 */
 	private function prepareSQLStatement (&$CCL) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
@@ -329,11 +329,11 @@ class CommandConsole {
 		$ptr = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']];
 		// convert ----------------------------------------
 		if ( is_array($ptr['convert']) ) {
-			foreach ($ptr['convert'] as $A){ $CCL['params'][$A['v']] = $cs->StringFormatObj->conversion_expression($CCL['params'][$A['v']], $A['s']); }
+			foreach ($ptr['convert'] as $A){ $CCL['params'][$A['v']] = $bts->StringFormatObj->conversion_expression($CCL['params'][$A['v']], $A['s']); }
 		}
 		// Next Id ----------------------------------------
 		if ( is_array($ptr['nextId']) ) {
-			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $cs->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
+			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
 		}
 		//timeCreate ----------------------------------------
 		$time = time ();
@@ -342,11 +342,11 @@ class CommandConsole {
 		}
 		// timeConvert ----------------------------------------
 		if ( is_array($ptr['timeConvert']) ) {
-			foreach ($ptr['timeConvert'] as $A) { $CCL['params'][$A] = $cs->TimeObj->mktimeFromCanonical($CCL['params'][$A]); }
+			foreach ($ptr['timeConvert'] as $A) { $CCL['params'][$A] = $bts->TimeObj->mktimeFromCanonical($CCL['params'][$A]); }
 		}
 		// langConvert ----------------------------------------
 		if ( is_array($ptr['langConvert']) ) {
-			foreach ($ptr['langConvert'] as $A) { $CCL['params'][$A['t']] = $cs->CMObj->getLanguageListSubEntry($A['v'], 'lang_id'); }
+			foreach ($ptr['langConvert'] as $A) { $CCL['params'][$A['t']] = $bts->CMObj->getLanguageListSubEntry($A['v'], 'lang_id'); }
 		}
 		//----------------------------------------
 		// Associate columns in a compatible syntax to use with SQL statements.
@@ -364,7 +364,7 @@ class CommandConsole {
 			$CCL['columns'] = substr ( $columns , 0 , -2 );
 			$CCL['values'] = substr ( $values , 0 , -2 );
 		}
-		else { $cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ ." : ptr['columns'] is not an array.")); }
+		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ ." : ptr['columns'] is not an array.")); }
 		
 		// Selects and run the function that will return the SQL queries to execute.
 		// In case of directive N°4 it will not return an array but execute what's needed.
@@ -373,11 +373,11 @@ class CommandConsole {
 		
 		if ( is_array($CCL['sql']) ) {
 			foreach ( $CCL['sql'] as $Q ) {
-				$cs->SDDMObj->query($Q);
+				$bts->SDDMObj->query($Q);
 				self::$report['executionPerformed']++;
 			}
 		}
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 	}
 	
 	/**
@@ -386,15 +386,15 @@ class CommandConsole {
 	 *
 	 */
 	public function executeCommand ($CommandLine) {
-		$cs = CommonSystem::getInstance();
+		$bts = BaseToolSet::getInstance();
 		self::$report['signal'] = "OK";
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start : " . $CommandLine));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start : " . $CommandLine));
 		
 		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-		$TabConfig = $cs->CMObj->getConfiguration();
+		$TabConfig = $bts->CMObj->getConfiguration();
 		
 		// CCL  = Current Command line
 		// The buffer must NOT contain the end separator ";"
@@ -404,7 +404,7 @@ class CommandConsole {
 
 		if ( is_array(self::$ActionTable[$CCL['init']['cmd']]) ) {
 			if ( is_callable(self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']])) {
-				$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
 					"user_id" => $UserObj->getUserEntry('id'),
@@ -423,13 +423,13 @@ class CommandConsole {
 						// Special routine for website creation.
 						// Adding basic set of users and groups in order to make the website viable.
 						// At this point; some data have been converted. In this case user credential given by the "add website" command.
-						$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ ." : Website creation"));
+						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ ." : Website creation"));
 						$CurrentSetObj->setDataSubEntry('cli', 'websiteCreation', 1);
 						$SpecialCommandBuffer = array(
 							"website context name '".$CCL['params']['name']."' user '*user_install*' password '*user_install*'",
-							"add group name 'Server_owner' parent origin title ROOT tag SENIOR_STAFF file 'graph/universal/icone_developpeur_001.jpg' desc 'Owner'",
-							"add group name Reader parent Server_owner title Reader tag READER file 'graph/universal/icone_developpeur_001.jpg' desc 'Reader'",
-							"add group name Anonymous parent reader title Anonymous tag ANONYMOUS file 'graph/universal/icone_developpeur_001.jpg' desc 'Nobody'",
+							"add group name 'Server_owner' parent origin title ROOT tag SENIOR_STAFF file 'media/img/universal/icone_developpeur_001.jpg' desc 'Owner'",
+							"add group name Reader parent Server_owner title Reader tag READER file 'media/img/universal/icone_developpeur_001.jpg' desc 'Reader'",
+							"add group name Anonymous parent reader title Anonymous tag ANONYMOUS file 'media/img/universal/icone_developpeur_001.jpg' desc 'Nobody'",
 							"add user name \"".   $CCL['params']['user']."\" login \"".$CCL['params']['user']."\" perso_name \"".$CCL['params']['user']."\" password \"".$CCL['params']['password']."\" status ACTIVE role_function PRIVATE",
 							"assign user name \"".$CCL['params']['user']."\" to_group 'Server_owner' primary_group YES"
 						);
@@ -451,7 +451,7 @@ class CommandConsole {
 		}
 		
 		self::$report['signal'] = ( $CCL['errFlag'] == 1 ) ? "ERR" : "OK";
-		$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 		
 	}
 	

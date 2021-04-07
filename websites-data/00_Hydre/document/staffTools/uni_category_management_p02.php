@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,13 +30,13 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('categoryForm',
+$bts->RequestDataObj->setRequestData('categoryForm',
 		array(
 				'selectionId'	=> 150,
 				'selectionLang'	=> 2,
 		)
 );
-$cs->RequestDataObj->setRequestData('formGenericData',
+$bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'				=> 'AdminDashboard',
 				'section'				=> 'AdminCategoryManagementP02',
@@ -52,14 +52,14 @@ $cs->RequestDataObj->setRequestData('formGenericData',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_category_management_p02";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_category_management_p02.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_category_management_p02.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_category_management_p02.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_category_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les catégories.",
 		"invite2"		=> "Cette partie va vous permettre de créer une catégorie.",
 		"tabTxt1"		=> "Général",
@@ -95,7 +95,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage categorys.",
 		"invite2"		=> "This part will allow you to create a category.",
 		"tabTxt1"		=> "General",
@@ -150,13 +150,13 @@ $T = array();
 
 $ClassLoaderObj->provisionClass('Category');
 $currentCategoryObj = new Category();
-switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
+switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentCategoryObj->getCategoryDataFromDB($cs->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
+		$currentCategoryObj->getCategoryDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -169,10 +169,10 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) 
 				"cate_title"		=>	"Category title",
 				"cate_desc"			=>	"Category",
 				"cate_type"			=>	1,
-				"ws_id"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-				"cate_lang"			=>	"",
+				"ws_id"				=>	$WebSiteObj->getWebSiteEntry('ws_id'),
+				"lang_id"			=>	"",
 				"deadline_id"		=>	1,
-				"cate_state"			=>	1,
+				"cate_state"		=>	1,
 				"cate_parent"		=>	1,
 				"cate_position"		=>	1,
 				"group_id"			=>	1,
@@ -183,7 +183,7 @@ switch ($cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) 
 			)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$cs->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -204,29 +204,29 @@ $Content .= "
 ."<input type='hidden' name='formEntity1'				value='category'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$currentCategoryObj->getCategoryEntry('cate_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='categoryForm[selectionId]'	value='".$cs->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId')."'>\r"
+."<input type='hidden' name='categoryForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId')."'>\r"
 ."<p>\r"
 ;
 
 // --------------------------------------------------------------------------------------------
 
 
-$T['AD']['1']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l8c1');
-$T['AD']['1']['9']['1']['cont'] = $cs->I18nObj->getI18nEntry('t1l9c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
+$T['AD']['1']['9']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l9c1');
 
-$T['AD']['2']['1']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $cs->I18nObj->getI18nEntry('t2l6c1');
+$T['AD']['2']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l1c1');
+$T['AD']['2']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l2c1');
+$T['AD']['2']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l3c1');
+$T['AD']['2']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l4c1');
+$T['AD']['2']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l5c1');
+$T['AD']['2']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l6c1');
 
 $T['AD']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
 $T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
@@ -235,10 +235,10 @@ $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	si
 
 
 $tabType = array(
-		0 =>	array ( "t" => $cs->I18nObj->getI18nEntry('article_racine'),		"db" => "article_racine"),
-		1 =>	array ( "t" => $cs->I18nObj->getI18nEntry('article'),				"db" => "article"),
-		2 =>	array ( "t" => $cs->I18nObj->getI18nEntry('menu_admin_racine'),	"db" => "menu_admin_racine"),
-		3 =>	array ( "t" => $cs->I18nObj->getI18nEntry('menu_admin'),			"db" => "menu_admin"),
+		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('article_racine'),		"db" => "article_racine"),
+		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('article'),				"db" => "article"),
+		2 =>	array ( "t" => $bts->I18nObj->getI18nEntry('menu_admin_racine'),	"db" => "menu_admin_racine"),
+		3 =>	array ( "t" => $bts->I18nObj->getI18nEntry('menu_admin'),			"db" => "menu_admin"),
 );
 $tabType[$currentCategoryObj->getCategoryEntry('cate_type')]['s'] = " selected ";
 $T['AD']['1']['5']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -248,8 +248,8 @@ $T['AD']['1']['5']['2']['cont'] .= "</select>\r";
 
 
 $tabState = array(
-		0 =>	array ( "t" => $cs->I18nObj->getI18nEntry('offline'),	"db" => "OFFLINE"),
-		1 =>	array ( "t" => $cs->I18nObj->getI18nEntry('online'),	"db" => "ONLINE"),
+		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('offline'),	"db" => "OFFLINE"),
+		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('online'),	"db" => "ONLINE"),
 );
 $tabState[$currentCategoryObj->getCategoryEntry('cate_state')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -275,13 +275,13 @@ $T['AD']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Bl
 foreach ( $tabGroup as $A ) { $T['AD']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['AD']['2']['2']['2']['cont'] .= "</select>\r";
 
-$T['AD']['2']['3']['2']['cont'] = $cs->TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
+$T['AD']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
 
 
 $tabRole = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('noRole'),					"db"=>0 ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('correction_article'),		"db"=>"correction_article" ),
-		2	=> array ( "t"=>$cs->I18nObj->getI18nEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('noRole'),					"db"=>0 ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('correction_article'),		"db"=>"correction_article" ),
+		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
 );
 $tabRole[$currentCategoryObj->getCategoryEntry('cate_role')]['s'] = " selected ";
 $T['AD']['2']['4']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -290,8 +290,8 @@ $T['AD']['2']['4']['2']['cont'] .= "</select>\r";
 
 
 $tabYN = array(
-		0	=> array ( "t"=>$cs->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$cs->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
 );
 $tabYN[$currentCategoryObj->getCategoryEntry('cate_initial_document')]['s'] = " selected ";
 $T['AD']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -312,18 +312,18 @@ $T['AD']['2']['6']['2']['cont'] .= "</select>\r";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig(9,2,2),
-		2	=>	$cs->RenderTablesObj->getDefaultTableConfig(6,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
+		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $infos['formName'] = "categoryForm";
-$Content .= $TemplateObj->renderAdminFormButtons($infos, $cs->i18nDoc);
+$Content .= $TemplateObj->renderAdminFormButtons($infos, $bts->i18nDoc);
 
 
 /*Hydre-contenu_fin*/

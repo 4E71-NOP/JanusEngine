@@ -11,7 +11,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs CommonSystem                            */
+/* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$cs->RequestDataObj->setRequestData('test',
+$bts->RequestDataObj->setRequestData('test',
 		array(
 				'test'		=> 1,
 		)
@@ -38,14 +38,14 @@ $cs->RequestDataObj->setRequestData('test',
 
 /*Hydre-contenu_debut*/
 $localisation = " / uni_keyword_management_p01";
-$cs->MapperObj->AddAnotherLevel($localisation );
-$cs->LMObj->logCheckpoint("uni_keyword_management_p01.php");
-$cs->MapperObj->RemoveThisLevel($localisation );
-$cs->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_keyword_management_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Type",
@@ -59,7 +59,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$cs->I18nObj->apply(array(
+		$bts->I18nObj->apply(array(
 		"invite1"		=> "This part will allow you to manage keywords.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Type",
@@ -74,14 +74,14 @@ switch ($l) {
 		break;
 }
 
-$Content .= $cs->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
 
 $clause = "";
-if ( strlen($cs->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$cs->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
-$dbquery = $cs->SDDMObj->query("
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
+$dbquery = $bts->SDDMObj->query("
 SELECT *  
 FROM ".$SqlTableListObj->getSQLTableName('keyword')." 
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
@@ -89,28 +89,28 @@ AND keyword_state != '2'
 ".$clause." 
 ;");
 
-if ( $cs->SDDMObj->num_row_sql($dbquery) == 0 ) {
+if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $cs->I18nObj->getI18nEntry('raf1');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('raf1');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	
 	$tabState = array(
-			0	=> $cs->I18nObj->getI18nEntry('kwState0'),
-			1	=> $cs->I18nObj->getI18nEntry('kwState1'),
+			0	=> $bts->I18nObj->getI18nEntry('kwState0'),
+			1	=> $bts->I18nObj->getI18nEntry('kwState1'),
 	);
 	$tabType = array(
-			1	=> $cs->I18nObj->getI18nEntry('kwType1'),
-			2	=> $cs->I18nObj->getI18nEntry('kwType2'),
-			3	=> $cs->I18nObj->getI18nEntry('kwType3'),
+			1	=> $bts->I18nObj->getI18nEntry('kwType1'),
+			2	=> $bts->I18nObj->getI18nEntry('kwType2'),
+			3	=> $bts->I18nObj->getI18nEntry('kwType3'),
 	);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $cs->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $cs->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $cs->I18nObj->getI18nEntry('col_3_txt');
-	while ($dbp = $cs->SDDMObj->fetch_array_sql($dbquery)) { 
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
 		&amp;M_MOTCLE[keyword_selection]=".$dbp['keyword_id'].
@@ -124,11 +124,11 @@ else {
 }
 
 
-$T['tab_infos'] = $cs->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
 $T['ADC']['onglet'] = array(
-		1	=>	$cs->RenderTablesObj->getDefaultTableConfig($i,3,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
-$Content .= $cs->RenderTablesObj->render($infos, $T);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 <br>\r
 <table width='100%' cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 <tr>\r
-<td>\r <input type='text' name='keywordForm[filter]' size='35' maxlength='255' value='".$cs->RequestDataObj->getRequestDataSubEntry('keywordForm','filter')."' class='".$Block."_t3 ".$Block."_form_1'>\r
+<td>\r <input type='text' name='keywordForm[filter]' size='35' maxlength='255' value='".$bts->RequestDataObj->getRequestDataSubEntry('keywordForm','filter')."' class='".$Block."_t3 ".$Block."_form_1'>\r
 </td>\r
 
 <td align='right'>\r";
@@ -150,12 +150,12 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 		"onclick"			=> "",
-		"message"			=> $cs->I18nObj->getI18nEntry('btnFilter'),
+		"message"			=> $bts->I18nObj->getI18nEntry('btnFilter'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,
 );
-$Content .= $cs->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $Content .= "</form>\r
 </td>\r
 </tr>\r
