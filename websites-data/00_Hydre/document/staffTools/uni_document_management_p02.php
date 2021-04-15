@@ -126,7 +126,7 @@ $currentDocumentObj = new Document();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentDocumentObj->getDocumentDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
+		$currentDocumentObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
 		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";

@@ -75,6 +75,14 @@ unset ($ll);
 // URL elements
 define ( "HYDRLINKURLTAG", "HydrLink");
 
+// --------------------------------------------------------------------------------------------
+// Option menu arrays 
+// The fields have dynamic name in case we use combo box that require different entry names etc...
+define ("MenuOptionDb",	"db" );
+define ("MenuOptionSelected",	"s" );
+define ("MenuOptionTxt",	"t" );
+
+
 
 // --------------------------------------------------------------------------------------------
 // Class names

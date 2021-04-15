@@ -11,11 +11,18 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
+
+/**
+ * Not yet implemented in the model. 
+ * 
+ * @author faust
+ *
+ */
 class SmallVariable {
 	private $SmallVariable = array ();
 	public function __construct() {
 	}
-	public function getSmallVariableDataFromDB($id) {
+	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		

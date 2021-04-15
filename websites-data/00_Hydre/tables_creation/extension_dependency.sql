@@ -3,7 +3,7 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-dependence_id		INTEGER NOT NULL, 
+dependency_id		INTEGER NOT NULL, 
 extension_id		INTEGER, 
 extension_dep		INTEGER, 
 

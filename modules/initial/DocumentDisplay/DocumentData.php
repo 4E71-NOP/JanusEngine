@@ -25,7 +25,7 @@ class DocumentData {
 	
 	public function __construct() {}
 	
-	public function getDocumentDataFromDB (){
+	public function getDataFromDB (){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		

@@ -11,38 +11,38 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin *
-/*Hydre-contenu_debut*/
+ /*Hydre-contenu_debut*/
 
-$ClassLoaderObj->provisionClass ( 'DeadLine' );
-$dl = new DeadLine();
+$ClassLoaderObj->provisionClass ( 'Category' );
+$obj = new Category();
+$id = 77;
 
-$dl->getDataFromDB(4);
+$obj->getDataFromDB($id);
 
-$Content .= "Type: DeadLine<br>\r<br>\r";
+$Content .= "Type: Category<br>\r<br>\r";
 $Content .= "dl->checkDataConsistency()=";
-switch ($dl->checkDataConsistency()) {
+switch ($obj->checkDataConsistency()) {
 	case true:		$Content .= "TRUE";			break;
 	case false:		$Content .= "FALSE";		break;
 }
 
 
 $Content .= "<br>\r";
-// $dl->setDeadLineEntry('deadline_id', '1');
 $Content .= "dl->existsInDB()=";
-switch ($dl->existsInDB()) {
+switch ($obj->existsInDB()) {
 	case true:		$Content .= "TRUE";			break;
 	case false:		$Content .= "FALSE";		break;
 }
 
 $Content .= "<br>\r";
-$Content .= $bts->StringFormatObj->print_r_html($dl->getDeadLine());
+$Content .= $bts->StringFormatObj->print_r_html($obj->getCategory());
 
 
-$dl->setDeadLineEntry('deadline_title', $dl->getDeadLineEntry('deadline_title')."*");
-$dl->sendToDB();
-$dl->getDataFromDB(4);
+$obj->setCategoryEntry('cate_title', $obj->getCategoryEntry('cate_title')."*");
+$obj->sendToDB();
+$obj->getDataFromDB($id);
 $Content .= "<br>\r";
-$Content .= $bts->StringFormatObj->print_r_html($dl->getDeadLine());
+$Content .= $bts->StringFormatObj->print_r_html($obj->getCategory());
 
 $Content .= "<br>\r<br>\r<br>\r";
 

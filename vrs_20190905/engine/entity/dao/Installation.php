@@ -11,11 +11,16 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
+/**
+ * this class is base on the model in the database. Made to recover some information in the database.
+ * @author faust
+ *
+ */
 class Installation {
 	private $Installation = array ();
 	public function __construct() {
 	}
-	public function getInstallationDataFromDB($id) {
+	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		

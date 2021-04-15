@@ -192,7 +192,7 @@ $currentUserObj = new User();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'mode') ) {
 	case "edit":
 		$commandType = "update";
-		$currentUserObj->getUserDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'selectionName'), $WebSiteObj);
+		$currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'selectionName'), $WebSiteObj);
 		$t1l2c2 = $currentUserObj->getUserEntry('user_name');
 		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";

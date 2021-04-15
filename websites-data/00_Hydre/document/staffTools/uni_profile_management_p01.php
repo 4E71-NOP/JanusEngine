@@ -495,7 +495,7 @@ else {
 	$PmThemeDescriptorObj = new ThemeDescriptor();
 	$PmThemeDataObj = new ThemeData();
 	
-	$PmThemeDescriptorObj->getThemeDescriptorDataFromDB($PmThemeName);
+	$PmThemeDescriptorObj->getDataFromDB($PmThemeName);
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setThemeName($PmThemeName);
 	$PmThemeDataObj->setDecorationListFromDB();

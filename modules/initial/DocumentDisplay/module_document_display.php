@@ -45,7 +45,7 @@ class ModuleDocumentDisplay {
 		if (!class_exists("DocumentData")) { include ("modules/initial/DocumentDisplay/DocumentData.php"); }
 		$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());
 		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
-		$DocumentDataObj->getDocumentDataFromDB();
+		$DocumentDataObj->getDataFromDB();
 
 
 // 		We have a document object. Now we have to process it.

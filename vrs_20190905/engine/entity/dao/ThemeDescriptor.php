@@ -14,14 +14,119 @@
 class ThemeDescriptor {
 	private $ThemeDescriptor = array ();
 	
-	public function __construct() {}
+	//@formatter:off
+	private $columns = array(
+		'theme_id'						=> 0,
+		'theme_directory'				=> 0,
+		'theme_name'					=> "New theme",
+		'theme_title'					=> 0,
+		'theme_desc'					=> 0,
+		'theme_date'					=> 0,
+		'theme_stylesheet_1'			=> 0,
+		'theme_stylesheet_2'			=> 0,
+		'theme_stylesheet_3'			=> 0,
+		'theme_stylesheet_4'			=> 0,
+		'theme_stylesheet_5'			=> 0,
+		'theme_bg'						=> 0,
+		'theme_bg_repeat'				=> 0,
+		'theme_bg_color'				=> 0,
+		'theme_logo'					=> 0,
+		'theme_banner'					=> 0,
+		'theme_divinitial_bg'			=> 0,
+		'theme_divinitial_repeat'		=> 0,
+		'theme_divinitial_dx'			=> 0,
+		'theme_divinitial_dy'			=> 0,
+		'theme_block_01_name'			=> 0,
+		'theme_block_01_text'			=> 0,
+		'theme_block_02_name'			=> 0,
+		'theme_block_02_text'			=> 0,
+		'theme_block_03_name'			=> 0,
+		'theme_block_03_text'			=> 0,
+		'theme_block_04_name'			=> 0,
+		'theme_block_04_text'			=> 0,
+		'theme_block_05_name'			=> 0,
+		'theme_block_05_text'			=> 0,
+		'theme_block_06_name'			=> 0,
+		'theme_block_06_text'			=> 0,
+		'theme_block_07_name'			=> 0,
+		'theme_block_07_text'			=> 0,
+		'theme_block_08_name'			=> 0,
+		'theme_block_08_text'			=> 0,
+		'theme_block_09_name'			=> 0,
+		'theme_block_09_text'			=> 0,
+		'theme_block_10_name'			=> 0,
+		'theme_block_10_text'			=> 0,
+		'theme_block_11_name'			=> 0,
+		'theme_block_11_text'			=> 0,
+		'theme_block_12_name'			=> 0,
+		'theme_block_12_text'			=> 0,
+		'theme_block_13_name'			=> 0,
+		'theme_block_13_text'			=> 0,
+		'theme_block_14_name'			=> 0,
+		'theme_block_14_text'			=> 0,
+		'theme_block_15_name'			=> 0,
+		'theme_block_15_text'			=> 0,
+		'theme_block_16_name'			=> 0,
+		'theme_block_16_text'			=> 0,
+		'theme_block_17_name'			=> 0,
+		'theme_block_17_text'			=> 0,
+		'theme_block_18_name'			=> 0,
+		'theme_block_18_text'			=> 0,
+		'theme_block_19_name'			=> 0,
+		'theme_block_19_text'			=> 0,
+		'theme_block_20_name'			=> 0,
+		'theme_block_20_text'			=> 0,
+		'theme_block_21_name'			=> 0,
+		'theme_block_21_text'			=> 0,
+		'theme_block_22_name'			=> 0,
+		'theme_block_22_text'			=> 0,
+		'theme_block_23_name'			=> 0,
+		'theme_block_23_text'			=> 0,
+		'theme_block_24_name'			=> 0,
+		'theme_block_24_text'			=> 0,
+		'theme_block_25_name'			=> 0,
+		'theme_block_25_text'			=> 0,
+		'theme_block_26_name'			=> 0,
+		'theme_block_26_text'			=> 0,
+		'theme_block_27_name'			=> 0,
+		'theme_block_27_text'			=> 0,
+		'theme_block_28_name'			=> 0,
+		'theme_block_28_text'			=> 0,
+		'theme_block_29_name'			=> 0,
+		'theme_block_29_text'			=> 0,
+		'theme_block_30_name'			=> 0,
+		'theme_block_30_text'			=> 0,
+		'theme_block_00_menu'			=> 0,
+		'theme_block_01_menu'			=> 0,
+		'theme_block_02_menu'			=> 0,
+		'theme_block_03_menu'			=> 0,
+		'theme_block_04_menu'			=> 0,
+		'theme_block_05_menu'			=> 0,
+		'theme_block_06_menu'			=> 0,
+		'theme_block_07_menu'			=> 0,
+		'theme_block_08_menu'			=> 0,
+		'theme_block_09_menu'			=> 0,
+		'theme_admctrl_panel_bg'		=> 0,
+		'theme_admctrl_switch_bg'		=> 0,
+		'theme_admctrl_width'			=> 0,
+		'theme_admctrl_height'			=> 0,
+		'theme_admctrl_position'		=> 0,
+		'theme_gradient_start_color'	=> 0,
+		'theme_gradient_middle_color'	=> 0,
+		'theme_gradient_end_color'		=> 0,
+	);
+	//@formatter:on
+	
+	public function __construct() {
+		$this->ThemeDescriptor= $this->getDefaultValues();
+	}
 	
 	/**
 	 * Gets theme descriptor data from the database.<br>
 	 * @param integer $id
 	 */
 	//$UserObj, $WebSiteObj
-	public function getThemeDescriptorDataFromDB($ThemeId) {
+	public function getDataFromDB($ThemeId) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -76,13 +181,113 @@ class ThemeDescriptor {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));
 		}
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			foreach ( $dbp as $A => $B ) { $this->ThemeDescriptor [$A] = $B; }
+			foreach ( $dbp as $A => $B ) {
+				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
+			}
 		}
 		$this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
 	
 		
 	}
+	
+	/**
+	 * Updates or inserts in DB the local data.
+	 * mode ar available: <br>
+	 * <br>
+	 * 0 = insert or update - Depending on the Id existing in DB or not, it'll be UPDATE or INSERT<br>
+	 * 1 = insert only - Supposedly a new ID and not an existing one<br>
+	 * 2 = update only - Supposedly an existing ID<br>
+	 */
+	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
+			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ThemeDescriptor);
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
+			
+			$bts->SDDMObj->query("
+			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td
+			SET ".$QueryColumnDescription['equality']."
+			WHERE td.theme_id ='".$this->ThemeDescriptor['theme_id']."'
+			;
+			");
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : theme_descriptor already exist in DB. Updating Id=".$this->ThemeDescriptor['theme_id']));
+		}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
+			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ThemeDescriptor);
+			$bts->SDDMObj->query("
+				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
+				(".$QueryColumnDescription['columns'].")
+				VALUES
+				(".$QueryColumnDescription['values'].")
+				;
+			");
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : theme_descriptor doesn't exist in DB. Inserting Id=".$this->ThemeDescriptor['theme_id']));
+		}
+	}
+	
+	/**
+	 * Verifies if the entity exists in DB.
+	 */
+	public function existsInDB() {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$res = false;
+		$dbquery = $bts->SDDMObj->query("
+			SELECT td.theme_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td
+			WHERE td.theme_id ='".$this->ThemeDescriptor['theme_id']."';
+		");
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
+		return $res;
+	}
+	
+	
+	/**
+	 * Checks weither the local data is consistant with the database.
+	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
+	 */
+	public function checkDataConsistency () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$res = true;
+		
+		
+		return $res;
+	}
+	
+	
+	/**
+	 * Returns the default values of this type (this is consistent witht de SQL model and it should stay that way)
+	 * @return array()
+	 */
+	public function getDefaultValues () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$date = time ();
+		$tab = $this->columns;
+		$this->ThemeDescriptor['theme_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->ThemeDescriptor['theme_date'] .= time();
+		
+		return $tab;
+	}
+	
+	/**
+	 * Returns an array containing the list of states for this entity.
+	 * Useful for menu select amongst other things.
+	 * @return array()
+	 */
+	public function getMenuOptionArray () {
+		$bts = BaseToolSet::getInstance();
+		return array (
+			'state' => array (
+				0 => array( MenuOptionDb =>	 0,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('offline')),
+				1 => array( MenuOptionDb =>	 1,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('online')),
+				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('disabled')),
+			));
+	}
 
+	
 	//@formatter:off
 	public function getThemeDescriptorEntry ($data) { return $this->ThemeDescriptor[$data]; }
 	public function getThemeDescriptor() { return $this->ThemeDescriptor; }

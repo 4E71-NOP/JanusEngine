@@ -11,26 +11,28 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Languages {
-	private $Languages = array ();
+class ReturnNote {
+	private $ReturnNote = array ();
 	
 	//@formatter:off
 	private $columns = array(
-		'lang_id'				=> 0,
-		'lang_639_3'			=> 0,
-		'lang_original_name'	=> 0,
-		'lang_639_2'			=> 0,
-		'lang_639_1'			=> 0,
-		'lang_image'			=> 0,
+		'retnot_id'			=> 0,
+		'docu_id'			=> 0,
+		'user_id'			=> 0,
+		'retnot_date'		=> 0,
+		'retnot_origin'		=> 0,
+		'retnot_content'	=> 0,
 	);
 	//@formatter:on
 	
 	public function __construct() {
-		$this->Languages = $this->getDefaultValues();
+		$this->Module= $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets language data from the database.<br>
+	 * Gets module data from the database.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the module selection to the website ID only.
 	 * @param integer $id
 	 */
 	public function getDataFromDB($id) {
@@ -39,21 +41,20 @@ class Languages {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('languages') . "
-			WHERE lang_id = '" . $id . "'
-			;" );
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('returnnote') . "
+			WHERE retnot_id = '" . $id . "'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for languages id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for returnnote id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->Languages[$A] = $B; }
+					if (isset($this->columns[$A])) { $this->ReturnNote[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for languages id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for returnnote id=".$id));
 		}
-		
 	}
 	
 	/**
@@ -69,27 +70,27 @@ class Languages {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Languages);
+			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ReturnNote);
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
 			
 			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')." l
+			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('returnnote')." rn
 			SET ".$QueryColumnDescription['equality']."
-			WHERE l.lang_id ='".$this->Languages['lang_id']."'
+			WHERE rn.retnot_id ='".$this->ReturnNote['retnot_id']."'
 			;
 			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : languages already exist in DB. Updating Id=".$this->Languages['lang_id']));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : returnnote already exist in DB. Updating Id=".$this->ReturnNote['retnot_id']));
 		}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Languages);
+			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ReturnNote);
 			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')."
+				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('returnnote')."
 				(".$QueryColumnDescription['columns'].")
 				VALUES
 				(".$QueryColumnDescription['values'].")
 				;
 			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : languages doesn't exist in DB. Inserting Id=".$this->Languages['lang_id']));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : returnnote doesn't exist in DB. Inserting Id=".$this->ReturnNote['retnot_id']));
 		}
 	}
 	
@@ -101,8 +102,8 @@ class Languages {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = false;
 		$dbquery = $bts->SDDMObj->query("
-			SELECT l.lang_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')." l
-			WHERE l.lang_id ='".$this->Languages['lang_id']."';
+			SELECT rn.retnot_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('returnnote')." rn
+			WHERE rn.retnot_id ='".$this->ReturnNote['retnot_id']."';
 		");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
 		return $res;
@@ -118,6 +119,18 @@ class Languages {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		
+		$dbquery = $bts->SDDMObj->query("
+			SELECT d.docu_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." d
+			WHERE d.docu_id ='".$this->Decoration['docu_id']."';
+		");
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = false; }
+		
+		$dbquery = $bts->SDDMObj->query("
+			SELECT user_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')."
+			WHERE user_id = ".$this->Extension['arti_creator']."
+			LIMIT 1;");
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
+
 		return $res;
 	}
 	
@@ -131,7 +144,7 @@ class Languages {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-
+		
 		return $tab;
 	}
 	
@@ -150,15 +163,18 @@ class Languages {
 			));
 	}
 	
-	//@formatter:off
-	public function getLanguagesEntry ($data) { return $this->Languages[$data]; }
-	public function getLanguages() { return $this->Languages; }
 	
-	public function setLanguagesEntry ($entry, $data) { 
-		if ( isset($this->Languages[$entry])) { $this->Languages[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	
+	
+	//@formatter:off
+	public function getReturnNoteEntry ($data) { return $this->ReturnNote[$data]; }
+	public function getReturnNote() { return $this->ReturnNote; }
+	
+	public function setReturnNoteEntry ($entry, $data) { 
+		if ( isset($this->ReturnNote[$entry])) { $this->ReturnNote[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setLanguages($Languages) { $this->Languages = $Languages; }
+	public function setReturnNote($returnnote) { $this->ReturnNote = $returnnote; }
 	//@formatter:off
 
 }

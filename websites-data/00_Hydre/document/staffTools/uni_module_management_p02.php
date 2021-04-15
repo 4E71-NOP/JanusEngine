@@ -157,7 +157,7 @@ $ClassLoaderObj->provisionClass('Module');
 $currentModuleObj = new Module();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 	case "edit":
-		$currentModuleObj->getModuleDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId'));
+		$currentModuleObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId'));
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
 		$processStep = "";

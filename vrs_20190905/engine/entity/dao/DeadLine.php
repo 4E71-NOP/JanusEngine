@@ -11,19 +11,21 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class DeadLine {
+class DeadLine extends Entity{
 	private $DeadLine = array ();
 	
+	//@formatter:off
 	private $columns = array(
-			'deadline_id'				=>	0,
-			'deadline_name'				=>	'New deadline',
-			'deadline_title'			=>	'New deadline title',
-			'deadline_state'			=>	0,
-			'deadline_creation_date'	=>	0,
-			'deadline_end_date'			=>	0,
-			'ws_id'						=>	2,
-			'user_id'					=>	1,
+		'deadline_id'				=>	0,
+		'deadline_name'				=>	'New deadline',
+		'deadline_title'			=>	'New deadline title',
+		'deadline_state'			=>	0,
+		'deadline_creation_date'	=>	0,
+		'deadline_end_date'			=>	0,
+		'ws_id'						=>	0,
+		'user_id'					=>	0,
 	);
+	//@formatter:on
 	
 	public function __construct() {
 		$this->DeadLine = $this->getDefaultValues();
@@ -69,47 +71,23 @@ class DeadLine {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->DeadLine);
-// 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl 
-			SET ".$QueryColumnDescription['equality']." 
-			WHERE dl.deadline_id ='".$this->DeadLine['deadline_id']."' 
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : deadline already exist in DB. Updating Id=".$this->DeadLine['deadline_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->DeadLine);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : deadline doesn't exist in DB. Inserting Id=".$this->DeadLine['deadline_id']));
-		}
+		$genericActionArray = array(
+				'columns'		=> $this->columns,
+				'data'			=> $this->DeadLine,
+				'targetTable'	=> 'deadline',
+				'targetColumn'	=> 'deadline_id',
+				'entityId'		=> $this->DeadLine['deadline_id'],
+				'entityTitle'	=> 'deadline'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT dl.deadline_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl
-			WHERE dl.deadline_id ='".$this->DeadLine['deadline_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->deadlineExists($this->DeadLine['deadline_id']);
 	}
 	
 	
@@ -125,19 +103,8 @@ class DeadLine {
 		if ( $this->DeadLine['deadline_creation_date'] == 0 ) { $res = false; }
 		if ( $this->DeadLine['deadline_end_date'] == 0 ) { $res = false; }
 		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." 
-			WHERE ws_id = ".$this->DeadLine['ws_id']." 
-			LIMIT 1;"
-		);
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT user_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')."
-			WHERE user_id = ".$this->DeadLine['user_id']."
-			LIMIT 1;"
-		);
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
+		if ( $this->websiteExists($this->DeadLine['ws_id']) == false ) { $res = false; }
+		if ( $this->userExists($this->DeadLine['user_id']) == false ) { $res = false; }
 		
 		return $res;
 	}
@@ -148,25 +115,33 @@ class DeadLine {
 	 * @return array()
 	 */
 	public function getDefaultValues () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
+		
 		$tab = $this->columns;
 		$tab['deadline_creation_date'] = $date;
 		$tab['deadline_end_date'] = $date + (60*60*24*31*12*10);
+		$tab['user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	
 	/**
-	 * Returns an array containing the list of states for this entity.
+	 * Returns an array containing the useful table to build menus for this entity.
 	 * Useful for menu select amongst other things.
 	 * @return array()
 	 */
-	public function getStatesArray () {
+	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
-		return array (
-			0 => array( 'db' =>	 0,	's' => '',	't' => $bts->I18nObj->getI18nEntry('offline')),
-			1 => array( 'db' =>	 1,	's' => '',	't' => $bts->I18nObj->getI18nEntry('online')),
-			2 => array( 'db' =>	 2,	's' => '',	't' => $bts->I18nObj->getI18nEntry('disabled')),
-		);
+		return array ( 
+			'state' => array (
+				0 => array( MenuOptionDb =>	 0,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('offline')),
+				1 => array( MenuOptionDb =>	 1,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('online')),
+				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('disabled')),
+		));
 	}
 	
 	//@formatter:off

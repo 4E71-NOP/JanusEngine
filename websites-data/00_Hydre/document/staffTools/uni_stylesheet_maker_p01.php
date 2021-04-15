@@ -163,7 +163,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 	$WorkingThemeData = new ThemeData();
 	$WorkingThemeData->setThemeName('renderCSS_');				// will use the $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection') as the theme ID
 	$WorkingThemeDescriptorObj = new ThemeDescriptor();
-	$WorkingThemeDescriptorObj->getThemeDescriptorDataFromDB($ThemeDataObj->getThemeName());
+	$WorkingThemeDescriptorObj->getDataFromDB($ThemeDataObj->getThemeName());
 	$WorkingThemeData->setThemeName('mt_');				// Change the to the Maint Theme acronym "mt_" for rendering
 	$WorkingThemeData->setThemeData($WorkingThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$WorkingThemeData->setDecorationListFromDB();

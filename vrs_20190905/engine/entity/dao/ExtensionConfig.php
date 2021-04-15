@@ -11,11 +11,27 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class ExtensionConfig {
+class ExtensionConfig extends Entity {
 	private $ExtensionConfig = array ();
+	//@formatter:off
+	private $columns = array(
+		'config_id'				=> 0,
+		'ws_id'					=> 0,
+		'extension_id'			=> 0,
+		'extension_variable'	=> 'New Variable',
+		'extension_value'		=> 0,
+	);
+	//@formatter:on
+	
 	public function __construct() {
+		$this->ExtensionConfig = $this->getDefaultValues();
 	}
-	public function getExtensionConfigDataFromDB($id) {
+
+	/**
+	 * Gets extensionConfig data from the database.<br>
+	 * @param integer $id
+	 */
+	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -23,19 +39,94 @@ class ExtensionConfig {
 			SELECT *
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('extension_config') . "
 			WHERE config_id = '" . $id . "'
-			;" );
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for extension_config id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->ExtensionConfig[$A] = $B; }
+				foreach ( $dbp as $A => $B ) {
+					if (isset($this->columns[$A])) { $this->ExtensionConfig[$A] = $B; }
+				}
 			}
 		}
 		else {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for extension_config id=".$id));
 		}
-		
 	}
-
+	
+	/**
+	 * Updates or inserts in DB the local data.
+	 * mode ar available: <br>
+	 * <br>
+	 * 0 = insert or update - Depending on the Id existing in DB or not, it'll be UPDATE or INSERT<br>
+	 * 1 = insert only - Supposedly a new ID and not an existing one<br>
+	 * 2 = update only - Supposedly an existing ID<br>
+	 */
+	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$genericActionArray = array(
+				'columns'		=> $this->columns,
+				'data'			=> $this->ExtensionConfig,
+				'targetTable'	=> 'extension_config',
+				'targetColumn'	=> 'config_id',
+				'entityId'		=> $this->ExtensionConfig['config_id'],
+				'entityTitle'	=> 'extensionConfig'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+	}
+	
+	/**
+	 * Verifies if the entity exists in DB.
+	 */
+	public function existsInDB() {
+		return $this->extensionConfigExists($this->ExtensionConfig['config_id']);
+	}
+	
+	
+	/**
+	 * Checks weither the local data is consistant with the database.
+	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
+	 */
+	public function checkDataConsistency () {
+		$res = true;
+		
+		if ( $this->extensionExists($this->ExtensionFile['extension_id']) == false ) { $res = false; }
+		if ( $this->websiteExists($this->ExtensionConfig['ws_id']) == false ) { $res = false; }
+		
+		return $res;
+	}
+	
+	
+	/**
+	 * Returns the default values of this type (this is consistent witht de SQL model and it should stay that way)
+	 * @return array()
+	 */
+	public function getDefaultValues () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$tab = $this->columns;
+		
+		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+		return $tab;
+	}
+	
+	/**
+	 * Returns an array containing the list of states for this entity.
+	 * Useful for menu select amongst other things.
+	 * @return array()
+	 */
+	public function getMenuOptionArray () {
+		$bts = BaseToolSet::getInstance();
+		return array (
+			'state' => array (
+				0 => array( MenuOptionDb =>	 0,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('offline')),
+				1 => array( MenuOptionDb =>	 1,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('online')),
+				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('disabled')),
+			));
+	}
+	
 	//@formatter:off
 	public function getExtensionConfigEntry ($data) { return $this->ExtensionConfig[$data]; }
 	public function getExtensionConfig() { return $this->ExtensionConfig; }

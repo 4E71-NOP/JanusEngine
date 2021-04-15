@@ -1,14 +1,15 @@
 <?php
-require_once 'Hydr/vrs_20190905/engine/entity/dao/DeadLine.php';
+require_once '../engine/entity/dao/DeadLine.php';
 
 /**
  * DeadLine test case.
  */
-class DeadLineTest extends PHPUnit_Framework_TestCase {
+// class DeadLineTest extends PHPUnit_Framework_TestCase {
+class DeadLineTest {
 
 	/**
 	 *
-	 * @var DeadLine
+	 * @var DeadLine 
 	 */
 	private $deadLine;
 

@@ -138,7 +138,7 @@ $currentArticleObj = new Article();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentArticleObj->getArticleDataFromDB(
+		$currentArticleObj->getDataFromDB(
 			$bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionRef'),
 			$bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionPage')
 		);

@@ -62,6 +62,9 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('RenderTabs');
 		$ClassLoaderObj->provisionClass('Router');
 		
+		// Every entity extends 'Entity', so...
+		$ClassLoaderObj->provisionClass('Entity');
+		
 		$this->TimeObj					= Time::getInstance();
 		$this->LMObj					= LogManagement::getInstance();
 		$this->LMObj->setInternalLogTarget(LOG_TARGET);

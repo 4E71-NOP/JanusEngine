@@ -11,11 +11,17 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
+
+/**
+ * Not yet used. Maybe something to remove.
+ * @author faust
+ *
+ */
 class StoredEvent {
 	private $StoredEvent = array ();
 	public function __construct() {
 	}
-	public function getStoredEventDataFromDB($id) {
+	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		

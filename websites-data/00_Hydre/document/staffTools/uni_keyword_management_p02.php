@@ -138,7 +138,7 @@ $currentKeyWordObj = new KeyWord();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentKeyWordObj->getKeyWordDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId'));
+		$currentKeyWordObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'selectionId'));
 
 		$tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
 		

@@ -118,7 +118,7 @@ $currentGroupObj = new Group();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
-		$currentGroupObj->getGroupDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
+		$currentGroupObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
 		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
 		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";

@@ -153,7 +153,7 @@ $currentCategoryObj = new Category();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentCategoryObj->getCategoryDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
+		$currentCategoryObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
 		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";

@@ -277,7 +277,7 @@ class Hydr {
 				}
 // 				$bts->SMObj->ResetSession (); // If a login comes from a form. The session object must be reset!
 				$bts->SMObj->InitializeSession(); // If a login comes from a form. The session object must be reset!
-				$UserObj->getUserDataFromDB ( $userName, $WebSiteObj );
+				$UserObj->getDataFromDB ( $userName, $WebSiteObj );
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : user_login=" . $UserObj->getUserEntry ( 'user_login' )) );
 				$bts->AUObj->checkUserCredential ( $UserObj, 'form' );
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Connection attempt end") );
@@ -289,7 +289,7 @@ class Hydr {
 				if (strlen ( $bts->SMObj->getSessionEntry ( 'user_login' ) ) == 0) {
 					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION strlen(user_login)=0") );
 				}
-				$UserObj->getUserDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
+				$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
 				if ($UserObj->getUserEntry ( 'error_login_not_found' ) != 1) {
 					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : session mode : " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
 					$bts->AUObj->checkUserCredential ( $UserObj, 'session' );
@@ -297,7 +297,7 @@ class Hydr {
 // 					No form then no user found it's defintely an anonymous user
 					$bts->SMObj->InitializeSession();
 					$UserObj->resetUser ();
-					$UserObj->getUserDataFromDB ( 'anonymous', $WebSiteObj );
+					$UserObj->getDataFromDB ( 'anonymous', $WebSiteObj );
 				}
 				break;
 		}
@@ -305,7 +305,7 @@ class Hydr {
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
 		if ($bts->AUObj->getDataEntry ( 'error' ) === TRUE) {
-			$UserObj->getUserDataFromDB ( "anonymous", $WebSiteObj );
+			$UserObj->getDataFromDB ( "anonymous", $WebSiteObj );
 		}
 // 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : UserObj = " . $bts->StringFormatObj->arrayToString($UserObj->getUser())));
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
@@ -422,7 +422,7 @@ class Hydr {
 				case "AdminDashboardUserProfileForm" :
 				case "ModuleQuickSkin" :
 				case "ModuleSelectLanguage" :
-					$UserObj->getUserDataFromDB ( $UserObj->getUserEntry ( 'user_login' ), $WebSiteObj ); // We need to reload the user data in order to update the current user_pref_theme variable.
+					$UserObj->getDataFromDB ( $UserObj->getUserEntry ( 'user_login' ), $WebSiteObj ); // We need to reload the user data in order to update the current user_pref_theme variable.
 					break;
 				case "AdminDashboardWebsiteManagementP01" :
 					// refresh with updated data
@@ -537,7 +537,7 @@ class Hydr {
 		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
 		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
 		
-		$ThemeDescriptorObj->getThemeDescriptorDataFromDB ( "mt_" );
+		$ThemeDescriptorObj->getDataFromDB ( "mt_" );
 		
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );

@@ -181,7 +181,7 @@ $currentThemeObj = new ThemeDescriptor();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 	case "edit":
 		$commandType = "update";
-		$currentThemeObj->getThemeDescriptorDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'));
+		$currentThemeObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'));
 		$t1l2c2 = $currentThemeObj->getThemeDescriptorEntry('theme_name');
 		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
