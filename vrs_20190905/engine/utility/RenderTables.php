@@ -263,7 +263,7 @@ class  RenderTables {
 		"DocumentName"		=> "d",
 		);
 		for ($i=1; $i<=$NbrOfTabs; $i++ ){
-			$tab["tabTxt".$i] = $bts->I18nObj->getI18nEntry($TabTxt.$i);
+			$tab["tabTxt".$i] = $bts->I18nTransObj->getI18nTransEntry($TabTxt.$i);
 		}
 		
 		return $tab;

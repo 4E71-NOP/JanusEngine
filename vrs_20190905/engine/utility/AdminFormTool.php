@@ -37,13 +37,13 @@ class AdminFormTool {
 				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on'
 				) {
 					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : modification checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
 		}
 		if ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboardCreate'
 				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
 				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'creation') != 'on' ) {
 					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nEntry('userForgotCreation')."</p>\r";
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotCreation')."</p>\r";
 					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'create');
 					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}
@@ -51,7 +51,7 @@ class AdminFormTool {
 				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'delete'
 				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
 					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nEntry('userForgotDeletion')."</p>\r";
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
 					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'edit');
 					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}

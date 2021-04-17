@@ -52,7 +52,7 @@ class CommandConsole {
 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ("current/engine/cli/i18n/".$l.".php");
-		$bts->I18nObj->apply($i18n);
+		$bts->I18nTransObj->apply($i18n);
 		unset ($i18n);
 // 		self::$i18n = $i18n;
 	}
@@ -274,7 +274,7 @@ class CommandConsole {
 							if ( $q != -1 ) {
 								$dbquery = $bts->SDDMObj->query($q['0']);
 								if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-									$msg = str_replace ( '<A1>', $A['p'] , $bts->I18nObj->getI18nEntry('elementNotFound') );
+									$msg = str_replace ( '<A1>', $A['p'] , $bts->I18nTransObj->getI18nTransEntry('elementNotFound') );
 // 									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
 									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									
@@ -292,7 +292,7 @@ class CommandConsole {
 							if ( $q != -1 ) {
 								$dbquery = $bts->SDDMObj->query($q['0']);
 								if ( $CCL['errFlag'] != 1 && $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
-									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $bts->I18nObj->getI18nEntry('duplicateFound') );
+									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $bts->I18nTransObj->getI18nTransEntry('duplicateFound') );
 									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
 									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									$CCL['errFlag'] = 1;

@@ -53,7 +53,7 @@ $bts->MapperObj->setSqlApplicant("uni_website_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer le site.",
 		"msg01"			=> "Le site est actuellement : ",
 		"tabTxt1"		=> "Présentation",
@@ -119,7 +119,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage the website.",
 		"msg01"			=> "The site is actually : ",
 		"tabTxt1"		=> "Display",
@@ -195,7 +195,7 @@ WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$pv['ws_state2']		= "select_o1_1_" . $dbp['ws_state'];
 	$pv['ws_state']		= $dbp['ws_state'];
-	$Content .= "<p>".$bts->I18nObj->getI18nEntry('msg_01').$bts->I18nObj->getI18nEntry($pv['ws_state2'])."<br>\r<br>\r</p>\r";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('msg_01').$bts->I18nTransObj->getI18nTransEntry($pv['ws_state2'])."<br>\r<br>\r</p>\r";
 	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['ws_lang']);
 }
 
@@ -205,11 +205,11 @@ $AdminFormToolObj = AdminFormTool::getInstance();
 $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 
 // --------------------------------------------------------------------------------------------
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
 // 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard modification checkbox forgotten');
-// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
+// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
 // }
 
 // --------------------------------------------------------------------------------------------
@@ -230,11 +230,11 @@ $Content .= "
 ;
 
 $mws_state = array(
-	0		=> array( 't'=> $bts->I18nObj->getI18nEntry('select_t1_01_1_0'),		'db' => "OFFLINE",		'v' => 0),
-	1		=> array( 't'=> $bts->I18nObj->getI18nEntry('select_t1_01_1_1'),		'db' => "ONLINE",		'v' => 1),
-	2		=> array( 't'=> $bts->I18nObj->getI18nEntry('select_t1_01_1_2'),		'db' => "SUPPRIME",		'v' => 2),
-	3		=> array( 't'=> $bts->I18nObj->getI18nEntry('select_t1_01_1_3'),		'db' => "MAINTENANCE",	'v' => 3),
-	1000	=> array( 't'=> $bts->I18nObj->getI18nEntry('select_t1_01_1_1000'),	'db' => "LOCKED",		'v' => 1000),
+	0		=> array( 't'=> $bts->I18nTransObj->getI18nTransEntry('select_t1_01_1_0'),		'db' => "OFFLINE",		'v' => 0),
+	1		=> array( 't'=> $bts->I18nTransObj->getI18nTransEntry('select_t1_01_1_1'),		'db' => "ONLINE",		'v' => 1),
+	2		=> array( 't'=> $bts->I18nTransObj->getI18nTransEntry('select_t1_01_1_2'),		'db' => "SUPPRIME",		'v' => 2),
+	3		=> array( 't'=> $bts->I18nTransObj->getI18nTransEntry('select_t1_01_1_3'),		'db' => "MAINTENANCE",	'v' => 3),
+	1000	=> array( 't'=> $bts->I18nTransObj->getI18nTransEntry('select_t1_01_1_1000'),	'db' => "LOCKED",		'v' => 1000),
 );
 
 $Tab = 0;
@@ -258,10 +258,10 @@ $ws_lang_select	= array();
 // Tab 01
 $Tab++;
 
-$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l1');
-$T['AD'][$Tab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l2');
-$T['AD'][$Tab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l3');
-$T['AD'][$Tab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l4');
+$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l1');
+$T['AD'][$Tab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l2');
+$T['AD'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l3');
+$T['AD'][$Tab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l4');
 
 // $T['AD'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_name')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['AD'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
@@ -274,11 +274,11 @@ $T['AD'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'	
 // Tab 02
 $Tab++;
 
-$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l1');
-$T['AD'][$Tab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l2');
-$T['AD'][$Tab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l3');
-$T['AD'][$Tab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l4');
-$T['AD'][$Tab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l5');
+$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l1');
+$T['AD'][$Tab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l2');
+$T['AD'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l3');
+$T['AD'][$Tab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l4');
+$T['AD'][$Tab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l5');
 
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 $langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected ";
@@ -293,8 +293,8 @@ $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
 
 
 $T['AD'][$Tab]['2']['2']['cont'] = "<select name='formParams1[lang_select]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$ws_lang_select['0']['t'] = $bts->I18nObj->getI18nEntry('no');		$ws_lang_select['0']['s'] = "";		$ws_lang_select['0']['cmd'] = "NO";
-$ws_lang_select['1']['t'] = $bts->I18nObj->getI18nEntry('yes');	$ws_lang_select['1']['s'] = "";		$ws_lang_select['1']['cmd'] = "YES";
+$ws_lang_select['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('no');		$ws_lang_select['0']['s'] = "";		$ws_lang_select['0']['cmd'] = "NO";
+$ws_lang_select['1']['t'] = $bts->I18nTransObj->getI18nTransEntry('yes');	$ws_lang_select['1']['s'] = "";		$ws_lang_select['1']['cmd'] = "YES";
 $ws_lang_select[$WebSiteObj->getWebSiteEntry('ws_lang_select')]['s'] = " selected ";
 foreach ( $ws_lang_select as $A ) { $T['AD'][$Tab]['2']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s']."> ".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['2']['2']['cont'] .= "</select>\r";
@@ -315,8 +315,8 @@ $T['AD'][$Tab]['3']['2']['cont'] .= "</select>\r";
 
 $T['AD'][$Tab]['4']['2']['cont'] = "<select name='formParams1[stylesheet]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $sw_CSS = Array(
-		0	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_0'),		"s" => "",		"cmd" => "STATIC"),
-		1	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_1'),		"s" => "",		"cmd" => "DYNAMIC"),
+		0	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_0'),		"s" => "",		"cmd" => "STATIC"),
+		1	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_1'),		"s" => "",		"cmd" => "DYNAMIC"),
 		);
 $sw_CSS[$WebSiteObj->getWebSiteEntry('ws_stylesheet')]['s'] = " selected ";
 foreach ( $sw_CSS as $A ) { $T['AD'][$Tab]['4']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
@@ -336,28 +336,28 @@ $arrayDbg = array(
 );
 
 $T['AD'][$Tab]['5']['2']['cont'] = "
-<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_default')."<br>\r 
-<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_graph')."<br>\r 
-<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_stats')."<br>\r 
-<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_sql')."<br>\r 
-<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_commandbuffer')."<br>\r 
-<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_commandlogs')."<br>\r 
-<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_internallogs')."<br>\r 
-<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nObj->getI18nEntry('checkbox_t2_05_variables')."<br>\r 
+<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
+<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
+<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
+<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
+<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
+<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
+<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
+<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
 ";
 
 // <select name='formParams1[info_debug]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 // $sw_niv_debug = array(
-// 		1	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_1'),		"s" => "",		"cmd" => "1"),
-// 		2	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_2'),		"s" => "",		"cmd" => "2"),
-// 		3	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_3'),		"s" => "",		"cmd" => "3"),
-// 		4	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_4'),		"s" => "",		"cmd" => "4"),
-// 		5	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_5'),		"s" => "",		"cmd" => "5"),
-// 		6	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_6'),		"s" => "",		"cmd" => "6"),
-// 		7	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_7'),		"s" => "",		"cmd" => "7"),
-// 		8	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_8'),		"s" => "",		"cmd" => "8"),
-// 		9	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
-// 		10	=>	array("t" => $bts->I18nObj->getI18nEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
+// 		1	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_1'),		"s" => "",		"cmd" => "1"),
+// 		2	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_2'),		"s" => "",		"cmd" => "2"),
+// 		3	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_3'),		"s" => "",		"cmd" => "3"),
+// 		4	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_4'),		"s" => "",		"cmd" => "4"),
+// 		5	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_5'),		"s" => "",		"cmd" => "5"),
+// 		6	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_6'),		"s" => "",		"cmd" => "6"),
+// 		7	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_7'),		"s" => "",		"cmd" => "7"),
+// 		8	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_8'),		"s" => "",		"cmd" => "8"),
+// 		9	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
+// 		10	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
 // );
 // $sw_niv_debug[$WebSiteObj->getWebSiteEntry('ws_info_debug')]['s'] = " selected ";
 // foreach ( $sw_niv_debug as $A ) { $T['AD'][$Tab]['5']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
@@ -370,7 +370,7 @@ $Tab++;
 reset ($langList);
 $i = 1;
 $j = 1;
-$T['AD'][$Tab]['1']['8']['cont'] = $bts->I18nObj->getI18nEntry('t3_l1')."
+$T['AD'][$Tab]['1']['8']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l1')."
 <input type='hidden' name='formCommand2'			value='assign'>\r
 <input type='hidden' name='formEntity2'				value='language'>\r
 <input type='hidden' name='formParams2'				value='to_website'>\r
@@ -402,7 +402,7 @@ $Tab++;
 
 $mws_state[$pv['ws_state']]['s'] = " selected ";
 
-$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t'.$Tab.'_l1');
+$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t'.$Tab.'_l1');
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[state]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 foreach ( $mws_state as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s'].">".$A['t']."</option>\r"; }
 $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
@@ -411,11 +411,11 @@ $T['AD'][$Tab]['1']['2']['cont'] .= "</select>\r";
 // Tab 05
 $Tab++;
 
-$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5_l1');
+$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5_l1');
 $T['AD'][$Tab]['1']['2']['cont'] = "<select name='formParams1[ma_diff]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $ws_ma_diff = array(
-	0	=> array('t' => $bts->I18nObj->getI18nEntry('no'),		's' => "",		'cmd' => "NO"),
-	1	=> array('t' => $bts->I18nObj->getI18nEntry('yes'),	's' => "",		'cmd' => "YES"),
+	0	=> array('t' => $bts->I18nTransObj->getI18nTransEntry('no'),		's' => "",		'cmd' => "NO"),
+	1	=> array('t' => $bts->I18nTransObj->getI18nTransEntry('yes'),	's' => "",		'cmd' => "YES"),
 );
 $ws_ma_diff[$WebSiteObj->getWebSiteEntry('ws_ma_diff')]['s'] = " selected ";
 foreach ( $ws_ma_diff as $A ) { $T['AD'][$Tab]['1']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
@@ -484,7 +484,7 @@ function computeInfoDebug () {\r
 <table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>
 <tr>\r
 <td>\r
-<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nObj->getI18nEntry('validation')."\r
+<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('validation')."\r
 </td>\r
 <td align='right'>\r
 ";
@@ -495,7 +495,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btnUpdate'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,

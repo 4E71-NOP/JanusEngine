@@ -33,7 +33,7 @@ class ModuleGlobalReport {
 		$bts->LMObj->logDebug($CurrentSetObj->getData(),					"CurrentSetObj->getData()");
 		$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),					"CMObj->ConfigDump()");
 		$bts->LMObj->logDebug($bts->SMObj->getSession(),					"SMObj->getSession()");
-		$bts->LMObj->logDebug($bts->I18nObj->getI18n(),						"I18nObj->getI18n()");
+		$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),						"I18nObj->getI18nTrans()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
 		$bts->LMObj->logDebug($RenderLayoutObj->getLayout(),				"RenderLayoutObj->getLayout()");
@@ -41,7 +41,7 @@ class ModuleGlobalReport {
 		$T = array();
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$bts->I18nObj->apply($i18n);
+		$bts->I18nTransObj->apply($i18n);
 		unset ($i18n);
 		
 		$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
@@ -55,56 +55,56 @@ class ModuleGlobalReport {
 			$tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 2;	
 		if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
 			$tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 3;	
 		if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
 			$tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 4;	
 		if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
 			$tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 5;	
 		if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
 			$tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 6;	
 		if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
 			$tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 7;	
 		if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
 			$tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 8;	
 		if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
 			$tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('defaut'); }
+		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 // 		$tabDbgLvl = array(
 // 			1 => 1,			2 => 2,			3 => 3,
@@ -130,28 +130,28 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = array();
 		
-		$Content['1']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l11');
-		$Content['2']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l21');
-		$Content['3']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l31');
-		$Content['4']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l41');
-		$Content['5']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l51');
-		$Content['6']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l61');
-		$Content['7']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l71');
-		$Content['8']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l81');
-		$Content['9']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l91');
-		$Content['10']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l101');
-		$Content['11']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l111');
-		$Content['12']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l112');
-		$Content['13']['1']['cont']		= $bts->I18nObj->getI18nEntry('t1l113');
+		$Content['1']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l11');
+		$Content['2']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l21');
+		$Content['3']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l31');
+		$Content['4']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l41');
+		$Content['5']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l51');
+		$Content['6']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l61');
+		$Content['7']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l71');
+		$Content['8']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l81');
+		$Content['9']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l91');
+		$Content['10']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l101');
+		$Content['11']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l111');
+		$Content['12']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l112');
+		$Content['13']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l113');
 		
 		$memory_			= array();
 		$memory_['peak']	= memory_get_peak_usage();
 		$memory_['usage']	= memory_get_usage();
 		
 		$Content['1']['2']['cont']		= $_SERVER['HTTP_HOST'];														$Content['1']['2']['class']		= $infos['block']."_tb4";
-		$Content['2']['2']['cont']		= round(($memory_['peak']/1024), 2) . $bts->I18nObj->getI18nEntry('Ko');			$Content['2']['2']['class']		= $infos['block']."_tb4";
+		$Content['2']['2']['cont']		= round(($memory_['peak']/1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');			$Content['2']['2']['class']		= $infos['block']."_tb4";
 		$Content['3']['2']['cont']		= phpversion();																	$Content['3']['2']['class']		= $infos['block']."_tb4";
-		$Content['4']['2']['cont']		= round(($memory_['usage']/1024), 2) . $bts->I18nObj->getI18nEntry('Ko');		$Content['4']['2']['class']		= $infos['block']."_tb4";
+		$Content['4']['2']['cont']		= round(($memory_['usage']/1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');		$Content['4']['2']['class']		= $infos['block']."_tb4";
 		$Content['5']['2']['cont']		= $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');	$Content['5']['2']['tc']		= 1;
 		$Content['6']['2']['cont']		= get_include_path();															$Content['6']['2']['tc']		= 1;
 		$Content['7']['2']['cont']		= getcwd();																		$Content['7']['2']['tc']		= 1;
@@ -234,10 +234,10 @@ class ModuleGlobalReport {
 		$dataObjectChart2['data']['datasets'][0] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		$dataObjectChart3['data']['datasets'][1] = array('label' => '%Time','data' => array(),'fill' => 'false','borderColor' => '#FF0000');
 		
-		$dataObjectChart1['data']['datasets'][0]['label'] = $bts->I18nObj->getI18nEntry('tGraphLabelM');
-		$dataObjectChart2['data']['datasets'][0]['label'] = $bts->I18nObj->getI18nEntry('tGraphLabelT');
-		$dataObjectChart3['data']['datasets'][0]['label'] = $bts->I18nObj->getI18nEntry('tGraphLabelM2');
-		$dataObjectChart3['data']['datasets'][1]['label'] = $bts->I18nObj->getI18nEntry('tGraphLabelT2');
+		$dataObjectChart1['data']['datasets'][0]['label'] = $bts->I18nTransObj->getI18nTransEntry('tGraphLabelM');
+		$dataObjectChart2['data']['datasets'][0]['label'] = $bts->I18nTransObj->getI18nTransEntry('tGraphLabelT');
+		$dataObjectChart3['data']['datasets'][0]['label'] = $bts->I18nTransObj->getI18nTransEntry('tGraphLabelM2');
+		$dataObjectChart3['data']['datasets'][1]['label'] = $bts->I18nTransObj->getI18nTransEntry('tGraphLabelT2');
 		
 		$mainTimeEnd = $CurrentSetObj->getDataSubEntry('timeStat', 'end');
 		
@@ -277,7 +277,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nObj->getI18nEntry('tMemoryMb');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
@@ -323,12 +323,12 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('t2l12');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('t2l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('t2l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('t2l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-		$Content['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('t2l16');	$Content['1']['6']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l12');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
+		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l16');	$Content['1']['6']['class'] = $block."_tb3";
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
@@ -389,13 +389,13 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('t3l12');	$Content['1']['2']['class'] = $block."_tb3";	$Content['1']['2']['style'] = "text-align: center;";
-		$Content['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('t3l13');	$Content['1']['3']['class'] = $block."_tb3";
-		$Content['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('t3l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('t3l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['5']['style'] = "text-align: center;";
-		$Content['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('t3l16');	$Content['1']['6']['class'] = $block."_tb3";	$Content['1']['6']['style'] = "text-align: center;";
-		$Content['1']['7']['cont'] = $bts->I18nObj->getI18nEntry('t3l17');	$Content['1']['7']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l12');	$Content['1']['2']['class'] = $block."_tb3";	$Content['1']['2']['style'] = "text-align: center;";
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l13');	$Content['1']['3']['class'] = $block."_tb3";
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l14');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l15');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['5']['style'] = "text-align: center;";
+		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l16');	$Content['1']['6']['class'] = $block."_tb3";	$Content['1']['6']['style'] = "text-align: center;";
+		$Content['1']['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l17');	$Content['1']['7']['class'] = $block."_tb3";
 		
 		$tabSignal = array(
 		0 => "<span class='".$block."_erreur'>ERR</span>",
@@ -463,10 +463,10 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$Content = array();
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']		= $bts->I18nObj->getI18nEntry('t6l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";  
-		$Content['1']['2']['cont']		= $bts->I18nObj->getI18nEntry('t6l12');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont']		= $bts->I18nObj->getI18nEntry('t6l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['3']['style'] = "text-align: center;";  
-		$Content['1']['4']['cont']		= $bts->I18nObj->getI18nEntry('t6l14');	$Content['1']['4']['class'] = $block."_tb3";
+		$Content['1']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";  
+		$Content['1']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l12');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['3']['style'] = "text-align: center;";  
+		$Content['1']['4']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l14');	$Content['1']['4']['class'] = $block."_tb3";
 		
 		$i = 2;
 		foreach ( $bts->LMObj->getSqlQueryLog() as $A ) {
@@ -514,9 +514,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$Content = array();
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']	= $bts->I18nObj->getI18nEntry('t9l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont']	= $bts->I18nObj->getI18nEntry('t9l12');	$Content['1']['2']['class'] = $block."_tb2";
-		$Content['1']['3']['cont']	= $bts->I18nObj->getI18nEntry('t9l13');	$Content['1']['3']['class'] = $block."_tb2";	$Content['1']['3']['style'] = "text-align: center;";
+		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l12');	$Content['1']['2']['class'] = $block."_tb2";
+		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l13');	$Content['1']['3']['class'] = $block."_tb2";	$Content['1']['3']['style'] = "text-align: center;";
 		
 		$i = 2;
 		foreach ( $bts->LMObj->getInternalLog() as $A ) {
@@ -548,8 +548,8 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t10l11');
-		$Content['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('t10l12');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t10l11');
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t10l12');
 		
 		$i = 2;
 		

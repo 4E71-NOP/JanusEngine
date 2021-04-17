@@ -47,7 +47,7 @@ $bts->MapperObj->setSqlApplicant("uni_stylesheet_maker_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de g&eacute;n&eacute;rer un script au format CSS (Cascading StyleSheet) pour un des thèmes de Hydr.<br>\r<br>\r",
 		"invite2"		=>	"Générer le stylesheet du theme :",
 		"invite3"		=>	"Sélectionnez un theme :",
@@ -66,7 +66,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"This part will allow you to create dedicated Stylesheet (Cascading StyleSheet) for a MWM theme.",
 		"invite2"		=>	"Build the stylesheet of the theme : ",
 		"invite3"		=>	"Select a theme :",
@@ -88,8 +88,8 @@ switch ($l) {
 
 
 // --------------------------------------------------------------------------------------------
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r
-".$bts->I18nObj->getI18nEntry('invite2')."
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r
+".$bts->I18nTransObj->getI18nTransEntry('invite2')."
 <br>\r
 ";
 
@@ -98,7 +98,7 @@ $Content .= "
 <table cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto; '>
 <tr>\r
 <td>\r
-".$bts->I18nObj->getI18nEntry('invite3')."<br>\r<br>\r
+".$bts->I18nTransObj->getI18nTransEntry('invite3')."<br>\r<br>\r
 <select name='CssSelection' class='".$Block."_t3 ".$Block."_form_1'>
 ";
 
@@ -110,9 +110,9 @@ AND sd.theme_id = ss.theme_id
 ;");
 
 $SGEtat = array(
-	0 => $bts->I18nObj->getI18nEntry('state0'),
-	1 => $bts->I18nObj->getI18nEntry('state1'),
-	2 => $bts->I18nObj->getI18nEntry('state2'),
+	0 => $bts->I18nTransObj->getI18nTransEntry('state0'),
+	1 => $bts->I18nTransObj->getI18nTransEntry('state1'),
+	2 => $bts->I18nTransObj->getI18nTransEntry('state2'),
 );
 
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
@@ -136,7 +136,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 0,
 		"size" 				=> 128,
 		"lastSize"			=> 0,
@@ -182,13 +182,13 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 	
 	$Content .= "
 	<hr>\r
-	".$bts->I18nObj->getI18nEntry('instructions')."
+	".$bts->I18nTransObj->getI18nTransEntry('instructions')."
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 	
 	<tr>\r
 	<td>\r
 	<br>\r<br>\r
-	".$bts->I18nObj->getI18nEntry('frame1')."<br>\r
+	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='GDS_01' ACTION='' method='post'>\r
 	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
@@ -208,7 +208,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 			"onclick"			=> "javascript:this.form.GDS_result.focus();this.form.GDS_result.select();",
-			"message"			=> $bts->I18nObj->getI18nEntry('btn2'),
+			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn2'),
 			"mode"				=> 0,
 			"size" 				=> 0,
 			"lastSize"			=> 0,
@@ -230,7 +230,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 	<tr>\r
 	<td>\r
 	<br>\r<br>\r
-	".$bts->I18nObj->getI18nEntry('frame2')."<br>\r
+	".$bts->I18nTransObj->getI18nTransEntry('frame2')."<br>\r
 	<form name='GDS_02' ACTION='' method='post'>\r
 	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
 	
@@ -247,7 +247,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
 			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 			"onclick"			=> "javascript:this.form.GDS_result.focus();this.form.GDS_result.select();",
-			"message"			=> $bts->I18nObj->getI18nEntry('btn2'),
+			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn2'),
 			"mode"				=> 0,
 			"size" 				=> 0,
 			"lastSize"			=> 0,

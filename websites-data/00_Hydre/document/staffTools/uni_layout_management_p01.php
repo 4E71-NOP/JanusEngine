@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_layout_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les présentations.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Nom générique",
@@ -56,7 +56,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage layouts.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Generic name",
@@ -68,7 +68,7 @@ switch ($l) {
 		break;
 }
 
-$Content .="<p>". $bts->I18nObj->getI18nEntry('invite1')."</p>";
+$Content .="<p>". $bts->I18nTransObj->getI18nTransEntry('invite1')."</p>";
 
 $dbquery = $bts->SDDMObj->query("
 SELECT pr.*, sd.theme_title
@@ -82,15 +82,15 @@ ORDER BY pr.layout_id
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('raf1');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "

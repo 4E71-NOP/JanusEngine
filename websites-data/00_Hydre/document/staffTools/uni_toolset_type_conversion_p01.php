@@ -51,7 +51,7 @@ $bts->MapperObj->setSqlApplicant("uni_toolset_type_conversion_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de gérer les themes.",
 		"TypeTxt"		=>	"Texte",
 		"TypeHtml"		=>	"HTML (héritage)",
@@ -65,7 +65,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"This part will allow you to manage themes.",
 		"TypeTxt"		=>	"Text",
 		"TypeHtml"		=>	"HTML (old school)",
@@ -87,11 +87,11 @@ $bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_Co
 // $pv['ttrb'] = &${$theme_tableau}[$infos['blockT']];
 
 $select_type = array();
-$select_type['0']['t'] = $bts->I18nObj->getI18nEntry('TypeTxt');	$select_type['0']['s'] = "";	$select_type['0']['db'] = "0";
-$select_type['1']['t'] = $bts->I18nObj->getI18nEntry('TypeHtml');	$select_type['1']['s'] = "";	$select_type['1']['db'] = "1";
-$select_type['2']['t'] = $bts->I18nObj->getI18nEntry('TypeMixed');	$select_type['2']['s'] = "";	$select_type['2']['db'] = "2";
-$select_type['3']['t'] = $bts->I18nObj->getI18nEntry('TypePHP');	$select_type['3']['s'] = "";	$select_type['3']['db'] = "3";
-$select_type['4']['t'] = $bts->I18nObj->getI18nEntry('TypeHydr');	$select_type['4']['s'] = "";	$select_type['4']['db'] = "4";
+$select_type['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeTxt');	$select_type['0']['s'] = "";	$select_type['0']['db'] = "0";
+$select_type['1']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHtml');	$select_type['1']['s'] = "";	$select_type['1']['db'] = "1";
+$select_type['2']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeMixed');	$select_type['2']['s'] = "";	$select_type['2']['db'] = "2";
+$select_type['3']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypePHP');	$select_type['3']['s'] = "";	$select_type['3']['db'] = "3";
+$select_type['4']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHydr');	$select_type['4']['s'] = "";	$select_type['4']['db'] = "4";
 
 foreach ( $select_type as $A ) { $pv['select_option'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $pv['select_option'] .= "</select>\r";
@@ -102,8 +102,8 @@ $Content .= "
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 
 <tr>\r
-<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nObj->getI18nEntry('l1c1')."</td>\r
-<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nObj->getI18nEntry('l1c2')."</td>\r
+<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c1')."</td>\r
+<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c2')."</td>\r
 </tr>\r
 
 <tr>\r
@@ -118,7 +118,7 @@ $Content .= "
 
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
-".$bts->I18nObj->getI18nEntry('instruction')."<br>\r
+".$bts->I18nTransObj->getI18nTransEntry('instruction')."<br>\r
 <textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'fonte_size_n3')) * 1.35 )."' rows='5' class='" . $Block."_t3 " . $Block."_form_1'>
 ".$bts->RequestDataObj->getRequestDataSubEntry('CONV', 'cont')."
 </textarea>
@@ -150,7 +150,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "ConversionType ('ConvForm', 'conv_src', 'conv_dst', 'conv_type_src', 'conv_type_dst');",
-		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 1,
 		"size" 				=> 96,
 		"lastSize"			=> 0,

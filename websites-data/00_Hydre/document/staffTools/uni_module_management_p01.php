@@ -40,7 +40,7 @@ $bts->MapperObj->setSqlApplicant("uni_module_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de créer un module.",
 		"invite2"		=> "Cette partie va vous permettre de gérer les modules.",
 		"col_1_txt"		=> "Name",
@@ -54,7 +54,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to create a module.",
 		"invite2"		=> "This part will allow you to manage modules.",
 		"col_1_txt"		=> "Name",
@@ -68,7 +68,7 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $bts->SDDMObj->query("
 SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_name,a.module_title,a.module_file,a.module_desc,a.module_group_allowed_to_see,a.module_group_allowed_to_use,a.module_adm_control,b.module_state 
@@ -95,24 +95,24 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 }
 
 $tab_module_state = array(
-	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nObj->getI18nEntry('disabled')."</span>",
-	1 => $bts->I18nObj->getI18nEntry('enabled'),
-	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nObj->getI18nEntry('deleted')."</span>",
+	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nTransObj->getI18nTransEntry('disabled')."</span>",
+	1 => $bts->I18nTransObj->getI18nTransEntry('enabled'),
+	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nTransObj->getI18nTransEntry('deleted')."</span>",
 );
 		
 $tab_module_deco = array(
-	0 => $bts->I18nObj->getI18nEntry('no'),
-	1 => $bts->I18nObj->getI18nEntry('yes'),
+	0 => $bts->I18nTransObj->getI18nTransEntry('no'),
+	1 => $bts->I18nTransObj->getI18nTransEntry('yes'),
 );
 
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $bts->I18nObj->getI18nEntry('col_6_txt');
-$T['AD']['1'][$i]['7']['cont']	= $bts->I18nObj->getI18nEntry('col_7_txt');
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+$T['AD']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+$T['AD']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+$T['AD']['1'][$i]['7']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 
 foreach ( $table_infos_modules AS $A1 ) {
 	$i++;

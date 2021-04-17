@@ -49,14 +49,14 @@ $bts->MapperObj->setSqlApplicant("uni_toolset_cleanup_script_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Formatting tool for text copied from LibreOffice.",
 		"btn1"			=>	"Convertir",
 		"instruction"	=>	"Insérer le texte à convertir",
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Outil de formattage de texte issu de copi&eacute;/coll&eacute; depuis LibreOffice.",
 		"btn1"			=>	"Convert",
 		"instruction"	=>	"Insert here the text you want to convert",
@@ -65,7 +65,7 @@ switch ($l) {
 }
 $bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
 
-$Content .= $bts->I18nObj->getI18nEntry('Invite1').
+$Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 "<br>\r
 <form name='formConvert' ACTION='index.php?' method='post'>\r
 
@@ -100,7 +100,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "FormattageScriptMWM ( 'formConvert' , 'script_source' , 'script_resultat' );",
-		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,

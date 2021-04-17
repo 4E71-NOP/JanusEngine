@@ -47,7 +47,7 @@
 
 $installationStartTime = time();
 include ("current/install/i18n/install_page_02_".$l.".php");
-$bts->I18nObj->apply($i18n);
+$bts->I18nTransObj->apply($i18n);
 unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
@@ -314,13 +314,13 @@ sort ( $installationReport['tables_post_install']);
 $style1 = array (
 	"block" => $block,
 	"tc"=>1,
-	"titles" => array($bts->I18nObj->getI18nEntry('t1c1'),	$bts->I18nObj->getI18nEntry('t1c2'),	$bts->I18nObj->getI18nEntry('t1c3'),	$bts->I18nObj->getI18nEntry('t1c4'),	),
+	"titles" => array($bts->I18nTransObj->getI18nTransEntry('t1c1'),	$bts->I18nTransObj->getI18nTransEntry('t1c2'),	$bts->I18nTransObj->getI18nTransEntry('t1c3'),	$bts->I18nTransObj->getI18nTransEntry('t1c4'),	),
 	"cols" => array( 'file', 'OK', 'WARN', 'ERR'),
 );
 $style2 = array (
 	"block" => $block,
 	"tc"=>1,
-	"titles" => array($bts->I18nObj->getI18nEntry('t9c1'),	$bts->I18nObj->getI18nEntry('t9c2'),	$bts->I18nObj->getI18nEntry('t9c3'),	$bts->I18nObj->getI18nEntry('t9c4'),	$bts->I18nObj->getI18nEntry('t9c5'),	),
+	"titles" => array($bts->I18nTransObj->getI18nTransEntry('t9c1'),	$bts->I18nTransObj->getI18nTransEntry('t9c2'),	$bts->I18nTransObj->getI18nTransEntry('t9c3'),	$bts->I18nTransObj->getI18nTransEntry('t9c4'),	$bts->I18nTransObj->getI18nTransEntry('t9c5'),	),
 	"cols" => array('temps_debut', 'nbr', 'nom', 'signal', 'err_no', 'err_msg', 'temps_fin'),
 );
 
@@ -363,13 +363,13 @@ $SB['type']				= "button";
 $SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
 $SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s2_h";
 $SB['onclick']			= "";
-$SB['message']			= $bts->I18nObj->getI18nEntry('t5Btn');
+$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('t5Btn');
 $SB['mode']				= 1;
 $SB['size'] 			= 92;
 $SB['lastSize']			= 92;
 
 $T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1 ,4,6);
-$T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5c1');
+$T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5c1');
 $Cl = 2;
 foreach ($tabConfigFile as $A ) {
 	$SB['id']		=	"SelectBtn".$A['name'];
@@ -442,13 +442,13 @@ $infos = array(
 
 
 $T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, 6);
-$T['tab_infos']['tabTxt1']			= $bts->I18nObj->getI18nEntry('tab_1');
-$T['tab_infos']['tabTxt2']			= $bts->I18nObj->getI18nEntry('tab_2');
-$T['tab_infos']['tabTxt3']			= $bts->I18nObj->getI18nEntry('tab_3');
-$T['tab_infos']['tabTxt4']			= $bts->I18nObj->getI18nEntry('tab_4');
-$T['tab_infos']['tabTxt5']			= $bts->I18nObj->getI18nEntry('tab_5');
-$T['tab_infos']['tabTxt6']			= $bts->I18nObj->getI18nEntry('tab_6');
-$T['tab_infos']['tabTxt7']			= $bts->I18nObj->getI18nEntry('tab_7');
+$T['tab_infos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
+$T['tab_infos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
+$T['tab_infos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');
+$T['tab_infos']['tabTxt4']			= $bts->I18nTransObj->getI18nTransEntry('tab_4');
+$T['tab_infos']['tabTxt5']			= $bts->I18nTransObj->getI18nTransEntry('tab_5');
+$T['tab_infos']['tabTxt6']			= $bts->I18nTransObj->getI18nTransEntry('tab_6');
+$T['tab_infos']['tabTxt7']			= $bts->I18nTransObj->getI18nTransEntry('tab_7');
 
 
 // $T['ADC']['onglet'] = array(

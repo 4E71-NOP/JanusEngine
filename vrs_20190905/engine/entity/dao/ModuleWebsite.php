@@ -11,48 +11,48 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class GroupWebsite extends Entity{
-	private $GroupWebsite = array ();
+class ModuleWebsite extends Entity {
+	private $ModuleWebsite = array ();
 	
 	//@formatter:off
 	private $columns = array(
-		'group_website_id'		=> 0,
-		'ws_id'					=> 0,
-		'group_id'				=> 0,
-		'group_state'			=> 0,
+		"module_website_id"		=> 0,
+		"ws_id"					=> 0,
+		"module_id"				=> 0,
+		"module_state"			=> 0,
+		"module_position"		=> 0,
 	);
 	//@formatter:on
 	
 	public function __construct() {
-		$this->GroupWebsite= $this->getDefaultValues();
+		$this->ModuleWebsite= $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets GroupWebsite data from the database.<br>
+	 * Gets ModuleWebsite data from the database.<br>
 	 * @param integer $id
-	 * @param integer $page
 	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $bts->SDDMObj->query ( "
+		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('group_website') . "
-			WHERE group_website_id = '" . $id . "'
-			;" );
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')."
+			WHERE module_website_id = '".$id."'
+		;");
+		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group_website id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module_website id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->GroupWebsite[$A] = $B; }
+					if (isset($this->columns[$A])) { $this->ModuleWebsite[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for group_website id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module_website id=".$id));
 		}
-		
 	}
 	
 	/**
@@ -66,21 +66,21 @@ class GroupWebsite extends Entity{
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
-			'data'			=> $this->GroupWebsite,
-			'targetTable'	=> 'group_website',
-			'targetColumn'	=> 'group_website_id',
-			'entityId'		=> $this->GroupWebsite['group_website_id'],
-			'entityTitle'	=> 'GroupWebsite'
-		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
-	}
+			'data'			=> $this->ModuleWebsite,
+			'targetTable'	=> 'module_website',
+			'targetColumn'	=> 'module_website_id',
+			'entityId'		=> $this->ModuleWebsite['module_website_id'],
+			'entityTitle'	=> 'group'
+	);
+	if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+	elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->groupWebsiteExists($this->GroupWebsite['group_website_id']);
+		return $this->ModuleWebsiteExists($this->ModuleWebsite['module_website_id']);
 	}
 	
 	
@@ -92,8 +92,9 @@ class GroupWebsite extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->websiteExists($this->GroupWebsite['ws_id']) == false ) { $res = false; }
-		if ( $this->groupExists($this->GroupWebsite['group_id']) == false ) { $res = false; }
+		if ( $this->websiteExists($this->ModuleWebsite['ws_id']) == false ) { $res = false; }
+		if ( $this->moduleExists($this->ModuleWebsite['module_id']) == false ) { $res = false; }
+
 		return $res;
 	}
 	
@@ -108,6 +109,9 @@ class GroupWebsite extends Entity{
 		$date = time ();
 		$tab = $this->columns;
 		
+		$this->ModuleWebsite['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	
@@ -127,14 +131,14 @@ class GroupWebsite extends Entity{
 	}
 	
 	//@formatter:off
-	public function getGroupWebsiteEntry ($data) { return $this->GroupWebsite[$data]; }
-	public function getGroupWebsite() { return $this->GroupWebsite; }
+	public function getModuleWebsiteEntry ($data) { return $this->ModuleWebsite[$data]; }
+	public function getModuleWebsite() { return $this->ModuleWebsite; }
 	
-	public function setGroupWebsiteEntry ($entry, $data) { 
-		if ( isset($this->GroupWebsite[$entry])) { $this->GroupWebsite[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setModuleWebsiteEntry ($entry, $data) { 
+		if ( isset($this->ModuleWebsite[$entry])) { $this->ModuleWebsite[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setGroupWebsite($GroupWebsite) { $this->GroupWebsite = $GroupWebsite; }
+	public function setModuleWebsite($ModuleWebsite) { $this->ModuleWebsite = $ModuleWebsite; }
 	//@formatter:off
 
 }

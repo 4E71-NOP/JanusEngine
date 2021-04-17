@@ -38,7 +38,7 @@ $bts->MapperObj->setSqlApplicant("uni_decoration_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gerer les d&eacute;corations.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Etat",
@@ -60,7 +60,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage decoration.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "State",
@@ -82,7 +82,7 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $dbquery = $bts->SDDMObj->query("
@@ -93,15 +93,15 @@ FROM ".$SqlTableListObj->getSQLTableName('decoration')."
 $T = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 
 	$i = 1;
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
@@ -115,8 +115,8 @@ else {
 		."&formGenericData[mode]=edit"
 		."&decorationForm[selectionId]=".$dbp['deco_ref_id']
 		."'>".$dbp['deco_name']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('state')[$dbp['deco_state']];
-		$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('type')[$dbp['deco_type']];
+		$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('state')[$dbp['deco_state']];
+		$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('type')[$dbp['deco_type']];
 	}
 }
 

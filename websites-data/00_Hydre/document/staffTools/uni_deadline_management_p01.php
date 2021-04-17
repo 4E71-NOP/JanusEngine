@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_deadline_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les deadlines.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Etat",
@@ -57,7 +57,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage deadlines.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Status",
@@ -82,15 +82,15 @@ $T = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 
 	
 	$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="
@@ -103,9 +103,9 @@ else {
 			;
 	
 	$tabState = array(
-		0	=> $bts->I18nObj->getI18nEntry('dlState0'),
-		1	=> $bts->I18nObj->getI18nEntry('dlState1'),
-		2	=> $bts->I18nObj->getI18nEntry('dlState2'),
+		0	=> $bts->I18nTransObj->getI18nTransEntry('dlState0'),
+		1	=> $bts->I18nTransObj->getI18nTransEntry('dlState1'),
+		2	=> $bts->I18nTransObj->getI18nTransEntry('dlState2'),
 	);
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;

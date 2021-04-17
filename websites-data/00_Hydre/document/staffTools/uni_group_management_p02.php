@@ -61,7 +61,7 @@ $bts->MapperObj->setSqlApplicant("uni_group_management_p02.php");
 switch ($l) {
 	case "fra":
 // 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Merging i18n data. Language selection=".$l);
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"anonymous"		=>	"Anonyme",
 		"reader"		=>	"Lecteur",
 		"staff"			=>	"Staff",
@@ -83,7 +83,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"anonymous"		=>	"Anonymous",
 		"reader"		=>	"Reader",
 		"staff"			=>	"Staff",
@@ -122,7 +122,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
 		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -131,17 +131,17 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 			array(
 			"group_id"		=> "*",
 			"group_tag"	=> 0,
-			"group_name"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
-			"group_title"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
-			"group_desc"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
+			"group_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+			"group_title"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+			"group_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 			)
 		);
-		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "add";
 		$processStep = "Create";
 		$processTarget = "edit";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		break;
 }
 
@@ -165,21 +165,21 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 // $tabYN = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nEntry('no'],		"db"=>"NO" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nEntry('yes'],	"db"=>"YES" ),
+// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('no'],		"db"=>"NO" ),
+// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('yes'],	"db"=>"YES" ),
 // );
 // $tabLine = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nEntry('offline'],	"db"=>"OFFLINE" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nEntry('online'],		"db"=>"ONLINE" ),
-// 		2	=> array ( "t"=>$I18nObj->getI18nEntry('deleted'],	"db"=>"DELETED" ),
+// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('offline'],	"db"=>"OFFLINE" ),
+// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('online'],		"db"=>"ONLINE" ),
+// 		2	=> array ( "t"=>$I18nObj->getI18nTransEntry('deleted'],	"db"=>"DELETED" ),
 // );
 
 
@@ -188,10 +188,10 @@ $T['AD']['1']['2']['2']['cont'] = $t1l2c2;
 $T['AD']['1']['3']['2']['cont'] = $t1l3c2;
 
 $tabStateDealine = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('anonymous'),		"db"=>"ANONYMOUS" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('reader'),			"db"=>"READER" ),
-		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('staff'),			"db"=>"STAFF" ),
-		3	=> array ( "t"=>$bts->I18nObj->getI18nEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('anonymous'),		"db"=>"ANONYMOUS" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('reader'),			"db"=>"READER" ),
+		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('staff'),			"db"=>"STAFF" ),
+		3	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
 );
 $tab = $tabStateDealine;
 
@@ -258,9 +258,9 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // $T['tab_infos']['GroupName']		= "list";
 // $T['tab_infos']['CellName']			= "grp";
 // $T['tab_infos']['DocumentName']		= "doc";
-// $T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nEntry('cell_1_txt');
-// $T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nEntry('cell_2_txt');
-// $T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nEntry('cell_3_txt');
+// $T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
+// $T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
+// $T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
 
 // $T['ADC']['onglet']['1']['nbr_ligne']	= 5;	$T['ADC']['onglet']['1']['nbr_cellule']	= 2;	$T['ADC']['onglet']['1']['legende']		= 2;
 

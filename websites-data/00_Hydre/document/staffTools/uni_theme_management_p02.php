@@ -62,7 +62,7 @@ $bts->MapperObj->setSqlApplicant("uni_theme_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"acpUp"			=>	"Haut",
 		"acpDown"		=>	"Bas",
 		"acpLeft"		=>	"Gauche",
@@ -115,7 +115,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"acpUp"			=>	"Up",
 		"acpDown"		=>	"Down",
 		"acpLeft"		=>	"Left",
@@ -184,7 +184,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 		$currentThemeObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'));
 		$t1l2c2 = $currentThemeObj->getThemeDescriptorEntry('theme_name');
 		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -193,14 +193,14 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 		$currentThemeObj->setThemeDescriptor(
 		array(
 		"theme_id"		=> "*",
-		"theme_name"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
-		"theme_title"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
-		"theme_desc"	=> $bts->I18nObj->getI18nEntry('t1l2c2'),
+		"theme_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+		"theme_title"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+		"theme_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 		)
 		);
-		$t1l2c2 = "<input type='text' name='formTarget[name]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$t1l2c2 = "<input type='text' name='formTarget[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l3c2 = "<input type='text' name='formParams[title]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -210,11 +210,11 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 // --------------------------------------------------------------------------------------------
 // if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
 // 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard modification checkbox forgotten');
-// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nEntry('userForgotConfirmation')."</p>\r";
+// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
 // }
 // if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
 // 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard deletion checkbox forgotten');
-// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nEntry('userForgotDeletion')."</p>\r";
+// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
 // }
 
 $Content .= "
@@ -237,11 +237,11 @@ $Content .= "
 $T = array();
 $curTab = 1;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 
 
 $T['AD'][$curTab]['1']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_id');
@@ -255,7 +255,7 @@ $decoCount1 = 1;
 for ( $i = 2 ; $i <= 3 ; $i++ ) {
 	for ( $j = 1 ; $j <= 15 ; $j++ ) {
 		$decoCount2 = sprintf("%02u", $decoCount1 );
-		$T['AD'][$i][$j]['1']['cont'] = $bts->I18nObj->getI18nEntry('t2lxc1') . "_" . $decoCount2;
+		$T['AD'][$i][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
 		$T['AD'][$i][$j]['2']['cont'] = "
 		<input type='text' name='formParams[theme_bloc_".$decoCount2."_nom]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_nom')."\" class='".$Block."_t3 ".$Block."_form_1'>\r
 		&nbsp;&nbsp;&nbsp;&nbsp;
@@ -268,7 +268,7 @@ for ( $i = 2 ; $i <= 3 ; $i++ ) {
 $decoCount1 = 0;
 for ( $j = 1 ; $j <= 30 ; $j++ ) {
 	$decoCount2 = sprintf("%02u", $decoCount1 );
-	$T['AD']['4'][$j]['1']['cont'] = $bts->I18nObj->getI18nEntry('t2lxc1') . "_" . $decoCount2;
+	$T['AD']['4'][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
 	$T['AD']['4'][$j]['2']['cont'] = "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 	$decoCount1++;
 }
@@ -276,27 +276,27 @@ for ( $j = 1 ; $j <= 30 ; $j++ ) {
 
 // --------------------------------------------------------------------------------------------
 $curTab = 5;
-$T['AD'][$curTab]['1']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l1c1');
-$T['AD'][$curTab]['2']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l2c1')." #1";
-$T['AD'][$curTab]['3']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l2c1')." #2";
-$T['AD'][$curTab]['4']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l2c1')." #3";
-$T['AD'][$curTab]['5']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l2c1')." #4";
-$T['AD'][$curTab]['6']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l2c1')." #5";
-$T['AD'][$curTab]['7']['2']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l7c1');
+$T['AD'][$curTab]['1']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l1c1');
+$T['AD'][$curTab]['2']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #1";
+$T['AD'][$curTab]['3']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #2";
+$T['AD'][$curTab]['4']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #3";
+$T['AD'][$curTab]['5']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #4";
+$T['AD'][$curTab]['6']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #5";
+$T['AD'][$curTab]['7']['2']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l7c1');
 $T['AD'][$curTab]['7']['1']['colspan']		= 2;
-$T['AD'][$curTab]['8']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l8c1');
-$T['AD'][$curTab]['9']['1']['cont']			= $bts->I18nObj->getI18nEntry('t'.$curTab.'l9c1');
-$T['AD'][$curTab]['10']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l10c1');
-$T['AD'][$curTab]['11']['2']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l11c1');
+$T['AD'][$curTab]['8']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l8c1');
+$T['AD'][$curTab]['9']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l9c1');
+$T['AD'][$curTab]['10']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l10c1');
+$T['AD'][$curTab]['11']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l11c1');
 $T['AD'][$curTab]['11']['1']['colspan']		= 2;
-$T['AD'][$curTab]['12']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l12c1');
-$T['AD'][$curTab]['13']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l13c1');
-$T['AD'][$curTab]['14']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l14c1');
-$T['AD'][$curTab]['15']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l15c1');
-$T['AD'][$curTab]['16']['2']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l16c1');
+$T['AD'][$curTab]['12']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l12c1');
+$T['AD'][$curTab]['13']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l13c1');
+$T['AD'][$curTab]['14']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l14c1');
+$T['AD'][$curTab]['15']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l15c1');
+$T['AD'][$curTab]['16']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l16c1');
 $T['AD'][$curTab]['16']['1']['colspan']		= 2;
-$T['AD'][$curTab]['17']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l17c1');
-$T['AD'][$curTab]['18']['1']['cont']		= $bts->I18nObj->getI18nEntry('t'.$curTab.'l18c1');
+$T['AD'][$curTab]['17']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l17c1');
+$T['AD'][$curTab]['18']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l18c1');
 
 
 
@@ -576,12 +576,12 @@ $T['AD'][$curTab]['18']['2']['cont']		= $bts->InteractiveElementsObj->renderIcon
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l5c1');
-$T['AD'][$curTab]['6']['2']['cont'] = $bts->I18nObj->getI18nEntry('t6l6c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
+$T['AD'][$curTab]['6']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -638,14 +638,14 @@ $T['AD'][$curTab]['4']['2']['cont'] = "<select name ='formParams['admctrl_positi
 $admctrl_position = array();
 $admctrl_position[$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_position')] = " selected ";
 $T['AD'][$curTab]['4']['2']['cont'] .= "
-<option value='1' ".$admctrl_position['1']."> ".$bts->I18nObj->getI18nEntry('acpUp')." - ".		$bts->I18nObj->getI18nEntry('acpLeft')		." </option>\r
-<option value='2' ".$admctrl_position['2']."> ".$bts->I18nObj->getI18nEntry('acpUp')." - ".		$bts->I18nObj->getI18nEntry('acpMiddle')	." </option>\r
-<option value='3' ".$admctrl_position['3']."> ".$bts->I18nObj->getI18nEntry('acpUp')." - ".		$bts->I18nObj->getI18nEntry('acpRight')	." </option>\r
-<option value='4' ".$admctrl_position['4']."> ".$bts->I18nObj->getI18nEntry('acpMiddle')." - ".	$bts->I18nObj->getI18nEntry('acpRight')	." </option>\r
-<option value='5' ".$admctrl_position['5']."> ".$bts->I18nObj->getI18nEntry('acpDown')." - ".		$bts->I18nObj->getI18nEntry('acpRight')	." </option>\r
-<option value='6' ".$admctrl_position['6']."> ".$bts->I18nObj->getI18nEntry('acpDown')." - ".		$bts->I18nObj->getI18nEntry('acpMiddle')	." </option>\r
-<option value='7' ".$admctrl_position['7']."> ".$bts->I18nObj->getI18nEntry('acpDown')." - ".		$bts->I18nObj->getI18nEntry('acpLeft')		." </option>\r
-<option value='8' ".$admctrl_position['8']."> ".$bts->I18nObj->getI18nEntry('acpMiddle')." - ".	$bts->I18nObj->getI18nEntry('acpLeft')		." </option>\r
+<option value='1' ".$admctrl_position['1']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpLeft')		." </option>\r
+<option value='2' ".$admctrl_position['2']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpMiddle')	." </option>\r
+<option value='3' ".$admctrl_position['3']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpRight')	." </option>\r
+<option value='4' ".$admctrl_position['4']."> ".$bts->I18nTransObj->getI18nTransEntry('acpMiddle')." - ".	$bts->I18nTransObj->getI18nTransEntry('acpRight')	." </option>\r
+<option value='5' ".$admctrl_position['5']."> ".$bts->I18nTransObj->getI18nTransEntry('acpDown')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpRight')	." </option>\r
+<option value='6' ".$admctrl_position['6']."> ".$bts->I18nTransObj->getI18nTransEntry('acpDown')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpMiddle')	." </option>\r
+<option value='7' ".$admctrl_position['7']."> ".$bts->I18nTransObj->getI18nTransEntry('acpDown')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpLeft')		." </option>\r
+<option value='8' ".$admctrl_position['8']."> ".$bts->I18nTransObj->getI18nTransEntry('acpMiddle')." - ".	$bts->I18nTransObj->getI18nTransEntry('acpLeft')		." </option>\r
 </select>\r";
 
 

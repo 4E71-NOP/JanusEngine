@@ -365,9 +365,9 @@ class Hydr {
 				break;
 		}
 		
-		$ClassLoaderObj->provisionClass ( 'I18n' );
-		$I18nObj = I18n::getInstance ();
-		$I18nObj->getI18nFromDB ();
+		$ClassLoaderObj->provisionClass ( 'I18nTrans' );
+		$I18nObj = I18nTrans::getInstance ();
+		$I18nObj->getI18nTrans();
 		
 		$bts->LMObj->restoreLastInternalLogTarget ();
 		

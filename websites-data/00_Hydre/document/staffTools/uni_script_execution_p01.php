@@ -55,7 +55,7 @@ $bts->MapperObj->setSqlApplicant("uni_script_execution_p01.php");
 
 switch ($CurrentSetObj->getDataEntry ( 'language')) {
 	case "fra":
-		$bts->I18nObj->apply(
+		$bts->I18nTransObj->apply(
 			array(
 				"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Sélectionnez un fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
 				"processing"	=> "Traitement de : ",
@@ -64,7 +64,7 @@ switch ($CurrentSetObj->getDataEntry ( 'language')) {
 			);
 		break;
 	case "eng":
-		$bts->I18nObj->apply(
+		$bts->I18nTransObj->apply(
 			array(
 				"invite1"		=> "This part will help you test some PHP code. Select a file and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
 				"processing"	=> "Processing : ",
@@ -98,7 +98,7 @@ $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$Fil
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 
 // --------------------------------------------------------------------------------------------
-$Content .= $bts->I18nObj->getI18nEntry('invite1');
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1');
 $Content .= "
 <form name='formScrExec' ACTION='/' method='post'>\r
 <input type='hidden' name='formSubmitted'					value='1'>
@@ -126,7 +126,7 @@ $SB['type']				= "submit";
 $SB['initialStyle']		= $Block."_t3 ".$Block."_submit_s1_n";
 $SB['hoverStyle']		= $Block."_t3 ".$Block."_submit_s1_h";
 $SB['onclick']			= "";
-$SB['message']			= $bts->I18nObj->getI18nEntry('btnExecute');
+$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('btnExecute');
 $SB['mode']				= 1;
 $SB['size'] 			= 128;
 $SB['lastSize']			= 0;
@@ -146,10 +146,10 @@ $path = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('DOCU
 $fileName = $path.$formInputFile;
 
 if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
-	$Content .= "<p>".$bts->I18nObj->getI18nEntry('processing').$formInputFile."</p>\r";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('processing').$formInputFile."</p>\r";
 	switch ( true ) {
 		case ( strpos($fileName ,".htm") ):
-			$Content .= "<p>".$bts->I18nObj->getI18nEntry('mode')." HTML</p>\r<hr>\r";
+			$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('mode')." HTML</p>\r<hr>\r";
 			$fileHandle = fopen($fileName,"r");
 			$fileData = fread($fileHandle,filesize($fileName));
 			if ($fileData === FALSE) {$Content .= "ERRRRRRR<br>\r";}
@@ -157,7 +157,7 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 			fclose($fileHandle);
 		break;
 		case ( strpos($fileName ,".php") ):
-			$Content .= "<p>".$bts->I18nObj->getI18nEntry('mode')."PHP</p>\r<hr>\r";
+			$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('mode')."PHP</p>\r<hr>\r";
 			$fileData = include ($fileName);
 		break;
 		case ( strpos($fileName ,".mvmcode") ):

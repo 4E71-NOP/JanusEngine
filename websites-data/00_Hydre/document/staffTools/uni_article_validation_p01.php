@@ -47,7 +47,7 @@ $bts->MapperObj->setSqlApplicant("uni_article_validation_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de valider des articles.",
 		"raf1"			=>	"Rien à afficher",
 		"cell_1_txt"	=> "Informations",
@@ -59,7 +59,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"This part will allow you to validate documents.",
 		"raf1"			=>	"Nothing to display",
 		"cell_1_txt"	=> "Informations",
@@ -86,16 +86,16 @@ AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 $i = 1;
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 	$T['AD']['1'][$i]['4']['cont'] = "";
 }
 else {
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "

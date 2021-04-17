@@ -29,7 +29,7 @@ class BaseToolSet {
 	public $AUObj;
 	public $SddmToolsObj;
 	public $SDDMObj;
-	public $I18nObj;
+	public $I18nTransObj;
 	public $InteractiveElementsObj;
 	public $RenderFormObj;
 	public $RenderModuleObj;
@@ -54,7 +54,7 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
 		$ClassLoaderObj->provisionClass('SddmTools');
 		$ClassLoaderObj->provisionClass('DalFacade');
-		$ClassLoaderObj->provisionClass('I18n');
+		$ClassLoaderObj->provisionClass('I18nTrans');
 		$ClassLoaderObj->provisionClass('InteractiveElements');
 		$ClassLoaderObj->provisionClass('RenderForm');
 		$ClassLoaderObj->provisionClass('RenderModule');
@@ -76,7 +76,7 @@ class BaseToolSet {
 		$this->CMObj->InitBasicSettings();
 		$this->AUObj					= AuthenticateUser::getInstance();
 		$this->SddmToolsObj				= SddmTools::getInstance();
-		$this->I18nObj					= I18n::getInstance();
+		$this->I18nTransObj				= I18nTrans::getInstance();
 		$this->InteractiveElementsObj	= InteractiveElements::getInstance();
 		$this->RenderFormObj			= RenderForm::getInstance();
 		$this->RenderModuleObj			= RenderModule::getInstance();

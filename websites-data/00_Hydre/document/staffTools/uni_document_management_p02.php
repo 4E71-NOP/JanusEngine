@@ -62,7 +62,7 @@ $bts->MapperObj->setSqlApplicant("uni_document_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
 		"invite2"		=> "Cette partie va vous permettre de créer un document.",
 		"tabTxt1"		=> "Informations",
@@ -81,7 +81,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"no"			=>	"No",
 		"yes"			=>	"Yes",
 		"offline"		=> "Offline",
@@ -129,7 +129,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 		$currentDocumentObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -151,7 +151,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
 				)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -176,11 +176,11 @@ $Content .= "
 ;
 
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 
 
 $T['AD']['1']['1']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_id');
@@ -188,10 +188,10 @@ $T['AD']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_na
 
 
 $tabType = array(
-		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('type0'),	"db" => "WMCODE"),
-		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('type1'),	"db" => "NOCODE"),
-		2 =>	array ( "t" => $bts->I18nObj->getI18nEntry('type2'),	"db" => "PHP"),
-		3 =>	array ( "t" => $bts->I18nObj->getI18nEntry('type3'),	"db" => "MIXED"),
+		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type0'),	"db" => "WMCODE"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type1'),	"db" => "NOCODE"),
+		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type2'),	"db" => "PHP"),
+		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type3'),	"db" => "MIXED"),
 );
 $tabType[$currentDocumentObj->getDocumentEntry('docu_type')]['s'] = " selected ";
 $T['AD']['1']['3']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -200,8 +200,8 @@ $T['AD']['1']['3']['2']['cont'] .= "</select>\r";
 
 
 $tabYN = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
 $tab = $tabYN;
 $tab[$currentDocumentObj->getDocumentEntry('part_modification')]['s'] = " selected ";

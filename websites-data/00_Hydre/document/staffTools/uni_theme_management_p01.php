@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_theme_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les themes.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Titre",
@@ -56,7 +56,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage themes.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Title",
@@ -67,7 +67,7 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 
@@ -80,14 +80,14 @@ AND ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
 $i = 1;
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?"

@@ -59,7 +59,7 @@ $bts->MapperObj->setSqlApplicant("uni_category_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les catégories.",
 		"invite2"		=> "Cette partie va vous permettre de créer une catégorie.",
 		"tabTxt1"		=> "Général",
@@ -95,7 +95,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage categorys.",
 		"invite2"		=> "This part will allow you to create a category.",
 		"tabTxt1"		=> "General",
@@ -156,7 +156,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 		$currentCategoryObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -183,7 +183,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 			)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -211,22 +211,22 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
-$T['AD']['1']['9']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l9c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
+$T['AD']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
 
-$T['AD']['2']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l6c1');
+$T['AD']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['AD']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['AD']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['AD']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
+$T['AD']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
+$T['AD']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
 
 $T['AD']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
 $T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
@@ -235,10 +235,10 @@ $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	si
 
 
 $tabType = array(
-		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('article_racine'),		"db" => "article_racine"),
-		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('article'),				"db" => "article"),
-		2 =>	array ( "t" => $bts->I18nObj->getI18nEntry('menu_admin_racine'),	"db" => "menu_admin_racine"),
-		3 =>	array ( "t" => $bts->I18nObj->getI18nEntry('menu_admin'),			"db" => "menu_admin"),
+		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('article_racine'),		"db" => "article_racine"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('article'),				"db" => "article"),
+		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('menu_admin_racine'),	"db" => "menu_admin_racine"),
+		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('menu_admin'),			"db" => "menu_admin"),
 );
 $tabType[$currentCategoryObj->getCategoryEntry('cate_type')]['s'] = " selected ";
 $T['AD']['1']['5']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -248,8 +248,8 @@ $T['AD']['1']['5']['2']['cont'] .= "</select>\r";
 
 
 $tabState = array(
-		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('offline'),	"db" => "OFFLINE"),
-		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('online'),	"db" => "ONLINE"),
+		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('offline'),	"db" => "OFFLINE"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('online'),	"db" => "ONLINE"),
 );
 $tabState[$currentCategoryObj->getCategoryEntry('cate_state')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -279,9 +279,9 @@ $T['AD']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentCategor
 
 
 $tabRole = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('noRole'),					"db"=>0 ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('correction_article'),		"db"=>"correction_article" ),
-		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('noRole'),					"db"=>0 ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('correction_article'),		"db"=>"correction_article" ),
+		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
 );
 $tabRole[$currentCategoryObj->getCategoryEntry('cate_role')]['s'] = " selected ";
 $T['AD']['2']['4']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -290,8 +290,8 @@ $T['AD']['2']['4']['2']['cont'] .= "</select>\r";
 
 
 $tabYN = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
 $tabYN[$currentCategoryObj->getCategoryEntry('cate_initial_document')]['s'] = " selected ";
 $T['AD']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";

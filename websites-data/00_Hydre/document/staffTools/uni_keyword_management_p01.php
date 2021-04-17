@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Type",
@@ -59,7 +59,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage keywords.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Type",
@@ -74,7 +74,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
@@ -91,25 +91,25 @@ AND keyword_state != '2'
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('raf1');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	
 	$tabState = array(
-			0	=> $bts->I18nObj->getI18nEntry('kwState0'),
-			1	=> $bts->I18nObj->getI18nEntry('kwState1'),
+			0	=> $bts->I18nTransObj->getI18nTransEntry('kwState0'),
+			1	=> $bts->I18nTransObj->getI18nTransEntry('kwState1'),
 	);
 	$tabType = array(
-			1	=> $bts->I18nObj->getI18nEntry('kwType1'),
-			2	=> $bts->I18nObj->getI18nEntry('kwType2'),
-			3	=> $bts->I18nObj->getI18nEntry('kwType3'),
+			1	=> $bts->I18nTransObj->getI18nTransEntry('kwType1'),
+			2	=> $bts->I18nTransObj->getI18nTransEntry('kwType2'),
+			3	=> $bts->I18nTransObj->getI18nTransEntry('kwType3'),
 	);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
@@ -150,7 +150,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btnFilter'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnFilter'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,

@@ -31,7 +31,7 @@ class ModuleQuickSkin {
 // 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
-		$I18nObj = I18n::getInstance();
+		$I18nObj = I18nTrans::getInstance();
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		$I18nObj->apply($i18n);
@@ -42,7 +42,7 @@ class ModuleQuickSkin {
 		$Content = "
 		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."'>\r
 		<tr>\r<td>\r
-		".$I18nObj->getI18nEntry('txt1')." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
+		".$I18nObj->getI18nTransEntry('txt1')." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 		</td>\r</tr>\r
 		";
 		$grp = $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
@@ -61,7 +61,7 @@ class ModuleQuickSkin {
 				<form ACTION='/' method='post'>\r
 				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 				<tr>\r<td>\r
-				".$I18nObj->getI18nEntry('txt2')."
+				".$I18nObj->getI18nTransEntry('txt2')."
 				</td>\r</tr>\r
 				<tr>\r<td>\r
 				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
@@ -89,7 +89,7 @@ class ModuleQuickSkin {
 					"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
 					"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
 					"onclick"			=> "",
-					"message"			=> $I18nObj->getI18nEntry('bouton'),
+					"message"			=> $I18nObj->getI18nTransEntry('bouton'),
 					"mode"				=> 0,
 					"size" 				=> 0,
 					"lastSize"			=> 0,
@@ -111,7 +111,7 @@ class ModuleQuickSkin {
 				<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 
 				<tr>\r<td>\r
-				<a href='index.php?arti_ref=fra_gestion_du_profil&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML','url_slup')."'>".$I18nObj->getI18nEntry('txt4')."</a>
+				<a href='index.php?arti_ref=fra_gestion_du_profil&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML','url_slup')."'>".$I18nObj->getI18nTransEntry('txt4')."</a>
 				</td>\r</tr>\r
 				</table>\r
 				";

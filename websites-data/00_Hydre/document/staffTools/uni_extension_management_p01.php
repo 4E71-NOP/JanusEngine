@@ -41,7 +41,7 @@ $bts->MapperObj->setSqlApplicant("uni_extension_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les extensions.",
 		"col_1_txt"		=> "Extensions disponibles",
 		"col_2_txt"		=> "Version",
@@ -58,7 +58,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage extensions.",
 		"col_1_txt"		=> "Available extensions",
 		"col_2_txt"		=> "Version",
@@ -76,7 +76,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 
@@ -116,17 +116,17 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 
 	unset ( $A );
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
-	$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['AD']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
 	foreach ( $extensions_['donnees'] as $A ) {
 		if ( $A['introuvable'] != 1 ) {
 			$i++;
 			$T['AD']['1'][$i]['1']['cont'] = $A['extension_name'];
 			$T['AD']['1'][$i]['2']['cont'] = $A['extension_version'];
-			$T['AD']['1'][$i]['3']['cont'] = $bts->I18nObj->getI18nEntry('tab1'.$A['extension_etat']);
+			$T['AD']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tab1'.$A['extension_etat']);
 			
 			$SB = array(
 					"id"				=> "installButton",
@@ -134,7 +134,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 					"onclick"			=> "",
-					"message"			=> $bts->I18nObj->getI18nEntry('tab2'.$A['extension_etat']),
+					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab2'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,
@@ -160,7 +160,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 					"onclick"			=> "",
-					"message"			=> $bts->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
+					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,
@@ -187,7 +187,7 @@ if ( $UserObj->getUserEntry('group_tag') == 3 ) {
 					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
 					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
 					"onclick"			=> "",
-					"message"			=> $bts->I18nObj->getI18nEntry('tab3'.$A['extension_etat']),
+					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']),
 					"mode"				=> 1,
 					"size" 				=> 96,
 					"lastSize"			=> 0,

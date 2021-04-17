@@ -37,7 +37,7 @@ class SqlTableList {
 			'pv',				
 			'stored_event',		
 			'tag',				
-			'theme_descriptor',	
+			'theme_descriptor',	'theme_website',
 			'user',
 			'website',			'group_website',		'theme_website',
 	);

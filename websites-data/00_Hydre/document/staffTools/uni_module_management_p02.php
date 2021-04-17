@@ -59,7 +59,7 @@ $bts->MapperObj->setSqlApplicant("uni_module_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"before"		=>	"Avant",
 		"during"		=>	"Pendant",
 		"after"			=>	"Après",
@@ -95,7 +95,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"before"		=>	"Before",
 		"during"		=>	"During",
 		"after"			=>	"After",
@@ -159,7 +159,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 	case "edit":
 		$currentModuleObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'selectionId'));
 		$commandType = "update";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -169,10 +169,10 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 				"module_id"	=> "",
 				"module_deco"					=>	1,
 				"module_deco_nbr"				=>	1,
-				"module_name"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
-				"module_title"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
+				"module_name"					=>	$bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+				"module_title"					=>	$bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 				"module_file"				=>	"",
-				"module_desc"					=>	$bts->I18nObj->getI18nEntry('t1l2c2'),
+				"module_desc"					=>	$bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 				"module_group_allowed_to_see"		=>	2,
 				"module_group_allowed_to_use"	=>	2,
 				"module_state"					=>	0,
@@ -182,7 +182,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('moduleForm', 'mode') ) {
 			)
 		);
 		$commandType = "add";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -210,10 +210,10 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
 
 
 
@@ -233,13 +233,13 @@ $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]' si
 
 // --------------------------------------------------------------------------------------------
 
-$T['AD']['2']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l6c1');
-$T['AD']['2']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l7c1');
+$T['AD']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['AD']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['AD']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['AD']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
+$T['AD']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
+$T['AD']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
+$T['AD']['2']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l7c1');
 
 
 $FileSelectorConfig = array(
@@ -266,17 +266,17 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['AD']['2']['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $tabYN = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
 $tabLine = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
-		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('offline'),	"db"=>"OFFLINE" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('online'),		"db"=>"ONLINE" ),
+		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('deleted'),	"db"=>"DELETED" ),
 );
 // $tabStatus = array(
-// 		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('disabled'],	"db"=>"DISABLED" ),
-// 		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('enabled'],	"db"=>"ENABLED" ),
+// 		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('disabled'],	"db"=>"DISABLED" ),
+// 		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('enabled'],	"db"=>"ENABLED" ),
 // );
 
 
@@ -332,9 +332,9 @@ $T['AD']['2']['6']['2']['cont'] .= "</select>\r";
 
 
 $tab = array (
-		0	=>	array("t" => $bts->I18nObj->getI18nEntry('during'),	"db" => "DURING",),
-		1	=>	array("t" => $bts->I18nObj->getI18nEntry('before'),	"db" => "BEFORE",),
-		2	=>	array("t" => $bts->I18nObj->getI18nEntry('after'),		"db" => "AFTER",),
+		0	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('during'),	"db" => "DURING",),
+		1	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('before'),	"db" => "BEFORE",),
+		2	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('after'),		"db" => "AFTER",),
 );
 
 $T['AD']['2']['7']['2']['cont'] = "<select name='formParams[execution]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -345,7 +345,7 @@ foreach ( $tab as $A1 ) {
 $T['AD']['2']['7']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
-$T['AD']['3']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l1c1');
+$T['AD']['3']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
 $tab = $tabLine;
 $T['AD']['3']['1']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 $tab[$currentModuleObj->getModuleEntry('module_state')]['s'] = " selected ";

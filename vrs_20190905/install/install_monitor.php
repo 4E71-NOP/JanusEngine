@@ -182,7 +182,7 @@ else { $l = "eng"; }
 
 $i18n ="";
 include ("current/install/i18n/install_monitor_".$l.".php");
-$bts->I18nObj->apply($i18n);
+$bts->I18nTransObj->apply($i18n);
 unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
@@ -239,10 +239,10 @@ $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 32
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 
 $DocContent .= $RenderDeco->render($infos);
-// $Content .= "<p class='".$block."_tb7' style='text-align: center;'>".$bts->I18nObj->getI18nEntry('b01Invite']."</p>
+// $Content .= "<p class='".$block."_tb7' style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('b01Invite']."</p>
 
 // --------------------------------------------------------------------------------------------
-$DocContent .= "<h1 style='text-align: center;'>".$bts->I18nObj->getI18nEntry('title')."</h1>\r";
+$DocContent .= "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('title')."</h1>\r";
 
 // --------------------------------------------------------------------------------------------
 $CurrentTab = 1;
@@ -279,37 +279,37 @@ if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']
 			break;
 		case 1: 
 			$time = (time() - $itd['last_activity']['inst_nbr']);
-			if ( $time > 60 ) { $status = "<span class='".$block."_erreur ".$block."_tb4'>" .$bts->I18nObj->getI18nEntry('inactive') . ": " . $time . "s.</span>"; }
-			else { $status = $bts->I18nObj->getI18nEntry('installState1'); }
+			if ( $time > 60 ) { $status = "<span class='".$block."_erreur ".$block."_tb4'>" .$bts->I18nTransObj->getI18nTransEntry('inactive') . ": " . $time . "s.</span>"; }
+			else { $status = $bts->I18nTransObj->getI18nTransEntry('installState1'); }
 			break;	
-		case 3: $status = $bts->I18nObj->getI18nEntry('installState2');	break;
+		case 3: $status = $bts->I18nTransObj->getI18nTransEntry('installState2');	break;
 	}
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nObj->getI18nEntry('status')."</b>";				
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nTransObj->getI18nTransEntry('status')."</b>";				
 	$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<b>".$status."</b>";												
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nObj->getI18nEntry('SQL_query_count');					
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SQL_query_count');					
 	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nObj->getI18nEntry('command_count');						
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('command_count');						
 	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nObj->getI18nEntry('start_date');							
+	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('start_date');							
 	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	
 	
 	$isInactive = time() - $itd['last_activity']['inst_nbr'];
 	if ( $isInactive > 10 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nObj->getI18nEntry('inactive');						$T['AD'][$CurrentTab][$lt]['1']['class'] = $block."_error";
+		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');						$T['AD'][$CurrentTab][$lt]['1']['class'] = $block."_error";
 		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";												$T['AD'][$CurrentTab][$lt]['2']['class'] = $block."_error"; 
 	}
 	
 	if ($itd['end_date']['inst_nbr'] != 0 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nObj->getI18nEntry('end_date');						
+		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('end_date');						
 		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	
 	}
 	

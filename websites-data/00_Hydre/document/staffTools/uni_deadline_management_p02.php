@@ -59,7 +59,7 @@ $bts->MapperObj->setSqlApplicant("uni_deadline_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer le deadline.",
 		"invite2"		=> "Cette partie va vous permettre de créer un deadline.",
 		"tabTxt1"		=> "Informations",
@@ -82,7 +82,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage this deadline.",
 		"invite2"		=> "This part will allow you to create a deadline.",
 		"tabTxt1"		=> "Informations",
@@ -148,7 +148,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		>".$dbp['arti_title']."</a> - ";
 		}
 		$commandType = "update";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -163,7 +163,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 				),
 		);
 		$commandType = "add";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -192,14 +192,14 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
 
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 	case "edit":
@@ -212,9 +212,9 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) 
 		$T['ADC']['onglet']['1']['nbr_ligne'] = 8;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
 		break;
 	case "create":
-		$T['AD']['1']['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$bts->I18nObj->getI18nEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $bts->I18nObj->getI18nEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $bts->I18nTransObj->getI18nTransEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , mktime() ) ;
 		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value='".date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$T['ADC']['onglet']['1']['nbr_ligne'] = 7;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
@@ -222,9 +222,9 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) 
 }
 
 $stateTab = array(
-		0	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState0'),	'db'	=>	"OFFLINE",	),
-		1	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState1'),	'db'	=>	"ONLINE",	),
-		2	=>	array(	't'	=>	$bts->I18nObj->getI18nEntry('dlState2'),	'db'	=>	"DELETED",	),
+		0	=>	array(	't'	=>	$bts->I18nTransObj->getI18nTransEntry('dlState0'),	'db'	=>	"OFFLINE",	),
+		1	=>	array(	't'	=>	$bts->I18nTransObj->getI18nTransEntry('dlState1'),	'db'	=>	"ONLINE",	),
+		2	=>	array(	't'	=>	$bts->I18nTransObj->getI18nTransEntry('dlState2'),	'db'	=>	"DELETED",	),
 );
 $stateTab[$currentArticleObj->getDeadLineEntry('deadline_state')]['s'] = " selected";
 $str = "<select name ='formParams[etat]' class='".$Block."_t3 ".$Block."_form_1'>\r";

@@ -59,7 +59,7 @@ $bts->MapperObj->setSqlApplicant("uni_keyword_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
 		"invite2"		=> "Cette partie va vous permettre de créer un mot clé.",
 		"tabTxt1"	=> "Informations",
@@ -83,7 +83,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage keywords.",
 		"invite2"		=> "This part will allow you to create a keyword.",
 		"tabTxt1"	=> "Informations",
@@ -107,7 +107,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 
 $dbquery = $bts->SDDMObj->query("
@@ -143,7 +143,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 		$tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
 		
 		$T['AD']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_name');
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -163,7 +163,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 			)
 		);
 		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -189,32 +189,32 @@ $Content .= "
 
 // --------------------------------------------------------------------------------------------
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l8c1');
+$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
 
 
 // $tabYN = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nEntry('no'],		"db"=>"NO" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nEntry('yes'],	"db"=>"YES" ),
+// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('no'],		"db"=>"NO" ),
+// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('yes'],	"db"=>"YES" ),
 // );
 $tabLine = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
-		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('offline'),	"db"=>"OFFLINE" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('online'),		"db"=>"ONLINE" ),
+		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('deleted'),	"db"=>"DELETED" ),
 );
 // $tabStatus = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nEntry('disabled'],	"db"=>"DISABLED" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nEntry('enabled'],	"db"=>"ENABLED" ),
+// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('disabled'],	"db"=>"DISABLED" ),
+// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('enabled'],	"db"=>"ENABLED" ),
 // );
 $tabState = array(
-		0 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwState0'),	"db" => "OFFLINE"),
-		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwState1'),	"db" => "ONLINE"),
+		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwState0'),	"db" => "OFFLINE"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwState1'),	"db" => "ONLINE"),
 );
 
 
@@ -236,9 +236,9 @@ $T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' 
 $T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabType = array(
-		1 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType1'),	"db" => "TO_CATEGORY"),
-		2 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType2'),	"db" => "TO_URL"),
-		3 =>	array ( "t" => $bts->I18nObj->getI18nEntry('kwType3'),	"db" => "TOOLTIP"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType1'),	"db" => "TO_CATEGORY"),
+		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType2'),	"db" => "TO_URL"),
+		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType3'),	"db" => "TOOLTIP"),
 );
 $tabType[$currentKeyWordObj->getKeyWordEntry('keyword_type')]['s'] = " selected ";
 $T['AD']['1']['7']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";

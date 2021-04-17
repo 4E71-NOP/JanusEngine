@@ -47,7 +47,7 @@ $bts->MapperObj->setSqlApplicant("uni_user_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Login",
@@ -75,7 +75,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage users.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Login",
@@ -103,7 +103,7 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $GDU_ = array();
@@ -174,12 +174,12 @@ $GDU_['nbr_par_page_reel'] = $bts->SDDMObj->num_row_sql ( $dbquery );
 
 $T = array();
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $bts->I18nObj->getI18nEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $bts->I18nObj->getI18nEntry('col_6_txt');
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+$T['AD']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+$T['AD']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
 // 	if ( $dbp['user_status'] == 2 ) { $trr['tableau'][$i]['c_2_txt'] .= "style='font-style: italic; text-decoration: line-through; font-weight: lighter;'"; }
@@ -199,7 +199,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	
 	$T['AD']['1'][$i]['4']['cont'] = $dbp['group_title'];
 	$T['AD']['1'][$i]['4']['tc'] = 1;
-	$T['AD']['1'][$i]['5']['cont'] = $bts->I18nObj->getI18nEntry('status'.$dbp['user_status']);
+	$T['AD']['1'][$i]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
 	$T['AD']['1'][$i]['5']['tc'] = 1;
 	$lastVisit = date ("Y M d - H:i:s",$dbp['user_last_visit']);
 	$T['AD']['1'][$i]['6']['cont'] = $lastVisit;
@@ -236,19 +236,19 @@ $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
 $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
 "<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r
 <tr>\r
-<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_1')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_1')."</td>\r
 <td class='".$Block."_fca'><input type='text' name='userForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('RCH', 'query_like')."' class='".$Block."_t3 ".$Block."_form_1'></td>\r
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_2')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_2')."</td>\r
 <td class='".$Block."_fca'><select name='userForm[group_id]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
 
 $gu_select1 = array(
-	0 => array("id" => 0, 'titre' => $bts->I18nObj->getI18nEntry('select1_0')),
-	1 => array("id" => 1, 'titre' => $bts->I18nObj->getI18nEntry('select1_1')),
+	0 => array("id" => 0, 'titre' => $bts->I18nTransObj->getI18nTransEntry('select1_0')),
+	1 => array("id" => 1, 'titre' => $bts->I18nTransObj->getI18nTransEntry('select1_1')),
 );
 
 $dbquery = $bts->SDDMObj->query("
@@ -272,7 +272,7 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_3')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_3')."</td>\r
 <td class='".$Block."_fca'>
 <select name='userForm[user_status]' class='".$Block."_t3 ".$Block."_form_1'>\r
 ";
@@ -281,9 +281,9 @@ $Content .= "
 //	Test explicite pour chaque cas. Il pourra y en avoir d'autre dans l'avenir
 // --------------------------------------------------------------------------------------------
 $gu_usestatus = array();
-$gu_usestatus['0']['i'] = 0;		$gu_usestatus['0']['t'] = $bts->I18nObj->getI18nEntry('select2_0');		$gu_usestatus['0']['s'] = "";		$gu_usestatus['0']['db'] = "DISABLED";
-$gu_usestatus['1']['i'] = 1;		$gu_usestatus['1']['t'] = $bts->I18nObj->getI18nEntry('select2_1');		$gu_usestatus['1']['s'] = "";		$gu_usestatus['1']['db'] = "ACTIVE";
-$gu_usestatus['2']['i'] = 2;		$gu_usestatus['2']['t'] = $bts->I18nObj->getI18nEntry('select2_2');		$gu_usestatus['2']['s'] = "";		$gu_usestatus['2']['db'] = "DELETED";
+$gu_usestatus['0']['i'] = 0;		$gu_usestatus['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('select2_0');		$gu_usestatus['0']['s'] = "";		$gu_usestatus['0']['db'] = "DISABLED";
+$gu_usestatus['1']['i'] = 1;		$gu_usestatus['1']['t'] = $bts->I18nTransObj->getI18nTransEntry('select2_1');		$gu_usestatus['1']['s'] = "";		$gu_usestatus['1']['db'] = "ACTIVE";
+$gu_usestatus['2']['i'] = 2;		$gu_usestatus['2']['t'] = $bts->I18nTransObj->getI18nTransEntry('select2_2');		$gu_usestatus['2']['s'] = "";		$gu_usestatus['2']['db'] = "DELETED";
 if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status') != 0 ) { $gu_usestatus[$bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_status')]['s'] = " selected "; }
 else {$gu_usestatus['1']['s'] = " selected ";}
 foreach ( $gu_usestatus as $A ) { $Content .= "<option value='".$A['i']."' ".$A['s'].">".$A['t']."</option>"; } 
@@ -294,9 +294,9 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca'>".$bts->I18nObj->getI18nEntry('table1_41')."</td>\r
+<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_41')."</td>\r
 <td class='".$Block."_fca'><input type='text' name='userForm[nbrPerPage]' size='2' value='".$GDU_['nbr_par_page']."' class='".$Block."_t3 ".$Block."_form_1'> 
-".$bts->I18nObj->getI18nEntry('table1_42')."
+".$bts->I18nTransObj->getI18nTransEntry('table1_42')."
 </td>\r
 </tr>\r
 </table>\r
@@ -311,7 +311,7 @@ $SB2 = array(
 		"id"				=> "refreshButton",
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-		"message"			=> $bts->I18nObj->getI18nEntry('btnFilter'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnFilter'),
 // 		"size" 				=> 0,
 );
 $SB = array_merge($SB,$SB2);

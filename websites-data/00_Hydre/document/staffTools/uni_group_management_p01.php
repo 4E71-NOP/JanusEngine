@@ -40,7 +40,7 @@ $bts->MapperObj->setSqlApplicant("uni_group_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les groupes.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Titre",
@@ -53,7 +53,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage groups.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Title",
@@ -68,10 +68,10 @@ switch ($l) {
 }
 
 $tagTab = array(
-	0 => $bts->I18nObj->getI18nEntry('tag0'),
-	1 => $bts->I18nObj->getI18nEntry('tag1'),
-	2 => $bts->I18nObj->getI18nEntry('tag2'),
-	3 => $bts->I18nObj->getI18nEntry('tag3'),
+	0 => $bts->I18nTransObj->getI18nTransEntry('tag0'),
+	1 => $bts->I18nTransObj->getI18nTransEntry('tag1'),
+	2 => $bts->I18nTransObj->getI18nTransEntry('tag2'),
+	3 => $bts->I18nTransObj->getI18nTransEntry('tag3'),
 );
 
 $T = array();
@@ -83,9 +83,9 @@ AND grp.group_id = sg.group_id
 and grp.group_name != 'Server_owner' 
 ;");
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
 	$T['AD']['1'][$i]['link'] = "index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=2&formGenericData[mode]=edit&groupForm[selectionId]=".$dbp['group_id'];

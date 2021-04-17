@@ -44,7 +44,7 @@ class FileSelector {
 		
 // 		switch ($CurrentSetObj->getDataEntry('language_id')) {
 // 			case 38:
-// 				$bts->I18nObj->setI18nEntry('FileSelector', 
+// 				$bts->I18nTransObj->setI18nEntry('FileSelector', 
 // 					array(
 // 					"title"	=> "File selector",
 // 					"c1"	=> "Name",
@@ -54,7 +54,7 @@ class FileSelector {
 // 				);
 // 				break;
 // 			case 48:
-// 				$bts->I18nObj->setI18nEntry('FileSelector',
+// 				$bts->I18nTransObj->setI18nEntry('FileSelector',
 // 					array(
 // 						"title"	=> "Sélecteur de fichier",
 // 						"c1"	=> "Nom",
@@ -84,12 +84,12 @@ class FileSelector {
 			<div id='FileSelectorCaption'>
 			
 			<table class='".$infos['block'].CLASS_Table01." ".$infos['block'].CLASS_TblLgnd_Top."' style='width='100%;'>\r
-			<caption>".$bts->I18nObj->getI18nEntry('fileSelectorTitle')."</caption>\r
+			<caption>".$bts->I18nTransObj->getI18nTransEntry('fileSelectorTitle')."</caption>\r
 			</tr>\r
 			<tr>\r
-			<td width='65%'>".$bts->I18nObj->getI18nEntry('fileSelectorC1')."</td>\r
-			<td width='10%'>".$bts->I18nObj->getI18nEntry('fileSelectorC2')."</td>\r
-			<td width='25%'>".$bts->I18nObj->getI18nEntry('fileSelectorC3')."</td>\r
+			<td width='65%'>".$bts->I18nTransObj->getI18nTransEntry('fileSelectorC1')."</td>\r
+			<td width='10%'>".$bts->I18nTransObj->getI18nTransEntry('fileSelectorC2')."</td>\r
+			<td width='25%'>".$bts->I18nTransObj->getI18nTransEntry('fileSelectorC3')."</td>\r
 			</tr>\r
 			</table>\r
 			

@@ -30,13 +30,13 @@ class ModuleLogo {
 		$l = $CurrentSetObj->getDataEntry('language');
 		$i18n = array();
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$bts->I18nObj->apply($i18n);
+		$bts->I18nTransObj->apply($i18n);
 		unset ($i18n);
 		$Content = "";
 		
 		$Content .= "
 		<div style='text-align: center;'>\r
-		<a href='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nObj->getI18nEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
+		<a href='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
 		<img src='".
 			$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
 			"/media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory').

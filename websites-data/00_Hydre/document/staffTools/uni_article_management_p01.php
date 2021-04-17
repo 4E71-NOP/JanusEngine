@@ -51,7 +51,7 @@ $bts->MapperObj->setSqlApplicant("uni_article_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Pages",
@@ -67,7 +67,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to modify articles.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Pages",
@@ -83,7 +83,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $langList = $bts->CMObj->getLanguageList();
@@ -98,7 +98,7 @@ else { $langList[$CurrentSetObj->getDataEntry('language_id')]['s'] = "selected";
 $listDeadline = array(
 		0 => array(
 				'id' => 0,
-				'deadline_title' => $bts->I18nObj->getI18nEntry('boucl0'),
+				'deadline_title' => $bts->I18nTransObj->getI18nTransEntry('boucl0'),
 		),
 );
 
@@ -128,16 +128,16 @@ $Content .= "
 <input type='hidden' name='arti_page'	value='2'>\r
 <table class='".$Block.CLASS_Table01." ".$Block.CLASS_TblLgnd_Top."'>\r
 <tr>\r
-<td colspan='2'>".$bts->I18nObj->getI18nEntry('caption')."</td>\r
+<td colspan='2'>".$bts->I18nTransObj->getI18nTransEntry('caption')."</td>\r
 </tr>\r
 		
 <tr>\r
-<td>".$bts->I18nObj->getI18nEntry('c1l1')."</td>\r
+<td>".$bts->I18nTransObj->getI18nTransEntry('c1l1')."</td>\r
 <td><input type='text' name='articleForm[SQLnom]' size='15' value='".$bts->RequestDataObj->getRequestDataEntry('SQLnom')."' class='".$Block."_t3 " . $Block."_form_1'></td>\r
 </tr>\r
 		
 <tr>\r
-<td>".$bts->I18nObj->getI18nEntry('c1l2')."</td>\r
+<td>".$bts->I18nTransObj->getI18nTransEntry('c1l2')."</td>\r
 <td><select name='articleForm[SQLlang]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 // unset ( $A , $B );
@@ -151,7 +151,7 @@ $Content .= "</select>
 </tr>\r
 		
 <tr>\r
-<td>".$bts->I18nObj->getI18nEntry('c1l3')."</td>\r
+<td>".$bts->I18nTransObj->getI18nTransEntry('c1l3')."</td>\r
 <td><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 unset ( $A , $B );
@@ -172,7 +172,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btnRefresh'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnRefresh'),
 		"mode"				=> 1,
 		"size" 				=> 128,
 		"lastSize"			=> 0,
@@ -235,10 +235,10 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	
 	unset ($A,$B);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nObj->getI18nEntry('col_4_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	
 	$linkId1 = "<a href='".
 	$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').

@@ -48,7 +48,7 @@ $colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de tester du code Hydr (BBCode like).<br>\r
 <br>\r
 Entrez un nom de fichier qui contient un script wmode et vous pourrez le tester directement dans l'interface de MWM.<br>\r
@@ -61,7 +61,7 @@ Le fichier doit se trouver dans le repertoire 'article.wmcode'.<br>\r",
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"This part will help you test Hydr code (BBcode like).<br>\r
 <br>\r
 Enter the filename containing a Hydr script and you will be able to test it directly into this interface.<br>\r
@@ -83,7 +83,7 @@ $colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -
 
 $Content .= "
 <p>
-".$bts->I18nObj->getI18nEntry('invite1')."
+".$bts->I18nTransObj->getI18nTransEntry('invite1')."
 <br>\r
 <br>\r
 
@@ -171,7 +171,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 0,
 		"size" 				=> 0,
 		"lastSize"			=> 0,

@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_document_validation_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"Cette partie va vous permettre de modifier les documents.",
 		"type0"			=>	"Hydr",
 		"type1"			=>	"Pas de code",
@@ -62,7 +62,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=>	"This part will allow you to modify documents.",
 		"type0"			=>	"Hydr",
 		"type1"			=>	"No code",
@@ -92,27 +92,27 @@ AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 
 $tab_modif = array(
-		0 => $bts->I18nObj->getI18nEntry('modif0'),
-		1 => $bts->I18nObj->getI18nEntry('modif1'),
+		0 => $bts->I18nTransObj->getI18nTransEntry('modif0'),
+		1 => $bts->I18nTransObj->getI18nTransEntry('modif1'),
 );
 $tab_type = array(
-		0 => $bts->I18nObj->getI18nEntry('type0'),
-		1 => $bts->I18nObj->getI18nEntry('type1'),
-		2 => $bts->I18nObj->getI18nEntry('type2'),
-		3 => $bts->I18nObj->getI18nEntry('type3'),
+		0 => $bts->I18nTransObj->getI18nTransEntry('type0'),
+		1 => $bts->I18nTransObj->getI18nTransEntry('type1'),
+		2 => $bts->I18nTransObj->getI18nTransEntry('type2'),
+		3 => $bts->I18nTransObj->getI18nTransEntry('type3'),
 );
 
 $T = array();
 $i = 1;
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien " . $Block."_t1' href='index.php?&amp;M_DOCUME[document_selection]=".$dbp['docu_id'].$bloc_html['url_sldup']."&amp;arti_page=2'>".$dbp['docu_name']."</a>";
@@ -131,7 +131,7 @@ $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_larg
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "dl";
 $T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $bts->I18nObj->getI18nEntry('cell_1_txt');
+$T['tab_infos']['cell_1_txt']		= $bts->I18nTransObj->getI18nTransEntry('cell_1_txt');
 
 $T['ADC']['onglet']['1']['nbr_ligne']	= $i;
 $T['ADC']['onglet']['1']['nbr_cellule']	= 3;
@@ -172,7 +172,7 @@ $SB = array(
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 		"onclick"			=> "",
-		"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 0,
 		"size" 				=> 0,
 		"lastSize"			=> 0,

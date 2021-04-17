@@ -11,6 +11,31 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work.
+/* @var $bts BaseToolSet                            */
+/* @var $CMObj ConfigurationManagement              */
+/* @var $ClassLoaderObj ClassLoader                 */
+/* @var $LMObj LogManagement                        */
+/* @var $MapperObj Mapper                           */
+/* @var $InteractiveElementsObj InteractiveElements */
+/* @var $RenderTablesObj RenderTables               */
+/* @var $RequestDataObj RequestData                 */
+/* @var $SDDMObj DalFacade                          */
+/* @var $SqlTableListObj SqlTableList               */
+/* @var $StringFormatObj StringFormat               */
+
+/* @var $CurrentSetObj CurrentSet                   */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $RenderLayoutObj RenderLayout               */
+/* @var $ThemeDataObj ThemeData                     */
+/* @var $UserObj User                               */
+/* @var $WebSiteObj WebSite                         */
+
+/* @var $Block String                               */
+/* @var $infos array                                */
+/* @var $l String                                   */
+/*Hydre-IDE-end*/
 
 class LibInstallationReport {
 	private static $Instance = null;
@@ -75,12 +100,12 @@ class LibInstallationReport {
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('perfTab01');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('perfTab02');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('perfTab03');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('perfTab04');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('perfTab05');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-// 		$Content['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('perfTab06');	$Content['1']['6']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');	$Content['1']['2']['class'] = $block."_tb3";
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
+// 		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');	$Content['1']['6']['class'] = $block."_tb3";
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
@@ -110,12 +135,12 @@ class LibInstallationReport {
 			$A['MemoireSegment'] = ( $A['memoire'] - $pv['mem_b4'] );
 			$pv['mem_b4'] = $A['memoire'];
 			
-			$Content[$i]['1']['cont'] = $A['position'];																$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
-			$Content[$i]['2']['cont'] = $A['routine'];																$Content[$i]['2']['tc'] = 1;
-			$Content[$i]['3']['cont'] = $A['TempsPerf'];															$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";
+			$Content[$i]['1']['cont'] = $A['position'];																	$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['2']['tc'] = 1;
+			$Content[$i]['3']['cont'] = $A['TempsPerf'];																$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";
 			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
-			$Content[$i]['5']['cont'] = $A['SQL_queries'];															$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
-// 			$Content[$i]['6']['cont'] = $A['context'];																$Content[$i]['6']['tc'] = 1;
+			$Content[$i]['5']['cont'] = $A['SQL_queries'];																$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
+// 			$Content[$i]['6']['cont'] = $A['context'];																	$Content[$i]['6']['tc'] = 1;
 // 			error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
 
 			$SQLQueries += $A['SQL_queries'];

@@ -12,60 +12,61 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-class I18n {
+class I18nTrans {
 	private static $Instance = null;
 	
-	private $i18n = array();
+	private $I18nTrans = array();
 	
 	private function __construct(){}
 	
 	/**
 	 * Singleton : Will return the instance of this class.
-	 * @return I18n
+	 * @return I18nTrans
 	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new I18n();
+			self::$Instance = new I18nTrans();
 		}
 		return self::$Instance;
 	}
 	
 	/**
-	 * Gets the i18n data from the database and store it. The default package is 'initial' 
+	 * Gets the I18nTrans data from the database and store it. The default package is 'initial' 
 	 * @param string $package
 	 */
-	public function getI18nFromDB ($package = 'initial' ) {
+	public function getI18nTransFromDB ($package = 'initial' ) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 // 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
 		$dbquery = $bts->SDDMObj->query ("
-		SELECT i18n_name, i18n_text FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
+		SELECT i18n_name, i18n_text 
+		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('I18n')."
 		WHERE i18n_package = '".$package."'
 		AND lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
 		");
-		$tab0 = $this->i18n;
+		$tab0 = $this->I18nTrans;
 		$tab1 = array();
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
-		$this->i18n = array_merge ($tab0, $tab1);
+		$this->I18nTrans = array_merge ($tab0, $tab1);
 	}
 	
 	/**
-	 * Merge the incoming array with the i18n array.
+	 * Merge the incoming array with the I18nTrans array.
 	 * @param array $data
 	 */
 	public function apply($data) { 
-		$tab0 = $this->i18n;
-		$this->i18n = array_merge ($tab0, $data);
+		$tab0 = $this->I18nTrans;
+		$this->I18nTrans = array_merge ($tab0, $data);
 	}
 	
 	
 	//@formatter:off
-	public function getI18n() { return $this->i18n; }
-	public function getI18nEntry($entry) { return $this->i18n[$entry]; }
-	public function setI18n($i18n) { $this->i18n = $i18n; }
-	public function setI18nEntry($entry, $data) { $this->i18n[$entry] = $data; }
+	public function getI18nTrans() { return $this->I18nTrans; }
+	public function getI18nTransEntry($entry) { return $this->I18nTrans[$entry]; }
+	public function setI18nTrans($I18nTrans) { $this->I18nTrans = $I18nTrans; }
+	public function setI18nTransEntry($entry, $data) { $this->I18nTrans[$entry] = $data; }
 	//@formatter:on
 	
 }

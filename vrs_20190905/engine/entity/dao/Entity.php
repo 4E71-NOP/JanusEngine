@@ -385,6 +385,21 @@ class Entity {
 	 * @param int $id
 	 * @return boolean
 	 */
+	public function LanguageWebsiteExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website'),
+			'column'	=> 'lang_website_id',
+			'id'		=> $id,
+			)
+		);
+	}
+	
+	/**
+	 * Returns true if the lang_id exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
 	public function layoutExists($id) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		return $this->findEntryInDb( array (
@@ -420,6 +435,21 @@ class Entity {
 		return $this->findEntryInDb( array (
 			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module'),
 			'column'	=> 'module_id',
+			'id'		=> $id,
+			)
+		);
+	}
+	
+	/**
+	 * Returns true if the module exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
+	public function moduleWebsiteExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website'),
+			'column'	=> 'module_website_id',
 			'id'		=> $id,
 			)
 		);
@@ -472,6 +502,20 @@ class Entity {
 		);
 	}
 	
+	/**
+	 * Returns true if the theme_id exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
+	public function themeWebsiteExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website'),
+			'column'	=> 'theme_website_id',
+			'id'		=> $id,
+			)
+		);
+	}
 	
 	/**
 	 * Returns true if the user_id exists in the DB.

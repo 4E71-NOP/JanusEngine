@@ -71,7 +71,7 @@ $bts->MapperObj->setSqlApplicant("uni_profile_management_p01.php");
 
 switch ($CurrentSetObj->getDataEntry('language')) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"anonDeny"		=>	"Partie reservée aux membres enregistrés",
 		"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
 		"col_1_txt"		=>	"Id",
@@ -136,7 +136,7 @@ switch ($CurrentSetObj->getDataEntry('language')) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"anonDeny"		=>	"Partie reservée aux membres enregistrés",
 		"invite1"		=>	"This part will allow you to manage Logs.",
 		"col_1_txt"		=>	"Id",
@@ -202,7 +202,7 @@ switch ($CurrentSetObj->getDataEntry('language')) {
 }
 $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 // $UserObj = $CurrentSetObj->getInstanceOfUserObj();
-if ( $UserObj->getUserEntry('user_login') == "anonymous" ) { $Content .= $bts->I18nObj->getI18nEntry("anonDeny"); }
+if ( $UserObj->getUserEntry('user_login') == "anonymous" ) { $Content .= $bts->I18nTransObj->getI18nTransEntry("anonDeny"); }
 else {
 // --------------------------------------------------------------------------------------------
 //	Debut du formulaire
@@ -215,11 +215,11 @@ else {
 	";
 	
 	if ( $bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'uploadError') == 1 ) {
-		$Content .= "<p class='" . $Block."_avert'>".$bts->I18nObj->getI18nEntry('AvatarUploadError')[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'AvatarUploadError')]."</p>\r<br>\r";
+		$Content .= "<p class='" . $Block."_avert'>".$bts->I18nTransObj->getI18nTransEntry('AvatarUploadError')[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'AvatarUploadError')]."</p>\r<br>\r";
 	}
 	
 	if ( $bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'confirmation_modification_oubli') == 'on' ) { 
-		$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nEntry('confirmation_modification_oubli')."</p>\r<br>\r"; 
+		$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('confirmation_modification_oubli')."</p>\r<br>\r"; 
 	}
 	
 	$Content .= "<br>\r
@@ -263,9 +263,9 @@ else {
 	
 	
 	$T = array();
-	$T['AD']['1']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l1');
-	$T['AD']['1']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l2');
-	$T['AD']['1']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1_l3');
+	$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l1');
+	$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l2');
+	$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l3');
 	
 	$T['AD']['1']['1']['2']['cont'] = "<input type='text' name='formParams[login]' value='".$UserObj->getUserEntry('user_login')."' size='15' maxlength='255' class='" . $Block."_t3 " . $Block."_t3 " . $Block."_form_1'  disabled> (ne sera pas modifié)";
 	
@@ -276,12 +276,12 @@ else {
 	<input type='file' name='formParams[AvatarSelectedFile]' size='40' class='" . $Block."_t3 " . $Block."_form_1'>";
 
 // --------------------------------------------------------------------------------------------
-	$T['AD']['2']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l1');
-	$T['AD']['2']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l2');
-	$T['AD']['2']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l3');
-	$T['AD']['2']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l4');
-	$T['AD']['2']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l5');
-	$T['AD']['2']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2_l6');
+	$T['AD']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l1');
+	$T['AD']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l2');
+	$T['AD']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l3');
+	$T['AD']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l4');
+	$T['AD']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l5');
+	$T['AD']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l6');
 	
 	$T['AD']['2']['1']['2']['cont'] = "<input type='text' name='formParams[user_email]' value='".		$UserObj->getUserEntry('user_email')	."' size='30' maxlength='255' class='"	.$Block."_t3 ".$Block."_form_1'>";
 	$T['AD']['2']['2']['2']['cont'] = "<input type='text' name='formParams[user_msn]' value='".			$UserObj->getUserEntry('user_msn')		."' size='30' maxlength='25' class='"	.$Block."_t3 ".$Block."_form_1'>";
@@ -292,11 +292,11 @@ else {
 	
 	
 // --------------------------------------------------------------------------------------------
-	$T['AD']['3']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3_l1');
-	$T['AD']['3']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3_l2');
-	$T['AD']['3']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3_l3');
-	$T['AD']['3']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3_l4');
-	$T['AD']['3']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3_l5');
+	$T['AD']['3']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l1');
+	$T['AD']['3']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l2');
+	$T['AD']['3']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l3');
+	$T['AD']['3']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l4');
+	$T['AD']['3']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l5');
 	
 	$T['AD']['3']['1']['2']['cont'] = "<input type='text' name='formParams[perso_nom]' value='".			$UserObj->getUserEntry('user_perso_name')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
 	$T['AD']['3']['2']['2']['cont'] = "<input type='text' name='formParams[perso_pays]' value='".			$UserObj->getUserEntry('user_perso_country')		."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
@@ -305,25 +305,25 @@ else {
 	$T['AD']['3']['5']['2']['cont'] = "<input type='text' name='formParams[perso_interet]' value='".		$UserObj->getUserEntry('user_perso_interest')	."' size='30' maxlength='255' class='".$Block."_t3 ".$Block."_form_1'>";
 // --------------------------------------------------------------------------------------------
 
-	$T['AD']['4']['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l1');
-	$T['AD']['4']['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l2');
-	$T['AD']['4']['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l3');
-	$T['AD']['4']['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l4');
-	$T['AD']['4']['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l5');
-	$T['AD']['4']['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l6');
-	$T['AD']['4']['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l7');
-	$T['AD']['4']['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l8');
-	$T['AD']['4']['9']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4_l9');
+	$T['AD']['4']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l1');
+	$T['AD']['4']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l2');
+	$T['AD']['4']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l3');
+	$T['AD']['4']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l4');
+	$T['AD']['4']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l5');
+	$T['AD']['4']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l6');
+	$T['AD']['4']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l7');
+	$T['AD']['4']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l8');
+	$T['AD']['4']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l9');
 	
 	// TSO = $TableSelectOptions
 	$TSO = array(
 			0	=>	array (
 				"A"	=>	"<option value='0' ",
-				"B"	=>	">".$bts->I18nObj->getI18nEntry('uni')[0]."</option>\r",
+				"B"	=>	">".$bts->I18nTransObj->getI18nTransEntry('uni')[0]."</option>\r",
 			),
 			1	=>	array (
 				"A"	=>	"<option value='0' ",
-				"B"	=>	">".$bts->I18nObj->getI18nEntry('uni')[1]."</option>\r",
+				"B"	=>	">".$bts->I18nTransObj->getI18nTransEntry('uni')[1]."</option>\r",
 			),
 	);
 	
@@ -426,7 +426,7 @@ else {
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
 	<tr>\r
 	<td style='width: ".($RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - 200)."px;'>\r
-	<input type='checkbox' name='formParams[confirmation_modification]' checked> ".$bts->I18nObj->getI18nEntry('text_confirm1')."\r
+	<input type='checkbox' name='formParams[confirmation_modification]' checked> ".$bts->I18nTransObj->getI18nTransEntry('text_confirm1')."\r
 	</td>\r
 	<td style='width: 200px;'>\r
 	";
@@ -437,7 +437,7 @@ else {
 			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 			"onclick"			=> "",
-			"message"			=> $bts->I18nObj->getI18nEntry('modif_profil'),
+			"message"			=> $bts->I18nTransObj->getI18nTransEntry('modif_profil'),
 			"mode"				=> 0,
 			"size" 				=> 0,
 			"lastSize"			=> 0,
@@ -489,7 +489,7 @@ else {
 // 	AND a.theme_id = b.theme_id
 // 	;");
 	
-	$Content .= "<p>".$bts->I18nObj->getI18nEntry('text_choix_theme')."<br>\r</p>\r";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('text_choix_theme')."<br>\r</p>\r";
 	
 	$PmThemeName = "PM_";
 	$PmThemeDescriptorObj = new ThemeDescriptor();
@@ -530,7 +530,7 @@ else {
 	}
 
 	for ( $i = 1; $i < (count($ListThemeBlock)+2); $i++ ) {
-		$bts->I18nObj->setI18nEntry('tabTxtThm'.$i, "#".$i);
+		$bts->I18nTransObj->setI18nEntry('tabTxtThm'.$i, "#".$i);
 		$T['ADC']['onglet'][$i] = $bts->RenderTablesObj->getDefaultTableConfig(1,1,0);
 	}
 	$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, count($ListThemeBlock)+1,1,0,'tabTxtThm');
@@ -621,12 +621,12 @@ else {
 			<table class='".$PmBlock.CLASS_TableStd."'>
 			<tr style='background-color:transparent;'>\r
 			<td>\r
-			".$bts->I18nObj->getI18nEntry('formIwantTo').": 
+			".$bts->I18nTransObj->getI18nTransEntry('formIwantTo').": 
 			<select name='formCommand1' class='".$PmBlock."_t3 ".$PmBlock."_form_1'>\r
-			<option value='NONE'>".$bts->I18nObj->getI18nEntry('formIwantToSee')."</option>\r
-			<option value='update'>".$bts->I18nObj->getI18nEntry('formIwantToActivate')."</option>\r
+			<option value='NONE'>".$bts->I18nTransObj->getI18nTransEntry('formIwantToSee')."</option>\r
+			<option value='update'>".$bts->I18nTransObj->getI18nTransEntry('formIwantToActivate')."</option>\r
 			</select>\r
-			".$bts->I18nObj->getI18nEntry('formTheTheme')." 
+			".$bts->I18nTransObj->getI18nTransEntry('formTheTheme')." 
 			<select name='formParams1[pref_theme]'>\r
 			";
 			
@@ -653,7 +653,7 @@ else {
 					"initialStyle"		=> $PmBlock."_t3 ".$PmBlock."_submit_s2_n",
 					"hoverStyle"		=> $PmBlock."_t3 ".$PmBlock."_submit_s2_h",
 					"onclick"			=> "",
-					"message"			=> $bts->I18nObj->getI18nEntry('btn1'),
+					"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 					"mode"				=> 0,
 					"size" 				=> 0,
 					"lastSize"			=> 0,

@@ -209,7 +209,7 @@ class HydrInstall {
 		}
 
 		include ("current/install/i18n/install_init_" . $l . ".php");
-		$bts->I18nObj->apply ( $i18n );
+		$bts->I18nTransObj->apply ( $i18n );
 		unset ( $i18n );
 		// --------------------------------------------------------------------------------------------
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
@@ -268,7 +268,7 @@ class HydrInstall {
 
 		$RenderDeco = RenderDeco50Exquisite::getInstance ();
 		$DocContent .= $RenderDeco->render ( $infos );
-		$DocContent .= "<h1 style='text-align: center;'>" . $bts->I18nObj->getI18nEntry ( 'b01Invite' ) . "</h1></div>\r";
+		$DocContent .= "<h1 style='text-align: center;'>" . $bts->I18nTransObj->getI18nTransEntry ( 'b01Invite' ) . "</h1></div>\r";
 
 		// --------------------------------------------------------------------------------------------
 

@@ -51,8 +51,8 @@ class Template {
 		
 		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
-			case "edit":	$Content .= "<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nObj->getI18nEntry('updateConfirm');		break;
-			case "create":	$Content .= "<input type='checkbox' name='formGenericData[creation]' 	>".$bts->I18nObj->getI18nEntry('createEditConfirm');		break;
+			case "edit":	$Content .= "<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('updateConfirm');		break;
+			case "create":	$Content .= "<input type='checkbox' name='formGenericData[creation]' 	>".$bts->I18nTransObj->getI18nTransEntry('createEditConfirm');		break;
 		}
 		$Content .= "
 		</td>\r
@@ -60,9 +60,9 @@ class Template {
 		";
 				
 		$btnTxtTab = array(
-				"delete"	=>	$bts->I18nObj->getI18nEntry('btnDelete'),
-				"edit"		=>	$bts->I18nObj->getI18nEntry('btnUpdate'),
-				"create"	=>	$bts->I18nObj->getI18nEntry('btnCreate'),
+				"delete"	=>	$bts->I18nTransObj->getI18nTransEntry('btnDelete'),
+				"edit"		=>	$bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
+				"create"	=>	$bts->I18nTransObj->getI18nTransEntry('btnCreate'),
 		);
 		
 		$SB = array(
@@ -102,7 +102,7 @@ class Template {
 				"id"				=> "returnButton",
 				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-				"message"			=> $bts->I18nObj->getI18nEntry('btnReturn'),
+				"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnReturn'),
 				"mode"				=> 1,
 				"size" 				=> 0,
 		);
@@ -133,7 +133,7 @@ class Template {
 				."
 				<tr>\r
 				<td>\r
-				<input type='checkbox' name='formGenericData[deletion]'>".$bts->I18nObj->getI18nEntry('deleteConfirm')."
+				<input type='checkbox' name='formGenericData[deletion]'>".$bts->I18nTransObj->getI18nTransEntry('deleteConfirm')."
 				</td>\r
 				<td align='right'>\r
 				";
@@ -143,7 +143,7 @@ class Template {
 						"id"				=> "deleteButton",
 						"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
 						"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
-						"message"			=> $bts->I18nObj->getI18nEntry('btnDelete'),
+						"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnDelete'),
 						"mode"				=> 1,
 						"size" 				=> 0,
 				);
@@ -189,7 +189,7 @@ class Template {
 				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
 				"onclick"			=> "",
-				"message"			=> $bts->I18nObj->getI18nEntry('btnCreate'),
+				"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnCreate'),
 				"mode"				=> 1,
 				"size" 				=> 128,
 				"lastSize"			=> 0,

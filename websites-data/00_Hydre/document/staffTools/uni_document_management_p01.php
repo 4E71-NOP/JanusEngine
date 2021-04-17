@@ -40,7 +40,7 @@ $bts->MapperObj->setSqlApplicant("uni_document_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
 		"col_1_txt"		=> "Nom",
 		"col_2_txt"		=> "Type",
@@ -55,7 +55,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage documents.",
 		"col_1_txt"		=> "Name",
 		"col_2_txt"		=> "Type",
@@ -70,7 +70,7 @@ switch ($l) {
 		));
 		break;
 }
-$Content .= $bts->I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $bts->SDDMObj->query("
 SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
@@ -83,28 +83,28 @@ AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 $T = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nObj->getI18nEntry('nothingToDisplay');
+	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['AD']['1'][$i]['2']['cont'] = "";
 	$T['AD']['1'][$i]['3']['cont'] = "";
 }
 else {
 	
 	$type = array (
-		0 => $bts->I18nObj->getI18nEntry('docTyp0'),
-		1 => $bts->I18nObj->getI18nEntry('docTyp1'),
-		2 => $bts->I18nObj->getI18nEntry('docTyp2'),
-		3 => $bts->I18nObj->getI18nEntry('docTyp3'),
+		0 => $bts->I18nTransObj->getI18nTransEntry('docTyp0'),
+		1 => $bts->I18nTransObj->getI18nTransEntry('docTyp1'),
+		2 => $bts->I18nTransObj->getI18nTransEntry('docTyp2'),
+		3 => $bts->I18nTransObj->getI18nTransEntry('docTyp3'),
 	);
 	
 	$modif = array(
-		0 => $bts->I18nObj->getI18nEntry('docModif0'),
-		1 => $bts->I18nObj->getI18nEntry('docModif1'),
+		0 => $bts->I18nTransObj->getI18nTransEntry('docModif0'),
+		1 => $bts->I18nTransObj->getI18nTransEntry('docModif1'),
 	);
 	
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nObj->getI18nEntry('col_3_txt');
+	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;

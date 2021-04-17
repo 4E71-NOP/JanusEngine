@@ -60,7 +60,7 @@ switch ($l) {
 		break;
 }
 
-$Content .= $I18nObj->getI18nEntry('invite1')."<br>\r<br>\r";
+$Content .= $I18nObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $collection = array(
 	"JavaScript" => array(
@@ -115,10 +115,10 @@ $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_larg
 $T['tab_infos']['GroupName']		= "list";
 $T['tab_infos']['CellName']			= "link";
 $T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nEntry('cell_1_txt');
-$T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nEntry('cell_2_txt');
-$T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nEntry('cell_3_txt');
-$T['tab_infos']['cell_4_txt']		= $I18nObj->getI18nEntry('cell_4_txt');
+$T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
+$T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
+$T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
+$T['tab_infos']['cell_4_txt']		= $I18nObj->getI18nTransEntry('cell_4_txt');
 
 $config = array(
 	"mode" => 1,

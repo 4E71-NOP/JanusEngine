@@ -45,7 +45,7 @@ $bts->MapperObj->setSqlApplicant("uni_category_management_p01.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de modifier les deadlines.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Nom",
@@ -61,7 +61,7 @@ switch ($l) {
 		));
 		break;
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to modify deadlines.",
 		"col_1_txt"		=> "Id",
 		"col_2_txt"		=> "Name",
@@ -116,13 +116,13 @@ reset ($CateTabList);
 unset ($A);
 foreach ( $CateTabList as $A ) {
 	$Tab = $A['tab'];
-	$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('col_1_txt');
-	$T['AD'][$Tab]['1']['2']['cont'] = $bts->I18nObj->getI18nEntry('col_2_txt');
-	$T['AD'][$Tab]['1']['3']['cont'] = $bts->I18nObj->getI18nEntry('col_3_txt');
-	$T['AD'][$Tab]['1']['4']['cont'] = $bts->I18nObj->getI18nEntry('col_4_txt');
-	$T['AD'][$Tab]['1']['5']['cont'] = $bts->I18nObj->getI18nEntry('col_5_txt');
-	$T['AD'][$Tab]['1']['6']['cont'] = $bts->I18nObj->getI18nEntry('col_6_txt');
-	$T['AD'][$Tab]['1']['7']['cont'] = $bts->I18nObj->getI18nEntry('col_7_txt');
+	$T['AD'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['AD'][$Tab]['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['AD'][$Tab]['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['AD'][$Tab]['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['AD'][$Tab]['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+	$T['AD'][$Tab]['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+	$T['AD'][$Tab]['1']['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 }
 
 $dbquery = $bts->SDDMObj->query("SELECT * 
@@ -137,8 +137,8 @@ ORDER BY c.lang_id, c.cate_parent, c.cate_position
 ;");
 
 $stateTab = array(
-	0	=>	$bts->I18nObj->getI18nEntry('disabled'),
-	1	=>	$bts->I18nObj->getI18nEntry('enabled'),
+	0	=>	$bts->I18nTransObj->getI18nTransEntry('disabled'),
+	1	=>	$bts->I18nTransObj->getI18nTransEntry('enabled'),
 );
 
 $buttonLink = "<a href='index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article', 'arti_page'); 
@@ -186,7 +186,7 @@ unset ($A);
 foreach ( $CateTabList as $A ) {
 	$Tab = $A['tab'];
 	$T['ADC']['onglet'][$Tab] = $bts->RenderTablesObj->getDefaultTableConfig($A['count']-1,7,1);
-	$bts->I18nObj->setI18nEntry('tabTxt'.$Tab, $A['nom']);
+	$bts->I18nTransObj->setI18nEntry('tabTxt'.$Tab, $A['nom']);
 }
 $T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15,$nbrTabs );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

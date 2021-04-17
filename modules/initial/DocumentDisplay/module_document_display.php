@@ -328,7 +328,7 @@ class ModuleDocumentDisplay {
 			if ( $documentAnalyse['nbr'] == 15 ) { $documentAnalyse['mode'] = "exit"; }
 			$documentAnalyse['nbr']++;
 		}
-		
+
 // 		We need to modify the css classnames expressions in the script
 		$search = array (	'{[block]}',	"{[DataLocation]}");
 		$replace = array(	$Block,			$baseUrl."websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/documents/".$DocumentDataObj->getDocumentDataEntry('docu_name')."/");
@@ -357,13 +357,13 @@ class ModuleDocumentDisplay {
 				$result = eval ($analysedContent);
 				break;
 			case 2 :
-				$result = $this->documentExecution($analysedContent);
+				$result = $this->documentExecution($analysedContent, $infos);
 				break;
 		}
 		
 		$Content .= $result;
 		
-		
+
 		// --------------------------------------------------------------------------------------------
 		// Update document stats
 		
@@ -652,19 +652,19 @@ class ModuleDocumentDisplay {
 						"['WM']" , $StartPos );																	// Gives the first ['WM'] position
 				if ( $StartPos == false) {																		// Checks if a markup is found... or not
 					if ( $EndPos == 0 ) { 																		// Finds code presence in the whole document
-						$this->documentConvertion( $inputContent , $infos );									// If there is no code to execute, we display the document directly
+						// $this->documentConvertion( $inputContent , $infos );									// If there is no code to execute, we display the document directly
 						$pv['wm_fini'] = 1;
 					}
 					if ( $pv['wm_fini'] != 1 ) {
 						$pv['docu_len'] = strlen ($inputContent);												// This is the document end, it gives the length
 						$pv['docu_tmp_cont'] = substr( $inputContent , $EndPos , $pv['docu_len'] - $EndPos );	// There is another wm_end as a start offset;
-						$Content = $this->documentConvertion ( $pv['docu_tmp_cont'] , $infos );
+						// $Content = $this->documentConvertion ( $pv['docu_tmp_cont'] , $infos );
 						$SearchAction = "OFF";																	// We get out
 					}
 				}
 				else {
 					$pv['docu_tmp_cont'] = substr( $inputContent, $EndPos, $StartPos - $EndPos );				// Display all that is before the code.
-					$this->documentConvertion ( $pv['docu_tmp_cont'] , $infos );
+					// $this->documentConvertion ( $pv['docu_tmp_cont'] , $infos );
 					$Content .= $pv['docu_tmp_cont'];
 					$Mode ="CODE";																				// Switch for execution
 					$SearchAction = "ON";																		// We found a ['WM'] markup, we stay!!!

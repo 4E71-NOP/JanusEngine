@@ -64,7 +64,7 @@ $bts->MapperObj->setSqlApplicant("uni_user_management_p02.php");
 
 switch ($l) {
 	case "fra":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "Cette partie va vous permettre de gérer le thème.",
 		"invite2"		=> "Cette partie va vous permettre de créer un thème.",
 		"tabTxt1"		=> "Général",
@@ -123,7 +123,7 @@ switch ($l) {
 		break;
 		
 	case "eng":
-		$bts->I18nObj->apply(array(
+		$bts->I18nTransObj->apply(array(
 		"invite1"		=> "This part will allow you to manage this theme.",
 		"invite2"		=> "This part will allow you to create a theme.",
 		"tabTxt1"		=> "General",
@@ -194,7 +194,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'mode') ) {
 		$commandType = "update";
 		$currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'selectionName'), $WebSiteObj);
 		$t1l2c2 = $currentUserObj->getUserEntry('user_name');
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite1')."</p>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
@@ -238,8 +238,8 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'mode') ) {
 					"user_admin_comment"				=>	"Null",
 				)
 		);
-		$t1l2c2 = "<input type='text' name='formTarget[name]' size='45' maxlength='255' value=\"".$bts->I18nObj->getI18nEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$Content .= "<p>".$bts->I18nObj->getI18nEntry('invite2')."</p>\r";
+		$t1l2c2 = "<input type='text' name='formTarget[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
@@ -255,8 +255,8 @@ $tabLanguage	= $MenuSelectTableObj->getLanguageList();
 $tabTheme		= $MenuSelectTableObj->getThemeList();
 
 $tabYN = array(
-		0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('yes'),	"db"=>"YES" ),
+		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
 
 // --------------------------------------------------------------------------------------------
@@ -309,12 +309,12 @@ $Content .= "
 $T = array();
 $curTab = 1;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t1l6c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 
 $T['AD'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
@@ -350,10 +350,10 @@ $T['AD'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_com
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t2l4c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
 
 $bts->LMObj->logDebug($currentUserObj, 'currentUserObj');
 
@@ -365,9 +365,9 @@ $T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";
 
 
 $tabStatus = array(
-	0	=> array ( "t"=>$bts->I18nObj->getI18nEntry('offline'),	"db"=>"OFFLINE" ),
-	1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('online'),		"db"=>"ONLINE" ),
-	2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('deleted'),	"db"=>"DELETED" ),
+	0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('offline'),	"db"=>"OFFLINE" ),
+	1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('online'),		"db"=>"ONLINE" ),
+	2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('deleted'),	"db"=>"DELETED" ),
 );
 $tabStatus[$currentUserObj->getUserEntry('user_status')]['s'] = " selected ";
 $T['AD'][$curTab]['2']['2']['cont'] = "<select name='formParams[status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -376,8 +376,8 @@ $T['AD'][$curTab]['2']['2']['cont'] .= "</select>\r";
 
 
 $tabRole = array(
-		1	=> array ( "t"=>$bts->I18nObj->getI18nEntry('public'),	"db"=>"PUBLIC" ),
-		2	=> array ( "t"=>$bts->I18nObj->getI18nEntry('private'),	"db"=>"PRIVATE" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('public'),	"db"=>"PUBLIC" ),
+		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('private'),	"db"=>"PRIVATE" ),
 );
 $tabRole[$currentUserObj->getUserEntry('user_role_function')]['s'] = " selected ";
 $T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[role]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -393,12 +393,12 @@ $T['AD'][$curTab]['4']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t3l6c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l5c1');
+$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l6c1');
 
 $T['AD'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[user_email]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_email')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['AD'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[user_msn]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_msn')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -410,11 +410,11 @@ $T['AD'][$curTab]['6']['2']['cont'] = "<input type='text' name='formParams[user_
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t4l5c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l5c1');
 
 $T['AD'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[perso_nom]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_nom')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['AD'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[perso_pays]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_pays')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -427,10 +427,10 @@ $T['AD'][$curTab]['5']['2']['cont'] = "<input type='text' name='formParams[perso
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t5l4c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
 
 $tabLanguage[$currentUserObj->getUserEntry('user_lang')]['s'] = " selected ";
 $T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -444,15 +444,15 @@ $T['AD'][$curTab]['4']['2']['cont'] = $timezone[$currentUserObj->getUserEntry('u
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l6c1');
-$T['AD'][$curTab]['7']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l7c1');
-$T['AD'][$curTab]['8']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l8c1');
-$T['AD'][$curTab]['9']['1']['cont'] = $bts->I18nObj->getI18nEntry('t6l9c1');
+$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
+$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
+$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
+$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
+$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
+$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
+$T['AD'][$curTab]['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l7c1');
+$T['AD'][$curTab]['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l8c1');
+$T['AD'][$curTab]['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l9c1');
 
 
 
