@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Module {
+class Module extends Entity {
 	private $Module = array ();
 	
 	//@formatter:off
@@ -80,47 +80,24 @@ class Module {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Module);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." m
-			SET ".$QueryColumnDescription['equality']."
-			WHERE m.module_id ='".$this->Module['module_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : module already exist in DB. Updating Id=".$this->Module['module_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Module);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : module doesn't exist in DB. Inserting Id=".$this->Module['module_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->Module,
+			'targetTable'	=> 'module',
+			'targetColumn'	=> 'module_id',
+			'entityId'		=> $this->Module['module_id'],
+			'entityTitle'	=> 'module'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT m.module_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." m
-			WHERE m.module_id ='".$this->Module['module_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->moduleExists($this->Module['module_id']);
 	}
 	
 	
@@ -133,17 +110,8 @@ class Module {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT g.group_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." g
-			WHERE g.group_id ='".$this->Module['module_group_allowed_to_see']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT g.group_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." g
-			WHERE g.group_id ='".$this->Module['module_group_allowed_to_use']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
+		if ( $this->groupExists($this->Module['module_group_allowed_to_see']) == false ) { $res = false; }
+		if ( $this->groupExists($this->Module['module_group_allowed_to_use']) == false ) { $res = false; }
 		
 		return $res;
 	}
@@ -158,11 +126,8 @@ class Module {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Group['module_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->Module['module_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
-// 		$this->Module['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-// 		? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-// 		: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	
@@ -193,6 +158,5 @@ class Module {
 	//@formatter:off
 
 }
-
 
 ?>

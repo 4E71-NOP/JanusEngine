@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class ThemeDescriptor {
+class ThemeDescriptor extends Entity{
 	private $ThemeDescriptor = array ();
 	
 	//@formatter:off
@@ -132,6 +132,7 @@ class ThemeDescriptor {
 		
 		$q ="";
 		$Dest = $ThemeId;
+		// mt_ as Main Theme
 		if ( $Dest == "mt_" ) {
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme') != 0 ) { 
 				$Dest = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
@@ -148,7 +149,6 @@ class ThemeDescriptor {
 			AND a.theme_id = b.theme_id
 			AND b.theme_state = '1'
 			;";
-			
 		}
 		else { 
 			// Case for displaying another theme to the user (browsing and choosing).
@@ -185,9 +185,7 @@ class ThemeDescriptor {
 				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
 			}
 		}
-		$this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
-	
-		
+		// $this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
 	}
 	
 	/**
@@ -199,47 +197,24 @@ class ThemeDescriptor {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
 		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ThemeDescriptor);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td
-			SET ".$QueryColumnDescription['equality']."
-			WHERE td.theme_id ='".$this->ThemeDescriptor['theme_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : theme_descriptor already exist in DB. Updating Id=".$this->ThemeDescriptor['theme_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->ThemeDescriptor);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : theme_descriptor doesn't exist in DB. Inserting Id=".$this->ThemeDescriptor['theme_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->ThemeDescriptor,
+			'targetTable'	=> 'theme_descriptor',
+			'targetColumn'	=> 'theme_id',
+			'entityId'		=> $this->ThemeDescriptor['theme_id'],
+			'entityTitle'	=> 'ThemeDescriptor'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT td.theme_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td
-			WHERE td.theme_id ='".$this->ThemeDescriptor['theme_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		$this->themeDescriptorExists($this->ThemeDescriptor['theme_id']);
 	}
 	
 	
@@ -262,12 +237,9 @@ class ThemeDescriptor {
 	 * @return array()
 	 */
 	public function getDefaultValues () {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$date = time ();
 		$tab = $this->columns;
 		$this->ThemeDescriptor['theme_name'] .= "-".date("d_M_Y_H:i:s", time());
-		$this->ThemeDescriptor['theme_date'] .= time();
+		$this->ThemeDescriptor['theme_date'] = time();
 		
 		return $tab;
 	}
@@ -286,14 +258,13 @@ class ThemeDescriptor {
 				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('disabled')),
 			));
 	}
-
 	
 	//@formatter:off
 	public function getThemeDescriptorEntry ($data) { return $this->ThemeDescriptor[$data]; }
 	public function getThemeDescriptor() { return $this->ThemeDescriptor; }
 	
 	public function setThemeDescriptorEntry ($entry, $data) { 
-		if ( isset($this->ThemeDescriptor[$entry])) { $this->ThemeDescriptor[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+		if ( isset($this->ThemeDescriptor[$entry])) { $this->ThemeDescriptor[$entry] = $data; }	// DB Entity objects do NOT accept new columns!  
 	}
 
 	public function setThemeDescriptor($ThemeDescriptor) { $this->ThemeDescriptor = $ThemeDescriptor; }

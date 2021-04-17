@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Group {
+class Group extends Entity {
 	private $Group = array ();
 	
 	//@formatter:off
@@ -71,47 +71,23 @@ class Group {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Group);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." g
-			SET ".$QueryColumnDescription['equality']."
-			WHERE g.group_id ='".$this->Group['group_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : group already exist in DB. Updating Id=".$this->Group['group_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Group);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : group doesn't exist in DB. Inserting Id=".$this->Group['group_id']));
-		}
-	}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->Group,
+			'targetTable'	=> 'group',
+			'targetColumn'	=> 'group_id',
+			'entityId'		=> $this->Group['group_id'],
+			'entityTitle'	=> 'group'
+	);
+	if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+	elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT g.group_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." g
-			WHERE g.group_id ='".$this->Group['group_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->groupExists($this->Group['group_id']);
 	}
 	
 	
@@ -124,13 +100,6 @@ class Group {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		if ( $this->Group['group_tag'] < 0 && $this->Group['group_tag'] > 3) { $res = false; }
-		
-// 		$dbquery = $bts->SDDMObj->query("
-// 			SELECT ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')."
-// 			WHERE ws_id = ".$this->Group['ws_id']."
-// 			LIMIT 1;"
-// 				);
-// 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
 		
 		return $res;
 	}
@@ -147,9 +116,6 @@ class Group {
 		$tab = $this->columns;
 		$this->Group['group_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
-// 		$this->Group['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-// 		? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-// 		: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

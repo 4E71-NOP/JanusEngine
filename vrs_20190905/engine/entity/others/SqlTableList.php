@@ -14,18 +14,22 @@
 
 class SqlTableList {
 	private static $Instance = null;
+
+	private $SQLTableName = array();
+	// private $SQLTableShortName = array();		// Deprecated
 	
 	private $TableList = array (
 			'article',			'article_tag',			'article_config',
 			'category',			
 			'deadline',			
 			'decoration',		'deco_10_menu',			'deco_20_caligraph',		'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquisite',			'deco_60_elysion',					
+			'definition',
 			'document',			'document_share',		'document_partage',
 			'extension',		'extension_config',		'extension_dependency',		'extension_file',
 			'group',			'group_user',
 			'i18n',				
 			'installation',		
-			'keyword',			'returnnote',			
+			'keyword',			'note',			
 			'language',			'language_website',		
 			'log',				
 			'module',			'module_website',		
@@ -37,14 +41,11 @@ class SqlTableList {
 			'user',
 			'website',			'group_website',		'theme_website',
 	);
-	
-	private $SQLTableName = array();
-	private $SQLTableShortName = array();		// Deprecated
-	
+
 	private function __construct( $dbprefix , $tabprefix ){
 		foreach ( $this->TableList as $A ) { 
 			$this->SQLTableName[$A] = $dbprefix . "." .  $tabprefix . $A;
-			$this->SQLTableShortName[$A] = $tabprefix . $A;		// Deprecated
+			// $this->SQLTableShortName[$A] = $tabprefix . $A;		// Deprecated
 		}
 	}
 	
@@ -57,9 +58,9 @@ class SqlTableList {
 	
 	//@formatter:off
 	public function getSQLTableName( $data ) { return $this->SQLTableName[$data]; }
-	public function getSQLTableShortName( $data ) { return $this->SQLTableShortName[$data]; }		// Deprecated
 	public function getSQLWholeTableName() { return $this->SQLTableName; }
-	public function getSQLWholeTableShortName() { return $this->SQLTableShortName; }
+	// public function getSQLTableShortName( $data ) { return $this->SQLTableShortName[$data]; }		// Deprecated
+	// public function getSQLWholeTableShortName() { return $this->SQLTableShortName; }
 	//@formatter:on
 }
 

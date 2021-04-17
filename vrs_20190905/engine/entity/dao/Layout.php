@@ -11,15 +11,15 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Layout {
+class Layout extends Entity {
 	private $Layout = array ();
 	
 	//@formatter:off
 	private $columns = array(
 		'layout_id'				=> 0,
-		'layout_name'			=> "",
-		'layout_title'			=> "",
-		'layout_generic_name'	=> "",
+		'layout_name'			=> "New Layout",
+		'layout_title'			=> "New Layout",
+		'layout_generic_name'	=> "NewLyot",
 		'layout_desc'			=> 0,
 	);
 	//@formatter:on
@@ -63,47 +63,23 @@ class Layout {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Layout);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." l
-			SET ".$QueryColumnDescription['equality']."
-			WHERE l.layout_id ='".$this->Layout['layout_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout already exist in DB. Updating Id=".$this->Layout['layout_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Layout);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout doesn't exist in DB. Inserting Id=".$this->Layout['layout_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->Layout,
+			'targetTable'	=> 'layout',
+			'targetColumn'	=> 'layout_id',
+			'entityId'		=> $this->Layout['layout_id'],
+			'entityTitle'	=> 'layout'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT l.layout_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." l
-			WHERE l.layout_id ='".$this->Layout['layout_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->layoutExists($this->Layout['layout_id']);
 	}
 	
 	
@@ -129,7 +105,7 @@ class Layout {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Group['layout_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->Layout['layout_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
 		return $tab;
 	}

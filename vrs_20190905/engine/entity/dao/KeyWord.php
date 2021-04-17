@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class KeyWord {
+class KeyWord extends Entity {
 	private $KeyWord = array ();
 	
 	//@formatter:off
@@ -71,47 +71,23 @@ class KeyWord {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->KeyWord);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')." k
-			SET ".$QueryColumnDescription['equality']."
-			WHERE k.keyword_id ='".$this->KeyWord['keyword_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : keyword already exist in DB. Updating Id=".$this->KeyWord['keyword_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->KeyWord);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : keyword doesn't exist in DB. Inserting Id=".$this->KeyWord['keyword_id']));
-		}
-	}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->KeyWord,
+			'targetTable'	=> 'keyword',
+			'targetColumn'	=> 'keyword_id',
+			'entityId'		=> $this->KeyWord['keyword_id'],
+			'entityTitle'	=> 'group'
+	);
+	if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+	elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT k.keyword_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')." k
-			WHERE k.keyword_id ='".$this->KeyWord['keyword_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->keywordExists($this->KeyWord['keyword_id']);
 	}
 	
 	
@@ -124,19 +100,10 @@ class KeyWord {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		if ( $this->KeyWord['keyword_type'] < 0 && $this->KeyWord['keyword_type'] > 3) { $res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT a.article_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')." a
-			WHERE a.article_id ='".$this->Article['article_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')."
-			WHERE ws_id = ".$this->KeyWord['ws_id']."
-			LIMIT 1;");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
+
+		if ( $this->articleExists($this->KeyWord['arti_id']) == false ) { $res = false; }
+		if ( $this->websiteExists($this->KeyWord['ws_id']) == false ) { $res = false; }
+
 		return $res;
 	}
 	
@@ -150,7 +117,7 @@ class KeyWord {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Group['keyword_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->KeyWord['keyword_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
 		$this->KeyWord['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')

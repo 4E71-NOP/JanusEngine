@@ -19,7 +19,7 @@ class WebSite extends Entity{
 	private $columns = array(
 		'ws_id'				=> 0,
 		'ws_name'			=> "New Website",
-		'ws_short'			=> 0,
+		'ws_short'			=> "nw",
 		'ws_lang'			=> 0,
 		'ws_lang_select'	=> 0,
 		'theme_id'			=> 0,
@@ -49,7 +49,7 @@ class WebSite extends Entity{
 	 * It uses the current WebSiteObj to restrict the website selection to the website ID only.
 	 * @param integer $id
 	 */
-	public function getWebSiteDataFromDB() {
+	public function getDataFromDB() {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -112,47 +112,24 @@ class WebSite extends Entity{
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->WebSite);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." ws
-			SET ".$QueryColumnDescription['equality']."
-			WHERE ws.ws_id ='".$this->WebSite['ws_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : website already exist in DB. Updating Id=".$this->WebSite['ws_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->WebSite);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : website doesn't exist in DB. Inserting Id=".$this->WebSite['ws_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->WebSite,
+			'targetTable'	=> 'website',
+			'targetColumn'	=> 'ws_id',
+			'entityId'		=> $this->WebSite['ws_id'],
+			'entityTitle'	=> 'website'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
+	
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ws.ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." ws
-			WHERE ws.ws_id ='".$this->WebSite['ws_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->websiteExists($this->WebSite['ws_id']);
 	}
 	
 	/**
@@ -163,13 +140,6 @@ class WebSite extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')."
-			WHERE ws_id = ".$this->DocumentShare['ws_id']."
-			LIMIT 1;");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
 		
 		return $res;
 	}

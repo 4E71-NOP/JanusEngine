@@ -3,8 +3,9 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! (
-pv_name 						VARCHAR(255),
-pv_number					INTEGER,
-pv_text						VARCHAR(255)
+def_id 					VARCHAR(255),
+def_name 				VARCHAR(255),
+def_number				INTEGER,
+def_text				VARCHAR(255)
 );
 

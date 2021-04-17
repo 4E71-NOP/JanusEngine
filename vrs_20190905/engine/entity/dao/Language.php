@@ -11,8 +11,8 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Languages {
-	private $Languages = array ();
+class Language extends Entity {
+	private $Language = array ();
 	
 	//@formatter:off
 	private $columns = array(
@@ -26,7 +26,7 @@ class Languages {
 	//@formatter:on
 	
 	public function __construct() {
-		$this->Languages = $this->getDefaultValues();
+		$this->Language = $this->getDefaultValues();
 	}
 	
 	/**
@@ -39,21 +39,20 @@ class Languages {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('languages') . "
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('language') . "
 			WHERE lang_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for languages id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for language id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->Languages[$A] = $B; }
+					if (isset($this->columns[$A])) { $this->Language[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for languages id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for language id=".$id));
 		}
-		
 	}
 	
 	/**
@@ -65,47 +64,23 @@ class Languages {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Languages);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')." l
-			SET ".$QueryColumnDescription['equality']."
-			WHERE l.lang_id ='".$this->Languages['lang_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : languages already exist in DB. Updating Id=".$this->Languages['lang_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->Languages);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : languages doesn't exist in DB. Inserting Id=".$this->Languages['lang_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->Language,
+			'targetTable'	=> 'language',
+			'targetColumn'	=> 'lang_id',
+			'entityId'		=> $this->Language['lang_id'],
+			'entityTitle'	=> 'language'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT l.lang_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages')." l
-			WHERE l.lang_id ='".$this->Languages['lang_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->languageExists($this->Language['lang_id']);
 	}
 	
 	
@@ -117,7 +92,7 @@ class Languages {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
+
 		return $res;
 	}
 	
@@ -151,17 +126,16 @@ class Languages {
 	}
 	
 	//@formatter:off
-	public function getLanguagesEntry ($data) { return $this->Languages[$data]; }
-	public function getLanguages() { return $this->Languages; }
+	public function getLanguageEntry ($data) { return $this->Language[$data]; }
+	public function getLanguage() { return $this->Language; }
 	
-	public function setLanguagesEntry ($entry, $data) { 
-		if ( isset($this->Languages[$entry])) { $this->Languages[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setLanguageEntry ($entry, $data) { 
+		if ( isset($this->Language[$entry])) { $this->Language[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setLanguages($Languages) { $this->Languages = $Languages; }
+	public function setLanguage($Language) { $this->Language = $Language; }
 	//@formatter:off
 
 }
-
 
 ?>

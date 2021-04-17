@@ -228,7 +228,7 @@ class Hydr {
 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 		$CurrentSetObj->setInstanceOfWebSiteObj ( new WebSite () );
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
-		$WebSiteObj->getWebSiteDataFromDB ();
+		$WebSiteObj->getDataFromDB ();
 		
 		switch ($WebSiteObj->getWebSiteEntry ( 'ws_state' )) {
 			case 0 : // Offline
@@ -427,7 +427,7 @@ class Hydr {
 				case "AdminDashboardWebsiteManagementP01" :
 					// refresh with updated data
 					$id = $WebSiteObj->getWebSiteEntry ( 'ws_id' );
-					$WebSiteObj->getWebSiteDataFromDB ( $id );
+					$WebSiteObj->getDataFromDB ( $id );
 					break;
 			}
 		}

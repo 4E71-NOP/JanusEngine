@@ -17,7 +17,7 @@
  * @author faust
  *
  */
-class LayoutContent {
+class LayoutContent extends Entity {
 	private $LayoutContent = array ();
 	
 	//@formatter:off
@@ -111,7 +111,7 @@ class LayoutContent {
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout_content id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->LayoutDefinition[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { $this->LayoutContent[$A] = $B; }
 			}
 		}
 		else {
@@ -120,16 +120,89 @@ class LayoutContent {
 	}
 	
 	
+	/**
+	 * Updates or inserts in DB the local data.
+	 * mode ar available: <br>
+	 * <br>
+	 * 0 = insert or update - Depending on the Id existing in DB or not, it'll be UPDATE or INSERT<br>
+	 * 1 = insert only - Supposedly a new ID and not an existing one<br>
+	 * 2 = update only - Supposedly an existing ID<br>
+	 */
+	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->LayoutContent,
+			'targetTable'	=> 'layout_content',
+			'targetColumn'	=> 'lyoc_id',
+			'entityId'		=> $this->LayoutContent['lyoc_id'],
+			'entityTitle'	=> 'layoutContent'
+	);
+	if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+	elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+}
+	
+	/**
+	 * Verifies if the entity exists in DB.
+	 */
+	public function existsInDB() {
+		return $this->layoutContentExists($this->LayoutContent['lyoc_id']);
+	}
+	
+	
+	/**
+	 * Checks weither the local data is consistant with the database.
+	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
+	 */
+	public function checkDataConsistency () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$res = true;
+		if ( $this->layoutExists($this->LayoutContent['layout_id']) == false ) { $res = false; }
+		return $res;
+	}
+	
+	
+	/**
+	 * Returns the default values of this type (this is consistent witht de SQL model and it should stay that way)
+	 * @return array()
+	 */
+	public function getDefaultValues () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$date = time ();
+		$tab = $this->columns;
+		// $this->LayoutContent['lyoc_name'] .= "-".date("d_M_Y_H:i:s", time());
+		
+		return $tab;
+	}
+	
+	/**
+	 * Returns an array containing the list of states for this entity.
+	 * Useful for menu select amongst other things.
+	 * @return array()
+	 */
+	public function getMenuOptionArray () {
+		$bts = BaseToolSet::getInstance();
+		return array (
+			'state' => array (
+				0 => array( MenuOptionDb =>	 0,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('offline')),
+				1 => array( MenuOptionDb =>	 1,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('online')),
+				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nObj->getI18nEntry('disabled')),
+			));
+	}
+	
+
+	
 	
 	//@formatter:off
-	public function getLayoutDefinitionEntry ($data) { return $this->LayoutDefinition[$data]; }
-	public function getLayoutDefinition() { return $this->LayoutDefinition; }
+	public function getLayoutContentEntry ($data) { return $this->LayoutContent[$data]; }
+	public function getLayoutContent() { return $this->LayoutContent; }
 	
-	public function setLayoutDefinitionEntry ($entry, $data) { 
-		if ( isset($this->LayoutDefinition[$entry])) { $this->LayoutDefinition[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setLayoutContentEntry ($entry, $data) { 
+		if ( isset($this->LayoutContent[$entry])) { $this->LayoutContent[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setLayoutDefinition($LayoutDefinition) { $this->LayoutDefinition = $LayoutDefinition; }
+	public function setLayoutContent($LayoutContent) { $this->LayoutContent = $LayoutContent; }
 	//@formatter:off
 
 }

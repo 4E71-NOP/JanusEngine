@@ -174,12 +174,13 @@ class ModuleGlobalReport {
 		// --------------------------------------------------------------------------------------------
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('pv')."
-			WHERE pv_name = 'sl'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition')."
+			WHERE def_name = 'sl'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$bts->SDDMObj->query("
-			INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('pv')." VALUES (
+			INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition')." VALUES (
+			'1',
 			'sl',
 			'0',
 			'RW-1234-4321-8765-5678-9999'

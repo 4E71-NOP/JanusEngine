@@ -11,26 +11,28 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class ExtensionFile extends Entity{
-	private $ExtensionFile = array ();
+class Note extends Entity {
+	private $Note = array ();
 	
 	//@formatter:off
 	private $columns = array(
-		'file_id'			=> 0,
-		'extension_id'		=> 0,
-		'extension_name'	=> "New File",
-		'file_name'			=> "/folder/file",
-		'file_generic_name'	=> "New File",
-		'file_type'			=> 0,
+		'note_id'			=> 0,
+		'docu_id'			=> 0,
+		'user_id'			=> 0,
+		'note_date'			=> 0,
+		'note_origin'		=> 0,
+		'note_content'		=> "New note content",
 	);
 	//@formatter:on
 	
 	public function __construct() {
-		$this->ExtensionFile= $this->getDefaultValues();
+		$this->Note = $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets ExtensionFile data from the database.<br>
+	 * Gets module data from the database.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the module selection to the website ID only.
 	 * @param integer $id
 	 */
 	public function getDataFromDB($id) {
@@ -39,22 +41,21 @@ class ExtensionFile extends Entity{
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('extension_file') . "
-			WHERE file_id = '" . $id . "'
-			;" );
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('note') . "
+			WHERE note_id = '" . $id . "'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for extension_file id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for note id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->ExtensionFile[$A] = $B; }
+					if (isset($this->columns[$A])) { $this->Note[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for extension_file id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for note id=".$id));
 		}
 	}
-	
 	
 	/**
 	 * Updates or inserts in DB the local data.
@@ -66,42 +67,47 @@ class ExtensionFile extends Entity{
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$genericActionArray = array(
-				'columns'		=> $this->columns,
-				'data'			=> $this->ExtensionConfig,
-				'targetTable'	=> 'extension_file',
-				'targetColumn'	=> 'file_id',
-				'entityId'		=> $this->ExtensionConfig['file_id'],
-				'entityTitle'	=> 'extensionFile'
+			'columns'		=> $this->columns,
+			'data'			=> $this->Note,
+			'targetTable'	=> 'note',
+			'targetColumn'	=> 'note_id',
+			'entityId'		=> $this->Note['note_id'],
+			'entityTitle'	=> 'Note'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->extensionFileExists($this->ExtensionFile['file_id']);
+		return $this->noteExists($this->Note['note_id']);
 	}
-		
+	
+	
 	/**
 	 * Checks weither the local data is consistant with the database.
 	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
 	 */
 	public function checkDataConsistency () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
-		if ( $this->extensionExists($this->ExtensionFile['extension_id']) == false ) { $res = false; }
-		
-		return $res;	
+		if ( $this->documentExists($this->Note['docu_id']) == false ) { $res = false; }
+		if ( $this->userExists($this->Note['user_id']) == false ) { $res = false; }
+		return $res;
 	}
-	
 	
 	/**
 	 * Returns the default values of this type (this is consistent witht de SQL model and it should stay that way)
 	 * @return array()
 	 */
 	public function getDefaultValues () {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$date = time ();
 		$tab = $this->columns;
 		
 		return $tab;
@@ -122,15 +128,18 @@ class ExtensionFile extends Entity{
 			));
 	}
 	
-	//@formatter:off
-	public function getExtensionFileEntry ($data) { return $this->ExtensionFile[$data]; }
-	public function getExtensionFile() { return $this->ExtensionFile; }
 	
-	public function setExtensionFileEntry ($entry, $data) { 
-		if ( isset($this->ExtensionFile[$entry])) { $this->ExtensionFile[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	
+	
+	//@formatter:off
+	public function getNoteEntry ($data) { return $this->Note[$data]; }
+	public function getNote() { return $this->Note; }
+	
+	public function setNoteEntry ($entry, $data) { 
+		if ( isset($this->Note[$entry])) { $this->Note[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setExtensionFile($ExtensionFile) { $this->ExtensionFile = $ExtensionFile; }
+	public function setNote($returnnote) { $this->Note = $returnnote; }
 	//@formatter:off
 
 }

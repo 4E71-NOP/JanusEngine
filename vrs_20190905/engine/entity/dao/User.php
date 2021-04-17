@@ -11,55 +11,15 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class User {
+class User extends Entity {
 	private $User;
 	
-// 	array(
-// 			"user_id" => null,
-// 			"user_name" => null,
-// 			"user_login" => null,
-// 			"user_password" => null,
-// 			"user_subscription_date" => null,
-// 			"user_status" => null,
-// 			"user_role_function" => null,
-// 			"user_forum_access" => null,
-// 			"user_email" => null,
-// 			"user_msn" => null,
-// 			"user_aim" => null,
-// 			"user_icq" => null,
-// 			"user_yim" => null,
-// 			"user_website" => null,
-// 			"user_perso_name" => null,
-// 			"user_perso_country" => null,
-// 			"user_perso_town" => null,
-// 			"user_perso_occupation" => null,
-// 			"user_perso_interest" => null,
-// 			"user_last_visit" => null,
-// 			"user_last_ip" => null,
-// 			"user_timezone" => null,
-// 			"user_lang" => null,
-// 			"user_pref_theme" => null,
-// 			"user_pref_newsletter" => null,
-// 			"user_pref_show_email" => null,
-// 			"user_pref_show_online_status" => null,
-// 			"user_pref_forum_notification" => null,
-// 			"user_pref_forum_pm" => null,
-// 			"user_pref_allow_bbcode" => null,
-// 			"user_pref_allow_html" => null,
-// 			"user_pref_autorise_smilies" => null,
-// 			"user_avatar_image" => null,
-// 			"user_admin_comment" => null,
-			
-// 			"clause_in_group" => "",
-// 			"error_login_not_found" => null,
-// 	);
-
 	//@formatter:off
 	private $columns = array(
 	'user_id'						=> 0,
 	'user_name'						=> "new User",
-	'user_login'					=> 0,
-	'user_password'					=> 0,
+	'user_login'					=> "newLogin",
+	'user_password'					=> "1a2b3c4d5e",
 	'user_subscription_date'		=> 0,
 	'user_status'					=> 0,
 	'user_role_function'			=> 0,
@@ -105,7 +65,7 @@ class User {
 	 * @param User $UserLogin
 	 * @param WebSite $WebSiteObj
 	 */
-	public function getDataFromDB($UserLogin , $WebSiteObj) {
+	public function getDataFromDB($UserLogin) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
@@ -118,8 +78,8 @@ class User {
 			AND gu.group_user_initial_group = '1'
 			AND gu.group_id = g.group_id
 			AND gu.group_id = sg.group_id
-			AND sg.ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
-		;");
+			AND sg.ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			;");
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
@@ -186,11 +146,11 @@ class User {
 		
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
-			$this->User['user_lang'] = $WebSiteObj->getWebSiteEntry('ws_lang');
+			$this->User['user_lang'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang');
 		}
 		// Set a default theme if none is specified.
 		if ( $this->User['user_pref_theme'] == 0 ) {
-			$this->User['user_pref_theme'] = $WebSiteObj->getWebSiteEntry('theme_id');
+			$this->User['user_pref_theme'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('theme_id');
 		}
 	}
 	
@@ -203,47 +163,23 @@ class User {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->User);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." u
-			SET ".$QueryColumnDescription['equality']."
-			WHERE u.user_id ='".$this->User['user_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user already exist in DB. Updating Id=".$this->User['user_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->User);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user doesn't exist in DB. Inserting Id=".$this->User['user_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->User,
+			'targetTable'	=> 'user',
+			'targetColumn'	=> 'user_id',
+			'entityId'		=> $this->User['user_id'],
+			'entityTitle'	=> 'user'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT u.user_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." u
-			WHERE u.user_id ='".$this->User['user_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->userExists($this->User['user_id']);
 	}
 	
 	/**
@@ -254,7 +190,10 @@ class User {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
+		if ( strlen($this->User['user_name']) == 0 ) { $res = false; }
+		if ( strlen($this->User['user_login']) == 0 ) { $res = false; }
+		if ( strlen($this->User['user_password']) == 0 ) { $res = false; }
+		if ( strlen($this->User['user_status']) == 0 ) { $res = false; }
 		return $res;
 	}
 	
@@ -268,10 +207,8 @@ class User {
 		$date = time ();
 		$tab = $this->columns;
 		$this->User['user_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->User['user_login'] .= "-".date("dMYHis", time());
 		
-// 		$this->User['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-// 		? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-// 		: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

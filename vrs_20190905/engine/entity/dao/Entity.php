@@ -329,7 +329,7 @@ class Entity {
 	public function languageExists($id) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		return $this->findEntryInDb( array (
-			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('languages'),
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language'),
 			'column'	=> 'lang_id',
 			'id'		=> $id,
 			)
@@ -383,15 +383,15 @@ class Entity {
 	
 	
 	/**
-	 * Returns true if the returnnote_id exists in the DB.
+	 * Returns true if the note_id exists in the DB.
 	 * @param int $id
 	 * @return boolean
 	 */
-	public function returnNoteExists($id) {
+	public function noteExists($id) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		return $this->findEntryInDb( array (
-			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('return_note'),
-			'column'	=> 'returnnote_id',
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('note'),
+			'column'	=> 'note_id',
 			'id'		=> $id,
 			)
 		);
@@ -399,7 +399,7 @@ class Entity {
 	
 	
 	/**
-	 * Returns true if the returnnote_id exists in the DB.
+	 * Returns true if the tag_id exists in the DB.
 	 * @param int $id
 	 * @return boolean
 	 */

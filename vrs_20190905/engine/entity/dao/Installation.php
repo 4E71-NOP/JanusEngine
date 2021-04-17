@@ -18,8 +18,14 @@
  */
 class Installation {
 	private $Installation = array ();
+
 	public function __construct() {
 	}
+
+	/**
+	 * Gets group data from the database.<br>
+	 * @param integer $id
+	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
