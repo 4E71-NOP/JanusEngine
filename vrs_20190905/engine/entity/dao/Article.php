@@ -49,7 +49,6 @@ class Article extends Entity {
 	 * <br>
 	 * It uses the current WebSiteObj to restrict the article selection to the website ID only.
 	 * @param integer $id
-	 * @param integer $page
 	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
@@ -74,7 +73,6 @@ class Article extends Entity {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article arti_id=".$id));
 		}
 	}
-	
 	
 	/**
 	 * Updates or inserts in DB the local data.

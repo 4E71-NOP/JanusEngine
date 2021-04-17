@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class DocumentShare {
+class DocumentShare extends Entity{
 	private $DocumentShare = array ();
 	
 	//@formatter:off
@@ -24,11 +24,11 @@ class DocumentShare {
 	//@formatter:on
 	
 	public function __construct() {
-		$this->Decoration = $this->getDefaultValues();
+		$this->DocumentShare = $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets document_share data from the database.<br>
+	 * Gets DocumentShare data from the database.<br>
 	 * <br>
 	 * It uses the current WebSiteObj to restrict the document selection to the website ID only.
 	 * @param integer $id
@@ -36,13 +36,6 @@ class DocumentShare {
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
-		$dbquery = $bts->SDDMObj->query ( "" );
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			foreach ( $dbp as $A => $B ) {
-				if (isset($this->columns[$A])) { $this->DocumentShare[$A] = $B; }
-			}
-		}
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
@@ -72,47 +65,24 @@ class DocumentShare {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->DocumentShare);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." ds
-			SET ".$QueryColumnDescription['equality']."
-			WHERE ds.share_id ='".$this->DocumentShare['share_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : document_share already exist in DB. Updating Id=".$this->DocumentShare['share_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->DocumentShare);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : document_share doesn't exist in DB. Inserting Id=".$this->DocumentShare['share_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->DocumentShare,
+			'targetTable'	=> 'document_share',
+			'targetColumn'	=> 'share_id',
+			'entityId'		=> $this->DocumentShare['share_id'],
+			'entityTitle'	=> 'documentShare'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
-	
+
+
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ds.share_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." ds
-			WHERE ds.share_id ='".$this->DocumentShare['share_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->documentShareExists($this->DocumentShare['share_id']);
 	}
 	
 	
@@ -124,20 +94,10 @@ class DocumentShare {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
+		
+		if ( $this->documentExists($this->DocumentShare['docu_id']) == false ) { $res = false; }
+		if ( $this->websiteExists($this->DocumentShare['ws_id']) == false ) { $res = false; }
 
-		$dbquery = $bts->SDDMObj->query("
-			SELECT ws_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')."
-			WHERE ws_id = ".$this->DocumentShare['ws_id']."
-			LIMIT 1;"
-				);
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT d.docu_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." d
-			WHERE d.docu_id ='".$this->Decoration['docu_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = false; }
-		
 		return $res;
 	}
 	
@@ -150,7 +110,7 @@ class DocumentShare {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$tab = $this->columns;
-		
+
 		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 		? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 		: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');

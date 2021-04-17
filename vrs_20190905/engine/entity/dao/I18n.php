@@ -11,47 +11,49 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-
-/**
- * Not yet implemented in the model. 
- * 
- * @author faust
- *
- */
-class Definition extends Entity {
-	private $Definition = array ();
-
+class I18n extends Entity{
+	private $I18n = array ();
+	
 	//@formatter:off
 	private $columns = array(
-		"def_id"		=> 0,
-		"def_name"		=> "New definition",
-		"def_number"	=> 0,
-		"def_text"		=> 0,
+		"i18n_id"		=> 0,
+		"lang_id"		=> 0,
+		"i18n_package"	=> 0,
+		"i18n_name"		=> 0,
+		"i18n_text"		=> 0,
 	);
 	//@formatter:on
-
+	
 	public function __construct() {
+		$this->I18n= $this->getDefaultValues();
 	}
+	
+	/**
+	 * Gets I18n data from the database.<br>
+	 * @param integer $id
+	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('definition') . "
-			WHERE def_id = '" . $id . "'
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('i18n') . "
+			WHERE i18n_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for definition id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for i18n id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->Definition[$A] = $B; }
+				foreach ( $dbp as $A => $B ) {
+					if (isset($this->columns[$A])) { $this->I18n[$A] = $B; }
+				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for definition id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for i18n id=".$id));
 		}
 	}
-
+	
 	/**
 	 * Updates or inserts in DB the local data.
 	 * mode ar available: <br>
@@ -63,11 +65,11 @@ class Definition extends Entity {
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
-			'data'			=> $this->Definition,
-			'targetTable'	=> 'definition',
-			'targetColumn'	=> 'def_id',
-			'entityId'		=> $this->Definition['def_id'],
-			'entityTitle'	=> 'definition'
+			'data'			=> $this->I18n,
+			'targetTable'	=> 'i18n',
+			'targetColumn'	=> 'i18n_id',
+			'entityId'		=> $this->I18n['i18n_id'],
+			'entityTitle'	=> 'I18n'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
@@ -77,7 +79,7 @@ class Definition extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->definitionExists($this->Definition['def_id']);
+		return $this->i18nExists($this->I18n['i18n_id']);
 	}
 	
 	
@@ -89,8 +91,6 @@ class Definition extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( strlen($this->Definition['def_name'] == 0) ) { $res = false; }
-
 		return $res;
 	}
 	
@@ -104,7 +104,6 @@ class Definition extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Definition['def_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
 		return $tab;
 	}
@@ -124,19 +123,17 @@ class Definition extends Entity {
 			));
 	}
 	
-
 	//@formatter:off
-	public function getDefinitionEntry ($data) { return $this->Definition[$data]; }
-	public function getDefinition() { return $this->Definition; }
+	public function getI18nEntry ($data) { return $this->I18n[$data]; }
+	public function getI18n() { return $this->I18n; }
 	
-	public function setDefinitionEntry ($entry, $data) { 
-		if ( isset($this->Definition[$entry])) { $this->Definition[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setI18nEntry ($entry, $data) { 
+		if ( isset($this->I18n[$entry])) { $this->I18n[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setDefinition($Definition) { $this->Definition = $Definition; }
+	public function setI18n($I18n) { $this->I18n = $I18n; }
 	//@formatter:off
 
 }
-
 
 ?>

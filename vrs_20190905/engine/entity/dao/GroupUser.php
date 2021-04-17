@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class GroupUser {
+class GroupUser extends Entity{
 	private $GroupUser = array ();
 	
 	//@formatter:off
@@ -27,6 +27,11 @@ class GroupUser {
 		$this->GroupUser= $this->getDefaultValues();
 	}
 	
+		/**
+	 * Gets GroupUser data from the database.<br>
+	 * @param integer $id
+	 * @param integer $page
+	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -59,47 +64,23 @@ class GroupUser {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->GroupUser);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-			
-			$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')." gu
-			SET ".$QueryColumnDescription['equality']."
-			WHERE gu.group_user_id ='".$this->GroupUser['group_user_id']."'
-			;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : group_user already exist in DB. Updating Id=".$this->GroupUser['group_user_id']));
-		}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) {
-			$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($this->columns, $this->GroupUser);
-			$bts->SDDMObj->query("
-				INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')."
-				(".$QueryColumnDescription['columns'].")
-				VALUES
-				(".$QueryColumnDescription['values'].")
-				;
-			");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : group_user doesn't exist in DB. Inserting Id=".$this->GroupUser['group_user_id']));
-		}
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->GroupUser,
+			'targetTable'	=> 'group_user',
+			'targetColumn'	=> 'group_user_id',
+			'entityId'		=> $this->GroupUser['group_user_id'],
+			'entityTitle'	=> 'GroupUser'
+		);
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$res = false;
-		$dbquery = $bts->SDDMObj->query("
-			SELECT a.group_user_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')." a
-			WHERE a.group_user_id ='".$this->GroupUser['group_user_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 1 ) { $res = true; }
-		return $res;
+		return $this->articleExists($this->GroupUser['group_user_id']);
 	}
 	
 	
@@ -111,21 +92,8 @@ class GroupUser {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->GroupUser['group_user_initial_group'] < 0 && $this->GroupUser['group_user_initial_group'] > 1) { $res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT g.group_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." g
-			WHERE g.group_id ='".$this->GroupUser['group_id']."';
-		");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT user_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')."
-			WHERE user_id = ".$this->GroupUser['user_id']."
-			LIMIT 1;");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
-		
-		
+		if ( $this->userExists($this->GroupUser['user_id']) == false ) { $res = false; }
+		if ( $this->groupExists($this->GroupUser['group_id']) == false ) { $res = false; }
 		return $res;
 	}
 	

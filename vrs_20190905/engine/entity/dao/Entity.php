@@ -179,6 +179,20 @@ class Entity {
 		);
 	}
 	
+		/**
+	 * Returns true if the category id exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
+	public function definitionExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition'),
+			'column'	=> 'def_id',
+			'id'		=> $id,
+			)
+		);
+	}	
 	
 	/**
 	 * Returns true if the category id exists in the DB.
@@ -301,6 +315,36 @@ class Entity {
 		return $this->findEntryInDb( array (
 			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user'),
 			'column'	=> 'group_user_id',
+			'id'		=> $id,
+			)
+		);
+	}
+
+	/**
+	 * Returns true if the file_id exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
+	public function groupWebsiteExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website'),
+			'column'	=> 'group_website_id',
+			'id'		=> $id,
+			)
+		);
+	}
+
+	/**
+	 * Returns true if the file_id exists in the DB.
+	 * @param int $id
+	 * @return boolean
+	 */
+	public function i18nExists($id) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		return $this->findEntryInDb( array (
+			'table' 	=> $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n'),
+			'column'	=> 'i18n_id',
 			'id'		=> $id,
 			)
 		);
