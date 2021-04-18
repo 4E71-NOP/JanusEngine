@@ -182,5 +182,4 @@ class InteractiveElements {
 		}
 		return $contenu_R;
 	}
-	
 }
