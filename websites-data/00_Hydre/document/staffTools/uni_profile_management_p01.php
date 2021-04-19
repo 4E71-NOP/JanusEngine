@@ -528,9 +528,9 @@ else {
 			}
 		}
 	}
-
+	
 	for ( $i = 1; $i < (count($ListThemeBlock)+2); $i++ ) {
-		$bts->I18nTransObj->setI18nEntry('tabTxtThm'.$i, "#".$i);
+		$bts->I18nTransObj->setI18nTransEntry('tabTxtThm'.$i, "#".$i);
 		$T['ADC']['onglet'][$i] = $bts->RenderTablesObj->getDefaultTableConfig(1,1,0);
 	}
 	$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, count($ListThemeBlock)+1,1,0,'tabTxtThm');
@@ -547,7 +547,8 @@ else {
 	$infos['blockBackup']		= $infos['block']; 
 	$infos['blockGBackup']		= $infos['blockG']; 
 	$infos['blockTBackup']		= $infos['blockT']; 
-	
+
+
 	$Tab = 1;
 	unset ( $A );
 	foreach ( $ListThemeBlock as $A ) {

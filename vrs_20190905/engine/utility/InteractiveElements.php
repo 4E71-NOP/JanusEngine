@@ -29,19 +29,18 @@ class InteractiveElements {
 	}
 	
 	/**
-	 * Return the HTML code of a button.<br>
-	 * <u>The array should contain:</u>
-	 * <table style='border: solid 1px #00000040;'>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>id			</b></td>	<td style='background-color: #FFFFFF60;'>Defines the button's name</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>type			</b></td>	<td style='background-color: #FFFFFF60;'>Defines the command (ex Submit) of the button.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>initialStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines initial behavior.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>hoverStyle	</b></td>	<td style='background-color: #FFFFFF60;'>Defines onmouseover behavior. Changing style.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>onclick		</b></td>	<td style='background-color: #FFFFFF60;'>If not empty define the javascript used when clicking on the button.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>message		</b></td>	<td style='background-color: #FFFFFF60;'>Defines the button text</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>mode			</b></td>	<td style='background-color: #FFFFFF60;'>1 set the size (if!=0) and save it into 'lastSize'. 0 will clear 'lastSize' and no button size will be set.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>size			</b></td>	<td style='background-color: #FFFFFF60;'>Defines the button size.</td></tr>
-	 * <tr><td style='background-color: #FFFFFF60;'><b>lastSize		</b></td>	<td style='background-color: #FFFFFF60;'>is here as a variable passed along for the next button.</td></tr>
-	 * </table>
+	 * Return the HTML code of a button controled with an array/object.
+	 * The array should contain:
+	 * id				Defines the button's name
+	 * type				Defines the command (ex Submit) of the button.
+	 * initialStyle		Defines initial behavior.
+	 * hoverStyle		Defines onmouseover behavior. Changing style.
+	 * onclick			If not empty define the javascript used when clicking on the button.
+	 * message			Defines the button text
+	 * mode				1 set the size (if!=0) and save it into 'lastSize'. 0 will clear 'lastSize' and no button size will be set.
+	 * size				Defines the button size.
+	 * lastSize			is here as a variable passed along for the next button.
+	 * 
 	 * @param array $infos
 	 * @return string
 	 * 

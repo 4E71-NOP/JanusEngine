@@ -20,7 +20,7 @@ config_menu_float_size_x		INTEGER,
 config_menu_float_size_y		INTEGER, 
 config_menu_occurence			INTEGER, 
 config_show_release_info		INTEGER,
-config_show_info_update	INTEGER,
+config_show_info_update	        INTEGER,
 ws_id							INTEGER, 
 
 PRIMARY KEY (config_id),

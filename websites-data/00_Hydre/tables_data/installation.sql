@@ -9,4 +9,3 @@ INSERT INTO !table! VALUES ("6",	"0",	"end_date",				"0",	"");
 INSERT INTO !table! VALUES ("7",	"0",	"last_activity",		"0",	"");
 INSERT INTO !table! VALUES ("8",	"0",	"verification_monitor",	"0",	"");
 
-FLUSH TABLES;
