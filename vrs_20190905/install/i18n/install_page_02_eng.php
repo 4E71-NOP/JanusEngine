@@ -4,9 +4,10 @@ $i18n = array(
 	'tab_2' => "Load SQL data",
 	'tab_3' => "Script",
 	'tab_4' => "Load more SQL data",
-	'tab_5' => "Performances",
-	'tab_6' => "Files",
-	'tab_7' => "7",
+	'tab_5' => "Raw SQL",
+	'tab_6' => "Performances",
+	'tab_7' => "Files",
+	'tab_8' => "7",
 
 	't1c1' => "File",
 	't1c2' => "Ok",
@@ -19,7 +20,7 @@ Access to this directory must be restricted. A simple 'default .htaccess' is pro
 Make sure it's on the server. Make sure you edit it carfully. And make sure 'AllowOverride All' is set for 'Directory /var/www/'<br>\r
 <br>\r
 ",
-	't5Btn' => "Select",
+	'BtnSelect' => "Select",
 	
 	"perfTab01"	=>	"N",
 	"perfTab02"	=>	"Point de contrôle",

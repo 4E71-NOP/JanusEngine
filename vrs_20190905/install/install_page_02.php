@@ -25,7 +25,7 @@
 
 /*Hydre-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $cs BaseToolSet                             */
+/* @var $bts BaseToolSet                             */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -209,8 +209,7 @@ if ( $devDebug != 1 ) {
 			$LibInstallationObj->executeContent($infos, $A);
 		}
 	}
-	
-	
+		
 	// --------------------------------------------------------------------------------------------
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_data"));
 	$infos = array (
@@ -281,17 +280,41 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
+	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
+	$infos = array (
+			"path" => "websites-data/",
+			"method" =>  "raw_sql",
+			"section" => "raw_sql",
+			"directory_list" => $bts->RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInsdtallationMonitor" => 0
+	);
+	$LibInstallationObj->scanDirectories($infos);
+	foreach ( $infos['directory_list'] as $A ) {
+		if ( isset ($A['filesFound'] ) ) {
+			$LibInstallationObj->executeContent($infos, $A);
+		}
+	}
+		
+	// --------------------------------------------------------------------------------------------
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
+	// $infos = array (
+	// 	"path" => "websites-data/",
+	// 	"method" =>  "",
+	// 	"section" => "",
+	// 	"directory_list" => $bts->RequestDataObj->getRequestDataEntry('directory_list'),
+	// 	"updateInsdtallationMonitor" => 0
+	// );
 	$tabConfigFile = array();
 	$i=0;
-	error_log($bts->StringFormatObj->arrayToString($infos));
+	// $LibInstallationObj->scanDirectories($infos);
+	// error_log("\$infos : ".$bts->StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $k => $v ) {
-		if ( isset ($A['filesFound'] ) ) {
+		// if ( isset ($A['filesFound'] ) ) {
 			$infos = array ( "n" => $i, );
 			$tabConfigFile[$i]['n'] = $i;
 			$tabConfigFile[$i]['name'] = $k;
 			$tabConfigFile[$i]['cont'] = $LibInstallationObj->renderConfigFile($infos);
-		}
+		// }
 		$i++;
 	}
 	
@@ -348,6 +371,11 @@ $T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationRe
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
+$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['raw_sql'])+2 ,4,6);
+$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['raw_sql']	, $style1 );
+$CurrentTab++;
+
+// --------------------------------------------------------------------------------------------
 $tmp = $LibInstallationReportObj->renderPerfomanceReport();
 $T['AD'][$CurrentTab] = $tmp['content'];
 $T['ADC']['onglet'] [$CurrentTab]= $tmp['config'];
@@ -363,7 +391,7 @@ $SB['type']				= "button";
 $SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
 $SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s2_h";
 $SB['onclick']			= "";
-$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('t5Btn');
+$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('BtnSelect');
 $SB['mode']				= 1;
 $SB['size'] 			= 92;
 $SB['lastSize']			= 92;
@@ -396,7 +424,7 @@ foreach ($tabConfigFile as $A ) {
 			;
 	$Cl++;
 }
-
+$ADC['onglet'][$CurrentTab]['nbr_ligne'] = $Cl-1;
 $CurrentTab++;
 
 
@@ -441,7 +469,7 @@ $infos = array(
 );
 
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, 6);
+$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, $CurrentTab-1);
 $T['tab_infos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
 $T['tab_infos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
 $T['tab_infos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');
@@ -449,6 +477,7 @@ $T['tab_infos']['tabTxt4']			= $bts->I18nTransObj->getI18nTransEntry('tab_4');
 $T['tab_infos']['tabTxt5']			= $bts->I18nTransObj->getI18nTransEntry('tab_5');
 $T['tab_infos']['tabTxt6']			= $bts->I18nTransObj->getI18nTransEntry('tab_6');
 $T['tab_infos']['tabTxt7']			= $bts->I18nTransObj->getI18nTransEntry('tab_7');
+$T['tab_infos']['tabTxt8']			= $bts->I18nTransObj->getI18nTransEntry('tab_8');
 
 
 // $T['ADC']['onglet'] = array(

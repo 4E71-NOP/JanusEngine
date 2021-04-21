@@ -89,6 +89,9 @@ class LibInstallation {
 				case "commandConsole":
 					$this->methodCommand($infos);
 					break;
+				case "raw_sql":
+					$this->methodRawSql($infos);
+					break;
 			}
 		}
 	}
@@ -136,6 +139,7 @@ class LibInstallation {
 	private function methodCommand (&$infos) {
 		$CommandConsole = CommandConsole::getInstance();
 		
+		$Tmp = '';
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
 		$infos['currentFileContent'] = $Tmp;
 		
@@ -176,6 +180,42 @@ class LibInstallation {
 	}
 
 	/**
+	 * SQL execution without formating . Especially usuful for tirgger commands which can contain several ';'.
+	 * @param array $infos
+	 */
+	public function methodRawSql(&$infos) {
+		$bts = BaseToolSet::getInstance();
+		$SqlTableListObj = CurrentSet::getInstance()->getInstanceOfSqlTableListObj();
+
+		$TabSrch = array();
+		$TabRpl = array();
+		$tblList = $SqlTableListObj->getTableList();
+		foreach ( $tblList as $A ) {
+			$TabSrch[] = "!table_".$A."!";
+			$TabRpl[] = $SqlTableListObj->getSQLTableName($A);
+		}
+		// $TabSrch	= array_merge ( $TabSrch,	array ( "\n",	"	",	chr(13) ));
+		// $TabRpl		= array_merge ( $TabRpl,	array ( " ",	" ",	" " ));
+
+		$Tmp = "";
+		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
+		$infos['currentFileContent'] = $Tmp;
+	
+		$infos['currentFileContent'] = str_replace ($TabSrch,$TabRpl,$infos['currentFileContent']);
+		unset ( $TabSrch, $TabRpl );
+		$bts->SDDMObj->query($infos['currentFileContent']);
+
+		$res = $bts->LMObj->getLastSQLDetails();
+		switch ( $res['signal'] ) {
+			case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
+			case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
+			case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
+		}
+		$this->report['lastReportExecution'] = time();
+		if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
+	}
+
+	/**
 	 * 
 	 */
 	private function updateInsdtallationMonitor(){
@@ -200,13 +240,14 @@ class LibInstallation {
 	 */
 	private function createMap ( &$infos){
 // 		We create a map to ease the command processing.
+		$endline = ( isset($infos['endline'])) ? $infos['endline'] : ";";
 		$this->mapPattern ( "//" , 1 , 99999 , $infos );
 		$this->mapPattern ( "\n" , 2 , 99998 , $infos );
 		$this->mapPattern ( "/*" , 3 , 99997 , $infos );
 		$this->mapPattern ( "*/" , 4 , 99996 , $infos );
 		$this->mapPattern ( "'"  , 5 , 99995 , $infos );
 		$this->mapPattern ( "\"" , 6 , 99994 , $infos );
-		$this->mapPattern ( ";"  , 7 , 99993 , $infos );
+		$this->mapPattern ( $endline  , 7 , 99993 , $infos );
 		
 		ksort ($infos['TabAnalyse']);
 		reset ($infos['TabAnalyse']);
@@ -313,6 +354,8 @@ class LibInstallation {
 	 */
 	public function renderConfigFile (&$infos) {
 		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
+
 // 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "
 <?php

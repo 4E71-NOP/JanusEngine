@@ -62,8 +62,8 @@ ALTER TABLE HdrTst.Ht_module ADD CONSTRAINT Ht_module_FK_1 FOREIGN KEY (module_g
 */
 
 
-ALTER TABLE HdrTst.Ht_returnnote ADD CONSTRAINT Ht_returnnote_FK FOREIGN KEY (docu_id) REFERENCES HdrTst.Ht_document(docu_id);
-ALTER TABLE HdrTst.Ht_returnnote ADD CONSTRAINT Ht_returnnote_FK_1 FOREIGN KEY (user_id) REFERENCES HdrTst.Ht_user(user_id);
+ALTER TABLE HdrTst.Ht_note ADD CONSTRAINT Ht_note_FK FOREIGN KEY (docu_id) REFERENCES HdrTst.Ht_document(docu_id);
+ALTER TABLE HdrTst.Ht_note ADD CONSTRAINT Ht_note_FK_1 FOREIGN KEY (user_id) REFERENCES HdrTst.Ht_user(user_id);
 
 ALTER TABLE HdrTst.Ht_tag ADD CONSTRAINT Ht_tag_FK FOREIGN KEY (ws_id) REFERENCES HdrTst.Ht_website(ws_id);
 

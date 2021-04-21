@@ -4,9 +4,10 @@ $i18n = array(
 	'tab_2' => "Chargement SQL",
 	'tab_3' => "Script",
 	'tab_4' => "Chargement SQL supplémentaire",
-	'tab_5' => "Performances",
-	'tab_6' => "Fichiers",
-	'tab_7' => "7",
+	'tab_5' => "SQL brut",
+	'tab_6' => "Performances",
+	'tab_7' => "Fichiers",
+	'tab_8' => "7",
 
 	't1c1' => "Fichier",
 	't1c2' => "Ok",
@@ -19,7 +20,7 @@ L'acces à ce répertoire doit être restreint. Un simple .htaccess par défaut 
 Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer avec précaution. Assurez vous que 'AllowOverride All' est configuré pour 'Directory /var/www/'<br>\r
 <br>\r
 ",
-	't5Btn' => "Sélectionner",
+	'BtnSelect' => "Sélectionner",
 	
 	"perfTab01"	=>	"N",
 	"perfTab02"	=>	"Checkpoint",

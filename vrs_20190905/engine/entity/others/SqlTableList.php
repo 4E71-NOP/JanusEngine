@@ -59,6 +59,7 @@ class SqlTableList {
 	//@formatter:off
 	public function getSQLTableName( $data ) { return $this->SQLTableName[$data]; }
 	public function getSQLWholeTableName() { return $this->SQLTableName; }
+	public function getTableList() { return $this->TableList; }
 	// public function getSQLTableShortName( $data ) { return $this->SQLTableShortName[$data]; }		// Deprecated
 	// public function getSQLWholeTableShortName() { return $this->SQLTableShortName; }
 	//@formatter:on

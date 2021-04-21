@@ -24,6 +24,13 @@ ws_gal_y			INTEGER,
 ws_gal_border		INTEGER,
 ws_ma_diff			INTEGER,
 
+row_creation		TIMESTAMP NULL NULL,
+row_user_creation	VARCHAR(255),
+row_update			TIMESTAMP NULL NULL,
+row_user_update		VARCHAR(255),
+row_disabled		TIMESTAMP NULL NULL,
+row_user_disabled	VARCHAR(255),
+
 PRIMARY KEY (ws_id),
 KEY idx_!IdxNom!_theme_id (theme_id)
 
