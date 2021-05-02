@@ -14,9 +14,9 @@ define ( "ANONYMOUS_USER_NAME", "anonymous" );
 
 // --------------------------------------------------------------------------------------------
 // ClassLoader
-define ("UtilityDirectory"	, "current/engine/utility/");
-define ("SddmDirectory"		, "current/engine/sddm/");
-define ("EntityDirectory"	, "current/engine/entity/");
+define ("_UTILITY_DIRECTORY_"	, "current/engine/utility/");
+define ("_SDDM_DIRECTORY_"		, "current/engine/sddm/");
+define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");
 
 // --------------------------------------------------------------------------------------------
 // Logs
@@ -73,35 +73,54 @@ unset ($ll);
 
 // --------------------------------------------------------------------------------------------
 // URL elements
-define ( "HYDRLINKURLTAG", "HydrLink");
+define ( "_HYDRLINKURLTAG_", "HydrLink");
 
 // --------------------------------------------------------------------------------------------
 // Option menu arrays 
 // The fields have dynamic name in case we use combo box that require different entry names etc...
-define ("MenuOptionDb",	"db" );
-define ("MenuOptionSelected",	"s" );
-define ("MenuOptionTxt",	"t" );
+define ("_MENU_OPTION_DB_",			"db" );
+define ("_MENU_OPTION_SELECTED_",	"s" );
+define ("_MENU_OPTION_TXT_",		"t" );
 
+define ("_NULL_"		,0);
+define ("_NO_"			,0);
+define ("_OFF_"			,0);
+define ("_OFFLINE_"		,0);
+define ("_DISABLED_"	,0);
+define ("_STATIC_"		,0);
+define ("_DURING_"		,0);
+
+define ("_YES_"			,1);
+define ("_ON_"			,1);
+define ("_ONLINE_"		,1);
+define ("_ENABLED_"		,1);
+define ("_DYNAMIC_"		,1);
+define ("_PRIVATE_"		,1);
+define ("_BEFORE_"		,1);
+
+define ("_DELETED_"		,2);
+define ("_AFTER_"		,2);
+define ("_PUBLIC_"		,2);
 
 
 // --------------------------------------------------------------------------------------------
 // Class names
-define ( "CLASS_Table01",		"_Table01");
-define ( "CLASS_TableStd",		"_TableStd");
-define ( "CLASS_Txt_Ok",		"_ok");
-define ( "CLASS_Txt_Warning",	"_warning");
-define ( "CLASS_Txt_Error",		"_error");
-define ( "CLASS_Txt_Fade",		"_fade");
-define ( "CLASS_Txt_Highlight",	"_highlight");
-define ( "CLASS_TblLgnd_Top",	"_TblLgndTop"); 
-define ( "CLASS_TblLgnd_Bottom","_TblLgndBottom"); 
-define ( "CLASS_TblLgnd_Left",	"_TblLgndLeft"); 
-define ( "CLASS_TblLgnd_Right",	"_TblLgndRight"); 
+define ( "_CLASS_TABLE01_",			"_Table01");
+define ( "_CLASS_TABLE_STD_",		"_TableStd");
+define ( "_CLASS_TXT_OK_",			"_ok");
+define ( "_CLASS_TXT_WARNING_",		"_warning");
+define ( "_CLASS_TXT_ERROR_",		"_error");
+define ( "_CLASS_TXT_FADE_",		"_fade");
+define ( "_CLASS_TXT_HIGHLIGHT_",	"_highlight");
+define ( "_CLASS_TBL_LGND_TOP_",	"_TblLgndTop"); 
+define ( "_CLASS_TBL_LGND_BOTTOM_","_TblLgndBottom"); 
+define ( "_CLASS_TBL_LGND_LEFT_",	"_TblLgndLeft"); 
+define ( "_CLASS_TBL_LGND_RIGHT_",	"_TblLgndRight"); 
 
-define ( "CLASS_ADM_Ctrl_Switch",			"div_AdminControlSwitch");
-define ( "CLASS_ADM_Ctrl_Panel",			"div_AdminControlPanel");
-define ( "CLASS_File_Selector_Container",	"FileSelectorContainer");
-define ( "CLASS_File_Selector",				"FileSelector");
-
+define ( "_CLASS_ADM_CTRL_SWITCH_",			"div_AdminControlSwitch");
+define ( "_CLASS_ADM_CTRL_PANEL_",			"div_AdminControlPanel");
+define ( "_CLASS_FILE_SELECTOR_CONTAINER_",	"FileSelectorContainer");
+define ( "_CLASS_FILE_SELECTOR_",			"FileSelector");
 
 ?>
+

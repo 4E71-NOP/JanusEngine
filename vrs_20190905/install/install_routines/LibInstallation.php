@@ -28,6 +28,7 @@ class LibInstallation {
 	
 	/**
 	 * Scan directories and store the file list in the passed array.
+	 * 
 	 * @param array $infos
 	 */
 	public function scanDirectories ( &$infos ) {
@@ -59,6 +60,7 @@ class LibInstallation {
 
 	/**
 	 * Execute the commands found in each file listed in the array. 
+	 * 
 	 * @param array $infos
 	 * @param array $list
 	 */
@@ -98,6 +100,7 @@ class LibInstallation {
 
 	/**
 	 * Load a file, call for formatting methods and execute the SQL commands.
+	 * 
 	 * @param array $infos
 	*/
 	private function methodFilename (&$infos) {
@@ -134,6 +137,7 @@ class LibInstallation {
 	
 	/**
 	 * Load a file, call for formatting methods and execute the Hydr commands.
+	 * 
 	 * @param array $infos
 	 */
 	private function methodCommand (&$infos) {
@@ -181,42 +185,47 @@ class LibInstallation {
 
 	/**
 	 * SQL execution without formating . Especially usuful for tirgger commands which can contain several ';'.
+	 * Disabled for now as it's not critical and need more time to work on a proper 
+	 * 
 	 * @param array $infos
 	 */
 	public function methodRawSql(&$infos) {
-		$bts = BaseToolSet::getInstance();
-		$SqlTableListObj = CurrentSet::getInstance()->getInstanceOfSqlTableListObj();
+		// $bts = BaseToolSet::getInstance();
+		// $SqlTableListObj = CurrentSet::getInstance()->getInstanceOfSqlTableListObj();
 
-		$TabSrch = array();
-		$TabRpl = array();
-		$tblList = $SqlTableListObj->getTableList();
-		foreach ( $tblList as $A ) {
-			$TabSrch[] = "!table_".$A."!";
-			$TabRpl[] = $SqlTableListObj->getSQLTableName($A);
-		}
-		// $TabSrch	= array_merge ( $TabSrch,	array ( "\n",	"	",	chr(13) ));
-		// $TabRpl		= array_merge ( $TabRpl,	array ( " ",	" ",	" " ));
+		// $TabSrch = array();
+		// $TabRpl = array();
+		// $tblList = $SqlTableListObj->getTableList();
+		// foreach ( $tblList as $A ) {
+		// 	$TabSrch[] = "!table_".$A."!";
+		// 	$TabRpl[] = $SqlTableListObj->getSQLTableName($A);
+		// }
+		// // $TabSrch	= array_merge ( $TabSrch,	array ( "\n",	"	",	chr(13) ));
+		// // $TabRpl		= array_merge ( $TabRpl,	array ( " ",	" ",	" " ));
 
-		$Tmp = "";
-		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
-		$infos['currentFileContent'] = $Tmp;
+		// $Tmp = "";
+		// foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
+		// $infos['currentFileContent'] = $Tmp;
 	
-		$infos['currentFileContent'] = str_replace ($TabSrch,$TabRpl,$infos['currentFileContent']);
-		unset ( $TabSrch, $TabRpl );
-		$bts->SDDMObj->query($infos['currentFileContent']);
+		// $infos['currentFileContent'] = str_replace ($TabSrch,$TabRpl,$infos['currentFileContent']);
+		// unset ( $TabSrch, $TabRpl );
 
-		$res = $bts->LMObj->getLastSQLDetails();
-		switch ( $res['signal'] ) {
-			case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
-			case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
-			case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
-		}
-		$this->report['lastReportExecution'] = time();
-		if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
+		// $this->createMap($infos);
+
+		// $bts->SDDMObj->query($infos['currentFileContent']);
+
+		// $res = $bts->LMObj->getLastSQLDetails();
+		// switch ( $res['signal'] ) {
+		// 	case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
+		// 	case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
+		// 	case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
+		// }
+		// $this->report['lastReportExecution'] = time();
+		// if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 	}
 
 	/**
-	 * 
+	 * Update values in the installation table.
 	 */
 	private function updateInsdtallationMonitor(){
 		$bts = BaseToolSet::getInstance();
@@ -254,7 +263,7 @@ class LibInstallation {
 	}
 
 	/**
-	 * Create a map of a specific pattenr in the command string.
+	 * Create a map of a specific pattern in the command string.
 	 * 
 	 * @param String $pattern
 	 * @param Number $code
@@ -346,6 +355,22 @@ class LibInstallation {
 		if ($err == 1) { $Dest[$idx]['Ordre'] = 1; }
 	}
 	
+	/**
+	 * 
+	 * Extract sql commands
+	 * 
+	 */
+	private function rawSqlExtraction (&$infos) {
+		$Map = &$infos['TabAnalyse'];
+		$Buffer = &$infos['currentFileContent'];
+		$Dest = &$infos['FormattedCommand'];
+
+		// 99993
+		foreach ( $Map as $K => $A ) {
+
+		}
+
+	}
 	
 	/**
 	 * Return a template of a config file. 

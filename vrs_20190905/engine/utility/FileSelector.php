@@ -83,7 +83,7 @@ class FileSelector {
 			
 			<div id='FileSelectorCaption'>
 			
-			<table class='".$infos['block'].CLASS_Table01." ".$infos['block'].CLASS_TblLgnd_Top."' style='width='100%;'>\r
+			<table class='".$infos['block']._CLASS_TABLE01_." ".$infos['block']._CLASS_TBL_LGND_TOP_."' style='width='100%;'>\r
 			<caption>".$bts->I18nTransObj->getI18nTransEntry('fileSelectorTitle')."</caption>\r
 			</tr>\r
 			<tr>\r

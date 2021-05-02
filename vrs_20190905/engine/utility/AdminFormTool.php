@@ -32,28 +32,28 @@ class AdminFormTool {
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		$Content = "";
-		if ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on'
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on'
 				) {
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : modification checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : modification checkbox forgotten'));
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
 		}
-		if ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboardCreate'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'creation') != 'on' ) {
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotCreation')."</p>\r";
-					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'create');
-					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboardCreate'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'creation') != 'on' ) {
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotCreation')."</p>\r";
+					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'create');
+					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}
-		if ( $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'delete'
-				&& $cs->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
-					$cs->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$cs->I18nObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
-					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'edit');
-					$cs->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'delete'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
+					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
+					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'edit');
+					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}
 		return $Content;
 	}

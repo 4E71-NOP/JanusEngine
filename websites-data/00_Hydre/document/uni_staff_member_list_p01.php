@@ -80,7 +80,7 @@ foreach ( $user_liste as $B ) {
 	if ( $B['group_id'] != $CurrentGroup ) {	
 		$CurrentGroup = $B['group_id'];
 		$DisplayGroupName = 1 ;
-		$Content .= "<table class='".$Block.CLASS_Table01."' ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r<tr>\r";
+		$Content .= "<table class='".$Block._CLASS_TABLE01_."' ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r<tr>\r";
 		foreach ( $user_liste as $A ) {
 			if ( $A['group_id'] == $CurrentGroup ) {
 				if ( $DisplayGroupName == 1 ) {

@@ -317,7 +317,7 @@ class HydrInstall {
 		// Tooltip
 		// --------------------------------------------------------------------------------------------
 		$infos ['module'] ['module_container_name'] = "tooltipContainer";
-		$infos ['module'] ['module_name'] = "ToolTip";
+		$infos ['module'] ['module_name'] = "tooltip";
 		$infos ['module'] ['module_deco_nbr'] = 20;
 		$infos ['module_z_index'] = 99;
 		$infos ['block'] = "B20";
@@ -333,14 +333,10 @@ class HydrInstall {
 		$RenderDeco = RenderDeco40Elegance::getInstance ();
 		$DocContent .= $RenderDeco->render ( $infos ) . "</div>\r</div>\r";
 
-		// $GeneratedJavaScriptObj->insertJavaScript('Data' , "var DivInitial = LocaliseElement ( 'initial_div' );");
-		// $GeneratedJavaScriptObj->insertJavaScript('Onload', "\tinitAdyn('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dx')."' , '".$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'dy')."' );");
-
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Data', "var TabInfoModule = new Array();\r" );
-
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var t = new ToolTip();' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tt.InitToolTip('" . $infos ['module'] ['module_container_name'] . "' , '" . $infos ['module'] ['module_name'] . "_ex22' , '" . $cdx . "' , '" . $cdy . "' );" );
+		require_once "modules/initial/Tooltip/module_tooltip.php";
+		$tooltip = new ModuleTooltip();
+		$tooltip->render($infos);
+		$GeneratedJavaScriptObj->insertJavaScript ( "Data", "var TabInfoModule = new Array();\r");
 
 		// --------------------------------------------------------------------------------------------
 		// Javascript files
@@ -350,13 +346,7 @@ class HydrInstall {
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_test_db.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_fonctions.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'modules/initial/Tooltip/lib_tooltip.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_ElementAnimation.js' );
-// 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'engine/javascript_onglet.js' );
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_Aide_dynamique.js');
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_lib_calculs_decoration.js');
 
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
@@ -369,6 +359,8 @@ class HydrInstall {
 
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";

@@ -20,6 +20,8 @@
  */
 class GeneratedJavaScript {
 	private $GeneratedJavaScript = array();
+	private $Object = array();
+	private $ObjectList = array();
 
 	public function __construct() {}
 
@@ -93,6 +95,55 @@ class GeneratedJavaScript {
 				$Content .= $A . "\r"; 
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$A ."`"));
 			}
+		}
+		return  $Content."\r";
+	}
+
+
+	/**
+	 * Adds an entry into the $this->Object[$section]
+	 * 
+	 * @param string	$section
+	 * @param string	$content
+	 *
+	 * */
+	public function AddObjectEntry ($section, $content ) {
+		$this->Object[$section][] = $content;
+		$this->ObjectList[$section] = 1;
+	}
+
+	/**
+	 * Adds an entry into the $this->Object[$section]
+	 * 
+	 * @param string	$section
+	 * @param string	$content
+	 * 
+	 * @return string
+	 *
+	 * */
+	public function renderJavaScriptObjects () {
+		$Content = "";
+		foreach ( $this->ObjectList as $k => $v ) {
+			$Content .= $this->renderJavaScriptObject($k);
+		}
+		return $Content;
+	}
+
+	/**
+	 * Renders the JavaScript with no modifications.
+	 * @param String $section
+	 * @return string
+	 */
+	public function renderJavaScriptObject ( $section ) {
+		$Content = "";
+		if ( isset($this->Object[$section])) {
+			$Content = "var ". $section ." = {\r";
+			reset ($this->Object[$section]);
+			$tab = &$this->Object[$section];
+			foreach ($tab as $A ) { 
+				$Content .= $A . ",\r"; 
+			}
+			$Content = substr($Content, 0 , -2 )."\r};\r";
 		}
 		return  $Content."\r";
 	}

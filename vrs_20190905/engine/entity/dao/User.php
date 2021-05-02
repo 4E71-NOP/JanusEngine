@@ -13,7 +13,7 @@
 /* Hydre-licence-fin */
 class User extends Entity {
 	private $User;
-	
+	private $groupList = array();
 	//@formatter:off
 	private $columns = array(
 	'user_id'						=> 0,
@@ -111,15 +111,16 @@ class User extends Entity {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$dbquery = $bts->SDDMObj->query ("SELECT group_id, group_parent
+				$dbquery = $bts->SDDMObj->query ("SELECT group_id, group_parent, group_name 
 					FROM " . $SqlTableListObj->getSQLTableName ('group') . "
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;");
 				if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
-						$groupList02[] = $dbp ['group_id'];
-						$this->User['group'][$dbp ['group_id']] = 1;
+						$groupList02[] = $dbp['group_id'];
+						$this->User['group'][$dbp['group_id']] = 1;
+						$this->groupList[$dbp['group_id']] = array("group_id"=>$dbp ['group_id'], "group_name"=>$dbp['group_name']);
 						$loopAgain = 1;
 					}
 				}
@@ -132,6 +133,7 @@ class User extends Entity {
 			}
 
 			// Sort entries
+			sort ($this->groupList);
 			ksort ( $this->User['group']);
 			unset ( $A );
 			$strGrp = "";
@@ -219,12 +221,28 @@ class User extends Entity {
 	 */
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
-		return array (
-			'state' => array (
-				0 => array( MenuOptionDb =>	 0,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nTransObj->getI18nTransEntry('offline')),
-				1 => array( MenuOptionDb =>	 1,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nTransObj->getI18nTransEntry('online')),
-				2 => array( MenuOptionDb =>	 2,	MenuOptionSelected => '',	MenuOptionTxt => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-			));
+
+		$res = array (
+			'status' => array (
+				'name' => "user_status",
+				'defaultSelected'=> 1,
+				'options' => array (
+					array( _MENU_OPTION_DB_ =>	 _DISABLED_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
+					array( _MENU_OPTION_DB_ =>	 _ENABLED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')),
+					array( _MENU_OPTION_DB_ =>	 _DELETED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')),
+				)
+			),
+			'group' => array (
+				'name' => 'user_status',
+				'defaultSelected'=> 0,
+			)
+		);
+
+		$res['group']['options'] = array( 0=> array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => '') );
+		foreach ($this->groupList as $A ) {
+			$res['group']['options'][$A['group_id']] = array( _MENU_OPTION_DB_ =>	 $A['group_id'],	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $A['group_name']);
+		}
+		return $res;
 	}
 	
 	

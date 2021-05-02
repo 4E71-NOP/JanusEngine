@@ -166,7 +166,7 @@ class RenderStylesheet {
 	.".$tableName."modif_article	{ height:512px ; overflow:auto }\r
 	.".$tableName."modif_category	{ height:512px ; overflow:auto }\r
 
-	.".$tableName.CLASS_ADM_Ctrl_Switch." {	
+	.".$tableName._CLASS_ADM_CTRL_SWITCH_." {	
 		width: ". $themeArray['theme_admctrl_width'] ."px; 
 		height: ". $themeArray['theme_admctrl_height'] ."px; 
 		background-image: url(".$baseUrl."media/theme/".$themeArray['theme_directory']."/". $themeArray['theme_admctrl_switch_bg'] ."); 
@@ -179,7 +179,7 @@ class RenderStylesheet {
 		position: fixed;
 	}\r
 	
-	.".$tableName.CLASS_ADM_Ctrl_Panel." {
+	.".$tableName._CLASS_ADM_CTRL_PANEL_." {
 		position: absolute; 
 		top: ". floor( $themeArray['theme_admctrl_width']/ 2 )."px; 
 		left: ".floor( $themeArray['theme_admctrl_height']/ 2 )."px; 
@@ -192,7 +192,7 @@ class RenderStylesheet {
 		visibility: hidden; 
 	}
 	
-	.".$tableName.CLASS_File_Selector_Container." {
+	.".$tableName._CLASS_FILE_SELECTOR_CONTAINER_." {
 		position: absolute; 
 		border-style: solid; 
 		border-width: 0px; 
@@ -202,7 +202,7 @@ class RenderStylesheet {
 		background-image: url(".$baseUrl."media/img/universal/noir_50prct.png);
 		visibility: hidden; display : none;
 	}
-	.".$tableName.CLASS_File_Selector." {
+	.".$tableName._CLASS_FILE_SELECTOR_." {
 		position: absolute; 
 		border-style: solid; 
 		border-width: 2.5mm; 
@@ -346,6 +346,7 @@ class RenderStylesheet {
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("input", $list, $p);
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font']."; ".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font']."; ".$str."}");}
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
 		
 		// code
@@ -355,17 +356,17 @@ class RenderStylesheet {
 		
 		
 		// Table with no background. Usually used to align elements like images.
-		$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TableStd,		"",				"{ border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}");
-		$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TableStd,		"td",			"{ text-align:center; background-color:transparent;}");
+		$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE_STD_,		"",				"{ border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}");
+		$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE_STD_,		"td",			"{ text-align:center; background-color:transparent;}");
 		
 		// Table01
-		if ( strlen($p['table_rules'])			> 0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"",				"{ ".$p['table_rules']." }"); }
+		if ( strlen($p['table_rules'])			> 0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"",				"{ ".$p['table_rules']." }"); }
 		$valTest = 0;
 		$sv = array();
 		if ( strlen( $p['t01_caption_bg_col'])	> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_caption_bg_col'].";";}
 		if ( strlen( $p['t01_caption_fg_col'])	> 0 )	{ $valTest++; $sv['b'] = "color: ".$p['t01_caption_fg_col'].";";}
 		if ( strlen( $p['t01_caption_special'])	> 0 )	{ $valTest++; $sv['c'] = $p['t01_caption_special'];}
-		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"caption",				"{".$sv['a']." ".$sv['b']." ".$sv['c']."}");}
+		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"caption",				"{".$sv['a']." ".$sv['b']." ".$sv['c']."}");}
 		
 		// TR
 		$valTest = 0;
@@ -373,45 +374,45 @@ class RenderStylesheet {
 		if ( strlen( $p['t01_tr_bg_col'])	> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_tr_bg_col'].";";}
 		if ( strlen( $p['t01_txt_col'])		> 0 )	{ $valTest++; $sv['b'] = "color:".$p['t01_txt_col']."; "; }
 		if ( strlen( $p['t01_tr_special'])	> 0 )	{ $valTest++; $sv['c'] = $p['t01_tr_special'].";";}
-		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"tr",	"{ ".$sv['a']." ".$sv['b']." ".$sv['c']."}"); }
+		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr",	"{ ".$sv['a']." ".$sv['b']." ".$sv['c']."}"); }
 		
 		// TR specific
-		if ( strlen( $p['t01_tr_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"tr:nth-child(2n+1)",	"{ background-color:".$p['t01_tr_bg_odd_col'].";	}");	}
-		if ( strlen( $p['t01_tr_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"tr:nth-child(2n)",		"{ background-color:".$p['t01_tr_bg_even_col'].";	}");	}
-		if ( strlen( $p['t01_tr_bg_hover_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"tr:hover",				"{ background-color:".$p['t01_tr_bg_hover_col'].";	}");	}
-		if ( strlen( $p['t01_td_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"td:nth-child(2n+1)",	"{ background-color:".$p['t01_td_bg_odd_col'].";	}"); 	}
-		if ( strlen( $p['t01_td_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,		"td:nth-child(2n)",		"{ background-color:".$p['t01_td_bg_even_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n+1)",	"{ background-color:".$p['t01_tr_bg_odd_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n)",		"{ background-color:".$p['t01_tr_bg_even_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_hover_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:hover",				"{ background-color:".$p['t01_tr_bg_hover_col'].";	}");	}
+		if ( strlen( $p['t01_td_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n+1)",	"{ background-color:".$p['t01_td_bg_odd_col'].";	}"); 	}
+		if ( strlen( $p['t01_td_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n)",		"{ background-color:".$p['t01_td_bg_even_col'].";	}");	}
 		
 		// td a
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"a",			"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a",			"{".$str."}");}
 		// td a:hover
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a_hover", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"a:hover",		"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:hover",		"{".$str."}");}
 		// td a:active
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a_active", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"a:active",		"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:active",		"{".$str."}");}
 		// td a:visited
 		$list= array( "font",	"fg_col",	"td_bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a_visited", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"a:visited",	"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:visited",	"{".$str."}");}
 		//td form
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("td_input", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"input[type=text]",	"{".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_Table01,				"select",			"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"input[type=text]",	"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"select",			"{".$str."}");}
 		
 		// Table01 legend 
 		$list= array( "txt_col",	"fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("t01_legend", $list, $p);
 		if ( strlen($str) > 0 ) { 
-			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TblLgnd_Top,			"tr:first-child",	"{".$str."}");
-			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TblLgnd_Bottom,		"tr:last-child",	"{".$str."}");
-			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TblLgnd_Left,			"td:first-child",	"{".$str."}");
-			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	CLASS_TblLgnd_Right,		"td:last-child",	"{".$str."}");
+			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_TOP_,			"tr:first-child",	"{".$str."}");
+			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_BOTTOM_,		"tr:last-child",	"{".$str."}");
+			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_LEFT_,			"td:first-child",	"{".$str."}");
+			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_RIGHT_,		"td:last-child",	"{".$str."}");
 		}
 		
 		// Add title lines (first/last line +  first/last column)

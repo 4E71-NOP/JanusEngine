@@ -44,25 +44,34 @@ class ToolTip {
 		dc.style.display		= 'none';
 		dc.style.zIndex			= 99;
 		
-		if ( typeof TooltipByPass != 'undefined' ) {
-			TabInfoModule.tooltip.DimConteneurX = TooltipByPass.X;
-			TabInfoModule.tooltip.DimConteneurY = TooltipByPass.Y;
-			this.cfg.DivSizeX = TooltipByPass.X
-			this.cfg.DivSizeY = TooltipByPass.Y;
-			dm.UpdateDecoModule (TabInfoModule, 'tooltip');
+		// Avoid 
+		if ( typeof TooltipConfig.default == 'undefined' ) {
+			TooltipConfig.default = { 'State':1, 'X':'256', 'Y':'128' };
 		}
 	}
-	
-	
+		
 	/**
 	 * Manage the tootip
 	 */
-	ToolTip(msg) {
-		var str = "msg='" + msg +"'";
+	ToolTip(msg, profile) {
+		if ( typeof profile == 'undefined') { profile = 'default'; }
+		l.Log[this.dbgToolTip]("Profile is set to "+profile);
+
+		var str = "section='"+profile+"'; msg='" + msg +"'";
 		l.Log[this.dbgToolTip](str);
 
 		var Obj = elm.Gebi(this.cfg.DivContent);
 		var dc = this.cfg.DivExt;
+
+		if ( typeof TooltipConfig[profile] != 'undefined' ) {
+			l.Log[this.dbgToolTip](TooltipConfig[profile]);
+			TabInfoModule.tooltip.DimConteneurX = TooltipConfig[profile].X;
+			TabInfoModule.tooltip.DimConteneurY = TooltipConfig[profile].Y;
+			// this.cfg.DivSizeX = TooltipConfig.X
+			// this.cfg.DivSizeY = TooltipConfig.Y;
+			dm.UpdateDecoModule (TabInfoModule, 'tooltip');
+		}
+
 		if (this.cfg.FirstTime == 1) {
 			switch (de.cliEnv.browser.agent) {
 				case 'Firefox':			while (Obj.childNodes.length >= 1){ Obj.removeChild(Obj.firstChild); }		break;

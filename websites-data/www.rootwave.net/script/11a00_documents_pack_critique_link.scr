@@ -45,6 +45,7 @@ share document	name "doc_uni_website_list_p01.php"						with_website "rootwave"	
 
 share document	name "doc_uni_admin_authentification_p01.php"			with_website "rootwave"	modification "NO";
 share document	name "doc_uni_article_not_found_p01.php"				with_website "rootwave"	modification "NO";
+share document	name "doc_uni_article_moved_p01.php"		    		with_website "rootwave"	modification "NO";
 share document	name "doc_uni_staff_member_list_p01.php"				with_website "rootwave"	modification "NO";
 share document	name "doc_uni_what_we_do_p01.php"						with_website "rootwave"	modification "NO";
 

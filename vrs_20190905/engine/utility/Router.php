@@ -71,17 +71,17 @@ class Router {
 	}
 	
 	/**
-	 * Updates the session route if the URL contains defined HYDRLINKURLTAG. It will also process 'sw'. 
+	 * Updates the session route if the URL contains defined _HYDRLINKURLTAG_. It will also process 'sw'. 
 	 * @param String $url
 	 * @return boolean
 	 */
 	private function processHydrData($url) {
 		$bts = BaseToolSet::getInstance();
 		
-		$match = $this->matchRoute("/(\?|&)HydrLink=1/", $url);
+		$match = $this->matchRoute("/(\?|&)"._HYDRLINKURLTAG_."=1/", $url);
 // 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : BP01 \$match['0']=" . $match['0'] . ", strlen=". strlen($match['0'])));
 		if (strlen($match['0']) > 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '".HYDRLINKURLTAG."' field data. \$match=`".$match['0']."`. From RequestDataEntry ".HYDRLINKURLTAG."=".$bts->RequestDataObj->getRequestDataEntry ( HYDRLINKURLTAG )));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '"._HYDRLINKURLTAG_."' field data. \$match=`".$match['0']."`. From RequestDataEntry "._HYDRLINKURLTAG_."=".$bts->RequestDataObj->getRequestDataEntry ( _HYDRLINKURLTAG_ )));
 			
 			$tab = array('target'	=> 'home','page'		=> '1' ,);
 			if (strlen ($bts->RequestDataObj->getRequestDataEntry('arti_slug')) > 0 ) { $tab['target'] = $bts->RequestDataObj->getRequestDataEntry('arti_slug'); }
@@ -98,8 +98,6 @@ class Router {
 			$bts->SMObj->setSessionEntry('sw', $bts->RequestDataObj->getRequestDataEntry ( 'sw' ));
 		}
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End reached on URL processing"));
-	
-	
 	}
 	
 	

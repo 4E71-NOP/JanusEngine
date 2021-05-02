@@ -83,12 +83,12 @@ class  RenderTables {
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
 			switch ( $ADC['onglet'][$CurT]['legende'] ) {
-				case 1: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Top;									break;// top
-				case 2: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Left;								break;// left
-				case 3: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Right;								break;// right
-				case 4: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Bottom;								break;// bottom
-				case 5: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Left." ".$block.CLASS_TblLgnd_Right;	break;// left&right
-				case 6:		$ADC['onglet'][$CurT]['legendClasses'] .= $block.CLASS_TblLgnd_Top." ".$block.CLASS_TblLgnd_Bottom;	break;// top&bottom
+				case 1: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_;									break;// top
+				case 2: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_;								break;// left
+				case 3: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_RIGHT_;								break;// right
+				case 4: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_BOTTOM_;								break;// bottom
+				case 5: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_." ".$block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
+				case 6:		$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_." ".$block._CLASS_TBL_LGND_BOTTOM_;	break;// top&bottom
 			}
 		}
 		// --------------------------------------------------------------------------------------------
@@ -144,10 +144,10 @@ class  RenderTables {
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
 
-				$Content .= "<table class='".$block.CLASS_Table01." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
+				$Content .= "<table class='".$block._CLASS_TABLE01_." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
-					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass .= "class='".$AD[$CurT]['caption']['class']."' "; }
+					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass = "class='".$AD[$CurT]['caption']['class']."' "; }
 					if ( isset($AD[$CurT]['caption']['syle']) ) { $CaptionStyle = "style='".$AD[$CurT]['caption']['style']."' "; }
 					$Content .= "<caption ".$captionClass.$CaptionStyle.">".$AD[$CurT]['caption']['cont']."</caption>\r";
 				}
@@ -265,9 +265,7 @@ class  RenderTables {
 		for ($i=1; $i<=$NbrOfTabs; $i++ ){
 			$tab["tabTxt".$i] = $bts->I18nTransObj->getI18nTransEntry($TabTxt.$i);
 		}
-		
 		return $tab;
-		
 	}
 	
 	/**

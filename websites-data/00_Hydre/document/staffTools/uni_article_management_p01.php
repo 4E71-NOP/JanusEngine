@@ -126,7 +126,7 @@ $Content .= "
 <form id='MH_001' ACTION='/' method='post'>\r
 <input type='hidden' name='formGenericData[mode]'	value='create'>
 <input type='hidden' name='arti_page'	value='2'>\r
-<table class='".$Block.CLASS_Table01." ".$Block.CLASS_TblLgnd_Top."'>\r
+<table class='".$Block._CLASS_TABLE01_." ".$Block._CLASS_TBL_LGND_TOP_."'>\r
 <tr>\r
 <td colspan='2'>".$bts->I18nTransObj->getI18nTransEntry('caption')."</td>\r
 </tr>\r
@@ -242,7 +242,7 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	
 	$linkId1 = "<a href='".
 	$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
-	"index.php?HydrLink=1".
+	"index.php?"._HYDRLINKURLTAG_."=1".
 	"&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug').
 	"&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref').
 	"&arti_page=2".

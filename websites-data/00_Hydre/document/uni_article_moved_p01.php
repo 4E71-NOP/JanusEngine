@@ -10,8 +10,8 @@
 /*Hydre-licence-fin*/
 
 /*Hydre-IDE-begin*/
-// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
-/* @var $bts BaseToolSet                            */
+// Some definitions in order to ease the IDE's work.
+/* @var $cs CommonSystem                            */
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $ClassLoaderObj ClassLoader                 */
 
@@ -27,43 +27,19 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $RequestDataObj->setRequestDataEntry('script_source',"");
-$bts->RequestDataObj->setRequestDataEntry('RenderCSS',
-	array(
-		'CssSelection' => 2,
-		'go' => 1,
-	),
-);
-$bts->SMObj->setSessionEntry('user_login', 'anonymous');
-
 /*Hydre-contenu_debut*/
-$localisation = " / uni_admin_authentification_p01";
-
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_admin_authentification_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_admin_authentification_p01.php");
-
 switch ($l) {
 	case "fra":
-		$bts->I18nTransObj->apply(array(
-			"invite"		=>	"Module d'authentification<br>\r<br>\r",)
-		);
+		$i18nDoc = array(
+		"invit"		=>	"Article déplacé. L'article que vous recherchez ne se trouve plus à cette URL.");
 		break;
 	case "eng":
-		$bts->I18nTransObj->apply(array(
-			"invite"		=>	"Authentification module.",)
-		);
+		$i18nDoc = array(
+		"invit"		=>	"This article has been moved. The article you seek isn't on this URL any more.");
 		break;
 }
 
-if ( !class_exists('ModuleAuthentification')) {
-	include("modules/Authentification/module_authentification_Obj.php");
-}
-
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite');
-$obj = new ModuleAuthentification();
-$Content .= $obj->render($infos);
+$Content .= $i18nDoc['invit'];
 
 /*Hydre-contenu_fin*/
 ?>

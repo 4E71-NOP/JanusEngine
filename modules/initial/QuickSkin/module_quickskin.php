@@ -40,7 +40,7 @@ class ModuleQuickSkin {
 		$bts->LMObj->setInternalLogTarget("none");
 		
 		$Content = "
-		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."'>\r
+		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."'>\r
 		<tr>\r<td>\r
 		".$I18nObj->getI18nTransEntry('txt1')." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 		</td>\r</tr>\r

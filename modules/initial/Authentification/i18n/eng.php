@@ -1,7 +1,7 @@
 <?php
-$i18n['cnxResult']['0'] = "Connection succeeded";
-$i18n['cnxResult']['1'] = "Wrong password";
-$i18n['cnxResult']['2'] = "Login doesn't exist";
+$i18n['cnxResult0'] = "Connection succeeded";
+$i18n['cnxResult1'] = "Wrong password";
+$i18n['cnxResult2'] = "Login doesn't exist";
 $i18n['id'] = "Login";
 $i18n['ps'] = "Password";
 $i18n['login'] = "Log in";

@@ -51,14 +51,14 @@ class ModuleCalendar {
 		$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - $pv['table_width'] ) /2);
 		
 		$Content = "
-		<table class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_TableStd."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
+		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
 						
 		<tr>\r
 		<td style='font-size:150%'>\r".$i18n['day'][$date['day']]."</td>\r
 		<td rowspan='2' style='font-size: ".( $pv['table_height'] - 8 )."px; font-weight: bold; vertical-align: middle;'>\r".$date['number']."</td>\r
 		</tr>\r
 		<tr>\r
-		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block'].CLASS_Txt_Fade."'>\r".$i18n['month'][$date['month']]."</td>\r
+		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TXT_FADE_."'>\r".$i18n['month'][$date['month']]."</td>\r
 		</tr>\r
 		</table>\r
 		";

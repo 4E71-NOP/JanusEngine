@@ -619,7 +619,7 @@ else {
 		if ( $Tab == 1 ) {
 			$T['AD'][$Tab]['1']['1']['cont'] .= "
 			<form ACTION='index.php?' method='post'>\r
-			<table class='".$PmBlock.CLASS_TableStd."'>
+			<table class='".$PmBlock._CLASS_TABLE_STD_."'>
 			<tr style='background-color:transparent;'>\r
 			<td>\r
 			".$bts->I18nTransObj->getI18nTransEntry('formIwantTo').": 
@@ -715,7 +715,7 @@ else {
 		</td>\r
 
 		<td>\r
-		<table class='".$PmBlock.CLASS_Table01."'>\r
+		<table class='".$PmBlock._CLASS_TABLE01_."'>\r
 		<caption>Lorem ipsum dolor sit amet</caption>
 		<tr>\r
 		<td colspan='2'>\r Lorem ipsum dolor sit amet, consectetur adipiscing elit (A)</td>\r

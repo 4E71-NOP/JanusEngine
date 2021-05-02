@@ -30,16 +30,18 @@
 /*Hydre-contenu_debut*/
 switch ($l) {
 	case "fra":
-		$i18nDoc = array(
-		"invit"		=>	"Article non disponible. Ou peut-être avez oublié de vous connecter.");
+		$bts->I18nTransObj->apply(array(
+		"invit"		=>	"<p>Article non disponible. Ou peut-être avez vous oublié de vous connecter.</p>\r")
+	);
 		break;
 	case "eng":
-		$i18nDoc = array(
-		"invit"		=>	"This article isn't available. Or maybe you forgot to sign-in.");
+		$bts->I18nTransObj->apply(array(
+		"invit"		=>	"<p>This article isn't available. Or maybe you forgot to sign-in.</p>")
+		);
 		break;
 }
 
-$Content .= $i18nDoc['invit'];
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invit');
 
 /*Hydre-contenu_fin*/
 ?>

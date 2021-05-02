@@ -197,7 +197,7 @@ class ModuleDocumentDisplay {
 				case "2":
 					$ContentMenu = "
 					<form ACTION='/' method='post'>\r
-					<table class='".$Block.CLASS_Table01." ".$Block.CLASS_TblLgnd_Top."' style='border:1px solid #000000; box-shadow:8px 5px 5px #80808080;'>\r
+					<table class='".$Block._CLASS_TABLE01_." ".$Block._CLASS_TBL_LGND_TOP_."' style='border:1px solid #000000; box-shadow:8px 5px 5px #80808080;'>\r
 					<tr>
 					<td style='font-weight:bold; font-size:150%; opacity:0.75'>Index</td>\r
 					</tr>\r
@@ -452,7 +452,7 @@ class ModuleDocumentDisplay {
 			$Content .= "
 			<hr>\r
 			<div 
-				class='".$Block.CLASS_Txt_Fade."' 
+				class='".$Block._CLASS_TXT_FADE_."' 
 				style='font-size:".floor($ThemeDataObj->getThemeBlockEntry($infos['block']."T", "txt_font_size")*0.75)."px'
 				id='document_infos' style='position: absolute;'
 			>\r

@@ -19,7 +19,7 @@ class ModuleTooltip {
 	
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
-		$CurrentSet = CurrentSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$localisation = " / ModuleTooltip";
 		$bts->MapperObj->AddAnotherLevel($localisation );
@@ -27,7 +27,7 @@ class ModuleTooltip {
 		$bts->MapperObj->RemoveThisLevel($localisation );
 		$bts->MapperObj->setSqlApplicant("ModuleTooltip");
 		
-		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$RenderLayoutObj = RenderLayout::getInstance();
 		
 		$cdx = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdx'); 
@@ -41,7 +41,8 @@ class ModuleTooltip {
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
 		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
-		
+		$GeneratedJavaScriptObj->AddObjectEntry ('TooltipConfig', "'default' : { 'State':1, 'X':'".$cdx."', 'Y':'".$cdy."' }");
+
 		// Cleaning up
 	
 	}

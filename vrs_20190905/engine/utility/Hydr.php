@@ -96,7 +96,6 @@ class Hydr {
 		$CurrentSetObj->setInstanceOfServerInfosObj( new ServerInfos() );
 		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
 		$CurrentSetObj->setDataEntry( 'fsIdx', 0 );		// Useful for FileSelector
-		
 		// --------------------------------------------------------------------------------------------
 		//
 		// Session management
@@ -490,13 +489,13 @@ class Hydr {
 				}
 			} else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
-				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) . 'article_not_found' );
-				$bts->RequestDataObj->setRequestDataEntry ( 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) . 'article_not_found' );		//deprecated remove when ready
-				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', $bts->RequestDataObj->getRequestDataEntry ( 'arti_page' ) );
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', 'article_not_found' );
+				$bts->RequestDataObj->setRequestDataEntry ( 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );		//deprecated remove when ready
+				$bts->RequestDataObj->setRequestDataEntry ( 'arti_page', 1 );
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', $bts->RequestDataObj->getRequestDataEntry ( 'arti_page' ) );
 			}
 		}
-		
 		
 		// --------------------------------------------------------------------------------------------
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'>\r" );
@@ -708,6 +707,8 @@ class Hydr {
 		
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";

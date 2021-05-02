@@ -373,8 +373,8 @@ else {
 		$T['AD'][$Tab][$lt]['6']['cont'] = $dbp['log_action'];
 		$T['AD'][$Tab][$lt]['7']['cont'] = "<span
 		onMouseOver=\"t.ToolTip('".
-		$bts->SDDMObj->escapeString(htmlentities($dbp['log_contenu']))."');\"
-		onMouseOut=\"t.ToolTip();\">\r".$dbp['log_contenu2']."</span>\r";
+		$bts->SDDMObj->escapeString(htmlentities($dbp['log_contenu']))."', 'logMgmt');\"
+		onMouseOut=\"t.ToolTip('', 'logMgmt');\">\r".$dbp['log_contenu2']."</span>\r";
 
 		$T['AD'][$Tab][$lt]['1']['tc'] = 1;
 		$T['AD'][$Tab][$lt]['2']['tc'] = 1;
@@ -427,8 +427,9 @@ $Content .= "
 </form>\r
 ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection_page')."
 ";
+// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Init', "var TooltipByPass = { logMgmt : { 'State':1, 'X':196, 'Y':256 }};");
+$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->AddObjectEntry ('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");
 
-$bts->GeneratedJavaScriptObj->insertJavaScript('Init', "var TooltipByPass = { 'State':1, 'X':196, 'Y':256 };");
 
 /*Hydre-contenu_fin*/
 
