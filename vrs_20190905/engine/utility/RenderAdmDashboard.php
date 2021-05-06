@@ -43,8 +43,8 @@ class RenderAdmDashboard {
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
-			WHERE b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
-			AND a.module_id = b.module_id
+			WHERE b.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
+			AND a.module_id = b.fk_module_id
 			AND b.module_state = '1'
 			AND a.module_group_allowed_to_see ". $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND a.module_adm_control > '0'

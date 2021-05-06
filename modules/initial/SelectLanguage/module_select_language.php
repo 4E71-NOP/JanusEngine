@@ -42,10 +42,12 @@ class ModuleSelectLanguage {
 			
 			$language_website_support = array();
 			$dbquery = $bts->SDDMObj->query("
-				SELECT b.lang_id
-				FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." a, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." b
-				WHERE a.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-				AND a.lang_id = b.lang_id
+				SELECT l.lang_id
+				FROM "
+				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw, "
+				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l
+				WHERE lw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+				AND lw.fk_lang_id = l.lang_id
 				;");
 			
 			$Content .= "<table><tr>";

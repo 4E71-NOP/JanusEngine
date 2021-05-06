@@ -27,7 +27,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 $localisation = " / uni_staff_member_list_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
@@ -104,6 +104,6 @@ foreach ( $user_liste as $B ) {
 	}
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>
 ;

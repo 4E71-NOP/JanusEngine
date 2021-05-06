@@ -18,7 +18,7 @@ $_REQUEST['M_EXTENS']['extension_requete']	= "Installer";
 //$_REQUEST['M_EXTENS']['extension_requete']	= "Retirer";
 $_REQUEST['uni_gestion_des_modules_p'] = 2;
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 statistique_checkpoint ( "Demarrage gestion des extensions" );
 $_REQUEST['sql_initiateur'] = "uni_gestion_des_groups_p0".$_REQUEST['uni_gestion_des_modules_p'].".php";
 
@@ -260,5 +260,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	);
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

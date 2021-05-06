@@ -41,7 +41,7 @@ $bts->RequestDataObj->setRequestDataEntry('searchForm' ,
 );
 
 /* -------------------------------------------------------------------------------------------- */
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_search_p01.php";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_search_p01.php");
@@ -195,5 +195,5 @@ else {
 	$Content .= "<p class='".$Block."_p'>".$i18nDoc['err1']."</p>";
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

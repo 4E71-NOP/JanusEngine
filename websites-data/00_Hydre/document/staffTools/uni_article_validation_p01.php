@@ -38,7 +38,7 @@ $bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 			),
 		);
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_article_validation_p01.php";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_article_validation_p01.php");
@@ -126,5 +126,5 @@ $TemplateObj = Template::getInstance();
 $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

@@ -27,7 +27,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 switch ($l) {
 	case "fra":
 		$bts->I18nTransObj->apply(array(
@@ -43,5 +43,5 @@ switch ($l) {
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invit');
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

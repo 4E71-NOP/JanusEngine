@@ -27,7 +27,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 $localisation = " / uni_download_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
@@ -97,5 +97,5 @@ $T['tab_infos']['cell_1_txt']		= $i18nDoc['tab1'];
 
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

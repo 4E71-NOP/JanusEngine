@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 /* -------------------------------------------------------------------------------------------- */
 /*	Galerie dessin peinture																		*/
 /* -------------------------------------------------------------------------------------------- */
@@ -36,5 +36,5 @@ $pv['galerie_album'] = "../extensions/".$PA['extension_directory']."/programmes/
 include ( $pv['galerie_album'] );
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

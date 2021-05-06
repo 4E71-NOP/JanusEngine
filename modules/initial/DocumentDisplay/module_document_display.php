@@ -94,11 +94,13 @@ class ModuleDocumentDisplay {
 		// --------------------------------------------------------------------------------------------
 		//	Get the article number of pages (Article != Document)
 		$dbquery = $bts->SDDMObj->query("
-		SELECT COUNT(docu_id) AS arti_nbr_page
-		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
+		SELECT COUNT(fk_docu_id) AS arti_nbr_page
+		FROM "
+		.$SqlTableListObj->getSQLTableName('article')." art, "
+		.$SqlTableListObj->getSQLTableName('deadline')." bcl
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."'
-		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND art.deadline_id = bcl.deadline_id
+		AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND art.fk_deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }

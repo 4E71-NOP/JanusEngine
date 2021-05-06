@@ -88,17 +88,20 @@ class ModuleMenu {
 		// One query to get all the necessary informations for the processing 	
 		// --------------------------------------------------------------------------------------------
 		$infos['module_menu_requete'] = "
-		SELECT cat.*
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." cat, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." bcl
-		WHERE cat.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-		AND cat.lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."'
-		AND cat.deadline_id = bcl.deadline_id
-		AND bcl.deadline_state = '1'
-		AND cat.cate_type IN ('0','1')
-		AND cat.group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
-		AND cat.cate_state = '1'
-		ORDER BY cat.cate_parent,cat.cate_position
-		;";
+			SELECT cat.* FROM "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." cat, "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." bcl
+			WHERE cat.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND cat.fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."'
+			AND cat.fk_deadline_id = bcl.deadline_id
+			AND bcl.deadline_state = '1'
+			AND cat.cate_type IN ('0','1')
+			AND cat.fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+			AND cat.cate_state = '1'
+			ORDER BY cat.cate_parent,cat.cate_position
+			;";
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query :" . $infos['module_menu_requete'] ));
+
 		$dbquery = $bts->SDDMObj->query($infos['module_menu_requete']);
 		$Content = "";
 		$menuData = &$infos['menuData'];
@@ -115,9 +118,9 @@ class ModuleMenu {
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
-					"group_id" 		=> $dbp['group_id'],
-					"arti_ref"		=> $dbp['arti_ref'],
-					"arti_slug"		=> $dbp['arti_slug'],
+					"fk_group_id" 	=> $dbp['fk_group_id'],
+					"fk_arti_ref"	=> $dbp['fk_arti_ref'],
+					"fk_arti_slug"	=> $dbp['fk_arti_slug'],
 				);
 				if ( $dbp['cate_type'] == $menu_racine ) { $racine_menu = $dbp['cate_id']; }
 			}

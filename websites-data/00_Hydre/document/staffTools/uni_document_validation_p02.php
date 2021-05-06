@@ -15,7 +15,7 @@
 // --------------------------------------------------------------------------------------------
 $_REQUEST['M_DOCUME']['document_selection'] = 25;
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "uni_correction_des_documents_p02.php";
 
 // --------------------------------------------------------------------------------------------
@@ -229,5 +229,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	);
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

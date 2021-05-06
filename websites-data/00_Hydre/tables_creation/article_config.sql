@@ -21,9 +21,9 @@ config_menu_float_size_y		INTEGER,
 config_menu_occurence			INTEGER, 
 config_show_release_info		INTEGER,
 config_show_info_update	        INTEGER,
-ws_id							INTEGER, 
+fk_ws_id						INTEGER, 
 
 PRIMARY KEY (config_id),
-KEY idx_!IdxNom!_ws_id (ws_id)
+KEY idx_!IdxNom!_ws_id (fk_ws_id)
 
 );

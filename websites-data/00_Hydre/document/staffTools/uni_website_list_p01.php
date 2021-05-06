@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_website_list_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_website_list_p01.php");
@@ -116,5 +116,5 @@ $config = array(
 
 $Content .= $bts->RenderTablesObj->render($config, $T);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

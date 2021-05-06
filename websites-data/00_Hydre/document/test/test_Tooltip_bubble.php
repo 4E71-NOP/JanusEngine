@@ -12,7 +12,7 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 $_REQUEST['BS']['id']				= "bouton_suppression_log1";
 $_REQUEST['BS']['type']				= "button";

@@ -6,9 +6,9 @@ CREATE TABLE !table! (
 ws_id				INTEGER NOT NULL,
 ws_name				VARCHAR(255),
 ws_short			VARCHAR(255),
-ws_lang				INTEGER,
+fk_lang_id			INTEGER,
 ws_lang_select		INTEGER,
-theme_id			INTEGER,
+fk_theme_id			INTEGER,
 ws_title			VARCHAR(255),
 ws_home				VARCHAR(255),
 ws_directory		VARCHAR(255),
@@ -32,6 +32,6 @@ row_disabled		TIMESTAMP NULL NULL,
 row_user_disabled	VARCHAR(255),
 
 PRIMARY KEY (ws_id),
-KEY idx_!IdxNom!_theme_id (theme_id)
+KEY idx_!IdxNom!_theme_id (fk_theme_id)
 
 );

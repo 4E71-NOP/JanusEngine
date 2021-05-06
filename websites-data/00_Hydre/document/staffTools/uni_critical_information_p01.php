@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_critical_information_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_critical_information_p01.php");
@@ -59,14 +59,11 @@ switch ($l) {
 }
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('url_bypass') . "
-
-<p style='text-align:center'><a href='
-index.php?
-&amp;sw=".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."
-&amp;l=".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('lang')."
-&amp;arti_ref=fra_admin_authentification
-&amp;arti_page=1
-'>".$bts->I18nTransObj->getI18nTransEntry('url_bypass_nom')."
+<p style='text-align:center'><a href='".
+$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
+"index.php?"._HYDRLINKURLTAG_."=1".
+"&arti_slug=admin-authentification"
+."&arti_page=1'>".$bts->I18nTransObj->getI18nTransEntry('url_bypass_nom')."
 </a>
 </p>
 <br>\r
@@ -74,5 +71,5 @@ index.php?
 <hr>\r
 ";
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

@@ -40,7 +40,7 @@ spacing_border_left	'0'	spacing_border_right	'0'	spacing_border_top	'0'	spacing_
 module_zindex	'10';
 ");
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_toolset_cleanup_script_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_toolset_cleanup_script_p01.php");
@@ -114,5 +114,5 @@ $Content .= "
 </form>\r
 ";
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

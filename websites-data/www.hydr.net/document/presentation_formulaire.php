@@ -16,7 +16,7 @@ $_REQUEST[MM][id] = 10 ;
 /*	2005 09 11 : fra_gestion_des_modules_p02.php debut 											*/
 /*	2007 08 16 : derniere modification															*/
 /* -------------------------------------------------------------------------------------------- */
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST[sql_initiateur] = "fra_gestion_des_modules_p02";
 
 for ( $i=1 ; $i<=3 ; $i++ ) {
@@ -43,5 +43,5 @@ while ($dbp = fetch_array_sql($dbquery)) {
 	foreach ( $dbp as $A => $B ) { $table_module[$A] = $B; }
 }
 */
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

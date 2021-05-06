@@ -53,7 +53,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 $bts->CMObj->setConfigurationEntry('colorSelector', 'system');		//"or Hydr"
 
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_theme_management_p02";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_theme_management_p02.php");
@@ -707,7 +707,7 @@ $infos['formName'] = "themeForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

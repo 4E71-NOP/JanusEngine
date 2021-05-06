@@ -36,7 +36,7 @@ $bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 );
 $bts->SMObj->setSessionEntry('user_login', 'anonymous');
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_admin_authentification_p01";
 
 $bts->MapperObj->AddAnotherLevel($localisation );
@@ -65,5 +65,5 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite');
 $obj = new ModuleAuthentification();
 $Content .= $obj->render($infos);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

@@ -44,7 +44,7 @@ class I18nTrans {
 		SELECT i18n_name, i18n_text 
 		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
 		WHERE i18n_package = '".$package."'
-		AND lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
+		AND fk_lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
 		");
 		$tab0 = $this->I18nTrans;
 		$tab1 = array();

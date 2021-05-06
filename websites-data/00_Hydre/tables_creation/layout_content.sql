@@ -3,7 +3,7 @@
 /* ---------------------------------------- */
 CREATE TABLE !table! ( 
 lyoc_id						INTEGER NOT NULL,
-layout_id					INTEGER,
+fk_layout_id				INTEGER,
 lyoc_line					INTEGER,
 lyoc_minimum_x				INTEGER,
 lyoc_minimum_y				INTEGER,
@@ -43,6 +43,6 @@ lyoc_margin_bottom	INTEGER,
 lyoc_module_zindex	INTEGER,
 
 PRIMARY KEY (lyoc_id),
-KEY idx_!IdxNom!_layout_id (layout_id)
+KEY idx_!IdxNom!_layout_id (fk_layout_id)
 
 );

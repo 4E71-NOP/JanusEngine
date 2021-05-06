@@ -47,8 +47,8 @@ class ModuleMenuType02 {
 		// Mi = Menu Index (the current one)
 		foreach ( $menuData as $A ) {
 			if ( $A['cate_parent'] != 0 ) {
-// 				if ( $A['arti_ref'] == "0" ) {									// folder
-				if ( $A['arti_ref'] == "0" ) {									// folder
+// 				if ( $A['fk_arti_ref'] == "0" ) {									// folder
+				if ( $A['fk_arti_ref'] == "0" ) {									// folder
 					$Mi = &$menuDiv[$A['cate_id']];
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mi['niv']		= ( $Mp['niv'] + 1 );
@@ -58,16 +58,16 @@ class ModuleMenuType02 {
 					$Mi['width']	= $A['div_width'];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 1;
 				}
-// 				elseif ( $A['arti_ref'] == $FPRM['arti_request'] ) {
-				elseif ( $A['arti_ref'] == $FPRM['arti_request'] ) {
+// 				elseif ( $A['fk_arti_ref'] == $FPRM['arti_request'] ) {
+				elseif ( $A['fk_arti_ref'] == $FPRM['arti_request'] ) {
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 3;
 				}
 				else {
 					$Mp = &$menuDiv[$A['cate_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 2;
-// 					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_ref'];
-					$Mp['entree'][$Mp['idx']]['ref'] = $A['arti_slug'];
+// 					$Mp['entree'][$Mp['idx']]['ref'] = $A['fk_arti_ref'];
+					$Mp['entree'][$Mp['idx']]['ref'] = $A['fk_arti_slug'];
 				}
 				$Mp['entree'][$Mp['idx']]['nom'] = $A['cate_title'];
 				$Mp['entree'][$Mp['idx']]['id'] = $A['cate_id'];
@@ -87,7 +87,7 @@ class ModuleMenuType02 {
 					$J['niv']		= $Mp['niv'];								// Level in the tree (deep)
 					if ( $J['niv'] > 0 ) { $J['deco'] = $bts->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($J['niv'], 'deco_type'), "M"); }
 					
-					$J['animation']	= $Spb['menu_anim'];						// Animation type
+					// $J['animation']	= $Spb['menu_anim'];						// Animation type
 					$J['entree']	= $A['cate_position'];						// Position amongst other
 					$J['typ']		= "a";										// Type
 					$J['dos']		= 0;										// Folder
@@ -103,8 +103,8 @@ class ModuleMenuType02 {
 						$Jp['nf']++;
 					}
 					
-// 					if ( $A['arti_ref'] == "0" ) {								// folder, creation of d_menu
-					if ( $A['arti_slug'] == "0" ) {								// folder, creation of d_menu
+// 					if ( $A['fk_arti_ref'] == "0" ) {								// folder, creation of d_menu
+					if ( $A['fk_arti_slug'] == "0" ) {								// folder, creation of d_menu
 						$J['dos'] = 1;
 						$Jd = &$renderJSON['d_menu_'.$A['cate_id']];
 						$Jd['menu'] 			= $Jd['id'] = "d_menu_".$A['cate_id'];

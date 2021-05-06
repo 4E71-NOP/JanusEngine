@@ -35,7 +35,7 @@ $bts->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_article_test_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_article_test_p01.php");
@@ -194,5 +194,5 @@ if ( file_exists($_REQUEST['WM_VFA_script_file']) ) {
 }
 else { $Content .= "Fichier non trouv&eacute; <br>\r"; }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

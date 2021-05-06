@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin *
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 $ClassLoaderObj->provisionClass ( 'GroupWebsite' );
 $obj = new GroupWebsite();
@@ -47,7 +47,7 @@ $Content .= $bts->StringFormatObj->print_r_html($obj->getGroupWebsite());
 $Content .= "<br>\r<br>\r<br>\r";
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 
 ?>

@@ -28,7 +28,7 @@ $_REQUEST['M_DECORA']['ref_id'] = 15;
 $DP_['arti_page_save'] = $DP_['arti_page'];
 $pv['deco_name_form'] = "modification";
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "uni_gestion_des_decoration_p02.php";
 
 $_REQUEST['tableau_javascript_element_dynamique'] = array();
@@ -1270,7 +1270,7 @@ if ( $website['ws_info_debug'] < 10 ) {
 }
 
 //$theme_tableau_a_ecrire = "theme_princ_";
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 $DP_['arti_page'] = $DP_['arti_page_save'];
 
 ?>

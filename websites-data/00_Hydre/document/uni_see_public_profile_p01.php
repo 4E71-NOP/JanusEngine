@@ -34,7 +34,7 @@ $bts->RequestDataObj->setRequestDataEntry('publicProfil',
 				'userId' => 1,
 		),
 );
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_see_public_profile_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_see_public_profile_p01.php");
@@ -110,5 +110,5 @@ $Content .= $bts->RenderTablesObj->render($config, $T);
 
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

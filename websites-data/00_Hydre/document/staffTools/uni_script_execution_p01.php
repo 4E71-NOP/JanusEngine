@@ -45,7 +45,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 $localisation = " / uni_script_execution_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
@@ -168,7 +168,7 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 	
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

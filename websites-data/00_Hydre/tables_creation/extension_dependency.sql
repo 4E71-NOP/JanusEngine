@@ -4,7 +4,7 @@
 
 CREATE TABLE !table! ( 
 dependency_id		INTEGER NOT NULL, 
-extension_id		INTEGER, 
+fk_extension_id		INTEGER, 
 extension_dep		INTEGER, 
 
 PRIMARY KEY (dependency_id),

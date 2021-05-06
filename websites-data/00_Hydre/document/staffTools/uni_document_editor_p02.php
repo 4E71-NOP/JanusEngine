@@ -18,7 +18,7 @@ $user['group_tag'] = 1;
 $pv['execution_script'] = 1;
 
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "uni_ecriture_des_documents_p02.php";
 // --------------------------------------------------------------------------------------------
 // Preparation des tables
@@ -384,5 +384,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	);
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

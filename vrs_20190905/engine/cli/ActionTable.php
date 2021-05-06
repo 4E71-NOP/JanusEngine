@@ -11,7 +11,7 @@ self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT
 self::$ActionTable['add']['decoration']			= function (&$a) {
 	switch ( $a['params']['type']) {
 		case 10:	$targetTable = "deco_10_menu";			$idv="10_id";	break;
-		case 20:	$targetTable = "deco_20_caligraph";	$idv="20_id";	break;
+		case 20:	$targetTable = "deco_20_caligraph";		$idv="20_id";	break;
 		case 30:	$targetTable = "deco_30_1_div";			$idv="30_id";	break;
 		case 40:	$targetTable = "deco_40_elegance";		$idv="40_id";	break;
 		case 50:	$targetTable = "deco_50_exquisite";		$idv="50_id";	break;
@@ -30,7 +30,7 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 		}
 	}
 	$a['values2'] = substr($a['values2'], 0 , -1);
-	$a['columns2'] = "deco_line_number, deco_id, deco_variable_name, deco_value";
+	$a['columns2'] = "deco_line_number, fk_deco_id, deco_variable_name, deco_value";
 	
 	return array (
 		"INSERT INTO ".$a['sqlTables']['decoration']." (".$a['columns'].") VALUES (".$a['values'].");",
@@ -58,7 +58,7 @@ self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("IN
 self::$ActionTable['add']['log']	= function (&$a) { 
 	$bts = BaseToolSet::getInstance();
 // 	$LMObj = LogManagement::getInstance();
-	$bts->LMObj->log($a);
+	$bts->LMObj->InternalLog($a);
 };
 
 
@@ -74,7 +74,7 @@ self::$ActionTable['add']['tag']			= function (&$a) { return array ("INSERT INTO
 
 self::$ActionTable['add']['theme']			= function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['theme_descriptor']." (".$a['columns'].") VALUES (".$a['values'].");",
-		"INSERT INTO ".$a['sqlTables']['theme_website']." (theme_website_id, ws_id, theme_id, theme_state) VALUES ('".$a['params']['theme_website_id']."','".$a['Context']['ws_id']."','".$a['params']['id']."','".$a['params']['state']."');");
+		"INSERT INTO ".$a['sqlTables']['theme_website']." (theme_website_id, fk_ws_id, fk_theme_id, theme_state) VALUES ('".$a['params']['theme_website_id']."','".$a['Context']['ws_id']."','".$a['params']['id']."','".$a['params']['state']."');");
 };
 
 
@@ -105,7 +105,7 @@ self::$ActionTable['add']['website']		= function (&$a) {
 //	Assign
 //--------------------------------------------------------------------------------
 self::$ActionTable['assign']['document']		= function (&$a) {
-	return array ("UPDATE ".$a['sqlTables']['article']." SET docu_id = '".$a['params']['docu_id']."' WHERE arti_id = '".$a['params']['arti_id']."';");
+	return array ("UPDATE ".$a['sqlTables']['article']." SET fk_docu_id = '".$a['params']['docu_id']."' WHERE arti_id = '".$a['params']['arti_id']."';");
 };
 
 self::$ActionTable['assign']['language']		= function (&$a) {
@@ -116,7 +116,7 @@ self::$ActionTable['assign']['language']		= function (&$a) {
 self::$ActionTable['assign']['layout']		= function (&$a) {
 	$queries = array();
 	if ( $a['params']['default'] == 1 ) {
-		$queries[] = "UPDATE ".$a['sqlTables']['layout_theme']." SET default_layout_content = '0' WHERE theme_id = '".$a['params']['theme_id']."';";
+		$queries[] = "UPDATE ".$a['sqlTables']['layout_theme']." SET default_layout_content = '0' WHERE fk_theme_id = '".$a['params']['theme_id']."';";
 	}
 	$queries[] = "INSERT INTO ".$a['sqlTables']['layout_theme']." VALUES ('".$a['params']['layout_theme_id']."','".$a['params']['theme_id']."','".$a['params']['layout_id']."','".$a['params']['default']."');";
 	return $queries;
@@ -124,12 +124,12 @@ self::$ActionTable['assign']['layout']		= function (&$a) {
 
 self::$ActionTable['assign']['tag']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article_tag']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['website']." SET theme_id = '".$a['params']['theme_id']."' WHERE ws_id = '".$a['params']['ws_id']."';");};
+self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['website']." SET fk_theme_id = '".$a['params']['theme_id']."' WHERE ws_id = '".$a['params']['ws_id']."';");};
 
 self::$ActionTable['assign']['user']		= function (&$a) {
 	$queries = array();
 	if ( $a['params']['primary_group'] == 1 ) {
-		$queries[] = "UPDATE ".$a['sqlTables']['group_user']." SET group_user_initial_group = '0' WHERE user_id = '".$a['params']['user_id']."';";
+		$queries[] = "UPDATE ".$a['sqlTables']['group_user']." SET group_user_initial_group = '0' WHERE fk_user_id = '".$a['params']['user_id']."';";
 	}
 	$queries[] = "INSERT INTO ".$a['sqlTables']['group_user']." VALUES ('".$a['params']['group_user_id']."','".$a['params']['group_id']."','".$a['params']['user_id']."','".$a['params']['primary_group']."');";
 	return $queries;
@@ -173,19 +173,20 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 	
 	if ( file_exists($a['params']['file']) ) {
 		$fileContent = file( $a['params']['file'] );
+		$content = "";
 		foreach ( $fileContent as $line ) { $content .= $line; }
 		
-		$startPtr = stripos( $content , "/*Hydre-contenu_debut*/" , 0) + 23 ;
-		$endPtr = stripos( $content , "/*Hydre-contenu_fin*/" , 0);
+		$startPtr = stripos( $content , "/*Hydr-Content-Begin*/" , 0) + 23 ;
+		$endPtr = stripos( $content , "/*Hydr-Content-End*/" , 0);
 		if ( $startPtr > $endPtr ) {
 			$a['errFlag'] = 1;
 			$a['errMsg'][] = "End tag found before StartTag";
 		}
 		
-		$startTagCount = substr_count( $content , "/*Hydre-contenu_debut*/");
-		$endTagCount = substr_count( $content , "/*Hydre-contenu_fin*/");
+		$startTagCount = substr_count( $content , "/*Hydr-Content-Begin*/");
+		$endTagCount = substr_count( $content , "/*Hydr-Content-End*/");
 		if ( $startTagCount != 1 || $endTagCount != 1 ) {
-			$a['errMsg'][] = "Incorrect tag count in file '".$R['fichier_cible']."' ( D: ".$startTagCount." ; F: ".$startTagCount." ).";
+			$a['errMsg'][] = "Incorrect tag count in file '".$a['fichier_cible']."' ( D: ".$startTagCount." ; F: ".$startTagCount." ).";
 		}
 		
 		if ( strlen($content) > 65536 ) {

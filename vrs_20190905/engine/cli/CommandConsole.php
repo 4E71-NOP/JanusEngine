@@ -122,8 +122,8 @@ class CommandConsole {
 	 *
 	 */
 	private function splitIntoArray ( $CommandLine ) {
-		$tab_rch = array ("\n",	chr(13),	"				",	"			",	"		",	"	",	"      ",	"     ",	"    ",	"   ",	"  ");
-		$tab_rpl = array (" ",	" ",		" ",				" ",			" ", 		" ",	" ",		" ",		" ",	" ",	" ");
+		$tab_rch = array ("\n",	chr(13),	"		",	"			",	"		",	"	",	"      ",	"    ",	"    ",	"   ",	"  ");
+		$tab_rpl = array (" ",	" ",		" ",	" ",			" ", 		" ",	" ",		" ",	" ",	" ",	" ");
 		$CommandLine = trim($CommandLine);
 		$CommandLine = str_replace ($tab_rch,$tab_rpl,$CommandLine);
 		
@@ -293,7 +293,7 @@ class CommandConsole {
 								$dbquery = $bts->SDDMObj->query($q['0']);
 								if ( $CCL['errFlag'] != 1 && $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 									$msg = str_replace ( '<A1>', $CCL['params']['name'] , $bts->I18nTransObj->getI18nTransEntry('duplicateFound') );
-									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
+									// $bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
 									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: Duplicate found</span>";
@@ -401,6 +401,12 @@ class CommandConsole {
 		$CCL = $this->splitIntoArray ($CommandLine);
 		$CCL = $this->linkTerms($CCL);
 		$CCL['CommandString'] = $CommandLine;	// We save the command string for error messages and debug.
+
+		if ( $CCL['init']['cmd'] == "exit") { 
+			error_log("Exit has been called. I'm out!");
+			exit(0);
+
+		}
 
 		if ( is_array(self::$ActionTable[$CCL['init']['cmd']]) ) {
 			if ( is_callable(self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']])) {

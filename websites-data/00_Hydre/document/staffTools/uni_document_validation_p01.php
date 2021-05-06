@@ -35,7 +35,7 @@ $bts->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_document_validation_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_document_validation_p01.php");
@@ -187,5 +187,5 @@ $Content .= "<br>\r&nbsp;
 <br>\r
 ";
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

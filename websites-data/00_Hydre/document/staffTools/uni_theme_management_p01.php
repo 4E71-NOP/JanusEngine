@@ -36,7 +36,7 @@ $bts->RequestDataObj->setRequestData('test',
 		)
 		);
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_theme_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_theme_management_p01.php");
@@ -124,7 +124,7 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

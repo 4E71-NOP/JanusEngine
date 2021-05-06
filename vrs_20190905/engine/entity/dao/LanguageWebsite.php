@@ -40,7 +40,7 @@ class LanguageWebsite extends Entity {
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')."
 			WHERE lang_website_id = '".$id."'
-			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

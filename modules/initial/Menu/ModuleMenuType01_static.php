@@ -45,8 +45,8 @@ class ModuleMenuType01 {
 						"cate_desc"		=> $dbp['cate_desc'],
 						"cate_parent"	=> $dbp['cate_parent'],
 						"cate_position"	=> $dbp['cate_position'],
-						"group_id" 	=> $dbp['group_id'],
-						"arti_ref"		=> $dbp['arti_ref']
+						"fk_group_id" 	=> $dbp['fk_group_id'],
+						"fk_arti_ref"	=> $dbp['fk_arti_ref']
 				);
 				if ( $dbp['cate_type'] == $menu_racine ) { $racine_menu = $dbp['cate_id']; }
 			}
@@ -90,7 +90,7 @@ class ModuleMenuType01 {
 		
 		foreach ( $menu_principal as $A ) {
 			if ($A['cate_parent'] == $function_parameters['cate_parent'] ) {
-				if ( $A['arti_ref'] == "0" ) {
+				if ( $A['fk_arti_ref'] == "0" ) {
 					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_tb3' href=\"#\">".$A['cate_title']."</a>\r<ul style='padding-left: 5px; list-style: none;'>\r";
 					$function_parametres_save = $function_parameters['cate_parent'];
 					$function_parameters['cate_parent'] = $A['cate_id'];
@@ -98,11 +98,11 @@ class ModuleMenuType01 {
 					$function_parameters['cate_parent'] = $function_parametres_save;
 					$Content .= "</ul>\r</li>\r";
 				}
-				elseif ( $A['arti_ref'] == $function_parameters['arti_request'] ) {
+				elseif ( $A['fk_arti_ref'] == $function_parameters['arti_request'] ) {
 					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_t3' href=\"#\">".$A['cate_title']."</a></li>\r";
 				}
 				else {
-					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$bloc_html['url_slup']."\">".$A['cate_title']."</a></li>\r";
+					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['fk_arti_ref']."&amp;arti_page=1".$bloc_html['url_slup']."\">".$A['cate_title']."</a></li>\r";
 				}
 			}
 		}

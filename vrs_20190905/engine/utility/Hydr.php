@@ -329,22 +329,22 @@ class Hydr {
 		if (strlen ( $UserObj->getUserEntry ( 'user_lang' ) ) != 0 ) {
 			$scoreLang += 2;
 		}
-		if (strlen ( $WebSiteObj->getWebSiteEntry ( 'ws_lang' ) ) != 0 && $WebSiteObj->getWebSiteEntry ( 'ws_lang' ) != 0) {
+		if (strlen ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) ) != 0 && $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) != 0) {
 			$scoreLang += 1;
 		}
 		
 		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language list: ". $bts->StringFormatObj->arrayToString($bts->CMObj->getLanguageList())));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ws_lang='" . $WebSiteObj->getWebSiteEntry ( 'ws_lang' ) . "'") );
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "'") );
 		
 		switch ($scoreLang) {
 			case 0 :
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened") );
 				break;
 			case 1 :
-				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'ws_lang' ), 'lang_639_3' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'ws_lang' ) . "->" . $tmp . ")") );
+				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_639_3' );
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "->" . $tmp . ")") );
 				$CurrentSetObj->setDataEntry ( 'language', $tmp );
-				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'ws_lang' ), 'lang_id' ) );
+				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_id' ) );
 				break;
 			case 2 :
 			case 3 :
@@ -450,19 +450,21 @@ class Hydr {
 		
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
-			$dbquery = $bts->SDDMObj->query ( "
-				SELECT cat.cate_id, cat.cate_name, cat.arti_ref
+			$sqlQuery = "
+				SELECT cat.cate_id, cat.cate_name, cat.fk_arti_ref
 				FROM " . $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " . $SqlTableListObj->getSQLTableName ( 'deadline' ) . " bcl
-				WHERE cat.ws_id = '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'
-				AND cat.lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "'
-				AND cat.deadline_id = bcl.deadline_id
+				WHERE cat.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'
+				AND cat.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "'
+				AND cat.fk_deadline_id = bcl.deadline_id
 				AND bcl.deadline_state = '1'
 				AND cat.cate_type IN ('0','1')
-				AND cat.group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . "
+				AND cat.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . "
 				AND cat.cate_state = '1'
 				AND cate_initial_document = '1'
 				ORDER BY cat.cate_parent,cat.cate_position
-				;" );
+				;";
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 			}
@@ -470,16 +472,35 @@ class Hydr {
 		} else {
 			// Is the user can read this article ?
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A route exists in the session. The target is `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
-			$dbquery = $bts->SDDMObj->query ( "
-				SELECT * FROM " . $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " . $SqlTableListObj->getSQLTableName ( 'article' ) . " art
-				WHERE cat.ws_id IN ('1', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "')
-				AND cat.lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
-				AND cat.group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . " 
-				AND cat.cate_state = '1'
-				AND cat.arti_ref = art.arti_ref
-				AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
-				AND art.arti_page = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'page')."';
-				;" );
+
+			// Special case for admin auth 
+			if ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') == "admin-authentification") {
+				$sqlQuery = "
+					SELECT * FROM ". $SqlTableListObj->getSQLTableName ( 'article' ) . " art
+					WHERE art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
+					AND art.arti_page = '1';
+					;";
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$dbquery = $bts->SDDMObj->query ($sqlQuery);
+			}
+			else {
+				// Normal case
+				$sqlQuery = "
+					SELECT * 
+					FROM " 
+					. $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " 
+					. $SqlTableListObj->getSQLTableName ( 'article' ) . " art
+					WHERE cat.fk_ws_id IN ('1', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "')
+					AND cat.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
+					AND cat.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . " 
+					AND cat.cate_state = '1'
+					AND cat.fk_arti_ref = art.arti_ref
+					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
+					AND art.arti_page = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'page')."';
+					;";
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$dbquery = $bts->SDDMObj->query ($sqlQuery);
+			}
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -524,7 +545,7 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Prepare Theme & Layout" );
 		
-		// Those are ENTITY (DAO) classes, they're not UTILITY classes.
+		// Those are ENTITIES(DAO), they're not UTILITY classes.
 		$ClassLoaderObj->provisionClass ( 'Deco10_Menu' );
 		$ClassLoaderObj->provisionClass ( 'Deco20_Caligraph' );
 		$ClassLoaderObj->provisionClass ( 'Deco30_1Div' );

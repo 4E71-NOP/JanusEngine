@@ -33,7 +33,7 @@
 $bts->RequestDataObj->setRequestData('cate_parent', 39);
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_category_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_category_management_p01.php");
@@ -83,11 +83,11 @@ SELECT c.lang_id, l.lang_original_name
 FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language')." l, ".$SqlTableListObj->getSQLTableName('language_website')." sl
 WHERE c.cate_type IN ('0','1')
 AND c.cate_state = '1'
-AND c.ws_id = '2'
-AND c.lang_id = l.lang_id
-AND l.lang_id = sl.lang_id
-AND c.ws_id = sl.ws_id
-AND c.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND c.fk_ws_id = '2'
+AND c.fk_lang_id = l.lang_id
+AND l.lang_id = sl.fk_lang_id
+AND c.fk_ws_id = sl.fk_ws_id
+AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 GROUP BY c.lang_id
 ;");
 
@@ -126,13 +126,13 @@ foreach ( $CateTabList as $A ) {
 }
 
 $dbquery = $bts->SDDMObj->query("SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language_website')." sl, ".$SqlTableListObj->getSQLTableName('website')." sw 
+FROM ".$SqlTableListObj->getSQLTableName('category')." c, ".$SqlTableListObj->getSQLTableName('language_website')." lw, ".$SqlTableListObj->getSQLTableName('website')." w 
 WHERE c.cate_type IN (0,1) 
 AND c.cate_state = '1' 
 AND c.lang_id IN (".$langClause.") 
-AND c.lang_id = sl.lang_id 
-AND sl.ws_id = sw.ws_id 
-AND sw.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND c.lang_id = lw.fk_lang_id 
+AND lw.fk_ws_id = w.ws_id 
+AND w.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY c.lang_id, c.cate_parent, c.cate_position 
 ;");
 
@@ -208,7 +208,7 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

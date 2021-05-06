@@ -32,7 +32,7 @@ $LMObj->setInternalLogTarget("both");
 
 // $RequestDataObj->setRequestDataEntry('script_source',"");
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_outil_url_utiles_p01";
 $MapperObj->AddAnotherLevel($localisation );
 $LMObj->logCheckpoint("uni_outil_url_utiles_p01");
@@ -134,5 +134,5 @@ $config = array(
 $Content .= $RenderTablesObj->render($config, $T);
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

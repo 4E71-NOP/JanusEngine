@@ -44,8 +44,8 @@ $ll = 0;
 switch ($application) {
 	case 'install' :
 		$ll = LOGLEVEL_WARNING;
-// 		$ll = LOGLEVEL_STATEMENT;
-// 		$ll = LOGLEVEL_BREAKPOINT;
+		// $ll = LOGLEVEL_STATEMENT;
+		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'monitor' :
 		$ll = LOGLEVEL_ERROR;
@@ -54,7 +54,7 @@ switch ($application) {
 	case 'website':
 		$ll = LOGLEVEL_WARNING;
 		$ll = LOGLEVEL_STATEMENT;
-// 		$ll = LOGLEVEL_BREAKPOINT;
+		$ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'FileSelector':
 		$ll = LOGLEVEL_WARNING;

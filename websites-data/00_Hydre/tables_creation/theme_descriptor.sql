@@ -7,7 +7,7 @@ theme_admctrl_position		1 H-G	2 H-M	3 H-D	4 M-D	5 B-D	6 B-M	7 B-G	8 M-G
 
 CREATE TABLE !table! (
 theme_id				INTEGER NOT NULL,
-theme_directory		VARCHAR(128),
+theme_directory		    VARCHAR(128),
 theme_name 				VARCHAR(128),
 theme_title				VARCHAR(128),
 theme_desc				VARCHAR(128),
@@ -22,7 +22,7 @@ theme_stylesheet_5		VARCHAR(128),
 theme_bg				VARCHAR(128),
 theme_bg_repeat			VARCHAR(128),
 theme_bg_color			VARCHAR(128),
-theme_logo			VARCHAR(128),
+theme_logo			    VARCHAR(128),
 theme_banner			VARCHAR(128),
 
 theme_divinitial_bg		VARCHAR(128),
@@ -82,7 +82,7 @@ theme_admctrl_position		INTEGER,
 
 theme_gradient_start_color	VARCHAR(10),
 theme_gradient_middle_color	VARCHAR(10),
-theme_gradient_end_color		VARCHAR(10),
+theme_gradient_end_color	VARCHAR(10),
 
 PRIMARY KEY (theme_id)
 

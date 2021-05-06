@@ -38,46 +38,55 @@ class RenderLayout {
 	/**
 	 * Renders the layout that will be used for rendering the modules.
 	 */
-	public function render( ){
+	public function render(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
 		$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$SqlTableListObj->getSQLTableName('module')." m, ".$SqlTableListObj->getSQLTableName('module_website')." sm
-			WHERE sm.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			AND m.module_id = sm.module_id
-			AND sm.module_state = '1'
+			SELECT * FROM "
+			.$SqlTableListObj->getSQLTableName('module')." m, "
+			.$SqlTableListObj->getSQLTableName('module_website')." wm
+			WHERE wm.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND m.module_id = wm.fk_module_id
+			AND wm.module_state = '1'
 			AND m.module_group_allowed_to_see ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;");
-		
-		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
+		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
+			}
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
 		}
+		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for layout ")); }
 		
 		$switch_score = 10;
-// 		if ( isset($_REQUEST['arti_ref']) ) {
-// 		if ( strlen($CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref') ) != 0 ) {
-		$dbquery = $bts->SDDMObj->query("
-			SELECT
-			pr.layout_id as pr_layout_id,pr.layout_name,pr.layout_title,pr.layout_generic_name,
-			sp.*
-			FROM ".$SqlTableListObj->getSQLTableName('layout')." pr, ".$SqlTableListObj->getSQLTableName('layout_theme')." sp, ".$SqlTableListObj->getSQLTableName('article')." art
-			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."'
-			AND art.arti_page = '".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."'
-			AND art.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			AND art.layout_generic_name = pr.layout_generic_name
-			AND pr.layout_id = sp.layout_id
-			AND sp.theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
-			;");
-		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['layout_id']; }
+
+		$sqlQuery = "
+		SELECT
+		pr.layout_id as pr_layout_id,pr.layout_name,pr.layout_title,pr.layout_generic_name,
+		sp.*
+		FROM "
+		.$SqlTableListObj->getSQLTableName('layout')." pr, "
+		.$SqlTableListObj->getSQLTableName('layout_theme')." sp, "
+		.$SqlTableListObj->getSQLTableName('article')." art
+		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."'
+		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."'
+		AND art.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		AND art.layout_generic_name = pr.layout_generic_name
+		AND pr.layout_id = sp.fk_layout_id
+		AND sp.fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
+		;";
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$switch_score=".$switch_score));
+
+		$dbquery = $bts->SDDMObj->query($sqlQuery);
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['pr_layout_id']; }
 		if ( $layout_selection != 0 ) { $switch_score += 1000; }
-// 		}
 		
 		if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=".$sqlQuery));
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
@@ -90,9 +99,9 @@ class RenderLayout {
 				
 			case 10 :
 				$dbquery = $bts->SDDMObj->query("
-					SELECT layout_id
+					SELECT fk_layout_id
 					FROM ".$SqlTableListObj->getSQLTableName('layout_theme')."
-					WHERE theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
+					WHERE fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 					AND default_layout_content = '1'
 					;");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
@@ -102,6 +111,7 @@ class RenderLayout {
 // --------------------------------------------------------------------------------------------
 //	Part 2
 // --------------------------------------------------------------------------------------------
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : count(\$this->PL)=".count($this->PL)));
 		foreach ( $this->PL as $A )  {
 			$m = $A['lyoc_module_name'];
 			switch ( $A['lyoc_calculation_type'] ) {
@@ -121,7 +131,6 @@ class RenderLayout {
 					$this->Layout[$m]['cdx']	= $A['lyoc_size_x'];
 					$this->Layout[$m]['cdy']	= $A['lyoc_size_y'];
 					break;
-					
 				case 1:
 					$this->Layout[$m]['lyoc_margin_left']	= $A['lyoc_margin_left'];
 					$this->Layout[$m]['lyoc_margin_right']	= $A['lyoc_margin_right'];
@@ -154,6 +163,7 @@ class RenderLayout {
 							$this->Layout[$m]['py']	= $this->Layout[$m]['cpy'] + $this->Layout[$m]['lyoc_margin_top'];
 							$this->Layout[$m]['dx']	= $this->Layout[$m]['cdx'] - $this->Layout[$m]['lyoc_margin_left'] - $this->Layout[$m]['lyoc_margin_right'];
 							$this->Layout[$m]['dy']	= $this->Layout[$m]['cdy'] - $this->Layout[$m]['lyoc_margin_top'] - $this->Layout[$m]['lyoc_margin_bottom'];
+
 							break;
 							
 						// --------------------------------------------------------------------------------------------
@@ -255,7 +265,7 @@ class RenderLayout {
 				$this->Layout[$m]['cdy'] = $A['lyoc_minimum_y'] + $this->Layout[$m]['lyoc_margin_top'] + $this->Layout[$m]['lyoc_margin_bottom'];
 			}
 			$this->Layout[$m]['lyoc_module_zindex'] = $A['lyoc_module_zindex'];
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Layout calulation for module '".$m."'. Layout[".$m."]= ". $bts->StringFormatObj->arrayToString($this->Layout[$m])));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Layout calulation for module '".$m."'. Layout[".$m."]= ". $bts->StringFormatObj->arrayToString($this->Layout[$m])));
 		}
 		
 		
@@ -282,23 +292,14 @@ class RenderLayout {
 	// --------------------------------------------------------------------------------------------
 	private function loadRawData ( $layout_selection ) {
 		$bts = BaseToolSet::getInstance();
-		
-// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-// 		$LMObj = LogManagement::getInstance();
 			
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ". $SqlTableListObj->getSQLTableName('layout_content')."
-			WHERE layout_id = '".$layout_selection."'
+			WHERE fk_layout_id = '".$layout_selection."'
 			ORDER BY lyoc_line
 			;");
-// 		echo ("
-// 			SELECT *
-// 			FROM ". $SqlTableListObj->getSQLTableName('layout_content')."
-// 			WHERE layout_id = '".$layout_selection."'
-// 			ORDER BY lyoc_line
-// 			;<br>\r");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$l = $dbp['lyoc_line'];
 			foreach ( $dbp as $A => $B ) { $this->PL[$l][$A] = $B; }

@@ -59,7 +59,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_profile_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_profile_management_p01.php");
@@ -394,9 +394,9 @@ else {
 	
 	$T['AD']['4']['9']['2']['cont'] = "<select name='formParams[lang]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 	$dbqueryL = $bts->SDDMObj->query("
-	SELECT sl.lang_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." sl , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." s 
-	WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-	AND sl.ws_id = s.ws_id
+	SELECT lw.fk_lang_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." w 
+	WHERE w.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+	AND lw.fk_ws_id = w.ws_id
 	;");
 	$langList= array();
 	while ($dbpL = $bts->SDDMObj->fetch_array_sql($dbqueryL)) { $langList[$dbpL['lang_id']]['support'] = 1; }
@@ -865,7 +865,7 @@ else {
 // --------------------------------------------------------------------------------------------
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

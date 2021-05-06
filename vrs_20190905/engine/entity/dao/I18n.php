@@ -17,7 +17,7 @@ class I18n extends Entity{
 	//@formatter:off
 	private $columns = array(
 		"i18n_id"		=> 0,
-		"lang_id"		=> 0,
+		"fk_lang_id"	=> 0,
 		"i18n_package"	=> 0,
 		"i18n_name"		=> 0,
 		"i18n_text"		=> 0,

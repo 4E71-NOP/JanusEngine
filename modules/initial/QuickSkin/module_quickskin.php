@@ -36,8 +36,8 @@ class ModuleQuickSkin {
 		include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		$I18nObj->apply($i18n);
 		
-		$LOG_TARGET = $bts->LMObj->getInternalLogTarget();
-		$bts->LMObj->setInternalLogTarget("none");
+		// $LOG_TARGET = $bts->LMObj->getInternalLogTarget();
+		// $bts->LMObj->setInternalLogTarget("none");
 		
 		$Content = "
 		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."'>\r
@@ -48,13 +48,16 @@ class ModuleQuickSkin {
 		$grp = $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$bts->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUser()) ));
 		if ( $grp == "1" ) {
-			$dbquery = $bts->SDDMObj->query("
-			SELECT a.theme_id,a.theme_name,a.theme_title
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
-			WHERE b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			AND a.theme_id = b.theme_id
-			AND b.theme_state = '1'
-			;");
+			$sqlQuery = "
+			SELECT td.theme_id, td.theme_name, td.theme_title FROM "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+			WHERE tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND td.theme_id = tw.fk_theme_id
+			AND tw.theme_state = '1'
+			;";
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query=". $sqlQuery));
+			$dbquery = $bts->SDDMObj->query($sqlQuery);
 			
 			if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 				$Content .= "
@@ -128,7 +131,7 @@ class ModuleQuickSkin {
 					);
 		}
 		
-		$bts->LMObj->setInternalLogTarget($LOG_TARGET);
+		// $bts->LMObj->setInternalLogTarget($LOG_TARGET);
 		return $Content;
 	
 	}

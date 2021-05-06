@@ -221,9 +221,9 @@ class MenuSelectTable {
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT l.* 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." sl 
-			WHERE l.lang_id = sl.lang_id
-			AND sl.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw 
+			WHERE l.lang_id = lw.fk_lang_id
+			AND lw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		

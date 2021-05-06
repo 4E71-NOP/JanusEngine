@@ -42,7 +42,7 @@ aaa
 "),
 );
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_toolset_type_conversion_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_toolset_type_conversion_p01.php");
@@ -164,5 +164,5 @@ $Content .= "
 </form>\r
 ";
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

@@ -137,7 +137,7 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

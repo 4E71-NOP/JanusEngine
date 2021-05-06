@@ -22,7 +22,7 @@ class Deco30_1Div {
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_30_1_div') . "
-			WHERE deco_id = '" . $id . "'
+			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_30_1_div id=".$id));

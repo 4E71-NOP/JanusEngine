@@ -38,7 +38,7 @@ $bts->RequestDataObj->setRequestData('filterForm',
 	),
 );
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_user_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_user_management_p01.php");
@@ -316,5 +316,5 @@ $Content .= "
 <br>\r
 <br>\r
 ";
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

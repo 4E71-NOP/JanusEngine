@@ -33,7 +33,7 @@ $bts->RequestDataObj->setRequestData('test',
 		)
 	);
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_document_editor_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_document_editor_p01.php");
@@ -213,5 +213,5 @@ $Content .= "<br>\r&nbsp;
 ";
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

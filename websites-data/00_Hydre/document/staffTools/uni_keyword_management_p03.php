@@ -16,7 +16,7 @@ $_REQUEST['M_MOTCLE']['keyword_selection'] = 1 ;
 //	2008 03 29 : fra_gestion_des_mots_cles_p03.php debut
 //	2008 00 00 : derniere modification
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "fra_gestion_des_mots_cles_p03";
 
 // --------------------------------------------------------------------------------------------
@@ -219,5 +219,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	);
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

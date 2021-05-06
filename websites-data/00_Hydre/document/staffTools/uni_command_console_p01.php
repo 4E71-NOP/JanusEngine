@@ -46,7 +46,7 @@ array(
 	)
 );
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_command_console_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_command_console_p01.php");
@@ -295,5 +295,5 @@ $Content .= "</form>\r";
 
 // --------------------------------------------------------------------------------------------
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

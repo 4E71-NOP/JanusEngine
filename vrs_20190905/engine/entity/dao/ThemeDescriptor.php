@@ -139,15 +139,17 @@ class ThemeDescriptor extends Entity{
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. Id=".$Dest ));
 			}
 			else { 
-				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('theme_id'); // Problem with the prefered user theme
+				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id'); // Problem with the prefered user theme
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. Id=".$Dest ));
-			}											
+			}
 			// By default we use ID
-			$q = "SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
-			WHERE a.theme_id = '".$Dest."'
-			AND a.theme_id = b.theme_id
-			AND b.theme_state = '1'
+			$q = "
+			SELECT * FROM " 
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+			WHERE td.theme_id = '".$Dest."'
+			AND td.theme_id = tw.fk_theme_id
+			AND tw.theme_state = '1'
 			;";
 		}
 		else { 
@@ -155,15 +157,17 @@ class ThemeDescriptor extends Entity{
 			// in this case we use names as this was eventually sent to a command line which only uses names. 
 			$Dest = $bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme');
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. Id=".$Dest ));
-			$q = "SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." b
-			WHERE a.theme_name = '".$Dest."'
-			AND a.theme_id = b.theme_id
-			AND b.theme_state = '1'
+			$q = "
+			SELECT * FROM " 
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+			WHERE td.theme_name = '".$Dest."'
+			AND td.theme_id = tw.fk_theme_id
+			AND tw.theme_state = '1'
 			;";
 		}
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor id=".$ThemeId .". \$q = `".$q."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$ThemeId .". \$q = `".$q."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 		
 		// --------------------------------------------------------------------------------------------

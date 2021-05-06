@@ -50,7 +50,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_category_management_p02";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_category_management_p02.php");
@@ -326,7 +326,7 @@ $infos['formName'] = "categoryForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos, $bts->i18nDoc);
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

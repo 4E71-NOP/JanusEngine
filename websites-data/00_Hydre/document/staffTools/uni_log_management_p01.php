@@ -44,7 +44,7 @@ $bts->RequestDataObj->setRequestData('mhForm',
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_log_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_log_management_p01.php");
@@ -431,7 +431,7 @@ $Content .= "
 $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->AddObjectEntry ('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

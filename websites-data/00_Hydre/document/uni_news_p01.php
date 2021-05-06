@@ -27,7 +27,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 switch ($l) {
 	case "fra":
@@ -81,5 +81,5 @@ switch ($l) {
 
 $Content .= $i18nDoc['invit'];
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

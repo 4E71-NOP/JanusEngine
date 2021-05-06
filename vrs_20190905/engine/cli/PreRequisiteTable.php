@@ -33,22 +33,22 @@ self::$PreRequisiteTable['add']['article'] = array (
 				array ( "v" => "id",					"t" => "arti_id"),
 				array ( "v" => "ref",					"t" => "arti_ref"),
 				array ( "v" => "slug",					"t" => "arti_slug"),
-				array ( "v" => "deadline_id",			"t" => "deadline_id"),
+				array ( "v" => "deadline_id",			"t" => "fk_deadline_id"),
 				array ( "v" => "name",					"t" => "arti_name"),
 				array ( "v" => "desc",					"t" => "arti_desc"),
 				array ( "v" => "title",					"t" => "arti_title"),
 				array ( "v" => "subtitle",				"t" => "arti_subtitle"),
 				array ( "v" => "page",					"t" => "arti_page"),
 				array ( "v" => "layout_generic_name",	"t" => "layout_generic_name"),
-				array ( "v" => "config_id",				"t" => "config_id"),
+				array ( "v" => "config_id",				"t" => "fk_config_id"),
 				array ( "v" => "user_id_creator",		"t" => "arti_creator_id"),
 				array ( "v" => "creation_date",			"t" => "arti_creation_date"),
 				array ( "v" => "user_id_validator",		"t" => "arti_validator_id"),
 				array ( "v" => "validation_date",		"t" => "arti_validation_date"),
 				array ( "v" => "validation_state",		"t" => "arti_validation_state"),
 				array ( "v" => "parution_date",			"t" => "arti_release_date"),
-				array ( "v" => "docu_id",				"t" => "docu_id"),
-				array ( "v" => "ws_id",					"t" => "ws_id"),
+				array ( "v" => "docu_id",				"t" => "fk_docu_id"),
+				array ( "v" => "ws_id",					"t" => "fk_ws_id"),
 		),
 );
 
@@ -68,18 +68,18 @@ self::$PreRequisiteTable['add']['category'] = array (
 				array ( "v" => "title",				"t" => "cate_title"),
 				array ( "v" => "desc",				"t" => "cate_desc"),
 				array ( "v" => "type",				"t" => "cate_type"),
-				array ( "v" => "ws_id",				"t" => "ws_id"),
-				array ( "v" => "lang_id",			"t" => "lang_id"),
-				array ( "v" => "deadline_id",		"t" => "deadline_id"),
+				array ( "v" => "ws_id",				"t" => "fk_ws_id"),
+				array ( "v" => "lang_id",			"t" => "fk_lang_id"),
+				array ( "v" => "deadline_id",		"t" => "fk_deadline_id"),
 				array ( "v" => "state",				"t" => "cate_state"),
 				array ( "v" => "parent_id",			"t" => "cate_parent"),
 				array ( "v" => "position",			"t" => "cate_position"),
-				array ( "v" => "group_id",			"t" => "group_id"),
+				array ( "v" => "group_id",			"t" => "fk_group_id"),
 				array ( "v" => "last_modif",		"t" => "cate_last_update"),
 				array ( "v" => "role",				"t" => "cate_role"),
 				array ( "v" => "first_doc",			"t" => "cate_initial_document"),
-				array ( "v" => "article",			"t" => "arti_ref"),
-				array ( "v" => "slug",				"t" => "arti_slug"),
+				array ( "v" => "article",			"t" => "fk_arti_ref"),
+				array ( "v" => "slug",				"t" => "fk_arti_slug"),
 		),
 );
 
@@ -98,8 +98,8 @@ self::$PreRequisiteTable['add']['deadline'] = array (
 				array ( "v" => "state",				"t" => "deadline_state"),
 				array ( "v" => "date_creation",		"t" => "deadline_creation_date"),
 				array ( "v" => "date_expiration",	"t" => "deadline_end_date"),
-				array ( "v" => "user_id",			"t" => "user_id"),
-				array ( "v" => "ws_id",			"t" => "ws_id"),
+				array ( "v" => "user_id",			"t" => "fk_user_id"),
+				array ( "v" => "ws_id",				"t" => "fk_ws_id"),
 		),
 );
 
@@ -128,7 +128,7 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array("v" => "in55_e",			"s" => "decoration"),
 		),
 		"nextId" => array (
-				array ("table" => "decoration",				"column" => "deco_id",				"target" => "id"),
+				array ("table" => "decoration",				"column" => "fk_deco_id",			"target" => "id"),
 				array ("table" => "decoration",				"column" => "deco_ref_id",			"target" => "deco_ref_id"),
 				array ("table" => "deco_10_menu",			"column" => "deco_line_number",		"target" => "10_id"),
 				array ("table" => "deco_20_caligraph",		"column" => "deco_line_number",		"target" => "20_id"),
@@ -142,7 +142,7 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array ( "v" => "name",				"t" => "deco_name"),
 				array ( "v" => "state",				"t" => "deco_state"),
 				array ( "v" => "type",				"t" => "deco_type"),
-				array ( "v" => "id",				"t" => "deco_id"),
+				array ( "v" => "id",				"t" => "fk_deco_id"),
 		),
 );
 
@@ -169,7 +169,7 @@ self::$PreRequisiteTable['add']['document_config'] = array (
 				array ( "v" => "menu_occurence",			"t" => "config_menu_occurence"),
 				array ( "v" => "show_info_parution",		"t" => "config_show_release_info"),
 				array ( "v" => "show_info_modification",	"t" => "config_show_info_update"),
-				array ( "v" => "ws_id",					"t" => "ws_id"),
+				array ( "v" => "ws_id",						"t" => "fk_ws_id"),
 		),
 );
 
@@ -239,8 +239,8 @@ self::$PreRequisiteTable['add']['keyword'] = array (
 				array ( "v" => "id",						"t" => "keyword_id"),
 				array ( "v" => "name",						"t" => "keyword_name"),
 				array ( "v" => "state",						"t" => "keyword_state"),
-				array ( "v" => "arti_id",					"t" => "arti_id"),	
-				array ( "v" => "site",						"t" => "ws_id"), 	
+				array ( "v" => "arti_id",					"t" => "fk_arti_id"),	
+				array ( "v" => "site",						"t" => "fk_ws_id"), 	
 				array ( "v" => "string",					"t" => "keyword_string"),
 				array ( "v" => "count",						"t" => "keyword_count"),	
 				array ( "v" => "type",						"t" => "keyword_type"),	
@@ -311,7 +311,7 @@ self::$PreRequisiteTable['add']['layout_content'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "id",					"t" => "lyoc_id"),
-				array ( "v" => "layout_id",				"t" => "layout_id"),
+				array ( "v" => "layout_id",				"t" => "fk_layout_id"),
 				array ( "v" => "line",					"t" => "lyoc_line"),
 				array ( "v" => "minimum_x",				"t" => "lyoc_minimum_x"),
 				array ( "v" => "minimum_y",				"t" => "lyoc_minimum_y"),
@@ -423,7 +423,7 @@ self::$PreRequisiteTable['add']['tag'] = array (
 				array ( "v" => "id",			"t" => "tag_id"),
 				array ( "v" => "name",			"t" => "tag_name"),
 				array ( "v" => "html",			"t" => "tag_html"),
-				array ( "v" => "site",			"t" => "ws_id"),
+				array ( "v" => "site",			"t" => "fk_ws_id"),
 
 		),
 );
@@ -550,7 +550,7 @@ self::$PreRequisiteTable['add']['translation'] = array (
 		),
 		"columns" => array(
 				array("v" => "id",									"t"	=>	"i18n_id"),
-				array("v" => "lang_id",								"t"	=>	"lang_id"),
+				array("v" => "lang_id",								"t"	=>	"fk_lang_id"),
 				array("v" => "package",								"t"	=>	"i18n_package"),
 				array("v" => "name",								"t"	=>	"i18n_name"),
 				array("v" => "text",								"t"	=>	"i18n_text"),
@@ -584,7 +584,7 @@ self::$PreRequisiteTable['add']['user'] = array (
 				array("v" => "pref_allow_smilies",				"s" => "user"),
 		),
 		"nextId" => array (
-				array ("table" => "user",			"column" => "user_id",				"target" => "id"),
+				array ("table" => "user",		"column" => "user_id",				"target" => "id"),
 				array ("table" => "group_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 		),
 		"columns" => array(
@@ -647,9 +647,9 @@ self::$PreRequisiteTable['add']['website'] = array (
 				array ( "v" => "ws_id",			"t" => "ws_id"),
 				array ( "v" => "name",			"t" => "ws_name"),
 				array ( "v" => "short",			"t" => "ws_short"),
-				array ( "v" => "lang_id",		"t" => "ws_lang"),
+				array ( "v" => "lang_id",		"t" => "fk_lang_id"),
 				array ( "v" => "lang_select",	"t" => "ws_lang_select"),
-				array ( "v" => "theme_id",		"t" => "theme_id"),
+				array ( "v" => "theme_id",		"t" => "fk_theme_id"),
 				array ( "v" => "title",			"t" => "ws_title"),
 				array ( "v" => "home",			"t" => "ws_home"),
 				array ( "v" => "directory",		"t" => "ws_directory"),
@@ -683,8 +683,8 @@ self::$PreRequisiteTable['assign']['language'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "lang_website_id",			"t" => "lang_website_id"),
-				array ( "v" => "ws_id",					"t" => "ws_id"),
-				array ( "v" => "lang_id",				"t" => "lang_id"),
+				array ( "v" => "ws_id",						"t" => "fk_ws_id"),
+				array ( "v" => "lang_id",					"t" => "fk_lang_id"),
 		),
 );
 
@@ -697,9 +697,9 @@ self::$PreRequisiteTable['assign']['layout'] = array (
 				array ("table" => "layout_theme",	"column" => "layout_theme_id",	"target" => "layout_theme_id", ),
 		),
 		"columns" => array(
-				array ( "v" => "layout_theme_id",				"t" => "layout_theme_id"),
-				array ( "v" => "theme_id",					"t" => "theme_id"),
-				array ( "v" => "layout_id",					"t" => "layout_id"),
+				array ( "v" => "layout_theme_id",			"t" => "layout_theme_id"),
+				array ( "v" => "theme_id",					"t" => "fk_theme_id"),
+				array ( "v" => "layout_id",					"t" => "fk_layout_id"),
 				array ( "v" => "default",					"t" => "default"),
 		),
 );
@@ -712,8 +712,8 @@ self::$PreRequisiteTable['assign']['tag'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "article_tag_id",	"t" => "article_tag_id"),
-				array ( "v" => "arti_id",			"t" => "arti_id"),
-				array ( "v" => "tag_id",			"t" => "tag_id"),
+				array ( "v" => "arti_id",			"t" => "fk_arti_id"),
+				array ( "v" => "tag_id",			"t" => "fk_tag_id"),
 				
 		),
 );
@@ -734,8 +734,8 @@ self::$PreRequisiteTable['assign']['user'] = array (
 		),
 		"columns" => array(
 				array("v" => "group_user_id",						"t"	=>	"group_user_id"),
-				array("v" => "group_id",							"t"	=>	"group_id"),
-				array("v" => "user_id",								"t"	=>	"user_id"),
+				array("v" => "group_id",							"t"	=>	"fk_group_id"),
+				array("v" => "user_id",								"t"	=>	"fk_user_id"),
 				array("v" => "primary_group",						"t"	=>	"group_user_initial_group"),
 		),
 		);
@@ -776,8 +776,8 @@ self::$PreRequisiteTable['share']['document'] = array (
 		),
 		"columns" => array(
 				array ( "v" => "share_id",				"t" => "share_id"),
-				array ( "v" => "docu_id",				"t" => "docu_id"),
-				array ( "v" => "ws_id",				"t" => "ws_id"),
+				array ( "v" => "docu_id",				"t" => "fk_docu_id"),
+				array ( "v" => "ws_id",					"t" => "fk_ws_id"),
 				array ( "v" => "modification",			"t" => "share_modification"),
 		),
 );
@@ -823,7 +823,7 @@ self::$PreRequisiteTable['update']['website']['columns']			= array(
 		array ( "v" => "short",			"t" => "ws_short"),
 		array ( "v" => "lang_id",		"t" => "ws_lang"),
 		array ( "v" => "lang_select",	"t" => "ws_lang_select"),
-		array ( "v" => "theme_id",		"t" => "theme_id"),
+		array ( "v" => "theme_id",		"t" => "fk_theme_id"),
 		array ( "v" => "title",			"t" => "ws_title"),
 		array ( "v" => "home",			"t" => "ws_home"),
 		array ( "v" => "directory",		"t" => "ws_directory"),

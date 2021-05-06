@@ -18,7 +18,7 @@ $_REQUEST['arti_ref'] = "fra_modification_article" ;
 $_REQUEST['arti_page'] = "3" ;
 $_REQUEST['M_ARTICL']['arti_ref_selection'] = "fra_acceuil" ;
 $_REQUEST['M_ARTICL']['arti_page_selection'] = "2" ;
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "fra_modification_article_p03";
 
 // --------------------------------------------------------------------------------------------
@@ -358,5 +358,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	); 
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

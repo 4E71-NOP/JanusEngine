@@ -44,7 +44,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_website_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_website_management_p01.php");
@@ -507,7 +507,7 @@ $Content .= "
 </form>\r
 ";
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

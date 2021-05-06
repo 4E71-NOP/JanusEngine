@@ -23,7 +23,7 @@ $egalite = 20;
 /*	Test																						*/
 /*																								*/
 /* -------------------------------------------------------------------------------------------- */
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 
 echo ("Test de l'insertion de document complet.<br>\r<br>\r
 
@@ -59,7 +59,7 @@ testing....
 
 echo ("Test de l'insertion de document complet.<br>\r");
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 /* -------------------------------------------------------------------------------------------- */
 /*																								*/
 /*	Test																						*/

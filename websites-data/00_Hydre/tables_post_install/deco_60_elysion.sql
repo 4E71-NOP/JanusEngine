@@ -2,4 +2,4 @@
 /*	deco_60_elysion.sql																												*/
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-ALTER TABLE !table! ADD INDEX(deco_id);
+ALTER TABLE !table! ADD INDEX(fk_deco_id);

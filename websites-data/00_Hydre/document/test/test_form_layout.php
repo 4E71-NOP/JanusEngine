@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "fra_test_layout_formulaire";
 
 for ( $i=1 ; $i<=4 ; $i++ ) {
@@ -45,5 +45,5 @@ $tab_infos['cell_2_txt']		= $tl_[$l]['onglet_2'];
 $tab_infos['cell_3_txt']		= $tl_[$l]['onglet_3'];
 include ("engine/affichage_donnees.php");
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

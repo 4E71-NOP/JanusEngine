@@ -70,16 +70,18 @@ class User extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 
-		$dbquery = $bts->SDDMObj->query ("
+		$sqlQuery = "
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
-			AND usr.user_id = gu.user_id
+			AND usr.user_id = gu.fk_user_id
 			AND gu.group_user_initial_group = '1'
-			AND gu.group_id = g.group_id
-			AND gu.group_id = sg.group_id
-			AND sg.ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			;");
+			AND gu.fk_group_id = g.group_id
+			AND gu.fk_group_id = sg.fk_group_id
+			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			;";
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
@@ -91,17 +93,18 @@ class User extends Entity {
 			$this->User['clause_in_group'] = "";
 			$groupList00 = $groupList01 = $groupList02 = array ();
 
-			// find all sons of the initial user "groupset". 
-			$dbquery = $bts->SDDMObj->query ("
-				SELECT group_id
+			// find all children of the initial user "groupset". 
+			$sqlQuery = "
+				SELECT fk_group_id
 				FROM " . $SqlTableListObj->getSQLTableName ('group_user') . "
-				WHERE user_id = '" . $this->User['user_id'] . "'
-				ORDER BY group_id
-				;
-				");
+				WHERE fk_user_id = '" . $this->User['user_id'] . "'
+				ORDER BY fk_group_id
+				;";
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
-				$groupList01[] = $dbp ['group_id'];
-				$this->User['group'][$dbp ['group_id']] = 1;
+				$groupList01[] = $dbp ['fk_group_id'];
+				$this->User['group'][$dbp ['fk_group_id']] = 1;
 			}
 
 			$loopAgain = 1;
@@ -111,11 +114,13 @@ class User extends Entity {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$dbquery = $bts->SDDMObj->query ("SELECT group_id, group_parent, group_name 
+				$sqlQuery = "SELECT group_id, group_parent, group_name 
 					FROM " . $SqlTableListObj->getSQLTableName ('group') . "
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
-					;");
+					;";
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 				if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
 						$groupList02[] = $dbp['group_id'];

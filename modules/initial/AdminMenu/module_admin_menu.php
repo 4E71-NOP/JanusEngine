@@ -32,9 +32,9 @@ class ModuleAdministration {
 			SELECT * 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." 
 			WHERE cate_type IN ('2', '3') 
-			AND ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
-			AND lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."' 
-			AND group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
+			AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
+			AND fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."' 
+			AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
 			AND cate_state = '1' 
 			ORDER BY cate_id 
 			;");
@@ -52,9 +52,9 @@ class ModuleAdministration {
 					"cate_desc"		=> $dbp['cate_desc'],
 					"cate_parent"	=> $dbp['cate_parent'],
 					"cate_position"	=> $dbp['cate_position'],
-					"group_id" 		=> $dbp['group_id'],
-					"arti_ref"		=> $dbp['arti_ref'],
-					"arti_slug"		=> $dbp['arti_slug'],
+					"fk_group_id" 	=> $dbp['fk_group_id'],
+					"fk_arti_ref"	=> $dbp['fk_arti_ref'],
+					"fk_arti_slug"	=> $dbp['fk_arti_slug'],
 				);
 				if ( $dbp['cate_type'] == 2 ) { $rootMenu = $dbp['cate_id']; }
 			}
@@ -84,10 +84,10 @@ class ModuleAdministration {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'); 
-		
+		$Content = "";
 		foreach ( $infos['menuData'] as $A ) {
 			if ($A['cate_parent'] == $infos['parameters']['cate_parent'] ) {
-				if ( $A['arti_ref'] == "0" ) {
+				if ( $A['fk_arti_ref'] == "0" ) {
 					$Content .= "<li><b>".$A['cate_title']."</b>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
 					$tmp = $infos['parameters']['cate_parent'];
 					$infos['parameters']['cate_parent'] = $A['cate_id'];
@@ -97,11 +97,11 @@ class ModuleAdministration {
 					$infos['parameters']['cate_parent'] = $tmp;
 					$Content .= "</ul>\r</li>\r";
 				}
-				elseif ( $A['arti_ref'] == $infos['parameters']['arti_request'] ) {
+				elseif ( $A['fk_arti_ref'] == $infos['parameters']['arti_request'] ) {
 					$Content .= "<li><span class='".$block."_fade'><b>*".$A['cate_title']."</b></li>\r";
 				}
 				else {
-					$Content .= "<li><a href=\"".$baseUrl.$A['arti_slug']."/1\">".$A['cate_title']."</a></li>\r";
+					$Content .= "<li><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['cate_title']."</a></li>\r";
 				}
 			}
 		}

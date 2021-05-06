@@ -409,7 +409,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('log')."
-			WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			ORDER BY log_id DESC
 			LIMIT 0,15
 			;");

@@ -20,9 +20,9 @@ class WebSite extends Entity{
 		'ws_id'				=> 0,
 		'ws_name'			=> "New Website",
 		'ws_short'			=> "nw",
-		'ws_lang'			=> 0,
+		'fk_lang_id'		=> 0,
 		'ws_lang_select'	=> 0,
-		'theme_id'			=> 0,
+		'fk_theme_id'		=> 0,
 		'ws_title'			=> "New Website",
 		'ws_home'			=> 0,
 		'ws_directory'		=> 0,
@@ -39,7 +39,8 @@ class WebSite extends Entity{
 	);
 	//@formatter:on
 	
-	public function __construct() {
+	public function 
+	__construct() {
 		$this->WebSite= $this->getDefaultValues();
 	}
 	
@@ -89,12 +90,14 @@ class WebSite extends Entity{
 		$dbquery = $bts->SDDMObj->query ( 
 			"SELECT * 
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." 
-			WHERE ws_id = '" . $id. "'
+			WHERE ws_id = '".$id."'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->WebSite[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { 
+					if (isset($this->columns[$A])) { $this->WebSite[$A] = $B; }
+				}
 			}
 		}
 		else {

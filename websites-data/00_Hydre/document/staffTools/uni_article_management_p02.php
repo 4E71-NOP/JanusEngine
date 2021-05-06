@@ -50,7 +50,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $localisation = " / uni_article_management_p02";
 $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_article_management_p02.php");
@@ -295,7 +295,7 @@ $TemplateObj = Template::getInstance();
 $infos['formName'] = "articleForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 

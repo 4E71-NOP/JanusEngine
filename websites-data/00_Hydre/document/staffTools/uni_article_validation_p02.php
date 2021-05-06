@@ -18,7 +18,7 @@ $_REQUEST['M_ARTICL']['arti_ref_selection'] = "mwm_fra_acceuil" ;
 $_REQUEST['M_ARTICL']['arti_page_selection'] = "1" ;
 //$_REQUEST['M_ARTICL']['arti_id_selection'] = "20";
 $_REQUEST['uni_gestion_des_articles_p'] = 2;
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 $_REQUEST['sql_initiateur'] = "uni_validation_article_p02";
 
 // --------------------------------------------------------------------------------------------
@@ -417,5 +417,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 	); 
 }
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>

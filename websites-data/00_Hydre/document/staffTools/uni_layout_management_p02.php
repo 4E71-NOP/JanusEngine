@@ -13,7 +13,7 @@
 /*Hydre-licence-fin*/
 $_REQUEST['M_PRESNT']['layout_id'] = 5;
 
-/*Hydre-contenu_debut*/
+/*Hydr-Content-Begin*/
 if ( $_REQUEST['M_PRESNT']['confirmation_modification_oubli'] == 1 ) {
 		$tl_['eng']['err'] = "You didn't confirm the layout update.";
 		$tl_['fra']['err'] = "Vous n'avez pas confirm&eacute; la modification de la pr&eacute;sentation";
@@ -434,5 +434,5 @@ if ( $website['ws_info_debug'] < 10 ) {
 }
 
 
-/*Hydre-contenu_fin*/
+/*Hydr-Content-End*/
 ?>
