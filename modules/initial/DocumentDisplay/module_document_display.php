@@ -279,10 +279,12 @@ class ModuleDocumentDisplay {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : ". $documentAnalyse['include_docu_name'] ));
 				$dbquery = $bts->SDDMObj->query("
 				SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_examiner, doc.docu_examination_date
-				FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." ds
+				FROM "
+				.$SqlTableListObj->getSQLTableName('document')." doc, "
+				.$SqlTableListObj->getSQLTableName('document_share')." ds
 				WHERE doc.docu_name = '".$documentAnalyse['include_docu_name']."'
-				AND doc.docu_id = ds.docu_id
-				AND ds.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+				AND doc.docu_id = ds.fk_docu_id
+				AND ds.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 				;");
 				
 				if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
