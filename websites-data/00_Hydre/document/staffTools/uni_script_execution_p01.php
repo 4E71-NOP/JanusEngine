@@ -160,11 +160,8 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 		break;
 	}
 	$Content .= $fileData;
-	
 }
-
 /*Hydr-Content-End*/
 
 // $LMObj->setInternalLogTarget($LOG_TARGET);
-
 ?>
