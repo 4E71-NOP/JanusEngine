@@ -152,11 +152,15 @@ class Router {
 			// It's coming from Quickskin and such who doesn't change navigation.
 			// so we take the current route
 			default :
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found. We take the last save route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
-				$tab = array(
-					'target'	=> $bts->SMObj->getSessionSubEntry('currentRoute', 'target'),
-					'page'		=> $bts->SMObj->getSessionSubEntry('currentRoute', 'page'),
-				);
+			if ( strlen($bts->SMObj->getSessionSubEntry('currentRoute', 'target')) == 0 ) {
+				$bts->SMObj->setSessionSubEntry('currentRoute', 'target', 'home');
+				$bts->SMObj->setSessionSubEntry('currentRoute', 'page', '1');
+			}
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found. We take the last save route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+			$tab = array(
+				'target'	=> $bts->SMObj->getSessionSubEntry('currentRoute', 'target'),
+				'page'		=> $bts->SMObj->getSessionSubEntry('currentRoute', 'page'),
+			);
 				break;
 		}
 		

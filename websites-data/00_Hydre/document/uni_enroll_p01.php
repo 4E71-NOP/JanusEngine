@@ -29,10 +29,11 @@
 
 /*Hydr-Content-Begin*/
 
-switch ($l) {
-	case "fra":
-		$i18nDoc = array(
-		"invit"		=>	"Webmachine, de mani&egrave;re a devenir international a besoin de traducteurs pour ses articles, code, commentaires.<br>\r
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+		"invite1"		=>	"Webmachine, de mani&egrave;re a devenir international a besoin de traducteurs pour ses articles, code, commentaires.<br>\r
 		<br>\r
 		Si vous avez des sujets int&eacute;ressants pour Multi-Web Manager n'h&eacute;sitez pas a en proposer.<br>\r
 		<br>\r
@@ -44,11 +45,9 @@ switch ($l) {
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		");
-		break;
-	case "eng":
-		$i18nDoc = array(
-		"invit"		=>	"In order to become international MultiWebManager needs traducers for article, code, comments.<br>\r
+		"),
+		"eng" => array(
+		"invite1"		=>	"In order to become international MultiWebManager needs traducers for article, code, comments.<br>\r
 		<br>\r
 		If you have interesting topics for  MultiWebManager don't hesitate to submit some.<br>\r
 		<br>\r
@@ -60,11 +59,11 @@ switch ($l) {
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
 		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		");
-		break;
-}
+		")
+	)
+);
 
-$Content .= $i18nDoc['invit'];
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 /*Hydr-Content-End*/
 ?>

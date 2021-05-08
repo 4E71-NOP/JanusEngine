@@ -53,13 +53,18 @@ $Content .= "<p class='".$Block."_t3'>".$i18nDoc['invit']."<br>\r
 <br>\r
 ";
 
-$dbquery = $bts->SDDMObj->query("SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_avatar_image, grp.group_name, grp.group_file
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." grp, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+$dbquery = $bts->SDDMObj->query("
+SELECT usr.user_id, grp.group_id, grp.group_desc, usr.user_login, usr.user_avatar_image, grp.group_name, grp.group_file
+FROM "
+.$SqlTableListObj->getSQLTableName('user')." usr, "
+.$SqlTableListObj->getSQLTableName('group')." grp, "
+.$SqlTableListObj->getSQLTableName('group_user')." gu, "
+.$SqlTableListObj->getSQLTableName('group_website')." gw 
 WHERE gu.group_user_initial_group = '1' 
-AND sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND gu.user_id = usr.user_id 
-AND sg.group_id = gu.group_id 
-AND gu.group_id = grp.group_id
+AND gw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND gu.fk_user_id = usr.user_id 
+AND gw.fk_group_id = gu.fk_group_id 
+AND gu.fk_group_id = grp.group_id
 AND grp.group_tag = '2' 
 AND usr.user_role_function = '2' 
 ORDER BY grp.group_id,usr.user_login ASC

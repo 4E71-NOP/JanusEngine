@@ -391,8 +391,7 @@ class ModuleDocumentDisplay {
 // 			AND arti_page = '".$DocumentDataObj->getDocumentDataEntry('arti_page')."'
 // 			;");
 // 		}
-		
-		
+
 		switch ( $DocumentDataObj->getDocumentDataEntry('arti_menu_occurence') ) {
 			case "1":
 			case "3":
@@ -686,7 +685,9 @@ class ModuleDocumentDisplay {
 		
 	}
 	
-	
+	/**
+	 * 
+	 */
 	private function documentPostProcessing (&$inputContent , $infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -718,9 +719,6 @@ class ModuleDocumentDisplay {
 					break;
 			}
 		}
-		
 	}
-
-	
 }
 ?>

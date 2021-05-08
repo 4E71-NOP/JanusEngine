@@ -29,34 +29,33 @@
 
 /*Hydr-Content-Begin*/
 
-switch ($l) {
-	case "fra":
-		$i18nDoc = array(
-		"invit"		=>	"Le but du site est de pouvoir permettre de faire des sites web. Rien de nouveau hein? L'accent est mis sur les possibilit&eacute;s graphique et les pr&eacute;sentations.<br>\r
-		<br>\r
-		Nous d&eacute;veloppons les modules du site afin d'am&eacute;liorer les fonctionnalit&eacute;s et aussi d'en cr&eacute;er de nouvelles.<br>\r
-		<br>\r
-		Nous sommes sensibles &agrave; vos suggestions qui pourront apporter, tant &agrave; vous m&ecirc;me qu'aux autres, des &eacute;volutions int&eacute;ressantes.<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		");
-		break;
-	case "eng":
-		$i18nDoc = array(
-		"invit"		=>	"The engine goal is to provide an interface to create website. Nothing new huh? A particular touch was put on graphic possibilities and layouts.<br>\r
-		<br>\r
-		We are developping 'module' to enhace functionalities and to create new ones.<br>\r
-		<br>\r
-		We are listening to suggestions that will probably bring, for us and others, interresting and useful futur evolutions. <br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		");
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Le but du site est de pouvoir permettre de faire des sites web. Rien de nouveau hein? L'accent est mis sur les possibilit&eacute;s graphique et les pr&eacute;sentations.<br>\r
+			<br>\r
+			Nous d&eacute;veloppons les modules du site afin d'am&eacute;liorer les fonctionnalit&eacute;s et aussi d'en cr&eacute;er de nouvelles.<br>\r
+			<br>\r
+			Nous sommes sensibles &agrave; vos suggestions qui pourront apporter, tant &agrave; vous m&ecirc;me qu'aux autres, des &eacute;volutions int&eacute;ressantes.<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			"),
+		"eng" => array(
+			"invite1"		=>	"The engine goal is to provide an interface to create website. Nothing new huh? A particular touch was put on graphic possibilities and layouts.<br>\r
+			<br>\r
+			We are developping 'module' to enhace functionalities and to create new ones.<br>\r
+			<br>\r
+			We are listening to suggestions that will probably bring, for us and others, interresting and useful futur evolutions. <br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+		")
+	)
+);
 
-$Content .= $i18nDoc['invit'];
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 /*Hydr-Content-End*/
 ?>
