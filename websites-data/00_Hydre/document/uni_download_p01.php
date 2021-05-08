@@ -35,36 +35,36 @@ $bts->LMObj->logCheckpoint("uni_download_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_download_p01.php");
 
-switch ($l) {
-	case "fra":
-		$i18nDoc = array(
-		"invit"		=> "Section t&eacute;l&eacute;chargement.",
-		"TableCaptionPos1"	=> "Fichier",
-		"TableCaptionPos2"	=> "Taille",
-		"l2c1"		=> "Répertoire vide",
-		"mb"		=> " Mb",
-		"tab1"		=> "Fichiers disponibles",
-		);
-		break;
-	case "eng":
-		$i18nDoc = array(
-		"invit" => "Download section.",
-		"TableCaptionPos1"	=> "File",
-		"TableCaptionPos2"	=> "Size",
-		"l2c1"		=> "Empty directory",
-		"mb"		=> " Mo",
-		"tab1"		=> "Available files",
-		);
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invit"		=> "Section téléchargement.",
+			"TableCaptionPos1"	=> "Fichier",
+			"TableCaptionPos2"	=> "Taille",
+			"l2c1"		=> "Répertoire vide",
+			"mb"		=> " Mb",
+			"tabTxt1"	=> "Fichiers disponibles",
+		),
+		"eng" => array(
+			"invit" => "Download section.",
+			"TableCaptionPos1"	=> "File",
+			"TableCaptionPos2"	=> "Size",
+			"l2c1"		=> "Empty directory",
+			"mb"		=> " Mo",
+			"tabTxt1"	=> "Available files",
+		)
+	)
+);
+		
 
 $i = 1;
 $T = array();
 
-$T['Content']['1'][$i]['1']['cont']	= $i18nDoc['TableCaptionPos1'];
-$T['Content']['1'][$i]['2']['cont']	= $i18nDoc['TableCaptionPos2'];
+$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('TableCaptionPos1');
+$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('TableCaptionPos2');
 
-$realpath = realpath("../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/public/");
+$realpath = realpath("websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/public/");
 $handle = opendir($realpath);
 while (false !== ($f = readdir($handle))) {
 	if ($f != "." && $f != "..") {
@@ -81,21 +81,29 @@ if ($i == 1) {
 	$T['Content']['1'][$i]['2']['cont']	= "";
 }
 
-$T['ContentCfg']['tabs']['1']['NbrOfLines'] = $i;		$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
-$RenderLayoutObj = RenderLayout::getInstance();
-$T['ContentInfos']['EnableTabs']		= 1;
-$T['ContentInfos']['NbrOfTabs']		= 1;
-$T['ContentInfos']['TabBehavior']		= 1;
-$T['ContentInfos']['RenderMode']		= 1;
-$T['ContentInfos']['HighLightType']	= 0;
-$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'tab_y' )-256;
-$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['ContentInfos']['GroupName']		= "g";
-$T['ContentInfos']['CellName']			= "c";
-$T['ContentInfos']['DocumentName']		= "d";
-$T['ContentInfos']['cell_1_txt']		= $i18nDoc['tab1'];
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentCfg']['tabs'] = array(
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,4,1),
+);
 
+
+$T['ContentCfg']['tabs']['1']['NbrOfLines'] = $i;		$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 $Content .= $bts->RenderTablesObj->render($infos, $T);
+
+// $RenderLayoutObj = RenderLayout::getInstance();
+// $T['ContentInfos']['EnableTabs']		= 1;
+// $T['ContentInfos']['NbrOfTabs']			= 1;
+// $T['ContentInfos']['TabBehavior']		= 1;
+// $T['ContentInfos']['RenderMode']		= 1;
+// $T['ContentInfos']['HighLightType']		= 0;
+// $T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'tab_y' )-256;
+// $T['ContentInfos']['Width']				= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+// $T['ContentInfos']['GroupName']			= "g";
+// $T['ContentInfos']['CellName']			= "c";
+// $T['ContentInfos']['DocumentName']		= "d";
+// $T['ContentInfos']['cell_1_txt']		= $i18nDoc['tab1'];
+
+// $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 /*Hydr-Content-End*/
 ?>
