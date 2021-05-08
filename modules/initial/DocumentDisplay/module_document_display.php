@@ -48,12 +48,12 @@ class ModuleDocumentDisplay {
 
 
 // 		We have a document object. Now we have to process it.
-		$DocumentDataObj->setDocumentDataEntry ('arti_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_creation_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('arti_validation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_validation_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('arti_release_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_release_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('docu_creation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_creation_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('arti_creation_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_creation_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('arti_validation_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_validation_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('arti_release_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_release_date')) );
+		$DocumentDataObj->setDocumentDataEntry ('docu_creation_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_creation_date')) );
 		$DocumentDataObj->setDocumentDataEntry ('docu_examination_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_examination_date')) );
-		$DocumentDataObj->setDocumentDataEntry ('docu_cont_brut',		$DocumentDataObj->getDocumentDataEntry('docu_cont'));
+		$DocumentDataObj->setDocumentDataEntry ('docu_cont_brut',			$DocumentDataObj->getDocumentDataEntry('docu_cont'));
 		
 		$document_list = array();
 		$LD_idx = 1;
@@ -76,7 +76,7 @@ class ModuleDocumentDisplay {
 		$dbquery = $bts->SDDMObj->query("
 		SELECT *
 		FROM ".$SqlTableListObj->getSQLTableName('article_config')."
-		WHERE config_id = '".$DocumentDataObj->getDocumentDataEntry('config_id')."'
+		WHERE config_id = '".$DocumentDataObj->getDocumentDataEntry('fk_config_id')."'
 		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$DocumentDataObj->setDocumentDataEntry ('arti_menu_type',					$dbp['config_menu_type']);
@@ -92,7 +92,7 @@ class ModuleDocumentDisplay {
 
 		// --------------------------------------------------------------------------------------------
 		//	Get the article number of pages (Article != Document)
-		$dbquery = $bts->SDDMObj->query("
+		$sqlQuery = "
 		SELECT COUNT(fk_docu_id) AS arti_nbr_page
 		FROM "
 		.$SqlTableListObj->getSQLTableName('article')." art, "
@@ -101,7 +101,8 @@ class ModuleDocumentDisplay {
 		AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.fk_deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
-		;");
+		;";
+		$dbquery = $bts->SDDMObj->query($sqlQuery);
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
 		
@@ -136,14 +137,16 @@ class ModuleDocumentDisplay {
 			
 			$q = "
 			SELECT art.arti_id, art.arti_ref, art.arti_slug, art.arti_subtitle, art.arti_page, bcl.deadline_name 
-			FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
+			FROM "
+			.$SqlTableListObj->getSQLTableName('article')." art, "
+			.$SqlTableListObj->getSQLTableName('deadline')." bcl 
 			WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."' 
 			AND art.arti_validation_state = '1' 
-			AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND art.deadline_id = bcl.deadline_id 
+			AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND art.fk_deadline_id = bcl.deadline_id 
 			AND bcl.deadline_state = '1'
 			;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " q=`".$q."`"));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`".$q."`"));
 			$dbquery = $bts->SDDMObj->query($q);
 			
 			$pv = array();
@@ -440,8 +443,8 @@ class ModuleDocumentDisplay {
 			.$SqlTableListObj->getSQLTableName('user')." u , "
 			.$SqlTableListObj->getSQLTableName('group_user')." gu, "
 			.$SqlTableListObj->getSQLTableName('group_website')." gw 
-			WHERE u.user_id = gu.user_id
-			AND gu.group_id = gw.group_id
+			WHERE u.user_id = gu.fk_user_id
+			AND gu.fk_group_id = gw.fk_group_id
 			AND gu.group_user_initial_group = '1'
 			ORDER BY u.user_id
 			;");

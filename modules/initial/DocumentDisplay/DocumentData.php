@@ -87,17 +87,17 @@ class DocumentData {
 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
 		doc.docu_creator, doc.docu_creation_date,
 		doc.docu_examiner, doc.docu_examination_date,
-		doc.docu_origin, doc.docu_cont, sit.ws_directory
+		doc.docu_origin, doc.docu_cont, w.ws_directory
 		FROM "
 		.$SqlTableListObj->getSQLTableName('article')." art, "
 		.$SqlTableListObj->getSQLTableName('document')." doc, "
 		.$SqlTableListObj->getSQLTableName('deadline')." bcl, "
-		.$SqlTableListObj->getSQLTableName('website')." sit
+		.$SqlTableListObj->getSQLTableName('website')." w
 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."'
 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('article', 'arti_page')."'
 		AND art.fk_docu_id = doc.docu_id
 		AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND sit.ws_id = doc.docu_origin
+		AND w.ws_id = doc.docu_origin
 		AND art.fk_deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		;");
