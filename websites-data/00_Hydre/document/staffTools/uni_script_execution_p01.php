@@ -53,26 +53,21 @@ $bts->LMObj->logCheckpoint("uni_script_execution_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_script_execution_p01.php");
 
-switch ($CurrentSetObj->getDataEntry ( 'language')) {
-	case "fra":
-		$bts->I18nTransObj->apply(
-			array(
-				"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Sélectionnez un fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
-				"processing"	=> "Traitement de : ",
-				"mode"			=> "Mode : "
-				)
-			);
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(
-			array(
-				"invite1"		=> "This part will help you test some PHP code. Select a file and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
-				"processing"	=> "Processing : ",
-				"mode"			=> "Mode : "
-				)
-			);
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Sélectionnez un fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
+			"processing"	=> "Traitement de : ",
+			"mode"			=> "Mode : "
+		),
+		"eng" => array(
+			"invite1"		=> "This part will help you test some PHP code. Select a file and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
+			"processing"	=> "Processing : ",
+			"mode"			=> "Mode : "
+		)
+	)
+);
 
 $formInputFile = $bts->RequestDataObj->getRequestDataSubEntry('formScrExec', 'inputFile');
 
