@@ -34,11 +34,8 @@ class ModuleAuthentification {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
 		
 		$cnxResult = $bts->AUObj->getDataEntry('errorType');
-		$l = $CurrentSetObj->getDataEntry ( 'language');
-		
-		$i18n = array();
-		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$bts->I18nTransObj->apply($i18n);
+		$l = $CurrentSetObj->getDataEntry ('language');
+		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionEntry('user_login')));
 		

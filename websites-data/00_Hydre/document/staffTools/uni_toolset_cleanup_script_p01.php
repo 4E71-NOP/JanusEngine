@@ -47,23 +47,22 @@ $bts->LMObj->logCheckpoint("uni_toolset_cleanup_script_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_toolset_cleanup_script_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"Formatting tool for text copied from LibreOffice.",
-		"btn1"			=>	"Convertir",
-		"instruction"	=>	"Insérer le texte à convertir",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"Outil de formattage de texte issu de copi&eacute;/coll&eacute; depuis LibreOffice.",
-		"btn1"			=>	"Convert",
-		"instruction"	=>	"Insert here the text you want to convert",
-		));
-		break;
-}
-$bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Formatting tool for text copied from LibreOffice.",
+			"btn1"			=>	"Convertir",
+			"instruction"	=>	"Insérer le texte à convertir",
+		),
+		"eng" => array(
+			"invite1"		=>	"Outil de formattage de texte issu de copi&eacute;/coll&eacute; depuis LibreOffice.",
+			"btn1"			=>	"Convert",
+			"instruction"	=>	"Insert here the text you want to convert",
+		)
+	)
+);
+$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 "<br>\r
@@ -72,14 +71,14 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 <tr>\r
 <td>\r
-<textarea name='script_source' id='script_source' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/ $ThemeDataObj->getThemeDataEntry('fonte_size_n3') ) * 1.35 )."' rows='16' class='".$Block."_t3 ".$Block."_form_1'>
+<textarea name='script_source' id='script_source' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
 ".$bts->RequestDataObj->getRequestDataEntry('script_source')."</textarea>\r
 </td>\r
 </tr>\r
 
 <tr>\r
 <td style='font-size: 8px;'>\r
-<textarea name='script_resultat' id='script_resultat' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/ $ThemeDataObj->getThemeDataEntry('fonte_size_n3') ) * 1.35 )."' rows='16' class='".$Block."_t3 ".$Block."_form_1'>
+<textarea name='script_resultat' id='script_resultat' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
 ".$pv['converti']."</textarea>\r
 </td>\r
 </tr>\r

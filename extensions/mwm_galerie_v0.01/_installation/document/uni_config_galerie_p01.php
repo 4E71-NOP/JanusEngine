@@ -83,7 +83,7 @@ $AD['1']['6']['2']['cont'] = "<input type='text' name='GG[fichier_tag]'	size='20
 
 
 $tl_['eng']['onglet1'] = "Gallery";	$tl_['fra']['onglet1'] = "Galerie";	
-$ADC['onglet']['1']['nbr_ligne'] = 6;	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 2;
+$ADC['tabs']['1']['NbrOfLines'] = 6;	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 2;
 
 $tab_infos['AffOnglet']			= 1;
 $tab_infos['NbrOnglet']			= 1;

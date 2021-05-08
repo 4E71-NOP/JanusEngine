@@ -309,17 +309,17 @@ $Content .= "
 $T = array();
 $curTab = 1;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 
-$T['AD'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
-$T['AD'][$curTab]['2']['2']['cont'] = $currentUserObj->getUserEntry('user_name');
-$T['AD'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
+$T['Content'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
+$T['Content'][$curTab]['2']['2']['cont'] = $currentUserObj->getUserEntry('user_name');
+$T['Content'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -342,26 +342,26 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['AD'][$curTab]['5']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
-$T['AD'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_comment]' cols='50' rows='10'>".$currentUserObj->getUserEntry('user_admin_comment')."</textarea>";
+$T['Content'][$curTab]['5']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
+$T['Content'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_comment]' cols='50' rows='10'>".$currentUserObj->getUserEntry('user_admin_comment')."</textarea>";
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
 
 $bts->LMObj->logDebug($currentUserObj, 'currentUserObj');
 
 
 $tabGroup[$currentUserObj->getUserEntry('group_id')]['s'] = " selected ";
-$T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabGroup as $A ) { $T['AD'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['1']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabGroup as $A ) { $T['Content'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['1']['2']['cont'] .= "</select>\r";
 
 
 $tabStatus = array(
@@ -370,9 +370,9 @@ $tabStatus = array(
 	2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('deleted'),	"db"=>"DELETED" ),
 );
 $tabStatus[$currentUserObj->getUserEntry('user_status')]['s'] = " selected ";
-$T['AD'][$curTab]['2']['2']['cont'] = "<select name='formParams[status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabStatus as $A ) { $T['AD'][$curTab]['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['2']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['2']['2']['cont'] = "<select name='formParams[status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabStatus as $A ) { $T['Content'][$curTab]['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['2']['2']['cont'] .= "</select>\r";
 
 
 $tabRole = array(
@@ -380,136 +380,136 @@ $tabRole = array(
 		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('private'),	"db"=>"PRIVATE" ),
 );
 $tabRole[$currentUserObj->getUserEntry('user_role_function')]['s'] = " selected ";
-$T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[role]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabRole as $A ) { $T['AD'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['3']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['3']['2']['cont'] = "<select name='formParams[role]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabRole as $A ) { $T['Content'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['3']['2']['cont'] .= "</select>\r";
 
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_forum_access')]['s'] = " selected ";
-$T['AD'][$curTab]['4']['2']['cont'] = "<select name='formParams[forums]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['4']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['4']['2']['cont'] = "<select name='formParams[forums]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['4']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l6c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l5c1');
+$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l6c1');
 
-$T['AD'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[user_email]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_email')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[user_msn]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_msn')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['3']['2']['cont'] = "<input type='text' name='formParams[user_aim]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_aim')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['4']['2']['cont'] = "<input type='text' name='formParams[user_icq]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_icq')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['5']['2']['cont'] = "<input type='text' name='formParams[user_yim]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_yim')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['6']['2']['cont'] = "<input type='text' name='formParams[user_website]'	size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_website')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-
-// --------------------------------------------------------------------------------------------
-$curTab++;
-
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l5c1');
-
-$T['AD'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[perso_nom]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_nom')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[perso_pays]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_pays')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['3']['2']['cont'] = "<input type='text' name='formParams[perso_ville]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_ville')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['4']['2']['cont'] = "<input type='text' name='formParams[perso_occupation]'	size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_occupation')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['5']['2']['cont'] = "<input type='text' name='formParams[perso_interet]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_interet')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-
-
+$T['Content'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[user_email]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_email')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[user_msn]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_msn')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['3']['2']['cont'] = "<input type='text' name='formParams[user_aim]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_aim')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['4']['2']['cont'] = "<input type='text' name='formParams[user_icq]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_icq')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['5']['2']['cont'] = "<input type='text' name='formParams[user_yim]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_yim')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['6']['2']['cont'] = "<input type='text' name='formParams[user_website]'	size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('user_website')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l5c1');
+
+$T['Content'][$curTab]['1']['2']['cont'] = "<input type='text' name='formParams[perso_nom]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_nom')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['2']['2']['cont'] = "<input type='text' name='formParams[perso_pays]'			size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_pays')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['3']['2']['cont'] = "<input type='text' name='formParams[perso_ville]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_ville')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['4']['2']['cont'] = "<input type='text' name='formParams[perso_occupation]'	size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_occupation')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['5']['2']['cont'] = "<input type='text' name='formParams[perso_interet]'		size='35' maxlength='255' value=\"".$currentUserObj->getUserEntry('perso_interet')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+
+
+
+// --------------------------------------------------------------------------------------------
+$curTab++;
+
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
 
 $tabLanguage[$currentUserObj->getUserEntry('user_lang')]['s'] = " selected ";
-$T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabLanguage as $A ) { $T['AD'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabLanguage as $A ) { $T['Content'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['1']['2']['cont'] .= "</select>\r";
 
-$T['AD'][$curTab]['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_last_visit'));
-$T['AD'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_last_ip');
-$T['AD'][$curTab]['4']['2']['cont'] = $timezone[$currentUserObj->getUserEntry('user_timezone')];
+$T['Content'][$curTab]['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_last_visit'));
+$T['Content'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_last_ip');
+$T['Content'][$curTab]['4']['2']['cont'] = $timezone[$currentUserObj->getUserEntry('user_timezone')];
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
-$T['AD'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
-$T['AD'][$curTab]['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l7c1');
-$T['AD'][$curTab]['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l8c1');
-$T['AD'][$curTab]['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l9c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
+$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
+$T['Content'][$curTab]['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l7c1');
+$T['Content'][$curTab]['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l8c1');
+$T['Content'][$curTab]['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l9c1');
 
 
 
 
 $tabTheme[$currentUserObj->getUserEntry('user_pref_theme')]['s'] = " selected ";
-$T['AD'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_pref_theme]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTheme as $A ) { $T['AD'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['1']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['1']['2']['cont'] = "<select name='formParams[user_pref_theme]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTheme as $A ) { $T['Content'][$curTab]['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['1']['2']['cont'] .= "</select>\r";
 
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_newsletter')]['s'] = " selected ";
-$T['AD'][$curTab]['2']['2']['cont'] = "<select name='formParams[user_pref_newsletter]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['2']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['2']['2']['cont'] = "<select name='formParams[user_pref_newsletter]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['2']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_show_email')]['s'] = " selected ";
-$T['AD'][$curTab]['3']['2']['cont'] = "<select name='formParams[user_pref_show_email]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['3']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['3']['2']['cont'] = "<select name='formParams[user_pref_show_email]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['3']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_show_online_status')]['s'] = " selected ";
-$T['AD'][$curTab]['4']['2']['cont'] = "<select name='formParams[user_pref_show_online_status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['4']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['4']['2']['cont'] = "<select name='formParams[user_pref_show_online_status]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['4']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_forum_notification')]['s'] = " selected ";
-$T['AD'][$curTab]['5']['2']['cont'] = "<select name='formParams[user_pref_forum_notification]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['5']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['5']['2']['cont'] = "<select name='formParams[user_pref_forum_notification]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['5']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_forum_pm')]['s'] = " selected ";
-$T['AD'][$curTab]['6']['2']['cont'] = "<select name='formParams[user_pref_forum_pm]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['6']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['6']['2']['cont'] = "<select name='formParams[user_pref_forum_pm]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['6']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_allow_bbcode')]['s'] = " selected ";
-$T['AD'][$curTab]['7']['2']['cont'] = "<select name='formParams[user_pref_allow_bbcode]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['7']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['7']['2']['cont'] = "<select name='formParams[user_pref_allow_bbcode]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['7']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_allow_html')]['s'] = " selected ";
-$T['AD'][$curTab]['8']['2']['cont'] = "<select name='formParams[user_pref_allow_html]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['8']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['8']['2']['cont'] = "<select name='formParams[user_pref_allow_html]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['8']['2']['cont'] .= "</select>\r";
 
 $tabTmp = $tabYN;
 $tabTmp[$currentUserObj->getUserEntry('user_pref_autorise_smilies')]['s'] = " selected ";
-$T['AD'][$curTab]['9']['2']['cont'] = "<select name='formParams[user_pref_autorise_smilies]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabTmp as $A ) { $T['AD'][$curTab]['9']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD'][$curTab]['9']['2']['cont'] .= "</select>\r";
+$T['Content'][$curTab]['9']['2']['cont'] = "<select name='formParams[user_pref_autorise_smilies]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabTmp as $A ) { $T['Content'][$curTab]['9']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content'][$curTab]['9']['2']['cont'] .= "</select>\r";
 
 
 // --------------------------------------------------------------------------------------------
@@ -518,8 +518,8 @@ $T['AD'][$curTab]['9']['2']['cont'] .= "</select>\r";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 6);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 6);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
 		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),

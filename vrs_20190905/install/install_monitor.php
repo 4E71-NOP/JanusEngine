@@ -180,10 +180,11 @@ if ( strlen($bts->RequestDataObj->getRequestDataEntry('l')) != 0){
 if ( $langHit == 1 ) { $l = $bts->RequestDataObj->getRequestDataEntry('l'); }
 else { $l = "eng"; }
 
-$i18n ="";
-include ("current/install/i18n/install_monitor_".$l.".php");
-$bts->I18nTransObj->apply($i18n);
-unset ($i18n);
+// $i18n ="";
+// include ("current/install/i18n/install_monitor_".$l.".php");
+// $bts->I18nTransObj->apply($i18n);
+// unset ($i18n);
+$bts->I18nTransObj->apply(array( "type" => "file", "file" => "current/install/i18n/install_monitor_".$l.".php", "format" => "php" ) );
 
 // --------------------------------------------------------------------------------------------
 $div_initial_bg = "";
@@ -248,16 +249,16 @@ $DocContent .= "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTra
 $CurrentTab = 1;
 $lt = 1;
 
-$T['tab_infos']['EnableTabs']		= 0;
-$T['tab_infos']['NbrOfTabs']		= 1;
-$T['tab_infos']['TabBehavior']		= 1;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 0; // 1:ligne, 2:cellule
-$T['tab_infos']['Height']			= 380;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -24;  
-$T['tab_infos']['GroupName']		= "inst1";
-$T['tab_infos']['CellName']			= "frame01";
-$T['tab_infos']['DocumentName']		= "doc";
+$T['ContentInfos']['EnableTabs']		= 0;
+$T['ContentInfos']['NbrOfTabs']		= 1;
+$T['ContentInfos']['TabBehavior']		= 1;
+$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['HighLightType']	= 0; // 1:ligne, 2:cellule
+$T['ContentInfos']['Height']			= 380;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -24;  
+$T['ContentInfos']['GroupName']		= "inst1";
+$T['ContentInfos']['CellName']			= "frame01";
+$T['ContentInfos']['DocumentName']		= "doc";
 
 
 //	Choice matrix 
@@ -285,35 +286,35 @@ if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']
 		case 3: $status = $bts->I18nTransObj->getI18nTransEntry('installState2');	break;
 	}
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nTransObj->getI18nTransEntry('status')."</b>";				
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<b>".$status."</b>";												
+	$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nTransObj->getI18nTransEntry('status')."</b>";				
+	$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<b>".$status."</b>";												
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SQL_query_count');					
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];								
+	$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SQL_query_count');					
+	$T['Content'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('command_count');						
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];								
+	$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('command_count');						
+	$T['Content'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];								
 	$lt++;
 	
-	$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('start_date');							
-	$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	
+	$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('start_date');							
+	$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	
 	
 	$isInactive = time() - $itd['last_activity']['inst_nbr'];
 	if ( $isInactive > 10 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');						$T['AD'][$CurrentTab][$lt]['1']['class'] = $block."_error";
-		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";												$T['AD'][$CurrentTab][$lt]['2']['class'] = $block."_error"; 
+		$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');						$T['Content'][$CurrentTab][$lt]['1']['class'] = $block."_error";
+		$T['Content'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";												$T['Content'][$CurrentTab][$lt]['2']['class'] = $block."_error"; 
 	}
 	
 	if ($itd['end_date']['inst_nbr'] != 0 ) {
 		$lt++;
-		$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('end_date');						
-		$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	
+		$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('end_date');						
+		$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	
 	}
 	
-	$T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = $lt;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 2;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 1;
+	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 1;
 	
 	$DocContent .= $bts->RenderTablesObj->render($infos, $T)."</div>\r";
 }

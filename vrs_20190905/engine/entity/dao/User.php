@@ -72,7 +72,11 @@ class User extends Entity {
 
 		$sqlQuery = "
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM " . $SqlTableListObj->getSQLTableName ( 'user' ) . " usr, " . $SqlTableListObj->getSQLTableName ( 'group_user' ) . " gu, " . $SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $SqlTableListObj->getSQLTableName ( 'group' ) . " g
+			FROM " 
+			.$SqlTableListObj->getSQLTableName ('user') . " usr, " 
+			.$SqlTableListObj->getSQLTableName ('group_user') . " gu, " 
+			.$SqlTableListObj->getSQLTableName ('group_website') . " sg, " 
+			.$SqlTableListObj->getSQLTableName ('group') . " g
 			WHERE usr.user_login = '" . $UserLogin . "'
 			AND usr.user_id = gu.fk_user_id
 			AND gu.group_user_initial_group = '1'
@@ -114,7 +118,7 @@ class User extends Entity {
 				unset ($A);
 				foreach ( $groupList01 as $A ) { $strGrp .= "'" . $A . "', "; }
 				$strGrp = "(" . substr ( $strGrp, 0, - 2 ) . ") ";
-				$sqlQuery = "SELECT group_id, group_parent, group_name 
+				$sqlQuery = "SELECT group_id, group_parent, group_name, group_tag 
 					FROM " . $SqlTableListObj->getSQLTableName ('group') . "
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
@@ -125,7 +129,7 @@ class User extends Entity {
 					while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
 						$groupList02[] = $dbp['group_id'];
 						$this->User['group'][$dbp['group_id']] = 1;
-						$this->groupList[$dbp['group_id']] = array("group_id"=>$dbp ['group_id'], "group_name"=>$dbp['group_name']);
+						$this->groupList[$dbp['group_id']] = array("group_id"=>$dbp ['group_id'], "group_name"=>$dbp['group_name'], "group_tag"=>$dbp['group_tag']);
 						$loopAgain = 1;
 					}
 				}
@@ -260,6 +264,9 @@ class User extends Entity {
 		if ( isset($this->User[$lvl1][$lvl2])) { return $this->User[$lvl1][$lvl2];}
 		else { return null; }
 	}
+
+	public function getGroupList () { return $this->groupList; }
+
 	public function getUser() { return $this->User; }
 	public function resetUser () { $this->User = array(); }
 	

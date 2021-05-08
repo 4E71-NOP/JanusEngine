@@ -237,17 +237,17 @@ $Content .= "
 $T = array();
 $curTab = 1;
 
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 
 
-$T['AD'][$curTab]['1']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_id');
-$T['AD'][$curTab]['2']['2']['cont'] = $t1l2c2;
-$T['AD'][$curTab]['3']['2']['cont'] = $t1l3c2;
-$T['AD'][$curTab]['4']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_desc');
+$T['Content'][$curTab]['1']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_id');
+$T['Content'][$curTab]['2']['2']['cont'] = $t1l2c2;
+$T['Content'][$curTab]['3']['2']['cont'] = $t1l3c2;
+$T['Content'][$curTab]['4']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_desc');
 
 
 // --------------------------------------------------------------------------------------------
@@ -255,8 +255,8 @@ $decoCount1 = 1;
 for ( $i = 2 ; $i <= 3 ; $i++ ) {
 	for ( $j = 1 ; $j <= 15 ; $j++ ) {
 		$decoCount2 = sprintf("%02u", $decoCount1 );
-		$T['AD'][$i][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
-		$T['AD'][$i][$j]['2']['cont'] = "
+		$T['Content'][$i][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
+		$T['Content'][$i][$j]['2']['cont'] = "
 		<input type='text' name='formParams[theme_bloc_".$decoCount2."_nom]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_nom')."\" class='".$Block."_t3 ".$Block."_form_1'>\r
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type='text' name='formParams[theme_bloc_".$decoCount2."_texte]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_texte')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
@@ -268,35 +268,35 @@ for ( $i = 2 ; $i <= 3 ; $i++ ) {
 $decoCount1 = 0;
 for ( $j = 1 ; $j <= 30 ; $j++ ) {
 	$decoCount2 = sprintf("%02u", $decoCount1 );
-	$T['AD']['4'][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
-	$T['AD']['4'][$j]['2']['cont'] = "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+	$T['Content']['4'][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
+	$T['Content']['4'][$j]['2']['cont'] = "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bloc_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 	$decoCount1++;
 }
 
 
 // --------------------------------------------------------------------------------------------
 $curTab = 5;
-$T['AD'][$curTab]['1']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l1c1');
-$T['AD'][$curTab]['2']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #1";
-$T['AD'][$curTab]['3']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #2";
-$T['AD'][$curTab]['4']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #3";
-$T['AD'][$curTab]['5']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #4";
-$T['AD'][$curTab]['6']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #5";
-$T['AD'][$curTab]['7']['2']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l7c1');
-$T['AD'][$curTab]['7']['1']['colspan']		= 2;
-$T['AD'][$curTab]['8']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l8c1');
-$T['AD'][$curTab]['9']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l9c1');
-$T['AD'][$curTab]['10']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l10c1');
-$T['AD'][$curTab]['11']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l11c1');
-$T['AD'][$curTab]['11']['1']['colspan']		= 2;
-$T['AD'][$curTab]['12']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l12c1');
-$T['AD'][$curTab]['13']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l13c1');
-$T['AD'][$curTab]['14']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l14c1');
-$T['AD'][$curTab]['15']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l15c1');
-$T['AD'][$curTab]['16']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l16c1');
-$T['AD'][$curTab]['16']['1']['colspan']		= 2;
-$T['AD'][$curTab]['17']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l17c1');
-$T['AD'][$curTab]['18']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l18c1');
+$T['Content'][$curTab]['1']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l1c1');
+$T['Content'][$curTab]['2']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #1";
+$T['Content'][$curTab]['3']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #2";
+$T['Content'][$curTab]['4']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #3";
+$T['Content'][$curTab]['5']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #4";
+$T['Content'][$curTab]['6']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l2c1')." #5";
+$T['Content'][$curTab]['7']['2']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l7c1');
+$T['Content'][$curTab]['7']['1']['colspan']		= 2;
+$T['Content'][$curTab]['8']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l8c1');
+$T['Content'][$curTab]['9']['1']['cont']			= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l9c1');
+$T['Content'][$curTab]['10']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l10c1');
+$T['Content'][$curTab]['11']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l11c1');
+$T['Content'][$curTab]['11']['1']['colspan']		= 2;
+$T['Content'][$curTab]['12']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l12c1');
+$T['Content'][$curTab]['13']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l13c1');
+$T['Content'][$curTab]['14']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l14c1');
+$T['Content'][$curTab]['15']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l15c1');
+$T['Content'][$curTab]['16']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l16c1');
+$T['Content'][$curTab]['16']['1']['colspan']		= 2;
+$T['Content'][$curTab]['17']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l17c1');
+$T['Content'][$curTab]['18']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l18c1');
 
 
 
@@ -321,7 +321,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 $FileSelectorConfig = array(
@@ -345,7 +345,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['2']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['2']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 $FileSelectorConfig = array(
@@ -369,7 +369,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['3']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['3']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 $FileSelectorConfig = array(
@@ -393,7 +393,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 $FileSelectorConfig = array(
@@ -417,7 +417,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['5']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['5']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 $FileSelectorConfig = array(
@@ -441,7 +441,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['6']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['6']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 
@@ -468,38 +468,10 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['8']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['8']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['AD'][$curTab]['9']['2']['cont']		= "<input type='text' name='formParams[theme_bg_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r"; 
-$T['AD'][$curTab]['10']['2']['cont']	= "<input type='text' name='formParams[theme_bg_color]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_color')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_divinitial_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l12c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-
-$T['AD'][$curTab]['13']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['14']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dx]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dx')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD'][$curTab]['15']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dy]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dy')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['9']['2']['cont']		= "<input type='text' name='formParams[theme_bg_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r"; 
+$T['Content'][$curTab]['10']['2']['cont']	= "<input type='text' name='formParams[theme_bg_color]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_color')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -522,7 +494,35 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+
+
+$T['Content'][$curTab]['13']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['14']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dx]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dx')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['15']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dy]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dy')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+
+$FileSelectorConfig = array(
+		"width"				=> 80,	//in %
+		"height"			=> 50,	//in %
+		"formName"			=> "themeForm",
+		"formTargetId"		=> "formParams[theme_divinitial_bg]",
+		"formInputSize"		=> 25 ,
+		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
+		"path"				=> "/media/theme/",
+		"restrictTo"		=> "/media/theme/",
+		"strRemove"			=> "/\.*\w*\//",
+		"strAdd"			=> "",
+		"selectionMode"		=> "file",
+		"displayType"		=> "imageMosaic",
+		"buttonId"			=> "t5l12c2",
+		"case"				=> 3,
+		"update"			=> 1,
+		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+);
+$infos['IconSelectFile'] = $FileSelectorConfig;
+$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
+$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
+$T['Content'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 
@@ -547,7 +547,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['17']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['17']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -570,18 +570,18 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['18']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['18']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
-$T['AD'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
-$T['AD'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
-$T['AD'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
-$T['AD'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
-$T['AD'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
-$T['AD'][$curTab]['6']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
+$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
+$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
+$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
+$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
+$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
+$T['Content'][$curTab]['6']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -604,7 +604,7 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['1']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['1']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $FileSelectorConfig = array(
 		"width"				=> 80,	//in %
@@ -627,17 +627,17 @@ $FileSelectorConfig = array(
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD'][$curTab]['2']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content'][$curTab]['2']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['AD'][$curTab]['3']['2']['cont'] = "
+$T['Content'][$curTab]['3']['2']['cont'] = "
 	<input type='text' name='formParams[admctrl_size_x]' size='8' maxlength='255' value='".$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_x')."' class='".$Block."_t3 ".$Block."_form_1'>px\r /
 	<input type='text' name='formParams[admctrl_size_y]' size='8' maxlength='255' value='".$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_y')."' class='".$Block."_t3 ".$Block."_form_1'>px\r"
 ;
 
-$T['AD'][$curTab]['4']['2']['cont'] = "<select name ='formParams['admctrl_position']' class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['4']['2']['cont'] = "<select name ='formParams['admctrl_position']' class='".$Block."_t3 ".$Block."_form_1'>\r";
 $admctrl_position = array();
 $admctrl_position[$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_position')] = " selected ";
-$T['AD'][$curTab]['4']['2']['cont'] .= "
+$T['Content'][$curTab]['4']['2']['cont'] .= "
 <option value='1' ".$admctrl_position['1']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpLeft')		." </option>\r
 <option value='2' ".$admctrl_position['2']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpMiddle')	." </option>\r
 <option value='3' ".$admctrl_position['3']."> ".$bts->I18nTransObj->getI18nTransEntry('acpUp')." - ".		$bts->I18nTransObj->getI18nTransEntry('acpRight')	." </option>\r
@@ -651,7 +651,7 @@ $T['AD'][$curTab]['4']['2']['cont'] .= "
 
 switch ( $bts->CMObj->getConfigurationEntry('colorSelector') ){
 	case "Hydr":
-		$T['AD'][$curTab]['5']['2']['cont'] = "
+		$T['Content'][$curTab]['5']['2']['cont'] = "
 		#<input type='text' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
 		#<input type='text' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
 		#<input type='text' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."\"		class='".$Block."_t3 ".$Block."_form_1'>\r
@@ -661,7 +661,7 @@ switch ( $bts->CMObj->getConfigurationEntry('colorSelector') ){
 		<tr>\r";
 		break;
 	case "system":
-		$T['AD'][$curTab]['5']['2']['cont'] = "
+		$T['Content'][$curTab]['5']['2']['cont'] = "
 		<input type='color' id='MS_couleur_jauge_depart'	name='formParams[couleur_jauge_depart]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
 		<input type='color' id='MS_couleur_jauge_milieu'	name='formParams[couleur_jauge_milieu]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."'	oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r /
 		<input type='color' id='MS_couleur_jauge_fin'		name='formParams[couleur_jauge_fin]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."'		oninput='GestionThemeMAJJauge()' class='" . $Block."_t3 ".$Block."_form_1'>\r
@@ -674,8 +674,8 @@ switch ( $bts->CMObj->getConfigurationEntry('colorSelector') ){
 
 $gradientNbr = 30;
 $gradientWidth = 320;
-for ( $i = 1 ; $i <= $gradientNbr; $i++ ) { $T['AD'][$curTab]['5']['2']['cont'] .= "<td id='jauge_theme_".$i."' style='width: ".floor( $gradientWidth / $gradientNbr)."px; height: 32px; background-color: #000000; border: 0px'></td>\r"; }
-$T['AD'][$curTab]['5']['2']['cont'] .= "</tr>\r</table>\r";
+for ( $i = 1 ; $i <= $gradientNbr; $i++ ) { $T['Content'][$curTab]['5']['2']['cont'] .= "<td id='jauge_theme_".$i."' style='width: ".floor( $gradientWidth / $gradientNbr)."px; height: 32px; background-color: #000000; border: 0px'></td>\r"; }
+$T['Content'][$curTab]['5']['2']['cont'] .= "</tr>\r</table>\r";
 
 
 
@@ -685,8 +685,8 @@ $T['AD'][$curTab]['5']['2']['cont'] .= "</tr>\r</table>\r";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 16, 6);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 16, 6);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(15,2,2),
 		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(15,2,2),

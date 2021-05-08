@@ -192,32 +192,32 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
+$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['Content']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
 
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode') ) {
 	case "edit":
-		$T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_id');
-		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_name');
-		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('deadline_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_creation_date'));
-		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value=\"".date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_end_date'))."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['8']['2']['cont'] = $articleList;
-		$T['ADC']['onglet']['1']['nbr_ligne'] = 8;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
+		$T['Content']['1']['1']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_id');
+		$T['Content']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_name');
+		$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('deadline_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_creation_date'));
+		$T['Content']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value=\"".date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_end_date'))."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['8']['2']['cont'] = $articleList;
+		$T['ContentCfg']['tabs']['1']['NbrOfLines'] = 8;	$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 2;
 		break;
 	case "create":
-		$T['AD']['1']['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $bts->I18nTransObj->getI18nTransEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['AD']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , mktime() ) ;
-		$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value='".date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$T['ADC']['onglet']['1']['nbr_ligne'] = 7;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 2;
+		$T['Content']['1']['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[nom]' size='45' maxlength='255' value='".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[titre]' size='45' maxlength='255' value='". $bts->I18nTransObj->getI18nTransEntry('t1l3c2') . date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , mktime() ) ;
+		$T['Content']['1']['6']['2']['cont'] = "<input type='text' name='formParams[date_limite]' size='45' maxlength='255' value='".date ( "Y-m-d G:i:s" , (mktime()+ (60*60*24*30)) )."' class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['ContentCfg']['tabs']['1']['NbrOfLines'] = 7;	$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 2;
 		break;
 }
 
@@ -231,8 +231,8 @@ $str = "<select name ='formParams[etat]' class='".$Block."_t3 ".$Block."_form_1'
 foreach ( $stateTab as $A ) { $str .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $str .= "</select>\r";
 
-$T['AD']['1']['4']['2']['cont'] = $str;
-$T['AD']['1']['7']['2']['cont'] = $currentArticleObj->getDeadLineEntry('user_login');
+$T['Content']['1']['4']['2']['cont'] = $str;
+$T['Content']['1']['7']['2']['cont'] = $currentArticleObj->getDeadLineEntry('user_login');
 
 // --------------------------------------------------------------------------------------------
 //
@@ -240,8 +240,8 @@ $T['AD']['1']['7']['2']['cont'] = $currentArticleObj->getDeadLineEntry('user_log
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 12);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 12);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

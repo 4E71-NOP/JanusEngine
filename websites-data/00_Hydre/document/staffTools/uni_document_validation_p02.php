@@ -122,7 +122,7 @@ else {
 	$AD['1']['4']['2']['cont'] = $pv['o1l42'];
 	$AD['1']['5']['2']['cont'] = $pv['o1l52'];
 
-	$ADC['onglet']['1']['nbr_ligne'] = 5;
+	$ADC['tabs']['1']['NbrOfLines'] = 5;
 
 	$tl_['eng']['onglet1'] = "Informations";
 	$tl_['fra']['onglet1'] = "Informations";

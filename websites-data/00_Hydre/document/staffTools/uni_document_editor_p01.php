@@ -111,10 +111,10 @@ ORDER BY docu_id, docu_type, part_modification ASC
 $docList = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $i18nDoc['raf1'];
-	$T['AD']['1'][$i]['2']['cont'] = "";
-	$T['AD']['1'][$i]['3']['cont'] = "";
-	$T['AD']['1'][$i]['4']['cont'] = "";
+	$T['Content']['1'][$i]['1']['cont'] = $i18nDoc['raf1'];
+	$T['Content']['1'][$i]['2']['cont'] = "";
+	$T['Content']['1'][$i]['3']['cont'] = "";
+	$T['Content']['1'][$i]['4']['cont'] = "";
 }
 else {
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -145,10 +145,10 @@ else {
 	
 	
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $i18nDoc['col_1_txt'];
-	$T['AD']['1'][$i]['2']['cont']	= $i18nDoc['col_2_txt'];
-	$T['AD']['1'][$i]['3']['cont']	= $i18nDoc['col_3_txt'];
-	$T['AD']['1'][$i]['4']['cont']	= $i18nDoc['col_4_txt'];
+	$T['Content']['1'][$i]['1']['cont']	= $i18nDoc['col_1_txt'];
+	$T['Content']['1'][$i]['2']['cont']	= $i18nDoc['col_2_txt'];
+	$T['Content']['1'][$i]['3']['cont']	= $i18nDoc['col_3_txt'];
+	$T['Content']['1'][$i]['4']['cont']	= $i18nDoc['col_4_txt'];
 	
 	foreach ( $docList as $A ) { 
 		$i++;
@@ -156,40 +156,40 @@ else {
 		case 9 :
 		case 16 :
 		case 17 :
-			$T['AD']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien' href='index.php?
+			$T['Content']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien' href='index.php?
 			&amp;M_DOCUME[document_selection]=".$A['docu_id'].
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
 			&amp;arti_page=2'>".$A['docu_name']."</a>";
 		break;
 		default:
-			$T['AD']['1'][$i]['1']['cont'] = $A['docu_name'];
+			$T['Content']['1'][$i]['1']['cont'] = $A['docu_name'];
 		break;
 		} 
-		$T['AD']['1'][$i]['2']['cont']	= $i18nDoc['type'][$A['docu_type']];
-		$T['AD']['1'][$i]['3']['cont']	= $i18nDoc[$A['part_modification']];
-		$T['AD']['1'][$i]['4']['cont']	= $i18nDoc[$A['edition']];
+		$T['Content']['1'][$i]['2']['cont']	= $i18nDoc['type'][$A['docu_type']];
+		$T['Content']['1'][$i]['3']['cont']	= $i18nDoc[$A['part_modification']];
+		$T['Content']['1'][$i]['4']['cont']	= $i18nDoc[$A['edition']];
 	}
 }
 
 
-$T['tab_infos']['EnableTabs']		= 1;
-$T['tab_infos']['NbrOfTabs']		= 1;
-$T['tab_infos']['TabBehavior']		= 0;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 1;
-$T['tab_infos']['Height']			= $bts->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['tab_infos']['GroupName']		= "list";
-$T['tab_infos']['CellName']			= "dl";
-$T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
-// $T['tab_infos']['cell_2_txt']		= $i18nDoc['col_2_txt'];
-// $T['tab_infos']['cell_3_txt']		= $i18nDoc['col_3_txt'];
-// $T['tab_infos']['cell_4_txt']		= $i18nDoc['col_4_txt'];
+$T['ContentInfos']['EnableTabs']		= 1;
+$T['ContentInfos']['NbrOfTabs']		= 1;
+$T['ContentInfos']['TabBehavior']		= 0;
+$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['HighLightType']	= 1;
+$T['ContentInfos']['Height']			= $bts->RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+$T['ContentInfos']['GroupName']		= "list";
+$T['ContentInfos']['CellName']			= "dl";
+$T['ContentInfos']['DocumentName']		= "doc";
+$T['ContentInfos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
+// $T['ContentInfos']['cell_2_txt']		= $i18nDoc['col_2_txt'];
+// $T['ContentInfos']['cell_3_txt']		= $i18nDoc['col_3_txt'];
+// $T['ContentInfos']['cell_4_txt']		= $i18nDoc['col_4_txt'];
 
-$T['ADC']['onglet']['1']['nbr_ligne']	= $i;
-$T['ADC']['onglet']['1']['nbr_cellule']	= 4;
-$T['ADC']['onglet']['1']['legende']		= 1;
+$T['ContentCfg']['tabs']['1']['NbrOfLines']	= $i;
+$T['ContentCfg']['tabs']['1']['NbrOfCells']	= 4;
+$T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 1;
 
 $config = array(
 		"mode" => 1,

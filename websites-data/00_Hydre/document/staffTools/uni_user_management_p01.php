@@ -45,64 +45,64 @@ $bts->LMObj->logCheckpoint("uni_user_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_user_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
-		"col_1_txt"		=> "Id",
-		"col_2_txt"		=> "Login",
-		"col_3_txt"		=> "Nom",
-		"col_4_txt"		=> "Groupe",
-		"col_5_txt"		=> "Statut",
-		"col_6_txt"		=> "Dernière visite",
-		"tabTxt1"		=> "Informations",
-		"select1_0"		=> "No groupe",
-		"select1_1"		=> "Aucun groupe",
-		
-		"status0"		=> "Désactivé",
-		"status1"		=> "Actif",
-		"status2"		=> "Suppprimé",
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
+			"col_1_txt"		=> "Id",
+			"col_2_txt"		=> "Login",
+			"col_3_txt"		=> "Nom",
+			"col_4_txt"		=> "Groupe",
+			"col_5_txt"		=> "Statut",
+			"col_6_txt"		=> "Dernière visite",
+			"tabTxt1"		=> "Informations",
+			"select1_0"		=> "No groupe",
+			"select1_1"		=> "Aucun groupe",
+			
+			"status0"		=> "Désactivé",
+			"status1"		=> "Actif",
+			"status2"		=> "Suppprimé",
 
-		"table1_1"		=> "Chercher le login contenant",
-		"table1_2"		=> "Du groupe",
-		"table1_3"		=> "Statut",
-		"table1_41"		=> "Affichage",
-		"table1_42"		=> "entrées par pages.",
-		"select1_0"		=> "Aucun groupe",
-		"select2_0"		=> "Inactif",
-		"select2_1"		=> "Actif",
-		"select2_2"		=> "Supprimé",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage users.",
-		"col_1_txt"		=> "Id",
-		"col_2_txt"		=> "Login",
-		"col_3_txt"		=> "Name",
-		"col_4_txt"		=> "In group",
-		"col_5_txt"		=> "Status",
-		"col_6_txt"		=> "Last visit",
-		"tabTxt1"		=> "Informations",
-		"select1_0"		=> "No group",
-		"select1_1"		=> "Aucun group",
-		
-		"status0"		=> "Disabled",
-		"status1"		=> "Active",
-		"status2"		=> "Deleted",
+			"table1_1"		=> "Chercher le login contenant",
+			"table1_2"		=> "Du groupe",
+			"table1_3"		=> "Statut",
+			"table1_41"		=> "Affichage",
+			"table1_42"		=> "entrées par pages.",
+			"select1_0"		=> "Aucun groupe",
+			"select2_0"		=> "Inactif",
+			"select2_1"		=> "Actif",
+			"select2_2"		=> "Supprimé",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage users.",
+			"col_1_txt"		=> "Id",
+			"col_2_txt"		=> "Login",
+			"col_3_txt"		=> "Name",
+			"col_4_txt"		=> "In group",
+			"col_5_txt"		=> "Status",
+			"col_6_txt"		=> "Last visit",
+			"tabTxt1"		=> "Informations",
+			"select1_0"		=> "No group",
+			"select1_1"		=> "Aucun group",
+			
+			"status0"		=> "Disabled",
+			"status1"		=> "Active",
+			"status2"		=> "Deleted",
 
-		"table1_1"		=> "Find login containing",
-		"table1_2"		=> "From group",
-		"table1_3"		=> "User status",
-		"table1_41"		=> "Display",
-		"table1_42"		=> "entry per pages.",
-		"select1_0"		=> "No group",
-		"select2_0"		=> "Disabled",
-		"select2_1"		=> "Active",
-		"select2_2"		=> "Deleted",
-		));
-		break;
-}
+			"table1_1"		=> "Find login containing",
+			"table1_2"		=> "From group",
+			"table1_3"		=> "User status",
+			"table1_41"		=> "Display",
+			"table1_42"		=> "entry per pages.",
+			"select1_0"		=> "No group",
+			"select2_0"		=> "Disabled",
+			"select2_1"		=> "Active",
+			"select2_2"		=> "Deleted",
+		)
+	)
+);
+
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
@@ -123,15 +123,18 @@ if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id
 if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'))>0 )																				{ $GDU_['clause_like'] .= " ".	$clause_sql_element[$clause_sql_element_offset]." usr.user_status = '".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status')."' ";			$clause_sql_element_offset++; }
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gr.group_tag != '0' ";										$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_user_initial_group = '1' ";							$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' ";		$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.user_id = usr.user_id";									$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." sg.group_id = gu.group_id ";									$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.group_id = gr.group_id ";									$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' ";	$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.fk_user_id = usr.user_id";									$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gw.fk_group_id = gu.fk_group_id ";							$clause_sql_element_offset++;
+$GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.fk_group_id = gr.group_id ";								$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_name != 'HydreBDD'";									$clause_sql_element_offset++;
 
 $dbquery = $bts->SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
+.$SqlTableListObj->getSQLTableName('group')." gr, "
+.$SqlTableListObj->getSQLTableName('group_user')." gu, "
+.$SqlTableListObj->getSQLTableName('group_website')." gw 
 ".$GDU_['clause_like'].";");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
 
@@ -163,7 +166,10 @@ M_UTILIS_page=".$GDU_['compteur_page']."
 
 $dbquery = $bts->SDDMObj->query("
 SELECT usr.user_id,usr.user_login,user_name,usr.user_last_visit,gr.group_title,usr.user_status 
-FROM ".$SqlTableListObj->getSQLTableName('user')." usr, ".$SqlTableListObj->getSQLTableName('group')." gr, ".$SqlTableListObj->getSQLTableName('group_user')." gu, ".$SqlTableListObj->getSQLTableName('group_website')." sg 
+FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
+.$SqlTableListObj->getSQLTableName('group')." gr, "
+.$SqlTableListObj->getSQLTableName('group_user')." gu, "
+.$SqlTableListObj->getSQLTableName('group_website')." gw 
 ".$GDU_['clause_like']."  
 ORDER BY user_id, user_login 
 LIMIT ".($GDU_['nbr_par_page'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'M_UTILIS_page')).",".$GDU_['nbr_par_page']." 
@@ -173,16 +179,16 @@ $GDU_['nbr_par_page_reel'] = $bts->SDDMObj->num_row_sql ( $dbquery );
 
 $T = array();
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+$T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+$T['Content']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
 // 	if ( $dbp['user_status'] == 2 ) { $trr['tableau'][$i]['c_2_txt'] .= "style='font-style: italic; text-decoration: line-through; font-weight: lighter;'"; }
-	$T['AD']['1'][$i]['link'] = "&HydrLink=1"
+	$T['Content']['1'][$i]['link'] = "&HydrLink=1"
 	.$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
 	."index.php?"._HYDRLINKURLTAG_."=1"
 	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
@@ -193,10 +199,10 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	;
 
 
-	$T['AD']['1'][$i]['1']['cont'] = $dbp['user_id'];
-	$T['AD']['1'][$i]['2']['cont'] = $dbp['user_login'];
-	$T['AD']['1'][$i]['3']['cont'] = $dbp['user_name'];
-	// $T['AD']['1'][$i]['3']['cont'] = 
+	$T['Content']['1'][$i]['1']['cont'] = $dbp['user_id'];
+	$T['Content']['1'][$i]['2']['cont'] = $dbp['user_login'];
+	$T['Content']['1'][$i]['3']['cont'] = $dbp['user_name'];
+	// $T['Content']['1'][$i]['3']['cont'] = 
 	// "<a class='".$Block."_lien' href='index.php?"
 	// ."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 	// ."&l=".$CurrentSetObj->getDataEntry('language')
@@ -208,13 +214,13 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	// .$dbp['user_name']
 	// ."</a>\r";
 	
-	$T['AD']['1'][$i]['4']['cont'] = $dbp['group_title'];
-	$T['AD']['1'][$i]['4']['tc'] = 1;
-	$T['AD']['1'][$i]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
-	$T['AD']['1'][$i]['5']['tc'] = 1;
+	$T['Content']['1'][$i]['4']['cont'] = $dbp['group_title'];
+	$T['Content']['1'][$i]['4']['tc'] = 1;
+	$T['Content']['1'][$i]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
+	$T['Content']['1'][$i]['5']['tc'] = 1;
 	$lastVisit = date ("Y M d - H:i:s",$dbp['user_last_visit']);
-	$T['AD']['1'][$i]['6']['cont'] = $lastVisit;
-	$T['AD']['1'][$i]['6']['tc'] = 1;
+	$T['Content']['1'][$i]['6']['cont'] = $lastVisit;
+	$T['Content']['1'][$i]['6']['tc'] = 1;
 }
 
 // --------------------------------------------------------------------------------------------
@@ -223,8 +229,8 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,6,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

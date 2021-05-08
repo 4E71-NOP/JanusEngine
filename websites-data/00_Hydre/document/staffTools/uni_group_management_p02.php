@@ -165,12 +165,12 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 // $tabYN = array(
 // 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('no'],		"db"=>"NO" ),
@@ -183,9 +183,9 @@ $T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1'
 // );
 
 
-$T['AD']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
-$T['AD']['1']['2']['2']['cont'] = $t1l2c2;
-$T['AD']['1']['3']['2']['cont'] = $t1l3c2;
+$T['Content']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
+$T['Content']['1']['2']['2']['cont'] = $t1l2c2;
+$T['Content']['1']['3']['2']['cont'] = $t1l3c2;
 
 $tabStateDealine = array(
 		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('anonymous'),		"db"=>"ANONYMOUS" ),
@@ -200,11 +200,11 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'mode') ) {
 	case "create":	$tab[1]['s'] = " selected";	break;
 }
 
-$T['AD']['1']['4']['2']['cont'] = "<select name ='formParams[tag]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tab as $A ) { $T['AD']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['4']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['4']['2']['cont'] = "<select name ='formParams[tag]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tab as $A ) { $T['Content']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['4']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[desc]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[desc]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
 		array(
@@ -226,7 +226,7 @@ $infos['IconSelectFile'] = array(
 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-$T['AD']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 // --------------------------------------------------------------------------------------------
@@ -235,8 +235,8 @@ $T['AD']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelect
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
@@ -248,21 +248,21 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 //
 //
 // --------------------------------------------------------------------------------------------
-// $T['tab_infos']['EnableTabs']		= 1;
-// $T['tab_infos']['NbrOfTabs']		= 1;
-// $T['tab_infos']['TabBehavior']		= 0;
-// $T['tab_infos']['RenderMode']		= 1;
-// $T['tab_infos']['HighLightType']	= 0;
-// $T['tab_infos']['Height']			= floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * 6; //T3 is default; total padding = 10; nbr line +1
-// $T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-// $T['tab_infos']['GroupName']		= "list";
-// $T['tab_infos']['CellName']			= "grp";
-// $T['tab_infos']['DocumentName']		= "doc";
-// $T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
-// $T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
-// $T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
+// $T['ContentInfos']['EnableTabs']		= 1;
+// $T['ContentInfos']['NbrOfTabs']		= 1;
+// $T['ContentInfos']['TabBehavior']		= 0;
+// $T['ContentInfos']['RenderMode']		= 1;
+// $T['ContentInfos']['HighLightType']	= 0;
+// $T['ContentInfos']['Height']			= floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * 6; //T3 is default; total padding = 10; nbr line +1
+// $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+// $T['ContentInfos']['GroupName']		= "list";
+// $T['ContentInfos']['CellName']			= "grp";
+// $T['ContentInfos']['DocumentName']		= "doc";
+// $T['ContentInfos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
+// $T['ContentInfos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
+// $T['ContentInfos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
 
-// $T['ADC']['onglet']['1']['nbr_ligne']	= 5;	$T['ADC']['onglet']['1']['nbr_cellule']	= 2;	$T['ADC']['onglet']['1']['legende']		= 2;
+// $T['ContentCfg']['tabs']['1']['NbrOfLines']	= 5;	$T['ContentCfg']['tabs']['1']['NbrOfCells']	= 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 2;
 
 // $config = array(
 // 		"mode" => 1,

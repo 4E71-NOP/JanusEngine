@@ -288,10 +288,10 @@ $AD['4']['2']['2']['cont'] = $pv['user_list'][$infos_article['arti_validator_id'
 $AD['4']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['arti_release_date']);
 
 
-$ADC['onglet']['1']['nbr_ligne'] = 5;	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 2;
-$ADC['onglet']['2']['nbr_ligne'] = 3;	$ADC['onglet']['2']['nbr_cellule'] = 2;	$ADC['onglet']['2']['legende'] = 2;
-$ADC['onglet']['3']['nbr_ligne'] = 1;	$ADC['onglet']['4']['nbr_cellule'] = 2;	$ADC['onglet']['3']['legende'] = 2;
-$ADC['onglet']['4']['nbr_ligne'] = 3;	$ADC['onglet']['3']['nbr_cellule'] = 2;	$ADC['onglet']['4']['legende'] = 2;
+$ADC['tabs']['1']['NbrOfLines'] = 5;	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 2;
+$ADC['tabs']['2']['NbrOfLines'] = 3;	$ADC['tabs']['2']['NbrOfCells'] = 2;	$ADC['tabs']['2']['TableCaptionPos'] = 2;
+$ADC['tabs']['3']['NbrOfLines'] = 1;	$ADC['tabs']['4']['NbrOfCells'] = 2;	$ADC['tabs']['3']['TableCaptionPos'] = 2;
+$ADC['tabs']['4']['NbrOfLines'] = 3;	$ADC['tabs']['3']['NbrOfCells'] = 2;	$ADC['tabs']['4']['TableCaptionPos'] = 2;
 
 $tl_['eng']['onglet_1'] = "Informations";		$tl_['fra']['onglet_1'] = "Informations";
 $tl_['eng']['onglet_2'] = "Options";			$tl_['fra']['onglet_2'] = "Options";

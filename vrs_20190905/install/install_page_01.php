@@ -44,9 +44,10 @@ $bts->CMObj->setConfigurationEntry('admin_user','dbadmin');
 $bts->CMObj->setConfigurationEntry('admin_password','nimdabd');
 $bts->CMObj->setConfigurationEntry('db_hosting_prefix','');
 
-include ("current/install/i18n/install_page_01_".$l.".php");
-$bts->I18nTransObj->apply($i18n);
-unset ($i18n);
+// include ("current/install/i18n/install_page_01_".$l.".php");
+// $bts->I18nTransObj->apply($i18n);
+$bts->I18nTransObj->apply(array( "type" => "file", "file" => "current/install/i18n/install_page_01_".$l.".php", "format" => "php" ) );
+// unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -216,7 +217,7 @@ $Support['PHP_version'] = "PHP vrs " . phpversion();
 $maid_stats_nombre_de_couleurs = 5;
 // --------------------------------------------------------------------------------------------
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 21, 6);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 21, 6);
 // --------------------------------------------------------------------------------------------
 
 $CellTab['t1l1c2']	= $ServerInfosObj->getServerInfosEntry('srv_hostname');
@@ -237,11 +238,11 @@ if ( $ServerInfosObj->getServerInfosEntry('max_execution_time') >= 60 ) { $CellT
 else { $CellTab['t1l7c2'] .= $bts->I18nTransObj->getI18nTransEntry('test_ok'); }
 
 for ( $i = 1 ; $i <= 10 ; $i++ ) {
-	$T['AD'][$CurrentTab][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$i.'c1');
-	$T['AD'][$CurrentTab][$i]['2']['cont'] = $CellTab['t1l'.$i.'c2'];
+	$T['Content'][$CurrentTab][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$i.'c1');
+	$T['Content'][$CurrentTab][$i]['2']['cont'] = $CellTab['t1l'.$i.'c2'];
 }
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(10,2,2);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(10,2,2);
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
@@ -253,11 +254,11 @@ $lt = 1;
 $bubbleBegin = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='24' height='24' border='0' onMouseOver=\"t.ToolTip('";
 $bubbleEnd = "')\" onMouseOut=\"t.ToolTip()\">";
 
-$T['AD'][$CurrentTab]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('F2_intro');
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='setFormPreconizedSettings()' value='directCnx' checked>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o1').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide1').$bubbleEnd;
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='setFormPreconizedSettings()' value='createScript'>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o2').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide2').$bubbleEnd;
+$T['Content'][$CurrentTab]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('F2_intro');
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='setFormPreconizedSettings()' value='directCnx' checked>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o1').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide1').$bubbleEnd;
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='setFormPreconizedSettings()' value='createScript'>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o2').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide2').$bubbleEnd;
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,2,0);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,2,0);
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
@@ -266,16 +267,16 @@ $CurrentTab++;
 //
 $lt = 1;
 
-$T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 0;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 3;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 1;
+$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 0;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 3;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 1;
 
-$T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
-$T['AD'][$CurrentTab]['1']['1']['tc'] = 4;
+$T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
+$T['Content'][$CurrentTab]['1']['1']['tc'] = 4;
 
-$T['AD'][$CurrentTab]['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c2');
-$T['AD'][$CurrentTab]['1']['2']['tc'] = 4;
+$T['Content'][$CurrentTab]['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c2');
+$T['Content'][$CurrentTab]['1']['2']['tc'] = 4;
 
-$T['AD'][$CurrentTab]['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c3');
-$T['AD'][$CurrentTab]['1']['3']['tc'] = 4;
+$T['Content'][$CurrentTab]['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c3');
+$T['Content'][$CurrentTab]['1']['3']['tc'] = 4;
 
 $i = 0;
 $directory_list = array();
@@ -292,23 +293,23 @@ reset ($directory_list);
 $listDirectoriCheckbox = array();
 foreach ( $directory_list as $a ) {
 	if ( $a == "00_Hydre" ) {
-		$T['AD'][$CurrentTab][$i]['1']['cont'] = "<span style='font-style:italic'>".$a."</span>\r";
-		$T['AD'][$CurrentTab][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[".$a."][plouf]' disabled checked >";
-		$T['AD'][$CurrentTab][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[".$a."][plouf2]' disabled checked >\r
+		$T['Content'][$CurrentTab][$i]['1']['cont'] = "<span style='font-style:italic'>".$a."</span>\r";
+		$T['Content'][$CurrentTab][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[".$a."][plouf]' disabled checked >";
+		$T['Content'][$CurrentTab][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[".$a."][plouf2]' disabled checked >\r
 		<input type='hidden' name='directory_list[".$a."][name]' value='".$a."'>\r
 		<input type='hidden' name='directory_list[".$a."][state]' value='on'>\r";
 	}
 	else {
-		$T['AD'][$CurrentTab][$i]['1']['cont'] = $a." <input type='hidden' name='directory_list[".$a."][name]' value='".$a."'>\r";
-		$T['AD'][$CurrentTab][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[".$a."][state]' checked onClick='setFormPreconizedSettings()'>\r";
+		$T['Content'][$CurrentTab][$i]['1']['cont'] = $a." <input type='hidden' name='directory_list[".$a."][name]' value='".$a."'>\r";
+		$T['Content'][$CurrentTab][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[".$a."][state]' checked onClick='setFormPreconizedSettings()'>\r";
 		
 		$listDirectoriCheckbox[] = "directory_list[".$a."][state]";
 		
-		$T['AD'][$CurrentTab][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[".$a."][code_verification]' checked>\r";
+		$T['Content'][$CurrentTab][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[".$a."][code_verification]' checked>\r";
 	}
 	$i++;
 }
-$T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = ( $i - 1 );
+$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = ( $i - 1 );
 
 $str = "var ListCheckbox = [\r";
 foreach ( $listDirectoriCheckbox as $A ) { $str .= "\"".$A."\", \r"; }
@@ -316,7 +317,7 @@ $str = substr($str, 0,-3) . "\r];\r";
 $GeneratedJavaScriptObj->insertJavaScript('Data' , $str);
 $GeneratedJavaScriptObj->insertJavaScript('Onload' , "\tsetFormPreconizedSettings();");
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),3,1);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),3,1);
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
@@ -325,90 +326,90 @@ $CurrentTab++;
 //
 $lt = 1;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');	$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c3');	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['3']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');	$T['AD'][$CurrentTab][$lt]['4']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['4']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');	$T['Content'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['1']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');	$T['Content'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['2']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c3');	$T['Content'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['3']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');	$T['Content'][$CurrentTab][$lt]['4']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['4']['sc'] = 1;
 $lt++;
 
 unset ($tab_);
 $tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"MenuSelectForgeron ( 'form[dal]' , 'form[database_type_choix]' , CompatiliteDBvsDAL[this.value] );\">\r";
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"MenuSelectForgeron ( 'form[dal]' , 'form[database_type_choix]' , CompatiliteDBvsDAL[this.value] );\">\r";
 
-if ( $Support['PHP']['PHP_mysqli_builtin']['state'] == 1 )	{ $T['AD'][$CurrentTab][$lt]['3']['cont'] .= "<option value='MYSQLI'	".$tab_['MYSQLI'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_msqli')."</option>\r"; }
-if ( $Support['DAL']['ADOdb']['state'] == 1 )				{ $T['AD'][$CurrentTab][$lt]['3']['cont'] .= "<option value='ADODB'		".$tab_['ADODB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_adodb')."</option>\r"; }
-if ( $Support['DAL']['PDO']['state'] == 1 )					{ $T['AD'][$CurrentTab][$lt]['3']['cont'] .= "<option value='PHPPDO'	".$tab_['PDO'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_phppdo')."</option>\r"; }
-if ( $Support['DAL']['pear']['state'] == 1 )				{ $T['AD'][$CurrentTab][$lt]['3']['cont'] .= "<option value='PEARDB'	".$tab_['PEARDB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_pear')."</option>\r"; }
+if ( $Support['PHP']['PHP_mysqli_builtin']['state'] == 1 )	{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='MYSQLI'	".$tab_['MYSQLI'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_msqli')."</option>\r"; }
+if ( $Support['DAL']['ADOdb']['state'] == 1 )				{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='ADODB'		".$tab_['ADODB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_adodb')."</option>\r"; }
+if ( $Support['DAL']['PDO']['state'] == 1 )					{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='PHPPDO'	".$tab_['PDO'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_phppdo')."</option>\r"; }
+if ( $Support['DAL']['pear']['state'] == 1 )				{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='PEARDB'	".$tab_['PEARDB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_pear')."</option>\r"; }
 
-$T['AD'][$CurrentTab][$lt]['3']['cont'] .= "</select>\r";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['3']['cont'] .= "</select>\r";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // DB Type selection
 unset ($tab_);
 $tab_[$bts->CMObj->getConfigurationEntry('type')] = " selected ";
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[database_type_choix]' name='form[database_type_choix]'>\r
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[database_type_choix]' name='form[database_type_choix]'>\r
 <option value='mysql'	".$tab_['mysql'].">MySQL 3.x/4.x/5.x</option>\r
 </select>\r
 ";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // Hosting plan
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
 
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[database_profil]'>\r
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[database_profil]'>\r
 <option value='absolute'>".$bts->I18nTransObj->getI18nTransEntry('dbp_asolute')."</option>\r
 <option value='hostplan'>".$bts->I18nTransObj->getI18nTransEntry('dbp_hosted')."</option>\r
 </select>\r
 ";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // DB Server
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[host]' size='20' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('host')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[host]' size='20' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('host')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // Prefix
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"InsereValeur ( this.value , '".$FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\">";
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"InsereValeur ( this.value , '".$FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\">";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // DB name
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_1]' size='10' maxlength='255' value=''>";
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[dbprefix]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('dbprefix')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_1]' size='10' maxlength='255' value=''>";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[dbprefix]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('dbprefix')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 // Login
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_2]' size='10' maxlength='255' value=''>";
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[db_admin_user]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_user')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_2]' size='10' maxlength='255' value=''>";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[db_admin_user]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_user')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' name='form[db_admin_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_password')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' name='form[db_admin_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_password')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
 $lt++;
 
 
@@ -425,17 +426,17 @@ $SB['lastSize']			= 128;
 $pv['div_cnx_db'] = "
 	<input type='text' readonly disable name='form[chaine_connexion_test]' size='40' maxlength='255' value=''><br>\r";
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');	$T['AD'][$CurrentTab][$lt]['1']['tc'] = 2;
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 2;
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 2;
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $pv['div_cnx_db'] . "
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');	$T['Content'][$CurrentTab][$lt]['1']['tc'] = 2;
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');	$T['Content'][$CurrentTab][$lt]['2']['tc'] = 2;
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);	$T['Content'][$CurrentTab][$lt]['3']['tc'] = 2;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $pv['div_cnx_db'] . "
 	<div id='cnxToDBok'				style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok')													. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4aok')."</div>
 	<div id='cnxToDBko'				style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok')												. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4ako')."</div>
 	<div id='HydrDBAlreadyExistok'	style='visibilty: hidden; display : none; position: realtive;' class='".$block._CLASS_TXT_WARNING_."'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification')	. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4bok')."</div>
 	<div id='HydrDBAlreadyExistko'	style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok')												. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4bko')."</div>
 	";
 
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 2;
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 2;
 
 $SrvUri = $_SERVER['REQUEST_URI'];
 $uriCut = strpos( $_SERVER['REQUEST_URI'] , "/Hydr/current/install/install_page_01.php" );
@@ -445,7 +446,7 @@ $GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"". $SrvUr
 $GeneratedJavaScriptObj->insertJavaScript('Data' , "var FormName = \"".$FormName."\"");
 
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,4,1);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,4,1);
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
@@ -453,27 +454,27 @@ $CurrentTab++;
 //
 //
 $lt=1;
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');	$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c3');	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['3']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');	$T['AD'][$CurrentTab][$lt]['4']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['4']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');	$T['Content'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['1']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');	$T['Content'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['2']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c3');	$T['Content'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['3']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');	$T['Content'][$CurrentTab][$lt]['4']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['4']['sc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"InsereValeur ( 'Ex: ' + this.value + 'article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]'] );\">";
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' readonly disable name='form[db_hosting_tabprefix_copie_1]' size='20' maxlength='255' value=''>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"InsereValeur ( 'Ex: ' + this.value + 'article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]'] );\">";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' readonly disable name='form[db_hosting_tabprefix_copie_1]' size='20' maxlength='255' value=''>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $GeneratedJavaScriptObj->insertJavaScript('Command' , "InsereValeur ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
 
 $lt++;
 
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_3]' size='10' maxlength='255' value=''>";
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[database_user_login]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_login')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_3]' size='10' maxlength='255' value=''>";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' name='form[database_user_login]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_login')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
 
@@ -488,53 +489,53 @@ $SB['size'] 			= 128;
 $SB['lastSize']			= 128;
 
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' id='form[database_user_password]' name='form[database_user_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4') . "<br><br>". $bts->InteractiveElementsObj->renderSubmitButton($SB);
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' id='form[database_user_password]' name='form[database_user_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4') . "<br><br>". $bts->InteractiveElementsObj->renderSubmitButton($SB);
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[database_user_recreate]'>\r
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[database_user_recreate]'>\r
 <option value='non'>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 <option value='oui' selected >".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
 </select>\r
 ";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' name='form[standard_user_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'>";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='password' name='form[standard_user_password]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'>";
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[creation_htaccess]'>\r
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[creation_htaccess]'>\r
 <option value='non' selected>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 <option value='oui'>".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
 </select>\r
 ";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[TypeExec]'>\r
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select name='form[TypeExec]'>\r
 <option value='ModuleApache' selected>".$bts->I18nTransObj->getI18nTransEntry('TypeExec1')."</option>\r
 <option value='CLI'>".$bts->I18nTransObj->getI18nTransEntry('TypeExec2')."</option>\r
 </select>\r
 ";
-$T['AD'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
-$T['AD'][$CurrentTab][$lt]['4']['tc'] = 1;
+$T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
+$T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,4,1);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,4,1);
 $CurrentTab++;
 
 
@@ -544,22 +545,22 @@ $CurrentTab++;
 //
 $lt=1;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');	$T['AD'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['1']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');	$T['AD'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['2']['sc'] = 1;
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');	$T['AD'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['AD'][$CurrentTab][$lt]['3']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');	$T['Content'][$CurrentTab][$lt]['1']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['1']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');	$T['Content'][$CurrentTab][$lt]['2']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['2']['sc'] = 1;
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');	$T['Content'][$CurrentTab][$lt]['3']['tc'] = 4;	$T['Content'][$CurrentTab][$lt]['3']['sc'] = 1;
 $lt++;
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='checkbox' name='form[db_detail_log_warn]'>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='checkbox' name='form[db_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='checkbox' name='form[db_detail_log_warn]'>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='checkbox' name='form[db_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');
 $lt++;
 
 
-$T['AD'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');
-$T['AD'][$CurrentTab][$lt]['2']['cont'] = "<input type='checkbox' name='form[console_detail_log_warn]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');
-$T['AD'][$CurrentTab][$lt]['3']['cont'] = "<input type='checkbox' name='form[console_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');
+$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c1');
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='checkbox' name='form[console_detail_log_warn]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c2');
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='checkbox' name='form[console_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$lt.'c3');
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,3,1);
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,3,1);
 $CurrentTab++;
 
 

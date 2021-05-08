@@ -39,8 +39,8 @@ switch ($l) {
 	case "fra":
 		$i18nDoc = array(
 		"invit"		=> "Section t&eacute;l&eacute;chargement.",
-		"legende1"	=> "Fichier",
-		"legende2"	=> "Taille",
+		"TableCaptionPos1"	=> "Fichier",
+		"TableCaptionPos2"	=> "Taille",
 		"l2c1"		=> "Répertoire vide",
 		"mb"		=> " Mb",
 		"tab1"		=> "Fichiers disponibles",
@@ -49,8 +49,8 @@ switch ($l) {
 	case "eng":
 		$i18nDoc = array(
 		"invit" => "Download section.",
-		"legende1"	=> "File",
-		"legende2"	=> "Size",
+		"TableCaptionPos1"	=> "File",
+		"TableCaptionPos2"	=> "Size",
 		"l2c1"		=> "Empty directory",
 		"mb"		=> " Mo",
 		"tab1"		=> "Available files",
@@ -61,8 +61,8 @@ switch ($l) {
 $i = 1;
 $T = array();
 
-$T['AD']['1'][$i]['1']['cont']	= $i18nDoc['legende1'];
-$T['AD']['1'][$i]['2']['cont']	= $i18nDoc['legende2'];
+$T['Content']['1'][$i]['1']['cont']	= $i18nDoc['TableCaptionPos1'];
+$T['Content']['1'][$i]['2']['cont']	= $i18nDoc['TableCaptionPos2'];
 
 $realpath = realpath("../websites-data/".$WebSiteObj->getWebSiteEntry('ws_directory')."/data/public/");
 $handle = opendir($realpath);
@@ -70,30 +70,30 @@ while (false !== ($f = readdir($handle))) {
 	if ($f != "." && $f != "..") {
 		$i++;
 		$f_stat = stat($realpath."/".$f);
-		$T['AD']['1'][$i]['1']['cont'] = "<a class='" . $Block."_lien' href='../download/".$f."'>".$f."</a>";
-		$T['AD']['1'][$i]['2']['cont'] =  ($f_stat['size']/1024/1024).$i18nDoc['mb'];
+		$T['Content']['1'][$i]['1']['cont'] = "<a class='" . $Block."_lien' href='../download/".$f."'>".$f."</a>";
+		$T['Content']['1'][$i]['2']['cont'] =  ($f_stat['size']/1024/1024).$i18nDoc['mb'];
 	}
 }
 
 if ($i == 1) {
 	$i++;
-	$T['AD']['1'][$i]['1']['cont']	= $i18nDoc['l2c1'];
-	$T['AD']['1'][$i]['2']['cont']	= "";
+	$T['Content']['1'][$i]['1']['cont']	= $i18nDoc['l2c1'];
+	$T['Content']['1'][$i]['2']['cont']	= "";
 }
 
-$T['ADC']['onglet']['1']['nbr_ligne'] = $i;		$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 1;
+$T['ContentCfg']['tabs']['1']['NbrOfLines'] = $i;		$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 $RenderLayoutObj = RenderLayout::getInstance();
-$T['tab_infos']['EnableTabs']		= 1;
-$T['tab_infos']['NbrOfTabs']		= 1;
-$T['tab_infos']['TabBehavior']		= 1;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 0;
-$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'tab_y' )-256;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['tab_infos']['GroupName']		= "g";
-$T['tab_infos']['CellName']			= "c";
-$T['tab_infos']['DocumentName']		= "d";
-$T['tab_infos']['cell_1_txt']		= $i18nDoc['tab1'];
+$T['ContentInfos']['EnableTabs']		= 1;
+$T['ContentInfos']['NbrOfTabs']		= 1;
+$T['ContentInfos']['TabBehavior']		= 1;
+$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['HighLightType']	= 0;
+$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'tab_y' )-256;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+$T['ContentInfos']['GroupName']		= "g";
+$T['ContentInfos']['CellName']			= "c";
+$T['ContentInfos']['DocumentName']		= "d";
+$T['ContentInfos']['cell_1_txt']		= $i18nDoc['tab1'];
 
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 

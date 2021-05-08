@@ -43,36 +43,35 @@ $bts->LMObj->logCheckpoint("uni_keyword_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
-		"col_1_txt"		=> "Nom",
-		"col_2_txt"		=> "Type",
-		"col_3_txt"		=> "Etat",
-		"tabTxt1"		=> "Informations",
-		"kwState0"		=> "Hors ligne",
-		"kwState1"		=> "En ligne",
-		"kwType1"		=> "Vers une category",
-		"kwType2"		=> "Vers une URL",
-		"kwType3"		=> "Tooltip",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage keywords.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Type",
-		"col_3_txt"		=> "State",
-		"tabTxt1"		=> "Informations",
-		"kwState0"		=> "Offline",
-		"kwState0"		=> "Online",
-		"kwType1"		=> "Link to a category",
-		"kwType2"		=> "Link to an URL",
-		"kwType3"		=> "Tooltip",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Type",
+			"col_3_txt"		=> "Etat",
+			"tabTxt1"		=> "Informations",
+			"kwState0"		=> "Hors ligne",
+			"kwState1"		=> "En ligne",
+			"kwType1"		=> "Vers une category",
+			"kwType2"		=> "Vers une URL",
+			"kwType3"		=> "Tooltip",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage keywords.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Type",
+			"col_3_txt"		=> "State",
+			"tabTxt1"		=> "Informations",
+			"kwState0"		=> "Offline",
+			"kwState0"		=> "Online",
+			"kwType1"		=> "Link to a category",
+			"kwType2"		=> "Link to an URL",
+			"kwType3"		=> "Tooltip",
+		)
+	)
+);
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
@@ -84,16 +83,16 @@ if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) >
 $dbquery = $bts->SDDMObj->query("
 SELECT *  
 FROM ".$SqlTableListObj->getSQLTableName('keyword')." 
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND keyword_state != '2' 
 ".$clause." 
 ;");
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
-	$T['AD']['1'][$i]['2']['cont'] = "";
-	$T['AD']['1'][$i]['3']['cont'] = "";
+	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
+	$T['Content']['1'][$i]['2']['cont'] = "";
+	$T['Content']['1'][$i]['3']['cont'] = "";
 }
 else {
 	
@@ -107,25 +106,25 @@ else {
 			3	=> $bts->I18nTransObj->getI18nTransEntry('kwType3'),
 	);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
+		$T['Content']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?
 		&amp;M_MOTCLE[keyword_selection]=".$dbp['keyword_id'].
 		"&amp;M_MOTCLE[uni_gestion_des_motcle_p]=2".
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
 		&amp;arti_page=2'
 		>".$dbp['keyword_name']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $tabType[$dbp['keyword_type']];
-		$T['AD']['1'][$i]['3']['cont']	= $tabState[$dbp['keyword_state']];
+		$T['Content']['1'][$i]['2']['cont']	= $tabType[$dbp['keyword_type']];
+		$T['Content']['1'][$i]['3']['cont']	= $tabState[$dbp['keyword_state']];
 	}
 }
 
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

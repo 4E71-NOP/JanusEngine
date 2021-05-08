@@ -330,9 +330,9 @@ $AD['1']['2']['2']['cont'] = $pv['o1l22'];
 $AD['1']['3']['2']['cont'] = $pv['o1l32'];
 $AD['1']['4']['2']['cont'] = $pv['o1l42'];
 
-$ADC['onglet']['1']['nbr_ligne'] = 4;
-$ADC['onglet']['1']['nbr_cellule'] = 2;
-$ADC['onglet']['1']['legende'] = 2;
+$ADC['tabs']['1']['NbrOfLines'] = 4;
+$ADC['tabs']['1']['NbrOfCells'] = 2;
+$ADC['tabs']['1']['TableCaptionPos'] = 2;
 
 $tl_['eng']['onglet1'] = "Informations";
 $tl_['fra']['onglet1'] = "Informations";

@@ -28,10 +28,11 @@ class ModuleLogo {
 		$bts->MapperObj->setSqlApplicant("ModuleLogo");
 		
 		$l = $CurrentSetObj->getDataEntry('language');
-		$i18n = array();
-		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$bts->I18nTransObj->apply($i18n);
-		unset ($i18n);
+		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
+		// $i18n = array();
+		// include ($infos['module']['module_directory']."/i18n/".$l.".php");
+		// $bts->I18nTransObj->apply($i18n);
+		// unset ($i18n);
 		$Content = "";
 		
 		$Content .= "

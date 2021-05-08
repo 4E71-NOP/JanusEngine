@@ -204,7 +204,7 @@ if ( $user['group_tag'] == 3 ) {
 		$AD['1'][$pv['i']]['1']['cont'] = $tl_[$l]['dp_text'];
 		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['categorys']];
 
-		$ADC['onglet']['1']['nbr_ligne'] = $pv['i'];	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 1;
+		$ADC['tabs']['1']['NbrOfLines'] = $pv['i'];	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 1;
 		$tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";
 
 		$tab_infos['AffOnglet']			= 1;

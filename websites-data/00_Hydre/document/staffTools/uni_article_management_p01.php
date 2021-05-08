@@ -49,62 +49,61 @@ $bts->LMObj->logCheckpoint("uni_article_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_article_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
-		"col_1_txt"		=> "Nom",
-		"col_2_txt"		=> "Pages",
-		"col_3_txt"		=> "Langage",
-		"col_4_txt"		=> "Bouclage",
-		"tabTxt1"		=> "Informations",
-		"boucl0"		=> "Choisissez un deadline",
-		"caption"		=> "Recherche",
-		"c1l1"			=> "Nom contient",
-		"c1l2"			=> "Langue",
-		"c1l3"			=> "Bouclage",
-		
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to modify articles.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Pages",
-		"col_3_txt"		=> "Language",
-		"col_4_txt"		=> "Deadline",
-		"tabTxt1"		=> "Informations",
-		"boucl0"		=> "Choose a deadline",
-		"caption"		=> "Search",
-		"c1l1"			=> "Name contains",
-		"c1l2"			=> "Language",
-		"c1l3"			=> "Dead line",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Pages",
+			"col_3_txt"		=> "Langage",
+			"col_4_txt"		=> "Bouclage",
+			"tabTxt1"		=> "Informations",
+			"deadline0"		=> "Choisissez une deadline",
+			"caption"		=> "Recherche",
+			"c1l1"			=> "Nom contient",
+			"c1l2"			=> "Langue",
+			"c1l3"			=> "Bouclage",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to modify articles.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Pages",
+			"col_3_txt"		=> "Language",
+			"col_4_txt"		=> "Deadline",
+			"tabTxt1"		=> "Informations",
+			"deadline0"		=> "Choose a deadline",
+			"caption"		=> "Search",
+			"c1l1"			=> "Name contains",
+			"c1l2"			=> "Language",
+			"c1l3"			=> "Dead line",
+		)
+	)
+);
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $langList = $bts->CMObj->getLanguageList();
+$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "langList=" . $bts->StringFormatObj->arrayToString($langList)));
 
 // --------------------------------------------------------------------------------------------
 //	Form
 // --------------------------------------------------------------------------------------------
-
 if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLlang')) > 0 ) { $langList[$bts->RequestDataObj->getRequestDataEntry('SQLlang')]['s'] = "selected"; }
 else { $langList[$CurrentSetObj->getDataEntry('language_id')]['s'] = "selected"; }
 
 $listDeadline = array(
-		0 => array(
-				'id' => 0,
-				'deadline_title' => $bts->I18nTransObj->getI18nTransEntry('boucl0'),
-		),
+	0 => array(
+		'id' => 0,
+		'deadline_title' => $bts->I18nTransObj->getI18nTransEntry('deadline0'),
+	),
 );
 
 $dbquery = $bts->SDDMObj->query("
-SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM ".$SqlTableListObj->getSQLTableName('deadline')."
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM "
+.$SqlTableListObj->getSQLTableName('deadline')
+." WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['deadline_id'];
@@ -130,33 +129,34 @@ $Content .= "
 <tr>\r
 <td colspan='2'>".$bts->I18nTransObj->getI18nTransEntry('caption')."</td>\r
 </tr>\r
-		
+
 <tr>\r
 <td>".$bts->I18nTransObj->getI18nTransEntry('c1l1')."</td>\r
 <td><input type='text' name='articleForm[SQLnom]' size='15' value='".$bts->RequestDataObj->getRequestDataEntry('SQLnom')."' class='".$Block."_t3 " . $Block."_form_1'></td>\r
 </tr>\r
-		
+
 <tr>\r
 <td>".$bts->I18nTransObj->getI18nTransEntry('c1l2')."</td>\r
 <td><select name='articleForm[SQLlang]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 // unset ( $A , $B );
+reset( $langList );
 foreach ( $langList as $k => $v ) {
 	if ( !is_numeric($k) ) {
-		if ( $v['support'] == 1 ) { $Content .= "<option value='".$v['lang_639_3']."' ".$v['s']."> ".$v['lang_original_name']." </option>\r"; }
+		if ( $v['support'] == 1 ) { $Content .= "<option value='".$v['lang_639_3']."' ".$v['s'].">".$v['lang_original_name']."</option>\r"; }
 	}
 }
 $Content .= "</select>
 </td>\r
 </tr>\r
-		
+
 <tr>\r
 <td>".$bts->I18nTransObj->getI18nTransEntry('c1l3')."</td>\r
 <td><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
 ";
 unset ( $A , $B );
 foreach ( $listDeadline as $A ) {
-	$Content .= "<option value='".$A['id']."' ".$A['selected'].">".$A['deadline_title']."/".$A['deadline_name']."</option>\r";
+	$Content .= "<option value='".$A['id']."' ".$A['selected'].">".$A['deadline_title']." / ".$A['deadline_name']."</option>\r";
 }
 $Content .= "</select></tr>\r
 </table>\r
@@ -191,20 +191,26 @@ $sqlClause = "";
 
 if ( $articleFormData['action'] == "AFFICHAGE" ) {
 	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_name LIKE '%".$articleFormData['SQLnom']."%'"; }
-	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.lang_id = '".$articleFormData['SQLlang']."'"; }
+	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.fk_lang_id = '".$articleFormData['SQLlang']."'"; }
 	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
 }
 
 
 $dbquery = $bts->SDDMObj->query("
-SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page , cat.lang_id, bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat, ".$SqlTableListObj->getSQLTableName('deadline')." bcl
-WHERE art.arti_ref = cat.arti_ref
-AND art.deadline_id = bcl.deadline_id
+SELECT 
+art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, 
+cat.fk_lang_id, 
+bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
+FROM "
+.$SqlTableListObj->getSQLTableName('article')." art, "
+.$SqlTableListObj->getSQLTableName('category')." cat, "
+.$SqlTableListObj->getSQLTableName('deadline')." bcl
+WHERE art.arti_ref = cat.fk_arti_ref
+AND art.fk_deadline_id = bcl.deadline_id
 
-AND art.ws_id = bcl.ws_id
-AND bcl.ws_id = cat.ws_id
-AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND art.fk_ws_id = bcl.fk_ws_id
+AND bcl.fk_ws_id = cat.fk_ws_id
+AND cat.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
 AND cat.cate_state != '2'
 AND cat.cate_type IN ('1','0')
@@ -235,10 +241,10 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	
 	unset ($A,$B);
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	
 	$linkId1 = "<a href='".
 	$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
@@ -258,16 +264,16 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 		$articlePageLink = "";
 		unset ($B);
 		foreach ( $A as $B ) {
-			$T['AD']['1'][$i]['1']['cont'] = $B['arti_ref'];
+			$T['Content']['1'][$i]['1']['cont'] = $B['arti_ref'];
 			$articlePageLink .= $linkId1.$B['arti_ref'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
 			$articlePageLink .= " - ";
-			$T['AD']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
-// 			$T['AD']['1'][$i]['3']['tc'] = 1;
-			$T['AD']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
-// 			$T['AD']['1'][$i]['4']['tc'] = 1;
+			$T['Content']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
+// 			$T['Content']['1'][$i]['3']['tc'] = 1;
+			$T['Content']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
+// 			$T['Content']['1'][$i]['4']['tc'] = 1;
 		}
 		$articlePageLink = substr ( $articlePageLink , 0 , -3 );
-		$T['AD']['1'][$i]['2']['cont'] = $articlePageLink;
+		$T['Content']['1'][$i]['2']['cont'] = $articlePageLink;
 	}
 }
 // --------------------------------------------------------------------------------------------
@@ -276,8 +282,8 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,4,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

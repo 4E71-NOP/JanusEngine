@@ -72,27 +72,27 @@ $currentUserObj = new User();
 $currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('publicProfil', 'userLogin'), $WebSiteObj);
 
 $T = array();
-$T['AD']['1']['1']['1']['cont'] = $i18nDoc['l_1_txt'];
-$T['AD']['1']['2']['1']['cont'] = $i18nDoc['l_2_txt'];
-$T['AD']['1']['3']['1']['cont'] = $i18nDoc['l_3_txt'];
+$T['Content']['1']['1']['1']['cont'] = $i18nDoc['l_1_txt'];
+$T['Content']['1']['2']['1']['cont'] = $i18nDoc['l_2_txt'];
+$T['Content']['1']['3']['1']['cont'] = $i18nDoc['l_3_txt'];
 
-$T['AD']['1']['1']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
-$T['AD']['1']['2']['2']['cont'] = "<img src='".$currentUserObj->getUserEntry('user_avatar_image')."' width='128' height='128' alt='Avatar'>";
-$T['AD']['1']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
+$T['Content']['1']['1']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
+$T['Content']['1']['2']['2']['cont'] = "<img src='".$currentUserObj->getUserEntry('user_avatar_image')."' width='128' height='128' alt='Avatar'>";
+$T['Content']['1']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
 $RenderLayoutObj = RenderLayout::getInstance();
-$T['tab_infos']['EnableTabs']		= 1;
-$T['tab_infos']['NbrOfTabs']		= 1;
-$T['tab_infos']['TabBehavior']		= 0;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 0;
-$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['tab_infos']['GroupName']		= "list";
-$T['tab_infos']['CellName']			= "user";
-$T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
+$T['ContentInfos']['EnableTabs']		= 1;
+$T['ContentInfos']['NbrOfTabs']		= 1;
+$T['ContentInfos']['TabBehavior']		= 0;
+$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['HighLightType']	= 0;
+$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+$T['ContentInfos']['GroupName']		= "list";
+$T['ContentInfos']['CellName']			= "user";
+$T['ContentInfos']['DocumentName']		= "doc";
+$T['ContentInfos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
 
-$T['ADC']['onglet']['1']['nbr_ligne']	= 3;	$T['ADC']['onglet']['1']['nbr_cellule']	= 2;	$T['ADC']['onglet']['1']['legende']		= 2;
+$T['ContentCfg']['tabs']['1']['NbrOfLines']	= 3;	$T['ContentCfg']['tabs']['1']['NbrOfCells']	= 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 2;
 
 
 $config = array(

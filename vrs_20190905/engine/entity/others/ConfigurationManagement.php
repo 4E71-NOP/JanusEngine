@@ -44,7 +44,7 @@ class ConfigurationManagement {
 	public function InitBasicSettings () {
 		$this->Configuration['SessionMaxAge'] = 60*60*48;
 	}
-	
+
 	/**
 	 * 
 	 * Load a config file that contains a class/function. This last one will return an array.
@@ -121,7 +121,9 @@ class ConfigurationManagement {
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['fk_lang_id']; }
 				sort ( $TabLangueAdmises );
 				
-				$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language').";");
+				$dbquery = $bts->SDDMObj->query("
+				SELECT * FROM "
+				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language').";");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					$idx = $dbp['lang_id'];
 					$TableRendu = 0;
@@ -132,6 +134,9 @@ class ConfigurationManagement {
 						$this->LanguageList[$dbp['lang_639_3']] = &$this->LanguageList[$idx];
 					}
 				}
+
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "  : Render mode. LanguageList=".$bts->StringFormatObj->arrayToString($this->LanguageList)) );
+
 				break;
 		}
 	}
@@ -141,13 +146,13 @@ class ConfigurationManagement {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$dbquery = $bts->SDDMObj->query("
-			SELECT lw.fk_lang_id
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." s
-			WHERE s.ws_id ='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			AND lw.fk_ws_id = s.ws_id
+			SELECT lw.fk_lang_id FROM "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." w
+			WHERE w.ws_id ='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND lw.fk_ws_id = w.ws_id
 			;");
-		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['lang_id']]['support'] = 1; }
-		
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['fk_lang_id']]['support'] = 1; }
 	}
 	
 	//@formatter:off

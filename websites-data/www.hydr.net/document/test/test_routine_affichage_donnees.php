@@ -12,7 +12,7 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-// $ADC[onglet][$NumO][legende] = 1 top ; 2 left ; 3 right ; 4 bottom ; 5 left&right ; 6 top&bottom
+// $ADC[onglet][$NumO][TableCaptionPos] = 1 top ; 2 left ; 3 right ; 4 bottom ; 5 left&right ; 6 top&bottom
 //	$tab_infos['AffOnglet']			= 0;
 //	$tab_infos['NbrOnglet']			= 1;
 //	$tab_infos['tab_comportement']	= 1;
@@ -30,34 +30,34 @@
 //	$tab_infos['cell_5_txt']		= $tl_[$l]['onglet_5'];
 //	$tab_infos['cell_6_txt']		= $tl_[$l]['onglet_6'];
 //	include ("engine/affichage_donnees.php");
-//	$pv['onglet']++;
-//	$ADC['onglet'][$pv['onglet']]['nbr_ligne'] = 5;	$ADC['onglet'][$pv['onglet']]['nbr_cellule'] = 4;	$ADC['onglet'][$pv['onglet']]['legende'] = 1;
+//	$pv['tabs']++;
+//	$ADC['tabs'][$pv['tabs']]['NbrOfLines'] = 5;	$ADC['tabs'][$pv['tabs']]['NbrOfCells'] = 4;	$ADC['tabs'][$pv['tabs']]['TableCaptionPos'] = 1;
 //	$lt = 1;
 
-//	$pv['onglet'] = 1;
+//	$pv['tabs'] = 1;
 //	$lt = 1;
 
-//	$AD[$pv['onglet']][$lt]['1']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['2']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['3']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['4']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['5']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['6']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['7']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['8']['cont'] = "";
-//	$AD[$pv['onglet']][$lt]['9']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['1']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['2']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['3']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['4']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['5']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['6']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['7']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['8']['cont'] = "";
+//	$AD[$pv['tabs']][$lt]['9']['cont'] = "";
 
-//	$AD[$pv['onglet']][$lt]['9']['cc'] = "";							// Definit la légende en fonction de $ADC['onglet'][$NumO]['legende']
-//	$AD[$pv['onglet']][$lt]['9']['tc'] = "";							// Taille texte
-//	$AD[$pv['onglet']][$lt]['9']['sc'] = "";							// Style du fond de cellule choisi (numéroté pour clair/sombre etc)
-//	$AD[$pv['onglet']][$lt]['9']['style'] = 'text_align: justify;';		// Insère les définitions de style demandées.
-//	$AD[$pv['onglet']][$lt]['9']['class'] = 'theme_princ_B03_t2';		// Insère les définitions de class CSS demandées.
-//	$AD[$pv['onglet']][$lt]['9']['colspan']	= x;						// = colspan
-//	$AD[$pv['onglet']][$lt]['9']['rowspan'] = x;						// = rowspan
-//	$AD[$pv['onglet']][$lt]['9']['desactive'] = 1;						// pas de traitement
+//	$AD[$pv['tabs']][$lt]['9']['cc'] = "";							// Definit la légende en fonction de $ADC['tabs'][$NumO]['TableCaptionPos']
+//	$AD[$pv['tabs']][$lt]['9']['tc'] = "";							// Taille texte
+//	$AD[$pv['tabs']][$lt]['9']['sc'] = "";							// Style du fond de cellule choisi (numéroté pour clair/sombre etc)
+//	$AD[$pv['tabs']][$lt]['9']['style'] = 'text_align: justify;';		// Insère les définitions de style demandées.
+//	$AD[$pv['tabs']][$lt]['9']['class'] = 'theme_princ_B03_t2';		// Insère les définitions de class CSS demandées.
+//	$AD[$pv['tabs']][$lt]['9']['colspan']	= x;						// = colspan
+//	$AD[$pv['tabs']][$lt]['9']['rowspan'] = x;						// = rowspan
+//	$AD[$pv['tabs']][$lt]['9']['desactive'] = 1;						// pas de traitement
 
 
-$pv['onglet'] = 4;
+$pv['tabs'] = 4;
 $pv['ligne'] = 20;
 $pv['Cell'] = 5;
 
@@ -76,13 +76,13 @@ $pv['tabS'] = array (
 );
 $pv['S'] = $pv['tabS'][$pv['F_S']];
 
-for ( $pv['i'] = 1 ; $pv['i'] <= $pv['onglet'] ; $pv['i']++ ) {
+for ( $pv['i'] = 1 ; $pv['i'] <= $pv['tabs'] ; $pv['i']++ ) {
 
-	$ADC['onglet'][$pv['i']]['nbr_ligne'] = $pv['ligne'];
+	$ADC['tabs'][$pv['i']]['NbrOfLines'] = $pv['ligne'];
 	$pv['tc'] = $pv['tabTC'][$pv['F_TC']];
 
 	for ( $pv['j'] = 1 ; $pv['j'] <= $pv['ligne'] ; $pv['j']++ ) {
-		$ADC['onglet'][$pv['i']]['nbr_cellule'] = $pv['Cell'];
+		$ADC['tabs'][$pv['i']]['NbrOfCells'] = $pv['Cell'];
 		$pv['F_S'] = 0;
 		for ( $pv['k'] = 1 ; $pv['k'] <= $pv['Cell']  ; $pv['k']++ ) {
 			$pv['S'] = $pv['tabS'][$pv['F_S']];
@@ -107,17 +107,17 @@ $AD['1']['9']['1']['colspan'] = 3;
 $AD['1']['10']['1']['rowspan'] = 3;
 
 /*
-$ADC['onglet']['1']['theadD'] = 1;
-$ADC['onglet']['1']['theadF'] = 1;
-$ADC['onglet']['1']['tbodyD'] = 2;
-$ADC['onglet']['1']['tbodyF'] = 20;
-$ADC['onglet']['1']['tfootD'] = 0;
-$ADC['onglet']['1']['tfootF'] = 0;
+$ADC['tabs']['1']['theadD'] = 1;
+$ADC['tabs']['1']['theadF'] = 1;
+$ADC['tabs']['1']['tbodyD'] = 2;
+$ADC['tabs']['1']['tbodyF'] = 20;
+$ADC['tabs']['1']['tfootD'] = 0;
+$ADC['tabs']['1']['tfootF'] = 0;
 */
-$ADC['onglet']['1']['legende'] = 1;
-$ADC['onglet']['2']['legende'] = 2;
-$ADC['onglet']['3']['legende'] = 3;
-$ADC['onglet']['4']['legende'] = 4;
+$ADC['tabs']['1']['TableCaptionPos'] = 1;
+$ADC['tabs']['2']['TableCaptionPos'] = 2;
+$ADC['tabs']['3']['TableCaptionPos'] = 3;
+$ADC['tabs']['4']['TableCaptionPos'] = 4;
 
 $tab_infos['AffOnglet']			= 1;
 $tab_infos['NbrOnglet']			= 4;

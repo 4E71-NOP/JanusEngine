@@ -77,7 +77,7 @@ ft1_width	'32'	ft3_width	'32'	ft_height	'64'
 							
 icon_directory	'aqua_B01_icone_repertoire.png'	icon_erase	'aqua_B01_icone_efface.png'				
 icon_ok	'aqua_B01_icone_ok.png'	icon_nok	'aqua_B01_icone_nok.png'				
-icon_left	'aqua_B01_icone_gauche.png'	icon_right	'aqua_B01_icone_droite.png'	icon_top	'aqua_B01_icone_haut.png'	icon_bottom	'aqua_B01_icone_bas.png'
+icon_left	'aqua_B01_icone_fleche_gauche.png'	icon_right	'aqua_B01_icone_fleche_droite.png'	icon_top	'aqua_B01_icone_fleche_haut.png'	icon_bottom	'aqua_B01_icone_fleche_bas.png'
 icon_question	'aqua_B01_icone_question.png'	icon_notification	'aqua_B01_icone_notification.png'				
 transparent_8x8	'empty.gif'						
 icon_width	'32'						

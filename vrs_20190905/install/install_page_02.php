@@ -46,9 +46,10 @@
 // --------------------------------------------------------------------------------------------
 
 $installationStartTime = time();
-include ("current/install/i18n/install_page_02_".$l.".php");
-$bts->I18nTransObj->apply($i18n);
-unset ($i18n);
+// include ("current/install/i18n/install_page_02_".$l.".php");
+// $bts->I18nTransObj->apply($i18n);
+$bts->I18nTransObj->apply(array( "type" => "file", "file" => "current/install/i18n/install_page_02_".$l.".php", "format" => "php" ) );
+// unset ($i18n);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -348,41 +349,41 @@ $style2 = array (
 );
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'] = array();
+$T['ContentCfg']['tabs'] = array();
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2 ,4,6);
-$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_creation']		, $style1 );
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2 ,4,6);
+$T['Content'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_creation']		, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2 ,4,6);
-$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_data']			, $style1 );
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2 ,4,6);
+$T['Content'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_data']			, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2 ,4,6);
-$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['script']				, $style1 );
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2 ,4,6);
+$T['Content'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['script']				, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2 ,4,6);
-$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_post_install']	, $style1 );
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2 ,4,6);
+$T['Content'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['tables_post_install']	, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['raw_sql'])+2 ,4,6);
-$T['AD'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['raw_sql']	, $style1 );
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['raw_sql'])+2 ,4,6);
+$T['Content'][$CurrentTab] = $LibInstallationReportObj->renderReport( $installationReport['raw_sql']	, $style1 );
 $CurrentTab++;
 
 // --------------------------------------------------------------------------------------------
 $tmp = $LibInstallationReportObj->renderPerfomanceReport();
-$T['AD'][$CurrentTab] = $tmp['content'];
-$T['ADC']['onglet'] [$CurrentTab]= $tmp['config'];
+$T['Content'][$CurrentTab] = $tmp['content'];
+$T['ContentCfg']['tabs'] [$CurrentTab]= $tmp['config'];
 unset ($tmp);
 
 // error_log ("adcTab06: " . $bts->StringFormatObj->arrayToString($adcTab06));
-// error_log ("\$T['AD'][\$CurrentTab]: " . $bts->StringFormatObj->arrayToString($T['AD'][$CurrentTab]));
+// error_log ("\$T['Content'][\$CurrentTab]: " . $bts->StringFormatObj->arrayToString($T['Content'][$CurrentTab]));
 $CurrentTab++;
 // --------------------------------------------------------------------------------------------
 $SB = array();
@@ -396,13 +397,13 @@ $SB['mode']				= 1;
 $SB['size'] 			= 92;
 $SB['lastSize']			= 92;
 
-$T['ADC']['onglet'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1 ,4,6);
-$T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5c1');
+$T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1 ,4,6);
+$T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5c1');
 $Cl = 2;
 foreach ($tabConfigFile as $A ) {
 	$SB['id']		=	"SelectBtn".$A['name'];
 	$SB['onclick']	=	"elm.Gebi('txtConfig_".$A['name']."').select()";
-	$T['AD'][$CurrentTab][$Cl]['1']['cont'] = 
+	$T['Content'][$CurrentTab][$Cl]['1']['cont'] = 
 			"
 			<table style=' width:".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-32)."px; border-spacing: 4px;'>\r
 			<tr>\r
@@ -424,7 +425,7 @@ foreach ($tabConfigFile as $A ) {
 			;
 	$Cl++;
 }
-$ADC['onglet'][$CurrentTab]['nbr_ligne'] = $Cl-1;
+$ADC['tabs'][$CurrentTab]['NbrOfLines'] = $Cl-1;
 $CurrentTab++;
 
 
@@ -469,18 +470,18 @@ $infos = array(
 );
 
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, $CurrentTab-1);
-$T['tab_infos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
-$T['tab_infos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
-$T['tab_infos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');
-$T['tab_infos']['tabTxt4']			= $bts->I18nTransObj->getI18nTransEntry('tab_4');
-$T['tab_infos']['tabTxt5']			= $bts->I18nTransObj->getI18nTransEntry('tab_5');
-$T['tab_infos']['tabTxt6']			= $bts->I18nTransObj->getI18nTransEntry('tab_6');
-$T['tab_infos']['tabTxt7']			= $bts->I18nTransObj->getI18nTransEntry('tab_7');
-$T['tab_infos']['tabTxt8']			= $bts->I18nTransObj->getI18nTransEntry('tab_8');
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, $CurrentTab-1);
+$T['ContentInfos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
+$T['ContentInfos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
+$T['ContentInfos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');
+$T['ContentInfos']['tabTxt4']			= $bts->I18nTransObj->getI18nTransEntry('tab_4');
+$T['ContentInfos']['tabTxt5']			= $bts->I18nTransObj->getI18nTransEntry('tab_5');
+$T['ContentInfos']['tabTxt6']			= $bts->I18nTransObj->getI18nTransEntry('tab_6');
+$T['ContentInfos']['tabTxt7']			= $bts->I18nTransObj->getI18nTransEntry('tab_7');
+$T['ContentInfos']['tabTxt8']			= $bts->I18nTransObj->getI18nTransEntry('tab_8');
 
 
-// $T['ADC']['onglet'] = array(
+// $T['ContentCfg']['tabs'] = array(
 // 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
 // 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
 // 		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),

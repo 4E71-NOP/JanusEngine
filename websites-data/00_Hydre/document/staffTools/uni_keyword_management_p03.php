@@ -111,9 +111,9 @@ $PF_['1']['5']['2']['cont'] = "<input type='text' name='M_MOTCLE[nombre]' size='
 $PF_['1']['6']['2']['cont'] = $pv['o1_l6'];
 $PF_['1']['7']['2']['cont'] = "<input type='text' name='M_MOTCLE[donnee]' size='35' maxlength='255' value='".$info_mc_['keyword_data']."' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
 
-$PFC_['onglet']['1']['nbr_ligne'] = 7;
-$PFC_['onglet']['1']['nbr_cellule'] = 2;
-$PFC_['onglet']['1']['legende'] = 2;
+$PFC_['tabs']['1']['NbrOfLines'] = 7;
+$PFC_['tabs']['1']['NbrOfCells'] = 2;
+$PFC_['tabs']['1']['TableCaptionPos'] = 2;
 
 $tl_['eng']['onglet1'] = "Informations";
 $tl_['fra']['onglet1'] = "Informations";

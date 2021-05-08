@@ -48,7 +48,7 @@ $AD['1']['2']['1']['cont'] = $tl_[$l]['po1l2'];
 $AD['1']['3']['1']['cont'] = $tl_[$l]['po1l3'];
 $AD['1']['4']['1']['cont'] = $tl_[$l]['po1l4'];
 
-$ADC['onglet']['1']['nbr_ligne'] = 4;	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 2;
+$ADC['tabs']['1']['NbrOfLines'] = 4;	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 2;
 
 $tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";
 
@@ -330,7 +330,7 @@ for ( $pv['ligne'] = 1 ; $pv['ligne'] < $pv['i'] ; $pv['ligne']++ ) {
 	}
 }
 
-$ADC['onglet']['1']['nbr_ligne'] = ( $pv['i'] - 1 );	$ADC['onglet']['1']['nbr_cellule'] = 2;	$ADC['onglet']['1']['legende'] = 2;
+$ADC['tabs']['1']['NbrOfLines'] = ( $pv['i'] - 1 );	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 2;
 
 $tab_infos['AffOnglet']			= 1;
 $tab_infos['NbrOnglet']			= 1;

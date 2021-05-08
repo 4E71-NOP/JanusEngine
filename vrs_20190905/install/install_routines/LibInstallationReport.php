@@ -159,9 +159,9 @@ class LibInstallationReport {
 		$Content[$i]['5']['cont'] = $SQLQueries;					$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
 		
 		$config = array(
-				"nbr_ligne" => $i,
-				"nbr_cellule" => 5,
-				"legende" => 1,
+				"NbrOfLines" => $i,
+				"NbrOfCells" => 5,
+				"TableCaptionPos" => 1,
 		);
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;

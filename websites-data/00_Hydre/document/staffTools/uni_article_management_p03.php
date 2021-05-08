@@ -233,18 +233,18 @@ $PF_['3']['3']['2']['cont'] = strftime ("%a %d %b %y - %H:%M", $infos_article['a
 $PF_['4']['1']['2']['cont'] = $pv['PF']['o4l1'];
 $PF_['4']['2']['2']['cont'] = $pv['PF']['o4l2'];
 
-$PFC_['onglet']['1']['nbr_ligne'] = 5;
-$PFC_['onglet']['1']['nbr_cellule'] = 2;
-$PFC_['onglet']['1']['legende'] = 2;
-$PFC_['onglet']['2']['nbr_ligne'] = 3;
-$PFC_['onglet']['2']['nbr_cellule'] = 2;
-$PFC_['onglet']['2']['legende'] = 2;
-$PFC_['onglet']['3']['nbr_ligne'] = 3;
-$PFC_['onglet']['3']['nbr_cellule'] = 2;
-$PFC_['onglet']['3']['legende'] = 2;
-$PFC_['onglet']['4']['nbr_ligne'] = 2;
-$PFC_['onglet']['4']['nbr_cellule'] = 2;
-$PFC_['onglet']['4']['legende'] = 2;
+$PFC_['tabs']['1']['NbrOfLines'] = 5;
+$PFC_['tabs']['1']['NbrOfCells'] = 2;
+$PFC_['tabs']['1']['TableCaptionPos'] = 2;
+$PFC_['tabs']['2']['NbrOfLines'] = 3;
+$PFC_['tabs']['2']['NbrOfCells'] = 2;
+$PFC_['tabs']['2']['TableCaptionPos'] = 2;
+$PFC_['tabs']['3']['NbrOfLines'] = 3;
+$PFC_['tabs']['3']['NbrOfCells'] = 2;
+$PFC_['tabs']['3']['TableCaptionPos'] = 2;
+$PFC_['tabs']['4']['NbrOfLines'] = 2;
+$PFC_['tabs']['4']['NbrOfCells'] = 2;
+$PFC_['tabs']['4']['TableCaptionPos'] = 2;
 
 
 $tl_['eng']['onglet1'] = "Informations";

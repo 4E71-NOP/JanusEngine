@@ -56,8 +56,8 @@ class  RenderTables {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "<!-- Render Table Begin -->\r";
-		if ( $T['tab_infos']['NbrOfTabs'] == 0 ) { $T['tab_infos']['NbrOfTabs'] = 1; }
-		if ( $T['tab_infos']['EnableTabs'] != 0 ) {
+		if ( $T['ContentInfos']['NbrOfTabs'] == 0 ) { $T['ContentInfos']['NbrOfTabs'] = 1; }
+		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
 			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "current/engine/javascript/lib_TabsManagement.js");
 			$Content .= $bts->RenderTabsObj->render($infos, $T); 
@@ -71,9 +71,9 @@ class  RenderTables {
 		// $CurT = Current Tab
 		// $CurL = Current Line
 		// $CurC = Current Cell
-		$ADC = &$T['ADC'];
-		$AD = &$T['AD'];
-		$tab_infos = &$T['tab_infos'];
+		$ADC = &$T['ContentCfg'];
+		$AD = &$T['Content'];
+		$tab_infos = &$T['ContentInfos'];
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
@@ -81,14 +81,14 @@ class  RenderTables {
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['onglet'][$CurT]['legende']));
-			switch ( $ADC['onglet'][$CurT]['legende'] ) {
-				case 1: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_;									break;// top
-				case 2: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_;								break;// left
-				case 3: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_RIGHT_;								break;// right
-				case 4: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_BOTTOM_;								break;// bottom
-				case 5: 	$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_." ".$block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
-				case 6:		$ADC['onglet'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_." ".$block._CLASS_TBL_LGND_BOTTOM_;	break;// top&bottom
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));
+			switch ( $ADC['tabs'][$CurT]['TableCaptionPos'] ) {
+				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_;										break;// top
+				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_;										break;// left
+				case 3: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_RIGHT_;									break;// right
+				case 4: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_BOTTOM_;									break;// bottom
+				case 5: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_." ".$block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
+				case 6:		$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_." ".$block._CLASS_TBL_LGND_BOTTOM_;	break;// top&bottom
 			}
 		}
 		// --------------------------------------------------------------------------------------------
@@ -128,9 +128,9 @@ class  RenderTables {
 			
 			unset ($A);
 			$i = 0;
-			if ( isset($ADC['onglet'][$CurT]['colswidth']) ) {
+			if ( isset($ADC['tabs'][$CurT]['colswidth']) ) {
 				$ListeColWidth = "<colgroup>\r";
-				foreach ( $ADC['onglet'][$CurT]['colswidth'] as $A ) {
+				foreach ( $ADC['tabs'][$CurT]['colswidth'] as $A ) {
 					$ListeColWidth .= "<col span='".$i."' style='width:".floor( $TableWidth * $A )."px;'>\r";
 					$i++;
 				}
@@ -138,13 +138,13 @@ class  RenderTables {
 				if ( $i == 0 ) { $ListeColWidth =""; }
 			}
 			
-			if ( $ADC['onglet'][$CurT]['nbr_ligne'] != 0 ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType']));
-// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['onglet'][".$CurT."]['nbr_ligne']=".$ADC['onglet'][$CurT]['nbr_ligne']."; HighLightType=".$ADC['onglet'][$CurT]['HighLightType'])." ");
+			if ( $ADC['tabs'][$CurT]['NbrOfLines'] != 0 ) {
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType']));
+// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType'])." ");
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
-				if ( isset($ADC['onglet'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['onglet'][$CurT]['HighLightType']; }
+				if ( isset($ADC['tabs'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['tabs'][$CurT]['HighLightType']; }
 
-				$Content .= "<table class='".$block._CLASS_TABLE01_." ".$ADC['onglet'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
+				$Content .= "<table class='".$block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
 					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass = "class='".$AD[$CurT]['caption']['class']."' "; }
@@ -153,10 +153,10 @@ class  RenderTables {
 				}
 				
 				$TRidx = 0;
-				for ( $CurL = 1 ; $CurL <= $ADC['onglet'][$CurT]['nbr_ligne'] ; $CurL++ ) {
-					if ( $CurL == $ADC['onglet'][$CurT]['theadD'] ) { $Content .= "<thead>\r"; }
-					if ( $CurL == $ADC['onglet'][$CurT]['tbodyD'] ) { $Content .= "<tbody style='display:block; width:".$TableWidth."px; height:".($tab_infos['Height']-64)."px; overflow-y:scroll;'>\r"; }		//display:block;
-					if ( $CurL == $ADC['onglet'][$CurT]['tfootD'] ) { $Content .= "<tfoot>\r"; }
+				for ( $CurL = 1 ; $CurL <= $ADC['tabs'][$CurT]['NbrOfLines'] ; $CurL++ ) {
+					if ( $CurL == $ADC['tabs'][$CurT]['theadD'] ) { $Content .= "<thead>\r"; }
+					if ( $CurL == $ADC['tabs'][$CurT]['tbodyD'] ) { $Content .= "<tbody style='display:block; width:".$TableWidth."px; height:".($tab_infos['Height']-64)."px; overflow-y:scroll;'>\r"; }		//display:block;
+					if ( $CurL == $ADC['tabs'][$CurT]['tfootD'] ) { $Content .= "<tfoot>\r"; }
 					
 					$trLink = "";
 					if (isset($AD[$CurT][$CurL]['link'])) { $trLink = "onclick=\"document.location = '".$AD[$CurT][$CurL]['link']."';\""; }
@@ -167,7 +167,7 @@ class  RenderTables {
 					$Content .= $strTR;
 					
 					$TRidx = $TRidx;
-					for ( $CurC = 1 ; $CurC <= $ADC['onglet'][$CurT]['nbr_cellule'] ; $CurC++ ) {
+					for ( $CurC = 1 ; $CurC <= $ADC['tabs'][$CurT]['NbrOfCells'] ; $CurC++ ) {
 						if ( $AD[$CurT][$CurL][$CurC]['desactive'] == 0 ) {
 							
 							$strDeco = " class='";
@@ -206,9 +206,9 @@ class  RenderTables {
 						$TRidx ^= 1;
 					}
 					$Content .= "</tr>\r";
-					if ( $CurL == $ADC['onglet'][$CurT]['theadF'] ) { $Content .= "</thead>\r"; }
-					if ( $CurL == $ADC['onglet'][$CurT]['tbodyF'] ) { $Content .= "</tbody>\r"; }
-					if ( $CurL == $ADC['onglet'][$CurT]['tfootF'] ) { $Content .= "</tfoot>\r"; }
+					if ( $CurL == $ADC['tabs'][$CurT]['theadF'] ) { $Content .= "</thead>\r"; }
+					if ( $CurL == $ADC['tabs'][$CurT]['tbodyF'] ) { $Content .= "</tbody>\r"; }
+					if ( $CurL == $ADC['tabs'][$CurT]['tfootF'] ) { $Content .= "</tfoot>\r"; }
 					$TRidx ^= 1;
 				}
 				$Content .= "</table>\r";
@@ -278,9 +278,9 @@ class  RenderTables {
 	public function getDefaultTableConfig ($lines=10 , $cells=2, $legend=1) {
 		return (
 			array(
-				"nbr_ligne"		=>	$lines,	
-				"nbr_cellule"	=>	$cells,
-				"legende"		=>	$legend,
+				"NbrOfLines"		=>	$lines,	
+				"NbrOfCells"		=>	$cells,
+				"TableCaptionPos"	=>	$legend,
 			)
 		);
 	}

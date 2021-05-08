@@ -142,7 +142,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 
 		$tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_name');
+		$T['Content']['1']['2']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -162,7 +162,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('keywordForm', 'mode')) {
 					"keyword_data"		=>	"",	
 			)
 		);
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
@@ -189,14 +189,14 @@ $Content .= "
 
 // --------------------------------------------------------------------------------------------
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
+$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['Content']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
 
 
 // $tabYN = array(
@@ -218,22 +218,22 @@ $tabState = array(
 );
 
 
-$T['AD']['1']['1']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_id');
+$T['Content']['1']['1']['2']['cont'] = $currentKeyWordObj->getKeyWordEntry('keyword_id');
 
 $tabState[$currentKeyWordObj->getKeyWordEntry('keyword_state')]['s'] = " selected ";
-$T['AD']['1']['3']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabState as $A ) { $T['AD']['1']['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['3']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['3']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabState as $A ) { $T['Content']['1']['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['3']['2']['cont'] .= "</select>\r";
 
 
 $tabArticle_[$currentKeyWordObj->getKeyWordEntry('arti_id')]['s'] = " selected ";
-$T['AD']['1']['4']['2']['cont'] = "<select name='formParams[article]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabArticle_ as $A ) { $T['AD']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['4']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['4']['2']['cont'] = "<select name='formParams[article]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabArticle_ as $A ) { $T['Content']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['4']['2']['cont'] .= "</select>\r";
 
 
-$T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_string')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[string]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_string')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabType = array(
 		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType1'),	"db" => "TO_CATEGORY"),
@@ -241,11 +241,11 @@ $tabType = array(
 		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType3'),	"db" => "TOOLTIP"),
 );
 $tabType[$currentKeyWordObj->getKeyWordEntry('keyword_type')]['s'] = " selected ";
-$T['AD']['1']['7']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabType as $A ) { $T['AD']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['7']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['7']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabType as $A ) { $T['Content']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['7']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_data')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_data')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 // --------------------------------------------------------------------------------------------
 //
@@ -253,8 +253,8 @@ $T['AD']['1']['8']['2']['cont'] .= "<input type='text' name='formParams[data]' s
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 9);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 9);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

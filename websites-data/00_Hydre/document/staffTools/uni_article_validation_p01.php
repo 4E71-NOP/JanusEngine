@@ -86,19 +86,19 @@ AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 $i = 1;
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
-	$T['AD']['1'][$i]['2']['cont'] = "";
-	$T['AD']['1'][$i]['3']['cont'] = "";
-	$T['AD']['1'][$i]['4']['cont'] = "";
+	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
+	$T['Content']['1'][$i]['2']['cont'] = "";
+	$T['Content']['1'][$i]['3']['cont'] = "";
+	$T['Content']['1'][$i]['4']['cont'] = "";
 }
 else {
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= "
+		$T['Content']['1'][$i]['1']['cont']	= "
 		<a class='" . $Block."_lien' href='index.php?
 		&amp;M_ARTICL[arti_id_selection]=".$dbp['arti_id']."
 		&amp;M_ARTICL[arti_ref_selection]=".$dbp['arti_ref']."
@@ -106,14 +106,14 @@ else {
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
 		&amp;arti_page=2'
 		>".$dbp['arti_name']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $dbp['arti_ref'];
-		$T['AD']['1'][$i]['3']['cont']	= $dbp['arti_title'];
-		$T['AD']['1'][$i]['4']['cont']	= $dbp['deadline_name'];
+		$T['Content']['1'][$i]['2']['cont']	= $dbp['arti_ref'];
+		$T['Content']['1'][$i]['3']['cont']	= $dbp['arti_title'];
+		$T['Content']['1'][$i]['4']['cont']	= $dbp['deadline_name'];
 	}
 }
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,4,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

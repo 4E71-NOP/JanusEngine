@@ -167,9 +167,9 @@ if ( $_REQUEST['M_DOCUME']['haxorzfree'] == 1 ) {
 	$AD['1']['4']['2']['cont'] = $document['part_modification'];
 	$AD['1']['5']['2']['cont'] = $pv['o1l52'];
 	
-	$ADC['onglet']['1']['nbr_ligne'] = 5;
-	$ADC['onglet']['1']['nbr_cellule'] = 2;
-	$ADC['onglet']['1']['legende'] = 2;
+	$ADC['tabs']['1']['NbrOfLines'] = 5;
+	$ADC['tabs']['1']['NbrOfCells'] = 2;
+	$ADC['tabs']['1']['TableCaptionPos'] = 2;
 	
 	$tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";
 

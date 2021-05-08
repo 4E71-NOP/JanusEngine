@@ -143,7 +143,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 			$bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionPage')
 		);
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
+		$T['Content']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -176,7 +176,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 					"ws_id"					=>	$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id'),
 				)
 		);
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".time()."\">\r";
+		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewKeyword".time()."\">\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
@@ -211,69 +211,69 @@ $bts->RenderFormObj->renderformHeader('articleForm')
 ;
 
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
-$T['AD']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
+$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['Content']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
+$T['Content']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
 
-$T['AD']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
+$T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
+$T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
+$T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
 
 
-$T['AD']['1']['1']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_id');
-$T['AD']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
-$T['AD']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[reference]',	$currentArticleObj->getArticleEntry('arti_ref'));
-$T['AD']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[title]',		$currentArticleObj->getArticleEntry('arti_title'));
-$T['AD']['1']['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[subtitle]',	$currentArticleObj->getArticleEntry('arti_subtitle') );
-// $T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[reference]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_ref')."\">\r";
-// $T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_title')."\">\r";
-// $T['AD']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_subtitle')."\">\r";
+$T['Content']['1']['1']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_id');
+$T['Content']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
+$T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[reference]',	$currentArticleObj->getArticleEntry('arti_ref'));
+$T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[title]',		$currentArticleObj->getArticleEntry('arti_title'));
+$T['Content']['1']['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams[subtitle]',	$currentArticleObj->getArticleEntry('arti_subtitle') );
+// $T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[reference]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_ref')."\">\r";
+// $T['Content']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_title')."\">\r";
+// $T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_subtitle')."\">\r";
 
 $tabDeadline[$currentArticleObj->getArticleEntry('deadline_id')]['s'] = " selected ";
-$T['AD']['1']['6']['2']['cont'] = "<select name='formParams[deadline]'>\r";
-foreach ( $tabDeadline as $A ) { $T['AD']['1']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['6']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['6']['2']['cont'] = "<select name='formParams[deadline]'>\r";
+foreach ( $tabDeadline as $A ) { $T['Content']['1']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['6']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['7']['2']['cont'] = "<input type='text' name='formParams[page]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_page')."\">\r";
+$T['Content']['1']['7']['2']['cont'] = "<input type='text' name='formParams[page]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_page')."\">\r";
 
 
 $tabLayout[$currentArticleObj->getArticleEntry('layout_generic_name')]['s'] = " selected ";
-$T['AD']['1']['8']['2']['cont'] = "<select name='formParams[layout_generic_name]'>\r";
-foreach ( $tabLayout as $A ) { $T['AD']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['8']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['8']['2']['cont'] = "<select name='formParams[layout_generic_name]'>\r";
+foreach ( $tabLayout as $A ) { $T['Content']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['8']['2']['cont'] .= "</select>\r";
 
 
 
 $tabDocument[$currentArticleObj->getArticleEntry('docu_id')]['s'] = " selected ";
-$T['AD']['1']['9']['2']['cont'] = "<select name='formParams[document]'>\r";
-foreach ( $tabDocument as $A ) { $T['AD']['1']['9']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['9']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['9']['2']['cont'] = "<select name='formParams[document]'>\r";
+foreach ( $tabDocument as $A ) { $T['Content']['1']['9']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['9']['2']['cont'] .= "</select>\r";
 
 // --------------------------------------------------------------------------------------------
-$T['AD']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
-$T['AD']['2']['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
-$T['AD']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
-$T['AD']['2']['4']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
+$T['Content']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
+$T['Content']['2']['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
+$T['Content']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
+$T['Content']['2']['4']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
 
 $tabState = array(
 		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('offline'),	"db" => "OFFLINE"),
 		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('online'),	"db" => "ONLINE"),
 );
 $tabState[$currentArticleObj->getArticleEntry('arti_validation_state')]['s'] = " selected ";
-$T['AD']['2']['5']['2']['cont'] = "<select name='formParams[validation_state]'>\r";
-foreach ( $tabState as $A ) { $T['AD']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['5']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['5']['2']['cont'] = "<select name='formParams[validation_state]'>\r";
+foreach ( $tabState as $A ) { $T['Content']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['5']['2']['cont'] .= "</select>\r";
 
-$T['AD']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_release_date'));
+$T['Content']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_release_date'));
 
 
 // --------------------------------------------------------------------------------------------
@@ -282,8 +282,8 @@ $T['AD']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticle
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );

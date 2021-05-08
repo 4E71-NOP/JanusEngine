@@ -38,44 +38,47 @@ $bts->LMObj->logCheckpoint("uni_module_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_module_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de créer un module.",
-		"invite2"		=> "Cette partie va vous permettre de gérer les modules.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Description",
-		"col_3_txt"		=> "State",
-		"col_4_txt"		=> "Decoration",
-		"col_5_txt"		=> "Habilité à voir",
-		"col_6_txt"		=> "Habilité à utiliser",
-		"col_7_txt"		=> "Panneau d'administration",
-		"tabTxt1"		=> "Informations",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to create a module.",
-		"invite2"		=> "This part will allow you to manage modules.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Description",
-		"col_3_txt"		=> "State",
-		"col_4_txt"		=> "Decoration",
-		"col_5_txt"		=> "Alowed to see",
-		"col_6_txt"		=> "Alowed to use",
-		"col_7_txt"		=> "Administration panel",
-		"tabTxt1"		=> "Informations",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de créer un module.",
+			"invite2"		=> "Cette partie va vous permettre de gérer les modules.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Description",
+			"col_3_txt"		=> "State",
+			"col_4_txt"		=> "Decoration",
+			"col_5_txt"		=> "Habilité à voir",
+			"col_6_txt"		=> "Habilité à utiliser",
+			"col_7_txt"		=> "Panneau d'administration",
+			"tabTxt1"		=> "Informations",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to create a module.",
+			"invite2"		=> "This part will allow you to manage modules.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Description",
+			"col_3_txt"		=> "State",
+			"col_4_txt"		=> "Decoration",
+			"col_5_txt"		=> "Alowed to see",
+			"col_6_txt"		=> "Alowed to use",
+			"col_7_txt"		=> "Administration panel",
+			"tabTxt1"		=> "Informations",
+		)
+	)
+);
+
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $bts->SDDMObj->query("
-SELECT a.module_id,a.module_deco,a.module_deco_nbr,a.module_name,a.module_title,a.module_file,a.module_desc,a.module_group_allowed_to_see,a.module_group_allowed_to_use,a.module_adm_control,b.module_state 
-FROM ".$SqlTableListObj->getSQLTableName('module')." a , ".$SqlTableListObj->getSQLTableName('module_website')." b 
-WHERE a.module_id = b.module_id 
-AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-ORDER BY b.module_position
+SELECT m.module_id,m.module_deco,m.module_deco_nbr,m.module_name,m.module_title,m.module_file,m.module_desc,m.module_group_allowed_to_see,m.module_group_allowed_to_use,m.module_adm_control,
+mw.module_state 
+FROM "
+.$SqlTableListObj->getSQLTableName('module')." m , "
+.$SqlTableListObj->getSQLTableName('module_website')." mw 
+WHERE m.module_id = mw.fk_module_id 
+AND mw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+ORDER BY mw.module_position
 ;");
 
 $groupTab = array();
@@ -106,13 +109,13 @@ $tab_module_deco = array(
 );
 
 $i = 1;
-$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-$T['AD']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
-$T['AD']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
-$T['AD']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
-$T['AD']['1'][$i]['7']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
+$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+$T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+$T['Content']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+$T['Content']['1'][$i]['7']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 
 foreach ( $table_infos_modules AS $A1 ) {
 	$i++;
@@ -123,7 +126,7 @@ foreach ( $table_infos_modules AS $A1 ) {
 	$gpu = $A1['module_group_allowed_to_use'];
 	$gpv = $groupTab[$gpv];
 	$gpu = $groupTab[$gpu];
-	$T['AD']['1'][$i]['1']['cont'] = "
+	$T['Content']['1'][$i]['1']['cont'] = "
 	<a class='".$Block."_lien' href='index.php?"
 	."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
 	."&l=".$CurrentSetObj->getDataEntry('language')
@@ -135,12 +138,12 @@ foreach ( $table_infos_modules AS $A1 ) {
 	.$A1['module_name']
 	."</a>\r";
 
-	$T['AD']['1'][$i]['2']['cont'] = $A1['module_desc'];
-	$T['AD']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
-	$T['AD']['1'][$i]['4']['cont'] = $tab_module_deco[$A3];
-	$T['AD']['1'][$i]['5']['cont'] = $gpv;
-	$T['AD']['1'][$i]['6']['cont'] = $gpu;
-	$T['AD']['1'][$i]['7']['cont'] = $tab_module_deco[$A4];
+	$T['Content']['1'][$i]['2']['cont'] = $A1['module_desc'];
+	$T['Content']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
+	$T['Content']['1'][$i]['4']['cont'] = $tab_module_deco[$A3];
+	$T['Content']['1'][$i]['5']['cont'] = $gpv;
+	$T['Content']['1'][$i]['6']['cont'] = $gpu;
+	$T['Content']['1'][$i]['7']['cont'] = $tab_module_deco[$A4];
 }
 // --------------------------------------------------------------------------------------------
 //
@@ -148,8 +151,8 @@ foreach ( $table_infos_modules AS $A1 ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,7,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

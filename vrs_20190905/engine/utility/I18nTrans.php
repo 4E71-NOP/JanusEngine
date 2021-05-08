@@ -41,11 +41,11 @@ class I18nTrans {
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
 		$dbquery = $bts->SDDMObj->query ("
-		SELECT i18n_name, i18n_text 
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
-		WHERE i18n_package = '".$package."'
-		AND fk_lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
-		");
+			SELECT i18n_name, i18n_text 
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
+			WHERE i18n_package = '".$package."'
+			AND fk_lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
+			");
 		$tab0 = $this->I18nTrans;
 		$tab1 = array();
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) { $tab1[$dbp['i18n_name']] = $dbp['i18n_text']; }
@@ -57,10 +57,41 @@ class I18nTrans {
 	 * @param array $data
 	 */
 	public function apply($data) { 
-		$tab0 = $this->I18nTrans;
-		$this->I18nTrans = array_merge ($tab0, $data);
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		if ( is_array($data)) {
+			$tab0 = $this->I18nTrans;
+			switch ($data['type']){
+				case "array": 
+					if ( is_array($data[$CurrentSetObj->getDataEntry('language')])){
+						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
+						$this->I18nTrans = array_merge ($tab0, $data[$CurrentSetObj->getDataEntry ('language')]);
+					}
+					else {
+						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't merge data. It's not an array."));
+					}
+					break;
+				case "file":
+					switch ($data['format']) {
+						case 'php':
+							$i18n = array();
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading ".$data['file']));
+							include($data['file']); // will create $i18n
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
+							$this->I18nTrans = array_merge ($tab0, $i18n);
+							break;
+						case 'lang':
+							// Some day...
+							break;
+					}
+				break;
+			}
+
+		}
+		
+		if (is_array($file)) {
+		}
 	}
-	
 	
 	//@formatter:off
 	public function getI18nTrans() { return $this->I18nTrans; }

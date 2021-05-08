@@ -101,17 +101,17 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 		}
 		
 		$ligne = 1;
-		$T['AD']['1'][$ligne]['1']['cont']	= "Section";
-		$T['AD']['1'][$ligne]['2']['cont']	= "Article";
+		$T['Content']['1'][$ligne]['1']['cont']	= "Section";
+		$T['Content']['1'][$ligne]['2']['cont']	= "Article";
 		$ligne++;
 		foreach ( $tag_recherche as $A ) {
 			$pv['titre_article'] = 0;
 			foreach ( $A as $B ) {
 				if ( $pv['titre_article'] == 0 ) {
-					$T['AD']['1'][$ligne]['1']['cont']	= "<a class='".$Block."_lien ".$Block."_tb4' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_title']."</a>";
+					$T['Content']['1'][$ligne]['1']['cont']	= "<a class='".$Block."_lien ".$Block."_tb4' href=\"index.php?arti_ref=".$A['arti_ref']."&amp;arti_page=1".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_title']."</a>";
 					$pv['titre_article'] = 1;
 				}
-				$T['AD']['1'][$ligne]['2']['cont'] = "<a class='".$Block."_lien ".$Block."_tb3' href=\"index.php?arti_ref=".$B['arti_ref']."&amp;arti_page=".$B['arti_page'].$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_subtitle']."</a><br>\r";
+				$T['Content']['1'][$ligne]['2']['cont'] = "<a class='".$Block."_lien ".$Block."_tb3' href=\"index.php?arti_ref=".$B['arti_ref']."&amp;arti_page=".$B['arti_page'].$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')."\">".$B['arti_subtitle']."</a><br>\r";
 				switch ( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType') ) {
 					case "A":
 						$pv['taille_extrait'] = 92;
@@ -121,10 +121,10 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 						$pv['extrait'] = "..." . substr ( $B['docu_cont'] , $pv['extrait_debut'] , $pv['taille_extrait'] ) . "...";
 						$pv['expression_remplacante'] = "<span class='".$Block."_avert ".$Block."_tb3'>".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."</span>";
 						$pv['extrait'] = str_replace ( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') , $pv['expression_remplacante'] , $pv['extrait'] );
-						$T['AD']['1'][$ligne]['2']['cont'] .= "<span style='font-style:italic;'>".$pv['extrait']."</span><br>\r<br>\r";
+						$T['Content']['1'][$ligne]['2']['cont'] .= "<span style='font-style:italic;'>".$pv['extrait']."</span><br>\r<br>\r";
 						break;
 					case "T":
-						$T['AD']['1'][$ligne]['2']['cont'] .= "<span style='font-style:italic;'>".$B['arti_ref']." p".$B['arti_page']."</span><br>\r<br>\r";
+						$T['Content']['1'][$ligne]['2']['cont'] .= "<span style='font-style:italic;'>".$B['arti_ref']." p".$B['arti_page']."</span><br>\r<br>\r";
 						break;
 				}
 				$ligne++;
@@ -132,7 +132,7 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 			unset ($B);
 		}
 		
-		$T['ADC']['onglet']['1']['nbr_ligne'] = $ligne-1;	$T['ADC']['onglet']['1']['nbr_cellule'] = 2;	$T['ADC']['onglet']['1']['legende'] = 1;
+		$T['ContentCfg']['tabs']['1']['NbrOfLines'] = $ligne-1;	$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 
 		switch ($l) {
 			case "fra":
@@ -152,17 +152,17 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 		}
 		
 		$RenderLayoutObj = RenderLayout::getInstance();
-		$T['tab_infos']['EnableTabs']		= 1;
-		$T['tab_infos']['NbrOfTabs']		= 1;
-		$T['tab_infos']['TabBehavior']		= 0;
-		$T['tab_infos']['RenderMode']		= 1;
-		$T['tab_infos']['HighLightType']	= 1;
-		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
-		$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-		$T['tab_infos']['GroupName']		= "list";
-		$T['tab_infos']['CellName']			= "grp";
-		$T['tab_infos']['DocumentName']		= "doc";
-		$T['tab_infos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
+		$T['ContentInfos']['EnableTabs']		= 1;
+		$T['ContentInfos']['NbrOfTabs']		= 1;
+		$T['ContentInfos']['TabBehavior']		= 0;
+		$T['ContentInfos']['RenderMode']		= 1;
+		$T['ContentInfos']['HighLightType']	= 1;
+		$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
+		$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+		$T['ContentInfos']['GroupName']		= "list";
+		$T['ContentInfos']['CellName']			= "grp";
+		$T['ContentInfos']['DocumentName']		= "doc";
+		$T['ContentInfos']['cell_1_txt']		= $i18nDoc['cell_1_txt'];
 		
 		$config = array(
 				"mode" => 1,

@@ -30,12 +30,33 @@ class ModuleCalendar {
 		$CurrentSet = CurrentSet::getInstance();
 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-// 		$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-		$l = $CurrentSetObj->getDataEntry ( 'language');
+		$l = $CurrentSetObj->getDataEntry ('language');
 		
-		$i18n = array();
-		include ("modules/initial/Calendar/i18n/".$l.".php");
-	
+		$tabDay = array(
+			1 => "monday",
+			2 => "tuesday",
+			3 => "wetnesday",
+			4 => "thurday",
+			5 => "friday",
+			6 => "saturday",
+			7 => "sunday",
+		);
+		$tabMonth = array (
+			1 => "january",
+			2 => "february",
+			3 => "march",
+			4 => "april",
+			5 => "may",
+			6 => "june",
+			7 => "july",
+			8 => "august",
+			9 => "september",
+			10 => "october",
+			11 => "november",
+			12 => "december",
+			
+		);
+		
 		$CurrentDate = mktime(0,0,0,date('m'), date('d'), date('Y'));
 		$date = array(
 				'day' => date('N', $CurrentDate),
@@ -54,11 +75,11 @@ class ModuleCalendar {
 		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
 						
 		<tr>\r
-		<td style='font-size:150%'>\r".$i18n['day'][$date['day']]."</td>\r
+		<td style='font-size:150%'>\r".$bts->I18nTransObj->getI18nTransEntry($tabDay[$date['day']])."</td>\r
 		<td rowspan='2' style='font-size: ".( $pv['table_height'] - 8 )."px; font-weight: bold; vertical-align: middle;'>\r".$date['number']."</td>\r
 		</tr>\r
 		<tr>\r
-		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TXT_FADE_."'>\r".$i18n['month'][$date['month']]."</td>\r
+		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TXT_FADE_."'>\r".$bts->I18nTransObj->getI18nTransEntry($tabMonth[$date['month']])."</td>\r
 		</tr>\r
 		</table>\r
 		";

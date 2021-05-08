@@ -49,37 +49,37 @@ $bts->LMObj->logCheckpoint("uni_toolset_type_conversion_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_toolset_type_conversion_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"Cette partie va vous permettre de gérer les themes.",
-		"TypeTxt"		=>	"Texte",
-		"TypeHtml"		=>	"HTML (héritage)",
-		"TypeMixed"		=>	"Mixé",
-		"TypePHP"		=>	"PHP",
-		"TypeHydr"		=>	"Hydr",
-		"btn1"			=>	"Convertir",
-		"l1c1"			=>	"Depuis le type",
-		"l1c2"			=>	"Convertir en",
-		"instruction"	=>	"Insérer le texte à convertir",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"This part will allow you to manage themes.",
-		"TypeTxt"		=>	"Text",
-		"TypeHtml"		=>	"HTML (old school)",
-		"TypeMixed"		=>	"Mixed",
-		"TypePHP"		=>	"PHP",
-		"TypeHydr"		=>	"Hydr",
-		"btn1"			=>	"Convert",
-		"l1c1"			=>	"From type",
-		"l1c2"			=>	"Convert to",
-		"instruction"	=>	"Insert here the text you want to convert",
-		));
-		break;
-}
-$bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_ConvertTool.js');
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Cette partie va vous permettre de gérer les themes.",
+			"TypeTxt"		=>	"Texte",
+			"TypeHtml"		=>	"HTML (héritage)",
+			"TypeMixed"		=>	"Mixé",
+			"TypePHP"		=>	"PHP",
+			"TypeHydr"		=>	"Hydr",
+			"btn1"			=>	"Convertir",
+			"l1c1"			=>	"Depuis le type",
+			"l1c2"			=>	"Convertir en",
+			"instruction"	=>	"Insérer le texte à convertir",
+		),
+		"eng" => array(
+			"invite1"		=>	"This part will allow you to manage themes.",
+			"TypeTxt"		=>	"Text",
+			"TypeHtml"		=>	"HTML (old school)",
+			"TypeMixed"		=>	"Mixed",
+			"TypePHP"		=>	"PHP",
+			"TypeHydr"		=>	"Hydr",
+			"btn1"			=>	"Convert",
+			"l1c1"			=>	"From type",
+			"l1c2"			=>	"Convert to",
+			"instruction"	=>	"Insert here the text you want to convert",
+		)
+	)
+);
+
+$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'engine/javascript/lib_ConvertTool.js');
 
 // --------------------------------------------------------------------------------------------
 // Preparation des tables
@@ -87,11 +87,11 @@ $bts->GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript/lib_Co
 // $pv['ttrb'] = &${$theme_tableau}[$infos['blockT']];
 
 $select_type = array();
-$select_type['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeTxt');	$select_type['0']['s'] = "";	$select_type['0']['db'] = "0";
-$select_type['1']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHtml');	$select_type['1']['s'] = "";	$select_type['1']['db'] = "1";
+$select_type['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeTxt');		$select_type['0']['s'] = "";	$select_type['0']['db'] = "0";
+$select_type['1']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHtml');		$select_type['1']['s'] = "";	$select_type['1']['db'] = "1";
 $select_type['2']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeMixed');	$select_type['2']['s'] = "";	$select_type['2']['db'] = "2";
-$select_type['3']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypePHP');	$select_type['3']['s'] = "";	$select_type['3']['db'] = "3";
-$select_type['4']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHydr');	$select_type['4']['s'] = "";	$select_type['4']['db'] = "4";
+$select_type['3']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypePHP');		$select_type['3']['s'] = "";	$select_type['3']['db'] = "3";
+$select_type['4']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeHydr');		$select_type['4']['s'] = "";	$select_type['4']['db'] = "4";
 
 foreach ( $select_type as $A ) { $pv['select_option'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $pv['select_option'] .= "</select>\r";
@@ -119,7 +119,7 @@ $Content .= "
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
 ".$bts->I18nTransObj->getI18nTransEntry('instruction')."<br>\r
-<textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'fonte_size_n3')) * 1.35 )."' rows='5' class='" . $Block."_t3 " . $Block."_form_1'>
+<textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='5'>
 ".$bts->RequestDataObj->getRequestDataSubEntry('CONV', 'cont')."
 </textarea>
 </td>\r
@@ -127,7 +127,7 @@ $Content .= "
 
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
-<textarea name='conv_dst' id='conv_dst' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'fonte_size_n3') * 1.35 ))."' rows='5' class='" . $Block."_t3 " . $Block."_form_1'>
+<textarea name='conv_dst' id='conv_dst' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size') * 1.35 ))."' rows='5'>
 ".
 $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
 "</textarea>

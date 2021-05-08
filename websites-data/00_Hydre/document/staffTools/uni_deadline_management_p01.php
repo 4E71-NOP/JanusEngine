@@ -43,54 +43,55 @@ $bts->LMObj->logCheckpoint("uni_deadline_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_deadline_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les deadlines.",
-		"col_1_txt"		=> "Nom",
-		"col_2_txt"		=> "Etat",
-		"col_3_txt"		=> "Date",
-		"tabTxt1"		=> "Informations",
-		"dlState0"		=> "Hors ligne",
-		"dlState1"		=> "En ligne",
-		"dlState2"		=> "Supprimé",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage deadlines.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Status",
-		"col_3_txt"		=> "Date",
-		"tabTxt1"		=> "Informations",
-		"dlState0"		=> "Offline",
-		"dlState1"		=> "Online",
-		"dlState2"		=> "Deleted",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les deadlines.",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Etat",
+			"col_3_txt"		=> "Date",
+			"tabTxt1"		=> "Informations",
+			"dlState0"		=> "Hors ligne",
+			"dlState1"		=> "En ligne",
+			"dlState2"		=> "Supprimé",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage deadlines.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Status",
+			"col_3_txt"		=> "Date",
+			"tabTxt1"		=> "Informations",
+			"dlState0"		=> "Offline",
+			"dlState1"		=> "Online",
+			"dlState2"		=> "Deleted",
+		)
+	)
+);
 
 // --------------------------------------------------------------------------------------------
 $dbquery = $bts->SDDMObj->query("
-SELECT bcl.*,usr.user_login 
-FROM ".$SqlTableListObj->getSQLTableName('deadline')." bcl , ".$SqlTableListObj->getSQLTableName('user')." usr 
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND usr.user_id = bcl.user_id
+SELECT dl.*,usr.user_login 
+FROM "
+.$SqlTableListObj->getSQLTableName('deadline')." dl , "
+.$SqlTableListObj->getSQLTableName('user')." usr 
+WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND usr.user_id = dl.fk_user_id
 ;");
 
 $T = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
-	$T['AD']['1'][$i]['2']['cont'] = "";
-	$T['AD']['1'][$i]['3']['cont'] = "";
+	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
+	$T['Content']['1'][$i]['2']['cont'] = "";
+	$T['Content']['1'][$i]['3']['cont'] = "";
 }
 else {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 
 	
 	$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="
@@ -109,11 +110,11 @@ else {
 	);
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= $linkId1.$dbp['deadline_id']."'>".$dbp['deadline_title']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $tabState[$dbp['deadline_state']];
-		$T['AD']['1'][$i]['3']['cont']	= date ( "Y m d H:i:s" , $dbp['deadline_end_date']);
-		$T['AD']['1'][$i]['2']['tc']	= 1;
-		$T['AD']['1'][$i]['3']['tc']	= 1;
+		$T['Content']['1'][$i]['1']['cont']	= $linkId1.$dbp['deadline_id']."'>".$dbp['deadline_title']."</a>";
+		$T['Content']['1'][$i]['2']['cont']	= $tabState[$dbp['deadline_state']];
+		$T['Content']['1'][$i]['3']['cont']	= date ( "Y m d H:i:s" , $dbp['deadline_end_date']);
+		$T['Content']['1'][$i]['2']['tc']	= 1;
+		$T['Content']['1'][$i]['3']['tc']	= 1;
 	}
 }
 // --------------------------------------------------------------------------------------------
@@ -122,8 +123,8 @@ else {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

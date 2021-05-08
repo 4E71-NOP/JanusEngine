@@ -34,9 +34,11 @@ class ModuleMenu {
 		
  		$RenderLayoutObj = RenderLayout::getInstance();
  		
- 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
-		$i18n = array();
-		include ($infos['module']['module_directory']."/i18n/".$l.".php");
+ 		// $l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		// $i18n = array();
+		// include ($infos['module']['module_directory']."/i18n/".$l.".php");
+		$l = $CurrentSetObj->getDataEntry ('language');
+		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 		
 		// 20110131 add a column on tab_deco_10_menu = type
 		// the type gives the menu index du menu to find.

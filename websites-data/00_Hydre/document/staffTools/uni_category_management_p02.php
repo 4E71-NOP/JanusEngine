@@ -155,7 +155,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 		$commandType = "update";
 		$currentCategoryObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
 		
-		$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
+		$T['Content']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -182,7 +182,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 				"arti_ref"			=>	"",
 			)
 		);
-		$T['AD']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
@@ -211,27 +211,27 @@ $Content .= "
 // --------------------------------------------------------------------------------------------
 
 
-$T['AD']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['AD']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['AD']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['AD']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['AD']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['AD']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
-$T['AD']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
-$T['AD']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
-$T['AD']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
+$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
+$T['Content']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
+$T['Content']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
 
-$T['AD']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
-$T['AD']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
-$T['AD']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
-$T['AD']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
-$T['AD']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
-$T['AD']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
+$T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
+$T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
+$T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
+$T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
 
-$T['AD']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
-$T['AD']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
-$T['AD']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['AD']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
+$T['Content']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
+$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
 $tabType = array(
@@ -241,9 +241,9 @@ $tabType = array(
 		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('menu_admin'),			"db" => "menu_admin"),
 );
 $tabType[$currentCategoryObj->getCategoryEntry('cate_type')]['s'] = " selected ";
-$T['AD']['1']['5']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabType as $A ) { $T['AD']['1']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['5']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['5']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabType as $A ) { $T['Content']['1']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['5']['2']['cont'] .= "</select>\r";
 
 
 
@@ -252,30 +252,30 @@ $tabState = array(
 		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('online'),	"db" => "ONLINE"),
 );
 $tabState[$currentCategoryObj->getCategoryEntry('cate_state')]['s'] = " selected ";
-$T['AD']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabState as $A ) { $T['AD']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['7']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabState as $A ) { $T['Content']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['7']['2']['cont'] .= "</select>\r";
 
 $tabCategory[$currentCategoryObj->getCategoryEntry('cate_parent')]['s'] = " selected ";
-$T['AD']['1']['8']['2']['cont'] = "<select name='formParams[parent]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabCategory as $A ) { $T['AD']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['1']['8']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['8']['2']['cont'] = "<select name='formParams[parent]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabCategory as $A ) { $T['Content']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['1']['8']['2']['cont'] .= "</select>\r";
 
-$T['AD']['1']['9']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_position');
+$T['Content']['1']['9']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_position');
 // --------------------------------------------------------------------------------------------
 
 
 $tabDeadline[$currentCategoryObj->getCategoryEntry('deadline_id')]['s'] = " selected ";
-$T['AD']['2']['1']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabDeadline as $A ) { $T['AD']['2']['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['1']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['1']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabDeadline as $A ) { $T['Content']['2']['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['1']['2']['cont'] .= "</select>\r";
 
 $tabGroup[$currentCategoryObj->getCategoryEntry('group_id')]['s'] = " selected ";
-$T['AD']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabGroup as $A ) { $T['AD']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['2']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabGroup as $A ) { $T['Content']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['2']['2']['cont'] .= "</select>\r";
 
-$T['AD']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
+$T['Content']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
 
 
 $tabRole = array(
@@ -284,9 +284,9 @@ $tabRole = array(
 		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
 );
 $tabRole[$currentCategoryObj->getCategoryEntry('cate_role')]['s'] = " selected ";
-$T['AD']['2']['4']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabRole as $A ) { $T['AD']['2']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['4']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['4']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabRole as $A ) { $T['Content']['2']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['4']['2']['cont'] .= "</select>\r";
 
 
 $tabYN = array(
@@ -294,16 +294,16 @@ $tabYN = array(
 		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
 $tabYN[$currentCategoryObj->getCategoryEntry('cate_initial_document')]['s'] = " selected ";
-$T['AD']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabYN as $A ) { $T['AD']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['5']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabYN as $A ) { $T['Content']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['5']['2']['cont'] .= "</select>\r";
 
 
 
 $tabArtiRef[$currentCategoryObj->getCategoryEntry('arti_ref')]['s'] = " selected ";
-$T['AD']['2']['6']['2']['cont'] = "<select name='formParams[arti_ref]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabArtiRef as $A ) { $T['AD']['2']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['AD']['2']['6']['2']['cont'] .= "</select>\r";
+$T['Content']['2']['6']['2']['cont'] = "<select name='formParams[arti_ref]' class='".$Block."_t3 ".$Block."_form_1'>\r";
+foreach ( $tabArtiRef as $A ) { $T['Content']['2']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+$T['Content']['2']['6']['2']['cont'] .= "</select>\r";
 
 
 // --------------------------------------------------------------------------------------------
@@ -312,8 +312,8 @@ $T['AD']['2']['6']['2']['cont'] .= "</select>\r";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );

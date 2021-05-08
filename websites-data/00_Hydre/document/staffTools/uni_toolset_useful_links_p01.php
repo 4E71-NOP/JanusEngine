@@ -27,40 +27,40 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$LOG_TARGET = $LMObj->getInternalLogTarget();
-$LMObj->setInternalLogTarget("both");
+// $LOG_TARGET = $LMObj->getInternalLogTarget();
+// $LMObj->setInternalLogTarget("both");
 
 // $RequestDataObj->setRequestDataEntry('script_source',"");
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_outil_url_utiles_p01";
-$MapperObj->AddAnotherLevel($localisation );
-$LMObj->logCheckpoint("uni_outil_url_utiles_p01");
-$MapperObj->RemoveThisLevel($localisation );
-$MapperObj->setSqlApplicant("uni_outil_url_utiles_p01");
+$localisation = " / uni_toolset_useful_links_p01";
+$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->LMObj->logCheckpoint("uni_toolset_useful_links_p01.php");
+$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->setSqlApplicant("uni_toolset_useful_links_p01.php");
 
-switch ($l) {
-	case "fra":
-		$I18nObj->apply(array(
-		"invite1"		=>	"Liste d'URL utiles",
-		"cell_1_txt"			=>	"JavaScript",
-		"cell_2_txt"			=>	"CSS",
-		"cell_3_txt"			=>	"Validation",
-		"cell_4_txt"			=>	"Gratuit",
-		));
-		break;
-	case "eng":
-		$I18nObj->apply(array(
-		"invite1"		=>	"Useful links",
-		"cell_1_txt"			=>	"JavaScript",
-		"cell_2_txt"			=>	"CSS",
-		"cell_3_txt"			=>	"Validation",
-		"cell_4_txt"			=>	"Free Stuff",
-		));
-		break;
-}
 
-$Content .= $I18nObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Liste d'URL utiles",
+			"tabTxt1"		=>	"JavaScript",
+			"tabTxt2"		=>	"CSS",
+			"tabTxt3"		=>	"Validation",
+			"tabTxt4"		=>	"Gratuit",
+		),
+		"eng" => array(
+			"invite1"		=>	"Useful links",
+			"tabTxt1"		=>	"JavaScript",
+			"tabTxt2"		=>	"CSS",
+			"tabTxt3"		=>	"Validation",
+			"tabTxt4"		=>	"Free Stuff",
+		)
+	)
+);
+
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $collection = array(
 	"JavaScript" => array(
@@ -91,48 +91,33 @@ $collection = array(
 
 // --------------------------------------------------------------------------------------------
 $T = array();
-$o = 1;
-unset ( $A );
-foreach ( $collection as $key => &$A ) {
+
+$T['ContentCfg']['tabs'] = array(
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,1,0),
+	2	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,1,0),
+	3	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,1,0),
+	4	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,1,0),
+);
+
+$tab = 1;
+unset ($A);
+reset ($collection);
+foreach ( $collection as $key => $A ) {
 	$i = 1;
 	unset ( $B );
 	foreach ( $A as $B ) {
-		$T['AD'][$o][$i]['1']['cont']	= "<a class='".$Block."_lien' style='display:block;' target='_blank' href='".$B['url']."'>".$B['name']."</a>";
-		$T['AD'][$o][$i]['1']['style']	= "padding:4px;";
+		$T['Content'][$tab][$i]['1']['cont']	= "<a class='".$Block."_lien' style='display:block;' target='_blank' href='".$B['url']."'>".$B['name']."</a>";
+		$T['Content'][$tab][$i]['1']['style']	= "padding:4px;";
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing tab[".$tab."]line[".$i."]/collection[" . $B['name']. ']'));
 		$i++;
+
 	}
-	$T['ADC']['onglet'][$o]['nbr_ligne'] = ($i-1);	$T['ADC']['onglet'][$o]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$o]['legende'] = 0;
-	$o++;
-}
-
-$T['tab_infos']['EnableTabs']		= 1;
-$T['tab_infos']['NbrOfTabs']		= ($o-1);
-$T['tab_infos']['TabBehavior']		= 1;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 0;
-$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['tab_infos']['GroupName']		= "list";
-$T['tab_infos']['CellName']			= "link";
-$T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
-$T['tab_infos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
-$T['tab_infos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
-$T['tab_infos']['cell_4_txt']		= $I18nObj->getI18nTransEntry('cell_4_txt');
-
-$config = array(
-	"mode" => 1,
-	"affiche_module_mode" => "normal",
-	"module_z_index" => 2,
-	"block" => $infos['block'],
-	"blockG" => $infos['block']."G",
-	"blockT" => $infos['block']."T",
-	"deco_type" => 50,
-	"module" => $infos['module'],
-);
-
-$Content .= $RenderTablesObj->render($config, $T);
-
+	$T['ContentCfg']['tabs'][$tab]['NbrOfLines'] = ($i-1);	
+	// $T['ContentCfg']['tabs'][$tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$tab]['TableCaptionPos'] = 0;
+	$tab++;
+}	
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i+1, ($tab-1));
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
 /*Hydr-Content-End*/
 ?>

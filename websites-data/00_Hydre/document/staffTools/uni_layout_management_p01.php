@@ -43,71 +43,73 @@ $bts->LMObj->logCheckpoint("uni_layout_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_layout_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les présentations.",
-		"col_1_txt"		=> "Nom",
-		"col_2_txt"		=> "Nom générique",
-		"col_3_txt"		=> "Theme",
-		"tabTxt1"		=> "Informations",
-		"raf1"			=> "Rien a afficher",
-		"btn1"			=> "Filtrer",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage layouts.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Generic name",
-		"col_3_txt"		=> "Theme",
-		"tabTxt1"		=> "Informations",
-		"raf1"			=> "Nothing to display",
-		"btn1"			=> "Filter",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les présentations.",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Nom générique",
+			"col_3_txt"		=> "Theme",
+			"tabTxt1"		=> "Informations",
+			"raf1"			=> "Rien a afficher",
+			"btn1"			=> "Filtrer",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage layouts.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Generic name",
+			"col_3_txt"		=> "Theme",
+			"tabTxt1"		=> "Informations",
+			"raf1"			=> "Nothing to display",
+			"btn1"			=> "Filter",
+		)
+	)
+);
 
 $Content .="<p>". $bts->I18nTransObj->getI18nTransEntry('invite1')."</p>";
 
 $dbquery = $bts->SDDMObj->query("
-SELECT pr.*, sd.theme_title
-FROM ".$SqlTableListObj->getSQLTableName('layout')." pr, ".$SqlTableListObj->getSQLTableName('layout_theme')." sp, ".$SqlTableListObj->getSQLTableName('theme_website')." ss, ".$SqlTableListObj->getSQLTableName('theme_descriptor')." sd 
-WHERE ss.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND sp.theme_id = ss.theme_id 
-AND ss.theme_id = sd.theme_id
-AND sp.layout_id = pr.layout_id 
-ORDER BY pr.layout_id
+SELECT l.*, td.theme_title
+FROM ".$SqlTableListObj->getSQLTableName('layout')." l, "
+.$SqlTableListObj->getSQLTableName('layout_theme')." lt, "
+.$SqlTableListObj->getSQLTableName('theme_website')." tw, "
+.$SqlTableListObj->getSQLTableName('theme_descriptor')." td 
+WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND lt.fk_theme_id = tw.fk_theme_id 
+AND tw.fk_theme_id = td.theme_id
+AND lt.fk_layout_id = l.layout_id 
+ORDER BY l.layout_id
 ;");
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
-	$T['AD']['1'][$i]['2']['cont'] = "";
-	$T['AD']['1'][$i]['3']['cont'] = "";
+	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
+	$T['Content']['1'][$i]['2']['cont'] = "";
+	$T['Content']['1'][$i]['3']['cont'] = "";
 }
 else {
 	$i = 1;
-	$T['AD']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['AD']['1'][$i]['1']['cont']	= "
+		$T['Content']['1'][$i]['1']['cont']	= "
 		<a class='".$Block."_lien' href='index.php?
 		&amp;uni_gestion_des_layout_p=2
 		&amp;M_PRESNT[layout_id]=".$dbp['layout_id']. 
 		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup').
 		"&amp;arti_page=2'
 		>".$dbp['layout_name']."</a>";
-		$T['AD']['1'][$i]['2']['cont']	= $dbp['layout_title'];
-		$T['AD']['1'][$i]['3']['cont']	= $dbp['theme_title'];
+		$T['Content']['1'][$i]['2']['cont']	= $dbp['layout_title'];
+		$T['Content']['1'][$i]['3']['cont']	= $dbp['theme_title'];
 	}
 }
 
 
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 1);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 1);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

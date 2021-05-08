@@ -31,7 +31,7 @@ class RenderTabs {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$tab_infos = &$T['tab_infos'];
+		$tab_infos = &$T['ContentInfos'];
 		
 		$pv= array();
 		$widthA = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'tab_a_width');

@@ -236,6 +236,19 @@ class StringFormat {
 	}
 	
 	/**
+	 * Return a string strip of caracters that would clutter the logs and make it unreadable.
+	 * @param string $data
+	 * @return string
+	 * 
+	 */
+	public function formatToLog ( $data ) {
+		$tab_rch = array ("\n",	"\t",		"    ",	"   ",	"  ",	);
+		$tab_rpl = array (" ",	" ",		" ",	" ",	" ",	);
+		return str_replace ($tab_rch,$tab_rpl,$data);
+	}
+
+
+	/**
 	 * Return a HTML string to diplay an array in a readable fashion.
 	 * @param array $data
 	 * @param boolean $return_data
@@ -327,7 +340,7 @@ class StringFormat {
 			$a .= " : ";
 			for ($c = 0; $c <= $b; $c++) { $a .= dechex(ord($str[$c])) . " "; }
 		}
-		$data = print_r_html($data);
+		$data = $this->print_r_html($data);
 		if (!$return_data) { echo $data; }
 		else { return $data; }
 	}
@@ -353,7 +366,7 @@ class StringFormat {
 	/**
 	 * Returns a shorter expression
 	 * @param string $expr
-	 * @param number $l0
+	 * @param float $l0
 	 * @return string
 	 */
 	public function shorteningExpression ( $expr , $l0 ) {
@@ -371,7 +384,7 @@ class StringFormat {
 	/**
 	 * Convert a size in a human readdable fashion
 	 * @param array $infos
-	 * @param number $size
+	 * @param float $size
 	 * @return string
 	 */
 	public function makeSizeHumanFriendly( $infos, $size ) {

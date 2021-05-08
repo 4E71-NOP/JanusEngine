@@ -37,9 +37,8 @@ class ModuleDocumentDisplay {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 		
 		$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-		$i18n = array();
-		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		
+		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
+
 		$baseUrl = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
 		
 		if (!class_exists("DocumentData")) { include ("modules/initial/DocumentDisplay/DocumentData.php"); }
@@ -175,8 +174,8 @@ class ModuleDocumentDisplay {
 			switch ( $DocumentDataObj->getDocumentDataEntry ('arti_menu_type') ) {
 				case "1":
 					$T = array();
-					$AD = &$T['AD'];
-					$ADC = &$T['ADC'];
+					$AD = &$T['Content'];
+					$ADC = &$T['ContentCfg'];
 					
 					$i = 1;
 					foreach ( $P2P_tab_ as $A ) {
@@ -188,10 +187,10 @@ class ModuleDocumentDisplay {
 						$i++;
 					}
 					
-					$ADC['onglet']['1']['nbr_ligne'] = ($i-1);	$ADC['onglet']['1']['nbr_cellule'] = 1;	$ADC['onglet']['1']['legende'] = 0;
-					$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, ($i-1), 1);
-					$T['tab_infos']['tabTxt1']		= $i18n['tab1'];
-					$T['tab_infos']['EnableTabs']	= 0;
+					$ADC['tabs']['1']['NbrOfLines'] = ($i-1);	$ADC['tabs']['1']['NbrOfCells'] = 1;	$ADC['tabs']['1']['TableCaptionPos'] = 0;
+					$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, ($i-1), 1);
+					$T['ContentInfos']['tabTxt1']		= $bts->I18nTransObj->getI18nTransEntry('tab1');
+					$T['ContentInfos']['EnableTabs']	= 0;
 					
 					$ContentMenu .= $bts->RenderTablesObj->render($infos, $T);
 					break;
@@ -284,11 +283,6 @@ class ModuleDocumentDisplay {
 				;");
 				
 				if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-//					Probleme : On ne peut pas nomer le document dans I18N sans 
-//					$tl_['eng']['err'] = "The specified sub-article (" . $analyse_document['include_docu_name'] . ") could not be found for including.";
-//					$tl_['fra']['err'] = "Le sous-article mention&eacute; (" . $analyse_document['include_docu_name'] . ") pour inclusion n'a pas &eacute;t&eacute; trouv&eacute;";
-//					journalisation_evenement ( 1 , $_REQUEST['sql_initiateur'] , "MADP" , "ERR" , "MADP_0009" , $i18n['err']  );
-// 					$bts->LMObj->log(array( "i"=>"MADP render", "a"=>"MADP", "s"=> "ERR", "m"=>"MADP_0009", "t"=>$i18n['err']));
 					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `".$documentAnalyse['include_docu_name']."` in INCLUDE." ));
 					$documentAnalyse['contenu_include']	= " ";
 					$documentAnalyse['docu_type']			= 0; //MWMCODE
@@ -420,16 +414,16 @@ class ModuleDocumentDisplay {
 			$CurrentArtiPage = $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page');
 			switch ($pv['p2p_marque']) {
 				case "1":
-					$Content .= "<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage+1)."'>".$i18n['next1']."</a>\r";
+					$Content .= "<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage+1)."'>".$bts->I18nTransObj->getI18nTransEntry('next1')."</a>\r";
 					break;
 				case $pv['p2p_count']:
-					$Content .= "<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage-1)."'>".$i18n['previous1']."</a>\r";
+					$Content .= "<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage-1)."'>".$bts->I18nTransObj->getI18nTransEntry('previous1')."</a>\r";
 					break;
 				default:
 				$Content .= "
-				<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage-1)."'>".$i18n['previous1']."</a>\r
+				<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage-1)."'>".$bts->I18nTransObj->getI18nTransEntry('previous1')."</a>\r
 				-\r
-				<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage+1)."'>".$i18n['next1']."</a>\r";
+				<a href='".$baseUrl.$currentRouteSlug."/".($CurrentArtiPage+1)."'>".$bts->I18nTransObj->getI18nTransEntry('next1')."</a>\r";
 					break;
 			}
 		}
@@ -442,12 +436,15 @@ class ModuleDocumentDisplay {
 		if ( ( $DocumentDataObj->getDocumentDataEntry('arti_montre_info_modification') + $DocumentDataObj->getDocumentDataEntry('arti_montre_info_parution') ) != 0 ) {
 			$ADP_users = array();
 			$dbquery = $bts->SDDMObj->query("
-			SELECT a.user_id,a.user_name
-			FROM ".$SqlTableListObj->getSQLTableName('user')." a , ".$SqlTableListObj->getSQLTableName('group_user')." b, ".$SqlTableListObj->getSQLTableName('group_website')." c
-			WHERE a.user_id = b.user_id
-			AND b.group_id = c.group_id
-			AND b.group_user_initial_group = '1'
-			ORDER BY a.user_id
+			SELECT u.user_id,u.user_name
+			FROM "
+			.$SqlTableListObj->getSQLTableName('user')." u , "
+			.$SqlTableListObj->getSQLTableName('group_user')." gu, "
+			.$SqlTableListObj->getSQLTableName('group_website')." gw 
+			WHERE u.user_id = gu.user_id
+			AND gu.group_id = gw.group_id
+			AND gu.group_user_initial_group = '1'
+			ORDER BY u.user_id
 			;");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $ADP_users[$dbp['user_id']] = $dbp['user_name']; }
 			
@@ -458,21 +455,20 @@ class ModuleDocumentDisplay {
 				style='font-size:".floor($ThemeDataObj->getThemeBlockEntry($infos['block']."T", "txt_font_size")*0.75)."px'
 				id='document_infos' style='position: absolute;'
 			>\r
-
 			";
 			
 			$pv['LD_1er'] = 1;
 			foreach ( $document_list as $A ) {
 				if ( $pv['LD_1er'] == 1 ) {
-					$pv['C'] = "<b>'" . $A['arti_title'] . "'</b><br>\r" . $i18n['authors_by'] . $ADP_users[$A['arti_creator_id']] .
-					$i18n['authors_date'] . $A['arti_creation_date'] . " - " .
-					$i18n['authors_update'] . $A['arti_validation_date'] . $i18n['authors_by'] . $ADP_users[$A['arti_validator_id']] . "<br>\r";
+					$pv['C'] = "<b>'" . $A['arti_title'] . "'</b><br>\r" . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['arti_creator_id']] .
+					$bts->I18nTransObj->getI18nTransEntry('authors_date') . $A['arti_creation_date'] . " - " .
+					$bts->I18nTransObj->getI18nTransEntry('authors_update') . $A['arti_validation_date'] . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['arti_validator_id']] . "<br>\r";
 					$pv['LD_1er'] = 0;
 				}
 				else {
-					$pv['C'] = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $i18n['authors_by'] . $ADP_users[$A['docu_creator']] .
-					$i18n['authors_date'] . $A['docu_creation_date'] . " - " .
-					$i18n['authors_update'] . $A['docu_examination_date'] . $i18n['authors_by'] . $ADP_users[$A['docu_examiner']] . "<br>\r";
+					$pv['C'] = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['docu_creator']] .
+					$bts->I18nTransObj->getI18nTransEntry('authors_date') . $A['docu_creation_date'] . " - " .
+					$bts->I18nTransObj->getI18nTransEntry('authors_update') . $A['docu_examination_date'] . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['docu_examiner']] . "<br>\r";
 				}
 				$Content .= $pv['C'];
 			}
@@ -503,7 +499,7 @@ class ModuleDocumentDisplay {
 		}
 // 		$LMObj->logDebug( $DocumentDataObj->getDocumentData() , "\$DocumentDataObj->getDocumentData()");
 // 		$LMObj->logDebug( $CurrentSetObj->getData() , "\$CurrentSetObj->getData()");
-// 		$LMObj->setInternalLogTarget($LOG_TARGET);
+//		$LMObj->setInternalLogTarget($LOG_TARGET);
 		
 		return $Content;
 	}
@@ -642,10 +638,10 @@ class ModuleDocumentDisplay {
 		
 		$pv = array();
 		$StartPos		= 0;
-		$EndPos		= 0;
+		$EndPos			= 0;
 		$SearchAction	= "ON";
-		$Mode		= "NORMAL";
-		$Content = "";
+		$Mode			= "NORMAL";
+		$Content		= "";
 		
 		while ( $SearchAction == "ON" ) {																		// This is ON we loop
 			$SearchAction = "OFF";																				// Allow to exit the loop if no ['WM'] is found

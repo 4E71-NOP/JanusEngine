@@ -39,72 +39,74 @@ class ModuleGlobalReport {
 		$bts->LMObj->logDebug($RenderLayoutObj->getLayout(),				"RenderLayoutObj->getLayout()");
 		
 		$T = array();
-		$i18n = array();
-		include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		$bts->I18nTransObj->apply($i18n);
-		unset ($i18n);
+		// $i18n = array();
+		// include ($infos['module']['module_directory']."/i18n/".$l.".php");
+		// $bts->I18nTransObj->apply($i18n);
+		// unset ($i18n);
+		// $l = $CurrentSetObj->getDataEntry ('language');
+		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 		
-		$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
-		$T['tab_infos']['NbrOfTabs'] = 0;
+		$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
+		$T['ContentInfos']['NbrOfTabs'] = 0;
 		$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
 		$Content = "";
 // 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".decbin($dbgLvl)."`") );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
 		$CurrentTab = 1;	
 		if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
-			$tmp = $this->reportTab01($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab01($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 2;	
 		if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
-			$tmp = $this->reportTab02($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab02($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 3;	
 		if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
-			$tmp = $this->reportTab03($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab03($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 4;	
 		if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
-			$tmp = $this->reportTab04($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab04($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 5;	
 		if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
-			$tmp = $this->reportTab07($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab07($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 6;	
 		if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
-			$tmp = $this->reportTab08($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab08($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 7;	
 		if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
-			$tmp = $this->reportTab09($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab09($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 8;	
 		if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
-			$tmp = $this->reportTab10($infos);	$T['AD'][$CurrentTab] = $tmp['content']; $T['ADC']['onglet'][$CurrentTab] = $tmp['config']; $T['tab_infos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['tab_infos']['NbrOfTabs']) );
+			$tmp = $this->reportTab10($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-		else { $T['ADC']['onglet'][$CurrentTab]['nbr_ligne'] = 1;	$T['ADC']['onglet'][$CurrentTab]['nbr_cellule'] = 1;	$T['ADC']['onglet'][$CurrentTab]['legende'] = 0; $T['AD'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
+		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 // 		$tabDbgLvl = array(
 // 			1 => 1,			2 => 2,			3 => 3,
@@ -113,9 +115,9 @@ class ModuleGlobalReport {
 // 			10=> 8
 // 		);
 		
-		$T['tab_infos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
-		$T['tab_infos']['Width']			= 	$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne');
-		$T['tab_infos']['GroupName']		= "gr";
+		$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
+		$T['ContentInfos']['Width']			= 	$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne');
+		$T['ContentInfos']['GroupName']		= "gr";
 		$Content .= $bts->RenderTablesObj->render($infos, $T);
 		return $Content;
 	}
@@ -164,9 +166,9 @@ class ModuleGlobalReport {
 		;																												$Content['13']['2']['tc']		= 1;
 		
 		$config = array(
-			"nbr_ligne" => 13,	
-			"nbr_cellule" => 2,
-			"legende" => 2,
+			"NbrOfLines" => 13,	
+			"NbrOfCells" => 2,
+			"TableCaptionPos" => 2,
 		);
 		
 		$package = array ("content" => $Content , "config" => $config);
@@ -283,9 +285,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		
 		$config = array(
-				"nbr_ligne" => 4,
-				"nbr_cellule" => 1,
-				"legende" => 0,
+				"NbrOfLines" => 4,
+				"NbrOfCells" => 1,
+				"TableCaptionPos" => 0,
 				"HighLightType" => 0,
 				
 		);
@@ -367,9 +369,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		
 		$config = array(
-				"nbr_ligne" => $i - 1,
-				"nbr_cellule" => 6,
-				"legende" => 1,
+				"NbrOfLines" => $i - 1,
+				"NbrOfCells" => 6,
+				"TableCaptionPos" => 1,
 		);
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
@@ -432,9 +434,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		
 		$config = array(
-				"nbr_ligne" => $i - 1,
-				"nbr_cellule" => 7,
-				"legende" => 1,
+				"NbrOfLines" => $i - 1,
+				"NbrOfCells" => 7,
+				"TableCaptionPos" => 1,
 		);
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
@@ -489,9 +491,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			$i++;
 		}
 		$config = array(
-				"nbr_ligne" => $i - 1,
-				"nbr_cellule" => 4,
-				"legende" => 1,
+				"NbrOfLines" => $i - 1,
+				"NbrOfCells" => 4,
+				"TableCaptionPos" => 1,
 		);
 		
 		$package = array ("content" => $Content , "config" => $config);
@@ -527,9 +529,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		
 		$config = array(
-				"nbr_ligne" => $i - 1,
-				"nbr_cellule" => 3,
-				"legende" => 1,
+				"NbrOfLines" => $i - 1,
+				"NbrOfCells" => 3,
+				"TableCaptionPos" => 1,
 		);
 		
 		$package = array ("content" => $Content , "config" => $config);
@@ -562,9 +564,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		
 		$config = array(
-				"nbr_ligne" => $i - 1,
-				"nbr_cellule" => 2,
-				"legende" => 1,
+				"NbrOfLines" => $i - 1,
+				"NbrOfCells" => 2,
+				"TableCaptionPos" => 1,
 		);
 		
 		$package = array ("content" => $Content , "config" => $config);

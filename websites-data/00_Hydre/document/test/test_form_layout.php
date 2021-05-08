@@ -26,9 +26,9 @@ $tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Information
 $tl_['eng']['onglet_2'] = "Configuration";	$tl_['fra']['onglet_2'] = "Configuration";
 $tl_['eng']['onglet_3'] = "State";			$tl_['fra']['onglet_3'] = "Etat";
 
-$ADC['onglet']['1']['nbr_ligne'] = 4;	$ADC['onglet']['1']['nbr_cellule'] = 4;	$ADC['onglet']['1']['legende'] = 1;
-$ADC['onglet']['2']['nbr_ligne'] = 4;	$ADC['onglet']['2']['nbr_cellule'] = 4;	$ADC['onglet']['2']['legende'] = 2;
-$ADC['onglet']['3']['nbr_ligne'] = 4;	$ADC['onglet']['3']['nbr_cellule'] = 4;	$ADC['onglet']['3']['legende'] = 3;
+$ADC['tabs']['1']['NbrOfLines'] = 4;	$ADC['tabs']['1']['NbrOfCells'] = 4;	$ADC['tabs']['1']['TableCaptionPos'] = 1;
+$ADC['tabs']['2']['NbrOfLines'] = 4;	$ADC['tabs']['2']['NbrOfCells'] = 4;	$ADC['tabs']['2']['TableCaptionPos'] = 2;
+$ADC['tabs']['3']['NbrOfLines'] = 4;	$ADC['tabs']['3']['NbrOfCells'] = 4;	$ADC['tabs']['3']['TableCaptionPos'] = 3;
 
 $tab_infos['AffOnglet']			= 1;
 $tab_infos['NbrOnglet']			= 3;

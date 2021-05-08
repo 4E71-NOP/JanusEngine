@@ -51,50 +51,49 @@ $bts->LMObj->logCheckpoint("uni_log_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_log_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
-		"col_1_txt"		=>	"Id",
-		"col_2_txt"		=>	"Date",
-		"col_3_txt"		=>	"Signal",
-		"col_4_txt"		=>	"Id Msg",
-		"col_5_txt"		=>	"Initiateur",
-		"col_6_txt"		=>	"Action",
-		"col_7_txt"		=>	"Message",
-		"tabTxt1"		=> "Informations",
-		"type_err"		=>	"Erreur",
-		"type_avrt"		=>	"Avertissement",
-		"type_ok"		=>	"Ok",
-		"type_info"		=>	"Information",
-		"type_autr"		=>	"Autre",
-		"t1r1"			=>	"Voir signal",
-		"t1r2"			=>	"Entrées par page",
-		"t1cap"			=>	"Critères de recherche",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"This part will allow you to manage Logs.",
-		"col_1_txt"		=>	"Id",
-		"col_2_txt"		=>	"Date",
-		"col_3_txt"		=>	"Signal",
-		"col_4_txt"		=>	"Id Msg",
-		"col_5_txt"		=>	"Initiator",
-		"col_6_txt"		=>	"Action",
-		"col_7_txt"		=>	"Message",
-		"tabTxt1"		=> "Informations",
-		"type_err"		=>	"Error",
-		"type_avrt"		=>	"Warning",
-		"type_ok"		=>	"Ok",
-		"type_info"		=>	"Information",
-		"type_autr"		=>	"Other",
-		"t1r1"			=>	"View signal",
-		"t1r2"			=>	"Entries per page",
-		"t1cap"			=>	"Search criteria",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
+			"col_1_txt"		=>	"Id",
+			"col_2_txt"		=>	"Date",
+			"col_3_txt"		=>	"Signal",
+			"col_4_txt"		=>	"Id Msg",
+			"col_5_txt"		=>	"Initiateur",
+			"col_6_txt"		=>	"Action",
+			"col_7_txt"		=>	"Message",
+			"tabTxt1"		=> "Informations",
+			"type_err"		=>	"Erreur",
+			"type_avrt"		=>	"Avertissement",
+			"type_ok"		=>	"Ok",
+			"type_info"		=>	"Information",
+			"type_autr"		=>	"Autre",
+			"t1r1"			=>	"Voir signal",
+			"t1r2"			=>	"Entrées par page",
+			"t1cap"			=>	"Critères de recherche",
+		),
+		"eng" => array(
+			"invite1"		=>	"This part will allow you to manage Logs.",
+			"col_1_txt"		=>	"Id",
+			"col_2_txt"		=>	"Date",
+			"col_3_txt"		=>	"Signal",
+			"col_4_txt"		=>	"Id Msg",
+			"col_5_txt"		=>	"Initiator",
+			"col_6_txt"		=>	"Action",
+			"col_7_txt"		=>	"Message",
+			"tabTxt1"		=> "Informations",
+			"type_err"		=>	"Error",
+			"type_avrt"		=>	"Warning",
+			"type_ok"		=>	"Ok",
+			"type_info"		=>	"Information",
+			"type_autr"		=>	"Other",
+			"t1r1"			=>	"View signal",
+			"t1r2"			=>	"Entries per page",
+			"t1cap"			=>	"Search criteria",
+		)
+	)
+);
 
 // --------------------------------------------------------------------------------------------
 //	Realisation des suppresions demandées
@@ -186,13 +185,13 @@ $T = array();
 $Tab = 1;
 $lt = 1;
 
-$T['AD'][$Tab][$lt]['1']['colspan'] = 2;
-$T['AD'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1cap');
-// $T['AD'][$Tab][$lt]['2']['cont'] = "";
+$T['Content'][$Tab][$lt]['1']['colspan'] = 2;
+$T['Content'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1cap');
+// $T['Content'][$Tab][$lt]['2']['cont'] = "";
 $lt++;
 
-$T['AD'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r1');
-$T['AD'][$Tab][$lt]['2']['cont'] = "<input type='checkbox' name ='mhForm[clause_type][ok]'		class='".$Block."_t3 ".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok').">\r".$bts->I18nTransObj->getI18nTransEntry('type_ok')."; \r
+$T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r1');
+$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='checkbox' name ='mhForm[clause_type][ok]'		class='".$Block."_t3 ".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok').">\r".$bts->I18nTransObj->getI18nTransEntry('type_ok')."; \r
 <input type='checkbox' name ='mhForm[clause_type][avrt]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'avrt').">\r".$bts->I18nTransObj->getI18nTransEntry('type_avrt')."; \r
 <input type='checkbox' name ='mhForm[clause_type][err]'		class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'err').">\r".$bts->I18nTransObj->getI18nTransEntry('type_err')."; \r
 <input type='checkbox' name ='mhForm[clause_type][info]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'info').">\r".$bts->I18nTransObj->getI18nTransEntry('type_info')."; \r
@@ -200,26 +199,26 @@ $T['AD'][$Tab][$lt]['2']['cont'] = "<input type='checkbox' name ='mhForm[clause_
 ";
 $lt++;
 
-$T['AD'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
-$T['AD'][$Tab][$lt]['2']['cont'] = "<input type='text' name='mhForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
+$T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
+$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='text' name='mhForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
 
-// $T['ADC']['onglet'][$Tab]['nbr_ligne'] = $lt;	$T['ADC']['onglet'][$Tab]['nbr_cellule'] = 2;	$T['ADC']['onglet'][$Tab]['legende'] = 1;
+// $T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
-$T['tab_infos']['EnableTabs']		= 0;
-$T['tab_infos']['NbrOfTabs']		= 1;
-$T['tab_infos']['TabBehavior']		= 0;
-$T['tab_infos']['RenderMode']		= 1;
-$T['tab_infos']['HighLightType']	= 0;
-$T['tab_infos']['Height']			= 128;
-$T['tab_infos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
-$T['tab_infos']['GroupName']		= "list";
-$T['tab_infos']['CellName']			= "log";
-$T['tab_infos']['DocumentName']		= "doc";
-$T['tab_infos']['cell_1_txt']		= $bts->I18nTransObj->getI18nTransEntry('cell_1_txt');
+$T['ContentInfos']['EnableTabs']		= 0;
+$T['ContentInfos']['NbrOfTabs']		= 1;
+$T['ContentInfos']['TabBehavior']		= 0;
+$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['HighLightType']	= 0;
+$T['ContentInfos']['Height']			= 128;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+$T['ContentInfos']['GroupName']		= "list";
+$T['ContentInfos']['CellName']			= "log";
+$T['ContentInfos']['DocumentName']		= "doc";
+$T['ContentInfos']['cell_1_txt']		= $bts->I18nTransObj->getI18nTransEntry('cell_1_txt');
 
-$T['ADC']['onglet']['1']['nbr_ligne']	= $lt;
-$T['ADC']['onglet']['1']['nbr_cellule']	= 2;
-$T['ADC']['onglet']['1']['legende']		= 1;
+$T['ContentCfg']['tabs']['1']['NbrOfLines']	= $lt;
+$T['ContentCfg']['tabs']['1']['NbrOfCells']	= 2;
+$T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 1;
 
 $config = array(
 		"mode" => 1,
@@ -273,7 +272,7 @@ if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page') == 0 
 $dbquery = $bts->SDDMObj->query("
 SELECT COUNT(log_id) as nbr_log 
 FROM ".$SqlTableListObj->getSQLTableName('log')." 
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ;");
@@ -307,7 +306,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') > $bts-
 $dbquery = $bts->SDDMObj->query("
 SELECT * 
 FROM ".$SqlTableListObj->getSQLTableName('log')." 
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ORDER BY log_date DESC, log_id DESC 
@@ -328,10 +327,10 @@ $config = array(
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 
 	$Tab = 1; $lt = 1;
-	$T['AD'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
+	$T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 
-// 	$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-// 	$T['ADC']['onglet'] = array(
+// 	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+// 	$T['ContentCfg']['tabs'] = array(
 // 			1	=>	$bts->RenderTablesObj->getDefaultTableConfig($lt,1,1),
 // 	);
 // 	$Content .= $bts->RenderTablesObj->render($infos, $T);
@@ -348,13 +347,13 @@ else {
 
 	$Tab = 1; $lt = 1;
 
-	$T['AD'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['AD'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['AD'][$Tab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	$T['AD'][$Tab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
-	$T['AD'][$Tab][$lt]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
-	$T['AD'][$Tab][$lt]['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
-	$T['AD'][$Tab][$lt]['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
+	$T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content'][$Tab][$lt]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	$T['Content'][$Tab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['Content'][$Tab][$lt]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
+	$T['Content'][$Tab][$lt]['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+	$T['Content'][$Tab][$lt]['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$pv['log_action_longeur'] = strlen($dbp['log_contenu']);
@@ -365,24 +364,24 @@ else {
 		}
 
 		$lt++;
-		$T['AD'][$Tab][$lt]['1']['cont'] = $dbp['log_id']. "<br>\r<input type='checkbox' name='mhForm[selection][".$dbp['log_id']."]'>";
-		$T['AD'][$Tab][$lt]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
-		$T['AD'][$Tab][$lt]['3']['cont'] = $tab[$dbp['log_signal']];
-		$T['AD'][$Tab][$lt]['4']['cont'] = $dbp['log_msgid'];
-		$T['AD'][$Tab][$lt]['5']['cont'] = $dbp['log_initiator'];
-		$T['AD'][$Tab][$lt]['6']['cont'] = $dbp['log_action'];
-		$T['AD'][$Tab][$lt]['7']['cont'] = "<span
+		$T['Content'][$Tab][$lt]['1']['cont'] = $dbp['log_id']. "<br>\r<input type='checkbox' name='mhForm[selection][".$dbp['log_id']."]'>";
+		$T['Content'][$Tab][$lt]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
+		$T['Content'][$Tab][$lt]['3']['cont'] = $tab[$dbp['log_signal']];
+		$T['Content'][$Tab][$lt]['4']['cont'] = $dbp['log_msgid'];
+		$T['Content'][$Tab][$lt]['5']['cont'] = $dbp['log_initiator'];
+		$T['Content'][$Tab][$lt]['6']['cont'] = $dbp['log_action'];
+		$T['Content'][$Tab][$lt]['7']['cont'] = "<span
 		onMouseOver=\"t.ToolTip('".
 		$bts->SDDMObj->escapeString(htmlentities($dbp['log_contenu']))."', 'logMgmt');\"
 		onMouseOut=\"t.ToolTip('', 'logMgmt');\">\r".$dbp['log_contenu2']."</span>\r";
 
-		$T['AD'][$Tab][$lt]['1']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['2']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['3']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['4']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['5']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['6']['tc'] = 1;
-		$T['AD'][$Tab][$lt]['7']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['1']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['2']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['3']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['4']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['5']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['6']['tc'] = 1;
+		$T['Content'][$Tab][$lt]['7']['tc'] = 1;
 	}
 }
 
@@ -392,8 +391,8 @@ else {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['tab_infos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, $Tab);
-$T['ADC']['onglet'] = array(
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, $Tab);
+$T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($lt,7,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

@@ -42,7 +42,9 @@ class Group extends Entity {
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT grp.* 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
+			FROM "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = '".$id."'
 			AND grp.group_id = sg.group_id
 			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
