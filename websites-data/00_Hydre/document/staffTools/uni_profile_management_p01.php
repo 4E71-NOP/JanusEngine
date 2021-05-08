@@ -69,9 +69,10 @@ $bts->MapperObj->setSqlApplicant("uni_profile_management_p01.php");
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-switch ($CurrentSetObj->getDataEntry('language')) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
 		"anonDeny"		=>	"Partie reservée aux membres enregistrés",
 		"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
 		"col_1_txt"		=>	"Id",
@@ -132,11 +133,8 @@ switch ($CurrentSetObj->getDataEntry('language')) {
 		"formIwantToSee"		=>	"voir",
 		"formIwantToActivate"	=>	"activer",
 		"formTheTheme"			=>	"le thème",
-		));
-		break;
-		
-	case "eng":
-		$bts->I18nTransObj->apply(array(
+		),
+		"eng" => array(
 		"anonDeny"		=>	"Partie reservée aux membres enregistrés",
 		"invite1"		=>	"This part will allow you to manage Logs.",
 		"col_1_txt"		=>	"Id",
@@ -196,10 +194,10 @@ switch ($CurrentSetObj->getDataEntry('language')) {
 		"formIwantToSee"		=>	"see",
 		"formIwantToActivate"	=>	"activate",
 		"formTheTheme"			=>	"the theme",
-			));
-		
-		break;
-}
+		)
+	)
+);
+
 $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 // $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 if ( $UserObj->getUserEntry('user_login') == "anonymous" ) { $Content .= $bts->I18nTransObj->getI18nTransEntry("anonDeny"); }
@@ -227,10 +225,11 @@ else {
 	";
 	if ( $UserObj->getUserEntry('pref_theme') == 0 ) { $UserObj->setUserEntry('pref_theme', $WebSiteObj->getWebSiteEntry('theme_id')); }
 	$dbquery = $bts->SDDMObj->query("
-	SELECT a.*,b.theme_name,b.theme_id
-	FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." b 
-	WHERE a.user_id = '".$UserObj->getUserEntry('id')."' 
-	AND theme_id = '".$UserObj->getUserEntry('pref_theme')."' 
+	SELECT u.*,td.theme_name,td.theme_id
+	FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." u , "
+	.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td 
+	WHERE u.user_id = '".$UserObj->getUserEntry('id')."' 
+	AND td.theme_id = '".$UserObj->getUserEntry('pref_theme')."' 
 	;");
 	$PmListTheme = array();
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { foreach ( $dbp as $A => $B ) { $PmListTheme[$A] = $B; } }
@@ -394,7 +393,9 @@ else {
 	
 	$T['Content']['4']['9']['2']['cont'] = "<select name='formParams[lang]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
 	$dbqueryL = $bts->SDDMObj->query("
-	SELECT lw.fk_lang_id FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." w 
+	SELECT lw.fk_lang_id FROM "
+	.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , "
+	.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." w 
 	WHERE w.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 	AND lw.fk_ws_id = w.ws_id
 	;");
@@ -478,9 +479,10 @@ else {
 	
 	$dbquery = $bts->SDDMObj->query("
 	SELECT * 
-	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
-	WHERE a.theme_name = '".$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')."' 
-	AND a.theme_id = b.theme_id 
+	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
+	.$SqlTableListObj->getSQLTableName('theme_website')." tw 
+	WHERE td.theme_name = '".$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')."' 
+	AND td.theme_id = tw.fk_theme_id 
 	;");
 // 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "
 // 	SELECT *
@@ -632,10 +634,12 @@ else {
 			";
 			
 			$dbquery = $bts->SDDMObj->query("
-			SELECT a.theme_id,a.theme_name,theme_title 
-			FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b
-			WHERE a.theme_id = b.theme_id  
-			AND b.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+			SELECT td.theme_id, td.theme_name, td.theme_title 
+			FROM "
+			.$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
+			.$SqlTableListObj->getSQLTableName('theme_website')." tw 
+			WHERE td.theme_id = tw.fk_theme_id  
+			AND tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 			;");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 				if ( $dbp['theme_name'] == $bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme') ) { $T['Content'][$Tab]['1']['1']['cont'] .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
