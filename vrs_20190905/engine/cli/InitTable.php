@@ -193,11 +193,11 @@ self::$InitTable['decoration'] = function (&$a) {
 			"in55_e" => "OFFLINE",
 			
 			
-			"tab_y" => 32,
-			"tab_a_x" => 16,				"tab_c_x" => 16,
-			"tab_down_a" => "vide.gif",		"tab_down_b" => "vide.gif",		"tab_down_c" => "vide.gif",
-			"tab_up_a" => "vide.gif",		"tab_up_b" => "vide.gif",		"tab_up_c" => "vide.gif",
-			"tab_hover_a" => "vide.gif",	"tab_hover_b" => "vide.gif",	"tab_hover_c" => "vide.gif",
+			// "tab_y" => 32,
+			// "tab_a_x" => 16,				"tab_c_x" => 16,
+			// "tab_down_a" => "vide.gif",		"tab_down_b" => "vide.gif",		"tab_down_c" => "vide.gif",
+			// "tab_up_a" => "vide.gif",		"tab_up_b" => "vide.gif",		"tab_up_c" => "vide.gif",
+			// "tab_hover_a" => "vide.gif",	"tab_hover_b" => "vide.gif",	"tab_hover_c" => "vide.gif",
 			
 			"ft1" => "vide.gif",		"ft2" => "vide.gif",		"ft3" => "vide.gif",
 			"ft1_x" => "16",			"ft3_x" => "16",			"ft_y" => "16",
@@ -208,15 +208,15 @@ self::$InitTable['decoration'] = function (&$a) {
 			"bgcsa" => "vide.gif",		"bgcsb" => "vide.gif",
 			"bgco" => "vide.gif",
 			
-			"s1_01_x" => 8,			"s1_01_y" => 16,		"s1_03_x" => 8,
-			"s2_01_x" => 8,			"s2_01_y" => 16,		"s2_03_x" => 8,
-			"s3_01_x" => 8,			"s3_01_y" => 16,		"s3_03_x" => 8,
-			"s1_n01" => "vide.gif",	"s1_n02" => "vide.gif",	"s1_n03" => "vide.gif",
-			"s1_h01" => "vide.gif",	"s1_h02" => "vide.gif",	"s1_h03" => "vide.gif",
-			"s2_n01" => "vide.gif",	"s2_n02" => "vide.gif",	"s2_n03" => "vide.gif",
-			"s2_h01" => "vide.gif",	"s2_h02" => "vide.gif",	"s2_h03" => "vide.gif",
-			"s3_n01" => "vide.gif",	"s3_n02" => "vide.gif",	"s3_n03" => "vide.gif",
-			"s3_h01" => "vide.gif",	"s3_h02" => "vide.gif",	"s3_h03" => "vide.gif",
+			// "s1_01_x" => 8,			"s1_01_y" => 16,		"s1_03_x" => 8,
+			// "s2_01_x" => 8,			"s2_01_y" => 16,		"s2_03_x" => 8,
+			// "s3_01_x" => 8,			"s3_01_y" => 16,		"s3_03_x" => 8,
+			// "s1_n01" => "vide.gif",	"s1_n02" => "vide.gif",	"s1_n03" => "vide.gif",
+			// "s1_h01" => "vide.gif",	"s1_h02" => "vide.gif",	"s1_h03" => "vide.gif",
+			// "s2_n01" => "vide.gif",	"s2_n02" => "vide.gif",	"s2_n03" => "vide.gif",
+			// "s2_h01" => "vide.gif",	"s2_h02" => "vide.gif",	"s2_h03" => "vide.gif",
+			// "s3_n01" => "vide.gif",	"s3_n02" => "vide.gif",	"s3_n03" => "vide.gif",
+			// "s3_h01" => "vide.gif",	"s3_h02" => "vide.gif",	"s3_h03" => "vide.gif",
 			
 			"main_unit" =>	"mm",	"txt_font_unit" =>	"px",
 			"txt_fonte" => "Arial, Helvetica, Sans-serif",					
@@ -273,7 +273,9 @@ self::$InitTable['decoration'] = function (&$a) {
 			"tab_down_txt_col" => "000000",		"tab_down_txt_bg_col" => "000000",	"tab_down_txt_weight" => "normal",	"tab_down_txt_shadow" => "0 0 0px #000000",
 			"tab_hover_txt_col" => "000000",	"tab_hover_txt_bg_col" => "000000",	"tab_hover_txt_weight" => "normal",	"tab_hover_txt_shadow" => "0 0 0px #000000",
 			
-			
+			"tab_a" => 	"", 			"tab_b" => 	"", 				"tab_c" => 	"", 	
+			"tab_offset_x" => 	"", 	"tab_offset_y" => 	"",
+
 			"icone_repertoire"	=> "icone_repertoire.png",
 			"icone_efface"		=> "icone_efface.png",
 			"icone_gauche"		=> "icone_fleche_gauche.png",
@@ -287,7 +289,8 @@ self::$InitTable['decoration'] = function (&$a) {
 			"p_mrg_top" => 0,		"p_mrg_bottom" => 0,		"p_mrg_left" => 0,				"p_mrg_right" => 0,
 			"p_pad_top" => 0,		"p_pad_bottom" => 5,		"p_pad_left" => 0,				"p_pad_right" => 0,
 			
-			// New style----------------------------------------------------------------------------
+			// ***************************************************************************
+			// New style
 			"main_unit" => 	"mm", 	"txt_font_unit" => 	"px",
 			"txt_font" => 	"Arial", 	"txt_font_size" => 	"14",
 			"txt_font_dl_name" => 	"", 	"txt_font_dl_url" => 	"",
@@ -335,25 +338,30 @@ self::$InitTable['decoration'] = function (&$a) {
 			"s1_txt_hover_weight" => 	"", 	"s2_txt_hover_weight" => 	"", 	"s3_txt_hover_weight" => 	"",
 			"s1_txt_hover_special" => 	"", 	"s2_txt_hover_special" => 	"", 	"s3_txt_hover_special" => 	"",
 			
-			"s1_01_width" => 	"8", 	"s1_01_height" => 	"32", 	"s1_03_width" => 	"8",
+			"s1_a" => 	"", 	"s1_b" => 	"", 	"s1_c" => 	"", 	
+			"s2_a" => 	"", 	"s2_b" => 	"", 	"s2_c" => 	"", 	
+			"s3_a" => 	"", 	"s3_b" => 	"", 	"s3_c" => 	"", 	
+			"s1_01_width" => 	"8", 	"s1_01_height" => 	"32", 	"s1_03_width" => 	"8", 	
+			"s2_01_width" => 	"8", 	"s2_01_height" => 	"32", 	"s2_03_width" => 	"8", 	
+			"s3_01_width" => 	"8", 	"s3_01_height" => 	"32", 	"s3_03_width" => 	"8", 	
+
+			// ***************************************************************************
+			// Virer
 			"s1_n01" => 	"", 	"s1_n02" => 	"", 	"s1_n03" => 	"",
 			"s1_h01" => 	"", 	"s1_h02" => 	"", 	"s1_h03" => 	"",
-			
-			"s2_01_width" => 	"8", 	"s2_01_height" => 	"32", 	"s2_03_width" => 	"8",
 			"s2_n01" => 	"", 	"s2_n02" => 	"", 	"s2_n03" => 	"",
 			"s2_h01" => 	"", 	"s2_h02" => 	"", 	"s2_h03" => 	"",
-			
-			"s3_01_width" => 	"8", 	"s3_01_height" => 	"32", 	"s3_03_width" => 	"8",
 			"s3_n01" => 	"", 	"s3_n02" => 	"", 	"s3_n03" => 	"",
 			"s3_h01" => 	"", 	"s3_h02" => 	"", 	"s3_h03" => 	"",
+			// ***************************************************************************
 			
-			"tab_up_txt_col" => 	"", 	"tab_up_txt_bg_col" => 	"", 	"tab_up_txt_weight" => 	"", 	"tab_up_txt_special" => 	"",
+			"tab_up_txt_col" => 	"", 	"tab_up_txt_bg_col" => 	"", 		"tab_up_txt_weight" => 	"", 		"tab_up_txt_special" => 	"",
 			"tab_down_txt_col" => 	"", 	"tab_down_txt_bg_col" => 	"", 	"tab_down_txt_weight" => 	"", 	"tab_down_txt_special" => 	"",
 			"tab_hover_txt_col" => 	"", 	"tab_hover_txt_bg_col" => 	"", 	"tab_hover_txt_weight" => 	"", 	"tab_hover_txt_special" => 	"",
-			"tab_height" => 	"32", 	"tab_a_width" => 	"16", 	"tab_c_width" => 	"16",
-			"tab_down_a" => 	"", 	"tab_down_b" => 	"", 	"tab_down_c" => 	"",
-			"tab_up_a" => 	"", 	"tab_up_b" => 	"", 	"tab_up_c" => 	"",
-			"tab_hover_a" => 	"", 	"tab_hover_b" => 	"", 	"tab_hover_c" => 	"",
+			"tab_height" => 	"32", 		"tab_a_width" => 	"16", 			"tab_c_width" => 	"16",
+			"tab_down_a" => 	"", 		"tab_down_b" => 	"", 			"tab_down_c" => 	"",
+			"tab_up_a" => 	"", 			"tab_up_b" => 	"", 				"tab_up_c" => 	"",
+			"tab_hover_a" => 	"", 		"tab_hover_b" => 	"", 			"tab_hover_c" => 	"",
 			"tab_frame_bg_col" => 	"", 	"tab_frame_bg_img" => 	"",
 			
 			"ft2_font" => 	"", 	"ft2_font_size" => 	"20", 	"ft2_fg_col" => 	"", 	"ft2_special" => 	"",
@@ -367,11 +375,9 @@ self::$InitTable['decoration'] = function (&$a) {
 			"transparent_8x8" => 	"",
 			"icon_width" => 	"32",
 			"icon_height" => 	"32",
-			
-			
-			
-			// end new style------------------------------------------------
-			
+
+			// end new style
+			// ***************************************************************************
 			
 			"niveau"			=> 0,
 			"genre"				=> 1,
@@ -401,7 +407,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"icone_dim_x"		=> 48,
 			"icone_dim_y"		=> 48,
 			
-			"a_line_height"				=> 14,
+			"a_line_height"		=> 14,
 	);
 	$a['listVars'] = array(
 			"10" => array(
@@ -508,20 +514,20 @@ self::$InitTable['decoration'] = function (&$a) {
 					"ft1_x",				"ft3_x",			"ft_y",
 					
 					"bgca",	"bgcb",	"bgcc",	"bgcd",	"bgcta",	"bgctb",	"bgcsa",	"bgcsb",	"bgco",
-					"s1_01_x",	"s1_01_y",	"s1_03_x",
-					"s2_01_x",	"s2_01_y",	"s2_03_x",
-					"s3_01_x",	"s3_01_y",	"s3_03_x",
-					"s1_n01",	"s1_n02",	"s1_n03",
-					"s1_h01",	"s1_h02",	"s1_h03",
-					"s2_n01",	"s2_n02",	"s2_n03",
-					"s2_h01",	"s2_h02",	"s2_h03",
-					"s3_n01",	"s3_n02",	"s3_n03",
-					"s3_h01",	"s3_h02",	"s3_h03",
+					// "s1_01_x",	"s1_01_y",	"s1_03_x",
+					// "s2_01_x",	"s2_01_y",	"s2_03_x",
+					// "s3_01_x",	"s3_01_y",	"s3_03_x",
+					// "s1_n01",	"s1_n02",	"s1_n03",
+					// "s1_h01",	"s1_h02",	"s1_h03",
+					// "s2_n01",	"s2_n02",	"s2_n03",
+					// "s2_h01",	"s2_h02",	"s2_h03",
+					// "s3_n01",	"s3_n02",	"s3_n03",
+					// "s3_h01",	"s3_h02",	"s3_h03",
 					
-					"tab_y",		"tab_a_x",		"tab_c_x",
-					"tab_down_a",	"tab_down_b",	"tab_down_c",
-					"tab_up_a",		"tab_up_b",		"tab_up_c",
-					"tab_hover_a",	"tab_hover_b",	"tab_hover_c",
+					// "tab_y",		"tab_a_x",		"tab_c_x",
+					// "tab_down_a",	"tab_down_b",	"tab_down_c",
+					// "tab_up_a",		"tab_up_b",		"tab_up_c",
+					// "tab_hover_a",	"tab_hover_b",	"tab_hover_c",
 					
 					"icone_repertoire",	"icone_efface",
 					"icone_gauche",		"icone_droite",		"icone_haut",		"icone_bas",
@@ -531,6 +537,7 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icone_dim_x",		"icone_dim_y",
 					
 					
+					// ***************************************************************************
 					// new style
 					
 					"main_unit", 		"txt_font_unit",
@@ -597,13 +604,23 @@ self::$InitTable['decoration'] = function (&$a) {
 					"s3_n01", 		"s3_n02", 		"s3_n03",
 					"s3_h01", 		"s3_h02", 		"s3_h03",
 					
+					"s1_a", 	"s1_b", 	"s1_c", 	
+					"s2_a", 	"s2_b", 	"s2_c", 	
+					"s3_a", 	"s3_b", 	"s3_c",
+					"s1_offset_x", 	"s1_offset_y", 
+					"s2_offset_x", 	"s2_offset_y", 
+					"s3_offset_x", 	"s3_offset_y",
+
+					"tab_a", 	"tab_b", 	"tab_c", 
+					"tab_offset_x", 	"tab_offset_y",
+					
 					"tab_up_txt_col", 		"tab_up_txt_bg_col", 		"tab_up_txt_weight", 		"tab_up_txt_special",
 					"tab_down_txt_col", 		"tab_down_txt_bg_col", 		"tab_down_txt_weight", 		"tab_down_txt_special",
 					"tab_hover_txt_col", 		"tab_hover_txt_bg_col", 		"tab_hover_txt_weight", 		"tab_hover_txt_special",
 					"tab_height", 		"tab_a_width", 		"tab_c_width",
-					"tab_down_a", 		"tab_down_b", 		"tab_down_c",
-					"tab_up_a", 		"tab_up_b", 		"tab_up_c",
-					"tab_hover_a", 		"tab_hover_b", 		"tab_hover_c",
+					// "tab_down_a", 		"tab_down_b", 		"tab_down_c",
+					// "tab_up_a", 		"tab_up_b", 		"tab_up_c",
+					// "tab_hover_a", 		"tab_hover_b", 		"tab_hover_c",
 					"tab_frame_bg_col",		"tab_frame_bg_img",
 					
 					"ft2_font", 		"ft2_font_size", 		"ft2_fg_col", 		"ft2_special",
@@ -618,18 +635,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icon_width",
 					"icon_height",
 					
-					
-					
-					
-					
-					
-					
-					
-					
 					// end new style
-					
-					
-					
+					// ***************************************************************************
 					
 			),
 			"30" => array (
