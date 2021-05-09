@@ -79,7 +79,7 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 // &form[db_hosting_prefix]=
 // &form[db_admin_user]=dbadmin
 // &form[db_admin_password]=nimdabd
-// &form[dbprefix]=HdrTst
+// &form[dbprefix]=Hdr
 // &form[prefix_des_tables]=HtTst_
 // &l=eng
 // &SessionID=1576417445

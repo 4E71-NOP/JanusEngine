@@ -51,7 +51,7 @@ if ( $pv['ObjectMode'] == 1 ) {
 		$tab['dal']					= "MYSQLI";
 		$tab['db_user_login']		= "HydreBDD";
 		$tab['db_user_password']	= "Celeste";
-		$tab['dbprefix']			= "HdrTst";
+		$tab['dbprefix']			= "Hdr";
 		$tab['tabprefix']			= "Ht_";
 		$tab['maid_stats_nombre_de_couleurs'] = 5;
 		$tab['SessionMaxAge'] = (60*60*24);
