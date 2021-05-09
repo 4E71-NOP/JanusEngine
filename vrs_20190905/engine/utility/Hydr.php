@@ -433,9 +433,9 @@ class Hydr {
 		
 		// --------------------------------------------------------------------------------------------
 		//
-		//
 		// Start of the module display
 		// The so called route is based on the arti_ref transmitted
+		//
 		//
 		$localisation = " (CurrentSet)";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
