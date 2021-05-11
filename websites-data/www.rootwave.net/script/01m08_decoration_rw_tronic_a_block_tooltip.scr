@@ -1,0 +1,15 @@
+add decoration		
+name 'rw_tronic_block_tooltip'		
+type 'elegance'		
+directory 'Tronic'		
+		
+ex11 'tronic_B99_ex11.png'	ex11_x '32'	ex11_y '16'
+ex12 'tronic_B99_ex12.png'	ex12_x '448'	ex12_y '16'
+ex13 'tronic_B99_ex13.png'	ex13_x '32'	ex13_y '16'
+ex21 'tronic_B99_ex21.png'	ex21_x '32'	ex21_y '480'
+ex22 'tronic_B99_ex22.png'	ex22_x '448'	ex22_y '480'
+ex23 'tronic_B99_ex23.png'	ex23_x '32'	ex23_y '480'
+ex31 'tronic_B99_ex31.png'	ex31_x '32'	ex31_y '16'
+ex32 'tronic_B99_ex32.png'	ex32_x '448'	ex32_y '16'
+ex33 'tronic_B99_ex33.png'	ex33_x '32'	ex33_y '16'
+;	 	

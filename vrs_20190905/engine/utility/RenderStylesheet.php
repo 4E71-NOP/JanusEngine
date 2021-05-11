@@ -429,6 +429,7 @@ class RenderStylesheet {
 	
 	
 	private function renderStylesheetDeco30 (&$infos) {
+		$Content = "";
 		return $Content;
 	}
 	

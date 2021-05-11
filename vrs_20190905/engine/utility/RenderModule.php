@@ -178,7 +178,7 @@ class RenderModule {
 				break;
 			default:
 				$mn = $infos['module_name'];
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
 				$Content .= "
 					<div class='".$ThemeDataObj->getThemeName().$infos['block']."'>\r
 					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std' style='position: absolute; left:

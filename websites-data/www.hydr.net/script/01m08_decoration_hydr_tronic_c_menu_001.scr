@@ -1,7 +1,7 @@
 add	decoration
 name	'hydr_tronic_menu_001'
-graphique	'hydr_tronic_block_001'
-texte	'hydr_tronic_texte_002'
+deco_graphique	'hydr_tronic_block_tooltip'
+deco_texte	'hydr_tronic_txt_main'
 type	'menu'
 directory	'Tronic'
 	
@@ -16,4 +16,4 @@ div_width	'160'
 affiche_icones	'NON'
 icone_taille_x	'16'
 icone_taille_y	'16'
-;
+;	

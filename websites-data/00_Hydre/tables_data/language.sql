@@ -1,5 +1,6 @@
 /*
 								id			code		Nom Original									639-2				639-1				image
+								https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1
 */
 
 INSERT INTO !table! VALUES (	"1",		"aar",		"Afaraf",										"aar",				"aa",				"tl_aar.png"	);

@@ -31,12 +31,7 @@
 // $LMObj->setInternalLogTarget("both");
 
 // $bts->RequestDataObj->setRequestDataEntry('script_source',"");
-$bts->RequestDataObj->setRequestDataEntry('RenderCSS', 
-	array(
-			'CssSelection' => 2,
-			'go' => 1,
-	),
-);
+$bts->RequestDataObj->setRequestDataEntry('stylesheetMaker', 'selectedTheme', 2	);
 
 /*Hydr-Content-Begin*/
 $localisation = " / uni_stylesheet_maker_p01";
@@ -97,7 +92,7 @@ $Content .= "
 <tr>\r
 <td>\r
 ".$bts->I18nTransObj->getI18nTransEntry('invite3')."<br>\r<br>\r
-<select name='CssSelection' class='".$Block."_t3 ".$Block."_form_1'>
+<select name='stylesheetMaker[selectedTheme]'>
 ";
 
 $dbquery = $bts->SDDMObj->query("
@@ -117,14 +112,10 @@ $SGEtat = array(
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$Content .= "<option value='".$dbp['theme_id']."'>".$dbp['theme_title']." (".$SGEtat[$dbp['theme_state']].") </option>\r";
 }
-$Content .= "</select>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')."
-<input type='hidden' name='RenderCSS[go]' value='1'>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_login').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_pass')."
+$Content .= "</select>\r
+<input type='hidden' name='formSubmitted'				value='1'>
+<input type='hidden' name='formGenericData[origin]'		value='stylesheetMaker'>
+<input type='hidden' name='formGenericData[action]' 	value='render'>\r
 </td>\r
 <td>\r
 ";
@@ -150,7 +141,7 @@ $Content .= "
 <br>\r
 ";
 
-if ( $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'go')) {
+if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme' != 0 )) {
 	$dbquery = $bts->SDDMObj->query("
 	SELECT * 
 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 

@@ -1,6 +1,6 @@
 add decoration		
 name 'rw_tronic_block_002'		
-type 'exquisite'		
+type 'exquise'		
 directory 'Tronic'		
 		
 ex11 'tronic_B02_ex11.png'	ex11_x '24'	ex11_y '32'
@@ -20,4 +20,4 @@ ex52 'tronic_B02_ex52.png'	ex52_x '32'	ex52_y '24'
 ex53 'tronic_B02_ex53.png'	ex53_x '384'	ex53_y '24'
 ex54 'tronic_B02_ex54.png'	ex54_x '48'	ex54_y '24'
 ex55 'tronic_B02_ex55.png'	ex55_x '24'	ex55_y '24'
-;
+;		

@@ -20,14 +20,14 @@ a_active_fg_col	'FFFFFF'
 a_visited_fg_col	'FFFFFF'						
 							
 table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
-t01_caption_fg_col	'FFFFFF'	t01_caption_bg_col	'FFFFE040'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
+t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFE08080'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'FFFFFF'						
-t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
+t01_tr_bg_col	'60608080'	t01_td_bg_odd_col	'FFFFFF20'				
 							
-t01_tr_bg_even_col	'AADAFF'						
-t01_tr_bg_hover_col	'ACEDD4'						
+t01_tr_bg_even_col	'8080A080'						
+t01_tr_bg_hover_col	'FE62CD80'						
 							
-		t01_legend_bg_col	'FFFFE0'				
+t01_legend_txt_col	'000000'	t01_legend_bg_col	'FFE08080'				
 							
 td_a_fg_col	'FFFFFF'			td_a_decoration	'none'		
 td_a_hover_fg_col	'FFFFFF'					td_a_hover_special	'font-weight:bold;'
@@ -69,11 +69,11 @@ tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'
 tab_down_a	'nebula_B01_tab_up_a.png'	tab_down_b	'nebula_B01_tab_up_b.png'	tab_down_c	'nebula_B01_tab_up_c.png'		
 tab_up_a	'nebula_B01_tab_down_a.png'	tab_up_b	'nebula_B01_tab_down_b.png'	tab_up_c	'nebula_B01_tab_down_c.png'		
 tab_hover_a	'nebula_B01_tab_hover_a.png'	tab_hover_b	'nebula_B01_tab_hover_b.png'	tab_hover_c	'nebula_B01_tab_hover_c.png'		
-tab_frame_bg_col	'79C6DA'						
+tab_frame_bg_col	'55749280'						
 							
 		ft2_font_size	'26'	ft2_fg_col	'FFFFFF'	ft2_special	'font-weight:bold;'
 ft1_bg	'nebula_B01_ft1.png'	ft2_bg	'nebula_B01_ft2.png'	ft3_bg	'nebula_B01_ft3.png'		
-ft1_width	'16'	ft3_width	'16'	ft_height	'32'		
+ft1_width	'24'	ft3_width	'24'	ft_height	'32'		
 							
 icon_directory	'nebula_B01_icone_repertoire.png'	icon_erase	'nebula_B01_icone_efface.png'				
 icon_ok	'nebula_B01_icone_ok.png'	icon_nok	'nebula_B01_icone_nok.png'				

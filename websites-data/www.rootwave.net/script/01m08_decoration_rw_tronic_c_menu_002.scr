@@ -1,7 +1,7 @@
 add	decoration
 name	'rw_tronic_menu_002'
-graphique	'rw_tronic_block_099'
-texte	'rw_tronic_texte_002'
+deco_graphique	'rw_tronic_block_tooltip'
+deco_texte	'rw_tronic_txt_main'
 type	'menu'
 directory	'Tronic'
 	
@@ -16,4 +16,4 @@ div_width	'320'
 affiche_icones	'NON'
 icone_taille_x	'16'
 icone_taille_y	'16'
-;
+;	

@@ -208,9 +208,13 @@ class HydrInstall {
 			$l = "eng";
 		}
 
-		include ("current/install/i18n/install_init_" . $l . ".php");
-		$bts->I18nTransObj->apply ( $i18n );
-		unset ( $i18n );
+		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Loading `current/install/i18n/install_init_" . $l . ".php`"));
+		$bts->I18nTransObj->apply (
+			array(
+				"type"		=> "file", 
+				"file"		=> "current/install/i18n/install_init_" . $l . ".php",
+				"format"	=>	"php"
+			 ));
 		// --------------------------------------------------------------------------------------------
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
 			$div_initial_bg = "background-image: url(media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";

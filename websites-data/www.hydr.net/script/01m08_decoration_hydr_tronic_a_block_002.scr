@@ -1,6 +1,6 @@
 add decoration		
 name 'hydr_tronic_block_002'		
-type 'exquisite'		
+type 'exquise'		
 directory 'Tronic'		
 		
 ex11 'tronic_B02_ex11.png'	ex11_x '24'	ex11_y '32'
