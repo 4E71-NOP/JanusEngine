@@ -14,20 +14,9 @@
 
 class SddmTools {
 	private static $Instance = null;
-	
-	private $i18n_ = array (
-		"38" => array (
-			"err_no" => "Empty result",
-			"requete" => "No result for this query."
-		),
-		"48" => array (
-			"err_no" => "Aucune ligne retourn&eacute;e",
-			"requete" => "Aucune ligne retourn&eacute;e pour cette requete."
-		)
-	);
 
-	public function __construct() {
-	}
+	public function __construct() {}
+
 	public static function getInstance() {
 		if (self::$Instance == null) {
 			self::$Instance = new SddmTools();
@@ -40,14 +29,7 @@ class SddmTools {
 	 */
 	public function SLMEmptyResult() {
 		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance ();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		
-		
-		$l = $WebSiteObj->getWebSiteEntry('ws_lang'); 
-		
-// 		if (strlen($l) == 0 ) { }		// failsafe on language selection. Back to the website default language.
-		switch ($_REQUEST ['execution_context']) {
+		switch ($bts->CMObj->getConfigurationEntry ( 'execution_context')) {
 			case "admin_menu" :
 			case "Admin_menu" :
 			case "Extension_installation" :
@@ -56,9 +38,8 @@ class SddmTools {
 			default :
 				$data = array();
 				$data [3] = "WARN";
-				$data [5] = $this->i18n_ [$l] ['err_no'];
-				$data [6] = $this->i18n_ [$l] ['requete'];
-// 				outil_debug( $data, "SddmTools i18n" );
+				$data [5] = $bts->I18nTransObj->getI18nTransEntry('SqlNoResultReturned1');
+				$data [6] = $bts->I18nTransObj->getI18nTransEntry('SqlNoResultReturned2');
 				$bts->LMObj->logSQLMoreDetailsOnLast( $data );
 				break;
 		}

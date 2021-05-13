@@ -67,4 +67,5 @@ add translation	lang	"eng"		package	"initial"		name	"fileSelectorC1"			text	"Nam
 add translation	lang	"eng"		package	"initial"		name	"fileSelectorC2"			text	"Size";
 add translation	lang	"eng"		package	"initial"		name	"fileSelectorC3"			text	"Date";
 
-
+add translation	lang	"eng"		package	"initial"		name	"SqlNoResultReturned1"		text	"Empty result!";
+add translation	lang	"eng"		package	"initial"		name	"SqlNoResultReturned2"		text	"No result for this query!";

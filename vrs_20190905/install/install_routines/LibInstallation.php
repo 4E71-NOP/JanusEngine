@@ -417,10 +417,10 @@ if ( \$pv['ObjectMode'] == 1 ) {
 		\$tab['pde_img_h']		= 32;					//height
 		\$tab['pde_img_l']		= 32;					//width
 		
-		\$tab['DebugLevel_SQL']	= 1;					// Préparatif_sql.php
-		\$tab['DebugLevel_CC']	= 1;					// Manipulation_<element>.php
-		\$tab['DebugLevel_PHP']	= 1;					// PHP original debug level
-		\$tab['DebugLevel_JS']	= 1;					// JavaScript
+		\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;		// Préparatif_sql.php
+		\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;		// Manipulation_<element>.php
+		\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;		// PHP original debug level
+		\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;		// JavaScript
 		\$tab['LogTarget']		= \"internal\";			// 'systeme' (apache log), 'echo' (affichage erreur sur l'ecran), 'aucun' (conserve la comptabilité des états)
 		
 		\$tab['contexte_d_execution']	= \"render\";			//deprecated

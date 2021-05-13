@@ -43,6 +43,7 @@ class BaseToolSet {
 	private function __construct() {
 		include_once ("current/engine/utility/ClassLoader.php");			// Make sure we got this loaded.
 		$ClassLoaderObj = ClassLoader::getInstance();
+		error_log("BREAKPOINT");
 		$ClassLoaderObj->provisionClass('LogManagement');
 		$ClassLoaderObj->provisionClass('Time');
 		$ClassLoaderObj->provisionClass('Mapper');
@@ -52,9 +53,9 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('ConfigurationManagement');
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
+		$ClassLoaderObj->provisionClass('I18nTrans');
 		$ClassLoaderObj->provisionClass('SddmTools');
 		$ClassLoaderObj->provisionClass('DalFacade');
-		$ClassLoaderObj->provisionClass('I18nTrans');
 		$ClassLoaderObj->provisionClass('InteractiveElements');
 		$ClassLoaderObj->provisionClass('RenderForm');
 		$ClassLoaderObj->provisionClass('RenderModule');
@@ -75,8 +76,8 @@ class BaseToolSet {
 		$this->CMObj					= ConfigurationManagement::getInstance();
 		$this->CMObj->InitBasicSettings();
 		$this->AUObj					= AuthenticateUser::getInstance();
-		$this->SddmToolsObj				= SddmTools::getInstance();
 		$this->I18nTransObj				= I18nTrans::getInstance();
+		$this->SddmToolsObj				= SddmTools::getInstance();
 		$this->InteractiveElementsObj	= InteractiveElements::getInstance();
 		$this->RenderFormObj			= RenderForm::getInstance();
 		$this->RenderModuleObj			= RenderModule::getInstance();

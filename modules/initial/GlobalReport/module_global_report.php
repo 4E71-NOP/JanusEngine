@@ -82,7 +82,7 @@ class ModuleGlobalReport {
 		
 		$CurrentTab = 5;	
 		if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
-			$tmp = $this->reportTab07($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$tmp = $this->sqlReportTab($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
@@ -349,7 +349,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		}
 		$i = 2;
 		foreach ( $TableStats as &$A ) {
-			
+			$pv['mem_b4'] =0;
 			if ( $i == 2 ) { $sg['tempsAV'] = $A['temps']; }
 			$A['TempsPerf'] =  round ( ($A['temps'] - $sg['tempsAV']), 4 );
 			$A['TempsCheckpoint'] =  round ($A['temps'] - $sg['TempsMin'], 4 );
@@ -458,17 +458,17 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab07 (&$infos){
+	private function sqlReportTab (&$infos){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = array();
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";  
-		$Content['1']['2']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l12');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l13');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['3']['style'] = "text-align: center;";  
-		$Content['1']['4']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t6l14');	$Content['1']['4']['class'] = $block."_tb3";
+		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l11');	$Content['1']['1']['style'] = "text-align: center;";  
+		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l12');
+		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l13');	$Content['1']['3']['style'] = "text-align: center;";  
+		$Content['1']['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l14');
 		
 		$i = 2;
 		foreach ( $bts->LMObj->getSqlQueryLog() as $A ) {
@@ -476,17 +476,15 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			
 			$queryTime = round( ( $A['temps_fin'] - $A['temps_debut'] ) , 4);
 			
-			$Content[$i]['1']['cont'] = $A['nbr'];				$Content[$i]['1']['style'] = "text-align: center;"; $Content[$i]['1']['tc'] = 1;
-			$Content[$i]['2']['cont'] = $A['nom'];																	$Content[$i]['2']['tc'] = 2;
-			$Content[$i]['3']['cont'] = $queryTime;				$Content[$i]['3']['style'] = "text-align: center;"; $Content[$i]['3']['tc'] = 1;
-			$Content[$i]['4']['cont'] = $query;
-			$Content[$i]['4']['tc'] = 1;
+			$Content[$i]['1']['cont']	= $A['nbr'];		$Content[$i]['1']['style']	= "text-align: center;";
+			$Content[$i]['2']['cont']	= $A['nom'];		$Content[$i]['2']['style']	= "font-size:75%;";
+			$Content[$i]['3']['cont']	= $queryTime;		$Content[$i]['3']['style']	= "text-align: center;font-size:75%;";
+			$Content[$i]['4']['cont']	= $query;			$Content[$i]['4']['style']	= "font-size:60%;";
 			if ( isset ($A['signal']) && $A['signal'] != "OK")	{
 				// 		outil_debug($A, "A");
-				$Content[$i]['4']['cont']	.= "<br>\r" . $A['err_no']." : ".$A['err_msg'];
+				$Content[$i]['4']['cont']	.= "<br>\rErr N°=" . $A['err_no']." : ".$A['err_msg'];
 				$Content[$i]['4']['class']	= $block."_warning";
-				$Content[$i]['4']['style']	= "font-weight: bold";
-				$Content[$i]['4']['tc']		= 2;
+				$Content[$i]['4']['style']	.= " font-weight: bold;";
 			}
 			$i++;
 		}

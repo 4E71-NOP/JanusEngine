@@ -59,38 +59,42 @@ class I18nTrans {
 	public function apply($data) { 
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		if ( is_array($data)) {
-			$tab0 = $this->I18nTrans;
-			switch ($data['type']){
-				case "array": 
-					if ( is_array($data[$CurrentSetObj->getDataEntry('language')])){
-						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
-						$this->I18nTrans = array_merge ($tab0, $data[$CurrentSetObj->getDataEntry ('language')]);
-					}
-					else {
-						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't merge data. It's not an array."));
-					}
-					break;
-				case "file":
-					switch ($data['format']) {
-						case 'php':
-							$i18n = array();
-							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading ".$data['file']));
-							include($data['file']); // will create $i18n
+		if ( !empty($CurrentSetObj->getDataEntry('language')) ) {
+			if (is_array($data)) {
+				$tab0 = $this->I18nTrans;
+				switch ($data['type']){
+					case "array": 
+						if ( is_array($data[$CurrentSetObj->getDataEntry('language')])){
 							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
-							$this->I18nTrans = array_merge ($tab0, $i18n);
-							break;
-						case 'lang':
-							// Some day...
-							break;
-					}
-				break;
+							$this->I18nTrans = array_merge ($tab0, $data[$CurrentSetObj->getDataEntry ('language')]);
+						}
+						else {
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't merge data. It's not an array."));
+						}
+						break;
+					case "file":
+						switch ($data['format']) {
+							case 'php':
+								$i18n = array();
+								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading ".$data['file']));
+								include($data['file']); // will create $i18n
+								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
+								$this->I18nTrans = array_merge ($tab0, $i18n);
+								break;
+							case 'lang':
+								// Some day...
+								break;
+						}
+					break;
+				}
 			}
-
+			if (is_array($file)) {
+			}
+		}
+		else {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : CurrentSetObj->language is empty. I don't know where to put the data."));
 		}
 		
-		if (is_array($file)) {
-		}
 	}
 	
 	//@formatter:off

@@ -55,19 +55,19 @@ if ( $pv['ObjectMode'] == 1 ) {
 		$tab['tabprefix']			= "Ht_";
 		$tab['maid_stats_nombre_de_couleurs'] = 5;
 		$tab['SessionMaxAge'] = (60*60*24);
-		$tab['pde_img_aff'] = 1;
-		$tab['pde_img_h'] = 32;						//height
-		$tab['pde_img_l'] = 32;						//width
+		$tab['pde_img_aff'] = 1;					// DEPRECATED 
+		$tab['pde_img_h'] = 32;						// DEPRECATED //height
+		$tab['pde_img_l'] = 32;						// DEPRECATED //width
 		
-		$tab['DebugLevel_SQL'] = 1;					// Préparatif_sql.php
-		$tab['DebugLevel_CC'] = 1;					// Manipulation_<element>.php
-		$tab['DebugLevel_PHP'] = 1;					// PHP original debug level
-		$tab['DebugLevel_JS'] = 1;					// JavaScript
-		$tab['LogTarget'] = "internal";				// 'systeme' (apache log), 'echo' (affichage erreur sur l'ecran), 'aucun' (conserve la comptabilité des états)
+		$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// Préparatif_sql.php
+		$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Manipulation_<element>.php
+		$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// PHP original debug level
+		$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// JavaScript
+		$tab['LogTarget'] = "internal";				// DEPRECATED 'systeme' (apache log), 'echo' (affichage erreur sur l'ecran), 'aucun' (conserve la comptabilité des états)
 		
-		$tab['contexte_d_execution'] = "render";
+		$tab['contexte_d_execution'] = "render";	// DEPRECATED 
 		$tab['execution_context'] 	= "render";
-		$tab['mode_operatoire'] = "connexion_directe";
+		$tab['mode_operatoire'] = "connexion_directe";	// DEPRECATED 
 		$tab['InsertStatistics'] = 1;
 		
 		$tab['commandLineEngine'] = array(

@@ -106,10 +106,16 @@ class LogManagement {
 		return $this->StatisticsLog [$data];
 	}
 	
+	/**
+	 * Increase number of SQL queries in the log array
+	 */
 	public function IncreaseSqlQueries() {
 		$this->StatisticsLog [$this->StatisticsIndex] ['SQL_queries'] ++;
 	}
 	
+	/**
+	 * Inserts an entry in the SqlQueryLog array
+	 */
 	public function logSQLDetails($data) {
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['temps_debut'] = $data [0];
 		$this->SqlQueryLog [$this->SlmSqlIdx] ['nbr'] = $data [1];
@@ -122,6 +128,9 @@ class LogManagement {
 		$this->SlmSqlIdx ++;
 	}
 	
+	/**
+	 * Change the last entry in the SqlQueryLog array
+	 */
 	public function logSQLMoreDetailsOnLast($data) {
 		$idx = $this->SlmSqlIdx - 1;
 		

@@ -67,4 +67,5 @@ add translation	lang	"fra"		package	"initial"		name	"fileSelectorC1"			text	"Nom
 add translation	lang	"fra"		package	"initial"		name	"fileSelectorC2"			text	"Taille";
 add translation	lang	"fra"		package	"initial"		name	"fileSelectorC3"			text	"Date";
 
-
+add translation	lang	"fra"		package	"initial"		name	"SqlNoResultReturned1"		text	"Aucune ligne retournée!";
+add translation	lang	"fra"		package	"initial"		name	"SqlNoResultReturned2"		text	"Aucune ligne retournée pour cette requête.";
