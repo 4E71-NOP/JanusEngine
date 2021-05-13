@@ -11,33 +11,38 @@
 // --------------------------------------------------------------------------------------------
 //	Le nom du site utilisé pour la base de données
 //	The name used for the database
-//	Gen : 2017-08-15
-//	www.multiweb-manager.net
+//	Gen : 2018-07-01
+//	www.hydr.net
 
 // Vous serrez peut etre obligé de rajouter le préfix de votre compte chez l'hébergeur.
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
-$db_['type']			= "mysql";
-$db_['host']			= "localhost";
-$db_['dal']			= "MYSQLI";
-$db_['user_login']		= "texmex_MWMdbuser";
-$db_['user_password']	= "spacelion";
-$db_['dbprefix']		= "texmex_mwm";
-$db_['tabprefix']		= "mt_";
+if ( $pv['ObjectMode'] == 1 ) {
+	function returnConfig () {
+		$tab = array();
+		$tab['type']				= "mysql";
+		$tab['charset']				= "utf8mb4";
+		$tab['host']				= "localhost";
+		$tab['dal']					= "MYSQLI";						// MYSQLI , PDOMYSQL
+		$tab['db_user_login']		= "texmex_HydreBDD";
+		$tab['db_user_password']	= "Celeste";
+		$tab['dbprefix']			= "texmex_Hdr";
+		$tab['tabprefix']			= "Ht_";
+		$tab['SessionMaxAge'] = (60*60*24);							// 24 hours by default
+		
+		$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
+		$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Command console
+		$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
+		$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
 
-//--------------------------------------------------------------------------------------------
-//	Admin_info_debug
-$maid_stats_nombre_de_couleurs = 5;
-
-//--------------------------------------------------------------------------------------------
-//	Session maximum time
-$MWM_session_max_time = (60*60*24);
-
-//--------------------------------------------------------------------------------------------
-//	websites-data/00_Hydre/document/fra_layout_de_l_equipe_p01.php
-$pde_img_aff = 1;
-$pde_img_h = 32;																	//height
-$pde_img_l = 32;																	//width
+		$tab['execution_context'] 	= "render";
+		$tab['InsertStatistics'] = 1;
+		$tab['commandLineEngine'] = array(
+				"state"		=>	"enabled",
+		);
+		return $tab;
+	}
+}
 
 ?>

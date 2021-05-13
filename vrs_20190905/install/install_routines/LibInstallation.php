@@ -406,28 +406,20 @@ if ( \$pv['ObjectMode'] == 1 ) {
 		\$tab = array();
 		\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
 		\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
-		\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";
+		\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";						// MYSQLI , PDOMYSQL
 		\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
 		\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
 		\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
 		\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
-		\$tab['maid_stats_nombre_de_couleurs'] = 5;
 		\$tab['SessionMaxAge']	= (60*60*24);
-		\$tab['pde_img_aff']	= 1;
-		\$tab['pde_img_h']		= 32;					//height
-		\$tab['pde_img_l']		= 32;					//width
 		
-		\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;		// Préparatif_sql.php
-		\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;		// Manipulation_<element>.php
-		\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;		// PHP original debug level
-		\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;		// JavaScript
-		\$tab['LogTarget']		= \"internal\";			// 'systeme' (apache log), 'echo' (affichage erreur sur l'ecran), 'aucun' (conserve la comptabilité des états)
+		\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
+		\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
+		\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
+		\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
 		
-		\$tab['contexte_d_execution']	= \"render\";			//deprecated
 		\$tab['execution_context']		= \"render\";
-		\$tab['mode_operatoire']		= \"connexion_directe\";
 		\$tab['InsertStatistics']		= 1;
-		
 		\$tab['commandLineEngine'] = array(
 				\"state\"		=>	\"enabled\",
 		);

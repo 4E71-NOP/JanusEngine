@@ -214,7 +214,6 @@ foreach ( $Support['PHP'] as &$A ) {
 }
 $Support['PHP_version'] = "PHP vrs " . phpversion();
 
-$maid_stats_nombre_de_couleurs = 5;
 // --------------------------------------------------------------------------------------------
 
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 21, 6);

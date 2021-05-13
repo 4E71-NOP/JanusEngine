@@ -19,7 +19,7 @@ class ConfigurationManagement {
 	 * @return multitype:
 	 * The $Configuration array contains:
 	 * 'type', 'host', 'dal', 'db_user_login', 'db_user_password', 'dbprefix', 'tabprefix',
-	 * 'maid_stats_nombre_de_couleurs', 'SessionMaxAge', 'pde_img_aff', 'pde_img_h', 'pde_img_l', 
+	 * 'SessionMaxAge', 'pde_img_aff', 'pde_img_h', 'pde_img_l', 
 	 * 'DebugLevel_SQL', 'DebugLevel_CC', 'DebugLevel_PHP', 'DebugLevel_JS', 'LogTarget'
 	 * 'execution_context', 'InsertStatistics', 'installMonitor'
 	 *  
