@@ -96,14 +96,14 @@ class ModuleGlobalReport {
 		
 		$CurrentTab = 7;	
 		if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
-			$tmp = $this->reportTab09($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		$CurrentTab = 8;	
 		if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
-			$tmp = $this->reportTab10($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+			$tmp = $this->variablesReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
@@ -507,22 +507,22 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * Returns the internal report into an array for RenderTables:render()
 	 * @param array $infos
 	 * @return array
-	 */private function reportTab09 (&$infos){
+	 */private function internalLogReport (&$infos){
 	 	$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = array();
 		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
-		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l11');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l12');	$Content['1']['2']['class'] = $block."_tb2";
-		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l13');	$Content['1']['3']['class'] = $block."_tb2";	$Content['1']['3']['style'] = "text-align: center;";
+		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l11');	$Content['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l12');	
+		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l13');	$Content['1']['3']['style'] = "text-align: center;";
 		
 		$i = 2;
 		foreach ( $bts->LMObj->getInternalLog() as $A ) {
-			$Content[$i]['1']['cont'] = $A['nbr'];			$Content[$i]['1']['tc'] = 1;
-			$Content[$i]['2']['cont'] = $A['origin'];		$Content[$i]['2']['tc'] = 1;	$Content[$i]['2']['style'] = "white-space:nowrap;";
-			$Content[$i]['3']['cont'] = $A['message'];		$Content[$i]['3']['tc'] = 1;
+			$Content[$i]['1']['cont'] = $A['nbr'];		
+			$Content[$i]['2']['cont'] = $A['origin'];	$Content[$i]['2']['style'] = "font-size:60%;";
+			$Content[$i]['3']['cont'] = $A['message'];	$Content[$i]['3']['style'] = "font-size:60%;";
 			$i++;
 		}
 		
@@ -541,7 +541,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab10 (&$infos){
+	private function variablesReport (&$infos){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -556,8 +556,8 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		foreach ( $bts->LMObj->getDebugLog() as $A ) {
 			$Content[$i]['1']['cont'] = $A['name'];
 			$Content[$i]['2']['cont'] = $bts->StringFormatObj->print_r_html($A['data']);
-			$Content[$i]['1']['style'] = "vertical-align:top;font-size:10px;";
-			$Content[$i]['2']['style'] = "font-size:10px;";
+			$Content[$i]['1']['style'] = "vertical-align:top;font-size:75%;";
+			$Content[$i]['2']['style'] = "font-size:60%;";
 			$i++;
 		}
 		

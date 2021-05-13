@@ -171,7 +171,7 @@ class LogManagement {
 		
 		$data = array (
 				"nbr" => $this->InternalLogIdx,
-				"origin" => ( $origin === false ) ? "": $originStr,
+				"origin" => ( $origin === false ) ? "*": $originStr,
 				"message" => ($msgFlag == 1) ? $log['msg']: "EMPTY LOG !!!!",
 		);
 		
