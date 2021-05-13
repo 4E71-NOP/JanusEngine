@@ -43,6 +43,7 @@ add category	name "c_fra_outils"								parent "c_fra_summary_admin"		position 0
 add category	name "c_fra_outil_conversion"					parent "c_fra_outils"				position 01	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Conversion de type"					desc "Conversion"									group "Auteurs_debutant"			slug "toolset-type-conversion"		article "fra_toolset_type_conversion";	
 add category	name "c_fra_outil_nettoyage"					parent "c_fra_outils"				position 02	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Nettoyage de script"					desc "Nettoyage"									group "Auteurs_debutant"			slug "toolset-cleanup-script"		article "fra_toolset_cleanup_script";	
 add category	name "c_fra_url_utiles"							parent "c_fra_outils"				position 03	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "URLs utiles"							desc "Couteaux suisse"								group "Auteurs_debutant"			slug "toolset-useful-links"			article "fra_toolset_useful_links";		
+add category	name "c_fra_caligraph_decoration_test_page"		parent "c_fra_outils"				position 04	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Page de test Caligraphe"     		desc "Test"							            	group "Auteurs_debutant"			slug "caligraph-decoration-test-page"	article "fra_caligraph_decoration_test_page_p01";		
 
 
 
@@ -91,6 +92,7 @@ add category	name "c_eng_tools"								parent "c_eng_summary_admin"		position 07
 add category	name "c_eng_converting_tools"					parent "c_eng_tools"				position 01	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Converting tool"					desc "Converting"									group "Auteurs_debutant"			slug "toolset-type-conversion"		article "eng_toolset_type_conversion";	
 add category	name "c_eng_cleaning_tools"						parent "c_eng_tools"				position 02	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Cleaning tool"					desc "Cleaning"										group "Auteurs_debutant"			slug "toolset-cleanup-script"		article "eng_toolset_cleanup_script";	
 add category	name "c_eng_useful_URLs"						parent "c_eng_tools"				position 03	type MENU_ADMIN			lang eng		state ONLINE	deadline initial_online	title "Useful URLs"						desc "Swiss army knife"								group "Auteurs_debutant"			slug "toolset-useful-links"			article "eng_toolset_useful_links";		
+add category	name "c_eng_caligraph_decoration_test_page"		parent "c_eng_outils"				position 04	type MENU_ADMIN			lang fra	state ONLINE	deadline initial_online	title "Page de test Caligraphe"     		desc "Test"							            	group "Auteurs_debutant"			slug "caligraph-decoration-test-page"	article "eng_caligraph_decoration_test_page_p01";		
 
 
 

@@ -6,6 +6,7 @@ add article	name "eng_article_not_found_p01"					reference "eng_article_not_foun
 add article	name "eng_article_moved_p01"						reference "eng_article_moved"				slug "article-moved"					deadline initial_online		desc "Article indisponible"			title "404 - Article indisponible"				subtitle "Page inexistante"									page "1"	validation_state "VALID"	config "nothing";
 add article	name "eng_article_validation_p01"					reference "eng_article_validation"			slug "article-validation"				deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Select the article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_article_validation_p02"					reference "eng_article_validation"			slug "article-validation"				deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Validate the article"								page "2"	validation_state "VALID"	config "no_menu";
+add article	name "eng_caligraph_decoration_test_page_p01"		reference "eng_caligraph_decoration_test_page_p01"	slug "caligraph-decoration-test-page"	deadline initial_online	desc "Test"		              	title "Page de test Caligraphe"					subtitle "Valider l'article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_category_management_p01"					reference "eng_category_management"			slug "category-management"				deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Select the category"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_category_management_p02"					reference "eng_category_management"			slug "category-management"				deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Modify the category"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_command_console_p01"						reference "eng_command_console"				slug "command-console"					deadline initial_online		desc "Admin in English"				title "Command console"							subtitle "Interface"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name default_layout;
@@ -52,6 +53,7 @@ assign	document name "doc_uni_article_not_found_p01.php"				to_article	"eng_arti
 assign	document name "doc_uni_article_moved_p01.php"				    to_article  "eng_article_moved_p01";
 assign	document name "doc_uni_article_validation_p01.php"				to_article	"eng_article_validation_p01";
 assign	document name "doc_uni_article_validation_p02.php"				to_article	"eng_article_validation_p02";
+assign	document name "doc_uni_caligraph_decoration_test_page_p01.php"	to_article  "eng_caligraph_decoration_test_page_p01";
 assign	document name "doc_uni_category_management_p01.php"				to_article	"eng_category_management_p01";
 assign	document name "doc_uni_category_management_p02.php"				to_article	"eng_category_management_p02";
 assign	document name "doc_uni_command_console_p01.php"					to_article	"eng_command_console_p01";

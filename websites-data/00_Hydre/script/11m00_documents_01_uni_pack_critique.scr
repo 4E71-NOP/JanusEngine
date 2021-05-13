@@ -48,6 +48,12 @@ share document	name "doc_uni_article_validation_p02.php"	with_website Hydre	modi
 update document	name "doc_uni_article_validation_p02.php"	checked YES	validator "*user_install*"	from_site Hydre;
 
 
+add document	name "doc_uni_caligraph_decoration_test_page_p01.php"	type PHP;
+insert content	file "staffTools/uni_caligraph_decoration_test_page_p01.php"		into "doc_uni_caligraph_decoration_test_page_p01.php";
+share document	name "doc_uni_caligraph_decoration_test_page_p01.php"	with_website Hydre	modification NO;
+update document	name "doc_uni_caligraph_decoration_test_page_p01.php"	checked YES	validator "*user_install*"	from_site Hydre;
+
+
 add document	name "doc_uni_category_management_p01.php"	type PHP;
 insert content	file "staffTools/uni_category_management_p01.php"		into "doc_uni_category_management_p01.php";
 share document	name "doc_uni_category_management_p01.php"	with_website Hydre	modification NO;

@@ -103,7 +103,6 @@ class ModuleSearch {
 		}
 		return $Content;
 	}
-
 	
 }
 ?>
