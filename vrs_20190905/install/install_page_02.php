@@ -63,13 +63,13 @@ $tab_index = 1 ;
 if ( $bts->RequestDataObj->getRequestDataEntry('resume_detail_desc') == "on") { $tab_index++; }
 if ( $bts->RequestDataObj->getRequestDataEntry('resume_detail_execsql') == "on") { $tab_index += 2; }
 
-$tab_fc['1'] = $block."_fca ".$block."_t1";
-$tab_fc['2'] = $block."_fca ".$block."_t1";
-$tab_fc['3'] = $block."_fca ".$block."_t1";
-$tab_fc['4'] = $block."_fcb ".$block."_t1";
-$tab_fc['5'] = $block."_fcc ".$block."_tb2";
-$tab_fc['6'] = $block."_fcd ".$block."_tb3";
-$tab_fc['7'] = $block."_fcd ".$block."_tb4";
+$tab_fc['1'] = $Block."_fca ".$Block."_t1";
+$tab_fc['2'] = $Block."_fca ".$Block."_t1";
+$tab_fc['3'] = $Block."_fca ".$Block."_t1";
+$tab_fc['4'] = $Block."_fcb ".$Block."_t1";
+$tab_fc['5'] = $Block."_fcc ".$Block."_tb2";
+$tab_fc['6'] = $Block."_fcd ".$Block."_tb3";
+$tab_fc['7'] = $Block."_fcd ".$Block."_tb4";
 
 $tab_fc1 = $tab_fc[$tab_index];	$tab_index++;
 $tab_fc2 = $tab_fc[$tab_index];	$tab_index++;
@@ -336,13 +336,13 @@ sort ( $installationReport['script']);
 sort ( $installationReport['tables_post_install']);
 
 $style1 = array (
-	"block" => $block,
+	"block" => $Block,
 	"tc"=>1,
 	"titles" => array($bts->I18nTransObj->getI18nTransEntry('t1c1'),	$bts->I18nTransObj->getI18nTransEntry('t1c2'),	$bts->I18nTransObj->getI18nTransEntry('t1c3'),	$bts->I18nTransObj->getI18nTransEntry('t1c4'),	),
 	"cols" => array( 'file', 'OK', 'WARN', 'ERR'),
 );
 $style2 = array (
-	"block" => $block,
+	"block" => $Block,
 	"tc"=>1,
 	"titles" => array($bts->I18nTransObj->getI18nTransEntry('t9c1'),	$bts->I18nTransObj->getI18nTransEntry('t9c2'),	$bts->I18nTransObj->getI18nTransEntry('t9c3'),	$bts->I18nTransObj->getI18nTransEntry('t9c4'),	$bts->I18nTransObj->getI18nTransEntry('t9c5'),	),
 	"cols" => array('temps_debut', 'nbr', 'nom', 'signal', 'err_no', 'err_msg', 'temps_fin'),
@@ -389,8 +389,8 @@ $CurrentTab++;
 $SB = array();
 $SB['id']				= "SelectBtn";
 $SB['type']				= "button";
-$SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
-$SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s2_h";
+$SB['initialStyle']		= $Block."_tb3 ".$Block."_submit_s1_n";
+$SB['hoverStyle']		= $Block."_tb3 ".$Block."_submit_s2_h";
 $SB['onclick']			= "";
 $SB['message']			= $bts->I18nTransObj->getI18nTransEntry('BtnSelect');
 $SB['mode']				= 1;

@@ -40,11 +40,12 @@ class ModuleQuickSkin {
 
 		// $LOG_TARGET = $bts->LMObj->getInternalLogTarget();
 		// $bts->LMObj->setInternalLogTarget("none");
-		
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
 		$Content = "
-		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."'>\r
+		<table class='".$Block._CLASS_TABLE_STD_."'>\r
 		<tr>\r<td>\r
-		".$bts->I18nTransObj->getI18nTransEntry('txt1')." <span class='" . $ThemeDataObj->getThemeName().$infos['block']."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
+		".$bts->I18nTransObj->getI18nTransEntry('txt1')." <span class='" . $Block."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 		</td>\r</tr>\r
 		";
 		$grp = $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
@@ -69,7 +70,7 @@ class ModuleQuickSkin {
 				".$bts->I18nTransObj->getI18nTransEntry('txt2')."
 				</td>\r</tr>\r
 				<tr>\r<td>\r
-				<select name='userForm[user_pref_theme]' class='" . $ThemeDataObj->getThemeName().$infos['block']."_form_1 " . $ThemeDataObj->getThemeName().$infos['block']."_t3'>
+				<select name='userForm[user_pref_theme]' class='" . $Block."_form_1 " . $Block."_t3'>
 				";
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
@@ -91,8 +92,8 @@ class ModuleQuickSkin {
 				$SB = array(
 					"id"				=> "bouton_module_quicktheme",
 					"type"				=> "submit",
-					"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
-					"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
+					"initialStyle"		=> $Block."_submit_s2_n",
+					"hoverStyle"		=> $Block."_submit_s2_h",
 					"onclick"			=> "",
 					"message"			=> $bts->I18nTransObj->getI18nTransEntry('bouton'),
 					"mode"				=> 0,

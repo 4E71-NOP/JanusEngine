@@ -31,7 +31,8 @@ class ModuleCalendar {
 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
 		$l = $CurrentSetObj->getDataEntry ('language');
-		
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
 		$tabDay = array(
 			1 => "monday",
 			2 => "tuesday",
@@ -72,14 +73,14 @@ class ModuleCalendar {
 		$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - $pv['table_width'] ) /2);
 		
 		$Content = "
-		<table class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
+		<table class='".$Block._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
 						
 		<tr>\r
 		<td style='font-size:150%'>\r".$bts->I18nTransObj->getI18nTransEntry($tabDay[$date['day']])."</td>\r
 		<td rowspan='2' style='font-size: ".( $pv['table_height'] - 8 )."px; font-weight: bold; vertical-align: middle;'>\r".$date['number']."</td>\r
 		</tr>\r
 		<tr>\r
-		<td style='font-size:200%' class='".$ThemeDataObj->getThemeName().$infos['block']._CLASS_TXT_FADE_."'>\r".$bts->I18nTransObj->getI18nTransEntry($tabMonth[$date['month']])."</td>\r
+		<td style='font-size:200%' class='".$Block._CLASS_TXT_FADE_."'>\r".$bts->I18nTransObj->getI18nTransEntry($tabMonth[$date['month']])."</td>\r
 		</tr>\r
 		</table>\r
 		";

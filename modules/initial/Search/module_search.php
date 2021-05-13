@@ -31,10 +31,11 @@ class ModuleSearch {
 
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
-		
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
 		$Content = "";
 		if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']) == 1 ) {
-			$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_tb2'>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>
+			$Content .= "<span>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>
 			<form ACTION='index.php?' method='post'>\r".
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
 			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
@@ -48,20 +49,20 @@ class ModuleSearch {
 			
 			<table style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')-16)."px; margin-right:auto; margin-left:auto' >
 			<tr>\r
-			<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t2'>\r
+			<td>\r
 			<input type='radio' name='searchForm[searchType]'	value='T'>".$bts->I18nTransObj->getI18nTransEntry('radio1')."\r
 			</td>\r
 			</tr>\r
 			
 			<tr>\r
-			<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t2'>\r
+			<td>\r
 			<input type='radio' name='searchForm[searchType]'	value='A' checked>".$bts->I18nTransObj->getI18nTransEntry('radio2')."\r
 			</td>\r
 			</tr>\r
 				
 			<tr>\r
 			<td colspan=2 style='text-align: center;'>\r
-			<input type='text' name='searchForm[search]' size='10' maxlength='64' value='' class='".$ThemeDataObj->getThemeName().$infos['block']."_form_2 ".$ThemeDataObj->getThemeName().$infos['block']."_t3'>
+			<input type='text' name='searchForm[search]' size='10' maxlength='64' value=''>
 			</td>\r
 			</tr>\r
 			<tr>\r
@@ -72,8 +73,8 @@ class ModuleSearch {
 			$SB = array(
 				"id"				=> "bouton_module_recherche",
 				"type"				=> "submit",
-				"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_t3 ".$ThemeDataObj->getThemeName().$infos['block']."_submit_s1_n",
-				"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_t3 ".$ThemeDataObj->getThemeName().$infos['block']."_submit_s1_h",
+				"initialStyle"		=> $Block."_submit_s1_n",
+				"hoverStyle"		=> $Block."_submit_s1_h",
 				"onclick"			=> "",
 				"message"			=> $bts->I18nTransObj->getI18nTransEntry('txt2'),
 				"mode"				=> 0,

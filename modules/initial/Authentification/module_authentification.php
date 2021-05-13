@@ -28,11 +28,10 @@ class ModuleAuthentification {
 		$bts->MapperObj->setSqlApplicant("ModuleAuthentification");
 
 		$bts->LMObj->setInternalLogTarget(LOG_TARGET);
-		
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
-		
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
 		$cnxResult = $bts->AUObj->getDataEntry('errorType');
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
@@ -45,7 +44,7 @@ class ModuleAuthentification {
 					$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
 					$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
 					) {
-				$Content .= "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_warning' style='text-align: center;'>". $bts->I18nTransObj->getI18nTransEntry('cnxResult'.$cnxResult) ."</span>"; 
+				$Content .= "<span class='" . $Block."_warning' style='text-align: center;'>". $bts->I18nTransObj->getI18nTransEntry('cnxResult'.$cnxResult) ."</span>"; 
 			}
 
 			$Content .= "
@@ -71,8 +70,8 @@ class ModuleAuthentification {
 			$SB = array(
 				"id"				=> "bouton_authentif",
 				"type"				=> "submit",
-				"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
-				"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
+				"initialStyle"		=> $Block."_submit_s2_n",
+				"hoverStyle"		=> $Block."_submit_s2_h",
 				"onclick"			=> "",
 				"message"			=> $bts->I18nTransObj->getI18nTransEntry('login'),
 				"mode"				=> 0,
@@ -91,8 +90,8 @@ class ModuleAuthentification {
 			$SB = array(
 				"id"				=> "bouton_deconexion",
 				"type"				=> "submit",
-				"initialStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_n",
-				"hoverStyle"		=> $ThemeDataObj->getThemeName().$infos['block']."_submit_s2_h",
+				"initialStyle"		=> $Block."_submit_s2_n",
+				"hoverStyle"		=> $Block."_submit_s2_h",
 				"onclick"			=> "",
 				"message"			=> $bts->I18nTransObj->getI18nTransEntry('disconnect'),
 				"mode"				=> 0,
@@ -100,10 +99,10 @@ class ModuleAuthentification {
 				"lastSize"			=> 0,
 			);
 		
-			$pv['SSL_etat'] = "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('via80')."</span>\r"; 
+			$pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('via80')."</span>\r"; 
 			if ( isset($_SERVER['HTTPS']) ) {
 				if ( isset($_SERVER['SERVER_PORT'] ) && ( $_SERVER['SERVER_PORT'] == '443' ) ) { 
-					$pv['SSL_etat'] = "<span class='" . $ThemeDataObj->getThemeName().$infos['block']."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('viassl')."</span>\r"; 
+					$pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('viassl')."</span>\r"; 
 				}
 			}
 		

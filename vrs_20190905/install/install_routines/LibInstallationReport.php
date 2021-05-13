@@ -97,15 +97,15 @@ class LibInstallationReport {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');	$Content['1']['1']['class'] = $block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');	$Content['1']['2']['class'] = $block."_tb3";
-		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');	$Content['1']['3']['class'] = $block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');	$Content['1']['4']['class'] = $block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');	$Content['1']['5']['class'] = $block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-// 		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');	$Content['1']['6']['class'] = $block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');	$Content['1']['1']['class'] = $Block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');	$Content['1']['2']['class'] = $Block."_tb3";
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');	$Content['1']['3']['class'] = $Block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');	$Content['1']['4']['class'] = $Block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
+		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');	$Content['1']['5']['class'] = $Block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
+// 		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');	$Content['1']['6']['class'] = $Block."_tb3";
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;

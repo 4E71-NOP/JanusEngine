@@ -50,8 +50,9 @@ class RenderTabs {
 		$tab['1'] = "visible";	$tab['2'] = "hidden";
 		$tab['3'] = $tab['4'] = $tab['5'] = $tab['6'] = $tab['7'] = $tab['8'] = $tab['9'] = $tab['10'] = &$tab['2'];
 		
-		$class = $ThemeDataObj->getThemeName().$infos['block']."_t2 ";//.theme_princ_B01_t1
-		$Content = "<div id='table_".$tab_infos['GroupName']."' class='".$class."' style='height:".($HeightABCD)."px'>\r";
+		// $class = $ThemeDataObj->getThemeName().$infos['block']."_t2 ";//.theme_princ_B01_t1
+		// $Content = "<div id='table_".$tab_infos['GroupName']."' class='".$class."' style='height:".($HeightABCD)."px'>\r";
+		$Content = "<div id='table_".$tab_infos['GroupName']."' style='height:".($HeightABCD)."px'>\r";
 		
 		$TabPosDim = array();
 		for ( $i = 1 ; $i <= $tab_infos['NbrOfTabs'] ; $i++ ) {

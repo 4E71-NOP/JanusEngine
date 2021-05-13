@@ -235,7 +235,7 @@ $infos = array(
 		)
 );
 
-$block = $ThemeDataObj->getThemeName().$infos['block'];
+$Block = $ThemeDataObj->getThemeName().$infos['block'];
 
 $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
 $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 0 );
@@ -245,7 +245,7 @@ $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 32
 $RenderDeco = RenderDeco50Exquisite::getInstance();
 
 $DocContent .= $RenderDeco->render($infos);
-// $Content .= "<p class='".$block."_tb7' style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('b01Invite']."</p>
+// $Content .= "<p class='".$Block."_tb7' style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('b01Invite']."</p>
 
 // --------------------------------------------------------------------------------------------
 $DocContent .= "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('title')."</h1>\r";
@@ -285,7 +285,7 @@ if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']
 			break;
 		case 1: 
 			$time = (time() - $itd['last_activity']['inst_nbr']);
-			if ( $time > 60 ) { $status = "<span class='".$block."_erreur ".$block."_tb4'>" .$bts->I18nTransObj->getI18nTransEntry('inactive') . ": " . $time . "s.</span>"; }
+			if ( $time > 60 ) { $status = "<span class='".$Block."_error'>" .$bts->I18nTransObj->getI18nTransEntry('inactive') . ": " . $time . "s.</span>"; }
 			else { $status = $bts->I18nTransObj->getI18nTransEntry('installState1'); }
 			break;	
 		case 3: $status = $bts->I18nTransObj->getI18nTransEntry('installState2');	break;
@@ -309,8 +309,8 @@ if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']
 	$isInactive = time() - $itd['last_activity']['inst_nbr'];
 	if ( $isInactive > 10 ) {
 		$lt++;
-		$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');						$T['Content'][$CurrentTab][$lt]['1']['class'] = $block."_error";
-		$T['Content'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";												$T['Content'][$CurrentTab][$lt]['2']['class'] = $block."_error"; 
+		$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');		$T['Content'][$CurrentTab][$lt]['1']['class'] = $Block."_error";
+		$T['Content'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";										$T['Content'][$CurrentTab][$lt]['2']['class'] = $Block."_error"; 
 	}
 	
 	if ($itd['end_date']['inst_nbr'] != 0 ) {

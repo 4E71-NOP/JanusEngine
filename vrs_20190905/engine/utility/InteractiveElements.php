@@ -48,7 +48,7 @@ class InteractiveElements {
 	public function renderSubmitButton (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
 		if ( strlen($infos['hoverStyle']) > 0 ) { 
 			$animation = " onmouseover=\"elm.ButtonHover('".$infos['id']."', '".$infos['hoverStyle']."');\" onmouseout=\"elm.ButtonHover('".$infos['id']."', '".$infos['initialStyle']."');\" ";
 		}
@@ -94,7 +94,6 @@ class InteractiveElements {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$i = &$infos['IconSelectFile'];
-// 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_width');
 		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_height');

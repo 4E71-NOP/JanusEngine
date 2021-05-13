@@ -390,15 +390,15 @@ class StringFormat {
 	public function makeSizeHumanFriendly( $infos, $size ) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$TabUnits = array(
-				"<span class='" . $block."_ok'>b</span>",
-				"<span class='" . $block."_warning'>Kb</span>",
-				"<span class='" . $block."_erreur " . $block."_tb3'>MB</span>",
-				"<span class='" . $block."_erreur " . $block."_tb4'>GB</span>"
+				"<span class='" . $Block."_ok'>b</span>",
+				"<span class='" . $Block."_warning'>Kb</span>",
+				"<span class='" . $Block."_erreur " . $Block."_tb3'>MB</span>",
+				"<span class='" . $Block."_erreur " . $Block."_tb4'>GB</span>"
 		);
 		if ($size == 0 ) {
-			return "0<span class='" . $block."_erreur " . $block."_tb3'>Kb</span>";
+			return "0<span class='" . $Block."_erreur " . $Block."_tb3'>Kb</span>";
 		}
 		else {
 			if ( $size < 0 ) { return "-".round(abs($size)/pow(1024,($i=floor(log(abs($size),1024)))),2)." ".$TabUnits[$i]; }

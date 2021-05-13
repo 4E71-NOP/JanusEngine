@@ -222,7 +222,7 @@ class FileSelectorRender {
 		switch ($displayType) {
 			case "imageMosaic" :
 				$baseURI = "http://" . $_SERVER ['HTTP_HOST'] . "/Hydr/";
-				$Content .= "<table class='mt_B01" . _CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
+				$Content .= "<table class='".$Block._CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
 				$x = 0;
 				foreach ( $fileList [1] as $A ) {
 					if ($x == 0) {
@@ -292,7 +292,7 @@ class FileSelectorRender {
 			
 			// --------------------------------------------------------------------------------------------
 			case "fileList" :
-				$Content .= "<table class='mt_B01" . _CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
+				$Content .= "<table class='".$Block._CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
 				$scoreMode = ($selectionMode == 'file') ? 0 : 4;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php selectionMode=`" . $selectionMode . "`;scoreMode=`" . $scoreMode . "`.") );
 

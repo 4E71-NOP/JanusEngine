@@ -100,7 +100,7 @@ $CurrentTab = 1;
 //	Dectection of installed support.
 //	This is only relevant when this program reside on the server
 // --------------------------------------------------------------------------------------------
-$pv['a'] = "<span class='" . $block."_warning'>";
+$pv['a'] = "<span class='" . $Block."_warning'>";
 $pv['b'] = "</span>";
 
 $pv['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='24' height='24' border='0'>";
@@ -230,10 +230,10 @@ $CellTab['t1l8c2']	= $Support['response'];
 $CellTab['t1l9c2']	= "<input type='text' size='2' name='form[memory_limit]'	value=''>M";
 $CellTab['t1l10c2']	= "<input type='text' size='2' name='form[time_limit]'		value=''>s";
 
-if ( intval(str_replace( "M", "", $ServerInfosObj->getServerInfosEntry('memory_limit') )) < 128 ) { $CellTab['t1l6c2'] .= " (<span class='".$block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
+if ( intval(str_replace( "M", "", $ServerInfosObj->getServerInfosEntry('memory_limit') )) < 128 ) { $CellTab['t1l6c2'] .= " (<span class='".$Block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
 else { $CellTab['t1l6c2'] .= $bts->I18nTransObj->getI18nTransEntry('test_ok'); }
 
-if ( $ServerInfosObj->getServerInfosEntry('max_execution_time') >= 60 ) { $CellTab['t1l7c2'] .= " (<span class='".$block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
+if ( $ServerInfosObj->getServerInfosEntry('max_execution_time') >= 60 ) { $CellTab['t1l7c2'] .= " (<span class='".$Block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
 else { $CellTab['t1l7c2'] .= $bts->I18nTransObj->getI18nTransEntry('test_ok'); }
 
 for ( $i = 1 ; $i <= 10 ; $i++ ) {
@@ -414,8 +414,8 @@ $lt++;
 
 $SB['id']				= "bouton_install_testdb";
 $SB['type']				= "button";
-$SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
-$SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s1_h";
+$SB['initialStyle']		= $Block."_submit_s1_n";
+$SB['hoverStyle']		= $Block."_submit_s1_h";
 $SB['onclick']			= "toggleDiv ('cnxToDB', false ); toggleDiv ('HydrDBAlreadyExist', false ); test_cnx_db(); var tmp_cnx_chaine = document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[db_admin_user]'].value + '@' + document.forms['".$FormName."'].elements['form[host]'].value  + ', Database: ' + document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[dbprefix]'].value ; InsereValeur ( tmp_cnx_chaine , '".$FormName."', [ 'form[chaine_connexion_test]']  );";
 $SB['message']			= "Test DB";
 $SB['mode']				= 1;
@@ -431,7 +431,7 @@ $T['Content'][$CurrentTab][$lt]['3']['cont'] = $bts->InteractiveElementsObj->ren
 $T['Content'][$CurrentTab][$lt]['4']['cont'] = $pv['div_cnx_db'] . "
 	<div id='cnxToDBok'				style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok')														. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4aok')."</div>
 	<div id='cnxToDBko'				style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ko')														. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4ako')."</div>
-	<div id='HydrDBAlreadyExistok'	style='visibilty: hidden; display : none; position: realtive;' class='".$block._CLASS_TXT_WARNING_."'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification')	. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4bok')."</div>
+	<div id='HydrDBAlreadyExistok'	style='visibilty: hidden; display : none; position: realtive;' class='".$Block._CLASS_TXT_WARNING_."'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification')	. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4bok')."</div>
 	<div id='HydrDBAlreadyExistko'	style='visibilty: hidden; display : none; position: realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ko')														. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('t4l10c4bko')."</div>
 	";
 
@@ -479,8 +479,8 @@ $lt++;
 
 $SB['id']				= "bouton_install_radompass";
 $SB['type']				= "button";
-$SB['initialStyle']		= $block."_tb3 ".$block."_submit_s1_n";
-$SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s1_h";
+$SB['initialStyle']		= $Block."_tb3 ".$Block."_submit_s1_n";
+$SB['hoverStyle']		= $Block."_tb3 ".$Block."_submit_s1_h";
 $SB['onclick']			= "elm.SetFormInputValue ( '".$FormName."' , 'form[database_user_password]' , CreateRandomPassword( 20 ) );";
 $SB['message']			= $bts->I18nTransObj->getI18nTransEntry('boutonpass');
 $SB['mode']				= 1;
@@ -592,8 +592,8 @@ $SessionID = floor ( $bts->TimeObj->microtime_chrono() );
 $SB = array();
 $SB['id']				= "bouton_install_p1";
 $SB['type']				= "button";
-$SB['initialStyle']		= $block."_tb3 ".$block."_submit_s2_n";
-$SB['hoverStyle']		= $block."_tb3 ".$block."_submit_s3_h";
+$SB['initialStyle']		= $Block."_submit_s2_n";
+$SB['hoverStyle']		= $Block."_submit_s3_h";
 $SB['onclick']			= "VerifieChampsFomulaire( ListeChamps , '".$l."' , '".$SessionID."')";
 $SB['message']			= $bts->I18nTransObj->getI18nTransEntry('bouton');
 $SB['mode']				= 1;

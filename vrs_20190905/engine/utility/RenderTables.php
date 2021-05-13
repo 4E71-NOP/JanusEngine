@@ -78,17 +78,17 @@ class  RenderTables {
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
 // 		$legendClasses = "";
-		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));
 			switch ( $ADC['tabs'][$CurT]['TableCaptionPos'] ) {
-				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_;										break;// top
-				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_;										break;// left
-				case 3: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_RIGHT_;									break;// right
-				case 4: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_BOTTOM_;									break;// bottom
-				case 5: 	$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_LEFT_." ".$block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
-				case 6:		$ADC['tabs'][$CurT]['legendClasses'] .= $block._CLASS_TBL_LGND_TOP_." ".$block._CLASS_TBL_LGND_BOTTOM_;	break;// top&bottom
+				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_TOP_;										break;// top
+				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_;										break;// left
+				case 3: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_RIGHT_;									break;// right
+				case 4: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_BOTTOM_;									break;// bottom
+				case 5: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_." ".$Block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
+				case 6:		$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_TOP_." ".$Block._CLASS_TBL_LGND_BOTTOM_;	break;// top&bottom
 			}
 		}
 		// --------------------------------------------------------------------------------------------
@@ -98,23 +98,23 @@ class  RenderTables {
 		
 		if ( $tab_infos['EnableTabs'] != 0 ) {
 			$Height = ($tab_infos['Height'] > 0) ? "height:".$tab_infos['Height']."px; " : "height:auto; ";
-			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$block."_tabFrame' style='position:relative; overflow:hidden; width:".($tab_infos['Width']-10) ."px; ".$Height."' >\r"; // overflow:hidden;
+			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$Block."_tabFrame' style='position:relative; overflow:hidden; width:".($tab_infos['Width']-10) ."px; ".$Height."' >\r"; // overflow:hidden;
 		}
 // 		$classTab= array (
-// 			0  =>	$block."_fca",
-// 			1  =>	$block."_fcb",
-// 			2  =>	$block."_fcc",
-// 			3  =>	$block."_fcd",
+// 			0  =>	$Block."_fca",
+// 			1  =>	$Block."_fcb",
+// 			2  =>	$Block."_fcc",
+// 			3  =>	$Block."_fcd",
 
-// 			4  =>	$block."_fcsa",
-// 			5  =>	$block."_fcsb",
-// 			6  =>	$block."_fcsa",
-// 			7  =>	$block."_fcsb",
+// 			4  =>	$Block."_fcsa",
+// 			5  =>	$Block."_fcsb",
+// 			6  =>	$Block."_fcsa",
+// 			7  =>	$Block."_fcsb",
 				
-// 			8  =>	$block."_fcta",
-// 			9  =>	$block."_fctb",
-// 			10 =>	$block."_fcta",
-// 			11 =>	$block."_fctb",
+// 			8  =>	$Block."_fcta",
+// 			9  =>	$Block."_fctb",
+// 			10 =>	$Block."_fcta",
+// 			11 =>	$Block."_fctb",
 // 		);
 		
 		
@@ -144,7 +144,7 @@ class  RenderTables {
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['tabs'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['tabs'][$CurT]['HighLightType']; }
 
-				$Content .= "<table class='".$block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
+				$Content .= "<table class='".$Block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
 					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass = "class='".$AD[$CurT]['caption']['class']."' "; }

@@ -82,7 +82,7 @@ class ModuleAdministration {
 	
 	private function renderAdminMenu (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'); 
 		$Content = "";
 		foreach ( $infos['menuData'] as $A ) {
@@ -98,7 +98,7 @@ class ModuleAdministration {
 					$Content .= "</ul>\r</li>\r";
 				}
 				elseif ( $A['fk_arti_ref'] == $infos['parameters']['arti_request'] ) {
-					$Content .= "<li><span class='".$block."_fade'><b>*".$A['cate_title']."</b></li>\r";
+					$Content .= "<li><span class='".$Block."_fade'><b>*".$A['cate_title']."</b></li>\r";
 				}
 				else {
 					$Content .= "<li><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['cate_title']."</a></li>\r";

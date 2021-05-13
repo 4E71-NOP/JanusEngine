@@ -265,7 +265,7 @@ class HydrInstall {
 				)
 		);
 
-		$block = $ThemeDataObj->getThemeName () . $infos ['block'];
+		$Block = $ThemeDataObj->getThemeName () . $infos ['block'];
 
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 0 );
@@ -290,7 +290,7 @@ class HydrInstall {
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 816 + 64 );
 
 		$RenderDeco = RenderDeco40Elegance::getInstance ();
-		$DocContent .= $RenderDeco->render ( $infos );
+		$DocContent .= $RenderDeco->render ($infos);
 
 		// --------------------------------------------------------------------------------------------
 		//
