@@ -257,7 +257,7 @@ class  RenderTables {
 		"RenderMode"		=> 1,
 		"HighLightType"		=> $HighLightType,
 		"Height"			=> floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * $lines, //T3 is default; total padding = 10; nbr line +1
-		"Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne'),
+		"Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width'),
 		"GroupName"			=> "l",
 		"CellName"			=> "c",
 		"DocumentName"		=> "d",

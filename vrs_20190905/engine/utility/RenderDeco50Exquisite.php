@@ -126,7 +126,7 @@ class RenderDeco50Exquisite {
 		$L['pos_x_ex55'] = &$L['pos_x2_ex22'];					$L['pos_y_ex55'] = &$L['pos_y3_ex22'];
 
 		// --------------------------------------------------------------------------------------------
-		$ThemeDataObj->setThemeDataEntry('theme_module_largeur_interne', $L['dim_x_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
 		$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $L['dim_y_ex22'] - 16);
 		$DivIdList = array();
 		$DivList = array ( "ex11", "ex12", "ex13", "ex14", "ex15", "ex21", "ex22", "ex23", "ex25", "ex31", "ex35", "ex41", "ex45", "ex51", "ex52", "ex53", "ex54", "ex55" );

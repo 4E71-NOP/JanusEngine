@@ -46,7 +46,7 @@ class ModuleSearch {
 			<input type='hidden' name='arti_ref'		value='".$l."_recherche'>\r
 			<input type='hidden' name='arti_page'		value='1'>\r
 			
-			<table style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')-16)."px; margin-right:auto; margin-left:auto' >
+			<table style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')-16)."px; margin-right:auto; margin-left:auto' >
 			<tr>\r
 			<td class='" . $ThemeDataObj->getThemeName().$infos['block']."_t2'>\r
 			<input type='radio' name='searchForm[searchType]'	value='T'>".$bts->I18nTransObj->getI18nTransEntry('radio1')."\r

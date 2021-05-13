@@ -90,7 +90,7 @@ $tab_infos['NbrOnglet']			= 1;
 $tab_infos['tab_comportement']	= 0;
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 7*36;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -16 ;
 $tab_infos['group']			= "mb_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
@@ -122,7 +122,7 @@ $_REQUEST['BS']['mode']				= 0;
 $_REQUEST['BS']['taille'] 			= 0;
 
 echo ( 
-"<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."px;'>\r
+"<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."px;'>\r
 <tr>
 <td class='" . $theme_tableau.$_REQUEST['bloc']."_t2'>\r</td>\r
 <td class='" . $theme_tableau.$_REQUEST['bloc']."_t2' style='width: 128px;'>\r

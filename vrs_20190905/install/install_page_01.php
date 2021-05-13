@@ -603,7 +603,7 @@ $SB['lastSize']			= 256;
 $DocContent .= "
 <br>\r
 <br>\r
-<div style='position: absolute; text-align: center; width: ".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px;'>\r
+<div style='position: absolute; text-align: center; width: ".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px;'>\r
 <table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 <tr>\r
 <td>\r

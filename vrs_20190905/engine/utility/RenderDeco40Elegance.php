@@ -113,7 +113,7 @@ class RenderDeco40Elegance {
 		$L['pos_x_ex33'] = $L['pos_x2_ex22'];					$L['pos_y_ex33'] = $L['pos_y3_ex22'];
 		
 		// --------------------------------------------------------------------------------------------
-		$ThemeDataObj->setThemeDataEntry('theme_module_largeur_interne', $L['dim_x_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
 		$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $L['dim_y_ex22'] - 16);
 		$DivIdList = array();
 		$DivList = array ( "ex11", "ex12", "ex13", "ex21", "ex22", "ex23", "ex31", "ex32", "ex33" );

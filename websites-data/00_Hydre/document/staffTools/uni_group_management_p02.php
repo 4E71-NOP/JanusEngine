@@ -254,7 +254,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // $T['ContentInfos']['RenderMode']		= 1;
 // $T['ContentInfos']['HighLightType']	= 0;
 // $T['ContentInfos']['Height']			= floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * 6; //T3 is default; total padding = 10; nbr line +1
-// $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+// $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
 // $T['ContentInfos']['GroupName']		= "list";
 // $T['ContentInfos']['CellName']			= "grp";
 // $T['ContentInfos']['DocumentName']		= "doc";

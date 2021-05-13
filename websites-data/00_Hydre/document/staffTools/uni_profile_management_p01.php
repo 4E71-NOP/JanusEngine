@@ -502,7 +502,7 @@ else {
 	$PmThemeDataObj->setThemeName($PmThemeName);
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
-	$PmThemeDataObj->setThemeDataEntry('theme_module_largeur_interne', $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne'));
+	$PmThemeDataObj->setThemeDataEntry('theme_module_internal_width', $ThemeDataObj->getThemeDataEntry('theme_module_internal_width'));
 	
 	$CurrentSetObj->backupInstanceOfThemeDataObj();
 	$CurrentSetObj->setInstanceOfThemeDataObj($PmThemeDataObj);
@@ -511,7 +511,7 @@ else {
 	$RenderStylesheetObj = RenderStylesheet::getInstance ();
 	$Content .= $RenderStylesheetObj->render($PmThemeName, $PmThemeDataObj );
 	
-	$iconList = array ('icon_directory','icon_erase','icon_left','icon_right','icon_top','icon_bottom','icon_ok','icon_nok','icon_question','icon_notification');
+	$iconList = array ('icon_directory','icon_erase','icon_left','icon_right','icon_top','icon_bottom','icon_ok','icon_ko','icon_question','icon_notification');
 	
 	$ListThemeBlock= array();
 	for ( $i = 1; $i < 31; $i++ ) {
@@ -539,8 +539,8 @@ else {
 	$T['ContentInfos']['GroupName']		= "theme";
 	$T['ContentInfos']['Height']			= 1024;
 	
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', "../media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
-	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', "../media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
 	$ModulePaddingX = 64;
 	$ModulePaddingY = 64;
 // 	$LMObj->logDebug($PmThemeDataObj->getThemeData(), "PmThemeDataObj");
@@ -605,13 +605,13 @@ else {
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttd', "
 		<table style='height:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft_height')."px; width:auto;' border='0' cellspacing='0' cellpadding='0'>\r
 		<tr style='background-color:transparent;'>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_width')."px;	background-image: url(../media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_bg').");'></td>\r
-		<td class='".$PmBlock."_ft2' style='background-image: url(../media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft2_bg').");'>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_width')."px;	background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft1_bg').");'></td>\r
+		<td class='".$PmBlock."_ft2' style='background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft2_bg').");'>\r
 		");
 		
 		$PmThemeDataObj->setThemetBlockEntry($infos['blockT'], 'ttf', "
 		</td>\r
-		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_width')."px;	background-image: url(../media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_bg').");'></td>\r
+		<td style='width:".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_width')."px;	background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'ft3_bg').");'></td>\r
 		</tr>\r
 		</table>\r
 		");
@@ -752,7 +752,7 @@ else {
 		reset ($iconList);
 		foreach ( $iconList as $A ) {
 			if ( strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)) != 0 ) {
-				$PmIcon[$j] = "background-image: url(../media/theme/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
+				$PmIcon[$j] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
 			}
 			$j++;
 		}
@@ -760,7 +760,7 @@ else {
 		$maxCells = 3;
 		$maxLines = 4;
 		$lineCount = 1;
-		$pv['icon_div_size'] = floor($PmThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/4)-8 ;
+		$pv['icon_div_size'] = floor($PmThemeDataObj->getThemeDataEntry('theme_module_internal_width')/4)-8 ;
 		if ( $pv['icon_div_size'] > 128 ) { $pv['icon_div_size'] = 128; }
 		$j = 0;
 		$T['Content'][$Tab]['1']['1']['cont'] .= "<table style='margin-left:auto; margin-right:auto;' border='0' >\r";
@@ -824,7 +824,7 @@ else {
 	$themeEntries = array();
 	foreach ( $themeList as $A ) {
 		if (strlen($PmThemeDataObj->getThemeDataEntry($A)) != 0) {
-			$themeEntries[$j] = "background-image: url(../media/theme/".$themeDir."/".$PmThemeDataObj->getThemeDataEntry($A).");";
+			$themeEntries[$j] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$themeDir."/".$PmThemeDataObj->getThemeDataEntry($A).");";
 			$j++;
 		}
 	}

@@ -808,7 +808,7 @@ self::$InitTable['group'] = function (&$a) {
 			"parent" => "reader",
 			"tag" => 1,
 			"title" => "New group",
-			"file" => "media/img/universal/icone_developpeur_001.jpg",
+			"file" => "media/img/universal/icon_dev_001.jpg",
 			"desc" => "New group"
 	);
 };

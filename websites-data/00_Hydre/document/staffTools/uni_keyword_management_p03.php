@@ -122,7 +122,7 @@ $tab_infos['nbr']			= 1;
 $tab_infos['tab_comportement'] = 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']	= 256;
-$tab_infos['doc_width']		= ${$theme_tableau}['theme_module_largeur_interne'];
+$tab_infos['doc_width']		= ${$theme_tableau}['theme_module_internal_width'];
 $tab_infos['group']		= "mmc_grp1";
 $tab_infos['cell_id']		= "tab";
 $tab_infos['document']		= "doc";
@@ -153,7 +153,7 @@ $bloc_html['post_hidden_user_pass']."
 <table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: 0px; '>
 <tr>\r
 
-<td style='width: ".(${$theme_tableau}['theme_module_largeur_interne'] - 200)."px;'>\r
+<td style='width: ".(${$theme_tableau}['theme_module_internal_width'] - 200)."px;'>\r
 </td>\r
 <td>\r
 ");
@@ -174,7 +174,7 @@ echo ("<br>&nbsp;\r
 
 
 <tr>\r
-<td style='width: ".(${$theme_tableau}['theme_module_largeur_interne'] - 200)."px;'>\r
+<td style='width: ".(${$theme_tableau}['theme_module_internal_width'] - 200)."px;'>\r
 </td>\r
 <td>\r
 <form ACTION='index.php?' method='post'>\r".

@@ -133,7 +133,7 @@ else {
 	$tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 	$tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 	$tab_infos['doc_height']		= $pres_[$mn]['dim_y_22'] - ${$theme_tableau}[$_REQUEST['bloc']]['tab_y'] - 32 ;
-	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'];
+	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'];
 	$tab_infos['group']			= "mb_grp1";
 	$tab_infos['cell_id']			= "tab";
 	$tab_infos['document']			= "doc";
@@ -153,7 +153,7 @@ else {
 	<table style='margin-left: auto; margin-right: auto;'>
 	<tr>\r
 	<td>\r
-	<textarea name='M_DOCUME['cont']' cols='". floor((${$theme_tableau}['theme_module_largeur_interne'] / $pv['ttrb']['fonte_size_n3'] ) * 1.35 ) ."' rows='24' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>".$document['docu_cont']."</textarea><br>\r
+	<textarea name='M_DOCUME['cont']' cols='". floor((${$theme_tableau}['theme_module_internal_width'] / $pv['ttrb']['fonte_size_n3'] ) * 1.35 ) ."' rows='24' class='" . $theme_tableau . $_REQUEST['bloc']."_form_1'>".$document['docu_cont']."</textarea><br>\r
 	</td>\r
 	</tr>\r
 	</table>\r
@@ -164,7 +164,7 @@ else {
 	<input type='hidden' name='M_DOCUME[correction]'				value='YES'>\r
 	<input type='hidden' name='M_DOCUME[type]'					value='".$document['docu_type']."'>\r
 	<input type='hidden' name='M_DOCUME[fichier]'					value=''>\r
-	<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."'>\r
+	<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."'>\r
 	<tr>\r".
 	$bloc_html['post_hidden_sw'].
 	$bloc_html['post_hidden_l'].

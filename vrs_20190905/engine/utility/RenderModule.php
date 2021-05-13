@@ -190,7 +190,7 @@ class RenderModule {
 					>\r
 					"
 					;
-				$ThemeDataObj->setThemeDataEntry('theme_module_largeur_interne', $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx'));
+				$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx'));
 				$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $RenderLayoutObj->getLayoutModuleEntry($mn, 'dy'));
 				$err = TRUE;		// Most likely no decoration. Or something went wrong. So the system use a default behavior.
 				break;

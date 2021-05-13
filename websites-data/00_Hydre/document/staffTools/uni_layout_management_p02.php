@@ -58,7 +58,7 @@ $tab_infos['tab_comportement']	= 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 128;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -16 ;
 $tab_infos['group']			= "mp_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
@@ -338,7 +338,7 @@ $tab_infos['tab_comportement']	= 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 512;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -16 ;
 $tab_infos['group']			= "gp_grp2";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
@@ -352,7 +352,7 @@ $tl_['eng']['text_confirm1'] = "I confirm the layout modifications.";					$tl_['
 $tl_['fra']['text_confirm1'] = "Je valide la modification de la pr&eacute;sentation.";	$tl_['fra']['bouton1'] = "Modifier";
 $bloc_html['UPDATE_action'] = "<input type='hidden' name='UPDATE_action'		value='UPDATE_DISPLAY'>\r";
 echo ("
-<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."'>\r
+<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."'>\r
 <tr>\r
 <td>\r<input type='checkbox' name='M_PRESNT['confirmation_modification']' value='1'>".$tl_[$l]['text_confirm1']."\r</td>\r
 

@@ -44,7 +44,7 @@ class Template {
 // 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
-			<table style=' width:".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')."px; border-spacing: 16px;'>\r
+			<table style=' width:".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 16px;'>\r
 			<tr>\r
 			<td>
 		";

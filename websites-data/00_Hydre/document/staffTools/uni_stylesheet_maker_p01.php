@@ -180,7 +180,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='GDS_01' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 
@@ -222,7 +222,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame2')."<br>\r
 	<form name='GDS_02' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
+	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
 	
 	<tr>\r
 	<td>\r

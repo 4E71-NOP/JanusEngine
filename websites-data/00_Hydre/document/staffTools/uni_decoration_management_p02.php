@@ -343,7 +343,7 @@ $tab_infos['tab_comportement']	= 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['doc_height']		= 192;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -16 ;
 $tab_infos['group']			= "md_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
@@ -361,12 +361,12 @@ $tl_['eng']['cell_1_txt']	= "Decoration";	$tl_['fra']['cell_1_txt'] = "D&eacute;
 $tab_infos['tab_comportement']	= 0;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']		= 548;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -16;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -16;
 $tab_infos['group']			= "type1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "deco";
 $tab_infos['cell_1_txt']		= $tl_[$l]['cell_1_txt'];
-//$theme_SW_['tab_interieur']	= ${$theme_tableau}['theme_module_largeur_interne'] -16;
+//$theme_SW_['tab_interieur']	= ${$theme_tableau}['theme_module_internal_width'] -16;
 $tab_infos['visible']			= "visible";
 genere_onglet_html ();
 
@@ -397,7 +397,7 @@ break;
 $_REQUEST['sauvegarde']['_REQUEST_bloc_01'] = $_REQUEST['bloc'];
 $theme_GD_['background_image'] = "../media/theme/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
 
-echo ("<div id='decoration_principal' class='" . $theme_tableau . $_REQUEST['bloc']."_fco' style='width: ".( ${$theme_tableau}['theme_module_largeur_interne'] - 24 ) ."px; height: ".$tab_infos['doc_height']."px; overflow: hidden;' >\r");
+echo ("<div id='decoration_principal' class='" . $theme_tableau . $_REQUEST['bloc']."_fco' style='width: ".( ${$theme_tableau}['theme_module_internal_width'] - 24 ) ."px; height: ".$tab_infos['doc_height']."px; overflow: hidden;' >\r");
 for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i']++ ) { 
 
 	$theme_GD_['background_image'] = "../media/theme/".$theme_GD_['theme_directory']."/".$theme_GD_['theme_bg'];
@@ -452,7 +452,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	default:
 		$GD_pres_[$mn]['px'] = $pv['module_ecart_bordure_x'];
 		$GD_pres_[$mn]['py'] = $pv['module_ecart_bordure_y'];
-		$GD_pres_[$mn]['dx'] = (${$theme_tableau}['theme_module_largeur_interne'] - ($pv['module_ecart_bordure_x']*2));
+		$GD_pres_[$mn]['dx'] = (${$theme_tableau}['theme_module_internal_width'] - ($pv['module_ecart_bordure_x']*2));
 		$GD_pres_[$mn]['dy'] = $pv['bloc_taille_y'] - ($pv['module_ecart_bordure_y'] * 2);
 	break;
 	}
@@ -461,7 +461,7 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 	echo ("
 	<div id='".$pv['div_id']."' class='css_".$pv['div_id']."' 
 	style='position: absolute; visibility: ".$tab_infos['visible']."; 
-	width: ".(${$theme_tableau}['theme_module_largeur_interne'] - 24)."px; 
+	width: ".(${$theme_tableau}['theme_module_internal_width'] - 24)."px; 
 	height: ".$tab_infos['doc_height']."px; 
 	background-image: url(".$theme_GD_['background_image']."); 
 	overflow:auto'>
@@ -598,8 +598,8 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 		$tl_['eng']['md_bgc'] = "Background color";		$tl_['fra']['md_bgc'] = "Couleur de fond";
 		$tl_['eng']['md_bgi'] = "Background image";		$tl_['fra']['md_bgi'] = "Image de fond";
 
-		$pv['60pc'] = floor(${$theme_tableau}['theme_module_largeur_interne'] * 0.6);
-		$pv['decalage_60pc'] = floor( ( ${$theme_tableau}['theme_module_largeur_interne'] - $pv['60pc'] ) /2 );
+		$pv['60pc'] = floor(${$theme_tableau}['theme_module_internal_width'] * 0.6);
+		$pv['decalage_60pc'] = floor( ( ${$theme_tableau}['theme_module_internal_width'] - $pv['60pc'] ) /2 );
 		// outil_debug ( $pv['60pc'] , "pv['60pc']" );
 
 		echo ("
@@ -961,7 +961,7 @@ echo ("
 <br>\r
 <br>\r
 
-<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."'>\r
+<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."'>\r
 <tr>\r
 ".$bloc_html['post_hidden_sw'].
 $bloc_html['post_hidden_l'].

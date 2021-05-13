@@ -119,8 +119,8 @@ if ( $dbquery != false && $SDDMObj->num_row_sql($dbquery) > 0 ) {
 // --------------------------------------------------------------------------------------------
 include ("stylesheets/css_admin_install.php");
 $theme_tableau = "mt_";
-${$theme_tableau}['theme_module_largeur_interne'] = 512;
-${$theme_tableau}['theme_module_largeur'] = 512;
+${$theme_tableau}['theme_module_internal_width'] = 512;
+${$theme_tableau}['theme_module_width'] = 512;
 
 $ClassLoaderObj->provisionClass('ThemeData');
 $CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
@@ -177,20 +177,25 @@ if ( strlen($bts->RequestDataObj->getRequestDataEntry('l')) != 0){
 	unset ( $A );
 	foreach ( $langComp as $A ) { if ( $A == $bts->RequestDataObj->getRequestDataEntry('l')) { $langHit = 1; } }
 }
-if ( $langHit == 1 ) { $l = $bts->RequestDataObj->getRequestDataEntry('l'); }
-else { $l = "eng"; }
-
+if ($langHit == 1) {
+	$l = $bts->RequestDataObj->getRequestDataEntry ( 'l' );
+	$CurrentSetObj->setDataEntry('language', $l);
+} else {
+	$l = "eng";
+	$CurrentSetObj->setDataEntry('language', "eng");
+}
 // $i18n ="";
 // include ("current/install/i18n/install_monitor_".$l.".php");
 // $bts->I18nTransObj->apply($i18n);
 // unset ($i18n);
+
 $bts->I18nTransObj->apply(array( "type" => "file", "file" => "current/install/i18n/install_monitor_".$l.".php", "format" => "php" ) );
 
 // --------------------------------------------------------------------------------------------
 $div_initial_bg = "";
 if ( strlen($ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $div_initial_bg = "background-image: url(media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ;}
-if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
-if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry('theme_module_largeur') + 16); }
+if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry('theme_module_width') + 16); }
+if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry('theme_module_width') + 16); }
 
 
 $DocContent .= "<!-- __________ start of modules __________ -->\r
@@ -234,7 +239,7 @@ $block = $ThemeDataObj->getThemeName().$infos['block'];
 
 $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
 $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 0 );
-$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_largeur"));
+$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", $ThemeDataObj->getThemeDataEntry("theme_module_width"));
 $RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 320 );
 
 $RenderDeco = RenderDeco50Exquisite::getInstance();
@@ -249,16 +254,16 @@ $DocContent .= "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTra
 $CurrentTab = 1;
 $lt = 1;
 
-$T['ContentInfos']['EnableTabs']		= 0;
+$T['ContentInfos']['EnableTabs']	= 0;
 $T['ContentInfos']['NbrOfTabs']		= 1;
-$T['ContentInfos']['TabBehavior']		= 1;
-$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['TabBehavior']	= 1;
+$T['ContentInfos']['RenderMode']	= 1;
 $T['ContentInfos']['HighLightType']	= 0; // 1:ligne, 2:cellule
-$T['ContentInfos']['Height']			= 380;
-$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') -24;  
+$T['ContentInfos']['Height']		= 380;
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') -24;  
 $T['ContentInfos']['GroupName']		= "inst1";
-$T['ContentInfos']['CellName']			= "frame01";
-$T['ContentInfos']['DocumentName']		= "doc";
+$T['ContentInfos']['CellName']		= "frame01";
+$T['ContentInfos']['DocumentName']	= "doc";
 
 
 //	Choice matrix 

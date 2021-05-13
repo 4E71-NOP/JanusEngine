@@ -210,7 +210,7 @@ $T['ContentInfos']['TabBehavior']		= 0;
 $T['ContentInfos']['RenderMode']		= 1;
 $T['ContentInfos']['HighLightType']	= 0;
 $T['ContentInfos']['Height']			= 128;
-$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne');
+$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
 $T['ContentInfos']['GroupName']		= "list";
 $T['ContentInfos']['CellName']			= "log";
 $T['ContentInfos']['DocumentName']		= "doc";
@@ -248,7 +248,7 @@ $SB = array(
 );
 
 $Content .= "
-		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px; border-spacing: 3px;'>\r
+		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 3px;'>\r
 		<tr>\r
 		<td align='right'>\r"
 		.$bts->InteractiveElementsObj->renderSubmitButton($SB)
@@ -415,7 +415,7 @@ $SB = array(
 );
 
 $Content .= "
-		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."px; border-spacing: 3px;'>\r
+		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 3px;'>\r
 		<tr>\r
 		<td align='right'>\r"
 		.$bts->InteractiveElementsObj->renderSubmitButton($SB)

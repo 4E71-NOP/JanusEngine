@@ -116,7 +116,7 @@ class ModuleGlobalReport {
 // 		);
 		
 		$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
-		$T['ContentInfos']['Width']			= 	$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne');
+		$T['ContentInfos']['Width']			= 	$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width');
 		$T['ContentInfos']['GroupName']		= "gr";
 		$Content .= $bts->RenderTablesObj->render($infos, $T);
 		return $Content;
@@ -280,9 +280,9 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
-		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_largeur_interne')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		
 		$config = array(
 				"NbrOfLines" => 4,

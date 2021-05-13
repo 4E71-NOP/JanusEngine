@@ -44,7 +44,7 @@ $bts->MapperObj->setSqlApplicant("uni_article_test_p01.php");
 
 $colone_taille = 48;
 $colone_modification = 128;
-$colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - $colone_taille - $colone_modification - 32;
+$colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - $colone_taille - $colone_modification - 32;
 
 switch ($l) {
 	case "fra":
@@ -79,7 +79,7 @@ The file must be in the directory 'article.wmcode'.<br>\r",
 
 $colone_taille = 48;
 $colone_modification = 128;
-$colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - $colone_taille - $colone_modification - 32;
+$colone_nom = $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - $colone_taille - $colone_modification - 32;
 
 $Content .= "
 <p>
@@ -87,7 +87,7 @@ $Content .= "
 <br>\r
 <br>\r
 
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r
+<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."'>\r
 <tr>\r
 <td class='" . $Block."_fctab' colspan='3'>\rListe des fichiers pr&eacute;sents dans le r&eacute;pertoire 'article.wmcode'.</td>\r
 </tr>\r
@@ -100,7 +100,7 @@ $Content .= "
 </table>\r
 
 <div  class='".$ThemeDataObj->getThemeName()."fileselector'>\r
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne')."'>\r
+<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."'>\r
 ";
 
 $handle = opendir("../websites-data");

@@ -19,7 +19,7 @@
 //	$tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 //	$tab_infos['TypSurbrillance']	= 1; // 1:ligne, 2:cellule
 //	$tab_infos['doc_height']		= $pres_[$mn]['dim_y_22'] - ${$theme_tableau}[$_REQUEST['bloc']]['tab_y'] - 32 ;
-//	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -24 ;
+//	$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -24 ;
 //	$tab_infos['group']			= "inst1";
 //	$tab_infos['cell_id']			= "tab";
 //	$tab_infos['document']			= "doc";
@@ -125,7 +125,7 @@ $tab_infos['tab_comportement']	= 1;
 $tab_infos['TypSurbrillance']	= 1; // 1:ligne, 2:cellule
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']		= 256;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -24 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -24 ;
 $tab_infos['group']			= "tst";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";

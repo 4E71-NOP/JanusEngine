@@ -54,7 +54,7 @@ if ( is_dir( $GAL_dir ) ) {
 		else { echo ("<span class='".$theme_tableau.$_REQUEST['bloc']."_tb3 ".$theme_tableau.$_REQUEST['bloc']."_highlight'>(".$GAL_page.")</span>&nbsp;&nbsp;");
 		}
 	}
-	$pv['tab_width'] = $theme_princ_['theme_module_largeur_interne'] - 32;
+	$pv['tab_width'] = $theme_princ_['theme_module_internal_width'] - 32;
 	$pv['tab_margin'] = floor ( $pv['tab_width'] / 2 );
 	echo ("--
 	</p>\r

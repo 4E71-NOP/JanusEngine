@@ -481,7 +481,7 @@ function computeInfoDebug () {\r
 <input type='hidden' name='site_context[ws_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
 <input type='hidden' name='site_context[site_nom]'	value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
 
-<table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_largeur_interne') - 16) ."px;'>
+<table cellpadding='8' cellspacing='0' style='width :". ($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - 16) ."px;'>
 <tr>\r
 <td>\r
 <input type='checkbox' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('validation')."\r

@@ -433,9 +433,9 @@ class CommandConsole {
 						$CurrentSetObj->setDataSubEntry('cli', 'websiteCreation', 1);
 						$SpecialCommandBuffer = array(
 							"website context name '".$CCL['params']['name']."' user '*user_install*' password '*user_install*'",
-							"add group name 'Server_owner' parent origin title ROOT tag SENIOR_STAFF file 'media/img/universal/icone_developpeur_001.jpg' desc 'Owner'",
-							"add group name Reader parent Server_owner title Reader tag READER file 'media/img/universal/icone_developpeur_001.jpg' desc 'Reader'",
-							"add group name Anonymous parent reader title Anonymous tag ANONYMOUS file 'media/img/universal/icone_developpeur_001.jpg' desc 'Nobody'",
+							"add group name 'Server_owner' parent origin title ROOT tag SENIOR_STAFF file 'media/img/universal/icon_dev_001.jpg' desc 'Owner'",
+							"add group name Reader parent Server_owner title Reader tag READER file 'media/img/universal/icon_dev_001.jpg' desc 'Reader'",
+							"add group name Anonymous parent reader title Anonymous tag ANONYMOUS file 'media/img/universal/icon_dev_001.jpg' desc 'Nobody'",
 							"add user name \"".   $CCL['params']['user']."\" login \"".$CCL['params']['user']."\" perso_name \"".$CCL['params']['user']."\" password \"".$CCL['params']['password']."\" status ACTIVE role_function PRIVATE",
 							"assign user name \"".$CCL['params']['user']."\" to_group 'Server_owner' primary_group YES"
 						);

@@ -124,8 +124,8 @@ class HydrInstall {
 		// --------------------------------------------------------------------------------------------
 		include ("stylesheets/css_admin_install.php");
 		$theme_tableau = "mt_";
-		${$theme_tableau} ['theme_module_largeur_interne'] = 896;
-		${$theme_tableau} ['theme_module_largeur'] = 896;
+		${$theme_tableau} ['theme_module_internal_width'] = 896;
+		${$theme_tableau} ['theme_module_width'] = 896;
 
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
@@ -204,8 +204,10 @@ class HydrInstall {
 		}
 		if ($langHit == 1) {
 			$l = $bts->RequestDataObj->getRequestDataEntry ( 'l' );
+			$CurrentSetObj->setDataEntry('language', $l);
 		} else {
 			$l = "eng";
+			$CurrentSetObj->setDataEntry('language', "eng");
 		}
 
 		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Loading `current/install/i18n/install_init_" . $l . ".php`"));
@@ -220,10 +222,10 @@ class HydrInstall {
 			$div_initial_bg = "background-image: url(media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
 		}
 		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) == 0) {
-			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_largeur' ) + 16 );
+			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
 		}
 		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) == 0) {
-			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry ( 'theme_module_largeur' ) + 16 );
+			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
 		}
 
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
@@ -267,7 +269,7 @@ class HydrInstall {
 
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_largeur" ) );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 112 );
 
 		$RenderDeco = RenderDeco50Exquisite::getInstance ();
@@ -284,7 +286,7 @@ class HydrInstall {
 
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 120 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_largeur" ) );
+		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
 		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 816 + 64 );
 
 		$RenderDeco = RenderDeco40Elegance::getInstance ();

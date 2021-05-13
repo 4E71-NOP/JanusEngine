@@ -308,7 +308,7 @@ $tab_infos['tab_comportement']	= 1;
 $tab_infos['TypSurbrillance']	= 0; // 1:ligne, 2:cellule
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']		= 224;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_largeur_interne'] -24 ;
+$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'] -24 ;
 $tab_infos['group']			= "maa_grp1";
 $tab_infos['cell_id']			= "tab";
 $tab_infos['document']			= "doc";
@@ -357,7 +357,7 @@ $bloc_html['post_hidden_arti_ref'].
 $bloc_html['post_hidden_user_login'].
 $bloc_html['post_hidden_user_pass'].
 $pv['bloc_type_hidden']."
-<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."px;'>\r
+<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."px;'>\r
 <tr>\r
 <td>\r".$pv['textebouton1']."\r</td>\r
 <td style='text-align: right;'>\r");

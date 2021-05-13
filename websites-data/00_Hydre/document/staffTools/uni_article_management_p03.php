@@ -260,7 +260,7 @@ $tab_infos['nbr']			= 4;
 $tab_infos['tab_comportement'] = 1;
 $tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
 $tab_infos['doc_height']	= 224;
-$tab_infos['doc_width']	= ${$theme_tableau}['theme_module_largeur_interne'];
+$tab_infos['doc_width']	= ${$theme_tableau}['theme_module_internal_width'];
 $tab_infos['group']		= "maa_grp1";
 $tab_infos['cell_id']		= "tab";
 $tab_infos['document']	= "doc";
@@ -293,7 +293,7 @@ $bloc_html['post_hidden_user_pass']."
 <input type='hidden' name='M_ARTICL[ref]'						value='".$infos_article['arti_ref']."'>\r
 <input type='hidden' name='UPDATE_action'				value='UPDATE_ARTICLE'>\r
 
-<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_largeur_interne']."px;'>\r
+<table ".${$theme_tableau}['tab_std_rules']." width='".${$theme_tableau}['theme_module_internal_width']."px;'>\r
 <tr>\r
 <td class='".$theme_tableau."s0".$module_['module_deco_nbr']."_fc2'>\r<input type='checkbox' name='M_ARTICL[confirmation_modification]' value='1'>".$tl_[$l]['text_confirm1']."\r</td>\r
 <td class='".$theme_tableau."s0".$module_['module_deco_nbr']."_fc2' style='text-align: right;'>\r");
