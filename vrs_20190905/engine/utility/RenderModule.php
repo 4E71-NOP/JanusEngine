@@ -40,7 +40,7 @@ class RenderModule {
 		$ModuleTable = $RenderLayoutObj->getModuleList();
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
 
-		if ( strlen( $ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $pv['div_initial_bg'] = "background-image: url(../media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ; }
+		if ( strlen( $ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $pv['div_initial_bg'] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ; }
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $_REQUEST['document_dx']); }
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $_REQUEST['document_dy']); }
 
@@ -50,7 +50,8 @@ class RenderModule {
 		$Content .= "<!-- __________ Modules begining __________ -->\r
 				<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility:" . $pv ['initial_div_vis'] . ";
 				width:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') . "px;
-				height:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') . "px;" . $pv ['div_initial_bg'] . "'>\r"; // width = Always define otherwise it won't work..
+				height:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') . "px;"
+				.$pv['div_initial_bg'] . "'>\r"; // width = Always define otherwise it won't work..
 		
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 		

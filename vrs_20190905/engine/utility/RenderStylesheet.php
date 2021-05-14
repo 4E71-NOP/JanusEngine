@@ -353,6 +353,7 @@ class RenderStylesheet {
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font']."; ".$str."}");}
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font']."; ".$str."}");}
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"textarea",	"{".$str."}");}
 		
 		// code
 		$list= array( "font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right", "special" ); 

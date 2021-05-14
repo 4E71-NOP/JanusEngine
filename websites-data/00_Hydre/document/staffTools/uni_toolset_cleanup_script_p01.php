@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$bts->RequestDataObj->setRequestDataEntry('script_source',"
+$bts->RequestDataObj->setRequestDataEntry('scriptSrc',"
 add layout_content to_layout		'mwm_aqua_01_layout_par_defaut'		module_name		'blason'
 line	'1'	calculus_type 	'STATIC'
 				
@@ -62,7 +62,7 @@ $bts->I18nTransObj->apply(
 		)
 	)
 );
-$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'engine/javascript/lib_HydrScriptFormatTool.js');
+$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 "<br>\r
@@ -71,14 +71,14 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 <tr>\r
 <td>\r
-<textarea name='script_source' id='script_source' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
-".$bts->RequestDataObj->getRequestDataEntry('script_source')."</textarea>\r
+<textarea name='scriptSrc' id='scriptSrc' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
+".$bts->RequestDataObj->getRequestDataEntry('scriptSrc')."</textarea>\r
 </td>\r
 </tr>\r
 
 <tr>\r
 <td style='font-size: 8px;'>\r
-<textarea name='script_resultat' id='script_resultat' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
+<textarea name='scriptResult' id='scriptResult' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='16'>
 ".$pv['converti']."</textarea>\r
 </td>\r
 </tr>\r
@@ -98,7 +98,7 @@ $SB = array(
 		"type"				=> "button",
 		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
 		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-		"onclick"			=> "FormattageScriptMWM ( 'formConvert' , 'script_source' , 'script_resultat' );",
+		"onclick"			=> "formatHydrScript ( 'formConvert' , 'scriptSrc' , 'scriptResult' );",
 		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
 		"mode"				=> 1,
 		"size" 				=> 128,

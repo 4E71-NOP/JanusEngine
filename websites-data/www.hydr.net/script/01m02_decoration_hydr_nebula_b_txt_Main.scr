@@ -39,9 +39,9 @@ code_font	'courier, monospace'	code_fg_col	'A0FFA0'	code_bg_col	'000000CC'
 code_pad_top	'3'	code_pad_bottom	'5'	code_pad_left	'3'	code_pad_right	'3'
 code_special	'display:block; border-radius:2.5mm;'						
 							
-input_fg_col	'000000'	input_bg_col	'FFFFFF'				
+input_fg_col	'FFFFFF'	input_bg_col	'FFFFFF40'				
 							
-		td_input_bg_col	'E8F8FF'				
+td_input_fg_col	'FFFFFF'	td_input_bg_col	'FFFFFF40'				
 							
 s1_txt_col	'EEEEEE'	s2_txt_col	'EEEEEE'	s3_txt_col	'EEEEEE'		
 s1_txt_weight	'bold'	s2_txt_weight	'bold'	s3_txt_weight	'bold'		
@@ -50,15 +50,15 @@ s1_txt_hover_col	'FFFFFF'	s2_txt_hover_col	'FFFFFF'	s3_txt_hover_col	'FFFFFF'
 s1_txt_hover_weight	'bold'	s2_txt_hover_weight	'bold'	s3_txt_hover_weight	'bold'		
 s1_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s2_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s3_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'		
 							
-s1_01_width	'16'	s1_01_height	'32'	s1_03_width	'16'		
+s1_01_width	'24'	s1_01_height	'32'	s1_03_width	'24'		
 s1_a	'nebula_B01_submit_s1a.png'	s1_b	'nebula_B01_submit_s1b.png'	s1_c	'nebula_B01_submit_s1c.png'		
 s1_offset_x	'0'	s1_offset_y	'32'				
 							
-s2_01_width	'16'	s2_01_height	'32'	s2_03_width	'16'		
+s2_01_width	'24'	s2_01_height	'32'	s2_03_width	'24'		
 s2_a	'nebula_B01_submit_s2a.png'	s2_b	'nebula_B01_submit_s2b.png'	s2_c	'nebula_B01_submit_s2c.png'		
 s2_offset_x	'0'	s2_offset_y	'32'				
 							
-s3_01_width	'16'	s3_01_height	'32'	s3_03_width	'16'		
+s3_01_width	'24'	s3_01_height	'32'	s3_03_width	'24'		
 s3_a	'nebula_B01_submit_s3a.png'	s3_b	'nebula_B01_submit_s3b.png'	s3_c	'nebula_B01_submit_s3c.png'		
 s3_offset_x	'0'	s3_offset_y	'32'				
 							
@@ -68,7 +68,7 @@ tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'	tab_hover_txt_special	'
 tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'		
 tab_a	'nebula_B01_tab_a.png'	tab_b	'nebula_B01_tab_b.png'	tab_c	'nebula_B01_tab_c.png'		
 tab_offset_x	'0'	tab_offset_y	'32'				
-tab_frame_bg_col	'79C6DA'						
+tab_frame_bg_col	'79C6DA30'						
 							
 							
 		ft2_font_size	'26'	ft2_fg_col	'FFFFFF'	ft2_special	'font-weight:bold;'

@@ -21,18 +21,15 @@ var TabProcessusRegExpRep = {
 	"spcvirgule":	{	"n":"1",	"s":" ;",	"d":";"		}
 };
 
-var TabProcessusRegExp = {
-};
+function formatHydrScript ( Form , src , dst ) {
+	var strSrc = document.forms[Form].elements[src].value;
+	var strDst = "";
 
-function FormattageScriptMWM ( Form , src , dst ) {
-	var ChaineSource = document.forms[Form].elements[src].value;
-	var ChaineDst = "";
-
-	for ( var ptr in TabProcessusRegExpRep ) {
-		for ( var Nfois = 1 ; Nfois <= TabProcessusRegExpRep[ptr].n ; Nfois++ ) {
-			ChaineSource = ChaineSource.replace( RegExp (TabProcessusRegExpRep[ptr].s, "g") , TabProcessusRegExpRep[ptr].d );
+	for ( let ptr in TabProcessusRegExpRep ) {
+		for ( let Nfois = 1 ; Nfois <= TabProcessusRegExpRep[ptr].n ; Nfois++ ) {
+			strSrc = strSrc.replace( RegExp (TabProcessusRegExpRep[ptr].s, "g") , TabProcessusRegExpRep[ptr].d );
 		}
 	}
-	ChaineDst = String(ChaineSource);
-	document.forms[Form].elements[dst].value = 	ChaineDst;
+	strDst = String(strSrc);
+	document.forms[Form].elements[dst].value = 	strDst;
 }
