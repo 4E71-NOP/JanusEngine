@@ -222,7 +222,7 @@ $T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 1;
 
 $config = array(
 		"mode" => 1,
-		"affiche_module_mode" => "normal",
+		"module_display_mode" => "normal",
 		"module_z_index" => 2,
 		"block" => $infos['block'],
 		"blockG" => $infos['block']."G",
@@ -315,7 +315,7 @@ LIMIT ".($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page') * $bts->
 
 $config = array(
 		"mode" => 1,
-		"affiche_module_mode" => "normal",
+		"module_display_mode" => "normal",
 		"module_z_index" => 2,
 		"block" => $infos['block'],
 		"blockG" => $infos['block']."G",

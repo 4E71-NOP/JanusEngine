@@ -235,7 +235,7 @@ class HydrInstall {
 
 		$infos = array (
 				"mode" => 1,
-				"affiche_module_mode" => "normal",
+				"module_display_mode" => "normal",
 				"module_z_index" => 2,
 				"block" => "B02",
 				"blockG" => "B02G",

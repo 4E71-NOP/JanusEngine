@@ -1,7 +1,7 @@
 add	decoration
 name	'hydr_aqua_menu_001'
-graphique	'hydr_aqua_block_001'
-texte	'hydr_aqua_txt_menu'
+graphic	'hydr_aqua_block_001'
+text	'hydr_aqua_txt_menu'
 type	'menu'
 directory	'Aqua'
 	
@@ -12,13 +12,11 @@ div_width	'160'
 	
 	
 	
-dock_cible	'Bottom-right'
+target_dock	'Bottom-right'
 dock_decal_x	'0'
 dock_decal_y	'0'
 	
-affiche_icones	'NON'
-icone_taille_x	'16'
-icone_taille_y	'16'
+display_icons	'NO'
 	
 	
 	

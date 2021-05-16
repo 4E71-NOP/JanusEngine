@@ -1,19 +1,30 @@
 add	decoration
-name	'rw_tronic_menu_002'
-deco_graphique	'rw_tronic_block_tooltip'
-deco_texte	'rw_tronic_txt_main'
+name	'hydr_tronic_menu_002'
+graphic	'hydr_tronic_block_tooltip'
+text	'hydr_tronic_txt_menu'
 type	'menu'
 directory	'Tronic'
 	
 genre	'2'
 animation	'ftgvs'
 	
-dock_cible	'Bottom-right'
+div_width	'256'
+	
+	
+	
+target_dock	'Bottom-right'
 dock_decal_x	'-32'
 dock_decal_y	'4'
-div_width	'320'
 	
-affiche_icones	'NON'
-icone_taille_x	'16'
-icone_taille_y	'16'
+display_icons	'NO'
+	
+	
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
 ;	

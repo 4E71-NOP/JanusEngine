@@ -48,7 +48,8 @@ class RenderDeco40Elegance {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
-		switch ($infos['affiche_module_mode']) {
+		$Block = $infos['block'];
+		switch ($infos['module_display_mode']) {
 			case "bypass":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
@@ -64,11 +65,11 @@ class RenderDeco40Elegance {
 				$L['px'] = 0;
 				$L['py'] = 0;
 				$mcn .= "_" . $infos['module']['module_name'];
+				$Block .= "M";
 				break;
 		}
 		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
-// 		$B = &$S[$_REQUEST['blocG']];
 		
 // 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'] , $B['ex21_x'] , $B['ex31_x'] );
 // 		$L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'] , $B['ex12_y'] , $B['ex13_y'] );
@@ -120,23 +121,22 @@ class RenderDeco40Elegance {
 		foreach ( $DivList as $A ) { $DivIdList[$A] = "id='" . $mn . "_".$A."' "; }
 		
 		$Content .= "
-	<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
-	";
+		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
+		";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style'].";" : "";
 		$Content .= "
 		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r
-		<div ".$DivIdList['ex11']." class='".$TN . $infos['block']."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex11_x']."px; 			height:".$B['ex11_y']."px;'></div>\r
-		<div ".$DivIdList['ex12']." class='".$TN . $infos['block']."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width: ".$L['dim_x_ex22']."px;		height:".$B['ex12_y']."px;'></div>\r
-		<div ".$DivIdList['ex13']." class='".$TN . $infos['block']."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex13_x']."px;			height:".$B['ex13_y']."px;'></div>\r
-		<div ".$DivIdList['ex21']." class='".$TN . $infos['block']."_ex21' style='left: ".$L['pos_x_ex21']."px;	top: ".$L['pos_y_ex21']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex21_x']."px;			height:".$L['dim_y_ex22']."px;'></div>\r
-		<div ".$DivIdList['ex23']." class='".$TN . $infos['block']."_ex23' style='left: ".$L['pos_x_ex23']."px;	top: ".$L['pos_y_ex23']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex23_x']."px;			height:".$L['dim_y_ex22']."px;'></div>\r
-		<div ".$DivIdList['ex31']." class='".$TN . $infos['block']."_ex31' style='left: ".$L['pos_x_ex31']."px;	top: ".$L['pos_y_ex31']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex31_x']."px; 			height:".$B['ex31_y']."px;'></div>\r
-		<div ".$DivIdList['ex32']." class='".$TN . $infos['block']."_ex32' style='left: ".$L['pos_x_ex32']."px;	top: ".$L['pos_y_ex32']."px; z-index: ".$infos['module_z_index']."; width: ".$L['dim_x_ex22']."px;		height:".$B['ex32_y']."px;'></div>\r
-		<div ".$DivIdList['ex33']." class='".$TN . $infos['block']."_ex33' style='left: ".$L['pos_x_ex33']."px;	top: ".$L['pos_y_ex33']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex33_x']."px; 			height:".$B['ex33_y']."px;'></div>\r
-		<div ".$DivIdList['ex22']." class='".$TN . $infos['block']."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
+		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex11_x']."px; 			height:".$B['ex11_y']."px;'></div>\r
+		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width: ".$L['dim_x_ex22']."px;		height:".$B['ex12_y']."px;'></div>\r
+		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex13_x']."px;			height:".$B['ex13_y']."px;'></div>\r
+		<div ".$DivIdList['ex21']." class='".$TN . $Block."_ex21' style='left: ".$L['pos_x_ex21']."px;	top: ".$L['pos_y_ex21']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex21_x']."px;			height:".$L['dim_y_ex22']."px;'></div>\r
+		<div ".$DivIdList['ex23']." class='".$TN . $Block."_ex23' style='left: ".$L['pos_x_ex23']."px;	top: ".$L['pos_y_ex23']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex23_x']."px;			height:".$L['dim_y_ex22']."px;'></div>\r
+		<div ".$DivIdList['ex31']." class='".$TN . $Block."_ex31' style='left: ".$L['pos_x_ex31']."px;	top: ".$L['pos_y_ex31']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex31_x']."px; 			height:".$B['ex31_y']."px;'></div>\r
+		<div ".$DivIdList['ex32']." class='".$TN . $Block."_ex32' style='left: ".$L['pos_x_ex32']."px;	top: ".$L['pos_y_ex32']."px; z-index: ".$infos['module_z_index']."; width: ".$L['dim_x_ex22']."px;		height:".$B['ex32_y']."px;'></div>\r
+		<div ".$DivIdList['ex33']." class='".$TN . $Block."_ex33' style='left: ".$L['pos_x_ex33']."px;	top: ".$L['pos_y_ex33']."px; z-index: ".$infos['module_z_index']."; width: ".$B['ex33_x']."px; 			height:".$B['ex33_y']."px;'></div>\r
+		<div ".$DivIdList['ex22']." class='".$TN . $Block."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-		// ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );

@@ -1,9 +1,9 @@
 add decoration 							
-name	'hydr_tronic_txt_tooltip'						
+name	'rw_tronic_txt_menu'						
 directory	'Tronic'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'EliteDanger, Arial, Helvetica, Sans-serif'	txt_font_size	'20'				
+txt_font	'EliteDanger, Arial, Helvetica, Sans-serif'	txt_font_size	'18'				
 txt_font_dl_name	'EliteDanger'	txt_font_dl_url	'elitedanger.ttf'				
 							
 p_txt_indent	'0'	p_txt_align	'justify'				
@@ -14,8 +14,8 @@ p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 txt_col	'40CCFF'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
 txt_ok_col	'A0FFA0'	txt_warning_col	'FFA080'	txt_error_col	'FF8080'	txt_fade_col	'C0C0C0'
 							
-a_fg_col	'40CCFF'			a_decoration	'none'		
-a_hover_fg_col	'40CCFF'					a_hover_special	'font-weight:bold;'
+a_fg_col	'40CCFF'			a_decoration	'none'	a_special	'display:block;'
+a_hover_fg_col	'40CCFF'	a_hover_bg_col	'40CCFF40'			a_hover_special	'font-weight:bold;'
 a_active_fg_col	'40CCFF'						
 a_visited_fg_col	'40CCFF'						
 							

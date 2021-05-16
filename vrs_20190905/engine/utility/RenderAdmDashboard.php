@@ -76,7 +76,7 @@ class RenderAdmDashboard {
 		// Default value in case of.
 		$infos  = array (
 			"mode" => 1,
-			"affiche_module_mode" => "bypass",
+			"module_display_mode" => "bypass",
 			"module_z_index" => 1000,
 			"block" => "B01",
 			"blockG" => "B01G",

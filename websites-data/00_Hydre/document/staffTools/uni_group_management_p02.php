@@ -266,7 +266,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // $config = array(
 // 		"mode" => 1,
-// 		"affiche_module_mode" => "normal",
+// 		"module_display_mode" => "normal",
 // 		"module_z_index" => 2,
 // 		"block"		=> $infos['block'],
 // 		"blockG"	=> $infos['block']."G",

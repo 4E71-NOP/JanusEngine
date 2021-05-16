@@ -104,7 +104,7 @@ class User extends Entity {
 				WHERE fk_user_id = '" . $this->User['user_id'] . "'
 				ORDER BY fk_group_id
 				;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $bts->StringFormatObj->formatToLog($sqlQuery)));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
 				$groupList01[] = $dbp ['fk_group_id'];
@@ -123,7 +123,7 @@ class User extends Entity {
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $bts->StringFormatObj->formatToLog($sqlQuery)));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 				if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {

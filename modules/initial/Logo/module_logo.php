@@ -11,7 +11,7 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-//	Module : ModuleCoatOfArms
+//	Module : ModuleLogo
 // --------------------------------------------------------------------------------------------
 
 class ModuleLogo {
@@ -21,7 +21,7 @@ class ModuleLogo {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " / ModuleCoatOfArms";
+		$localisation = " / ModuleLogo";
 		$bts->MapperObj->AddAnotherLevel($localisation );
 		$bts->LMObj->logCheckpoint("ModuleLogo");
 		$bts->MapperObj->RemoveThisLevel($localisation );

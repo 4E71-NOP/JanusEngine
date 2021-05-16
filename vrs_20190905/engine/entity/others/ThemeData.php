@@ -20,13 +20,11 @@ class ThemeData {
 	public function __construct() {
 		for ( $i=0; $i<=30; $i++) {
 			$b = sprintf("%02u",$i);
-			$this->ThemeData["B".$b."T"] = $this->ThemeData["B".$b."G"] = array( "liste_doublon" => "", "liste_bloc" => "", "liste_niveaux" => "", );
+			$this->ThemeData["B".$b."T"] = $this->ThemeData["B".$b."G"] = array( "duplicateList" => "", "blockList" => "", "levelList" => "", );
 			if ($i<10) {
-				$this->ThemeData["B".$b."M"] = array( "liste_doublon" => "", "liste_bloc_menu" => "", "liste_niveaux" => "", );
+				$this->ThemeData["B".$b."M"] = array( "duplicateList" => "", "blockList_menu" => "", "levelList" => "", );
 			}
-			
 		}
-		
 	}
 
 	/**
@@ -38,18 +36,20 @@ class ThemeData {
 		
 // 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 // 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$dbquery = $bts->SDDMObj->query("
+
+		$sqlQuery = "
 		SELECT *
 		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
-		;");
+		;";
+		$dbquery = $bts->SDDMObj->query($sqlQuery);
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`"));
+
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['fk_deco_id']	=	$this->DecorationList[$dbp['deco_ref_id']]['fk_deco_id']	=	$dbp['fk_deco_id'];
 			$this->DecorationList[$dbp['deco_name']]['deco_type']	=	$this->DecorationList[$dbp['deco_ref_id']]['deco_type']		=	$dbp['deco_type'];
 		}
 	}
-	
-	
+		
 	/**
 	 * Create the entries for block definitions.
 	 * Make sure no decoration gets loaded 2 times.
@@ -76,13 +76,13 @@ class ThemeData {
 			$BlockG = "B" . $Block . "G";
 			$BlockT = "B" . $Block . "T";
 			
-			$CurrentBlock['nom'] = $this->ThemeData['theme_block_'.$Block.'_name'];
+			$CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_name'];
 			
-			if ( strlen($CurrentBlock['nom']) > 0 ) {
-				$cbn = $CurrentBlock['nom'];
+			if ( strlen($CurrentBlock['name']) > 0 ) {
+				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['fk_deco_id']	= $this->DecorationList[$cbn]['fk_deco_id'];
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing ".$CurrentBlock['nom']."/".$CurrentBlock['fk_deco_id']));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing theme_block_".$Block."_name / ".$CurrentBlock['name']." with deco_id=".$CurrentBlock['fk_deco_id']));
 				
 				$cbal = &$BlockAlreadyLoaded[$CurrentBlock['deco_type']][$CurrentBlock['fk_deco_id']]; // Current Block Already Loaded
 				if ( !isset( $cbal ) ) {
@@ -125,8 +125,8 @@ class ThemeData {
 					$this->ThemeData[$BlockG]['deco_type'] = $CurrentBlock['deco_type'];
 				}
 				else {
-					$this->ThemeData[$cbal]['liste_doublon'] .= $BlockG." ";
-					$this->ThemeData[$cbal]['liste_bloc'] .= "B" . $Block." ";
+					$this->ThemeData[$cbal]['duplicateList'] .= $BlockG." ";
+					$this->ThemeData[$cbal]['blockList'] .= "B" . $Block." ";
 					$this->ThemeData[$BlockG] = &$this->ThemeData[$cbal];
 				}
 			}
@@ -138,9 +138,9 @@ class ThemeData {
 			// --------------------------------------------------------------------------------------------
 			//	Specific to Caligraph decoration type.
 			// --------------------------------------------------------------------------------------------
-			$CurrentBlock['nom'] = $this->ThemeData['theme_block_'.$Block.'_text'];
-			if ( strlen($CurrentBlock['nom']) > 0 ) {
-				$cbn = $CurrentBlock['nom'];
+			$CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_text'];
+			if ( strlen($CurrentBlock['name']) > 0 ) {
+				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['fk_deco_id']	= $this->DecorationList[$cbn]['fk_deco_id'];
 				
@@ -175,8 +175,8 @@ class ThemeData {
 					$this->colorToHtmlFormat ($this->ThemeData[$BlockT]);
 				}
 				else {
-					$this->ThemeData[$cbal]['liste_doublon'] .= $BlockT." ";
-					$this->ThemeData[$cbal]['liste_bloc'] .= "B" . $Block." ";
+					$this->ThemeData[$cbal]['duplicateList'] .= $BlockT." ";
+					$this->ThemeData[$cbal]['blockList'] .= "B" . $Block." ";
 					$this->ThemeData[$BlockT] = &$this->ThemeData[$cbal];
 				}
 			}
@@ -195,12 +195,13 @@ class ThemeData {
 
 		for($i = 0; $i <= 9; $i ++) {
 			$Block = $bts->StringFormatObj->getDecorationBlockName ( "", $i, "" );
-			$CurrentBlock['nom'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
-			if (strlen ( $CurrentBlock['nom'] ) > 0) {
+			$CurrentBlock['name'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
+			if (strlen ( $CurrentBlock['name'] ) > 0) {
 				$BlockM = "B" . $Block . "M";
-				$cbn = &$CurrentBlock['nom'];
+				$cbn = &$CurrentBlock['name'];
 				$CurrentBlock['fk_deco_id'] = $this->DecorationList [$cbn]['fk_deco_id'];
-				
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu ".$cbn." with deco_id=".$CurrentBlock['fk_deco_id']));
+
 				$cbal = &$BlockAlreadyLoaded['10'][$CurrentBlock ['fk_deco_id']];
 				if (!isset ( $cbal )) {
 					$dbquery = $bts->SDDMObj->query ( "
@@ -214,11 +215,14 @@ class ThemeData {
 						$p[$dbp['deco_variable_name']] = $dbp['deco_value'];
 					}
 					
-					$p ['niveau'] = sprintf ( "%01u", $i );
+					$p ['level'] = sprintf ( "%01u", $i );
 					$cbal = $BlocT = $BlocG = $BlockM;
 					
-					$CurrentBlock['fk_deco_id'] = $this->DecorationList [$p['texte']]['fk_deco_id'];
-					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p['texte']]['deco_type'];
+
+					$CurrentBlock['fk_deco_id'] = $this->DecorationList [$p['text']]['fk_deco_id'];
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Caligraph deco_id=".$CurrentBlock['fk_deco_id']));
+
+					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p['text']]['deco_type'];
 					$DecoTmpObj = new Deco20_Caligraph();
 					$DecoTmpObj->getDeco20_CaligraphDataFromDB($CurrentBlock['fk_deco_id'] );
 					
@@ -240,8 +244,10 @@ class ThemeData {
 // 					if ($p ['txt_l_td_size'] == 0)			{ $p['txt_l_td_size']			= $pv['taille_liens']; }
 // 					if ($p ['txt_l_td_hover_size'] == 0)	{ $p['txt_l_td_hover_size']	= $pv['taille_liens']; }
 					
-					$CurrentBlock ['fk_deco_id'] = $this->DecorationList[$p ['graphique']]['fk_deco_id'];
-					$p['deco_type'] = $CurrentBlock ['deco_type'] = $this->DecorationList [$p ['graphique']] ['deco_type'];
+					$CurrentBlock ['fk_deco_id'] = $this->DecorationList[$p ['graphic']]['fk_deco_id'];
+					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p ['graphic']] ['deco_type'];
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Graphic Type=".$CurrentBlock['deco_type']."; deco_id=".$CurrentBlock['fk_deco_id']));
+
 // 					echo ("<!-- \$p['deco_type']=".$p ['deco_type']."-->\r");
 					switch ($CurrentBlock ['deco_type']) {
 						case 30 :
@@ -286,12 +292,12 @@ class ThemeData {
 					$this->colorToHtmlFormat ($this->ThemeData[$BlockM]);
 					
 				} else {
-					$this->ThemeData[$cbal]['liste_doublon'] .= $BlockM . " ";
-					$this->ThemeData[$cbal]['liste_bloc'] .= "B" . $Block." ";
-					$this->ThemeData[$cbal]['liste_niveaux'] .= $i . " ";
+					$this->ThemeData[$cbal]['duplicateList'] .= $BlockM . " ";
+					$this->ThemeData[$cbal]['blockList'] .= "B" . $Block." ";
+					$this->ThemeData[$cbal]['levelList'] .= $i . " ";
 					$this->ThemeData[$BlockM] = &$this->ThemeData[$cbal];
 				}
-				$this->ThemeData[$cbal] ['liste_bloc_menu'] .= $BlockM . " ";
+				$this->ThemeData[$cbal] ['blockList_menu'] .= $BlockM . " ";
 			}
 		}
 		

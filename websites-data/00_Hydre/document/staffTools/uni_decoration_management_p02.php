@@ -73,7 +73,7 @@ function TJLM_insertion ( $type , $ModType , $NomModule , $FormCible ) {
 }
 
 //	Ligne_formulaire_deco_graphique ( "ex11" , "EX 11", 1,1,1,1, "exquise");
-function ligne_formulaire_deco_graphique ( $div , $nom_div , $x , $y , $b ,$p, $j ) {
+function ligne_form_graphical_decoration ( $div , $nom_div , $x , $y , $b ,$p, $j ) {
 	global $GD_module_, $mn, $pv, ${$theme_tableau};
 	$ChdimX = $ChdimY = "";
 	echo ("
@@ -704,17 +704,17 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			</tr>\r
 			");
 
-			ligne_formulaire_deco_graphique ( "ex11" , "EX 11", 1,1,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex12" , "EX 12", 0,1,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex13" , "EX 13", 1,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex11" , "EX 11", 1,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex12" , "EX 12", 0,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex13" , "EX 13", 1,1,1,1, "elegance");
 
-			ligne_formulaire_deco_graphique ( "ex21" , "EX 21", 1,0,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex22" , "EX 22", 0,0,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex23" , "EX 23", 1,0,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex21" , "EX 21", 1,0,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex22" , "EX 22", 0,0,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex23" , "EX 23", 1,0,1,1, "elegance");
 
-			ligne_formulaire_deco_graphique ( "ex31" , "EX 31", 1,1,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex32" , "EX 32", 0,1,1,1, "elegance");
-			ligne_formulaire_deco_graphique ( "ex33" , "EX 33", 1,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex31" , "EX 31", 1,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex32" , "EX 32", 0,1,1,1, "elegance");
+			ligne_form_graphical_decoration ( "ex33" , "EX 33", 1,1,1,1, "elegance");
 
 			echo ("
 			</table>\r
@@ -784,27 +784,27 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			</tr>\r
 			");
 
-			ligne_formulaire_deco_graphique ( "ex11" , "EX 11", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex12" , "EX 12", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex13" , "EX 13", 0,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex14" , "EX 14", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex15" , "EX 15", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex11" , "EX 11", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex12" , "EX 12", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex13" , "EX 13", 0,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex14" , "EX 14", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex15" , "EX 15", 1,1,1,1, "exquise");
 
-			ligne_formulaire_deco_graphique ( "ex21" , "EX 21", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex22" , "EX 22", 0,0,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex25" , "EX 25", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex21" , "EX 21", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex22" , "EX 22", 0,0,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex25" , "EX 25", 1,1,1,1, "exquise");
 
-			ligne_formulaire_deco_graphique ( "ex31" , "EX 31", 1,0,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex35" , "EX 35", 1,0,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex31" , "EX 31", 1,0,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex35" , "EX 35", 1,0,1,1, "exquise");
 
-			ligne_formulaire_deco_graphique ( "ex41" , "EX 41", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex45" , "EX 45", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex41" , "EX 41", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex45" , "EX 45", 1,1,1,1, "exquise");
 
-			ligne_formulaire_deco_graphique ( "ex51" , "EX 51", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex52" , "EX 52", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex53" , "EX 53", 0,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex54" , "EX 54", 1,1,1,1, "exquise");
-			ligne_formulaire_deco_graphique ( "ex55" , "EX 55", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex51" , "EX 51", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex52" , "EX 52", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex53" , "EX 53", 0,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex54" , "EX 54", 1,1,1,1, "exquise");
+			ligne_form_graphical_decoration ( "ex55" , "EX 55", 1,1,1,1, "exquise");
 
 			echo ("
 			</table>\r
@@ -888,40 +888,40 @@ for ( $pv['i'] = $tab_infos['premier'] ; $pv['i'] <= $tab_infos['nbr'] ; $pv['i'
 			</tr>\r
 			");
 
-			ligne_formulaire_deco_graphique ( "ex11" , "EX 11", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex12" , "EX 12", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex13" , "EX 13", 0,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex14" , "EX 14", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex15" , "EX 15", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex21" , "EX 21", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex22" , "EX 22", 0,0,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex25" , "EX 25", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex31" , "EX 31", 1,0,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex35" , "EX 35", 1,0,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex41" , "EX 41", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex45" , "EX 45", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex51" , "EX 51", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex52" , "EX 52", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex53" , "EX 53", 0,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex54" , "EX 54", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "ex55" , "EX 55", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex11" , "EX 11", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex12" , "EX 12", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex13" , "EX 13", 0,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex14" , "EX 14", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex15" , "EX 15", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex21" , "EX 21", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex22" , "EX 22", 0,0,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex25" , "EX 25", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex31" , "EX 31", 1,0,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex35" , "EX 35", 1,0,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex41" , "EX 41", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex45" , "EX 45", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex51" , "EX 51", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex52" , "EX 52", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex53" , "EX 53", 0,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex54" , "EX 54", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "ex55" , "EX 55", 1,1,1,1, "elysion" );
 
-			ligne_formulaire_deco_graphique ( "in11" , "IN 11", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in12" , "IN 12", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in13" , "IN 13", 0,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in14" , "IN 14", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in15" , "IN 15", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in21" , "IN 21", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in25" , "IN 25", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in31" , "IN 31", 1,0,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in35" , "IN 35", 1,0,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in41" , "IN 41", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in45" , "IN 45", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in51" , "IN 51", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in52" , "IN 52", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in53" , "IN 53", 0,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in54" , "IN 54", 1,1,1,1, "elysion" );
-			ligne_formulaire_deco_graphique ( "in55" , "IN 55", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in11" , "IN 11", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in12" , "IN 12", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in13" , "IN 13", 0,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in14" , "IN 14", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in15" , "IN 15", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in21" , "IN 21", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in25" , "IN 25", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in31" , "IN 31", 1,0,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in35" , "IN 35", 1,0,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in41" , "IN 41", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in45" , "IN 45", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in51" , "IN 51", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in52" , "IN 52", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in53" , "IN 53", 0,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in54" , "IN 54", 1,1,1,1, "elysion" );
+			ligne_form_graphical_decoration ( "in55" , "IN 55", 1,1,1,1, "elysion" );
 
 			echo ("
 			</table>\r

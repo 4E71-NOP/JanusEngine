@@ -12,8 +12,8 @@ div_width				"160"
 
 a_line_height			"18"	
 
-affiche_icones			"NO"	
-icone_taille_x			"16"	
-icone_taille_y			"16"	
+display_icons			"NO"	
+icons_width			"16"	
+icons_height			"16"	
 icone_repertoire_01		"icone_dossier.png"	
 ;

@@ -93,12 +93,12 @@ class RenderStylesheet {
 			if ( is_array($themeArray[$themeArray['currentBlock']."M"]) ) {
 				$p = &$themeArray[$themeArray['currentBlock']."M"];
 				
-				$css_menu_div = ".".$tableName."menu_lvl_".$p['niveau'].", ";
-				$css_menu_lnn = ".".$tableName."menu_lvl_".$p['niveau']."_link, ";
-				$css_menu_lnh = ".".$tableName."menu_lvl_".$p['niveau']."_link:hover, ";
-				$css_menu_lna = ".".$tableName."menu_lvl_".$p['niveau']."_link:active, ";
-				$css_menu_lnv = ".".$tableName."menu_lvl_".$p['niveau']."_link:visited, ";
-				if ( isset ( $p['liste_niveaux'] ) ) {
+				$css_menu_div = ".".$tableName."menu_lvl_".$p['level'].", ";
+				$css_menu_lnn = ".".$tableName."menu_lvl_".$p['level']."_link, ";
+				$css_menu_lnh = ".".$tableName."menu_lvl_".$p['level']."_link:hover, ";
+				$css_menu_lna = ".".$tableName."menu_lvl_".$p['level']."_link:active, ";
+				$css_menu_lnv = ".".$tableName."menu_lvl_".$p['level']."_link:visited, ";
+				if ( isset ( $p['levelList'] ) ) {
 					$css_menu_div .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_lvl_", "" );
 					$css_menu_lnn .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_lvl_", "_link" );
 					$css_menu_lnh .= $this->makeCssLevelString ($themeArray, $themeArray['currentBlock']."M", ".".$tableName."menu_lvl_", "_link:hover" );
@@ -300,8 +300,8 @@ class RenderStylesheet {
 		if (isset($p['txt_font_dl_name']) ) {
 			$Content .= "
 			@font-face {	font-family: '".$p['txt_font_dl_name']."';							".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_dl_url']."'":"").");}\r
-			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-style: italic;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_dl_url']."'":"").");}\r
-			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-weight: bold;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_dl_url']."'":"").");}\r
+			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-style: italic;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".str_replace( ".ttf", "_italic.ttf", $p['txt_font_dl_url'])."'":"").");}\r
+			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-weight: bold;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".str_replace( ".ttf", "_bold.ttf", $p['txt_font_dl_url'])."'":"").");}\r
 			";
 		}
 		
@@ -537,7 +537,7 @@ class RenderStylesheet {
 	}
 	
 	private function makeCssIdString (&$infos, $prefix, $block, $type, $suffix, $css) {
-		$p = explode( " ", trim($block." ".$infos[$block.$type]['liste_bloc']) ); // trim removes the last space in the string
+		$p = explode( " ", trim($block." ".$infos[$block.$type]['blockList']) ); // trim removes the last space in the string
 		$str = "";
 		if ($type != "M") { $type = "";}
 		foreach ($p as $A) { $str .= $prefix.$infos['tableName'].$A.$type.$suffix.", ";}
@@ -546,7 +546,7 @@ class RenderStylesheet {
 	}
 
 	private function makeCssLevelString(&$infos, $block, $prefix, $suffix) {
-		$p = explode( " ", trim($infos[$block]['liste_niveaux']) ); // trim removes the last space in the string
+		$p = explode( " ", trim($infos[$block]['levelList']) ); // trim removes the last space in the string
 		$str = "";
 		foreach ($p as $A) { $str .= $prefix.$A.$suffix.", "; }
 		return $str;
@@ -554,7 +554,7 @@ class RenderStylesheet {
 	}
 	
 	private function makeCssSelectorList (&$infos, $block, $type, $id, $item, $css ) {
-		$p = explode( " ", trim($block." ".$infos[$block.$type]['liste_bloc']) ); // trim removes the last space in the string
+		$p = explode( " ", trim($block." ".$infos[$block.$type]['blockList']) ); // trim removes the last space in the string
 		$str = "";
 		foreach ($p as $A) { $str .= ".".$infos['tableName'].$A.$id." ".$item.", ";}
 		$str = substr ( $str , 0 , -2 )." ".$css."\r";

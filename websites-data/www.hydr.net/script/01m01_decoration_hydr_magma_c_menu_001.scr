@@ -12,13 +12,13 @@ div_width	'160'
 	
 	
 	
-dock_cible	'Bottom-right'
+target_dock	'Bottom-right'
 dock_decal_x	'0'
 dock_decal_y	'0'
 	
-affiche_icones	'NO'
-icone_taille_x	'16'
-icone_taille_y	'16'
+display_icons	'NO'
+icons_width	'16'
+icons_height	'16'
 	
 	
 	

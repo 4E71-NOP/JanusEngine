@@ -48,7 +48,8 @@ class RenderDeco50Exquisite {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
-		switch ($infos['affiche_module_mode']) {
+		$Block = $infos['block'];
+		switch ($infos['module_display_mode']) {
 			case "bypass":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
@@ -64,14 +65,13 @@ class RenderDeco50Exquisite {
 				$L['px'] = 0;
 				$L['py'] = 0;
 				$mcn .= "_" . $infos['module']['module_name'];
+				$Block .= "M";
 				break;
 		}
 		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		// x1 x2
 		// x3 x4
-		// $B = &$S[$_REQUEST['blocG']];
-		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		
 // 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
 // 		$L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
@@ -137,28 +137,27 @@ class RenderDeco50Exquisite {
 		";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
 		$Content .= "
-		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle .";' class='".$TN . $infos['block']."'>\r
-		<div ".$DivIdList['ex11']." class='".$TN . $infos['block']."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
-		<div ".$DivIdList['ex12']." class='".$TN . $infos['block']."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
-		<div ".$DivIdList['ex13']." class='".$TN . $infos['block']."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
-		<div ".$DivIdList['ex14']." class='".$TN . $infos['block']."_ex14' style='left: ".$L['pos_x_ex14']."px;	top: ".$L['pos_y_ex14']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex14_x']."px;		height:".$B['ex14_y']."px;'></div>\r
-		<div ".$DivIdList['ex15']." class='".$TN . $infos['block']."_ex15' style='left: ".$L['pos_x_ex15']."px;	top: ".$L['pos_y_ex15']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex15_x']."px;		height:".$B['ex15_y']."px;'></div>\r
-		<div ".$DivIdList['ex21']." class='".$TN . $infos['block']."_ex21' style='left: ".$L['pos_x_ex21']."px;	top: ".$L['pos_y_ex21']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex21_x']."px;		height:".$B['ex21_y']."px;'></div>\r
-		<div ".$DivIdList['ex25']." class='".$TN . $infos['block']."_ex25' style='left: ".$L['pos_x_ex25']."px;	top: ".$L['pos_y_ex25']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex25_x']."px;		height:".$B['ex25_y']."px;'></div>\r
-		<div ".$DivIdList['ex31']." class='".$TN . $infos['block']."_ex31' style='left: ".$L['pos_x_ex31']."px;	top: ".$L['pos_y_ex31']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex31_x']."px;		height:".$L['dim_y_ex31']."px;'></div>\r
-		<div ".$DivIdList['ex35']." class='".$TN . $infos['block']."_ex35' style='left: ".$L['pos_x_ex35']."px;	top: ".$L['pos_y_ex35']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex35_x']."px;		height:".$L['dim_y_ex35']."px;'></div>\r
-		<div ".$DivIdList['ex41']." class='".$TN . $infos['block']."_ex41' style='left: ".$L['pos_x_ex41']."px;	top: ".$L['pos_y_ex41']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex41_x']."px;		height:".$B['ex41_y']."px;'></div>\r
-		<div ".$DivIdList['ex45']." class='".$TN . $infos['block']."_ex45' style='left: ".$L['pos_x_ex45']."px;	top: ".$L['pos_y_ex45']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex45_x']."px;		height:".$B['ex45_y']."px;'></div>\r
-		<div ".$DivIdList['ex51']." class='".$TN . $infos['block']."_ex51' style='left: ".$L['pos_x_ex51']."px;	top: ".$L['pos_y_ex51']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex51_x']."px;		height:".$B['ex51_y']."px;'></div>\r
-		<div ".$DivIdList['ex52']." class='".$TN . $infos['block']."_ex52' style='left: ".$L['pos_x_ex52']."px;	top: ".$L['pos_y_ex52']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex52_x']."px;		height:".$B['ex52_y']."px;'></div>\r
-		<div ".$DivIdList['ex53']." class='".$TN . $infos['block']."_ex53' style='left: ".$L['pos_x_ex53']."px;	top: ".$L['pos_y_ex53']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex53']."px;	height:".$B['ex53_y']."px;'></div>\r
-		<div ".$DivIdList['ex54']." class='".$TN . $infos['block']."_ex54' style='left: ".$L['pos_x_ex54']."px;	top: ".$L['pos_y_ex54']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex54_x']."px;		height:".$B['ex54_y']."px;'></div>\r
-		<div ".$DivIdList['ex55']." class='".$TN . $infos['block']."_ex55' style='left: ".$L['pos_x_ex55']."px;	top: ".$L['pos_y_ex55']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex55_x']."px;		height:".$B['ex55_y']."px;'></div>\r
+		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r		
+		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
+		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
+		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
+		<div ".$DivIdList['ex14']." class='".$TN . $Block."_ex14' style='left: ".$L['pos_x_ex14']."px;	top: ".$L['pos_y_ex14']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex14_x']."px;		height:".$B['ex14_y']."px;'></div>\r
+		<div ".$DivIdList['ex15']." class='".$TN . $Block."_ex15' style='left: ".$L['pos_x_ex15']."px;	top: ".$L['pos_y_ex15']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex15_x']."px;		height:".$B['ex15_y']."px;'></div>\r
+		<div ".$DivIdList['ex21']." class='".$TN . $Block."_ex21' style='left: ".$L['pos_x_ex21']."px;	top: ".$L['pos_y_ex21']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex21_x']."px;		height:".$B['ex21_y']."px;'></div>\r
+		<div ".$DivIdList['ex25']." class='".$TN . $Block."_ex25' style='left: ".$L['pos_x_ex25']."px;	top: ".$L['pos_y_ex25']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex25_x']."px;		height:".$B['ex25_y']."px;'></div>\r
+		<div ".$DivIdList['ex31']." class='".$TN . $Block."_ex31' style='left: ".$L['pos_x_ex31']."px;	top: ".$L['pos_y_ex31']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex31_x']."px;		height:".$L['dim_y_ex31']."px;'></div>\r
+		<div ".$DivIdList['ex35']." class='".$TN . $Block."_ex35' style='left: ".$L['pos_x_ex35']."px;	top: ".$L['pos_y_ex35']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex35_x']."px;		height:".$L['dim_y_ex35']."px;'></div>\r
+		<div ".$DivIdList['ex41']." class='".$TN . $Block."_ex41' style='left: ".$L['pos_x_ex41']."px;	top: ".$L['pos_y_ex41']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex41_x']."px;		height:".$B['ex41_y']."px;'></div>\r
+		<div ".$DivIdList['ex45']." class='".$TN . $Block."_ex45' style='left: ".$L['pos_x_ex45']."px;	top: ".$L['pos_y_ex45']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex45_x']."px;		height:".$B['ex45_y']."px;'></div>\r
+		<div ".$DivIdList['ex51']." class='".$TN . $Block."_ex51' style='left: ".$L['pos_x_ex51']."px;	top: ".$L['pos_y_ex51']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex51_x']."px;		height:".$B['ex51_y']."px;'></div>\r
+		<div ".$DivIdList['ex52']." class='".$TN . $Block."_ex52' style='left: ".$L['pos_x_ex52']."px;	top: ".$L['pos_y_ex52']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex52_x']."px;		height:".$B['ex52_y']."px;'></div>\r
+		<div ".$DivIdList['ex53']." class='".$TN . $Block."_ex53' style='left: ".$L['pos_x_ex53']."px;	top: ".$L['pos_y_ex53']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex53']."px;	height:".$B['ex53_y']."px;'></div>\r
+		<div ".$DivIdList['ex54']." class='".$TN . $Block."_ex54' style='left: ".$L['pos_x_ex54']."px;	top: ".$L['pos_y_ex54']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex54_x']."px;		height:".$B['ex54_y']."px;'></div>\r
+		<div ".$DivIdList['ex55']." class='".$TN . $Block."_ex55' style='left: ".$L['pos_x_ex55']."px;	top: ".$L['pos_y_ex55']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex55_x']."px;		height:".$B['ex55_y']."px;'></div>\r
 				
 		<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-		// ".$TN.$infos['block']."_t".$m[$mnd]['module_deco_default_text']." ".$TN.$infos['block']."_t_couleur_de_base
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 50 );");
 		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );

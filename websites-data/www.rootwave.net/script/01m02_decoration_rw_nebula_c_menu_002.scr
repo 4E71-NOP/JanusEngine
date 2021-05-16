@@ -1,7 +1,7 @@
 add	decoration
 name	'rw_nebula_menu_002'
-graphique	'rw_nebula_block_001'
-texte	'rw_nebula_txt_menu'
+graphic	'rw_nebula_block_001'
+text	'rw_nebula_txt_menu'
 type	'menu'
 directory	'Nebula'
 	
@@ -12,13 +12,13 @@ div_width	'192'
 div_height	'96'
 	
 	
-dock_cible	'Bottom-right'
+target_dock	'Bottom-right'
 dock_decal_x	'-16'
 dock_decal_y	'0'
 	
-affiche_icones	'NON'
-icone_taille_x	'16'
-icone_taille_y	'16'
+display_icons	'NO'
+	
+	
 	
 	
 	

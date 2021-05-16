@@ -117,7 +117,7 @@ class ModuleMenuType02 {
 						$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
 						$Jd['animation']		= $Jb['animation'];						// Animation type
 						$Jd['width']			= $Jb['div_width'];
-						$Jd['dock_cible']		= $Jb['dock_cible'];
+						$Jd['target_dock']		= $Jb['target_dock'];
 						$Jd['dock_decal_x']		= $Jb['dock_decal_x'];
 						$Jd['dock_decal_y']		= $Jb['dock_decal_y'];
 						$Jd['div_height']		= $Mi['div_height'] = $Jb['div_height'];
@@ -162,7 +162,7 @@ class ModuleMenuType02 {
 			
 			$PMT = &$PositionMenuTable[$lvl];
 			$PMT['div_width']		= $Pm['div_width'];
-			$PMT['dock_cible']		= $Pm['dock_cible'];
+			$PMT['target_dock']		= $Pm['target_dock'];
 			$PMT['dock_decal_x']	= $Pm['dock_decal_x'];
 			$PMT['dock_decal_y']	= $Pm['dock_decal_y'];
 			
@@ -246,22 +246,22 @@ class ModuleMenuType02 {
 			if ( $A['niv'] == 0 ) {
 				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Onload" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
-			if ( $Ab['affiche_icones'] == 1 ) {
-				if ( strlen ($Ab['icone_repertoire']) > 0 ) { $Micone_rep =		"<img src='../media/theme/".$Ab['repertoire']."/".$Ab['icone_repertoire']."'	width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
-				if ( strlen ($Ab['icone_fichier']) > 0 ) { $Micone_fichier =	"<img src='../media/theme/".$Ab['repertoire']."/".$Ab['icone_fichier']."'		width='".$Ab['icone_taille_x']."' height='".$Ab['icone_taille_y']."' border='0'>"; }
+			if ( $Ab['display_icons'] == 1 ) {
+				if ( strlen ($Ab['icone_directory_01']) > 0 ) { $Micone_rep =		"<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_directory']."'	width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
+				if ( strlen ($Ab['icone_file_01']) > 0 ) { $Micone_fichier =	"<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_file']."'			width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
 			}
 			
-			$infos['backup']['affiche_module_mode']	= $infos['affiche_module_mode'];
+			$infos['backup']['module_display_mode']	= $infos['module_display_mode'];
 			$infos['backup']['block']				= $infos['block'];
 			$infos['backup']['module_z_index']		= $infos['module_z_index'];
 			
 			$pv['NiveauZero'] = "";
 			if ( $A['niv'] != 0 ) {
 				$infos['module']['module_name'] = $A['id'];
-				$infos['affiche_module_mode'] = 'menu';
+				$infos['module_display_mode'] = 'menu';
 				$infos['module_z_index'] = $A['niv'] + 100;
 				
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processing ".$infos['module']['module_name']." with mode " . $infos['affiche_module_mode'] . " and deco type is ". $Ab['deco_type']));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processing ".$infos['module']['module_name']." with mode " . $infos['module_display_mode'] . " and deco type is ". $Ab['deco_type']));
 				
 				switch ( $Ab['deco_type'] ) {
 					case 30:
@@ -301,13 +301,14 @@ class ModuleMenuType02 {
 			
 // 			position: absolute; is necessary otherwise the DIVs will be located on top left.
 // 			$infos['module']['module_container_style'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
-			$pv['style_niveau_en_cours'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; left: ".
-			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'px')."px; top: ".
-			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'py')."px; width: ".
-			$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'dx').
-			"px; height: ". $A['div_height_calc'] . "px;
-			visibility: ".$visibility."; ".$pv['supLH']."'";
+			$pv['style_niveau_en_cours'] = "style='position: absolute; z-index: ".$infos['module_z_index']."; "
+			// ."left: ".$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'px')."px; "
+			// ."top: ".$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'py')."px; "
+			."width: ".$RenderLayoutObj->getLayoutModuleEntry($A['id'], 'dx')."px; "
+			."height: ". $A['div_height_calc'] . "px;"
+			."visibility: ".$visibility."; ".$pv['supLH']."'";
 			
+			// $contentTarget .= "<div id='".$A['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."' " . $pv['style_niveau_en_cours'] . " ".$pv['NiveauZero']." >\r" . $ModuleDecoration ;
 			$contentTarget .= "<div id='".$A['id']."' class='".$ThemeDataObj->getThemeName()."menu_lvl_".$A['niv']."' " . $pv['style_niveau_en_cours'] . " ".$pv['NiveauZero']." >\r" . $ModuleDecoration ;
 			
 			if ( is_array ( $A['entree'] ) ) {
@@ -323,7 +324,7 @@ class ModuleMenuType02 {
 			}
 			$contentTarget .= "\r</div>\r";
 			
-			$infos['affiche_module_mode']	= $infos['backup']['affiche_module_mode'];
+			$infos['module_display_mode']	= $infos['backup']['module_display_mode'];
 			$infos['block']					= $infos['backup']['block'];
 			$infos['module_z_index']		= $infos['backup']['module_z_index'];
 			
@@ -333,14 +334,13 @@ class ModuleMenuType02 {
 			
 		}
 		
-		
 		$infos['module']['module_name'] = $infos['backup']['module_name'];
 		$infos['module']['module_z_index'] = $infos['backup']['module_z_index'];
 		
 		$name = "TabMenuArbre";
-		$ContentJSON .= "var ".$name." = {\r";
+		$ContentJSON = "var ".$name." = {\r";
 		foreach ( $renderJSON as &$A ) {
-			$ContentJSON .= "\t'".$A['menu']."':	{ 'id':'".$A['id']."',	'p':'".$A['par']."',	'niv':'".$A['niv']."',	'deco':'".$A['deco']."',	'anim':'".$A['animation']."',	'ent':'".$A['entree']."',	'nbent':'".$A['nf']."',	'width':'".$A['width']."',	'cible':'".$A['dock_cible']."',	'decal_x':'".$A['dock_decal_x']."',	'decal_y':'".$A['dock_decal_y']."',	'le':'".$A['le']."', 'dos':'".$A['dos']."',	'typ':'".$A['typ']."',	'min_height':'" .$A['div_height'] ."'";
+			$ContentJSON .= "\t'".$A['menu']."':	{ 'id':'".$A['id']."',	'p':'".$A['par']."',	'niv':'".$A['niv']."',	'deco':'".$A['deco']."',	'anim':'".$A['animation']."',	'ent':'".$A['entree']."',	'nbent':'".$A['nf']."',	'width':'".$A['width']."',	'cible':'".$A['target_dock']."',	'decal_x':'".$A['dock_decal_x']."',	'decal_y':'".$A['dock_decal_y']."',	'le':'".$A['le']."', 'dos':'".$A['dos']."',	'typ':'".$A['typ']."',	'min_height':'" .$A['div_height'] ."'";
 			if ( $A['nf'] > 0 ) {
 				$ContentJSON .= ",	f:{ ";
 				foreach ( $A['fils'] as $B => &$C ) { $ContentJSON .= "'a".( $B + 1 )."':'".$C."',	"; } // par reference obligatoire

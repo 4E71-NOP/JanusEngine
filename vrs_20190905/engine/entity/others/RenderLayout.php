@@ -149,7 +149,9 @@ class RenderLayout {
 					if ( strlen($A['lyoc_module_anchor_e30']) > 0 ) { $dynamic_['note'] += 4; }
 					
 					switch ( $dynamic_['note'] ) {
-						case 0:		break;
+						case 0:		
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Module=".$m." has a dynamic note of 0!!!"));
+							break;
 						
 						case 1:
 						case 2:

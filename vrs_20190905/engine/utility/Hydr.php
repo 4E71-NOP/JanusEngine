@@ -659,7 +659,7 @@ class Hydr {
 		$RenderModuleObj = RenderModule::getInstance ();
 		$directives = array (
 				'mode' => 1,
-				'affiche_module_mode' => "normal",
+				'module_display_mode' => "normal",
 				'module_z_index' => 0
 		);
 		$Content .= $RenderModuleObj->render ( $directives );

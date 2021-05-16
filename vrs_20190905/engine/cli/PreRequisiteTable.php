@@ -108,8 +108,8 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 		"convert" => array(
 				array("v" => "state",			"s" => "decoration"),
 				array("v" => "type",			"s" => "decoration"),
-				array("v" => "affiche_icones",	"s" => "decoration"),
-				array("v" => "dock_cible",		"s" => "decoration"),
+				array("v" => "display_icons",	"s" => "decoration"),
+				array("v" => "target_dock",		"s" => "decoration"),
 				array("v" => "in11_e",			"s" => "decoration"),
 				array("v" => "in12_e",			"s" => "decoration"),
 				array("v" => "in13_e",			"s" => "decoration"),
