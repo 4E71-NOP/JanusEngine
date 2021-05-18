@@ -1,9 +1,11 @@
 add decoration 							
-name	'rw_aqua_txt_menu'						
+name	'rw_aqua_menu'						
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'14'				
+txt_font_family	'Arial'	txt_font_size	'14'				
+							
+							
 							
 							
 		p_txt_align	'justify'				
@@ -19,7 +21,7 @@ a_hover_fg_col	'000000'	a_hover_bg_col	'B0E0FF'			a_hover_special	'font-weight:b
 							
 							
 							
-table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
+table_rules	'border-spacing:0px; cellspacing:0px; width:100%'						
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
@@ -51,34 +53,34 @@ s1_txt_hover_weight	'bold'	s2_txt_hover_weight	'bold'	s3_txt_hover_weight	'bold'
 s1_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s2_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'	s3_txt_hover_special	'text-shadow:0px 0px 4px #FFFFFF;'		
 							
 s1_01_width	'16'	s1_01_height	'32'	s1_03_width	'16'		
-s1_n01	'aqua_B01_submit_s1_n01.png'	s1_n02	'aqua_B01_submit_s1_n02.png'	s1_n03	'aqua_B01_submit_s1_n03.png'		
-s1_h01	'aqua_B01_submit_s1_h01.png'	s1_h02	'aqua_B01_submit_s1_h02.png'	s1_h03	'aqua_B01_submit_s1_h03.png'		
+s1_a	'aqua_B01_submit_s1a.png'	s1_b	'aqua_B01_submit_s1b.png'	s1_c	'aqua_B01_submit_s1c.png'		
+s1_offset_x	'0'	s1_offset_y	'32'				
 							
 s2_01_width	'16'	s2_01_height	'32'	s2_03_width	'16'		
-s2_n01	'aqua_B01_submit_s2_n01.png'	s2_n02	'aqua_B01_submit_s2_n02.png'	s2_n03	'aqua_B01_submit_s2_n03.png'		
-s2_h01	'aqua_B01_submit_s2_h01.png'	s2_h02	'aqua_B01_submit_s2_h02.png'	s2_h03	'aqua_B01_submit_s2_h03.png'		
+s2_a	'aqua_B01_submit_s2a.png'	s2_b	'aqua_B01_submit_s2b.png'	s2_c	'aqua_B01_submit_s2c.png'		
+s2_offset_x	'0'	s2_offset_y	'32'				
 							
 s3_01_width	'16'	s3_01_height	'32'	s3_03_width	'16'		
-s3_n01	'aqua_B01_submit_s3_n01.png'	s3_n02	'aqua_B01_submit_s3_n02.png'	s3_n03	'aqua_B01_submit_s3_n03.png'		
-s3_h01	'aqua_B01_submit_s3_h01.png'	s3_h02	'aqua_B01_submit_s3_h02.png'	s3_h03	'aqua_B01_submit_s3_h03.png'		
+s3_a	'aqua_B01_submit_s3a.png'	s3_b	'aqua_B01_submit_s3b.png'	s3_c	'aqua_B01_submit_s3c.png'		
+s3_offset_x	'0'	s3_offset_y	'32'				
 							
 tab_up_txt_col	'FFFFFF'			tab_up_txt_weight	'bold'	tab_up_txt_special	'text-shadow:0px 0px 5px #000000;'
 tab_down_txt_col	'DDDDDD'					tab_down_txt_special	'text-shadow:0px 0px 5px #000000;'
 tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'	tab_hover_txt_special	'text-shadow:0px 0px 5px #FFFFFF;'
 tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'		
-tab_down_a	'aqua_B01_tab_up_a.png'	tab_down_b	'aqua_B01_tab_up_b.png'	tab_down_c	'aqua_B01_tab_up_c.png'		
-tab_up_a	'aqua_B01_tab_down_a.png'	tab_up_b	'aqua_B01_tab_down_b.png'	tab_up_c	'aqua_B01_tab_down_c.png'		
-tab_hover_a	'aqua_B01_tab_hover_a.png'	tab_hover_b	'aqua_B01_tab_hover_b.png'	tab_hover_c	'aqua_B01_tab_hover_c.png'		
-tab_frame_bg_col	'79C6DA'						
+tab_a	'aqua_B01_tab_a.png'	tab_b	'aqua_B01_tab_b.png'	tab_c	'aqua_B01_tab_c.png'		
+tab_offset_x	'0'	tab_offset_y	'32'				
+tab_frame_bg_col	'55749280'						
+							
 							
 		ft2_font_size	'26'	ft2_fg_col	'FFFFFF'	ft2_special	'font-weight:bold;'
 ft1_bg	'aqua_B01_ft1.png'	ft2_bg	'aqua_B01_ft2.png'	ft3_bg	'aqua_B01_ft3.png'		
 ft1_width	'32'	ft3_width	'32'	ft_height	'64'		
 							
-icon_directory	'aqua_B01_icone_repertoire.png'	icon_erase	'aqua_B01_icone_efface.png'				
-icon_ok	'aqua_B01_icone_ok.png'	icon_nok	'aqua_B01_icone_nok.png'				
-icon_left	'aqua_B01_icone_fleche_gauche.png'	icon_right	'aqua_B01_icone_fleche_droite.png'	icon_top	'aqua_B01_icone_fleche_haut.png'	icon_bottom	'aqua_B01_icone_fleche_bas.png'
-icon_question	'aqua_B01_icone_question.png'	icon_notification	'aqua_B01_icone_notification.png'				
+icon_directory	'aqua_B01_icon_directory.png'	icon_erase	'aqua_B01_icon_erase.png'				
+icon_ok	'aqua_B01_icon_ok.png'	icon_nok	'aqua_B01_icon_ko.png'				
+icon_left	'aqua_B01_icon_left.png'	icon_right	'aqua_B01_icon_right.png'	icon_top	'aqua_B01_icon_up.png'	icon_bottom	'aqua_B01_icon_down.png'
+icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_notification.png'				
 transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						

@@ -3,23 +3,25 @@ name	'hydr_aqua_txt_main'
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'14'				
+txt_font_family	'Arial'	txt_font_size	'14'				
+							
+							
 							
 							
 		p_txt_align	'justify'				
 							
-		p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 							
 							
 txt_col	'000000'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
 txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
 							
 a_fg_col	'000000'			a_decoration	'none'		
-a_hover_fg_col	'000040'						
+a_hover_fg_col	'000000'					a_hover_special	'font-weight:bold;'
+a_active_fg_col	'000000'						
+a_visited_fg_col	'000000'						
 							
-							
-							
-table_rules	'border-spacing:0px; cellspacing:0px; width:100%'						
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
@@ -30,7 +32,7 @@ t01_tr_bg_hover_col	'ACEDD4'
 		t01_legend_bg_col	'FFFFE0'				
 							
 td_a_fg_col	'000000'			td_a_decoration	'none'		
-td_a_hover_fg_col	'FFFFFF'	td_a_hover_bg_col	'004080'			td_a_hover_special	'font-weight:bold;display:block'
+td_a_hover_fg_col	'000000'					td_a_hover_special	'font-weight:bold;'
 td_a_active_fg_col	'000000'					td_a_active_special	'color:inherit;'
 td_a_visited_fg_col	'000000'						
 							
@@ -58,7 +60,7 @@ s2_01_width	'16'	s2_01_height	'32'	s2_03_width	'16'
 s2_a	'aqua_B01_submit_s2a.png'	s2_b	'aqua_B01_submit_s2b.png'	s2_c	'aqua_B01_submit_s2c.png'		
 s2_offset_x	'0'	s2_offset_y	'32'				
 							
-s3_01_width	'16'	s3_01_height	'32'	s3_03_width	'16'		
+s3_01_width	'0'	s3_01_height	'0'	s3_03_width	'0'		
 s3_a	'aqua_B01_submit_s3a.png'	s3_b	'aqua_B01_submit_s3b.png'	s3_c	'aqua_B01_submit_s3c.png'		
 s3_offset_x	'0'	s3_offset_y	'32'				
 							
@@ -68,7 +70,8 @@ tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'	tab_hover_txt_special	'
 tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'		
 tab_a	'aqua_B01_tab_a.png'	tab_b	'aqua_B01_tab_b.png'	tab_c	'aqua_B01_tab_c.png'		
 tab_offset_x	'0'	tab_offset_y	'32'				
-tab_frame_bg_col	'79C6DA'						
+tab_frame_bg_col	'55749280'						
+							
 							
 		ft2_font_size	'26'	ft2_fg_col	'FFFFFF'	ft2_special	'font-weight:bold;'
 ft1_bg	'aqua_B01_ft1.png'	ft2_bg	'aqua_B01_ft2.png'	ft3_bg	'aqua_B01_ft3.png'		

@@ -57,8 +57,7 @@ class ThemeData {
 	public function renderBlockData() {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
-		
+
 // 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
 // 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 // 		$StringFormat = StringFormat::getInstance();
@@ -155,17 +154,17 @@ class ThemeData {
 							$this->ThemeData[$BlockT] = $DecoTmpObj->getDeco20_Caligraph();
 							$addBlockFlag = 1;
 							
-							if ( strlen($DecoTmpObj->getDeco20_CaligraphEntry('txt_fonte_dl_nom')) > 0 ) {
+							if ( strlen($DecoTmpObj->getDeco20_CaligraphEntry('txt_font_filename_normal')) > 0 ) {
 								if ( $BlockT == "B01T" ) {
 									$this->ThemeData['stylesheet_at_fontface'] = "
 									@font-face {
-										font-family: '".$this->ThemeData['B01T']['txt_fonte_dl_nom']."'; src: url('../media/theme/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_fonte_dl_url']."') format('truetype');
+										font-family: '".$this->ThemeData['B01T']['txt_font_filename_normal']."'; src: url('../media/theme/".$this->ThemeData['B01T']['repertoire']."/".$this->ThemeData['B01T']['txt_font_family_dl_url']."') format('truetype');
 										font-weight: normal;
 										font-style: normal;
 									}\r\r
 									";
 								}
-								$this->ThemeData[$BlockT]['deco_txt_fonte'] = $this->ThemeData[$BlockT]['txt_fonte_dl_nom'] . ", " . $this->ThemeData[$BlockT]['txt_fonte'] ; // txt_fonte = fallback
+								$this->ThemeData[$BlockT]['deco_txt_font_family'] = $this->ThemeData[$BlockT]['txt_font_filename_normal'] . ", " . $this->ThemeData[$BlockT]['txt_font_family'] ; // txt_font_family = fallback
 							}
 							unset ( $DecoTmpObj );
 							break;
@@ -234,16 +233,6 @@ class ThemeData {
 					unset($DecoTmpObj);
 					
 					// --------------------------------------------------------------------------------------------
-// 					$pv ['fonte_plage'] = $p ['deco_txt_fonte_size_max'] - $p ['deco_txt_fonte_size_min'];
-// 					$pv ['fonte_coef'] = $pv ['fonte_plage'] / 6;
-// 					$pv ['fonte_depart'] = $p ['deco_txt_fonte_size_min'];
-// 					$pv ['taille_liens'] = floor ( $pv ['fonte_depart'] + ($pv ['fonte_coef'] * 2) ); // Equivalent T3
-					
-// 					if ($p ['txt_l_01_size'] == 0)			{ $p['txt_l_01_size']			= $pv['taille_liens']; }
-// 					if ($p ['txt_l_01_hover_size'] == 0)	{ $p['txt_l_01_hover_size']	= $pv['taille_liens']; }
-// 					if ($p ['txt_l_td_size'] == 0)			{ $p['txt_l_td_size']			= $pv['taille_liens']; }
-// 					if ($p ['txt_l_td_hover_size'] == 0)	{ $p['txt_l_td_hover_size']	= $pv['taille_liens']; }
-					
 					$CurrentBlock ['fk_deco_id'] = $this->DecorationList[$p ['graphic']]['fk_deco_id'];
 					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p ['graphic']] ['deco_type'];
 					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Graphic Type=".$CurrentBlock['deco_type']."; deco_id=".$CurrentBlock['fk_deco_id']));

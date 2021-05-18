@@ -3,7 +3,9 @@ name	'hydr_aqua_txt_tooltip'
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'12'				
+txt_font_family	'Arial'	txt_font_size	'14'				
+							
+							
 							
 							
 		p_txt_align	'justify'				
@@ -75,10 +77,10 @@ a_visited_fg_col	'FFFFFF'
 							
 							
 							
-icon_directory	'aqua_B01_icone_repertoire.png'	icon_erase	'aqua_B01_icone_efface.png'				
-icon_ok	'aqua_B01_icone_ok.png'	icon_nok	'aqua_B01_icone_nok.png'				
-icon_left	'aqua_B01_icone_gauche.png'	icon_right	'aqua_B01_icone_droite.png'	icon_top	'aqua_B01_icone_haut.png'	icon_bottom	'aqua_B01_icone_bas.png'
-icon_question	'aqua_B01_icone_question.png'	icon_notification	'aqua_B01_icone_notification.png'				
+icon_directory	'aqua_B01_icon_directory.png'	icon_erase	'aqua_B01_icon_erase.png'				
+icon_ok	'aqua_B01_icon_ok.png'	icon_nok	'aqua_B01_icon_ko.png'				
+icon_left	'aqua_B01_icon_left.png'	icon_right	'aqua_B01_icon_right.png'	icon_top	'aqua_B01_icon_up.png'	icon_bottom	'aqua_B01_icon_down.png'
+icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_notification.png'				
 transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						

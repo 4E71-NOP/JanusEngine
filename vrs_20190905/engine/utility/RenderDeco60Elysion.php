@@ -72,7 +72,7 @@ class RenderDeco60Elysion {
 		// --------------------------------------------------------------------------------------------
 		// x1 x2
 		// x3 x4
-		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
+		// $B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		
 		
 // 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
@@ -160,7 +160,10 @@ class RenderDeco60Elysion {
 		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
 		$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $L['dim_y_ex22'] - 16);
 		$DivIdList = array();
-		$DivList = array ( "ex11", "ex12", "ex13", "ex21", "ex22", "ex23", "ex31", "ex32", "ex33" );
+		$DivList = array (
+			"ex11", "ex12", "ex13", "ex14", "ex15", "ex21", "ex22", "ex25", "ex31", "ex35", "ex41", "ex45",	"ex51", "ex52", "ex53", "ex54", "ex55",
+			"in11", "in12", "in13", "in14", "in15", "in21", "in25", "in31", "in35", "in41", "in45", "in51", "in52", "in53", "in54", "in55"
+		);
 		foreach ( $DivList as $A ) { $DivIdList[$A] = "id='" . $mn . "_".$A."' "; }
 		
 		$Content = "
@@ -186,7 +189,7 @@ class RenderDeco60Elysion {
 		<div ".$DivIdList['ex54']." class='".$TN . $Block."_ex54' style='left: ".$L['pos_x_ex54']."px;	top: ".$L['pos_y_ex54']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex54_x']."px;		height:".$B['ex54_y']."px;'></div>\r
 		<div ".$DivIdList['ex55']." class='".$TN . $Block."_ex55' style='left: ".$L['pos_x_ex55']."px;	top: ".$L['pos_y_ex55']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex55_x']."px;		height:".$B['ex55_y']."px;'></div>\r";
 		
-		$bts->LMObj->logDebug($B, "B in effect");
+		// $bts->LMObj->logDebug($B, "B in effect");
 		if ( $B['in11_e'] == 1 ) { $Content .= "<div ".$DivIdList['in11']." class='".$TN . $Block."_in11' style='left: ".$L['pos_x_in11']."px;	top: ".$L['pos_y_in11']."px; width:".$L['in11_x']."px;		height:".$B['in11_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		if ( $B['in12_e'] == 1 ) { $Content .= "<div ".$DivIdList['in12']." class='".$TN . $Block."_in12' style='left: ".$L['pos_x_in12']."px;	top: ".$L['pos_y_in12']."px; width:".$L['in12_x']."px;		height:".$B['in12_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		if ( $B['in13_e'] == 1 ) { $Content .= "<div ".$DivIdList['in13']." class='".$TN . $Block."_in13' style='left: ".$L['pos_x_in13']."px;	top: ".$L['pos_y_in13']."px; width:".$L['dim_x_in13']."px;	height:".$B['in13_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }

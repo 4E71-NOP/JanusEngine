@@ -3,8 +3,10 @@ name	'rw_tronic_txt_menu'
 directory	'Tronic'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'EliteDanger, Arial, Helvetica, Sans-serif'	txt_font_size	'18'				
-txt_font_dl_name	'EliteDanger'	txt_font_dl_url	'elitedanger.ttf'				
+txt_font_family	'EliteDanger'	txt_font_size	'18'				
+txt_font_name_normal	'EliteDanger'	txt_font_filename_normal	'elitedanger.ttf'				
+txt_font_name_bold	'EliteDanger'	txt_font_filename_bold	'elitedanger.ttf'				
+txt_font_name_italic	'EliteDanger'	txt_font_filename_italic	'elitedanger.ttf'				
 							
 p_txt_indent	'0'	p_txt_align	'justify'				
 							

@@ -3,7 +3,9 @@ name	'hydr_nebula_txt_main'
 directory	'Nebula'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
-txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'14'				
+txt_font_family	'Arial'	txt_font_size	'14'				
+							
+							
 							
 							
 		p_txt_align	'justify'				

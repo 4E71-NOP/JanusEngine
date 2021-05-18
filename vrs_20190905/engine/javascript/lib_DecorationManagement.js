@@ -145,13 +145,16 @@ class DecorationManagement {
 					T = TIM[ListeDivsGebi[Div]];
 					T.DivObj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
 					if ( T.DivObj ) {
-					T.DimX = Number(T.DivObj.style.width.replace( RegExp ('px', 'g') , '' ));
-					T.DimY = Number(T.DivObj.style.height.replace( RegExp ('px', 'g') , '' ));
+						T.DimX = Number(T.DivObj.style.width.replace( RegExp ('px', 'g') , '' ));
+						T.DimY = Number(T.DivObj.style.height.replace( RegExp ('px', 'g') , '' ));
+						l.Log[this.dbgCalcDeco]( ModuleName + '_' + ListeDivsGebi[Div] +' is up! ');
 					}
-					else
-					T.Etat = 0
-					T.PosX = 0;
-					T.PosY = 0;
+					else {
+						l.Log[this.dbgCalcDeco]( ModuleName + '_' + ListeDivsGebi[Div] +' is down! ');
+						T.Etat = 0
+						T.PosX = 0;
+						T.PosY = 0;
+					}
 				}
 		
 				var Col1XMax = Math.max ( Number(TIM.ex11.DimX) , Number(TIM.ex21.DimX) , Number(TIM.ex31.DimX) , Number(TIM.ex41.DimX) , Number(TIM.ex51.DimX) );
@@ -171,7 +174,6 @@ class DecorationManagement {
 				TIM.ex22.PosY3 = Lig1YMax + TIM.ex22.DimY;
 				TIM.ex22.PosX4 = Col1XMax + TIM.ex22.DimX;
 				TIM.ex22.PosY4 = Lig1YMax + TIM.ex22.DimY;
-		
 		
 				TIM.ex13.DimX = TIM.ex22.DimX - TIM.ex12.DimX - TIM.ex14.DimX;
 				TIM.ex53.DimX = TIM.ex22.DimX - TIM.ex52.DimX - TIM.ex54.DimX;

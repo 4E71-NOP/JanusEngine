@@ -221,8 +221,8 @@ self::$InitTable['decoration'] = function (&$a) {
 			"main_unit" =>	"mm",	"txt_font_unit" =>	"px",
 			"txt_fonte" => "Arial, Helvetica, Sans-serif",					
 			"txt_fonte_size_min" => 12,	"txt_fonte_size_max" => 24,
-			"txt_fonte_size" => 12,
-			"txt_fonte_dl_nom" => "",	"txt_fonte_dl_url" => "",
+			// "txt_fonte_size" => 12,
+			// "txt_fonte_dl_nom" => "",	"txt_fonte_dl_url" => "",
 			"p_txt_indent" => 0,		"p_txt_align" => "justify",
 			
 			"txt_col" => "000000",		"txt_highlight_col" => "000000",		"txt_bg_col" => "transparent",			"txt_titre_col" => 		"000000",
@@ -292,9 +292,11 @@ self::$InitTable['decoration'] = function (&$a) {
 			// ***************************************************************************
 			// New style
 			"main_unit" => 	"mm", 	"txt_font_unit" => 	"px",
-			"txt_font" => 	"Arial", 	"txt_font_size" => 	"14",
-			"txt_font_dl_name" => 	"", 	"txt_font_dl_url" => 	"",
-			
+			"txt_font_family" => 	"Arial", 	"txt_font_size" => 	"14",
+			"txt_font_name_normal" => 	"", 	"txt_font_filename_normal" => 	"", 
+			"txt_font_name_bold" => 	"", 	"txt_font_filename_bold" => 	"", 
+			"txt_font_name_italic" => 	"", 	"txt_font_filename_italic" => 	"", 
+
 			"p_txt_indent" => 	"", 	"p_txt_align" => 	"",
 			"p_mrg_top" => 	"", 	"p_mrg_bottom" => 	"", 	"p_mrg_left" => 	"", 	"p_mrg_right" => 	"",
 			"p_pad_top" => 	"", 	"p_pad_bottom" => 	"", 	"p_pad_left" => 	"", 	"p_pad_right" => 	"",
@@ -540,9 +542,11 @@ self::$InitTable['decoration'] = function (&$a) {
 					// new style
 					
 					"main_unit", 		"txt_font_unit",
-					"txt_font", 		"txt_font_size",
-					"txt_font_dl_name", 		"txt_font_dl_url",
-					
+					"txt_font_family", 		"txt_font_size",
+					"txt_font_name_normal", 		"txt_font_filename_normal", 
+					"txt_font_name_bold", 			"txt_font_filename_bold", 
+					"txt_font_name_italic", 		"txt_font_filename_italic", 
+										
 					"p_txt_indent", 		"p_txt_align",
 					"p_mrg_top", 		"p_mrg_bottom", 		"p_mrg_left", 		"p_mrg_right",
 					"p_pad_top", 		"p_pad_bottom", 		"p_pad_left", 		"p_pad_right",

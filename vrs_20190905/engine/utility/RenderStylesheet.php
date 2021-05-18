@@ -114,7 +114,7 @@ class RenderStylesheet {
 				$Content .= $css_menu_div . " { position: absolute; margin: 0px; padding: 0px ; border: 0px; }\r";
 				$Content .= $css_menu_lnn . " { ";
 				$maybeMoreContent = "";
-				if ( strlen($p['txt_font']) > 0 )				{ $Content .= "font-family:".		$p['txt_font']			.";	"; }
+				if ( strlen($p['txt_font_family']) > 0 )		{ $Content .= "font-family:".		$p['txt_font_family']	.";	"; }
 				if ( strlen($p['a_fg_col']) > 0 )				{ $Content .= "color:".				$p['a_fg_col']			.";	"; }
 				if ( strlen($p['a_bg_col']) > 0 )				{ $Content .= "background-color:".	$p['a_bg_col']			.";	"; }
 				if ( strlen($p['a_decoration']) > 0 )			{ $Content .= "text-decoration:".	$p['a_decoration']		.";	"; }
@@ -209,7 +209,7 @@ class RenderStylesheet {
 		border-color: ".$themeArray['B01T']['txt_warning_col']."; 
 		margin : 0mm;
 		padding : 0.5mm;".
-		((strlen($themeArray['B01T']['txt_font'])>0) ? "font-family:".$themeArray['B01T']['txt_font'].";":"").
+		((strlen($themeArray['B01T']['txt_font_family'])>0) ? "font-family:".$themeArray['B01T']['txt_font_family'].";":"").
 		((strlen($themeArray['B01T']['txt_font_size'])>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
 		((strlen($themeArray['B01T']['txt_col'])>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
 		((strlen($themeArray['B01T']['tab_frame_bg_img'])>0) ? "background-image: url(".$baseUrl."media/theme/".$themeArray['theme_directory']."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
@@ -219,7 +219,7 @@ class RenderStylesheet {
 	}
 	
 	.div_std {
-	font-family: ".$themeArray['B01T']['txt_font'].";
+	font-family: ".$themeArray['B01T']['txt_font_family'].";
 	font-weight: normal;
 	line-height: normal;
 	color: ".$themeArray['B01T']['txt_col'].";
@@ -262,26 +262,26 @@ class RenderStylesheet {
 		if ( strlen($p['ft2_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;									height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] )>0)? "background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");									}
 		if ( strlen($p['ft3_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft3_bg'] )>0)? "background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['ft3_bg'].");" :"")."	".$p['ft3_special']. " } \r");																												}
 
-		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																						}
-		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";	}\r");		}
-		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																						}
-		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_a'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																				}
-		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_b'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	}\r");	}
-		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_c'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
+		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
+		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_a'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_b'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s1_c'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
 
-		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																						}
-		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";	}\r");		}
-		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																						}
-		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_a'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																				}
-		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_b'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	}\r");	}
-		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_c'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																				}
+		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
+		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
+		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_a'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_b'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s2_c'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
 
-		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																						}
-		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";	}\r");		}
-		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																						}
-		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_a'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");																				}
-		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_b'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	}\r");	}
-		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_c'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");																				}
+		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
+		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	 }
+		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
+		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_a'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_b'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['s3_c'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");																																}
 
 		if ( strlen($p['tab_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",		" { background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		)."; }\r");										}
 		if ( strlen($p['tab_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",		" { background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	".((strlen($p['tab_down_txt_weight'])>0) ? "font-weight:".$p['tab_down_txt_weight'].";":"")."	".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		).";	".$p['tab_down_txt_special']."	}\r");	}
@@ -297,16 +297,38 @@ class RenderStylesheet {
 
 		$protocol = ( $ServerInfosObj->getServerInfosEntry('sslState') == 1) ? "https://" : "http://" ;
 		// New stylsheet
-		if (isset($p['txt_font_dl_name']) ) {
-			$Content .= "
-			@font-face {	font-family: '".$p['txt_font_dl_name']."';							".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_dl_url']."'":"").");}\r
-			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-style: italic;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".str_replace( ".ttf", "_italic.ttf", $p['txt_font_dl_url'])."'":"").");}\r
-			@font-face {	font-family: '".$p['txt_font_dl_name']."';	font-weight: bold;		".((strlen($p['txt_font_dl_url'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".str_replace( ".ttf", "_bold.ttf", $p['txt_font_dl_url'])."'":"").");}\r
-			";
+		// if (isset($p['txt_font_name_normal']) ) {
+		// 	$Content .= "@font-face {	font-family: '".$p['txt_font_dl_name']."';							".((strlen($p['txt_font_name_normal'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_dl_url']."'":"").");}\r";
+		// }
+			
+		$rootPath = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('DOCUMENT_ROOT')."/media/theme/".$infos['theme_directory']."/";
+
+		if ( 
+			isset($p['txt_font_name_normal']) 
+			&& isset($p['txt_font_filename_normal']) 
+			// && file_exists($rootPath.$p['txt_font_filename_normal'])
+			) {
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_normal']."'; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_filename_normal']."');}\r";
+		}
+
+		if ( 
+			isset($p['txt_font_name_bold']) 
+			&& isset($p['txt_font_filename_bold'])
+			// && file_exists($rootPath.$p['txt_font_filename_bold'])
+			) {
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_bold']."'; font-weight:bold; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_filename_bold']."');}\r";
+		}
+
+		if ( 
+			isset($p['txt_font_name_italic'])  
+			&& isset($p['txt_font_filename_italic'])
+			// && file_exists($rootPath.$p['txt_font_filename_bold'])
+			) {
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_italic']."'; font-style:italic; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$infos['theme_directory']."/".$p['txt_font_filename_italic']."');}\r";
 		}
 		
 		// Main module class
-		$list= array( "font",	"font_dl_url",	"font_size",	"col");
+		$list= array( "font_family",	"font_dl_url",	"font_size",	"col");
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"",			"{".$str."}");}
 
@@ -350,8 +372,8 @@ class RenderStylesheet {
 		//form
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("input", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font']."; ".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font']."; ".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
+		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"textarea",	"{".$str."}");}
 		
@@ -412,18 +434,16 @@ class RenderStylesheet {
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"select",			"{".$str."}");}
 		
 		// Table01 legend 
-		$list= array( "txt_col",	"fg_col",	"bg_col",	"special");
+		$list= array( "txt_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("t01_legend", $list, $p);
 		if ( strlen($str) > 0 ) { 
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_TOP_,			"tr:first-child",	"{".$str."}");
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_BOTTOM_,		"tr:last-child",	"{".$str."}");
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_LEFT_,			"td:first-child",	"{".$str."}");
-			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_RIGHT_,		"td:last-child",	"{".$str."}");
+			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_RIGHT_,			"td:last-child",	"{".$str."}");
 		}
 		
 		// Add title lines (first/last line +  first/last column)
-		
-		
 		return "\r".$Content;
 	}
 	
@@ -573,10 +593,11 @@ class RenderStylesheet {
 		$tab = array(
 				"bg_col"		=>	"background-color",
 				"col"			=>	"color",
+				"txt_col"		=>	"color",
 				"decoration"	=>	"text-decoration",
 				"error_col"		=>	"color",
 				"fade_col"		=>	"color",
-				"font"			=>	"font-family",
+				"font_family"	=>	"font-family",
 				"fonte"			=>	"font-family",
 				"font_size"		=>	"font-size",
 				"fg_col"		=>	"color",
@@ -621,11 +642,12 @@ class RenderStylesheet {
 					break;
 				case "bg_col":
 				case "col":
+				case "txt_col":
 				case "decoration":
 				case "error_col":
 				case "fade_col":
 				case "fg_col":
-				case "font":
+				case "font_family":
 				case "fonte":
 				case "highlight_col":
 				case "ok_col":
