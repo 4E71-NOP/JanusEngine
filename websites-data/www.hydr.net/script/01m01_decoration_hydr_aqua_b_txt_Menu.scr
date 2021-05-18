@@ -1,5 +1,5 @@
 add decoration 							
-name	'hydr_aqua_menu'						
+name	'hydr_aqua_txt_menu'						
 directory	'Aqua'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
