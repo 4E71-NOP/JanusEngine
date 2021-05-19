@@ -557,13 +557,15 @@ class Hydr {
 		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
 		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
 		
-		$ThemeDescriptorObj->getDataFromDB ( "mt_" );
+		$ThemeDescriptorObj->setCssPrefix("mt_");
+		$ThemeDescriptorObj->getDataFromDBByPriority ();
+		// $ThemeDescriptorObj->getDataFromDB (  );
 		
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
 		$ThemeDataObj->setThemeData ( $ThemeDescriptorObj->getThemeDescriptor () ); // Better to give an array than the object itself.
-		$ThemeDataObj->setThemeName ( 'mt_' );
+		$ThemeDataObj->setThemeName ( $ThemeDescriptorObj->getCssPrefix() );
 		$ThemeDataObj->setDecorationListFromDB ();
 		$ThemeDataObj->renderBlockData ();
 		

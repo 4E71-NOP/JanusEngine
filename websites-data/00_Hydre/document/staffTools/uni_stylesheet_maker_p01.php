@@ -31,7 +31,7 @@
 // $LMObj->setInternalLogTarget("both");
 
 // $bts->RequestDataObj->setRequestDataEntry('script_source',"");
-$bts->RequestDataObj->setRequestDataEntry('stylesheetMaker', 'selectedTheme', 2	);
+$bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 3	);
 
 /*Hydr-Content-Begin*/
 $localisation = " / uni_stylesheet_maker_p01";
@@ -96,12 +96,12 @@ $Content .= "
 ";
 
 $dbquery = $bts->SDDMObj->query("
-SELECT td.theme_id,td.theme_name,td.theme_title,tw.theme_state
-FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
-.$SqlTableListObj->getSQLTableName('theme_website')." tw 
-WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
-AND td.theme_id = tw.fk_theme_id 
-;");
+	SELECT td.theme_id,td.theme_name,td.theme_title,tw.theme_state
+	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
+	.$SqlTableListObj->getSQLTableName('theme_website')." tw 
+	WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
+	AND td.theme_id = tw.fk_theme_id 
+	;");
 
 $SGEtat = array(
 	0 => $bts->I18nTransObj->getI18nTransEntry('state0'),
@@ -141,19 +141,20 @@ $Content .= "
 <br>\r
 ";
 
-if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme' != 0 )) {
-	$dbquery = $bts->SDDMObj->query("
-	SELECT * 
-	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
-	WHERE a.theme_id = '".$bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection')."' 
-	AND a.theme_id = b.theme_id 
-	;");
+if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme') != 0 ) {
+	// $dbquery = $bts->SDDMObj->query("
+	// SELECT * 
+	// FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
+	// WHERE a.theme_id = '".$bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme')."' 
+	// AND a.theme_id = b.theme_id 
+	// ;");
 	
 	$RenderStylesheetObj = RenderStylesheet::getInstance();
 	$WorkingThemeData = new ThemeData();
-	$WorkingThemeData->setThemeName('renderCSS_');				// will use the $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection') as the theme ID
+	// $WorkingThemeData->setThemeName('renderCSS_');				// will use the $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection') as the theme ID
 	$WorkingThemeDescriptorObj = new ThemeDescriptor();
-	$WorkingThemeDescriptorObj->getDataFromDB($ThemeDataObj->getThemeName());
+	// $WorkingThemeDescriptorObj->getDataFromDB($ThemeDataObj->getThemeName());
+	$WorkingThemeDescriptorObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme'));
 	$WorkingThemeData->setThemeName('mt_');				// Change the to the Maint Theme acronym "mt_" for rendering
 	$WorkingThemeData->setThemeData($WorkingThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$WorkingThemeData->setDecorationListFromDB();
@@ -169,6 +170,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	// $coef = (($fontSizeMax - $fontSizeMin) / 7);
 	// $fontSize =$fontSizeMin+($coef*1);
 	
+	$textareSize = floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5);
 
 	$Content .= "
 	<hr>\r
@@ -179,8 +181,8 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<td>\r
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
-	<form name='GDS_01' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<form name='CSSMaker' ACTION='' method='post'>\r
+	<textarea name='CSSMakerResult' cols='".$textareSize."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 
@@ -197,7 +199,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 			"type"				=> "button",
 			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-			"onclick"			=> "javascript:this.form.GDS_result.focus();this.form.GDS_result.select();",
+			"onclick"			=> "javascript:this.form.CSSMakerResult.focus();this.form.CSSMakerResult.select();",
 			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn2'),
 			"mode"				=> 0,
 			"size" 				=> 0,
@@ -222,7 +224,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame2')."<br>\r
 	<form name='GDS_02' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
+	<textarea name='CSSMakerResult' cols='".$textareSize."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
 	
 	<tr>\r
 	<td>\r
@@ -236,7 +238,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 			"type"				=> "button",
 			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
 			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-			"onclick"			=> "javascript:this.form.GDS_result.focus();this.form.GDS_result.select();",
+			"onclick"			=> "javascript:this.form.CSSMakerResult.focus();this.form.CSSMakerResult.select();",
 			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn2'),
 			"mode"				=> 0,
 			"size" 				=> 0,

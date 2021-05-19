@@ -13,6 +13,7 @@
 /* Hydre-licence-fin */
 class ThemeDescriptor extends Entity{
 	private $ThemeDescriptor = array ();
+	private $CssPrefix = "";
 	
 	//@formatter:off
 	private $columns = array(
@@ -125,22 +126,49 @@ class ThemeDescriptor extends Entity{
 	 * Gets theme descriptor data from the database.<br>
 	 * @param integer $id
 	 */
-	//$UserObj, $WebSiteObj
-	public function getDataFromDB($ThemeId) {
+	public function getDataFromDB($id) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
+		$q = "
+		SELECT * FROM " 
+		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
+		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+		WHERE td.theme_id = '".$id."'
+		AND td.theme_id = tw.fk_theme_id
+		AND tw.theme_state = '1'
+		;";
+
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$dbquery = $bts->SDDMObj->query ( $q );
+
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+			foreach ( $dbp as $A => $B ) {
+				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
+			}
+		}
+		// $this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
+	}
+	
+	/**
+	 * Gets theme descriptor data from the database using the priority system.<br>
+	 * 
+	 */
+	public function getDataFromDBByPriority() {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$q ="";
-		$Dest = $ThemeId;
+		$Dest = $this->CssPrefix;
 		// mt_ as Main Theme
 		if ( $Dest == "mt_" ) {
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme') != 0 ) { 
 				$Dest = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. Id=".$Dest ));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. id=".$Dest ));
 			}
 			else { 
 				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id'); // Problem with the prefered user theme
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. Id=".$Dest ));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. id=".$Dest ));
 			}
 			// By default we use ID
 			$q = "
@@ -156,7 +184,7 @@ class ThemeDescriptor extends Entity{
 			// Case for displaying another theme to the user (browsing and choosing).
 			// in this case we use names as this was eventually sent to a command line which only uses names. 
 			$Dest = $bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme');
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. Id=".$Dest ));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. id=".$Dest ));
 			$q = "
 			SELECT * FROM " 
 			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
@@ -167,7 +195,7 @@ class ThemeDescriptor extends Entity{
 			;";
 		}
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$ThemeId .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$Dest .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 		
 		// --------------------------------------------------------------------------------------------
@@ -182,7 +210,7 @@ class ThemeDescriptor extends Entity{
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
 			WHERE theme_id = '2'
 			;");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$ThemeId.".Fallback on generic theme."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=2.Fallback on generic theme."));
 		}
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {
@@ -192,6 +220,8 @@ class ThemeDescriptor extends Entity{
 		// $this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
 	}
 	
+
+
 	/**
 	 * Updates or inserts in DB the local data.
 	 * mode ar available: <br>
@@ -266,12 +296,14 @@ class ThemeDescriptor extends Entity{
 	//@formatter:off
 	public function getThemeDescriptorEntry ($data) { return $this->ThemeDescriptor[$data]; }
 	public function getThemeDescriptor() { return $this->ThemeDescriptor; }
+	public function getCssPrefix() { return $this->CssPrefix; }
 	
 	public function setThemeDescriptorEntry ($entry, $data) { 
 		if ( isset($this->ThemeDescriptor[$entry])) { $this->ThemeDescriptor[$entry] = $data; }	// DB Entity objects do NOT accept new columns!  
 	}
-
+	
 	public function setThemeDescriptor($ThemeDescriptor) { $this->ThemeDescriptor = $ThemeDescriptor; }
+	public function setCssPrefix($data) { $this->CssPrefix = $data; }
 	//@formatter:off
 
 }

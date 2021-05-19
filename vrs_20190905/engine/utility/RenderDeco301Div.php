@@ -87,7 +87,7 @@ class RenderDeco301Div {
 		$L['dim_y_22'] = $L['pos_y3_22'] - $L['pos_y1_22'];
 		
 		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
-		$ThemeDataObj->setThemeDataEntry('theme_module_hauteur_interne', $L['dim_y_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('theme_module_internal_height', $L['dim_y_ex22'] - 16);
 		
 		$DivIdList['un_div'] = "id='" . $mn . "_un_div' ";
 		
