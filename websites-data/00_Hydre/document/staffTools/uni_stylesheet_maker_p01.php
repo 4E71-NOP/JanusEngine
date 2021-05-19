@@ -164,12 +164,12 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	$stylesheet = $RenderStylesheetObj->render($WorkingThemeData->getThemeName(), $WorkingThemeData );
 	$stylesheet = str_replace("	" , " ", $stylesheet);
 	
-	$fontSizeMin = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_min');
-	$fontSizeMax = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_max');
-	$coef = (($fontSizeMax - $fontSizeMin) / 7);
-	$fontSize =$fontSizeMin+($coef*1);
+	// $fontSizeMin = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_min');
+	// $fontSizeMax = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_max');
+	// $coef = (($fontSizeMax - $fontSizeMin) / 7);
+	// $fontSize =$fontSizeMin+($coef*1);
 	
-	
+
 	$Content .= "
 	<hr>\r
 	".$bts->I18nTransObj->getI18nTransEntry('instructions')."
@@ -180,7 +180,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='GDS_01' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 
@@ -222,7 +222,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame2')."<br>\r
 	<form name='GDS_02' ACTION='' method='post'>\r
-	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$fontSize)*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
+	<textarea name='GDS_result' cols='".floor(($ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5)."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
 	
 	<tr>\r
 	<td>\r

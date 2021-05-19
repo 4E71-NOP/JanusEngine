@@ -119,7 +119,7 @@ $Content .= "
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
 ".$bts->I18nTransObj->getI18nTransEntry('instruction')."<br>\r
-<textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_fonte_size')) * 1.35 )."' rows='5'>
+<textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size')) * 1.35 )."' rows='5'>
 ".$bts->RequestDataObj->getRequestDataSubEntry('CONV', 'cont')."
 </textarea>
 </td>\r
@@ -127,7 +127,7 @@ $Content .= "
 
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
-<textarea name='conv_dst' id='conv_dst' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size') * 1.35 ))."' rows='5'>
+<textarea name='conv_dst' id='conv_dst' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size') * 1.35 ))."' rows='5'>
 ".
 $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
 "</textarea>
