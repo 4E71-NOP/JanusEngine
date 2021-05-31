@@ -60,7 +60,7 @@ s2_01_width	'16'	s2_01_height	'32'	s2_03_width	'16'
 s2_a	'aqua_B01_submit_s2a.png'	s2_b	'aqua_B01_submit_s2b.png'	s2_c	'aqua_B01_submit_s2c.png'		
 s2_offset_x	'0'	s2_offset_y	'32'				
 							
-s3_01_width	'0'	s3_01_height	'0'	s3_03_width	'0'		
+s3_01_width	'16'	s3_01_height	'32'	s3_03_width	'16'		
 s3_a	'aqua_B01_submit_s3a.png'	s3_b	'aqua_B01_submit_s3b.png'	s3_c	'aqua_B01_submit_s3c.png'		
 s3_offset_x	'0'	s3_offset_y	'32'				
 							

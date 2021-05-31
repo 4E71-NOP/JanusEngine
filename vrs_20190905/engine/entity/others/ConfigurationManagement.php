@@ -73,8 +73,7 @@ class ConfigurationManagement {
 	 * Returns the $this->Configuration variable.
 	 * @return array
 	 */
-	public function ConfigDump () { return $this->Configuration; }
-	
+	public function ConfigDump () { return array( "Configuration" => $this->Configuration, "LanguageList" => $this->LanguageList ); }
 	
 	/**
 	 * 

@@ -32,8 +32,8 @@
 
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
-				'origin'			=> 'AdminDashboard',
-				'section'			=> 'WebsiteManagementP01',
+				'origin'		=> 'AdminDashboard',
+				'section'		=> 'WebsiteManagementP01',
 				'creation'		=> 'on',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
@@ -192,7 +192,7 @@ FROM ".$SqlTableListObj->getSQLTableName('website')."
 WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ;");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-	$pv['ws_state2']		= "select_o1_1_" . $dbp['ws_state'];
+	$pv['ws_state2']	= "select_o1_1_" . $dbp['ws_state'];
 	$pv['ws_state']		= $dbp['ws_state'];
 	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('msg_01').$bts->I18nTransObj->getI18nTransEntry($pv['ws_state2'])."<br>\r<br>\r</p>\r";
 	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['ws_lang']);
@@ -215,11 +215,11 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $Content .= "
 <form ACTION='index.php?' method='post'>\r"
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
-."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
+// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
+// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
+// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
+// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
+."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard'>\r"
 ."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"
 ."<input type='hidden' name='formCommand1'				value='update'>"
 ."<input type='hidden' name='formEntity1'				value='website'>"
@@ -264,9 +264,9 @@ $T['Content'][$Tab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 
 // $T['Content'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_name')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['Content'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
-$T['Content'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['Content'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'		size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['Content'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['Content'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['Content'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['Content'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 
 
 // --------------------------------------------------------------------------------------------
@@ -279,8 +279,8 @@ $T['Content'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 $T['Content'][$Tab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l4');
 $T['Content'][$Tab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l5');
 
-$T['Content'][$Tab]['1']['2']['cont'] = "<select name='formParams1[lang]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-$langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected ";
+$T['Content'][$Tab]['1']['2']['cont'] = "<select name='formParams1[lang]'>\r";
+$langList[$WebSiteObj->getWebSiteEntry('fk_lang_id')]['s'] = " selected ";
 
 foreach ( $langList as $k => $v ) {
 	if ( !is_numeric($k) ) {
@@ -288,7 +288,6 @@ foreach ( $langList as $k => $v ) {
 	}
 }
 $T['Content'][$Tab]['1']['2']['cont'] .= "</select>\r";
-
 
 
 $T['Content'][$Tab]['2']['2']['cont'] = "<select name='formParams1[lang_select]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
@@ -490,15 +489,15 @@ function computeInfoDebug () {\r
 ";
 
 $SB = array(
-		"id"				=> "updateButton",
-		"type"				=> "submit",
-		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
-		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
-		"onclick"			=> "",
-		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
-		"mode"				=> 1,
-		"size" 				=> 128,
-		"lastSize"			=> 0,
+	"id"				=> "WebsiteUpdateButton",
+	"type"				=> "submit",
+	"initialStyle"		=> $Block."_submit_s3_n",
+	"hoverStyle"		=> $Block."_submit_s3_h",
+	"onclick"			=> "",
+	"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
+	"mode"				=> 1,
+	"size" 				=> 128,
+	"lastSize"			=> 0,
 );
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
@@ -508,7 +507,4 @@ $Content .= "
 ";
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
-
 ?>
