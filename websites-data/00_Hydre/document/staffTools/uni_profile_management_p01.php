@@ -33,8 +33,10 @@
 // --------------------------------------------------------------------------------------------
 $bts->RequestDataObj->setRequestData('UserProfileForm', 
 	array(
-		"SelectedThemeId"	=>	3,
-		"SelectedTheme"		=>	"hydr_nebula_01",
+		"SelectedThemeId"	=>	2,
+		"SelectedTheme"		=>	"hydr_aqua_01",
+		// "SelectedThemeId"	=>	3,
+		// "SelectedTheme"		=>	"hydr_nebula_01",
 // 		"SelectedThemeId"	=>	4,
 // 		"SelectedTheme"		=>	"hydr_magma_01",
 // 		"SelectedThemeId"	=>	5,
@@ -492,6 +494,12 @@ else {
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')) == 0 ) { 
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
 		$bts->RequestDataObj->setRequestDataSubEntry('formParams1', 'pref_theme', $ThemeDataObj->getThemeDataEntry('theme_name') );
+		$bts->RequestDataObj->setRequestData('UserProfileForm', 
+			array(
+				"SelectedThemeId"	=>	$ThemeDataObj->getThemeDataEntry('theme_id'),
+				"SelectedTheme"		=>	$ThemeDataObj->getThemeDataEntry('theme_name'),
+			)
+		);
 	}
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N°=`".$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')."`"));
 	
@@ -693,7 +701,7 @@ else {
 		<br>\r
 		</p>
 
-		<table>\r
+		<table class='".$PmBlock._CLASS_TABLE_STD_."'>\r
 		<tr style='background-color:transparent;'>\r
 		<td>\r
 		
@@ -743,6 +751,7 @@ else {
 		$j = 0;
 		reset ($iconList);
 		foreach ( $iconList as $A ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " icon ".$A.": " . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)));
 			if ( strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)) != 0 ) {
 				$PmIcon[$j] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
 			}

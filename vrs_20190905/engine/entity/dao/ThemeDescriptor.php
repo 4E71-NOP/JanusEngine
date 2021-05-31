@@ -261,7 +261,6 @@ class ThemeDescriptor extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		
-		
 		return $res;
 	}
 	
