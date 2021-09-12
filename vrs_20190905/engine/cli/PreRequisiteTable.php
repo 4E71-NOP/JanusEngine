@@ -821,7 +821,7 @@ self::$PreRequisiteTable['update']['website']['langConvert']		= 0;
 self::$PreRequisiteTable['update']['website']['columns']			= array(
 		array ( "v" => "name",			"t" => "ws_name"),
 		array ( "v" => "short",			"t" => "ws_short"),
-		array ( "v" => "lang_id",		"t" => "ws_lang"),
+		array ( "v" => "lang_id",		"t" => "fk_lang_id"),
 		array ( "v" => "lang_select",	"t" => "ws_lang_select"),
 		array ( "v" => "theme_id",		"t" => "fk_theme_id"),
 		array ( "v" => "title",			"t" => "ws_title"),

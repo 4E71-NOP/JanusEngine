@@ -1,12 +1,12 @@
 <?php
 
 // d=Directive
-//		Directive = 1 : Return the data in a variable. No error message.
-//		Directive = 2 : Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
-//		Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
+//		Directive = 1 : Return the data in (v)ariable. No error message.
+//		Directive = 2 : Return the data in (v)ariable. If an error uccurs, a message is stored and a flag is set.
+//		Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error/flag.
 // f=Function
 // c=Column
-// v=Variable (destination)
+// v=Variable name (destination in $a['params'])
 // m=Message Code -> CLI_<entity>_<operation>xxx.
 // p=parameter name (for error message)
 // s=search parameter used in SQL to find an element
@@ -702,8 +702,8 @@ self::$CheckTable['add']['website']['0']['m']	= "CLI_Website_C001";
 self::$CheckTable['add']['website']['0']['s']	= "name";
 self::$CheckTable['add']['website']['1']['d']	= 2;
 self::$CheckTable['add']['website']['1']['f']	= function ($a) { return array ( "SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."'"); };
-self::$CheckTable['add']['website']['1']['c']	= "lang_id";
-self::$CheckTable['add']['website']['1']['v']	= "lang_id";
+self::$CheckTable['add']['website']['1']['c']	= "fk_lang_id";
+self::$CheckTable['add']['website']['1']['v']	= "fk_lang_id";
 self::$CheckTable['add']['website']['1']['m']	= "CLI_Website_C002";
 self::$CheckTable['add']['website']['1']['p']	= "language";
 self::$CheckTable['add']['website']['1']['s']	= "lang";
@@ -718,15 +718,15 @@ self::$CheckTable['update']['website']['0']['p']	= "site";
 self::$CheckTable['update']['website']['0']['s']	= "name";
 self::$CheckTable['update']['website']['1']['d']	= 1;
 self::$CheckTable['update']['website']['1']['f']	= function ($a) { return array ( "SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';"); };
-self::$CheckTable['update']['website']['1']['c']	= "lang_id";
-self::$CheckTable['update']['website']['1']['v']	= "lang_id";
+self::$CheckTable['update']['website']['1']['c']	= "fk_lang_id";
+self::$CheckTable['update']['website']['1']['v']	= "fk_lang_id";
 self::$CheckTable['update']['website']['1']['m']	= "CLI_Website_U002";
 self::$CheckTable['update']['website']['1']['p']	= "language";
 self::$CheckTable['update']['website']['1']['s']	= "lang";
 self::$CheckTable['update']['website']['2']['d']	= 2;
 self::$CheckTable['update']['website']['2']['f']	= function ($a) { return array ("SELECT sd.theme_id, sd.theme_name FROM ".$a['sqlTables']['theme_descriptor']." sd, ".$a['sqlTables']['theme_website']." ss WHERE sd.theme_name = '".$a['params']['theme']."' AND sd.theme_id = ss.fk_theme_id AND ss.fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['update']['website']['2']['c']	= "theme_id";
-self::$CheckTable['update']['website']['2']['v']	= "theme_id";
+self::$CheckTable['update']['website']['2']['c']	= "fk_theme_id";
+self::$CheckTable['update']['website']['2']['v']	= "fk_theme_id";
 self::$CheckTable['update']['website']['2']['m']	= "CLI_Website_U003";
 self::$CheckTable['update']['website']['2']['p']	= "theme";
 self::$CheckTable['update']['website']['2']['s']	= "name";

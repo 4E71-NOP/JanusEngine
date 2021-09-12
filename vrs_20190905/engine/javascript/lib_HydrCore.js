@@ -47,28 +47,35 @@ class Log {
 // --------------------------------------------------------------------------------------------
 class DetectionEnvironment {
 	constructor () {
+		
+		this.userAgentDataImplemented = false;
+		this.GeoLocationCurrentPosition = false;
+		
+		this.NavUsrAgent = navigator.userAgent;
+		this.NavPlatform = navigator.platform;
+		
 		this.BrowserList = {
-			'Chrome':	{	'string':navigator.userAgent,		'pattern':'Chrome',		'response':'Chrome',										'offset':1,	'length':2		},
-			'OmniWeb':	{ 	'string':navigator.userAgent,		'pattern':'OmniWeb',	'response':'OmniWeb',		patternExtraction:'OmniWeb/',	'offset':1,	'length':2		},
+			'Chrome':	{	'string':this.NavUsrAgent,		'pattern':'Chrome',		'response':'Chrome',										'offset':1,	'length':2		},
+			'OmniWeb':	{ 	'string':this.NavUsrAgent,		'pattern':'OmniWeb',	'response':'OmniWeb',		patternExtraction:'OmniWeb/',	'offset':1,	'length':2		},
 			'Apple':	{	'string':navigator.vendor,			'pattern':'Apple',		'response':'Safari',		patternExtraction:'Version',	'offset':1,	'length':2		},
 			'Opera':	{	'string':window.opera,				'pattern':'Opera',		'response':'Opera',											'offset':1,	'length':2		},
 			'iCab':		{	'string':navigator.vendor,			'pattern':'iCab',		'response':'iCab',											'offset':1,	'length':2		},
 			'KDE':		{	'string':navigator.vendor,			'pattern':'KDE',		'response':'Konqueror',										'offset':1,	'length':2		},
-			'Firefox':	{	'string':navigator.userAgent,		'pattern':'Firefox',	'response':'Firefox',										'offset':1,	'length':2		},
+			'Firefox':	{	'string':this.NavUsrAgent,		'pattern':'Firefox',	'response':'Firefox',										'offset':1,	'length':2		},
 			'Camino':	{	'string':navigator.vendor,			'pattern':'Camino',		'response':'Camino',										'offset':1,	'length':2		},
-			'Netscape':	{	'string':navigator.userAgent,		'pattern':'Netscape',	'response':'Netscape',										'offset':1,	'length':2		},
-			'MSIE':		{	'string':navigator.userAgent,		'pattern':'MSIE',		'response':'Explorer',										'offset':1,	'length':2		},
-			'Gecko':	{	'string':navigator.userAgent,		'pattern':'Gecko',		'response':'Mozilla',		patternExtraction:'rv',			'offset':1,	'length':2		},
-			'Mozilla':	{ 	'string':navigator.userAgent,		'pattern':'Mozilla',	'response':'Netscape',										'offset':1,	'length':2		},
-			'Edge':		{ 	'string':navigator.userAgent,		'pattern':'Edge',		'response':'Edge',											'offset':1,	'length':2		}
+			'Netscape':	{	'string':this.NavUsrAgent,		'pattern':'Netscape',	'response':'Netscape',										'offset':1,	'length':2		},
+			'MSIE':		{	'string':this.NavUsrAgent,		'pattern':'MSIE',		'response':'Explorer',										'offset':1,	'length':2		},
+			'Gecko':	{	'string':this.NavUsrAgent,		'pattern':'Gecko',		'response':'Mozilla',		patternExtraction:'rv',			'offset':1,	'length':2		},
+			'Mozilla':	{ 	'string':this.NavUsrAgent,		'pattern':'Mozilla',	'response':'Netscape',										'offset':1,	'length':2		},
+			'Edge':		{ 	'string':this.NavUsrAgent,		'pattern':'Edge',		'response':'Edge',											'offset':1,	'length':2		}
 		};
 		
 		this.OSList = {
-			'0':	{	'string':navigator.platform,	'pattern':'Win',		'response':'Windows'		},
-			'1':	{	'string':navigator.platform,	'pattern':'Mac',		'response':'Mac'			},
-			'2':	{ 	'string':navigator.userAgent,	'pattern':'iPhone',		'response':'iPhone/iPad'	},
-			'3':	{	'string':navigator.platform,	'pattern':'Linux',		'response':'Linux'			},
-			'4':	{	'string':navigator.platform,	'pattern':'Android',	'response':'Android'		},
+			'0':	{	'string':this.NavPlatform,	'pattern':'Win',		'response':'Windows'		},
+			'1':	{	'string':this.NavPlatform,	'pattern':'Mac',		'response':'Mac'			},
+			'2':	{ 	'string':this.NavUsrAgent,	'pattern':'iPhone',		'response':'iPhone/iPad'	},
+			'3':	{	'string':this.NavPlatform,	'pattern':'Linux',		'response':'Linux'			},
+			'4':	{	'string':this.NavPlatform,	'pattern':'Android',	'response':'Android'		},
 		};
 
 		this.BrowserSupportList = {
@@ -89,21 +96,40 @@ class DetectionEnvironment {
 		for (let i=5 ; i<=15 ; i++ ) { browserSection[i] = "MSIE"+i; }
 
 		var browserSection = this.BrowserSupportList.Firefox;
-		for (let i=60 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=60 ; i<=200 ; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.Konqueror;
-		for (let i=3 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=3 ; i<=200 ; i++ ) { browserSection[i] = "DOM"; }
 		
 		var browserSection = this.BrowserSupportList.Opera;
-		for (let i=5 ; i<=100; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=5 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.Safari;
-		for (let i=3 ; i<=50; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=3 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.inconnu;
-		for (let i=1 ; i<=100; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=1 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
+		
+		
+		
+		if (navigator.userAgentData) { this.userAgentDataImplemented = true; }
+		
+		if ("geolocation" in navigator) { navigator.geolocation.getCurrentPosition(
+			this.geoSuccess, 
+			this.geoFailure, {
+				enableHighAccuracy: true,
+				timeout: 5000,
+				maximumAge: 0
+				} 
+			);
+		}		
+		
 		
 		this.cliEnv = {
+			'featureDetection' : {
+				'geolocationCurrentPosition':this.GeoLocationCurrentPosition,
+				'userAgentDataImplemented':this.userAgentDataImplemented,
+			},
 			'os':{ 'platform':this.SearchString(this.OSList, 0 )},
 			'screen':{ 'width':window.screen.width, 'height':window.screen.height },
 			'browser':{
@@ -123,9 +149,12 @@ class DetectionEnvironment {
 		
 		this.cliEnv.browser.support = this.BrowserSupportList[this.cliEnv.browser.agent][this.cliEnv.browser.version];
 		this.cliEnv.browser.CompleteName = this.BrowserList[this.cliEnv.browser.agent].string;
-		
+	
 	}
-		
+	
+	geoSuccess(pos) { this.GeoLocationCurrentPosition = pos; }
+	geoFailure(err) { console.log('navigator.geolocation.getCurrentPosition not available'); }
+	
 	SearchString (data, extraction) {
 		let str, ptrn, res, idx;
 		for (let i in data) {
@@ -581,17 +610,16 @@ if ( !window.onresize ) {
 	window.onresize = function () { elm.UpdateWindowSize(); };
 	// An anonymous function calling the class.method() is better than assinging
 	// a class.method.
-	// in this 2nd case the function will loose the object.method status.
-	// therfore it will not be able to call other methods in the same class
+	// in this 2nd case the function will loose the object.method scope.
+	// therefore it will not be able to call other methods in the same class
 	// using the word 'this' as this function thinks its alone.
 
 }
 de.cliEnv.document.width	= elm.UpdateWindowSize('x');
 de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 
-// l.Log[cfg.CoreDbg]("_______________________Migration
-// Javascript_______________________");
-// l.Log[cfg.CoreDbg](cliEnv);
+l.Log[cfg.CoreDbg]("_______________________Dump Javascript_______________________");
+l.Log[cfg.CoreDbg](de.cliEnv);
 
 // document.onkeypress = k.stopRKey;
 document.onmousemove = function (e) { m.LocateMouse(e);};
@@ -599,6 +627,3 @@ document.onmousemove = function (e) { m.LocateMouse(e);};
 // If you need to get the keycode typed.
 //k.ListenToKeyPressed();
 
-
-
-// l.Log[1](de.BrowserSupportList);

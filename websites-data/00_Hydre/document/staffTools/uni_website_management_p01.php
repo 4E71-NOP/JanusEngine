@@ -34,10 +34,10 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'WebsiteManagementP01',
-				'creation'		=> 'on',
-				'modification'	=> 'on',
-				'deletion'		=> 'on',
-				'mode'			=> 'edit',
+// 				'creation'		=> 'on',
+// 				'modification'	=> 'on',
+// 				'deletion'		=> 'on',
+// 				'mode'			=> 'edit',
 //				'mode'			=> 'create',
 //				'mode'			=> 'delete',
 		)
@@ -220,7 +220,7 @@ $Content .= "
 // .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
 // .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 ."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"
+."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"   AdminDashboardWebsiteManagementP01
 ."<input type='hidden' name='formCommand1'				value='update'>"
 ."<input type='hidden' name='formEntity1'				value='website'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
@@ -335,14 +335,14 @@ $arrayDbg = array(
 );
 
 $T['Content'][$Tab]['5']['2']['cont'] = "
-<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
-<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
-<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
-<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
-<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
-<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
-<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
-<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_default]' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_graph]'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_stats]'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_sql]'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_commandbuffer]'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_commandlogs]'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_internallogs]'	".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
+<input type='checkbox' id='formTarget1[info_debug_variables]'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
 ";
 
 // <select name='formParams1[info_debug]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
