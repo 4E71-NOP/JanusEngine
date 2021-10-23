@@ -12,32 +12,66 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
+/* @var $bts BaseToolSet                            */
+/* @var $CurrentSetObj CurrentSet                   */
+/* @var $ClassLoaderObj ClassLoader                 */
+
+/* @var $SqlTableListObj SqlTableList               */
+/* @var $UserObj User                               */
+/* @var $WebSiteObj WebSite                         */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $ThemeDataObj ThemeData                     */
+
+/* @var $Content String                             */
+/* @var $Block String                               */
+/* @var $infos Array                                */
+/* @var $l String                                   */
+/*Hydre-IDE-end*/
+
+
 /*Hydr-Content-Begin*/
+$SB = array(
+		"id"				=> "bouton_suppression_log1",
+		"type"				=> "button",
+		"initialStyle"		=> $Block."_submit_s1_n",
+		"hoverStyle"		=> $Block."_submit_s1_h",
+		"onclick"			=> "dm.dbgCalcDeco=1; TooltipConfig.test01={ 'State':1, 'X':'128', 'Y':'256' };",
+		"message"			=> "128x256",
+		"mode"				=> 1,
+		"size" 				=> 96,
+		"lastSize"			=> 0,
+);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
-$_REQUEST['BS']['id']				= "bouton_suppression_log1";
-$_REQUEST['BS']['type']				= "button";
-$_REQUEST['BS']['style_initial']	= $theme_tableau.$_REQUEST['bloc']."_submit_s1_n";
-$_REQUEST['BS']['style_hover']		= $theme_tableau.$_REQUEST['bloc']."_submit_s1_h";
-$_REQUEST['BS']['onclick']			= "JSGeneralDebug=1; TabInfoModule.AideDynamique.DimConteneurX=128; TabInfoModule.AideDynamique.DimConteneurY=256; CalculeDecoModule ( TabInfoModule , 'AideDynamique' );";
-$_REQUEST['BS']['message']			= "A";
-$_REQUEST['BS']['mode']				= 1;
-$_REQUEST['BS']['taille'] 			= 64;
-$_REQUEST['BS']['derniere_taille']	= 0;
-echo ( generation_bouton()."Taille = 128x256" );
+$Content .=  ("<br>\r");
 
-echo ("<br>\r<br>\r<br>\r");
+$SB = array(
+		"id"				=> "bouton_suppression_log2",
+		"type"				=> "button",
+		"initialStyle"		=> $Block."_submit_s2_n",
+		"hoverStyle"		=> $Block."_submit_s2_h",
+		"onclick"			=> "dm.dbgCalcDeco=1; TooltipConfig.test01={ 'State':1, 'X':'256', 'Y':'96' };",
+		"message"			=> "256x96",
+		"mode"				=> 1,
+		"size" 				=> 96,
+		"lastSize"			=> 0,
+);
+$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
+$Content .=  ("<br>\r<br>\r<br>\r
+<div style='display:block; text-align:center;'>
+<span
+		style= 'margin:1cm; padding:0.5cm; background-color:#FF800080; border-radius: 0.5cm;'
+		onMouseOver=\"t.ToolTip('Testing...', 'test01');\"
+		onMouseOut=\"t.ToolTip('', 'test01');\">
+Hover on me and test the tooltip!</span>\r
+</div>\r
+<br>\r
+<br>\r
+");
 
-$_REQUEST['BS']['id']				= "bouton_suppression_log2";
-$_REQUEST['BS']['type']				= "button";
-$_REQUEST['BS']['style_initial']	= $theme_tableau.$_REQUEST['bloc']."_submit_s2_n";
-$_REQUEST['BS']['style_hover']		= $theme_tableau.$_REQUEST['bloc']."_submit_s2_h";
-$_REQUEST['BS']['onclick']			= "JSGeneralDebug=1; TabInfoModule.AideDynamique.DimConteneurX=256; TabInfoModule.AideDynamique.DimConteneurY=128; CalculeDecoModule ( TabInfoModule , 'AideDynamique' );";
-$_REQUEST['BS']['message']			= "B";
-$_REQUEST['BS']['mode']				= 1;
-$_REQUEST['BS']['taille'] 			= 64;
-$_REQUEST['BS']['derniere_taille']	= 0;
-echo ( generation_bouton()."Taille = 256x128" );
 
-$JavaScriptInitDonnees[] = "var AideDynamiqueDerogation = { 'Etat':1, 'X':196, 'Y':256 };\r";
+//$JavaScriptInitDonnees[] = "var AideDynamiqueDerogation = { 'Etat':1, 'X':196, 'Y':256 };\r";
 
 ?>

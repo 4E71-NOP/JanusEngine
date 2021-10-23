@@ -108,7 +108,7 @@ class BaseToolSet {
 	
 	/**
 	 * Sets the session management instance.
-	 * It is donne this ways because the session isn't initialized right away at the start or when this class is loaded.
+	 * It is done this ways because the session isn't initialized right away at the start or when this class is loaded.
 	 */
 	public function initSmObj (){
 // 		$this->SMObj					= SessionManagement::getInstance($this->CMObj);

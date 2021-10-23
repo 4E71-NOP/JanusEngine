@@ -118,9 +118,12 @@ if ( $dbquery != false && $SDDMObj->num_row_sql($dbquery) > 0 ) {
 
 // --------------------------------------------------------------------------------------------
 include ("stylesheets/css_admin_install.php");
-$theme_tableau = "mt_";
-${$theme_tableau}['theme_module_internal_width'] = 512;
-${$theme_tableau}['theme_module_width'] = 512;
+$mt_ = array_merge(
+		$mt_,
+		array(
+				'theme_module_internal_width'=> 512,
+				'theme_module_width' => 512,)
+		);
 
 $ClassLoaderObj->provisionClass('ThemeData');
 $CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());

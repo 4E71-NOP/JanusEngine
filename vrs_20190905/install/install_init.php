@@ -123,10 +123,13 @@ class HydrInstall {
 
 		// --------------------------------------------------------------------------------------------
 		include ("stylesheets/css_admin_install.php");
-		$theme_tableau = "mt_";
-		${$theme_tableau} ['theme_module_internal_width'] = 896;
-		${$theme_tableau} ['theme_module_width'] = 896;
-
+		$mt_ = array_merge(
+				$mt_,
+				array(
+						'theme_module_internal_width'=> 896,
+						'theme_module_width' => 896,)
+				);
+		
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
@@ -174,7 +177,13 @@ class HydrInstall {
 			<title>INSTALL</title>\r
 			" . $stylesheet . "\r
 			</head>\r
-			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . "' background='media/theme/" . ${$theme_tableau} ['theme_directory'] . "/" . ${$theme_tableau} ['theme_bg'] . "'>\r\r
+			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
+			"' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . 
+			"' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . 
+			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . 
+			"' background='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . 
+			"/" . $ThemeDataObj->getThemeDataEntry('theme_bg') 
+			. "'>\r\r
 			";
 
 		// --------------------------------------------------------------------------------------------

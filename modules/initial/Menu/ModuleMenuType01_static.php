@@ -75,7 +75,6 @@ class ModuleMenuType01 {
 	
 	private function menu_affichage_statique (&$infos) {
 		$LMObj = LogManagement::getInstance();
-// 		global $module_, $theme_tableau, ${$theme_tableau}, $bloc_html, $db_, $menu_principal, $function_parametres, $tl_, $l, $pv, $theme_tableau;
 		$CurrentSet = CurrentSet::getInstance();
 // 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();

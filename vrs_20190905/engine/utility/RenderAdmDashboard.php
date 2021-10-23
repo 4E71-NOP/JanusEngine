@@ -119,7 +119,6 @@ class RenderAdmDashboard {
 		// 0 	8	4
 		// 2	10	6
 		// 1	9	5
-		//if ( !isset ( ${$theme_tableau}['theme_admctrl_position'] ) ) {}
 		
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		

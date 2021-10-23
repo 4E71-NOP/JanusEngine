@@ -53,9 +53,12 @@ class ModuleOffLineMessage {
 		// --------------------------------------------------------------------------------------------
 		
 		include ("../stylesheets/css_admin_install.php");
-		$theme_tableau = "mt_";
-		${$theme_tableau}['theme_module_internal_width'] = 896;
-		${$theme_tableau}['theme_module_width'] = 896;
+		$mt_ = array_merge(
+				$mt_,
+				array(
+					'theme_module_internal_width'=> 896,
+					'theme_module_width' => 896,)
+		);
 		
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();

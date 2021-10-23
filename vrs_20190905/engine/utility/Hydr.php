@@ -11,6 +11,14 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
+/* @var $CurrentSetObj CurrentSet                   */
+/* @var $Block String                               */
+/* @var $infos Array                                */
+/* @var $l String                                   */
+/*Hydre-IDE-end*/
+
 class Hydr {
 	private static $Instance = null;
 	private function __construct() {
@@ -112,7 +120,7 @@ class Hydr {
 		// Scoring on what we recieved (or what's at disposal)
 		//
 		
-		// casematrix  
+		// case matrix  
 		//	0	Reset session (anonymous user)
 		//	1	Check session, Authentification mode = session
 		//	2	sw has been submitted (this is a first contact case)
