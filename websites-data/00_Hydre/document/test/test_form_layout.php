@@ -11,39 +11,86 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
-/*Hydr-Content-Begin*/
-$_REQUEST['sql_initiateur'] = "fra_test_layout_formulaire";
+/*Hydre-IDE-begin*/
+// Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
+/* @var $bts BaseToolSet                            */
+/* @var $CurrentSetObj CurrentSet                   */
+/* @var $ClassLoaderObj ClassLoader                 */
 
-for ( $i=1 ; $i<=4 ; $i++ ) {
-	for ( $j=1 ; $j<=4 ; $j++ ) {
-		for ( $k=1 ; $k<=4 ; $k++ ) {
-			$AD[$i][$j][$k]['cont'] = $i . "_" . $j . "_" .  $k ;
+/* @var $SqlTableListObj SqlTableList               */
+/* @var $UserObj User                               */
+/* @var $WebSiteObj WebSite                         */
+/* @var $DocumentDataObj DocumentData               */
+/* @var $ThemeDataObj ThemeData                     */
+
+/* @var $Content String                             */
+/* @var $Block String                               */
+/* @var $infos Array                                */
+/* @var $l String                                   */
+/*Hydre-IDE-end*/
+
+
+/*Hydr-Content-Begin*/
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Invite #01",
+			"col_1_txt"		=> "1",
+			"col_2_txt"		=> "2",
+			"col_3_txt"		=> "3",
+			"col_4_txt"		=> "4",
+			"col_5_txt"		=> "5",
+			"tabTxt1"		=> "1",
+			"tabTxt2"		=> "2",
+			"tabTxt3"		=> "3",
+			"tabTxt4"		=> "4",
+			"tabTxt5"		=> "5",
+		),
+		"eng" => array(
+			"invite1"		=> "Invite #01",
+			"col_1_txt"		=> "1",
+			"col_2_txt"		=> "2",
+			"col_3_txt"		=> "3",
+			"col_4_txt"		=> "4",
+			"col_5_txt"		=> "5",
+			"tabTxt1"		=> "1",
+			"tabTxt2"		=> "2",
+			"tabTxt3"		=> "3",
+			"tabTxt4"		=> "4",
+			"tabTxt5"		=> "5",
+		)
+	)
+);
+
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+
+$T = array();
+
+$maxTabs=2;
+$maxLines=10;
+$maxCells=2;
+
+for ( $tab=1; $tab<=$maxTabs; $tab++) {
+	for ( $line=1; $line<=$maxLines; $line++) {
+		for ( $cell=1; $cell<=$maxCells; $cell+=2) {
+			$T['Content'][$tab][$line][$cell]['cont']	=  $tab."_".$line."_".$cell.":";
+			$T['Content'][$tab][$line][$cell+1]['cont']	=  "<input type='text' value='".$tab."/".$line."/".$cell."'>";
 		}
 	}
 }
 
-$tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";
-$tl_['eng']['onglet_2'] = "Configuration";	$tl_['fra']['onglet_2'] = "Configuration";
-$tl_['eng']['onglet_3'] = "State";			$tl_['fra']['onglet_3'] = "Etat";
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, $maxTabs);
+$T['ContentCfg']['tabs'] = array(
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($maxLines,$maxCells,1),
+		2	=>	$bts->RenderTablesObj->getDefaultTableConfig($maxLines,$maxCells,1),
+		3	=>	$bts->RenderTablesObj->getDefaultTableConfig($maxLines,$maxCells,1),
+		4	=>	$bts->RenderTablesObj->getDefaultTableConfig($maxLines,$maxCells,1),
+		5	=>	$bts->RenderTablesObj->getDefaultTableConfig($maxLines,$maxCells,1),
+);
+$Content .= $bts->RenderTablesObj->render($infos, $T);
 
-$ADC['tabs']['1']['NbrOfLines'] = 4;	$ADC['tabs']['1']['NbrOfCells'] = 4;	$ADC['tabs']['1']['TableCaptionPos'] = 1;
-$ADC['tabs']['2']['NbrOfLines'] = 4;	$ADC['tabs']['2']['NbrOfCells'] = 4;	$ADC['tabs']['2']['TableCaptionPos'] = 2;
-$ADC['tabs']['3']['NbrOfLines'] = 4;	$ADC['tabs']['3']['NbrOfCells'] = 4;	$ADC['tabs']['3']['TableCaptionPos'] = 3;
-
-$tab_infos['AffOnglet']			= 1;
-$tab_infos['NbrOnglet']			= 3;
-$tab_infos['tab_comportement']	= 1;
-$tab_infos['TypSurbrillance']	= 1; // 1:ligne, 2:cellule
-$tab_infos['mode_rendu']		= 0;	// 0 echo 1 dans une variable
-$tab_infos['doc_height']		= 256;
-$tab_infos['doc_width']			= ${$theme_tableau}['theme_module_internal_width'];
-$tab_infos['group']			= "inst1";
-$tab_infos['cell_id']			= "tab";
-$tab_infos['document']			= "doc";
-$tab_infos['cell_1_txt']		= $tl_[$l]['onglet_1'];
-$tab_infos['cell_2_txt']		= $tl_[$l]['onglet_2'];
-$tab_infos['cell_3_txt']		= $tl_[$l]['onglet_3'];
-include ("engine/affichage_donnees.php");
 
 /*Hydr-Content-End*/
+
 ?>

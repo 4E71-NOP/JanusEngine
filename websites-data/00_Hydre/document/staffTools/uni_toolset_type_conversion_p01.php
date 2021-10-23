@@ -84,7 +84,6 @@ $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 
 // --------------------------------------------------------------------------------------------
 // Preparation des tables
 // --------------------------------------------------------------------------------------------
-// $pv['ttrb'] = &${$theme_tableau}[$infos['blockT']];
 
 $select_type = array();
 $select_type['0']['t'] = $bts->I18nTransObj->getI18nTransEntry('TypeTxt');		$select_type['0']['s'] = "";	$select_type['0']['db'] = "0";

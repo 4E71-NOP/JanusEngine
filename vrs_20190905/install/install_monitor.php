@@ -170,8 +170,15 @@ $refresh.
 "<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 ".$stylesheet."\r
 </head>\r
-<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' vlink='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' alink='".$ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' )."' background='../media/theme/".${$theme_tableau}['theme_directory']."/".${$theme_tableau}['theme_bg']."'>\r\r
+<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
+			"' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_col' ) . 
+			"' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_visite_col' ) . 
+			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . 
+			"' background='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . 
+			"/" . $ThemeDataObj->getThemeDataEntry('theme_bg') 
+			. "'>\r\r	
 ";
+
 
 // --------------------------------------------------------------------------------------------
 

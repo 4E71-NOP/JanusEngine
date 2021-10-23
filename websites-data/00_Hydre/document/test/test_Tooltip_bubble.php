@@ -70,8 +70,6 @@ Hover on me and test the tooltip!</span>\r
 <br>\r
 <br>\r
 ");
-
-
-//$JavaScriptInitDonnees[] = "var AideDynamiqueDerogation = { 'Etat':1, 'X':196, 'Y':256 };\r";
+/*Hydr-Content-End*/
 
 ?>

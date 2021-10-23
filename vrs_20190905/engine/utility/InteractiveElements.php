@@ -128,6 +128,7 @@ class InteractiveElements {
 	/**
 	 * 
 	 * MUST UPDATE !!!! 
+	 * 2020 10 23 : Task / Check with a image selector as validation
 	 * 
 	 * @param String $cas
 	 * @param String $FormNom
@@ -139,12 +140,15 @@ class InteractiveElements {
 	 * @param String $DivCible
 	 * @param String $JavascriptRoutine
 	 * @param String $ModType
+	 * @param String $infos
 	 * @return string
 	 */
-	public function renderIconSelectImage ( $cas , $FormNom , $ForgeFormElement, $ForgeFormElementX, $ForgeFormElementY, $FormRepertoire , $InputVal , $DivCible , $JavascriptRoutine , $ModType ) {
-		global $theme_tableau, ${$theme_tableau};
-		$X = ${$theme_tableau}[$_REQUEST['blocT']]['icon_width'];
-		$Y = ${$theme_tableau}[$_REQUEST['blocT']]['icon_height'];
+	public function renderIconSelectImage ( $cas , $FormNom , $ForgeFormElement, $ForgeFormElementX, $ForgeFormElementY, $FormRepertoire , $InputVal , $DivCible , $JavascriptRoutine , $ModType , $infos) {
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+
+		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_width');
+		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_height');
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$contenu_A = "
@@ -160,7 +164,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	RenderFSJS('".$FormNom."','".$ForgeFormElement."', '".$ForgeFormElementX."', '".$ForgeFormElementY."', document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value , 'FSJavaScript' , 'FSJS_C_' , '".$JavascriptRoutine."' )\">
-	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_repertoire'] . "' width='".$X."' height='".$Y."' border='0'></span>\r
+	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'></span>\r
 	";
 		
 		$contenu_B = "
@@ -169,7 +173,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	".$JavascriptRoutine."();\">\r
-	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . ${$theme_tableau}['theme_directory'] . "/" . ${$theme_tableau}[$_REQUEST['blocT']]['icon_erase'] . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
+	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
 	";
 		
 		$contenu_R = "";
