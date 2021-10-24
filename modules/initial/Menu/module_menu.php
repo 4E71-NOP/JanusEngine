@@ -109,7 +109,7 @@ class ModuleMenu {
 		$menuData = &$infos['menuData'];
 		
 // 		$bts->StringFormatObj = StringFormat::getInstance();
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Pas de menu afficher."; }
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { $Content .= "Nothing for the menu says SQL DB"; }
 		else {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$cate_id_index = $infos['cate_id_index'] = $dbp['cate_id'];

@@ -327,6 +327,8 @@ class Hydr {
 		$bts->LMObj->logCheckpoint ( "Language selection" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Language selection" );
+
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
 		
 		$scoreLang = 0;
 		
@@ -346,7 +348,9 @@ class Hydr {
 		
 		switch ($scoreLang) {
 			case 0 :
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened") );
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language.") );
+				$CurrentSetObj->setDataEntry ( 'language', 'eng' );
+				$CurrentSetObj->setDataEntry ( 'language_id', '38' );
 				break;
 			case 1 :
 				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_639_3' );
