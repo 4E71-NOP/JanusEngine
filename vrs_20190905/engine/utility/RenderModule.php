@@ -45,6 +45,7 @@ class RenderModule {
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', $_REQUEST['document_dy']); }
 
 		$pv['initial_div_vis'] = "hidden";
+		$pv['initial_div_vis'] = "visible";
 		if ( $_REQUEST['debug_special'] == 1 ) { $pv['initial_div_vis'] = "visible"; }
 		
 		$Content .= "<!-- __________ Modules begining __________ -->\r
@@ -212,13 +213,13 @@ class ModuleNotFound {
 	public function __construct(){}
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->log(array(
-				"i"=>"ModuleNotFound",
-				"a"=>"render()",
-				"s"=>"ERR",
-				"m"=>"RenderModule001",
-				"t"=>"No class found for this module",
-		));
+		// $bts->LMObj->log(array(
+		// 		"i"=>"ModuleNotFound",
+		// 		"a"=>"render()",
+		// 		"s"=>"ERR",
+		// 		"m"=>"RenderModule001",
+		// 		"t"=>"No class found for this module",
+		// ));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : No class found for module " . $infos['module_name'] . "; ClassName : `". $infos['ModuleRendererName']."`"));
 		
 // 		error_log ("No class found for module " . $infos['module_name'] . "; ClassName : ");

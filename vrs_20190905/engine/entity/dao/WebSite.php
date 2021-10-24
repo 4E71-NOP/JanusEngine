@@ -103,7 +103,6 @@ class WebSite extends Entity{
 		else {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$id));
 		}
-		
 	}
 	
 	/**

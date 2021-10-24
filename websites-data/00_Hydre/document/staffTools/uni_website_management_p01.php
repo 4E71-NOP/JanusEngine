@@ -71,17 +71,6 @@ $bts->I18nTransObj->apply(
 			"select_t1_01_1_2"		=> "Supprimé",
 			"select_t1_01_1_3"		=> "Maintenance",
 			"select_t1_01_1_1000"	=> "Vérrouillé",
-			
-	// 		"select_t2_04_1"	=> "Synthèse basique",
-	// 		"select_t2_04_2"	=> "Graphique",
-	// 		"select_t2_04_3"	=> "Statistique",
-	// 		"select_t2_04_4"	=> "Logs",
-	// 		"select_t2_04_5"	=> "N/A",
-	// 		"select_t2_04_6"	=> "N/A",
-	// 		"select_t2_04_7"	=> "Requête",
-	// 		"select_t2_04_8"	=> "Commandes",
-	// 		"select_t2_04_9"	=> "Internes",
-	// 		"select_t2_04_10"	=> "Variables",
 
 			"select_t2_04_0"	=> "Statique",
 			"select_t2_04_1"	=> "Dynamique",
@@ -134,17 +123,6 @@ $bts->I18nTransObj->apply(
 			"select_t1_01_1_2"		=> "Deleted",
 			"select_t1_01_1_3"		=> "Maintenance",
 			"select_t1_01_1_1000"	=> "Locked",
-			
-	// 		"select_t2_04_1"	=> "Basic report",
-	// 		"select_t2_04_2"	=> "Graph",
-	// 		"select_t2_04_3"	=> "Stats",
-	// 		"select_t2_04_4"	=> "Logs",
-	// 		"select_t2_04_5"	=> "N/A",
-	// 		"select_t2_04_6"	=> "N/A",
-	// 		"select_t2_04_7"	=> "Queries",
-	// 		"select_t2_04_8"	=> "Commands",
-	// 		"select_t2_04_9"	=> "Internal",
-	// 		"select_t2_04_10"	=> "Variables",
 
 			"select_t2_04_0"	=> "Static",
 			"select_t2_04_1"	=> "Dynamic",
@@ -215,12 +193,8 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $Content .= "
 <form ACTION='index.php?' method='post'>\r"
-// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
-// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-// .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 ."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"   AdminDashboardWebsiteManagementP01
+."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"   
 ."<input type='hidden' name='formCommand1'				value='update'>"
 ."<input type='hidden' name='formEntity1'				value='website'>"
 ."<input type='hidden' name='formTarget1[name]'			value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
@@ -243,15 +217,6 @@ $T = array();
 
 $langList		= $bts->CMObj->getLanguageList();
 $ws_lang_select	= array();
-
-// $dbquery = $bts->SDDMObj->query("
-// SELECT sl.lang_id
-// FROM ".$SqlTableListObj->getSQLTableName('language_website')." sl , ".$SqlTableListObj->getSQLTableName('website')." s
-// WHERE s.ws_id ='".$WebSiteObj->getWebSiteEntry('ws_id')."'
-// AND sl.ws_id = s.ws_id
-// ;");
-// while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $langList[$dbp['lang_id']]['support'] = 1; }
-// $LMObj->logDebug($langList, "langList");
 
 // --------------------------------------------------------------------------------------------
 // Tab 01
@@ -335,33 +300,15 @@ $arrayDbg = array(
 );
 
 $T['Content'][$Tab]['5']['2']['cont'] = "
-<input type='checkbox' id='formTarget1[info_debug_default]' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_graph]'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_stats]'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_sql]'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_commandbuffer]'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_commandlogs]'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_internallogs]'	".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
-<input type='checkbox' id='formTarget1[info_debug_variables]'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
+<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
+<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
+<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
+<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
+<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
+<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
+<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
+<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
 ";
-
-// <select name='formParams1[info_debug]' class='" . $Block."_t3 " . $Block."_form_1'>\r";
-// $sw_niv_debug = array(
-// 		1	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_1'),		"s" => "",		"cmd" => "1"),
-// 		2	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_2'),		"s" => "",		"cmd" => "2"),
-// 		3	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_3'),		"s" => "",		"cmd" => "3"),
-// 		4	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_4'),		"s" => "",		"cmd" => "4"),
-// 		5	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_5'),		"s" => "",		"cmd" => "5"),
-// 		6	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_6'),		"s" => "",		"cmd" => "6"),
-// 		7	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_7'),		"s" => "",		"cmd" => "7"),
-// 		8	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_8'),		"s" => "",		"cmd" => "8"),
-// 		9	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_9'),		"s" => "",		"cmd" => "9"),
-// 		10	=>	array("t" => $bts->I18nTransObj->getI18nTransEntry('select_t2_04_10'),		"s" => "",		"cmd" => "10"),
-// );
-// $sw_niv_debug[$WebSiteObj->getWebSiteEntry('ws_info_debug')]['s'] = " selected ";
-// foreach ( $sw_niv_debug as $A ) { $T['Content'][$Tab]['5']['2']['cont'] .= "<option value='".$A['cmd']."' ".$A['s'].">".$A['t']."</option>\r"; }
-// $T['Content'][$Tab]['5']['2']['cont'] .= "</select>\r";
-
 
 // --------------------------------------------------------------------------------------------
 // Tab 03
@@ -384,7 +331,7 @@ $T['Content'][$Tab][$i][$j]['cont'] = "";
 $T['Content'][$Tab][$i][$j]['cont'] = "";
 
 $i++;
-// <input type='hidden' name='formTarget2'				value=''>\r
+
 $dbquery = $bts->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$B = "";
@@ -438,15 +385,6 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 
 // --------------------------------------------------------------------------------------------
-/*
-<input type='hidden' name='UPDATE_action'				value='UPDATE_WEBSITE'>\r
-<input type='hidden' name='UPDATE_action_complement'	value='COMPLETE_UPDATE'>\r
-<input type='hidden' name='FormWebSite[action]'			value='2'>\r
-<input type='hidden' name='FormWebSite[repertoire]'		value='".$WebSiteObj->getWebSiteEntry('ws_directory')."'>\r
-<input type='hidden' name='FormWebSite[banner_bypass]'	value='1'>\r
-
-*/
-
 
 // A Javascript is inserted for computing the final 'info_debug' value. 
 // This is a specific case that does not require a separated script file.
@@ -473,7 +411,7 @@ function computeInfoDebug () {\r
 		}\r
 	}\r
 	elm.Gebi('formParams1_info_debug').value = scoreInfoDebug;\r
-	// console.log ('formParams1_info_debug=' + elm.Gebi('formParams1_info_debug').value );\r
+	l.Log[cfg.CoreDbg]('formParams1_info_debug=' + elm.Gebi('formParams1_info_debug').value);\r
 }\r
 </script>\r
 \r

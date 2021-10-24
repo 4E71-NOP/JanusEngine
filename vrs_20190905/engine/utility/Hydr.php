@@ -645,12 +645,17 @@ class Hydr {
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-				";
+					<link rel='stylesheet' href='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."stylesheets/".$ThemeDataObj->getThemeDataEntry('theme_stylesheet_1')."'>
+					</head>\r
+					";
 				break;
 		}
 		$Content .= "<body id='HydrBody' ";
 		if (strlen ( $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) ) > 0) {
-			$html_body .= "text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
+			$html_body .= "text='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
+			"' link='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
+			"' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
+			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
 		}
 		$Content .= "style='";
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) ) > 0) {
@@ -662,7 +667,7 @@ class Hydr {
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0) {
 			$Content .= "background-color: #" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . ";";
 		}
-		$Content .= " visibility: hidden;'>\r ";
+		$Content .= " visibility: visible;'>\r ";
 		
 		// --------------------------------------------------------------------------------------------
 		//
