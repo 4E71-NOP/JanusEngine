@@ -348,6 +348,12 @@ class RenderStylesheet {
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
 		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_highlight",				"",			"{".$str."}");}
 		
+		// Hx
+		$list= array( "font_family",	"font_size",	"txt_col",	"special" );
+		for ( $hx=1; $hx<=7; $hx++) {
+			$str = $this->testAndRenderCssStyle("h".$hx, $list, $p);
+			if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"h".$hx,			"{".$str."}");}
+		}
 		// P
 		$list= array( "txt_indent",	"txt_align",	"font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right" );
 		$str = $this->testAndRenderCssStyle("p", $list, $p);
@@ -587,6 +593,11 @@ class RenderStylesheet {
 	 * @param Array $infos
 	 * @param Array $p
 	 * @return string
+	 * txt_h1_font	=>	"font-family",
+	 * txt_h1_size	=>	"font-size"
+	 * txt_h1_col	=>	"color",
+	 * txt_h1_special	"special"		=>	"",
+
 	 */
 	private function testAndRenderCssStyle ( $elm, $infos, &$p) {
 		$str = "";

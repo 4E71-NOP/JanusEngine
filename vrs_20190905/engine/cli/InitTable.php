@@ -349,12 +349,12 @@ self::$InitTable['decoration'] = function (&$a) {
 
 			// ***************************************************************************
 			// Virer
-			"s1_n01" => 	"", 	"s1_n02" => 	"", 	"s1_n03" => 	"",
-			"s1_h01" => 	"", 	"s1_h02" => 	"", 	"s1_h03" => 	"",
-			"s2_n01" => 	"", 	"s2_n02" => 	"", 	"s2_n03" => 	"",
-			"s2_h01" => 	"", 	"s2_h02" => 	"", 	"s2_h03" => 	"",
-			"s3_n01" => 	"", 	"s3_n02" => 	"", 	"s3_n03" => 	"",
-			"s3_h01" => 	"", 	"s3_h02" => 	"", 	"s3_h03" => 	"",
+			// "s1_n01" => 	"", 	"s1_n02" => 	"", 	"s1_n03" => 	"",
+			// "s1_h01" => 	"", 	"s1_h02" => 	"", 	"s1_h03" => 	"",
+			// "s2_n01" => 	"", 	"s2_n02" => 	"", 	"s2_n03" => 	"",
+			// "s2_h01" => 	"", 	"s2_h02" => 	"", 	"s2_h03" => 	"",
+			// "s3_n01" => 	"", 	"s3_n02" => 	"", 	"s3_n03" => 	"",
+			// "s3_h01" => 	"", 	"s3_h02" => 	"", 	"s3_h03" => 	"",
 			// ***************************************************************************
 			
 			"tab_up_txt_col" => 	"", 	"tab_up_txt_bg_col" => 	"", 		"tab_up_txt_weight" => 	"", 		"tab_up_txt_special" => 	"",
@@ -377,6 +377,14 @@ self::$InitTable['decoration'] = function (&$a) {
 			"transparent_8x8" => 	"",
 			"icon_width" => 	"32",
 			"icon_height" => 	"32",
+
+			"h1_font_family"	=> "",	"h1_font_size"	=> "",	"h1_txt_col"	=> "",	"h1_special"	=> "",	
+			"h2_font_family"	=> "",	"h2_font_size"	=> "",	"h2_txt_col"	=> "",	"h2_special"	=> "",	
+			"h3_font_family"	=> "",	"h3_font_size"	=> "",	"h3_txt_col"	=> "",	"h3_special"	=> "",	
+			"h4_font_family"	=> "",	"h4_font_size"	=> "",	"h4_txt_col"	=> "",	"h4_special"	=> "",	
+			"h5_font_family"	=> "",	"h5_font_size"	=> "",	"h5_txt_col"	=> "",	"h5_special"	=> "",	
+			"h6_font_family"	=> "",	"h6_font_size"	=> "",	"h6_txt_col"	=> "",	"h6_special"	=> "",	
+			"h7_font_family"	=> "",	"h7_font_size"	=> "",	"h7_txt_col"	=> "",	"h7_special"	=> "",	
 
 			// end new style
 			// ***************************************************************************
@@ -638,6 +646,14 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icon_width",
 					"icon_height",
 					
+					"h1_font_family",	"h1_font_size",	"h1_txt_col",	"h1_special",	
+					"h2_font_family",	"h2_font_size",	"h2_txt_col",	"h2_special",	
+					"h3_font_family",	"h3_font_size",	"h3_txt_col",	"h3_special",	
+					"h4_font_family",	"h4_font_size",	"h4_txt_col",	"h4_special",	
+					"h5_font_family",	"h5_font_size",	"h5_txt_col",	"h5_special",	
+					"h6_font_family",	"h6_font_size",	"h6_txt_col",	"h6_special",	
+					"h7_font_family",	"h7_font_size",	"h7_txt_col",	"h7_special",	
+				
 					// end new style
 					// ***************************************************************************
 					
