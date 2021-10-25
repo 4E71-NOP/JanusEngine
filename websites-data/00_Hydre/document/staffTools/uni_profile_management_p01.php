@@ -844,6 +844,7 @@ else {
 				<td>\r	
 				<div style='background-repeat: no-repeat; background-position:center; ".$themeEntries[$j]." width: ".(floor(($T['ContentInfos']['Width']-48)/$maxCells))."px; height: ".(floor($RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')/$maxLines))."px;'></div>\r
 				</td>\r";
+				$T['Content'][$Tab]['1']['1']['class'] = "mt_bareTable";
 				$j++;
 			}
 		}

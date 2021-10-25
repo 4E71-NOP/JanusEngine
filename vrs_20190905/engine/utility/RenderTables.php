@@ -30,12 +30,12 @@ class  RenderTables {
 	
 	/**
 	 * Takes the array and render it as a chart (option : with tabs).<br>
-	 * The renderer is reactive to specific definitions in the array. Ex: $myArray[1][2][3][tc] is defining the font size to use when rendering the cell at tab 1, line 2, cell 3.<br>
+	 * The renderer is reactive to specific definitions in the array. Ex: $myArray[1][2][3][cc] is defining the caption class<br>
 	 * <br>
 	 * <b>TD level:</b><br>
 	 * cc : Defines caption class.<br>
 	 * b  : Enables bold font.<br>
-	 * class : if not empty tells the renderer to use the specified classname.<br>
+	 * class : if not empty tells the renderer to use the specified classname for a cell.<br>
 	 * DEPRECATED tc : Defines font size.<br>
 	 * DEPRECATED sc : Defines the "selection class" when hover.<br>
 	 * <br>
