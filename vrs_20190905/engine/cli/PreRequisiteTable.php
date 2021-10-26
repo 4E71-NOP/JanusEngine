@@ -128,8 +128,8 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array("v" => "in55_e",			"s" => "decoration"),
 		),
 		"nextId" => array (
-				array ("table" => "decoration",				"column" => "fk_deco_id",			"target" => "id"),
-				array ("table" => "decoration",				"column" => "deco_ref_id",			"target" => "deco_ref_id"),
+				// array ("table" => "decoration",				"column" => "fk_deco_id",			"target" => "id"),
+				array ("table" => "decoration",				"column" => "deco_id",				"target" => "id"),
 				array ("table" => "deco_10_menu",			"column" => "deco_line_number",		"target" => "10_id"),
 				array ("table" => "deco_20_caligraph",		"column" => "deco_line_number",		"target" => "20_id"),
 				array ("table" => "deco_30_1_div",			"column" => "deco_line_number",		"target" => "30_id"),
@@ -138,11 +138,11 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 				array ("table" => "deco_60_elysion",		"column" => "deco_line_number",		"target" => "60_id"),
 		),
 		"columns" => array(
-				array ( "v" => "deco_ref_id",		"t" => "deco_ref_id"),
+				array ( "v" => "id",				"t" => "deco_id"),
 				array ( "v" => "name",				"t" => "deco_name"),
 				array ( "v" => "state",				"t" => "deco_state"),
 				array ( "v" => "type",				"t" => "deco_type"),
-				array ( "v" => "id",				"t" => "fk_deco_id"),
+				// array ( "v" => "id",				"t" => "fk_deco_id"),
 		),
 );
 

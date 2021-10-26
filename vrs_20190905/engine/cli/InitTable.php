@@ -102,7 +102,7 @@ self::$InitTable['content'] = function (&$a) {
 self::$InitTable['decoration'] = function (&$a) {
 	$a['params'] = array(
 			"name"			=> "New Decoration",
-			"ref_id"		=> "",
+			"id"			=> "",
 			"repertoire"	=> "",
 			"directory"		=> "",
 			"state"			=> "ONLINE",
@@ -445,7 +445,7 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icons_height"
 			),
 			"20" => array (
-					"repertoire",
+					// "repertoire",
 					"directory",
 					"txt_fonte",			"txt_fonte_size_min",		"txt_fonte_size_max",
 					"txt_fonte_size",		
@@ -668,7 +668,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"border_all_width",			"border_all_color",			"border_all_style", 		"padding_all",		"margin_all"
 			),
 			"40" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",
 					"ex21",	"ex22",	"ex23",
 					"ex31",	"ex32",	"ex33",
@@ -683,7 +684,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"ex33_x",	"ex33_y",	"ex33_bgp"
 			),
 			"50" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",	"ex14",	"ex15",
 					"ex21",	"ex22",					"ex25",
 					"ex31",							"ex35",
@@ -708,7 +710,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"ex55_x",	"ex55_y",		"ex55_bgp"
 			),
 			"60" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",	"ex14",	"ex15",
 					"ex21",	"ex22",					"ex25",
 					"ex31",							"ex35",

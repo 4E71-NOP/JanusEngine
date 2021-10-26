@@ -113,7 +113,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&decorationForm[selectionId]=".$dbp['deco_ref_id']
+		."&decorationForm[selectionId]=".$dbp['deco_id']
 		."'>".$dbp['deco_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('state')[$dbp['deco_state']];
 		$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('type')[$dbp['deco_type']];
