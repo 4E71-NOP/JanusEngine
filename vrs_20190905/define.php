@@ -14,6 +14,13 @@ define ( "ANONYMOUS_USER_NAME", "anonymous" );
 
 // --------------------------------------------------------------------------------------------
 // ClassLoader
+define ("_EXTENSIONS_DIRECTORY_"	, "extensions/");
+define ("_CURRENT_DIRECTORY_"		, "current/");
+define ("_MEDIA_DIRECTORY_"			, "media/");
+define ("_MODULES_DIRECTORY_"		, "modules/");
+define ("_STYLESHEETS_DIRECTORY_"	, "stylesheets/");
+define ("_WEBSITESDATA_DIRECTORY_"	, "websites-data/");
+
 define ("_UTILITY_DIRECTORY_"	, "current/engine/utility/");
 define ("_SDDM_DIRECTORY_"		, "current/engine/sddm/");
 define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");

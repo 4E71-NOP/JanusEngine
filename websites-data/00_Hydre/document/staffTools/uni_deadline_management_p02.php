@@ -118,7 +118,7 @@ $currentArticleObj = new DeadLine();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentArticleObj->getDeadLineDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'selectionId'));
+		$currentArticleObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'selectionId'));
 		unset ( $A , $B );
 		$dbquery = $bts->SDDMObj->query("
 		SELECT art.arti_name, art.arti_title

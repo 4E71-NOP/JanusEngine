@@ -57,26 +57,6 @@ class CommandConsole {
 // 		self::$i18n = $i18n;
 	}
 	
-	
-	/**
-	 * 2020 02 26 - DEPRECATED
-	 * Artefact from the old system. Kept here for migration purposes 
-	 * Fill the $SqlQueryTable with all the necessary assets to test if a command can be executed or not.
-	 * 
-	 */
-// 	private static function makeQueryTable () {
-// 		$bts = BaseToolSet::getInstance();
-// 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
-// // 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-// // 		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
-// // 		$webSiteId = $WebSiteContextObj->getWebSiteEntry('ws_id');
-// // 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		
-// 		include ("current/engine/cli/SqlQueryTable.php");
-	
-// 	}
-	
 	/**
 	 * Initialize the values of the entity.
 	 * It helps fill the blanks the user will not provide when creating commands.
@@ -240,7 +220,6 @@ class CommandConsole {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
-// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		$CCL['sqlTables'] = $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLWholeTableName();
 
 		//----------------------------------------
@@ -323,7 +302,6 @@ class CommandConsole {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		//----------------------------------------
 		// Convert selected values to a compatible format with the DB model.
 		$ptr = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']];

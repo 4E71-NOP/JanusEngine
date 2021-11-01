@@ -80,18 +80,6 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 // --------------------------------------------------------------------------------------------
 $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group_tag') ));
 
-// $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group_tag')
-// $dbquery = $bts->SDDMObj->query("
-// SELECT grp.*, wg.group_state 
-// FROM "
-// .$SqlTableListObj->getSQLTableName('group')." grp, "
-// .$SqlTableListObj->getSQLTableName('group_website')." wg 
-// WHERE wg.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-// AND grp.group_id = wg.fk_group_id 
-// and grp.group_name != 'Server_owner' 
-// ;");
-// while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
-
 // Will be replaced by a proper user permission management.
 $permissionOnExtenssion = 0;
 $groupList = $CurrentSetObj->getInstanceOfUserObj()->getGroupList();

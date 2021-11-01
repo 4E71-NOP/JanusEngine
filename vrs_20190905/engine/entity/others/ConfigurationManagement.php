@@ -111,7 +111,6 @@ class ConfigurationManagement {
 				$bts = BaseToolSet::getInstance();
 				$CurrentSetObj = CurrentSet::getInstance();
 				$this->LanguageList = array ();
-// 				$SqlTableListObj = SqlTableList::getInstance(null, null);
 				
 				$TabLangueAdmises = array();
 				$dbquery = $bts->SDDMObj->query("

@@ -16,7 +16,6 @@ class SqlTableList {
 	private static $Instance = null;
 
 	private $SQLTableName = array();
-	// private $SQLTableShortName = array();		// Deprecated
 	
 	private $TableList = array (
 			'article',			'article_tag',			'article_config',

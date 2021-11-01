@@ -49,7 +49,7 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('Mapper');
 		$ClassLoaderObj->provisionClass('RequestData');
 		$ClassLoaderObj->provisionClass('StringFormat');
-// 		$ClassLoaderObj->provisionClass('SqlTableList');
+// 		$ClassLoaderObj->provisionClass('SqlTableList');			// Need configuration to be loaded first
 		$ClassLoaderObj->provisionClass('ConfigurationManagement');
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
@@ -72,7 +72,7 @@ class BaseToolSet {
 		$this->MapperObj				= Mapper::getInstance();
 		$this->RequestDataObj			= RequestData::getInstance();
 		$this->StringFormatObj			= StringFormat::getInstance();
-// 		$this->SqlTableListObj			= SqlTableList::getInstance ( '', '' );
+// 		$this->SqlTableListObj			= SqlTableList::getInstance ( '', '' ); 			// Need configuration to be loaded first
 		$this->CMObj					= ConfigurationManagement::getInstance();
 		$this->CMObj->InitBasicSettings();
 		$this->AUObj					= AuthenticateUser::getInstance();

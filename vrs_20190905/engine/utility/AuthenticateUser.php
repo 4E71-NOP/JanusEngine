@@ -108,8 +108,6 @@ class AuthenticateUser {
 			else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : The user `".$this->report['user_login']."` has successfuly authenticated"));
 				$bts->SMObj->StoreUserCredential();
-// 				$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-// 				$SqlTableListObj = SqlTableList::getInstance ( null, null );
 				
 				$bts->SDDMObj->query ( "
 				UPDATE " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('user') . " SET
@@ -117,12 +115,6 @@ class AuthenticateUser {
 				user_last_visit = '".$_SERVER['REQUEST_TIME']."'
 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'
 				;" );
-// 				$SDDMObj->query ( "
-// 				UPDATE " . $SqlTableListObj->getSQLTableName ('user') . " SET
-// 				user_last_ip = '".$_SESSION['last_REMOTE_ADDR']."',
-// 				user_last_visit = '".$_SESSION['last_REQUEST_TIME']."'
-// 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'
-// 				;" );
 			}
 		}
 	}

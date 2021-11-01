@@ -142,12 +142,6 @@ $Content .= "
 ";
 
 if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme') != 0 ) {
-	// $dbquery = $bts->SDDMObj->query("
-	// SELECT * 
-	// FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
-	// WHERE a.theme_id = '".$bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme')."' 
-	// AND a.theme_id = b.theme_id 
-	// ;");
 	
 	$RenderStylesheetObj = RenderStylesheet::getInstance();
 	$WorkingThemeData = new ThemeData();

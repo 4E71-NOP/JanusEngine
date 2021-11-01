@@ -34,9 +34,6 @@ class ThemeData {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-
 		$sqlQuery = "
 		SELECT *
 		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
@@ -58,9 +55,6 @@ class ThemeData {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-// 		$SDDMObj = DalFacade::getInstance ()->getDALInstance ();
-// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-// 		$StringFormat = StringFormat::getInstance();
 		$CurrentBlock = array();
 		$pv = array();
 		
