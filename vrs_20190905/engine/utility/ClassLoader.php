@@ -20,9 +20,12 @@ class ClassLoader {
 		"BaseToolSet"				=> _UTILITY_DIRECTORY_."BaseToolSet.php",
 		"DetectPEAR"				=> _UTILITY_DIRECTORY_."DetectPEAR.php",
 		"FileSelector"				=> _UTILITY_DIRECTORY_."FileSelector.php",
+		"FileUtil"					=> _UTILITY_DIRECTORY_."FileUtil.php",
 		"FormToCommandLine"			=> _UTILITY_DIRECTORY_."FormToCommandLine.php",
 		"I18nTrans"					=> _UTILITY_DIRECTORY_."I18nTrans.php",
 		"InteractiveElements"		=> _UTILITY_DIRECTORY_."InteractiveElements.php",
+		"LayoutProcessor"			=> _UTILITY_DIRECTORY_."LayoutProcessor.php",
+		"LayoutParser"				=> _UTILITY_DIRECTORY_."LayoutParser.php",
 		"LogManagement"				=> _UTILITY_DIRECTORY_."LogManagement.php",
 		"Mapper"					=> _UTILITY_DIRECTORY_."Mapper.php",
 		"MenuSelectTable"			=> _UTILITY_DIRECTORY_."MenuSelectTable.php",
@@ -35,6 +38,7 @@ class ClassLoader {
 		"RenderDeco50Exquisite"		=> _UTILITY_DIRECTORY_."RenderDeco50Exquisite.php",
 		"RenderDeco60Elysion"		=> _UTILITY_DIRECTORY_."RenderDeco60Elysion.php",
 		"RenderModule"				=> _UTILITY_DIRECTORY_."RenderModule.php",
+		"RenderModule2"				=> _UTILITY_DIRECTORY_."RenderModule2.php",
 		"RenderStylesheet"			=> _UTILITY_DIRECTORY_."RenderStylesheet.php",
 		"RenderTables"				=> _UTILITY_DIRECTORY_."RenderTables.php",
 		"RenderTabs"				=> _UTILITY_DIRECTORY_."RenderTabs.php",
@@ -53,12 +57,15 @@ class ClassLoader {
 		
 		"ConfigurationManagement"	=> _ENTITY_DIRECTORY_."others/ConfigurationManagement.php",
 		"CurrentSet"				=> _ENTITY_DIRECTORY_."others/CurrentSet.php",
+		"FileContent"				=> _ENTITY_DIRECTORY_."others/FileContent.php",
 		"GeneratedJavaScript"		=> _ENTITY_DIRECTORY_."others/GeneratedJavaScript.php",
 		"RenderLayout"				=> _ENTITY_DIRECTORY_."others/RenderLayout.php",
 		"RequestData"				=> _ENTITY_DIRECTORY_."others/RequestData.php",
 		"ServerInfos"				=> _ENTITY_DIRECTORY_."others/ServerInfos.php",
 		"SqlTableList"				=> _ENTITY_DIRECTORY_."others/SqlTableList.php",
 		"ThemeData"					=> _ENTITY_DIRECTORY_."others/ThemeData.php",
+		
+		"ModuleList"				=> _ENTITY_DIRECTORY_."lists/ModuleList.php",
 		
 		"AddOnConfig"				=> _ENTITY_DIRECTORY_."dao/AddOnConfig.php",
 		"AddOnDependancies"			=> _ENTITY_DIRECTORY_."dao/AddOnDependancies.php",
@@ -95,6 +102,7 @@ class ClassLoader {
 		"LanguageWebsite"			=> _ENTITY_DIRECTORY_."dao/LanguageWebsite.php",
 		"LayoutContent"				=> _ENTITY_DIRECTORY_."dao/LayoutContent.php",
 		"Layout"					=> _ENTITY_DIRECTORY_."dao/Layout.php",
+		"LayoutFile"				=> _ENTITY_DIRECTORY_."dao/LayoutFile.php",
 		"Logs"						=> _ENTITY_DIRECTORY_."dao/Logs.php",
 		"Module"					=> _ENTITY_DIRECTORY_."dao/Module.php",
 		"ModuleWebsite"				=> _ENTITY_DIRECTORY_."dao/ModuleWebsite.php",
@@ -135,16 +143,16 @@ class ClassLoader {
 		if ( isset ( $this->classTab[$ClassName])) {
 			if ( !class_exists($ClassName) ) { 
 				if ( file_exists($this->classTab[$ClassName])) { 
-// 					error_log("ClassLoader::provisionClass : including " . $this->classTab[$ClassName]);
+ 					// error_log("ClassLoader::provisionClass : including " . $this->classTab[$ClassName]);
 					include ($this->classTab[$ClassName]); 
 				}
 				else { 
-// 					error_log("ClassLoader::provisionClass : File " . $this->classTab[$ClassName] ." doesn't exist."); 
+					// error_log("ClassLoader::provisionClass : File " . $this->classTab[$ClassName] ." doesn't exist."); 
 				}
 			}
 		}
 		else { 
-// 			error_log("ClassLoader::provisionClass : " . $ClassName ." doesn't exist.");
+			// error_log("ClassLoader::provisionClass : " . $ClassName ." doesn't exist.");
 			$ret = "ERR"; }
 		return $ret;
 	}

@@ -904,7 +904,7 @@ self::$InitTable['language'] = function (&$a) {
 self::$InitTable['layout'] = function (&$a) {
 	$a['params'] = array(
 			"id"				=> "",
-			"layout_theme_id"		=> "",
+			"layout_theme_id"	=> "",
 			"name"				=> "New Layout",
 			"title"				=> "New Layout",
 			"generic_name"		=> "New Layout",
@@ -912,6 +912,17 @@ self::$InitTable['layout'] = function (&$a) {
 			
 			"to_theme"			=> "",
 			"default"			=> "NO",
+	);
+	$a['params']['description'] = &$a['params']['desc'];
+};
+
+self::$InitTable['layoutfile'] = function (&$a) {
+	$a['params'] = array(
+		'id'			=> 0,
+		'name'			=> "New Layout",
+		'generic_name'	=> "NewLyt",
+		'filename'		=> "LayoutFileName.lyt.html",
+		'desc'			=> "Desc",
 	);
 	$a['params']['description'] = &$a['params']['desc'];
 };

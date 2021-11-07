@@ -52,6 +52,8 @@ self::$ActionTable['add']['keyword']		= function (&$a) { return array ("INSERT I
 
 self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
+self::$ActionTable['add']['layoutfile']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layoutfile']." (".$a['columns'].") VALUES (".$a['values'].");");};
+
 self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 

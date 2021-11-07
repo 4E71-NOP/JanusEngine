@@ -477,6 +477,30 @@ self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
 // self::$CheckTable['add']['layout_content']['1']['p']	= "layout";
 
 
+// Layout file
+self::$CheckTable['add']['layoutfile']['0']['d']	= 3;
+self::$CheckTable['add']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['layoutfile']['0']['m']	= "CLI_layoutfile_D001";
+self::$CheckTable['add']['layoutfile']['0']['s']	= "name";
+
+self::$CheckTable['update']['layoutfile']['0']['d']	= 2;
+self::$CheckTable['update']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
+self::$CheckTable['update']['layoutfile']['0']['c']	= "layoutfile_id";
+self::$CheckTable['update']['layoutfile']['0']['v']	= "layoutfile_id";
+self::$CheckTable['update']['layoutfile']['0']['m']	= "CLI_layoutfile_U001";
+self::$CheckTable['update']['layoutfile']['0']['p']	= "layout file";
+self::$CheckTable['update']['layoutfile']['0']['s']	= "name";
+
+self::$CheckTable['delete']['layoutfile']['0']['d']	= 2;
+self::$CheckTable['delete']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
+self::$CheckTable['delete']['layoutfile']['0']['c']	= "layoutfile_id";
+self::$CheckTable['delete']['layoutfile']['0']['v']	= "layoutfile_id";
+self::$CheckTable['delete']['layoutfile']['0']['m']	= "CLI_layoutfile_D001";
+self::$CheckTable['delete']['layoutfile']['0']['p']	= "layout file";
+self::$CheckTable['delete']['layoutfile']['0']['s']	= "name";
+
+
+
 // Module
 self::$CheckTable['add']['module']['0']['d']	= 3;
 self::$CheckTable['add']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['name']."' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '".$a['Context']['ws_id']."';");};

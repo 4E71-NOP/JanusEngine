@@ -266,7 +266,7 @@ class Hydr {
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())) );
 		
-// 		we have 2 variables used to drive the authentification process.
+// 		We have 2 variables used to drive the authentification process.
 		switch ($authentificationMode) {
 			case "form" :
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with form mode") );
@@ -457,7 +457,7 @@ class Hydr {
 		
 		// --------------------------------------------------------------------------------------------
 		// Router
-		// What was called (slug/form etc..) and storing information in the session
+		// What was called ? (slug/form etc..) and storing information in the session
 		$bts->Router->manageNavigation ();
 		
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
@@ -548,6 +548,31 @@ class Hydr {
 		
 		// --------------------------------------------------------------------------------------------
 		//
+		// JavaScript Object
+		//
+		//
+		$localisation = " (JavaScript)";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		
+		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
+		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		
+		// $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript_lib_calculs_decoration.js');
+		// We got the route definition in the $CurrentSet and the session.
+		// Inserting the URL in the browser bar.
+		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
+		
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
+		
+		// --------------------------------------------------------------------------------------------
+		//
 		// Prepare data for theme and layout
 		//
 		//
@@ -581,31 +606,52 @@ class Hydr {
 		$ThemeDataObj->setDecorationListFromDB ();
 		$ThemeDataObj->renderBlockData ();
 		
-		// --------------------------------------------------------------------------------------------
-		//
-		// JavaScript Object
-		//
-		//
-		$localisation = " (JavaScript)";
-		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
-		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		// ******************************************************************************
+		// 2021 layout process
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		$ClassLoaderObj->provisionClass ('ModuleList');
+		$CurrentSetObj->setInstanceOfModuleLisObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleLisObj();
+		$ModuleLisObj->makeModuleList();
+
+		$ClassLoaderObj->provisionClass ('LayoutProcessor');
+		$LayoutProcessorObj = LayoutProcessor::getInstance();
+		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
+		$RenderModule2Obj = RenderModule2::getInstance ();
+
+		$ContentFragments = $LayoutProcessorObj->render();
+
+		$LayoutCommands = array(
+			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
+			1 => array( "regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
+		);
 		
-		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		// We know there's only one command per entry
+		foreach ( $ContentFragments as &$A ) {
+			foreach ( $LayoutCommands as $B) {
+				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
+					// We got the match so it's...
+					switch ($B['command']) {
+						case "get_header":
+							break;
+						case "render_module":
+							// Module it is.
+							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for ". $A['module_name'] ." and data ". $A['data'] ) );
+							$A['content'] = $RenderModule2Obj->render($A['module_name']);
+							break;
+					}
+				}
+			}
+		}
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript_lib_calculs_decoration.js');
-		// We got the route definition in the $CurrentSet and the session.
-		// Inserting the URL in the browser bar.
-		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
-		
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
-		
+		// 2021 layout process
+		// ******************************************************************************
+
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Display
@@ -674,15 +720,23 @@ class Hydr {
 		// Modules
 		//
 		//
-		$ClassLoaderObj->provisionClass ( 'RenderModule' );
-		$RenderModuleObj = RenderModule::getInstance ();
-		$directives = array (
-				'mode' => 1,
-				'module_display_mode' => "normal",
-				'module_z_index' => 0
-		);
-		$Content .= $RenderModuleObj->render ( $directives );
+
+		// $ClassLoaderObj->provisionClass ( 'RenderModule' );
+		// $RenderModuleObj = RenderModule::getInstance ();
+		// $directives = array (
+		// 		'mode' => 1,
+		// 		'module_display_mode' => "normal",
+		// 		'module_z_index' => 0
+		// );
+		// $Content .= $RenderModuleObj->render ( $directives );
 		
+		foreach ( $ContentFragments as &$A ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
+			$Content .= $A['content'];
+		}
+
+
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Checkpoint ("index_before_stat");

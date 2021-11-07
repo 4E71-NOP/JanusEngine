@@ -38,7 +38,7 @@ class RenderDeco301Div {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		$m = $RenderLayoutObj->getModuleList();
+		// $m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
 		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
 		

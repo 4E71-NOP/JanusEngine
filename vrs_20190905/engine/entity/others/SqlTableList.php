@@ -32,7 +32,7 @@ class SqlTableList {
 			'language',			'language_website',		
 			'log',				
 			'module',			'module_website',		
-			'layout',			'layout_content',		'layout_theme',
+			'layout',			'layout_content',		'layout_theme',				'layoutfile',
 			'pv',				
 			'stored_event',		
 			'tag',				

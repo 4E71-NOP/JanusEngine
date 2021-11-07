@@ -13,9 +13,10 @@ define ( "USER_ACTION_DISCONNECT", "disconnect" );
 define ( "ANONYMOUS_USER_NAME", "anonymous" );
 
 // --------------------------------------------------------------------------------------------
-// ClassLoader
+// Directories 
 define ("_EXTENSIONS_DIRECTORY_"	, "extensions/");
 define ("_CURRENT_DIRECTORY_"		, "current/");
+define ("_LAYOUTS_DIRECTORY_"		, "layouts/");
 define ("_MEDIA_DIRECTORY_"			, "media/");
 define ("_MODULES_DIRECTORY_"		, "modules/");
 define ("_STYLESHEETS_DIRECTORY_"	, "stylesheets/");

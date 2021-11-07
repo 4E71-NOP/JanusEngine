@@ -32,19 +32,20 @@ class RenderDeco40Elegance {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$RenderLayoutObj = RenderLayout::getInstance();
+		// $GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+		// $RenderLayoutObj = RenderLayout::getInstance();
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		$m = $RenderLayoutObj->getModuleList();
+		// $m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
-		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
+		// $L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
-		
+		$L['dx'] = $L['dy'] = 160;
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
@@ -68,7 +69,7 @@ class RenderDeco40Elegance {
 				$Block .= "M";
 				break;
 		}
-		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
+		// if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		
 // 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'] , $B['ex21_x'] , $B['ex31_x'] );
@@ -138,7 +139,7 @@ class RenderDeco40Elegance {
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
-		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
+		// $RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

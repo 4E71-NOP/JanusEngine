@@ -52,6 +52,11 @@ class CurrentSet {
 	/* @var $InstanceOfDocumentDataObj DocumentData */
 	private $InstanceOfDocumentDataObj = null;
 
+	/* @var $InstanceOfModuleListObj DocumentData */
+	private $InstanceOfModuleListObj = null;
+
+
+
 	/* @var $data array */
 	private $data = array();
 	
@@ -82,6 +87,7 @@ class CurrentSet {
 	public function getInstanceOfThemeDataObj() { return $this->InstanceOfThemeDataObj; }
 	public function getInstanceOfGeneratedJavaScriptObj() { return $this->InstanceOfGeneratedJavaScriptObj; }
 	public function getInstanceOfDocumentDataObj() { return $this->InstanceOfDocumentDataObj; }
+	public function getInstanceOfModuleLisObj() { return $this->InstanceOfModuleLisObj; }
 	public function getData() { return $this->data; }
 	
 	public function setInstanceOfServerInfosObj($InstanceOfServerInfos) { $this->InstanceOfServerInfos = $InstanceOfServerInfos; }
@@ -93,6 +99,7 @@ class CurrentSet {
 	public function setInstanceOfThemeDataObj($InstanceOfThemeDataObj) { $this->InstanceOfThemeDataObj = $InstanceOfThemeDataObj; }
 	public function setInstanceOfGeneratedJavaScriptObj($InstanceOfGeneratedJavaScriptObj) { $this->InstanceOfGeneratedJavaScriptObj = $InstanceOfGeneratedJavaScriptObj; }
 	public function setInstanceOfDocumentDataObj($InstanceOfDocumentDataObj) { $this->InstanceOfDocumentDataObj = $InstanceOfDocumentDataObj; }
+	public function setInstanceOfModuleLisObj($InstanceOfModuleLisObj) { $this->InstanceOfModuleLisObj = $InstanceOfModuleLisObj; }
 	//@formatter:on
 
 
