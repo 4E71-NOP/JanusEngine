@@ -85,5 +85,36 @@ class LayoutProcessor {
 		// }
 		return ($map);
 	}
+
+	/**
+	 * Returns an array containing the content chunks and the "to be rendered module" information
+	 * This one is specific to the install process
+	 * 
+	 */
+
+	public function installRender($targetFilneName) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ClassLoaderObj = ClassLoader::getInstance();
+
+		$ClassLoaderObj->provisionClass('LayoutParser');
+		$ClassLoaderObj->provisionClass('FileUtil');
+		$ClassLoaderObj->provisionClass('FileContent');
+		// $ClassLoaderObj->provisionClass('LayoutFile');
+
+		$fileUtilObj = FileUtil::getInstance();
+		$layoutParserObj = LayoutParser::getInstance();
+		$fileContentObj = FileContent::getInstance();
+//		$layoutFileObj = new LayoutFile();
+		
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
+		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $targetFilneName;
+		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
+		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
+		return ($map);
+
+	}
+
+
 }
 ?>

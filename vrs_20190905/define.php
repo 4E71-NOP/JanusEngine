@@ -29,7 +29,7 @@ define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");
 // --------------------------------------------------------------------------------------------
 // Logs
 define ( "LOGLEVEL_BREAKPOINT",		5 ); // You definitely like to read or you're a crappy programmer
-define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like i'm the <class::method> and i recieved this data
+define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like "I'm the <class::method> and i recieved this data"
 define ( "LOGLEVEL_INFORMATION",	3 ); // Moaar
 define ( "LOGLEVEL_WARNING",		2 ); // More
 define ( "LOGLEVEL_ERROR",			1 ); // Usual level
@@ -52,7 +52,7 @@ $ll = 0;
 switch ($application) {
 	case 'install' :
 		$ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_STATEMENT;
+		$ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'monitor' :

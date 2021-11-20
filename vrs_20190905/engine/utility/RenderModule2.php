@@ -73,6 +73,7 @@ class RenderModule2 {
 		$infos['mode'] = 1;
 		
 		$ModuleRendererName = $m['module_classname'];
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleRendererName=".$ModuleRendererName . "; module file is : " . $m['module_directory'].$m['module_file']));
 		
 		if (!class_exists($ModuleRendererName)) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));

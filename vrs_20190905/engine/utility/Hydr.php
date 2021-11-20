@@ -801,8 +801,14 @@ class Hydr {
 		//
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
-		
+		// $JavaScriptContent .= "\r";
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tdm.UpdateDecoModule(TabInfoModule);" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tconsole.log ( TabInfoModule );" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');
+
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile ( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptExternalRessource ( "ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
@@ -818,10 +824,8 @@ class Hydr {
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r	dm.UpdateDecoModule(TabInfoModule);\r		}\r";
-
 		$JavaScriptContent .= "function WindowOnload () {\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
-		$JavaScriptContent .= "dm.UpdateDecoModule(TabInfoModule);\r";
 		$JavaScriptContent .= "
 	}\r
 	window.onresize = WindowOnResize;\r

@@ -31,7 +31,7 @@ class InstallTitle {
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
 		
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
-		$Content = $bts->I18nTransObj->getI18nTransEntry("Invite");
+		$Content = "<span style='display:block; text-align:center; vertical-align:middle; padding:10px; font-size:38px; font-weight:bold;'>". $bts->I18nTransObj->getI18nTransEntry("Invite"); "</span>";
 		
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (

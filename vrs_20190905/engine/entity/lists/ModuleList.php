@@ -62,25 +62,31 @@ class ModuleList {
 	 * Prepare list of installation modules (specific to install ONLY).
 	 */
 	public function makeInstallModuleList(){
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
-		$q = "SELECT * FROM "
-			.$SqlTableListObj->getSQLTableName('module')." m, 
-			AND wm.module_state = '1'
-			AND m.module_type = '1'
-			;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$q."`"));
-		$dbquery = $bts->SDDMObj->query($q);
-		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
-			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
-			}
-			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
-		}
-		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for install module list ")); }		
 
+		$this->ModuleList['installtitle'] = array(
+			"module_id" => "1",
+			"module_deco" => "1",
+			"module_deco_nbr" => "1",
+			"module_deco_default_text" => "",
+			"module_name" => "installtitle",
+			"module_classname" => "InstallTitle",
+			"module_container_name" => "InstallTitleContainer",
+			"module_title" => "",
+			"module_directory"   => "modules/initial/InstallTitle/", 
+			"module_file"   => "module_install_title.php", 
+		);
+		$this->ModuleList['installdocument'] = array(
+			"module_id" => "2",
+			"module_deco" => "1",
+			"module_deco_nbr" => "1",
+			"module_deco_default_text" => "",
+			"module_name" => "installdocument",
+			"module_classname" => "InstallDocument",
+			"module_container_name" => "InstallDocumentContainer",
+			"module_title" => "",
+			"module_directory"   => "modules/initial/InstallDocument/", 
+			"module_file"   => "module_install_document.php", 
+		);
 	}
 
 	//@formatter:off
