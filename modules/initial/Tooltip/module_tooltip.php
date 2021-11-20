@@ -28,10 +28,11 @@ class ModuleTooltip {
 		$bts->MapperObj->setSqlApplicant("ModuleTooltip");
 		
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$RenderLayoutObj = RenderLayout::getInstance();
+		// $RenderLayoutObj = RenderLayout::getInstance();
 		
-		$cdx = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdx'); 
-		$cdy = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdy');
+		// $cdx = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdx'); 
+		// $cdy = $RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'cdy');
+		$cdx = $cdy = 0;
 		if ($cdx == 0) { $cdx = 256;}
 		if ($cdy == 0) { $cdy = 256;}
 

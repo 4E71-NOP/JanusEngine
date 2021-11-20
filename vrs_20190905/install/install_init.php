@@ -130,6 +130,52 @@ class HydrInstall {
 						'theme_module_width' => 896,)
 				);
 		
+		// ******************************************************************************
+		// 2021 layout process
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		$ClassLoaderObj->provisionClass ('ModuleList');
+		$CurrentSetObj->setInstanceOfModuleLisObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleLisObj();
+		$ModuleLisObj->makeInstallModuleList();
+
+		$ClassLoaderObj->provisionClass ('LayoutProcessor');
+		$LayoutProcessorObj = LayoutProcessor::getInstance();
+		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
+		$RenderModule2Obj = RenderModule2::getInstance ();
+
+		$ContentFragments = $LayoutProcessorObj->render(); // attendre la sélection automatique du layout par le document
+
+		$LayoutCommands = array(
+			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
+			1 => array( "regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
+		);
+		
+		// We know there's only one command per entry
+		foreach ( $ContentFragments as &$A ) {
+			foreach ( $LayoutCommands as $B) {
+				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
+					// We got the match so it's...
+					switch ($B['command']) {
+						case "get_header":
+							break;
+						case "render_module":
+							// Module it is.
+							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
+							$A['content'] = $RenderModule2Obj->render($A['module_name']);
+							break;
+					}
+				}
+			}
+		}
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		
+		// 2021 layout process
+		// ******************************************************************************
+
+
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
@@ -144,8 +190,8 @@ class HydrInstall {
 		$CurrentSetObj->setInstanceOfUserObj ( new User () );
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
 
-		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
-		$RenderLayoutObj = RenderLayout::getInstance ();
+		// $ClassLoaderObj->provisionClass ( 'RenderLayout' );
+		// $RenderLayoutObj = RenderLayout::getInstance ();
 
 		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
 		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );

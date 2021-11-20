@@ -57,6 +57,7 @@ class RenderStylesheet {
 // fileName : ".$themeArray['theme_name'].".css
 //----------------------------------------------------------------------------
 */
+html { width:100%; height:100%;}\r\r
 ";
 		$blockIdList = &$themeArray['blockTFirstInLineId'];
 		for ( $i = 1 ; $i <= $themeArray['blockTCount'] ; $i++ ) {

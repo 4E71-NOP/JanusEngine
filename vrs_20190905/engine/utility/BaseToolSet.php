@@ -43,7 +43,7 @@ class BaseToolSet {
 	private function __construct() {
 		include_once ("current/engine/utility/ClassLoader.php");			// Make sure we got this loaded.
 		$ClassLoaderObj = ClassLoader::getInstance();
-		error_log("BREAKPOINT");
+		//error_log("BREAKPOINT");
 		$ClassLoaderObj->provisionClass('LogManagement');
 		$ClassLoaderObj->provisionClass('Time');
 		$ClassLoaderObj->provisionClass('Mapper');

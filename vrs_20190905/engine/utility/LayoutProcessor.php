@@ -32,6 +32,8 @@ class LayoutProcessor {
 	/**
 	 * Returns an array containing the content chunks and the "to be rendered module" information
 	 * 
+	 * WE CONSIDER THE ARTICLE AND THEME ARE LOADED IN $CurrentSetObj
+	 * 
 	 * It gets the layout information in DB, then loads the file, parse it and return the array for future processing.
 	 * We stop before rendering the module in order to seprate things (generally speaking) and to stay closer to the root level. 
 	 * @return array
@@ -50,8 +52,30 @@ class LayoutProcessor {
 		$fileContentObj = FileContent::getInstance();
 		$layoutFileObj = new LayoutFile();
 
-		$layoutFileObj->getDataFromDB(1); // first one
-		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $layoutFileObj->getLayoutFileEntry('layoutfile_filename');
+		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj ();
+
+		$sqlQuery = "
+		SELECT lfi.layout_file_id, lfi.layout_file_filename 
+		FROM " 
+		. $SqlTableListObj->getSQLTableName ( 'layout_file' ) . " lfi, "
+		. $SqlTableListObj->getSQLTableName ( 'layout' ) . " lyt, "
+		. $SqlTableListObj->getSQLTableName ( 'layout_theme' ) . " lth, "
+		. $SqlTableListObj->getSQLTableName ( 'theme_website' ) . " tw 
+		WHERE lyt.layout_generic_name = '".$CurrentSetObj->getInstanceOfArticleObj()->getArticleEntry('layout_generic_name')."'
+		AND lyt.fk_layout_file_id = lfi.layout_file_id 
+		AND lyt.layout_id = lth.fk_layout_id
+		AND lth.fk_theme_id = tw.fk_theme_id
+		AND tw.fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
+		AND tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		;";
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+		$dbquery = $bts->SDDMObj->query ($sqlQuery);
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+			$layout_id = $dbp ['layout_file_id'];
+		}
+		$layoutFileObj->getDataFromDB($layout_id);
+
+		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $layoutFileObj->getLayoutFileEntry('layout_file_filename');
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
 
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));

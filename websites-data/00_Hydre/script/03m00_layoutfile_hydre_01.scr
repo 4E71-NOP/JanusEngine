@@ -1,4 +1,0 @@
-add layoutfile name "hydre_default_layout"				generic_name "default_layout"			description "hydre_default_layout"				filename "default.lyt.html";
-add layoutfile name "hydre_gestion_profil"				generic_name "gestion_profil"			description "hydre_gestion_profil"				filename "default.lyt.html";
-add layoutfile name "hydre_test_script"					generic_name "test_script" 				description "hydre_test_script"					filename "default.lyt.html";
-add layoutfile name "hydre_gestion_decoration"			generic_name "gestion_decoration" 		description "hydre_gestion_decoration"			filename "default.lyt.html";

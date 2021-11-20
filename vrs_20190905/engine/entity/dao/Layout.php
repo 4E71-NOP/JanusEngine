@@ -21,6 +21,7 @@ class Layout extends Entity {
 		'layout_title'			=> "New Layout",
 		'layout_generic_name'	=> "NewLyot",
 		'layout_desc'			=> 0,
+		'layout_file_id'		=> "default.lyt.html",
 	);
 	//@formatter:on
 	

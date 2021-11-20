@@ -862,6 +862,7 @@ self::$InitTable['module'] = function (&$a) {
 			"title"					=> "New module",
 			"directory"				=> "NA",
 			"file"					=> "NA",
+			"type"					=> 1,
 			"desc"					=> "New module",
 			"group_allowed_to_see"	=> 1,
 			"group_allowed_to_use"	=> 1,
@@ -916,12 +917,12 @@ self::$InitTable['layout'] = function (&$a) {
 	$a['params']['description'] = &$a['params']['desc'];
 };
 
-self::$InitTable['layoutfile'] = function (&$a) {
+self::$InitTable['layout_file'] = function (&$a) {
 	$a['params'] = array(
 		'id'			=> 0,
-		'name'			=> "New Layout",
+		'name'			=> "New Layout_file",
 		'generic_name'	=> "NewLyt",
-		'filename'		=> "LayoutFileName.lyt.html",
+		'filename'		=> "Layout_FileName.lyt.html",
 		'desc'			=> "Desc",
 	);
 	$a['params']['description'] = &$a['params']['desc'];

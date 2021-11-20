@@ -130,6 +130,9 @@ class StringFormat {
 		self::$ConvertTable['module']['before']					= 1;
 		self::$ConvertTable['module']['after']					= 2;
 		self::$ConvertTable['module']['during']					= 0;
+		self::$ConvertTable['module']['standart']				= 1;
+		self::$ConvertTable['module']['admin']					= 2;
+		self::$ConvertTable['module']['install']				= 99;
 		
 		self::$ConvertTable['keyword']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['keyword']['online']				= &self::$ConvertTable['universal']['online'];

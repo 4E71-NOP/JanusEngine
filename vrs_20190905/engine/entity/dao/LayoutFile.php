@@ -16,11 +16,11 @@ class LayoutFile extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'layoutfile_id'			=> 0,
-		'layoutfile_name'			=> "New Layout",
-		'layoutfile_generic_name'	=> "NewLyt",
-		'layoutfile_filename'		=> "LayoutFileName.lyt.html",
-		'layoutfile_desc'			=> "Desc",
+		'layout_file_id'			=> 0,
+		'layout_file_name'			=> "New Layout",
+		'layout_file_generic_name'	=> "NewLyt",
+		'layout_file_filename'		=> "layout_fileName.lyt.html",
+		'layout_file_desc'			=> "Desc",
 	);
 	//@formatter:on
 	
@@ -38,11 +38,11 @@ class LayoutFile extends Entity {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('layoutfile') . "
-			WHERE layoutfile_id = '" . $id . "'
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('layout_file') . "
+			WHERE layout_file_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layoutfile id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout_file id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
 					if (isset($this->columns[$A])) { $this->LayoutFile[$A] = $B; }
@@ -50,7 +50,7 @@ class LayoutFile extends Entity {
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layoutfile id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layout_file id=".$id));
 		}
 	}
 	
@@ -66,9 +66,9 @@ class LayoutFile extends Entity {
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
 			'data'			=> $this->LayoutFile,
-			'targetTable'	=> 'layoutfile',
-			'targetColumn'	=> 'layoutfile_id',
-			'entityId'		=> $this->LayoutFile['layoutfile_id'],
+			'targetTable'	=> 'layout_file',
+			'targetColumn'	=> 'layout_file_id',
+			'entityId'		=> $this->LayoutFile['layout_file_id'],
 			'entityTitle'	=> 'layout file'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
@@ -79,7 +79,7 @@ class LayoutFile extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->layoutExists($this->LayoutFile['layoutfile_id']);
+		return $this->layoutExists($this->LayoutFile['layout_file_id']);
 	}
 	
 	
@@ -105,7 +105,7 @@ class LayoutFile extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->LayoutFile['layoutfile_name'] .= "-".date("d_M_Y_H:i:s", time());
+		$this->LayoutFile['layout_file_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
 		return $tab;
 	}

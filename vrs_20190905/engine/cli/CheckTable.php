@@ -478,26 +478,26 @@ self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
 
 
 // Layout file
-self::$CheckTable['add']['layoutfile']['0']['d']	= 3;
-self::$CheckTable['add']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
-self::$CheckTable['add']['layoutfile']['0']['m']	= "CLI_layoutfile_D001";
-self::$CheckTable['add']['layoutfile']['0']['s']	= "name";
+self::$CheckTable['add']['layout_file']['0']['d']	= 3;
+self::$CheckTable['add']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['layout_file']['0']['m']	= "CLI_layout_file_D001";
+self::$CheckTable['add']['layout_file']['0']['s']	= "name";
 
-self::$CheckTable['update']['layoutfile']['0']['d']	= 2;
-self::$CheckTable['update']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
-self::$CheckTable['update']['layoutfile']['0']['c']	= "layoutfile_id";
-self::$CheckTable['update']['layoutfile']['0']['v']	= "layoutfile_id";
-self::$CheckTable['update']['layoutfile']['0']['m']	= "CLI_layoutfile_U001";
-self::$CheckTable['update']['layoutfile']['0']['p']	= "layout file";
-self::$CheckTable['update']['layoutfile']['0']['s']	= "name";
+self::$CheckTable['update']['layout_file']['0']['d']	= 2;
+self::$CheckTable['update']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['update']['layout_file']['0']['c']	= "layout_file_id";
+self::$CheckTable['update']['layout_file']['0']['v']	= "layout_file_id";
+self::$CheckTable['update']['layout_file']['0']['m']	= "CLI_layout_file_U001";
+self::$CheckTable['update']['layout_file']['0']['p']	= "layout file";
+self::$CheckTable['update']['layout_file']['0']['s']	= "name";
 
-self::$CheckTable['delete']['layoutfile']['0']['d']	= 2;
-self::$CheckTable['delete']['layoutfile']['0']['f']	= function ($a) { return array ("SELECT layoutfile_id,layoutfile_name FROM ".$a['sqlTables']['layoutfile']." WHERE layoutfile_name = '".$a['params']['name']."';");};
-self::$CheckTable['delete']['layoutfile']['0']['c']	= "layoutfile_id";
-self::$CheckTable['delete']['layoutfile']['0']['v']	= "layoutfile_id";
-self::$CheckTable['delete']['layoutfile']['0']['m']	= "CLI_layoutfile_D001";
-self::$CheckTable['delete']['layoutfile']['0']['p']	= "layout file";
-self::$CheckTable['delete']['layoutfile']['0']['s']	= "name";
+self::$CheckTable['delete']['layout_file']['0']['d']	= 2;
+self::$CheckTable['delete']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['delete']['layout_file']['0']['c']	= "layout_file_id";
+self::$CheckTable['delete']['layout_file']['0']['v']	= "layout_file_id";
+self::$CheckTable['delete']['layout_file']['0']['m']	= "CLI_layout_file_D001";
+self::$CheckTable['delete']['layout_file']['0']['p']	= "layout file";
+self::$CheckTable['delete']['layout_file']['0']['s']	= "name";
 
 
 

@@ -12,223 +12,220 @@
 //Decoration management functions
 class DecorationManagement {
 	constructor (){
-		this.dbgCalcDeco = 0;
+		this.dbgCalcDeco = 1;
+	}
+
+	UpdateDecoModule ( t ) {
+		for ( let m in t ) {
+			var d = t[m];
+			var c = elm.Gebi( d.main.container )
+			// Executed if initialization is needed
+			if ( d.main.container != "" & d.main.isInitialized != true ) {
+				d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
+				c.style.width = d.main.parent.offsetWidth+"px";
+				c.style.height = d.main.parent.offsetHeight+"px";
+
+				switch (d.main.deco_type) {
+					case 'elegance':
+					case 40:
+						var dl = ['ex11', 'ex12', 'ex13', 'ex21', 'ex22', 'ex23', 'ex31', 'ex32', 'ex33'];
+						break;
+					case 'exquise':
+					case 'exquisite':
+					case 50:
+						var dl = ['ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55'];
+						break;
+					case 'elysion':
+					case 60:
+						var dl = [
+						'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
+						'in11', 'in12', 'in13', 'in14', 'in15', 'in21', 'in25', 'in31', 'in35', 'in41', 'in45', 'in51', 'in52', 'in53', 'in54', 'in55'
+						];
+						break;
+				}
+				for ( var Div in dl ) {
+					if ( d[dl[Div]].isEnabled === true ) {
+						d[dl[Div]].DivObj = elm.Gebi( d.main.module_name + '_' + dl[Div] );
+					}
+				}
+				d.main.isInitialized = true
+			}
+
+			// Executed every window.OnResize event
+			if ( d.main.container != "" ) {
+				d.main.ContainerSizeX = d.main.parent.offsetWidth;
+				d.main.ContainerSizeY = d.main.parent.offsetHeight;
+			}
+
+			switch (d.main.deco_type) {
+				case 'elegance':
+				case 40:
+					this.UpdateDeco40(d);
+					break;
+				case 'exquise':
+				case 'exquisite':
+				case 50:
+					this.UpdateDeco50(d);
+					break;
+				case 'elysion':
+				case 60:
+					this.UpdateDeco60(d);
+					break;
+			}
+		}
 	}
 	
-	UpdateDecoModule ( Table , ModuleName ) {
-		var TIM = Table[ModuleName];
-		var T = 0; 
-		var Obj = elm.Gebi( ModuleName );
-		
-		if ( TIM ) {
-			if ( !TIM.DimConteneurX ) { 
-				TIM.DimConteneurX = Number( Obj.style.width.replace( RegExp ('px', 'g') , '' ));
+	UpdateDeco40 (d){
+		let Col1XMax = Math.max ( Number(d.ex11.DimX) , Number(d.ex21.DimX) , Number(d.ex31.DimX) );
+		let Col3XMax = Math.max ( Number(d.ex13.DimX) , Number(d.ex23.DimX) , Number(d.ex33.DimX) );
+		let Lin1YMax = Math.max ( Number(d.ex11.DimY) , Number(d.ex12.DimY) , Number(d.ex13.DimY) );
+		let Lin3YMax = Math.max ( Number(d.ex31.DimY) , Number(d.ex32.DimY) , Number(d.ex33.DimY) );
+
+		d.ex22.DimX = d.main.ContainerSizeX - Col1XMax - Col3XMax;
+		d.ex22.DimY = d.main.ContainerSizeY - Lin1YMax - Lin3YMax;
+		d.ex22.PosX = Col1XMax;
+		d.ex22.PosY = Lin1YMax;
+		d.ex22.PosX2 = Col1XMax + d.ex22.DimX;
+		d.ex22.PosY2 = Lin1YMax + d.ex22.DimY;
+
+		d.ex12.DimX = d.ex22.DimX;
+		d.ex32.DimX = d.ex22.DimX;
+
+		d.ex21.DimY = d.ex22.DimY;
+		d.ex23.DimY = d.ex22.DimY;
+
+		d.ex11.PosX = d.ex22.PosX - d.ex11.DimX;		d.ex12.PosX = d.ex22.PosX;		d.ex13.PosX = d.ex22.PosX2;
+		d.ex21.PosX = d.ex22.PosX - d.ex21.DimX;										d.ex23.PosX = d.ex22.PosX2;
+		d.ex31.PosX = d.ex22.PosX - d.ex31.DimX;		d.ex32.PosX = d.ex22.PosX;		d.ex33.PosX = d.ex22.PosX2;
+
+		d.ex11.PosY = d.ex22.PosY - d.ex11.DimY;		d.ex21.PosY = d.ex22.PosY;		d.ex31.PosY = d.ex22.PosY2;
+		d.ex12.PosY = d.ex22.PosY - d.ex12.DimY;										d.ex32.PosY = d.ex22.PosY2;
+		d.ex13.PosY = d.ex22.PosY - d.ex13.DimY;		d.ex23.PosY = d.ex22.PosY;		d.ex33.PosY = d.ex22.PosY2;
+
+		let dl = ['ex11', 'ex12', 'ex13', 'ex21', 'ex22', 'ex23', 'ex31', 'ex32', 'ex33'];
+		this.setSizeAndPos(d,dl);
+	}
+
+	UpdateDeco50 (d){
+		// l.Log[this.dbgCalcDeco]('UpdateDeco50 processing');
+		let Col1XMax = Math.max ( Number(d.ex11.DimX) , Number(d.ex21.DimX) , Number(d.ex31.DimX) , Number(d.ex41.DimX) , Number(d.ex51.DimX) );
+		let Col5XMax = Math.max ( Number(d.ex15.DimX) , Number(d.ex25.DimX) , Number(d.ex35.DimX) , Number(d.ex45.DimX) , Number(d.ex55.DimX) );
+		let Lin1YMax = Math.max ( Number(d.ex11.DimY) , Number(d.ex12.DimY) , Number(d.ex13.DimY) , Number(d.ex14.DimY) , Number(d.ex15.DimY) );
+		let Lin5YMax = Math.max ( Number(d.ex51.DimY) , Number(d.ex52.DimY) , Number(d.ex53.DimY) , Number(d.ex54.DimY) , Number(d.ex55.DimY) );
+
+		d.ex22.DimX = d.main.ContainerSizeX - Col1XMax - Col5XMax;
+		d.ex22.DimY = d.main.ContainerSizeY - Lin1YMax - Lin5YMax;
+		d.ex22.PosX = Col1XMax;
+		d.ex22.PosY = Lin1YMax;
+		d.ex22.PosX1 = Col1XMax;
+		d.ex22.PosY1 = Lin1YMax;
+		d.ex22.PosX2 = Col1XMax + d.ex22.DimX;
+		d.ex22.PosY2 = Lin1YMax;
+		d.ex22.PosX3 = Col1XMax;
+		d.ex22.PosY3 = Lin1YMax + d.ex22.DimY;
+		d.ex22.PosX4 = Col1XMax + d.ex22.DimX;
+		d.ex22.PosY4 = Lin1YMax + d.ex22.DimY;
+
+		d.ex13.DimX = d.ex22.DimX - d.ex12.DimX - d.ex14.DimX;
+		d.ex53.DimX = d.ex22.DimX - d.ex52.DimX - d.ex54.DimX;
+		d.ex31.DimY = d.ex22.DimY - d.ex21.DimY - d.ex41.DimY;
+		d.ex35.DimY = d.ex22.DimY - d.ex25.DimY - d.ex45.DimY;
+
+		d.ex11.PosX = d.ex22.PosX1 - d.ex11.DimX;		d.ex12.PosX = d.ex22.PosX1;						d.ex13.PosX = d.ex22.PosX1 + d.ex12.DimX;		d.ex14.PosX = d.ex22.PosX2 - d.ex14.DimX;		d.ex15.PosX = d.ex22.PosX2;
+		d.ex21.PosX = d.ex22.PosX1 - d.ex21.DimX;																																						d.ex25.PosX = d.ex22.PosX2;
+		d.ex31.PosX = d.ex22.PosX1 - d.ex31.DimX;																																						d.ex35.PosX = d.ex22.PosX2;
+		d.ex41.PosX = d.ex22.PosX1 - d.ex41.DimX;																																						d.ex45.PosX = d.ex22.PosX2;
+		d.ex51.PosX = d.ex22.PosX1 - d.ex51.DimX;		d.ex52.PosX = d.ex22.PosX1;						d.ex53.PosX = d.ex22.PosX1 + d.ex52.DimX;		d.ex54.PosX = d.ex22.PosX2 - d.ex54.DimX;		d.ex55.PosX = d.ex22.PosX2;
+
+		d.ex11.PosY = d.ex22.PosY1 - d.ex11.DimY;		d.ex12.PosY = d.ex22.PosY1 - d.ex12.DimY;		d.ex13.PosY = d.ex22.PosY1 - d.ex13.DimY;		d.ex14.PosY = d.ex22.PosY2 - d.ex14.DimY;		d.ex15.PosY = d.ex22.PosY2 - d.ex15.DimY;
+		d.ex21.PosY = d.ex22.PosY1;																																										d.ex25.PosY = d.ex22.PosY2;
+		d.ex31.PosY = d.ex22.PosY1 + d.ex21.DimY;																																						d.ex35.PosY = d.ex22.PosY2 + d.ex25.DimY;
+		d.ex41.PosY = d.ex22.PosY3 - d.ex41.DimY;																																						d.ex45.PosY = d.ex22.PosY3 - d.ex45.DimY;
+		d.ex51.PosY = d.ex22.PosY3;						d.ex52.PosY = d.ex22.PosY3;						d.ex53.PosY = d.ex22.PosY3;						d.ex54.PosY = d.ex22.PosY3;						d.ex55.PosY = d.ex22.PosY3;
+
+		let dl = ['ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55'];
+		this.setSizeAndPos(d,dl);
+	}
+	
+	UpdateDeco60 (d){
+		let Col1XMax = Math.max ( Number(d.ex11.DimX) , Number(d.ex21.DimX) , Number(d.ex31.DimX) , Number(d.ex41.DimX) , Number(d.ex51.DimX) );
+		let Col5XMax = Math.max ( Number(d.ex15.DimX) , Number(d.ex25.DimX) , Number(d.ex35.DimX) , Number(d.ex45.DimX) , Number(d.ex55.DimX) );
+		let Lig1YMax = Math.max ( Number(d.ex11.DimY) , Number(d.ex12.DimY) , Number(d.ex13.DimY) , Number(d.ex14.DimY) , Number(d.ex15.DimY) );
+		let Lig5YMax = Math.max ( Number(d.ex51.DimY) , Number(d.ex52.DimY) , Number(d.ex53.DimY) , Number(d.ex54.DimY) , Number(d.ex55.DimY) );
+
+		d.ex22.DimX = d.ContainerSizeX - Col1XMax - Col5XMax;
+		d.ex22.DimY = d.ContainerSizeY - Lig1YMax - Lig5YMax;
+		d.ex22.PosX = Col1XMax;
+		d.ex22.PosY = Lig1YMax;
+		d.ex22.PosX1 = Col1XMax;
+		d.ex22.PosY1 = Lig1YMax;
+		d.ex22.PosX2 = Col1XMax + d.ex22.DimX;
+		d.ex22.PosY2 = Lig1YMax;
+		d.ex22.PosX3 = Col1XMax;
+		d.ex22.PosY3 = Lig1YMax + d.ex22.DimY;
+		d.ex22.PosX4 = Col1XMax + d.ex22.DimX;
+		d.ex22.PosY4 = Lig1YMax + d.ex22.DimY;
+
+		d.ex13.DimX = d.ex22.DimX - d.ex12.DimX - d.ex14.DimX;
+		d.ex53.DimX = d.ex22.DimX - d.ex52.DimX - d.ex54.DimX;
+		d.ex31.DimY = d.ex22.DimY - d.ex21.DimY - d.ex41.DimY;
+		d.ex35.DimY = d.ex22.DimY - d.ex25.DimY - d.ex45.DimY;
+
+		if ( d.in13.Etat == 1 ) { d.in13.DimX = d.ex22.DimX - d.in11.DimX - d.in12.DimX - d.in14.DimX - d.in15.DimX; }
+		if ( d.in53.Etat == 1 ) { d.in53.DimX = d.ex22.DimX - d.in51.DimX - d.in52.DimX - d.in54.DimX - d.in55.DimX; }
+		if ( d.in31.Etat == 1 ) { d.in31.DimY = d.ex22.DimY - d.in11.DimY - d.in21.DimY - d.in41.DimY - d.in51.DimY; }
+		if ( d.in35.Etat == 1 ) { d.in35.DimY = d.ex22.DimY - d.in15.DimY - d.in25.DimY - d.in45.DimY - d.in55.DimY; }
+
+
+		d.ex11.PosX = d.ex22.PosX1 - d.ex11.DimX;		d.ex12.PosX = d.ex22.PosX1;		d.ex13.PosX = d.ex22.PosX1 + d.ex12.DimX;		d.ex14.PosX = d.ex22.PosX2 - d.ex14.DimX;		d.ex15.PosX = d.ex22.PosX2;
+		d.ex21.PosX = d.ex22.PosX1 - d.ex21.DimX;																																		d.ex25.PosX = d.ex22.PosX2;
+		d.ex31.PosX = d.ex22.PosX1 - d.ex31.DimX;																																		d.ex35.PosX = d.ex22.PosX2;
+		d.ex41.PosX = d.ex22.PosX1 - d.ex41.DimX;																																		d.ex45.PosX = d.ex22.PosX2;
+		d.ex51.PosX = d.ex22.PosX1 - d.ex51.DimX;		d.ex52.PosX = d.ex22.PosX1;		d.ex53.PosX = d.ex22.PosX1 + d.ex52.DimX;		d.ex54.PosX = d.ex22.PosX2 - d.ex54.DimX;		d.ex55.PosX = d.ex22.PosX2;
+
+		d.ex11.PosY = d.ex22.PosY1 - d.ex11.DimY;		d.ex12.PosY = d.ex22.PosY1 - d.ex12.DimY;		d.ex13.PosY = d.ex22.PosY1 - d.ex13.DimY;		d.ex14.PosY = d.ex22.PosY2 - d.ex14.DimY;		d.ex15.PosY = d.ex22.PosY2 - d.ex15.DimY;
+		d.ex21.PosY = d.ex22.PosY1;																																										d.ex25.PosY = d.ex22.PosY2;
+		d.ex31.PosY = d.ex22.PosY1 + d.ex21.DimY;																																						d.ex35.PosY = d.ex22.PosY2 + d.ex25.DimY;
+		d.ex41.PosY = d.ex22.PosY3 - d.ex41.DimY;																																						d.ex45.PosY = d.ex22.PosY3 - d.ex45.DimY;
+		d.ex51.PosY = d.ex22.PosY3;						d.ex52.PosY = d.ex22.PosY3;						d.ex53.PosY = d.ex22.PosY3;						d.ex54.PosY = d.ex22.PosY3;						d.ex55.PosY = d.ex22.PosY3;
+
+		if ( d.in11.Etat == 1 ) { d.in11.PosX = d.ex22.PosX1;									d.in11.PosY = d.ex22.PosY1;									}
+		if ( d.in12.Etat == 1 ) { d.in12.PosX = d.ex22.PosX1 + d.in11.DimX;						d.in12.PosY = d.ex22.PosY1;									}
+		if ( d.in13.Etat == 1 ) { d.in13.PosX = d.ex22.PosX1 + d.in11.DimX + d.in12.DimX;		d.in13.PosY = d.ex22.PosY1;									}
+		if ( d.in14.Etat == 1 ) { d.in14.PosX = d.ex22.PosX2 - d.ex14.DimX - d.ex15.DimX;		d.in14.PosY = d.ex22.PosY1;									}
+		if ( d.in15.Etat == 1 ) { d.in15.PosX = d.ex22.PosX2 - d.ex15.DimX;						d.in15.PosY = d.ex22.PosY1;									}
+		if ( d.in21.Etat == 1 ) { d.in21.PosX = d.ex22.PosX1;									d.in21.PosY = d.ex22.PosY1 + d.in11.DimY;					}
+		if ( d.in25.Etat == 1 ) { d.in25.PosX = d.ex22.PosX2 - d.ex25.DimX;						d.in25.PosY = d.ex22.PosY1 + d.ex15.DimY;					}
+		if ( d.in31.Etat == 1 ) { d.in31.PosX = d.ex22.PosX1;									d.in31.PosY = d.ex22.PosY1 + d.in11.DimY + d.in21.DimY;		}
+		if ( d.in35.Etat == 1 ) { d.in35.PosX = d.ex22.PosX2 - d.ex35.DimX;						d.in35.PosY = d.ex22.PosY1 + d.ex15.DimY + d.ex25.DimY;		}
+		if ( d.in41.Etat == 1 ) { d.in41.PosX = d.ex22.PosX1;									d.in41.PosY = d.ex22.PosY3 - d.in41.DimY - d.in51.DimY;		}
+		if ( d.in45.Etat == 1 ) { d.in45.PosX = d.ex22.PosX2 - d.ex45.DimX;						d.in45.PosY = d.ex22.PosY3 - d.ex45.DimY - d.ex55.DimY;		}
+		if ( d.in51.Etat == 1 ) { d.in51.PosX = d.ex22.PosX1;									d.in51.PosY = d.ex22.PosY3 - d.in51.DimY;					}
+		if ( d.in52.Etat == 1 ) { d.in52.PosX = d.ex22.PosX1 + d.in51.DimX;						d.in52.PosY = d.ex22.PosY3 - d.ex52.DimY;					}
+		if ( d.in53.Etat == 1 ) { d.in53.PosX = d.ex22.PosX1 + d.in51.DimX + d.in52.DimX;		d.in53.PosY = d.ex22.PosY3 - d.ex53.DimY;					}
+		if ( d.in54.Etat == 1 ) { d.in54.PosX = d.ex22.PosX2 - d.ex54.DimX - d.ex55.DimX;		d.in54.PosY = d.ex22.PosY3 - d.ex54.DimY;					}
+		if ( d.in55.Etat == 1 ) { d.in55.PosX = d.ex22.PosX2 - d.ex55.DimX;						d.in55.PosY = d.ex22.PosY3 - d.ex55.DimY;					}
+
+		let dl = [
+			'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
+			'in11', 'in12', 'in13', 'in14', 'in15', 'in21', 'in25', 'in31', 'in35', 'in41', 'in45', 'in51', 'in52', 'in53', 'in54', 'in55'
+			];
+		this.setSizeAndPos(d,dl);
+	}
+	
+	setSizeAndPos (d,dl) {
+		// l.Log[this.dbgCalcDeco]('setSizeAndPos processing : ' +  d.main.module_name);
+		for ( let dv in dl ) {
+			let dd = d[dl[dv]];
+			if ( dd.isEnabled === true ) { 
+				let Obj = dd.DivObj.style;
+				Obj.width = dd.DimX + 'px';
+				Obj.height = dd.DimY + 'px';
+				Obj.left = dd.PosX + 'px';
+				Obj.top = dd.PosY + 'px';
+				// l.Log[this.dbgCalcDeco]('setSizeAndPos processing : ' +  dd.DivObj.id + "; PosX="+dd.PosX + 'px'+ "; PosY="+dd.PosX + 'px' + "; DimX="+dd.DimX + 'px'+"; DimY="+dd.DimY + 'px');
 			}
-			if ( !TIM.DimConteneurY ) { 
-				TIM.DimConteneurY = Number( Obj.style.height.replace( RegExp ('px', 'g') , '' ));
-			}
-			l.Log[this.dbgCalcDeco]('UpdateDecoModule processing : ' + Table + '/' + ModuleName);
-			l.Log[this.dbgCalcDeco](TIM.module_name + '/' + TIM.deco_type);
-		
-			switch ( TIM.deco_type ) {
-			case 'elegance':
-			case 40:
-				var ListeDivsGebi = ['ex11', 'ex12', 'ex13', 'ex21', 'ex22', 'ex23', 'ex31', 'ex32', 'ex33'];
-				for ( var Div in ListeDivsGebi ) {
-					T = TIM[ListeDivsGebi[Div]];
-					T.DivObj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-					T.DimX = Number(T.DivObj.style.width.replace( RegExp ('px', 'g') , '' ));
-					T.DimY = Number(T.DivObj.style.height.replace( RegExp ('px', 'g') , '' ));
-					T.PosX = 0;
-					T.PosY = 0;
-				}
-		
-				var Col1XMax = Math.max ( Number(TIM.ex11.DimX) , Number(TIM.ex21.DimX) , Number(TIM.ex31.DimX) );
-				var Col3XMax = Math.max ( Number(TIM.ex13.DimX) , Number(TIM.ex23.DimX) , Number(TIM.ex33.DimX) );
-				var Lig1YMax = Math.max ( Number(TIM.ex11.DimY) , Number(TIM.ex12.DimY) , Number(TIM.ex13.DimY) );
-				var Lig3YMax = Math.max ( Number(TIM.ex31.DimY) , Number(TIM.ex32.DimY) , Number(TIM.ex33.DimY) );
-		
-				TIM.ex22.DimX = TIM.DimConteneurX - Col1XMax - Col3XMax;
-				TIM.ex22.DimY = TIM.DimConteneurY - Lig1YMax - Lig3YMax;
-				TIM.ex22.PosX = Col1XMax;
-				TIM.ex22.PosY = Lig1YMax;
-				TIM.ex22.PosX2 = Col1XMax + TIM.ex22.DimX;
-				TIM.ex22.PosY2 = Lig1YMax + TIM.ex22.DimY;
-		
-				TIM.ex12.DimX = TIM.ex22.DimX;
-				TIM.ex32.DimX = TIM.ex22.DimX;
-		
-				TIM.ex21.DimY = TIM.ex22.DimY;
-				TIM.ex23.DimY = TIM.ex22.DimY;
-		
-				TIM.ex11.PosX = TIM.ex22.PosX - TIM.ex11.DimX;		TIM.ex12.PosX = TIM.ex22.PosX;		TIM.ex13.PosX = TIM.ex22.PosX2;
-				TIM.ex21.PosX = TIM.ex22.PosX - TIM.ex21.DimX;											TIM.ex23.PosX = TIM.ex22.PosX2;
-				TIM.ex31.PosX = TIM.ex22.PosX - TIM.ex31.DimX;		TIM.ex32.PosX = TIM.ex22.PosX;		TIM.ex33.PosX = TIM.ex22.PosX2;
-		
-				TIM.ex11.PosY = TIM.ex22.PosY - TIM.ex11.DimY;		TIM.ex21.PosY = TIM.ex22.PosY;		TIM.ex31.PosY = TIM.ex22.PosY2;
-				TIM.ex12.PosY = TIM.ex22.PosY - TIM.ex12.DimY;											TIM.ex32.PosY = TIM.ex22.PosY2;
-				TIM.ex13.PosY = TIM.ex22.PosY - TIM.ex13.DimY;		TIM.ex23.PosY = TIM.ex22.PosY;		TIM.ex33.PosY = TIM.ex22.PosY2;
-		
-				for ( var Div in ListeDivsGebi ) {
-					var Obj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-					Obj.style.left = TIM[ListeDivsGebi[Div]].PosX + 'px';
-					Obj.style.top = TIM[ListeDivsGebi[Div]].PosY + 'px';
-					Obj.style.width = TIM[ListeDivsGebi[Div]].DimX + 'px';
-					Obj.style.height = TIM[ListeDivsGebi[Div]].DimY + 'px';
-				}
-			break;
-		
-			case 'exquise':
-			case 'exquisite':
-			case 50:
-				var ListeDivsGebi = ['ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55'];
-				for ( var Div in ListeDivsGebi ) {
-					T = TIM[ListeDivsGebi[Div]];
-					T.DivObj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-					T.DimX = Number(T.DivObj.style.width.replace( RegExp ('px', 'g') , '' ));
-					T.DimY = Number(T.DivObj.style.height.replace( RegExp ('px', 'g') , '' ));
-					T.PosX = 0;
-					T.PosY = 0;
-				}
-		
-				var Col1XMax = Math.max ( Number(TIM.ex11.DimX) , Number(TIM.ex21.DimX) , Number(TIM.ex31.DimX) , Number(TIM.ex41.DimX) , Number(TIM.ex51.DimX) );
-				var Col5XMax = Math.max ( Number(TIM.ex15.DimX) , Number(TIM.ex25.DimX) , Number(TIM.ex35.DimX) , Number(TIM.ex45.DimX) , Number(TIM.ex55.DimX) );
-				var Lig1YMax = Math.max ( Number(TIM.ex11.DimY) , Number(TIM.ex12.DimY) , Number(TIM.ex13.DimY) , Number(TIM.ex14.DimY) , Number(TIM.ex15.DimY) );
-				var Lig5YMax = Math.max ( Number(TIM.ex51.DimY) , Number(TIM.ex52.DimY) , Number(TIM.ex53.DimY) , Number(TIM.ex54.DimY) , Number(TIM.ex55.DimY) );
-		
-				TIM.ex22.DimX = TIM.DimConteneurX - Col1XMax - Col5XMax;
-				TIM.ex22.DimY = TIM.DimConteneurY - Lig1YMax - Lig5YMax;
-				TIM.ex22.PosX = Col1XMax;
-				TIM.ex22.PosY = Lig1YMax;
-				TIM.ex22.PosX1 = Col1XMax;
-				TIM.ex22.PosY1 = Lig1YMax;
-				TIM.ex22.PosX2 = Col1XMax + TIM.ex22.DimX;
-				TIM.ex22.PosY2 = Lig1YMax;
-				TIM.ex22.PosX3 = Col1XMax;
-				TIM.ex22.PosY3 = Lig1YMax + TIM.ex22.DimY;
-				TIM.ex22.PosX4 = Col1XMax + TIM.ex22.DimX;
-				TIM.ex22.PosY4 = Lig1YMax + TIM.ex22.DimY;
-		
-				TIM.ex13.DimX = TIM.ex22.DimX - TIM.ex12.DimX - TIM.ex14.DimX;
-				TIM.ex53.DimX = TIM.ex22.DimX - TIM.ex52.DimX - TIM.ex54.DimX;
-				TIM.ex31.DimY = TIM.ex22.DimY - TIM.ex21.DimY - TIM.ex41.DimY;
-				TIM.ex35.DimY = TIM.ex22.DimY - TIM.ex25.DimY - TIM.ex45.DimY;
-		
-				TIM.ex11.PosX = TIM.ex22.PosX1 - TIM.ex11.DimX;		TIM.ex12.PosX = TIM.ex22.PosX1;		TIM.ex13.PosX = TIM.ex22.PosX1 + TIM.ex12.DimX;		TIM.ex14.PosX = TIM.ex22.PosX2 - TIM.ex14.DimX;		TIM.ex15.PosX = TIM.ex22.PosX2;
-				TIM.ex21.PosX = TIM.ex22.PosX1 - TIM.ex21.DimX;																																					TIM.ex25.PosX = TIM.ex22.PosX2;
-				TIM.ex31.PosX = TIM.ex22.PosX1 - TIM.ex31.DimX;																																					TIM.ex35.PosX = TIM.ex22.PosX2;
-				TIM.ex41.PosX = TIM.ex22.PosX1 - TIM.ex41.DimX;																																					TIM.ex45.PosX = TIM.ex22.PosX2;
-				TIM.ex51.PosX = TIM.ex22.PosX1 - TIM.ex51.DimX;		TIM.ex52.PosX = TIM.ex22.PosX1;		TIM.ex53.PosX = TIM.ex22.PosX1 + TIM.ex52.DimX;		TIM.ex54.PosX = TIM.ex22.PosX2 - TIM.ex54.DimX;		TIM.ex55.PosX = TIM.ex22.PosX2;
-		
-				TIM.ex11.PosY = TIM.ex22.PosY1 - TIM.ex11.DimY;		TIM.ex12.PosY = TIM.ex22.PosY1 - TIM.ex12.DimY;		TIM.ex13.PosY = TIM.ex22.PosY1 - TIM.ex13.DimY;		TIM.ex14.PosY = TIM.ex22.PosY2 - TIM.ex14.DimY;		TIM.ex15.PosY = TIM.ex22.PosY2 - TIM.ex15.DimY;
-				TIM.ex21.PosY = TIM.ex22.PosY1;																																													TIM.ex25.PosY = TIM.ex22.PosY2;
-				TIM.ex31.PosY = TIM.ex22.PosY1 + TIM.ex21.DimY;																																									TIM.ex35.PosY = TIM.ex22.PosY2 + TIM.ex25.DimY;
-				TIM.ex41.PosY = TIM.ex22.PosY3 - TIM.ex41.DimY;																																									TIM.ex45.PosY = TIM.ex22.PosY3 - TIM.ex45.DimY;
-				TIM.ex51.PosY = TIM.ex22.PosY3;						TIM.ex52.PosY = TIM.ex22.PosY3;						TIM.ex53.PosY = TIM.ex22.PosY3;						TIM.ex54.PosY = TIM.ex22.PosY3;						TIM.ex55.PosY = TIM.ex22.PosY3;
-		
-				for ( var Div in ListeDivsGebi ) {
-					var Obj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-					Obj.style.left = TIM[ListeDivsGebi[Div]].PosX + 'px';
-					Obj.style.top = TIM[ListeDivsGebi[Div]].PosY + 'px';
-					Obj.style.width = TIM[ListeDivsGebi[Div]].DimX + 'px';
-					Obj.style.height = TIM[ListeDivsGebi[Div]].DimY + 'px';
-				}
-			break;
-		
-			case 'elysion':
-			case 60:
-				var ListeDivsGebi = [
-				'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
-				'in11', 'in12', 'in13', 'in14', 'in15', 'in21', 'in25', 'in31', 'in35', 'in41', 'in45', 'in51', 'in52', 'in53', 'in54', 'in55'
-				];
-				for ( var Div in ListeDivsGebi ) {
-					T = TIM[ListeDivsGebi[Div]];
-					T.DivObj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-					if ( T.DivObj ) {
-						T.DimX = Number(T.DivObj.style.width.replace( RegExp ('px', 'g') , '' ));
-						T.DimY = Number(T.DivObj.style.height.replace( RegExp ('px', 'g') , '' ));
-						l.Log[this.dbgCalcDeco]( ModuleName + '_' + ListeDivsGebi[Div] +' is up! ');
-					}
-					else {
-						l.Log[this.dbgCalcDeco]( ModuleName + '_' + ListeDivsGebi[Div] +' is down! ');
-						T.Etat = 0
-						T.PosX = 0;
-						T.PosY = 0;
-					}
-				}
-		
-				var Col1XMax = Math.max ( Number(TIM.ex11.DimX) , Number(TIM.ex21.DimX) , Number(TIM.ex31.DimX) , Number(TIM.ex41.DimX) , Number(TIM.ex51.DimX) );
-				var Col5XMax = Math.max ( Number(TIM.ex15.DimX) , Number(TIM.ex25.DimX) , Number(TIM.ex35.DimX) , Number(TIM.ex45.DimX) , Number(TIM.ex55.DimX) );
-				var Lig1YMax = Math.max ( Number(TIM.ex11.DimY) , Number(TIM.ex12.DimY) , Number(TIM.ex13.DimY) , Number(TIM.ex14.DimY) , Number(TIM.ex15.DimY) );
-				var Lig5YMax = Math.max ( Number(TIM.ex51.DimY) , Number(TIM.ex52.DimY) , Number(TIM.ex53.DimY) , Number(TIM.ex54.DimY) , Number(TIM.ex55.DimY) );
-		
-				TIM.ex22.DimX = TIM.DimConteneurX - Col1XMax - Col5XMax;
-				TIM.ex22.DimY = TIM.DimConteneurY - Lig1YMax - Lig5YMax;
-				TIM.ex22.PosX = Col1XMax;
-				TIM.ex22.PosY = Lig1YMax;
-				TIM.ex22.PosX1 = Col1XMax;
-				TIM.ex22.PosY1 = Lig1YMax;
-				TIM.ex22.PosX2 = Col1XMax + TIM.ex22.DimX;
-				TIM.ex22.PosY2 = Lig1YMax;
-				TIM.ex22.PosX3 = Col1XMax;
-				TIM.ex22.PosY3 = Lig1YMax + TIM.ex22.DimY;
-				TIM.ex22.PosX4 = Col1XMax + TIM.ex22.DimX;
-				TIM.ex22.PosY4 = Lig1YMax + TIM.ex22.DimY;
-		
-				TIM.ex13.DimX = TIM.ex22.DimX - TIM.ex12.DimX - TIM.ex14.DimX;
-				TIM.ex53.DimX = TIM.ex22.DimX - TIM.ex52.DimX - TIM.ex54.DimX;
-				TIM.ex31.DimY = TIM.ex22.DimY - TIM.ex21.DimY - TIM.ex41.DimY;
-				TIM.ex35.DimY = TIM.ex22.DimY - TIM.ex25.DimY - TIM.ex45.DimY;
-		
-				if ( TIM.in13.Etat == 1 ) { TIM.in13.DimX = TIM.ex22.DimX - TIM.in11.DimX - TIM.in12.DimX - TIM.in14.DimX - TIM.in15.DimX; }
-				if ( TIM.in53.Etat == 1 ) { TIM.in53.DimX = TIM.ex22.DimX - TIM.in51.DimX - TIM.in52.DimX - TIM.in54.DimX - TIM.in55.DimX; }
-				if ( TIM.in31.Etat == 1 ) { TIM.in31.DimY = TIM.ex22.DimY - TIM.in11.DimY - TIM.in21.DimY - TIM.in41.DimY - TIM.in51.DimY; }
-				if ( TIM.in35.Etat == 1 ) { TIM.in35.DimY = TIM.ex22.DimY - TIM.in15.DimY - TIM.in25.DimY - TIM.in45.DimY - TIM.in55.DimY; }
-		
-		
-				TIM.ex11.PosX = TIM.ex22.PosX1 - TIM.ex11.DimX;		TIM.ex12.PosX = TIM.ex22.PosX1;		TIM.ex13.PosX = TIM.ex22.PosX1 + TIM.ex12.DimX;		TIM.ex14.PosX = TIM.ex22.PosX2 - TIM.ex14.DimX;		TIM.ex15.PosX = TIM.ex22.PosX2;
-				TIM.ex21.PosX = TIM.ex22.PosX1 - TIM.ex21.DimX;																																					TIM.ex25.PosX = TIM.ex22.PosX2;
-				TIM.ex31.PosX = TIM.ex22.PosX1 - TIM.ex31.DimX;																																					TIM.ex35.PosX = TIM.ex22.PosX2;
-				TIM.ex41.PosX = TIM.ex22.PosX1 - TIM.ex41.DimX;																																					TIM.ex45.PosX = TIM.ex22.PosX2;
-				TIM.ex51.PosX = TIM.ex22.PosX1 - TIM.ex51.DimX;		TIM.ex52.PosX = TIM.ex22.PosX1;		TIM.ex53.PosX = TIM.ex22.PosX1 + TIM.ex52.DimX;		TIM.ex54.PosX = TIM.ex22.PosX2 - TIM.ex54.DimX;		TIM.ex55.PosX = TIM.ex22.PosX2;
-		
-				TIM.ex11.PosY = TIM.ex22.PosY1 - TIM.ex11.DimY;		TIM.ex12.PosY = TIM.ex22.PosY1 - TIM.ex12.DimY;		TIM.ex13.PosY = TIM.ex22.PosY1 - TIM.ex13.DimY;		TIM.ex14.PosY = TIM.ex22.PosY2 - TIM.ex14.DimY;		TIM.ex15.PosY = TIM.ex22.PosY2 - TIM.ex15.DimY;
-				TIM.ex21.PosY = TIM.ex22.PosY1;																																													TIM.ex25.PosY = TIM.ex22.PosY2;
-				TIM.ex31.PosY = TIM.ex22.PosY1 + TIM.ex21.DimY;																																									TIM.ex35.PosY = TIM.ex22.PosY2 + TIM.ex25.DimY;
-				TIM.ex41.PosY = TIM.ex22.PosY3 - TIM.ex41.DimY;																																									TIM.ex45.PosY = TIM.ex22.PosY3 - TIM.ex45.DimY;
-				TIM.ex51.PosY = TIM.ex22.PosY3;						TIM.ex52.PosY = TIM.ex22.PosY3;						TIM.ex53.PosY = TIM.ex22.PosY3;						TIM.ex54.PosY = TIM.ex22.PosY3;						TIM.ex55.PosY = TIM.ex22.PosY3;
-		
-				if ( TIM.in11.Etat == 1 ) { TIM.in11.PosX = TIM.ex22.PosX1;										TIM.in11.PosY = TIM.ex22.PosY1;										}
-				if ( TIM.in12.Etat == 1 ) { TIM.in12.PosX = TIM.ex22.PosX1 + TIM.in11.DimX;						TIM.in12.PosY = TIM.ex22.PosY1;										}
-				if ( TIM.in13.Etat == 1 ) { TIM.in13.PosX = TIM.ex22.PosX1 + TIM.in11.DimX + TIM.in12.DimX;		TIM.in13.PosY = TIM.ex22.PosY1;										}
-				if ( TIM.in14.Etat == 1 ) { TIM.in14.PosX = TIM.ex22.PosX2 - TIM.ex14.DimX - TIM.ex15.DimX;		TIM.in14.PosY = TIM.ex22.PosY1;										}
-				if ( TIM.in15.Etat == 1 ) { TIM.in15.PosX = TIM.ex22.PosX2 - TIM.ex15.DimX;						TIM.in15.PosY = TIM.ex22.PosY1;										}
-				if ( TIM.in21.Etat == 1 ) { TIM.in21.PosX = TIM.ex22.PosX1;										TIM.in21.PosY = TIM.ex22.PosY1 + TIM.in11.DimY;						}
-				if ( TIM.in25.Etat == 1 ) { TIM.in25.PosX = TIM.ex22.PosX2 - TIM.ex25.DimX;						TIM.in25.PosY = TIM.ex22.PosY1 + TIM.ex15.DimY;						}
-				if ( TIM.in31.Etat == 1 ) { TIM.in31.PosX = TIM.ex22.PosX1;										TIM.in31.PosY = TIM.ex22.PosY1 + TIM.in11.DimY + TIM.in21.DimY;		}
-				if ( TIM.in35.Etat == 1 ) { TIM.in35.PosX = TIM.ex22.PosX2 - TIM.ex35.DimX;						TIM.in35.PosY = TIM.ex22.PosY1 + TIM.ex15.DimY + TIM.ex25.DimY;		}
-				if ( TIM.in41.Etat == 1 ) { TIM.in41.PosX = TIM.ex22.PosX1;										TIM.in41.PosY = TIM.ex22.PosY3 - TIM.in41.DimY - TIM.in51.DimY;		}
-				if ( TIM.in45.Etat == 1 ) { TIM.in45.PosX = TIM.ex22.PosX2 - TIM.ex45.DimX;						TIM.in45.PosY = TIM.ex22.PosY3 - TIM.ex45.DimY - TIM.ex55.DimY;		}
-				if ( TIM.in51.Etat == 1 ) { TIM.in51.PosX = TIM.ex22.PosX1;										TIM.in51.PosY = TIM.ex22.PosY3 - TIM.in51.DimY;						}
-				if ( TIM.in52.Etat == 1 ) { TIM.in52.PosX = TIM.ex22.PosX1 + TIM.in51.DimX;						TIM.in52.PosY = TIM.ex22.PosY3 - TIM.ex52.DimY;						}
-				if ( TIM.in53.Etat == 1 ) { TIM.in53.PosX = TIM.ex22.PosX1 + TIM.in51.DimX + TIM.in52.DimX;		TIM.in53.PosY = TIM.ex22.PosY3 - TIM.ex53.DimY;						}
-				if ( TIM.in54.Etat == 1 ) { TIM.in54.PosX = TIM.ex22.PosX2 - TIM.ex54.DimX - TIM.ex55.DimX;		TIM.in54.PosY = TIM.ex22.PosY3 - TIM.ex54.DimY;						}
-				if ( TIM.in55.Etat == 1 ) { TIM.in55.PosX = TIM.ex22.PosX2 - TIM.ex55.DimX;						TIM.in55.PosY = TIM.ex22.PosY3 - TIM.ex55.DimY;						}
-		
-				for ( var Div in ListeDivsGebi ) {
-					if ( TIM[ListeDivsGebi[Div]].Etat == 1 ) {
-					var Obj = elm.Gebi( ModuleName + '_' + ListeDivsGebi[Div] );
-						Obj.style.left = TIM[ListeDivsGebi[Div]].PosX + 'px';
-						Obj.style.top = TIM[ListeDivsGebi[Div]].PosY + 'px';
-						Obj.style.width = TIM[ListeDivsGebi[Div]].DimX + 'px';
-						Obj.style.height = TIM[ListeDivsGebi[Div]].DimY + 'px';
-					}
-				}
-			break;
-			}
-			if  ( this.dbgCalcDeco == 1 ) { console.table(TIM); }
 		}
-		else { l.Log[this.dbgCalcDeco]('UpdateDecoModule could not process : ' + Table + '/' + ModuleName + '. This table does NOT exists'); }
 	}
 }
 

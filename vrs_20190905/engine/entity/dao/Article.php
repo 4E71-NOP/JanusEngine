@@ -58,9 +58,9 @@ class Article extends Entity {
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')."
 			WHERE arti_id = '".$id."'
-			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			;");
-// 			AND arti_page = '".$page."'
+			// AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			// 			AND arti_page = '".$page."'
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

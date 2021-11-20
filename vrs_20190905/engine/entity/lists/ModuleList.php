@@ -30,15 +30,14 @@ class ModuleList {
 		return self::$Instance;
 	}
 	/**
-	 * Renders the layout that will be used for rendering the modules.
+	 * Prepare list of modules.
 	 */
 	public function makeModuleList(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		
-		$dbquery = $bts->SDDMObj->query("
-			SELECT * FROM "
+		$q = "SELECT * FROM "
 			.$SqlTableListObj->getSQLTableName('module')." m, "
 			.$SqlTableListObj->getSQLTableName('module_website')." wm
 			WHERE wm.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
@@ -47,15 +46,41 @@ class ModuleList {
 			AND m.module_group_allowed_to_see ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
-			;");
+			;";
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$q."`"));
+		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
 			}
 			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
 		}
-		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for module list ")); }
-				
+		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for module list ")); }		
+	}
+
+	/**
+	 * Prepare list of installation modules (specific to install ONLY).
+	 */
+	public function makeInstallModuleList(){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$SqlTableListObj = SqlTableList::getInstance ( null, null );
+		
+		$q = "SELECT * FROM "
+			.$SqlTableListObj->getSQLTableName('module')." m, 
+			AND wm.module_state = '1'
+			AND m.module_type = '1'
+			;";
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$q."`"));
+		$dbquery = $bts->SDDMObj->query($q);
+		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
+			}
+			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
+		}
+		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for install module list ")); }		
+
 	}
 
 	//@formatter:off
@@ -65,6 +90,7 @@ class ModuleList {
 	public function setModuleList($Layout) { $this->ModuleList = $Layout; }
 	public function setModuleListEntry($entry , $data) { $this->ModuleList[$entry] = $data; }
 	//@formatter:on
+
 
 }
 

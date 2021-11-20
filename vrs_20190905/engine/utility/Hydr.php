@@ -62,7 +62,7 @@ class Hydr {
 		$bts = BaseToolSet::getInstance();
 
 		// --------------------------------------------------------------------------------------------
-		$Content = "";
+		$Content =  "";
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
@@ -125,7 +125,7 @@ class Hydr {
 		//	1	Check session, Authentification mode = session
 		//	2	sw has been submitted (this is a first contact case)
 		//	3	sw has been submitted, update session with new sw,  check session
-		//	4x	If a auth form is submitted a session is active unless « big problem » – unused case.
+		//	4x	If an auth form is submitted a session is active unless « big problem » – unused case.
 		//	5	A user is trying to authenticate. Great !
 		//	6x	We have a form and a URI and no session at the same time. Unused case
 		//	7x	We have a form and a URI at the same time. Unused case
@@ -188,7 +188,7 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Loading website data" );
 
-// 		A this point we have a ws in the session so we don't use the URI parameter anymore.
+		// A this point we have a ws in the session so we don't use the URI parameter anymore.
 		$bts->CMObj->LoadConfigFile ();
 		$bts->CMObj->setConfigurationEntry ( 'execution_context', "render" );
 		$bts->LMObj->setDebugLogEcho ( 0 );
@@ -478,6 +478,7 @@ class Hydr {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 			}
 			$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', 1 );
@@ -516,12 +517,14 @@ class Hydr {
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', $dbp ['arti_slug'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', $dbp ['arti_page'] );
 				}
 			} else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', 'article_not_found' );
 				$bts->RequestDataObj->setRequestDataEntry ( 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );		//deprecated remove when ready
@@ -530,6 +533,10 @@ class Hydr {
 			}
 		}
 		
+		$ClassLoaderObj->provisionClass ( 'Article' );
+		$CurrentSetObj->setInstanceOfArticleObj(new Article());
+		$CurrentSetObj->getInstanceOfArticleObj()->getDataFromDB($CurrentSetObj->getDataSubEntry( 'article', 'arti_id'));
+
 		// --------------------------------------------------------------------------------------------
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'>\r" );
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry ( 'language' ) . "'>\r" );
@@ -610,17 +617,17 @@ class Hydr {
 		// 2021 layout process
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
-		$CurrentSetObj->setInstanceOfModuleLisObj(new ModuleList());
-		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleLisObj();
+		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
 		$ModuleLisObj->makeModuleList();
-
+		
 		$ClassLoaderObj->provisionClass ('LayoutProcessor');
 		$LayoutProcessorObj = LayoutProcessor::getInstance();
 		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
 		$RenderModule2Obj = RenderModule2::getInstance ();
-
+		
 		$ContentFragments = $LayoutProcessorObj->render();
-
+		
 		$LayoutCommands = array(
 			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
 			1 => array( "regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
@@ -636,7 +643,7 @@ class Hydr {
 							break;
 						case "render_module":
 							// Module it is.
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for ". $A['module_name'] ." and data ". $A['data'] ) );
+							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
 							$A['content'] = $RenderModule2Obj->render($A['module_name']);
 							break;
 					}
@@ -676,7 +683,7 @@ class Hydr {
 		$RenderStylesheetObj = RenderStylesheet::getInstance ();
 		$stylesheet = $RenderStylesheetObj->render ( "mt_", $ThemeDataObj );
 		
-		$Content .= "<!DOCTYPE html>\r";
+		$Content .= "<!DOCTYPE html>\r<html>";
 		switch ($WebSiteObj->getWebSiteEntry ( 'ws_stylesheet' )) {
 			case 1 : // dynamic
 				$Content .= "
@@ -703,7 +710,8 @@ class Hydr {
 			"' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
 		}
-		$Content .= "style='";
+		$Content .= "style='
+		height:100%;";
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) ) > 0) {
 			$Content .= "background-image: url(".
 				$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
@@ -713,8 +721,8 @@ class Hydr {
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0) {
 			$Content .= "background-color: #" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . ";";
 		}
-		$Content .= " visibility: visible;'>\r ";
-		
+		$Content .= "'>\r ";
+		$Content .= "<div id='initial_div' style='position:relative; width:98%; height:100%; margin:16px; padding:0px; visibility:visible'>\r";
 		// --------------------------------------------------------------------------------------------
 		//
 		// Modules
@@ -731,10 +739,11 @@ class Hydr {
 		// $Content .= $RenderModuleObj->render ( $directives );
 		
 		foreach ( $ContentFragments as &$A ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
+//			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
 			$Content .= $A['content'];
 		}
 
+		$Content .= "</div>\r"; // Closing initial_div
 
 
 		// --------------------------------------------------------------------------------------------
@@ -808,13 +817,17 @@ class Hydr {
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
+		$JavaScriptContent .= "function WindowOnResize (){\r	dm.UpdateDecoModule(TabInfoModule);\r		}\r";
+
 		$JavaScriptContent .= "function WindowOnload () {\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
+		$JavaScriptContent .= "dm.UpdateDecoModule(TabInfoModule);\r";
 		$JavaScriptContent .= "
-			}\r
-			window.onload = WindowOnload;\r\r
-			</script>\r";
-		
+	}\r
+	window.onresize = WindowOnResize;\r
+	window.onload = WindowOnload;\r
+	</script>\r";
+
 		$licence = "
 			<!--
 			Author : FMA - 2005 ~ " . date ( "Y", time () ) . "

@@ -138,7 +138,20 @@ class RenderDeco40Elegance {
 		<div ".$DivIdList['ex22']." class='".$TN . $Block."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 );");
+
+		$argAddModule = "{
+		ex11 : {	'isEnabled':true,	'DimX':".$B['ex11_x'].",	'DimY':".$B['ex11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex12 : {	'isEnabled':true,	'DimX':".$B['ex12_x'].",	'DimY':".$B['ex12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex13 : {	'isEnabled':true,	'DimX':".$B['ex13_x'].",	'DimY':".$B['ex13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex21 : {	'isEnabled':true,	'DimX':".$B['ex21_x'].",	'DimY':".$B['ex21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex22 : {	'isEnabled':true,	'DimX':".$B['ex22_x'].",	'DimY':".$B['ex22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex23 : {	'isEnabled':true,	'DimX':".$B['ex23_x'].",	'DimY':".$B['ex23_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex31 : {	'isEnabled':true,	'DimX':".$B['ex31_x'].",	'DimY':".$B['ex31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex32 : {	'isEnabled':true,	'DimX':".$B['ex32_x'].",	'DimY':".$B['ex32_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		ex33 : {	'isEnabled':true,	'DimX':".$B['ex33_x'].",	'DimY':".$B['ex33_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+		}";
+
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 40 , '".$mcn."', ".$argAddModule.");");
 		// $RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		

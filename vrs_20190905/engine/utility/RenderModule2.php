@@ -37,12 +37,19 @@ class RenderModule2 {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "";
-		$Content .= "<!-- __________ Modules begining __________ -->\r";
+		// $Content .= "<!-- __________ Modules begining __________ -->\r";
 
 		//$ModuleTable = $RenderLayoutObj->getModuleList();
 		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
 
-		$m = $CurrentSetObj->getInstanceOfModuleLisObj()->getModuleListEntry($module_name);
+		$m = $CurrentSetObj->getInstanceOfModuleListObj()->getModuleListEntry($module_name);
+
+		// Failsafe for the old authorization model. 
+		// To be removed when the upated 2021 layout system is fully operationnal
+		if (strlen($m['module_name']) == 0 ) {
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : No module availaible with this name (".$module_name.")") );	
+			return ("");
+		}
 
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
@@ -53,8 +60,7 @@ class RenderModule2 {
 
 		$infos = array();
 
-		$nbr = $m['module_deco_nbr'];
-		$Block = $bts->StringFormatObj->getDecorationBlockName( "B", $nbr , "");
+		$Block = $bts->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , "");
 		$infos['module_name'] = $m['module_name'];
 		$infos['block'] = $Block;
 		$infos['blockG'] = $Block . "G";
@@ -75,7 +81,7 @@ class RenderModule2 {
 		
 		if (class_exists($ModuleRendererName)) { 
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
-			$ModuleRenderer = new $ModuleRendererName(); 
+			$ModuleRenderer = new $ModuleRendererName();
 		}
 		else {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
@@ -254,7 +260,8 @@ class RenderModule2 {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
 				$Content .= "
 					<div class='".$ThemeDataObj->getThemeName().$infos['block']."'>\r
-					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std' style='position: absolute;'>\r'";
+					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std'>\r";
+					//  style='position: absolute;'
 					// $RenderLayoutObj->getLayoutModuleEntry($mn, 'px')."px; top:".
 					// $RenderLayoutObj->getLayoutModuleEntry($mn, 'py')."px; width:".
 					// $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx')."px; height:".

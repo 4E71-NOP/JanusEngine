@@ -548,44 +548,47 @@ class ModuleManagement {
 	/**
 	 * Add a generic table into the TabInfoModule array
 	 */
-	AddModule ( ModuleName, DecoType ) {
-		TabInfoModule[ModuleName] = { 'module_name':ModuleName, 'deco_type':DecoType, 'DimConteneurX':'', 'DimConteneurY':'' };
-		TabInfoModule[ModuleName]['ex11'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex12'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex13'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex14'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex15'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex21'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex22'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex23'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex25'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex31'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex32'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex33'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex35'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex41'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex45'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex51'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex52'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex53'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex54'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['ex55'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in11'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in12'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in13'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in14'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in15'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in21'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in25'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in31'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in35'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in41'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in45'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in51'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in52'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in53'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in54'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
-		TabInfoModule[ModuleName]['in55'] = {	'Etat':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
+	AddModule ( ModuleName, DecoType, Container ,object ) {
+		switch ( DecoType) {
+			case 40:
+				var DivList = [
+					'ex11', 'ex12', 'ex13', 
+					'ex21', 'ex22', 'ex23', 
+					'ex31', 'ex32', 'ex33'
+					];
+				break;
+			case 50:
+				var DivList = [
+					'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 
+					'ex21', 'ex22', 'ex25', 
+					'ex31', 'ex35', 
+					'ex41', 'ex45', 
+					'ex51', 'ex52', 'ex53', 'ex54', 'ex55'
+					];
+				break;
+			case 60:
+				var DivList = [
+					'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 
+					'ex21', 'ex22', 'ex25', 
+					'ex31', 'ex35', 
+					'ex41', 'ex45', 
+					'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
+					'in11', 'in12', 'in13', 'in14', 'in15', 
+					'in21', 'in25', 
+					'in31', 'in35', 
+					'in41', 'in45', 
+					'in51', 'in52', 'in53', 'in54', 'in55'
+					];
+				break;
+		}
+		TabInfoModule[ModuleName] = object;
+		for ( var Div in DivList ) {
+			if ( !TabInfoModule[ModuleName][DivList[Div]]) {
+				TabInfoModule[ModuleName][DivList[Div]] = {	'Enabled':1,	'DimX':0,	'DimY':0,	'PosX':0,	'PosY':0,	'DivObj':0	};
+			}
+		}
+		TabInfoModule[ModuleName]['main'] = { 'module_name':ModuleName, 'deco_type':DecoType, 'container': Container , isInitialized : false, 'ContainerSizeX':'', 'ContainerSizeY':'' };
+
 	}
 }
 

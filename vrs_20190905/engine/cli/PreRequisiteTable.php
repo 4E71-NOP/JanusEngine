@@ -263,17 +263,17 @@ self::$PreRequisiteTable['add']['layout'] = array (
 		),				
 );
 
-self::$PreRequisiteTable['add']['layoutfile'] = array (
+self::$PreRequisiteTable['add']['layout_file'] = array (
 		"convert" => array(),
 		"nextId" => array (
-				array ("table" => "layoutfile",				"column" => "layoutfile_id",				"target" => "id"),
+				array ("table" => "layout_file",				"column" => "layout_file_id",				"target" => "id"),
 		),
 		"columns" => array(
-				array ( "v" => "id",						"t" => "layoutfile_id"),
-				array ( "v" => "name",						"t" => "layoutfile_name"),
-				array ( "v" => "generic_name",				"t" => "layoutfile_generic_name"),	
-				array ( "v" => "filename",					"t" => "layoutfile_filename"),
-				array ( "v" => "desc",						"t" => "layoutfile_desc"), 	
+				array ( "v" => "id",						"t" => "layout_file_id"),
+				array ( "v" => "name",						"t" => "layout_file_name"),
+				array ( "v" => "generic_name",				"t" => "layout_file_generic_name"),	
+				array ( "v" => "filename",					"t" => "layout_file_filename"),
+				array ( "v" => "desc",						"t" => "layout_file_desc"), 	
 		),				
 );
 

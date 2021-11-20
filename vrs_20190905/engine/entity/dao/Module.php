@@ -26,6 +26,7 @@ class Module extends Entity {
 		'module_directory'				=> 0,
 		'module_file'					=> 0,
 		'module_desc'					=> 0,
+		'module_type'					=> 0,
 		'module_container_name'			=> 0,
 		'module_container_style'		=> 0,
 		'module_group_allowed_to_see'	=> 0,
