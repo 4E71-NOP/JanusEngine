@@ -260,6 +260,7 @@ self::$PreRequisiteTable['add']['layout'] = array (
 				array ( "v" => "title",						"t" => "layout_title"),
 				array ( "v" => "generic_name",				"t" => "layout_generic_name"),	
 				array ( "v" => "desc",						"t" => "layout_desc"), 	
+				array ( "v" => "file",						"t" => "fk_layout_file_id"), 	
 		),				
 );
 

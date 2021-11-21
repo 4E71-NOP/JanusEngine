@@ -39,7 +39,7 @@ class ModuleTooltip {
 		$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/Tooltip/lib_tooltip.js');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
+		$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
 		$GeneratedJavaScriptObj->AddObjectEntry ('TooltipConfig', "'default' : { 'State':1, 'X':'".$cdx."', 'Y':'".$cdy."' }");
 
 		// Cleaning up

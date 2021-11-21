@@ -268,6 +268,7 @@ class HydrInstall {
 		);
 		
 		// We know there's only one command per entry
+		$insertJavascriptDecorationMgmt = false;
 		foreach ( $ContentFragments as &$A ) {
 			foreach ( $LayoutCommands as $B) {
 				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
@@ -277,6 +278,12 @@ class HydrInstall {
 							break;
 						case "render_module":
 							// Module it is.
+							if ( $insertJavascriptDecorationMgmt === false) {
+								$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tdm.UpdateDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$insertJavascriptDecorationMgmt = true;
+							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
 							$A['content'] = $RenderModule2Obj->render($A['module_name']);
 							break;
@@ -284,8 +291,7 @@ class HydrInstall {
 				}
 			}
 		}
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
@@ -423,11 +429,10 @@ class HydrInstall {
 
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tdm.UpdateDecoModule(TabInfoModule);" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
@@ -441,14 +446,16 @@ class HydrInstall {
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
-		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
-		$JavaScriptContent .= "function WindowOnResize (){\r	dm.UpdateDecoModule(TabInfoModule);\r		}\r";
-		$JavaScriptContent .= "function WindowOnload () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
+		$JavaScriptContent .= "function WindowOnResize (){\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= "\r}\r";
+		$JavaScriptContent .= "function WindowOnLoad () {\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
 		}\r
 		window.onresize = WindowOnResize;\r
-		window.onload = WindowOnload;\r\r
+		window.onload = WindowOnLoad;\r\r
 		</script>\r";
 
 		$DocContent .= $JavaScriptContent;

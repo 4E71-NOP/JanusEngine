@@ -54,7 +54,7 @@ class RenderModule {
 				height:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') . "px;"
 				.$pv['div_initial_bg'] . "'>\r"; // width = Always define otherwise it won't work..
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 		
 		$pv ['i'] = 1;
 		

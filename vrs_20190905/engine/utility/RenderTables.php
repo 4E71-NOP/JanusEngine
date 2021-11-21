@@ -55,7 +55,7 @@ class  RenderTables {
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
-		$Content = "<!-- Render Table Begin -->\r";
+		$Content = "<!-- Render Table Begin -->\r<div style='width:100%;'>\r";
 		if ( $T['ContentInfos']['NbrOfTabs'] == 0 ) { $T['ContentInfos']['NbrOfTabs'] = 1; }
 		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
@@ -76,15 +76,15 @@ class  RenderTables {
 		$tab_infos = &$T['ContentInfos'];
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Table on the bench"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " A table is on the bench. Let's get to work!"));
 // 		$legendClasses = "";
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));
 			switch ( $ADC['tabs'][$CurT]['TableCaptionPos'] ) {
-				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_TOP_;										break;// top
-				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_;										break;// left
+				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_TOP_;									break;// top
+				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_;									break;// left
 				case 3: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_RIGHT_;									break;// right
 				case 4: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_BOTTOM_;									break;// bottom
 				case 5: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_." ".$Block._CLASS_TBL_LGND_RIGHT_;	break;// left&right
@@ -98,7 +98,7 @@ class  RenderTables {
 		
 		if ( $tab_infos['EnableTabs'] != 0 ) {
 			$Height = ($tab_infos['Height'] > 0) ? "height:".$tab_infos['Height']."px; " : "height:auto; ";
-			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$Block."_tabFrame' style='position:relative; overflow:hidden; width:".($tab_infos['Width']-10) ."px; ".$Height."' >\r"; // overflow:hidden;
+			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$Block."_tabFrame' style='width:100%; padding:0px; margin:0px; overflow:auto; ".$Height."' >\r"; // overflow:hidden;
 		}
 // 		$classTab= array (
 // 			0  =>	$Block."_fca",
@@ -116,14 +116,12 @@ class  RenderTables {
 // 			10 =>	$Block."_fcta",
 // 			11 =>	$Block."_fctb",
 // 		);
-		
-		
 		$TableWidth = ($tab_infos['Width']-32);
 		$visibility = "visible";
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			if ( $CurT > 1 ) { $visibility = "hidden"; }
 			if ( $tab_infos['EnableTabs'] != 0 ) {
-				$Content .= "<div id='".$tab_infos['GroupName']."_".$tab_infos['DocumentName'].$CurT."' style='position:absolute; visibility:".$visibility."; width:".( $tab_infos['Width']-16)."px; ".$Height." overflow:auto;'>\r"; // position:absolute;
+				$Content .= "<div id='".$tab_infos['GroupName']."_".$tab_infos['DocumentName'].$CurT."' style='position:absolute; visibility:".$visibility."; width:100%; ".$Height." overflow:auto;'>\r"; // position:absolute;
 			}
 			
 			unset ($A);
@@ -144,7 +142,7 @@ class  RenderTables {
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['tabs'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['tabs'][$CurT]['HighLightType']; }
 
-				$Content .= "<table class='".$Block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:".$TableWidth."px; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
+				$Content .= "<table class='".$Block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:100%; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
 				
 				if ( isset($AD[$CurT]['caption']['cont']) ) {
 					if ( isset($AD[$CurT]['caption']['class']) ) { $captionClass = "class='".$AD[$CurT]['caption']['class']."' "; }
@@ -155,7 +153,7 @@ class  RenderTables {
 				$TRidx = 0;
 				for ( $CurL = 1 ; $CurL <= $ADC['tabs'][$CurT]['NbrOfLines'] ; $CurL++ ) {
 					if ( $CurL == $ADC['tabs'][$CurT]['theadD'] ) { $Content .= "<thead>\r"; }
-					if ( $CurL == $ADC['tabs'][$CurT]['tbodyD'] ) { $Content .= "<tbody style='display:block; width:".$TableWidth."px; height:".($tab_infos['Height']-64)."px; overflow-y:scroll;'>\r"; }		//display:block;
+					if ( $CurL == $ADC['tabs'][$CurT]['tbodyD'] ) { $Content .= "<tbody style='display:block; width:100%; height:".($tab_infos['Height']-64)."px; overflow-y:scroll;'>\r"; }		//display:block;
 					if ( $CurL == $ADC['tabs'][$CurT]['tfootD'] ) { $Content .= "<tfoot>\r"; }
 					
 					$trLink = "";
@@ -224,7 +222,7 @@ class  RenderTables {
 		$CurL,
 		$CurT
 		);
-		$Content .= "<!-- Render Table End -->\r";
+		$Content .= "</div>\r<!-- Render Table End -->\r";
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$tab_infos['RenderMode']:". $tab_infos['RenderMode']));
 		switch ( $tab_infos['RenderMode'] ) {
@@ -250,14 +248,15 @@ class  RenderTables {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$tab = array(	
+		$tab = array(
 		"EnableTabs"		=> 1,
 		"NbrOfTabs"			=> $NbrOfTabs,
 		"TabBehavior"		=> $TabBehavior,
 		"RenderMode"		=> 1,
 		"HighLightType"		=> $HighLightType,
 		"Height"			=> floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * $lines, //T3 is default; total padding = 10; nbr line +1
-		"Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width'),
+		// "Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width'),
+		"Width"				=> 960, // Minimum size (we don't have theme_module_internal_width any more)
 		"GroupName"			=> "l",
 		"CellName"			=> "c",
 		"DocumentName"		=> "d",

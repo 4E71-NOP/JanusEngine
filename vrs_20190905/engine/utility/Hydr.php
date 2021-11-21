@@ -573,10 +573,10 @@ class Hydr {
 		// We got the route definition in the $CurrentSet and the session.
 		// Inserting the URL in the browser bar.
 		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
 		
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
 		
 		// --------------------------------------------------------------------------------------------
 		//
@@ -634,6 +634,7 @@ class Hydr {
 		);
 		
 		// We know there's only one command per entry
+		$insertJavascriptDecorationMgmt = false;
 		foreach ( $ContentFragments as &$A ) {
 			foreach ( $LayoutCommands as $B) {
 				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
@@ -643,6 +644,12 @@ class Hydr {
 							break;
 						case "render_module":
 							// Module it is.
+							if ( $insertJavascriptDecorationMgmt == false) {
+								$GeneratedJavaScriptObj->insertJavaScript ('OnLoad', "\tdm.UpdateDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$insertJavascriptDecorationMgmt = true;
+							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
 							$A['content'] = $RenderModule2Obj->render($A['module_name']);
 							break;
@@ -650,8 +657,8 @@ class Hydr {
 				}
 			}
 		}
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Onload", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
@@ -802,10 +809,9 @@ class Hydr {
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
 		// $JavaScriptContent .= "\r";
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tdm.UpdateDecoModule(TabInfoModule);" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\tconsole.log ( TabInfoModule );" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');
 
@@ -822,14 +828,16 @@ class Hydr {
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
-		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
-		$JavaScriptContent .= "function WindowOnResize (){\r	dm.UpdateDecoModule(TabInfoModule);\r		}\r";
-		$JavaScriptContent .= "function WindowOnload () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
+		$JavaScriptContent .= "function WindowOnResize (){\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= "}\r";
+		$JavaScriptContent .= "function WindowOnLoad () {\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
 	}\r
 	window.onresize = WindowOnResize;\r
-	window.onload = WindowOnload;\r
+	window.onload = WindowOnLoad;\r
 	</script>\r";
 
 		$licence = "

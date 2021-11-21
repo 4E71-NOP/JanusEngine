@@ -120,7 +120,7 @@ class RenderAdmDashboard {
 		// 2	10	6
 		// 1	9	5
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		
 		$n = 1;
 		foreach ( $module_tab_adm_ as $m ) {

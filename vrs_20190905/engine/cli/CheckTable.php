@@ -429,6 +429,13 @@ self::$CheckTable['add']['layout']['0']['d']	= 3;
 self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
 self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_D001";
 self::$CheckTable['add']['layout']['0']['s']	= "name";
+self::$CheckTable['add']['layout']['0']['d']	= 2;
+self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_file_id FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['file']."';");};
+self::$CheckTable['add']['layout']['0']['c']	= "layout_file_id";
+self::$CheckTable['add']['layout']['0']['v']	= "file";
+self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_U001";
+self::$CheckTable['add']['layout']['0']['p']	= "layout_file";
+self::$CheckTable['add']['layout']['0']['s']	= "file";
 
 self::$CheckTable['update']['layout']['0']['d']	= 2;
 self::$CheckTable['update']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};

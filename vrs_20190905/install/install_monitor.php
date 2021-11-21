@@ -342,16 +342,16 @@ $DocContent .= "</div>\r";
 // --------------------------------------------------------------------------------------------
 $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript/lib_HydrCore.js');
 // $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
-$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-$GeneratedJavaScriptObj->insertJavaScript('Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
+$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
 
 $JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile("File", "<script type='text/javascript' src='", "'></script>\r");
 $JavaScriptContent .= "<script type='text/javascript'>\r";
-$JavaScriptContent .= "function WindowOnload () {\r";
-$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("Onload");
+$JavaScriptContent .= "function WindowOnLoad () {\r";
+$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("OnLoad");
 $JavaScriptContent .= "
 }\r
-window.onload = WindowOnload;\r\r
+window.OnLoad = WindowOnLoad;\r\r
 </script>\r";
 
 $DocContent .= $JavaScriptContent;

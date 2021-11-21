@@ -167,7 +167,7 @@ class ModuleMenu {
 // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "modules/initial/Menu/javascript/ModuleMenuType02_animation.js");
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data', $MenuData['JavaScriptData']. "var ZindexDepart = ".($infos['module_z_index'] + 1).";\r");
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\tInitMenuDiv ( ".$MenuData['JavaScriptJSONName'].", TabInfoModule );");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\tInitMenuDiv ( ".$MenuData['JavaScriptJSONName'].", TabInfoModule );");
 		
 		return $Content;
 		

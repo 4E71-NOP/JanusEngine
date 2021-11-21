@@ -13,90 +13,123 @@
 //	Tabs management
 //
 // Mode selection 1 hover 0
-
 var dbgOnglet = 0;
 
-function InitOnglets ( Table ) {
-	for ( var Tab in Table ) {
-//		elm.Gebi(Table[Tab].cibleDoc).style.position = 'relative';
-//		elm.Gebi(Table[Tab].cibleDoc).style.display = 'none';
-
-		Table[Tab].down.ida = elm.Gebi( Table[Tab].down.ida )
-		Table[Tab].down.idb = elm.Gebi( Table[Tab].down.idb )
-		Table[Tab].down.idc = elm.Gebi( Table[Tab].down.idc )
-
-		Table[Tab].up.ida = elm.Gebi( Table[Tab].up.ida )
-		Table[Tab].up.idb = elm.Gebi( Table[Tab].up.idb )
-		Table[Tab].up.idc = elm.Gebi( Table[Tab].up.idc )
-
-		Table[Tab].hover.ida = elm.Gebi( Table[Tab].hover.ida )
-		Table[Tab].hover.idb = elm.Gebi( Table[Tab].hover.idb )
-		Table[Tab].hover.idc = elm.Gebi( Table[Tab].hover.idc )
-
-	}
-//	elm.Gebi(Table[0].cibleDoc).style.visibility = 'visible';
-//	elm.Gebi(Table[0].cibleDoc).style.display = 'block';
-}
-
-function GestionOnglets ( Mode , EvType , Table , Groupe , FeuiletNom , OngletChoisi ) {
-	l.Log[dbgOnglet](
-	'Mode:' + Mode+
-	'; EvType:' + EvType+
-	'; Groupe:' + Groupe+
-	'; FeuiletNom:' + FeuiletNom+
-	'; OngletChoisi:' + OngletChoisi +
-	'.'
-	);
-	var cpt = 1;
-	for ( var Tab in Table ) {
-		var Score = ( Number( Mode ) + ( Number(Table[Tab].EtatHover ) * 2 ) + ( Number(Table[Tab].EtatSelection ) * 4 ) + ( Number(EvType) * 16 ) );
-		if ( cpt == OngletChoisi ) { Score = Score + 8;  }
-		switch ( Score ) {
-		case 2 :
-		case 3 :
-		case 26 :
-			Table[Tab].down.ida.className = Table[Tab].down.Styla ;
-			Table[Tab].down.idb.className = Table[Tab].down.Stylb ;
-			Table[Tab].down.idc.className = Table[Tab].down.Stylc ;
-			Table[Tab].EtatHover = 0;
-		break;
-		case 5 :
-			Table[Tab].down.ida.className = Table[Tab].down.Styla ;
-			Table[Tab].down.idb.className = Table[Tab].down.Stylb ;
-			Table[Tab].down.idc.className = Table[Tab].down.Stylc ;
-			elm.Gebi( Groupe + '_' + FeuiletNom + cpt ).style.visibility = 'hidden';
-			elm.Gebi( Groupe + '_' + FeuiletNom + cpt ).style.display = 'none';
-			Table[Tab].EtatSelection = 0;
-		break;
-		case 6 :
-		case 7 :
-		case 22 :
-		case 30 :
-			Table[Tab].EtatHover = 0;
-		break;
-		case 8 :
-			Table[Tab].up.ida.className = Table[Tab].hover.Styla ;
-			Table[Tab].up.idb.className = Table[Tab].hover.Stylb ;
-			Table[Tab].up.idc.className = Table[Tab].hover.Stylc ;
-			Table[Tab].EtatHover = 1;
-		break;
-		case 9 :
-		case 11 :
-			Table[Tab].up.ida.className = Table[Tab].up.Styla ;
-			Table[Tab].up.idb.className = Table[Tab].up.Stylb ;
-			Table[Tab].up.idc.className = Table[Tab].up.Stylc ;
-			elm.Gebi( Groupe + '_' + FeuiletNom + cpt ).style.visibility = 'visible';
-			elm.Gebi( Groupe + '_' + FeuiletNom + cpt ).style.display = 'block';
-			Table[Tab].EtatSelection = 1;
-		break;
-		case 12 :
-			Table[Tab].EtatHover = 1;
-		break;
-		default :
-		break;
+class TabsManagement {
+	InitTabs ( Table ) {
+		let te = Table.elements;
+		for ( let t in te ) {
+			te[t].down.ida	= elm.Gebi( te[t].down.ida )
+			te[t].down.idb	= elm.Gebi( te[t].down.idb )
+			te[t].down.idc	= elm.Gebi( te[t].down.idc )
+			te[t].up.ida	= elm.Gebi( te[t].up.ida )
+			te[t].up.idb	= elm.Gebi( te[t].up.idb )
+			te[t].up.idc	= elm.Gebi( te[t].up.idc )
+			te[t].hover.ida	= elm.Gebi( te[t].hover.ida )
+			te[t].hover.idb	= elm.Gebi( te[t].hover.idb )
+			te[t].hover.idc	= elm.Gebi( te[t].hover.idc )
+			te[t].sup.idd	= elm.Gebi( te[t].sup.idd )
 		}
-		cpt++; 
 	}
-}
+	
+	TabStyleManagement ( Mode , EvType , Table , Group , CardName , ChosenTab ) {
+		l.Log[dbgOnglet](
+		'Mode:' + Mode+
+		'; EvType:' + EvType+
+		'; Group:' + Group+
+		'; CardName:' + CardName+
+		'; ChosenTab:' + ChosenTab +
+		'.'
+		);
+		let cpt = 1;
+		let te = Table.elements;
+		let ts = Table.styles;
+		for ( let t in te ) {
+			let Score = ( Number( Mode ) + ( Number(te[t].HoverState ) * 2 ) + ( Number(te[t].isSelected ) * 4 ) + ( Number(EvType) * 16 ) );
+			if ( cpt == ChosenTab ) { Score = Score + 8;  }
+			switch ( Score ) {
+			case 2 :
+			case 3 :
+			case 26 :
+				te[t].down.ida.className = ts.down.Styla ;
+				te[t].down.idb.className = ts.down.Stylb ;
+				te[t].down.idc.className = ts.down.Stylc ;
+				te[t].HoverState = 0;
+			break;
+			case 5 :
+				te[t].down.ida.className = ts.down.Styla ;
+				te[t].down.idb.className = ts.down.Stylb ;
+				te[t].down.idc.className = ts.down.Stylc ;
+				elm.Gebi( Group + '_' + CardName + cpt ).style.visibility = 'hidden';
+				elm.Gebi( Group + '_' + CardName + cpt ).style.display = 'none';
+				te[t].isSelected = 0;
+			break;
+			case 6 :
+			case 7 :
+			case 22 :
+			case 30 :
+				te[t].HoverState = 0;
+			break;
+			case 8 :
+				te[t].up.ida.className = ts.hover.Styla ;
+				te[t].up.idb.className = ts.hover.Stylb ;
+				te[t].up.idc.className = ts.hover.Stylc ;
+				te[t].HoverState = 1;
+			break;
+			case 9 :
+			case 11 :
+				te[t].up.ida.className = ts.up.Styla ;
+				te[t].up.idb.className = ts.up.Stylb ;
+				te[t].up.idc.className = ts.up.Stylc ;
+				elm.Gebi( Group + '_' + CardName + cpt ).style.visibility = 'visible';
+				elm.Gebi( Group + '_' + CardName + cpt ).style.display = 'block';
+				te[t].isSelected = 1;
+			break;
+			case 12 :
+				te[t].HoverState = 1;
+			break;
+			default :
+			break;
+			}
+			cpt++; 
+		}
+	}
+	
+	
+	TabsResize (Table) {
+		let te = Table.elements;
+		let h = elm.Gebi(Table.hostDiv);
+		let hostSize = Number(h.parentElement.offsetWidth);
+		h.style.width = hostSize+'px';
 
-
+		let n = Number(Table.tabsNbr);
+		let a = Number(Table.size.a);
+		let c = Number(Table.size.c);
+		let tabFullSize = Math.floor((hostSize/n));
+		let b = (tabFullSize - a - c);
+		let Compensation = Math.ceil (hostSize - (tabFullSize*n));
+		let cpt = 0;
+		l.Log[dbgOnglet](
+			'hostSize:' + hostSize+
+			'; tabFullSize:' + tabFullSize+
+			'; tabFullSize*n:' + (tabFullSize*n)+
+			'; Table.tabsNbr:' + n+
+			'; a:' + a+
+			'; b:' + b+
+			'; c:' + c+
+			'; Compensation:' + Compensation+
+			'.'
+			);
+		for ( let t in te ) {
+			let TabPos = (tabFullSize*cpt);
+			if (cpt == (n-1)) { b += Compensation; }
+			te[t].down.ida.style.left	= TabPos + 'px';
+			te[t].down.idb.style.left	= (TabPos + a ) + 'px';
+			te[t].down.idb.style.width	= b + 'px';
+			te[t].down.idc.style.left	= (TabPos + a + b) + 'px';
+			te[t].sup.idd.style.width	= (a+b+c) + 'px';
+			te[t].sup.idd.style.left	= TabPos + 'px';
+			cpt++;
+		}
+	}
+}	

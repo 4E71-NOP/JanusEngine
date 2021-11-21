@@ -910,7 +910,7 @@ self::$InitTable['layout'] = function (&$a) {
 			"title"				=> "New Layout",
 			"generic_name"		=> "New Layout",
 			"desc"				=> "",
-			
+			"file"				=> "hydr_default_layout",		
 			"to_theme"			=> "",
 			"default"			=> "NO",
 	);

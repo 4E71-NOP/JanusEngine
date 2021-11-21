@@ -244,7 +244,7 @@ class ModuleMenuType02 {
 			
 			$visibility = "hidden";
 			if ( $A['niv'] == 0 ) {
-				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Onload" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
+				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "OnLoad" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
 			if ( $Ab['display_icons'] == 1 ) {
 				if ( strlen ($Ab['icone_directory_01']) > 0 ) { $Micone_rep =		"<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_directory']."'	width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
