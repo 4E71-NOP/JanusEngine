@@ -469,13 +469,13 @@ self::$CheckTable['assign']['layout']['1']['p']	= "layout";
 self::$CheckTable['assign']['layout']['1']['s']	= "to_theme";
 
 
-self::$CheckTable['add']['layout_content']['0']['d']	= 2;
-self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
-self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
-self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
-self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
-self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
-self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
+// self::$CheckTable['add']['layout_content']['0']['d']	= 2;
+// self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
+// self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
+// self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
+// self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
+// self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
+// self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
 // self::$CheckTable['add']['layout_content']['1']['d']	= 2;
 // self::$CheckTable['add']['layout_content']['1']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['module']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 // self::$CheckTable['add']['layout_content']['1']['c']	= "module_id";

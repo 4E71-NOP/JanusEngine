@@ -603,7 +603,6 @@ class Hydr {
 		
 		$ThemeDescriptorObj->setCssPrefix("mt_");
 		$ThemeDescriptorObj->getDataFromDBByPriority ();
-		// $ThemeDescriptorObj->getDataFromDB (  );
 		
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
@@ -613,8 +612,7 @@ class Hydr {
 		$ThemeDataObj->setDecorationListFromDB ();
 		$ThemeDataObj->renderBlockData ();
 		
-		// ******************************************************************************
-		// 2021 layout process
+		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
@@ -661,9 +659,6 @@ class Hydr {
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
-		
-		// 2021 layout process
-		// ******************************************************************************
 
 
 		// --------------------------------------------------------------------------------------------
@@ -680,8 +675,8 @@ class Hydr {
 		$ClassLoaderObj->provisionClass ( 'InteractiveElements' ); // Responsible for rendering buttons
 		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
 		
-		$RenderLayoutObj = RenderLayout::getInstance ();
-		$RenderLayoutObj->render ();
+		// $RenderLayoutObj = RenderLayout::getInstance ();
+		// $RenderLayoutObj->render ();
 		
 		// --------------------------------------------------------------------------------------------
 		// StyleSheet
@@ -731,20 +726,6 @@ class Hydr {
 		$Content .= "'>\r ";
 		$Content .= "<div id='initial_div' style='position:relative; width:98%; height:100%; margin:16px; padding:0px; visibility:visible'>\r";
 		// --------------------------------------------------------------------------------------------
-		//
-		// Modules
-		//
-		//
-
-		// $ClassLoaderObj->provisionClass ( 'RenderModule' );
-		// $RenderModuleObj = RenderModule::getInstance ();
-		// $directives = array (
-		// 		'mode' => 1,
-		// 		'module_display_mode' => "normal",
-		// 		'module_z_index' => 0
-		// );
-		// $Content .= $RenderModuleObj->render ( $directives );
-		
 		foreach ( $ContentFragments as &$A ) {
 //			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
 			$Content .= $A['content'];
@@ -780,7 +761,7 @@ class Hydr {
 		// $pv['sdftotal'] = $_REQUEST['FS_index'];
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
-		$sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
+		// $sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {
 		
 			$ClassLoaderObj->provisionClass ( 'FileSelector' );
@@ -808,7 +789,6 @@ class Hydr {
 		//
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
-		// $JavaScriptContent .= "\r";
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );

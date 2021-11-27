@@ -9,13 +9,13 @@ remplacement_type
 */
 CREATE TABLE !table! (
 keyword_id			INTEGER NOT NULL,
-keyword_state			INTEGER,
-keyword_name			VARCHAR(255),
+keyword_state		INTEGER,
+keyword_name		VARCHAR(255),
 fk_arti_id  		INTEGER,
 fk_ws_id			INTEGER,
 keyword_string		VARCHAR(255),
 keyword_count		INTEGER,
-keyword_type			INTEGER,
+keyword_type		INTEGER,
 keyword_data		VARCHAR(255),
 
 PRIMARY KEY (keyword_id),

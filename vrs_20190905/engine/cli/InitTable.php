@@ -928,53 +928,53 @@ self::$InitTable['layout_file'] = function (&$a) {
 	$a['params']['description'] = &$a['params']['desc'];
 };
 
-self::$InitTable['layout_content'] = function (&$a) {
-	$a['params'] = array(
-			"id"				=> "",
-			"to_layout"			=> "",
-			"cont_id"			=> "",
-			"line"				=> "",
-			"minimum_x"			=> 128,
-			"minimum_y"			=> 128,
-			"module"			=> "",
-			"calculation_type"	=> "STATIC",
-			"position_x"		=> 0,
-			"position_y"		=> 0,
-			"dimenssion_x"		=> 0,
-			"dimenssion_y"		=> 0,
+// self::$InitTable['layout_content'] = function (&$a) {
+// 	$a['params'] = array(
+// 			"id"				=> "",
+// 			"to_layout"			=> "",
+// 			"cont_id"			=> "",
+// 			"line"				=> "",
+// 			"minimum_x"			=> 128,
+// 			"minimum_y"			=> 128,
+// 			"module"			=> "",
+// 			"calculation_type"	=> "STATIC",
+// 			"position_x"		=> 0,
+// 			"position_y"		=> 0,
+// 			"dimenssion_x"		=> 0,
+// 			"dimenssion_y"		=> 0,
 			
-			"anchor_dx10" => "null",	"anchor_dy10" => "null",
-			"anchor_dx20" => "null",	"anchor_dy20" => "null",
-			"anchor_dx30" => "null",	"anchor_dy30" => "null",
+// 			"anchor_dx10" => "null",	"anchor_dy10" => "null",
+// 			"anchor_dx20" => "null",	"anchor_dy20" => "null",
+// 			"anchor_dx30" => "null",	"anchor_dy30" => "null",
 			
-			"module_anchor_e1a"	=> "",	"anchor_ex1a" => "null",	"anchor_ey1a" => "null",
-			"module_anchor_e1b"	=> "",	"anchor_ex1b" => "null",	"anchor_ey1b" => "null",
-			"module_anchor_e1c"	=> "",	"anchor_ex1c" => "null",	"anchor_ey1c" => "null",
-			"module_anchor_e1d"	=> "",	"anchor_ex1d" => "null",	"anchor_ey1d" => "null",
-			"module_anchor_e1e"	=> "",	"anchor_ex1e" => "null",	"anchor_ey1e" => "null",
+// 			"module_anchor_e1a"	=> "",	"anchor_ex1a" => "null",	"anchor_ey1a" => "null",
+// 			"module_anchor_e1b"	=> "",	"anchor_ex1b" => "null",	"anchor_ey1b" => "null",
+// 			"module_anchor_e1c"	=> "",	"anchor_ex1c" => "null",	"anchor_ey1c" => "null",
+// 			"module_anchor_e1d"	=> "",	"anchor_ex1d" => "null",	"anchor_ey1d" => "null",
+// 			"module_anchor_e1e"	=> "",	"anchor_ex1e" => "null",	"anchor_ey1e" => "null",
 			
-			"module_anchor_e2a"	=> "",	"anchor_ex2a" => "null",	"anchor_ey2a" => "null",
-			"module_anchor_e2b"	=> "",	"anchor_ex2b" => "null",	"anchor_ey2b" => "null",
-			"module_anchor_e2c"	=> "",	"anchor_ex2c" => "null",	"anchor_ey2c" => "null",
-			"module_anchor_e2d"	=> "",	"anchor_ex2d" => "null",	"anchor_ey2d" => "null",
-			"module_anchor_e2e"	=> "",	"anchor_ex2e" => "null",	"anchor_ey2e" => "null",
+// 			"module_anchor_e2a"	=> "",	"anchor_ex2a" => "null",	"anchor_ey2a" => "null",
+// 			"module_anchor_e2b"	=> "",	"anchor_ex2b" => "null",	"anchor_ey2b" => "null",
+// 			"module_anchor_e2c"	=> "",	"anchor_ex2c" => "null",	"anchor_ey2c" => "null",
+// 			"module_anchor_e2d"	=> "",	"anchor_ex2d" => "null",	"anchor_ey2d" => "null",
+// 			"module_anchor_e2e"	=> "",	"anchor_ex2e" => "null",	"anchor_ey2e" => "null",
 			
-			"module_anchor_e3a"	=> "",	"anchor_ex3a" => "null",	"anchor_ey3a" => "null",
-			"module_anchor_e3b"	=> "",	"anchor_ex3b" => "null",	"anchor_ey3b" => "null",
-			"module_anchor_e3c"	=> "",	"anchor_ex3c" => "null",	"anchor_ey3c" => "null",
-			"module_anchor_e3d"	=> "",	"anchor_ex3d" => "null",	"anchor_ey3d" => "null",
-			"module_anchor_e3e"	=> "",	"anchor_ex3e" => "null",	"anchor_ey3e" => "null",
+// 			"module_anchor_e3a"	=> "",	"anchor_ex3a" => "null",	"anchor_ey3a" => "null",
+// 			"module_anchor_e3b"	=> "",	"anchor_ex3b" => "null",	"anchor_ey3b" => "null",
+// 			"module_anchor_e3c"	=> "",	"anchor_ex3c" => "null",	"anchor_ey3c" => "null",
+// 			"module_anchor_e3d"	=> "",	"anchor_ex3d" => "null",	"anchor_ey3d" => "null",
+// 			"module_anchor_e3e"	=> "",	"anchor_ex3e" => "null",	"anchor_ey3e" => "null",
 			
-			"spacing_border_left"	=> 8,
-			"spacing_border_right"	=> 8,
-			"spacing_border_top"	=> 8,
-			"spacing_border_bottom"	=> 8,
-			"module_zindex"			=> 0,
+// 			"spacing_border_left"	=> 8,
+// 			"spacing_border_right"	=> 8,
+// 			"spacing_border_top"	=> 8,
+// 			"spacing_border_bottom"	=> 8,
+// 			"module_zindex"			=> 0,
 			
-	);
-	$a['params']['description'] = &$a['params']['desc']; 
-	$a['params']['module_name'] = &$a['params']['module']; 
-};
+// 	);
+// 	$a['params']['description'] = &$a['params']['desc']; 
+// 	$a['params']['module_name'] = &$a['params']['module']; 
+// };
 
 self::$InitTable['tag'] = function (&$a) {
 	$a['params'] = array(

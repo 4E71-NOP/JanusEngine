@@ -335,7 +335,7 @@ unset ($tab_);
 $tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
 $T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
 $T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"MenuSelectForgeron ( 'form[dal]' , 'form[database_type_choix]' , CompatiliteDBvsDAL[this.value] );\">\r";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"SelectMenuBuilder ( 'form[dal]' , 'form[database_type_choix]' , DBvsDALCompatility[this.value] );\">\r";
 
 if ( $Support['PHP']['PHP_mysqli_builtin']['state'] == 1 )	{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='MYSQLI'	".$tab_['MYSQLI'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_msqli')."</option>\r"; }
 if ( $Support['DAL']['ADOdb']['state'] == 1 )				{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='ADODB'		".$tab_['ADODB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_adodb')."</option>\r"; }
@@ -383,7 +383,7 @@ $lt++;
 
 // Prefix
 $T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
-$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"InsereValeur ( this.value , '".$FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\">";
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"InsertValue ( this.value , '".$FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\">";
 $T['Content'][$CurrentTab][$lt]['3']['cont'] = "";
 $T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c4');
 $T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
@@ -416,7 +416,7 @@ $SB['id']				= "bouton_install_testdb";
 $SB['type']				= "button";
 $SB['initialStyle']		= $Block."_submit_s1_n";
 $SB['hoverStyle']		= $Block."_submit_s1_h";
-$SB['onclick']			= "toggleDiv ('cnxToDB', false ); toggleDiv ('HydrDBAlreadyExist', false ); test_cnx_db(); var tmp_cnx_chaine = document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[db_admin_user]'].value + '@' + document.forms['".$FormName."'].elements['form[host]'].value  + ', Database: ' + document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[dbprefix]'].value ; InsereValeur ( tmp_cnx_chaine , '".$FormName."', [ 'form[chaine_connexion_test]']  );";
+$SB['onclick']			= "toggleDiv ('cnxToDB', false ); toggleDiv ('HydrDBAlreadyExist', false ); test_cnx_db(); var tmp_cnx_chaine = document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[db_admin_user]'].value + '@' + document.forms['".$FormName."'].elements['form[host]'].value  + ', Database: ' + document.forms['".$FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$FormName."'].elements['form[dbprefix]'].value ; InsertValue ( tmp_cnx_chaine , '".$FormName."', [ 'form[chaine_connexion_test]']  );";
 $SB['message']			= "Test DB";
 $SB['mode']				= 1;
 $SB['size'] 			= 128;
@@ -460,11 +460,11 @@ $T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransE
 $lt++;
 
 $T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c1');
-$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"InsereValeur ( 'Ex: ' + this.value + 'article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]'] );\">";
+$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"InsertValue ( 'Ex: ' + this.value + 'article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]'] );\">";
 $T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' readonly disable name='form[db_hosting_tabprefix_copie_1]' size='20' maxlength='255' value=''>";
 $T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
 $T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
-$GeneratedJavaScriptObj->insertJavaScript('Command' , "InsereValeur ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
+$GeneratedJavaScriptObj->insertJavaScript('Command' , "InsertValue ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
 
 $lt++;
 
@@ -583,7 +583,7 @@ foreach ( $pv['ListeChamps'] as $A ) {
 }
 $pv['JSONListeChamps'] = substr ( $pv['JSONListeChamps'] , 0 , -2 ) . "}; ";
 $GeneratedJavaScriptObj->insertJavaScript('Data' , $pv['JSONListeChamps']);
-$GeneratedJavaScriptObj->insertJavaScript('Data' , " var AlertVerifieChampsFomulaire = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
+$GeneratedJavaScriptObj->insertJavaScript('Data' , " var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
 
 // --------------------------------------------------------------------------------------------
 
@@ -594,7 +594,7 @@ $SB['id']				= "bouton_install_p1";
 $SB['type']				= "button";
 $SB['initialStyle']		= $Block."_submit_s2_n";
 $SB['hoverStyle']		= $Block."_submit_s3_h";
-$SB['onclick']			= "VerifieChampsFomulaire( ListeChamps , '".$l."' , '".$SessionID."')";
+$SB['onclick']			= "CheckFormValues( ListeChamps , '".$l."' , '".$SessionID."')";
 $SB['message']			= $bts->I18nTransObj->getI18nTransEntry('bouton');
 $SB['mode']				= 1;
 $SB['size'] 			= 256;

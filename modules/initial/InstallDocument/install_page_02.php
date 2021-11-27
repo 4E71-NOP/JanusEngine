@@ -470,7 +470,7 @@ $infos = array(
 );
 
 
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 30, $CurrentTab-1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25, $CurrentTab-1);
 $T['ContentInfos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
 $T['ContentInfos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
 $T['ContentInfos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');

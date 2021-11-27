@@ -54,7 +54,7 @@ self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT I
 
 self::$ActionTable['add']['layout_file']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_file']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
+// self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 
 self::$ActionTable['add']['log']	= function (&$a) { 

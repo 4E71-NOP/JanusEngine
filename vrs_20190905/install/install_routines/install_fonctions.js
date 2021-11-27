@@ -13,28 +13,28 @@
 // http://www.pjb.com.au/comp/diacritics.html
 var dbgInstFonction = 0;
 
-function InsereValeur ( val , form , list ) {
+function InsertValue ( val , form , list ) {
 	for ( var ptr in list ) {
-		l.Log[dbgInstFonction]( 'InsereValeur: ' + val + ' -> ' + form + '/' + list[ptr] );
+		l.Log[dbgInstFonction]( 'InsertValue: ' + val + ' -> ' + form + '/' + list[ptr] );
 		elm.SetFormInputValue ( form , list[ptr] , val );
 	}
 }
-var OnKeypress = "InsereValeur ( this.value , 'install_p02' );"
+var OnKeypress = "InsertValue ( this.value , 'install_p02' );"
 
 function CreateRandomPassword( Longueur ) {
 	var Table = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
-	var ChaineAleatoire = '';
+	var RandomString = '';
 	for (var i=0; i < Longueur; i++) {
 		var Nombre = Math.floor(Math.random() * Table.length);
-		ChaineAleatoire += Table.substring(Nombre,Nombre+1);
+		RandomString += Table.substring(Nombre,Nombre+1);
 	}
-	return ChaineAleatoire;
+	return RandomString;
 }
 
 // --------------------------------------------------------------------------------------------
 var ListeChampsTstDB = [ "form[host]", "form[db_hosting_prefix]", "form[db_admin_user]", "form[db_admin_password]", "form[dbprefix]", "form[tabprefix]" ];
 
-function VerifieChampsFomulaire ( Tab , Langue , SessionID ) {
+function CheckFormValues ( Tab , Langue , SessionID ) {
 //	var FormName = 'install_page_init';
 	var stop = 0;
 	for ( var i in Tab ) { Tab[i].err = 0; }
@@ -49,7 +49,7 @@ function VerifieChampsFomulaire ( Tab , Langue , SessionID ) {
 		var DBTypeElm = elm.Gebi("form[dal]"); 
 		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var URLamp = "&";
-		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
+		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
 		for ( var ptr in ListeChampsTstDB ) {
 			URLvar += URLamp + ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[ListeChampsTstDB[ptr]].value;
 		}
@@ -63,7 +63,7 @@ function VerifieChampsFomulaire ( Tab , Langue , SessionID ) {
 		for ( var j in Tab ) {
 			if ( Tab[j].err == 1 ) { ErreurDesc += Tab[j].name + '\n'; }
 		}
-		window.alert ( AlertVerifieChampsFomulaire + '\n' + ErreurDesc ); 
+		window.alert ( AlertCheckFormValues + '\n' + ErreurDesc ); 
 	}
 }
 
@@ -101,7 +101,7 @@ function setFormPreconizedSettings() {
 
 // --------------------------------------------------------------------------------------------
 // http://phplens.com/lens/adodb/docs-adodb.htm#drivers
-var CompatiliteDBvsDAL = {
+var DBvsDALCompatility = {
 	'MYSQLI': {
 		'01': { 'val':'mysql' 	,	't':'MySQL 3.x/4.x/5.x'                        			  }
 	},
@@ -172,7 +172,7 @@ var CompatiliteDBvsDAL = {
 	}
 };
 
-function MenuSelectForgeron ( MSObj1 , MSObj2 , Table ) {
+function SelectMenuBuilder ( MSObj1 , MSObj2 , Table ) {
 	MSObj1 = elm.Gebi ( MSObj1 );
 	MSObj2 = elm.Gebi ( MSObj2 );
 	var MSObj1Sidx1 = MSObj1.options[MSObj1.selectedIndex].value;

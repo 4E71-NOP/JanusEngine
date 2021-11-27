@@ -78,7 +78,7 @@ class ModuleList {
 		$this->ModuleList['installdocument'] = array(
 			"module_id" => "2",
 			"module_deco" => "1",
-			"module_deco_nbr" => "1",
+			"module_deco_nbr" => "2",
 			"module_deco_default_text" => "",
 			"module_name" => "installdocument",
 			"module_classname" => "InstallDocument",
@@ -86,6 +86,24 @@ class ModuleList {
 			"module_title" => "",
 			"module_directory"   => "modules/initial/InstallDocument/", 
 			"module_file"   => "module_install_document.php", 
+		);
+	}
+
+	/**
+	 * Prepare list of installation modules (specific to install monitor ONLY).
+	 */
+	public function makeMonitorModuleList(){
+		$this->ModuleList['installmonitor'] = array(
+			"module_id" => "1",
+			"module_deco" => "1",
+			"module_deco_nbr" => "2",
+			"module_deco_default_text" => "",
+			"module_name" => "installmonitor",
+			"module_classname" => "InstallMonitor",
+			"module_container_name" => "InstallMonitorContainer",
+			"module_title" => "",
+			"module_directory"   => "modules/initial/InstallMonitor/", 
+			"module_file"   => "module_install_monitor.php", 
 		);
 	}
 
