@@ -77,7 +77,7 @@ class Definition extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->definitionExists($this->Definition['def_id']);
+		return $this->entityExistsInDb('definition', $this->Definition['def_id']);
 	}
 	
 	

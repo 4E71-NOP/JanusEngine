@@ -131,7 +131,7 @@ class WebSite extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->websiteExists($this->WebSite['ws_id']);
+		return $this->entityExistsInDb('website', $this->WebSite['ws_id']);
 	}
 	
 	/**

@@ -190,7 +190,7 @@ class User extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->userExists($this->User['user_id']);
+		return $this->entityExistsInDb('user', $this->User['user_id']);
 	}
 	
 	/**

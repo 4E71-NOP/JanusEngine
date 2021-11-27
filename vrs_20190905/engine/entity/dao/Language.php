@@ -80,7 +80,7 @@ class Language extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->languageExists($this->Language['lang_id']);
+		return $this->entityExistsInDb('language', $this->Language['lang_id']);
 	}
 	
 	

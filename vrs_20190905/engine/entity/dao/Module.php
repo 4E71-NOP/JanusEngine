@@ -98,7 +98,7 @@ class Module extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->moduleExists($this->Module['module_id']);
+		return $this->entityExistsInDb('module', $this->Module['module_id']);
 	}
 	
 	
@@ -111,8 +111,8 @@ class Module extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		
-		if ( $this->groupExists($this->Module['module_group_allowed_to_see']) == false ) { $res = false; }
-		if ( $this->groupExists($this->Module['module_group_allowed_to_use']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->Module['module_group_allowed_to_see']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->Module['module_group_allowed_to_use']) == false ) { $res = false; }
 		
 		return $res;
 	}

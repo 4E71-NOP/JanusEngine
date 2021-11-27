@@ -11,47 +11,47 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Layout extends Entity {
-	private $Layout = array ();
+class Permission extends Entity {
+	private $Permission = array ();
 	
 	//@formatter:off
 	private $columns = array(
-		'layout_id'				=> 0,
-		'layout_name'			=> "New Layout",
-		'layout_title'			=> "New Layout",
-		'layout_generic_name'	=> "NewLyot",
-		'layout_desc'			=> 0,
-		'layout_file_id'		=> "default.lyt.html",
+		"perm_id"					=> "",
+		"perm_name" 				=> "defaultPermission",
+		"perm_object_type"			=> "module",
+		"perm_level"				=> 1,
 	);
 	//@formatter:on
 	
 	public function __construct() {
-		$this->Layout = $this->getDefaultValues();
+		$this->Permission = $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets layout data from the database.<br>
+	 * Gets article data from the database.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the article selection to the website ID only.
 	 * @param integer $id
 	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $bts->SDDMObj->query ( "
+		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('layout') . "
-			WHERE layout_id = '" . $id . "'
-			;" );
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('permission')."
+			WHERE perm_id = '".$id."'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for permission perm_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->Layout[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { 
+					if (isset($this->columns[$A])) { $this->Permission[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layout id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for permission perm_id=".$id));
 		}
 	}
 	
@@ -66,11 +66,11 @@ class Layout extends Entity {
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
-			'data'			=> $this->Layout,
-			'targetTable'	=> 'layout',
-			'targetColumn'	=> 'layout_id',
-			'entityId'		=> $this->Layout['layout_id'],
-			'entityTitle'	=> 'layout'
+			'data'			=> $this->Permission,
+			'targetTable'	=> 'permission',
+			'targetColumn'	=> 'perm_id',
+			'entityId'		=> $this->Permission['perm_id'],
+			'entityTitle'	=> 'permission'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
@@ -80,7 +80,7 @@ class Layout extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->entityExistsInDb('layout', $this->Layout['layout_id']);
+		return $this->entityExistsInDb('permission', $this->Permission['perm_id']);
 	}
 	
 	
@@ -89,10 +89,8 @@ class Layout extends Entity {
 	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
 	 */
 	public function checkDataConsistency () {
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
+//		if ( $this->Permission['validation_state'] < 0 && $this->Permission['validation_state'] > 2) { $res = false; }
 		return $res;
 	}
 	
@@ -106,8 +104,12 @@ class Layout extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Layout['layout_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
+		$tab['perm_id'] = 0;
+		$tab['perm_name'] = "DEFAULT_PERMISSION";
+		$tab['perm_object_type'] = "module";
+		$tab['perm_level'] = 0;
+
 		return $tab;
 	}
 	
@@ -118,27 +120,22 @@ class Layout extends Entity {
 	 */
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
-		return array (
+		return array ( 
 			'state' => array (
-				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
-				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),
-				2 => array( _MENU_OPTION_DB_ =>	 2,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-			));
+				0 => array( _MENU_OPTION_DB_ =>	 _FORBIDDEN_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('forbidden')),
+				1 => array( _MENU_OPTION_DB_ =>	 _READ_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('read')),
+				2 => array( _MENU_OPTION_DB_ =>	 _WRITE_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('write')),
+		));
 	}
 	
-	
 	//@formatter:off
-	public function getLayoutEntry ($data) { return $this->Layout[$data]; }
-	public function getLayout() { return $this->Layout; }
+	public function getPermissionEntry ($data) { return $this->Permission[$data]; }
+	public function getPermission() { return $this->Permission; }
 	
-	public function setLayoutEntry ($entry, $data) { 
-		if ( isset($this->Layout[$entry])) { $this->Layout[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setPermissionEntry ($entry, $data) { 
+		if ( isset($this->Permission[$entry])) { $this->Permission[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
-
-	public function setLayout($Layout) { $this->Layout = $Layout; }
+	public function setPermission($Permission) { $this->Permission = $Permission; }
 	//@formatter:off
-
 }
-
-
 ?>

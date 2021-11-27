@@ -94,7 +94,7 @@ class Document extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->documentExists($this->Document['docu_id']);
+		return $this->entityExistsInDb('document', $this->Document['docu_id']);
  	}
 	
 	
@@ -104,8 +104,8 @@ class Document extends Entity{
 	 */
 	public function checkDataConsistency () {
 		$res = true;
-		if ( $this->userExists($this->Document['docu_creator']) == false ) { $res = false; }
-		if ( $this->userExists($this->Document['docu_examiner']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Document['docu_creator']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Document['docu_examiner']) == false ) { $res = false; }
 		
 		return $res;
 	}

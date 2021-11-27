@@ -80,7 +80,7 @@ class ModuleWebsite extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->ModuleWebsiteExists($this->ModuleWebsite['module_website_id']);
+		return $this->entityExistsInDb('module_website', $this->ModuleWebsite['module_website_id']);
 	}
 	
 	
@@ -92,8 +92,8 @@ class ModuleWebsite extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->websiteExists($this->ModuleWebsite['ws_id']) == false ) { $res = false; }
-		if ( $this->moduleExists($this->ModuleWebsite['module_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->ModuleWebsite['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('module', $this->ModuleWebsite['module_id']) == false ) { $res = false; }
 
 		return $res;
 	}

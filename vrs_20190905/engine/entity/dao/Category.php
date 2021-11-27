@@ -98,7 +98,7 @@ class Category extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->categoryExists($this->Category['cate_id']);
+		return $this->entityExistsInDb('category', $this->Category['cate_id']);
 
 	}
 	
@@ -115,11 +115,11 @@ class Category extends Entity {
 		if ( $this->Category['group_id'] == 0) { $res = false; }
 		if ( $this->Category['cate_last_modif'] == 0) { $res = false; }
 		if ( $this->Category['cate_parent'] != 0 || $this->Category['cate_parent'] != null ) {
-			if ( $this->categoryExists($this->Category['cate_parent'] ) == false ) { $res = false; }
+			if ( $this->entityExistsInDb('category', $this->Category['cate_parent'] ) == false ) { $res = false; }
 		}
-		if ( $this->websiteExists($this->Category['ws_id']) == false ) { $res = false; }
-		if ( $this->groupExists($this->Category['group_id']) == false ) { $res = false; }
-		if ( $this->deadlineExists($this->Category['deadline_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Category['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->Category['group_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('deadline', $this->Category['deadline_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

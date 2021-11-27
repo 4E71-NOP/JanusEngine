@@ -78,7 +78,7 @@ class Tag extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->tagExists($this->Tag['tag_id']);
+		return $this->entityExistsInDb('tag', $this->Tag['tag_id']);
 	}
 	
 	/**
@@ -90,7 +90,7 @@ class Tag extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 
-		if ( $this->websiteExists($this->Tag['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Tag['ws_id']) == false ) { $res = false; }
 
 		return $res;
 	}

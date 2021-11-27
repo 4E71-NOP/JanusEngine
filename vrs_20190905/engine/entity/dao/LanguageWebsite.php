@@ -81,7 +81,7 @@ class LanguageWebsite extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->LanguageWebsiteExists($this->LanguageWebsite['lang_website_id']);
+		return $this->entityExistsInDb('language_website', $this->LanguageWebsite['lang_website_id']);
 	}
 	
 	
@@ -93,8 +93,8 @@ class LanguageWebsite extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->websiteExists($this->LanguageWebsite['ws_id']) == false ) { $res = false; }
-		if ( $this->languageExists($this->LanguageWebsite['lang_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->LanguageWebsite['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('language', $this->LanguageWebsite['lang_id']) == false ) { $res = false; }
 
 		return $res;
 	}

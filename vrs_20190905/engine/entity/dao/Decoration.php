@@ -79,7 +79,7 @@ class Decoration extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->decorationExists($this->Decoration['deco_id']);
+		return $this->entityExistsInDb('decoration', $this->Decoration['deco_id']);
 	}
 	
 	

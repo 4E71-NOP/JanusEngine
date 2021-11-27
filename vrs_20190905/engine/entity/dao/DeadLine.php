@@ -87,7 +87,7 @@ class DeadLine extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->deadlineExists($this->DeadLine['deadline_id']);
+		return $this->entityExistsInDb('deadline', $this->DeadLine['deadline_id']);
 	}
 	
 	
@@ -103,8 +103,8 @@ class DeadLine extends Entity{
 		if ( $this->DeadLine['deadline_creation_date'] == 0 ) { $res = false; }
 		if ( $this->DeadLine['deadline_end_date'] == 0 ) { $res = false; }
 		
-		if ( $this->websiteExists($this->DeadLine['ws_id']) == false ) { $res = false; }
-		if ( $this->userExists($this->DeadLine['user_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->DeadLine['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->DeadLine['user_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

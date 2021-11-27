@@ -79,7 +79,7 @@ class ExtensionConfig extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->extensionConfigExists($this->ExtensionConfig['config_id']);
+		return $this->entityExistsInDb('extension_config', $this->ExtensionConfig['config_id']);
 	}
 	
 	
@@ -90,8 +90,8 @@ class ExtensionConfig extends Entity {
 	public function checkDataConsistency () {
 		$res = true;
 		
-		if ( $this->extensionExists($this->ExtensionFile['extension_id']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->ExtensionConfig['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('extension', $this->ExtensionFile['extension_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->ExtensionConfig['ws_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

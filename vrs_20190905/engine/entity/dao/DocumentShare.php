@@ -82,7 +82,7 @@ class DocumentShare extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->documentShareExists($this->DocumentShare['share_id']);
+		return $this->entityExistsInDb('document_share', $this->DocumentShare['share_id']);
 	}
 	
 	
@@ -95,8 +95,8 @@ class DocumentShare extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
 		
-		if ( $this->documentExists($this->DocumentShare['docu_id']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->DocumentShare['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('document', $this->DocumentShare['docu_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->DocumentShare['ws_id']) == false ) { $res = false; }
 
 		return $res;
 	}

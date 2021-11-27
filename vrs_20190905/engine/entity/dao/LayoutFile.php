@@ -79,7 +79,7 @@ class LayoutFile extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->layoutExists($this->LayoutFile['layout_file_id']);
+		return $this->entityExistsInDb('layout', $this->LayoutFile['layout_file_id']);
 	}
 	
 	

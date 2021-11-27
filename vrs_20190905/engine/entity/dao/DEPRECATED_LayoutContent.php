@@ -145,7 +145,7 @@ class LayoutContent extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->layoutContentExists($this->LayoutContent['lyoc_id']);
+		return $this->entityExistsInDb('layout_content', $this->LayoutContent['lyoc_id']);
 	}
 	
 	
@@ -157,7 +157,7 @@ class LayoutContent extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->layoutExists($this->LayoutContent['layout_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('layout', $this->LayoutContent['layout_id']) == false ) { $res = false; }
 		return $res;
 	}
 	

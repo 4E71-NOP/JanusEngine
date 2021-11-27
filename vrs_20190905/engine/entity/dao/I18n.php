@@ -79,7 +79,7 @@ class I18n extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->i18nExists($this->I18n['i18n_id']);
+		return $this->entityExistsInDb('i18n', $this->I18n['i18n_id']);
 	}
 	
 	

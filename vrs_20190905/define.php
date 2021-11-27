@@ -110,6 +110,9 @@ define ("_DELETED_"		,2);
 define ("_AFTER_"		,2);
 define ("_PUBLIC_"		,2);
 
+define ("_FORBIDDEN_"	,0);
+define ("_READ_"		,1);
+define ("_WRITE_"		,2);
 
 // --------------------------------------------------------------------------------------------
 // Class names

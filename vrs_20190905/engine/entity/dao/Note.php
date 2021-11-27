@@ -83,7 +83,7 @@ class Note extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->noteExists($this->Note['note_id']);
+		return $this->entityExistsInDb('note', $this->Note['note_id']);
 	}
 	
 	
@@ -95,8 +95,8 @@ class Note extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->documentExists($this->Note['docu_id']) == false ) { $res = false; }
-		if ( $this->userExists($this->Note['user_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('document', $this->Note['docu_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Note['user_id']) == false ) { $res = false; }
 		return $res;
 	}
 	
