@@ -164,7 +164,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	// $coef = (($fontSizeMax - $fontSizeMin) / 7);
 	// $fontSize =$fontSizeMin+($coef*1);
 	
-	$textareSize = floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5);
+	// $textareSize = floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5);
 
 	$Content .= "
 	<hr>\r
@@ -176,7 +176,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='CSSMaker' ACTION='' method='post'>\r
-	<textarea name='CSSMakerResult' cols='".$textareSize."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<textarea name='CSSMakerResult' style='width:100%' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 

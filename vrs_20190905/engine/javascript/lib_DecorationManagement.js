@@ -22,8 +22,8 @@ class DecorationManagement {
 			// Executed if initialization is needed
 			if ( d.main.container != "" & d.main.isInitialized != true ) {
 				d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
-				c.style.width = d.main.parent.offsetWidth+"px";
-				c.style.height = d.main.parent.offsetHeight+"px";
+				c.style.width = this.getContentWidth(d.main.parent)+"px";
+				c.style.height = this.getContentHeight(d.main.parent)+"px";
 
 				switch (d.main.deco_type) {
 					case 'elegance':
@@ -53,8 +53,8 @@ class DecorationManagement {
 
 			// Executed every window.OnResize event
 			if ( d.main.container != "" ) {
-				d.main.ContainerSizeX = d.main.parent.offsetWidth;
-				d.main.ContainerSizeY = d.main.parent.offsetHeight;
+				d.main.ContainerSizeX	= this.getContentWidth(d.main.parent);
+				d.main.ContainerSizeY	= this.getContentHeight(d.main.parent);
 			}
 
 			switch (d.main.deco_type) {
@@ -75,6 +75,15 @@ class DecorationManagement {
 		}
 	}
 	
+	getContentWidth (elm) {
+		var cs = getComputedStyle(elm);
+		return (elm.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight));
+	}
+	getContentHeight (elm){
+		var cs = getComputedStyle(elm);
+		return ( elm.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom));
+	}
+
 	UpdateDeco40 (d){
 		let Col1XMax = Math.max ( Number(d.ex11.DimX) , Number(d.ex21.DimX) , Number(d.ex31.DimX) );
 		let Col3XMax = Math.max ( Number(d.ex13.DimX) , Number(d.ex23.DimX) , Number(d.ex33.DimX) );

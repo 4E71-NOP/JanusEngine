@@ -576,8 +576,8 @@ class Hydr {
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
 		
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
-		
+//		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tUpdateWindowSize ('');");
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Prepare data for theme and layout
@@ -621,8 +621,8 @@ class Hydr {
 		
 		$ClassLoaderObj->provisionClass ('LayoutProcessor');
 		$LayoutProcessorObj = LayoutProcessor::getInstance();
-		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
-		$RenderModule2Obj = RenderModule2::getInstance ();
+		$ClassLoaderObj->provisionClass ( 'RenderModule' );
+		$RenderModuleObj = RenderModule::getInstance ();
 		
 		$ContentFragments = $LayoutProcessorObj->render();
 		
@@ -649,7 +649,7 @@ class Hydr {
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
-							$A['content'] = $RenderModule2Obj->render($A['module_name']);
+							$A['content'] = $RenderModuleObj->render($A['module_name']);
 							break;
 					}
 				}
@@ -673,10 +673,6 @@ class Hydr {
 		$bts->MapperObj->setSqlApplicant ( "Module Processing" );
 		
 		$ClassLoaderObj->provisionClass ( 'InteractiveElements' ); // Responsible for rendering buttons
-		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
-		
-		// $RenderLayoutObj = RenderLayout::getInstance ();
-		// $RenderLayoutObj->render ();
 		
 		// --------------------------------------------------------------------------------------------
 		// StyleSheet
@@ -791,7 +787,7 @@ class Hydr {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');
 

@@ -50,8 +50,7 @@ class ModuleAuthentification {
 			$Content .= "
 			<form ACTION='/' method='post'>\r
 		
-			<table style='width:".(
-			$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')-16)."px; margin-right: auto; margin-left: auto'>\r
+			<table style='width:100%; margin-right: auto; margin-left: auto'>\r
 			<tr>\r<td style='text-align:center;'>".$bts->I18nTransObj->getI18nTransEntry('id')."</td>\r</tr>\r
 			<tr>\r<td style='text-align:center; padding-bottom:8px;'><input type='text' name='authentificationForm[user_login]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
 			<tr>\r<td style='text-align:center;'>".$bts->I18nTransObj->getI18nTransEntry('ps')."</td>\r</tr>\r

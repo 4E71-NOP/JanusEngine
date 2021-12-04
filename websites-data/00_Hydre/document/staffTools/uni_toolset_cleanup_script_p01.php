@@ -71,14 +71,14 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 <tr>\r
 <td>\r
-<textarea name='scriptSrc' id='scriptSrc' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size')) * 1.35 )."' rows='16'>
+<textarea name='scriptSrc' id='scriptSrc' style='width:100%' rows='16'>
 ".$bts->RequestDataObj->getRequestDataEntry('scriptSrc')."</textarea>\r
 </td>\r
 </tr>\r
 
 <tr>\r
 <td style='font-size: 8px;'>\r
-<textarea name='scriptResult' id='scriptResult' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/ $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size')) * 1.35 )."' rows='16'>
+<textarea name='scriptResult' id='scriptResult' style='width:100%' rows='16'>
 ".$pv['converti']."</textarea>\r
 </td>\r
 </tr>\r
@@ -89,7 +89,7 @@ $Content .= "</table>\r
 
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 <tr>\r
-<td style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - 192)."px;'>\r</td>\r
+<td style='width:80%;'>\r</td>\r
 <td style='text-align: right;'>\r
 ";
 

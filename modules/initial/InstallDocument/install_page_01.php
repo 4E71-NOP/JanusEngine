@@ -25,7 +25,6 @@
 
 /* @var $CurrentSetObj CurrentSet                   */
 /* @var $DocumentDataObj DocumentData               */
-/* @var $RenderLayoutObj RenderLayout               */
 /* @var $ThemeDataObj ThemeData                     */
 /* @var $UserObj User                               */
 /* @var $WebSiteObj WebSite                         */

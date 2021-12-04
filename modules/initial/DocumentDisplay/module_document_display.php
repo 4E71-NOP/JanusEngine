@@ -236,7 +236,7 @@ class ModuleDocumentDisplay {
 					( $DocumentDataObj->getDocumentDataEntry('arti_menu_float_taille_y') != 0 ) ? $tab_float_['taille_y'] = "height: ".$DocumentDataObj->getDocumentDataEntry('arti_menu_float_taille_y')."px;" : $tab_float_['taille_y'] = "height:auto; ";
 					
 					$ContentMenu = "
-						<div id='menu_container' style='display:block; width:".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px; text-align:".$DocumentDataObj->getDocumentDataEntry('arti_menu_float_position')."'> 
+						<div id='menu_container' style='display:block; width:100%; text-align:".$DocumentDataObj->getDocumentDataEntry('arti_menu_float_position')."'> 
 						<div id='document_menu' class='" . $Block."_div_std' style='display:inline-block; text-align:justify; ".$tab_float_['taille_x']." ".$tab_float_['taille_y']." padding: 10px;'>\r" . $ContentMenu . "</div>\r
 						</div>
 						";
@@ -410,7 +410,7 @@ class ModuleDocumentDisplay {
 		$Content .= "
 		<br>\r
 		</div>\r
-		<div id='document_pied_de_page' style='width: ".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px;'>\r
+		<div id='document_pied_de_page' style='width:100%;'>\r
 		<p>";
 		
 		if ( $pv['p2p_count'] > 1 ) {

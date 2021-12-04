@@ -32,15 +32,11 @@ class RenderDeco60Elysion {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		// $GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		// $RenderLayoutObj = RenderLayout::getInstance();
-		
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		// $m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
-		// $L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
@@ -50,11 +46,13 @@ class RenderDeco60Elysion {
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
 		$Block = $infos['block'];
+		$position = "absolute";
 		switch ($infos['module_display_mode']) {
 			case "bypass":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
+				$position = "relative";
 				break;
 			case "normal":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
@@ -170,7 +168,7 @@ class RenderDeco60Elysion {
 	";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
 		$Content .= "
-		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle .";' class='".$TN . $infos['block']."'>\r
+		<div id='".$mcn."' style='position:".$position."; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle .";' class='".$TN . $infos['block']."'>\r
 		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
 		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
 		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
@@ -251,7 +249,6 @@ class RenderDeco60Elysion {
 
 			$argAddModule .= "}";
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
-//		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

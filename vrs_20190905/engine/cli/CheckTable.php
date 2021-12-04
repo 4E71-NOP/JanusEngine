@@ -555,6 +555,10 @@ self::$CheckTable['delete']['module']['0']['m']	= "CLI_Module_D001";
 self::$CheckTable['delete']['module']['0']['p']	= "module";
 self::$CheckTable['delete']['module']['0']['s']	= "name";
 
+self::$CheckTable['add']['permission']['0']['d']	= 3;
+self::$CheckTable['add']['permission']['0']['f']	= function ($a) { return array ("SELECT prm.perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['permission']['0']['m']	= "CLI_Permission_C001";
+self::$CheckTable['add']['permission']['0']['s']	= "name";
 
 // Tag
 // Usage of 'BINARY' because of collation : utf8mb4_general_ci

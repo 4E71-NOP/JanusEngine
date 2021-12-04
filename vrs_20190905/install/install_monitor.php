@@ -258,8 +258,8 @@ class HydrInstallMonitor {
 		
 		$ClassLoaderObj->provisionClass ('LayoutProcessor');
 		$LayoutProcessorObj = LayoutProcessor::getInstance();
-		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
-		$RenderModule2Obj = RenderModule2::getInstance ();
+		$ClassLoaderObj->provisionClass ( 'RenderModule' );
+		$RenderModuleObj = RenderModule::getInstance ();
 
 		// Monitor or Install screens
 		if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
@@ -296,7 +296,7 @@ class HydrInstallMonitor {
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
-							$A['content'] = $RenderModule2Obj->render($A['module_name']);
+							$A['content'] = $RenderModuleObj->render($A['module_name']);
 							break;
 					}
 				}

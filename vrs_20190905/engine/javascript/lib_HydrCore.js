@@ -365,7 +365,7 @@ class ElementHandling {
 	Hide (DivID) { this.Gebi( DivID ).style.visibility = 'none';	this.Gebi( DivID ).style.display = 'none'; }
 	
 	/**
-	 * Change the classname upon hiver on the buttons (3 divs button)
+	 * Change the classname upon hover on the buttons (3 divs button)
 	 */
 	ButtonHover (Name , Style) { 
 		this.Gebi( Name + '01').className = Style +'01';

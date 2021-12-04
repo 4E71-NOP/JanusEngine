@@ -12280,12 +12280,12 @@ html { width:100%; height:100%;}
  
  .mt_div_AdminControlPanel {
   position: absolute; 
-  top: 48px; 
-  left: 48px; 
+  width: 90%; 
+  height: 90%; 
   border-style: solid; 
   border-width: 8px; 
   border-color: #FF8000; 
-  margin : 0px;
+  margin : auto;
   padding : 0px;
   background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_bgc_fca.png);
   visibility: hidden; 

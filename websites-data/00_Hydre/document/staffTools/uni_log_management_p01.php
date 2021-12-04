@@ -248,7 +248,7 @@ $SB = array(
 );
 
 $Content .= "
-		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 3px;'>\r
+		<table style=' width:100%; border-spacing: 3px;'>\r
 		<tr>\r
 		<td align='right'>\r"
 		.$bts->InteractiveElementsObj->renderSubmitButton($SB)
@@ -415,7 +415,7 @@ $SB = array(
 );
 
 $Content .= "
-		<table style=' width:".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 3px;'>\r
+		<table style=' width:100%; border-spacing: 3px;'>\r
 		<tr>\r
 		<td align='right'>\r"
 		.$bts->InteractiveElementsObj->renderSubmitButton($SB)

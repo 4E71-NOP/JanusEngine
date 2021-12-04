@@ -123,13 +123,7 @@ class HydrInstall {
 
 		// --------------------------------------------------------------------------------------------
 		include ("stylesheets/css_admin_install.php");
-		// $mt_ = array_merge(
-		// 		$mt_,
-		// 		array(
-		// 				'theme_module_internal_width'=> 896,
-		// 				'theme_module_width' => 896,)
-		// 		);
-		
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// JavaScript Object
@@ -162,9 +156,6 @@ class HydrInstall {
 		$ClassLoaderObj->provisionClass ( 'User' );
 		$CurrentSetObj->setInstanceOfUserObj ( new User () );
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
-
-		// $ClassLoaderObj->provisionClass ( 'RenderLayout' );
-		// $RenderLayoutObj = RenderLayout::getInstance ();
 
 		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
 		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );
@@ -228,36 +219,19 @@ class HydrInstall {
 				"file"		=> "current/install/i18n/install_init_" . $l . ".php",
 				"format"	=>	"php"
 			 ));
-		// --------------------------------------------------------------------------------------------
-		// if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
-		// 	$div_initial_bg = "background-image: url(media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
-		// }
-		// if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) == 0) {
-		// 	$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
-		// }
-		// if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) == 0) {
-		// 	$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
-		// }
 
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
 			<div id='initial_div' style='position:relative; width:98%; height:100%; margin:16px; padding:0px; visibility:visible'>\r";
-			// <div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: hidden;
-			// width:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) . "px;
-			// height:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) . "px;" . $div_initial_bg . "'>\r";
 
-		// ******************************************************************************
-		// 2021 layout process
-
-
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
 		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
 		
 		$ClassLoaderObj->provisionClass ('LayoutProcessor');
 		$LayoutProcessorObj = LayoutProcessor::getInstance();
-		$ClassLoaderObj->provisionClass ( 'RenderModule2' );
-		$RenderModule2Obj = RenderModule2::getInstance ();
+		$ClassLoaderObj->provisionClass ( 'RenderModule' );
+		$RenderModuleObj = RenderModule::getInstance ();
 
 		// Monitor or Install screens
 		if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
@@ -297,136 +271,20 @@ class HydrInstall {
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
-							$A['content'] = $RenderModule2Obj->render($A['module_name']);
+							$A['content'] = $RenderModuleObj->render($A['module_name']);
 							break;
 					}
 				}
 			}
 		}
-		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
-		// 2021 layout process
-		// ******************************************************************************
 		foreach ( $ContentFragments as &$A ) {
 			//	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
 			$DocContent .= $A['content'];
 		}
 	
 		$DocContent .= "</div>\r"; // Closing initial_div
-		
-//************************************************** */
-		// $infos = array (
-		// 		"mode" => 1,
-		// 		"module_display_mode" => "normal",
-		// 		"module_z_index" => 2,
-		// 		"block" => "B02",
-		// 		"blockG" => "B02G",
-		// 		"blockT" => "B02T",
-		// 		"deco_type" => 50,
-		// 		"fontSizeMin" => 10,
-		// 		"fontCoef" => 1.3,
-		// 		"module" => Array (
-		// 				"module_id" => 11,
-		// 				"module_deco" => 1,
-		// 				"module_deco_nbr" => 2,
-		// 				"module_deco_default_text" => 3,
-		// 				"module_name" => "Admin_install_B1",
-		// 				"module_classname" => "",
-		// 				"module_title" => "",
-		// 				"module_file" => "",
-		// 				"module_desc" => "",
-		// 				"module_container_name" => "",
-		// 				"module_group_allowed_to_see" => 31,
-		// 				"module_group_allowed_to_use" => 31,
-		// 				"module_adm_control" => 0,
-		// 				"module_execution" => 0,
-		// 				"module_website_id" => 11,
-		// 				"ws_id" => 2,
-		// 				"module_state" => 1,
-		// 				"module_position" => 2
-		// 		)
-		// );
-
-		// $Block = $ThemeDataObj->getThemeName () . $infos ['block'];
-
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 0 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 112 );
-
-		// $RenderDeco = RenderDeco50Exquisite::getInstance ();
-		// $DocContent .= $RenderDeco->render ( $infos );
-		// $DocContent .= "<h1 style='text-align: center;'>" . $bts->I18nTransObj->getI18nTransEntry ( 'b01Invite' ) . "</h1></div>\r";
-
-		// --------------------------------------------------------------------------------------------
-
-		// $infos ['module'] ['module_name'] = "Admin_install_B2";
-		// $infos ['block'] = "B01";
-		// $infos ['blockG'] = "B01G";
-		// $infos ['blockT'] = "B01T";
-		// $infos ['deco_type'] = 40;
-
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 120 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 816 + 64 );
-
-		// $RenderDeco = RenderDeco40Elegance::getInstance ();
-		// $DocContent .= $RenderDeco->render ($infos);
-
-		// --------------------------------------------------------------------------------------------
-		//
-		// Pages - Diplaying informations
-		//
-		// --------------------------------------------------------------------------------------------
-		// $localisation = "Page";
-		// $bts->MapperObj->AddAnotherLevel ( $localisation );
-		// $bts->LMObj->logCheckpoint ( "Page" );
-		// $bts->MapperObj->RemoveThisLevel ( $localisation );
-		// $bts->MapperObj->setSqlApplicant ( "Page" );
-
-		// $T = array ();
-
-		// if ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
-		// 	$bts->RequestDataObj->setRequestData ( 'PageInstall', 1 );
-		// }
-
-		// switch ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
-		// 	case "1" :
-		// 		include ("current/install/install_page_01.php");
-		// 		break;
-		// 	case "2" :
-		// 		include ("current/install/install_page_02.php");
-		// 		break;
-		// }
-		// $DocContent .= "</div>\r</div>\r";
-
-		// --------------------------------------------------------------------------------------------
-		// Tooltip
-		// --------------------------------------------------------------------------------------------
-		// $infos ['module'] ['module_container_name'] = "tooltipContainer";
-		// $infos ['module'] ['module_name'] = "tooltip";
-		// $infos ['module'] ['module_deco_nbr'] = 20;
-		// $infos ['module_z_index'] = 99;
-		// $infos ['block'] = "B20";
-		// $infos ['blockG'] = "B20G";
-		// $infos ['blockT'] = "B20T";
-		// $infos ['deco_type'] = 40;
-
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 8 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 4 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", 320 );
-		// $RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 192 );
-
-		// $RenderDeco = RenderDeco40Elegance::getInstance ();
-		// $DocContent .= $RenderDeco->render ( $infos ) . "</div>\r</div>\r";
-
-		// require_once "modules/initial/Tooltip/module_tooltip.php";
-		// $tooltip = new ModuleTooltip();
-		// $tooltip->render($infos);
-		// $GeneratedJavaScriptObj->insertJavaScript ( "Data", "var TabInfoModule = new Array();\r");
 
 		// --------------------------------------------------------------------------------------------
 		// Javascript files

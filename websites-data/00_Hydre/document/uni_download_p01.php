@@ -90,20 +90,5 @@ $T['ContentCfg']['tabs'] = array(
 $T['ContentCfg']['tabs']['1']['NbrOfLines'] = $i;		$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
-// $RenderLayoutObj = RenderLayout::getInstance();
-// $T['ContentInfos']['EnableTabs']		= 1;
-// $T['ContentInfos']['NbrOfTabs']			= 1;
-// $T['ContentInfos']['TabBehavior']		= 1;
-// $T['ContentInfos']['RenderMode']		= 1;
-// $T['ContentInfos']['HighLightType']		= 0;
-// $T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'tab_y' )-256;
-// $T['ContentInfos']['Width']				= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
-// $T['ContentInfos']['GroupName']			= "g";
-// $T['ContentInfos']['CellName']			= "c";
-// $T['ContentInfos']['DocumentName']		= "d";
-// $T['ContentInfos']['cell_1_txt']		= $i18nDoc['tab1'];
-
-// $Content .= $bts->RenderTablesObj->render($infos, $T);
-
 /*Hydr-Content-End*/
 ?>

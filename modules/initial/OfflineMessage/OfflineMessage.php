@@ -22,7 +22,7 @@ class ModuleOffLineMessage {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-		$ClassLoaderObj->provisionClass('RenderLayout');
+		// $ClassLoaderObj->provisionClass('RenderLayout');
 		$ClassLoaderObj->provisionClass('ThemeData');
 		$ClassLoaderObj->provisionClass('WebSite');
 		
@@ -64,8 +64,6 @@ class ModuleOffLineMessage {
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
 		$ThemeDataObj->setThemeName('mt_');
-		
-		$RenderLayoutObj = RenderLayout::getInstance();
 		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
 		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
@@ -114,17 +112,6 @@ class ModuleOffLineMessage {
 		
 		// --------------------------------------------------------------------------------------------
 		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 128 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", 512 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 256 );
-		
-		$RenderLayoutObj->setModuleList(
-			array(
-				$infos['module']['module_name'] => array ('module_deco_default_text'	=>	6 ),
-			)
-		);
-		
 		$Content = "
 			<!DOCTYPE html>
 			<html>\r
@@ -142,7 +129,6 @@ class ModuleOffLineMessage {
 			$RenderDeco->render($infos).
 			"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>".
 			$WebSiteObj->getWebSiteEntry('ws_message')."</span><br>\r".
-			$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'module_deco_default_text')."<br>\r".
 			"
 			</div>\r
 			</div>\r

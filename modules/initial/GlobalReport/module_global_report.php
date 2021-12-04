@@ -24,7 +24,6 @@ class ModuleGlobalReport {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$RenderLayoutObj	= RenderLayout::getInstance();
 // 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
@@ -36,21 +35,15 @@ class ModuleGlobalReport {
 		$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),			"I18nObj->getI18nTrans()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
-		$bts->LMObj->logDebug($RenderLayoutObj->getLayout(),				"RenderLayoutObj->getLayout()");
 		
 		$T = array();
-		// $i18n = array();
-		// include ($infos['module']['module_directory']."/i18n/".$l.".php");
-		// $bts->I18nTransObj->apply($i18n);
-		// unset ($i18n);
-		// $l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 		
-		$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20,8);
+		$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25,8);
+		$infos['initial_visibility'] = 'hidden';		// trick to hide the first tab.
 		$T['ContentInfos']['NbrOfTabs'] = 0;
 		$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
 		$Content = "";
-// 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".decbin($dbgLvl)."`") );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
 		$CurrentTab = 0;	
 		if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
@@ -58,57 +51,53 @@ class ModuleGlobalReport {
 			$tmp = $this->reportTab01($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->reportTab02($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->reportTab03($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->reportTab04($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->sqlReportTab($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->reportTab08($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
 		if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
 			$CurrentTab++;	
 			$tmp = $this->variablesReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 		}
-// 		else { $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 0; $T['Content'][$CurrentTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('defaut'); }
 		
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+		$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
+		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var gr = new GlobalReport();');
+
 // 		$tabDbgLvl = array(
 // 			1 => 1,			2 => 2,			3 => 3,
 // 			4 => 4,			5 => 4,			6 => 4,
@@ -116,9 +105,7 @@ class ModuleGlobalReport {
 // 			10=> 8
 // 		);
 		
-		$T['ContentInfos']['Height']			= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeBlockEntry($infos['blockG'],'tab_y' )-92;
-		$T['ContentInfos']['Width']			= 	$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width');
-		$T['ContentInfos']['GroupName']		= "gr";
+		$T['ContentInfos']['GroupName']		= "AdmGr";
 		$Content .= $bts->RenderTablesObj->render($infos, $T);
 		return $Content;
 	}
@@ -166,11 +153,12 @@ class ModuleGlobalReport {
 		$Content['13']['2']['cont']		= $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('request_uri');
 		;																												
 		
-		$config = array(
-			"NbrOfLines" => 13,	
-			"NbrOfCells" => 2,
-			"TableCaptionPos" => 2,
-		);
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(13,2,2);
+		// array(
+		// 	"NbrOfLines" => 13,	
+		// 	"NbrOfCells" => 2,
+		// 	"TableCaptionPos" => 2,
+		// );
 		
 		$package = array ("content" => $Content , "config" => $config);
 		
@@ -225,8 +213,9 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		// This will be implemented with "'" at the end of the string 
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
-		
+		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+
 		$log = $bts->LMObj->getStatisticsLog();
 		$stepOne = true;
 		$timeStart = 0;
@@ -281,17 +270,18 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data',$javaScriptForChartJs."\r");
 		$Content = array();
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
-		$Content['2']['1']['cont'] = "<canvas id='statChart1' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['3']['1']['cont'] = "<canvas id='statChart2' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='256' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
-		$Content['4']['1']['cont'] = "<canvas id='statChart3' width='".($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')-10)."' height='512' style='background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['2']['1']['cont'] = "<canvas id='statChart1' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['3']['1']['cont'] = "<canvas id='statChart2' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
+		$Content['4']['1']['cont'] = "<canvas id='statChart3' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		
-		$config = array(
-				"NbrOfLines" => 4,
-				"NbrOfCells" => 1,
-				"TableCaptionPos" => 0,
-				"HighLightType" => 0,
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(4,1,0);
+		// array(
+		// 	"NbrOfLines" => 4,
+		// 	"NbrOfCells" => 1,
+		// 	"TableCaptionPos" => 0,
+		// 	"HighLightType" => 0,
 				
-		);
+		// );
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 }
@@ -369,11 +359,12 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			$i++;
 		}
 		
-		$config = array(
-				"NbrOfLines" => $i - 1,
-				"NbrOfCells" => 6,
-				"TableCaptionPos" => 1,
-		);
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),6,1);
+		// array(
+		// 		"NbrOfLines" => $i - 1,
+		// 		"NbrOfCells" => 6,
+		// 		"TableCaptionPos" => 1,
+		// );
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 	}
@@ -434,11 +425,12 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			$i++;
 		}
 		
-		$config = array(
-				"NbrOfLines" => $i - 1,
-				"NbrOfCells" => 7,
-				"TableCaptionPos" => 1,
-		);
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),7,1);
+		// array(
+		// 		"NbrOfLines" => $i - 1,
+		// 		"NbrOfCells" => 7,
+		// 		"TableCaptionPos" => 1,
+		// );
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 	}
@@ -489,11 +481,12 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			}
 			$i++;
 		}
-		$config = array(
-				"NbrOfLines" => $i - 1,
-				"NbrOfCells" => 4,
-				"TableCaptionPos" => 1,
-		);
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),4,1);
+		// $config = array(
+		// 		"NbrOfLines" => $i - 1,
+		// 		"NbrOfCells" => 4,
+		// 		"TableCaptionPos" => 1,
+		// );
 		
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
@@ -527,11 +520,12 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			$i++;
 		}
 		
-		$config = array(
-				"NbrOfLines" => $i - 1,
-				"NbrOfCells" => 3,
-				"TableCaptionPos" => 1,
-		);
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),3,1);
+		// $config = array(
+		// 		"NbrOfLines" => $i - 1,
+		// 		"NbrOfCells" => 3,
+		// 		"TableCaptionPos" => 1,
+		// );
 		
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
@@ -571,30 +565,4 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 	}
-	
-// 	/**
-// 	 * Convert a size in a human readdable fashion
-// 	 * @param array $infos
-// 	 * @param number $size
-// 	 * @return string
-// 	 */
-// 	private function convertSize( $infos, $size ) {
-// 		$CurrentSetObj = CurrentSet::getInstance();
-		
-// 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
-// 		$TabUnits = array(
-// 				"<span class='" . $Block."_ok'>b</span>",
-// 				"<span class='" . $Block."_warning'>Kb</span>",
-// 				"<span class='" . $Block."_erreur " . $Block."_tb3'>MB</span>",
-// 				"<span class='" . $Block."_erreur " . $Block."_tb4'>GB</span>"
-// 		);
-// 		if ($size == 0 ) {
-// 			return "0<span class='" . $Block."_erreur " . $Block."_tb3'>Kb</span>";
-// 		}
-// 		else {
-// 			if ( $size < 0 ) { return "-".round(abs($size)/pow(1024,($i=floor(log(abs($size),1024)))),2)." ".$TabUnits[$i]; }
-// 			else { return round(abs($size)/pow(1024,($i=floor(log(abs($size),1024)))),2).' '.$TabUnits[$i]; }
-// 		}
-// 	}
-	
 }

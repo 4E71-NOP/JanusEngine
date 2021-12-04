@@ -428,6 +428,25 @@ self::$PreRequisiteTable['add']['module'] = array (
 );
 
 
+self::$PreRequisiteTable['add']['permission'] = array (
+		"convert" => array(
+				array("v" => "level",			"s" => "permission"),
+				array("v" => "state",			"s" => "permission"),
+		),
+		"nextId" => array (
+				array ("table" => "permission",			"column" => "perm_id",			"target" => "id"),
+		),
+		"columns" => array(
+			array ( "v" => "id",							"t" => "perm_id"),
+			array ( "v" => "state",							"t" => "perm_state"),
+			array ( "v" => "name",							"t" => "perm_name"),
+			array ( "v" => "affinity",						"t" => "perm_affinity"),
+			array ( "v" => "object_type",					"t" => "perm_object_type"),
+			array ( "v" => "desc",							"t" => "perm_desc"),
+			array ( "v" => "level",							"t" => "perm_level"),
+		),
+);
+
 
 self::$PreRequisiteTable['add']['tag'] = array (
 		"convert" => array(),

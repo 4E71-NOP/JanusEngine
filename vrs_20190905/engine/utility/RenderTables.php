@@ -117,7 +117,7 @@ class  RenderTables {
 // 			11 =>	$Block."_fctb",
 // 		);
 		$TableWidth = ($tab_infos['Width']-32);
-		$visibility = "visible";
+		$visibility = ($infos['initial_visibility']) ? $infos['initial_visibility'] : "visible";
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			if ( $CurT > 1 ) { $visibility = "hidden"; }
 			if ( $tab_infos['EnableTabs'] != 0 ) {
@@ -244,7 +244,7 @@ class  RenderTables {
 	 * @param string $TabTxt
 	 * @return array
 	 */
-	public function getDefaultDocumentConfig (&$infos, $lines=10, $NbrOfTabs=1, $TabBehavior=1, $HighLightType=1, $TabTxt="tabTxt") {
+	public function getDefaultDocumentConfig (&$infos, $lines=0, $NbrOfTabs=1, $TabBehavior=1, $HighLightType=1, $TabTxt="tabTxt") {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -254,7 +254,7 @@ class  RenderTables {
 		"TabBehavior"		=> $TabBehavior,
 		"RenderMode"		=> 1,
 		"HighLightType"		=> $HighLightType,
-		"Height"			=> floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * $lines, //T3 is default; total padding = 10; nbr line +1
+		"Height"			=> $lines * 24,		// default
 		// "Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width'),
 		"Width"				=> 960, // Minimum size (we don't have theme_module_internal_width any more)
 		"GroupName"			=> "l",

@@ -155,7 +155,9 @@ html { width:100%; height:100%;}\r\r
 		}
 		
 		// --------------------------------------------------------------------------------
-		$Content .= "
+	// top: ". floor( $themeArray['theme_admctrl_width']/ 2 )."px; 
+	// left: ".floor( $themeArray['theme_admctrl_height']/ 2 )."px; 
+	$Content .= "
 	.centered { text-align: center; }\r
 	
 	.".$tableName."bareTable	{ border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px; }\r
@@ -179,15 +181,14 @@ html { width:100%; height:100%;}\r\r
 		background-repeat: repeat;
 		position: fixed;
 	}\r
-	
 	.".$tableName._CLASS_ADM_CTRL_PANEL_." {
 		position: absolute; 
-		top: ". floor( $themeArray['theme_admctrl_width']/ 2 )."px; 
-		left: ".floor( $themeArray['theme_admctrl_height']/ 2 )."px; 
+		width: 90%;
+		height: 90%;
 		border-style: solid; 
 		border-width: 8px; 
 		border-color: ".$themeArray['B01T']['txt_warning_col']."; 
-		margin : 0px;
+		margin : auto;
 		padding : 0px;
 		background-image: url(".$baseUrl."media/theme/".$themeArray['theme_directory']."/".$themeArray['theme_admctrl_panel_bg'].");
 		visibility: hidden; 
@@ -233,7 +234,7 @@ html { width:100%; height:100%;}\r\r
 	\r	/* Media screen */
 
 
-@media print { BODY { font-size: 10pt; } }\r\r-->\r</style>\r";
+	@media print { BODY { font-size: 10pt; } }\r\r-->\r</style>\r";
 		return $Content;
 		
 	}

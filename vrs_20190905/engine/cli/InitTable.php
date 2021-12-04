@@ -928,6 +928,22 @@ self::$InitTable['layout_file'] = function (&$a) {
 	$a['params']['description'] = &$a['params']['desc'];
 };
 
+
+self::$InitTable['permission'] = function (&$a) {
+	$a['params'] = array(
+		"perm_id"					=> "",
+		"perm_state" 				=> "enabled",
+		"perm_name" 				=> "defaultPermission",
+		"perm_affinity"				=> "user",
+		"perm_object_type"			=> "module",
+		"perm_desc"					=> "defaultPermission description",
+		"perm_level"				=> "read",
+
+	);
+	$a['params']['description'] = &$a['params']['desc'];
+};
+
+
 // self::$InitTable['layout_content'] = function (&$a) {
 // 	$a['params'] = array(
 // 			"id"				=> "",

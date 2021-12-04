@@ -72,6 +72,12 @@ self::$ActionTable['add']['module'] = function (&$a) { return array (
 	);
 };
 
+self::$ActionTable['add']['permission'] = function (&$a) { return array (
+	"INSERT INTO ".$a['sqlTables']['permission']." (".$a['columns'].") VALUES (".$a['values'].");",
+	);
+};
+
+
 self::$ActionTable['add']['tag']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['tag']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['theme']			= function (&$a) { return array (

@@ -157,6 +157,13 @@ class StringFormat {
 		self::$ConvertTable['layout_content']['gauche']			= &self::$ConvertTable['layout_content']['left'];
 		self::$ConvertTable['layout_content']['droite']			= &self::$ConvertTable['layout_content']['right'];
 		
+		// Permission
+		self::$ConvertTable['permission']['disbled']			= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['permission']['enabled']			= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['permission']['deleted']			= &self::$ConvertTable['universal']['disabled'];
+		self::$ConvertTable['permission']['read']				= 1;
+		self::$ConvertTable['permission']['write']				= 2;
+
 		//Theme
 		self::$ConvertTable['theme']['offline']					= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['theme']['online']					= &self::$ConvertTable['universal']['online'];

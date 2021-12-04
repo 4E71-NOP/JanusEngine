@@ -17,8 +17,11 @@ class Permission extends Entity {
 	//@formatter:off
 	private $columns = array(
 		"perm_id"					=> "",
+		"state"						=> 0,
 		"perm_name" 				=> "defaultPermission",
+		"perm_affinity"				=> "user",
 		"perm_object_type"			=> "module",
+		"perm_desc"					=> "defaultPermission description",
 		"perm_level"				=> 1,
 	);
 	//@formatter:on
@@ -70,7 +73,6 @@ class Permission extends Entity {
 			'targetTable'	=> 'permission',
 			'targetColumn'	=> 'perm_id',
 			'entityId'		=> $this->Permission['perm_id'],
-			'entityTitle'	=> 'permission'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
@@ -105,10 +107,13 @@ class Permission extends Entity {
 		$date = time ();
 		$tab = $this->columns;
 		
-		$tab['perm_id'] = 0;
-		$tab['perm_name'] = "DEFAULT_PERMISSION";
-		$tab['perm_object_type'] = "module";
-		$tab['perm_level'] = 0;
+		$tab['perm_id']				=	"";
+		$tab['perm_state']			=	1;
+		$tab['perm_name'] 			=	"defaultPermission";
+		$tab['perm_affinity']		=	"user";
+		$tab['perm_object_type']	=	"module";
+		$tab['perm_desc']			=	"defaultPermission description";
+		$tab['perm_level']			=	1;
 
 		return $tab;
 	}

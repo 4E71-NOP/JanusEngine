@@ -245,7 +245,7 @@ $Content .= "
 </form>\r
 
 <form ACTION='index.php?' method='post'>\r".
-"<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." width='".$ThemeDataObj->getThemeDataEntry('theme_module_internal_width')."'>\r
+"<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." style='width:100%'>\r
 <tr>\r
 <td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_1')."</td>\r
 <td class='".$Block."_fca'><input type='text' name='filterForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."' class='".$Block."_t3 ".$Block."_form_1'></td>\r

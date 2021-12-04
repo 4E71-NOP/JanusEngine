@@ -19,7 +19,6 @@
 /* $RequestDataObj RequestData                 */
 /* $SDDMObj DalFacade                          */
 /* $StringFormatObj StringFormat               */
-/* $RenderLayoutObj RenderLayout               */
 
 /*Hydre-IDE-end*/
 
@@ -405,7 +404,7 @@ foreach ($tabConfigFile as $A ) {
 	$SB['onclick']	=	"elm.Gebi('txtConfig_".$A['name']."').select()";
 	$T['Content'][$CurrentTab][$Cl]['1']['cont'] = 
 			"
-			<table style=' width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')-32)."px; border-spacing: 4px;'>\r
+			<table style=' width:100%; border-spacing: 4px;'>\r
 			<tr>\r
 			<td colspan='2'>\rcurrent/config/current/site_".$A['n']."_config.php (for ".$A['name'].")</td>\r
 			</tr>\r
@@ -417,7 +416,7 @@ foreach ($tabConfigFile as $A ) {
 			</tr>\r
 
 			<tr>\r
-			<td style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')-256)."px;'>&nbsp;</td>\r
+			<td style='width:80%'>&nbsp;</td>\r
 			<td>\r".$bts->InteractiveElementsObj->renderSubmitButton($SB)."</td>\r
 			</tr>\r
 			</table>\r

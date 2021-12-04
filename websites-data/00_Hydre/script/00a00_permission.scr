@@ -1,0 +1,8 @@
+/*
++---------------------------------------+
+|		Primary set of permission		|
++---------------------------------------+
+*/
+add permission	name "default_permission"		level "read"	state "enabled"	affinity "user"	object_type "homepage"				desc "homepage access";
+add permission	name "general_admin_access"		level "write"	state "enabled"	affinity "user"	object_type "general_permission"	desc "admin access";
+
