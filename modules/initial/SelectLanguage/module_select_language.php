@@ -50,7 +50,11 @@ class ModuleSelectLanguage {
 				AND lw.fk_lang_id = l.lang_id
 				;");
 			
-			$Content .= "<table><tr>";
+			$Content .= "
+			<table>\r
+			<tbody>\r
+			<tr>\r
+			";
 			
 			if ( $bts->SDDMObj->num_row_sql($dbquery) > 1 ) {
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -65,23 +69,24 @@ class ModuleSelectLanguage {
 						if ( !file_exists ( "media/theme/". $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }
 						else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image']; }
 						
-						$Content .= "<td>
-						<form ACTION='/' method='post'>\r
-						<input type='hidden' name='formSubmitted'					value='1'>
-						<input type='hidden' name='formGenericData[origin]'			value='ModuleSelectLanguage'>
-						<input type='hidden' name='formGenericData[modification]'	value='on'>
-						<input type='hidden' name='userForm[user_lang]'				value='".$language_website_[$A]['lang_639_3']."'>
-						<button 
-							style='background-color:#FF00FF00; border-width:0px; background-image: url(".$pv['img_src'].");height:64px; width:64px; background-size: cover;'
-							onMouseOver=\"t.ToolTip('".$language_website_[$A]['lang_original_name']."')\"
-							onMouseOut='t.ToolTip()'
-						>
+						$Content .= "
+						<td>\r
+						<form method='post' id='FormSelect_".$language_website_[$A]['lang_639_3']."'>\r
+						<input type='hidden' name='formSubmitted'					value='1'>\r
+						<input type='hidden' name='formGenericData[origin]'			value='ModuleSelectLanguage'>\r
+						<input type='hidden' name='formGenericData[modification]'	value='on'>\r
+						<input type='hidden' name='userForm[user_lang]'				value='".$language_website_[$A]['lang_639_3']."'>\r
+						<button style='background-color:#FF00FF00; border-width:0px; background-image: url(".$pv['img_src']."); height:64px; width:64px; background-size: cover;'\r
+							onMouseOver=\"t.ToolTip('".$language_website_[$A]['lang_original_name']."')\" onMouseOut='t.ToolTip()'>
 						</form>\r
 						</td>";
 					}
 				}
 			}
-			$Content .= "</tr></table>";
+			$Content .= "
+			</tr>\r
+			</tbody>\r
+			</table>\r";
 		}
 		return $Content;
 	}

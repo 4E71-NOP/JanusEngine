@@ -106,11 +106,11 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca' style='width:".floor($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/2)."px; text-align: center;'>\r
+<td class='".$Block."_fca' style='width:50%; text-align: center;'>\r
 <select name='conv_type_src' class='".$Block."_t3 " . $Block . "_form_1'>\r".$pv['select_option']."
 </td>\r
 
-<td class='".$Block."_fca' style='width:".floor($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/2)."px; text-align: center;'>\r
+<td class='".$Block."_fca' style='width:50%; text-align: center;'>\r
 <select name='conv_type_dst' class='" . $Block."_t3 " . $Block . "_form_1'>\r".$pv['select_option']."
 </td>\r
 </tr>\r
@@ -118,7 +118,7 @@ $Content .= "
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
 ".$bts->I18nTransObj->getI18nTransEntry('instruction')."<br>\r
-<textarea name='conv_src' id='conv_src' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size')) * 1.35 )."' rows='5'>
+<textarea name='conv_src' id='conv_src' style='width:100%' rows='5'>
 ".$bts->RequestDataObj->getRequestDataSubEntry('CONV', 'cont')."
 </textarea>
 </td>\r
@@ -126,7 +126,7 @@ $Content .= "
 
 <tr>\r
 <td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
-<textarea name='conv_dst' id='conv_dst' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width')/$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size') * 1.35 ))."' rows='5'>
+<textarea name='conv_dst' id='conv_dst' style='width:100%' rows='5'>
 ".
 $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
 "</textarea>
@@ -139,7 +139,7 @@ $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
 <br>\r
 <table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
 <tr>\r
-<td style='width:".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - 192)."px;'>\r</td>\r
+<td style='width:80%'>\r</td>\r
 <td style='text-align: right;'>\r
 ";
 

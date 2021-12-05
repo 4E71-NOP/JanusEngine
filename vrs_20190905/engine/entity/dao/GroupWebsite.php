@@ -80,7 +80,7 @@ class GroupWebsite extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->groupWebsiteExists($this->GroupWebsite['group_website_id']);
+		return $this->entityExistsInDb('group_website', $this->GroupWebsite['group_website_id']);
 	}
 	
 	
@@ -92,8 +92,8 @@ class GroupWebsite extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->websiteExists($this->GroupWebsite['ws_id']) == false ) { $res = false; }
-		if ( $this->groupExists($this->GroupWebsite['group_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->GroupWebsite['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->GroupWebsite['group_id']) == false ) { $res = false; }
 		return $res;
 	}
 	

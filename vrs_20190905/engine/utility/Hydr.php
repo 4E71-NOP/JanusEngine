@@ -62,7 +62,7 @@ class Hydr {
 		$bts = BaseToolSet::getInstance();
 
 		// --------------------------------------------------------------------------------------------
-		$Content = "";
+		$Content =  "";
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
@@ -125,7 +125,7 @@ class Hydr {
 		//	1	Check session, Authentification mode = session
 		//	2	sw has been submitted (this is a first contact case)
 		//	3	sw has been submitted, update session with new sw,  check session
-		//	4x	If a auth form is submitted a session is active unless « big problem » – unused case.
+		//	4x	If an auth form is submitted a session is active unless « big problem » – unused case.
 		//	5	A user is trying to authenticate. Great !
 		//	6x	We have a form and a URI and no session at the same time. Unused case
 		//	7x	We have a form and a URI at the same time. Unused case
@@ -188,7 +188,7 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Loading website data" );
 
-// 		A this point we have a ws in the session so we don't use the URI parameter anymore.
+		// A this point we have a ws in the session so we don't use the URI parameter anymore.
 		$bts->CMObj->LoadConfigFile ();
 		$bts->CMObj->setConfigurationEntry ( 'execution_context', "render" );
 		$bts->LMObj->setDebugLogEcho ( 0 );
@@ -266,7 +266,7 @@ class Hydr {
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())) );
 		
-// 		we have 2 variables used to drive the authentification process.
+// 		We have 2 variables used to drive the authentification process.
 		switch ($authentificationMode) {
 			case "form" :
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with form mode") );
@@ -457,7 +457,7 @@ class Hydr {
 		
 		// --------------------------------------------------------------------------------------------
 		// Router
-		// What was called (slug/form etc..) and storing information in the session
+		// What was called ? (slug/form etc..) and storing information in the session
 		$bts->Router->manageNavigation ();
 		
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
@@ -478,6 +478,7 @@ class Hydr {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 			}
 			$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', 1 );
@@ -516,12 +517,14 @@ class Hydr {
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', $dbp ['arti_slug'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', $dbp ['arti_page'] );
 				}
 			} else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
+				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', 'article_not_found' );
 				$bts->RequestDataObj->setRequestDataEntry ( 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );		//deprecated remove when ready
@@ -530,6 +533,10 @@ class Hydr {
 			}
 		}
 		
+		$ClassLoaderObj->provisionClass ( 'Article' );
+		$CurrentSetObj->setInstanceOfArticleObj(new Article());
+		$CurrentSetObj->getInstanceOfArticleObj()->getDataFromDB($CurrentSetObj->getDataSubEntry( 'article', 'arti_id'));
+
 		// --------------------------------------------------------------------------------------------
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'>\r" );
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry ( 'language' ) . "'>\r" );
@@ -546,6 +553,31 @@ class Hydr {
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sldup', "&sw=" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&l=" . $CurrentSetObj->getDataEntry ( 'language' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Lang Article User Pass
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sdup', "&sw=" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Article User Pass
 		
+		// --------------------------------------------------------------------------------------------
+		//
+		// JavaScript Object
+		//
+		//
+		$localisation = " (JavaScript)";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		
+		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
+		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
+		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		
+		// $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript_lib_calculs_decoration.js');
+		// We got the route definition in the $CurrentSet and the session.
+		// Inserting the URL in the browser bar.
+		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
+		
+		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\telm.UpdateWindowSize ('');");
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Prepare data for theme and layout
@@ -571,7 +603,6 @@ class Hydr {
 		
 		$ThemeDescriptorObj->setCssPrefix("mt_");
 		$ThemeDescriptorObj->getDataFromDBByPriority ();
-		// $ThemeDescriptorObj->getDataFromDB (  );
 		
 		$ClassLoaderObj->provisionClass ( 'ThemeData' );
 		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
@@ -582,30 +613,50 @@ class Hydr {
 		$ThemeDataObj->renderBlockData ();
 		
 		// --------------------------------------------------------------------------------------------
-		//
-		// JavaScript Object
-		//
-		//
-		$localisation = " (JavaScript)";
-		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
-		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		$ClassLoaderObj->provisionClass ('ModuleList');
+		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
+		$ModuleLisObj->makeModuleList();
 		
-		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		$ClassLoaderObj->provisionClass ('LayoutProcessor');
+		$LayoutProcessorObj = LayoutProcessor::getInstance();
+		$ClassLoaderObj->provisionClass ( 'RenderModule' );
+		$RenderModuleObj = RenderModule::getInstance ();
 		
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript_lib_calculs_decoration.js');
-		// We got the route definition in the $CurrentSet and the session.
-		// Inserting the URL in the browser bar.
-		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
+		$ContentFragments = $LayoutProcessorObj->render();
 		
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
+		$LayoutCommands = array(
+			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
+			1 => array( "regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
+		);
 		
+		// We know there's only one command per entry
+		$insertJavascriptDecorationMgmt = false;
+		foreach ( $ContentFragments as &$A ) {
+			foreach ( $LayoutCommands as $B) {
+				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
+					// We got the match so it's...
+					switch ($B['command']) {
+						case "get_header":
+							break;
+						case "render_module":
+							// Module it is.
+							if ( $insertJavascriptDecorationMgmt == false) {
+								$GeneratedJavaScriptObj->insertJavaScript ('OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$insertJavascriptDecorationMgmt = true;
+							}
+							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
+							$A['content'] = $RenderModuleObj->render($A['module_name']);
+							break;
+					}
+				}
+			}
+		}
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Display
@@ -618,10 +669,6 @@ class Hydr {
 		$bts->MapperObj->setSqlApplicant ( "Module Processing" );
 		
 		$ClassLoaderObj->provisionClass ( 'InteractiveElements' ); // Responsible for rendering buttons
-		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
-		
-		$RenderLayoutObj = RenderLayout::getInstance ();
-		$RenderLayoutObj->render ();
 		
 		// --------------------------------------------------------------------------------------------
 		// StyleSheet
@@ -630,7 +677,7 @@ class Hydr {
 		$RenderStylesheetObj = RenderStylesheet::getInstance ();
 		$stylesheet = $RenderStylesheetObj->render ( "mt_", $ThemeDataObj );
 		
-		$Content .= "<!DOCTYPE html>\r";
+		$Content .= "<!DOCTYPE html>\r<html>";
 		switch ($WebSiteObj->getWebSiteEntry ( 'ws_stylesheet' )) {
 			case 1 : // dynamic
 				$Content .= "
@@ -657,7 +704,8 @@ class Hydr {
 			"' vlink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . 
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) . "' ";
 		}
-		$Content .= "style='";
+		$Content .= "style='
+		height:100%;";
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) ) > 0) {
 			$Content .= "background-image: url(".
 				$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
@@ -667,22 +715,13 @@ class Hydr {
 		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0) {
 			$Content .= "background-color: #" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . ";";
 		}
-		$Content .= " visibility: visible;'>\r ";
-		
+		$Content .= "'>\r ";
 		// --------------------------------------------------------------------------------------------
-		//
-		// Modules
-		//
-		//
-		$ClassLoaderObj->provisionClass ( 'RenderModule' );
-		$RenderModuleObj = RenderModule::getInstance ();
-		$directives = array (
-				'mode' => 1,
-				'module_display_mode' => "normal",
-				'module_z_index' => 0
-		);
-		$Content .= $RenderModuleObj->render ( $directives );
-		
+		foreach ( $ContentFragments as &$A ) {
+//			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
+			$Content .= $A['content'];
+		}
+
 		// --------------------------------------------------------------------------------------------
 		//
 		// Checkpoint ("index_before_stat");
@@ -710,7 +749,7 @@ class Hydr {
 		// $pv['sdftotal'] = $_REQUEST['FS_index'];
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
-		$sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
+		// $sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {
 		
 			$ClassLoaderObj->provisionClass ( 'FileSelector' );
@@ -738,8 +777,11 @@ class Hydr {
 		//
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
-		
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');
+
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile ( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptExternalRessource ( "ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
@@ -753,14 +795,18 @@ class Hydr {
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
-		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
-		$JavaScriptContent .= "function WindowOnload () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
+		$JavaScriptContent .= "function WindowOnResize (){\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= "}\r";
+		$JavaScriptContent .= "function WindowOnLoad () {\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
-			}\r
-			window.onload = WindowOnload;\r\r
-			</script>\r";
-		
+	}\r
+	window.onresize = WindowOnResize;\r
+	window.onload = WindowOnLoad;\r
+	</script>\r";
+
 		$licence = "
 			<!--
 			Author : FMA - 2005 ~ " . date ( "Y", time () ) . "

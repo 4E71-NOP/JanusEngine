@@ -99,7 +99,7 @@ $Content .= "
 <input type='hidden' name='formSubmitted'					value='1'>
 <input type='hidden' name='formGenericData[origin]'			value='AdminScriptExecutionP01'>
 
-<table cellpadding='0' cellspacing='0' style='width :".($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - 16)."px;'>
+<table cellpadding='0' cellspacing='0' style='width:100%;'>
 <tr>\r
 <td>\r"
 .$bts->InteractiveElementsObj->renderIconSelectFile($infos)

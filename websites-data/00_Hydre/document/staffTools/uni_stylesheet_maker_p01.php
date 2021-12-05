@@ -30,7 +30,6 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-// $bts->RequestDataObj->setRequestDataEntry('script_source',"");
 $bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 3	);
 
 /*Hydr-Content-Begin*/
@@ -87,7 +86,7 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r
 ";
 
 $Content .= "
-<form name='generationSS' ACTION='index.php?' method='post'>\r
+<form name='generationCSS' ACTION='index.php?' method='post'>\r
 <table cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto; '>
 <tr>\r
 <td>\r
@@ -142,18 +141,11 @@ $Content .= "
 ";
 
 if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme') != 0 ) {
-	// $dbquery = $bts->SDDMObj->query("
-	// SELECT * 
-	// FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." a , ".$SqlTableListObj->getSQLTableName('theme_website')." b 
-	// WHERE a.theme_id = '".$bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme')."' 
-	// AND a.theme_id = b.theme_id 
-	// ;");
 	
+	$ClassLoaderObj->provisionClass ('RenderStylesheet');
 	$RenderStylesheetObj = RenderStylesheet::getInstance();
 	$WorkingThemeData = new ThemeData();
-	// $WorkingThemeData->setThemeName('renderCSS_');				// will use the $bts->RequestDataObj->getRequestDataSubEntry('RenderCSS', 'CssSelection') as the theme ID
 	$WorkingThemeDescriptorObj = new ThemeDescriptor();
-	// $WorkingThemeDescriptorObj->getDataFromDB($ThemeDataObj->getThemeName());
 	$WorkingThemeDescriptorObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme'));
 	$WorkingThemeData->setThemeName('mt_');				// Change the to the Maint Theme acronym "mt_" for rendering
 	$WorkingThemeData->setThemeData($WorkingThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
@@ -165,13 +157,6 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	$stylesheet = $RenderStylesheetObj->render($WorkingThemeData->getThemeName(), $WorkingThemeData );
 	$stylesheet = str_replace("	" , " ", $stylesheet);
 	
-	// $fontSizeMin = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_min');
-	// $fontSizeMax = $ThemeDataObj->getThemeBlockEntry($infos['block']."T", 'txt_fonte_size_max');
-	// $coef = (($fontSizeMax - $fontSizeMin) / 7);
-	// $fontSize =$fontSizeMin+($coef*1);
-	
-	$textareSize = floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'txt_font_size'))*1.5);
-
 	$Content .= "
 	<hr>\r
 	".$bts->I18nTransObj->getI18nTransEntry('instructions')."
@@ -182,7 +167,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='CSSMaker' ACTION='' method='post'>\r
-	<textarea name='CSSMakerResult' cols='".$textareSize."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<textarea name='CSSMakerResult' style='width:100%' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 
@@ -258,10 +243,5 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	
 	";
 }
-
-
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
-
 ?>

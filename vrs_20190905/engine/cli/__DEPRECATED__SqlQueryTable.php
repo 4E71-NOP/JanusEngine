@@ -65,9 +65,9 @@ self::$SqlQueryTable['M_CATEGO_rrp']['colone_1']	= "cate_id";
 //decoration
 self::$SqlQueryTable['M_DECORA_rddec']['requete']	= "SELECT deco_name FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_name = '<A1>';";
 self::$SqlQueryTable['M_DECORA_rddec']['element']	= "Decoration";
-self::$SqlQueryTable['M_DECORA_redec']['requete']	= "SELECT deco_ref_id FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_name = '<A1>';";
+self::$SqlQueryTable['M_DECORA_redec']['requete']	= "SELECT deco_id FROM ".$SqlTableListObj->getSQLTableName('decoration')." WHERE deco_name = '<A1>';";
 self::$SqlQueryTable['M_DECORA_redec']['element']	= "Decoration";
-self::$SqlQueryTable['M_DECORA_redec']['colone_1']	= "deco_ref_id";
+self::$SqlQueryTable['M_DECORA_redec']['colone_1']	= "deco_id";
 
 //	self::$SqlQueryTable['M_DECORA_rtdec']['requete']	= "SELECT deco_type FROM ".$SqlTableListObj->getSQLTableName('decoration']." WHERE deco_id = '<A1>';";
 //	self::$SqlQueryTable['M_DECORA_rtdec']['element']	= "Decoration";

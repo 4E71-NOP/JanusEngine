@@ -75,12 +75,12 @@ class RenderTabs {
 		for ( $i = 1 ; $i <= $tab_infos['NbrOfTabs'] ; $i++ ) {
 			if ( $i == 1 ) { $type = "up"; }
 			else { $type = "down"; }
-			$TabFullName = "OngletData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'];
+			$TabFullName = "TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'];
 			
 			if ( $tab_infos['TabBehavior'] == 1 ) {
 				$onMouseOverOut = "
-			onmouseover=\"javascript:GestionOnglets ( 0 , 0 , ".$TabFullName." , '".$tab_infos['GroupName']."' , '".$tab_infos['DocumentName']."', ".$i." );\"
-			 onmouseout=\"javascript:GestionOnglets ( 0 , 1 , ".$TabFullName." , '".$tab_infos['GroupName']."' , '".$tab_infos['DocumentName']."', ".$i." );\"
+			onmouseover=\"javascript:tm.TabStyleManagement ( 0 , 0 , ".$TabFullName." , '".$tab_infos['GroupName']."' , '".$tab_infos['DocumentName']."', ".$i." );\"
+			 onmouseout=\"javascript:tm.TabStyleManagement ( 0 , 1 , ".$TabFullName." , '".$tab_infos['GroupName']."' , '".$tab_infos['DocumentName']."', ".$i." );\"
 			";
 			}
 			
@@ -94,7 +94,7 @@ class RenderTabs {
 			<div id='".$c_id_c.$i."' class='".$Block."_tab_".$type."_c' style='position:absolute;	left: ".$TabPosDim[$i]['pc']."px; width: ".$TabPosDim[$i]['dc']."px; height: ".$HeightABCD."px;'></div>\r
 					
 			<div id='".$c_id_d.$i."' style='position: absolute;	left: ".$TabPosDim[$i]['pa']."px; width: ".$TabPosDim[$i]['dd']."px; height: ".$HeightABCD."px;'
-			onClick=\"javascript:GestionOnglets ( 1 , 0 , ".$TabFullName.", '".$tab_infos['GroupName']."','".$tab_infos['DocumentName']."', ".$i." );\"
+			onClick=\"javascript:tm.TabStyleManagement ( 1 , 0 , ".$TabFullName.", '".$tab_infos['GroupName']."','".$tab_infos['DocumentName']."', ".$i." );\"
 			".$onMouseOverOut."
 			></div>\r
 			</div>\r
@@ -105,37 +105,43 @@ class RenderTabs {
 	</div>\r
 	";
 		
-		$JavaScriptTable = "\rvar OngletData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName']." = {\r";
+		$JavaScriptTable = "\rvar TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName']." = {\r
+		'hostDiv' : 'table_".$tab_infos['GroupName']."',
+		'tabsNbr' :'".$tab_infos['NbrOfTabs']."',
+		'size' : { 'a':'".$TabPosDim['1']['da']."', c:'".$TabPosDim['1']['dc']."',},\r
+		'styles' : {\r
+			'up':	{	'Styla':'".$Block."_tab_up_a',		'Stylb':'".$Block."_tab_up_b',		'Stylc':'".$Block."_tab_up_c',	},\r
+			'down':	{	'Styla':'".$Block."_tab_down_a',	'Stylb':'".$Block."_tab_down_b',	'Stylc':'".$Block."_tab_down_c',},\r
+			'hover':{	'Styla':'".$Block."_tab_hover_a',	'Stylb':'".$Block."_tab_hover_b',	'Stylc':'".$Block."_tab_hover_c',},\r
+		},\r
+		'elements': {\r";
 		
 		for ( $i = 1 ; $i <= $tab_infos['NbrOfTabs'] ; $i++ ) {
 			if ( $i == 1 ) { $selection = 1; }
 			else { $selection = 0; }
 			$JavaScriptTable .= "\"".$tab_infos['GroupName']."_".$tab_infos['CellName'].$i."\": {
-		'cibleDoc':'".$tab_infos['GroupName']."_".$tab_infos['DocumentName'].$i."',
-		'EtatSelection':'".$selection."',
-		'EtatHover':'0',
-		'up': {\r
-		'ida':'".$c_id_a.$i."', 'Styla':'".$Block."_tab_up_a',
-		'idb':'".$c_id_b.$i."', 'Stylb':'".$Block."_tab_up_b',
-		'idc':'".$c_id_c.$i."', 'Stylc':'".$Block."_tab_up_c' },\r
-		'down': {\r
-		'ida':'".$c_id_a.$i."', 'Styla':'".$Block."_tab_down_a',
-		'idb':'".$c_id_b.$i."', 'Stylb':'".$Block."_tab_down_b',
-		'idc':'".$c_id_c.$i."', 'Stylc':'".$Block."_tab_down_c' },\r
-		'hover': {\r
-		'ida':'".$c_id_a.$i."', 'Styla':'".$Block."_tab_hover_a',
-		'idb':'".$c_id_b.$i."', 'Stylb':'".$Block."_tab_hover_b',
-		'idc':'".$c_id_c.$i."', 'Stylc':'".$Block."_tab_hover_c' }\r
-		 },\r";
+			'cibleDoc':'".$tab_infos['GroupName']."_".$tab_infos['DocumentName'].$i."',
+			'isSelected':'".$selection."',
+			'HoverState':'0',
+			'up': {		'ida':'".$c_id_a.$i."',	'idb':'".$c_id_b.$i."',	'idc':'".$c_id_c.$i."', },\r
+			'down': {	'ida':'".$c_id_a.$i."',	'idb':'".$c_id_b.$i."',	'idc':'".$c_id_c.$i."', },\r
+			'hover': {	'ida':'".$c_id_a.$i."',	'idb':'".$c_id_b.$i."',	'idc':'".$c_id_c.$i."', },\r
+			'sup': {	'idd':'".$c_id_d.$i."', },\r
+		},\r
+		";
 		}
-		
+		$JavaScriptTable .= "	\r},\r}\r";
+
 		$JavaScriptTableLength = strlen($JavaScriptTable) - 2;
 		$JavaScriptTable = substr( $JavaScriptTable, 0 , $JavaScriptTableLength) . "\r};\r";
 		
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$GeneratedJavaScriptObj->insertJavaScript('Onload', "\tInitOnglets ( OngletData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName']." );");
+		$GeneratedJavaScriptObj->insertJavaScript('Init', "var tm = new TabsManagement();");
+		$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\ttm.InitTabs (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
+		$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
+		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
 		$GeneratedJavaScriptObj->insertJavaScript('Data', $JavaScriptTable);
-		
+
 		switch ( $tab_infos['RenderMode'] ) {
 			case 0:
 				echo $Content;
@@ -145,10 +151,6 @@ class RenderTabs {
 				return $Content;
 				break;
 		}
-	
 	}
-
-
-
 }
 ?>

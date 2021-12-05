@@ -16,7 +16,7 @@ class Decoration extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"deco_ref_id"		=> "",
+		"deco_id"			=> "",
 		"deco_name"			=> "New Decoration",
 		"deco_state"		=> 1,
 		"deco_type"			=> 20,
@@ -39,7 +39,7 @@ class Decoration extends Entity {
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('decoration') . "
-			WHERE deco_ref_id = '" . $id . "'
+			WHERE deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for <neddle> id=".$id));
@@ -67,8 +67,8 @@ class Decoration extends Entity {
 				'columns'		=> $this->columns,
 				'data'			=> $this->Decoration,
 				'targetTable'	=> 'decoration',
-				'targetColumn'	=> 'deco_ref_id',
-				'entityId'		=> $this->Decoration['deco_ref_id'],
+				'targetColumn'	=> 'deco_id',
+				'entityId'		=> $this->Decoration['deco_id'],
 				'entityTitle'	=> 'decoration'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
@@ -79,7 +79,7 @@ class Decoration extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->decorationExists($this->Decoration['deco_ref_id']);
+		return $this->entityExistsInDb('decoration', $this->Decoration['deco_id']);
 	}
 	
 	

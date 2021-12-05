@@ -33,14 +33,14 @@ class RenderDeco301Div {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$RenderLayoutObj = RenderLayout::getInstance();
+		// $RenderLayoutObj = RenderLayout::getInstance();
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		$m = $RenderLayoutObj->getModuleList();
+		// $m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
-		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
+		// $L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
@@ -106,7 +106,7 @@ class RenderDeco301Div {
 	";
 		
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 30 );");
-		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
+		// $RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

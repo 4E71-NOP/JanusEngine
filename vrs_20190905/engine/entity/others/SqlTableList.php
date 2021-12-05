@@ -16,7 +16,6 @@ class SqlTableList {
 	private static $Instance = null;
 
 	private $SQLTableName = array();
-	// private $SQLTableShortName = array();		// Deprecated
 	
 	private $TableList = array (
 			'article',			'article_tag',			'article_config',
@@ -26,21 +25,23 @@ class SqlTableList {
 			'definition',
 			'document',			'document_share',		'document_partage',
 			'extension',		'extension_config',		'extension_dependency',		'extension_file',
-			'group',			'group_user',
+			'group',			'group_permission',		'group_user',			
 			'i18n',				
 			'installation',		
 			'keyword',			'note',			
 			'language',			'language_website',		
 			'log',				
 			'module',			'module_website',		
-			'layout',			'layout_content',		'layout_theme',
-			'pv',				
+			'layout',			'layout_theme',				'layout_file',
+			'permission',		'pv',				
 			'stored_event',		
 			'tag',				
 			'theme_descriptor',	'theme_website',
-			'user',
+			'user',				'user_permission',
 			'website',			'group_website',		'theme_website',
 	);
+
+	// 'layout_content',		
 
 	private function __construct( $dbprefix , $tabprefix ){
 		foreach ( $this->TableList as $A ) { 

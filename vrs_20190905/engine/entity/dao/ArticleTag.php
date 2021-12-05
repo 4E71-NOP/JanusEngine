@@ -70,7 +70,7 @@ class ArticleTag extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->articleTagExists($this->ArticleTag['article_tag_id']);
+		return $this->entityExistsInDb('article_tag', $this->ArticleTag['article_tag_id']);
 	}
 		
 	/**
@@ -79,8 +79,8 @@ class ArticleTag extends Entity {
 	 */
 	public function checkDataConsistency () {
 		$res = true;
-		if ( $this->articleExists($this->ArticleTag['arti_id']) == false ) { $res = false; }
-		if ( $this->tagExists($this->ArticleTag['tag_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('article', $this->ArticleTag['arti_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('tag', $this->ArticleTag['tag_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

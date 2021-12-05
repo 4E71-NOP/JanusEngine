@@ -87,7 +87,7 @@ class KeyWord extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->keywordExists($this->KeyWord['keyword_id']);
+		return $this->entityExistsInDb('keyword', $this->KeyWord['keyword_id']);
 	}
 	
 	
@@ -101,8 +101,8 @@ class KeyWord extends Entity {
 		$res = true;
 		if ( $this->KeyWord['keyword_type'] < 0 && $this->KeyWord['keyword_type'] > 3) { $res = false; }
 
-		if ( $this->articleExists($this->KeyWord['arti_id']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->KeyWord['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('article', $this->KeyWord['arti_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->KeyWord['ws_id']) == false ) { $res = false; }
 
 		return $res;
 	}

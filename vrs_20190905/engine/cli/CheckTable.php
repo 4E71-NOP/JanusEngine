@@ -429,6 +429,13 @@ self::$CheckTable['add']['layout']['0']['d']	= 3;
 self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
 self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_D001";
 self::$CheckTable['add']['layout']['0']['s']	= "name";
+self::$CheckTable['add']['layout']['0']['d']	= 2;
+self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_file_id FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['file']."';");};
+self::$CheckTable['add']['layout']['0']['c']	= "layout_file_id";
+self::$CheckTable['add']['layout']['0']['v']	= "file";
+self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_U001";
+self::$CheckTable['add']['layout']['0']['p']	= "layout_file";
+self::$CheckTable['add']['layout']['0']['s']	= "file";
 
 self::$CheckTable['update']['layout']['0']['d']	= 2;
 self::$CheckTable['update']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['name']."';");};
@@ -462,19 +469,43 @@ self::$CheckTable['assign']['layout']['1']['p']	= "layout";
 self::$CheckTable['assign']['layout']['1']['s']	= "to_theme";
 
 
-self::$CheckTable['add']['layout_content']['0']['d']	= 2;
-self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
-self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
-self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
-self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
-self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
-self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
+// self::$CheckTable['add']['layout_content']['0']['d']	= 2;
+// self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
+// self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
+// self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
+// self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
+// self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
+// self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
 // self::$CheckTable['add']['layout_content']['1']['d']	= 2;
 // self::$CheckTable['add']['layout_content']['1']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['module']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
 // self::$CheckTable['add']['layout_content']['1']['c']	= "module_id";
 // self::$CheckTable['add']['layout_content']['1']['v']	= "module_id";
 // self::$CheckTable['add']['layout_content']['1']['m']	= "CLI_LayoutContent_C002";
 // self::$CheckTable['add']['layout_content']['1']['p']	= "layout";
+
+
+// Layout file
+self::$CheckTable['add']['layout_file']['0']['d']	= 3;
+self::$CheckTable['add']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['layout_file']['0']['m']	= "CLI_layout_file_D001";
+self::$CheckTable['add']['layout_file']['0']['s']	= "name";
+
+self::$CheckTable['update']['layout_file']['0']['d']	= 2;
+self::$CheckTable['update']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['update']['layout_file']['0']['c']	= "layout_file_id";
+self::$CheckTable['update']['layout_file']['0']['v']	= "layout_file_id";
+self::$CheckTable['update']['layout_file']['0']['m']	= "CLI_layout_file_U001";
+self::$CheckTable['update']['layout_file']['0']['p']	= "layout file";
+self::$CheckTable['update']['layout_file']['0']['s']	= "name";
+
+self::$CheckTable['delete']['layout_file']['0']['d']	= 2;
+self::$CheckTable['delete']['layout_file']['0']['f']	= function ($a) { return array ("SELECT layout_file_id,layout_file_name FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['name']."';");};
+self::$CheckTable['delete']['layout_file']['0']['c']	= "layout_file_id";
+self::$CheckTable['delete']['layout_file']['0']['v']	= "layout_file_id";
+self::$CheckTable['delete']['layout_file']['0']['m']	= "CLI_layout_file_D001";
+self::$CheckTable['delete']['layout_file']['0']['p']	= "layout file";
+self::$CheckTable['delete']['layout_file']['0']['s']	= "name";
+
 
 
 // Module
@@ -524,6 +555,10 @@ self::$CheckTable['delete']['module']['0']['m']	= "CLI_Module_D001";
 self::$CheckTable['delete']['module']['0']['p']	= "module";
 self::$CheckTable['delete']['module']['0']['s']	= "name";
 
+self::$CheckTable['add']['permission']['0']['d']	= 3;
+self::$CheckTable['add']['permission']['0']['f']	= function ($a) { return array ("SELECT prm.perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['permission']['0']['m']	= "CLI_Permission_C001";
+self::$CheckTable['add']['permission']['0']['s']	= "name";
 
 // Tag
 // Usage of 'BINARY' because of collation : utf8mb4_general_ci

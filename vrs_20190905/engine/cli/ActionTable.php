@@ -52,7 +52,9 @@ self::$ActionTable['add']['keyword']		= function (&$a) { return array ("INSERT I
 
 self::$ActionTable['add']['layout']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['layout_file']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_file']." (".$a['columns'].") VALUES (".$a['values'].");");};
+
+// self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 
 self::$ActionTable['add']['log']	= function (&$a) { 
@@ -69,6 +71,12 @@ self::$ActionTable['add']['module'] = function (&$a) { return array (
 		"INSERT INTO ".$a['sqlTables']['module_website']." VALUES ('".$a['params']['module_website_id']."', '".$a['Context']['ws_id']."', '".$a['params']['id']."', '".$a['params']['state']."', '".$a['params']['position']."' );"
 	);
 };
+
+self::$ActionTable['add']['permission'] = function (&$a) { return array (
+	"INSERT INTO ".$a['sqlTables']['permission']." (".$a['columns'].") VALUES (".$a['values'].");",
+	);
+};
+
 
 self::$ActionTable['add']['tag']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['tag']." (".$a['columns'].") VALUES (".$a['values'].");");};
 

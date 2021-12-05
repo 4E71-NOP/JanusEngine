@@ -13,7 +13,15 @@ define ( "USER_ACTION_DISCONNECT", "disconnect" );
 define ( "ANONYMOUS_USER_NAME", "anonymous" );
 
 // --------------------------------------------------------------------------------------------
-// ClassLoader
+// Directories 
+define ("_EXTENSIONS_DIRECTORY_"	, "extensions/");
+define ("_CURRENT_DIRECTORY_"		, "current/");
+define ("_LAYOUTS_DIRECTORY_"		, "layouts/");
+define ("_MEDIA_DIRECTORY_"			, "media/");
+define ("_MODULES_DIRECTORY_"		, "modules/");
+define ("_STYLESHEETS_DIRECTORY_"	, "stylesheets/");
+define ("_WEBSITESDATA_DIRECTORY_"	, "websites-data/");
+
 define ("_UTILITY_DIRECTORY_"	, "current/engine/utility/");
 define ("_SDDM_DIRECTORY_"		, "current/engine/sddm/");
 define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");
@@ -21,7 +29,7 @@ define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");
 // --------------------------------------------------------------------------------------------
 // Logs
 define ( "LOGLEVEL_BREAKPOINT",		5 ); // You definitely like to read or you're a crappy programmer
-define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like i'm the <class::method> and i recieved this data
+define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like "I'm the <class::method> and i recieved this data"
 define ( "LOGLEVEL_INFORMATION",	3 ); // Moaar
 define ( "LOGLEVEL_WARNING",		2 ); // More
 define ( "LOGLEVEL_ERROR",			1 ); // Usual level
@@ -44,7 +52,7 @@ $ll = 0;
 switch ($application) {
 	case 'install' :
 		$ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_STATEMENT;
+		$ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'monitor' :
@@ -102,6 +110,9 @@ define ("_DELETED_"		,2);
 define ("_AFTER_"		,2);
 define ("_PUBLIC_"		,2);
 
+define ("_FORBIDDEN_"	,0);
+define ("_READ_"		,1);
+define ("_WRITE_"		,2);
 
 // --------------------------------------------------------------------------------------------
 // Class names

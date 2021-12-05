@@ -12079,6 +12079,7 @@ $stylesheet = "
 // fileName : hydr_aqua_01.css
 //----------------------------------------------------------------------------
 */
+html { width:100%; height:100%;}
 
 .mt_B01_ft, .mt_B02_ft, .mt_B03_ft, .mt_B04_ft, .mt_B05_ft, .mt_B06_ft, .mt_B07_ft, .mt_B08_ft, .mt_B09_ft, .mt_B10_ft, .mt_B11_ft, .mt_B12_ft, .mt_B13_ft, .mt_B14_ft, .mt_B15_ft, .mt_B16_ft, .mt_B17_ft, .mt_B18_ft, .mt_B19_ft, .mt_B21_ft, .mt_B22_ft, .mt_B23_ft, .mt_B24_ft, .mt_B25_ft, .mt_B26_ft, .mt_B27_ft, .mt_B28_ft, .mt_B29_ft, .mt_B30_ft  { border-spacing: 0px; border: 0px; empty-cells: show; vertical-align: middle; } 
 .mt_B01_ft1, .mt_B02_ft1, .mt_B03_ft1, .mt_B04_ft1, .mt_B05_ft1, .mt_B06_ft1, .mt_B07_ft1, .mt_B08_ft1, .mt_B09_ft1, .mt_B10_ft1, .mt_B11_ft1, .mt_B12_ft1, .mt_B13_ft1, .mt_B14_ft1, .mt_B15_ft1, .mt_B16_ft1, .mt_B17_ft1, .mt_B18_ft1, .mt_B19_ft1, .mt_B21_ft1, .mt_B22_ft1, .mt_B23_ft1, .mt_B24_ft1, .mt_B25_ft1, .mt_B26_ft1, .mt_B27_ft1, .mt_B28_ft1, .mt_B29_ft1, .mt_B30_ft1  { padding: 0px; border: 0px; width: 32px; height: 64px; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ft1.png);  } 
@@ -12279,12 +12280,12 @@ $stylesheet = "
  
  .mt_div_AdminControlPanel {
   position: absolute; 
-  top: 48px; 
-  left: 48px; 
+  width: 90%; 
+  height: 90%; 
   border-style: solid; 
   border-width: 8px; 
   border-color: #FF8000; 
-  margin : 0px;
+  margin : auto;
   padding : 0px;
   background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_bgc_fca.png);
   visibility: hidden; 

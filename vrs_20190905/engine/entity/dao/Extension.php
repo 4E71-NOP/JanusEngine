@@ -84,7 +84,7 @@ class Extension extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->extensionExists($this->Extension['extension_id']);
+		return $this->entityExistsInDb('extension', $this->Extension['extension_id']);
 	}
 	
 	
@@ -94,8 +94,8 @@ class Extension extends Entity {
 	 */
 	public function checkDataConsistency () {
 		$res = true;
-		if ( $this->userExists($this->Extension['extension_author']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->Extension['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Extension['extension_author']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Extension['ws_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

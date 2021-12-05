@@ -37,7 +37,6 @@ class I18nTrans {
 	public function getI18nTransFromDB ($package = 'initial' ) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
 		$dbquery = $bts->SDDMObj->query ("

@@ -89,7 +89,7 @@ class Group extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->groupExists($this->Group['group_id']);
+		return $this->entityExistsInDb('group', $this->Group['group_id']);
 	}
 	
 	

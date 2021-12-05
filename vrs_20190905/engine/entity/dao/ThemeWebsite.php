@@ -81,7 +81,7 @@ class ThemeWebsite extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->themeWebsiteExists($this->ThemeWebsite['theme_website_id']);
+		return $this->entityExistsInDb('theme_website', $this->ThemeWebsite['theme_website_id']);
 	}
 	
 	
@@ -95,8 +95,8 @@ class ThemeWebsite extends Entity {
 		$res = true;
 		if ( $this->ThemeWebsite['theme_website_type'] < 0 && $this->ThemeWebsite['theme_website_type'] > 3) { $res = false; }
 
-		if ( $this->themeDescriptorExists($this->ThemeWebsite['theme_id']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->ThemeWebsite['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('theme_descriptor', $this->ThemeWebsite['theme_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->ThemeWebsite['ws_id']) == false ) { $res = false; }
 
 		return $res;
 	}

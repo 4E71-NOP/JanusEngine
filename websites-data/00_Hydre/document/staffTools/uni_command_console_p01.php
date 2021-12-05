@@ -148,7 +148,8 @@ $T['Content']['1']['4']['1']['cont'] = "**************";
 $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l5');
 $T['Content']['1']['5']['1']['class'] = $Block."_fcta";
 
-$T['Content']['1']['6']['1']['cont'] = "<textarea name='requete_insert' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($BlockT, 'txt_font_size' ) ) * 1.35 )."' rows='6' class='".$Block."_t3 ".$Block."_form_1'></textarea>";
+// $T['Content']['1']['6']['1']['cont'] = "<textarea name='requete_insert' cols='".floor(($ThemeDataObj->getThemeDataEntry('theme_module_internal_width') / $ThemeDataObj->getThemeBlockEntry($BlockT, 'txt_font_size' ) ) * 1.35 )."' rows='6' class='".$Block."_t3 ".$Block."_form_1'></textarea>";
+$T['Content']['1']['6']['1']['cont'] = "<textarea name='requete_insert' style='width:100%' rows='6' class='".$Block."_t3 ".$Block."_form_1'></textarea>";
 $T['Content']['1']['6']['1']['style'] = "text-align:center;";
 
 $SB = array(

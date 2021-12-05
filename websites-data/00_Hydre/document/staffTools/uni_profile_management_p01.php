@@ -515,7 +515,7 @@ else {
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
-	$PmThemeDataObj->setThemeDataEntry('theme_module_internal_width', $ThemeDataObj->getThemeDataEntry('theme_module_internal_width'));
+	// $PmThemeDataObj->setThemeDataEntry('theme_module_internal_width', $ThemeDataObj->getThemeDataEntry('theme_module_internal_width'));
 	
 	$CurrentSetObj->backupInstanceOfThemeDataObj();
 	$CurrentSetObj->setInstanceOfThemeDataObj($PmThemeDataObj);
@@ -761,8 +761,8 @@ else {
 		$maxCells = 3;
 		$maxLines = 4;
 		$lineCount = 1;
-		$pv['icon_div_size'] = floor($PmThemeDataObj->getThemeDataEntry('theme_module_internal_width')/4)-8 ;
-		if ( $pv['icon_div_size'] > 128 ) { $pv['icon_div_size'] = 128; }
+		// $pv['icon_div_size'] = "25%";
+		//if ( $pv['icon_div_size'] > 128 ) { $pv['icon_div_size'] = 128; }
 		$j = 0;
 		$T['Content'][$Tab]['1']['1']['cont'] .= "<table style='margin-left:auto; margin-right:auto;' border='0' >\r";
 		for ( $lineCount = 1 ; $lineCount <= $maxLines ; $lineCount++ ) {
@@ -772,7 +772,7 @@ else {
 				width: 136px; height: 136px; 
 				border-style: solid; border-width: 1px; border-color: #000000;'>\r
 				<div style='
-				width: ".$pv['icon_div_size']."px; height: ".$pv['icon_div_size']."px;
+				width:25%; height:25%;
 				margin:auto; 
 				background-repeat: no-repeat; background-position:center; 
 				".$PmIcon[$j]."'></div>\r
@@ -844,6 +844,7 @@ else {
 				<td>\r	
 				<div style='background-repeat: no-repeat; background-position:center; ".$themeEntries[$j]." width: ".(floor(($T['ContentInfos']['Width']-48)/$maxCells))."px; height: ".(floor($RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')/$maxLines))."px;'></div>\r
 				</td>\r";
+				$T['Content'][$Tab]['1']['1']['class'] = "mt_bareTable";
 				$j++;
 			}
 		}

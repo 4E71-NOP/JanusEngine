@@ -59,29 +59,7 @@ class DocumentData {
 			}
 			$CurrentSetObj->setDataSubEntry('document', 'arti_page', 1);
 		}
-		// this part is now take care of by the Router class
-		// We should only process things based upon session data
-// 		else {
-// 			$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $bts->RequestDataObj->getRequestDataEntry('arti_ref'));
-// 			$CurrentSetObj->setDataSubEntry('document', 'arti_page', $bts->RequestDataObj->getRequestDataEntry('arti_page'));
-// 		}
-		
-// 		We have an article to display whatever its ID is requested or forged
-// 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."`"), false );
-// 		$dbquery = $bts->SDDMObj->query("
-// 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
-// 		doc.docu_creator, doc.docu_creation_date,
-// 		doc.docu_examiner, doc.docu_examination_date,
-// 		doc.docu_origin, doc.docu_cont, sit.ws_directory
-// 		FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('deadline')." bcl, ".$SqlTableListObj->getSQLTableName('website')." sit
-// 		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('document', 'arti_ref')."'
-// 		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('document', 'arti_page')."'
-// 		AND art.docu_id = doc.docu_id
-// 		AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-// 		AND sit.ws_id = doc.docu_origin
-// 		AND art.deadline_id = bcl.deadline_id
-// 		AND bcl.deadline_state = '1'
-// 		;");
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."`"), false );
 		$dbquery = $bts->SDDMObj->query("
 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,

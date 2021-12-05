@@ -32,28 +32,28 @@ class RenderDeco60Elysion {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		$m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
-		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
+		if (! isset($infos['module_z_index'])) { $infos['module_z_index'] = 1; }
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
+		$L['dx'] = $L['dy'] = 160;
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
 		$Block = $infos['block'];
+		$position = "absolute";
 		switch ($infos['module_display_mode']) {
 			case "bypass":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
+				$position = "relative";
 				break;
 			case "normal":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
@@ -68,22 +68,20 @@ class RenderDeco60Elysion {
 				$Block .= "M";
 				break;
 		}
-		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
+		// if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		// x1 x2
 		// x3 x4
-		// $B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
-		
-		
-// 		$L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
-// 		$L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
-// 		$L['pos_x2_ex22'] = $L['px'] + $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
+		// $B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');		
+		// $L['pos_x1_ex22'] = $L['px'] + max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
+		// $L['pos_y1_ex22'] = $L['py'] + max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
+		// $L['pos_x2_ex22'] = $L['px'] + $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
 		$L['pos_x1_ex22'] = max ( $B['ex11_x'], $B['ex21_x'], $B['ex31_x'], $B['ex41_x'], $B['ex51_x']);
 		$L['pos_y1_ex22'] = max ( $B['ex11_y'], $B['ex12_y'], $B['ex13_y'], $B['ex14_y'], $B['ex15_y']);
 		$L['pos_x2_ex22'] = $L['dx'] - max ( $B['ex15_x'], $B['ex25_x'], $B['ex35_x'], $B['ex45_x'], $B['ex55_x'] );
 		$L['pos_y2_ex22'] = &$L['pos_y1_ex22'];
 		$L['pos_x3_ex22'] = &$L['pos_x1_ex22'];
-// 		$L['pos_y3_ex22'] = $L['py'] + $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
+		// $L['pos_y3_ex22'] = $L['py'] + $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
 		$L['pos_y3_ex22'] = $L['dy'] - max ( $B['ex51_y'], $B['ex52_y'], $B['ex53_y'], $B['ex54_y'], $B['ex55_y'] );
 		$L['pos_x4_ex22'] = &$L['pos_x2_ex22'];
 		$L['pos_y4_ex22'] = &$L['pos_y3_ex22'];
@@ -92,7 +90,7 @@ class RenderDeco60Elysion {
 		$L['dim_y_ex22'] = $L['pos_y3_ex22'] - $L['pos_y1_ex22'];
 		
 		// Adjust values depending on decoration 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " mn=".$mn."; B['ex11_x']=".$B['ex11_x']."; B['ex21_x']=".$B['ex21_x']."; B['ex31_x']=".$B['ex31_x']."; L['px']=".$L['px']."; infos['block']=".$infos['block']."; L['dim_x_ex22']=".$L['pos_x2_ex22']." - ".$L['pos_x1_ex22']." = ".$L['dim_x_ex22']));
 		
 		$CV = ($L['dim_x_ex22'] - $B['ex12_x'] - $B['ex14_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
 		$CV = ($L['dim_x_ex22'] - $B['ex52_x'] - $B['ex54_x']);	if ( $CV <= 0 ) { $CV = abs($CV) + 8; $L['dim_x_ex22'] += $CV; $L['dx'] += $CV; $L['pos_x2_ex22'] += $CV; $L['pos_x4_ex22'] = &$L['pos_x2_ex22']; }
@@ -170,8 +168,10 @@ class RenderDeco60Elysion {
 	<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 	";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
+		$containerWidth		= (isset($infos['forcedWidth'])) ? $infos['forcedWidth'] : $L['dx']."px";
+		$containerHeight	= (isset($infos['forcedHeight'])) ? $infos['forcedHeight'] : $L['dy']."px";
 		$Content .= "
-		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle .";' class='".$TN . $infos['block']."'>\r
+		<div id='".$mcn."' style='position:".$position."; width:".$containerWidth."; height:".$containerHeight."; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r
 		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
 		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
 		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
@@ -206,12 +206,52 @@ class RenderDeco60Elysion {
 		if ( $B['in53_e'] == 1 ) { $Content .= "<div ".$DivIdList['in53']." class='".$TN . $Block."_in53' style='left: ".$L['pos_x_in53']."px;	top: ".$L['pos_y_in53']."px; width:".$L['dim_x_in53']."px;	height:".$B['in53_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		if ( $B['in54_e'] == 1 ) { $Content .= "<div ".$DivIdList['in54']." class='".$TN . $Block."_in54' style='left: ".$L['pos_x_in54']."px;	top: ".$L['pos_y_in54']."px; width:".$L['in54_x']."px;		height:".$B['in54_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
 		if ( $B['in55_e'] == 1 ) { $Content .= "<div ".$DivIdList['in55']." class='".$TN . $Block."_in55' style='left: ".$L['pos_x_in55']."px;	top: ".$L['pos_y_in55']."px; width:".$L['in55_x']."px;		height:".$B['in55_y']."px;		z-index: ".($infos['module_z_index']+1).";'></div>\r"; }
+
 		$Content .= "
 		<div ".$DivIdList['ex22']." class='".$TN.$Block."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 60 );");
-		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
+
+		$argAddModule = "{
+			ex11 : {	'isEnabled':1,	'DimX':".$B['ex11_x'].",	'DimY':".$B['ex11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex12 : {	'isEnabled':1,	'DimX':".$B['ex12_x'].",	'DimY':".$B['ex12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex13 : {	'isEnabled':1,	'DimX':".$B['ex13_x'].",	'DimY':".$B['ex13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex14 : {	'isEnabled':1,	'DimX':".$B['ex14_x'].",	'DimY':".$B['ex14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex15 : {	'isEnabled':1,	'DimX':".$B['ex15_x'].",	'DimY':".$B['ex15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex21 : {	'isEnabled':1,	'DimX':".$B['ex21_x'].",	'DimY':".$B['ex21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex22 : {	'isEnabled':1,	'DimX':".$B['ex22_x'].",	'DimY':".$B['ex22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex25 : {	'isEnabled':1,	'DimX':".$B['ex25_x'].",	'DimY':".$B['ex25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex31 : {	'isEnabled':1,	'DimX':".$B['ex31_x'].",	'DimY':".$B['ex31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex35 : {	'isEnabled':1,	'DimX':".$B['ex35_x'].",	'DimY':".$B['ex35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex41 : {	'isEnabled':1,	'DimX':".$B['ex41_x'].",	'DimY':".$B['ex41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex45 : {	'isEnabled':1,	'DimX':".$B['ex45_x'].",	'DimY':".$B['ex45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex51 : {	'isEnabled':1,	'DimX':".$B['ex51_x'].",	'DimY':".$B['ex51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex52 : {	'isEnabled':1,	'DimX':".$B['ex52_x'].",	'DimY':".$B['ex52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex53 : {	'isEnabled':1,	'DimX':".$B['ex53_x'].",	'DimY':".$B['ex53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex54 : {	'isEnabled':1,	'DimX':".$B['ex54_x'].",	'DimY':".$B['ex54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex55 : {	'isEnabled':1,	'DimX':".$B['ex55_x'].",	'DimY':".$B['ex55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			";
+			$argAddModuleIn = "";
+			$argAddModuleIn .= ( $B['in11_e'] == 1 ) ? "in11 : {	'isEnabled':1,	'DimX':".$B['in11_x'].",	'DimY':".$B['in11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in11 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in12_e'] == 1 ) ? "in12 : {	'isEnabled':1,	'DimX':".$B['in12_x'].",	'DimY':".$B['in12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in12 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in13_e'] == 1 ) ? "in13 : {	'isEnabled':1,	'DimX':".$B['in13_x'].",	'DimY':".$B['in13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in13 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in14_e'] == 1 ) ? "in14 : {	'isEnabled':1,	'DimX':".$B['in14_x'].",	'DimY':".$B['in14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in14 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in15_e'] == 1 ) ? "in15 : {	'isEnabled':1,	'DimX':".$B['in15_x'].",	'DimY':".$B['in15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in15 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in21_e'] == 1 ) ? "in21 : {	'isEnabled':1,	'DimX':".$B['in21_x'].",	'DimY':".$B['in21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in21 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in22_e'] == 1 ) ? "in22 : {	'isEnabled':1,	'DimX':".$B['in22_x'].",	'DimY':".$B['in22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in22 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in25_e'] == 1 ) ? "in25 : {	'isEnabled':1,	'DimX':".$B['in25_x'].",	'DimY':".$B['in25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in25 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in31_e'] == 1 ) ? "in31 : {	'isEnabled':1,	'DimX':".$B['in31_x'].",	'DimY':".$B['in31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in31 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in35_e'] == 1 ) ? "in35 : {	'isEnabled':1,	'DimX':".$B['in35_x'].",	'DimY':".$B['in35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in35 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in41_e'] == 1 ) ? "in41 : {	'isEnabled':1,	'DimX':".$B['in41_x'].",	'DimY':".$B['in41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in41 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in45_e'] == 1 ) ? "in45 : {	'isEnabled':1,	'DimX':".$B['in45_x'].",	'DimY':".$B['in45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in45 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in51_e'] == 1 ) ? "in51 : {	'isEnabled':1,	'DimX':".$B['in51_x'].",	'DimY':".$B['in51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in51 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in52_e'] == 1 ) ? "in52 : {	'isEnabled':1,	'DimX':".$B['in52_x'].",	'DimY':".$B['in52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in52 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in53_e'] == 1 ) ? "in53 : {	'isEnabled':1,	'DimX':".$B['in53_x'].",	'DimY':".$B['in53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in53 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in54_e'] == 1 ) ? "in54 : {	'isEnabled':1,	'DimX':".$B['in54_x'].",	'DimY':".$B['in54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in54 : {	'isEnabled':false },";
+			$argAddModuleIn .= ( $B['in55_e'] == 1 ) ? "in55 : {	'isEnabled':1,	'DimX':".$B['in55_x'].",	'DimY':".$B['in55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in55 : {	'isEnabled':false },";
+
+			$argAddModule .= "}";
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

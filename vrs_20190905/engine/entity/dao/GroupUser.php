@@ -80,7 +80,7 @@ class GroupUser extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->articleExists($this->GroupUser['group_user_id']);
+		return $this->entityExistsInDb('article', $this->GroupUser['group_user_id']);
 	}
 	
 	
@@ -92,8 +92,8 @@ class GroupUser extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( $this->userExists($this->GroupUser['user_id']) == false ) { $res = false; }
-		if ( $this->groupExists($this->GroupUser['group_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->GroupUser['user_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->GroupUser['group_id']) == false ) { $res = false; }
 		return $res;
 	}
 	

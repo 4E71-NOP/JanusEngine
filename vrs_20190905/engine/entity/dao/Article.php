@@ -58,9 +58,9 @@ class Article extends Entity {
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')."
 			WHERE arti_id = '".$id."'
-			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			;");
-// 			AND arti_page = '".$page."'
+			// AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			// 			AND arti_page = '".$page."'
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -99,7 +99,7 @@ class Article extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->articleExists($this->Article['arti_id']);
+		return $this->entityExistsInDb('article', $this->Article['arti_id']);
 	}
 	
 	
@@ -112,12 +112,12 @@ class Article extends Entity {
 		if ( $this->Article['validation_state'] < 0 && $this->Article['validation_state'] > 2) { $res = false; }
 		if ( $this->Article['arti_creation_date'] == 0 ) { $res = false; }
 		
-		if ( $this->deadlineExists($this->Article['deadline_id']) == false ) { $res = false; }
-		if ( $this->articleConfigExists($this->Article['config_id']) == false ) { $res = false; }
-		if ( $this->documentExists($this->Article['docu_id']) == false ) { $res = false; }
-		if ( $this->websiteExists($this->Article['ws_id']) == false ) { $res = false; }
-		if ( $this->userExists($this->Article['arti_creator_id']) == false ) { $res = false; }
-		if ( $this->userExists($this->Article['arti_validator_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('deadline', $this->Article['deadline_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('article_config', $this->Article['config_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('document', $this->Article['docu_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Article['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Article['arti_creator_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Article['arti_validator_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

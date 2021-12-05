@@ -21,6 +21,7 @@ class Layout extends Entity {
 		'layout_title'			=> "New Layout",
 		'layout_generic_name'	=> "NewLyot",
 		'layout_desc'			=> 0,
+		'layout_file_id'		=> "default.lyt.html",
 	);
 	//@formatter:on
 	
@@ -79,7 +80,7 @@ class Layout extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->layoutExists($this->Layout['layout_id']);
+		return $this->entityExistsInDb('layout', $this->Layout['layout_id']);
 	}
 	
 	

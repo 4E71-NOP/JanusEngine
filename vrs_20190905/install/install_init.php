@@ -123,32 +123,6 @@ class HydrInstall {
 
 		// --------------------------------------------------------------------------------------------
 		include ("stylesheets/css_admin_install.php");
-		$mt_ = array_merge(
-				$mt_,
-				array(
-						'theme_module_internal_width'=> 896,
-						'theme_module_width' => 896,)
-				);
-		
-		$ClassLoaderObj->provisionClass ( 'ThemeData' );
-		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
-		$ThemeDataObj->setThemeData ( $mt_ ); // Better to give an array than the object itself.
-		$ThemeDataObj->setThemeName ( 'mt_' );
-
-		$ClassLoaderObj->provisionClass ( 'ThemeDescriptor' );
-		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
-		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
-
-		$ClassLoaderObj->provisionClass ( 'User' );
-		$CurrentSetObj->setInstanceOfUserObj ( new User () );
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
-
-		$ClassLoaderObj->provisionClass ( 'RenderLayout' );
-		$RenderLayoutObj = RenderLayout::getInstance ();
-
-		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
-		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -169,6 +143,25 @@ class HydrInstall {
 		$module_ ['module_deco'] = 1;
 
 		// --------------------------------------------------------------------------------------------
+		$ClassLoaderObj->provisionClass ( 'ThemeData' );
+		$CurrentSetObj->setInstanceOfThemeDataObj ( new ThemeData () );
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj->setThemeData ( $mt_ ); // Better to give an array than the object itself.
+		$ThemeDataObj->setThemeName ( 'mt_' );
+
+		$ClassLoaderObj->provisionClass ( 'ThemeDescriptor' );
+		$CurrentSetObj->setInstanceOfThemeDescriptorObj ( new ThemeDescriptor () );
+		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj ();
+
+		$ClassLoaderObj->provisionClass ( 'User' );
+		$CurrentSetObj->setInstanceOfUserObj ( new User () );
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+
+		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
+		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );
+	
+
+		// --------------------------------------------------------------------------------------------
 		// <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
 
 		$DocContent = "<!DOCTYPE html>
@@ -183,7 +176,7 @@ class HydrInstall {
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry ( 'B01T', 'a_fg_active_col' ) . 
 			"' background='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . 
 			"/" . $ThemeDataObj->getThemeDataEntry('theme_bg') 
-			. "'>\r\r
+			. "' style='height:100%;'>\r\r
 			";
 
 		// --------------------------------------------------------------------------------------------
@@ -226,133 +219,71 @@ class HydrInstall {
 				"file"		=> "current/install/i18n/install_init_" . $l . ".php",
 				"format"	=>	"php"
 			 ));
-		// --------------------------------------------------------------------------------------------
-		if (strlen ( $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) ) > 0) {
-			$div_initial_bg = "background-image: url(media/theme/" . $ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_bg' ) . "); background-repeat: " . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_repeat' ) . ";";
-		}
-		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) == 0) {
-			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dx', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
-		}
-		if ($ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) == 0) {
-			$ThemeDataObj->setThemeDataEntry ( 'theme_divinitial_dy', $ThemeDataObj->getThemeDataEntry ( 'theme_module_width' ) + 16 );
-		}
 
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
-			<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: hidden;
-			width:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dx' ) . "px;
-			height:" . $ThemeDataObj->getThemeDataEntry ( 'theme_divinitial_dy' ) . "px;" . $div_initial_bg . "'>\r";
+			";
 
-		$infos = array (
-				"mode" => 1,
-				"module_display_mode" => "normal",
-				"module_z_index" => 2,
-				"block" => "B02",
-				"blockG" => "B02G",
-				"blockT" => "B02T",
-				"deco_type" => 50,
-				"fontSizeMin" => 10,
-				"fontCoef" => 1.3,
-				"module" => Array (
-						"module_id" => 11,
-						"module_deco" => 1,
-						"module_deco_nbr" => 2,
-						"module_deco_default_text" => 3,
-						"module_name" => "Admin_install_B1",
-						"module_classname" => "",
-						"module_title" => "",
-						"module_file" => "",
-						"module_desc" => "",
-						"module_container_name" => "",
-						"module_group_allowed_to_see" => 31,
-						"module_group_allowed_to_use" => 31,
-						"module_adm_control" => 0,
-						"module_execution" => 0,
-						"module_website_id" => 11,
-						"ws_id" => 2,
-						"module_state" => 1,
-						"module_position" => 2
-				)
+		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		$ClassLoaderObj->provisionClass ('ModuleList');
+		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
+		
+		$ClassLoaderObj->provisionClass ('LayoutProcessor');
+		$LayoutProcessorObj = LayoutProcessor::getInstance();
+		$ClassLoaderObj->provisionClass ( 'RenderModule' );
+		$RenderModuleObj = RenderModule::getInstance ();
+
+		// Monitor or Install screens
+		if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is an install page") );
+			$ModuleLisObj->makeInstallModuleList();
+			$ContentFragments = $LayoutProcessorObj->installRender('install.lyt.html');
+		}
+		else { 
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );
+			$ModuleLisObj->makeMonitorModuleList(); 
+			$ContentFragments = $LayoutProcessorObj->installRender('install_monitor.lyt.html');
+		}
+
+
+
+
+		$LayoutCommands = array(
+			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
+			1 => array( "regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
 		);
-
-		$Block = $ThemeDataObj->getThemeName () . $infos ['block'];
-
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 112 );
-
-		$RenderDeco = RenderDeco50Exquisite::getInstance ();
-		$DocContent .= $RenderDeco->render ( $infos );
-		$DocContent .= "<h1 style='text-align: center;'>" . $bts->I18nTransObj->getI18nTransEntry ( 'b01Invite' ) . "</h1></div>\r";
-
-		// --------------------------------------------------------------------------------------------
-
-		$infos ['module'] ['module_name'] = "Admin_install_B2";
-		$infos ['block'] = "B01";
-		$infos ['blockG'] = "B01G";
-		$infos ['blockT'] = "B01T";
-		$infos ['deco_type'] = 40;
-
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 120 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", $ThemeDataObj->getThemeDataEntry ( "theme_module_width" ) );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 816 + 64 );
-
-		$RenderDeco = RenderDeco40Elegance::getInstance ();
-		$DocContent .= $RenderDeco->render ($infos);
-
-		// --------------------------------------------------------------------------------------------
-		//
-		// Pages - Diplaying informations
-		//
-		// --------------------------------------------------------------------------------------------
-		$localisation = "Page";
-		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Page" );
-		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Page" );
-
-		$T = array ();
-
-		if ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
-			$bts->RequestDataObj->setRequestData ( 'PageInstall', 1 );
+		
+		// We know there's only one command per entry
+		$insertJavascriptDecorationMgmt = false;
+		foreach ( $ContentFragments as &$A ) {
+			foreach ( $LayoutCommands as $B) {
+				if ( $A['type'] == "command" && preg_match($B['regex'],$A['data'],$match) === 1 ) {
+					// We got the match so it's...
+					switch ($B['command']) {
+						case "get_header":
+							break;
+						case "render_module":
+							// Module it is.
+							if ( $insertJavascriptDecorationMgmt === false) {
+								$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$insertJavascriptDecorationMgmt = true;
+							}
+							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
+							$A['content'] = $RenderModuleObj->render($A['module_name']);
+							break;
+					}
+				}
+			}
 		}
-
-		switch ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
-			case "1" :
-				include ("current/install/install_page_01.php");
-				break;
-			case "2" :
-				include ("current/install/install_page_02.php");
-				break;
+		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
+		
+		foreach ( $ContentFragments as &$A ) {
+			//	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
+			$DocContent .= $A['content'];
 		}
-		$DocContent .= "</div>\r</div>\r";
-
-		// --------------------------------------------------------------------------------------------
-		// Tooltip
-		// --------------------------------------------------------------------------------------------
-		$infos ['module'] ['module_container_name'] = "tooltipContainer";
-		$infos ['module'] ['module_name'] = "tooltip";
-		$infos ['module'] ['module_deco_nbr'] = 20;
-		$infos ['module_z_index'] = 99;
-		$infos ['block'] = "B20";
-		$infos ['blockG'] = "B20G";
-		$infos ['blockT'] = "B20T";
-		$infos ['deco_type'] = 40;
-
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "px", 8 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "py", 4 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dx", 320 );
-		$RenderLayoutObj->setLayoutModuleEntry ( $infos ['module'] ['module_name'], "dy", 192 );
-
-		$RenderDeco = RenderDeco40Elegance::getInstance ();
-		$DocContent .= $RenderDeco->render ( $infos ) . "</div>\r</div>\r";
-
-		require_once "modules/initial/Tooltip/module_tooltip.php";
-		$tooltip = new ModuleTooltip();
-		$tooltip->render($infos);
-		$GeneratedJavaScriptObj->insertJavaScript ( "Data", "var TabInfoModule = new Array();\r");
-
+	
 		// --------------------------------------------------------------------------------------------
 		// Javascript files
 		// --------------------------------------------------------------------------------------------
@@ -361,12 +292,14 @@ class HydrInstall {
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_test_db.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_fonctions.js' );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_ElementAnimation.js' );
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Onload', "console.log ( TabInfoModule );" );
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+
+		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
@@ -380,12 +313,16 @@ class HydrInstall {
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
 		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
-		$JavaScriptContent .= "// ----------------------------------------\r//\r// Onload segment\r//\r//\r";
-		$JavaScriptContent .= "function WindowOnload () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Onload" );
+		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
+		$JavaScriptContent .= "function WindowOnResize (){\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= "\r}\r";
+		$JavaScriptContent .= "function WindowOnLoad () {\r";
+		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
 		}\r
-		window.onload = WindowOnload;\r\r
+		window.onresize = WindowOnResize;\r
+		window.onload = WindowOnLoad;\r\r
 		</script>\r";
 
 		$DocContent .= $JavaScriptContent;

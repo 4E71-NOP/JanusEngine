@@ -85,7 +85,7 @@ class ArticleConfig extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->articleConfigExists($this->ArticleConfig['config_id']);
+		return $this->entityExistsInDb('article_config', $this->ArticleConfig['config_id']);
 	}
 	
 	
@@ -94,7 +94,7 @@ class ArticleConfig extends Entity {
 	 * Meaning that every foreign key must be corresponding to an entry in the 'right table'.
 	 */
 	public function checkDataConsistency () {
-		return $this->websiteExists($this->ArticleConfig['ws_id']);
+		return $this->entityExistsInDb('website', $this->ArticleConfig['ws_id']);
 	}
 	
 	

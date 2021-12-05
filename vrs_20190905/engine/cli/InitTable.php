@@ -102,7 +102,7 @@ self::$InitTable['content'] = function (&$a) {
 self::$InitTable['decoration'] = function (&$a) {
 	$a['params'] = array(
 			"name"			=> "New Decoration",
-			"ref_id"		=> "",
+			"id"			=> "",
 			"repertoire"	=> "",
 			"directory"		=> "",
 			"state"			=> "ONLINE",
@@ -445,7 +445,7 @@ self::$InitTable['decoration'] = function (&$a) {
 					"icons_height"
 			),
 			"20" => array (
-					"repertoire",
+					// "repertoire",
 					"directory",
 					"txt_fonte",			"txt_fonte_size_min",		"txt_fonte_size_max",
 					"txt_fonte_size",		
@@ -668,7 +668,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"border_all_width",			"border_all_color",			"border_all_style", 		"padding_all",		"margin_all"
 			),
 			"40" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",
 					"ex21",	"ex22",	"ex23",
 					"ex31",	"ex32",	"ex33",
@@ -683,7 +684,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"ex33_x",	"ex33_y",	"ex33_bgp"
 			),
 			"50" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",	"ex14",	"ex15",
 					"ex21",	"ex22",					"ex25",
 					"ex31",							"ex35",
@@ -708,7 +710,8 @@ self::$InitTable['decoration'] = function (&$a) {
 					"ex55_x",	"ex55_y",		"ex55_bgp"
 			),
 			"60" => array (
-					"repertoire",
+					// "repertoire",
+					"directory",
 					"ex11",	"ex12",	"ex13",	"ex14",	"ex15",
 					"ex21",	"ex22",					"ex25",
 					"ex31",							"ex35",
@@ -859,6 +862,7 @@ self::$InitTable['module'] = function (&$a) {
 			"title"					=> "New module",
 			"directory"				=> "NA",
 			"file"					=> "NA",
+			"type"					=> 1,
 			"desc"					=> "New module",
 			"group_allowed_to_see"	=> 1,
 			"group_allowed_to_use"	=> 1,
@@ -901,65 +905,92 @@ self::$InitTable['language'] = function (&$a) {
 self::$InitTable['layout'] = function (&$a) {
 	$a['params'] = array(
 			"id"				=> "",
-			"layout_theme_id"		=> "",
+			"layout_theme_id"	=> "",
 			"name"				=> "New Layout",
 			"title"				=> "New Layout",
 			"generic_name"		=> "New Layout",
 			"desc"				=> "",
-			
+			"file"				=> "hydr_default_layout",		
 			"to_theme"			=> "",
 			"default"			=> "NO",
 	);
 	$a['params']['description'] = &$a['params']['desc'];
 };
 
-self::$InitTable['layout_content'] = function (&$a) {
+self::$InitTable['layout_file'] = function (&$a) {
 	$a['params'] = array(
-			"id"				=> "",
-			"to_layout"			=> "",
-			"cont_id"			=> "",
-			"line"				=> "",
-			"minimum_x"			=> 128,
-			"minimum_y"			=> 128,
-			"module"			=> "",
-			"calculation_type"	=> "STATIC",
-			"position_x"		=> 0,
-			"position_y"		=> 0,
-			"dimenssion_x"		=> 0,
-			"dimenssion_y"		=> 0,
-			
-			"anchor_dx10" => "null",	"anchor_dy10" => "null",
-			"anchor_dx20" => "null",	"anchor_dy20" => "null",
-			"anchor_dx30" => "null",	"anchor_dy30" => "null",
-			
-			"module_anchor_e1a"	=> "",	"anchor_ex1a" => "null",	"anchor_ey1a" => "null",
-			"module_anchor_e1b"	=> "",	"anchor_ex1b" => "null",	"anchor_ey1b" => "null",
-			"module_anchor_e1c"	=> "",	"anchor_ex1c" => "null",	"anchor_ey1c" => "null",
-			"module_anchor_e1d"	=> "",	"anchor_ex1d" => "null",	"anchor_ey1d" => "null",
-			"module_anchor_e1e"	=> "",	"anchor_ex1e" => "null",	"anchor_ey1e" => "null",
-			
-			"module_anchor_e2a"	=> "",	"anchor_ex2a" => "null",	"anchor_ey2a" => "null",
-			"module_anchor_e2b"	=> "",	"anchor_ex2b" => "null",	"anchor_ey2b" => "null",
-			"module_anchor_e2c"	=> "",	"anchor_ex2c" => "null",	"anchor_ey2c" => "null",
-			"module_anchor_e2d"	=> "",	"anchor_ex2d" => "null",	"anchor_ey2d" => "null",
-			"module_anchor_e2e"	=> "",	"anchor_ex2e" => "null",	"anchor_ey2e" => "null",
-			
-			"module_anchor_e3a"	=> "",	"anchor_ex3a" => "null",	"anchor_ey3a" => "null",
-			"module_anchor_e3b"	=> "",	"anchor_ex3b" => "null",	"anchor_ey3b" => "null",
-			"module_anchor_e3c"	=> "",	"anchor_ex3c" => "null",	"anchor_ey3c" => "null",
-			"module_anchor_e3d"	=> "",	"anchor_ex3d" => "null",	"anchor_ey3d" => "null",
-			"module_anchor_e3e"	=> "",	"anchor_ex3e" => "null",	"anchor_ey3e" => "null",
-			
-			"spacing_border_left"	=> 8,
-			"spacing_border_right"	=> 8,
-			"spacing_border_top"	=> 8,
-			"spacing_border_bottom"	=> 8,
-			"module_zindex"			=> 0,
-			
+		'id'			=> 0,
+		'name'			=> "New Layout_file",
+		'generic_name'	=> "NewLyt",
+		'filename'		=> "Layout_FileName.lyt.html",
+		'desc'			=> "Desc",
 	);
-	$a['params']['description'] = &$a['params']['desc']; 
-	$a['params']['module_name'] = &$a['params']['module']; 
+	$a['params']['description'] = &$a['params']['desc'];
 };
+
+
+self::$InitTable['permission'] = function (&$a) {
+	$a['params'] = array(
+		"perm_id"					=> "",
+		"perm_state" 				=> "enabled",
+		"perm_name" 				=> "defaultPermission",
+		"perm_affinity"				=> "user",
+		"perm_object_type"			=> "module",
+		"perm_desc"					=> "defaultPermission description",
+		"perm_level"				=> "read",
+
+	);
+	$a['params']['description'] = &$a['params']['desc'];
+};
+
+
+// self::$InitTable['layout_content'] = function (&$a) {
+// 	$a['params'] = array(
+// 			"id"				=> "",
+// 			"to_layout"			=> "",
+// 			"cont_id"			=> "",
+// 			"line"				=> "",
+// 			"minimum_x"			=> 128,
+// 			"minimum_y"			=> 128,
+// 			"module"			=> "",
+// 			"calculation_type"	=> "STATIC",
+// 			"position_x"		=> 0,
+// 			"position_y"		=> 0,
+// 			"dimenssion_x"		=> 0,
+// 			"dimenssion_y"		=> 0,
+			
+// 			"anchor_dx10" => "null",	"anchor_dy10" => "null",
+// 			"anchor_dx20" => "null",	"anchor_dy20" => "null",
+// 			"anchor_dx30" => "null",	"anchor_dy30" => "null",
+			
+// 			"module_anchor_e1a"	=> "",	"anchor_ex1a" => "null",	"anchor_ey1a" => "null",
+// 			"module_anchor_e1b"	=> "",	"anchor_ex1b" => "null",	"anchor_ey1b" => "null",
+// 			"module_anchor_e1c"	=> "",	"anchor_ex1c" => "null",	"anchor_ey1c" => "null",
+// 			"module_anchor_e1d"	=> "",	"anchor_ex1d" => "null",	"anchor_ey1d" => "null",
+// 			"module_anchor_e1e"	=> "",	"anchor_ex1e" => "null",	"anchor_ey1e" => "null",
+			
+// 			"module_anchor_e2a"	=> "",	"anchor_ex2a" => "null",	"anchor_ey2a" => "null",
+// 			"module_anchor_e2b"	=> "",	"anchor_ex2b" => "null",	"anchor_ey2b" => "null",
+// 			"module_anchor_e2c"	=> "",	"anchor_ex2c" => "null",	"anchor_ey2c" => "null",
+// 			"module_anchor_e2d"	=> "",	"anchor_ex2d" => "null",	"anchor_ey2d" => "null",
+// 			"module_anchor_e2e"	=> "",	"anchor_ex2e" => "null",	"anchor_ey2e" => "null",
+			
+// 			"module_anchor_e3a"	=> "",	"anchor_ex3a" => "null",	"anchor_ey3a" => "null",
+// 			"module_anchor_e3b"	=> "",	"anchor_ex3b" => "null",	"anchor_ey3b" => "null",
+// 			"module_anchor_e3c"	=> "",	"anchor_ex3c" => "null",	"anchor_ey3c" => "null",
+// 			"module_anchor_e3d"	=> "",	"anchor_ex3d" => "null",	"anchor_ey3d" => "null",
+// 			"module_anchor_e3e"	=> "",	"anchor_ex3e" => "null",	"anchor_ey3e" => "null",
+			
+// 			"spacing_border_left"	=> 8,
+// 			"spacing_border_right"	=> 8,
+// 			"spacing_border_top"	=> 8,
+// 			"spacing_border_bottom"	=> 8,
+// 			"module_zindex"			=> 0,
+			
+// 	);
+// 	$a['params']['description'] = &$a['params']['desc']; 
+// 	$a['params']['module_name'] = &$a['params']['module']; 
+// };
 
 self::$InitTable['tag'] = function (&$a) {
 	$a['params'] = array(

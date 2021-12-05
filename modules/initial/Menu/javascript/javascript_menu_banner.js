@@ -26,7 +26,7 @@ function InitMenuBanner ( Tab ) {
 
 		var alignDiv = LocaliseElement ( ObjP.id );
 		if ( PremierBanner == 0 ) {
-			var initialDiv = LocaliseElement ( 'initial_div' ); // compensate first div relative position
+//			var initialDiv = LocaliseElement ( 'initial_div' ); // compensate first div relative position
 			var PremierADLeft = alignDiv.px - initialDiv.px;
 			PremierBanner = 1;	
 		}

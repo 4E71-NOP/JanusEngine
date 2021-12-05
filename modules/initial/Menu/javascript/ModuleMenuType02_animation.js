@@ -165,7 +165,7 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 				Obj.MWM_AnimationEnCoursIN = 0;
 
 				var CotesDuParent = elm.LocateElement ( Tab[ptr].p );
-				var initialDiv = elm.LocateElement ( 'initial_div' ); // compensate first div relative position
+//				var initialDiv = elm.LocateElement ( 'initial_div' ); // compensate first div relative position
 
 				switch ( Number(Tab[ptr].cible) ) {
 				case 0 :	var NewDivPx = ( CotesDuParent.px - initialDiv.px );						var NewDivPy = ( CotesDuParent.py - initialDiv.py ); 	break;	// cible
@@ -195,7 +195,7 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 						DivDecoList[IdxDeco].onmousedown = CustomEventMouseClick;
 					}
 				}
-			dm.UpdateDecoModule ( TabInfoModule , Tab[ptr].id );
+			dm.UpdateAllDecoModule ( TabInfoModule , Tab[ptr].id );
 			}
 		break;
 		case 'a':
@@ -561,7 +561,7 @@ function TailleHorizontale ( Obj , da , db ) {
 	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	}
-	dm.UpdateDecoModule ( TabInfoModule , Obj.id );
+	dm.UpdateAllDecoModule ( TabInfoModule , Obj.id );
 
 	str = 'Obj.id:' + Obj.id + '; ModuleNom:' + TabInfoModule[Obj.id]['module_name'] +'; DimConteneurX:' + TabInfoModule[Obj.id]['DimConteneurX'];
 	l.Log[dbgPopMenu](str);
@@ -577,7 +577,7 @@ function TailleVerticale ( Obj , da , db ) {
 	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	}
-	dm.UpdateDecoModule ( TabInfoModule , Obj.id );
+	dm.UpdateAllDecoModule ( TabInfoModule , Obj.id );
 
 }
 

@@ -699,7 +699,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // --------------------------------------------------------------------------------------------
 
 $bts->GeneratedJavaScriptObj->insertJavaScript('File', "engine/javascript/lib_themeManagement.js");
-$bts->GeneratedJavaScriptObj->insertJavaScript('Onload', 'GestionThemeMAJJauge();');
+$bts->GeneratedJavaScriptObj->insertJavaScript('OnLoad', 'GestionThemeMAJJauge();');
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();

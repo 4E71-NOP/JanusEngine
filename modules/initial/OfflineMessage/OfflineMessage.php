@@ -22,7 +22,7 @@ class ModuleOffLineMessage {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-		$ClassLoaderObj->provisionClass('RenderLayout');
+		// $ClassLoaderObj->provisionClass('RenderLayout');
 		$ClassLoaderObj->provisionClass('ThemeData');
 		$ClassLoaderObj->provisionClass('WebSite');
 		
@@ -65,8 +65,6 @@ class ModuleOffLineMessage {
 		$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
 		$ThemeDataObj->setThemeName('mt_');
 		
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
 		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
 		
@@ -74,7 +72,6 @@ class ModuleOffLineMessage {
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', 1024);
 		
 		$Content = "<!-- __________ start of modules __________ -->\r
-		<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: hidden;
 		width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px;
 		height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;".
 		"'>\r";
@@ -113,18 +110,6 @@ class ModuleOffLineMessage {
 		$RenderDeco = RenderDeco40Elegance::getInstance();
 		
 		// --------------------------------------------------------------------------------------------
-		
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "px", 0 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "py", 128 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dx", 512 );
-		$RenderLayoutObj->setLayoutModuleEntry($infos['module']['module_name'], "dy", 256 );
-		
-		$RenderLayoutObj->setModuleList(
-			array(
-				$infos['module']['module_name'] => array ('module_deco_default_text'	=>	6 ),
-			)
-		);
-		
 		$Content = "
 			<!DOCTYPE html>
 			<html>\r
@@ -135,14 +120,12 @@ class ModuleOffLineMessage {
 			</head>\r
 			<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../media/theme/".$ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg' )."'>\r\r
 			<!-- __________ start of modules __________ -->\r
-			<div id='initial_div' style='position:relative; margin-left: auto; margin-right: auto; visibility: visible;
 			width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px; 
 			height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;
 			'>\r".
 			$RenderDeco->render($infos).
 			"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>".
 			$WebSiteObj->getWebSiteEntry('ws_message')."</span><br>\r".
-			$RenderLayoutObj->getLayoutModuleEntry($infos['module']['module_name'], 'module_deco_default_text')."<br>\r".
 			"
 			</div>\r
 			</div>\r

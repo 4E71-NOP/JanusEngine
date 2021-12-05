@@ -29,7 +29,7 @@ class RenderAdmDashboard {
 	public function render(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$RenderLayoutObj = RenderLayout::getInstance();
+		// $RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
 		$localisation = " / ModuleMenu";
@@ -51,7 +51,6 @@ class RenderAdmDashboard {
 			ORDER BY module_position
 			;");
 		
-		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$module_tab_adm_ = array();
 			$i = 1;
@@ -61,7 +60,7 @@ class RenderAdmDashboard {
 				$module_tab_adm_[$i]['module_deco_nbr']				= $dbp['module_deco_nbr'];
 				$module_tab_adm_[$i]['module_deco_default_text']	= $dbp['module_deco_default_text'];
 				$module_tab_adm_[$i]['module_name']					= $dbp['module_name'];
-				$module_tab_adm_[$i]['module_name']					= str_replace ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_short') , "" , $module_tab_adm_[$i]['module_name'] ); // trouver pourquoi enlever le tag MWM (ou RW) du nom)
+				$module_tab_adm_[$i]['module_container_name']		= $dbp['module_container_name'];
 				$module_tab_adm_[$i]['module_classname']			= $dbp['module_classname'];
 				$module_tab_adm_[$i]['module_title']				= $dbp['module_title'];
 				$module_tab_adm_[$i]['module_directory']			= $dbp['module_directory'];
@@ -91,26 +90,29 @@ class RenderAdmDashboard {
 				),
 		);
 
-		foreach ( $module_tab_adm_ as $m ) {
-			$dimAdmModules += $RenderLayoutObj->getLayoutModuleEntry($m['module_name'], 'dx');
-		}
-		
+		$infos['module_z_index'] = 1000;
 		$Content .= "
 			<div id='AdminControlSwitch'
 			class ='".$ThemeDataObj->getThemeName()."div_AdminControlSwitch'
 			style='visibility:visible; z-index:".$infos['module_z_index'].";'
-			onClick=\"elm.SwitchDisplayCenter('AdmDashboard'); elm.FillScreenDiv ('AdminControlBG',1);\">
+			onClick=\"gr.switchDisplay('AdminControlBG','AdmDashboard', TabsData_AdmGrcd);\">
 			</div>\r
-							
+			
 			<div id='AdminControlBG'
 			class ='".$ThemeDataObj->getThemeName()."FileSelectorContainer'
-			style='display:none; visibility:hidden; z-index:".($infos['module_z_index']+1).";'
-			OnClick=\"elm.SwitchDisplay('AdmDashboard'); elm.FillScreenDiv('AdminControlBG',0);\">\r
-			</div>\r
-							
+			style='display:block; visibility:hidden; z-index:".($infos['module_z_index']+1)."; 
+			width:100%; height:100%;
+			top:0px; left:0px;' 
+			onClick=\"gr.switchDisplay('AdminControlBG','AdmDashboard', TabsData_AdmGrcd);\">
+			</div>
+
 			<div id='AdmDashboard'
 			class ='".$ThemeDataObj->getThemeName()."div_AdminControlPanel'
-			style='display:none; visibility:hidden; overflow:hidden; width:".($dimAdmModules+16)."px; background-color:#".$ThemeDataObj->getThemeDataEntry('theme_bg_color').";  z-index:".($infos['module_z_index']+2)."; padding:5px'
+			style='display:block; visibility:hidden; overflow:hidden; z-index:".($infos['module_z_index']+2).";
+			width:80%; height:80%;
+			top:0px; left:0px;
+			margin:0 auto; padding:10px;
+			background-color:#".$ThemeDataObj->getThemeDataEntry('theme_bg_color').";' 
 			>\r
 			";
 		$infos['module_z_index'] += 4;
@@ -120,9 +122,17 @@ class RenderAdmDashboard {
 		// 2	10	6
 		// 1	9	5
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Onload', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		
+		$cellList = array (
+			1 => array( 'width'=> '25%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '2cm',	'minHeight' => '10cm'),
+			2 => array( 'width'=> '75%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '6cm',	'minHeight' => '10cm'),
+		);
+
 		$n = 1;
+		$Content .= "<table style='width:100%;height:100%;border-spacing:0px; border-collapse:collapse;'>\r
+		<tr style=' padding:0px 0px 5px 0px;'>\r
+		";
 		foreach ( $module_tab_adm_ as $m ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
@@ -131,7 +141,10 @@ class RenderAdmDashboard {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 			
 			$infos['module_name'] = $mn = &$m['module_name'];
-			$Content .= "<!-- _______________________________________ Start ".$mn." _______________________________________ -->\r";
+			$Content .= "
+			<!-- _______________________________________ Start ".$mn." _______________________________________ -->\r
+			<td style='width:".$cellList[$n]['width']."; height:".$cellList[$n]['height']."; min-width:".$cellList[$n]['minWidth']."; min-height:".$cellList[$n]['minHeight'].";'>
+			";
 			
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
 				if ( $m['module_deco'] == 1 ) { 
@@ -141,6 +154,8 @@ class RenderAdmDashboard {
 				$infos['blockG'] = $infos['block']."G"; 
 				$infos['blockT'] = $infos['block']."T"; 
 				$infos['module'] = $m;
+				$infos['forcedWidth'] = $cellList[$n]['forcedWidth'];
+				$infos['forcedHeight'] = $cellList[$n]['forcedHeight'];
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
@@ -162,23 +177,24 @@ class RenderAdmDashboard {
 				$Content .= $bts->RenderModuleObj->selectDecoration($infos);
 				$Content .= $ModuleRenderer->render($infos);
 				
-				$Content .= "</div>\r</div>\r<!-- _______________________________________ Fin du module ".$mn." _______________________________________ -->\r\r\r\r\r";
+				$Content .= "
+				</div>\r
+				</div>\r
+				<!-- _______________________________________ Fin du module ".$mn." _______________________________________ -->\r
+				\r\r";
+
 				$n++;
-				
 			}
-			$infos['admin_control']['px'] += $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx');
-			$infos['admin_control']['dx'] += $RenderLayoutObj->getLayoutModuleEntry($mn, 'dx');
-			$infos['module_z_index']+=2;
-			if ( $RenderLayoutObj->getLayoutModuleEntry($mn, 'dy') > $infos['admin_control']['dy']) {  $infos['admin_control']['dy'] = $RenderLayoutObj->getLayoutModuleEntry($mn, 'dy'); }
+			$Content .= "</td>\r";
+			
 		}
-		
-		$Content .= "</div>\r";
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "elm.ResizeDiv ( 'AdmDashboard' , ".$infos['admin_control']['dx']." , ".$infos['admin_control']['dy']." );");
+		$Content .= "
+		</tr>\r
+		</table>\r
+		</div>\r";
 
 		return $Content;
 		}
-	
 	}
-	
 }
 ?>

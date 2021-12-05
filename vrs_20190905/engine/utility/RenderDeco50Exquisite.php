@@ -32,28 +32,28 @@ class RenderDeco50Exquisite {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$RenderLayoutObj = RenderLayout::getInstance();
-		
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
-		$m = $RenderLayoutObj->getModuleList();
 		$TN = $ThemeDataObj->getThemeName();
-		$L = $RenderLayoutObj->getLayoutEntry($mn);		// we work locally on the dataset and save it at the end.
+		if (! isset($infos['module_z_index'])) { $infos['module_z_index'] = 1; }
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
+		$L['dx'] = $L['dy'] = 160;
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 		$mcn = $infos['module']['module_container_name'];
 		$Block = $infos['block'];
+		$position = "absolute";
 		switch ($infos['module_display_mode']) {
 			case "bypass":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
+				$position = "relative";
 				break;
 			case "normal":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
@@ -68,7 +68,7 @@ class RenderDeco50Exquisite {
 				$Block .= "M";
 				break;
 		}
-		if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
+		// if ( $L['lyoc_module_zindex'] != 0 ) { $infos['module_z_index'] = $L['lyoc_module_zindex']; }
 		// --------------------------------------------------------------------------------------------
 		// x1 x2
 		// x3 x4
@@ -136,8 +136,10 @@ class RenderDeco50Exquisite {
 		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 		";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
+		$containerWidth		= (isset($infos['forcedWidth'])) ? $infos['forcedWidth'] : $L['dx']."px";
+		$containerHeight	= (isset($infos['forcedHeight'])) ? $infos['forcedHeight'] : $L['dy']."px";
 		$Content .= "
-		<div id='".$mcn."' style='position:absolute; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r		
+		<div id='".$mcn."' style='position:".$position."; width:".$containerWidth."; height:".$containerHeight."; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r
 		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
 		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
 		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r
@@ -154,12 +156,31 @@ class RenderDeco50Exquisite {
 		<div ".$DivIdList['ex53']." class='".$TN . $Block."_ex53' style='left: ".$L['pos_x_ex53']."px;	top: ".$L['pos_y_ex53']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex53']."px;	height:".$B['ex53_y']."px;'></div>\r
 		<div ".$DivIdList['ex54']." class='".$TN . $Block."_ex54' style='left: ".$L['pos_x_ex54']."px;	top: ".$L['pos_y_ex54']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex54_x']."px;		height:".$B['ex54_y']."px;'></div>\r
 		<div ".$DivIdList['ex55']." class='".$TN . $Block."_ex55' style='left: ".$L['pos_x_ex55']."px;	top: ".$L['pos_y_ex55']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex55_x']."px;		height:".$B['ex55_y']."px;'></div>\r
-				
 		<div ".$DivIdList['ex22']." class='".$TN.$infos['block']."_ex22' style='left: ".$L['pos_x_ex22']."px;	top: ".$L['pos_y_ex22']."px; width: ".$L['dim_x_ex22']."px ; height: ".$L['dim_y_ex22']."px; overflow: auto; z-index: ".$infos['module_z_index'].";'>\r
 		<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 		";
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 50 );");
-		$RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
+
+		$argAddModule = "{
+			ex11 : {	'isEnabled':true,	'DimX':".$B['ex11_x'].",	'DimY':".$B['ex11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex12 : {	'isEnabled':true,	'DimX':".$B['ex12_x'].",	'DimY':".$B['ex12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex13 : {	'isEnabled':true,	'DimX':".$B['ex13_x'].",	'DimY':".$B['ex13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex14 : {	'isEnabled':true,	'DimX':".$B['ex14_x'].",	'DimY':".$B['ex14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex15 : {	'isEnabled':true,	'DimX':".$B['ex15_x'].",	'DimY':".$B['ex15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex21 : {	'isEnabled':true,	'DimX':".$B['ex21_x'].",	'DimY':".$B['ex21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex22 : {	'isEnabled':true,	'DimX':".$B['ex22_x'].",	'DimY':".$B['ex22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex25 : {	'isEnabled':true,	'DimX':".$B['ex25_x'].",	'DimY':".$B['ex25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex31 : {	'isEnabled':true,	'DimX':".$B['ex31_x'].",	'DimY':".$B['ex31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex35 : {	'isEnabled':true,	'DimX':".$B['ex35_x'].",	'DimY':".$B['ex35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex41 : {	'isEnabled':true,	'DimX':".$B['ex41_x'].",	'DimY':".$B['ex41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex45 : {	'isEnabled':true,	'DimX':".$B['ex45_x'].",	'DimY':".$B['ex45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex51 : {	'isEnabled':true,	'DimX':".$B['ex51_x'].",	'DimY':".$B['ex51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex52 : {	'isEnabled':true,	'DimX':".$B['ex52_x'].",	'DimY':".$B['ex52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex53 : {	'isEnabled':true,	'DimX':".$B['ex53_x'].",	'DimY':".$B['ex53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex54 : {	'isEnabled':true,	'DimX':".$B['ex54_x'].",	'DimY':".$B['ex54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex55 : {	'isEnabled':true,	'DimX':".$B['ex55_x'].",	'DimY':".$B['ex55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			}";
+	
+		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 50, '".$mcn."', ".$argAddModule." );");
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

@@ -81,7 +81,7 @@ class ExtensionFile extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->extensionFileExists($this->ExtensionFile['file_id']);
+		return $this->entityExistsInDb('extension_file', $this->ExtensionFile['file_id']);
 	}
 		
 	/**
@@ -91,7 +91,7 @@ class ExtensionFile extends Entity{
 	public function checkDataConsistency () {
 		$res = true;
 		
-		if ( $this->extensionExists($this->ExtensionFile['extension_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('extension', $this->ExtensionFile['extension_id']) == false ) { $res = false; }
 		
 		return $res;	
 	}

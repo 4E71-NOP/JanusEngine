@@ -40,9 +40,9 @@ class ModuleLogo {
 		<a href='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
 		<img src='".
 			$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
-			"/media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory').
+			"media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory').
 			"/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_logo').
-			"' alt='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_name')."' border='0'
+			"' alt='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_name')."' style='border:0px'
 		>\r
 		</a>\r
 		</div>\r

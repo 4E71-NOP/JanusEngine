@@ -248,7 +248,7 @@ class ThemeDescriptor extends Entity{
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		$this->themeDescriptorExists($this->ThemeDescriptor['theme_id']);
+		$this->entityExistsInDb('theme_descriptor', $this->ThemeDescriptor['theme_id']);
 	}
 	
 	
