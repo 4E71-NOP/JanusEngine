@@ -28,7 +28,7 @@ class DecorationManagement {
 		// Executed if initialization is needed
 		if ( d.main.container != "" & d.main.isInitialized != true ) {
 			l.Log[this.dbgCalcDeco]("Init module "+d.main.module_name);
-			//d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
+			d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
 			// c.style.width = this.getContentWidth(d.main.parent)+"px";
 			// c.style.height = this.getContentHeight(d.main.parent)+"px";
 
