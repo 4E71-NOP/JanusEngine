@@ -29,8 +29,8 @@ class ModuleTooltip {
 		
 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
 		$cdx = $cdy = 0;
-		if ($cdx == 0) { $cdx = 256;}
-		if ($cdy == 0) { $cdy = 256;}
+		if ($cdx == 0) { $cdx = 192;}
+		if ($cdy == 0) { $cdy = 96;}
 
 		$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/Tooltip/lib_Tooltip.js');
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var t = new ToolTip();');

@@ -21,8 +21,8 @@
 // --------------------------------------------------------------------------------------------
 class HydrGlobalConfig {
 	constructor () {
-		this.GeneralDebug = 1;
-		this.CoreDbg = 1;
+		this.GeneralDebug = 0;
+		this.CoreDbg = 0;
 	}
 }
 
@@ -272,21 +272,20 @@ class ElementHandling {
 			y = window.innerHeight;
 		break;
 		}
-		this.DivInitial = this.LocateElement ('initial_div'); 
 	
 		switch ( mode ) {
-			case 'x':	return x;	break;
-			case 'y':	return y;	break;
-			default: 
-				if (de.cliEnv) {
-					de.cliEnv.document.width = x;
-					de.cliEnv.document.height = y;
-				}
-// var str = 'UpdateWindowSize : x=' + x + '; y=' + y +"; Client: width=" +
-// de.cliEnv.document.width + ", height=" + de.cliEnv.document.height;
-// l.Log[cfg.CoreDbg](str);
+		case 'x':	return x;	break;
+		case 'y':	return y;	break;
+		default: 
+			if (de.cliEnv) {
+				de.cliEnv.document.width = x;
+				de.cliEnv.document.height = y;
+			}
 			break;
 		}
+		// var str = 'UpdateWindowSize : x=' + x + '; y=' + y +"; Client: width=" +
+		// de.cliEnv.document.width + ", height=" + de.cliEnv.document.height;
+		// l.Log[cfg.CoreDbg](str);
 	}
 	
 	/**
@@ -606,9 +605,6 @@ var m	= new MouseManagement();
 var mod = new ModuleManagement();
 var sf	= new StringFormat();
 
-elm.DivInitial = elm.LocateElement ('initial_div'); 
-
-// elm.UpdateWindowSize();
 if ( !window.onresize ) {
 	window.onresize = function () { elm.UpdateWindowSize(); };
 	// An anonymous function calling the class.method() is better than assinging

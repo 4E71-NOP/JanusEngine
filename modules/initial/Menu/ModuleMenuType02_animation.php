@@ -291,7 +291,7 @@ class ModuleMenuType02 {
 					$ModuleDecoration = $MenuRenderer->render($infos);
 				}
 				
-				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Command", "dm.UpdateDecoModule ( TabInfoModule , '".$A['id']."' );");
+				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Command", "dm.UpdateAllDecoModule ( TabInfoModule , '".$A['id']."' );");
 			}
 			
 			$A['div_height_calc'] = (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']) ) + $PMT['ex11_y'] + $PMT['exF1_y'];

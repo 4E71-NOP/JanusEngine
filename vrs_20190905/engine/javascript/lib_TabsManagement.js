@@ -95,7 +95,6 @@ class TabsManagement {
 		}
 	}
 	
-	
 	TabsResize (Table) {
 		let te = Table.elements;
 		let h = elm.Gebi(Table.hostDiv);

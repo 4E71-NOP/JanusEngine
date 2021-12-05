@@ -12,69 +12,75 @@
 //Decoration management functions
 class DecorationManagement {
 	constructor (){
-		this.dbgCalcDeco = 1;
+		this.dbgCalcDeco = 0;
 	}
 
-	UpdateDecoModule ( t ) {
+	UpdateAllDecoModule ( t ) {
 		for ( let m in t ) {
-			var d = t[m];
-			var c = elm.Gebi( d.main.container )
-			// Executed if initialization is needed
-			if ( d.main.container != "" & d.main.isInitialized != true ) {
-				d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
-				c.style.width = this.getContentWidth(d.main.parent)+"px";
-				c.style.height = this.getContentHeight(d.main.parent)+"px";
-
-				switch (d.main.deco_type) {
-					case 'elegance':
-					case 40:
-						var dl = ['ex11', 'ex12', 'ex13', 'ex21', 'ex22', 'ex23', 'ex31', 'ex32', 'ex33'];
-						break;
-					case 'exquise':
-					case 'exquisite':
-					case 50:
-						var dl = ['ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55'];
-						break;
-					case 'elysion':
-					case 60:
-						var dl = [
-						'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
-						'in11', 'in12', 'in13', 'in14', 'in15', 'in21', 'in25', 'in31', 'in35', 'in41', 'in45', 'in51', 'in52', 'in53', 'in54', 'in55'
-						];
-						break;
-				}
-				for ( var Div in dl ) {
-					if ( d[dl[Div]].isEnabled === true ) {
-						d[dl[Div]].DivObj = elm.Gebi( d.main.module_name + '_' + dl[Div] );
-					}
-				}
-				d.main.isInitialized = true
-			}
-
-			// Executed every window.OnResize event
-			if ( d.main.container != "" ) {
-				d.main.ContainerSizeX	= this.getContentWidth(d.main.parent);
-				d.main.ContainerSizeY	= this.getContentHeight(d.main.parent);
-			}
+			this.UpdateSingleDecoModule(t[m]);
+		}
+	}
+	
+	UpdateSingleDecoModule(d){
+		l.Log[this.dbgCalcDeco](d);
+		l.Log[this.dbgCalcDeco]("elm c="+d.main.container);
+		var c = elm.Gebi( d.main.container )
+		// Executed if initialization is needed
+		if ( d.main.container != "" & d.main.isInitialized != true ) {
+			l.Log[this.dbgCalcDeco]("Init module "+d.main.module_name);
+			//d.main.parent = c.parentElement; // We want the size of the parent which is from the layer xxx.lyt.html file
+			// c.style.width = this.getContentWidth(d.main.parent)+"px";
+			// c.style.height = this.getContentHeight(d.main.parent)+"px";
 
 			switch (d.main.deco_type) {
 				case 'elegance':
 				case 40:
-					this.UpdateDeco40(d);
+					var dl = ['ex11', 'ex12', 'ex13', 'ex21', 'ex22', 'ex23', 'ex31', 'ex32', 'ex33'];
 					break;
 				case 'exquise':
 				case 'exquisite':
 				case 50:
-					this.UpdateDeco50(d);
+					var dl = ['ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55'];
 					break;
 				case 'elysion':
 				case 60:
-					this.UpdateDeco60(d);
+					var dl = [
+					'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'ex21', 'ex22', 'ex25', 'ex31', 'ex35', 'ex41', 'ex45', 'ex51', 'ex52', 'ex53', 'ex54', 'ex55',
+					'in11', 'in12', 'in13', 'in14', 'in15', 'in21', 'in25', 'in31', 'in35', 'in41', 'in45', 'in51', 'in52', 'in53', 'in54', 'in55'
+					];
 					break;
 			}
+			for ( var Div in dl ) {
+				if ( d[dl[Div]].isEnabled === true ) {
+					d[dl[Div]].DivObj = elm.Gebi( d.main.module_name + '_' + dl[Div] );
+				}
+			}
+			d.main.isInitialized = true
+		}
+
+		// Executed every window.OnResize event
+		if ( d.main.container != "" ) {
+			d.main.ContainerSizeX	= this.getContentWidth(c.parentElement);
+			d.main.ContainerSizeY	= this.getContentHeight(c.parentElement);
+		}
+
+		switch (d.main.deco_type) {
+			case 'elegance':
+			case 40:
+				this.UpdateDeco40(d);
+				break;
+			case 'exquise':
+			case 'exquisite':
+			case 50:
+				this.UpdateDeco50(d);
+				break;
+			case 'elysion':
+			case 60:
+				this.UpdateDeco60(d);
+				break;
 		}
 	}
-	
+
 	getContentWidth (elm) {
 		var cs = getComputedStyle(elm);
 		return (elm.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight));

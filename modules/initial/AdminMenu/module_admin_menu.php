@@ -67,7 +67,7 @@ class ModuleAdministration {
 			);
 // 			$Content .= "<!--\r".$StringFormatObj->print_r_debug($infos)."\r-->\r\r";
 			$Content .= $this->renderAdminMenu($infos);
-			$Content .= "</ul>\r</ul>\r";
+			$Content .= "</ul>\r";
 		}
 		
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
@@ -85,23 +85,24 @@ class ModuleAdministration {
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'); 
 		$Content = "";
+		$tabDecal = str_repeat("\t",$infos['parameters']['level']*2);
 		foreach ( $infos['menuData'] as $A ) {
 			if ($A['cate_parent'] == $infos['parameters']['cate_parent'] ) {
 				if ( $A['fk_arti_ref'] == "0" ) {
-					$Content .= "<li><b>".$A['cate_title']."</b>\r<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
+					$Content .= $tabDecal."<li><b>".$A['cate_title']."</b>\r".$tabDecal."\t<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
 					$tmp = $infos['parameters']['cate_parent'];
 					$infos['parameters']['cate_parent'] = $A['cate_id'];
 					$infos['parameters']['level']++;
 					$Content .= $this->renderAdminMenu ($infos);
 					$infos['parameters']['level']--;
 					$infos['parameters']['cate_parent'] = $tmp;
-					$Content .= "</ul>\r</li>\r";
+					$Content .= $tabDecal."\t</ul>\r".$tabDecal."</li>\r";
 				}
 				elseif ( $A['fk_arti_ref'] == $infos['parameters']['arti_request'] ) {
-					$Content .= "<li><span class='".$Block."_fade'><b>*".$A['cate_title']."</b></li>\r";
+					$Content .= $tabDecal."<li><span class='".$Block."_fade'><b>*".$A['cate_title']."</b></span></li>\r";
 				}
 				else {
-					$Content .= "<li><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['cate_title']."</a></li>\r";
+					$Content .= $tabDecal."<li><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['cate_title']."</a></li>\r";
 				}
 			}
 		}

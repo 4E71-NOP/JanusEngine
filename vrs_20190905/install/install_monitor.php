@@ -248,7 +248,7 @@ class HydrInstallMonitor {
 			 ));
 		// --------------------------------------------------------------------------------------------
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
-			<div id='initial_div' style='position:relative; width:98%; height:100%; margin:16px; padding:0px; visibility:visible'>\r";
+			";
 
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
@@ -290,8 +290,8 @@ class HydrInstallMonitor {
 						case "render_module":
 							// Module it is.
 							if ( $insertJavascriptDecorationMgmt === false) {
-								$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tdm.UpdateDecoModule(TabInfoModule);" );
-								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
 								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
@@ -309,8 +309,6 @@ class HydrInstallMonitor {
 			$DocContent .= $A['content'];
 		}
 	
-		$DocContent .= "</div>\r"; // Closing initial_div
-		
 		// --------------------------------------------------------------------------------------------
 		// Javascript files
 		// --------------------------------------------------------------------------------------------
@@ -324,7 +322,6 @@ class HydrInstallMonitor {
 
 		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
 
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "console.log ( TabInfoModule );" );

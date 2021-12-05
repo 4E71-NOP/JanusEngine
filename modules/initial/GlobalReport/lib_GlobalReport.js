@@ -18,7 +18,7 @@ class GlobalReport {
 		if (divBG.style.visibility == 'hidden') {
 			divBG.style.display = 'block';
 			divGR.style.display = 'block';
-			dm.UpdateDecoModule(TabInfoModule);
+			dm.UpdateAllDecoModule(TabInfoModule);
 			tm.TabsResize (Tabs);
 			divGR.style.left = Math.floor(( window.innerWidth - divGR.clientWidth ) / 2 ) + "px";
 			divGR.style.top = Math.floor((( window.innerHeight - divGR.clientHeight ) / 2) + window.pageYOffset ) + "px";

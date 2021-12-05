@@ -37,6 +37,7 @@ class RenderDeco50Exquisite {
 		
 		$mn = $infos['module']['module_name'];
 		$TN = $ThemeDataObj->getThemeName();
+		if (! isset($infos['module_z_index'])) { $infos['module_z_index'] = 1; }
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
@@ -135,8 +136,10 @@ class RenderDeco50Exquisite {
 		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 		";
 		$containerStyle = (strlen($infos['module']['module_container_style']) > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
+		$containerWidth		= (isset($infos['forcedWidth'])) ? $infos['forcedWidth'] : $L['dx']."px";
+		$containerHeight	= (isset($infos['forcedHeight'])) ? $infos['forcedHeight'] : $L['dy']."px";
 		$Content .= "
-		<div id='".$mcn."' style='position:".$position."; left:".$L['px']."px; top:".$L['py']."px; width:".$L['dx']."px; height:".$L['dy']."px; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r		
+		<div id='".$mcn."' style='position:".$position."; width:".$containerWidth."; height:".$containerHeight."; ".$containerStyle ."' class='".$TN . $infos['block']."'>\r
 		<div ".$DivIdList['ex11']." class='".$TN . $Block."_ex11' style='left: ".$L['pos_x_ex11']."px;	top: ".$L['pos_y_ex11']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex11_x']."px;		height:".$B['ex11_y']."px;'></div>\r
 		<div ".$DivIdList['ex12']." class='".$TN . $Block."_ex12' style='left: ".$L['pos_x_ex12']."px;	top: ".$L['pos_y_ex12']."px; z-index: ".$infos['module_z_index']."; width:".$B['ex12_x']."px;		height:".$B['ex12_y']."px;'></div>\r
 		<div ".$DivIdList['ex13']." class='".$TN . $Block."_ex13' style='left: ".$L['pos_x_ex13']."px;	top: ".$L['pos_y_ex13']."px; z-index: ".$infos['module_z_index']."; width:".$L['dim_x_ex13']."px;	height:".$B['ex13_y']."px;'></div>\r

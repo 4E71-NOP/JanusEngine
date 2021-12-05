@@ -19,10 +19,11 @@ class ToolTip {
 		'DivSizeX' : 0, 'DivSizeY' : 0,
 		'FirstTime' : 1, 'DivState' : 0,
 		'PosX' : 0, 'PosY' : 0,
-		'Debug' : this.dbgToolTip
+		'Debug' : this.dbgToolTip,
+		'animLength' : 0.5,			// second
+		'animHertz' : 50,			//10x / second
 		};
 	}
-	
 	
 	/**
 	 * Initialize the tooltip
@@ -33,8 +34,6 @@ class ToolTip {
 		this.cfg.DivSizeX	= cdX;
 		this.cfg.DivSizeY	= cdY;
 		
-// 		this.cfg.DivExt = elm.Gebi(CalqueExt);
-		// dc = Div Container
 		var dc = this.cfg.DivExt;
 		dc.Anim_Progress		= 0;
 		dc.Anim_Current			= 0;
@@ -51,25 +50,25 @@ class ToolTip {
 	}
 		
 	/**
-	 * Manage the tootip
+	 * Manage the tootip display
 	 */
-	ToolTip(msg, profile) {
+	ToolTip(msg, profile='default') {
 		if ( typeof profile == 'undefined') { profile = 'default'; }
 		l.Log[this.dbgToolTip]("Profile is set to "+profile);
-
-		var str = "section='"+profile+"'; msg='" + msg +"'";
-		l.Log[this.dbgToolTip](str);
+		l.Log[this.dbgToolTip]("section='"+profile+"'; msg='" + msg +"'");
 
 		var Obj = elm.Gebi(this.cfg.DivContent);
 		var dc = this.cfg.DivExt;
 
 		if ( typeof TooltipConfig[profile] != 'undefined' ) {
 			l.Log[this.dbgToolTip](TooltipConfig[profile]);
-			TabInfoModule.tooltip.DimConteneurX = TooltipConfig[profile].X;
-			TabInfoModule.tooltip.DimConteneurY = TooltipConfig[profile].Y;
-			// this.cfg.DivSizeX = TooltipConfig.X
-			// this.cfg.DivSizeY = TooltipConfig.Y;
-			dm.UpdateDecoModule (TabInfoModule, 'tooltip');
+			TabInfoModule.tooltip.main.DimConteneurX = TooltipConfig[profile].X;
+			TabInfoModule.tooltip.main.DimConteneurY = TooltipConfig[profile].Y;
+			
+			let ttp = TabInfoModule.tooltip.main.parent.style;
+			ttp.width	= TooltipConfig[profile].X+'px';
+			ttp.height	= TooltipConfig[profile].Y+'px';
+			dm.UpdateSingleDecoModule(TabInfoModule.tooltip);
 		}
 
 		if (this.cfg.FirstTime == 1) {
@@ -87,22 +86,19 @@ class ToolTip {
 			}
 		}
 		else {
-//			if (this.cfg.DivState == 0) { 
-				this.cfg.DivState = 1;
-				dc.Anim_Direction = 1;
-				switch (de.cliEnv.browser.support) {
-				case 'MSIE7': if (!e) { var e = window.event; }		Obj.innerHTML = msg;	break;
-				case 'DOM': Obj.innerHTML = msg; 											break;
-				}
-				if (dc.Anim_Current == 0) {
-					dc.Anim_Current	= 1;
-					this.ManageAnimation (dc.id);
-				}
-//			}
+			this.cfg.DivState = 1;
+			dc.Anim_Direction = 1;
+			switch (de.cliEnv.browser.support) {
+			case 'MSIE7': if (!e) { var e = window.event; }		Obj.innerHTML = msg;	break;
+			case 'DOM': Obj.innerHTML = msg; 											break;
+			}
+			if (dc.Anim_Current == 0) {
+				dc.Anim_Current	= 1;
+				this.ManageAnimation (dc.id);
+			}
 		}
 	}
-	
-	
+		
 	/**
 	 * Move the tooltip div.
 	 * Is called by the MouseManagement class.
@@ -113,14 +109,19 @@ class ToolTip {
 			c.PosX = m.mouseData.PosX;
 			c.PosY = m.mouseData.PosY;
 	
-			var windowX = de.cliEnv.document.width + window.scrollX;
-			var windowY = de.cliEnv.document.height + window.scrollY;
+			var windowX = window.innerWidth + window.scrollX;
+			var windowY = window.innerHeight + window.scrollY;
 	
-			if ( ( c.PosX + c.ShiftX ) > ( windowX - c.DivSizeX ) ) { c.PosX = c.PosX - c.DivSizeX - c.ShiftX - elm.DivInitial.px; }
-			else { c.PosX = c.PosX + c.ShiftX - elm.DivInitial.px; }
-			if ( ( c.PosY + c.ShiftY ) > ( windowY - c.DivSizeY ) ) { c.PosY = c.PosY - c.DivSizeY - c.ShiftY; }
-			else { c.PosY = c.PosY + c.ShiftY }
+			let tt = TabInfoModule.tooltip.main;
+			if ( ( c.PosX + c.ShiftX ) > ( windowX - tt.DimConteneurX ) ) { c.PosX = (c.PosX - tt.DimConteneurX - c.ShiftX); }
+			else { c.PosX = (c.PosX + c.ShiftX); }
+			if ( ( c.PosY + c.ShiftY ) > (windowY - tt.DimConteneurY) ) { c.PosY = (c.PosY - tt.DimConteneurY - c.ShiftY); }
+			else { c.PosY = (c.PosY + c.ShiftY) }
 	
+			let ttp = TabInfoModule.tooltip.main.parent.style;
+			ttp.left	= c.PosX+"px";
+			ttp.top		= c.PosY+"px";
+
 			c.DivExt.style.left = c.PosX + 'px';
 			c.DivExt.style.top  = c.PosY + 'px';
 			l.Log[this.dbgToolTip](
@@ -133,23 +134,28 @@ class ToolTip {
 		}
 	}
 	
-	
 	/**
-	 * 
+	 * Manage fading animation manually. CSS animation always had some trouble.
 	 */
 	ManageAnimation (Obj) {
 		Obj = elm.Gebi(Obj);
+		let ps = Obj.parentNode.style;
 		switch (Obj.Anim_Direction) {
 		case 0 :
 			clearTimeout(Obj.Anim_CurrentIn);
 			if ( Obj.Anim_Progress > 0 ) {
-				Obj.Anim_Progress		= Obj.Anim_Progress - ( 1 / 30 ); 
-				Obj.Anim_CurrentOut 	= setTimeout( 't.ManageAnimation (\''+Obj.id+'\');', (15) );
+				Obj.Anim_Progress		= Obj.Anim_Progress - ( 1/(this.cfg.animLength*this.cfg.animHertz) ); 
+				Obj.Anim_CurrentOut 	= setTimeout( 't.ManageAnimation (\''+Obj.id+'\');', (1000/this.cfg.animHertz) );
 				this.cfg.DivState		= 1;
 				Obj.style.zIndex		= 99;
 			}
 			else {
-				clearTimeout( Obj.Anim_CurrentOut );	
+				clearTimeout( Obj.Anim_CurrentOut );
+				ps.left = '0px';
+				ps.top = '0px';
+				ps.width = '0px';
+				ps.height = '0px';
+				ps.zIndex = -1;
 				Obj.style.visibility	= 'hidden';
 				Obj.style.display		= 'none';
 				Obj.Anim_Progress 		= 0;
@@ -162,8 +168,8 @@ class ToolTip {
 		case 1 :
 			clearTimeout( Obj.Anim_CurrentOut );	
 			if ( Obj.Anim_Progress < 1 ) { 
-				Obj.Anim_Progress		= Obj.Anim_Progress + ( 1 / 30 ); 
-				Obj.Anim_CurrentIn		= setTimeout( 't.ManageAnimation (\''+Obj.id+'\');', (15) ); 
+				Obj.Anim_Progress		= Obj.Anim_Progress + ( 1/(this.cfg.animLength*this.cfg.animHertz) ); 
+				Obj.Anim_CurrentIn		= setTimeout( 't.ManageAnimation (\''+Obj.id+'\');', (1000/this.cfg.animHertz) ); 
 				this.cfg.DivState		= 1;
 				Obj.style.zIndex		= 99;
 			}		
@@ -187,7 +193,6 @@ class ToolTip {
 //			'\n Souris : Mouse X=' + m.mouseData.PosX + ', Mouse Y=' + m.mouseData.PosY +
 //			'\n PosX=' + this.cfg.PosX + ', PosY=' + this.cfg.PosY +
 //			'\n de.cliEnv.document.width=' + de.cliEnv.document.width + ', de.cliEnv.document.height=' + de.cliEnv.document.height +
-//			'\n initial_div px=' + elm.DivInitial.px + ' py=' + elm.DivInitial.py + ' dx=' + elm.DivInitial.dx + ' dy=' + elm.DivInitial.dy + ' cx=' + elm.DivInitial.cx + ' cy=' + elm.DivInitial.cy + 
 //			'\n Direction=' + Obj.Anim_Direction + ', Progression=' +  Obj.Anim_Progress + 
 //			'\n fin';
 
@@ -197,7 +202,7 @@ class ToolTip {
 	}
 	
 	/**
-	 * 
+	 * Obviously fadind to transparent.
 	 */
 	FadeTransparent (Obj) {
 		Obj = elm.Gebi(Obj);

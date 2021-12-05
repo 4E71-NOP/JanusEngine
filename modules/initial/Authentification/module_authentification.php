@@ -115,7 +115,7 @@ class ModuleAuthentification {
 			<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
 			<input type='hidden' name='formGenericData[action]' 	value='disconnection'>\r
 		
-			<table cellpadding='0' cellspacing='0' style='height: ".$pv['table_hauteur']."px; margin-left: auto; margin-right: auto;'>
+			<table class='mt_bareTable' style='height: ".$pv['table_hauteur']."px; margin-left: auto; margin-right: auto; '>
 		
 			<tr>\r
 			<td style='text-align: center;'>\r".
@@ -126,11 +126,11 @@ class ModuleAuthentification {
 			
 			<tr>\r
 			<td style='text-align: center;'>\r
-			<span style='text-align: center;'>\r
+			<div style='text-align: center;'>\r
 			" .
 			$bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"
-			</span>\r
+			</div>\r
 			</td>\r
 			</tr>\r
 		

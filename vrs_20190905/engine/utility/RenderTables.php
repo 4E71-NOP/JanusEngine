@@ -13,6 +13,7 @@
 /*Hydre-licence-fin*/
 class  RenderTables {
 	private static $Instance = null;
+	private $javascriptAlreadyIncluded = false;
 	
 	private function __construct() {
 	}
@@ -59,7 +60,10 @@ class  RenderTables {
 		if ( $T['ContentInfos']['NbrOfTabs'] == 0 ) { $T['ContentInfos']['NbrOfTabs'] = 1; }
 		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "current/engine/javascript/lib_TabsManagement.js");
+			if ( $this->javascriptAlreadyIncluded == false ) {
+				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "current/engine/javascript/lib_TabsManagement.js");
+				$this->javascriptAlreadyIncluded = true;
+			}
 			$Content .= $bts->RenderTabsObj->render($infos, $T); 
 		}
 		

@@ -576,7 +576,7 @@ class Hydr {
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
 		
-//		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tUpdateWindowSize ('');");
+		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\telm.UpdateWindowSize ('');");
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -643,8 +643,8 @@ class Hydr {
 						case "render_module":
 							// Module it is.
 							if ( $insertJavascriptDecorationMgmt == false) {
-								$GeneratedJavaScriptObj->insertJavaScript ('OnLoad', "\tdm.UpdateDecoModule(TabInfoModule);" );
-								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateDecoModule(TabInfoModule);");
+								$GeneratedJavaScriptObj->insertJavaScript ('OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
 								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
@@ -655,11 +655,7 @@ class Hydr {
 				}
 			}
 		}
-		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
-
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -720,15 +716,11 @@ class Hydr {
 			$Content .= "background-color: #" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . ";";
 		}
 		$Content .= "'>\r ";
-		$Content .= "<div id='initial_div' style='position:relative; width:98%; height:100%; margin:16px; padding:0px; visibility:visible'>\r";
 		// --------------------------------------------------------------------------------------------
 		foreach ( $ContentFragments as &$A ) {
 //			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
 			$Content .= $A['content'];
 		}
-
-		$Content .= "</div>\r"; // Closing initial_div
-
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -786,7 +778,6 @@ class Hydr {
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');

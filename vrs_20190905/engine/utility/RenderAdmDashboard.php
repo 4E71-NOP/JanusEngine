@@ -110,7 +110,7 @@ class RenderAdmDashboard {
 			class ='".$ThemeDataObj->getThemeName()."div_AdminControlPanel'
 			style='display:block; visibility:hidden; overflow:hidden; z-index:".($infos['module_z_index']+2).";
 			width:80%; height:80%;
-			top:0px; left:0px;'
+			top:0px; left:0px;
 			margin:0 auto; padding:10px;
 			background-color:#".$ThemeDataObj->getThemeDataEntry('theme_bg_color').";' 
 			>\r
@@ -125,8 +125,8 @@ class RenderAdmDashboard {
 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
 		
 		$cellList = array (
-			1 => array( 'width'=> '20%' , 'height' => '100%', 'minWidth' => '2cm',	'minHeight' => '10cm'),
-			2 => array( 'width'=> '80%' , 'height' => '100%', 'minWidth' => '6cm',	'minHeight' => '10cm'),
+			1 => array( 'width'=> '25%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '2cm',	'minHeight' => '10cm'),
+			2 => array( 'width'=> '75%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '6cm',	'minHeight' => '10cm'),
 		);
 
 		$n = 1;
@@ -154,6 +154,8 @@ class RenderAdmDashboard {
 				$infos['blockG'] = $infos['block']."G"; 
 				$infos['blockT'] = $infos['block']."T"; 
 				$infos['module'] = $m;
+				$infos['forcedWidth'] = $cellList[$n]['forcedWidth'];
+				$infos['forcedHeight'] = $cellList[$n]['forcedHeight'];
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
