@@ -9,7 +9,7 @@ fk_deco_id				INTEGER,
 */
 
 CREATE TABLE !table! (
-deco_id		    		INTEGER NOT NULL,
+deco_id		    		BIGINT NOT NULL UNIQUE, 
 deco_name				VARCHAR(255),
 deco_state				INTEGER,
 deco_type				INTEGER,

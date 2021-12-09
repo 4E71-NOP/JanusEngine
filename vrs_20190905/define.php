@@ -6,7 +6,7 @@
 /* @var $application String */
 
 define ( "DEFAULT_ERROR_REPORTING", (E_ALL ^ E_WARNING ^ E_NOTICE) );
-define ( "DEFAULT_SITE_ID", 2 );
+define ( "DEFAULT_SITE_ID", "Hdr" );
 
 define ( "USER_ACTION_SIGN_IN", "singIn" );
 define ( "USER_ACTION_DISCONNECT", "disconnect" );

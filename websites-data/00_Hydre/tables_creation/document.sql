@@ -10,16 +10,16 @@ juste un renseignement sur le site a qui appartien tout les droits de ce documen
 */
 
 CREATE TABLE !table! (
-docu_id 					INTEGER NOT NULL,
+docu_id 					BIGINT NOT NULL UNIQUE, 
 docu_name					VARCHAR(255),
 docu_type					INTEGER,
-docu_origin				INTEGER,
+docu_origin		    		BIGINT,
 
-docu_creator				INTEGER,
+docu_creator				BIGINT,
 docu_creation_date			INTEGER,
 
-docu_examination				INTEGER,
-docu_examiner				INTEGER,
+docu_examination			INTEGER,
+docu_examiner				BIGINT,
 docu_examination_date		INTEGER,
 docu_cont 					BLOB,
 

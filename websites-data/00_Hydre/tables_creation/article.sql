@@ -9,10 +9,10 @@ arti_correction_etat		NON_CORRIGE 0 CORRIGE 1
 */
 
 CREATE TABLE !table! (
-arti_id 					INTEGER NOT NULL,
+arti_id 					BIGINT NOT NULL UNIQUE, 
 arti_ref					VARCHAR(255),
 arti_slug					VARCHAR(255),
-fk_deadline_id				INTEGER,
+fk_deadline_id				BIGINT,
 arti_name					VARCHAR(255),
 arti_desc					VARCHAR(255),
 arti_title					VARCHAR(255),
@@ -20,18 +20,18 @@ arti_subtitle				VARCHAR(255),
 arti_page					INTEGER,
 
 layout_generic_name			VARCHAR(255),
-fk_config_id				INTEGER,
+fk_config_id				BIGINT,
 
-arti_creator_id				INTEGER,
+arti_creator_id				BIGINT,
 arti_creation_date			INTEGER,
 
-arti_validator_id			INTEGER,
+arti_validator_id			BIGINT,
 arti_validation_date		INTEGER,
 arti_validation_state		INTEGER,
 
 arti_release_date			INTEGER,
-fk_docu_id					INTEGER,
-fk_ws_id					INTEGER,
+fk_docu_id					BIGINT,
+fk_ws_id					BIGINT,
 
 PRIMARY KEY (arti_id), 
 KEY idx_!IdxNom!_deadline_id (fk_deadline_id),

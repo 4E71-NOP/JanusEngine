@@ -9,21 +9,21 @@ cate_role		None 0
 */
 
 CREATE TABLE !table! (
-cate_id 				INTEGER NOT NULL,
+cate_id 				BIGINT NOT NULL UNIQUE, 
 cate_name 				VARCHAR(255),
 cate_title 				VARCHAR(255),
 cate_desc 				VARCHAR(255),
 cate_type				INTEGER,
-fk_ws_id				INTEGER,
-fk_lang_id				INTEGER,
-fk_deadline_id 			INTEGER,
+fk_ws_id				BIGINT,
+fk_lang_id				BIGINT,
+fk_deadline_id 			BIGINT,
 cate_state 				INTEGER,
-cate_parent 			INTEGER,
+cate_parent 			BIGINT,
 cate_position 			INTEGER,
-fk_group_id 			INTEGER,
+fk_group_id 			BIGINT,
 cate_last_update		INTEGER,
 cate_role 				INTEGER,
-cate_initial_document	INTEGER,
+cate_initial_document	BIGINT,
 fk_arti_slug			VARCHAR(255),
 fk_arti_ref 			VARCHAR(255),
 

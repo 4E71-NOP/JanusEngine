@@ -5,8 +5,8 @@
 group_tag		ANONYME 0	LECTEUR 1	STAFF 2	SENIOR_STAFF 3
 */
 CREATE TABLE !table! ( 
-group_id		INTEGER NOT NULL,
-group_parent	INTEGER,
+group_id		BIGINT NOT NULL UNIQUE, 
+group_parent	BIGINT,
 group_tag		INTEGER,
 group_name		VARCHAR (255),
 group_title	VARCHAR (255),

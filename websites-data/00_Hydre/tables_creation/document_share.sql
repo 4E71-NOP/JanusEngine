@@ -6,9 +6,9 @@ part_modification	NON 0	OUI 1
 */
 
 CREATE TABLE !table! (
-share_id			INTEGER NOT NULL,
-fk_docu_id				INTEGER,
-fk_ws_id				INTEGER,
+share_id			BIGINT NOT NULL UNIQUE, 
+fk_docu_id			BIGINT,
+fk_ws_id			BIGINT,
 share_modification	INTEGER,
 
 PRIMARY KEY (share_id),

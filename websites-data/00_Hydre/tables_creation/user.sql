@@ -9,7 +9,7 @@ user_role_function	publique 0	privé 1
 */
 
 CREATE TABLE !table! ( 
-user_id 								INTEGER NOT NULL,
+user_id 								BIGINT NOT NULL UNIQUE,
 user_name								VARCHAR(255),
 user_login								VARCHAR(255),
 user_password							VARCHAR(255),
@@ -27,27 +27,27 @@ user_website							VARCHAR(255),
 
 user_perso_name							VARCHAR(255),
 user_perso_country						VARCHAR(255),
-user_perso_town				    		VARCHAR(255),
+user_perso_town							VARCHAR(255),
 user_perso_occupation					VARCHAR(255),
 user_perso_interest						VARCHAR(255),
 
-user_last_visit			    	    	INTEGER,
-user_last_ip						    VARCHAR(15),
+user_last_visit							INTEGER,
+user_last_ip							VARCHAR(15),
 user_timezone							INTEGER,
-user_lang								INTEGER,
+user_lang								BIGINT,
 
 user_pref_theme							INTEGER,
 user_pref_newsletter					INTEGER,
 user_pref_show_email					INTEGER,
 user_pref_show_online_status			INTEGER,
-user_pref_forum_notification	        INTEGER,
-user_pref_forum_pm		                INTEGER,
-user_pref_allow_bbcode		    		INTEGER,
+user_pref_forum_notification			INTEGER,
+user_pref_forum_pm						INTEGER,
+user_pref_allow_bbcode					INTEGER,
 user_pref_allow_html					INTEGER,
 user_pref_autorise_smilies				INTEGER,
 
 user_avatar_image						VARCHAR(255),
-user_admin_comment				    	VARCHAR(255), 
+user_admin_comment						VARCHAR(255), 
 
 PRIMARY KEY (user_id)
 

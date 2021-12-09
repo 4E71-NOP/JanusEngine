@@ -135,7 +135,7 @@ class Hydr {
 		
 		$firstContactScore = 0;
 		if (session_status () === PHP_SESSION_ACTIVE) { $firstContactScore ++; }
-		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ( 'ws' ) ) != 0) { $firstContactScore += 2; }
+		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ('ws') ) != 0) { $firstContactScore += 2; }
 		if (strlen ( 
 				$bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) ) == 1 && 
 				$bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) == "ModuleAuthentification") { $firstContactScore += 4; }
@@ -235,7 +235,7 @@ class Hydr {
 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 		$CurrentSetObj->setInstanceOfWebSiteObj ( new WebSite () );
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
-		$WebSiteObj->getDataFromDB ();
+		$WebSiteObj->getDataFromDBUsingShort();
 		
 		switch ($WebSiteObj->getWebSiteEntry ( 'ws_state' )) {
 			case 0 : // Offline
@@ -538,7 +538,7 @@ class Hydr {
 		$CurrentSetObj->getInstanceOfArticleObj()->getDataFromDB($CurrentSetObj->getDataSubEntry( 'article', 'arti_id'));
 
 		// --------------------------------------------------------------------------------------------
-		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'>\r" );
+		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $WebSiteObj->getWebSiteEntry ( 'ws_short' ) . "'>\r" );
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry ( 'language' ) . "'>\r" );
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_user_login', "<input type='hidden'	name='user_login'	value='" . $bts->SMObj->getSessionEntry ( 'user_login' ) . "'>\r" );
 		$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_user_pass', "<input type='hidden'	name='user_pass'	value='" . $bts->SMObj->getSessionEntry ( 'user_password' ) . "'>\r" );

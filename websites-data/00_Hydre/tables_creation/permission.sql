@@ -2,7 +2,7 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 CREATE TABLE !table! ( 
-perm_id				INTEGER NOT NULL,
+perm_id				BIGINT NOT NULL UNIQUE, 
 perm_state			INTEGER,
 perm_name 			VARCHAR(255),
 perm_affinity		VARCHAR(255),

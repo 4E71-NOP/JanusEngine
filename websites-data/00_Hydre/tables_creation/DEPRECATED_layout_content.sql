@@ -2,8 +2,8 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 CREATE TABLE !table! ( 
-lyoc_id						INTEGER NOT NULL,
-fk_layout_id				INTEGER,
+lyoc_id						BIGINT NOT NULL UNIQUE, 
+fk_layout_id				BIGINT,
 lyoc_line					INTEGER,
 lyoc_minimum_x				INTEGER,
 lyoc_minimum_y				INTEGER,

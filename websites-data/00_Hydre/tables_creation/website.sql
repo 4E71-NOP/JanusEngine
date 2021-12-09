@@ -3,12 +3,12 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-ws_id				INTEGER NOT NULL,
+ws_id				BIGINT NOT NULL UNIQUE,
 ws_name				VARCHAR(255),
-ws_short			VARCHAR(255),
-fk_lang_id			INTEGER,
+ws_short			VARCHAR(255) UNIQUE,
+fk_lang_id			BIGINT,
 ws_lang_select		INTEGER,
-fk_theme_id			INTEGER,
+fk_theme_id			BIGINT,
 ws_title			VARCHAR(255),
 ws_home				VARCHAR(255),
 ws_directory		VARCHAR(255),

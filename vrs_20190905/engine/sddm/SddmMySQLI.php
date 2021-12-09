@@ -176,7 +176,7 @@ class SddmMySQLI {
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
 	 * It will always add 1. It won't find a free number.
-	 *
+	 * @DEPRECATED
 	 * @param string $table
 	 * @param string $column
 	 * @return number
@@ -191,6 +191,14 @@ class SddmMySQLI {
 		return $val;
 	}
 	
+	/**
+	 * Create an UID with random function
+	 * @return int
+	 */
+	public function createUniqueId(){
+		return random_int(1, 9223372036854775807);
+	}
+
 	//@formatter:off
 	
 	public function getReport() {return $this->report;}

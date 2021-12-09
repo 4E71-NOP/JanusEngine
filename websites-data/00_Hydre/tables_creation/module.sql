@@ -8,7 +8,7 @@ module_deco_default_text 1 à 7
 */
 
 CREATE TABLE !table! (
-module_id 						INTEGER NOT NULL,
+module_id 						BIGINT NOT NULL UNIQUE, 
 module_deco 					INTEGER,
 module_deco_nbr 				INTEGER,
 module_deco_default_text		INTEGER,
@@ -21,8 +21,8 @@ module_type 					INTEGER DEFAULT 1 NOT NULL,
 module_desc 					VARCHAR(255),
 module_container_name			VARCHAR(255),
 module_container_style			VARCHAR(255),
-module_group_allowed_to_see 	INTEGER,
-module_group_allowed_to_use 	INTEGER,
+module_group_allowed_to_see 	BIGINT,
+module_group_allowed_to_use 	BIGINT,
 module_adm_control				INTEGER,
 module_execution				INTEGER,
 

@@ -114,8 +114,12 @@ class ConfigurationManagement {
 				
 				$TabLangueAdmises = array();
 				$dbquery = $bts->SDDMObj->query("
-					SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." 
-					WHERE fk_ws_id = '".$bts->SMObj->getSessionEntry('ws')."';");
+					SELECT ws.ws_short, lw.fk_lang_id 
+					FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw,
+					".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." ws 
+					WHERE ws.ws_id = lw.fk_ws_id 
+					AND ws.ws_short = '".$bts->SMObj->getSessionEntry('ws')."'
+					;");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['fk_lang_id']; }
 				sort ( $TabLangueAdmises );
 				

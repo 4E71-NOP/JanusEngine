@@ -3,9 +3,9 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-config_id				INTEGER NOT NULL, 
-fk_ws_id				INTEGER, 
-fk_extension_id			INTEGER,
+config_id				BIGINT NOT NULL UNIQUE, 
+fk_ws_id				BIGINT, 
+fk_extension_id			BIGINT,
 extension_variable		VARCHAR(255), 
 extension_value		VARCHAR(255), 
 

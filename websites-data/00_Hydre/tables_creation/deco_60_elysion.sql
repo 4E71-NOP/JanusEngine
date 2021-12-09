@@ -3,8 +3,8 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! (
-deco_line_number	INTEGER NOT NULL,
-fk_deco_id			INTEGER,
+deco_line_number	BIGINT NOT NULL UNIQUE, 
+fk_deco_id			BIGINT,
 deco_variable_name	VARCHAR(255),
 deco_value		VARCHAR(255),
 

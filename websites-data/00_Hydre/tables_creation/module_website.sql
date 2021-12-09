@@ -6,9 +6,9 @@ module_state		OFFLINE 0	ONLINE 1	SUPPRIME 2
 */
 
 CREATE TABLE !table! (
-module_website_id	INTEGER NOT NULL,
-fk_ws_id 		INTEGER,
-fk_module_id	INTEGER,
+module_website_id	BIGINT NOT NULL UNIQUE, 
+fk_ws_id 		BIGINT,
+fk_module_id	BIGINT,
 module_state 	INTEGER,
 module_position	INTEGER,
 

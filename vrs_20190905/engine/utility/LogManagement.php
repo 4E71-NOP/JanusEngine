@@ -51,7 +51,8 @@ class LogManagement {
 			$data ['i'] = $bts->SDDMObj->escapeString ( $data ['i'] );
 			$data ['a'] = $bts->SDDMObj->escapeString ( $data ['a'] );
 			$data ['t'] = $bts->SDDMObj->escapeString ( $data ['t'] );
-			$id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+			// $id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+			$id = $bts->SDDMObj->createUniqueId();
 			$bts->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
 				'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 				'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );
@@ -286,7 +287,8 @@ class LogManagement {
 						break;
 					case "internal" :
 					default :
-						$id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+						// $id = $bts->SDDMObj->findNextId ( $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ), "log_id" );
+						$id = $bts->SDDMObj->createUniqueId();
 						$bts->SDDMObj->query ( "INSERT INTO " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'log' ) . " VALUES (
 						'" . $id . "', '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ( 'ws_id' ) . "', '" . time () . "', '" . $data ['i'] . "',
 						'" . $data ['a'] . "', '" . $data ['s'] . "', '" . $data ['m'] . "', '" . $data ['t'] . "') ;" );

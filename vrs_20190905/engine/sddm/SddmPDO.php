@@ -164,6 +164,14 @@ class SddmPDO {
 		return $val;
 	}
 	
+	/**
+	 * Create an UID with random function
+	 * @return string
+	 */
+	public function createUniqueId(){
+		return random_bytes(8);
+	}
+
 	//@formatter:off
 	
 	public function getReport() {return $this->report;}

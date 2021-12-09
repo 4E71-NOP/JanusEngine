@@ -48,7 +48,6 @@ class WebSite extends Entity{
 	 * Gets website data from the database.<br>
 	 * <br>
 	 * It uses the current WebSiteObj to restrict the website selection to the website ID only.
-	 * @param integer $id
 	 */
 	public function getDataFromDB() {
 		$bts = BaseToolSet::getInstance();
@@ -78,7 +77,43 @@ class WebSite extends Entity{
 			exit(1);
 		}
 	}
-	
+
+	/**
+	 * Gets website data from the database.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the website selection to the website SHORT only.
+	 * 
+	 */
+	public function getDataFromDBUsingShort() {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		if ( $bts->SMObj->getSessionEntry('ws') > 1 ){
+			$dbquery = $bts->SDDMObj->query ( "
+				SELECT * 
+				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('website') . " 
+				WHERE ws_short = '" . $bts->SMObj->getSessionEntry('ws') . "'
+				;" );
+			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website short=".$bts->SMObj->getSessionEntry('ws')));
+				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+					foreach ( $dbp as $A => $B ) {
+						if (isset($this->columns[$A])) { $this->WebSite[$A] = $B; }
+					}
+				}
+			}
+			else {
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website short=".$bts->SMObj->getSessionEntry('ws')));
+			}
+			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
+		}
+		else {
+			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");
+			exit(1);
+		}
+	}
+
+
 	/**
 	 * Change website context
 	 * @param integer $id
