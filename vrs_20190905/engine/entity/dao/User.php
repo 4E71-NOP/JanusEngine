@@ -155,6 +155,23 @@ class User extends Entity {
 			$this->User['error_login_not_found'] == 1;
 		}
 		
+		// building the permission list
+		$dbquery = $bts->SDDMObj->query ("
+			SELECT p.*, gp.fk_group_id, g.group_name 
+			FROM 
+			".$SqlTableListObj->getSQLTableName ('permission')." p, 
+			".$SqlTableListObj->getSQLTableName ('group_permission')." gp, 
+			".$SqlTableListObj->getSQLTableName ('group')." g 
+			WHERE p.perm_id = gp.fk_perm_id 
+			AND gp.fk_group_id = g.group_id 
+			AND gp.fk_group_id ".$this->User['clause_in_group'].";"
+		);
+		if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
+				$this->User['permissionList'][$dbp['perm_name']] = $dbp['perm_level'];
+			}
+		}
+
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
 			$this->User['user_lang'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang');
@@ -274,8 +291,13 @@ class User extends Entity {
 		if ( isset($this->User[$entry])) { $this->User[$entry] = $data; }	//DB Entity objects do NOT accept new columns!
 	}
 	
-// 	public function setUser($User) { $this->User = $User; }
+	// 	public function setUser($User) { $this->User = $User; }
 	
+	public function hasPermission($perm) {
+		if ( $this->User['permission'][$perm] != 0 ) { return true; }
+		return false;
+	}
+
 	//@formatter:on
 	
 }

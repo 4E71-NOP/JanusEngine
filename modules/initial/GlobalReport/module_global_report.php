@@ -27,12 +27,13 @@ class ModuleGlobalReport {
 // 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$l = $CurrentSetObj->getDataEntry ( 'language');
 		
-		$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),	"RequestDataObj");
-		$bts->LMObj->logDebug($infos,										"infos");
-		$bts->LMObj->logDebug($CurrentSetObj->getData(),					"CurrentSetObj->getData()");
-		$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),					"CMObj->ConfigDump()");
-		$bts->LMObj->logDebug($bts->SMObj->getSession(),					"SMObj->getSession()");
-		$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),			"I18nObj->getI18nTrans()");
+		$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
+		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),	"User");
+		$bts->LMObj->logDebug($infos,											"infos");
+		$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
+		$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
+		$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
+		$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
 		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
 		
