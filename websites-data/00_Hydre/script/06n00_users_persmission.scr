@@ -1,0 +1,6 @@
+/*
++---------------------------------------+
+|		user set of permission			|
++---------------------------------------+
+*/
+assign user_permission name default_user_permission    to_all_users yes;

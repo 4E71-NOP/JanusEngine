@@ -130,6 +130,28 @@ self::$ActionTable['assign']['layout']		= function (&$a) {
 	return $queries;
 };
 
+self::$ActionTable['assign']['group_permission']		= function (&$a) { 
+	if ( strtolower($a['params']['to_all_groups']) == "yes" ){
+		$queries = array();
+		foreach ( $a['params']['allIds'] as $B) {
+			$queries[] = "INSERT INTO ".$a['sqlTables']['group_permission']." (".$a['columns'].") VALUES (".$B['uid'].", ".$a['params']['perm_id'].", ".$B['group_id']." );";
+		}
+		return $queries;
+	}
+	else { return array ("INSERT INTO ".$a['sqlTables']['group_permission']." (".$a['columns'].") VALUES (".$a['values'].");");}
+};
+
+self::$ActionTable['assign']['user_permission']		= function (&$a) { 
+	if ( strtolower($a['params']['to_all_users']) == "yes" ){
+		$queries = array();
+		foreach ( $a['params']['allIds'] as $B) {
+			$queries[] = "INSERT INTO ".$a['sqlTables']['user_permission']." (".$a['columns'].") VALUES (".$B['uid'].", ".$a['params']['perm_id'].", ".$B['user_id']." );";
+		}
+		return $queries;
+	}
+	else { return array ("INSERT INTO ".$a['sqlTables']['user_permission']." (".$a['columns'].") VALUES (".$a['values'].");");}
+};
+
 self::$ActionTable['assign']['tag']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article_tag']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['assign']['theme']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['website']." SET fk_theme_id = '".$a['params']['theme_id']."' WHERE ws_id = '".$a['params']['ws_id']."';");};

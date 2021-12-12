@@ -311,9 +311,9 @@ class CommandConsole {
 		}
 		// Next Id ----------------------------------------
 		if ( is_array($ptr['nextId']) ) {
-			// foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
 			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->createUniqueId(); }
 		}
+		// 	foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
 		//timeCreate ----------------------------------------
 		$time = time ();
 		if ( is_array($ptr['timeCreate']) ) {

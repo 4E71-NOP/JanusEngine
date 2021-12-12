@@ -3,6 +3,7 @@
 |		Primary set of permission		|
 +---------------------------------------+
 */
-add permission	name "default_permission"		level "read"	state "enabled"	affinity "user"	object_type "homepage"				desc "homepage access";
-add permission	name "general_admin_access"		level "write"	state "enabled"	affinity "user"	object_type "general_permission"	desc "admin access";
-
+add permission	name "default_user_permission"			level "read"	state "enabled"	affinity "user"		object_type "homepage"				desc "homepage access";
+add permission	name "group_default_read_permission"	level "read"	state "enabled"	affinity "group"	object_type "all"	desc "homepage access";
+add permission	name "admin_default_read_permission"	level "read"	state "enabled"	affinity "group"	object_type "all"	desc "Admin read ";
+add permission	name "admin_default_write_permission"	level "write"	state "enabled"	affinity "group"	object_type "all"	desc "Admin write ";

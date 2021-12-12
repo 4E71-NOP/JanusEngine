@@ -503,9 +503,9 @@ class Hydr {
 					FROM " 
 					. $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " 
 					. $SqlTableListObj->getSQLTableName ( 'article' ) . " art
-					WHERE cat.fk_ws_id IN ('1', '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "')
+					WHERE cat.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry ('ws_id') . "')
 					AND cat.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
-					AND cat.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . " 
+					AND cat.fk_group_id " . $UserObj->getUserEntry ('clause_in_group') . " 
 					AND cat.cate_state = '1'
 					AND cat.fk_arti_ref = art.arti_ref
 					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'

@@ -931,16 +931,34 @@ self::$InitTable['layout_file'] = function (&$a) {
 
 self::$InitTable['permission'] = function (&$a) {
 	$a['params'] = array(
-		"perm_id"					=> "",
-		"perm_state" 				=> "enabled",
-		"perm_name" 				=> "defaultPermission",
-		"perm_affinity"				=> "user",
-		"perm_object_type"			=> "module",
-		"perm_desc"					=> "defaultPermission description",
-		"perm_level"				=> "read",
+		"id"				=> "",
+		"state" 			=> "enabled",
+		"name" 				=> "defaultPermission",
+		"affinity"			=> "user",
+		"object_type"		=> "module",
+		"desc"				=> "defaultPermission description",
+		"level"				=> "read",
 
 	);
 	$a['params']['description'] = &$a['params']['desc'];
+};
+
+self::$InitTable['group_permission'] = function (&$a) {
+	$a['params'] = array(
+		"id"						=> "",
+		"name"						=> "",
+		"to_group"					=> "",
+		"to_all_groups"				=> "no",
+	);
+};
+
+self::$InitTable['user_permission'] = function (&$a) {
+	$a['params'] = array(
+		"id"						=> "",
+		"name"						=> "",
+		"to_user"					=> "",
+		"to_all_users"				=> "no",
+	);
 };
 
 

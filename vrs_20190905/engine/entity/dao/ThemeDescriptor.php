@@ -208,9 +208,9 @@ class ThemeDescriptor extends Entity{
 			$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
-			WHERE theme_id = '2'
+			LIMIT 1
 			;");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=2.Fallback on generic theme."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));
 		}
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {

@@ -698,6 +698,38 @@ self::$CheckTable['update']['user']['4']['p']	= "language";
 self::$CheckTable['update']['user']['4']['s']	= "lang";
 
 
+self::$CheckTable['assign']['group_permission']['0']['d']	= 2;
+self::$CheckTable['assign']['group_permission']['0']['f']	= function ($a) { return array ("SELECT prm.perm_id AS perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['name']."' ;");};
+self::$CheckTable['assign']['group_permission']['0']['c']	= "perm_id";
+self::$CheckTable['assign']['group_permission']['0']['v']	= "perm_id";
+self::$CheckTable['assign']['group_permission']['0']['m']	= "CLI_Permission_A001";
+self::$CheckTable['assign']['group_permission']['0']['p']	= "permission";
+self::$CheckTable['assign']['group_permission']['0']['s']	= "name";
+self::$CheckTable['assign']['group_permission']['1']['d']	= 1;
+self::$CheckTable['assign']['group_permission']['1']['f']	= function ($a) {return array ( "SELECT grp.group_id FROM ".$a['sqlTables']['group']." grp , ".$a['sqlTables']['group_website']." sg , ".$a['sqlTables']['website']." ws WHERE grp.group_name = '".$a['params']['to_group']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = ws.ws_id AND ws.ws_id = '".$a['Context']['ws_id']."';" ); };
+self::$CheckTable['assign']['group_permission']['1']['c']	= "group_id";
+self::$CheckTable['assign']['group_permission']['1']['v']	= "group_id";
+self::$CheckTable['assign']['group_permission']['1']['m']	= "CLI_Permission_A002";
+self::$CheckTable['assign']['group_permission']['1']['p']	= "group";
+self::$CheckTable['assign']['group_permission']['1']['s']	= "group_id";
+
+self::$CheckTable['assign']['user_permission']['0']['d']	= 2;
+self::$CheckTable['assign']['user_permission']['0']['f']	= function ($a) { return array ("SELECT prm.perm_id AS perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['name']."' ;");};
+self::$CheckTable['assign']['user_permission']['0']['c']	= "perm_id";
+self::$CheckTable['assign']['user_permission']['0']['v']	= "perm_id";
+self::$CheckTable['assign']['user_permission']['0']['m']	= "CLI_Permission_A001";
+self::$CheckTable['assign']['user_permission']['0']['p']	= "permission";
+self::$CheckTable['assign']['user_permission']['0']['s']	= "name";
+self::$CheckTable['assign']['user_permission']['1']['d']	= 1;
+self::$CheckTable['assign']['user_permission']['1']['f']	= function ($a) { return array ("SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$a['sqlTables']['user']." usr, ".$a['sqlTables']['group_user']." gu, ".$a['sqlTables']['group_website']." sg WHERE usr.user_login = '".$a['params']['to_user']."' AND usr.user_id = gu.fk_user_id AND gu.fk_group_id = sg.fk_group_id AND gu.group_user_initial_group = '1' AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['assign']['user_permission']['1']['c']	= "user_id";
+self::$CheckTable['assign']['user_permission']['1']['v']	= "user_id";
+self::$CheckTable['assign']['user_permission']['1']['m']	= "CLI_Permission_A003";
+self::$CheckTable['assign']['user_permission']['1']['p']	= "user";
+self::$CheckTable['assign']['user_permission']['1']['s']	= "user_id";
+
+
+
 self::$CheckTable['assign']['user']['0']['d']	= 2;
 self::$CheckTable['assign']['user']['0']['f']	= function ($a) { return array ("SELECT usr.user_id AS user_id, usr.user_login AS user_login FROM ".$a['sqlTables']['user']." usr, ".$a['sqlTables']['group_user']." gu, ".$a['sqlTables']['group_website']." sg WHERE usr.user_login = '".$a['params']['name']."' AND usr.user_id = gu.fk_user_id AND gu.fk_group_id = sg.fk_group_id AND gu.group_user_initial_group = '1' AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['assign']['user']['0']['c']	= "user_id";
@@ -744,7 +776,6 @@ self::$CheckTable['add']['website']['1']['p']	= "language";
 self::$CheckTable['add']['website']['1']['s']	= "lang";
 
 self::$CheckTable['update']['website']['0']['d']	= 2;
-// self::$CheckTable['update']['website']['0']['f']	= function ($a) { return array ("SELECT ws_id,ws_nom FROM ".$a['sqlTables']['website']." WHERE ws_name = '".$a['params']['name']."';");};
 self::$CheckTable['update']['website']['0']['f']	= &self::$CheckTable['add']['website']['0']['f'];
 self::$CheckTable['update']['website']['0']['c']	= "ws_id";
 self::$CheckTable['update']['website']['0']['v']	= "ws_id";

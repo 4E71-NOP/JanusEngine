@@ -739,6 +739,63 @@ self::$PreRequisiteTable['assign']['layout'] = array (
 );
 
 
+self::$PreRequisiteTable['assign']['group_permission'] = array (
+	"execute" => function (&$a) {
+		if ( strtolower($a['params']['to_all_groups']) == "yes" ){
+			$bts = BaseToolSet::getInstance();
+			$dbquery = $bts->SDDMObj->query ("
+			SELECT grp.group_id 
+			FROM ".$a['sqlTables']['group']." grp , ".$a['sqlTables']['group_website']." gw , ".$a['sqlTables']['website']." ws 
+			WHERE grp.group_id = gw.fk_group_id 
+			AND gw.fk_ws_id = ws.ws_id 
+			AND ws.ws_id = '".$a['Context']['ws_id']."';
+			");
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) { 
+				$a['params']['allIds'][] = array('uid' => $bts->SDDMObj->createUniqueId(), 'group_id' => $dbp['group_id']);
+			}
+			$a['params']['group_id'] = "unlocking mecanism";
+		}
+	},
+	"convert" => array(),
+	"nextId" => array (
+		array ("table" => "group_permission",	"column" => "group_perm_id",		"target" => "group_perm_id"),
+	),
+	"columns" => array(
+			array ( "v" => "group_perm_id",			"t" => "group_perm_id"),
+			array ( "v" => "perm_id",				"t" => "fk_perm_id"),
+			array ( "v" => "group_id",				"t" => "fk_group_id"),
+	),
+);
+
+self::$PreRequisiteTable['assign']['user_permission'] = array (
+	"execute" => function (&$a) {
+		if ( strtolower($a['params']['to_all_users']) == "yes" ){
+			$bts = BaseToolSet::getInstance();
+			$dbquery = $bts->SDDMObj->query ("
+			SELECT usr.user_id 
+			FROM ".$a['sqlTables']['user']." usr, ".$a['sqlTables']['group_user']." gu, ".$a['sqlTables']['group_website']." gw 
+			WHERE usr.user_id = gu.fk_user_id 
+			AND gu.fk_group_id = gw.fk_group_id 
+			AND gu.group_user_initial_group = '1' 
+			AND gw.fk_ws_id = '".$a['Context']['ws_id']."';
+			");
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) { 
+				$a['params']['allIds'][] = array('uid' => $bts->SDDMObj->createUniqueId(), 'user_id' => $dbp['user_id']);
+			}
+			$a['params']['user_id'] = "unlocking mecanism";
+		}
+	},
+	"convert" => array(),
+	"nextId" => array (
+		array ("table" => "user_permission",	"column" => "user_perm_id",		"target" => "user_perm_id"),
+	),
+	"columns" => array(
+			array ( "v" => "user_perm_id",			"t" => "user_perm_id"),
+			array ( "v" => "perm_id",				"t" => "fk_perm_id"),
+			array ( "v" => "user_id",				"t" => "fk_user_id"),
+	),
+);
+
 self::$PreRequisiteTable['assign']['tag'] = array (
 		"convert" => array(),
 		"nextId" => array (
