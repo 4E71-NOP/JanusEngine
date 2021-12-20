@@ -20,7 +20,7 @@ class InstallTitle {
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+
 		$localisation = " / InstallTitle";
 		$bts->MapperObj->AddAnotherLevel($localisation );
 		$bts->LMObj->logCheckpoint("InstallTitle");
@@ -32,8 +32,8 @@ class InstallTitle {
 		
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = "<span style='display:block; text-align:center; vertical-align:middle; padding:10px; font-size:38px; font-weight:bold;'>". $bts->I18nTransObj->getI18nTransEntry("Invite"); "</span>";
-		
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+
+			if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,
 			);

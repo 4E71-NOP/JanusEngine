@@ -58,6 +58,7 @@ class ClassLoader {
 		"CurrentSet"				=> _ENTITY_DIRECTORY_."others/CurrentSet.php",
 		"FileContent"				=> _ENTITY_DIRECTORY_."others/FileContent.php",
 		"GeneratedJavaScript"		=> _ENTITY_DIRECTORY_."others/GeneratedJavaScript.php",
+		"MenuData"					=> _ENTITY_DIRECTORY_."others/MenuData.php",
 		"RequestData"				=> _ENTITY_DIRECTORY_."others/RequestData.php",
 		"ServerInfos"				=> _ENTITY_DIRECTORY_."others/ServerInfos.php",
 		"SqlTableList"				=> _ENTITY_DIRECTORY_."others/SqlTableList.php",
@@ -114,8 +115,8 @@ class ClassLoader {
 		
 		"CommandConsole"			=> "current/engine/cli/CommandConsole.php",
 		
-		"LibInstallation"			=> "current/install/install_routines/LibInstallation.php",
-		"LibInstallationReport"		=> "current/install/install_routines/LibInstallationReport.php",
+		"LibInstallation"			=> _UTILITY_DIRECTORY_."LibInstallation.php",
+		"LibInstallationReport"		=> _UTILITY_DIRECTORY_."LibInstallationReport.php",
 		);
 	
 	public function __construct() {}

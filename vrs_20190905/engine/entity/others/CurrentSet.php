@@ -31,7 +31,7 @@ class CurrentSet {
 	/* @var $InstanceOfWebSiteObj WebSite */
 	private $InstanceOfWebSiteObj = null;
 
-	/* @var $InstanceOfWebSiteContextObj WebSite */
+	/* @var $InstanceOfWebSiteContextObj WebSiteContext */
 	private $InstanceOfWebSiteContextObj = null;
 	
 	/* @var $InstanceOfUserObj User */
@@ -52,7 +52,7 @@ class CurrentSet {
 	/* @var $InstanceOfDocumentDataObj DocumentData */
 	private $InstanceOfDocumentDataObj = null;
 
-	/* @var $InstanceOfModuleListObj DocumentData */
+	/* @var $InstanceOfModuleListObj ModuleList */
 	private $InstanceOfModuleListObj = null;
 
 	/* @var $InstanceOfLayoutObj Layout */

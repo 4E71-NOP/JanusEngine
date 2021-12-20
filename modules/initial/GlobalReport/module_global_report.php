@@ -23,92 +23,89 @@ class ModuleGlobalReport {
 	public function render (&$infos){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
-// 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
-		$l = $CurrentSetObj->getDataEntry ( 'language');
-		
-		$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
-		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),	"User");
-		$bts->LMObj->logDebug($infos,											"infos");
-		$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
-		$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
-		$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
-		$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
-		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
-		$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
-		
-		$T = array();
-		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
-		
-		$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25,8);
-		$infos['initial_visibility'] = 'hidden';		// trick to hide the first tab.
-		$T['ContentInfos']['NbrOfTabs'] = 0;
-		$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
-		$Content = "";
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
-		$CurrentTab = 0;	
-		if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
-			$CurrentTab++;
-			$tmp = $this->reportTab01($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->reportTab02($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->reportTab03($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->reportTab04($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->sqlReportTab($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->reportTab08($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
-			$CurrentTab++;	
-			$tmp = $this->variablesReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
-		}
-		
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
-		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var gr = new GlobalReport();');
 
-// 		$tabDbgLvl = array(
-// 			1 => 1,			2 => 2,			3 => 3,
-// 			4 => 4,			5 => 4,			6 => 4,
-// 			7 => 5,			8 => 6,			9 => 7,
-// 			10=> 8
-// 		);
-		
-		$T['ContentInfos']['GroupName']		= "AdmGr";
-		$Content .= $bts->RenderTablesObj->render($infos, $T);
-		return $Content;
+		$Content = "";
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('admin_default_read_permission') === true ) {
+
+// 			$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+			$l = $CurrentSetObj->getDataEntry ( 'language');
+			
+			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
+			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),	"User");
+			$bts->LMObj->logDebug($infos,											"infos");
+			$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
+			$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
+			$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
+			$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
+			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
+			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
+			$bts->LMObj->logDebug($CurrentSetObj->getDataEntry('MenuDataTree'),									"MenuDataObj->getMenuDataTree()");
+			
+			$T = array();
+			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
+			
+			$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25,8);
+			$infos['initial_visibility'] = 'hidden';		// trick to hide the first tab.
+			$T['ContentInfos']['NbrOfTabs'] = 0;
+			$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
+			$CurrentTab = 0;	
+			if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
+				$CurrentTab++;
+				$tmp = $this->reportTab01($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->reportTab02($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->reportTab03($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->reportTab04($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->sqlReportTab($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->reportTab08($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
+				$CurrentTab++;	
+				$tmp = $this->variablesReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
+			}
+			
+			$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+			$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
+			$GeneratedJavaScriptObj->insertJavaScript('Init', 'var gr = new GlobalReport();');
+		}
+	
+			$T['ContentInfos']['GroupName']		= "AdmGr";
+			$Content .= $bts->RenderTablesObj->render($infos, $T);
+			return $Content;
 	}
 	
 	/**

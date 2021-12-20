@@ -21,55 +21,58 @@ class ModuleAdministration {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$localisation = " / ModuleAdministration";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("ModuleAdministration");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("ModuleAdministration");
-		
 		$Content = "";
-		$dbquery = $bts->SDDMObj->query ("
-			SELECT * 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." 
-			WHERE cate_type IN ('2', '3') 
-			AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
-			AND fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."' 
-			AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
-			AND cate_state = '1' 
-			ORDER BY cate_id 
-			;");
-		
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
-		else {
-			$Content .= "<ul id='Admin_Menu_Simple' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";
-			$infos['menuData'] = array();
-			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				$cateIdIndex = $dbp['cate_id'];
-				$infos['menuData'][$cateIdIndex] = array (
-					"cate_id"		=> $dbp['cate_id'],
-					"cate_type"		=> $dbp['cate_type'],
-					"cate_title"	=> $dbp['cate_title'],
-					"cate_desc"		=> $dbp['cate_desc'],
-					"cate_parent"	=> $dbp['cate_parent'],
-					"cate_position"	=> $dbp['cate_position'],
-					"fk_group_id" 	=> $dbp['fk_group_id'],
-					"fk_arti_ref"	=> $dbp['fk_arti_ref'],
-					"fk_arti_slug"	=> $dbp['fk_arti_slug'],
-				);
-				if ( $dbp['cate_type'] == 2 ) { $rootMenu = $dbp['cate_id']; }
-			}
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('admin_default_write_permission') === true ) {
+
+			$localisation = " / ModuleAdministration";
+			$bts->MapperObj->AddAnotherLevel($localisation );
+			$bts->LMObj->logCheckpoint("ModuleAdministration");
+			$bts->MapperObj->RemoveThisLevel($localisation );
+			$bts->MapperObj->setSqlApplicant("ModuleAdministration");
 			
-			$infos['parameters'] = array (
-				"cate_parent"	=> $rootMenu,
-				"spaceSize"		=> 0,
-				"level"			=> 0,
-				"arti_request"	=> $CurrentSetObj->getDataSubEntry('article', 'arti_ref'),
-			);
-// 			$Content .= "<!--\r".$StringFormatObj->print_r_debug($infos)."\r-->\r\r";
-			$Content .= $this->renderAdminMenu($infos);
-			$Content .= "</ul>\r";
+			$Content = "";
+			$dbquery = $bts->SDDMObj->query ("
+				SELECT * 
+				FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." 
+				WHERE cate_type IN ('2', '3') 
+				AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
+				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."' 
+				AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
+				AND cate_state = '1' 
+				ORDER BY cate_id 
+				;");
+			
+			if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
+			else {
+				$Content .= "<ul id='Admin_Menu_Simple' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";
+				$infos['menuData'] = array();
+				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+					$cateIdIndex = $dbp['cate_id'];
+					$infos['menuData'][$cateIdIndex] = array (
+						"cate_id"		=> $dbp['cate_id'],
+						"cate_type"		=> $dbp['cate_type'],
+						"cate_title"	=> $dbp['cate_title'],
+						"cate_desc"		=> $dbp['cate_desc'],
+						"cate_parent"	=> $dbp['cate_parent'],
+						"cate_position"	=> $dbp['cate_position'],
+						"fk_group_id" 	=> $dbp['fk_group_id'],
+						"fk_arti_ref"	=> $dbp['fk_arti_ref'],
+						"fk_arti_slug"	=> $dbp['fk_arti_slug'],
+					);
+					if ( $dbp['cate_type'] == 2 ) { $rootMenu = $dbp['cate_id']; }
+				}
+				
+				$infos['parameters'] = array (
+					"cate_parent"	=> $rootMenu,
+					"spaceSize"		=> 0,
+					"level"			=> 0,
+					"arti_request"	=> $CurrentSetObj->getDataSubEntry('article', 'arti_ref'),
+				);
+	// 			$Content .= "<!--\r".$StringFormatObj->print_r_debug($infos)."\r-->\r\r";
+				$Content .= $this->renderAdminMenu($infos);
+				$Content .= "</ul>\r";
+			}
 		}
-		
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$dbquery ,

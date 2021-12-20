@@ -20,7 +20,7 @@ class InstallDocument {
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+
 		$localisation = " / InstallDocument";
 		$bts->MapperObj->AddAnotherLevel($localisation );
 		$bts->LMObj->logCheckpoint("InstallDocument");
@@ -57,8 +57,6 @@ class InstallDocument {
 				break;
 		}
 		$DocContent .= "</div>\r</div>\r";
-
-
 
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (

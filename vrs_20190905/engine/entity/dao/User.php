@@ -293,8 +293,23 @@ class User extends Entity {
 	
 	// 	public function setUser($User) { $this->User = $User; }
 	
-	public function hasPermission($perm) {
-		if ( $this->User['permission'][$perm] != 0 ) { return true; }
+	/**
+	 * Returns bolean true/false on named Read permission
+	 * @param string
+	 * @return boolean
+	 */
+	public function hasReadPermission($perm) {
+		if ( $this->User['permissionList'][$perm] != 0 ) { return true; }
+		return false;
+	}
+
+	/**
+	 * Returns bolean true/false on named Write permission
+	 * @param string
+	 * @return boolean
+	 */
+	public function hasWritePermission($perm) {
+		if ( $this->User['permissionList'][$perm] != 0 ) { return true; }
 		return false;
 	}
 

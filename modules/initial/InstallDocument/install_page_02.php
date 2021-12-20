@@ -297,17 +297,8 @@ if ( $devDebug != 1 ) {
 		
 	// --------------------------------------------------------------------------------------------
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
-	// $infos = array (
-	// 	"path" => "websites-data/",
-	// 	"method" =>  "",
-	// 	"section" => "",
-	// 	"directory_list" => $bts->RequestDataObj->getRequestDataEntry('directory_list'),
-	// 	"updateInsdtallationMonitor" => 0
-	// );
 	$tabConfigFile = array();
 	$i=0;
-	// $LibInstallationObj->scanDirectories($infos);
-	// error_log("\$infos : ".$bts->StringFormatObj->arrayToString($infos));
 	foreach ( $infos['directory_list'] as $k => $v ) {
 		// if ( isset ($A['filesFound'] ) ) {
 			$infos = array ( "n" => $i, );
@@ -478,16 +469,6 @@ $T['ContentInfos']['tabTxt5']			= $bts->I18nTransObj->getI18nTransEntry('tab_5')
 $T['ContentInfos']['tabTxt6']			= $bts->I18nTransObj->getI18nTransEntry('tab_6');
 $T['ContentInfos']['tabTxt7']			= $bts->I18nTransObj->getI18nTransEntry('tab_7');
 $T['ContentInfos']['tabTxt8']			= $bts->I18nTransObj->getI18nTransEntry('tab_8');
-
-
-// $T['ContentCfg']['tabs'] = array(
-// 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_creation'])+2		,4,6),
-// 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_data'])+2			,4,6),
-// 		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['script'])+2				,4,6),
-// 		4	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($installationReport['tables_post_install'])+2	,4,6),
-// 		5	=>	$adcTab06,
-// 		6	=>	$bts->RenderTablesObj->getDefaultTableConfig(count($tabConfigFile)+1								,4,6),
-// );
 
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 

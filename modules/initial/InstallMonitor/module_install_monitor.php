@@ -21,6 +21,7 @@ class InstallMonitor {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
+
 		$localisation = " / InstallMonitor";
 		$bts->MapperObj->AddAnotherLevel($localisation );
 		$bts->LMObj->logCheckpoint("InstallMonitor");
@@ -106,7 +107,6 @@ class InstallMonitor {
 			
 			$Content .= $bts->RenderTablesObj->render($infos, $T)."</div>\r";
 		}
-		
 	
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
