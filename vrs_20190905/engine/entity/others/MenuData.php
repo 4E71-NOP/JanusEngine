@@ -74,6 +74,7 @@ class MenuData {
 			}
 			$this->MenuDataTree[$this->EntryPoint] = $this->MenuDataRaw[$this->EntryPoint];
 			$this->buildTree($this->MenuDataTree);
+			$this->MenuDataTree['theme_name'] = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName();
 		}
 	}
 
@@ -134,8 +135,6 @@ class MenuData {
 	public function getMenuDataTree () { return $this->MenuDataTree; }
 	public function getMenuDataTreeEntry ($data) { return $this->MenuDataTree[$data]; }
 	public function getEntryPoint() { return $this->EntryPoint; }
-
-
 	//@formatter:on
 
 }

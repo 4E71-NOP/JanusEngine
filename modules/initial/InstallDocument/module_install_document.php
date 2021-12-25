@@ -32,7 +32,7 @@ class InstallDocument {
 		
 		// Required by included scripts
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
+		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		$ClassLoaderObj = ClassLoader::getInstance ();
 		

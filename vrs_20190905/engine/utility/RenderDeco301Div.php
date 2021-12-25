@@ -32,7 +32,7 @@ class RenderDeco301Div {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+// 		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
 		// $RenderLayoutObj = RenderLayout::getInstance();
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
@@ -105,7 +105,7 @@ class RenderDeco301Div {
 	<!-- _______________________________________ Decoration of module ".$mn." (end)_______________________________________ -->\r
 	";
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 30 );");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 30 );");
 		// $RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		

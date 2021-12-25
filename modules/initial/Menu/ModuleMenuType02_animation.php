@@ -244,7 +244,7 @@ class ModuleMenuType02 {
 			
 			$visibility = "hidden";
 			if ( $A['niv'] == 0 ) {
-				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "OnLoad" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
+				$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString("JavaScript-OnLoad" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
 			if ( $Ab['display_icons'] == 1 ) {
 				if ( strlen ($Ab['icone_directory_01']) > 0 ) { $Micone_rep =		"<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_directory']."'	width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
@@ -291,7 +291,7 @@ class ModuleMenuType02 {
 					$ModuleDecoration = $MenuRenderer->render($infos);
 				}
 				
-				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript ( "Command", "dm.UpdateAllDecoModule ( TabInfoModule , '".$A['id']."' );");
+				$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString("JavaScript-Command", "dm.UpdateAllDecoModule ( TabInfoModule , '".$A['id']."' );");
 			}
 			
 			$A['div_height_calc'] = (( $PMT['txt_l_01_margin_top'] + $PMT['txt_l_01_margin_bottom'] + $PMT['a_line_height'] ) * ($A['nf']) ) + $PMT['ex11_y'] + $PMT['exF1_y'];

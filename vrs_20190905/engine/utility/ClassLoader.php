@@ -57,7 +57,7 @@ class ClassLoader {
 		"ConfigurationManagement"	=> _ENTITY_DIRECTORY_."others/ConfigurationManagement.php",
 		"CurrentSet"				=> _ENTITY_DIRECTORY_."others/CurrentSet.php",
 		"FileContent"				=> _ENTITY_DIRECTORY_."others/FileContent.php",
-		"GeneratedJavaScript"		=> _ENTITY_DIRECTORY_."others/GeneratedJavaScript.php",
+		"GeneratedScript"			=> _ENTITY_DIRECTORY_."others/GeneratedScript.php",
 		"MenuData"					=> _ENTITY_DIRECTORY_."others/MenuData.php",
 		"RequestData"				=> _ENTITY_DIRECTORY_."others/RequestData.php",
 		"ServerInfos"				=> _ENTITY_DIRECTORY_."others/ServerInfos.php",

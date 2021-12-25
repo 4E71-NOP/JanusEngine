@@ -38,7 +38,7 @@ class RenderModule {
 		
 		$Content = "";
 		$ModuleTable = $RenderLayoutObj->getModuleList();
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
 
 		if ( strlen( $ThemeDataObj->getThemeDataEntry('theme_divinitial_bg') ) > 0 ) { $pv['div_initial_bg'] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeDataEntry('theme_divinitial_bg')."); background-repeat: ".$ThemeDataObj->getThemeDataEntry('theme_divinitial_repeat').";" ; }
 		if ( $ThemeDataObj->getThemeDataEntry('theme_divinitial_dx') == 0 ) { $ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', $_REQUEST['document_dx']); }
@@ -54,7 +54,7 @@ class RenderModule {
 				height:" . $ThemeDataObj->getThemeDataEntry('theme_divinitial_dy') . "px;"
 				.$pv['div_initial_bg'] . "'>\r"; // width = Always define otherwise it won't work..
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript("OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString("JavaScript-OnLoad", "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 		
 		$pv ['i'] = 1;
 		

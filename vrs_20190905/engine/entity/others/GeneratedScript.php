@@ -12,26 +12,31 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-
 /**
  * @author faust
- * This class is responssible for the Javascript code rendered at the end of the HTML script. 
+ * This class is responssible for the script/css code rendered at the end of the HTML script. 
  *  
  */
-class GeneratedJavaScript {
-	private $GeneratedJavaScript = array();
+class GeneratedScript {
+	private $GeneratedScript = array();
 	private $Object = array();
 	private $ObjectList = array();
 
 	public function __construct() {}
-
-// 	Sections are "Command", "Data", "Onload", "Fichier" 
-	public function insertJavaScript ( $section , $content) {
-		$this->GeneratedJavaScript[$section][] = $content;
+	
+	/**
+	 * Insert data into the desired $section
+	 * Sections are "JavaScript-Command", "JavaScript-Data", "JavaScript-Onload", "JavaScript-File" 
+	 * @param String $section
+	 * @param String $content
+	 * @return string
+	 */
+	public function insertString ( $section , $content) {
+		$this->GeneratedScript[$section][] = $content;
 	}
 	
-	public function getGeneratedJavaScript () { return $this->GeneratedJavaScript; }
-	public function getGeneratedJavaScriptEntry ($data) { return $this->GeneratedJavaScript[$data]; }
+	public function getGeneratedScript () { return $this->GeneratedScript; }
+	public function getGeneratedScriptEntry ($data) { return $this->GeneratedScript[$data]; }
 
 	/**
 	 * Render a JavaScript to get a local website ressource (ie Hydr scripts)
@@ -45,9 +50,9 @@ class GeneratedJavaScript {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( isset($this->GeneratedJavaScript[$section])) {
-			reset ($this->GeneratedJavaScript[$section]);
-			$tab = &$this->GeneratedJavaScript[$section];
+		if ( isset($this->GeneratedScript[$section])) {
+			reset ($this->GeneratedScript[$section]);
+			$tab = &$this->GeneratedScript[$section];
 			$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
 			foreach ($tab as $A ) { 
 				$Content .= $left .$baseUrl.$A . $right;
@@ -67,9 +72,9 @@ class GeneratedJavaScript {
 	public function renderJavaScriptExternalRessource ( $section, $left, $right ) {
 // 		$bts = BaseToolSet::getInstance();
 		$Content = "";
-		if ( isset($this->GeneratedJavaScript[$section])) {
-			reset ($this->GeneratedJavaScript[$section]);
-			$tab = &$this->GeneratedJavaScript[$section];
+		if ( isset($this->GeneratedScript[$section])) {
+			reset ($this->GeneratedScript[$section]);
+			$tab = &$this->GeneratedScript[$section];
 			foreach ($tab as $A ) { 
 				$Content .= $left .$A . $right;
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left . $A . $right."`"));
@@ -88,9 +93,9 @@ class GeneratedJavaScript {
 	public function renderJavaScriptCrudeMode ( $section ) {
 // 		$bts = BaseToolSet::getInstance();
 		$Content = "";
-		if ( isset($this->GeneratedJavaScript[$section])) {
-			reset ($this->GeneratedJavaScript[$section]);
-			$tab = &$this->GeneratedJavaScript[$section];
+		if ( isset($this->GeneratedScript[$section])) {
+			reset ($this->GeneratedScript[$section]);
+			$tab = &$this->GeneratedScript[$section];
 			foreach ($tab as $A ) { 
 				$Content .= $A . "\r"; 
 // 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$A ."`"));

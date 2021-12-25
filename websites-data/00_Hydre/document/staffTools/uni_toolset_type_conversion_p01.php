@@ -79,7 +79,7 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'engine/javascript/lib_ConvertTool.js');
+$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', 'engine/javascript/lib_ConvertTool.js');
 
 // --------------------------------------------------------------------------------------------
 // Preparation des tables

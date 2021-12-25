@@ -98,9 +98,9 @@ class ModuleGlobalReport {
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
-			$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-			$GeneratedJavaScriptObj->insertJavaScript('File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
-			$GeneratedJavaScriptObj->insertJavaScript('Init', 'var gr = new GlobalReport();');
+			$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+			$GeneratedScriptObj->insertString('JavaScript-File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
+			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');
 		}
 	
 			$T['ContentInfos']['GroupName']		= "AdmGr";
@@ -211,8 +211,8 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		// This will be implemented with "'" at the end of the string 
-		// $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
 
 		$log = $bts->LMObj->getStatisticsLog();
 		$stepOne = true;
@@ -265,7 +265,7 @@ var Chart02 = new Chart(document.getElementById('statChart2'), ".$dataObjectEnco
 var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEncoded3 ."\r);\r\r
 ";
 		
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data',$javaScriptForChartJs."\r");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data',$javaScriptForChartJs."\r");
 		$Content = array();
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";

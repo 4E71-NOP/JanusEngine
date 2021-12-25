@@ -79,7 +79,7 @@ class ModuleMenuType01 {
 // 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
-// 		$GeneratedJavaScriptObj = $CurrentSet->getInstanceOfGeneratedJavaScriptObj();
+// 		$GeneratedScriptObj = $CurrentSet->getInstanceOfGeneratedScriptObj();
 		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
 		
 		$Content = "";

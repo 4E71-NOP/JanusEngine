@@ -153,8 +153,8 @@ $ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
 
 
 $ClassLoaderObj->provisionClass('GeneratedJavaScript');
-$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
-$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedJavaScript());
+$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
 
 // --------------------------------------------------------------------------------------------
 // refresh  = <meta http-equiv='refresh' content='5'>\r
@@ -340,15 +340,15 @@ $DocContent .= "</div>\r";
 // --------------------------------------------------------------------------------------------
 // Javascript files
 // --------------------------------------------------------------------------------------------
-$GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript/lib_HydrCore.js');
-// $GeneratedJavaScriptObj->insertJavaScript('File', 'engine/javascript_statique.js');
-$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
-$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
+$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js');
+// $GeneratedScriptObj->insertString('JavaScript-File', 'engine/javascript_statique.js');
+$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
+$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
 
-$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile("File", "<script type='text/javascript' src='", "'></script>\r");
+$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptFile("File", "<script type='text/javascript' src='", "'></script>\r");
 $JavaScriptContent .= "<script type='text/javascript'>\r";
 $JavaScriptContent .= "function WindowOnLoad () {\r";
-$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode("OnLoad");
+$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode("OnLoad");
 $JavaScriptContent .= "
 }\r
 window.OnLoad = WindowOnLoad;\r\r

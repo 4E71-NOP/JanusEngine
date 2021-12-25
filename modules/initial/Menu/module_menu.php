@@ -38,27 +38,27 @@ class ModuleMenu {
 			$JavascriptData = "var MenuDataTree = { 'EntryPoint':'".$MenuDataObj->getEntryPoint()."',\r"
 			.substr( $JavascriptTreeData, 1, strlen( $JavascriptTreeData )-2)
 			."};\r\r";
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data', $JavascriptData);
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data', $JavascriptData);
+			$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName();
 			$Content .=  "
 			<div id='menuTitle'>\r</div>\r
-			<div id='menuSlide' class='menuSlide'>\r
-				<div id='menuBlock1'	class='menuBlock'></div>\r
-				<div id='menuBlock2'	class='menuBlock'></div>\r
-				<div id='menuBlock3'	class='menuBlock'></div>\r
-				<div id='menuBlock4'	class='menuBlock'></div>\r
-				<div id='menuBlock5'	class='menuBlock'></div>\r
-				<div id='menuBlock6'	class='menuBlock'></div>\r
-				<div id='menuBlock7'	class='menuBlock'></div>\r
-				<div id='menuBlock8'	class='menuBlock'></div>\r
-				<div id='menuBlock9'	class='menuBlock'></div>\r
-				<div id='menuBlock10'	class='menuBlock'></div>\r
+			<div id='menuSlide' class='menuSlideHost'>\r
+				<div id='menuBlock1'	class='menuSlide'></div>\r
+				<div id='menuBlock2'	class='menuSlide'></div>\r
+				<div id='menuBlock3'	class='menuSlide'></div>\r
+				<div id='menuBlock4'	class='menuSlide'></div>\r
+				<div id='menuBlock5'	class='menuSlide'></div>\r
+				<div id='menuBlock6'	class='menuSlide'></div>\r
+				<div id='menuBlock7'	class='menuSlide'></div>\r
+				<div id='menuBlock8'	class='menuSlide'></div>\r
+				<div id='menuBlock9'	class='menuSlide'></div>\r
 			</div>
 			";
 
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "modules/initial/Menu/javascript/MenuSlide.js");
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Init', "ms = new MenuSlide();\r");
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\tms.initialization(MenuDataTree,'menuBlock');");
-			$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\tms.PrepareMenuBeforeAnimation();");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "modules/initial/Menu/javascript/MenuSlide.js");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.initialization(MenuDataTree,'menuBlock');");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
 
 		}
 		
@@ -223,10 +223,10 @@ class ModuleMenu {
 	// 			$Content .= "<!-- _______________________________________ DIVs menu (End) _______________________________________ -->";
 	// 		}
 			
-	// // 		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-	// 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "modules/initial/Menu/javascript/ModuleMenuType02_animation.js");
-	// 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Data', $MenuData['JavaScriptData']. "var ZindexDepart = ".($infos['module_z_index'] + 1).";\r");
-	// 		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('OnLoad', "\tInitMenuDiv ( ".$MenuData['JavaScriptJSONName'].", TabInfoModule );");
+	// // 		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+	// 		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "modules/initial/Menu/javascript/ModuleMenuType02_animation.js");
+	// 		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data', $MenuData['JavaScriptData']. "var ZindexDepart = ".($infos['module_z_index'] + 1).";\r");
+	// 		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tInitMenuDiv ( ".$MenuData['JavaScriptJSONName'].", TabInfoModule );");
 	// 	}	
 	// 	return $Content;
 		

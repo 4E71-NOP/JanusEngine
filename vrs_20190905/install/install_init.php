@@ -137,8 +137,8 @@ class HydrInstall {
 
 		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
 		// include ("engine/entity/others/GeneratedJavaScript.php");
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
+		$CurrentSetObj->setInstanceOfGeneratedScriptObj ( new GeneratedJavaScript () );
+		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
 
 		$module_ ['module_deco'] = 1;
 
@@ -265,9 +265,9 @@ class HydrInstall {
 						case "render_module":
 							// Module it is.
 							if ( $insertJavascriptDecorationMgmt === false) {
-								$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
-								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
-								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedScriptObj->insertString('JavaScript-OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
+								$GeneratedScriptObj->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
@@ -289,36 +289,36 @@ class HydrInstall {
 		// --------------------------------------------------------------------------------------------
 		unset ( $A );
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_test_db.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/install/install_routines/install_fonctions.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_ElementAnimation.js' );
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js' );
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_test_db.js' );
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_fonctions.js' );
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_ElementAnimation.js' );
 
-		$GeneratedJavaScriptObj->insertJavaScript('Init', 'var dm = new DecorationManagement();');
+		$GeneratedScriptObj->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';" );
 
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "console.log ( TabInfoModule );" );
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptObjects();
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
 		$JavaScriptContent .= "\r}\r";
 		$JavaScriptContent .= "function WindowOnLoad () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
 		}\r
 		window.onresize = WindowOnResize;\r

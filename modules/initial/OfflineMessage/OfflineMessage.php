@@ -66,7 +66,7 @@ class ModuleOffLineMessage {
 		$ThemeDataObj->setThemeName('mt_');
 		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj(new GeneratedJavaScript());
+		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedJavaScript());
 		
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', 512);
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', 1024);

@@ -46,8 +46,8 @@ class CurrentSet {
 	/* @var $InstanceOfThemeDataObjBackup ThemeData */
 	private $InstanceOfThemeDataObjBackup  = null;
 	
-	/* @var $InstanceOfGeneratedJavaScriptObj GeneratedJavaScript */
-	private $InstanceOfGeneratedJavaScriptObj = null;
+	/* @var $InstanceOfGeneratedScriptObj GeneratedScript */
+	private $InstanceOfGeneratedScriptObj = null;
 
 	/* @var $InstanceOfDocumentDataObj DocumentData */
 	private $InstanceOfDocumentDataObj = null;
@@ -60,7 +60,6 @@ class CurrentSet {
 
 	/* @var $InstanceOfArticleObj Article */
 	private $InstanceOfArticleObj = null;
-
 
 	/* @var $data array */
 	private $data = array();
@@ -90,7 +89,7 @@ class CurrentSet {
 	public function getInstanceOfUserObj()					{ return $this->InstanceOfUserObj; }
 	public function getInstanceOfThemeDescriptorObj()		{ return $this->InstanceOfThemeDescriptorObj; }
 	public function getInstanceOfThemeDataObj()				{ return $this->InstanceOfThemeDataObj; }
-	public function getInstanceOfGeneratedJavaScriptObj()	{ return $this->InstanceOfGeneratedJavaScriptObj; }
+	public function getInstanceOfGeneratedScriptObj()		{ return $this->InstanceOfGeneratedScriptObj; }
 	public function getInstanceOfDocumentDataObj()			{ return $this->InstanceOfDocumentDataObj; }
 	public function getInstanceOfLayoutObj()				{ return $this->InstanceOfLayoutObj; }
 	public function getInstanceOfModuleListObj()			{ return $this->InstanceOfModuleListObj; }
@@ -104,7 +103,7 @@ class CurrentSet {
 	public function setInstanceOfUserObj($InstanceOfUserObj)								{ $this->InstanceOfUserObj = $InstanceOfUserObj; }
 	public function setInstanceOfThemeDescriptorObj($InstanceOfThemeDescriptorObj)			{ $this->InstanceOfThemeDescriptorObj = $InstanceOfThemeDescriptorObj; }
 	public function setInstanceOfThemeDataObj($InstanceOfThemeDataObj)						{ $this->InstanceOfThemeDataObj = $InstanceOfThemeDataObj; }
-	public function setInstanceOfGeneratedJavaScriptObj($InstanceOfGeneratedJavaScriptObj)	{ $this->InstanceOfGeneratedJavaScriptObj = $InstanceOfGeneratedJavaScriptObj; }
+	public function setInstanceOfGeneratedScriptObj($InstanceOfGeneratedScriptObj)			{ $this->InstanceOfGeneratedScriptObj = $InstanceOfGeneratedScriptObj; }
 	public function setInstanceOfDocumentDataObj($InstanceOfDocumentDataObj)				{ $this->InstanceOfDocumentDataObj = $InstanceOfDocumentDataObj; }
 	public function setInstanceOfLayoutObj($InstanceOfLayoutObj)							{ $this->InstanceOfLayoutObj = $InstanceOfLayoutObj; }
 	public function setInstanceOfModuleListObj($InstanceOfModuleListObj)					{ $this->InstanceOfModuleListObj = $InstanceOfModuleListObj; }

@@ -251,7 +251,7 @@ class RenderDeco60Elysion {
 			$argAddModuleIn .= ( $B['in55_e'] == 1 ) ? "in55 : {	'isEnabled':1,	'DimX':".$B['in55_x'].",	'DimY':".$B['in55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in55 : {	'isEnabled':false },";
 
 			$argAddModule .= "}";
-		$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

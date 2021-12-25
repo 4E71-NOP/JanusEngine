@@ -564,19 +564,19 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
 		
-		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
-		$CurrentSetObj->setInstanceOfGeneratedJavaScriptObj ( new GeneratedJavaScript () );
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj ();
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_HydrCore.js' );
+		$ClassLoaderObj->provisionClass ( 'GeneratedScript' );
+		$CurrentSetObj->setInstanceOfGeneratedScriptObj ( new GeneratedScript () );
+		$GeneratedScript = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js' );
 		
-		// $GeneratedJavaScriptObj->insertJavaScript('File', 'current/engine/javascript_lib_calculs_decoration.js');
+		// $GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript_lib_calculs_decoration.js');
 		// We got the route definition in the $CurrentSet and the session.
 		// Inserting the URL in the browser bar.
 		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'). $CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."/".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."/";
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
+		$GeneratedScript->insertString('JavaScript-OnLoad', "	window.history.pushState( null , '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )."', '".$urlBar."');" );
+		$GeneratedScript->insertString('JavaScript-OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
 		
-		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\telm.UpdateWindowSize ('');");
+		$GeneratedScript->insertString('JavaScript-OnResize', "\telm.UpdateWindowSize ('');");
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -643,9 +643,9 @@ class Hydr {
 						case "render_module":
 							// Module it is.
 							if ( $insertJavascriptDecorationMgmt == false) {
-								$GeneratedJavaScriptObj->insertJavaScript ('OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
-								$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
-								$GeneratedJavaScriptObj->insertJavaScript("Data", "var TabInfoModule = new Array();\r");
+								$GeneratedScript->insertString('JavaScript-OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);" );
+								$GeneratedScript->insertString('JavaScript-OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
+								$GeneratedScript->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
@@ -767,7 +767,7 @@ class Hydr {
 				$i ++;
 			}
 			$str = substr ( $str, 0, - 2 ) . "\r};\r";
-			$GeneratedJavaScriptObj->insertJavaScript ( 'Data', $str );
+			$GeneratedScript->insertString('JavaScript-Data', $str );
 		}
 		
 		// --------------------------------------------------------------------------------------------
@@ -777,30 +777,30 @@ class Hydr {
 		//
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\tconsole.log ( TabInfoModule );" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'File', 'current/engine/javascript/lib_DecorationManagement.js' );
-		$GeneratedJavaScriptObj->insertJavaScript ( 'Init', 'var dm = new DecorationManagement();');
+		$GeneratedScript->insertString('JavaScript-OnLoad', "\tconsole.log ( TabInfoModule );" );
+		$GeneratedScript->insertString('JavaScript-OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
+		$GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js' );
+		$GeneratedScript->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptFile ( "File", "<script type='text/javascript' src='", "'></script>\r" );
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptExternalRessource ( "ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptFile ( "JavaScript-File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptExternalRessource ( "JavaScript-ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 		
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptObjects();
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Init" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "Command" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-OnResize" );
 		$JavaScriptContent .= "}\r";
 		$JavaScriptContent .= "function WindowOnLoad () {\r";
-		$JavaScriptContent .= $GeneratedJavaScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
+		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-OnLoad" );
 		$JavaScriptContent .= "
 	}\r
 	window.onresize = WindowOnResize;\r

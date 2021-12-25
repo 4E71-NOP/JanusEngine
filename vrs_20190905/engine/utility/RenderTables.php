@@ -61,7 +61,7 @@ class  RenderTables {
 		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
 			if ( $this->javascriptAlreadyIncluded == false ) {
-				$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', "current/engine/javascript/lib_TabsManagement.js");
+				$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "current/engine/javascript/lib_TabsManagement.js");
 				$this->javascriptAlreadyIncluded = true;
 			}
 			$Content .= $bts->RenderTabsObj->render($infos, $T); 

@@ -312,8 +312,8 @@ $T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = ( $i - 1 );
 $str = "var ListCheckbox = [\r";
 foreach ( $listDirectoriCheckbox as $A ) { $str .= "\"".$A."\", \r"; }
 $str = substr($str, 0,-3) . "\r];\r";
-$GeneratedJavaScriptObj->insertJavaScript('Data' , $str);
-$GeneratedJavaScriptObj->insertJavaScript('OnLoad' , "\tsetFormPreconizedSettings();");
+$GeneratedScriptObj->insertString('JavaScript-Data' , $str);
+$GeneratedScriptObj->insertString('JavaScript-OnLoad' , "\tsetFormPreconizedSettings();");
 
 $T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig(($i-1),3,1);
 $CurrentTab++;
@@ -440,8 +440,8 @@ $SrvUri = $_SERVER['REQUEST_URI'];
 $uriCut = strpos( $_SERVER['REQUEST_URI'] , "/Hydr/current/install/install_page_01.php" );
 $SrvUri = substr ( $_SERVER['REQUEST_URI'] , 0 , $uriCut );
 
-$GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"". $SrvUri . "\"");
-$GeneratedJavaScriptObj->insertJavaScript('Data' , "var FormName = \"".$FormName."\"");
+$GeneratedScriptObj->insertString('JavaScript-Data' , "var RequestURI = \"". $SrvUri . "\"");
+$GeneratedScriptObj->insertString('JavaScript-Data' , "var FormName = \"".$FormName."\"");
 
 
 $T['ContentCfg']['tabs'][$CurrentTab] = $bts->RenderTablesObj->getDefaultTableConfig($lt,4,1);
@@ -463,7 +463,7 @@ $T['Content'][$CurrentTab][$lt]['2']['cont'] = "<input type='text' name='form[ta
 $T['Content'][$CurrentTab][$lt]['3']['cont'] = "<input type='text' readonly disable name='form[db_hosting_tabprefix_copie_1]' size='20' maxlength='255' value=''>";
 $T['Content'][$CurrentTab][$lt]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$lt.'c4');
 $T['Content'][$CurrentTab][$lt]['4']['tc'] = 1;
-$GeneratedJavaScriptObj->insertJavaScript('Command' , "InsertValue ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
+$GeneratedScriptObj->insertString('JavaScript-Command' , "InsertValue ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
 
 $lt++;
 
@@ -581,8 +581,8 @@ foreach ( $pv['ListeChamps'] as $A ) {
 	$i++;
 }
 $pv['JSONListeChamps'] = substr ( $pv['JSONListeChamps'] , 0 , -2 ) . "}; ";
-$GeneratedJavaScriptObj->insertJavaScript('Data' , $pv['JSONListeChamps']);
-$GeneratedJavaScriptObj->insertJavaScript('Data' , " var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
+$GeneratedScriptObj->insertString('JavaScript-Data' , $pv['JSONListeChamps']);
+$GeneratedScriptObj->insertString('JavaScript-Data' , " var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
 
 // --------------------------------------------------------------------------------------------
 

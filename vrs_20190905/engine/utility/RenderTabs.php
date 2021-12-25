@@ -135,12 +135,12 @@ class RenderTabs {
 		$JavaScriptTableLength = strlen($JavaScriptTable) - 2;
 		$JavaScriptTable = substr( $JavaScriptTable, 0 , $JavaScriptTableLength) . "\r};\r";
 		
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
-		$GeneratedJavaScriptObj->insertJavaScript('Init', "var tm = new TabsManagement();");
-		$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\ttm.InitTabs (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
-		$GeneratedJavaScriptObj->insertJavaScript('OnLoad', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
-		$GeneratedJavaScriptObj->insertJavaScript('OnResize', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
-		$GeneratedJavaScriptObj->insertJavaScript('Data', $JavaScriptTable);
+		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$GeneratedScriptObj->insertString('JavaScript-Init', "var tm = new TabsManagement();");
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\ttm.InitTabs (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
+		$GeneratedScriptObj->insertString('JavaScript-OnResize', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
+		$GeneratedScriptObj->insertString('JavaScript-Data', $JavaScriptTable);
 
 		switch ( $tab_infos['RenderMode'] ) {
 			case 0:

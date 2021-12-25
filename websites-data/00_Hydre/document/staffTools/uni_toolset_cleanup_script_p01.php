@@ -62,7 +62,7 @@ $bts->I18nTransObj->apply(
 		)
 	)
 );
-$CurrentSetObj->getInstanceOfGeneratedJavaScriptObj()->insertJavaScript('File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
+$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 "<br>\r

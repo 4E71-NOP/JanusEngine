@@ -36,7 +36,7 @@ class FileSelector {
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();		// we use it this way for syntaxic ease. instead of $CurrentSetObj->getInstanceOfThemeDataObj()->xxxx()
-		$GeneratedJavaScriptObj = $CurrentSetObj->getInstanceOfGeneratedJavaScriptObj();
+		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
 		
 		$Content = "";
 		$zIndex = 500;
@@ -104,11 +104,11 @@ class FileSelector {
 		$RootUri = strpos( $_SERVER['REQUEST_URI'] , "/index.php" );
 		$Uri = substr ( $_SERVER['REQUEST_URI'] , 0 , $RootUri );
 		
-		$GeneratedJavaScriptObj->insertJavaScript('File' , "current/engine/javascript/FileSelector.js");
-		$GeneratedJavaScriptObj->insertJavaScript('Data' , "var RequestURI = \"".$Uri. "\"");
-		$GeneratedJavaScriptObj->insertJavaScript('Init' , "var fs = new FileSelector('FileSelectorLines');");
+		$GeneratedScriptObj->insertString('JavaScript-File' , "current/engine/javascript/FileSelector.js");
+		$GeneratedScriptObj->insertString('JavaScript-Data' , "var RequestURI = \"".$Uri. "\"");
+		$GeneratedScriptObj->insertString('JavaScript-Init' , "var fs = new FileSelector('FileSelectorLines');");
 		
-		unset ( $ThemeDataObj , $GeneratedJavaScriptObj );
+		unset ( $ThemeDataObj , $GeneratedScriptObj );
 		return $Content;
 	}
 }
