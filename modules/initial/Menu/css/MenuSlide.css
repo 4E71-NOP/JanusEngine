@@ -1,21 +1,32 @@
+.menuSlideTitle {
+	display :block;
+	font-weight: bold;
+}
 .menuSlideHost {
 	width: 100%;
 	height: 100%;
-	display :inline-block;
-	overflow: hidden;
+	display :block;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .menuSlide {
-	transition: all 0.5s ease-out;
+	position:absolute;
+	top: 0px;
 	width:100%;
 	height:100%;
 	margin-left:100%;
-	margin-right:0%;
+	margin-right:0%; 
+	transition: all 0.5s ease-in-out;
 }
 
-.menuSlide.slideLeftEnter {
+.menuSlide.moveIn {
 	margin-left:0%;
 }
 .menuSlide.slideLeftExit {
-	margin-right:100%;
+	margin-left:-100%;
+}
+
+.menuSlide.slideRightExit {
+	margin-left:100%;
 }

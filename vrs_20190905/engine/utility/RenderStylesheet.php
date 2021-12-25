@@ -451,6 +451,18 @@ html { width:100%; height:100%;}\r\r
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_RIGHT_,			"td:last-child",	"{".$str."}");
 		}
 		
+		// Icons
+		if ( strlen($p['icon_directory'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_directory",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_directory']."); }\r");		}
+		if ( strlen($p['icon_erase'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_erase",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_erase']."); }\r");			}
+		if ( strlen($p['icon_ok'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_ok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_ok']."); }\r");				}
+		if ( strlen($p['icon_nok'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_nok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_nok']."); }\r");				}
+		if ( strlen($p['icon_left'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_left",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_left']."); }\r");			}
+		if ( strlen($p['icon_right'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_right",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_right']."); }\r");			}
+		if ( strlen($p['icon_top'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_top",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_top']."); }\r");				}
+		if ( strlen($p['icon_bottom'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_bottom",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_bottom']."); }\r");			}
+		if ( strlen($p['icon_question'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_question",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_question']."); }\r");		}
+		if ( strlen($p['icon_notification'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_notification",	" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_notification']."); }\r");	}
+
 		// Add title lines (first/last line +  first/last column)
 		return "\r".$Content;
 	}
@@ -671,7 +683,19 @@ html { width:100%; height:100%;}\r\r
 				case "special":
 					if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= $p[$elm.'_'.$A]."; ";}
 					break;
-					
+				// case "directory":
+				// case "erase":
+				// case "ok":
+				// case "nok":
+				// case "left":
+				// case "right":
+				// case "top":
+				// case "bottom":
+				// case "question":
+				// case "notification":
+				// 	$CurrentSetObj = CurrentSet::getInstance();
+				// 	if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$infos['theme_directory'].$p[$elm.'_'.$A].");";}
+				// 	break;
 			}
 		}
 		return $str;

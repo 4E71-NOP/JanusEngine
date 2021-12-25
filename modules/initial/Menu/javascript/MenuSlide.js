@@ -15,72 +15,105 @@ class MenuSlide {
 	md={};
 
 	/**
-	 * 
+	 * Init
 	 * @param {*} data 
 	 * @param {*} menuDivName 
 	 */
 	initialization (data, menuDivName) {
 		this.EntryPoint = data.EntryPoint;
-		this.currentPosition = data[this.EntryPoint].children;
+		this.data = data.Payload;
+		elm.Gebi('menuTitle').innerHTML = this.data[this.EntryPoint].cate_title;
+
+		this.currentMenu = this.EntryPoint;
 		this.themeName = data.theme_name;
-		for (let n=1; n<=10; n++ ) {
-			this.md[n] = elm.Gebi(menuDivName+n);
-		}
+		this.block = data.block;
 		this.level = 1;
-		elm.Gebi('menuTitle').innerHTML = '<b>' + data[this.EntryPoint].cate_title + '</b>';
+		
+		for (let n=1; n<=10; n++ ) { this.md[n] = elm.Gebi(menuDivName+n); }
+		elm.Gebi('menuSlide').parentNode.style.overflow='hidden';
 	}
 
 	/**
-	 * Id is the menu clicked cate_id
+	 * Stuff the nex div with the menu children tha has been clicked on
 	 * @param {*} id 
 	 */
 	makeMenu(){
-		let ObjPtr = this.currentPosition;		
+		let c = this.data[this.currentMenu];
+		l.Log[dbgMenu]("makeMenu on: '"+c.cate_title+"' ("+c.cate_id+ "); slug:'"+ c.fk_arti_slug+"'");
+
 		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
 		if ( this.level > 1) {
-			str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm'><span onClick='ms.slideBack()'><-</span></li>";
+			str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm' onClick='ms.slideBack()'><div class='"+this.themeName+this.block+"_icon_left' style='width:24px;height:24px;'></li>";
 		}
-		for (let n in ObjPtr) {
-			if (ObjPtr[n].children) {
-				str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm'><span onClick='ms.slideDeeper("+ObjPtr[n].cate_id+")'>*"+ObjPtr[n].cate_title+"</span></li>";
-			}
-			else {
-				str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"+ObjPtr[n].fk_arti_slug+"'>"+ObjPtr[n].cate_title+"</a></li>";
+		let d = this.data;
+		for ( let n in d ){
+			if ( d[n].cate_parent == this.currentMenu ) {
+				if ( this.checkChildren(d[n].cate_id) === true) {
+					str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"+d[n].cate_id+"')\">*"+d[n].cate_title+"</li>";
+				}
+				else {
+					str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"+d[n].fk_arti_slug+"'>"+d[n].cate_title+"</a></li>";
+				}
 			}
 		}
 		str+="</ul>";
 		this.md[this.level].innerHTML = str;
 	}
-
-	slideBack(){
-		let ObjPtr = this.currentPosition;
-		this.currentPosition = ObjPtr.parentNode;
-		this.level--;
-
+	
+	/**
+	 * Check for children of the entry in menu data
+	 * @param {*} id 
+	 * @returns 
+	 */
+	checkChildren(id){
+		let d = this.data;
+		for ( let n in d ){ 
+			if ( d[n].cate_parent == id ) { return true; }
+		}
+		return false;
 	}
 
+	/**
+	 * Finds the first children of a menu
+	 * @param {*} id 
+	 * @returns 
+	 */
+	findChildren (id){
+		let d = this.data;
+		for ( let n in d ){ 
+			if ( d[n].cate_parent == id ) { return d[n].cate_id; }
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 */
+	slideBack(){
+		if (this.level > 1) {
+			this.currentMenu = this.data[this.currentMenu].cate_parent;
+			this.md[(this.level-1)].classList.remove('slideLeftExit');
+			this.md[(this.level-1)].classList.toggle('moveIn');
+
+			this.md[(this.level)].classList.remove('moveIn');
+			this.md[(this.level)].classList.toggle('slideRightExit');
+			this.level--;
+		}
+	}
+
+	/**
+	 * 
+	 * @param {*} id 
+	 */
 	slideDeeper(id){
 		this.level++;
-		let ObjPtr = this.currentPosition;
-		let menuFound=false;
-		let NextPtr=null;
-		for (let n in ObjPtr) {
-			if (ObjPtr[n].cate_id == id ) { NextPtr = ObjPtr[n].children;}
-			menuFound=true;
-		}
-		if (menuFound==true){
-			this.currentPosition = NextPtr;
-			this.makeMenu();
-			this.md[this.level].classList.toggle('slideLeftExit')
-			this.md[(this.level+1)].classList.toggle('slideLeftEnter')
-			
-		}
-		else { l.Log[dbgMenu]("Menu not found!") }
+		this.currentMenu = id;
+		this.makeMenu();
+		this.md[(this.level-1)].classList.remove('moveIn');
+		this.md[(this.level-1)].classList.toggle('slideLeftExit');
+		this.md[(this.level)].classList.remove('slideRightExit');
+		this.md[(this.level)].classList.toggle('moveIn');
 	}
+
 }
-
-
-
-
-
 

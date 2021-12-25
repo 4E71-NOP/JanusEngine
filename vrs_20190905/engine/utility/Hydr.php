@@ -771,9 +771,14 @@ class Hydr {
 		}
 		
 		// --------------------------------------------------------------------------------------------
+		// Rendering of the CSS
 		//
+		// --------------------------------------------------------------------------------------------
+		$CssContent  ="<!-- Extra CSS -->\r";
+		$CssContent .= $GeneratedScript->renderScriptFileWithBaseURL ( "Css-File", "<link rel='stylesheet' href='", "'>\r" );
+
+		// --------------------------------------------------------------------------------------------
 		// Rendering of the JavaScript
-		//
 		//
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
@@ -783,24 +788,24 @@ class Hydr {
 		$GeneratedScript->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptFile ( "JavaScript-File", "<script type='text/javascript' src='", "'></script>\r" );
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptExternalRessource ( "JavaScript-ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptFileWithBaseURL ( "JavaScript-File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScript->renderExternalRessourceScript ( "JavaScript-ExternalRessource", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 		
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Data" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptCrudeMode ( "JavaScript-Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
 		$JavaScriptContent .= $GeneratedScript->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Init" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptCrudeMode ( "JavaScript-Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-Command" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptCrudeMode ( "JavaScript-Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-OnResize" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptCrudeMode ( "JavaScript-OnResize" );
 		$JavaScriptContent .= "}\r";
 		$JavaScriptContent .= "function WindowOnLoad () {\r";
-		$JavaScriptContent .= $GeneratedScript->renderJavaScriptCrudeMode ( "JavaScript-OnLoad" );
+		$JavaScriptContent .= $GeneratedScript->renderScriptCrudeMode ( "JavaScript-OnLoad" );
 		$JavaScriptContent .= "
 	}\r
 	window.onresize = WindowOnResize;\r
@@ -818,7 +823,7 @@ class Hydr {
 
 		// --------------------------------------------------------------------------------------------
 		$bts->SDDMObj->disconnect_sql ();
-		return ($Content . $JavaScriptContent . $licence . "</body>\r</html>\r");
+		return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
 	}
 }
 

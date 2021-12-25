@@ -29,21 +29,26 @@ class ModuleMenu {
 			$MenuDataObj = new MenuData();
 			$MenuDataObj->RenderMenuData();
 
+			$JavaScriptData = "var MenuDataTree = {\r
+				'EntryPoint':'m".$MenuDataObj->getEntryPoint()."',\r
+				'theme_name':'".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."',\r
+				'block':'".$infos['block']."',\r
+				'Payload':{\r";
+			$RawData = $MenuDataObj->getMenuDataRaw();
+			foreach ( $RawData as $A ) { 
+			
+				$A['cate_id'] = "m".$A['cate_id'];				// Javascript does store numbers compliant to IEEE 754 
+				$A['cate_parent'] = "m".$A['cate_parent'];		// Big number can be outside the max...
+				$JavaScriptData .= "'".$A['cate_id']."':".json_encode($A,JSON_FORCE_OBJECT).",\r"; 
+			}
+			$JavaScriptData .= "}\r}\r";
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data', $JavaScriptData);
 			$CurrentSetObj->setDataEntry('MenuDataTree', $MenuDataObj->getMenuDataTree());		// Good for debug
 			
-			$JavascriptTreeData = json_encode($MenuDataObj->getMenuDataTree(),JSON_FORCE_OBJECT);
-			// $JavascriptTreeData = str_replace("{\"cate_id", "{\r\"cate_id", $JavascriptTreeData);
-			$JavascriptTreeData = str_replace("},", "},\r", $JavascriptTreeData);
-			$JavascriptTreeData = str_replace(",\"children\":{", ",\r\"children\":{", $JavascriptTreeData);
-			$JavascriptData = "var MenuDataTree = { 'EntryPoint':'".$MenuDataObj->getEntryPoint()."',\r"
-			.substr( $JavascriptTreeData, 1, strlen( $JavascriptTreeData )-2)
-			."};\r\r";
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data', $JavascriptData);
-			$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName();
-			$Content .=  "
-			<div id='menuTitle'>\r</div>\r
+			$Content .= "
+			<div id='menuTitle' class='menuSlideTitle' >\r</div>\r
 			<div id='menuSlide' class='menuSlideHost'>\r
-				<div id='menuBlock1'	class='menuSlide'></div>\r
+				<div id='menuBlock1'	class='menuSlide moveIn'></div>\r
 				<div id='menuBlock2'	class='menuSlide'></div>\r
 				<div id='menuBlock3'	class='menuSlide'></div>\r
 				<div id='menuBlock4'	class='menuSlide'></div>\r
@@ -59,7 +64,7 @@ class ModuleMenu {
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.initialization(MenuDataTree,'menuBlock');");
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
-
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('Css-File', "modules/initial/Menu/css/MenuSlide.css");
 		}
 		
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
@@ -69,7 +74,6 @@ class ModuleMenu {
 		}
 		return $Content;
 	}
-
 
 	/**
 	 * Render the menu and return the HTML content

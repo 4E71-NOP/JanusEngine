@@ -45,7 +45,7 @@ class GeneratedScript {
 	 * @param String $right
 	 * @return string
 	 */
-	public function renderJavaScriptFile ( $section, $left, $right ) {
+	public function renderScriptFileWithBaseURL ( $section, $left, $right ) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -69,7 +69,7 @@ class GeneratedScript {
 	 * @param String $right
 	 * @return string
 	 */
-	public function renderJavaScriptExternalRessource ( $section, $left, $right ) {
+	public function renderExternalRessourceScript ( $section, $left, $right ) {
 // 		$bts = BaseToolSet::getInstance();
 		$Content = "";
 		if ( isset($this->GeneratedScript[$section])) {
@@ -90,7 +90,7 @@ class GeneratedScript {
 	 * @param String $section
 	 * @return string
 	 */
-	public function renderJavaScriptCrudeMode ( $section ) {
+	public function renderScriptCrudeMode ( $section ) {
 // 		$bts = BaseToolSet::getInstance();
 		$Content = "";
 		if ( isset($this->GeneratedScript[$section])) {

@@ -302,23 +302,23 @@ class HydrInstall {
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptFile( "File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptFileWithBaseURL( "File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
 		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Command" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "Init" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "OnResize" );
 		$JavaScriptContent .= "\r}\r";
 		$JavaScriptContent .= "function WindowOnLoad () {\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode ( "OnLoad" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "OnLoad" );
 		$JavaScriptContent .= "
 		}\r
 		window.onresize = WindowOnResize;\r

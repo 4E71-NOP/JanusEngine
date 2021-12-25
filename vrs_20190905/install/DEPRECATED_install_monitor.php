@@ -345,10 +345,10 @@ $GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/
 $GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'initial_div' ).style.visibility = 'visible';");
 $GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
 
-$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptFile("File", "<script type='text/javascript' src='", "'></script>\r");
+$JavaScriptContent .= $GeneratedScriptObj->renderScriptFileWithBaseURL("File", "<script type='text/javascript' src='", "'></script>\r");
 $JavaScriptContent .= "<script type='text/javascript'>\r";
 $JavaScriptContent .= "function WindowOnLoad () {\r";
-$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptCrudeMode("OnLoad");
+$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode("OnLoad");
 $JavaScriptContent .= "
 }\r
 window.OnLoad = WindowOnLoad;\r\r
