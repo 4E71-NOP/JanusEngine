@@ -37,7 +37,7 @@ class MenuData {
 		
 		$query = "
 		SELECT mnu.* FROM "
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." cat, "
+		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." mnu, "
 		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." bcl
 		WHERE mnu.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		AND mnu.fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."'

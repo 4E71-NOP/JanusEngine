@@ -203,7 +203,7 @@ mnu.fk_lang_id,
 bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
 FROM "
 .$SqlTableListObj->getSQLTableName('article')." art, "
-.$SqlTableListObj->getSQLTableName('menu')." cat, "
+.$SqlTableListObj->getSQLTableName('menu')." mnu, "
 .$SqlTableListObj->getSQLTableName('deadline')." bcl
 WHERE art.arti_ref = mnu.fk_arti_ref
 AND art.fk_deadline_id = bcl.deadline_id

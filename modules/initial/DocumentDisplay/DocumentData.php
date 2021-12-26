@@ -41,7 +41,7 @@ class DocumentData {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
 			$dbquery = $bts->SDDMObj->query ( "
 			SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
-			FROM " . $SqlTableListObj->getSQLTableName('menu') . " cat, " 
+			FROM " . $SqlTableListObj->getSQLTableName('menu') . " mnu, " 
 			. $SqlTableListObj->getSQLTableName('deadline') . " bcl
 			WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
 			AND mnu.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'

@@ -135,9 +135,9 @@ class HydrInstall {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
 
-		$ClassLoaderObj->provisionClass ( 'GeneratedJavaScript' );
-		// include ("engine/entity/others/GeneratedJavaScript.php");
-		$CurrentSetObj->setInstanceOfGeneratedScriptObj ( new GeneratedJavaScript () );
+		$ClassLoaderObj->provisionClass ( 'GeneratedScript' );
+		// include ("engine/entity/others/GeneratedScript.php");
+		$CurrentSetObj->setInstanceOfGeneratedScriptObj ( new GeneratedScript () );
 		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
 
 		$module_ ['module_deco'] = 1;
@@ -302,23 +302,23 @@ class HydrInstall {
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "console.log ( TabInfoModule );" );
 
 		$JavaScriptContent = "<!-- JavaScript -->\r\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptFileWithBaseURL( "File", "<script type='text/javascript' src='", "'></script>\r" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptFileWithBaseURL( "JavaScript-File", "<script type='text/javascript' src='", "'></script>\r" );
 		$JavaScriptContent .= "<script type='text/javascript'>\r";
 
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Data" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "JavaScript-Data" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
 		$JavaScriptContent .= $GeneratedScriptObj->renderJavaScriptObjects();
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Command" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "JavaScript-Command" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "Init" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "JavaScript-Init" );
 		$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 		$JavaScriptContent .= "function WindowOnResize (){\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "OnResize" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "JavaScript-OnResize" );
 		$JavaScriptContent .= "\r}\r";
 		$JavaScriptContent .= "function WindowOnLoad () {\r";
-		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "OnLoad" );
+		$JavaScriptContent .= $GeneratedScriptObj->renderScriptCrudeMode ( "JavaScript-OnLoad" );
 		$JavaScriptContent .= "
 		}\r
 		window.onresize = WindowOnResize;\r

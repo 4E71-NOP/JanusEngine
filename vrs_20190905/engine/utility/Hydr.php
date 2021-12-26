@@ -502,7 +502,7 @@ class Hydr {
 				$sqlQuery = "
 					SELECT * 
 					FROM " 
-					. $SqlTableListObj->getSQLTableName ( 'menu' ) . " cat, " 
+					. $SqlTableListObj->getSQLTableName ( 'menu' ) . " mnu, " 
 					. $SqlTableListObj->getSQLTableName ( 'article' ) . " art
 					WHERE mnu.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry ('ws_id') . "')
 					AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 

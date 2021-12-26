@@ -73,7 +73,7 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 		case "A":
 			$dbquery = $bts->SDDMObj->query("
 			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page, doc.docu_cont
-			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('menu')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
+			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('menu')." as mnu, ".$SqlTableListObj->getSQLTableName('document')." as doc
 			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND doc.docu_id = art.docu_id
 					
