@@ -478,6 +478,7 @@ class Hydr {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 			}
@@ -517,6 +518,7 @@ class Hydr {
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+					$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', $dbp ['arti_slug'] );
@@ -524,6 +526,7 @@ class Hydr {
 				}
 			} else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
+				$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', 'article_not_found' );

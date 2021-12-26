@@ -39,7 +39,6 @@ class ModuleGlobalReport {
 			$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
 			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
 			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
-			$bts->LMObj->logDebug($CurrentSetObj->getDataEntry('MenuDataTree'),									"MenuDataObj->getMenuDataTree()");
 			
 			$T = array();
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
