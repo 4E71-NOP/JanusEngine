@@ -58,12 +58,12 @@ self::$InitTable['context'] = function (&$a) {
 	
 };
 
-self::$InitTable['category'] = function (&$a) {
+self::$InitTable['menu'] = function (&$a) {
 	$a['params'] = array(
 			"id" => "",
-			"name" => "New category",
-			"title" => "New category",
-			"desc" => "New category",
+			"name" => "New menu",
+			"title" => "New menu",
+			"desc" => "New menu",
 			"type" => "ARTICLE",
 			"ws_id" => $a['Context']['ws_id'],
 			"lang" => "eng",
@@ -94,7 +94,7 @@ self::$InitTable['checkpoint'] = function (&$a) {
 
 self::$InitTable['content'] = function (&$a) {
 	$a['params'] = array(
-			"file" => "Nouvelle category",
+			"file" => "Nouveau menu",
 			"into" => "",
 	);
 };

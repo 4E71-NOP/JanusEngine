@@ -11,40 +11,40 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class Category extends Entity {
-	private $Category = array ();
+class Menu extends Entity {
+	private $Menu = array ();
 	
 	//@formatter:off
 	private $columns = array(
-		"cate_id"				=> "",
-		"cate_name"				=> "New category",
-		"cate_title"			=> "New category",
-		"cate_desc"				=> "New category",
-		"cate_type"				=> "ARTICLE",
+		"menu_id"				=> "",
+		"menu_name"				=> "New Menu",
+		"menu_title"			=> "New Menu",
+		"menu_desc"				=> "New Menu",
+		"menu_type"				=> "ARTICLE",
 		"ws_id"					=> 0,
 		"lang_id"				=> 0,
 		"deadline_id"			=> 0,
-		"cate_state"			=> 0,
-		"cate_parent"			=> 0,
-		"cate_position"			=> "",
+		"menu_state"			=> 0,
+		"menu_parent"			=> 0,
+		"menu_position"			=> "",
 		"group_id"				=> 0,
-		"cate_last_update"		=> 0,
-		"cate_role"				=> 0,
-		"cate_initial_document"	=> 0,
-		"cate_slug"				=> "",
+		"menu_last_update"		=> 0,
+		"menu_role"				=> 0,
+		"menu_initial_document"	=> 0,
+		"menu_slug"				=> "",
 		"arti_ref"				=> 0,
 		
 	);
 	//@formatter:on
 	
 	public function __construct() {
-		$this->Category= $this->getDefaultValues();
+		$this->Menu= $this->getDefaultValues();
 	}
 	
 	/**
-	 * Gets category data from the database.<br>
+	 * Gets Menu data from the database.<br>
 	 * <br>
-	 * It uses the current WebSiteObj to restrict the category selection to the website ID only. 
+	 * It uses the current WebSiteObj to restrict the Menu selection to the website ID only. 
 	 * @param integer $id
 	 */
 	public function getDataFromDB($id) {
@@ -53,21 +53,21 @@ class Category extends Entity {
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT * 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('category')." 
-			WHERE cate_id = '".$id."'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." 
+			WHERE menu_id = '".$id."'
 			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for category id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for Menu id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
-					if (isset($this->columns[$A])) { $this->Category[$A] = $B; }
+					if (isset($this->columns[$A])) { $this->Menu[$A] = $B; }
 				}
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for category id=".$id));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for Menu id=".$id));
 		}
 		
 	}
@@ -83,11 +83,11 @@ class Category extends Entity {
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$genericActionArray = array(
 				'columns'		=> $this->columns,
-				'data'			=> $this->Category,
-				'targetTable'	=> 'category',
-				'targetColumn'	=> 'cate_id',
-				'entityId'		=> $this->Category['cate_id'],
-				'entityTitle'	=> 'category'
+				'data'			=> $this->Menu,
+				'targetTable'	=> 'menu',
+				'targetColumn'	=> 'menu_id',
+				'entityId'		=> $this->Menu['menu_id'],
+				'entityTitle'	=> 'menu'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
 		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
@@ -98,7 +98,7 @@ class Category extends Entity {
 	 * Verifies if the entity exists in DB.
 	 */
 	public function existsInDB() {
-		return $this->entityExistsInDb('category', $this->Category['cate_id']);
+		return $this->entityExistsInDb('menu', $this->Menu['menu_id']);
 
 	}
 	
@@ -109,17 +109,17 @@ class Category extends Entity {
 	 */
 	public function checkDataConsistency () {
 		$res = true;
-		if ( $this->Category['lang_id'] == 0) { $res = false; }
-		if ( $this->Category['deadline_id'] == 0) { $res = false; }
-		if ( $this->Category['cate_state'] < 0 && $this->Category['cate_state'] > 2) { $res = false; }
-		if ( $this->Category['group_id'] == 0) { $res = false; }
-		if ( $this->Category['cate_last_modif'] == 0) { $res = false; }
-		if ( $this->Category['cate_parent'] != 0 || $this->Category['cate_parent'] != null ) {
-			if ( $this->entityExistsInDb('category', $this->Category['cate_parent'] ) == false ) { $res = false; }
+		if ( $this->Menu['lang_id'] == 0) { $res = false; }
+		if ( $this->Menu['deadline_id'] == 0) { $res = false; }
+		if ( $this->Menu['menu_state'] < 0 && $this->Menu['menu_state'] > 2) { $res = false; }
+		if ( $this->Menu['group_id'] == 0) { $res = false; }
+		if ( $this->Menu['menu_last_modif'] == 0) { $res = false; }
+		if ( $this->Menu['menu_parent'] != 0 || $this->Menu['menu_parent'] != null ) {
+			if ( $this->entityExistsInDb('menu', $this->Menu['menu_parent'] ) == false ) { $res = false; }
 		}
-		if ( $this->entityExistsInDb('website', $this->Category['ws_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('group', $this->Category['group_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('deadline', $this->Category['deadline_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Menu['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->Menu['group_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('deadline', $this->Menu['deadline_id']) == false ) { $res = false; }
 		
 		return $res;
 	}
@@ -134,7 +134,7 @@ class Category extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$tab['cate_last_modif'] = $date;
+		$tab['menu_last_modif'] = $date;
 		
 		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render') 
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
@@ -164,14 +164,14 @@ class Category extends Entity {
 	}
 	
 	//@formatter:off
-	public function getCategoryEntry ($data) { return $this->Category[$data]; }
-	public function getCategory() { return $this->Category; }
+	public function getMenuEntry ($data) { return $this->Menu[$data]; }
+	public function getMenu() { return $this->Menu; }
 	
-	public function setCategoryEntry ($entry, $data) { 
-		if ( isset($this->Category[$entry])) { $this->Category[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
+	public function setMenuEntry ($entry, $data) { 
+		if ( isset($this->Menu[$entry])) { $this->Menu[$entry] = $data; }	//DB Entity objects do NOT accept new columns!  
 	}
 
-	public function setCategory($Category) { $this->Category = $Category; }
+	public function setMenu($Menu) { $this->Menu = $Menu; }
 	//@formatter:off
 
 }

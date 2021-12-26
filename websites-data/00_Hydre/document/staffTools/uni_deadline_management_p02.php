@@ -122,16 +122,16 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('deadlineForm', 'mode')) {
 		unset ( $A , $B );
 		$dbquery = $bts->SDDMObj->query("
 		SELECT art.arti_name, art.arti_title
-		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('category')." as cat
+		FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('menu')." as cat
 					
 		WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND art.deadline_id = '".$currentArticleObj->getDeadLineEntry('deadline_id')."'
-		AND art.ws_id = cat.ws_id
-		AND art.arti_ref = cat.arti_ref
+		AND art.ws_id = mnu.ws_id
+		AND art.arti_ref = mnu.arti_ref
 		AND art.arti_page = '1'
 					
-		AND cat.cate_type IN ('0','1')
-		AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
+		AND mnu.menu_type IN ('0','1')
+		AND mnu.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
 		;");
 
 		$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="

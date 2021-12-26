@@ -167,7 +167,7 @@ html { width:100%; height:100%;}\r\r
 	.".$tableName."bareTable td:hover	{ background-color:transparent; }\r
 	
 	.".$tableName."modif_article	{ height:512px ; overflow:auto }\r
-	.".$tableName."modif_category	{ height:512px ; overflow:auto }\r
+	.".$tableName."modif_menu		{ height:512px ; overflow:auto }\r
 
 	.".$tableName._CLASS_ADM_CTRL_SWITCH_." {	
 		width: ". $themeArray['theme_admctrl_width'] ."px; 

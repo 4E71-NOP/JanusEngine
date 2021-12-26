@@ -2,8 +2,8 @@ share document	name "doc_uni_article_management_p01.php"				with_website "Hydr"	
 share document	name "doc_uni_article_management_p02.php"				with_website "Hydr"	modification "NO";
 share document	name "doc_uni_article_management_p03.php"				with_website "Hydr"	modification "NO";
 share document	name "doc_uni_caligraph_decoration_test_page_p01.php"	with_website "Hydr"	modification "NO";
-share document	name "doc_uni_category_management_p01.php"				with_website "Hydr"	modification "NO";
-share document	name "doc_uni_category_management_p02.php"				with_website "Hydr"	modification "NO";
+share document	name "doc_uni_menu_management_p01.php"					with_website "Hydr"	modification "NO";
+share document	name "doc_uni_menu_management_p02.php"					with_website "Hydr"	modification "NO";
 share document	name "doc_uni_command_console_p01.php"					with_website "Hydr"	modification "NO";
 share document	name "doc_uni_deadline_management_p01.php"				with_website "Hydr"	modification "NO";
 share document	name "doc_uni_deadline_management_p02.php"				with_website "Hydr"	modification "NO";

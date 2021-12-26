@@ -7,8 +7,8 @@ add article	name "eng_article_moved_p01"						reference "eng_article_moved"				s
 add article	name "eng_article_validation_p01"					reference "eng_article_validation"			slug "article-validation"				deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Select the article"								page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_article_validation_p02"					reference "eng_article_validation"			slug "article-validation"				deadline initial_online		desc "Admin in English"				title "Article validation"						subtitle "Validate the article"								page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_caligraph_decoration_test_page_p01"		reference "eng_caligraph_decoration_test_page_p01"	slug "caligraph-decoration-test-page"	deadline initial_online	desc "Test"		              	title "Page de test Caligraphe"					subtitle "Valider l'article"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_category_management_p01"					reference "eng_category_management"			slug "category-management"				deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Select the category"								page "1"	validation_state "VALID"	config "no_menu";
-add article	name "eng_category_management_p02"					reference "eng_category_management"			slug "category-management"				deadline initial_online		desc "Admin in English"				title "Category managment"						subtitle "Modify the category"								page "2"	validation_state "VALID"	config "no_menu";
+add article	name "eng_menu_management_p01"						reference "eng_menu_management"				slug "menu-management"					deadline initial_online		desc "Admin in English"				title "menu managment"							subtitle "Select the menu"									page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_menu_management_p02"						reference "eng_menu_management"				slug "menu-management"					deadline initial_online		desc "Admin in English"				title "menu managment"							subtitle "Modify the menu"									page "2"	validation_state "VALID"	config "no_menu";
 add article	name "eng_command_console_p01"						reference "eng_command_console"				slug "command-console"					deadline initial_online		desc "Admin in English"				title "Command console"							subtitle "Interface"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name default_layout;
 add article	name "eng_critical_information_p01"					reference "eng_critical_information"		slug "critical-information"				deadline initial_online		desc "Admin en Francais"			title "Console de commande"						subtitle "Interface"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "default_layout";
 add article	name "eng_deadline_management_p01"					reference "eng_deadline_management"			slug "deadline-management"				deadline initial_online		desc "Admin in English"				title "Deadline managment"						subtitle "Select the deadline"								page "1"	validation_state "VALID"	config "no_menu";
@@ -54,8 +54,8 @@ assign	document name "doc_uni_article_moved_p01.php"				    to_article  "eng_art
 assign	document name "doc_uni_article_validation_p01.php"				to_article	"eng_article_validation_p01";
 assign	document name "doc_uni_article_validation_p02.php"				to_article	"eng_article_validation_p02";
 assign	document name "doc_uni_caligraph_decoration_test_page_p01.php"	to_article  "eng_caligraph_decoration_test_page_p01";
-assign	document name "doc_uni_category_management_p01.php"				to_article	"eng_category_management_p01";
-assign	document name "doc_uni_category_management_p02.php"				to_article	"eng_category_management_p02";
+assign	document name "doc_uni_menu_management_p01.php"					to_article	"eng_menu_management_p01";
+assign	document name "doc_uni_menu_management_p02.php"					to_article	"eng_menu_management_p02";
 assign	document name "doc_uni_command_console_p01.php"					to_article	"eng_command_console_p01";
 assign	document name "doc_uni_critical_information_p01.php"			to_article	"eng_critical_information_p01";
 assign	document name "doc_uni_deadline_management_p01.php"				to_article	"eng_deadline_management_p01";

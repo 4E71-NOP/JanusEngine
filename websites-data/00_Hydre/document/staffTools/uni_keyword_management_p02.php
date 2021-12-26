@@ -66,7 +66,7 @@ switch ($l) {
 		"raf1"			=> "Rien a afficher",
 		"kwState0"		=> "Hors ligne",
 		"kwState1"		=> "En ligne",
-		"kwType1"		=> "Vers une category",
+		"kwType1"		=> "Vers une menu",
 		"kwType2"		=> "Vers une URL",
 		"kwType3"		=> "Tooltip",
 		
@@ -90,7 +90,7 @@ switch ($l) {
 		"raf1"			=> "Nothing to display",
 		"kwState0"		=> "Offline",
 		"kwState0"		=> "Online",
-		"kwType1"		=> "Link to a category",
+		"kwType1"		=> "Link to a menu",
 		"kwType2"		=> "Link to an URL",
 		"kwType3"		=> "Tooltip",
 		
@@ -112,13 +112,13 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $bts->SDDMObj->query("
 SELECT art.arti_id, art.arti_name
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('category')." cat
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('menu')." cat
 WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-AND cat.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-AND cat.arti_ref = art.arti_ref
-AND cat.arti_ref != '0'
-AND cat.cate_type IN ('0','1')
-AND cat.lang_id = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
+AND mnu.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND mnu.arti_ref = art.arti_ref
+AND mnu.arti_ref != '0'
+AND mnu.menu_type IN ('0','1')
+AND mnu.lang_id = '".$WebSiteObj->getWebSiteEntry('ws_lang')."'
 ;");
 $tabArticle_ = array();
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -236,7 +236,7 @@ $T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[stri
 $T['Content']['1']['6']['2']['cont'] = "<input type='text' name='formParams[count]' size='35' maxlength='255' value=\"".$currentKeyWordObj->getKeyWordEntry('keyword_count')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 $tabType = array(
-		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType1'),	"db" => "TO_CATEGORY"),
+		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType1'),	"db" => "TO_MENU"),
 		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType2'),	"db" => "TO_URL"),
 		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('kwType3'),	"db" => "TOOLTIP"),
 );

@@ -15,7 +15,7 @@ class MenuSlide {
 	md={};
 	data={};
 	EntryPoint=0;
-	cate_id=0;
+	menu_id=0;
 	currentMenu=0;
 	maxMenuLevel=10
 	level=1;
@@ -30,14 +30,14 @@ class MenuSlide {
 	initialization (data, menuDivName) {
 		this.EntryPoint = data.EntryPoint;
 		this.data = data.Payload;
-		elm.Gebi('menuTitle').innerHTML = this.data[this.EntryPoint].cate_title;
+		elm.Gebi('menuTitle').innerHTML = this.data[this.EntryPoint].menu_title;
 
 		this.currentMenu = this.EntryPoint;
 		this.themeName = data.theme_name;
-		this.cate_id = data.cate_id;
+		this.menu_id = data.menu_id;
 		this.block = data.block;
 		this.level = 1;
-		l.Log[dbgMenu]("MenuSlide.initialization / currentMenu:'"+this.currentMenu+"', cate_id:'"+this.cate_id+"', themeName:'"+this.themeName+"', block:'"+this.block+"'");
+		l.Log[dbgMenu]("MenuSlide.initialization / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', themeName:'"+this.themeName+"', block:'"+this.block+"'");
 		
 		for (let n=1; n<=this.maxMenuLevel; n++) { this.md[n] = elm.Gebi(menuDivName+n); }
 		elm.Gebi('menuSlide').parentNode.style.overflow='hidden';
@@ -45,30 +45,30 @@ class MenuSlide {
 		// Sets the menu level/branch on the article at hand
 		if ( this.locateCateId(this.EntryPoint) == true ) {
 			if ( this.level > 1 ) {	this.slideDeeper(this.currentMenu); }
-			l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', cate_id:'"+this.cate_id+"', tmpLevel:'"+this.tmpLevel+"'");
+			l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 		}
 		for (let n=1; n<=this.maxMenuLevel; n++) { this.md[n].style.visibility = "visible"; }
 	}
 
 	/**
-	 * Locate the cate_id in the menu tree 
+	 * Locate the menu_id in the menu tree 
 	 * @param {*} id 
 	 */
 	locateCateId (id) {
-		l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', cate_id:'"+this.cate_id+"', tmpLevel:'"+this.tmpLevel+"'");
+		l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 
 		let d = this.data;
 		for (let n in d ) {
-			if ( d[n].cate_parent == id ) {
-				if ( this.checkChildren(d[n].cate_id) == true ) {
+			if ( d[n].menu_parent == id ) {
+				if ( this.checkChildren(d[n].menu_id) == true ) {
 
 					this.tmpLevel++;
-					if ( this.locateCateId(d[n].cate_id) == true ) { return true; };
+					if ( this.locateCateId(d[n].menu_id) == true ) { return true; };
 					this.tmpLevel--;
 				}
-				if ( d[n].cate_id == this.cate_id) { 
-					l.Log[dbgMenu]("MenuSlide.locateCateId Got it! id:'"+id+"'= cate_id:'"+this.cate_id+"', tmpLevel:'"+this.tmpLevel+"'");
-					this.currentMenu = d[n].cate_parent;
+				if ( d[n].menu_id == this.menu_id) { 
+					l.Log[dbgMenu]("MenuSlide.locateCateId Got it! id:'"+id+"'= menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
+					this.currentMenu = d[n].menu_parent;
 					
 					if ( this.tmpLevel > 1 ) { this.level = this.tmpLevel;	}
 					else { this.level = 1; }
@@ -85,7 +85,7 @@ class MenuSlide {
 	 */
 	makeMenu(){
 		let c = this.data[this.currentMenu];
-		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.cate_title+"' ("+c.cate_id+ "); slug:'"+ c.fk_arti_slug+"'");
+		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.menu_title+"' ("+c.menu_id+ "); slug:'"+ c.fk_arti_slug+"'");
 
 		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
 		if ( this.level > 1) {
@@ -97,23 +97,23 @@ class MenuSlide {
 		}
 		let d = this.data;
 		for ( let n in d ){
-			if ( d[n].cate_parent == this.currentMenu ) {
-				if ( this.checkChildren(d[n].cate_id) === true) {
+			if ( d[n].menu_parent == this.currentMenu ) {
+				if ( this.checkChildren(d[n].menu_id) === true) {
 					str += "<li class='"
 						+this.themeName
 						+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"
-						+d[n].cate_id+"')\"><div class='"
+						+d[n].menu_id+"')\"><div class='"
 						+this.themeName
 						+this.block
 						+"_icon_directory' style='width:16px;height:16px; display:inline-block'></div>"
-						+d[n].cate_title+"</li>";
+						+d[n].menu_title+"</li>";
 				}
 				else {
-					if ( d[n].cate_id == this.cate_id ) {
+					if ( d[n].menu_id == this.menu_id ) {
 						str += "<li class='"
 							+this.themeName
 							+"menu_lvl_0_link' style='padding:0.05cm'>"
-							+d[n].cate_title
+							+d[n].menu_title
 							+"</li>";
 					}
 					else {
@@ -122,7 +122,7 @@ class MenuSlide {
 							+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"
 							+d[n].fk_arti_slug
 							+"' style='display :block;'>"
-							+d[n].cate_title+"</a></li>";
+							+d[n].menu_title+"</a></li>";
 					}
 				}
 			}
@@ -139,7 +139,7 @@ class MenuSlide {
 	checkChildren(id){
 		let d = this.data;
 		for ( let n in d ){ 
-			if ( d[n].cate_parent == id ) { return true; }
+			if ( d[n].menu_parent == id ) { return true; }
 		}
 		return false;
 	}
@@ -152,7 +152,7 @@ class MenuSlide {
 	findChildren (id){
 		let d = this.data;
 		for ( let n in d ){ 
-			if ( d[n].cate_parent == id ) { return d[n].cate_id; }
+			if ( d[n].menu_parent == id ) { return d[n].menu_id; }
 		}
 		return false;
 	}
@@ -162,7 +162,7 @@ class MenuSlide {
 	 */
 	slideBack(){
 		if (this.level > 1) {
-			this.currentMenu = this.data[this.currentMenu].cate_parent;
+			this.currentMenu = this.data[this.currentMenu].menu_parent;
 			this.level--;
 			this.makeMenu();
 

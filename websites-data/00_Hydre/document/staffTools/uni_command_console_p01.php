@@ -73,7 +73,7 @@ $bts->I18nTransObj->apply(
 			"t2_l3"			=> "Si un fichier est sélectionné, il prendra la priorité. Seul le contenu du fichier sera exécuté.",
 			"t4_l1"			=> "Utilisez '<b>;</b>' comme separateur.<br>\r
 			<br>\r
-			Les entitées sont les suivantes : website, user, group, deadline, document, article, category, module, decoration, keyword.<br>\r
+			Les entitées sont les suivantes : website, user, group, deadline, document, article, menu, module, decoration, keyword.<br>\r
 			<br>\r
 			<span style='text-decoration: underline;'>Liste de commandes basiques:</span>
 			<ul>
@@ -106,7 +106,7 @@ $bts->I18nTransObj->apply(
 		"t2_l3"			=> "If a file is selected, it will take over the console box. Only the file content will be executed.",
 		"t4_l1"			=> "Use '<b>;</b>' as separator.<br>\r
 		<br>\r
-		Entities are as follow : website, user, group, deadline, document, article, category, module, decoration, keyword.<br>\r
+		Entities are as follow : website, user, group, deadline, document, article, menu, module, decoration, keyword.<br>\r
 		<br>\r
 		<span style='text-decoration: underline;'>Basic command list:</span>
 		<ul>

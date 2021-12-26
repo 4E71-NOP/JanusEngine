@@ -106,14 +106,14 @@ case 2:
 	$tl_['fra']['link'] = "Lien pour modifier le document associ&eacute; a cet article (".$pv['document_list'][$infos_article['docu_id']]['nom'].").";
 
 	$dbquery = requete_sql($_REQUEST['sql_initiateur'],"
-	SELECT cate_role, cate_id, arti_ref 
-	FROM ".$SQL_tab['category']." 
-	WHERE cate_type IN ('2', '3') 
+	SELECT menu_role, menu_id, arti_ref 
+	FROM ".$SQL_tab['menu']." 
+	WHERE menu_type IN ('2', '3') 
 	AND ws_id IN ('1', '".$website['ws_id']."') 
 	AND lang_id = '".$website['ws_lang']."' 
 	AND group_id ".$user['clause_in_group']." 
-	AND cate_state = '1' 
-	AND cate_role = '1'
+	AND menu_state = '1' 
+	AND menu_role = '1'
 	;");
 	while ($dbp = fetch_array_sql($dbquery)) { $pv['role_article_cible'] = $dbp['arti_ref']; }
 

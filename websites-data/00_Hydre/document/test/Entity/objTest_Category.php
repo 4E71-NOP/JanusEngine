@@ -38,7 +38,7 @@ $Content .= "<br>\r";
 $Content .= $bts->StringFormatObj->print_r_html($obj->getCategory());
 
 
-$obj->setCategoryEntry('cate_title', $obj->getCategoryEntry('cate_title')."*");
+$obj->setCategoryEntry('menu_title', $obj->getCategoryEntry('menu_title')."*");
 $obj->sendToDB();
 $obj->getDataFromDB($id);
 $Content .= "<br>\r";

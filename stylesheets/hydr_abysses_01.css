@@ -167,7 +167,7 @@ td > .skin_princ_B01_form_2, td > .skin_princ_B02_form_2, td > .skin_princ_B03_f
 .skin_princ_menu_niv_9 A:hover { font-family: Arial, Helvetica, Sans-serif; text-align: left; vertical-align: top; font-size: 12px; font-weight: normal; color: #000000; background-color: #DDEEFF;  }
 
  .skin_princ_modif_article { height:512px ; overflow:auto }
- .skin_princ_modif_category { height:512px ; overflow:auto }
+ .skin_princ_modif_menu { height:512px ; overflow:auto }
 
  .skin_princ_div_AdminControlSwitch { 
   width: 128px; 

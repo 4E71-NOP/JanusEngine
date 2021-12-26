@@ -19,7 +19,6 @@ class SqlTableList {
 	
 	private $TableList = array (
 			'article',			'article_tag',			'article_config',
-			'category',			
 			'deadline',			
 			'decoration',		'deco_10_menu',			'deco_20_caligraph',		'deco_30_1_div',		'deco_40_elegance',			'deco_50_exquisite',			'deco_60_elysion',					
 			'definition',
@@ -30,9 +29,9 @@ class SqlTableList {
 			'installation',		
 			'keyword',			'note',			
 			'language',			'language_website',		
-			'log',				
-			'module',			'module_website',		
-			'layout',			'layout_theme',				'layout_file',
+			'log',
+			'menu',				'module',				'module_website',		
+			'layout',			'layout_theme',			'layout_file',
 			'permission',		'pv',				
 			'stored_event',		
 			'tag',				

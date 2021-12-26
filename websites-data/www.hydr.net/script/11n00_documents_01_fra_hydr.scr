@@ -63,10 +63,10 @@ share document	name "doc_fra_DOC_administration_p09.htm"	with_website Hydr	modif
 update document	name "doc_fra_DOC_administration_p09.htm"	checked YES	validator "*user_install*"	from_site Hydr;
 
 
-add document	name "doc_fra_DOC_administration_tab_category.htm"	type HTML;
-insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_category.htm"		into "doc_fra_DOC_administration_tab_category.htm";
-share document	name "doc_fra_DOC_administration_tab_category.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_category.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+add document	name "doc_fra_DOC_administration_tab_menu.htm"	type HTML;
+insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_menu.htm"		into "doc_fra_DOC_administration_tab_menu.htm";
+share document	name "doc_fra_DOC_administration_tab_menu.htm"	with_website Hydr	modification YES;
+update document	name "doc_fra_DOC_administration_tab_menu.htm"	checked YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_cdb.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_cdb.htm"		into "doc_fra_DOC_administration_tab_cdb.htm";

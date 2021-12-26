@@ -13,6 +13,6 @@ add	article	name "eng_config_galerie_p01"	reference "eng_config_galerie"	deadlin
 link	article "fra_config_galerie_p01"	document "doc_uni_config_galerie_p01.php";
 link	article "eng_config_galerie_p01"	document "doc_uni_config_galerie_p01.php";
 
-add category	name "fra_galerie"		parent "fra_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang fra	state ONLINE	deadline initial_online	title "Galerie"		desc "Configuration galerie"	group "Auteurs_debutant"	article fra_config_galerie;
-add category	name "eng_galerie"		parent "eng_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang eng	state ONLINE	deadline initial_online	title "Gallery"		desc "Gallery configuration"	group "Auteurs_debutant"	article eng_config_galerie;
+add menu	name "fra_galerie"		parent "fra_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang fra	state ONLINE	deadline initial_online	title "Galerie"		desc "Configuration galerie"	group "Auteurs_debutant"	article fra_config_galerie;
+add menu	name "eng_galerie"		parent "eng_configuration_des_extensions"		position 01	type ADMIN_CONF_EXTENSION	lang eng	state ONLINE	deadline initial_online	title "Gallery"		desc "Gallery configuration"	group "Auteurs_debutant"	article eng_config_galerie;
 

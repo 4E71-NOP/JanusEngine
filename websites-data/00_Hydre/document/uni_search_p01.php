@@ -54,7 +54,7 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 		case "T":
 			$dbquery = $bts->SDDMObj->query("
 			SELECT tag.tag_id, art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page
-			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('category')." as cat
+			FROM ".$SqlTableListObj->getSQLTableName('tag')." as tag, ".$SqlTableListObj->getSQLTableName('article_tag')." as at, ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('menu')." as cat
 			WHERE tag.tag_name LIKE '%".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			AND tag.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 					
@@ -64,26 +64,26 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 			AND art.deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 					
-			AND cat.arti_ref = art.arti_ref
-			AND cat.cate_state = '1'
-			AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
+			AND mnu.arti_ref = art.arti_ref
+			AND mnu.menu_state = '1'
+			AND mnu.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
 			ORDER BY art.arti_title
 			;");
 			break;
 		case "A":
 			$dbquery = $bts->SDDMObj->query("
 			SELECT art.arti_id, art.arti_ref, art.arti_desc, art.arti_title, art.arti_subtitle, art.arti_page, doc.docu_cont
-			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('category')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
+			FROM ".$SqlTableListObj->getSQLTableName('article')." as art, ".$SqlTableListObj->getSQLTableName('deadline')." as bcl, ".$SqlTableListObj->getSQLTableName('menu')." as cat, ".$SqlTableListObj->getSQLTableName('document')." as doc
 			WHERE art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND doc.docu_id = art.docu_id
 					
-			AND art.ws_id = cat.ws_id
+			AND art.ws_id = mnu.ws_id
 			AND art.deadline_id = bcl.deadline_id
-			AND art.arti_ref = cat.arti_ref
+			AND art.arti_ref = mnu.arti_ref
 					
 			AND bcl.deadline_state = '1'
-			AND cat.cate_type IN ('0','1')
-			AND cat.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
+			AND mnu.menu_type IN ('0','1')
+			AND mnu.lang_id = '".$CurrentSetObj->getDataEntry('language_id')."'
 			AND docu_cont LIKE '%".$bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search')."%'
 			;");
 			break;

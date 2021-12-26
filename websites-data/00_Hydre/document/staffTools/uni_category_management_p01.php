@@ -30,15 +30,15 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$bts->RequestDataObj->setRequestData('cate_parent', 39);
+$bts->RequestDataObj->setRequestData('menu_parent', 39);
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-$localisation = " / uni_category_management_p01";
+$localisation = " / uni_menu_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_category_management_p01.php");
+$bts->LMObj->logCheckpoint("uni_menu_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_category_management_p01.php");
+$bts->MapperObj->setSqlApplicant("uni_menu_management_p01.php");
 
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
@@ -78,11 +78,11 @@ $bts->I18nTransObj->apply(
 );
 $sqlQuery = "
 	SELECT c.fk_lang_id, l.lang_original_name
-	FROM ".$SqlTableListObj->getSQLTableName('category')." c, "
+	FROM ".$SqlTableListObj->getSQLTableName('menu')." c, "
 	.$SqlTableListObj->getSQLTableName('language')." l, "
 	.$SqlTableListObj->getSQLTableName('language_website')." lw
-	WHERE c.cate_type IN ('0','1')
-	AND c.cate_state = '1'
+	WHERE c.menu_type IN ('0','1')
+	AND c.menu_state = '1'
 	AND c.fk_ws_id = '2'
 	AND c.fk_lang_id = l.lang_id
 	AND l.lang_id = lw.fk_lang_id
@@ -127,15 +127,15 @@ foreach ( $CateTabList as $A ) {
 }
 $sqlQuery = "
 SELECT c.* 
-FROM ".$SqlTableListObj->getSQLTableName('category')." c, "
+FROM ".$SqlTableListObj->getSQLTableName('menu')." c, "
 .$SqlTableListObj->getSQLTableName('language_website')." lw 
-WHERE c.cate_type IN (0,1) 
-AND c.cate_state = '1' 
+WHERE c.menu_type IN (0,1) 
+AND c.menu_state = '1' 
 AND c.fk_lang_id IN (".$langClause.") 
 AND c.fk_lang_id = lw.fk_lang_id 
 AND lw.fk_ws_id = c.fk_ws_id 
 AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-ORDER BY c.fk_lang_id, c.cate_parent, c.cate_position 
+ORDER BY c.fk_lang_id, c.menu_parent, c.menu_position 
 ;";
 $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=" . $bts->StringFormatObj->formatToLog($sqlQuery)));
 $dbquery = $bts->SDDMObj->query($sqlQuery);
@@ -152,7 +152,7 @@ $buttonDown = "'><img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getS
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) {
 	$Tab = $CateTabList[$dbp['fk_lang_id']]['tab'];
 	$l = $CateTabList[$dbp['fk_lang_id']]['linePtr'];
-	$T['Content'][$Tab][$l]['1']['cont'] = $dbp['cate_id'];
+	$T['Content'][$Tab][$l]['1']['cont'] = $dbp['menu_id'];
 	$T['Content'][$Tab][$l]['2']['cont'] =
 		"<a class='".$Block."_lien' href='index.php?"
 		."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
@@ -160,13 +160,13 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&categoryForm[selectionId]=".$dbp['cate_id']
-		."'>".$dbp['cate_name']."</a>";
-	$T['Content'][$Tab][$l]['3']['cont'] = $dbp['cate_title'];
-	$T['Content'][$Tab][$l]['4']['cont'] = $dbp['cate_parent'];
-	$T['Content'][$Tab][$l]['5']['cont'] = $dbp['cate_position'];
-	$T['Content'][$Tab][$l]['6']['cont'] = $buttonLink."&categoryForm[cate_id]=".$dbp['cate_id']."&categoryForm[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&categoryForm[cate_id]=".$dbp['cate_id']."&categoryForm[command]=moveDown".$buttonDown."</a>\r";
-	$T['Content'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['cate_state']];
+		."&menuForm[selectionId]=".$dbp['menu_id']
+		."'>".$dbp['menu_name']."</a>";
+	$T['Content'][$Tab][$l]['3']['cont'] = $dbp['menu_title'];
+	$T['Content'][$Tab][$l]['4']['cont'] = $dbp['menu_parent'];
+	$T['Content'][$Tab][$l]['5']['cont'] = $dbp['menu_position'];
+	$T['Content'][$Tab][$l]['6']['cont'] = $buttonLink."&menuForm[menu_id]=".$dbp['menu_id']."&menuForm[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&menuForm[menu_id]=".$dbp['menu_id']."&menuForm[command]=moveDown".$buttonDown."</a>\r";
+	$T['Content'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['menu_state']];
 	$l++;
 	$CateTabList[$dbp['fk_lang_id']]['count'] = $CateTabList[$dbp['fk_lang_id']]['linePtr'] = $l;
 }
@@ -191,9 +191,9 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // DEPRECATED : 
 // Data sorting. Was useful at some point during migration. 
 // Wil be removed some day.
-function CateRchRacine ( $cate_type, &$src , &$dst ) {
+function CateRchRacine ( $menu_type, &$src , &$dst ) {
 	foreach ( $src as $A ) {
-		if ( $A['cate_type'] == $cate_type ) { 
+		if ( $A['menu_type'] == $menu_type ) { 
 			foreach ( $A as $B => $C ) { $dst['0'][$B] = $C ; }
 		}
 	}

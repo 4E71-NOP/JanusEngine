@@ -106,7 +106,7 @@ if ( $user['group_tag'] == 3 ) {
 	include_once ("engine/manipulation_article.php");
 	include_once ("engine/manipulation_article_config.php");
 	include_once ("engine/manipulation_deadline.php");
-	include_once ("engine/manipulation_category.php");
+	include_once ("engine/manipulation_menu.php");
 	include_once ("engine/manipulation_contexte.php");
 	include_once ("engine/manipulation_decoration.php");
 	include_once ("engine/manipulation_document.php");
@@ -200,9 +200,9 @@ if ( $user['group_tag'] == 3 ) {
 		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['articles']];
 
 		$pv['i']++;
-		$tl_['eng']['dp_text'] = "Creating categorys";	$tl_['fra']['dp_text'] = "Cr&eacute;ation des cat&eacute;rogies";
+		$tl_['eng']['dp_text'] = "Creating menus";	$tl_['fra']['dp_text'] = "Cr&eacute;ation des cat&eacute;rogies";
 		$AD['1'][$pv['i']]['1']['cont'] = $tl_[$l]['dp_text'];
-		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['categorys']];
+		$AD['1'][$pv['i']]['2']['cont'] = $tl_[$l]['score'][$dp['menus']];
 
 		$ADC['tabs']['1']['NbrOfLines'] = $pv['i'];	$ADC['tabs']['1']['NbrOfCells'] = 2;	$ADC['tabs']['1']['TableCaptionPos'] = 1;
 		$tl_['eng']['onglet_1'] = "Informations";	$tl_['fra']['onglet_1'] = "Informations";

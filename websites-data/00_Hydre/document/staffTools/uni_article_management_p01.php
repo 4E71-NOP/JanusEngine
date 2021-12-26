@@ -191,7 +191,7 @@ $sqlClause = "";
 
 if ( $articleFormData['action'] == "AFFICHAGE" ) {
 	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_name LIKE '%".$articleFormData['SQLnom']."%'"; }
-	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND cat.fk_lang_id = '".$articleFormData['SQLlang']."'"; }
+	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND mnu.fk_lang_id = '".$articleFormData['SQLlang']."'"; }
 	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
 }
 
@@ -199,21 +199,21 @@ if ( $articleFormData['action'] == "AFFICHAGE" ) {
 $dbquery = $bts->SDDMObj->query("
 SELECT 
 art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, 
-cat.fk_lang_id, 
+mnu.fk_lang_id, 
 bcl.deadline_name, bcl.deadline_title, bcl.deadline_state
 FROM "
 .$SqlTableListObj->getSQLTableName('article')." art, "
-.$SqlTableListObj->getSQLTableName('category')." cat, "
+.$SqlTableListObj->getSQLTableName('menu')." cat, "
 .$SqlTableListObj->getSQLTableName('deadline')." bcl
-WHERE art.arti_ref = cat.fk_arti_ref
+WHERE art.arti_ref = mnu.fk_arti_ref
 AND art.fk_deadline_id = bcl.deadline_id
 
 AND art.fk_ws_id = bcl.fk_ws_id
-AND bcl.fk_ws_id = cat.fk_ws_id
-AND cat.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND bcl.fk_ws_id = mnu.fk_ws_id
+AND mnu.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 
-AND cat.cate_state != '2'
-AND cat.cate_type IN ('1','0')
+AND mnu.menu_state != '2'
+AND mnu.menu_type IN ('1','0')
 
 ".$sqlClause."
 ORDER BY art.arti_ref,art.arti_page

@@ -50,17 +50,17 @@ class StringFormat {
 		self::$ConvertTable['article']['show_info_off']			= 0;
 		self::$ConvertTable['article']['show_info_on']			= 1;
 		
-		self::$ConvertTable['category']['no']					= &self::$ConvertTable['universal']['no'];
-		self::$ConvertTable['category']['yes']					= &self::$ConvertTable['universal']['yes'];
-		self::$ConvertTable['category']['offline']				= &self::$ConvertTable['universal']['offline'];
-		self::$ConvertTable['category']['online']				= &self::$ConvertTable['universal']['online'];
-		self::$ConvertTable['category']['article_racine']		= 0;
-		self::$ConvertTable['category']['article']				= 1;
-		self::$ConvertTable['category']['menu_admin_racine']	= 2;
-		self::$ConvertTable['category']['menu_admin']			= 3;
-		self::$ConvertTable['category']['correction_article']	= 1;
-		self::$ConvertTable['category']['article_examination']	= &self::$ConvertTable['category']['correction_article'];
-		self::$ConvertTable['category']['admin_conf_extension']	= 2;
+		self::$ConvertTable['menu']['no']					= &self::$ConvertTable['universal']['no'];
+		self::$ConvertTable['menu']['yes']					= &self::$ConvertTable['universal']['yes'];
+		self::$ConvertTable['menu']['offline']				= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['menu']['online']				= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['menu']['article_racine']		= 0;
+		self::$ConvertTable['menu']['article']				= 1;
+		self::$ConvertTable['menu']['menu_admin_racine']	= 2;
+		self::$ConvertTable['menu']['menu_admin']			= 3;
+		self::$ConvertTable['menu']['correction_article']	= 1;
+		self::$ConvertTable['menu']['article_examination']	= &self::$ConvertTable['menu']['correction_article'];
+		self::$ConvertTable['menu']['admin_conf_extension']	= 2;
 
 		
 		self::$ConvertTable['deadline']['no']					= &self::$ConvertTable['universal']['no'];
@@ -136,7 +136,7 @@ class StringFormat {
 		
 		self::$ConvertTable['keyword']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['keyword']['online']				= &self::$ConvertTable['universal']['online'];
-		self::$ConvertTable['keyword']['to_category']			= 1;
+		self::$ConvertTable['keyword']['to_menu']				= 1;
 		self::$ConvertTable['keyword']['to_url']				= 2;
 		self::$ConvertTable['keyword']['tooltip']				= 3;
 		

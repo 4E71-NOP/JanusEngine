@@ -46,31 +46,31 @@ class ModuleMenuType02 {
 		// Mp = Menu Parent
 		// Mi = Menu Index (the current one)
 		foreach ( $menuData as $A ) {
-			if ( $A['cate_parent'] != 0 ) {
+			if ( $A['menu_parent'] != 0 ) {
 // 				if ( $A['fk_arti_ref'] == "0" ) {									// folder
 				if ( $A['fk_arti_ref'] == "0" ) {									// folder
-					$Mi = &$menuDiv[$A['cate_id']];
-					$Mp = &$menuDiv[$A['cate_parent']];
+					$Mi = &$menuDiv[$A['menu_id']];
+					$Mp = &$menuDiv[$A['menu_parent']];
 					$Mi['niv']		= ( $Mp['niv'] + 1 );
-					$Mi['id']		= "d_menu_".$A['cate_id'];
-					$Mi['nf']		= $this->menuNumberOfSons($menuData, $A['cate_id'] );
+					$Mi['id']		= "d_menu_".$A['menu_id'];
+					$Mi['nf']		= $this->menuNumberOfSons($menuData, $A['menu_id'] );
 					$Mi['idx']		= 0;
 					$Mi['width']	= $A['div_width'];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 1;
 				}
 // 				elseif ( $A['fk_arti_ref'] == $FPRM['arti_request'] ) {
 				elseif ( $A['fk_arti_ref'] == $FPRM['arti_request'] ) {
-					$Mp = &$menuDiv[$A['cate_parent']];
+					$Mp = &$menuDiv[$A['menu_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 3;
 				}
 				else {
-					$Mp = &$menuDiv[$A['cate_parent']];
+					$Mp = &$menuDiv[$A['menu_parent']];
 					$Mp['entree'][$Mp['idx']]['deco_type'] = 2;
 // 					$Mp['entree'][$Mp['idx']]['ref'] = $A['fk_arti_ref'];
 					$Mp['entree'][$Mp['idx']]['ref'] = $A['fk_arti_slug'];
 				}
-				$Mp['entree'][$Mp['idx']]['nom'] = $A['cate_title'];
-				$Mp['entree'][$Mp['idx']]['id'] = $A['cate_id'];
+				$Mp['entree'][$Mp['idx']]['nom'] = $A['menu_title'];
+				$Mp['entree'][$Mp['idx']]['id'] = $A['menu_id'];
 				
 				// --------------------------------------------------------------------------------------------
 				//JSON
@@ -79,16 +79,16 @@ class ModuleMenuType02 {
 				// Jd "Json directory"
 				// Jp "Json Parent"
 				// --------------------------------------------------------------------------------------------
-				if ( $A['cate_type'] != 0 ) {									// avoid root menu
-					$J = &$renderJSON['a_menu_'.$A['cate_id']];					// section 'a'
+				if ( $A['menu_type'] != 0 ) {									// avoid root menu
+					$J = &$renderJSON['a_menu_'.$A['menu_id']];					// section 'a'
 					
-					$J['menu'] 		= $J['id'] = 'a_menu_'.$A['cate_id'];
+					$J['menu'] 		= $J['id'] = 'a_menu_'.$A['menu_id'];
 					$J['par']		= $Mp['id'];								// Parent
 					$J['niv']		= $Mp['niv'];								// Level in the tree (deep)
 					if ( $J['niv'] > 0 ) { $J['deco'] = $bts->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($J['niv'], 'deco_type'), "M"); }
 					
 					// $J['animation']	= $Spb['menu_anim'];						// Animation type
-					$J['entree']	= $A['cate_position'];						// Position amongst other
+					$J['entree']	= $A['menu_position'];						// Position amongst other
 					$J['typ']		= "a";										// Type
 					$J['dos']		= 0;										// Folder
 					
@@ -97,21 +97,21 @@ class ModuleMenuType02 {
 					$J['animation'] = $Jb['animation'];
 					$J['le'] = ( $Jb['txt_l_01_margin_top'] + $Jb['txt_l_01_margin_bottom'] + $Jb['a_line_height'] );
 					
-					if ( $A['cate_parent'] != 0 ) {								// Avoid to set a reference to root
-						$Jp = &$renderJSON['d_menu_'.$A['cate_parent']];		// add a children to it
-						$Jp['fils'][] = "a_menu_" . $A['cate_id'];
+					if ( $A['menu_parent'] != 0 ) {								// Avoid to set a reference to root
+						$Jp = &$renderJSON['d_menu_'.$A['menu_parent']];		// add a children to it
+						$Jp['fils'][] = "a_menu_" . $A['menu_id'];
 						$Jp['nf']++;
 					}
 					
 // 					if ( $A['fk_arti_ref'] == "0" ) {								// folder, creation of d_menu
 					if ( $A['fk_arti_slug'] == "0" ) {								// folder, creation of d_menu
 						$J['dos'] = 1;
-						$Jd = &$renderJSON['d_menu_'.$A['cate_id']];
-						$Jd['menu'] 			= $Jd['id'] = "d_menu_".$A['cate_id'];
+						$Jd = &$renderJSON['d_menu_'.$A['menu_id']];
+						$Jd['menu'] 			= $Jd['id'] = "d_menu_".$A['menu_id'];
 						$Jd['par']				= $J['id'];								// Parent
 						$Jd['niv']				= ( $J['niv'] + 1 );					// Level in the tree (deep)
 						if ( $Jd['niv'] > 0 ) { $Jd['deco'] = $bts->StringFormatObj->getDecorationBlockName("B", $ThemeDataObj->getThemeBlockEntry($Jd['niv'], 'deco_type'), "M"); }
-						$Jd['entree']			= $A['cate_position'];					// Position amongst other
+						$Jd['entree']			= $A['menu_position'];					// Position amongst other
 						$Jd['typ']				= "div";								// Type
 						$Jbn = $bts->StringFormatObj->getDecorationBlockName("B", $Jd['niv'], "M");
 						$Jb = $ThemeDataObj->getThemeDataEntry($Jbn);
@@ -123,23 +123,23 @@ class ModuleMenuType02 {
 						$Jd['div_height']		= $Mi['div_height'] = $Jb['div_height'];
 						$Jp = &$renderJSON[$Jd['par']];
 						$Jd['le']				= $Jp['le'];
-						$Jp['fils'][]			= "d_menu_" . $A['cate_id'];
+						$Jp['fils'][]			= "d_menu_" . $A['menu_id'];
 						$Jp['nf']++;
 					}
 				}
 				$Mp['idx']++;
 			}
 			else {
-				$Mi = &$menuDiv[$A['cate_id']];
+				$Mi = &$menuDiv[$A['menu_id']];
 				$Mi['niv']			= 0;
-				$Mi['id']			= "d_menu_".$A['cate_id'];
+				$Mi['id']			= "d_menu_".$A['menu_id'];
 				$Mi['idx'] 			= 0;
 				
-				$J = &$renderJSON['d_menu_'.$A['cate_id']];
-				$J['menu']			= $J['id'] = "d_menu_".$A['cate_id'];
+				$J = &$renderJSON['d_menu_'.$A['menu_id']];
+				$J['menu']			= $J['id'] = "d_menu_".$A['menu_id'];
 				$J['par']			= "root";										// Parent
 				$J['niv']			= 0;											// Level in the tree (deep)
-				$J['entree']		= $A['cate_position'];							// Position amongst other
+				$J['entree']		= $A['menu_position'];							// Position amongst other
 				$J['typ']			= "div";										// Type
 				$J['dos']			= 0;											// Folder
 				$Jbn = $bts->StringFormatObj->getDecorationBlockName("B", $J['niv'], "M");
@@ -377,10 +377,10 @@ class ModuleMenuType02 {
 		
 	}
 	
-	private function menuNumberOfSons ( $menu_principal, $cate_parent ) {
+	private function menuNumberOfSons ( $menu_principal, $menu_parent ) {
 		$nbr = 0;
 		foreach ( $menu_principal as $A ) {
-			if ( $A['cate_parent'] == $cate_parent ) { $nbr++; }
+			if ( $A['menu_parent'] == $menu_parent ) { $nbr++; }
 		}
 		return $nbr;
 	}

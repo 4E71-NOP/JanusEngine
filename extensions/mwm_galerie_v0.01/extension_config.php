@@ -13,12 +13,12 @@
 /*MWM-licence-fin*/
 $pv['tab'] = &$extensions_['donnees'][$pv['i']];
 
-$pv['tab']['ws_id']					= $website['ws_id'];
+$pv['tab']['ws_id']						= $website['ws_id'];
 $pv['tab']['extension_id']				= 0;
-$pv['tab']['extension_name']				= "MWM_Galerie";
+$pv['tab']['extension_name']			= "MWM_Galerie";
 $pv['tab']['extension_version']			= "0.01";
 $pv['tab']['extension_author']			= "Faust MDA";
-$pv['tab']['extension_author_website']		= "www.multiweb-manager.net";
+$pv['tab']['extension_author_website']	= "www.multiweb-manager.net";
 $pv['tab']['extension_directory']		= "mwm_galerie_v0.01";
 $pv['tab']['extension_etat']			= 0;
 $pv['tab']['extension_dep']				= array ( 1 => 0 );
@@ -37,7 +37,7 @@ function GalerieConfiguration () {
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'y', '128' );";				$id++;
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'liserai', '5' );";			$id++;
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'qualite', '40' );";			$id++;
-	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'table_colonnes', '3' );";		$id++;
+	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'table_colonnes', '3' );";	$id++;
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'table_lignes', '3' );";		$id++;
 	$requete[] = "INSERT INTO ".$SQL_tab_abrege['extension_config']." VALUES ( '".$id."', '".$P['ws_id']."', '".$P['extension_id']."', 'fichier_tag', 'thumb_' );";
 	$id = manipulation_trouve_id_suivant ( $SQL_tab_abrege['extension_fichiers'] , "fichier_id" );
@@ -89,7 +89,7 @@ function GalerieCheckInstall () {
 	extension_score_element ( $dp['articles'] , $liste , "M_ARTICL_rea" );
 
 	$liste = array ( "fra_galerie", "eng_galerie" );
-	extension_score_element ( $dp['categorys'] , $liste , "M_CATEGO_rep" );
+	extension_score_element ( $dp['menus'] , $liste , "M_CATEGO_rep" );
 
 // $_REQUEST['sru_ERR']
 /*

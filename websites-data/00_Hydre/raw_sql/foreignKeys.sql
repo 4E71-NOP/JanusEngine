@@ -30,10 +30,10 @@ ALTER TABLE Hdr.Ht_article_tag ADD CONSTRAINT Ht_article_tag_FK_1 FOREIGN KEY (t
 
 
 
-ALTER TABLE Hdr.Ht_category ADD CONSTRAINT Ht_category_FK FOREIGN KEY (ws_id) REFERENCES Hdr.Ht_website(ws_id);
-ALTER TABLE Hdr.Ht_category ADD CONSTRAINT Ht_category_FK_1 FOREIGN KEY (lang_id) REFERENCES Hdr.Ht_language(lang_id);
-ALTER TABLE Hdr.Ht_category ADD CONSTRAINT Ht_category_FK_2 FOREIGN KEY (deadline_id) REFERENCES Hdr.Ht_deadline(deadline_id);
-ALTER TABLE Hdr.Ht_category ADD CONSTRAINT Ht_category_FK_3 FOREIGN KEY (group_id) REFERENCES Hdr.Ht_group(group_id);
+ALTER TABLE Hdr.Ht_menu ADD CONSTRAINT Ht_menu_FK FOREIGN KEY (ws_id) REFERENCES Hdr.Ht_website(ws_id);
+ALTER TABLE Hdr.Ht_menu ADD CONSTRAINT Ht_menu_FK_1 FOREIGN KEY (lang_id) REFERENCES Hdr.Ht_language(lang_id);
+ALTER TABLE Hdr.Ht_menu ADD CONSTRAINT Ht_menu_FK_2 FOREIGN KEY (deadline_id) REFERENCES Hdr.Ht_deadline(deadline_id);
+ALTER TABLE Hdr.Ht_menu ADD CONSTRAINT Ht_menu_FK_3 FOREIGN KEY (group_id) REFERENCES Hdr.Ht_group(group_id);
 /*
 Trouver le moyen de faire arti_ref
 */

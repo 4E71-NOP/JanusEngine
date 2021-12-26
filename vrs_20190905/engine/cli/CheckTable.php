@@ -111,47 +111,47 @@ self::$CheckTable['link']['article']['1']['s']	= "name";
 
 
 
-//Category
-self::$CheckTable['add']['category']['0']['d']	= 3;
-self::$CheckTable['add']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['name']."';");};
-self::$CheckTable['add']['category']['0']['m']	= "CLI_Category_C001";
-self::$CheckTable['add']['category']['0']['s']	= "name";
-self::$CheckTable['add']['category']['1']['d']	= 1;
-self::$CheckTable['add']['category']['1']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['parent']."';");};
-self::$CheckTable['add']['category']['1']['c']	= "cate_id";
-self::$CheckTable['add']['category']['1']['v']	= "parent_id";
-self::$CheckTable['add']['category']['1']['m']	= "CLI_Category_C002";
-self::$CheckTable['add']['category']['1']['p']	= "parent category";
-self::$CheckTable['add']['category']['2']['d']	= 2;
-self::$CheckTable['add']['category']['2']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['deadline']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['add']['category']['2']['c']	= "deadline_id";
-self::$CheckTable['add']['category']['2']['v']	= "deadline_id";
-self::$CheckTable['add']['category']['2']['m']	= "CLI_Category_C003";
-self::$CheckTable['add']['category']['2']['p']	= "deadline";
-self::$CheckTable['add']['category']['2']['s']	= "deadline";
-self::$CheckTable['add']['category']['3']['d']	= 2;
-self::$CheckTable['add']['category']['3']['f']	= function ($a) { return array ("SELECT grp.group_name, grp.group_id FROM ".$a['sqlTables']['group']." grp , ".$a['sqlTables']['group_website']." sg  WHERE sg.fk_ws_id = '".$a['Context']['ws_id']."' AND grp.group_name = '".$a['params']['group_name']."' AND grp.group_id = sg.fk_group_id;");};
-self::$CheckTable['add']['category']['3']['c']	= "group_id";
-self::$CheckTable['add']['category']['3']['v']	= "group_id";
-self::$CheckTable['add']['category']['3']['m']	= "CLI_Category_C004";
-self::$CheckTable['add']['category']['3']['p']	= "group";
-self::$CheckTable['add']['category']['3']['s']	= "group_name";
-self::$CheckTable['add']['category']['4']['d']	= 2;
-self::$CheckTable['add']['category']['4']['f']	= function ($a) { return array ("SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';");};
-self::$CheckTable['add']['category']['4']['c']	= "lang_id";
-self::$CheckTable['add']['category']['4']['v']	= "lang_id";
-self::$CheckTable['add']['category']['4']['m']	= "CLI_Category_C005";
-self::$CheckTable['add']['category']['4']['p']	= "language";
-self::$CheckTable['add']['category']['4']['s']	= "lang";
+//menu
+self::$CheckTable['add']['menu']['0']['d']	= 3;
+self::$CheckTable['add']['menu']['0']['f']	= function ($a) { return array ("SELECT menu_id FROM ".$a['sqlTables']['menu']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND menu_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['menu']['0']['m']	= "CLI_menu_C001";
+self::$CheckTable['add']['menu']['0']['s']	= "name";
+self::$CheckTable['add']['menu']['1']['d']	= 1;
+self::$CheckTable['add']['menu']['1']['f']	= function ($a) { return array ("SELECT menu_id FROM ".$a['sqlTables']['menu']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND menu_name = '".$a['params']['parent']."';");};
+self::$CheckTable['add']['menu']['1']['c']	= "menu_id";
+self::$CheckTable['add']['menu']['1']['v']	= "parent_id";
+self::$CheckTable['add']['menu']['1']['m']	= "CLI_menu_C002";
+self::$CheckTable['add']['menu']['1']['p']	= "parent menu";
+self::$CheckTable['add']['menu']['2']['d']	= 2;
+self::$CheckTable['add']['menu']['2']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['deadline']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['menu']['2']['c']	= "deadline_id";
+self::$CheckTable['add']['menu']['2']['v']	= "deadline_id";
+self::$CheckTable['add']['menu']['2']['m']	= "CLI_menu_C003";
+self::$CheckTable['add']['menu']['2']['p']	= "deadline";
+self::$CheckTable['add']['menu']['2']['s']	= "deadline";
+self::$CheckTable['add']['menu']['3']['d']	= 2;
+self::$CheckTable['add']['menu']['3']['f']	= function ($a) { return array ("SELECT grp.group_name, grp.group_id FROM ".$a['sqlTables']['group']." grp , ".$a['sqlTables']['group_website']." sg  WHERE sg.fk_ws_id = '".$a['Context']['ws_id']."' AND grp.group_name = '".$a['params']['group_name']."' AND grp.group_id = sg.fk_group_id;");};
+self::$CheckTable['add']['menu']['3']['c']	= "group_id";
+self::$CheckTable['add']['menu']['3']['v']	= "group_id";
+self::$CheckTable['add']['menu']['3']['m']	= "CLI_menu_C004";
+self::$CheckTable['add']['menu']['3']['p']	= "group";
+self::$CheckTable['add']['menu']['3']['s']	= "group_name";
+self::$CheckTable['add']['menu']['4']['d']	= 2;
+self::$CheckTable['add']['menu']['4']['f']	= function ($a) { return array ("SELECT lang_id FROM ".$a['sqlTables']['language']." WHERE lang_639_3 = '".$a['params']['lang']."';");};
+self::$CheckTable['add']['menu']['4']['c']	= "lang_id";
+self::$CheckTable['add']['menu']['4']['v']	= "lang_id";
+self::$CheckTable['add']['menu']['4']['m']	= "CLI_menu_C005";
+self::$CheckTable['add']['menu']['4']['p']	= "language";
+self::$CheckTable['add']['menu']['4']['s']	= "lang";
 
 
-self::$CheckTable['update']['category']['0']['d']	= 2;
-self::$CheckTable['update']['category']['0']['f']	= function ($a) { return array ("SELECT cate_id FROM ".$a['sqlTables']['category']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND cate_name = '".$a['params']['name']."';");};
-self::$CheckTable['update']['category']['0']['c']	= "cate_id";
-self::$CheckTable['update']['category']['0']['v']	= "cate_id";
-self::$CheckTable['update']['category']['0']['m']	= "CLI_Category_C001";
-self::$CheckTable['update']['category']['0']['p']	= "category";
-self::$CheckTable['update']['category']['0']['s']	= "name";
+self::$CheckTable['update']['menu']['0']['d']	= 2;
+self::$CheckTable['update']['menu']['0']['f']	= function ($a) { return array ("SELECT menu_id FROM ".$a['sqlTables']['menu']." WHERE fk_ws_id = '".$a['Context']['ws_id']."' AND menu_name = '".$a['params']['name']."';");};
+self::$CheckTable['update']['menu']['0']['c']	= "menu_id";
+self::$CheckTable['update']['menu']['0']['v']	= "menu_id";
+self::$CheckTable['update']['menu']['0']['m']	= "CLI_menu_C001";
+self::$CheckTable['update']['menu']['0']['p']	= "menu";
+self::$CheckTable['update']['menu']['0']['s']	= "name";
 
 
 // Checkpoint

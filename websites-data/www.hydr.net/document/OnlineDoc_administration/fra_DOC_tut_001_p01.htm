@@ -155,9 +155,9 @@ La suite est logique; il nous faut un menu pour avoir quelque chose de consistan
 </p>
 <code>
 > site_context site test001 user site_owner password site_owner;<br>
-> add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
+> add menu name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
 <br>
-> add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
+> add menu name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
 </code>
 <p>
 Il y a quelque particularités aux catégories qu'il faut expliquer. 
@@ -211,8 +211,8 @@ Vous pourrez loisir vous inspirer des scripts déjà présents pour vos propres 
 > add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
 <br>
 <br>
-> add category name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
+> add menu name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
 <br>
-> add category name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
+> add menu name "fr_bienvenue" parent "fr_sommaire_user" position 02 type ARTICLE lang fra	state ONLINE deadline initial_tst title "Présentation" desc "Présentation" group Anonyme article "bienvenue" first_doc "YES";<br>
 </code>
 /*Hydr-Content-End*/

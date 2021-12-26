@@ -25,7 +25,7 @@ INSERT INTO !table! VALUES (	"19",		"ben",		"বাংলা",											"ben",	
 INSERT INTO !table! VALUES (	"20",		"bod",		"བོད་ཡིག",									"tib/bod",			"bo",				"tl_bod.png"	);
 INSERT INTO !table! VALUES (	"21",		"bre",		"Brezhoneg",									"bre",				"br",				"tl_bre.png"	);
 INSERT INTO !table! VALUES (	"22",		"bos",		"Bosanski jezik",								"bos",				"bs",				"tl_bos.png"	);
-INSERT INTO !table! VALUES (	"23",		"cat",		"Català",										"cat",				"ca",				"tl_cat.png"	);
+INSERT INTO !table! VALUES (	"23",		"cat",		"Català",										"cat",				"ca",				"tl_mnu.png"	);
 INSERT INTO !table! VALUES (	"24",		"che",		"нохчийн мотт",									"che",				"ce",				"tl_che.png"	);
 INSERT INTO !table! VALUES (	"25",		"cha",		"Chamoru",										"cha",				"ch",				"tl_cha.png"	);
 INSERT INTO !table! VALUES (	"26",		"cos",		"Corsu ; lingua corsa",							"cos",				"co",				"tl_cos.png"	);

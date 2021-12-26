@@ -54,7 +54,7 @@ $bts->I18nTransObj->apply(
 			"tabTxt1"		=> "Informations",
 			"kwState0"		=> "Hors ligne",
 			"kwState1"		=> "En ligne",
-			"kwType1"		=> "Vers une category",
+			"kwType1"		=> "Vers une menu",
 			"kwType2"		=> "Vers une URL",
 			"kwType3"		=> "Tooltip",
 		),
@@ -66,7 +66,7 @@ $bts->I18nTransObj->apply(
 			"tabTxt1"		=> "Informations",
 			"kwState0"		=> "Offline",
 			"kwState0"		=> "Online",
-			"kwType1"		=> "Link to a category",
+			"kwType1"		=> "Link to a menu",
 			"kwType2"		=> "Link to an URL",
 			"kwType3"		=> "Tooltip",
 		)

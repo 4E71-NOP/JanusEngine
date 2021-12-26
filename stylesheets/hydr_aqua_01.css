@@ -192,7 +192,7 @@ html { width:100%; height:100%;}
  .mt_bareTable td:hover { background-color:transparent; }
  
  .mt_modif_article { height:512px ; overflow:auto }
- .mt_modif_category { height:512px ; overflow:auto }
+ .mt_modif_menu { height:512px ; overflow:auto }
 
  .mt_div_AdminControlSwitch { 
   width: 96px; 

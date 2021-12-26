@@ -24,13 +24,13 @@ $_REQUEST['sql_initiateur'] = "fra_gestion_des_mots_cles_p03";
 // --------------------------------------------------------------------------------------------
 $dbquery = requete_sql($_REQUEST['sql_initiateur'],"
 SELECT art.arti_id, art.arti_name  
-FROM ".$SQL_tab['article']." art, ".$SQL_tab['category']." cat 
+FROM ".$SQL_tab['article']." art, ".$SQL_tab['menu']." cat 
 WHERE art.ws_id = '".$website['ws_id']."'
-AND cat.ws_id = '".$website['ws_id']."'
-AND cat.arti_ref = art.arti_ref 
-AND cat.arti_ref != '0' 
-AND cat.cate_type IN ('0','1') 
-AND cat.lang_id = '".$website['ws_lang']."' 
+AND mnu.ws_id = '".$website['ws_id']."'
+AND mnu.arti_ref = art.arti_ref 
+AND mnu.arti_ref != '0' 
+AND mnu.menu_type IN ('0','1') 
+AND mnu.lang_id = '".$website['ws_lang']."' 
 ;");
 
 while ($dbp = fetch_array_sql($dbquery)) { 
@@ -70,7 +70,7 @@ $pv['o1_l3'] .= "</select>\r";
 
 
 $pv['o1_l6'] = "<select name='M_MOTCLE[type]' class='" . $theme_tableau . $_REQUEST['bloc']."_t3 " . $theme_tableau . $_REQUEST['bloc']."_form_1'>\r";
-$tl_['eng']['ms_2_01'] = "Link to a category";				$tl_['fra']['ms_2_01'] = "Vers une cat&eacute;gorie";
+$tl_['eng']['ms_2_01'] = "Link to a menu";					$tl_['fra']['ms_2_01'] = "Vers une cat&eacute;gorie";
 $tl_['eng']['ms_2_02'] = "Link to an URL";					$tl_['fra']['ms_2_02'] = "Vers une URL";
 $tl_['eng']['ms_2_03'] = "Dynamic help";					$tl_['fra']['ms_2_03'] = "Aide dynamique";
 $gkeyword_type['1']['t'] = $tl_[$l]['ms_2_01'];		$gkeyword_type['1']['s'] = "";		$gkeyword_type['1']['db'] = "VERS_CATEGORIE";

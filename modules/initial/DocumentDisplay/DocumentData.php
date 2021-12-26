@@ -40,18 +40,18 @@ class DocumentData {
 		if (strlen ( $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref') ) == 0) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
 			$dbquery = $bts->SDDMObj->query ( "
-			SELECT cat.cate_id, cat.cate_name, cat.fk_arti_ref
-			FROM " . $SqlTableListObj->getSQLTableName('category') . " cat, " 
+			SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
+			FROM " . $SqlTableListObj->getSQLTableName('menu') . " cat, " 
 			. $SqlTableListObj->getSQLTableName('deadline') . " bcl
-			WHERE cat.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
-			AND cat.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
-			AND cat.fk_deadline_id = bcl.deadline_id
+			WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
+			AND mnu.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
+			AND mnu.fk_deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
-			AND cat.cate_type IN ('0','1')
-			AND cat.fk_group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
-			AND cat.cate_state = '1'
-			AND cate_initial_document = '1'
-			ORDER BY cat.cate_parent,cat.cate_position
+			AND mnu.menu_type IN ('0','1')
+			AND mnu.fk_group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+			AND mnu.menu_state = '1'
+			AND menu_initial_document = '1'
+			ORDER BY mnu.menu_parent,mnu.menu_position
 			;" );
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());

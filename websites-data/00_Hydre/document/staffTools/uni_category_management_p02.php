@@ -30,7 +30,7 @@
 // $LOG_TARGET = $LMObj->getInternalLogTarget();
 // $LMObj->setInternalLogTarget("both");
 
-$bts->RequestDataObj->setRequestData('categoryForm',
+$bts->RequestDataObj->setRequestData('menuForm',
 		array(
 				'selectionId'	=> 150,
 				'selectionLang'	=> 2,
@@ -39,7 +39,7 @@ $bts->RequestDataObj->setRequestData('categoryForm',
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'				=> 'AdminDashboard',
-				'section'				=> 'AdminCategoryManagementP02',
+				'section'				=> 'AdminmenuManagementP02',
 				'creation'		=> 'on',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
@@ -51,11 +51,11 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_category_management_p02";
+$localisation = " / uni_menu_management_p02";
 $bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_category_management_p02.php");
+$bts->LMObj->logCheckpoint("uni_menu_management_p02.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_category_management_p02.php");
+$bts->MapperObj->setSqlApplicant("uni_menu_management_p02.php");
 
 switch ($l) {
 	case "fra":
@@ -96,8 +96,8 @@ switch ($l) {
 		
 	case "eng":
 		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage categorys.",
-		"invite2"		=> "This part will allow you to create a category.",
+		"invite1"		=> "This part will allow you to manage menus.",
+		"invite2"		=> "This part will allow you to create a menu.",
 		"tabTxt1"		=> "General",
 		"tabTxt2"		=> "Details",
 
@@ -138,7 +138,7 @@ $MenuSelectTableObj = MenuSelectTable::getInstance();
 $tabDeadline	= $MenuSelectTableObj->getDeadlineList();
 // $tabDocument	= $MenuSelectTableObj->getDocumentList();
 $tabArtiRef		= $MenuSelectTableObj->getArtiRefList();
-$tabCategory	= $MenuSelectTableObj->getCategoryList();
+$tabmenu	= $MenuSelectTableObj->getMenuList();
 $tabGroup		= $MenuSelectTableObj->getGroupList();
 
 // --------------------------------------------------------------------------------------------
@@ -148,41 +148,41 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 // --------------------------------------------------------------------------------------------
 $T = array();
 
-$ClassLoaderObj->provisionClass('Category');
-$currentCategoryObj = new Category();
+$ClassLoaderObj->provisionClass('menu');
+$currentMenuObj = new Menu();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentCategoryObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId'));
+		$currentmenuObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('menuForm', 'selectionId'));
 		
-		$T['Content']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
+		$T['Content']['1']['2']['2']['cont'] = $currentMenuObj->getMenuEntry('menu_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
 	case "create":
 		$commandType = "add";
-		$currentCategoryObj->setCategory(
+		$currentMenuObj->setMenu(
 			array (
-				"cate_id"			=>	"",
-				"cate_name"			=>	"New_Category",
-				"cate_title"		=>	"Category title",
-				"cate_desc"			=>	"Category",
-				"cate_type"			=>	1,
+				"menu_id"			=>	"",
+				"menu_name"			=>	"New_Menu",
+				"menu_title"		=>	"Menu title",
+				"menu_desc"			=>	"Menu",
+				"menu_type"			=>	1,
 				"ws_id"				=>	$WebSiteObj->getWebSiteEntry('ws_id'),
 				"lang_id"			=>	"",
 				"deadline_id"		=>	1,
-				"cate_state"		=>	1,
-				"cate_parent"		=>	1,
-				"cate_position"		=>	1,
+				"menu_state"		=>	1,
+				"menu_parent"		=>	1,
+				"menu_position"		=>	1,
 				"group_id"			=>	1,
-				"cate_last_update"	=>	"",
-				"cate_role"			=>	"",
-				"cate_initial_document"	=>	"",
+				"menu_last_update"	=>	"",
+				"menu_role"			=>	"",
+				"menu_initial_document"	=>	"",
 				"arti_ref"			=>	"",
 			)
 		);
-		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"Newmenu".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
@@ -193,18 +193,18 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 // --------------------------------------------------------------------------------------------
 
 $Content .= "
-<form ACTION='index.php?' method='post' name='categoryForm'>\r"
+<form ACTION='index.php?' method='post' name='menuForm'>\r"
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 ."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='AdminCategoryManagementP02'>"
+."<input type='hidden' name='formGenericData[section]'	value='AdminmenuManagementP02'>"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
-."<input type='hidden' name='formEntity1'				value='category'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentCategoryObj->getCategoryEntry('cate_name')."'>\r"
+."<input type='hidden' name='formEntity1'				value='menu'>"
+."<input type='hidden' name='formTarget1[name]'			value='".$currentMenuObj->getMenuEntry('menu_name')."'>\r"
 ."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='categoryForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('categoryForm', 'selectionId')."'>\r"
+."<input type='hidden' name='menuForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('menuForm', 'selectionId')."'>\r"
 ."<p>\r"
 ;
 
@@ -228,10 +228,10 @@ $T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2
 $T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l5c1');
 $T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
 
-$T['Content']['1']['1']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_id');
-$T['Content']['1']['2']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_name');
-$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-$T['Content']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	size='35' maxlength='255' value=\"".$currentCategoryObj->getCategoryEntry('cate_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['1']['2']['cont'] = $currentMenuObj->getMenuEntry('menu_id');
+$T['Content']['1']['2']['2']['cont'] = $currentMenuObj->getMenuEntry('menu_name');
+$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams[title]'	size='35' maxlength='255' value=\"".$currentMenuObj->getMenuEntry('menu_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content']['1']['4']['2']['cont'] = "<input type='text' name='formParams[desc]'	size='35' maxlength='255' value=\"".$currentMenuObj->getMenuEntry('menu_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
 
 $tabType = array(
@@ -240,7 +240,7 @@ $tabType = array(
 		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('menu_admin_racine'),	"db" => "menu_admin_racine"),
 		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('menu_admin'),			"db" => "menu_admin"),
 );
-$tabType[$currentCategoryObj->getCategoryEntry('cate_type')]['s'] = " selected ";
+$tabType[$currentMenuObj->getMenuEntry('menu_type')]['s'] = " selected ";
 $T['Content']['1']['5']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabType as $A ) { $T['Content']['1']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['5']['2']['cont'] .= "</select>\r";
@@ -251,31 +251,31 @@ $tabState = array(
 		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('offline'),	"db" => "OFFLINE"),
 		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('online'),	"db" => "ONLINE"),
 );
-$tabState[$currentCategoryObj->getCategoryEntry('cate_state')]['s'] = " selected ";
+$tabState[$currentMenuObj->getMenuEntry('menu_state')]['s'] = " selected ";
 $T['Content']['1']['7']['2']['cont'] = "<select name='formParams[state]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabState as $A ) { $T['Content']['1']['7']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['7']['2']['cont'] .= "</select>\r";
 
-$tabCategory[$currentCategoryObj->getCategoryEntry('cate_parent')]['s'] = " selected ";
+$tabMenu[$currentMenuObj->getMenuEntry('menu_parent')]['s'] = " selected ";
 $T['Content']['1']['8']['2']['cont'] = "<select name='formParams[parent]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabCategory as $A ) { $T['Content']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
+foreach ( $tabMenu as $A ) { $T['Content']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['8']['2']['cont'] .= "</select>\r";
 
-$T['Content']['1']['9']['2']['cont'] = $currentCategoryObj->getCategoryEntry('cate_position');
+$T['Content']['1']['9']['2']['cont'] = $currentMenuObj->getMenuEntry('menu_position');
 // --------------------------------------------------------------------------------------------
 
 
-$tabDeadline[$currentCategoryObj->getCategoryEntry('deadline_id')]['s'] = " selected ";
+$tabDeadline[$currentMenuObj->getMenuEntry('deadline_id')]['s'] = " selected ";
 $T['Content']['2']['1']['2']['cont'] = "<select name='formParams[deadline]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabDeadline as $A ) { $T['Content']['2']['1']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['2']['1']['2']['cont'] .= "</select>\r";
 
-$tabGroup[$currentCategoryObj->getCategoryEntry('group_id')]['s'] = " selected ";
+$tabGroup[$currentMenuObj->getMenuEntry('group_id')]['s'] = " selected ";
 $T['Content']['2']['2']['2']['cont'] = "<select name='formParams[group]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabGroup as $A ) { $T['Content']['2']['2']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['2']['2']['2']['cont'] .= "</select>\r";
 
-$T['Content']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentCategoryObj->getCategoryEntry('cate_last_update'));
+$T['Content']['2']['3']['2']['cont'] = $bts->TimeObj->timestampToDate($currentMenuObj->getMenuEntry('menu_last_update'));
 
 
 $tabRole = array(
@@ -283,7 +283,7 @@ $tabRole = array(
 		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('correction_article'),		"db"=>"correction_article" ),
 		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('admin_conf_extension'),	"db"=>"admin_conf_extension" ),
 );
-$tabRole[$currentCategoryObj->getCategoryEntry('cate_role')]['s'] = " selected ";
+$tabRole[$currentMenuObj->getMenuEntry('menu_role')]['s'] = " selected ";
 $T['Content']['2']['4']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabRole as $A ) { $T['Content']['2']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['2']['4']['2']['cont'] .= "</select>\r";
@@ -293,14 +293,14 @@ $tabYN = array(
 		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
 		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
 );
-$tabYN[$currentCategoryObj->getCategoryEntry('cate_initial_document')]['s'] = " selected ";
+$tabYN[$currentMenuObj->getMenuEntry('menu_initial_document')]['s'] = " selected ";
 $T['Content']['2']['5']['2']['cont'] = "<select name='formParams[first_doc]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabYN as $A ) { $T['Content']['2']['5']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['2']['5']['2']['cont'] .= "</select>\r";
 
 
 
-$tabArtiRef[$currentCategoryObj->getCategoryEntry('arti_ref')]['s'] = " selected ";
+$tabArtiRef[$currentMenuObj->getMenuEntry('arti_ref')]['s'] = " selected ";
 $T['Content']['2']['6']['2']['cont'] = "<select name='formParams[arti_ref]' class='".$Block."_t3 ".$Block."_form_1'>\r";
 foreach ( $tabArtiRef as $A ) { $T['Content']['2']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['2']['6']['2']['cont'] .= "</select>\r";
@@ -322,7 +322,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$infos['formName'] = "categoryForm";
+$infos['formName'] = "menuForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos, $bts->i18nDoc);
 
 

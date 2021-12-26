@@ -84,7 +84,7 @@ class Entity {
 			case "article" :				$column = "arti_id";
 			case "article_config" :			$column = "config_id";
 			case "article_tag" :			$column = "article_tag_id";
-			case "category" :				$column = "cate_id";
+			case "menu" :					$column = "menu_id";
 			case "deadline" :				$column = "deadline_id";
 			case "decoration" :				$column = "deco_id";
 			case "definition" :				$column = "def_id";

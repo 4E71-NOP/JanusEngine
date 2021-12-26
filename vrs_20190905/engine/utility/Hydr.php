@@ -463,22 +463,22 @@ class Hydr {
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
 			$sqlQuery = "
-				SELECT cat.cate_id, cat.cate_name, cat.fk_arti_ref
-				FROM " . $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " . $SqlTableListObj->getSQLTableName ( 'deadline' ) . " bcl
-				WHERE cat.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'
-				AND cat.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "'
-				AND cat.fk_deadline_id = bcl.deadline_id
+				SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
+				FROM " . $SqlTableListObj->getSQLTableName ( 'menu' ) . " mnu, " . $SqlTableListObj->getSQLTableName ( 'deadline' ) . " bcl
+				WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "'
+				AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "'
+				AND mnu.fk_deadline_id = bcl.deadline_id
 				AND bcl.deadline_state = '1'
-				AND cat.cate_type IN ('0','1')
-				AND cat.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . "
-				AND cat.cate_state = '1'
-				AND cate_initial_document = '1'
-				ORDER BY cat.cate_parent,cat.cate_position
+				AND mnu.menu_type IN ('0','1')
+				AND mnu.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . "
+				AND mnu.menu_state = '1'
+				AND mnu.menu_initial_document = '1'
+				ORDER BY mnu.menu_parent,mnu.menu_position
 				;";
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
+				$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 			}
@@ -502,13 +502,13 @@ class Hydr {
 				$sqlQuery = "
 					SELECT * 
 					FROM " 
-					. $SqlTableListObj->getSQLTableName ( 'category' ) . " cat, " 
+					. $SqlTableListObj->getSQLTableName ( 'menu' ) . " cat, " 
 					. $SqlTableListObj->getSQLTableName ( 'article' ) . " art
-					WHERE cat.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry ('ws_id') . "')
-					AND cat.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
-					AND cat.fk_group_id " . $UserObj->getUserEntry ('clause_in_group') . " 
-					AND cat.cate_state = '1'
-					AND cat.fk_arti_ref = art.arti_ref
+					WHERE mnu.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry ('ws_id') . "')
+					AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
+					AND mnu.fk_group_id " . $UserObj->getUserEntry ('clause_in_group') . " 
+					AND mnu.menu_state = '1'
+					AND mnu.fk_arti_ref = art.arti_ref
 					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
 					AND art.arti_page = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'page')."';
 					;";
@@ -518,7 +518,7 @@ class Hydr {
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-					$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
+					$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $dbp ['arti_ref'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', $dbp ['arti_slug'] );
@@ -526,7 +526,7 @@ class Hydr {
 				}
 			} else {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
-				$CurrentSetObj->setDataSubEntry ( 'article', 'cate_id', $dbp ['cate_id'] );
+				$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_slug', 'article_not_found' );
