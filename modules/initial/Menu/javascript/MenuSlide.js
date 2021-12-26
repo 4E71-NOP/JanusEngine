@@ -89,16 +89,41 @@ class MenuSlide {
 
 		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
 		if ( this.level > 1) {
-			str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm' onClick='ms.slideBack()'><div class='"+this.themeName+this.block+"_icon_left' style='width:16px;height:16px;'></div></li>";
+			str += "<li class='"
+				+this.themeName
+				+"menu_lvl_0_link' style='padding:0.05cm' onClick='ms.slideBack()'><div class='"
+				+this.themeName+this.block
+				+"_icon_left' style='width:16px;height:16px;'></div></li>";
 		}
 		let d = this.data;
 		for ( let n in d ){
 			if ( d[n].cate_parent == this.currentMenu ) {
 				if ( this.checkChildren(d[n].cate_id) === true) {
-					str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"+d[n].cate_id+"')\"><div class='"+this.themeName+this.block+"_icon_directory' style='width:16px;height:16px; display:inline-block'></div> "+d[n].cate_title+"</li>";
+					str += "<li class='"
+						+this.themeName
+						+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"
+						+d[n].cate_id+"')\"><div class='"
+						+this.themeName
+						+this.block
+						+"_icon_directory' style='width:16px;height:16px; display:inline-block'></div>"
+						+d[n].cate_title+"</li>";
 				}
 				else {
-					str += "<li class='"+this.themeName+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"+d[n].fk_arti_slug+"'>"+d[n].cate_title+"</a></li>";
+					if ( d[n].cate_id == this.cate_id ) {
+						str += "<li class='"
+							+this.themeName
+							+"menu_lvl_0_link' style='padding:0.05cm'>"
+							+d[n].cate_title
+							+"</li>";
+					}
+					else {
+						str += "<li class='"
+							+this.themeName
+							+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"
+							+d[n].fk_arti_slug
+							+"' style='display :block;'>"
+							+d[n].cate_title+"</a></li>";
+					}
 				}
 			}
 		}
