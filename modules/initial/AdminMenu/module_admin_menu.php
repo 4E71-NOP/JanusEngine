@@ -35,13 +35,13 @@ class ModuleAdministration {
 				SELECT * 
 				FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." 
 				WHERE menu_type IN ('2', '3') 
-				AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
-				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."' 
-				AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
+				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ('language_id')."' 
 				AND menu_state = '1' 
-				ORDER BY menu_id 
+				ORDER BY menu_position , menu_name
 				;");
-			
+				// AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
+				// AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
+
 			if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
 			else {
 				$Content .= "<ul id='Admin_Menu_Simple' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";

@@ -43,9 +43,12 @@ class MenuSlide {
 		elm.Gebi('menuSlide').parentNode.style.overflow='hidden';
 		
 		// Sets the menu level/branch on the article at hand
-		if ( this.locateCateId(this.EntryPoint) == true ) {
-			if ( this.level > 1 ) {	this.slideDeeper(this.currentMenu); }
-			l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
+		if ( this.locateMenuId(this.EntryPoint) == true ) {
+			if ( this.level > 1 ) {	
+				this.level--;		// We know level will get +1;
+				this.slideDeeper(this.currentMenu); 
+			}
+			l.Log[dbgMenu]("MenuSlide.initialization / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 		}
 		for (let n=1; n<=this.maxMenuLevel; n++) { this.md[n].style.visibility = "visible"; }
 	}
@@ -54,24 +57,21 @@ class MenuSlide {
 	 * Locate the menu_id in the menu tree 
 	 * @param {*} id 
 	 */
-	locateCateId (id) {
-		l.Log[dbgMenu]("MenuSlide.locateCateId / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
+	locateMenuId (id) {
+		l.Log[dbgMenu]("MenuSlide.locateMenuId / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 
 		let d = this.data;
 		for (let n in d ) {
 			if ( d[n].menu_parent == id ) {
-				if ( this.checkChildren(d[n].menu_id) == true ) {
-
+				if ( this.checkChildren(d[n].menu_id) === true ) {
 					this.tmpLevel++;
-					if ( this.locateCateId(d[n].menu_id) == true ) { return true; };
+					if ( this.locateMenuId(d[n].menu_id) === true ) { return true; }
 					this.tmpLevel--;
 				}
 				if ( d[n].menu_id == this.menu_id) { 
-					l.Log[dbgMenu]("MenuSlide.locateCateId Got it! id:'"+id+"'= menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 					this.currentMenu = d[n].menu_parent;
-					
-					if ( this.tmpLevel > 1 ) { this.level = this.tmpLevel;	}
-					else { this.level = 1; }
+					this.level = this.tmpLevel;
+					l.Log[dbgMenu]("MenuSlide.locateMenuId Got it! id:'"+id+"'= menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"', level:'"+this.level+"'");
 					return true;
 				}
 			}
@@ -85,7 +85,7 @@ class MenuSlide {
 	 */
 	makeMenu(){
 		let c = this.data[this.currentMenu];
-		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.menu_title+"' ("+c.menu_id+ "); slug:'"+ c.fk_arti_slug+"'");
+		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.menu_title+"' ("+c.menu_id+ "); slug:'"+ c.fk_arti_slug+"', level:'"+this.level+"'");
 
 		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
 		if ( this.level > 1) {
@@ -162,8 +162,10 @@ class MenuSlide {
 	 */
 	slideBack(){
 		if (this.level > 1) {
+			l.Log[dbgMenu]("MenuSlide.slideBack level:'"+this.level+"'");
 			this.currentMenu = this.data[this.currentMenu].menu_parent;
 			this.level--;
+			l.Log[dbgMenu]("MenuSlide.slideBack level:'"+this.level+"'");
 			this.makeMenu();
 
 			this.md[this.level].classList.remove('slideLeftExit');
