@@ -43,7 +43,7 @@ class ModuleList {
 			WHERE wm.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			AND m.module_id = wm.fk_module_id
 			AND wm.module_state = '1'
-			AND m.module_group_allowed_to_see ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+			AND m.fk_perm_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;";

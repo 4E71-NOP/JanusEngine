@@ -54,14 +54,6 @@ ALTER TABLE Hdr.Ht_layout_content ADD CONSTRAINT Ht_layout_content_FK FOREIGN KE
 
 ALTER TABLE Hdr.Ht_log ADD CONSTRAINT Ht_log_FK FOREIGN KEY (ws_id) REFERENCES Hdr.Ht_website(ws_id);
 
-
-/*
-March po!
-ALTER TABLE Hdr.Ht_module ADD CONSTRAINT Ht_module_FK FOREIGN KEY (module_group_allowed_to_see) REFERENCES Hdr.Ht_user(user_id);
-ALTER TABLE Hdr.Ht_module ADD CONSTRAINT Ht_module_FK_1 FOREIGN KEY (module_group_allowed_to_use) REFERENCES Hdr.Ht_user(user_id);
-*/
-
-
 ALTER TABLE Hdr.Ht_note ADD CONSTRAINT Ht_note_FK FOREIGN KEY (docu_id) REFERENCES Hdr.Ht_document(docu_id);
 ALTER TABLE Hdr.Ht_note ADD CONSTRAINT Ht_note_FK_1 FOREIGN KEY (user_id) REFERENCES Hdr.Ht_user(user_id);
 

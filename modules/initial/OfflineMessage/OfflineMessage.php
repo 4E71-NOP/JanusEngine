@@ -66,7 +66,7 @@ class ModuleOffLineMessage {
 		$ThemeDataObj->setThemeName('mt_');
 		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
-		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedJavaScript());
+		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedScript());
 		
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', 512);
 		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', 1024);
@@ -96,8 +96,8 @@ class ModuleOffLineMessage {
 				"module_file" => "",
 				"module_desc" => "",
 				"module_container_name" => "",
-				"module_group_allowed_to_see" => 31,
-				"module_group_allowed_to_use" => 31,
+				// "module_group_allowed_to_see" => 31,
+				// "module_group_allowed_to_use" => 31,
 				"module_adm_control" => 0,
 				"module_execution" => 0,
 				"module_website_id" => 11,

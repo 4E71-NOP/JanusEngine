@@ -46,7 +46,7 @@ class RenderAdmDashboard {
 			WHERE b.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.fk_module_id
 			AND b.module_state = '1'
-			AND a.module_group_allowed_to_see ". $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+			AND a.fk_perm_id ". $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
 			;");
@@ -66,8 +66,7 @@ class RenderAdmDashboard {
 				$module_tab_adm_[$i]['module_directory']			= $dbp['module_directory'];
 				$module_tab_adm_[$i]['module_file']					= $dbp['module_file'];
 				$module_tab_adm_[$i]['module_desc']					= $dbp['module_desc'];
-				$module_tab_adm_[$i]['module_group_allowed_to_see']	= $dbp['module_group_allowed_to_see'];
-				$module_tab_adm_[$i]['module_group_allowed_to_use']	= $dbp['module_group_allowed_to_use'];
+				$module_tab_adm_[$i]['fk_perm_id']					= $dbp['fk_perm_id'];
 				$module_tab_adm_[$i]['module_adm_control']			= $dbp['module_adm_control'];
 				$i++;
 			}
@@ -146,7 +145,7 @@ class RenderAdmDashboard {
 			<td style='width:".$cellList[$n]['width']."; height:".$cellList[$n]['height']."; min-width:".$cellList[$n]['minWidth']."; min-height:".$cellList[$n]['minHeight'].";'>
 			";
 			
-			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see'] ) == 1 ) {
+			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("admin_default_write_permission") == true ) {
 				if ( $m['module_deco'] == 1 ) { 
 					$infos['block'] = $bts->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}

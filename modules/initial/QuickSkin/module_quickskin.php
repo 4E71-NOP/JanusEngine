@@ -43,9 +43,8 @@ class ModuleQuickSkin {
 			".$bts->I18nTransObj->getI18nTransEntry('txt1')." <span class='" . $Block."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
 			</td>\r</tr>\r
 			";
-			$grp = $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' =>  "QuickSkin module_group_allowed_to_use=" . $grp. "UserObj = " .$bts->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUser()) ));
-			if ( $grp == "1" ) {
+
+			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("connected_group_read_permission") == true ) {
 				$sqlQuery = "
 				SELECT td.theme_id, td.theme_name, td.theme_title FROM "
 				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "

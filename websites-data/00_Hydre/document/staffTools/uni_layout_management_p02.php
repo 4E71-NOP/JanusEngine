@@ -294,7 +294,7 @@ SELECT *
 FROM ".$SQL_tab_abrege['module']." m, ".$SQL_tab_abrege['module_website']." sm 
 WHERE sm.ws_id = '".$website['ws_id']."' 
 AND m.module_id = sm.module_id
-AND m.module_group_allowed_to_see ".$user['clause_in_group']." 
+AND m.fk_perm_id ".$user['clause_in_perm']." 
 ORDER BY module_position
 ;");
 $pv['i'] = 1;

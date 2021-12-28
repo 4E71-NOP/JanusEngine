@@ -52,38 +52,6 @@ self::$PreRequisiteTable['add']['article'] = array (
 		),
 );
 
-self::$PreRequisiteTable['add']['menu'] = array (
-		"convert" => array(
-				array("v" => "type",		"s" => "menu"),
-				array("v" => "state",		"s" => "menu"),
-				array("v" => "role",		"s" => "menu"),
-				array("v" => "first_doc",	"s" => "menu"),
-		),
-		"nextId" => array (
-				array ("table" => "menu",				"column" => "menu_id",			"target" => "id"),
-		),
-		"columns" => array(
-				array ( "v" => "id",				"t" => "menu_id"),
-				array ( "v" => "name",				"t" => "menu_name"),
-				array ( "v" => "title",				"t" => "menu_title"),
-				array ( "v" => "desc",				"t" => "menu_desc"),
-				array ( "v" => "type",				"t" => "menu_type"),
-				array ( "v" => "ws_id",				"t" => "fk_ws_id"),
-				array ( "v" => "lang_id",			"t" => "fk_lang_id"),
-				array ( "v" => "deadline_id",		"t" => "fk_deadline_id"),
-				array ( "v" => "state",				"t" => "menu_state"),
-				array ( "v" => "parent_id",			"t" => "menu_parent"),
-				array ( "v" => "position",			"t" => "menu_position"),
-				array ( "v" => "fk_perm_id",		"t" => "fk_perm_id"),
-//				array ( "v" => "group_id",			"t" => "fk_group_id"),
-				array ( "v" => "last_modif",		"t" => "menu_last_update"),
-				array ( "v" => "role",				"t" => "menu_role"),
-				array ( "v" => "first_doc",			"t" => "menu_initial_document"),
-				array ( "v" => "article",			"t" => "fk_arti_ref"),
-				array ( "v" => "slug",				"t" => "fk_arti_slug"),
-		),
-);
-
 self::$PreRequisiteTable['add']['deadline'] = array (
 		"convert" => array(
 				array("v" => "state",				"s" => "deadline"),
@@ -397,6 +365,38 @@ self::$PreRequisiteTable['add']['layout_file'] = array (
 // );
 
 
+self::$PreRequisiteTable['add']['menu'] = array (
+	"convert" => array(
+			array("v" => "type",		"s" => "menu"),
+			array("v" => "state",		"s" => "menu"),
+			array("v" => "role",		"s" => "menu"),
+			array("v" => "first_doc",	"s" => "menu"),
+	),
+	"nextId" => array (
+			array ("table" => "menu",				"column" => "menu_id",			"target" => "id"),
+	),
+	"columns" => array(
+			array ( "v" => "id",				"t" => "menu_id"),
+			array ( "v" => "name",				"t" => "menu_name"),
+			array ( "v" => "title",				"t" => "menu_title"),
+			array ( "v" => "desc",				"t" => "menu_desc"),
+			array ( "v" => "type",				"t" => "menu_type"),
+			array ( "v" => "ws_id",				"t" => "fk_ws_id"),
+			array ( "v" => "lang_id",			"t" => "fk_lang_id"),
+			array ( "v" => "deadline_id",		"t" => "fk_deadline_id"),
+			array ( "v" => "state",				"t" => "menu_state"),
+			array ( "v" => "parent_id",			"t" => "menu_parent"),
+			array ( "v" => "position",			"t" => "menu_position"),
+			array ( "v" => "fk_perm_id",		"t" => "fk_perm_id"),
+//				array ( "v" => "group_id",			"t" => "fk_group_id"),
+			array ( "v" => "last_modif",		"t" => "menu_last_update"),
+			array ( "v" => "role",				"t" => "menu_role"),
+			array ( "v" => "first_doc",			"t" => "menu_initial_document"),
+			array ( "v" => "article",			"t" => "fk_arti_ref"),
+			array ( "v" => "slug",				"t" => "fk_arti_slug"),
+	),
+);
+
 self::$PreRequisiteTable['add']['module'] = array (
 		"convert" => array(
 				array("v" => "deco",			"s" => "module"),
@@ -419,6 +419,7 @@ self::$PreRequisiteTable['add']['module'] = array (
 				array ( "v" => "directory",					"t" => "module_directory"),
 				array ( "v" => "file",						"t" => "module_file"),
 				array ( "v" => "desc",						"t" => "module_desc"),
+				array ( "v" => "fk_perm_id",				"t" => "fk_perm_id"),
 				array ( "v" => "group_allowed_to_see_id",	"t" => "module_group_allowed_to_see"),
 				array ( "v" => "group_allowed_to_use_id",	"t" => "module_group_allowed_to_use"),
 				array ( "v" => "adm_control",				"t" => "module_adm_control"),

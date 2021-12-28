@@ -21,11 +21,10 @@ module_type 					INTEGER DEFAULT 1 NOT NULL,
 module_desc 					VARCHAR(255),
 module_container_name			VARCHAR(255),
 module_container_style			VARCHAR(255),
-module_group_allowed_to_see 	BIGINT,
-module_group_allowed_to_use 	BIGINT,
+fk_perm_id                   	BIGINT,
 module_adm_control				INTEGER,
 module_execution				INTEGER,
 
-PRIMARY KEY (module_id)
-
+PRIMARY KEY (module_id), 
+KEY idx_!IdxNom!_fk_perm_id (fk_perm_id)
 );

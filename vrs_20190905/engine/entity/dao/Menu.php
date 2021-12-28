@@ -21,13 +21,13 @@ class Menu extends Entity {
 		"menu_title"			=> "New Menu",
 		"menu_desc"				=> "New Menu",
 		"menu_type"				=> "ARTICLE",
-		"ws_id"					=> 0,
-		"lang_id"				=> 0,
-		"deadline_id"			=> 0,
+		"fk_ws_id"				=> 0,
+		"fk_lang_id"			=> 0,
+		"fk_deadline_id"		=> 0,
 		"menu_state"			=> 0,
 		"menu_parent"			=> 0,
 		"menu_position"			=> "",
-		"group_id"				=> 0,
+		"fk_perm_id"			=> 0,
 		"menu_last_update"		=> 0,
 		"menu_role"				=> 0,
 		"menu_initial_document"	=> 0,
@@ -118,8 +118,9 @@ class Menu extends Entity {
 			if ( $this->entityExistsInDb('menu', $this->Menu['menu_parent'] ) == false ) { $res = false; }
 		}
 		if ( $this->entityExistsInDb('website', $this->Menu['ws_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('group', $this->Menu['group_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('deadline', $this->Menu['deadline_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('group', $this->Menu['fk_group_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('deadline', $this->Menu['fk_deadline_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('permission', $this->Menu['fk_perm_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

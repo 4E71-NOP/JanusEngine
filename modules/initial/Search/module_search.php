@@ -36,7 +36,7 @@ class ModuleSearch {
 			$Block = $ThemeDataObj->getThemeName().$infos['block'];
 	
 			$Content = "";
-			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $infos['module']['module_group_allowed_to_use']) == 1 ) {
+			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("connected_group_read_permission") == true ) {
 				$Content .= "<span>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>
 				<form ACTION='index.php?' method='post'>\r".
 				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').

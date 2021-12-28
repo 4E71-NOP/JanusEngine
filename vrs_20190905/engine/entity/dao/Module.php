@@ -29,8 +29,9 @@ class Module extends Entity {
 		'module_type'					=> 0,
 		'module_container_name'			=> 0,
 		'module_container_style'		=> 0,
-		'module_group_allowed_to_see'	=> 0,
-		'module_group_allowed_to_use'	=> 0,
+		'fk_perm_id'					=> 0,
+		// 'module_group_allowed_to_see'	=> 0,
+		// 'module_group_allowed_to_use'	=> 0,
 		'module_adm_control'			=> 0,
 		'module_execution'				=> 0,
 	);
@@ -110,9 +111,7 @@ class Module extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		
-		if ( $this->entityExistsInDb('group', $this->Module['module_group_allowed_to_see']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('group', $this->Module['module_group_allowed_to_use']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('permission', $this->Module['fk_perm_id']) == false ) { $res = false; }
 		
 		return $res;
 	}

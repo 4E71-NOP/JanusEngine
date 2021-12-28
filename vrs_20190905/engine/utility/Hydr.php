@@ -749,7 +749,6 @@ class Hydr {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {
-		
 			$ClassLoaderObj->provisionClass ( 'FileSelector' );
 			$FileSelectorObj = FileSelector::getInstance ();
 			$infos ['block'] = $ThemeDataObj->getThemeName () . "B01";
