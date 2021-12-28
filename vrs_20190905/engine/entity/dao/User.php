@@ -84,7 +84,7 @@ class User extends Entity {
 			AND gu.fk_group_id = sg.fk_group_id
 			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -104,7 +104,7 @@ class User extends Entity {
 				WHERE fk_user_id = '" . $this->User['user_id'] . "'
 				ORDER BY fk_group_id
 				;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $bts->StringFormatObj->formatToLog($sqlQuery)));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
 				$groupList01[] = $dbp ['fk_group_id'];
@@ -123,7 +123,6 @@ class User extends Entity {
 					WHERE group_parent IN " . $strGrp . "
 					ORDER BY group_id
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $bts->StringFormatObj->formatToLog($sqlQuery)));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 				if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
 					while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
@@ -132,6 +131,9 @@ class User extends Entity {
 						$this->groupList[$dbp['group_id']] = array("group_id"=>$dbp ['group_id'], "group_name"=>$dbp['group_name'], "group_tag"=>$dbp['group_tag']);
 						$loopAgain = 1;
 					}
+				}
+				else {
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) ."` did not return any rows. Most likely it's the end of the search process."));
 				}
 				
 				unset ( $A );
@@ -152,6 +154,7 @@ class User extends Entity {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
 			
 		} else {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Login not found. Maybe a user mispelling the login."));
 			$this->User['error_login_not_found'] == 1;
 		}
 		

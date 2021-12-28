@@ -47,7 +47,7 @@ class ModuleList {
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$q."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

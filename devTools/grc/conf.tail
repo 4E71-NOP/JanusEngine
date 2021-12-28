@@ -29,19 +29,39 @@ regexp=\[BKP\]
 colours=on_white bold black
 -
 
-# parenthesis
-regexp=\(.*\)
-colours=yellow
--
-
 # Location in code
 regexp=\w*::\w*
 colours=cyan
 -
 
+# parenthesis
+regexp=\(.*\)
+colours=magenta
+-
+
+# Specific to array 01
+regexp=array
+colours=bold on_yellow
+count=more
+-
+
+
+# Specific to $PHPvariable
+regexp=\$[a-zA-Z0-9_]*
+colours=bold on_red white
+count=more
+-
+
 # citation
 regexp=\`.*\`
 colours=bold cyan
+count=more
+-
+
+# Specific to array 02
+regexp=\[[a-zA-Z0-9_]*\]\=
+colours=bold on_cyan
+count=more
 -
 
 # decoration01

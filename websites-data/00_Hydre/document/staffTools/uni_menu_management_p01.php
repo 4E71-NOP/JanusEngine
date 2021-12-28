@@ -90,7 +90,7 @@ $sqlQuery = "
 	AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	GROUP BY c.fk_lang_id
 	;";
-	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=" . $bts->StringFormatObj->formatToLog($sqlQuery)));
+	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 	$dbquery = $bts->SDDMObj->query($bts->StringFormatObj->formatToLog($sqlQuery));
 
 $CateTabList = array();
@@ -137,7 +137,7 @@ AND lw.fk_ws_id = c.fk_ws_id
 AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY c.fk_lang_id, c.menu_parent, c.menu_position 
 ;";
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=" . $bts->StringFormatObj->formatToLog($sqlQuery)));
+$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 $dbquery = $bts->SDDMObj->query($sqlQuery);
 
 $stateTab = array(

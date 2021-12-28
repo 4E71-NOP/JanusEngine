@@ -475,7 +475,7 @@ class Hydr {
 				AND mnu.menu_initial_document = '1'
 				ORDER BY mnu.menu_parent,mnu.menu_position
 				;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
@@ -494,7 +494,7 @@ class Hydr {
 					WHERE art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
 					AND art.arti_page = '1';
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			}
 			else {
@@ -512,7 +512,7 @@ class Hydr {
 					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
 					AND art.arti_page = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'page')."';
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $sqlQuery));
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			}
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
@@ -822,11 +822,11 @@ class Hydr {
 		
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
 
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING,		'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR,		'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
 
 		// --------------------------------------------------------------------------------------------
 		$bts->SDDMObj->disconnect_sql ();

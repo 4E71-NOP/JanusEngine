@@ -191,7 +191,7 @@ class LogManagement {
 					break;
 				case 'both' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
-					error_log ( $this->TagList[$logLevel] . " InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
+					error_log ( $this->TagList[$logLevel] . " InternalLog N " . $data['nbr'] . "; " . $data['message'] . (($origin!=false)? "; ".$data['origin']:"") );
 					break;
 				case "none" :
 				default :

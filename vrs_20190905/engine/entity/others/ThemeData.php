@@ -39,7 +39,7 @@ class ThemeData {
 		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
 		;";
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_id']]['deco_id']	=	$dbp['deco_id'];

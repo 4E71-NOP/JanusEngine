@@ -38,12 +38,8 @@ class AuthenticateUser {
 	 */
 	public function checkUserCredential ( User $UserObj, $mode ) {
 		$bts = BaseToolSet::getInstance();
-// 		$bts->LMObj = LogManagement::getInstance();
 
 		if ( strlen($UserObj->getUserEntry('error_login_not_found')) == 0 ) {
-// 			$CMobj = ConfigurationManagement::getInstance ();
-// 			$RequestDataObj = RequestData::getInstance ();
-// 			$SMObj = SessionManagement::getInstance ( null );
 			$CurrentSetObj = CurrentSet::getInstance();
 			$CurrentSetObj->setDataSubEntry('autentification', 'mode', $mode);
 			

@@ -86,7 +86,7 @@ class RenderLayout {
 		if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		
 		if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=".$bts->StringFormatObj->formatToLog($sqlQuery)));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
@@ -104,7 +104,7 @@ class RenderLayout {
 					WHERE fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 					AND default_layout_content = '1'
 					;";
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=".$bts->StringFormatObj->formatToLog($sqlQuery)));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 					$dbquery = $bts->SDDMObj->query($sqlQuery);
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
 				break;

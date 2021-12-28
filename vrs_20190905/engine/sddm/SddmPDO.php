@@ -95,19 +95,13 @@ class SddmPDO {
 		$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
 		$SQLlogEntry['signal'] = "OK";
 		
-		// $DebugLevel = $bts->CMObj->getConfigurationEntry('DebugLevel_SQL');
-		
 		if ($this->DBInstance->errorCode() != 0) {
-			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errorCode() . " " . $this->DBInstance->errorInfo() . " Query : " . $q ));
-// 			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errorCode() . " " . $this->DBInstance->errorInfo() . " Query : `" . $bts->StringFormatObj->formatToLog($q)."`." ));
 			$SQLlogEntry['signal'] = "ERR";
-			// $DebugLevel = 0;
 		}
 		
 		if ($bts->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $bts->LMObj->IncreaseSqlQueries(); }
-		// if ($bts->CMObj->getConfigurationEntry('DebugLevel_SQL') >= $DebugLevel) {
-			$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono () ) );
-		// }
+		$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono () ) );
 		
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation" :

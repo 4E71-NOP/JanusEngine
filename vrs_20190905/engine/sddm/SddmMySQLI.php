@@ -101,7 +101,7 @@ class SddmMySQLI {
 		// $DebugLevel = $bts->CMObj->getConfigurationEntry('DebugLevel_SQL');
 		
 		if ($this->DBInstance->errno != 0) {
-			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : " . $q ));
+			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($q)."`." ));
 // 			error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
 			$SQLlogEntry['signal'] = "ERR";
 			// $DebugLevel = 0;

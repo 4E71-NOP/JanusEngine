@@ -48,10 +48,7 @@ class MenuData {
 		AND mnu.menu_state = '1'
 		ORDER BY mnu.menu_parent,mnu.menu_position
 		;";
-		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query :" . $query ));
-		
 		$dbquery = $bts->SDDMObj->query($query);
-		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { 
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : No rows for menu query."));
 		}
