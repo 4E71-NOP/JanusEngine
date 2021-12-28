@@ -31,7 +31,7 @@ fk_arti_ref 			VARCHAR(255),
 PRIMARY KEY (menu_id),
 KEY idx_!IdxNom!_ws_id (fk_ws_id),
 KEY idx_!IdxNom!_deadline_id (fk_deadline_id),
-KEY idx_!IdxNom!_group_id (fk_group_id),
+KEY idx_!IdxNom!_group_id (fk_perm_id),
 KEY idx_!IdxNom!_menu_initial_document (menu_initial_document)
 
 );
