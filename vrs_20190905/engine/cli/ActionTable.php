@@ -4,8 +4,6 @@
 //--------------------------------------------------------------------------------
 self::$ActionTable['add']['article']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
-self::$ActionTable['add']['menu']				= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['menu']." (".$a['columns'].") VALUES (".$a['values'].");");};
-
 self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['deadline']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['decoration']			= function (&$a) {
@@ -64,6 +62,7 @@ self::$ActionTable['add']['log']	= function (&$a) {
 };
 
 
+self::$ActionTable['add']['menu']				= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['menu']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 
 self::$ActionTable['add']['module'] = function (&$a) { return array (

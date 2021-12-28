@@ -22,7 +22,7 @@ class ModuleSelectLanguage {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('connected_group_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('connected_group_read_permission') === true ) {
 			$localisation = " / ModuleSelectLanguage";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleSelectLanguage");

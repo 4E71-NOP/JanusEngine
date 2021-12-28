@@ -26,7 +26,7 @@ class ModuleCalendar {
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
 			$localisation = " / ModuleCalendar";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleCalendar");

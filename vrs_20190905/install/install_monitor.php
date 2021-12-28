@@ -251,7 +251,6 @@ class HydrInstallMonitor {
 			";
 
 
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
 		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
@@ -302,7 +301,6 @@ class HydrInstallMonitor {
 				}
 			}
 		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
 		foreach ( $ContentFragments as &$A ) {
 			//	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));

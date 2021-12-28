@@ -58,33 +58,6 @@ self::$InitTable['context'] = function (&$a) {
 	
 };
 
-self::$InitTable['menu'] = function (&$a) {
-	$a['params'] = array(
-			"id" => "",
-			"name" => "New menu",
-			"title" => "New menu",
-			"desc" => "New menu",
-			"type" => "ARTICLE",
-			"ws_id" => $a['Context']['ws_id'],
-			"lang" => "eng",
-			"deadline" => "",
-			"state" => "OFFLINE",
-			"parent" => 0,
-			"position" => "",
-			"group_name" => "Anonymous",
-			"role" => "NO",
-			"first_doc" => "NO",
-			"article" => 1,
-			"slug" => "",
-			"last_modif" => time(),
-	);
-	
-	$a['params']['deadline_id']	= &$a['params']['deadline'];
-	$a['params']['group']		= &$a['params']['group_name'];
-// 	$a['params']['group_id']	= &$a['params']['group_name'];
-};
-
-
 self::$InitTable['checkpoint'] = function (&$a) {
 	$a['params'] = array(
 			"name"					=> "New variable",
@@ -835,47 +808,6 @@ self::$InitTable['group'] = function (&$a) {
 	);
 };
 
-self::$InitTable['log'] = function (&$a) {
-	$a['params'] = array(
-		"initiator"	=> "",
-		"action"	=> "",
-		"signal"	=> "",
-		"msgCode"	=> "",
-		"text"		=> "",
-	);
-	$a['params']['i']	= &$a['params']['initiator'];
-	$a['params']['a']	= &$a['params']['action'];
-	$a['params']['s']	= &$a['params']['signal'];
-	$a['params']['m']	= &$a['params']['msgCode'];
-	$a['params']['t']	= &$a['params']['text'];
-};
-
-
-self::$InitTable['module'] = function (&$a) {
-	$a['params'] = array(
-			"id"					=> "",
-			"name"					=> "New Module",
-			"classname"				=> "NewModuleClass",
-			"deco"					=> "ON",
-			"deco_nbr"				=> "1",
-			"deco_txt_default"		=> "3",
-			"title"					=> "New module",
-			"directory"				=> "NA",
-			"file"					=> "NA",
-			"type"					=> 1,
-			"desc"					=> "New module",
-			"group_allowed_to_see"	=> 1,
-			"group_allowed_to_use"	=> 1,
-			"state"					=> "ONLINE",
-			"position"				=> 1,
-			"adm_control"			=> "NO",
-			"container_name"		=> "",
-			"container_style"		=> "",
-			"execution"				=> "DURING",
-	);
-	
-};
-
 self::$InitTable['keyword'] = function (&$a) {
 	$a['params'] = array(
 			"name"		=> "nouveau_keyword",
@@ -928,6 +860,72 @@ self::$InitTable['layout_file'] = function (&$a) {
 	$a['params']['description'] = &$a['params']['desc'];
 };
 
+
+self::$InitTable['log'] = function (&$a) {
+	$a['params'] = array(
+		"initiator"	=> "",
+		"action"	=> "",
+		"signal"	=> "",
+		"msgCode"	=> "",
+		"text"		=> "",
+	);
+	$a['params']['i']	= &$a['params']['initiator'];
+	$a['params']['a']	= &$a['params']['action'];
+	$a['params']['s']	= &$a['params']['signal'];
+	$a['params']['m']	= &$a['params']['msgCode'];
+	$a['params']['t']	= &$a['params']['text'];
+};
+
+
+self::$InitTable['menu'] = function (&$a) {
+	$a['params'] = array(
+			"id" => "",
+			"name" => "New menu",
+			"title" => "New menu",
+			"desc" => "New menu",
+			"type" => "ARTICLE",
+			"ws_id" => $a['Context']['ws_id'],
+			"lang" => "eng",
+			"deadline" => "",
+			"state" => "OFFLINE",
+			"parent" => 0,
+			"position" => "",
+			"permission" => "group_default_read_permission",
+			"role" => "NO",
+			"first_doc" => "NO",
+			"article" => 1,
+			"slug" => "",
+			"last_modif" => time(),
+	);
+	
+	$a['params']['deadline_id']	= &$a['params']['deadline'];
+};
+
+
+self::$InitTable['module'] = function (&$a) {
+	$a['params'] = array(
+			"id"					=> "",
+			"name"					=> "New Module",
+			"classname"				=> "NewModuleClass",
+			"deco"					=> "ON",
+			"deco_nbr"				=> "1",
+			"deco_txt_default"		=> "3",
+			"title"					=> "New module",
+			"directory"				=> "NA",
+			"file"					=> "NA",
+			"type"					=> 1,
+			"desc"					=> "New module",
+			"group_allowed_to_see"	=> 1,
+			"group_allowed_to_use"	=> 1,
+			"state"					=> "ONLINE",
+			"position"				=> 1,
+			"adm_control"			=> "NO",
+			"container_name"		=> "",
+			"container_style"		=> "",
+			"execution"				=> "DURING",
+	);
+	
+};
 
 self::$InitTable['permission'] = function (&$a) {
 	$a['params'] = array(

@@ -27,6 +27,7 @@ class LogManagement {
 	private $InternalLogIdx = 0;
 	private $InternalLog = array ();
 	private static $logFunctions = array ();
+	private $TagList = array(0=> "", 1 => "[ERR]", 2 => "[WRN]", 3 => "[INF]", 4 => "[STM]", 5 => "[BKP]");
 	
 	private function __construct() {
 	}
@@ -190,7 +191,7 @@ class LogManagement {
 					break;
 				case 'both' :
 					$this->InternalLog [$this->InternalLogIdx] = $data;
-					error_log ( "InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
+					error_log ( $this->TagList[$logLevel] . " InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
 					break;
 				case "none" :
 				default :

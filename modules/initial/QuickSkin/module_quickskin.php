@@ -22,7 +22,7 @@ class ModuleQuickSkin {
 		$CurrentSetObj = CurrentSet::getInstance();
 	
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('connected_group_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('connected_group_read_permission') === true ) {
 
 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 			

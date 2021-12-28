@@ -83,7 +83,7 @@ class RenderModule {
 			$infos['ModuleRendererName'] = $m['module_classname'];
 			$ModuleRenderer = new ModuleNotFound(); 
 		}
-// 				Execution modes are : 0 during, 1 Before, 2 After
+		// Execution modes are : 0 during, 1 Before, 2 After
 		switch ( $m['module_execution'] ) {
 			case 0:
 				$Content .= $this->selectDecoration($infos);
@@ -109,7 +109,8 @@ class RenderModule {
 		if (strlen($extraContent)>0) { $Content .= $extraContent; }
 		$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " >> END rendering of '".$m['module_name']. "' module is done"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " rendering of '".$m['module_name']. "' module is done"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 		return $Content;
 	}
 	

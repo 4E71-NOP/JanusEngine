@@ -25,7 +25,7 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('admin_default_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('admin_default_read_permission') === true ) {
 
 // 			$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
 			$l = $CurrentSetObj->getDataEntry ( 'language');

@@ -22,7 +22,7 @@ class ModuleMenu {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('MenuData');
 

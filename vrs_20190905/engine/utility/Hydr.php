@@ -470,7 +470,7 @@ class Hydr {
 				AND mnu.fk_deadline_id = bcl.deadline_id
 				AND bcl.deadline_state = '1'
 				AND mnu.menu_type IN ('0','1')
-				AND mnu.fk_group_id " . $UserObj->getUserEntry ( 'clause_in_group' ) . "
+				AND mnu.fk_perm_id " . $UserObj->getUserEntry ( 'clause_in_perm' ) . "
 				AND mnu.menu_state = '1'
 				AND mnu.menu_initial_document = '1'
 				ORDER BY mnu.menu_parent,mnu.menu_position
@@ -506,7 +506,7 @@ class Hydr {
 					. $SqlTableListObj->getSQLTableName ( 'article' ) . " art
 					WHERE mnu.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry ('ws_id') . "')
 					AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry ( 'language_id') . "' 
-					AND mnu.fk_group_id " . $UserObj->getUserEntry ('clause_in_group') . " 
+					AND mnu.fk_perm_id " . $UserObj->getUserEntry ('clause_in_perm') . " 
 					AND mnu.menu_state = '1'
 					AND mnu.fk_arti_ref = art.arti_ref
 					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
@@ -616,7 +616,6 @@ class Hydr {
 		$ThemeDataObj->renderBlockData ();
 		
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
 		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
@@ -658,7 +657,6 @@ class Hydr {
 				}
 			}
 		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -823,6 +821,12 @@ class Hydr {
 			";
 		
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
+
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION,	'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING,		'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR,		'msg' => __METHOD__ ." : Test logging with levels (lalalalala)" ));
 
 		// --------------------------------------------------------------------------------------------
 		$bts->SDDMObj->disconnect_sql ();

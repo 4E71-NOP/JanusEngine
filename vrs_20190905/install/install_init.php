@@ -223,7 +223,6 @@ class HydrInstall {
 		$DocContent .= "<!-- __________ start of modules __________ -->\r
 			";
 
-		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
 		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
@@ -277,7 +276,6 @@ class HydrInstall {
 				}
 			}
 		}
-		// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>") );
 		
 		foreach ( $ContentFragments as &$A ) {
 			//	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));

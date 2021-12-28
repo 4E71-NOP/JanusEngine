@@ -22,7 +22,7 @@ class ModuleDocumentDisplay {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
 
 			$localisation = " / ModuleDocument";
 			$bts->MapperObj->AddAnotherLevel($localisation );

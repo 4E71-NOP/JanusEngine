@@ -1,0 +1,62 @@
+# none, default, bold, underline, blink, reverse, concealed,
+# black, green, yellow, blue, magenta, cyan, white,
+# on_black, on_green, on_yellow, on_blue, on_magenta, on_cyan, on_white
+# beep
+
+
+# ERR
+regexp=\[ERR\]
+colours=on_red bold white
+-
+
+# WRN
+regexp=\[WRN\]
+colours=on_yellow bold white
+-
+
+# INF
+regexp=\[INF\]
+colours=on_green bold white
+-
+
+# STM
+regexp=\[STM\]
+colours=on_green
+-
+
+# BKP
+regexp=\[BKP\]
+colours=on_white bold black
+-
+
+# parenthesis
+regexp=\(.*\)
+colours=yellow
+-
+
+# Location in code
+regexp=\w*::\w*
+colours=cyan
+-
+
+# citation
+regexp=\`.*\`
+colours=bold cyan
+-
+
+# decoration01
+regexp=\+\-*\+
+colours=on_white black
+-
+
+# decoration01
+regexp=\|.*\|
+colours=on_white black
+-
+
+# file
+regexp=(https?:\/\/)?([a-zA-Z0-9_\-\.]*\/)+([a-zA-Z0-9_]+)+\.\w+
+colours=underline
+-
+
+

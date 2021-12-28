@@ -168,9 +168,20 @@ class User extends Entity {
 		);
 		if ($bts->SDDMObj->num_row_sql ($dbquery) > 0) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
-				$this->User['permissionList'][$dbp['perm_name']] = $dbp['perm_level'];
+				$this->User['permissionList'][$dbp['perm_id']] = array(
+					"perm_id"			=> $dbp['perm_id'],
+					"perm_state"		=> $dbp['perm_state'],
+					"perm_name"			=> $dbp['perm_name'],
+					"perm_affinity"		=> $dbp['perm_affinity'],
+					"perm_object_type"	=> $dbp['perm_object_type'],
+					"perm_desc"			=> $dbp['perm_desc'],
+					"perm_level"		=> $dbp['perm_level'],
+				);
 			}
 		}
+		$strPerm = "";
+		foreach ( $this->User['permissionList'] as $A ) { $strPerm .= "'" . $A['perm_id'] . "', "; }
+		$this->User['clause_in_perm'] = " IN ( " . substr ( $strPerm, 0, - 2 ) . " ) ";
 
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
@@ -294,12 +305,26 @@ class User extends Entity {
 	// 	public function setUser($User) { $this->User = $User; }
 	
 	/**
+	 * Returns bolean true/false on named permission
+	 * @param string
+	 * @return boolean
+	 */
+	public function hasPermission($perm) {
+		foreach ( $this->User['permissionList'] as $A ) {
+			if ( $A['perm_name'] == $perm ) { return true; }
+		}
+		return false;
+	}
+
+	/**
 	 * Returns bolean true/false on named Read permission
 	 * @param string
 	 * @return boolean
 	 */
 	public function hasReadPermission($perm) {
-		if ( $this->User['permissionList'][$perm] != 0 ) { return true; }
+		foreach ( $this->User['permissionList'] as $A ) {
+			if ( $A['perm_name'] == $perm && $A['perm_level'] == 1 ) { return true; }
+		}
 		return false;
 	}
 
@@ -309,7 +334,9 @@ class User extends Entity {
 	 * @return boolean
 	 */
 	public function hasWritePermission($perm) {
-		if ( $this->User['permissionList'][$perm] != 0 ) { return true; }
+		foreach ( $this->User['permissionList'] as $A ) {
+			if ( $A['perm_name'] == $perm && $A['perm_level'] == 2 ) { return true; }
+		}
 		return false;
 	}
 

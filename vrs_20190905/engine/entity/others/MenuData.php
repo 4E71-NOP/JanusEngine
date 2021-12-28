@@ -44,7 +44,7 @@ class MenuData {
 		AND mnu.fk_deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		AND mnu.menu_type IN ('0','1')
-		AND mnu.fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+		AND mnu.fk_perm_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
 		AND mnu.menu_state = '1'
 		ORDER BY mnu.menu_parent,mnu.menu_position
 		;";
@@ -66,7 +66,7 @@ class MenuData {
 					"menu_desc"			=> $dbp['menu_desc'],
 					"menu_parent"		=> $dbp['menu_parent'],
 					"menu_position"		=> $dbp['menu_position'],
-					"fk_group_id" 		=> $dbp['fk_group_id'],
+					"fk_perm_id" 		=> $dbp['fk_perm_id'],
 					"fk_arti_ref"		=> $dbp['fk_arti_ref'],
 					"fk_arti_slug"		=> $dbp['fk_arti_slug'],
 				);

@@ -22,7 +22,7 @@ class ModuleAdministration {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('admin_default_write_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('admin_default_write_permission') === true ) {
 
 			$localisation = " / ModuleAdministration";
 			$bts->MapperObj->AddAnotherLevel($localisation );

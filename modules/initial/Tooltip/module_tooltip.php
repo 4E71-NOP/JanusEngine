@@ -22,7 +22,7 @@ class ModuleTooltip {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasReadPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
 			$localisation = " / ModuleTooltip";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleTooltip");
