@@ -100,7 +100,7 @@ class RenderAdmDashboard {
 			
 			<div id='AdminControlBG'
 			class ='".$ThemeDataObj->getThemeName()."FileSelectorContainer'
-			style='display:block; visibility:hidden; z-index:".($infos['module_z_index']+1)."; 
+			style='display:none; visibility:hidden; z-index:".($infos['module_z_index']+1)."; 
 			width:100%; height:100%;
 			top:0px; left:0px;' 
 			onClick=\"gr.switchDisplay('AdminControlBG','AdmDashboard', TabsData_AdmGrcd);\">
@@ -108,7 +108,7 @@ class RenderAdmDashboard {
 
 			<div id='AdmDashboard'
 			class ='".$ThemeDataObj->getThemeName()."div_AdminControlPanel'
-			style='display:block; visibility:hidden; overflow:hidden; z-index:".($infos['module_z_index']+2).";
+			style='display:none; visibility:hidden; overflow:hidden; z-index:".($infos['module_z_index']+2).";
 			width:80%; height:80%;
 			top:0px; left:0px;
 			margin:0 auto; padding:10px;

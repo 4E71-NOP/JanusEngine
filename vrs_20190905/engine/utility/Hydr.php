@@ -746,11 +746,8 @@ class Hydr {
 		
 		// --------------------------------------------------------------------------------------------
 		// creating file selector if necessary
-		// $module_z_index['compteur'] = 500; //bypass Z-index from layout
-		// $pv['sdftotal'] = $_REQUEST['FS_index'];
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
-		// $sdftotal = $CurrentSetObj->getDataEntry ( 'fsIdx' );
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {
 		
 			$ClassLoaderObj->provisionClass ( 'FileSelector' );

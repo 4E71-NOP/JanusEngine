@@ -31,7 +31,7 @@ class ModuleGlobalReport {
 			$l = $CurrentSetObj->getDataEntry ( 'language');
 			
 			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
-			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),	"User");
+			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),"User");
 			$bts->LMObj->logDebug($infos,											"infos");
 			$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
 			$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
@@ -44,7 +44,6 @@ class ModuleGlobalReport {
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 			
 			$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25,8);
-			$infos['initial_visibility'] = 'hidden';		// trick to hide the first tab.
 			$T['ContentInfos']['NbrOfTabs'] = 0;
 			$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
