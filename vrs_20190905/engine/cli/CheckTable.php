@@ -386,9 +386,9 @@ self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SE
 self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_D001";
 self::$CheckTable['add']['layout']['0']['s']	= "name";
 self::$CheckTable['add']['layout']['0']['d']	= 2;
-self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_file_id FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['file']."';");};
+self::$CheckTable['add']['layout']['0']['f']	= function ($a) { return array ("SELECT layout_file_id FROM ".$a['sqlTables']['layout_file']." WHERE layout_file_name = '".$a['params']['layout_file']."';");};
 self::$CheckTable['add']['layout']['0']['c']	= "layout_file_id";
-self::$CheckTable['add']['layout']['0']['v']	= "file";
+self::$CheckTable['add']['layout']['0']['v']	= "layout_file";
 self::$CheckTable['add']['layout']['0']['m']	= "CLI_Layout_U001";
 self::$CheckTable['add']['layout']['0']['p']	= "layout_file";
 self::$CheckTable['add']['layout']['0']['s']	= "file";
@@ -423,21 +423,6 @@ self::$CheckTable['assign']['layout']['1']['v']	= "theme_id";
 self::$CheckTable['assign']['layout']['1']['m']	= "CLI_Layout_A002";
 self::$CheckTable['assign']['layout']['1']['p']	= "layout";
 self::$CheckTable['assign']['layout']['1']['s']	= "to_theme";
-
-
-// self::$CheckTable['add']['layout_content']['0']['d']	= 2;
-// self::$CheckTable['add']['layout_content']['0']['f']	= function ($a) { return array ("SELECT layout_id,layout_name FROM ".$a['sqlTables']['layout']." WHERE layout_name = '".$a['params']['to_layout']."';");};
-// self::$CheckTable['add']['layout_content']['0']['c']	= "layout_id";
-// self::$CheckTable['add']['layout_content']['0']['v']	= "layout_id";
-// self::$CheckTable['add']['layout_content']['0']['m']	= "CLI_LayoutContent_C001";
-// self::$CheckTable['add']['layout_content']['0']['p']	= "layout";
-// self::$CheckTable['add']['layout_content']['0']['s']	= "to_layout";
-// self::$CheckTable['add']['layout_content']['1']['d']	= 2;
-// self::$CheckTable['add']['layout_content']['1']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['module']."' AND mdl.module_id = sm.module_id AND sm.ws_id = '".$a['Context']['ws_id']."';");};
-// self::$CheckTable['add']['layout_content']['1']['c']	= "module_id";
-// self::$CheckTable['add']['layout_content']['1']['v']	= "module_id";
-// self::$CheckTable['add']['layout_content']['1']['m']	= "CLI_LayoutContent_C002";
-// self::$CheckTable['add']['layout_content']['1']['p']	= "layout";
 
 
 // Layout file
@@ -520,20 +505,6 @@ self::$CheckTable['add']['module']['0']['d']	= 3;
 self::$CheckTable['add']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['name']."' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['module']['0']['m']	= "CLI_Module_C001";
 self::$CheckTable['add']['module']['0']['s']	= "name";
-// self::$CheckTable['add']['module']['1']['d']	= 2;
-// self::$CheckTable['add']['module']['1']['f']	= function ($a) { return array ("SELECT grp.group_id AS group_id, grp.group_name AS group_name FROM ".$a['sqlTables']['group']." grp, ".$a['sqlTables']['group_website']." sg WHERE grp.group_name = '".$a['params']['group_who_can_see']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
-// self::$CheckTable['add']['module']['1']['c']	= "group_id";
-// self::$CheckTable['add']['module']['1']['v']	= "group_allowed_to_see_id";
-// self::$CheckTable['add']['module']['1']['m']	= "CLI_Module_C002";
-// self::$CheckTable['add']['module']['1']['p']	= "user";
-// self::$CheckTable['add']['module']['1']['s']	= "group_who_can_see";
-// self::$CheckTable['add']['module']['2']['d']	= 2;
-// self::$CheckTable['add']['module']['2']['f']	= function ($a) { return array ("SELECT grp.group_id AS group_id, grp.group_name AS group_name FROM ".$a['sqlTables']['group']." grp, ".$a['sqlTables']['group_website']." sg WHERE grp.group_name = '".$a['params']['group_who_can_use']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
-// self::$CheckTable['add']['module']['2']['c']	= "group_id";
-// self::$CheckTable['add']['module']['2']['v']	= "group_allowed_to_use_id";
-// self::$CheckTable['add']['module']['2']['m']	= "CLI_Module_C003";
-// self::$CheckTable['add']['module']['2']['p']	= "user";
-// self::$CheckTable['add']['module']['2']['s']	= "group_who_can_use";
 self::$CheckTable['add']['module']['1']['d']	= 2;
 self::$CheckTable['add']['module']['1']['f']	= function ($a) { return array ("SELECT prm.perm_id AS perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['permission']."' ;");};
 self::$CheckTable['add']['module']['1']['c']	= "perm_id";

@@ -101,19 +101,17 @@ $Content .= "
 
 <table cellpadding='0' cellspacing='0' style='width:100%;'>
 <tr>\r
-<td>\r"
+<td colspan='2'>\r"
 .$bts->InteractiveElementsObj->renderIconSelectFile($infos)
 ."</td>\r
-<td>\r
-</td>\r
 </tr>\r
 
 <tr>\r
-<td>\r
-</td>\r
-<td>\r
-";
+<td style='width:60%;'>\r
 
+</td>\r
+<td style='width:35%;'>\r
+";
 
 $SB = array();
 $SB['id']				= "execButton";

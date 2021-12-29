@@ -17,6 +17,12 @@
 class ModuleMenu {
 	public function __construct(){}
 
+	/**
+	 * Renders the menu ans sets the necessary assets (javascript, etc.)
+	 * 
+	 * @param array
+	 * @return string
+	 */
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();

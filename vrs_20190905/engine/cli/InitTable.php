@@ -842,11 +842,12 @@ self::$InitTable['layout'] = function (&$a) {
 			"title"				=> "New Layout",
 			"generic_name"		=> "New Layout",
 			"desc"				=> "",
-			"file"				=> "hydr_default_layout",		
+			"layout_file"		=> "hydr_default_layout",		
 			"to_theme"			=> "",
 			"default"			=> "NO",
 	);
 	$a['params']['description'] = &$a['params']['desc'];
+	$a['params']['filename'] = &$a['params']['layout_file'];
 };
 
 self::$InitTable['layout_file'] = function (&$a) {

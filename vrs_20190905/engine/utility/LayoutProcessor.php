@@ -55,7 +55,7 @@ class LayoutProcessor {
 		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj ();
 
 		$sqlQuery = "
-		SELECT lfi.layout_file_id, lfi.layout_file_filename 
+		SELECT lfi.layout_file_id, lfi.layout_file_filename, lyt.layout_id, lth.fk_theme_id, tw.fk_ws_id 
 		FROM " 
 		. $SqlTableListObj->getSQLTableName ( 'layout_file' ) . " lfi, "
 		. $SqlTableListObj->getSQLTableName ( 'layout' ) . " lyt, "
