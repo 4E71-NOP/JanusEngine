@@ -30,7 +30,6 @@ class MenuSlide {
 	initialization (data, menuDivName) {
 		this.EntryPoint = data.EntryPoint;
 		this.data = data.Payload;
-		elm.Gebi('menuTitle').innerHTML = this.data[this.EntryPoint].menu_title;
 
 		this.currentMenu = this.EntryPoint;
 		this.themeName = data.theme_name;
@@ -86,6 +85,7 @@ class MenuSlide {
 	makeMenu(){
 		let c = this.data[this.currentMenu];
 		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.menu_title+"' ("+c.menu_id+ "); slug:'"+ c.fk_arti_slug+"', level:'"+this.level+"'");
+		elm.Gebi('menuTitle').innerHTML = this.data[this.currentMenu].menu_title;
 
 		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
 		if ( this.level > 1) {
