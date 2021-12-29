@@ -56,7 +56,6 @@ class ConfigurationManagement {
 		
 		$configFile = "current/config/current/site_" . $bts->SMObj->getSessionEntry('ws') . "_config.php";
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
-		$pv['ObjectMode'] = 1; //during migration avoid re-delcaring the same function.
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file `".$configFile."` doesn't exists -> reset session."));

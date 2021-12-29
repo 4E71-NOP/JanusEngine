@@ -21,6 +21,9 @@
 
 class Hydr {
 	private static $Instance = null;
+	private $authentificationMode;
+	private $authentificationAction;
+
 	private function __construct() {
 	}
 	
@@ -46,7 +49,6 @@ class Hydr {
 		include ("current/define.php");
 		
 		// --------------------------------------------------------------------------------------------
-		
 		/*
 		 * Good practice for the main script when it's ready to think about saving memory... more.
 		 * $varsStart = array_keys(get_defined_vars());
@@ -69,8 +71,7 @@ class Hydr {
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Begining Hydr page                                                             |"));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		
-		
+
 		$bts->LMObj->setStoreStatisticsStateOn ();
 		$bts->LMObj->logCheckpoint ( "Index" );
 		
@@ -94,9 +95,7 @@ class Hydr {
 		unset ( $Navigator );
 		
 		// --------------------------------------------------------------------------------------------
-		//
 		// CurrentSet
-		//
 		//
 		$ClassLoaderObj->provisionClass( 'ServerInfos' );
 		$ClassLoaderObj->provisionClass( 'CurrentSet' );
@@ -105,81 +104,19 @@ class Hydr {
 		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
 		$CurrentSetObj->setDataEntry( 'fsIdx', 0 );		// Useful for FileSelector
 		// --------------------------------------------------------------------------------------------
-		//
 		// Session management
 		//
-		//
 		$CurrentSetObj->setDataEntry ( 'sessionName', 'HydrWebsiteSessionId' );
-		
 		$bts->initSmObj();
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 		// --------------------------------------------------------------------------------------------
-		//
 		// Scoring on what we recieved (or what's at disposal)
 		//
-		
-		// case matrix  
-		//	0	Reset session (anonymous user)
-		//	1	Check session, Authentification mode = session
-		//	2	sw has been submitted (this is a first contact case)
-		//	3	sw has been submitted, update session with new sw,  check session
-		//	4x	If an auth form is submitted a session is active unless « big problem » – unused case.
-		//	5	A user is trying to authenticate. Great !
-		//	6x	We have a form and a URI and no session at the same time. Unused case
-		//	7x	We have a form and a URI at the same time. Unused case
-		//	8	We recieved a « disconnect » directive. → disconnect, reset session
-		// ...
-		//	15	We recieved a « disconnect » directive. → disconnect, reset session
-		
-		$firstContactScore = 0;
-		if (session_status () === PHP_SESSION_ACTIVE) { $firstContactScore ++; }
-		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ('ws') ) != 0) { $firstContactScore += 2; }
-		if (strlen ( 
-				$bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) ) == 1 && 
-				$bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) == "ModuleAuthentification") { $firstContactScore += 4; }
-		if (strlen ( $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'action' ) == "disconnection" )) { $firstContactScore += 8; }
-		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$firstContactScore='" . $firstContactScore . "'") );
-		$authentificationMode = "session";
-		$authentificationAction = USER_ACTION_SIGN_IN;
-		
-		switch ($firstContactScore) {
-			case 0 :
-				$bts->SMObj->InitializeSession();
-				$bts->SMObj->UpdatePhpSession();
-				break;
-			case 1 :
-				$bts->SMObj->CheckSession ();
-				break;
-			case 2 :
-			case 3 :
-				$bts->SMObj->setSessionEntry ( 'ws', $bts->RequestDataObj->getRequestDataEntry ( 'ws' ) );
-				$bts->SMObj->CheckSession ();
-				break;
-			case 4 :
-			case 5 :
-			case 6 :
-			case 7 :
-				$authentificationMode = "form";
-				break;
-			case 8 :
-			case 9 :
-			case 10 :
-			case 11 :
-			case 12 :
-			case 13 :
-			case 14 :
-			case 15 :
-				$authentificationMode = "form";
-				$authentificationAction = USER_ACTION_DISCONNECT;
-				break;
-		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState(). ", \$authentificationMode=".$authentificationMode."; \$authentificationAction=".$authentificationAction));
-		
+		$this->prepareAuthProcess();
+
 		// --------------------------------------------------------------------------------------------
-		//
 		// Loading the configuration file associated with this website
 		//
 		$localisation = " (Start)";
@@ -194,7 +131,6 @@ class Hydr {
 		$bts->LMObj->setDebugLogEcho ( 0 );
 
 		// --------------------------------------------------------------------------------------------
-		//
 		// Creating the necessary arrays for Sql Db Dialog Management
 		//
 		$ClassLoaderObj->provisionClass ( 'SqlTableList' );
@@ -202,9 +138,7 @@ class Hydr {
 		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj ();
 
 		// --------------------------------------------------------------------------------------------
-		//
 		// SQL DB dialog Management.
-		//
 		//
 		$ClassLoaderObj->provisionClass ( 'SddmTools' );
 		$ClassLoaderObj->provisionClass ( 'DalFacade' );
@@ -267,10 +201,10 @@ class Hydr {
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())) );
 		
 // 		We have 2 variables used to drive the authentification process.
-		switch ($authentificationMode) {
+		switch ($this->authentificationMode) {
 			case "form" :
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with form mode") );
-				switch ($authentificationAction) {
+				switch ($this->authentificationAction) {
 					case USER_ACTION_DISCONNECT :
 						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : disconnect submitted") );
 // 						$bts->SMObj->ResetSession ();
@@ -317,130 +251,13 @@ class Hydr {
 // 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : UserObj = " . $bts->StringFormatObj->arrayToString($UserObj->getUser())));
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
 		
-		// --------------------------------------------------------------------------------------------
-		//
 		// Language selection
-		//
-		//
-		$localisation = " (Language selection)";
-		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Language selection" );
-		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Language selection" );
+		$this->languageSelection();
 
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
-		
-		$scoreLang = 0;
-		
-		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0 && $bts->RequestDataObj->getRequestDataEntry ( 'l' ) != 0) {
-			$scoreLang += 4;
-		}
-// 		if (strlen ( $UserObj->getUserEntry ( 'lang' ) ) != 0 && $UserObj->getUserEntry ( 'lang' ) != 0) {
-		if (strlen ( $UserObj->getUserEntry ( 'user_lang' ) ) != 0 ) {
-			$scoreLang += 2;
-		}
-		if (strlen ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) ) != 0 && $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) != 0) {
-			$scoreLang += 1;
-		}
-		
-		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Language list: ". $bts->StringFormatObj->arrayToString($bts->CMObj->getLanguageList())));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "'") );
-		
-		switch ($scoreLang) {
-			case 0 :
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language.") );
-				$CurrentSetObj->setDataEntry ( 'language', 'eng' );
-				$CurrentSetObj->setDataEntry ( 'language_id', '38' );
-				break;
-			case 1 :
-				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_639_3' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "->" . $tmp . ")") );
-				$CurrentSetObj->setDataEntry ( 'language', $tmp );
-				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_id' ) );
-				break;
-			case 2 :
-			case 3 :
-				$tmp = $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_639_3' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says User priority (Case=" . $scoreLang . "; " . $UserObj->getUserEntry ( 'user_lang' ) . "->" . $tmp . ")") );
-				$CurrentSetObj->setDataEntry ( 'language', $tmp );
-				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_id' ) );
-				break;
-			case 4 :
-			case 5 :
-			case 6 :
-			case 7 :
-				$tmp = strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says URL priority (Case=" . $scoreLang . "; " . $bts->RequestDataObj->getRequestDataEntry ( 'l' ) . "->" . $tmp . ")") );
-				$CurrentSetObj->setDataEntry ( 'language', $tmp ); // URl/form asked, the king must be served!
-				$CurrentSetObj->setDataEntry ( 'language_id', strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) );
-				break;
-		}
-		
-		$ClassLoaderObj->provisionClass ( 'I18nTrans' );
-		$I18nObj = I18nTrans::getInstance ();
-		$I18nObj->getI18nTransFromDB();
-		
-		$bts->LMObj->restoreLastInternalLogTarget ();
-		
-		// --------------------------------------------------------------------------------------------
-		//
 		// Form Management for commandLine interface
-		//
-		//
-		
 		// Do we have a user submitting from the auth form ?
 		if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
-			$localisation = " (CLI)";
-			$bts->MapperObj->AddAnotherLevel ( $localisation );
-			$bts->LMObj->logCheckpoint ( "CLI" );
-			$bts->MapperObj->RemoveThisLevel ( $localisation );
-			$bts->MapperObj->setSqlApplicant ( "CLI" );
-			
-			$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
-			$FormToCommandLineObj = FormToCommandLine::getInstance ();
-			$FormToCommandLineObj->analysis ();
-			
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
-			
-			if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
-				
-				$ClassLoaderObj->provisionClass ( 'CommandConsole' );
-				$CurrentSetObj->setInstanceOfWebSiteContextObj ( $WebSiteObj ); // Set an initial website context.
-				$CommandConsole = CommandConsole::getInstance ();
-				
-				$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
-				$Script = $FormToCommandLineObj->getCommandLineScript ();
-				switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
-					case "enabled" :
-						foreach ( $Script as $A ) {
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ExecuteCommand - ".$A) );
-							$CommandConsole->executeCommand ( $A );
-						}
-						break;
-					case "disabled" :
-					default :
-						foreach ( $Script as $A ) {
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
-						}
-						break;
-				}
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
-			}
-			
-			switch ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) . $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'section' )) {
-				case "AdminDashboardUserProfileForm" :
-				case "ModuleQuickSkin" :
-				case "ModuleSelectLanguage" :
-					$UserObj->getDataFromDB ( $UserObj->getUserEntry ( 'user_login' ), $WebSiteObj ); // We need to reload the user data in order to update the current user_pref_theme variable.
-					break;
-				case "AdminDashboardWebsiteManagementP01" :
-					// refresh with updated data
-					$id = $WebSiteObj->getWebSiteEntry ( 'ws_id' );
-					$WebSiteObj->getDataFromDB ( $id );
-					break;
-			}
+			$this->formManagement();
 		}
 		
 		// --------------------------------------------------------------------------------------------
@@ -828,6 +645,215 @@ class Hydr {
 		$bts->SDDMObj->disconnect_sql ();
 		return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
 	}
+
+	/**
+	 * Sets the language for the page. It chooses by priority.
+	 * 
+	 */
+	private function languageSelection(){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ClassLoaderObj = ClassLoader::getInstance ();
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
+
+		$localisation = " (Language selection)";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "Language selection" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "Language selection" );
+
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
+		$scoreLang = 0;
+		
+		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0 && $bts->RequestDataObj->getRequestDataEntry ( 'l' ) != 0) {
+			$scoreLang += 4;
+		}
+		if (strlen ( $UserObj->getUserEntry ( 'user_lang' ) ) != 0 ) {
+			$scoreLang += 2;
+		}
+		if (strlen ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) ) != 0 && $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) != 0) {
+			$scoreLang += 1;
+		}
+		
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "'") );
+		
+		switch ($scoreLang) {
+			case 0 :
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language.") );
+				$CurrentSetObj->setDataEntry ( 'language', 'eng' );
+				$CurrentSetObj->setDataEntry ( 'language_id', '38' );
+				break;
+			case 1 :
+				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_639_3' );
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "->" . $tmp . ")") );
+				$CurrentSetObj->setDataEntry ( 'language', $tmp );
+				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_id' ) );
+				break;
+			case 2 :
+			case 3 :
+				$tmp = $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_639_3' );
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says User priority (Case=" . $scoreLang . "; " . $UserObj->getUserEntry ( 'user_lang' ) . "->" . $tmp . ")") );
+				$CurrentSetObj->setDataEntry ( 'language', $tmp );
+				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_id' ) );
+				break;
+			case 4 :
+			case 5 :
+			case 6 :
+			case 7 :
+				$tmp = strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) );
+				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says URL priority (Case=" . $scoreLang . "; " . $bts->RequestDataObj->getRequestDataEntry ( 'l' ) . "->" . $tmp . ")") );
+				$CurrentSetObj->setDataEntry ( 'language', $tmp ); // URl/form asked, the king must be served!
+				$CurrentSetObj->setDataEntry ( 'language_id', strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) );
+				break;
+		}
+		
+		$ClassLoaderObj->provisionClass ( 'I18nTrans' );
+		$I18nObj = I18nTrans::getInstance ();
+		$I18nObj->getI18nTransFromDB();
+		
+		$bts->LMObj->restoreLastInternalLogTarget ();
+		
+	}
+
+
+	/**
+	 * 
+	 */
+	private function prepareAuthProcess(){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
+		// case matrix  
+		//	0	Reset session (anonymous user)
+		//	1	Check session, Authentification mode = session
+		//	2	sw has been submitted (this is a first contact case)
+		//	3	sw has been submitted, update session with new sw,  check session
+		//	4x	If an auth form is submitted a session is active unless « big problem » – unused case.
+		//	5	A user is trying to authenticate. Great !
+		//	6x	We have a form and a URI and no session at the same time. Unused case
+		//	7x	We have a form and a URI at the same time. Unused case
+		//	8	We recieved a « disconnect » directive. → disconnect, reset session
+		// ...
+		//	15	We recieved a « disconnect » directive. → disconnect, reset session
+		
+		$firstContactScore = 0;
+		if (session_status () === PHP_SESSION_ACTIVE) { $firstContactScore ++; }
+		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ('ws') ) != 0) { $firstContactScore += 2; }
+		if (strlen ( 
+				$bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) ) == 1 && 
+				$bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) == "ModuleAuthentification") { $firstContactScore += 4; }
+		if (strlen ( $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'action' ) == "disconnection" )) { $firstContactScore += 8; }
+		
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$firstContactScore='" . $firstContactScore . "'") );
+		$this->authentificationMode = "session";
+		$this->authentificationAction = USER_ACTION_SIGN_IN;
+		
+		switch ($firstContactScore) {
+			case 0 :
+				$bts->SMObj->InitializeSession();
+				$bts->SMObj->UpdatePhpSession();
+				break;
+			case 1 :
+				$bts->SMObj->CheckSession ();
+				break;
+			case 2 :
+			case 3 :
+				$bts->SMObj->setSessionEntry ( 'ws', $bts->RequestDataObj->getRequestDataEntry ( 'ws' ) );
+				$bts->SMObj->CheckSession ();
+				break;
+			case 4 :
+			case 5 :
+			case 6 :
+			case 7 :
+				$this->authentificationMode = "form";
+				break;
+			case 8 :
+			case 9 :
+			case 10 :
+			case 11 :
+			case 12 :
+			case 13 :
+			case 14 :
+			case 15 :
+				$this->authentificationMode = "form";
+				$this->authentificationAction = USER_ACTION_DISCONNECT;
+				break;
+		}
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState(). ", \$this->authentificationMode=".$this->authentificationMode."; \$this->authentificationAction=".$this->authentificationAction));
+	}
+
+	/**
+	 * 
+	 */
+	private function formManagement() {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ClassLoaderObj = ClassLoader::getInstance ();
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
+
+
+		$localisation = " (CLI)";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "CLI" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "CLI" );
+		
+		$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
+		$FormToCommandLineObj = FormToCommandLine::getInstance ();
+		$FormToCommandLineObj->analysis ();
+		
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
+		
+		if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
+			
+			$ClassLoaderObj->provisionClass ( 'CommandConsole' );
+			$CurrentSetObj->setInstanceOfWebSiteContextObj ( $WebSiteObj ); // Set an initial website context.
+			$CommandConsole = CommandConsole::getInstance ();
+			
+			$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
+			$Script = $FormToCommandLineObj->getCommandLineScript ();
+			switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
+				case "enabled" :
+					foreach ( $Script as $A ) {
+						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ExecuteCommand - ".$A) );
+						$CommandConsole->executeCommand ( $A );
+						// We have to reload website and user in case of one of them was updated was updated.
+						$WebSiteObj->getDataFromDBUsingShort();
+						$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
+						$this->languageSelection();
+					}
+					break;
+				case "disabled" :
+				default :
+					foreach ( $Script as $A ) {
+						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
+						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
+					}
+					break;
+			}
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
+		}
+		
+		switch ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) . $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'section' )) {
+			case "AdminDashboardUserProfileForm" :
+			case "ModuleQuickSkin" :
+			case "ModuleSelectLanguage" :
+				$UserObj->getDataFromDB ( $UserObj->getUserEntry ( 'user_login' ), $WebSiteObj ); // We need to reload the user data in order to update the current user_pref_theme variable.
+				break;
+			case "AdminDashboardWebsiteManagementP01" :
+				// refresh with updated data
+				$id = $WebSiteObj->getWebSiteEntry ( 'ws_id' );
+				$WebSiteObj->getDataFromDB ( $id );
+				break;
+		}
+	}
+
+
+
+
 }
 
 ?>

@@ -12,7 +12,7 @@ $i18n = array(
 	'tabTxt8'	=>	"Variables",
 
 	't1l11'	=>	"Machine hote",
-	't1l21'	=>	"La m&eacute;moire maximum attribu&eacute; a &eacute;t&eacute; de",
+	't1l21'	=>	"La m&eacute;moire maximum attribu&eacute;e a &eacute;t&eacute; de",
 	't1l31'	=>	"Version PHP",
 	't1l41'	=>	"La consomation actuelle est de",
 	't1l51'	=>	"Niveau de debug",

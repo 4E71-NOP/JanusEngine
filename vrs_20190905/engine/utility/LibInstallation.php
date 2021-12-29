@@ -401,31 +401,30 @@ class LibInstallation {
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
-if ( \$pv['ObjectMode'] == 1 ) {
-	function returnConfig () {
-		\$tab = array();
-		\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
-		\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
-		\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";						// MYSQLI , PDOMYSQL
-		\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
-		\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
-		\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
-		\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
-		\$tab['SessionMaxAge']	= (60*60*24);
-		
-		\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
-		\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
-		\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
-		\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
-		
-		\$tab['execution_context']		= \"render\";
-		\$tab['InsertStatistics']		= 1;
-		\$tab['commandLineEngine'] = array(
-				\"state\"		=>	\"enabled\",
-		);
-		return \$tab;
-	}
+function returnConfig () {
+	\$tab = array();
+	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
+	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
+	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";						// MYSQLI , PDOMYSQL
+	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
+	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
+	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
+	\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
+	\$tab['SessionMaxAge']	= (60*60*24);
+	
+	\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
+	\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
+	\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
+	\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
+	
+	\$tab['execution_context']		= \"render\";
+	\$tab['InsertStatistics']		= 1;
+	\$tab['commandLineEngine'] = array(
+			\"state\"		=>	\"enabled\",
+	);
+	return \$tab;
 }
+
 ?>
 ";
 	

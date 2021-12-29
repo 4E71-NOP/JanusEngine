@@ -18,31 +18,30 @@
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
-if ( $pv['ObjectMode'] == 1 ) {
-	function returnConfig () {
-		$tab = array();
-		$tab['type']				= "mysql";
-		$tab['charset']				= "utf8mb4";
-		$tab['host']				= "localhost";
-		$tab['dal']					= "MYSQLI";						// MYSQLI , PDOMYSQL
-		$tab['db_user_login']		= "texmex_HydreBDD";
-		$tab['db_user_password']	= "Celeste";
-		$tab['dbprefix']			= "texmex_Hdr";
-		$tab['tabprefix']			= "Ht_";
-		$tab['SessionMaxAge'] = (60*60*24);							// 24 hours by default
-		
-		$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
-		$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Command console
-		$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
-		$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
+function returnConfig () {
+	$tab = array();
+	$tab['type']				= "mysql";
+	$tab['charset']				= "utf8mb4";
+	$tab['host']				= "localhost";
+	$tab['dal']					= "MYSQLI";						// MYSQLI , PDOMYSQL
+	$tab['db_user_login']		= "texmex_HydreBDD";
+	$tab['db_user_password']	= "Celeste";
+	$tab['dbprefix']			= "texmex_Hdr";
+	$tab['tabprefix']			= "Ht_";
+	$tab['SessionMaxAge'] = (60*60*24);							// 24 hours by default
+	
+	$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
+	$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Command console
+	$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
+	$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
 
-		$tab['execution_context'] 	= "render";
-		$tab['InsertStatistics'] = 1;
-		$tab['commandLineEngine'] = array(
-				"state"		=>	"enabled",
-		);
-		return $tab;
-	}
+	$tab['execution_context'] 	= "render";
+	$tab['InsertStatistics'] = 1;
+	$tab['commandLineEngine'] = array(
+			"state"		=>	"enabled",
+	);
+	return $tab;
 }
+
 
 ?>
