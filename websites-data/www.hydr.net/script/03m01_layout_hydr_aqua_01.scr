@@ -1,4 +1,9 @@
-add layout name "hydr_aqua_01_default_layout"		title "Présentation par défaut"			generic_name "default_layout"	    description "Hydr hydr_aqua_01_default_layout"		layout_file "hydr_default_layout";
-add layout name "hydr_aqua_01_gestion_profil"		title "Présentation gestion profil"		generic_name "gestion_profil"		description "Hydr hydr_aqua_01_gestion_profil"		layout_file "hydr_gestion_profil";
-add layout name "hydr_aqua_01_test_script"			title "Présentation gestion profil"		generic_name "test_script" 			description "Hydr hydr_aqua_01_test_script"			layout_file "hydr_test_script";
-add layout name "hydr_aqua_01_gestion_decoration"	title "Présentation gestion décoration"	generic_name "gestion_decoration"	description "Hydr hydr_aqua_01_gestion_decoration"	layout_file "hydr_gestion_decoration";
+add layout_file name	'hydr_aqua_default_layout'		generic_name	'default_layout'		description	'hydr_default_layout'	filename	'hydr_aqua_default.lyt.html';
+add layout_file name	'hydr_aqua_user_profile'		generic_name	'user_profile'			description	'hydr_user_profile'		filename	'hydr_aqua_default.lyt.html';
+add layout_file name	'hydr_aqua_script_exec'			generic_name	'script_execution'		description	'hydr_script_exec'		filename	'hydr_aqua_default.lyt.html';
+add layout_file name	'hydr_aqua_decoration_mgmt'		generic_name	'decoration_management'	description	'hydr_decoration_mgmt'	filename	'hydr_aqua_default.lyt.html';
+
+add layout name	'hydr_aqua_01_default_layout'	title 'Présentation par défaut'			generic_name	'default_layout'		description	'hydr_aqua Default layout'			layout_file	'hydr_aqua_default_layout';
+add layout name	'hydr_aqua_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'hydr_aqua User profile'			layout_file	'hydr_aqua_user_profile';
+add layout name	'hydr_aqua_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'hydr_aqua Script execution'		layout_file	'hydr_aqua_script_exec';
+add layout name	'hydr_aqua_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'hydr_aqua Decoration management'	layout_file	'hydr_aqua_decoration_mgmt';

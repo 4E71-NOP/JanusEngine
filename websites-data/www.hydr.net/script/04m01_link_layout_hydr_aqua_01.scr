@@ -1,6 +1,7 @@
 update website name "Hydr"	theme "hydr_aqua_01";
 
-assign layout name "hydr_aqua_01_default_layout"	    	to_theme "hydr_aqua_01"	default YES;
-assign layout name "hydr_aqua_01_gestion_profil"			to_theme "hydr_aqua_01";
-assign layout name "hydr_aqua_01_test_script"				to_theme "hydr_aqua_01";
-assign layout name "hydr_aqua_01_gestion_decoration"		to_theme "hydr_aqua_01";
+assign layout name "hydr_aqua_01_default_layout"		to_theme "hydr_aqua_01"	default YES;
+assign layout name "hydr_aqua_01_user_profile"			to_theme "hydr_aqua_01";
+assign layout name "hydr_aqua_01_script_exec"			to_theme "hydr_aqua_01";
+assign layout name "hydr_aqua_01_decoration_mgmt"		to_theme "hydr_aqua_01";
+
