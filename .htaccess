@@ -4,6 +4,10 @@
 DirectoryIndex index.php
 Options +FollowSymLinks
 
+# Allow Developper docs
+RewriteRule ^(DeveloperDocs)($|/) - [L]
+
+# Not a devdocs... rewrite
 <IfModule mod_rewrite.c>
     RewriteEngine On
     # RewriteBase /

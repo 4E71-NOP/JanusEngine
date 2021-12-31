@@ -16,7 +16,6 @@ class ConfigurationManagement {
 	private static $Instance = null;
 	/**
 	 * 
-	 * @return multitype:
 	 * The $Configuration array contains:
 	 * 'type', 'host', 'dal', 'db_user_login', 'db_user_password', 'dbprefix', 'tabprefix',
 	 * 'SessionMaxAge', 'pde_img_aff', 'pde_img_h', 'pde_img_l', 

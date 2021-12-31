@@ -36,7 +36,7 @@ user_last_ip							VARCHAR(15),
 user_timezone							INTEGER,
 user_lang								BIGINT,
 
-user_pref_theme							INTEGER,
+user_pref_theme							BIGINT,
 user_pref_newsletter					INTEGER,
 user_pref_show_email					INTEGER,
 user_pref_show_online_status			INTEGER,

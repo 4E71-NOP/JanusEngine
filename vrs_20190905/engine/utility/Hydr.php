@@ -79,8 +79,8 @@ class Hydr {
 		$bts->LMObj->logCheckpoint ( "Index" );
 		
 		// --------------------------------------------------------------------------------------------
-// 		error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
-// 		error_reporting ( E_ALL ^ E_NOTICE );
+		// error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
+		// error_reporting ( E_ALL ^ E_NOTICE );
 		error_reporting ( E_ALL  );
 		ini_set ( 'log_errors', "On" );
 		ini_set ( 'error_log', "/var/log/apache2/error.log" );
@@ -255,15 +255,18 @@ class Hydr {
 
 	}
 
-	//---------------------------------------------------------------------------------------------------------------------------
-
 	/**
 	 * 
 	 */
 	private function prepareAuthProcess(){
 		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
 
+		$localisation = " / prepareAuthProcess";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "prepareAuthProcess" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "prepareAuthProcess" );
+		
 		// case matrix  
 		//	0	Reset session (anonymous user)
 		//	1	Check session, Authentification mode = session
@@ -329,11 +332,11 @@ class Hydr {
 	private function loadConfigFile(){
 		$bts = BaseToolSet::getInstance();
 
-		$localisation = " (Start)";
+		$localisation = " loadConfigFile";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Start" );
+		$bts->LMObj->logCheckpoint ( "loadConfigFile" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Loading website data" );
+		$bts->MapperObj->setSqlApplicant ( "loadConfigFile" );
 
 		// A this point we have a ws in the session so we don't use the URI parameter anymore.
 		$bts->CMObj->LoadConfigFile ();
@@ -349,6 +352,13 @@ class Hydr {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 
+		$localisation = " initializeSDDM";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "initializeSDDM" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "initializeSDDM" );
+
+		
 		$ClassLoaderObj->provisionClass ( 'SqlTableList' );
 		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $bts->CMObj->getConfigurationEntry ( 'dbprefix' ), $bts->CMObj->getConfigurationEntry ( 'tabprefix' ) ) );
 		$this->SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj ();
@@ -379,11 +389,11 @@ class Hydr {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 
-		$localisation = " (Initialization)";
+		$localisation = " initializeWebsite";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "WebSite initialization" );
+		$bts->LMObj->logCheckpoint ( "initializeWebsite" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "WebSite initialization" );
+		$bts->MapperObj->setSqlApplicant ( "initializeWebsite" );
 		
 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 		$CurrentSetObj->setInstanceOfWebSiteObj ( new WebSite () );
@@ -410,11 +420,11 @@ class Hydr {
 		$ClassLoaderObj = ClassLoader::getInstance ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 
-		$localisation = " (Authentification)";
+		$localisation = " authentificationCheck";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Authentification" );
+		$bts->LMObj->logCheckpoint ( "authentificationCheck" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Authentification" );
+		$bts->MapperObj->setSqlApplicant ( "authentificationCheck" );
 		
 		$ClassLoaderObj->provisionClass ( 'AuthenticateUser' );
 		$ClassLoaderObj->provisionClass ( 'User' );
@@ -485,11 +495,11 @@ class Hydr {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 
-		$localisation = " (Language selection)";
+		$localisation = " languageSelection";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Language selection" );
+		$bts->LMObj->logCheckpoint ( "languageSelection" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Language selection" );
+		$bts->MapperObj->setSqlApplicant ( "languageSelection" );
 
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
 		$scoreLang = 0;
@@ -554,12 +564,11 @@ class Hydr {
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 
-
-		$localisation = " (CLI)";
+		$localisation = " formManagement";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "CLI" );
+		$bts->LMObj->logCheckpoint ( "formManagement" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "CLI" );
+		$bts->MapperObj->setSqlApplicant ( "formManagement" );
 		
 		$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
 		$FormToCommandLineObj = FormToCommandLine::getInstance ();
@@ -622,6 +631,12 @@ class Hydr {
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
 
+		$localisation = " initializeArticle";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "initializeArticle" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "initializeArticle" );
+		
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
 			$sqlQuery = "
@@ -713,11 +728,11 @@ class Hydr {
 		$ClassLoaderObj = ClassLoader::getInstance ();
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj ();
 
-		$localisation = " (JavaScript)";
+		$localisation = " initializeJavascript";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Prepare JavaScript Object" );
+		$bts->LMObj->logCheckpoint ( "initializeJavascript" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Prepare JavaScript Object" );
+		$bts->MapperObj->setSqlApplicant ( "initializeJavascript" );
 		
 		$ClassLoaderObj->provisionClass ( 'GeneratedScript' );
 		$CurrentSetObj->setInstanceOfGeneratedScriptObj ( new GeneratedScript () );
@@ -742,11 +757,11 @@ class Hydr {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 
-		$localisation = " (Theme&Layout)";
+		$localisation = " initializeTheme";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Prepare Theme & Layout" );
+		$bts->LMObj->logCheckpoint ( "initializeTheme" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Prepare Theme & Layout" );
+		$bts->MapperObj->setSqlApplicant ( "initializeTheme" );
 		
 		// Those are ENTITIES(DAO), they're not UTILITY classes.
 		$ClassLoaderObj->provisionClass ( 'Deco10_Menu' );
@@ -779,6 +794,12 @@ class Hydr {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
+
+		$localisation = " initializeLayout";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "initializeLayout" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "initializeLayout" );
 
 		$ClassLoaderObj->provisionClass ('ModuleList');
 		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
@@ -828,8 +849,16 @@ class Hydr {
 	 * 
 	 */
 	private function renderStylsheet() {
+		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 		$ClassLoaderObj->provisionClass ( 'RenderStylesheet' );
+
+		$localisation = " renderStylsheet";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "renderStylsheet" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "renderStylsheet" );
+
 		$RenderStylesheetObj = RenderStylesheet::getInstance ();
 		$this->stylesheet = $RenderStylesheetObj->render ( "mt_", $this->ThemeDataObj );
 	}
@@ -839,9 +868,14 @@ class Hydr {
 	 * @return string
 	 */
 	private function buildDocument() {
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-
+		$localisation = " buildDocument";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "buildDocument" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "buildDocument" );
 
 		$Content = "<!DOCTYPE html>\r<html>";
 		switch ($this->WebSiteObj->getWebSiteEntry ( 'ws_stylesheet' )) {
@@ -897,11 +931,11 @@ class Hydr {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 
-		$localisation = " (Stats)";
+		$localisation = " buidAdminDashboard";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Stats" );
+		$bts->LMObj->logCheckpoint ( "buidAdminDashboard" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Stats" );
+		$bts->MapperObj->setSqlApplicant ( "buidAdminDashboard" );
 		
 		$bts->LMObj->logCheckpoint ( "index_before_stat" );
 		$bts->MapperObj->RemoveThisLevel ( "/ idx" );
@@ -923,6 +957,12 @@ class Hydr {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance ();
 	
+		$localisation = " buildFileSelector";
+		$bts->MapperObj->AddAnotherLevel ( $localisation );
+		$bts->LMObj->logCheckpoint ( "buildFileSelector" );
+		$bts->MapperObj->RemoveThisLevel ( $localisation );
+		$bts->MapperObj->setSqlApplicant ( "buildFileSelector" );
+
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
 		$Content = "";

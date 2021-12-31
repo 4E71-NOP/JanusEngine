@@ -213,42 +213,41 @@ class RenderDeco60Elysion {
 		";
 
 		$argAddModule = "{
-			ex11 : {	'isEnabled':1,	'DimX':".$B['ex11_x'].",	'DimY':".$B['ex11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex12 : {	'isEnabled':1,	'DimX':".$B['ex12_x'].",	'DimY':".$B['ex12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex13 : {	'isEnabled':1,	'DimX':".$B['ex13_x'].",	'DimY':".$B['ex13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex14 : {	'isEnabled':1,	'DimX':".$B['ex14_x'].",	'DimY':".$B['ex14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex15 : {	'isEnabled':1,	'DimX':".$B['ex15_x'].",	'DimY':".$B['ex15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex21 : {	'isEnabled':1,	'DimX':".$B['ex21_x'].",	'DimY':".$B['ex21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex22 : {	'isEnabled':1,	'DimX':".$B['ex22_x'].",	'DimY':".$B['ex22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex25 : {	'isEnabled':1,	'DimX':".$B['ex25_x'].",	'DimY':".$B['ex25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex31 : {	'isEnabled':1,	'DimX':".$B['ex31_x'].",	'DimY':".$B['ex31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex35 : {	'isEnabled':1,	'DimX':".$B['ex35_x'].",	'DimY':".$B['ex35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex41 : {	'isEnabled':1,	'DimX':".$B['ex41_x'].",	'DimY':".$B['ex41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex45 : {	'isEnabled':1,	'DimX':".$B['ex45_x'].",	'DimY':".$B['ex45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex51 : {	'isEnabled':1,	'DimX':".$B['ex51_x'].",	'DimY':".$B['ex51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex52 : {	'isEnabled':1,	'DimX':".$B['ex52_x'].",	'DimY':".$B['ex52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex53 : {	'isEnabled':1,	'DimX':".$B['ex53_x'].",	'DimY':".$B['ex53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex54 : {	'isEnabled':1,	'DimX':".$B['ex54_x'].",	'DimY':".$B['ex54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
-			ex55 : {	'isEnabled':1,	'DimX':".$B['ex55_x'].",	'DimY':".$B['ex55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex11 : {	'isEnabled':true,	'DimX':".$B['ex11_x'].",	'DimY':".$B['ex11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex12 : {	'isEnabled':true,	'DimX':".$B['ex12_x'].",	'DimY':".$B['ex12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex13 : {	'isEnabled':true,	'DimX':".$B['ex13_x'].",	'DimY':".$B['ex13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex14 : {	'isEnabled':true,	'DimX':".$B['ex14_x'].",	'DimY':".$B['ex14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex15 : {	'isEnabled':true,	'DimX':".$B['ex15_x'].",	'DimY':".$B['ex15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex21 : {	'isEnabled':true,	'DimX':".$B['ex21_x'].",	'DimY':".$B['ex21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex22 : {	'isEnabled':true,	'DimX':".$B['ex22_x'].",	'DimY':".$B['ex22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex25 : {	'isEnabled':true,	'DimX':".$B['ex25_x'].",	'DimY':".$B['ex25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex31 : {	'isEnabled':true,	'DimX':".$B['ex31_x'].",	'DimY':".$B['ex31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex35 : {	'isEnabled':true,	'DimX':".$B['ex35_x'].",	'DimY':".$B['ex35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex41 : {	'isEnabled':true,	'DimX':".$B['ex41_x'].",	'DimY':".$B['ex41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex45 : {	'isEnabled':true,	'DimX':".$B['ex45_x'].",	'DimY':".$B['ex45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex51 : {	'isEnabled':true,	'DimX':".$B['ex51_x'].",	'DimY':".$B['ex51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex52 : {	'isEnabled':true,	'DimX':".$B['ex52_x'].",	'DimY':".$B['ex52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex53 : {	'isEnabled':true,	'DimX':".$B['ex53_x'].",	'DimY':".$B['ex53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex54 : {	'isEnabled':true,	'DimX':".$B['ex54_x'].",	'DimY':".$B['ex54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
+			ex55 : {	'isEnabled':true,	'DimX':".$B['ex55_x'].",	'DimY':".$B['ex55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
 			";
-			$argAddModuleIn = "";
-			$argAddModuleIn .= ( $B['in11_e'] == 1 ) ? "in11 : {	'isEnabled':1,	'DimX':".$B['in11_x'].",	'DimY':".$B['in11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in11 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in12_e'] == 1 ) ? "in12 : {	'isEnabled':1,	'DimX':".$B['in12_x'].",	'DimY':".$B['in12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in12 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in13_e'] == 1 ) ? "in13 : {	'isEnabled':1,	'DimX':".$B['in13_x'].",	'DimY':".$B['in13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in13 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in14_e'] == 1 ) ? "in14 : {	'isEnabled':1,	'DimX':".$B['in14_x'].",	'DimY':".$B['in14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in14 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in15_e'] == 1 ) ? "in15 : {	'isEnabled':1,	'DimX':".$B['in15_x'].",	'DimY':".$B['in15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in15 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in21_e'] == 1 ) ? "in21 : {	'isEnabled':1,	'DimX':".$B['in21_x'].",	'DimY':".$B['in21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in21 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in22_e'] == 1 ) ? "in22 : {	'isEnabled':1,	'DimX':".$B['in22_x'].",	'DimY':".$B['in22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in22 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in25_e'] == 1 ) ? "in25 : {	'isEnabled':1,	'DimX':".$B['in25_x'].",	'DimY':".$B['in25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in25 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in31_e'] == 1 ) ? "in31 : {	'isEnabled':1,	'DimX':".$B['in31_x'].",	'DimY':".$B['in31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in31 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in35_e'] == 1 ) ? "in35 : {	'isEnabled':1,	'DimX':".$B['in35_x'].",	'DimY':".$B['in35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in35 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in41_e'] == 1 ) ? "in41 : {	'isEnabled':1,	'DimX':".$B['in41_x'].",	'DimY':".$B['in41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in41 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in45_e'] == 1 ) ? "in45 : {	'isEnabled':1,	'DimX':".$B['in45_x'].",	'DimY':".$B['in45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in45 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in51_e'] == 1 ) ? "in51 : {	'isEnabled':1,	'DimX':".$B['in51_x'].",	'DimY':".$B['in51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in51 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in52_e'] == 1 ) ? "in52 : {	'isEnabled':1,	'DimX':".$B['in52_x'].",	'DimY':".$B['in52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in52 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in53_e'] == 1 ) ? "in53 : {	'isEnabled':1,	'DimX':".$B['in53_x'].",	'DimY':".$B['in53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in53 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in54_e'] == 1 ) ? "in54 : {	'isEnabled':1,	'DimX':".$B['in54_x'].",	'DimY':".$B['in54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in54 : {	'isEnabled':false },";
-			$argAddModuleIn .= ( $B['in55_e'] == 1 ) ? "in55 : {	'isEnabled':1,	'DimX':".$B['in55_x'].",	'DimY':".$B['in55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	}," : "in55 : {	'isEnabled':false },";
+			$argAddModule .= ( $B['in11_e'] == 1 ) ? "in11 : {	'isEnabled':true,	'DimX':".$B['in11_x'].",	'DimY':".$B['in11_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in11 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in12_e'] == 1 ) ? "in12 : {	'isEnabled':true,	'DimX':".$B['in12_x'].",	'DimY':".$B['in12_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in12 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in13_e'] == 1 ) ? "in13 : {	'isEnabled':true,	'DimX':".$B['in13_x'].",	'DimY':".$B['in13_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in13 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in14_e'] == 1 ) ? "in14 : {	'isEnabled':true,	'DimX':".$B['in14_x'].",	'DimY':".$B['in14_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in14 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in15_e'] == 1 ) ? "in15 : {	'isEnabled':true,	'DimX':".$B['in15_x'].",	'DimY':".$B['in15_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in15 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in21_e'] == 1 ) ? "in21 : {	'isEnabled':true,	'DimX':".$B['in21_x'].",	'DimY':".$B['in21_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in21 : {	'isEnabled':false },\r";
+			// $argAddModule .= ( $B['in22_e'] == 1 ) ? "in22 : {	'isEnabled':true,	'DimX':".$B['in22_x'].",	'DimY':".$B['in22_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in22 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in25_e'] == 1 ) ? "in25 : {	'isEnabled':true,	'DimX':".$B['in25_x'].",	'DimY':".$B['in25_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in25 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in31_e'] == 1 ) ? "in31 : {	'isEnabled':true,	'DimX':".$B['in31_x'].",	'DimY':".$B['in31_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in31 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in35_e'] == 1 ) ? "in35 : {	'isEnabled':true,	'DimX':".$B['in35_x'].",	'DimY':".$B['in35_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in35 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in41_e'] == 1 ) ? "in41 : {	'isEnabled':true,	'DimX':".$B['in41_x'].",	'DimY':".$B['in41_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in41 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in45_e'] == 1 ) ? "in45 : {	'isEnabled':true,	'DimX':".$B['in45_x'].",	'DimY':".$B['in45_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in45 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in51_e'] == 1 ) ? "in51 : {	'isEnabled':true,	'DimX':".$B['in51_x'].",	'DimY':".$B['in51_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in51 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in52_e'] == 1 ) ? "in52 : {	'isEnabled':true,	'DimX':".$B['in52_x'].",	'DimY':".$B['in52_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in52 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in53_e'] == 1 ) ? "in53 : {	'isEnabled':true,	'DimX':".$B['in53_x'].",	'DimY':".$B['in53_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in53 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in54_e'] == 1 ) ? "in54 : {	'isEnabled':true,	'DimX':".$B['in54_x'].",	'DimY':".$B['in54_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in54 : {	'isEnabled':false },\r";
+			$argAddModule .= ( $B['in55_e'] == 1 ) ? "in55 : {	'isEnabled':true,	'DimX':".$B['in55_x'].",	'DimY':".$B['in55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in55 : {	'isEnabled':false },\r";
 
 			$argAddModule .= "}";
 		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
