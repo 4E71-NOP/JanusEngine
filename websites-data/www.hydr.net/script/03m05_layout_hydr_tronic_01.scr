@@ -1,0 +1,14 @@
+add layout_file name	'hydr_tronic_default_layout'		generic_name	'default_layout'		description	'hydr_default_layout'	filename	'hydr_tronic_default.lyt.html';
+add layout_file name	'hydr_tronic_user_profile'			generic_name	'user_profile'			description	'hydr_user_profile'		filename	'hydr_tronic_default.lyt.html';
+add layout_file name	'hydr_tronic_script_exec'			generic_name	'script_execution'		description	'hydr_script_exec'		filename	'hydr_tronic_default.lyt.html';
+add layout_file name	'hydr_tronic_decoration_mgmt'		generic_name	'decoration_management'	description	'hydr_decoration_mgmt'	filename	'hydr_tronic_default.lyt.html';
+
+add layout name	'hydr_tronic_01_default_layout'		title 'Présentation par défaut'			generic_name	'default_layout'		description	'hydr_tronic Default layout'		layout_file	'hydr_tronic_default_layout';
+add layout name	'hydr_tronic_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'hydr_tronic User profile'			layout_file	'hydr_tronic_user_profile';
+add layout name	'hydr_tronic_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'hydr_tronic Script execution'		layout_file	'hydr_tronic_script_exec';
+add layout name	'hydr_tronic_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'hydr_tronic Decoration management'	layout_file	'hydr_tronic_decoration_mgmt';
+
+assign layout name	'hydr_tronic_01_default_layout'		to_theme	'hydr_tronic_01'	default YES;
+assign layout name	'hydr_tronic_01_user_profile'		to_theme	'hydr_tronic_01';
+assign layout name	'hydr_tronic_01_script_exec'		to_theme	'hydr_tronic_01';
+assign layout name	'hydr_tronic_01_decoration_mgmt'	to_theme	'hydr_tronic_01';

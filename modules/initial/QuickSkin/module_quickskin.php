@@ -52,6 +52,7 @@ class ModuleQuickSkin {
 				WHERE tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 				AND td.theme_id = tw.fk_theme_id
 				AND tw.theme_state = '1'
+				ORDER BY td.theme_name 
 				;";
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query=`". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query($sqlQuery);

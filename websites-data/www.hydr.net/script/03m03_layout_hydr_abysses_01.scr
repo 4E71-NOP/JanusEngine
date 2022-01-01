@@ -1,4 +1,14 @@
-add layout name "hydr_abysses_01_default_layout"		title "Présentation par défaut"			generic_name "Presentation_par_defaut"	description "hydr hydr_abysses_01_default_layout"		layout_file "hydr_default_layout";
-add layout name "hydr_abysses_01_gestion_profil"		title "Présentation gestion profil"		generic_name "gestion_profil"			description "hydr hydr_abysses_01_gestion_profil"		layout_file "hydr_gestion_profil";
-add layout name "hydr_abysses_01_test_script"			title "Présentation gestion profil"		generic_name "test_script" 				description "hydr hydr_abysses_01_test_script"			layout_file "hydr_test_script";
-add layout name "hydr_abysses_01_gestion_decoration"	title "Présentation gestion décoration"	generic_name "gestion_decoration" 		description "hydr hydr_abysses_01_gestion_decoration"	layout_file "hydr_gestion_decoration";
+add layout_file name	'hydr_abysses_default_layout'		generic_name	'default_layout'		description	'hydr_default_layout'	filename	'hydr_abysses_default.lyt.html';
+add layout_file name	'hydr_abysses_user_profile'			generic_name	'user_profile'			description	'hydr_user_profile'		filename	'hydr_abysses_default.lyt.html';
+add layout_file name	'hydr_abysses_script_exec'			generic_name	'script_execution'		description	'hydr_script_exec'		filename	'hydr_abysses_default.lyt.html';
+add layout_file name	'hydr_abysses_decoration_mgmt'		generic_name	'decoration_management'	description	'hydr_decoration_mgmt'	filename	'hydr_abysses_default.lyt.html';
+
+add layout name	'hydr_abysses_01_default_layout'	title 'Présentation par défaut'			generic_name	'default_layout'		description	'hydr_abysses Default layout'			layout_file	'hydr_abysses_default_layout';
+add layout name	'hydr_abysses_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'hydr_abysses User profile'				layout_file	'hydr_abysses_user_profile';
+add layout name	'hydr_abysses_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'hydr_abysses Script execution'			layout_file	'hydr_abysses_script_exec';
+add layout name	'hydr_abysses_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'hydr_abysses Decoration management'	layout_file	'hydr_abysses_decoration_mgmt';
+
+assign layout name	'hydr_abysses_01_default_layout'	to_theme	'hydr_abysses_01'	default YES;
+assign layout name	'hydr_abysses_01_user_profile'		to_theme	'hydr_abysses_01';
+assign layout name	'hydr_abysses_01_script_exec'		to_theme	'hydr_abysses_01';
+assign layout name	'hydr_abysses_01_decoration_mgmt'	to_theme	'hydr_abysses_01';

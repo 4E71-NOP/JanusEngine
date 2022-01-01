@@ -1,4 +1,0 @@
-add layout name "hydr_lay_it_low_01_default_layout"			title "Présentation par défaut"			generic_name "Presentation_par_defaut"	description "hydr hydr_lay_it_low_01_default_layout"        layout_file "hydr_default_layout";
-add layout name "hydr_lay_it_low_01_gestion_profil"			title "Présentation gestion profil"		generic_name "gestion_profil"			description "hydr hydr_lay_it_low_01_gestion_profil"        layout_file "hydr_gestion_profil";
-add layout name "hydr_lay_it_low_01_test_script"			title "Présentation gestion profil"		generic_name "test_script" 				description "hydr hydr_lay_it_low_01_test_script"           layout_file "hydr_test_script";
-add layout name "hydr_lay_it_low_01_gestion_decoration"		title "Présentation gestion décoration"	generic_name "gestion_decoration" 		description "hydr hydr_lay_it_low_01_gestion_decoration"    layout_file "hydr_gestion_decoration";

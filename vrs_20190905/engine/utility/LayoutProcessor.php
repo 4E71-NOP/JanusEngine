@@ -75,10 +75,19 @@ class LayoutProcessor {
 		}
 		$layoutFileObj->getDataFromDB($layout_id);
 
-		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $layoutFileObj->getLayoutFileEntry('layout_file_filename');
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
+		$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+		if ( $UserObj->getUserEntry('user_login') != "anonymous") { $finalFileName = str_replace ( ".lyt.html", "_connected.lyt.html", $finalFileName); }
 
+		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $finalFileName;
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
+		if ( $fileContentObj->getFileContent() === false ) { 
+			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : Layout file not found. Back to default layout filename `".$targetFilneName."`") );
+			$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . "default.lyt.html"; 
+			$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
+		}
+		
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		// foreach ( $map as $A ) {
 		// 	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Map[] = ".$A['type']." / `".$A['data']."`") );

@@ -1,6 +1,6 @@
 <table style="width:100%; height:100%; border:0px; padding:0px; margin:0px; border-collapse: collapse;">
 	<tr style="vertical-align: top;">
-		<td style="width:20%; min-width:5cm; height:95%; padding:0.1cm;">
+		<td colspan="3" style="width:97%; min-width:4cm; padding:0.1cm;">
 			<div id="layout_logo" style="
 				display:block; 
 				min-height:1cm; 
@@ -8,6 +8,10 @@
 				">
 				{{ render_module( 'logo' ) }}
 			</div>
+		</td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="width:20%; min-width:5cm; height:100%; padding:0.1cm;">
 			<div id="layout_authentification" style="
 				display:block; 
 				min-height:4.5cm; 
@@ -26,7 +30,7 @@
 			</div>
 			<div id="layout_calendar" style="
 				display:block; 
-				min-height:3.5cm; 
+				min-height:3cm; 
 				overflow:auto;
 				margin:0px auto 10px auto;
 				">
@@ -41,8 +45,8 @@
 				">
 				{{ render_module( 'selectlanguage' ) }}
 			</div>
-		</td>
-		<td style="width:77%; min-width:10cm; height: 95%; padding:0.1cm;">
+			</td>
+		<td style="width:57%; min-width:10cm; height: 100%; padding:0.1cm;">
 			<div id="layout_document" style="
 				display:block; 
 				min-height: 10cm; 
@@ -52,6 +56,27 @@
 			">
 			{{ render_module( 'document' ) }}
 			</div>
+		</td>
+		<td style="width:20%; min-width:5cm; height: 100%; padding:0.1cm;">
+			<div id="layout_quickskin" style="
+			display:block; 
+			min-height: 5cm; 
+			height:5cm;
+			overflow:auto;
+			margin:0px auto 10px auto;
+			">
+			{{ render_module( 'quickskin' ) }}
+			</div>
+
+			<div id="layout_search" style="
+			display:block; 
+			min-height: 5cm; 
+			height:5cm;
+			overflow:auto;
+			margin:0px auto 10px auto;
+			">
+			{{ render_module( 'search' ) }}
+			</div>			
 		</td>
 	</tr>
 	<tr>

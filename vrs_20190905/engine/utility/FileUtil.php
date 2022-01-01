@@ -44,7 +44,7 @@ class FileUtil {
 		}
 		else {
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : File '".$filename ."' doesn't exist.") );
-			return (null);
+			return (false);
 		}
 	}
 }
