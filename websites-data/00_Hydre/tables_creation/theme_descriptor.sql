@@ -7,7 +7,7 @@ theme_admctrl_position		1 H-G	2 H-M	3 H-D	4 M-D	5 B-D	6 B-M	7 B-G	8 M-G
 
 CREATE TABLE !table! (
 theme_id				BIGINT NOT NULL UNIQUE, 
-theme_directory		    VARCHAR(128),
+theme_directory			VARCHAR(128),
 theme_name 				VARCHAR(128),
 theme_title				VARCHAR(128),
 theme_desc				VARCHAR(128),
@@ -19,10 +19,16 @@ theme_stylesheet_3		VARCHAR(128),
 theme_stylesheet_4		VARCHAR(128),
 theme_stylesheet_5		VARCHAR(128),
 
+theme_height			VARCHAR(128),
+theme_width				VARCHAR(128),
+theme_max_width			VARCHAR(128),
+theme_max_height		VARCHAR(128),
+
 theme_bg				VARCHAR(128),
+theme_bg_position		VARCHAR(128),
 theme_bg_repeat			VARCHAR(128),
 theme_bg_color			VARCHAR(128),
-theme_logo			    VARCHAR(128),
+theme_logo				VARCHAR(128),
 theme_banner			VARCHAR(128),
 
 theme_divinitial_bg		VARCHAR(128),

@@ -1036,11 +1036,15 @@ self::$InitTable['theme'] = function (&$a) {
 			"stylesheet_4"	=> "",
 			"stylesheet_5"	=> "",
 			
+			"width"			=> "",
+			"max_width"		=> "",
+			"height"		=> "",
+			"max_height"	=> "",
 			"bg"			=> "",
+			"bg_position"	=> "",
 			"bg_repeat" 	=> "repeat",
 			"bg_color" 		=> "",
 			"logo"			=> "",
-			"banner"		=> "",
 			
 			"divinitial_bg"		=> "",
 			"divinitial_repeat"	=> "no-repeat",

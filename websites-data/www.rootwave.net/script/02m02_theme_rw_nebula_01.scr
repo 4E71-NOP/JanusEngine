@@ -6,17 +6,17 @@ desc	'Nebula'
 			
 stylesheet_1	'rw_nebula_01.css'		
 			
+height	'100%'		
+
+
 			
-			
+bg	'nebula_bg.png'		
+bg_position	'top'		
+bg_repeat	'no-repeat'		
 bg_color	'000000'		
+			
+			
 logo	'nebula_logo_rw.png'		
-			
-			
-divinitial_bg	'nebula_bg.png'		
-divinitial_repeat	'no-repeat'		
-divinitial_dx	'1024'		
-divinitial_dy	'2048'		
-			
 block_01_name	'rw_nebula_block_001'	block_01_text	'rw_nebula_txt_main'
 block_02_name	'rw_nebula_block_002'	block_02_text	'rw_nebula_txt_main'
 block_03_name	'rw_nebula_block_001'	block_03_text	'rw_nebula_txt_main'

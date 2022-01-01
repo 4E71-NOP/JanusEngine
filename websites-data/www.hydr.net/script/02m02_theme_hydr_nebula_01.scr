@@ -6,17 +6,17 @@ desc	'Nebula'
 			
 stylesheet_1	'hydr_nebula_01.css'		
 			
+height	'100%'		
+
+
+			
 bg	'nebula_bg.png'		
-bg_repeat	'repeat'		
+bg_position	'top'		
+bg_repeat	'no-repeat'		
 bg_color	'000000'		
+			
+			
 logo	'nebula_logo_hydr.png'		
-			
-			
-
-
-
-
-			
 block_01_name	'hydr_nebula_block_001'	block_01_text	'hydr_nebula_txt_main'
 block_02_name	'hydr_nebula_block_002'	block_02_text	'hydr_nebula_txt_main'
 block_03_name	'hydr_nebula_block_001'	block_03_text	'hydr_nebula_txt_main'
