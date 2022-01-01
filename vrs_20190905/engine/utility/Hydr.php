@@ -143,7 +143,7 @@ class Hydr {
 			
 			// Article
 			$this->initializeArticle();
-
+			
 			// --------------------------------------------------------------------------------------------
 			$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $this->WebSiteObj->getWebSiteEntry ( 'ws_short' ) . "'>\r" );
 			$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry ( 'language' ) . "'>\r" );
@@ -162,12 +162,12 @@ class Hydr {
 			
 			// JavaScript Object
 			$this->initializeJavascript();
-	
+			
 			// theme and layout
 			$this->initializeTheme();
 			// Initialize Layout
 			$this->initializeLayout();
-	
+			
 			// --------------------------------------------------------------------------------------------
 			//
 			// Module 
