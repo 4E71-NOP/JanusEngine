@@ -98,14 +98,15 @@ class ModuleAuthentification {
 					"lastSize"			=> 0,
 				);
 			
-				$pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('via80')."</span>\r"; 
+				$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+				// $pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('via80')."</span>\r"; 
+				$pv['SSL_etat'] = "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(".$baseUrl."/media/img/universal/ssl_ko.png)'></div>";
 				if ( isset($_SERVER['HTTPS']) ) {
 					if ( isset($_SERVER['SERVER_PORT'] ) && ( $_SERVER['SERVER_PORT'] == '443' ) ) { 
-						$pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('viassl')."</span>\r"; 
+						// $pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('viassl')."</span>\r"; 
+						$pv['SSL_etat'] = "<div style='width:60px;height:24px; background-size:contain; background-image: url(".$baseUrl."/media/img/universal/ssl_ok.png)'></div>";
 					}
 				}
-			
-				$pv['table_hauteur'] = 128;
 			
 				$Content .= "
 				<form ACTION='/' method='post'>\r
@@ -115,29 +116,21 @@ class ModuleAuthentification {
 				<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
 				<input type='hidden' name='formGenericData[action]' 	value='disconnection'>\r
 			
-				<table class='mt_bareTable' style='height: ".$pv['table_hauteur']."px; margin-left: auto; margin-right: auto; '>
+				<table class='mt_bareTable' style='margin-left:auto; margin-right:auto;'>
 			
 				<tr>\r
-				<td style='text-align: center;'>\r".
+				<td style='text-align:center; padding-top:10px;'>\r".
 				$bts->I18nTransObj->getI18nTransEntry('txt1').
-				"<span style='font-weight:bold;'>".$bts->SMObj->getSessionEntry('user_login')."</span>\r
+				"<span style='font-weight:bold;'>".$bts->SMObj->getSessionEntry('user_login')."</span>\r".$pv['SSL_etat']."
 				</td>\r
 				</tr>\r
 				
 				<tr>\r
-				<td style='text-align: center;'>\r
-				<div style='text-align: center;'>\r
-				" .
-				$bts->InteractiveElementsObj->renderSubmitButton($SB).
-				"
-				</div>\r
+				<td style='text-align:center; padding-top:10px;'>\r
+				<div style='display:inline-block; margin:0 auto'>\r"
+				.$bts->InteractiveElementsObj->renderSubmitButton($SB)
+				."</div>\r
 				</td>\r
-				</tr>\r
-			
-				<tr>\r
-				<td style='text-align: center;'>\r".
-				$pv['SSL_etat']	.
-				"</td>\r
 				</tr>\r
 				</table>\r
 			
