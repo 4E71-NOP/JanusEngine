@@ -1,129 +1,98 @@
-<div style="display: block; width:100%; height:100%; text-align: justify; border:0px; padding:0px 0px auto 0px;
-margin:0px; ">
-
-	<div id="layout_col01" style="
-		display:inline-block; 
-		vertical-align: top; 
-		width:20%; 
-		min-height:100%; 
-		height: inherit;
-		background-color:#FF000020">
-
-		<div id="layout_logo" style="
-			display:block; 
-			min-width:5cm; 
-			min-height: 5cm; 
-			background-color: mediumslateblue; 
-			overflow:auto;
-			margin:0px auto 10px auto;
+<table style="width:100%; height:100%; border:0px; padding:0px; margin:0px; border-collapse: collapse;">
+	<tr style="vertical-align: top;">
+		<td style="width:20%; min-width:5cm; height:95%; padding:0.1cm;">
+			<div id="layout_logo" style="
+				display:block; 
+				min-height:1cm; 
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'logo' ) }}
+			</div>
+			<div id="layout_authentification" style="
+				display:block; 
+				min-height:4.5cm; 
+				overflow:auto;
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'authentification' ) }}
+			</div>
+			<div id="layout_menu" style="
+				display:block; 
+				min-height:7cm; 
+				overflow:auto;
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'menu' ) }}
+			</div>
+			<div id="layout_calendar" style="
+				display:block; 
+				min-height:3.5cm; 
+				overflow:auto;
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'calendar' ) }}
+			</div>
+			<div id="layout_selectlanguage" style="
+				display:block; 
+				min-width:5cm; 
+				min-height:2cm; 
+				overflow:auto;
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'selectlanguage' ) }}
+			</div>
+			</td>
+		<td style="width:57%; min-width:10cm; height: 95%; padding:0.1cm;">
+			<div id="layout_document" style="
+				display:block; 
+				min-height: 10cm; 
+				height:100%;
+				padding-bottom: 0px;
+				margin:0px 0px 10px auto;
 			">
-		{{ render_module( 'logo' ) }}
-		</div>
-		<div id="layout_authentification" style="
+			{{ render_module( 'document' ) }}
+			</div>
+		</td>
+		<td style="width:20%; min-width:5cm; height: 95%; padding:0.1cm;">
+			<div id="layout_quickskin" style="
 			display:block; 
-			min-width:5cm; 
 			min-height: 5cm; 
 			height:5cm;
-			background-color: mediumslateblue; 
 			overflow:auto;
 			margin:0px auto 10px auto;
 			">
-			{{ render_module( 'authentification' ) }}
-		</div>
-		<div id="layout_menu" style="
-			display:block; 
-			min-width:5cm; 
-			min-height: 7cm; 
-			background-color: mediumslateblue; 
-			overflow:auto;
-			margin:0px auto 10px auto;
-			">
-			{{ render_module( 'calendar' ) }}
-		</div>
-		<div id="layout_calendar" style="
-			display:block; 
-			min-width:5cm; 
-			min-height: 3cm; 
-			background-color: mediumslateblue; 
-			overflow:auto;
-			margin:0px auto 10px auto;
-			">
-			{{ render_module( 'calendar' ) }}
-		</div>
-		<div id="layout_selectlanguage" style="
-			display:block; 
-			min-width:5cm; 
-			min-height: 2cm; 
-			background-color: mediumslateblue; 
-			overflow:auto;
-			margin:0px auto 10px auto;
-			">
-			{{ render_module( 'selectlanguage' ) }}
-		</div>
-	</div>
-	<div id="layout_col02" style="
-		display:inline-block; 
-		vertical-align: top; 
-		width:57%; 
-		height:100%; 
-		background-color:#00FF0020;
-		">
-		<div id="layout_document" style="
-		display:block; 
-		min-width:5cm; 
-		min-height: 20cm; 
-		height:90%;
-		background-color: mediumslateblue; 
-		overflow:auto;
-		margin:0px auto 10px auto;
-		">
-		{{ render_module( 'document' ) }}
-		</div>
-		<div id="layout_footer" style="
-		display:block; 
-		min-width:5cm; 
-		min-height: 2cm; 
-		height:5%;
-		background-color: mediumslateblue; 
-		overflow:auto;
-		margin:0px auto 10px auto;
-		">
-		{{ render_module( 'footer' ) }}
-	</div>
+			{{ render_module( 'quickskin' ) }}
+			</div>
 
-	</div>
-	<div id="layout_col03"
-		style="
-			display:inline-block; 
-			vertical-align: top; 
-			width:20%; 
-			height:100%; 
-			background-color:#00FF0020;
-			"
-		>
-		<div id="layout_quickskin" style="
-		display:block; 
-		min-width:5cm; 
-		min-height: 5cm; 
-		height:5cm;
-		background-color: mediumslateblue; 
-		overflow:auto;
-		margin:0px auto 10px auto;
-		">
-		{{ render_module( 'quickskin' ) }}
-		</div>
+			<div id="layout_search" style="
+			display:block; 
+			min-height: 5cm; 
+			height:5cm;
+			overflow:auto;
+			margin:0px auto 10px auto;
+			">
+			{{ render_module( 'search' ) }}
+			</div>			
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<div id="layout_footer" style="
+				display:block; 
+				min-width:5cm; 
+				min-height:1cm; 
+				width:100%; 
+				height:2cm;
+				overflow:auto;
+				margin:0px auto 10px auto;
+				">
+				{{ render_module( 'footer' ) }}
+			</div>
+		</td>
+	</tr>
+</table>
 
-		<div id="layout_search" style="
-		display:block; 
-		min-width:5cm; 
-		min-height: 5cm; 
-		height:5cm;
-		background-color: mediumslateblue; 
-		overflow:auto;
-		margin:0px auto 10px auto;
-		">
-		{{ render_module( 'search' ) }}
-
-	</div>
-</div>
+<div id="layout_tooltip" 
+style="top:0px; left:0px; width:1cm; height:1cm; z-index:500;">
 {{ render_module( 'tooltip' ) }}
+</div>
