@@ -6,17 +6,17 @@ desc	'Aqualand'
 			
 stylesheet_1	'rw_aqua_01.css'		
 			
+			
+			
+			
+			
 bg	'aqua_bg.png'		
+			
 bg_repeat	'repeat'		
 bg_color	'000000'		
-logo	'aqua_logo_Hydr.png'		
-
 			
 			
-			
-			
-			
-			
+logo	'aqua_logo_rw.png'		
 block_01_name	'rw_aqua_block_001'	block_01_text	'rw_aqua_txt_main'
 block_02_name	'rw_aqua_block_002'	block_02_text	'rw_aqua_txt_main'
 block_03_name	'rw_aqua_block_001'	block_03_text	'rw_aqua_txt_main'
@@ -61,9 +61,9 @@ block_09_menu	'rw_aqua_menu_002'
 			
 admctrl_panel_bg	'aqua_B01_bgc_fca.png'		
 admctrl_switch_bg	'aqua_admctrl_switch_bg.png'		
-admctrl_width	'96'
-admctrl_height	'96'
-admctrl_position	'top-left'
+admctrl_width	'96'		
+admctrl_height	'96'		
+admctrl_position	'top-left'		
 			
 gradient_color_start	'00FF00'		
 gradient_color_middle	'808020'		

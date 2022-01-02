@@ -6,17 +6,17 @@ desc	'Volcanic'
 			
 stylesheet_1	'hydr_magma_01.css'		
 			
+			
+			
+			
+			
 bg	'magma_bg.png'		
+			
 bg_repeat	'repeat'		
 bg_color	'000000'		
+			
+			
 logo	'magma_logo_hydr.png'		
-			
-			
-			
-			
-			
-			
-			
 block_01_name	'hydr_magma_block_001'	block_01_text	'hydr_magma_txt_main'
 block_02_name	'hydr_magma_block_002'	block_02_text	'hydr_magma_txt_main'
 block_03_name	'hydr_magma_block_001'	block_03_text	'hydr_magma_txt_main'

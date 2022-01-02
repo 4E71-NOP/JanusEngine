@@ -6,17 +6,17 @@ desc	'Tron tribute'
 			
 stylesheet_1	'rw_tronic_01.css'		
 			
+			
+			
+			
+			
 bg	'tronic_bg.png'		
+			
 bg_repeat	'repeat'		
 bg_color	'000000'		
+			
+			
 logo	'tronic_logo_rw.png'		
-banner	'---'		
-			
-			
-			
-			
-			
-			
 block_01_name	'rw_tronic_block_001'	block_01_text	'rw_tronic_txt_main'
 block_02_name	'rw_tronic_block_002'	block_02_text	'rw_tronic_txt_main'
 block_03_name	'rw_tronic_block_001'	block_03_text	'rw_tronic_txt_main'
