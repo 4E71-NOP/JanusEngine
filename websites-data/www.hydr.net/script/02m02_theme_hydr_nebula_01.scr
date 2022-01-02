@@ -7,8 +7,10 @@ desc	'Nebula'
 stylesheet_1	'hydr_nebula_01.css'		
 			
 height	'100%'		
-
-
+			
+			
+min_height	'100%'		
+			
 			
 bg	'nebula_bg.png'		
 bg_position	'top'		

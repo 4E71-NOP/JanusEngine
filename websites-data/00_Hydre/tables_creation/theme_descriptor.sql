@@ -19,10 +19,12 @@ theme_stylesheet_3		VARCHAR(128),
 theme_stylesheet_4		VARCHAR(128),
 theme_stylesheet_5		VARCHAR(128),
 
-theme_height			VARCHAR(128),
 theme_width				VARCHAR(128),
+theme_height			VARCHAR(128),
 theme_max_width			VARCHAR(128),
 theme_max_height		VARCHAR(128),
+theme_min_width			VARCHAR(128),
+theme_min_height		VARCHAR(128),
 
 theme_bg				VARCHAR(128),
 theme_bg_position		VARCHAR(128),

@@ -92,7 +92,7 @@ class ModuleGlobalReport {
 			
 			if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
 				$CurrentTab++;	
-				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $$bts->I18nTransObj->getI18nTransEntry('srcTabTxt7'));
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt7'));
 				$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}

@@ -900,10 +900,12 @@ class Hydr {
 		$Content .= "<body id='HydrBody' ";
 		$Content .= "style='";
 
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_width' ) ) > 0) { $Content .= "width:" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_width' ) . "; "; }
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_heigth' ) ) > 0) { $Content .= "height:" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_height' ) . "; "; }
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_width' ) ) > 0) { $Content .= "max-width:" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_width' ) . "; "; }
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_height' ) ) > 0) { $Content .= "max-height:" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_height' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_width' ) ) > 0)		{ $Content .= "width:".			$this->ThemeDataObj->getThemeDataEntry ( 'theme_width' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_heigth' ) ) > 0)		{ $Content .= "height:".		$this->ThemeDataObj->getThemeDataEntry ( 'theme_height' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_min_width' ) ) > 0)	{ $Content .= "min-width:".		$this->ThemeDataObj->getThemeDataEntry ( 'theme_min_width' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_min_height' ) ) > 0)	{ $Content .= "min-height:".	$this->ThemeDataObj->getThemeDataEntry ( 'theme_min_height' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_width' ) ) > 0)	{ $Content .= "max-width:".		$this->ThemeDataObj->getThemeDataEntry ( 'theme_max_width' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_max_height' ) ) > 0)	{ $Content .= "max-height:".	$this->ThemeDataObj->getThemeDataEntry ( 'theme_max_height' ) . "; "; }
 
 		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) ) > 0) {
 			$Content .= "background-image: url("
@@ -911,9 +913,9 @@ class Hydr {
 			."media/theme/" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg' ) . "); ";
 		}
 
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_position' ) ) > 0) { $Content .= "background-position: " . $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_position' ) . "; "; }
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) ) > 0) { $Content .= "background-repeat: " . $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) . "; "; }
-		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0) { $Content .= "background-color: #" . $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_position' ) ) > 0)	{ $Content .= "background-position:".	$this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_position' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) ) > 0)	{ $Content .= "background-repeat:".		$this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_repeat' ) . "; "; }
+		if (strlen ( $this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) ) > 0)		{ $Content .= "background-color:#".		$this->ThemeDataObj->getThemeDataEntry ( 'theme_bg_color' ) . "; "; }
 		$Content .= "'\r";
 
 		if (strlen ( $this->ThemeDataObj->getThemeBlockEntry ( 'B01T', 'txt_col' ) ) > 0) {

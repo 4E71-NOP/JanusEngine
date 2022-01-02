@@ -1037,9 +1037,11 @@ self::$InitTable['theme'] = function (&$a) {
 			"stylesheet_5"	=> "",
 			
 			"width"			=> "",
-			"max_width"		=> "",
 			"height"		=> "",
+			"max_width"		=> "",
 			"max_height"	=> "",
+			"min_width"		=> "",
+			"min_height"	=> "",
 			"bg"			=> "",
 			"bg_position"	=> "",
 			"bg_repeat" 	=> "repeat",
