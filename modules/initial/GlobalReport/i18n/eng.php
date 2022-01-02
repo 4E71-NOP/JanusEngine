@@ -2,14 +2,14 @@
 $i18n = array(
 	'kb'	=>	"Kb",
 
-	'tabTxt1'	=>	"Main",
-	'tabTxt2'	=>	"Memory",
-	'tabTxt3'	=>	"Statistics",
-	'tabTxt4'	=>	"Logs",
-	'tabTxt5'	=>	"SQL queries",
-	'tabTxt6'	=>	"Commands",
-	'tabTxt7'	=>	"Internal",
-	'tabTxt8'	=>	"Variables",
+	'srcTabTxt1'	=>	"Main",
+	'srcTabTxt2'	=>	"Memory",
+	'srcTabTxt3'	=>	"Statistics",
+	'srcTabTxt4'	=>	"Logs",
+	'srcTabTxt5'	=>	"SQL queries",
+	'srcTabTxt6'	=>	"Commands",
+	'srcTabTxt7'	=>	"Internal",
+	'srcTabTxt8'	=>	"Variables",
 
 	't1l11'	=>	"Hostname",
 	't1l21'	=>	"Maximum allocated memory",

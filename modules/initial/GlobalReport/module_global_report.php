@@ -50,52 +50,62 @@ class ModuleGlobalReport {
 			$CurrentTab = 0;	
 			if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
 				$CurrentTab++;
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt1'));
 				$tmp = $this->reportTab01($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000001 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0000000000000010 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt2'));
 				$tmp = $this->reportTab02($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000010 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0000000000000100 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt3'));
 				$tmp = $this->reportTab03($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000000100 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0000000000001000 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt4'));
 				$tmp = $this->reportTab04($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000001000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0000000000010000 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt5'));
 				$tmp = $this->sqlReportTab($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000010000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0000000000100000 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt6'));
 				$tmp = $this->reportTab08($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0000000000100000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b0100000000000000 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $$bts->I18nTransObj->getI18nTransEntry('srcTabTxt7'));
 				$tmp = $this->internalLogReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b0100000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
 			if ( ($dbgLvl & 0b1000000000000000 ) != 0)	{ 
 				$CurrentTab++;	
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt".$CurrentTab , $bts->I18nTransObj->getI18nTransEntry('srcTabTxt8'));
 				$tmp = $this->variablesReport($infos);	$T['Content'][$CurrentTab] = $tmp['content']; $T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config']; $T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : result binary is:`".sprintf('%016b', ($dbgLvl & 0b1000000000000000 ))."`; NbrOfTabs=".$T['ContentInfos']['NbrOfTabs']) );
 			}
 			
+			$bts->RenderTablesObj->updateTabsTitle($T['ContentInfos'],$CurrentTab);
+
 			$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
 			$GeneratedScriptObj->insertString('JavaScript-File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');

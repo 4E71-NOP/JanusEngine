@@ -272,6 +272,19 @@ class  RenderTables {
 	}
 	
 	/**
+	 * Update the tabs titles with the I18n fresh data
+	 * @param array $ContentInfos
+	 * @param number $NbrOfTabs
+	 * @param string $TabTxt
+	 */
+	public function updateTabsTitle(&$ContentInfos, $NbrOfTabs, $TabTxt="tabTxt") {
+		$bts = BaseToolSet::getInstance();
+		for ($i=1; $i<=$NbrOfTabs; $i++ ){
+			$ContentInfos["tabTxt".$i] = $bts->I18nTransObj->getI18nTransEntry($TabTxt.$i);
+		}
+	}
+
+	/**
 	 * Returns an array with default values for renderTable->render()
 	 * @param number $lines
 	 * @param number $cells

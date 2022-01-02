@@ -2,14 +2,14 @@
 $i18n = array(
 	'kb'	=>	"Ko",
 
-	'tabTxt1'	=>	"Général",
-	'tabTxt2'	=>	"Mémoire",
-	'tabTxt3'	=>	"Statistiques",
-	'tabTxt4'	=>	"Journaux",
-	'tabTxt5'	=>	"Requetes SQL",
-	'tabTxt6'	=>	"Commandes",
-	'tabTxt7'	=>	"Internes",
-	'tabTxt8'	=>	"Variables",
+	'srcTabTxt1'	=>	"Général",
+	'srcTabTxt2'	=>	"Mémoire",
+	'srcTabTxt3'	=>	"Statistiques",
+	'srcTabTxt4'	=>	"Journaux",
+	'srcTabTxt5'	=>	"Requetes SQL",
+	'srcTabTxt6'	=>	"Commandes",
+	'srcTabTxt7'	=>	"Internes",
+	'srcTabTxt8'	=>	"Variables",
 
 	't1l11'	=>	"Machine hote",
 	't1l21'	=>	"La m&eacute;moire maximum attribu&eacute;e a &eacute;t&eacute; de",
