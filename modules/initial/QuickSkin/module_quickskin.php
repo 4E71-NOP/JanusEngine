@@ -96,8 +96,7 @@ class ModuleQuickSkin {
 					$Content .= "
 					</center>
 					</td>\r</tr>\r
-					".
-					"<input type='hidden' name='formSubmitted'					value='1'>
+					<input type='hidden' name='formSubmitted'					value='1'>
 					<input type='hidden' name='formGenericData[origin]'			value='ModuleQuickSkin'>
 					<input type='hidden' name='formGenericData[modification]'	value='on'>
 

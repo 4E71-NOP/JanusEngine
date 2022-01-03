@@ -29,7 +29,6 @@ class RenderAdmDashboard {
 	public function render(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		// $RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
 		$localisation = " / ModuleMenu";

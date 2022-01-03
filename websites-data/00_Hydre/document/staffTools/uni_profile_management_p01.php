@@ -13,7 +13,7 @@
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
 /* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
-/* @var $ClassLoaderObj ClassLoader                 */
+/* @var $ClassLoaderObj ClassLoader                 *x/
 
 /* @var $SqlTableListObj SqlTableList               */
 /* @var $UserObj User                               */
@@ -49,9 +49,9 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'UserProfileP01',
-				'creation'		=> 'on',
+				// 'creation'		=> 'on',
 				'modification'	=> 'on',
-				'deletion'		=> 'on',
+				// 'deletion'		=> 'on',
 				'mode'			=> 'edit',
 //				'mode'			=> 'create',
 //				'mode'			=> 'delete',
@@ -257,7 +257,6 @@ else {
 // --------------------------------------------------------------------------------------------
 //	Informations internet
 // --------------------------------------------------------------------------------------------
-	
 	$FileSelectorConfig = array(
 			"width"				=> 80,	//in %
 			"height"			=> 50,	//in %
@@ -441,12 +440,12 @@ else {
 	);
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 	
-// 	$ClassLoaderObj->provisionClass('RenderLayout');
-	$RenderLayoutObj = RenderLayout::getInstance(); 
+	// $ClassLoaderObj->provisionClass('RenderLayout');
+	// $RenderLayoutObj = RenderLayout::getInstance(); 
 	$Content .= "
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
 	<tr>\r
-	<td style='width: ".($RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - 200)."px;'>\r
+	<td style='width:70%;'>\r
 	<input type='checkbox' name='formParams[confirmation_modification]' checked> ".$bts->I18nTransObj->getI18nTransEntry('text_confirm1')."\r
 	</td>\r
 	<td style='width: 200px;'>\r
@@ -472,17 +471,12 @@ else {
 	<hr>\r
 	
 	<input type='hidden' name='formSubmitted'					value='1'>
-	<input type='hidden' name='formGenericData[origin]'			value='AdminDashboard'>
+	<input type='hidden' name='formGenericData[origin]'			value='profile_management'>
 	<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
 	<input type='hidden' name='formGenericData[modification]'	value='on'>
 	<input type='hidden' name='formEntity'						value='User'>
-	<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r".
-	
-	$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-	$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-	$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-	$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
-	"</form>\r
+	<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
+	</form>\r
 	";
 // 	<input type='hidden' name='WM_GP_phase' value='1'>\r".
 	
@@ -491,9 +485,9 @@ else {
 // --------------------------------------------------------------------------------------------
 	unset ($T);
 	$T = array();
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')) == 0 ) { 
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'theme_name')) == 0 ) { 
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
-		$bts->RequestDataObj->setRequestDataSubEntry('formParams1', 'pref_theme', $ThemeDataObj->getThemeDataEntry('theme_name') );
+		$bts->RequestDataObj->setRequestDataSubEntry('formParams1', 'theme_name', $ThemeDataObj->getThemeDataEntry('theme_name') );
 		$bts->RequestDataObj->setRequestData('UserProfileForm', 
 			array(
 				"SelectedThemeId"	=>	$ThemeDataObj->getThemeDataEntry('theme_id'),
@@ -511,7 +505,7 @@ else {
 	
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "get theme data with name :".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name']." and id ".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id']."."));
-	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id']);
+	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'theme_name')]['theme_id']);
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
@@ -531,14 +525,13 @@ else {
 		$TmpBlockEntry = "theme_block_".$bts->StringFormatObj->getDecorationBlockName("", $i, "")."_name";
 		$TmpBlockName = $PmThemeDescriptorObj->getThemeDescriptorEntry($TmpBlockEntry);
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $TmpBlockName));
-// 		$TmpBlock = $PmThemeDataObj->getThemeData($TmpBlockName);
 		if ( strlen($TmpBlockName) > 0 ) {
 			$err = 0;
 			foreach ( $ListThemeBlock as $A) {
-				if ($A['nom'] == $TmpBlockName) { $err = 1; }
+				if ($A['name'] == $TmpBlockName) { $err = 1; }
 			}
 			if ( $err == 0 ) {
-				$ListThemeBlock[$TmpBlockEntry]['nom'] = $TmpBlockName;
+				$ListThemeBlock[$TmpBlockEntry]['name'] = $TmpBlockName;
 				$ListThemeBlock[$TmpBlockEntry]['pos'] = $i;
 			}
 		}
@@ -549,43 +542,43 @@ else {
 		$T['ContentCfg']['tabs'][$i] = $bts->RenderTablesObj->getDefaultTableConfig(1,1,0);
 	}
 	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, count($ListThemeBlock)+1,1,0,'tabTxtThm');
-	$T['ContentInfos']['GroupName']		= "theme";
+	$T['ContentInfos']['GroupName']		= "pm";
 	$T['ContentInfos']['Height']		= 1024;
+	$T['ContentInfos']['Height']		= 512;
 	
 	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
 	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
-	$ModulePaddingX = 64;
-	$ModulePaddingY = 64;
-// 	$LMObj->logDebug($PmThemeDataObj->getThemeData(), "PmThemeDataObj");
+	$ModulePaddingX = $ModulePaddingY = 64;
 	
 	$infos['module_nameBackup']	= $infos['module_name'];
 	$infos['blockBackup']		= $infos['block']; 
 	$infos['blockGBackup']		= $infos['blockG']; 
 	$infos['blockTBackup']		= $infos['blockT']; 
 
-
 	$Tab = 1;
 	unset ( $A );
 	foreach ( $ListThemeBlock as $A ) {
 		
-		$infos['block']		= $bts->StringFormatObj->getDecorationBlockName("B", $A['pos'] , "");
-		$infos['blockG']	= $infos['block']."G";
-		$infos['blockT']	= $infos['block']."T";
-		$PmBlock = $PmThemeDataObj->getThemeName().$infos['block'];
+		$currentBlock = $bts->StringFormatObj->getDecorationBlockName("B", $A['pos'] , "");
+		$PmBlock = $PmThemeDataObj->getThemeName().$currentBlock;
 		
-		// As the class RenderLayout is a singleton (and it's better like that), we insert the necessary module data (X,Y) into the dataset for later use in RenderDecoXXXX classes.
-		// We know the RenderDeco classes are provisionned.
 		$mn = "MpBlock0".$Tab;
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $mn));
-		$BlockDataTmp = array(
-				'px'	=>	$ModulePaddingX / 2 ,
-				'py'	=>	$ModulePaddingY / 2 ,
-				'dx'	=>	($T['ContentInfos']['Width'] - $ModulePaddingX -32),
-				'dy'	=>	($T['ContentInfos']['Height'] - $ModulePaddingY)
+
+		$infosTmp = array(
+			'module_name' => $mn,
+			'block' => $currentBlock,
+			'blockG' => $currentBlock . "G",
+			'blockT' => $currentBlock . "T",
+			'mode' => 1,
+			'module' => array(
+				'module_name' => $mn,
+				'module_container_name' => "container_".$mn,
+
+			),
 		);
-		$RenderLayoutObj->setLayoutEntry($mn, $BlockDataTmp);
-		$infos['module']['module_name'] = $mn;
-		
+		$infosTmp['deco_type'] = $ThemeDataObj->getThemeBlockEntry($infosTmp['blockG'], 'deco_type');
+
 		$T['Content'][$Tab]['1']['1']['cont'] .= "
 		<div style='
 		background-image: url(".$PmThemeDataObj->getThemeDataEntry('pathThemeBg')."); background-color: ".$PmThemeDataObj->getThemeDataEntry('theme_bg_color').";
@@ -597,7 +590,7 @@ else {
 		'>
 		";
 		
-		// Brutal... Bbut efficient!!!
+		// Brutal... But efficient!!!
 		$ClassLoaderObj->provisionClass('RenderDeco10Menu');
 		$ClassLoaderObj->provisionClass('RenderDeco20Caligraph');
 		$ClassLoaderObj->provisionClass('RenderDeco301Div');
@@ -605,12 +598,12 @@ else {
 		$ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
 		$ClassLoaderObj->provisionClass('RenderDeco60Elysion');
 		
-		switch ($PmThemeDataObj->getThemeBlockEntry($infos['blockG'], 'deco_type')){
-			case 30:	case "1_div":		$RenderDeco = RenderDeco301Div::getInstance();			$decoTmp = $RenderDeco->render($infos);		break;
-			case 40:	case "elegance":	$RenderDeco = RenderDeco40Elegance::getInstance();		$decoTmp = $RenderDeco->render($infos);		break;
-			case 50:	case "exquise":		$RenderDeco = RenderDeco50Exquisite::getInstance();		$decoTmp = $RenderDeco->render($infos);		break;
-			case 60:	case "elysion":		$RenderDeco = RenderDeco60Elysion::getInstance();		$decoTmp = $RenderDeco->render($infos);		break;
-			default:	$decoTmp = "<div id='".$mn."' style='position:absolute; left:".$RenderLayoutObj->getLayoutModuleEntry($mn, 'px')."px; top:".$RenderLayoutObj->getLayoutModuleEntry($mn, 'py')."px; width:".$RenderLayoutObj->getLayoutModuleEntry($mn, 'dx')."px; height:".$RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')."px; '>\r";		break;
+		switch ($PmThemeDataObj->getThemeBlockEntry($infosTmp['blockG'], 'deco_type')){
+			case 30:	case "1_div":		$RenderDeco = RenderDeco301Div::getInstance();			$decoTmp = $RenderDeco->render($infosTmp);		break;
+			case 40:	case "elegance":	$RenderDeco = RenderDeco40Elegance::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
+			case 50:	case "exquise":		$RenderDeco = RenderDeco50Exquisite::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
+			case 60:	case "elysion":		$RenderDeco = RenderDeco60Elysion::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
+			default:	$decoTmp = "<div id='".$mn."' style='position:absolute; left:0px; top:0px; width:640px; height:640px; '>\r";		break;
 		}
 		$T['Content'][$Tab]['1']['1']['cont'] .= $decoTmp;
 
@@ -626,19 +619,24 @@ else {
 			<h2>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</h2>
 			";
 
+			// 
 		if ( $Tab == 1 ) {
 			$T['Content'][$Tab]['1']['1']['cont'] .= "
-			<form ACTION='index.php?' method='post'>\r
+			<form ACTION='/profile-management?' method='post'>\r
+			<input type='hidden' name='formSubmitted'					value='1'>\r
+			<input type='hidden' name='formGenericData[origin]'			value='profile_management'>\r
+			<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
+		
 			<table class='".$PmBlock._CLASS_TABLE_STD_."'>
 			<tr style='background-color:transparent;'>\r
 			<td>\r
 			".$bts->I18nTransObj->getI18nTransEntry('formIwantTo').": 
 			<select name='formCommand1'>\r
-			<option value='NONE'>".$bts->I18nTransObj->getI18nTransEntry('formIwantToSee')."</option>\r
+			<option value=''>".$bts->I18nTransObj->getI18nTransEntry('formIwantToSee')."</option>\r
 			<option value='update'>".$bts->I18nTransObj->getI18nTransEntry('formIwantToActivate')."</option>\r
 			</select>\r
 			".$bts->I18nTransObj->getI18nTransEntry('formTheTheme')." 
-			<select name='formParams1[pref_theme]'>\r
+			<select name='formParams1[theme_name]'>\r
 			";
 			reset ($themeList);
 			foreach ( $themeList as $A ) {
@@ -668,19 +666,7 @@ else {
 			$T['Content'][$Tab]['1']['1']['cont'] .= "
 			</td>\r
 			</tr>\r
-			</table>\r".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
-			"
-			
-			<input type='hidden' name='formBrowseTheme'						value='1'>
-			<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard'>
-			<input type='hidden' name='formGenericData[section]'			value='UserProfileForm'>
-			<input type='hidden' name='formGenericData[modification]'		value='on'>
-			<input type='hidden' name='formEntity1'							value='user'>
-			<input type='hidden' name='formTarget1[name]'					value='".$UserObj->getUserEntry('user_login')."'>\r
+			</table>\r
 			</form>\r
 			<hr>\r
 			";
@@ -704,21 +690,6 @@ else {
 		<table class='".$PmBlock._CLASS_TABLE_STD_."'>\r
 		<tr style='background-color:transparent;'>\r
 		<td>\r
-		
-		<code>\r
-		/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */<br>\r
-		#include &lt;stdio.h&gt;<br>\r
-		#include &lt;mylib.h&gt;<br>\r
-		#include &lt;hislib.h&gt;<br>\r
-		#include &lt;theirlib.h&gt;<br>\r
-		main ()<br>\r
-		{<br>\r
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf ('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');<br>\r
-		}<br>\r
-		</code>\r
-		</td>\r
-
-		<td>\r
 		<table class='".$PmBlock._CLASS_TABLE01_."'>\r
 		<caption>Lorem ipsum dolor sit amet</caption>
 		<tr>\r
@@ -738,9 +709,27 @@ else {
 		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		<br>\r
 		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
-
 		</td>\r
 		</tr>\r
+
+		<tr style='background-color:transparent;'>\r
+
+		<td>\r
+		<code>\r
+		/* Lorem ipsum dolor sit amet, consectetur adipiscing elit */<br>\r
+		#include &lt;stdio.h&gt;<br>\r
+		#include &lt;mylib.h&gt;<br>\r
+		#include &lt;hislib.h&gt;<br>\r
+		#include &lt;theirlib.h&gt;<br>\r
+		main ()<br>\r
+		{<br>\r
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf ('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');<br>\r
+		}<br>\r
+		</code>\r
+		</td>\r
+		</tr>\r
+
+
 		</table>\r
 		</td>\r
 		</tr>\r
@@ -772,9 +761,9 @@ else {
 				width: 136px; height: 136px; 
 				border-style: solid; border-width: 1px; border-color: #000000;'>\r
 				<div style='
-				width:25%; height:25%;
+				width:50%; height:50%;
 				margin:auto; 
-				background-repeat: no-repeat; background-position:center; 
+				background-repeat: no-repeat; background-position:center; background-size:contain;
 				".$PmIcon[$j]."'></div>\r
 				</td>\r
 				";
@@ -793,13 +782,13 @@ else {
 	
 	
 	$mn = "MpBlock0".$Tab;
-	$BlockDataTmp = array(
+	$infosTmp = array(
 			'px'	=>	$ModulePaddingX / 2 ,
 			'py'	=>	$ModulePaddingY / 2 ,
 			'dx'	=>	($T['ContentInfos']['Width'] - $ModulePaddingX),
 			'dy'	=>	($T['ContentInfos']['Height'] - $ModulePaddingY)
 	);
-	$RenderLayoutObj->setLayoutEntry($mn, $BlockDataTmp);
+	//$RenderLayoutObj->setLayoutEntry($mn, $infosTmp);
 	
 	
 	$T['Content'][$Tab]['1']['1']['cont'] .= "
@@ -822,7 +811,7 @@ else {
 	$T['Content'][$Tab]['1']['1']['cont'] .= "<!-- Last tabs showing the specific items. -->\r";
 	$j = 0;
 	$themeDir = $PmThemeDataObj->getThemeBlockEntry('B01T', 'directory');
-	$themeList = array ('theme_logo', 'theme_banner');
+	$themeList = array ('theme_logo');
 	$themeEntries = array();
 	foreach ( $themeList as $A ) {
 		if (strlen($PmThemeDataObj->getThemeDataEntry($A)) != 0) {
@@ -842,7 +831,7 @@ else {
 			if ( $j < $NbrElmFound )  {
 				$T['Content'][$Tab]['1']['1']['cont'] .= "
 				<td>\r	
-				<div style='background-repeat: no-repeat; background-position:center; ".$themeEntries[$j]." width: ".(floor(($T['ContentInfos']['Width']-48)/$maxCells))."px; height: ".(floor($RenderLayoutObj->getLayoutModuleEntry($mn, 'dy')/$maxLines))."px;'></div>\r
+				<div style='background-repeat: no-repeat; background-position:center; ".$themeEntries[$j]." background-size: contain; width:128px; height:128px;'></div>\r
 				</td>\r";
 				$T['Content'][$Tab]['1']['1']['class'] = "mt_bareTable";
 				$j++;

@@ -34,7 +34,7 @@ class FormToCommandLine {
 	 */
 	public function analysis () {
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "FormToCommandLine/analysis(): Analysis started."));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analysis started."));
 		
 		$CurrentSetObj = CurrentSet::getInstance();
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
@@ -55,7 +55,21 @@ class FormToCommandLine {
 				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " lang '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_lang')."'";
 				$cln++;
 				break;
-				
+			case "profile_management":
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Page profile management submitted a form."));
+				if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData','modification') == "on" ) {
+					$n = 1;
+					while ( $n>0 ) {
+						if ( strlen($bts->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Profile management new command N°".$n."."));
+							$scr[$cln] = $this->createCommandFromPost($n);
+							$cln++;
+							$n++;
+						}
+						else {$n=0;}
+					}
+				}
+				break;
 			// All AdminDashboard will provide the necessary elements to build a set of command line.
 			case "AdminDashboard":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "AdminDashboard submitted a form."));
@@ -106,6 +120,19 @@ class FormToCommandLine {
 		unset ($UserObj);
 	}
 	
+	private function createCommandFromPost($n) {
+		$bts = BaseToolSet::getInstance();
+		$formCommand		= $bts->RequestDataObj->getRequestDataEntry('formCommand'.$n);
+		$formEntity			= $bts->RequestDataObj->getRequestDataEntry('formEntity'.$n);
+		$formTarget			= $bts->RequestDataObj->getRequestDataEntry('formTarget'.$n);
+		$formEntityParams	= $bts->RequestDataObj->getRequestDataEntry('formEntityParams'.$n);
+
+		$cmd = $formCommand." ".$formEntity." name ".$formTarget." ";
+		foreach ( $formEntityParams as $k => $v) {$cmd .= $k." \"".$v."\""; }
+		$cmd .= ";";
+		return ($cmd);
+	}
+
 	//@formatter:off
 	public function getCommandLineScript() { return $this->CommandLineScript; }
 	public function getCommandLineNbr() { return $this->CommandLineNbr; }

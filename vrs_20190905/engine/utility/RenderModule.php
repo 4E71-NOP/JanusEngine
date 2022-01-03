@@ -45,11 +45,11 @@ class RenderModule {
 			return ("");
 		}
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION,	'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 		$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 
 		$infos = array();
