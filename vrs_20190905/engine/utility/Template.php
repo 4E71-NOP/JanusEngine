@@ -140,7 +140,6 @@ class Template {
 				<td align='right'>\r
 				";
 				
-				
 				$SB2 = array(
 						"id"				=> "deleteButton",
 						"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
@@ -167,6 +166,9 @@ class Template {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public function renderAdminCreateButton (&$infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -207,5 +209,39 @@ class Template {
 		";
 		return $Content;
 	}
-	
+
+	/**
+	 * Renders a page selector
+	 * @param array $data
+	 * @return string
+	 */
+	public function renderPageSelector ($data) {
+		$bts = BaseToolSet::getInstance();
+
+		$Content = "<div style='text-align:center; item-align:center; margin:0 auto;'>\r";
+		if ( $data['nbrPerPage'] != 0 ) {
+			$data['PageNbr'] = $data['ItemsCount'] / $data['nbrPerPage'] ;
+			$data['remainder'] = $data['ItemsCount'] % $data['nbrPerPage'];
+			if ( $data['remainder'] > 0 ) { $data['PageNbr']++;}
+			$data['pageCounter'] = 0;
+			for ( $i = 1 ; $i <= $data['PageNbr'] ; $i++) {
+				if ( $data['selectionOffset'] != $data['pageCounter'] ) {
+					$Content .= ""
+					."<a style='display: inline;' href='"
+					."index.php?filterForm[selectionOffset]=".$data['pageCounter']
+					.$data['link']
+					."'>"
+					.$data['elmIn']
+					.$i
+					.$data['elmOut']
+					."</a>\r"
+					;
+				}
+				else { $Content .= $data['elmInHighlight'].$i.$data['elmOut']; }
+				$data['pageCounter']++;
+			}
+		}
+		$Content .= "</div>\r";
+		return $Content;
+	}
 }

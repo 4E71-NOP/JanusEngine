@@ -64,21 +64,23 @@ $bts->I18nTransObj->apply(
 );
 $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
 
+$textAreaCols=50;
+$textAreaRows=16;
 $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 "<br>\r
 <form name='formConvert' ACTION='index.php?' method='post'>\r
 
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
+<table class='".$Block."bareTable' style='width:100%; text-align:center;'>\r
 <tr>\r
 <td>\r
-<textarea name='scriptSrc' id='scriptSrc' style='width:100%' rows='16'>
+<textarea name='scriptSrc' id='scriptSrc' cols='".$textAreaCols."' rows='".$textAreaRows."'>\r
 ".$bts->RequestDataObj->getRequestDataEntry('scriptSrc')."</textarea>\r
 </td>\r
 </tr>\r
 
 <tr>\r
 <td style='font-size: 8px;'>\r
-<textarea name='scriptResult' id='scriptResult' style='width:100%' rows='16'>
+<textarea name='scriptResult' id='scriptResult' cols='".$textAreaCols."' rows='".$textAreaRows."'>\r
 ".$pv['converti']."</textarea>\r
 </td>\r
 </tr>\r
@@ -87,24 +89,19 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('Invite1').
 $Content .= "</table>\r
 <br>\r
 
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
+<table class='".$Block."bareTable' style='width:100%;'>\r
 <tr>\r
-<td style='width:80%;'>\r</td>\r
+<td style='width:60%;'>\r</td>\r
 <td style='text-align: right;'>\r
 ";
 
-$SB = array(
-		"id"				=> "cleanButton",
-		"type"				=> "button",
-		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-		"onclick"			=> "formatHydrScript ( 'formConvert' , 'scriptSrc' , 'scriptResult' );",
-		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
-		"mode"				=> 1,
-		"size" 				=> 128,
-		"lastSize"			=> 0,
+$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+	$infos , 'button', 
+	$bts->I18nTransObj->getI18nTransEntry('btn1'), 96, 
+	'cleanButton', 
+	2, 2, 
+	"formatHydrScript ( 'formConvert' , 'scriptSrc' , 'scriptResult' );" 
 );
-
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 $Content .= "
 </td>\r

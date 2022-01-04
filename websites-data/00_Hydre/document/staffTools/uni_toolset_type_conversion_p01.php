@@ -98,25 +98,25 @@ $pv['select_option'] .= "</select>\r";
 $Content .= "
 <form name='ConvForm' ACTION='index.php?' method='post'>\r
 
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
+<table class='".$Block."_TableStd' style='text-align:center;'>\r
 
 <tr>\r
-<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c1')."</td>\r
-<td class='".$Block."_tb4 ".$Block."_fcta' style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c2')."</td>\r
+<td style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c1')."</td>\r
+<td style='text-align: center;'>\r".$bts->I18nTransObj->getI18nTransEntry('l1c2')."</td>\r
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fca' style='width:50%; text-align: center;'>\r
-<select name='conv_type_src' class='".$Block."_t3 " . $Block . "_form_1'>\r".$pv['select_option']."
+<td style='width:50%; text-align: center;'>\r
+<select name='conv_type_src' class='".$Block."_form_1'>\r".$pv['select_option']."
 </td>\r
 
-<td class='".$Block."_fca' style='width:50%; text-align: center;'>\r
-<select name='conv_type_dst' class='" . $Block."_t3 " . $Block . "_form_1'>\r".$pv['select_option']."
+<td style='width:50%; text-align: center;'>\r
+<select name='conv_type_dst' class='".$Block."_form_1'>\r".$pv['select_option']."
 </td>\r
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
+<td colspan='2' style='text-align: center;'>\r
 ".$bts->I18nTransObj->getI18nTransEntry('instruction')."<br>\r
 <textarea name='conv_src' id='conv_src' style='width:100%' rows='5'>
 ".$bts->RequestDataObj->getRequestDataSubEntry('CONV', 'cont')."
@@ -125,7 +125,7 @@ $Content .= "
 </tr>\r
 
 <tr>\r
-<td class='".$Block."_fcb' colspan='2' style='text-align: center;'>\r
+<td colspan='2' style='text-align: center;'>\r
 <textarea name='conv_dst' id='conv_dst' style='width:100%' rows='5'>
 ".
 $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
@@ -137,22 +137,19 @@ $bts->RequestDataObj->getRequestDataSubEntry('CONV', 'converti').
 </table>\r
 
 <br>\r
-<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules').">\r
+<table class='".$Block."_TableStd' style='text-align:center;'>\r
 <tr>\r
-<td style='width:80%'>\r</td>\r
+<td style='width:70%'>\r</td>\r
 <td style='text-align: right;'>\r
 ";
 
-$SB = array(
-		"id"				=> "modifyButton",
-		"type"				=> "button",
-		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-		"onclick"			=> "ConversionType ('ConvForm', 'conv_src', 'conv_dst', 'conv_type_src', 'conv_type_dst');",
-		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
-		"mode"				=> 1,
-		"size" 				=> 96,
-		"lastSize"			=> 0,
+
+$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+	$infos , 'button', 
+	$bts->I18nTransObj->getI18nTransEntry('btn1'), 96, 
+	'modifyButton', 
+	2, 2, 
+	"ConversionType ('ConvForm', 'conv_src', 'conv_dst', 'conv_type_src', 'conv_type_dst');" 
 );
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 

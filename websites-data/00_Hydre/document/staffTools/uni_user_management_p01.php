@@ -49,7 +49,7 @@ $bts->I18nTransObj->apply(
 	array(
 		"type" => "array",
 		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
+			"invite1"		=> "Cette partie va vous permettre de gérer les utilisateurs.",
 			"col_1_txt"		=> "Login",
 			"col_2_txt"		=> "Nom",
 			"col_3_txt"		=> "Groupe",
@@ -106,8 +106,8 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 // --------------------------------------------------------------------------------------------
 $GDU_ = array();
 
-$GDU_['nbr_par_page'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($GDU_['nbr_par_page'] < 1 ) { $GDU_['nbr_par_page'] = 10;}
+$GDU_['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+if ($GDU_['nbrPerPage'] < 1 ) { $GDU_['nbrPerPage'] = 10;}
 if ( $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('filterForm', 'group_id', null); }
 
 $clause_sql_element = array();
@@ -135,36 +135,25 @@ FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
 .$SqlTableListObj->getSQLTableName('group_user')." gu, "
 .$SqlTableListObj->getSQLTableName('group_website')." gw 
 ".$GDU_['clause_like'].";");
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] = $dbp['mucount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['ItemsCount'] = $dbp['mucount']; }
 
 // --------------------------------------------------------------------------------------------
-if ( $GDU_['login_count'] > $GDU_['nbr_par_page'] ) {
+if ( $GDU_['ItemsCount'] > $GDU_['nbrPerPage'] ) {
 
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQuryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'))>0 ) 	{$strGroupId	= "&filterForm[group_id]="		.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');}
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'))>0 )	{$strUserStatus	= "&filterForm[user_status]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status');}
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
 
-	$GDU_['selection_page'] = "<p style='text-align: center;'>\r --\r";
-	$GDU_['nbr_page']  = $GDU_['login_count'] / $GDU_['nbr_par_page'] ;
-	$GDU_['reste'] = $GDU_['login_count'] % $GDU_['nbr_par_page'];
-	if ( $GDU_['reste'] != 0 ) { $GDU_['nbr_page']++;}
-	$GDU_['compteur_page'] = 0;
-	for ( $i = 1 ; $i <= $GDU_['nbr_page'] ; $i++) {
-		if ( $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset') != $GDU_['compteur_page'] ) {
-			$GDU_['selection_page'] .= "
-			<a class='" . $Block."_lien' style='display: inline;' href='index.php?filterForm[selectionOffset]=".$GDU_['compteur_page']
-			.$strQuryLike
-			.$strGroupId
-			.$strUserStatus
-			.$strNbrPerPage
-			."'>&nbsp;".$i."&nbsp;</a> ";
-		}
-		else { $GDU_['selection_page'] .= "<span class='".$Block."_tb3'>&nbsp;[".$i."]&nbsp;</span> "; }
-		$GDU_['compteur_page']++;
-	}
-	$GDU_['selection_page'] .= " --</p>\r";
-	$Content .= $GDU_['selection_page'];
+	$ClassLoaderObj->provisionClass('Template');
+	$TemplateObj = Template::getInstance();
+	$GDU_['link'] = $strQuryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$GDU_['elmIn'] = "<div style='display:inline-block; background-color:#00000030; border-radius:0.1cm; border:solid 1px #00000040; padding:0.2cm 0.35cm; margin:0.1cm;'>";
+	$GDU_['elmInHighlight'] = "<div style='display:inline-block; background-color:#FFFFFF80; border-radius:0.1cm; border:solid 1px #00000040; padding:0.2cm 0.35cm; margin:0.1cm;'>";
+	$GDU_['elmOut'] = "</div>";
+	$GDU_['block'] = $Block;
+	$GDU_['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$Content .= $TemplateObj->renderPageSelector($GDU_);
 }
 
 $dbquery = $bts->SDDMObj->query("
@@ -175,10 +164,10 @@ FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
 .$SqlTableListObj->getSQLTableName('group_website')." gw 
 ".$GDU_['clause_like']."  
 ORDER BY user_name, user_login  
-LIMIT ".($GDU_['nbr_par_page'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$GDU_['nbr_par_page']." 
+LIMIT ".($GDU_['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$GDU_['nbrPerPage']." 
 ;");
 
-$GDU_['nbr_par_page_reel'] = $bts->SDDMObj->num_row_sql ( $dbquery );
+$GDU_['realNbrPerPage'] = $bts->SDDMObj->num_row_sql ( $dbquery );
 
 $T = array();
 $i = 1;
@@ -204,18 +193,6 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 
 	$T['Content']['1'][$i]['1']['cont'] = $dbp['user_login'];
 	$T['Content']['1'][$i]['2']['cont'] = $dbp['user_name'];
-	// $T['Content']['1'][$i]['3']['cont'] = 
-	// "<a class='".$Block."_lien' href='index.php?"
-	// ."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-	// ."&l=".$CurrentSetObj->getDataEntry('language')
-	// ."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-	// ."&arti_page=2"
-	// ."&formGenericData[mode]=edit"
-	// ."&userForm[selectionId]=".$dbp['user_id']
-	// ."'>"
-	// .$dbp['user_name']
-	// ."</a>\r";
-	
 	$T['Content']['1'][$i]['3']['cont'] = $dbp['group_title'];
 	$T['Content']['1'][$i]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
 	$lastVisit = ( $dbp['user_last_visit'] != 0 ) ? date ("Y M d - H:i:s",$dbp['user_last_visit']) : "";
@@ -235,9 +212,7 @@ $T['ContentCfg']['tabs'] = array(
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('Template');
-$TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
+$Content .= "<br>\r".$TemplateObj->renderAdminCreateButton($infos);
 
 // --------------------------------------------------------------------------------------------
 $Content .= "
@@ -282,7 +257,7 @@ $Content .= "
 
 <tr>\r
 <td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_41')."</td>\r
-<td class='".$Block."_fca'><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$GDU_['nbr_par_page']."' class='".$Block."_t3 ".$Block."_form_1'> 
+<td class='".$Block."_fca'><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$GDU_['nbrPerPage']."' class='".$Block."_t3 ".$Block."_form_1'> 
 ".$bts->I18nTransObj->getI18nTransEntry('table1_42')."
 </td>\r
 </tr>\r

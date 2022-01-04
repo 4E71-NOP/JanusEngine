@@ -28,8 +28,43 @@ class InteractiveElements {
 		return self::$Instance;
 	}
 	
+
 	/**
-	 * Return the HTML code of a button controled with an array/object.
+	 * Returns an array with default values for InteractiveElements->renderSubmitButton()
+	 * @parma array $infos
+	 * @parma string $type
+	 * @parma string $message
+	 * @parma number $size
+	 * @parma string $id
+	 * @parma number $initialStyle
+	 * @parma number $hoverStyle 1 2 3 green blue red
+	 * @parma string $onclick javascript for OnClick
+	 * @parma number $mode 1 for keeping track of the last size
+	 * @return array
+	 * 
+	 */
+	public function getDefaultSubmitButtonConfig ($infos , $type='submit', $message='', $size=128, $id='defaultButton', $initialStyle=1, $hoverStyle=1, $onclick='', $mode=1 ) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$Block = $ThemeDataObj->getThemeName().$infos['block'];
+
+		$tab = array(
+			"id"				=> $id,
+			"type"				=> $type,
+			"initialStyle"		=> $Block."_submit_s".$initialStyle."_n",
+			"hoverStyle"		=> $Block."_submit_s".$hoverStyle."_h",
+			"onclick"			=> $onclick,
+			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
+			"mode"				=> $mode,
+			"size" 				=> $size,
+			"lastSize"			=> 0,
+		);
+		return ($tab);
+	}
+
+	/**
+	 * Returns the HTML code of a button controled with an array/object.
 	 * The array should contain:
 	 * id				Defines the button's name
 	 * type				Defines the command (ex Submit) of the button.
@@ -48,7 +83,7 @@ class InteractiveElements {
 	public function renderSubmitButton (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-
+		
 		if ( strlen($infos['hoverStyle']) > 0 ) { 
 			$animation = " onmouseover=\"elm.ButtonHover('".$infos['id']."', '".$infos['hoverStyle']."');\" onmouseout=\"elm.ButtonHover('".$infos['id']."', '".$infos['initialStyle']."');\" ";
 		}
