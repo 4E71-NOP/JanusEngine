@@ -12,10 +12,8 @@ deadline_state 				INTEGER,
 deadline_creation_date 		INTEGER,
 deadline_end_date 			INTEGER,
 fk_ws_id					BIGINT,
-fk_user_id					BIGINT,
 
 PRIMARY KEY (deadline_id),
-KEY idx_!IdxNom!_ws_id (fk_ws_id),
-KEY idx_!IdxNom!_user_id (fk_user_id)
+KEY idx_!IdxNom!_ws_id (fk_ws_id)
 
 );

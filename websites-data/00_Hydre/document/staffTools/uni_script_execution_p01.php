@@ -43,7 +43,6 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 		)
 );
 
-
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
 

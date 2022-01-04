@@ -125,13 +125,13 @@ foreach ( $table_infos_modules AS $A1 ) {
 	// $gpv = $groupTab[$gpv];
 	// $gpu = $groupTab[$gpu];
 	$T['Content']['1'][$i]['1']['cont'] = "
-	<a class='".$Block."_lien' href='index.php?"
-	."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-	."&l=".$CurrentSetObj->getDataEntry('language')
-	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
+	<a class='".$Block."_lien' href='"
+	."index.php?"._HYDRLINKURLTAG_."=1"
+	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&moduleForm[selectionId]=".$A1['module_id']
+	."&formGenericData[selectionId]=".$A1['module_id']
 	."'>"
 	.$A1['module_name']
 	."</a>\r";

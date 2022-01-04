@@ -91,10 +91,11 @@ else {
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['Content']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='index.php?"
-			."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-			."&l=".$CurrentSetObj->getDataEntry('language')
-			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
+		$T['Content']['1'][$i]['1']['cont']	= "<a class='".$Block."_lien' href='"
+		.$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
+			."index.php?"._HYDRLINKURLTAG_."=1"
+			."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+			."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 			."&arti_page=2"
 			."&formGenericData[mode]=edit"
 			."&themeForm[selectionId]=".$dbp['theme_id']

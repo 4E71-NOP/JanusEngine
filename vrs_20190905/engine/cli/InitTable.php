@@ -751,7 +751,6 @@ self::$InitTable['deadline'] = function (&$a) {
 			"date_creation" => $date,
 			"date_expiration" => $date + (60*60*24*31*12*10),
 			"ws_id" => $a['Context']['ws_id'],
-			"user_id" => "1"
 	);
 	$a['params']['date_limite']	= &$a['params']['date_expiration'];
 	$a['params']['etat']		= &$a['params']['state'];

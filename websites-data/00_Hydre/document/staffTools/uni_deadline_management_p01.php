@@ -71,12 +71,10 @@ $bts->I18nTransObj->apply(
 
 // --------------------------------------------------------------------------------------------
 $dbquery = $bts->SDDMObj->query("
-SELECT dl.*,usr.user_login 
+SELECT dl.* 
 FROM "
-.$SqlTableListObj->getSQLTableName('deadline')." dl , "
-.$SqlTableListObj->getSQLTableName('user')." usr 
-WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND usr.user_id = dl.fk_user_id
+.$SqlTableListObj->getSQLTableName('deadline')." dl 
+WHERE dl.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $T = array();
@@ -94,14 +92,14 @@ else {
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 
 	
-	$linkId1 = "<a class='".$Block."_lien' href='index.php?sw="
-			.$WebSiteObj->getWebSiteEntry('ws_id')
-			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-			."&arti_page=2"
-			."&l=".$CurrentSetObj->getDataEntry('language')
-			."&deadlineForm[mode]=edit"
-			."&deadlineForm[selectionId]="
-			;
+	$linkId1 = "<a class='".$Block."_lien' href='"
+	."index.php?"._HYDRLINKURLTAG_."=1"
+	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+	."&arti_page=2"
+	."&formGenericData[mode]=edit"
+	."&formGenericData[selectionId]=".$A1['deadline_id']
+	."'>";
 	
 	$tabState = array(
 		0	=> $bts->I18nTransObj->getI18nTransEntry('dlState0'),

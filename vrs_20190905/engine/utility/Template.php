@@ -44,17 +44,22 @@ class Template {
 // 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
-			<table style=' width:".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width')."px; border-spacing: 16px;'>\r
+			<table style='width:100%; border-spacing: 16px;'>\r
 			<tr>\r
 			<td>
-		";
+			<div style='display:block; width:100%; height:100%' 
+				onmouseover=\"this.parentNode.style.backgroundColor='#00000020';\" 
+				onmouseout=\"this.parentNode.style.backgroundColor='transparent';\" 
+				onclick=\"elm.Gebi('confirmCheckboxEdit').checked ^= 1;\">\r
+			";
 		
 		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
-			case "edit":	$Content .= "<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('updateConfirm');		break;
-			case "create":	$Content .= "<input type='checkbox' name='formGenericData[creation]' 	>".$bts->I18nTransObj->getI18nTransEntry('createEditConfirm');		break;
+			case "edit":	$Content .= "<input type='checkbox' id='confirmCheckboxEdit' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('updateConfirm');		break;
+			case "create":	$Content .= "<input type='checkbox' id='confirmCheckboxEdit' name='formGenericData[creation]'>".$bts->I18nTransObj->getI18nTransEntry('createEditConfirm');		break;
 		}
 		$Content .= "
+		</div>\r
 		</td>\r
 		<td align='right'>\r
 		";
@@ -84,12 +89,8 @@ class Template {
 		
 		<!-- __________Return button__________ -->\r
 		<form ACTION='index.php?' method='post'>\r"
-// 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws')
-// 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-// 		.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-// 		."<input type='hidden'	name='formGenericData[origin]'				value='AdminDashboard'>\r"
-		."<input type='hidden'	name='newRoute[arti_slug]'							value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
-		."<input type='hidden'	name='newRoute[arti_page]'							value='1'>\r"
+		."<input type='hidden'	name='newRoute[arti_slug]'		value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
+		."<input type='hidden'	name='newRoute[arti_page]'		value='1'>\r"
 		."
 		<tr>\r
 		<td>\r
@@ -121,10 +122,6 @@ class Template {
 				$Content .= "
 				<!-- __________Delete button__________ -->\r
 				<form ACTION='index.php?' method='post'>\r"
-// 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_ws')
-// 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-// 				.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-// 				."<input type='hidden' name='arti_page'								value='2'>\r"
 				."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
 				."<input type='hidden'	name='newRoute[arti_page]'					value='1'>\r"
 				."<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard'>\r"
@@ -133,7 +130,12 @@ class Template {
 				."
 				<tr>\r
 				<td>\r
-				<input type='checkbox' name='formGenericData[deletion]'>".$bts->I18nTransObj->getI18nTransEntry('deleteConfirm')."
+				<div style='display:block; width:100%; height:100%' 
+				onmouseover=\"this.parentNode.style.backgroundColor='#00000020';\" 
+				onmouseout=\"this.parentNode.style.backgroundColor='transparent';\" 
+				onclick=\"elm.Gebi('confirmCheckboxDelete').checked ^= 1;\">\r
+				<input type='checkbox' id='confirmCheckboxDelete' name='formGenericData[deletion]'>".$bts->I18nTransObj->getI18nTransEntry('deleteConfirm')."
+				</div>\r
 				</td>\r
 				<td align='right'>\r
 				";

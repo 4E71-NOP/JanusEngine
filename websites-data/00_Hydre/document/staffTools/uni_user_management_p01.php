@@ -33,7 +33,7 @@
 $bts->RequestDataObj->setRequestData('filterForm',
 	array(
 		'user_status'			=> 1,
-		'nbrPerPage'			=> 100,
+		'nbrPerPage'			=> 5,
 		'group_id'				=> 0,
 	),
 );
@@ -50,12 +50,11 @@ $bts->I18nTransObj->apply(
 		"type" => "array",
 		"fra" => array(
 			"invite1"		=> "Cette partie va vous permettre de gérer les utilisateur.",
-			"col_1_txt"		=> "Id",
-			"col_2_txt"		=> "Login",
-			"col_3_txt"		=> "Nom",
-			"col_4_txt"		=> "Groupe",
-			"col_5_txt"		=> "Statut",
-			"col_6_txt"		=> "Dernière visite",
+			"col_1_txt"		=> "Login",
+			"col_2_txt"		=> "Nom",
+			"col_3_txt"		=> "Groupe",
+			"col_4_txt"		=> "Statut",
+			"col_5_txt"		=> "Dernière visite",
 			"tabTxt1"		=> "Informations",
 			"select1_0"		=> "No groupe",
 			"select1_1"		=> "Aucun groupe",
@@ -76,12 +75,11 @@ $bts->I18nTransObj->apply(
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to manage users.",
-			"col_1_txt"		=> "Id",
-			"col_2_txt"		=> "Login",
-			"col_3_txt"		=> "Name",
-			"col_4_txt"		=> "In group",
-			"col_5_txt"		=> "Status",
-			"col_6_txt"		=> "Last visit",
+			"col_1_txt"		=> "Login",
+			"col_2_txt"		=> "Name",
+			"col_3_txt"		=> "In group",
+			"col_4_txt"		=> "Status",
+			"col_5_txt"		=> "Last visit",
 			"tabTxt1"		=> "Informations",
 			"select1_0"		=> "No group",
 			"select1_1"		=> "Aucun group",
@@ -129,6 +127,7 @@ $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gw
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." gu.fk_group_id = gr.group_id ";								$clause_sql_element_offset++;
 $GDU_['clause_like'] .= " ".$clause_sql_element[$clause_sql_element_offset]." usr.user_name != 'HydreBDD'";									$clause_sql_element_offset++;
 
+
 $dbquery = $bts->SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
@@ -140,22 +139,26 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['login_count'] =
 
 // --------------------------------------------------------------------------------------------
 if ( $GDU_['login_count'] > $GDU_['nbr_par_page'] ) {
+
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQuryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'))>0 ) 	{$strGroupId	= "&filterForm[group_id]="		.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'))>0 )	{$strUserStatus	= "&filterForm[user_status]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+
 	$GDU_['selection_page'] = "<p style='text-align: center;'>\r --\r";
 	$GDU_['nbr_page']  = $GDU_['login_count'] / $GDU_['nbr_par_page'] ;
 	$GDU_['reste'] = $GDU_['login_count'] % $GDU_['nbr_par_page'];
 	if ( $GDU_['reste'] != 0 ) { $GDU_['nbr_page']++;}
 	$GDU_['compteur_page'] = 0;
 	for ( $i = 1 ; $i <= $GDU_['nbr_page'] ; $i++) {
-		if ( $_REQUEST['M_UTILIS_page'] != $GDU_['compteur_page'] ) {
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset') != $GDU_['compteur_page'] ) {
 			$GDU_['selection_page'] .= "
-			<a class='" . $Block."_lien' style='display: inline;' href='index.php?
-M_UTILIS_page=".$GDU_['compteur_page']."
-&amp;nbrPerPage=".$GDU_['nbr_par_page']."
-&amp;M_UTILIS_query_like=".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."
-&amp;M_UTILIS_group_id=".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id')."
-&amp;arti_page=1
-".$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."'
->&nbsp;".$i."&nbsp;</a> ";
+			<a class='" . $Block."_lien' style='display: inline;' href='index.php?filterForm[selectionOffset]=".$GDU_['compteur_page']
+			.$strQuryLike
+			.$strGroupId
+			.$strUserStatus
+			.$strNbrPerPage
+			."'>&nbsp;".$i."&nbsp;</a> ";
 		}
 		else { $GDU_['selection_page'] .= "<span class='".$Block."_tb3'>&nbsp;[".$i."]&nbsp;</span> "; }
 		$GDU_['compteur_page']++;
@@ -171,8 +174,8 @@ FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
 .$SqlTableListObj->getSQLTableName('group_user')." gu, "
 .$SqlTableListObj->getSQLTableName('group_website')." gw 
 ".$GDU_['clause_like']."  
-ORDER BY user_id, user_login 
-LIMIT ".($GDU_['nbr_par_page'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'M_UTILIS_page')).",".$GDU_['nbr_par_page']." 
+ORDER BY user_name, user_login  
+LIMIT ".($GDU_['nbr_par_page'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$GDU_['nbr_par_page']." 
 ;");
 
 $GDU_['nbr_par_page_reel'] = $bts->SDDMObj->num_row_sql ( $dbquery );
@@ -199,9 +202,8 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	;
 
 
-	$T['Content']['1'][$i]['1']['cont'] = $dbp['user_id'];
-	$T['Content']['1'][$i]['2']['cont'] = $dbp['user_login'];
-	$T['Content']['1'][$i]['3']['cont'] = $dbp['user_name'];
+	$T['Content']['1'][$i]['1']['cont'] = $dbp['user_login'];
+	$T['Content']['1'][$i]['2']['cont'] = $dbp['user_name'];
 	// $T['Content']['1'][$i]['3']['cont'] = 
 	// "<a class='".$Block."_lien' href='index.php?"
 	// ."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
@@ -214,13 +216,10 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	// .$dbp['user_name']
 	// ."</a>\r";
 	
-	$T['Content']['1'][$i]['4']['cont'] = $dbp['group_title'];
-	$T['Content']['1'][$i]['4']['tc'] = 1;
-	$T['Content']['1'][$i]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
-	$T['Content']['1'][$i]['5']['tc'] = 1;
-	$lastVisit = date ("Y M d - H:i:s",$dbp['user_last_visit']);
-	$T['Content']['1'][$i]['6']['cont'] = $lastVisit;
-	$T['Content']['1'][$i]['6']['tc'] = 1;
+	$T['Content']['1'][$i]['3']['cont'] = $dbp['group_title'];
+	$T['Content']['1'][$i]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);
+	$lastVisit = ( $dbp['user_last_visit'] != 0 ) ? date ("Y M d - H:i:s",$dbp['user_last_visit']) : "";
+	$T['Content']['1'][$i]['5']['cont'] = $lastVisit;
 }
 
 // --------------------------------------------------------------------------------------------
@@ -254,7 +253,7 @@ $Content .= "
 <tr>\r
 <td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_2')."</td>\r
 <td class='".$Block."_fca'>";
-// Groupe
+// Group
 $userMenuSelect = $CurrentSetObj->getInstanceOfUserObj()->getMenuOptionArray();
 $userMenuSelect['group']['name'] = "filterForm[group_id]";
 if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0 ) {
@@ -276,7 +275,6 @@ if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_sta
 }
 $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : userMenuSelect = " . $bts->StringFormatObj->arrayToString($userMenuSelect)));
 $Content .= $bts->RenderFormObj->renderMenuSelect($userMenuSelect['status']);
-
 
 $Content .= "
 </td>\r

@@ -31,7 +31,7 @@
 // $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
-$bts->RequestDataObj->setRequestData('mhForm', 
+$bts->RequestDataObj->setRequestData('lmForm', 
 	array(
 		"ok"			=>	"on",
 		"avrt"			=>	"on",
@@ -98,11 +98,11 @@ $bts->I18nTransObj->apply(
 // --------------------------------------------------------------------------------------------
 //	Realisation des suppresions demandées
 // --------------------------------------------------------------------------------------------
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'action')) != 0) {
-	switch ($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'action')) {
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action')) != 0) {
+	switch ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action')) {
 	case "DELETE":
 		$DeleteSelection = " WHERE log_id IN (";
-		foreach ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection') as $K => $A ) { $DeleteSelection .= $K.", "; }
+		foreach ( $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection') as $K => $A ) { $DeleteSelection .= $K.", "; }
 		unset ($K,$A);
 		$DeleteSelection = substr($DeleteSelection, 0, -2) . ") ";
 		$dbquery = $bts->SDDMObj->query("
@@ -113,72 +113,46 @@ if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'action')) !=
 	}
 }
 // --------------------------------------------------------------------------------------------
-//	Analyse des critere d'affichage
+//	Analysis of display criterias
 // --------------------------------------------------------------------------------------------
-if ( is_array($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'clause_type')) ) {
-	$CheckClauseType = 0;
-	foreach ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'clause_type') as $A ) { if ( $A == "on" ) { $CheckClauseType++; } }
-	if ( $CheckClauseType == 0 ) {
-		$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'err', 'on');
-		$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'ok', 'on');
-		$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'avrt', 'on');
+$criteriaUrl = ""; 
+$ClauseTmp = array();
+
+$CheckClauseType = 0;
+if ( is_array($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'clause_type')) ) {
+	$tabClauseTypes = array("err" => 0, "ok" => 1, "avrt" => 2, "info" => 3, "autr" => 4);
+
+	foreach ( $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'clause_type') as $k => $v ) {
+		if ( $v == "on" ) {
+			$CheckClauseType++;
+			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', $k, ' checked ');
+			$criteriaUrl .= "&amp;lmForm[clause_type][".$k."]=on";
+			$criteria2ndPost .= "<input type='hidden' name='lmForm[clause_type][".$k."]'	value='on'>\r";
+			$ClauseTmp[] = $tabClauseTypes[$k];
+		}
 	}
 }
-else {
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'err', 'on');
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'ok', 'on');
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'avrt', 'on');
+if ( $CheckClauseType == 0 ) {
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'err', ' checked ');
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'ok', ' checked ');
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'avrt', ' checked ');
 }
 
-$criteriaUrl = ""; 
-$ClauseType = " AND log_signal IN (";
-$ClauseTmp = array();
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'err') == "on" )	{
-	$ClauseTmp['1'] = "0"; 
-	$criteriaUrl .= "&amp;mhForm[clause_type][err]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'err');		
-	$criteriaPost .= "<input type='hidden' name='mhForm[clause_type][err]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'err')."'>\r";		
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'err', ' checked ');
+$ClauseType = "";
+if ( $CheckClauseType > 0 ) {
+	$ClauseType = " AND log_signal IN (";
+	foreach ( $ClauseTmp as $B ) { $ClauseType .= $B.", "; }
+	$ClauseType = substr($ClauseType, 0, -2) . ") ";
 }
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok') == "on" )	{
-	$ClauseTmp['2'] = "1";
-	$criteriaUrl .= "&amp;mhForm[clause_type][ok]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok');
-	$criteriaPost .= "<input type='hidden' name='mhForm[clause_type][ok]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok')."'>\r";		
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'ok', ' checked ');
-}
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'avrt') == "on" )	{
-	$ClauseTmp['3'] = "2";
-	$criteriaUrl .= "&amp;mhForm[clause_type][avrt]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'avrt');
-	$criteriaPost .= "<input type='hidden' name='mhForm[clause_type][avrt]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'avrt')."'>\r";		
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'avrt', ' checked ');
-}
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'info') == "on" )	{
-	$ClauseTmp['4'] = "3";
-	$criteriaUrl .= "&amp;mhForm[clause_type][info]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'info');
-	$criteriaPost .= "<input type='hidden' name='mhForm[clause_type][info]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'info')."'>\r";		
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'info', ' checked ');
-}
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'autr') == "on" )	{
-	$ClauseTmp['5'] = "4";
-	$criteriaUrl .= "&amp;mhForm[clause_type][autr]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'autr');
-	$criteriaPost .= "<input type='hidden' name='mhForm[clause_type][autr]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'autr')."'>\r";		
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'autr', ' checked ');
-}
-
-foreach ( $ClauseTmp as $B ) { $ClauseType .= $B.", "; }
-$ClauseType = substr($ClauseType, 0, -2) . ") ";
 unset ($A,$B);
 
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')) == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_par_page', 10);}
-$criteriaUrl .= "&amp;mhForm[nbr_par_page]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page');
-$criteriaPost .= "<input type='hidden' name='mhForm[nbr_par_page]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."'>\r";		
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')) == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_par_page', 10);}
+$criteriaUrl .= "&amp;lmForm[nbr_par_page]=".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page');
+$criteria2ndPost .= "<input type='hidden' name='lmForm[nbr_par_page]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."'>\r";		
 
 $Content .= "
-<form id='mhForm_001' ACTION='index.php?' method='post'>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page').
-"<input type='hidden' name='mhForm[action]'	value='DISPLAY'>\r";
+<form id='lmForm_001' ACTION='index.php?' method='post'>\r
+<input type='hidden' name='lmForm[action]'	value='DISPLAY'>\r";
 
 // --------------------------------------------------------------------------------------------
 $T = array();
@@ -191,30 +165,31 @@ $T['Content'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r1');
-$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='checkbox' name ='mhForm[clause_type][ok]'		class='".$Block."_t3 ".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'ok').">\r".$bts->I18nTransObj->getI18nTransEntry('type_ok')."; \r
-<input type='checkbox' name ='mhForm[clause_type][avrt]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'avrt').">\r".$bts->I18nTransObj->getI18nTransEntry('type_avrt')."; \r
-<input type='checkbox' name ='mhForm[clause_type][err]'		class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'err').">\r".$bts->I18nTransObj->getI18nTransEntry('type_err')."; \r
-<input type='checkbox' name ='mhForm[clause_type][info]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'info').">\r".$bts->I18nTransObj->getI18nTransEntry('type_info')."; \r
-<input type='checkbox' name ='mhForm[clause_type][autr]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'autr').">\r".$bts->I18nTransObj->getI18nTransEntry('type_autr')."\r
+$T['Content'][$Tab][$lt]['2']['cont'] = "
+<input type='checkbox' name ='lmForm[clause_type][ok]'		class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'ok').">\r".$bts->I18nTransObj->getI18nTransEntry('type_ok')."; \r
+<input type='checkbox' name ='lmForm[clause_type][avrt]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'avrt').">\r".$bts->I18nTransObj->getI18nTransEntry('type_avrt')."; \r
+<input type='checkbox' name ='lmForm[clause_type][err]'		class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'err').">\r".$bts->I18nTransObj->getI18nTransEntry('type_err')."; \r
+<input type='checkbox' name ='lmForm[clause_type][info]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'info').">\r".$bts->I18nTransObj->getI18nTransEntry('type_info')."; \r
+<input type='checkbox' name ='lmForm[clause_type][autr]'	class='".$Block."_form_1' ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'autr').">\r".$bts->I18nTransObj->getI18nTransEntry('type_autr')."\r
 ";
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
-$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='text' name='mhForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
+$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='text' name='lmForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
 
 // $T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
-$T['ContentInfos']['EnableTabs']		= 0;
+$T['ContentInfos']['EnableTabs']	= 0;
 $T['ContentInfos']['NbrOfTabs']		= 1;
-$T['ContentInfos']['TabBehavior']		= 0;
-$T['ContentInfos']['RenderMode']		= 1;
+$T['ContentInfos']['TabBehavior']	= 0;
+$T['ContentInfos']['RenderMode']	= 1;
 $T['ContentInfos']['HighLightType']	= 0;
-$T['ContentInfos']['Height']			= 128;
+$T['ContentInfos']['Height']		= 128;
 $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
 $T['ContentInfos']['GroupName']		= "list";
-$T['ContentInfos']['CellName']			= "log";
-$T['ContentInfos']['DocumentName']		= "doc";
-$T['ContentInfos']['cell_1_txt']		= $bts->I18nTransObj->getI18nTransEntry('cell_1_txt');
+$T['ContentInfos']['CellName']		= "log";
+$T['ContentInfos']['DocumentName']	= "doc";
+$T['ContentInfos']['cell_1_txt']	= $bts->I18nTransObj->getI18nTransEntry('cell_1_txt');
 
 $T['ContentCfg']['tabs']['1']['NbrOfLines']	= $lt;
 $T['ContentCfg']['tabs']['1']['NbrOfCells']	= 2;
@@ -248,26 +223,19 @@ $SB = array(
 );
 
 $Content .= "
-		<table style=' width:100%; border-spacing: 3px;'>\r
-		<tr>\r
-		<td align='right'>\r"
-		.$bts->InteractiveElementsObj->renderSubmitButton($SB)
-		."</td>\r</tr>\r</table>\r"
-		;
-
-$Content .= "
+	<table style=' width:100%; border-spacing: 3px;'>\r
+	<tr>\r
+	<td align='right'>\r"
+	.$bts->InteractiveElementsObj->renderSubmitButton($SB)
+	."</td>\r</tr>\r</table>\r
 <br>\r
 </form>\r
-<form id='mhForm_002' ACTION='index.php?' method='post'>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 
-."<input type='hidden' name='mhForm[action]'	value='SUPPRESSION'>\r"
+<form id='lmForm_002' ACTION='index.php?' method='post'>\r
+<input type='hidden' name='lmForm[action]'	value='SUPPRESSION'>\r"
 ;
 
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page') == 0 )) { $bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'page', 0 ); }
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') == 0 )) { $bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'page', 0 ); }
 
 $dbquery = $bts->SDDMObj->query("
 SELECT COUNT(log_id) as nbr_log 
@@ -276,31 +244,29 @@ WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ;");
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'log_count', $dbp['nbr_log']); } 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'log_count', $dbp['nbr_log']); } 
 
-if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') > $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page') ) {
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'selection_page', "<p style='text-align: center;'>\r --\r");
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') / $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'reste', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'log_count') % $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page'));
-	if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'reste') != 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_page')+1); }
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'compteur_page', 0);
-	for ( $i = 1 ; $i <= $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_page') ; $i++ ) {
-		if ( $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page') != $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'compteur_page') ) {
-			$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'selection_page', "
+if ( $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') > $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page') ) {
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'selection_page', "<p style='text-align: center;'>\r --\r");
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') / $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'));
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'reste', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') % $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'));
+	if ( $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'reste') != 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_page')+1); }
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'compteur_page', 0);
+	for ( $i = 1 ; $i <= $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_page') ; $i++ ) {
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') != $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'compteur_page') ) {
+			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'selection_page', "
 			<a class='" . $Block."_lien' href='index.php?
-			mhForm[page]=".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'compteur_page')."
-			&amp;arti_page=1".
-			$criteriaUrl.
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup').
-			"'>".$i."</a> ");
+			lmForm[page]=".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'compteur_page')
+			.$criteriaUrl
+			."'>".$i."</a> ");
 		}
 		else { 
 			
-			$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'selection_page', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection_page'). "<span style='font-weight: bold;'>[".$i."]</span> "); }
-			$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'compteur_page', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'compteur_page')+1);
+			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'selection_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection_page'). "<span style='font-weight: bold;'>[".$i."]</span> "); }
+			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'compteur_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'compteur_page')+1);
 	}
-	$bts->RequestDataObj->setRequestDataSubEntry('mhForm', 'selection_page', $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection_page')." --</p>\r");
-	$Content .= $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection_page');
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'selection_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection_page')." --</p>\r");
+	$Content .= $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection_page');
 }
 
 $dbquery = $bts->SDDMObj->query("
@@ -310,7 +276,7 @@ WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ".$ClauseType.
 $pv['clause_msgid']."
 ORDER BY log_date DESC, log_id DESC 
-LIMIT ".($bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page') * $bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')).",".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'nbr_par_page')."
+LIMIT ".($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') * $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')).",".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."
 ;");
 
 $config = array(
@@ -364,7 +330,7 @@ else {
 		}
 
 		$lt++;
-		$T['Content'][$Tab][$lt]['1']['cont'] = $dbp['log_id']. "<br>\r<input type='checkbox' name='mhForm[selection][".$dbp['log_id']."]'>";
+		$T['Content'][$Tab][$lt]['1']['cont'] = $dbp['log_id']. "<br>\r<input type='checkbox' name='lmForm[selection][".$dbp['log_id']."]'>";
 		$T['Content'][$Tab][$lt]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
 		$T['Content'][$Tab][$lt]['3']['cont'] = $tab[$dbp['log_signal']];
 		$T['Content'][$Tab][$lt]['4']['cont'] = $dbp['log_msgid'];
@@ -397,9 +363,9 @@ $T['ContentCfg']['tabs'] = array(
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
-$Content .= $criteriaPost."
-<input type='hidden' name='mhForm[page]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'page')."'>\r
-<input type='hidden' name='mhForm[action]'	value='DELETE'>\r
+$Content .= $criteria2ndPost."
+<input type='hidden' name='lmForm[page]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page')."'>\r
+<input type='hidden' name='lmForm[action]'	value='DELETE'>\r
 <br>\r";
 
 $SB = array(
@@ -424,7 +390,7 @@ $Content .= "
 
 $Content .= "
 </form>\r
-".$bts->RequestDataObj->getRequestDataSubEntry('mhForm', 'selection_page')."
+".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection_page')."
 ";
 // $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "var TooltipByPass = { logMgmt : { 'State':1, 'X':196, 'Y':256 }};");
 $CurrentSetObj->getInstanceOfGeneratedScriptObj()->AddObjectEntry ('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");

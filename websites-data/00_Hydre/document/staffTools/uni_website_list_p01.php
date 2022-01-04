@@ -42,18 +42,16 @@ $bts->I18nTransObj->apply(
 		"type" => "array",
 		"fra" => array(
 			"invite1"		=> "Cette partie va vous permettre de voir les sites.",
-			"col_1_txt"	=> "Id",
-			"col_2_txt"	=> "Nom",
-			"col_3_txt"	=> "Répertoire",
-			"col_4_txt"	=> "Lien",
+			"col_1_txt"	=> "Nom",
+			"col_2_txt"	=> "Répertoire",
+			"col_3_txt"	=> "Lien",
 			"link"		 => "Visiter le site",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will show you the websites.",
-			"col_1_txt"	=> "Id",
-			"col_2_txt"	=> "Name",
-			"col_3_txt"	=> "Directory",
-			"col_4_txt"	=> "Link",
+			"col_1_txt"	=> "Name",
+			"col_2_txt"	=> "Directory",
+			"col_3_txt"	=> "Link",
 			"link"		=> "Visit the website",
 		)
 	)
@@ -66,7 +64,6 @@ $i = 1;
 $T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 $T['Content']['1'][$i]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 $T['Content']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-$T['Content']['1'][$i]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 $i++;
 
 $dbquery = $bts->SDDMObj->query("
@@ -75,10 +72,9 @@ FROM ".$SqlTableListObj->getSQLTableName('website')."
 ORDER BY ws_id
 ;");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-	$T['Content']['1'][$i]['1']['cont'] = $dbp['ws_id'];
-	$T['Content']['1'][$i]['2']['cont'] = $dbp['ws_name'];
-	$T['Content']['1'][$i]['3']['cont'] = $dbp['ws_directory'];
-	$T['Content']['1'][$i]['4']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$bts->I18nTransObj->getI18nTransEntry('link')."</a>";
+	$T['Content']['1'][$i]['1']['cont'] = $dbp['ws_name'];
+	$T['Content']['1'][$i]['2']['cont'] = $dbp['ws_directory'];
+	$T['Content']['1'][$i]['3']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$bts->I18nTransObj->getI18nTransEntry('link')."</a>";
 	$i++;
 }
 
@@ -86,7 +82,7 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i+
 $T['ContentInfos']['EnableTabs']		= 0;
 
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i+1,4,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i+1,3,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 

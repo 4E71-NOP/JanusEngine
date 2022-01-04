@@ -65,6 +65,7 @@ class ClassLoader {
 		"ThemeData"					=> _ENTITY_DIRECTORY_."others/ThemeData.php",
 		
 		"ModuleList"				=> _ENTITY_DIRECTORY_."lists/ModuleList.php",
+		"PermissionList"			=> _ENTITY_DIRECTORY_."lists/PermissionList.php",
 		
 		"AddOnConfig"				=> _ENTITY_DIRECTORY_."dao/AddOnConfig.php",
 		"AddOnDependancies"			=> _ENTITY_DIRECTORY_."dao/AddOnDependancies.php",

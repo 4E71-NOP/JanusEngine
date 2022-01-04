@@ -39,8 +39,36 @@ class ModuleWebsite extends Entity {
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')."
-			WHERE module_website_id = '".$id."'
-		;");
+			WHERE module_website_id = '".$id."' 
+			;");
+		
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module_website id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) {
+					if (isset($this->columns[$A])) { $this->ModuleWebsite[$A] = $B; }
+				}
+			}
+		}
+		else {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for module_website id=".$id));
+		}
+	}
+
+	/**
+	 * Gets ModuleWebsite data from the database.<br>
+	 * @param integer $id
+	 */
+	public function getModuleDataFromDB($id) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." 
+			WHERE fk_module_id = '".$id."' 
+			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module_website id=".$id));

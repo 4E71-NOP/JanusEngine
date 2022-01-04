@@ -96,12 +96,14 @@ else {
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['Content']['1'][$i]['1']['cont']	= "
-		<a class='".$Block."_lien' href='index.php?
-		&amp;uni_gestion_des_layout_p=2
-		&amp;M_PRESNT[layout_id]=".$dbp['layout_id']. 
-		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup').
-		"&amp;arti_page=2'
-		>".$dbp['layout_name']."</a>";
+		<a class='".$Block."_lien' href='"
+		."index.php?"._HYDRLINKURLTAG_."=1"
+		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+		."&arti_page=2"
+		."&formGenericData[mode]=edit"
+		."&formGenericData[selectionId]=".$dbp['layout_id']
+		."'>".$dbp['layout_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['layout_title'];
 		$T['Content']['1'][$i]['3']['cont']	= $dbp['theme_title'];
 	}

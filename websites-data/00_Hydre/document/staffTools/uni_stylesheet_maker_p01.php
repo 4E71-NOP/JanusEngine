@@ -167,7 +167,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame1')."<br>\r
 	<form name='CSSMaker' ACTION='' method='post'>\r
-	<textarea name='CSSMakerResult' style='width:100%' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
+	<textarea name='CSSMakerResult' cols='80' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$stylesheet."\r</textarea>\r<br>\r
 	</td>\r
 	</tr>\r
 
@@ -209,7 +209,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	<br>\r<br>\r
 	".$bts->I18nTransObj->getI18nTransEntry('frame2')."<br>\r
 	<form name='GDS_02' ACTION='' method='post'>\r
-	<textarea name='CSSMakerResult' cols='".$textareSize."' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
+	<textarea name='CSSMakerResult' cols='80' rows='20' class='" . $Block."_t1 " . $Block."_form_1'>\r".$theme_vars."\r</textarea>\r<br>\r
 	
 	<tr>\r
 	<td>\r

@@ -30,8 +30,6 @@ class Module extends Entity {
 		'module_container_name'			=> 0,
 		'module_container_style'		=> 0,
 		'fk_perm_id'					=> 0,
-		// 'module_group_allowed_to_see'	=> 0,
-		// 'module_group_allowed_to_use'	=> 0,
 		'module_adm_control'			=> 0,
 		'module_execution'				=> 0,
 	);
@@ -53,11 +51,11 @@ class Module extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$dbquery = $bts->SDDMObj->query("
-			SELECT a.*,b.module_state
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
-			WHERE a.module_id = '".$id."'
-			AND a.module_id = b.module_id
-			AND b.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			SELECT m.*,mw.module_state
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." m , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." mw
+			WHERE m.module_id = '".$id."'
+			AND m.module_id = mw.fk_module_id
+			AND mw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

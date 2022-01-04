@@ -67,7 +67,6 @@ self::$PreRequisiteTable['add']['deadline'] = array (
 				array ( "v" => "state",				"t" => "deadline_state"),
 				array ( "v" => "date_creation",		"t" => "deadline_creation_date"),
 				array ( "v" => "date_expiration",	"t" => "deadline_end_date"),
-				array ( "v" => "user_id",			"t" => "fk_user_id"),
 				array ( "v" => "ws_id",				"t" => "fk_ws_id"),
 		),
 );

@@ -51,7 +51,10 @@ class ModuleList {
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
+				foreach ( $dbp as $A => $B ) { 
+					$this->ModuleList[$dbp['module_name']][$A] = $B; 
+				}
+				$this->ModuleList[$dbp['module_id']] = &$this->ModuleList[$dbp['module_name']]; 
 			}
 			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
 		}
@@ -111,7 +114,7 @@ class ModuleList {
 	public function getModuleList() { return $this->ModuleList; }
 	public function getModuleListEntry($data) { return $this->ModuleList[$data]; }
 	
-	public function setModuleList($Layout) { $this->ModuleList = $Layout; }
+	public function setModuleList($data) { $this->ModuleList = $data; }
 	public function setModuleListEntry($entry , $data) { $this->ModuleList[$entry] = $data; }
 	//@formatter:on
 
