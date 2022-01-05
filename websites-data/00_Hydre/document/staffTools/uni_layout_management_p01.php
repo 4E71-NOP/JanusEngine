@@ -95,8 +95,7 @@ else {
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['Content']['1'][$i]['1']['cont']	= "
-		<a class='".$Block."_lien' href='"
+		$T['Content']['1'][$i]['1']['cont']	= "<a href='"
 		."index.php?"._HYDRLINKURLTAG_."=1"
 		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')

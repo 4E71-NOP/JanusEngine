@@ -134,83 +134,63 @@ if ( $permissionOnExtenssion == 1 ) {
 			$T['Content']['1'][$i]['2']['cont'] = $A['extension_version'];
 			$T['Content']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tab1'.$A['extension_etat']);
 			
-			$SB = array(
-					"id"				=> "installButton",
-					"type"				=> "submit",
-					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
-					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab2'.$A['extension_etat']),
-					"mode"				=> 1,
-					"size" 				=> 64,
-					"lastSize"			=> 0,
+			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+				$infos , 'submit', 
+				$bts->I18nTransObj->getI18nTransEntry('tab2'.$A['extension_etat']), 64, 
+				'installButton', 
+				1, 1, 
+				"" 
 			);
 			
-			$T['Content']['1'][$i]['4']['style']		= "padding:16px";
+			$T['Content']['1'][$i]['4']['style']	= "padding:16px";
 			$T['Content']['1'][$i]['4']['cont']		= "
-			<form ACTION='index.php?' method='post' name='formulaire_install1'>\r".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')."
-			<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_name]'			value='".$A['extension_name']."'>\r
+			<form ACTION='index.php?' method='post' name='installForm01'>\r
+			<input type='hidden' name='M_EXTENS[extension_name]'		value='".$A['extension_name']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
 			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Installer'>\r
 			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
 			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"</form>\r";
 
-			$SB = array(
-					"id"				=> "deleteButton",
-					"type"				=> "submit",
-					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']),
-					"mode"				=> 1,
-					"size" 				=> 64,
-					"lastSize"			=> 0,
+			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+				$infos , 'submit', 
+				$bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']), 64, 
+				'deleteButton', 
+				2, 2, 
+				"" 
 			);
-			
-			$T['Content']['1'][$i]['5']['style']		= "padding:16px";
-			$T['Content']['1'][$i]['5']['cont']		= "
-			<form ACTION='index.php?' method='post' name='formulaire_install1'>\r".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')."
-			<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_name]'			value='".$A['extension_name']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Supprimer'>\r
-			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
+
+			$T['Content']['1'][$i]['5']['style']	= "padding:16px";
+			$T['Content']['1'][$i]['5']['cont']		= "<form ACTION='index.php?' method='post' name='Form01'>\r"
+			."<input type='hidden' name='formGenericData[origin]'		value='AdminDashboard".$processStep."'>\r"
+			."<input type='hidden' name='formGenericData[section]'		value='AdminExtensionManagementP02'>"
+			."<input type='hidden' name='formCommand1'					value='".$commandType."'>"
+			."<input type='hidden' name='formEntity1'					value='entity'>"
+			."<input type='hidden' name='formTarget1[name]'				value='".$A['extension_name']."'>\r"
+			."<input type='hidden' name='formGenericData[mode]'			value='".$processTarget."'>\r"
+			."<input type='hidden' name='formGenericData[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'selectionId')."'>\r"
+			. $bts->InteractiveElementsObj->renderSubmitButton($SB).
 			"</form>\r";
 		}
 		if ( $A['extension_etat'] == 1 ) {
-			$SB = array(
-					"id"				=> "deleteButton",
-					"type"				=> "submit",
-					"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
-					"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']),
-					"mode"				=> 1,
-					"size" 				=> 64,
-					"lastSize"			=> 0,
+			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+				$infos , 'submit', 
+				$bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']), 64, 
+				'deleteButton', 
+				3, 3, 
+				"" 
 			);
-			
-			
-			$T['Content']['1'][$i]['5']['cont']		= "<br>\r&nbsp;
-			<form ACTION='index.php?' method='post' name='formulaire_Retire1'>\r".
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-			$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-			"<input type='hidden' name='arti_page'						value='2'>\r
-			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Retirer'>\r
-			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
-			"</form>\r";
+
+			$T['Content']['1'][$i]['5']['cont']		= 
+			"<form ACTION='index.php?' method='post' name='Form01'>\r"
+			."<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard".$processStep."'>\r"
+			."<input type='hidden' name='formGenericData[section]'				value='AdminExtensionManagementP02'>"
+			."<input type='hidden' name='formCommand1'							value='".$commandType."'>"
+			."<input type='hidden' name='formGenericData[extension_directory]'	value='".$A['extension_directory']."'>\r"
+			."<input type='hidden' name='formGenericData[extension_requete]'	value='Retirer'>\r"
+			."<input type='hidden' name='uni_gestion_des_extensions_p'			value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r"
+			.$bts->InteractiveElementsObj->renderSubmitButton($SB)
+			."</form>\r";
 		}
 	}
 	
@@ -228,9 +208,7 @@ if ( $permissionOnExtenssion == 1 ) {
 }
 else { $Content .= "!!!!!!!!!!!!!!!!"; }
 
-
 /*Hydr-Content-End*/
-
 // $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

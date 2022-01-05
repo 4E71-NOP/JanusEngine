@@ -55,7 +55,7 @@ class FormToCommandLine {
 				$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " lang '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_lang')."'";
 				$cln++;
 				break;
-			case "profile_management":
+			case "profileManagement":
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Page profile management submitted a form."));
 				if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData','modification') == "on" ) {
 					$n = 1;

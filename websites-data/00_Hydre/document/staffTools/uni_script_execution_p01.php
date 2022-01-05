@@ -112,16 +112,13 @@ $Content .= "
 <td style='width:35%;'>\r
 ";
 
-$SB = array();
-$SB['id']				= "execButton";
-$SB['type']				= "submit";
-$SB['initialStyle']		= $Block."_t3 ".$Block."_submit_s1_n";
-$SB['hoverStyle']		= $Block."_t3 ".$Block."_submit_s1_h";
-$SB['onclick']			= "";
-$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('btnExecute');
-$SB['mode']				= 1;
-$SB['size'] 			= 128;
-$SB['lastSize']			= 0;
+$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+	$infos , 'submit', 
+	$bts->I18nTransObj->getI18nTransEntry('btnExecute'), 128, 
+	'execButton', 
+	1, 1, 
+	"" 
+);
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
 $Content .= "

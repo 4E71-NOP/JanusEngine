@@ -48,13 +48,12 @@ $bts->I18nTransObj->apply(
 		"type" => "array",
 		"fra" => array(
 			"invite1"		=> "Cette partie va vous permettre de modifier les deadlines.",
-			"col_1_txt"		=> "Id",
-			"col_2_txt"		=> "Nom",
-			"col_3_txt"		=> "Titre",
-			"col_4_txt"		=> "Parent",
-			"col_5_txt"		=> "Pos",
-			"col_6_txt"		=> "▲/▼",
-			"col_7_txt"		=> "Etat",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Titre",
+			"col_3_txt"		=> "Parent",
+			"col_4_txt"		=> "Pos",
+			"col_5_txt"		=> "▲/▼",
+			"col_6_txt"		=> "Etat",
 			"cell_1_txt"	=> "Informations",
 			"dlState0"		=> "Hors ligne",
 			"dlState1"		=> "En ligne",
@@ -62,13 +61,12 @@ $bts->I18nTransObj->apply(
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to modify deadlines.",
-			"col_1_txt"		=> "Id",
-			"col_2_txt"		=> "Name",
-			"col_3_txt"		=> "Title",
-			"col_4_txt"		=> "Parent",
-			"col_5_txt"		=> "Pos",
-			"col_6_txt"		=> "▲/▼",
-			"col_7_txt"		=> "Status",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Title",
+			"col_3_txt"		=> "Parent",
+			"col_4_txt"		=> "Pos",
+			"col_5_txt"		=> "▲/▼",
+			"col_6_txt"		=> "Status",
 			"cell_1_txt"	=> "Informations",
 			"dlState0"		=> "Offline",
 			"dlState1"		=> "Online",
@@ -77,45 +75,44 @@ $bts->I18nTransObj->apply(
 	)
 );
 $sqlQuery = "
-	SELECT c.fk_lang_id, l.lang_original_name
-	FROM ".$SqlTableListObj->getSQLTableName('menu')." c, "
+	SELECT m.fk_lang_id, l.lang_original_name
+	FROM ".$SqlTableListObj->getSQLTableName('menu')." m, "
 	.$SqlTableListObj->getSQLTableName('language')." l, "
 	.$SqlTableListObj->getSQLTableName('language_website')." lw
-	WHERE c.menu_type IN ('0','1')
-	AND c.menu_state = '1'
-	AND c.fk_ws_id = '2'
-	AND c.fk_lang_id = l.lang_id
+	WHERE m.menu_type IN ('0','1')
+	AND m.menu_state = '1'
+	AND m.fk_lang_id = l.lang_id
 	AND l.lang_id = lw.fk_lang_id
-	AND c.fk_ws_id = lw.fk_ws_id
-	AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-	GROUP BY c.fk_lang_id
+	AND m.fk_ws_id = lw.fk_ws_id
+	AND m.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+	GROUP BY m.fk_lang_id
 	;";
-	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 	$dbquery = $bts->SDDMObj->query($bts->StringFormatObj->formatToLog($sqlQuery));
 
-$CateTabList = array();
+$TabListLang = array();
 $langClause = "";
 $i = 1;
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
-	$CateTabList[$dbp['fk_lang_id']]['tab'] = $i; 
-	$CateTabList[$dbp['fk_lang_id']]['id'] = $dbp['fk_lang_id']; 
-	$CateTabList[$dbp['fk_lang_id']]['nom'] = $dbp['lang_original_name']; 
-	$CateTabList[$dbp['fk_lang_id']]['count'] = 1;
-	$CateTabList[$dbp['fk_lang_id']]['linePtr'] = 2;
+	$TabListLang[$dbp['fk_lang_id']]['tab'] = $i; 
+	$TabListLang[$dbp['fk_lang_id']]['id'] = $dbp['fk_lang_id']; 
+	$TabListLang[$dbp['fk_lang_id']]['nom'] = $dbp['lang_original_name']; 
+	$TabListLang[$dbp['fk_lang_id']]['count'] = 1;
+	$TabListLang[$dbp['fk_lang_id']]['linePtr'] = 2;
 	$langClause .= $dbp['fk_lang_id'].", ";
 	$i++;
 }
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "CateTabList=".$bts->StringFormatObj->arrayToString($CateTabList)));
-$bts->LMObj->logDebug($CateTabList, "CateTabList");
+$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "CateTabList=".$bts->StringFormatObj->arrayToString($TabListLang)));
+$bts->LMObj->logDebug($TabListLang, "CateTabList");
 $langClause = substr($langClause, 0, -2);
 $nbrTabs = $i-1;
 
 // Prepare the chart first line.
 $T = array();
 
-reset ($CateTabList);
+reset ($TabListLang);
 unset ($A);
-foreach ( $CateTabList as $A ) {
+foreach ( $TabListLang as $A ) {
 	$Tab = $A['tab'];
 	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content'][$Tab]['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
@@ -123,19 +120,18 @@ foreach ( $CateTabList as $A ) {
 	$T['Content'][$Tab]['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	$T['Content'][$Tab]['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
 	$T['Content'][$Tab]['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
-	$T['Content'][$Tab]['1']['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 }
 $sqlQuery = "
-SELECT c.* 
-FROM ".$SqlTableListObj->getSQLTableName('menu')." c, "
+SELECT m.* 
+FROM ".$SqlTableListObj->getSQLTableName('menu')." m, "
 .$SqlTableListObj->getSQLTableName('language_website')." lw 
-WHERE c.menu_type IN (0,1) 
-AND c.menu_state = '1' 
-AND c.fk_lang_id IN (".$langClause.") 
-AND c.fk_lang_id = lw.fk_lang_id 
-AND lw.fk_ws_id = c.fk_ws_id 
-AND c.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-ORDER BY c.fk_lang_id, c.menu_parent, c.menu_position 
+WHERE m.menu_type IN (0,1) 
+AND m.menu_state = '1' 
+AND m.fk_lang_id IN (".$langClause.") 
+AND m.fk_lang_id = lw.fk_lang_id 
+AND lw.fk_ws_id = m.fk_ws_id 
+AND m.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position 
 ;";
 $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 $dbquery = $bts->SDDMObj->query($sqlQuery);
@@ -145,30 +141,50 @@ $stateTab = array(
 	1	=>	$bts->I18nTransObj->getI18nTransEntry('enabled'),
 );
 
-$buttonLink = "<a href='index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."&arti_page=".$CurrentSetObj->getDataSubEntry('article', 'arti_page'); 
+$buttonLink = "<a href='"
+."index.php?"._HYDRLINKURLTAG_."=1"
+."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+."&arti_page=1"
+;
+
 $buttonUp = "'><img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_top')."' width='16' height='16'>"; 
 $buttonDown = "'><img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_bottom')."' width='16' height='16'>";
 
+$tabListMenu = array();
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) {
-	$Tab = $CateTabList[$dbp['fk_lang_id']]['tab'];
-	$l = $CateTabList[$dbp['fk_lang_id']]['linePtr'];
-	$T['Content'][$Tab][$l]['1']['cont'] = $dbp['menu_id'];
-	$T['Content'][$Tab][$l]['2']['cont'] =
-		"<a class='".$Block."_lien' href='index.php?"
-		."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-		."&l=".$CurrentSetObj->getDataEntry('language')
-		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-		."&arti_page=2"
-		."&formGenericData[mode]=edit"
-		."&menuForm[selectionId]=".$dbp['menu_id']
-		."'>".$dbp['menu_name']."</a>";
-	$T['Content'][$Tab][$l]['3']['cont'] = $dbp['menu_title'];
-	$T['Content'][$Tab][$l]['4']['cont'] = $dbp['menu_parent'];
-	$T['Content'][$Tab][$l]['5']['cont'] = $dbp['menu_position'];
-	$T['Content'][$Tab][$l]['6']['cont'] = $buttonLink."&menuForm[menu_id]=".$dbp['menu_id']."&menuForm[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&menuForm[menu_id]=".$dbp['menu_id']."&menuForm[command]=moveDown".$buttonDown."</a>\r";
-	$T['Content'][$Tab][$l]['7']['cont'] = $stateTab[$dbp['menu_state']];
+	$tabListMenu[$dbp['menu_id']] = array( 
+		'menu_id'		=> $dbp['menu_id'],
+		'menu_name'		=> $dbp['menu_name'],
+		'menu_title'	=> $dbp['menu_title'],
+		'menu_parent'	=> $dbp['menu_parent'],
+		'menu_position'	=> $dbp['menu_position'],
+		'menu_state'	=> $dbp['menu_state'],
+		'fk_lang_id'	=> $dbp['fk_lang_id'],
+	);
+}
+
+
+foreach ($tabListMenu as $A ) {
+	$Tab = $TabListLang[$A['fk_lang_id']]['tab'];
+	$l = $TabListLang[$A['fk_lang_id']]['linePtr'];
+	$T['Content'][$Tab][$l]['1']['cont'] = "<a href='"
+	."index.php?"._HYDRLINKURLTAG_."=1"
+	."&arti_slug=".$CurrentSetObj->getDataSubEntry ('article', 'arti_slug')
+	."&arti_ref=".$CurrentSetObj->getDataSubEntry ('article', 'arti_ref')
+	."&arti_page=2"
+	."&formGenericData[mode]=edit"
+	."&formGenericData[selectionId]=".$A['menu_id']
+	."'>"
+	.$A['menu_name']
+	."</a>\r";
+	$T['Content'][$Tab][$l]['2']['cont'] = $A['menu_title'];
+	$T['Content'][$Tab][$l]['3']['cont'] = $tabListMenu[$A['menu_parent']]['menu_name'];
+	$T['Content'][$Tab][$l]['4']['cont'] = $A['menu_position'];
+	$T['Content'][$Tab][$l]['5']['cont'] = $buttonLink."&formGenericData[selection_id]=".$A['menu_id']."&formGenericData[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&formGenericData[menu_id]=".$A['menu_id']."&formGenericData[command]=moveDown".$buttonDown."</a>\r";
+	$T['Content'][$Tab][$l]['6']['cont'] = $stateTab[$dbp['menu_state']];
 	$l++;
-	$CateTabList[$dbp['fk_lang_id']]['count'] = $CateTabList[$dbp['fk_lang_id']]['linePtr'] = $l;
+	$TabListLang[$A['fk_lang_id']]['count'] = $TabListLang[$A['fk_lang_id']]['linePtr'] = $l;
 }
 
 // --------------------------------------------------------------------------------------------
@@ -177,9 +193,9 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery) ) {
 //
 //
 // --------------------------------------------------------------------------------------------
-reset ($CateTabList);
+reset ($TabListLang);
 unset ($A);
-foreach ( $CateTabList as $A ) {
+foreach ( $TabListLang as $A ) {
 	$Tab = $A['tab'];
 	$T['ContentCfg']['tabs'][$Tab] = $bts->RenderTablesObj->getDefaultTableConfig($A['count']-1,7,1);
 	$bts->I18nTransObj->setI18nTransEntry('tabTxt'.$Tab, $A['nom']);
@@ -202,7 +218,7 @@ function CateRchRacine ( $menu_type, &$src , &$dst ) {
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
+$Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydr-Content-End*/
 

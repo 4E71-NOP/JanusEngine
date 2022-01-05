@@ -31,24 +31,10 @@
 // $LMObj->setInternalLogTarget("both");
 
 // --------------------------------------------------------------------------------------------
-$bts->RequestDataObj->setRequestData('UserProfileForm', 
-	array(
-		"SelectedThemeId"	=>	2,
-		"SelectedTheme"		=>	"hydr_aqua_01",
-		// "SelectedThemeId"	=>	3,
-		// "SelectedTheme"		=>	"hydr_nebula_01",
-// 		"SelectedThemeId"	=>	4,
-// 		"SelectedTheme"		=>	"hydr_magma_01",
-// 		"SelectedThemeId"	=>	5,
-// 		"SelectedTheme"		=>	"hydr_nebula_01",
-		
-	)
-);
-
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
-				'origin'		=> 'AdminDashboard',
-				'section'		=> 'UserProfileP01',
+				'origin'		=> 'profileManagement',
+				'section'		=> 'BrowseThemeForm',
 				// 'creation'		=> 'on',
 				'modification'	=> 'on',
 				// 'deletion'		=> 'on',
@@ -56,7 +42,15 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 //				'mode'			=> 'create',
 //				'mode'			=> 'delete',
 		)
-		);
+	);
+
+	$bts->RequestDataObj->setRequestData('browseTheme', 
+	array(
+		"theme_id"			=>	3748884111131853825,
+		"theme_name"		=>	"hydr_magma_01",
+	)
+);
+
 
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
@@ -85,9 +79,7 @@ $bts->I18nTransObj->apply(
 		"col_6_txt"		=>	"Action",
 		"col_7_txt"		=>	"Message",
 		"tabTxt1"		=>	"Compte",
-		"tabTxt2"		=>	"Internet",
-		"tabTxt3"		=>	"Perso",
-		"tabTxt4"		=>	"Preferences",
+		"tabTxt2"		=>	"Preferences",
 		"btn1"			=>	"Rafraichir la vue",
 		"btn2"			=>	"Supprimer",
 		"AvatarUploadError" => array(
@@ -99,20 +91,10 @@ $bts->I18nTransObj->apply(
 				5	=>	"Extension interdite pour les images d'avatar.",
 			),		
 		"confirmation_modification_oubli"	=>	"Vous n'avez pas confirm&eacute; la modification du profil.",
-		"t1_l1"	=>	"Identifiant",
-		"t1_l2"	=>	"Avatar",
-		"t1_l3"	=>	"Téléchargement",
-		"t2_l1"	=>	"Email",
-		"t2_l2"	=>	"MSN",
-		"t2_l3"	=>	"AIM",
-		"t2_l4"	=>	"ICQ",
-		"t2_l5"	=>	"YIM",
-		"t2_l6"	=>	"Site Web",
-		"t3_l1" =>	"Nom",
-		"t3_l2"	=>	"Pays",
-		"t3_l3"	=>	"Ville",
-		"t3_l4"	=>	"Occupation",
-		"t3_l5"	=>	"Sujets d'intérèt",
+		"t1_login"	=>	"Identifiant",
+		"t1_mail"	=>	"Email",
+		"t1_avatar"	=>	"Avatar",
+		"t1_upload"	=>	"Téléchargement",
 		"t4_l1"	=>	"Recevoir la newsletter",
 		"t4_l2"	=>	"Montrer l'E-mail au public",
 		"t4_l3"	=>	"Montrer le status 'En ligne'",
@@ -147,9 +129,7 @@ $bts->I18nTransObj->apply(
 		"col_6_txt"		=>	"Action",
 		"col_7_txt"		=>	"Message",
 		"tabTxt1"		=>	"Compte",
-		"tabTxt2"		=>	"Internet",
-		"tabTxt3"		=>	"Perso",
-		"tabTxt4"		=>	"Préférences",
+		"tabTxt2"		=>	"Préférences",
 		"btn1"			=>	"Refresh display",
 		"AvatarUploadError" => array(
 				0	=>	"Unknown error.",
@@ -160,20 +140,10 @@ $bts->I18nTransObj->apply(
 				5	=>	"Forbidden extenssion for avatar images.",
 			),
 		"confirmation_modification_oubli"	=>	"You forgot to confirm the profil modification.",
-		"t1_l1"	=>	"Login",
-		"t1_l2"	=>	"Avatar",
-		"t1_l3"	=>	"Upload",
-		"t2_l1"	=>	"Email",
-		"t2_l2"	=>	"MSN",
-		"t2_l3"	=>	"AIM",
-		"t2_l4"	=>	"ICQ",
-		"t2_l5"	=>	"YIM",
-		"t2_l6"	=>	"Website",
-		"t3_l1"	=>	"Name",
-		"t3_l2"	=>	"Pays",
-		"t3_l3"	=>	"Town",
-		"t3_l4"	=>	"Occupation",
-		"t3_l5"	=>	"Interest",
+		"t1_login"	=>	"Login",
+		"t1_mail"	=>	"Email",
+		"t1_avatar"	=>	"Avatar",
+		"t1_upload"	=>	"Upload",
 		"t4_l1"	=>	"Get the newletter",
 		"t4_l2"	=>	"Show email to the public",
 		"t4_l3"	=>	"Show Online status",
@@ -201,36 +171,12 @@ $bts->I18nTransObj->apply(
 );
 
 $UserObj = $CurrentSetObj->getInstanceOfUserObj();
-// $UserObj = $CurrentSetObj->getInstanceOfUserObj();
 if ( $UserObj->getUserEntry('user_login') == "anonymous" ) { $Content .= $bts->I18nTransObj->getI18nTransEntry("anonDeny"); }
 else {
 // --------------------------------------------------------------------------------------------
 //	Debut du formulaire
 // --------------------------------------------------------------------------------------------
-	// $WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-	$themeList = array();
-	$dbquery = $bts->SDDMObj->query("
-		SELECT td.theme_id, td.theme_name, td.theme_title 
-		FROM "
-		.$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
-		.$SqlTableListObj->getSQLTableName('theme_website')." tw 
-		WHERE td.theme_id = tw.fk_theme_id  
-		AND tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-		;");
-	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
-		$themeList[$dbp['theme_name']] = array(
-			"theme_id"		=> $dbp['theme_id'],
-			"theme_name"	=> $dbp['theme_name'],
-			"theme_title"	=> $dbp['theme_title'],
-		);
-		// $themeList[$dbp['theme_name']] = &$themeList[$dbp['theme_id']];
-	}
-
-	$Content .= "
-	<p>
-	Cette Partie permet de modifier les données de votre profil. Modifiez les champs accessibles puis validez.
-	<br>\r
-	";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r<br>\r";
 	
 	if ( $bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'uploadError') == 1 ) {
 		$Content .= "<p class='" . $Block._CLASS_TXT_WARNING_."'>".$bts->I18nTransObj->getI18nTransEntry('AvatarUploadError')[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'AvatarUploadError')]."</p>\r<br>\r";
@@ -242,14 +188,23 @@ else {
 	
 	$Content .= "<br>\r
 	<form enctype='multipart/form-data' ACTION='index.php?' method='post' name='UserProfileForm'>\r
+
+	<input type='hidden' name='formSubmitted'					value='1'>
+	<input type='hidden' name='formGenericData[origin]'			value='profileManagement'>
+	<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
+	<input type='hidden' name='formGenericData[modification]'	value='on'>
+	<input type='hidden' name='formEntity'						value='User'>
+	<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
 	";
-	if ( $UserObj->getUserEntry('pref_theme') == 0 ) { $UserObj->setUserEntry('pref_theme', $WebSiteObj->getWebSiteEntry('theme_id')); }
+
+	$userPrefthemeId = $WebSiteObj->getWebSiteEntry('fk_theme_id');
+	if ( $UserObj->getUserEntry('pref_theme') != 0 ) { $userPrefthemeId = $UserObj->getUserEntry('pref_theme'); }
 	$dbquery = $bts->SDDMObj->query("
 	SELECT u.*,td.theme_name,td.theme_id
 	FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." u , "
 	.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td 
-	WHERE u.user_id = '".$UserObj->getUserEntry('id')."' 
-	AND td.theme_id = '".$UserObj->getUserEntry('pref_theme')."' 
+	WHERE u.user_id = '".$UserObj->getUserEntry('user_id')."' 
+	AND td.theme_id = '".$userPrefthemeId."' 
 	;");
 	$PmListTheme = array();
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { foreach ( $dbp as $A => $B ) { $PmListTheme[$A] = $B; } }
@@ -281,57 +236,30 @@ else {
 	
 	
 	$T = array();
-	$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l1');
-	$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l2');
-	$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l3');
+	$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_login');
+	$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_mail');
+	$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_avatar');
+	$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_upload');
 	
-	$T['Content']['1']['1']['2']['cont'] = "<input type='text' name='formParams[login]' value='".$UserObj->getUserEntry('user_login')."' size='15' maxlength='255' disabled> (ne sera pas modifié)";
+	$T['Content']['1']['1']['2']['cont'] = "<input type='text' name='formParams[login]' value='".$UserObj->getUserEntry('user_login')."' size='15' maxlength='255' disabled>";
+	$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[user_email]'	value='".	$UserObj->getUserEntry('user_email')	."' size='30' maxlength='255'>";
 	
-	if ( strlen($PmListTheme['user_avatar_image']) != 1024 ) { $T['Content']['1']['2']['2']['cont'] = "<img src='".$PmListTheme['user_avatar_image']."' width='48' height='48' alt='[Avatar]'>"; }
-	else { $T['Content']['1']['2']['2']['cont'] = "N/A"; }
-	$T['Content']['1']['2']['2']['cont'] .=	$bts->InteractiveElementsObj->renderIconSelectFile($infos);
-	$T['Content']['1']['3']['2']['cont'] = "<input type='hidden' name='MAX_FILE_SIZE' value='32768'> 
+	if ( strlen($PmListTheme['user_avatar_image']) != 1024 ) { $T['Content']['1']['3']['2']['cont'] = "<img src='".$PmListTheme['user_avatar_image']."' width='48' height='48' alt='[Avatar]'>"; }
+	else { $T['Content']['1']['3']['2']['cont'] = "N/A"; }
+	$T['Content']['1']['3']['2']['cont'] .=	$bts->InteractiveElementsObj->renderIconSelectFile($infos);
+	$T['Content']['1']['4']['2']['cont'] = "<input type='hidden' name='MAX_FILE_SIZE' value='32768'> 
 	<input type='file' name='formParams[AvatarSelectedFile]' size='40'>";
 
-// --------------------------------------------------------------------------------------------
-	$T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l1');
-	$T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l2');
-	$T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l3');
-	$T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l4');
-	$T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l5');
-	$T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l6');
-	
-	$T['Content']['2']['1']['2']['cont'] = "<input type='text' name='formParams[user_email]' value='".			$UserObj->getUserEntry('user_email')	."' size='30' maxlength='255'>";
-	$T['Content']['2']['2']['2']['cont'] = "<input type='text' name='formParams[user_msn]' value='".			$UserObj->getUserEntry('user_msn')		."' size='30' maxlength='25' >";
-	$T['Content']['2']['3']['2']['cont'] = "<input type='text' name='formParams[user_aim]' value='".			$UserObj->getUserEntry('user_aim')		."' size='30' maxlength='18' >";
-	$T['Content']['2']['4']['2']['cont'] = "<input type='text' name='formParams[user_icq]' value='".			$UserObj->getUserEntry('user_icq')		."' size='30' maxlength='15' >";
-	$T['Content']['2']['5']['2']['cont'] = "<input type='text' name='formParams[user_yim]' value='".			$UserObj->getUserEntry('user_yim')		."' size='30' maxlength='25' >";
-	$T['Content']['2']['6']['2']['cont'] = "<input type='text' name='formParams[user_website]' value='".		$UserObj->getUserEntry('user_website')	."' size='30' maxlength='255'>";
-	
-	
-// --------------------------------------------------------------------------------------------
-	$T['Content']['3']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l1');
-	$T['Content']['3']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l2');
-	$T['Content']['3']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l3');
-	$T['Content']['3']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l4');
-	$T['Content']['3']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3_l5');
-	
-	$T['Content']['3']['1']['2']['cont'] = "<input type='text' name='formParams[perso_nom]' value='".			$UserObj->getUserEntry('user_perso_name')		."' size='30' maxlength='255'>";
-	$T['Content']['3']['2']['2']['cont'] = "<input type='text' name='formParams[perso_pays]' value='".			$UserObj->getUserEntry('user_perso_country')		."' size='30' maxlength='255'>";
-	$T['Content']['3']['3']['2']['cont'] = "<input type='text' name='formParams[perso_ville]' value='".			$UserObj->getUserEntry('user_perso_town')		."' size='30' maxlength='255'>";
-	$T['Content']['3']['4']['2']['cont'] = "<input type='text' name='formParams[perso_occupation]' value='".	$UserObj->getUserEntry('user_perso_occupation')	."' size='30' maxlength='255'>";
-	$T['Content']['3']['5']['2']['cont'] = "<input type='text' name='formParams[perso_interet]' value='".		$UserObj->getUserEntry('user_perso_interest')	."' size='30' maxlength='255'>";
-// --------------------------------------------------------------------------------------------
-
-	$T['Content']['4']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l1');
-	$T['Content']['4']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l2');
-	$T['Content']['4']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l3');
-	$T['Content']['4']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l4');
-	$T['Content']['4']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l5');
-	$T['Content']['4']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l6');
-	$T['Content']['4']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l7');
-	$T['Content']['4']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l8');
-	$T['Content']['4']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l9');
+	// --------------------------------------------------------------------------------------------
+	$T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l1');
+	$T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l2');
+	$T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l3');
+	$T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l4');
+	$T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l5');
+	$T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l6');
+	$T['Content']['2']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l7');
+	$T['Content']['2']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l8');
+	$T['Content']['2']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l9');
 	
 	// TSO = $TableSelectOptions
 	$TSO = array(
@@ -347,70 +275,61 @@ else {
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_newsletter')]['s'] = "selected";
-	$T['Content']['4']['1']['2']['cont'] = "<select name='formParams[pref_newsletter]'>\r
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['1']['2']['cont'] = "<select name='formParams[pref_newsletter]'>\r"
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_show_email')]['s'] = "selected";
-	$T['Content']['4']['2']['2']['cont'] = "<select name='formParams[pref_montre_email]'>\r 
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['2']['2']['cont'] = "<select name='formParams[pref_montre_email]'>\r "
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_show_online_status')]['s'] = "selected";
-	$T['Content']['4']['3']['2']['cont'] = "<select name='formParams[pref_montre_status_online]'>\r 
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['3']['2']['cont'] = "<select name='formParams[pref_montre_status_online]'>\r "
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_forum_notification')]['s'] = "selected";
-	$T['Content']['4']['4']['2']['cont'] = "<select name='formParams[pref_notification_reponse_forum]'>\r
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['4']['2']['cont'] = "<select name='formParams[pref_notification_reponse_forum]'>\r"
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_forum_pm')]['s'] = "selected";
-	$T['Content']['4']['5']['2']['cont'] = "<select name='formParams[pref_notification_nouveau_pm]'>\r
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['5']['2']['cont'] = "<select name='formParams[pref_notification_nouveau_pm]'>\r"
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_allow_bbcode')]['s'] = "selected";
-	$T['Content']['4']['6']['2']['cont'] = "<select name='formParams[pref_autorise_bbcode]'>\r 
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['6']['2']['cont'] = "<select name='formParams[pref_autorise_bbcode]'>\r "
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_allow_html')]['s'] = "selected";
-	$T['Content']['4']['7']['2']['cont'] = "<select name='formParams[pref_autorise_html]'>\r
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['7']['2']['cont'] = "<select name='formParams[pref_autorise_html]'>\r"
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_autorise_smilies')]['s'] = "selected";
-	$T['Content']['4']['8']['2']['cont'] = "<select name='formParams[pref_autorise_smilies]'>\r
-	".
-	$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B'].
-	$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B'].
-	"</select>\r";
+	$T['Content']['2']['8']['2']['cont'] = "<select name='formParams[pref_autorise_smilies]'>\r"
+	.$TSO['0']['A'].$TSO['0']['s'].$TSO['0']['B']
+	.$TSO['1']['A'].$TSO['1']['s'].$TSO['1']['B']
+	."</select>\r";
 	
-	
-	$T['Content']['4']['9']['2']['cont'] = "<select name='formParams[lang]'>\r";
+	$T['Content']['2']['9']['2']['cont'] = "<select name='formParams[lang]'>\r";
 	$dbqueryL = $bts->SDDMObj->query("
 		SELECT lw.fk_lang_id FROM "
 		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , "
@@ -424,43 +343,35 @@ else {
 	else { $langList[$PmListTheme['user_lang']]['s'] = " selected "; }
 	foreach ( $langList as $A ) { 
 		if ( $A['support'] == 1 ) {
-			$T['Content']['4']['9']['2']['cont'] .= "<option value='".$A['lang_639_3']."' ".$A['s']."> ".$A['lang_original_name']." </option>\r"; 
+			$T['Content']['2']['9']['2']['cont'] .= "<option value='".$A['lang_639_3']."' ".$A['s']."> ".$A['lang_original_name']." </option>\r"; 
 		}
 	}
-	$T['Content']['4']['9']['2']['cont'] .= "</select>\r";
+	$T['Content']['2']['9']['2']['cont'] .= "</select>\r";
 
 
 // --------------------------------------------------------------------------------------------
-	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 4);
+	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
 	$T['ContentCfg']['tabs'] = array(
-			1	=>	$bts->RenderTablesObj->getDefaultTableConfig(3,2,2),
-			2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
-			3	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
-			4	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
+			1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
+			2	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
 	);
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 	
-	// $ClassLoaderObj->provisionClass('RenderLayout');
-	// $RenderLayoutObj = RenderLayout::getInstance(); 
 	$Content .= "
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
 	<tr>\r
 	<td style='width:70%;'>\r
-	<input type='checkbox' name='formParams[confirmation_modification]' checked> ".$bts->I18nTransObj->getI18nTransEntry('text_confirm1')."\r
+	<input type='checkbox' name='formParams1[confirmation_modification]' checked> ".$bts->I18nTransObj->getI18nTransEntry('text_confirm1')."\r
 	</td>\r
 	<td style='width: 200px;'>\r
 	";
-	
-	$SB = array(
-			"id"				=> "UpdateButton",
-			"type"				=> "submit",
-			"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-			"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-			"onclick"			=> "",
-			"message"			=> $bts->I18nTransObj->getI18nTransEntry('modif_profil'),
-			"mode"				=> 0,
-			"size" 				=> 0,
-			"lastSize"			=> 0,
+
+	$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+		$infos , 'submit', 
+		$bts->I18nTransObj->getI18nTransEntry('modif_profil'), 0, 
+		'UpdateButton', 
+		2, 2, 
+		"",0 
 	);
 	$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 	
@@ -470,34 +381,46 @@ else {
 	</table>\r
 	<hr>\r
 	
-	<input type='hidden' name='formSubmitted'					value='1'>
-	<input type='hidden' name='formGenericData[origin]'			value='profile_management'>
-	<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
-	<input type='hidden' name='formGenericData[modification]'	value='on'>
-	<input type='hidden' name='formEntity'						value='User'>
-	<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
 	</form>\r
 	";
 // 	<input type='hidden' name='WM_GP_phase' value='1'>\r".
-	
+
 // --------------------------------------------------------------------------------------------
 //	Affichage du theme selectionné
 // --------------------------------------------------------------------------------------------
+	$themeList = array();
+	$dbquery = $bts->SDDMObj->query("
+		SELECT td.theme_id, td.theme_name, td.theme_title 
+		FROM "
+		.$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
+		.$SqlTableListObj->getSQLTableName('theme_website')." tw 
+		WHERE td.theme_id = tw.fk_theme_id  
+		AND tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+		ORDER BY td.theme_name
+		;");
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+		$themeList[$dbp['theme_name']] = array(
+			"theme_id"		=> $dbp['theme_id'],
+			"theme_name"	=> $dbp['theme_name'],
+			"theme_title"	=> $dbp['theme_title'],
+		);
+	}
+
 	unset ($T);
 	$T = array();
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'theme_name')) == 0 ) { 
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')) == 0 ) { 
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
-		$bts->RequestDataObj->setRequestDataSubEntry('formParams1', 'theme_name', $ThemeDataObj->getThemeDataEntry('theme_name') );
-		$bts->RequestDataObj->setRequestData('UserProfileForm', 
+		$bts->RequestDataObj->setRequestDataSubEntry('browseTheme', 'theme_name', $ThemeDataObj->getThemeDataEntry('theme_name') );
+		$bts->RequestDataObj->setRequestData('browseTheme', 
 			array(
 				"SelectedThemeId"	=>	$ThemeDataObj->getThemeDataEntry('theme_id'),
 				"SelectedTheme"		=>	$ThemeDataObj->getThemeDataEntry('theme_name'),
 			)
 		);
 	}
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N°=`".$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme')."`"));
+	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N=`".$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')."`"));
 	
-	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('text_choix_theme')."<br>\r</p>\r";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('text_choix_theme')."</p>\r";
 	
 	$PmThemeDescriptorObj = new ThemeDescriptor();
 	$PmThemeDescriptorObj->setCssPrefix('PM_');
@@ -505,7 +428,7 @@ else {
 	
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
 	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "get theme data with name :".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name']." and id ".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id']."."));
-	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'theme_name')]['theme_id']);
+	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
@@ -536,7 +459,7 @@ else {
 			}
 		}
 	}
-	
+
 	for ( $i = 1; $i < (count($ListThemeBlock)+2); $i++ ) {
 		$bts->I18nTransObj->setI18nTransEntry('tabTxtThm'.$i, "#".$i);
 		$T['ContentCfg']['tabs'][$i] = $bts->RenderTablesObj->getDefaultTableConfig(1,1,0);
@@ -547,7 +470,7 @@ else {
 	$T['ContentInfos']['Height']		= 512;
 	
 	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
-	$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
+	//$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
 	
 	$infos['module_nameBackup']	= $infos['module_name'];
@@ -574,7 +497,6 @@ else {
 			'module' => array(
 				'module_name' => $mn,
 				'module_container_name' => "container_".$mn,
-
 			),
 		);
 		$infosTmp['deco_type'] = $ThemeDataObj->getThemeBlockEntry($infosTmp['blockG'], 'deco_type');
@@ -584,25 +506,21 @@ else {
 		background-image: url(".$PmThemeDataObj->getThemeDataEntry('pathThemeBg')."); background-color: ".$PmThemeDataObj->getThemeDataEntry('theme_bg_color').";
 		width: ".($T['ContentInfos']['Width']-32)."px; height: ".($T['ContentInfos']['Height']-32)."px;
 		'>
-		<div style='
-		position: absolute; background-image: url(".$PmThemeDataObj->getThemeDataEntry('pathThemeDivInitialBg')."); 
-		width: ".($T['ContentInfos']['Width']-32)."px; height: ".($T['ContentInfos']['Height']-32)."px;
-		'>
 		";
 		
 		// Brutal... But efficient!!!
-		$ClassLoaderObj->provisionClass('RenderDeco10Menu');
-		$ClassLoaderObj->provisionClass('RenderDeco20Caligraph');
+		// $ClassLoaderObj->provisionClass('RenderDeco10Menu');
+		// $ClassLoaderObj->provisionClass('RenderDeco20Caligraph');
 		$ClassLoaderObj->provisionClass('RenderDeco301Div');
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
 		$ClassLoaderObj->provisionClass('RenderDeco50Exquisite');
 		$ClassLoaderObj->provisionClass('RenderDeco60Elysion');
 		
 		switch ($PmThemeDataObj->getThemeBlockEntry($infosTmp['blockG'], 'deco_type')){
-			case 30:	case "1_div":		$RenderDeco = RenderDeco301Div::getInstance();			$decoTmp = $RenderDeco->render($infosTmp);		break;
-			case 40:	case "elegance":	$RenderDeco = RenderDeco40Elegance::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
-			case 50:	case "exquise":		$RenderDeco = RenderDeco50Exquisite::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
-			case 60:	case "elysion":		$RenderDeco = RenderDeco60Elysion::getInstance();		$decoTmp = $RenderDeco->render($infosTmp);		break;
+			case 30:	case "1_div":		$PmRenderDeco = RenderDeco301Div::getInstance();		$decoTmp = $PmRenderDeco->render($infosTmp);		break;
+			case 40:	case "elegance":	$PmRenderDeco = RenderDeco40Elegance::getInstance();	$decoTmp = $PmRenderDeco->render($infosTmp);		break;
+			case 50:	case "exquise":		$PmRenderDeco = RenderDeco50Exquisite::getInstance();	$decoTmp = $PmRenderDeco->render($infosTmp);		break;
+			case 60:	case "elysion":		$PmRenderDeco = RenderDeco60Elysion::getInstance();		$decoTmp = $PmRenderDeco->render($infosTmp);		break;
 			default:	$decoTmp = "<div id='".$mn."' style='position:absolute; left:0px; top:0px; width:640px; height:640px; '>\r";		break;
 		}
 		$T['Content'][$Tab]['1']['1']['cont'] .= $decoTmp;
@@ -619,13 +537,20 @@ else {
 			<h2>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</h2>
 			";
 
-			// 
+/*
+
+			<input type='hidden' name='formEntity'						value='User'>
+			<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
+
+*/		
 		if ( $Tab == 1 ) {
 			$T['Content'][$Tab]['1']['1']['cont'] .= "
-			<form ACTION='/profile-management?' method='post'>\r
-			<input type='hidden' name='formSubmitted'					value='1'>\r
-			<input type='hidden' name='formGenericData[origin]'			value='profile_management'>\r
-			<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
+			<form ACTION='index.php?' method='post' name'ThemeSelection'>\r
+
+			<input type='hidden' name='formSubmitted'					value='1'>
+			<input type='hidden' name='formGenericData[origin]'			value='profileManagement'>
+			<input type='hidden' name='formGenericData[section]'		value='BrowseThemeForm'>
+			<input type='hidden' name='formGenericData[modification]'	value='off'>
 		
 			<table class='".$PmBlock._CLASS_TABLE_STD_."'>
 			<tr style='background-color:transparent;'>\r
@@ -636,11 +561,11 @@ else {
 			<option value='update'>".$bts->I18nTransObj->getI18nTransEntry('formIwantToActivate')."</option>\r
 			</select>\r
 			".$bts->I18nTransObj->getI18nTransEntry('formTheTheme')." 
-			<select name='formParams1[theme_name]'>\r
+			<select name='browseTheme[theme_name]'>\r
 			";
 			reset ($themeList);
 			foreach ( $themeList as $A ) {
-				if ( $A['theme_name'] == $bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme') ) { $T['Content'][$Tab]['1']['1']['cont'] .= "<option value='".$A['theme_name']."' selected>".$A['theme_title']."</option>\r"; }
+				if ( $A['theme_name'] == $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') ) { $T['Content'][$Tab]['1']['1']['cont'] .= "<option value='".$A['theme_name']."' selected>".$A['theme_title']."</option>\r"; }
 				else { $T['Content'][$Tab]['1']['1']['cont'] .= "<option value='".$A['theme_name']."'>".$A['theme_title']."</option>\r"; }
 			}
 			
@@ -649,17 +574,13 @@ else {
 			</td>\r
 			<td>\r
 			";
-			
-			$SB = array(
-					"id"				=> "refreshButton",
-					"type"				=> "submit",
-					"initialStyle"		=> $PmBlock."_t3 ".$PmBlock."_submit_s2_n",
-					"hoverStyle"		=> $PmBlock."_t3 ".$PmBlock."_submit_s2_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
-					"mode"				=> 0,
-					"size" 				=> 0,
-					"lastSize"			=> 0,
+
+			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+				$infos , 'submit', 
+				$bts->I18nTransObj->getI18nTransEntry('modif_profil'), 0, 
+				'refreshButton', 
+				2, 2, 
+				"",0 
 			);
 			$T['Content'][$Tab]['1']['1']['cont'] .=  $bts->InteractiveElementsObj->renderSubmitButton($SB);
 			
@@ -681,9 +602,9 @@ else {
 		<br>\r
 		<a>Exemple de lien simple</a><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' ><br>\r
+		<input type='text' name='PmExample01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' ><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
+		<input type='text' name='PmExample02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		<br>\r
 		</p>
 
@@ -706,9 +627,9 @@ else {
 		<td colspan='4'>\r
 		<a>Lorem ipsum dolor sit amet, consectetur adipiscing elit</a><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
+		<input type='text' name='PmExample03' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		<br>\r
-		<input type='text' name='WM_GP_exemple02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
+		<input type='text' name='PmExample04' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
 		</td>\r
 		</tr>\r
 
@@ -750,8 +671,6 @@ else {
 		$maxCells = 3;
 		$maxLines = 4;
 		$lineCount = 1;
-		// $pv['icon_div_size'] = "25%";
-		//if ( $pv['icon_div_size'] > 128 ) { $pv['icon_div_size'] = 128; }
 		$j = 0;
 		$T['Content'][$Tab]['1']['1']['cont'] .= "<table style='margin-left:auto; margin-right:auto;' border='0' >\r";
 		for ( $lineCount = 1 ; $lineCount <= $maxLines ; $lineCount++ ) {
@@ -780,7 +699,6 @@ else {
 	
 	}
 	
-	
 	$mn = "MpBlock0".$Tab;
 	$infosTmp = array(
 			'px'	=>	$ModulePaddingX / 2 ,
@@ -788,16 +706,10 @@ else {
 			'dx'	=>	($T['ContentInfos']['Width'] - $ModulePaddingX),
 			'dy'	=>	($T['ContentInfos']['Height'] - $ModulePaddingY)
 	);
-	//$RenderLayoutObj->setLayoutEntry($mn, $infosTmp);
-	
-	
+
 	$T['Content'][$Tab]['1']['1']['cont'] .= "
 	<div style='
 	background-image: url(".$PmThemeDataObj->getThemeDataEntry('pathThemeBg')."); background-color: ".$PmThemeDataObj->getThemeDataEntry('theme_bg_color').";
-	width: ".($T['ContentInfos']['Width']-32)."px; height: ".($T['ContentInfos']['Height']-64)."px;
-	'>
-	<div style='
-	position: absolute; background-image: url(".$PmThemeDataObj->getThemeDataEntry('pathThemeDivInitialBg')."); 
 	width: ".($T['ContentInfos']['Width']-32)."px; height: ".($T['ContentInfos']['Height']-64)."px;
 	'>
 	";
@@ -819,7 +731,7 @@ else {
 			$j++;
 		}
 	}
-	
+
 	$NbrElmFound = $j;
 	$maxCells = 1;
 	$maxLines = 5;
@@ -848,11 +760,11 @@ else {
 	</table>\r
 
 	</div>\r
-	</div>\r
 	<br>\r
 	</p>
 	";
 	$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 0;
+	
 	$CurrentSetObj->restoreInstanceOfThemeDataObj();
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 	
@@ -862,7 +774,5 @@ else {
 }
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

@@ -120,12 +120,7 @@ foreach ( $table_infos_modules AS $A1 ) {
 	$A2 = $A1['module_state'];
 	$A3 = $A1['module_deco'];
 	$A4 = $A1['module_adm_control'];
-	// $gpv = $A1['module_group_allowed_to_see'];
-	// $gpu = $A1['module_group_allowed_to_use'];
-	// $gpv = $groupTab[$gpv];
-	// $gpu = $groupTab[$gpu];
-	$T['Content']['1'][$i]['1']['cont'] = "
-	<a class='".$Block."_lien' href='"
+	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
 	."index.php?"._HYDRLINKURLTAG_."=1"
 	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
@@ -139,8 +134,6 @@ foreach ( $table_infos_modules AS $A1 ) {
 	$T['Content']['1'][$i]['2']['cont'] = $A1['module_desc'];
 	$T['Content']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
 	$T['Content']['1'][$i]['4']['cont'] = $tab_module_deco[$A3];
-	// $T['Content']['1'][$i]['5']['cont'] = $gpv;
-	// $T['Content']['1'][$i]['6']['cont'] = $gpu;
 	$T['Content']['1'][$i]['5']['cont'] = $A1['perm_name'];
 	$T['Content']['1'][$i]['6']['cont'] = $tab_module_deco[$A4];
 }

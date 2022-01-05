@@ -45,14 +45,14 @@ $bts->I18nTransObj->apply(
 				<p>Le moteur fonctionne avec un syst&egrave;me d'authentification. Si votre site n'a pas besoin d'utilisateur, et donc n'a pas besoin d'avoir le module pr&eacute;sent, vous ne pourrez plus vous authentifier de mani&egrave;re classique. Pour contourner ce petit probl&egrave;me, vous pouvez utiliser une URL qui fera en sorte que le moteur vous authentifie.</p>\r
 				<p>Notez bien que si vous changez vos identifiants, une URL de ce type, sauvegard&eacute;e avec les anciens identifiants ne fonctionnera plus.</p>\r
 				<p>Avant de mettre le module d'authentification hors ligne vous pouvez enregistrer dans les signets l'URL suivante.</p>\r",
-			"url_bypass_nom" => "Adresse pour me connecter au site",
+			"url_bypass_name" => "Adresse pour me connecter au site",
 		),
 		"eng" => array(
 			"url_bypass" => "<h3>Accessing Admin panels:</h3>\r
 				<p>The engine works with a athentification system. If your website do not have the need to register users and by the way do not need to have the authentification module 'online', you will not be able to login either (classical way). To bypass this little problem, you can can use an URL that will make the engine perform the authification.</p>\r
 				<p>Note that if you change you login and password, this URL with previous login and password information will not work anymore.</p>\r
 				<p>So before putting the authentification module offline you can bookmark the following URL:</p>\r",
-			"url_bypass_nom" => "URL to loggin on this website",
+			"url_bypass_name" => "URL to loggin on this website",
 		)
 	)
 );
@@ -62,7 +62,7 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('url_bypass') . "
 $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
 "index.php?"._HYDRLINKURLTAG_."=1".
 "&arti_slug=admin-authentification"
-."&arti_page=1'>".$bts->I18nTransObj->getI18nTransEntry('url_bypass_nom')."
+."&arti_page=1'>".$bts->I18nTransObj->getI18nTransEntry('url_bypass_name')."
 </a>
 </p>
 <br>\r

@@ -179,19 +179,16 @@ $T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col
 $T['Content']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
-// 	if ( $dbp['user_status'] == 2 ) { $trr['tableau'][$i]['c_2_txt'] .= "style='font-style: italic; text-decoration: line-through; font-weight: lighter;'"; }
-	$T['Content']['1'][$i]['link'] = "&HydrLink=1"
-	.$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
+	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
 	."index.php?"._HYDRLINKURLTAG_."=1"
 	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
-	."&formUserMgmt[user_id]="
-	.$dbp['user_id']
-	;
-
-
-	$T['Content']['1'][$i]['1']['cont'] = $dbp['user_login'];
+	."&formGenericData[mode]=edit"
+	."&formGenericData[selectionId]=".$dbp['user_id']
+	."'>"
+	.$dbp['user_login']
+	."</a>\r";
 	$T['Content']['1'][$i]['2']['cont'] = $dbp['user_name'];
 	$T['Content']['1'][$i]['3']['cont'] = $dbp['group_title'];
 	$T['Content']['1'][$i]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('status'.$dbp['user_status']);

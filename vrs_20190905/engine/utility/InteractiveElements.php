@@ -55,7 +55,7 @@ class InteractiveElements {
 			"initialStyle"		=> $Block."_submit_s".$initialStyle."_n",
 			"hoverStyle"		=> $Block."_submit_s".$hoverStyle."_h",
 			"onclick"			=> $onclick,
-			"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
+			"message"			=> $message,
 			"mode"				=> $mode,
 			"size" 				=> $size,
 			"lastSize"			=> 0,

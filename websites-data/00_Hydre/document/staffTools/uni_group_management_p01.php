@@ -89,16 +89,16 @@ $T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col
 $T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 	$i++;
-	$T['Content']['1'][$i]['link'] = "index.php?arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')."&arti_page=2&formGenericData[mode]=edit&groupForm[selectionId]=".$dbp['group_id'];
-// 	$T['Content']['1'][$i]['1']['cont'] = "<a class='".$Block."_lien' href='index.php?"
-// 	.$CurrentSetObj->getDataSubEntry('block_HTML', 'url_slup')
-// 	."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-// 	."&arti_page=2"
-// 	."&formGenericData[mode]=edit"
-// 	."&groupForm[selectionId]=".$dbp['group_id']
-// 	."'>".$dbp['group_name']
-// 	."</a>";
-	$T['Content']['1'][$i]['1']['cont'] =$dbp['group_name'];
+	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
+	."index.php?"._HYDRLINKURLTAG_."=1"
+	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+	."&arti_page=2"
+	."&formGenericData[mode]=edit"
+	."&formGenericData[selectionId]=".$A1['group_id']
+	."'>"
+	.$dbp['group_name']
+	."</a>\r";
 	$T['Content']['1'][$i]['2']['cont'] = $dbp['group_title'];
 	$T['Content']['1'][$i]['2']['tc'] = 2;
 	$T['Content']['1'][$i]['3']['cont'] = $tagTab[$dbp['group_tag']];
@@ -120,7 +120,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
+$Content .= "<br\r>".$TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydr-Content-End*/
 

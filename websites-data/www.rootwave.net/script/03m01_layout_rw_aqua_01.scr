@@ -1,11 +1,11 @@
 add layout_file name	'rw_aqua_default_layout'		generic_name	'default_layout'		description	'rw_default_layout'		filename	'rw_aqua_default.lyt.html';
 add layout_file name	'rw_aqua_user_profile'			generic_name	'user_profile'			description	'rw_user_profile'		filename	'rw_aqua_default.lyt.html';
-add layout_file name	'rw_aqua_script_exec'			generic_name	'script_execution'		description	'rw_script_exec'		filename	'rw_aqua_default.lyt.html';
+add layout_file name	'rw_aqua_script_exec'			generic_name	'script_execution'		description	'rw_script_exec'		filename	'rw_aqua_script_execution.lyt.html';
 add layout_file name	'rw_aqua_decoration_mgmt'		generic_name	'decoration_management'	description	'rw_decoration_mgmt'	filename	'rw_aqua_default.lyt.html';
 
 add layout name	'rw_aqua_01_default_layout'		title 'Présentation par défaut'			generic_name	'default_layout'		description	'rw_aqua Default layout'		layout_file	'rw_aqua_default_layout';
 add layout name	'rw_aqua_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'rw_aqua User profile'			layout_file	'rw_aqua_user_profile';
-add layout name	'rw_aqua_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'rw_aqua Script execution'		layout_file	'rw_aqua_script_exec';
+add layout name	'rw_aqua_01_script_exec'		title 'Exécution de script'     		generic_name	'script_execution'		description	'rw_aqua Script execution'		layout_file	'rw_aqua_script_exec';
 add layout name	'rw_aqua_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'rw_aqua Decoration management'	layout_file	'rw_aqua_decoration_mgmt';
 
 assign layout name	'rw_aqua_01_default_layout'		to_theme	'rw_aqua_01'	default YES;

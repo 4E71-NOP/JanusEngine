@@ -38,45 +38,45 @@ $bts->LMObj->logCheckpoint("uni_document_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_document_management_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
-		"col_1_txt"		=> "Nom",
-		"col_2_txt"		=> "Type",
-		"col_3_txt"		=> "Modifiable",
-		"tabTxt1"		=> "Informations",
-		"docTyp0"		=> "HydrCode",
-		"docTyp1"		=> "NoCode",
-		"docTyp2"		=> "PHP",
-		"docTyp3"		=> "Mixed",
-		"docModif0"		=> "Non",
-		"docModif1"		=> "Oui",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage documents.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Type",
-		"col_3_txt"		=> "Can be modified",
-		"tabTxt1"		=> "Informations",
-		"docTyp0"		=> "HydrCode",
-		"docTyp1"		=> "NoCode",
-		"docTyp2"		=> "PHP",
-		"docTyp3"		=> "Mixed",
-		"docModif0"		=> "No",
-		"docModif1"		=> "Yes",
-		));
-		break;
-}
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
+			"col_1_txt"		=> "Nom",
+			"col_2_txt"		=> "Type",
+			"col_3_txt"		=> "Modifiable",
+			"tabTxt1"		=> "Informations",
+			"docTyp0"		=> "HydrCode",
+			"docTyp1"		=> "NoCode",
+			"docTyp2"		=> "PHP",
+			"docTyp3"		=> "Mixed",
+			"docModif0"		=> "Non",
+			"docModif1"		=> "Oui",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage documents.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Type",
+			"col_3_txt"		=> "Can be modified",
+			"tabTxt1"		=> "Informations",
+			"docTyp0"		=> "HydrCode",
+			"docTyp1"		=> "NoCode",
+			"docTyp2"		=> "PHP",
+			"docTyp3"		=> "Mixed",
+			"docModif0"		=> "No",
+			"docModif1"		=> "Yes",
+		)
+	)
+);
+
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 $dbquery = $bts->SDDMObj->query("
 SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
 FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-WHERE shr.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND shr.docu_id = doc.docu_id 
+WHERE shr.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND shr.fk_docu_id = doc.docu_id 
 AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
@@ -108,17 +108,19 @@ else {
 	
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;
-		$T['Content']['1'][$i]['1']['cont']	= "
-		<a class='" . $Block."_lien' href='index.php?"
-			."sw=".$WebSiteObj->getWebSiteEntry('ws_id')
-			."&l=".$CurrentSetObj->getDataEntry('language')
-			."&arti_ref=".$CurrentSetObj->getDataSubEntry('article','arti_ref')
-			."&arti_page=2"
-			."&formGenericData[mode]=edit"
-			."&documentForm[selectionId]=".$dbp['docu_id']
-			."'>".$dbp['docu_name']."</a>";
+		$T['Content']['1'][$i]['1']['cont']	= "<a href='"
+		."index.php?"._HYDRLINKURLTAG_."=1"
+		."&arti_slug=".$CurrentSetObj->getDataSubEntry('article', 'arti_slug')
+		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')
+		."&arti_page=2"
+		."&formGenericData[mode]=edit"
+		."&formGenericData[selectionId]=".$dbp['docu_id']
+		."'>"
+		.$dbp['docu_name']
+		."</a>\r";
+
 		$T['Content']['1'][$i]['2']['cont']	= $type[$dbp['docu_type']];
-		$T['Content']['1'][$i]['3']['cont']	= $modif[$dbp['part_modification']];
+		$T['Content']['1'][$i]['3']['cont']	= $modif[$dbp['share_modification']];
 	}
 }
 // --------------------------------------------------------------------------------------------
@@ -136,7 +138,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
+$Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydr-Content-End*/
 

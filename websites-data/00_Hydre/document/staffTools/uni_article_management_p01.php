@@ -246,14 +246,13 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
 	
-	$linkId1 = "<a href='".
-	$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
-	"index.php?"._HYDRLINKURLTAG_."=1".
-	"&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug').
-	"&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref').
-	"&arti_page=2".
-	"&formGenericData[mode]=edit".
-	"&articleForm[selectionRef]=";
+	$linkId1 = "<a href='"
+	."index.php?"._HYDRLINKURLTAG_."=1"
+	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+	."&arti_page=2"
+	."&formGenericData[mode]=edit"
+	."&formGenericData[selectionId]=";
 	
 	$linkId2 = "&articleForm[selectionPage]=";
 	$tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
@@ -268,9 +267,7 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$articlePageLink .= $linkId1.$B['arti_ref'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
 			$articlePageLink .= " - ";
 			$T['Content']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
-// 			$T['Content']['1'][$i]['3']['tc'] = 1;
 			$T['Content']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
-// 			$T['Content']['1'][$i]['4']['tc'] = 1;
 		}
 		$articlePageLink = substr ( $articlePageLink , 0 , -3 );
 		$T['Content']['1'][$i]['2']['cont'] = $articlePageLink;
