@@ -208,15 +208,6 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'mode') ) {
 
 
 // --------------------------------------------------------------------------------------------
-// if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on' ) {
-// 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard modification checkbox forgotten');
-// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
-// }
-// if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard' && $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
-// 	$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => 'AdminDashboard deletion checkbox forgotten');
-// 	$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nTransObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
-// }
-
 $Content .= "
 <form ACTION='index.php?' method='post' name='themeForm'>\r"
 .$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')

@@ -44,10 +44,10 @@ class Group extends Entity {
 			SELECT grp.* 
 			FROM "
 			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." gw
 			WHERE grp.group_id = '".$id."'
-			AND grp.group_id = sg.group_id
-			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND grp.group_id = gw.fk_group_id
+			AND gw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

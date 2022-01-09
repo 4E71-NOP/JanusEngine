@@ -321,7 +321,9 @@ class CommandConsole {
 		}
 		// timeConvert ----------------------------------------
 		if ( is_array($ptr['timeConvert']) ) {
-			foreach ($ptr['timeConvert'] as $A) { $CCL['params'][$A] = $bts->TimeObj->mktimeFromCanonical($CCL['params'][$A]); }
+			foreach ($ptr['timeConvert'] as $A) { 
+				if ( is_numeric($CCL['params'][$A]) !== true ) { $CCL['params'][$A] = $bts->TimeObj->mktimeFromCanonical($CCL['params'][$A]); }
+				}
 		}
 		// langConvert ----------------------------------------
 		if ( is_array($ptr['langConvert']) ) {
@@ -348,6 +350,8 @@ class CommandConsole {
 		// Selects and run the function that will return the SQL queries to execute.
 		// In case of directive N°4 it will not return an array but execute what's needed.
 		$af = self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']];
+		$bts->RequestDataObj->setRequestDataSubEntry('formGenericData','selectionId', $CCL['params']['id']); // Saves the ID in case it's a form (AdminDashBoard).
+
 		$CCL['sql'] = $af($CCL);
 		
 		if ( is_array($CCL['sql']) ) {

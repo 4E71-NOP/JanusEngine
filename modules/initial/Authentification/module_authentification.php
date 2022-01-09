@@ -60,22 +60,17 @@ class ModuleAuthentification {
 				<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
 				<input type='hidden' name='formGenericData[action]' 	value='connectionAttempt'>\r
 	
-	
 				<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 				<tr>\r
 				<td>\r
 				";
-			
-				$SB = array(
-					"id"				=> "bouton_authentif",
-					"type"				=> "submit",
-					"initialStyle"		=> $Block."_submit_s2_n",
-					"hoverStyle"		=> $Block."_submit_s2_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('login'),
-					"mode"				=> 0,
-					"size" 				=> 0,
-					"lastSize"			=> 0,
+
+				$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+					$infos , 'submit', 
+					$bts->I18nTransObj->getI18nTransEntry('login'), '', 
+					'execButton', 
+					2, 2, 
+					"" 
 				);
 				$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB); 
 				$Content .= "
@@ -86,18 +81,13 @@ class ModuleAuthentification {
 				";
 			}
 			else {
-				$SB = array(
-					"id"				=> "bouton_deconexion",
-					"type"				=> "submit",
-					"initialStyle"		=> $Block."_submit_s2_n",
-					"hoverStyle"		=> $Block."_submit_s2_h",
-					"onclick"			=> "",
-					"message"			=> $bts->I18nTransObj->getI18nTransEntry('disconnect'),
-					"mode"				=> 0,
-					"size" 				=> 0,
-					"lastSize"			=> 0,
+				$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+					$infos , 'submit', 
+					$bts->I18nTransObj->getI18nTransEntry('disconnect'), '', 
+					'execButton', 
+					2, 2, 
+					"" 
 				);
-			
 				$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
 				// $pv['SSL_etat'] = "<span class='" . $Block."_fade'>\r".$bts->I18nTransObj->getI18nTransEntry('via80')."</span>\r"; 
 				$pv['SSL_etat'] = "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(".$baseUrl."/media/img/universal/ssl_ko.png)'></div>";

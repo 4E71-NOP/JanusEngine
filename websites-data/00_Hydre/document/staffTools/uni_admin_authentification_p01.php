@@ -28,12 +28,7 @@
 /*Hydre-IDE-end*/
 
 // $RequestDataObj->setRequestDataEntry('script_source',"");
-$bts->RequestDataObj->setRequestDataEntry('RenderCSS',
-	array(
-		'CssSelection' => 2,
-		'go' => 1,
-	),
-);
+
 $bts->SMObj->setSessionEntry('user_login', 'anonymous');
 
 /*Hydr-Content-Begin*/

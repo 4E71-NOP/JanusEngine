@@ -134,9 +134,11 @@ class Hydr {
 	
 			// Form Management for commandLine interface
 			// Do we have a user submitting from the auth form ?
-			if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
-				$this->formManagement();
-			}
+			// if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
+			if (
+					$bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) == 1 && 
+					$CurrentSetObj->getInstanceOfUserObj()->getUserEntry ( 'user_login' ) != 'anonymous') 
+			{ $this->formManagement();	}
 			
 			// Router : What was called ? (slug/form etc..) and storing information in the session
 			$bts->Router->manageNavigation();
@@ -156,9 +158,9 @@ class Hydr {
 			if ($bts->SMObj->getSessionEntry ( 'sessionMode' ) != 1) {
 				$urlUsrPass = "&amp;user_login=" . $bts->SMObj->getSessionEntry ( 'user_login' );
 			}
-			$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_slup', "" ); // Site Lang User Pass
-			$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sldup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&l=" . $CurrentSetObj->getDataEntry ( 'language' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Lang Article User Pass
-			$CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sdup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Article User Pass
+			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_slup', "" ); // Site Lang User Pass
+			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sldup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&l=" . $CurrentSetObj->getDataEntry ( 'language' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Lang Article User Pass
+			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sdup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Article User Pass
 			
 			// JavaScript Object
 			$this->initializeJavascript();

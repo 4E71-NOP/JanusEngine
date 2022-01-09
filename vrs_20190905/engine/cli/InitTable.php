@@ -72,6 +72,21 @@ self::$InitTable['content'] = function (&$a) {
 	);
 };
 
+
+self::$InitTable['deadline'] = function (&$a) {
+	$date = time ();
+	$a['params'] = array(
+			"id" => "",
+			"name" => "New DeadLine",
+			"title" => "New deadline title",
+			"state" => 0,
+			"date_creation" => $date,
+			"end_date" => ($date + (60*60*24*31*12*10)),
+			"ws_id" => $a['Context']['ws_id'],
+	);
+//	$a['params']['date_expiration']	= &$a['params']['end_date'];
+};
+
 self::$InitTable['decoration'] = function (&$a) {
 	$a['params'] = array(
 			"name"			=> "New Decoration",
@@ -740,23 +755,7 @@ self::$InitTable['decoration'] = function (&$a) {
 	
 };
 
-
-self::$InitTable['deadline'] = function (&$a) {
-	$date = time ();
-	$a['params'] = array(
-			"id" => "",
-			"name" => "New DeadLine",
-			"title" => "New deadline title",
-			"state" => 0,
-			"date_creation" => $date,
-			"date_expiration" => $date + (60*60*24*31*12*10),
-			"ws_id" => $a['Context']['ws_id'],
-	);
-	$a['params']['date_limite']	= &$a['params']['date_expiration'];
-	$a['params']['etat']		= &$a['params']['state'];
-};
-
-self::$InitTable['document_config'] = function (&$a) {
+self::$InitTable['article_config'] = function (&$a) {
 	$a['params'] = array(
 			"id" => "",
 			"name" => "New ArticleConfig",

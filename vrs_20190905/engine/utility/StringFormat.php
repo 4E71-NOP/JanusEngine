@@ -92,22 +92,22 @@ class StringFormat {
 		self::$ConvertTable['decoration']['exquisite']			= 50;
 		self::$ConvertTable['decoration']['elysion']			= 60;
 		
-		self::$ConvertTable['document_config']['no']				= &self::$ConvertTable['universal']['no'];
-		self::$ConvertTable['document_config']['yes']				= &self::$ConvertTable['universal']['yes'];
-		self::$ConvertTable['document_config']['offline']			= &self::$ConvertTable['universal']['offline'];
-		self::$ConvertTable['document_config']['online']			= &self::$ConvertTable['universal']['online'];
-		self::$ConvertTable['document_config']['table']				= 1;
-		self::$ConvertTable['document_config']['menu_select']		= 2;
-		self::$ConvertTable['document_config']['normal']			= 1;
-		self::$ConvertTable['document_config']['float']				= 2;
-		self::$ConvertTable['document_config']['none']				= 0;
-		self::$ConvertTable['document_config']['left']				= 1;
-		self::$ConvertTable['document_config']['right']				= 2;
-		self::$ConvertTable['document_config']['no_menu']			= 0;
-		self::$ConvertTable['document_config']['top']				= 1;
-		self::$ConvertTable['document_config']['bottom']			= 2;
-		self::$ConvertTable['document_config']['both']				= 3;
-		self::$ConvertTable['document_config']['store']				= 4;
+		self::$ConvertTable['article_config']['no']				= &self::$ConvertTable['universal']['no'];
+		self::$ConvertTable['article_config']['yes']				= &self::$ConvertTable['universal']['yes'];
+		self::$ConvertTable['article_config']['offline']			= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['article_config']['online']			= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['article_config']['table']				= 1;
+		self::$ConvertTable['article_config']['menu_select']		= 2;
+		self::$ConvertTable['article_config']['normal']			= 1;
+		self::$ConvertTable['article_config']['float']				= 2;
+		self::$ConvertTable['article_config']['none']				= 0;
+		self::$ConvertTable['article_config']['left']				= 1;
+		self::$ConvertTable['article_config']['right']				= 2;
+		self::$ConvertTable['article_config']['no_menu']			= 0;
+		self::$ConvertTable['article_config']['top']				= 1;
+		self::$ConvertTable['article_config']['bottom']			= 2;
+		self::$ConvertTable['article_config']['both']				= 3;
+		self::$ConvertTable['article_config']['store']				= 4;
 		
 		
 		self::$ConvertTable['document']['no']					= &self::$ConvertTable['universal']['no'];

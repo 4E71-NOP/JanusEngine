@@ -190,10 +190,10 @@ self::$CheckTable['add']['decoration']['0']['s']	= "name";
 
 
 // Article_config
-self::$CheckTable['add']['document_config']['0']['d']	= 3;
-self::$CheckTable['add']['document_config']['0']['f']	= function ($a) { return array ("SELECT config_id FROM ".$a['sqlTables']['article_config']." WHERE config_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['add']['document_config']['0']['m']	= "CLI_ArticleConfig_C001";
-self::$CheckTable['add']['document_config']['0']['s']	= "name";
+self::$CheckTable['add']['article_config']['0']['d']	= 3;
+self::$CheckTable['add']['article_config']['0']['f']	= function ($a) { return array ("SELECT config_id FROM ".$a['sqlTables']['article_config']." WHERE config_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['article_config']['0']['m']	= "CLI_ArticleConfig_C001";
+self::$CheckTable['add']['article_config']['0']['s']	= "name";
 
 
 // Document

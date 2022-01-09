@@ -52,7 +52,7 @@ class Time {
 	
 	/**
 	 * Returns a date from a timestamp.
-	 * @param Number $data
+	 * @param Int $data
 	 * @return string
 	 */
 	public function timestampToDate ( $data ) {

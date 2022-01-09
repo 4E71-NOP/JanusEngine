@@ -115,7 +115,7 @@ $Content .= "
 $SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
 	$infos , 'submit', 
 	$bts->I18nTransObj->getI18nTransEntry('btnExecute'), 128, 
-	'execButton', 
+	'scriptExecButton', 
 	1, 1, 
 	"" 
 );
@@ -135,10 +135,10 @@ $path = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('DOCU
 $fileName = $path.$formInputFile;
 
 if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
-	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('processing').$formInputFile."</p>\r";
+	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('processing').$formInputFile."<br>\r";
 	switch ( true ) {
 		case ( strpos($fileName ,".htm") ):
-			$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('mode')." HTML</p>\r<hr>\r";
+			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode')." HTML</p>\r<hr>\r";
 			$fileHandle = fopen($fileName,"r");
 			$fileData = fread($fileHandle,filesize($fileName));
 			if ($fileData === FALSE) {$Content .= "ERRRRRRR<br>\r";}
@@ -146,7 +146,7 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 			fclose($fileHandle);
 		break;
 		case ( strpos($fileName ,".php") ):
-			$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('mode')."PHP</p>\r<hr>\r";
+			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode')."PHP</p>\r<hr>\r";
 			$fileData = include ($fileName);
 		break;
 		case ( strpos($fileName ,".mvmcode") ):

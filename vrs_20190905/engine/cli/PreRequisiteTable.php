@@ -54,11 +54,13 @@ self::$PreRequisiteTable['add']['article'] = array (
 
 self::$PreRequisiteTable['add']['deadline'] = array (
 		"convert" => array(
-				array("v" => "state",				"s" => "deadline"),
-				
+				array("v" => "state",				"s" => "deadline"),		
 		),
 		"nextId" => array (
 				array ("table" => "deadline",		"column" => "deadline_id",			"target" => "id"),
+		),
+		"timeConvert" => array(
+			"end_date"
 		),
 		"columns" => array(
 				array ( "v" => "id",				"t" => "deadline_id"),
@@ -66,7 +68,7 @@ self::$PreRequisiteTable['add']['deadline'] = array (
 				array ( "v" => "title",				"t" => "deadline_title"),
 				array ( "v" => "state",				"t" => "deadline_state"),
 				array ( "v" => "date_creation",		"t" => "deadline_creation_date"),
-				array ( "v" => "date_expiration",	"t" => "deadline_end_date"),
+				array ( "v" => "end_date",			"t" => "deadline_end_date"),
 				array ( "v" => "ws_id",				"t" => "fk_ws_id"),
 		),
 );
@@ -114,14 +116,14 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 		),
 );
 
-self::$PreRequisiteTable['add']['document_config'] = array (
+self::$PreRequisiteTable['add']['article_config'] = array (
 		"convert" => array(
-				array("v" => "menu_type",				"s" => "document_config"),
-				array("v" => "menu_style",				"s" => "document_config"),
-				array("v" => "menu_float_position",		"s" => "document_config"),
-				array("v" => "menu_occurence",			"s" => "document_config"),
-				array("v" => "show_info_parution",		"s" => "document_config"),
-				array("v" => "show_info_modification",	"s" => "document_config"),
+				array("v" => "menu_type",				"s" => "article_config"),
+				array("v" => "menu_style",				"s" => "article_config"),
+				array("v" => "menu_float_position",		"s" => "article_config"),
+				array("v" => "menu_occurence",			"s" => "article_config"),
+				array("v" => "show_info_parution",		"s" => "article_config"),
+				array("v" => "show_info_modification",	"s" => "article_config"),
 		),
 		"nextId" => array (
 				array ("table" => "article_config",		"column" => "config_id",			"target" => "id"),

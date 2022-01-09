@@ -58,52 +58,50 @@ $bts->LMObj->logCheckpoint("uni_group_management_p02.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_group_management_p02.php");
 
-switch ($l) {
-	case "fra":
-// 		$LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Merging i18n data. Language selection=".$l);
-		$bts->I18nTransObj->apply(array(
-		"anonymous"		=>	"Anonyme",
-		"reader"		=>	"Lecteur",
-		"staff"			=>	"Staff",
-		"seniorStaff"	=>	"Staff Sénior",
-		
-		"invite1"		=> "Cette partie va vous permettre de gérer le group.",
-		"invite2"		=> "Cette partie va vous permettre de créer un group.",
-		"tabTxt1"		=> "Informations",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Nom",
-		"t1l3c1"		=>	"Titre",
-		"t1l4c1"		=>	"Tag",
-		"t1l5c1"		=>	"Description",
-		"t1l6c1"		=>	"Fichier",
-		
-		"t1l2c2"		=>	"New_group",
-		));
-		break;
-		
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"anonymous"		=>	"Anonymous",
-		"reader"		=>	"Reader",
-		"staff"			=>	"Staff",
-		"seniorStaff"	=>	"Senior Staff",
-		
-		"invite1"		=> "This part will allow you to manage this group.",
-		"invite2"		=> "This part will allow you to create a group.",
-		"tabTxt1"		=> "Informations",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Nom",
-		"t1l3c1"		=>	"Title",
-		"t1l4c1"		=>	"Tag",
-		"t1l5c1"		=>	"Description",
-		"t1l6c1"		=>	"File",
-		
-		"t1l2c2"		=>	"New_group",
-		));
-		break;
-}
+
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"anonymous"		=>	"Anonyme",
+			"reader"		=>	"Lecteur",
+			"staff"			=>	"Staff",
+			"seniorStaff"	=>	"Staff Sénior",
+			
+			"invite1"		=> "Cette partie va vous permettre de gérer le group.",
+			"invite2"		=> "Cette partie va vous permettre de créer un group.",
+			"tabTxt1"		=> "Informations",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Nom",
+			"t1l3c1"		=>	"Titre",
+			"t1l4c1"		=>	"Tag",
+			"t1l5c1"		=>	"Description",
+			"t1l6c1"		=>	"Fichier",
+			
+			"t1l2c2"		=>	"New_group",
+		),
+		"eng" => array(
+			"anonymous"		=>	"Anonymous",
+			"reader"		=>	"Reader",
+			"staff"			=>	"Staff",
+			"seniorStaff"	=>	"Senior Staff",
+			
+			"invite1"		=> "This part will allow you to manage this group.",
+			"invite2"		=> "This part will allow you to create a group.",
+			"tabTxt1"		=> "Informations",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Nom",
+			"t1l3c1"		=>	"Title",
+			"t1l4c1"		=>	"Tag",
+			"t1l5c1"		=>	"Description",
+			"t1l6c1"		=>	"File",
+			
+			"t1l2c2"		=>	"New_group",
+		)
+	)
+);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('AdminFormTool');
@@ -148,10 +146,6 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 
 $Content .= "
 <form ACTION='index.php?' method='post' name='groupForm'>\r"
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
 ."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
 ."<input type='hidden' name='formGenericData[section]'	value='AdminGroupManagementP02'>\r"
 ."<input type='hidden' name='formCommand1'				value='".$commandType."'>\r"

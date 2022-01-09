@@ -40,7 +40,6 @@ $bts->RequestDataObj->setRequestData('articleForm',
 		'action'		=> "",
 	)
 );
-// 		'action'		=> "AFFICHAGE",
 
 /*Hydr-Content-Begin*/
 $localisation = " / uni_article_management_p01";
@@ -254,7 +253,7 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	."&formGenericData[mode]=edit"
 	."&formGenericData[selectionId]=";
 	
-	$linkId2 = "&articleForm[selectionPage]=";
+	$linkId2 = "&formGenericData[selectionPage]=";
 	$tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
 	$tranlation = $bts->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
 	

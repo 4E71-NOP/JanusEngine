@@ -39,7 +39,7 @@ class InteractiveElements {
 	 * @parma number $initialStyle
 	 * @parma number $hoverStyle 1 2 3 green blue red
 	 * @parma string $onclick javascript for OnClick
-	 * @parma number $mode 1 for keeping track of the last size
+	 * @parma number $mode 1 = keep track by saving the last used size. '0' = reuse the last size
 	 * @return array
 	 * 
 	 */
@@ -58,7 +58,7 @@ class InteractiveElements {
 			"message"			=> $message,
 			"mode"				=> $mode,
 			"size" 				=> $size,
-			"lastSize"			=> 0,
+//			"lastSize"			=> 0,
 		);
 		return ($tab);
 	}

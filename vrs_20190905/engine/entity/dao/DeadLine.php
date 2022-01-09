@@ -22,8 +22,7 @@ class DeadLine extends Entity{
 		'deadline_state'			=>	0,
 		'deadline_creation_date'	=>	0,
 		'deadline_end_date'			=>	0,
-		'ws_id'						=>	0,
-		'user_id'					=>	0,
+		'fk_ws_id'					=>	0,
 	);
 	//@formatter:on
 	
@@ -42,10 +41,9 @@ class DeadLine extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$dbquery = $bts->SDDMObj->query("
-		SELECT dl.*,usr.user_login
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." usr
-		WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-		AND usr.user_id = dl.user_id
+		SELECT dl.*
+		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl "
+		."WHERE dl.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		AND dl.deadline_id ='".$id."'
 		;");
 		
@@ -117,13 +115,13 @@ class DeadLine extends Entity{
 	public function getDefaultValues () {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$date = time ();
+		$date = time();
 		
 		$tab = $this->columns;
 		$tab['deadline_creation_date'] = $date;
-		$tab['deadline_end_date'] = $date + (60*60*24*31*12*10);
-		$tab['user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
-		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+		$tab['deadline_end_date'] = $date+(60*60*24*31*12*10);
+		// $tab['user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;

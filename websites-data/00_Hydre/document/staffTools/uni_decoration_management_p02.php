@@ -225,7 +225,7 @@ case 3:
 	unset ( $A );
 	$pv['o1l32'] .= "</select>\r";
 	$_REQUEST['deco_repertoire'] = "one";
-	$DEC['deco_name'] = "deco_". date ( "Y_m_j_-_G_i_s", mktime() );
+	$DEC['deco_name'] = "deco_". date ( "Y_m_j_-_G_i_s", time() );
 break;
 }
 

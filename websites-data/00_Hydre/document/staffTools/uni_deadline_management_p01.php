@@ -91,7 +91,6 @@ else {
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 
-	
 	$linkId1 = "<a href='"
 	."index.php?"._HYDRLINKURLTAG_."=1"
 	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
@@ -129,7 +128,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
+$Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydr-Content-End*/
 

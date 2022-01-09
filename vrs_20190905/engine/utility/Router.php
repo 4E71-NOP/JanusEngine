@@ -37,14 +37,14 @@ class Router {
 		
 		if ($bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) == 1 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A form has been submitted"));
-			$this->buildDataFromForm();
+			$this->updateSessionRouteFromForm();
 		}
 		else {
 			$url = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('request_uri');
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analyzing requested URI `".$url."`"));
 			if ( $this->isCleanUrl($url) === true ) {
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : URL is clean. We consider it's a slug thing."));
-				$this->buildDataFromURL($url); 
+				$this->updateSessionRouteFromURL($url); 
 			}
 			else {
 				// Neither it is a Form or a Slug thing. We process it as a GET method.
@@ -104,7 +104,7 @@ class Router {
 	/**
 	 * Uptade session with the relevant data from the URL
 	 */
-	private function buildDataFromURL ($url) {
+	private function updateSessionRouteFromURL ($url) {
 		$bts = BaseToolSet::getInstance();
 		$match = $this->matchRoute("/^(http[s]?:\/\/)?([\w-]+\.)+([\w]+)\//", $url);
 		$str = str_replace($match['0'], "", $url);
@@ -127,7 +127,7 @@ class Router {
 	/**
 	 * Uptade session with the relevant data from the posted form
 	 */
-	private function buildDataFromForm () {
+	private function updateSessionRouteFromForm () {
 		// A form asked for a arti_ref. We need to 
 		$bts = BaseToolSet::getInstance();
 		
@@ -156,7 +156,7 @@ class Router {
 				$bts->SMObj->setSessionSubEntry('currentRoute', 'target', 'home');
 				$bts->SMObj->setSessionSubEntry('currentRoute', 'page', '1');
 			}
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found. We take the last save route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found for routing. We take the last saved route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 			$tab = array(
 				'target'	=> $bts->SMObj->getSessionSubEntry('currentRoute', 'target'),
 				'page'		=> $bts->SMObj->getSessionSubEntry('currentRoute', 'page'),

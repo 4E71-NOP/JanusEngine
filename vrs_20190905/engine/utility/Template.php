@@ -40,7 +40,7 @@ class Template {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 // 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+//		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 // 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
 		
 		$Content = "
@@ -56,7 +56,11 @@ class Template {
 		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
 			case "edit":	$Content .= "<input type='checkbox' id='confirmCheckboxEdit' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('updateConfirm');		break;
-			case "create":	$Content .= "<input type='checkbox' id='confirmCheckboxEdit' name='formGenericData[creation]'>".$bts->I18nTransObj->getI18nTransEntry('createEditConfirm');		break;
+			case "create":	$Content .= "<input type='checkbox' id='confirmCheckboxEdit' name='formGenericData[creation]'>"
+				.$bts->I18nTransObj->getI18nTransEntry('createEditConfirm')
+				."<input type='hidden' name='formGenericData[modification]'		value='on'>\r"
+				;
+			break;
 		}
 		$Content .= "
 		</div>\r
@@ -70,16 +74,12 @@ class Template {
 				"create"	=>	$bts->I18nTransObj->getI18nTransEntry('btnCreate'),
 		);
 		
-		$SB = array(
-				"id"				=> "updateButton",
-				"type"				=> "submit",
-				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-				"onclick"			=> "",
-				"message"			=> $btnTxtTab[$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')],
-				"mode"				=> 1,
-				"size" 				=> 192,
-				"lastSize"			=> 0,
+		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos , 'submit', 
+			$btnTxtTab[$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')], 192, 
+			'updateButton', 
+			2, 2, 
+			""
 		);
 		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
@@ -89,6 +89,9 @@ class Template {
 		
 		<!-- __________Return button__________ -->\r
 		<form ACTION='index.php?' method='post'>\r"
+		."<input type='hidden'	name='formSubmitted'			value='1'>\r"
+		."<input type='hidden'	name='formGenericData[origin]'	value='AdminDashboard'>\r"
+		."<input type='hidden'	name='formGenericData[mode]'	value='routing'>\r"
 		."<input type='hidden'	name='newRoute[arti_slug]'		value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
 		."<input type='hidden'	name='newRoute[arti_page]'		value='1'>\r"
 		."
@@ -98,17 +101,13 @@ class Template {
 		<td align='right'>\r
 		";
 		
-		
-		$SB2 = array(
-				"id"				=> "returnButton",
-				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
-				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-				"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnReturn'),
-				"mode"				=> 1,
-				"size" 				=> 0,
+		$SB = array_merge($SB, $SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos , 'submit', 
+			$bts->I18nTransObj->getI18nTransEntry('btnReturn'), 0, 
+			'returnButton', 
+			1, 1,
+			"",1)
 		);
-		$SB = array_merge($SB, $SB2);		//OverWrites the $SB array with $SB2.
-		
 		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
 		$Content .= "</td>\r
@@ -122,11 +121,12 @@ class Template {
 				$Content .= "
 				<!-- __________Delete button__________ -->\r
 				<form ACTION='index.php?' method='post'>\r"
+				."<input type='hidden'	name='formSubmitted'						value='1'>\r"
+				."<input type='hidden'	name='formGenericData[origin]'				value='AdminDashboard'>\r"
+				."<input type='hidden'	name='formGenericData[mode]'				value='delete'>\r"
 				."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
 				."<input type='hidden'	name='newRoute[arti_page]'					value='1'>\r"
-				."<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard'>\r"
-				."<input type='hidden' name='formGenericData[mode]'					value='delete'>\r"
-				."<input type='hidden' name='".$infos['formName']."[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId')."'>\r"
+				."<input type='hidden'	name='".$infos['formName']."[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId')."'>\r"
 				."
 				<tr>\r
 				<td>\r
@@ -140,16 +140,13 @@ class Template {
 				<td align='right'>\r
 				";
 				
-				$SB2 = array(
-						"id"				=> "deleteButton",
-						"initialStyle"		=> $Block."_t3 ".$Block."_submit_s3_n",
-						"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s3_h",
-						"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnDelete'),
-						"mode"				=> 1,
-						"size" 				=> 0,
+				$SB = array_merge($SB, $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+					$infos , 'submit', 
+					$bts->I18nTransObj->getI18nTransEntry('btnDelete'), 0, 
+					'deleteButton', 
+					3, 3, 
+					"",1)
 				);
-				$SB = array_merge($SB, $SB2);		//OverWrites the $SB array with $SB2.
-				
 				$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 				
 				$Content .= "
@@ -187,16 +184,13 @@ class Template {
 			."<input type='hidden'	name='formGenericData[mode]'				value='create'>\r"
 			;
 		
-		$SB = array(
-				"id"				=> "createButton",
-				"type"				=> "submit",
-				"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-				"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-				"onclick"			=> "",
-				"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnCreate'),
-				"mode"				=> 1,
-				"size" 				=> 128,
-				"lastSize"			=> 0,
+
+		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos , 'submit', 
+			$bts->I18nTransObj->getI18nTransEntry('btnCreate'), 128, 
+			'createButton', 
+			2, 2, 
+			"",1
 		);
 		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		

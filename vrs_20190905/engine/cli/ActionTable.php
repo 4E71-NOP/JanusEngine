@@ -3,6 +3,7 @@
 //	Add
 //--------------------------------------------------------------------------------
 self::$ActionTable['add']['article']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article']." (".$a['columns'].") VALUES (".$a['values'].");");};
+self::$ActionTable['add']['article_config']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article_config']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['deadline']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
@@ -36,7 +37,6 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 	);
 };
 
-self::$ActionTable['add']['document_config']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['article_config']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 self::$ActionTable['add']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
@@ -168,10 +168,27 @@ self::$ActionTable['assign']['user']		= function (&$a) {
 //--------------------------------------------------------------------------------
 //	Update
 //--------------------------------------------------------------------------------
+self::$ActionTable['update']['article']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['article']." SET ".$a['equalities']." WHERE article_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['article_config']	= function (&$a) { return array ("UPDATE ".$a['sqlTables']['article_config']." SET ".$a['equalities']." WHERE config_id = '".$a['params']['id']."';"); };
+
+self::$ActionTable['update']['deadline']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['deadline']." SET ".$a['equalities']." WHERE deadline_id = '".$a['params']['id']."';"); };
+
 self::$ActionTable['update']['document']		= function (&$a) {
 	if ($a['params']['updateGO'] == 1 ) { return array ("UPDATE ".$a['sqlTables']['document']." SET ".$a['equalities']." WHERE docu_id = '".$a['params']['docu_id']."';"); }
 	else { return array ("SELECT 'Nothing to do';"); }
 };
+
+self::$ActionTable['update']['group']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['group']." SET ".$a['equalities']." WHERE group_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['keyword']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['keyword']." SET ".$a['equalities']." WHERE keyword_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['layout']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout']." SET ".$a['equalities']." WHERE layout_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['layout_file']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout_file']." SET ".$a['equalities']." WHERE layout_file_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['menu']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['menu']." SET ".$a['equalities']." WHERE menu_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']." SET ".$a['equalities']." WHERE module_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['permission']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['permission']." SET ".$a['equalities']." WHERE permission_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['tag']				= function (&$a) { return array ("UPDATE ".$a['sqlTables']['tag']." SET ".$a['equalities']." WHERE tag_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['theme']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['theme']." SET ".$a['equalities']." WHERE theme_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['translation']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['translation']." SET ".$a['equalities']." WHERE translation_id = '".$a['params']['id']."';"); };
+self::$ActionTable['update']['user']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['user']." SET ".$a['equalities']." WHERE user_id = '".$a['params']['id']."';"); };
 
 self::$ActionTable['update']['website']		= function (&$a) {
 	$queries = array();
@@ -180,13 +197,6 @@ self::$ActionTable['update']['website']		= function (&$a) {
 	}
 	return $queries;
 };
-
-
-self::$ActionTable['update']['user']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['user']." SET ".$a['equalities']." WHERE user_id = '".$a['params']['id']."';"); };
-
-
-
-
 
 //--------------------------------------------------------------------------------
 //	Insert

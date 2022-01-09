@@ -37,13 +37,13 @@ class AdminFormTool {
 				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') != 'on'
 				) {
 					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : modification checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
+					$Content .= "<p class='".$Block."_error'>".$bts->I18nTransObj->getI18nTransEntry('userForgotConfirmation')."</p>\r";
 		}
-		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboardCreate'
-				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'edit'
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == 'AdminDashboard'
+				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'create'
 				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'creation') != 'on' ) {
 					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotCreation')."</p>\r";
+					$Content .= "<p class='".$Block."_erreur'>".$bts->I18nTransObj->getI18nTransEntry('userForgotCreation')."</p>\r";
 					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'create');
 					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}
@@ -51,7 +51,7 @@ class AdminFormTool {
 				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') == 'delete'
 				&& $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'deletion') != 'on' ) {
 					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . ' : deletion checkbox forgotten'));
-					$Content .= "<p class='".$Block."_erreur ".$Block."_tb3'>".$bts->I18nObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
+					$Content .= "<p class='".$Block."_erreur'>".$bts->I18nTransObj->getI18nTransEntry('userForgotDeletion')."</p>\r";
 					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'mode', 'edit');
 					$bts->RequestDataObj->setRequestDataSubEntry('formGenericData', 'modification', '');
 		}

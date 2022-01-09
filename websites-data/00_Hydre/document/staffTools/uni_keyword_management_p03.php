@@ -48,7 +48,7 @@ $tl_['eng']['l5'] = "Count";				$tl_['fra']['l5'] = "Nombre";
 $tl_['eng']['l6'] = "Type";					$tl_['fra']['l6'] = "Type";	
 $tl_['eng']['l7'] = "Data";					$tl_['fra']['l7'] = "Donn&eacute;e";	
 
-$info_mc_['keyword_name'] = "Nouveau_keyword-" . date ( "Y_m_j_-_G_i_s", mktime() );
+$info_mc_['keyword_name'] = "Nouveau_keyword-" . date ( "Y_m_j_-_G_i_s", time() );
 $info_mc_['keyword_string'] = "abcd";
 $info_mc_['mc_nbr'] = 1;
 $info_mc_['keyword_data'] = "abcd";
