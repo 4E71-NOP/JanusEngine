@@ -46,7 +46,11 @@ class DeadLine extends Entity{
 		."WHERE dl.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		AND dl.deadline_id ='".$id."'
 		;");
-		
+		if ( $dbquery === false ) { 
+			$this->LastExecutionReport[] = array('state' => 'err', 'msg' =>  $bts->SDDMObj->errno.':'.$bts->SDDMObj->error);
+			return false; 
+		}
+
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deadline id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -57,6 +61,7 @@ class DeadLine extends Entity{
 		}
 		else {
 			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deadline id=".$id));
+			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => 'No rows returned for deadline id='.$id );
 		}
 	}
 	
@@ -78,7 +83,7 @@ class DeadLine extends Entity{
 				'entityTitle'	=> 'deadline'
 		);
 		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		elseif ( $this->existsInDB() === false && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
 	}
 	
 	/**

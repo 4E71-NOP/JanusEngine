@@ -64,7 +64,7 @@ class DalFacade {
 			case "PEARSQLITE" :
 				break;
 		}
-		$this->DALInstance->connect ();
+		$this->DALInstance->connect();
 	}
 	
 	/**

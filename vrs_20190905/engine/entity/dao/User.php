@@ -93,7 +93,7 @@ class User extends Entity {
 				}
 			}
 
-// 			Building SQL clause for groups. Done here to avoid redoing it over and over. 
+			// Building SQL clause for groups. Done here to avoid redoing it over and over. 
 			$this->User['clause_in_group'] = "";
 			$groupList00 = $groupList01 = $groupList02 = array ();
 

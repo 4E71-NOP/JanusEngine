@@ -49,7 +49,7 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('Mapper');
 		$ClassLoaderObj->provisionClass('RequestData');
 		$ClassLoaderObj->provisionClass('StringFormat');
-// 		$ClassLoaderObj->provisionClass('SqlTableList');			// Need configuration to be loaded first
+// 		$ClassLoaderObj->provisionClass('SqlTableList');					// Need configuration to be loaded first
 		$ClassLoaderObj->provisionClass('ConfigurationManagement');
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$ClassLoaderObj->provisionClass('AuthenticateUser');

@@ -17,10 +17,12 @@
  *
  */
 class Entity {
-	
+	private $LastExecutionReport = array();
+
 	public function __construct() {	}
+
 	/**
-	 * Returns the current website depending on the context
+	 * Returns the current website id depending on the context
 	 * @return number
 	 */
 	public function getCurrentWebsite () {
@@ -30,12 +32,13 @@ class Entity {
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 	}
-		
+	
 	/**
 	 * Insert in Db according to data in the array
 	 * @param array $data
 	 */
 	public function genericInsertInDb ($data) {
+		$res = true;
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
@@ -49,13 +52,19 @@ class Entity {
 			VALUES
 			(".$QueryColumnDescription['values'].")
 			;");
-	}
+			if ( $bts->SDDMObj->errno != 0 ) { 
+				$this->LastExecutionReport[] = array( 'state' => 'err', 'msg' => $bts->SDDMObj->error); 
+				$res = false; 
+			}
+			return $res;
+		}
 	
 	/**
 	 * Update an entity in DB
 	 * @param array $data
 	 */
 	public function genericUpdateDb ($data) {
+		$res = true;
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." doesn't exist in DB. Inserting Id=".$data['entityId']));
@@ -65,7 +74,12 @@ class Entity {
 			SET ".$QueryColumnDescription['equality']."
 			WHERE a.".$data['targetColumn']." ='".$data['entityId']."'
 			;");
-	}
+		if ( $bts->SDDMObj->errno != 0 ) { 
+			$this->LastExecutionReport[] = array( 'state' => 'err', 'msg' => $bts->SDDMObj->error); 
+			$res = false; 
+		}
+		return $res;
+}
 	
 	/**
 	 * Finds an entity filtering on the specified table and columns.
@@ -118,7 +132,10 @@ class Entity {
 			SELECT ".$column." FROM ".$SqlTableListObj->getSQLTableName($entity)."
 			WHERE ".$column." = ".$id."
 			LIMIT 1;");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {$res = false; }
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
+			$this->LastExecutionReport[] = array( 'state' => 'wrn', 'msg' => 'No rows returned for the last query.');
+			$res = false; 
+		}
 		return $res;
 	}
 }
