@@ -65,7 +65,7 @@ switch ($application) {
 		$ll = LOGLEVEL_WARNING;
 		$ll = LOGLEVEL_INFORMATION;
 		$ll = LOGLEVEL_STATEMENT;
-		// $ll = LOGLEVEL_BREAKPOINT;
+		$ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'FileSelector':
 		$ll = LOGLEVEL_ERROR;

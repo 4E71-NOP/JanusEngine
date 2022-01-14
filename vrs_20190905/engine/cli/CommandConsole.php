@@ -26,16 +26,12 @@ class CommandConsole {
 	
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new CommandConsole ();
+			self::$Instance = new CommandConsole();
 			self::loadI18n();
-
-// 			self::makeQueryTable();
-
 			self::makeInitTable();
 			self::makeCheckTable();
 			self::makePreRequisiteTable();
 			self::makeActionTable();
-			
 			self::$report['executionPerformed'] = 0;
 		}
 		return self::$Instance;
@@ -310,8 +306,8 @@ class CommandConsole {
 			foreach ($ptr['convert'] as $A){ $CCL['params'][$A['v']] = $bts->StringFormatObj->conversion_expression($CCL['params'][$A['v']], $A['s']); }
 		}
 		// Next Id ----------------------------------------
-		if ( is_array($ptr['nextId']) ) {
-			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->createUniqueId(); }
+		if ( is_array($ptr['nextId']) && $CCL['init']['cmd'] != 'update') {
+			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->createUniqueId();}
 		}
 		// 	foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
 		//timeCreate ----------------------------------------
@@ -320,13 +316,16 @@ class CommandConsole {
 			foreach ($ptr['timeCreate'] as $A) { $CCL['params'][$A] = $time; }
 		}
 		// timeConvert ----------------------------------------
-		if ( is_array($ptr['timeConvert']) ) {
+		if ( is_array($ptr['timeConvert']) && $CCL['init']['cmd'] != 'add') {
 			foreach ($ptr['timeConvert'] as $A) { 
-				if ( is_numeric($CCL['params'][$A]) !== true ) { $CCL['params'][$A] = $bts->TimeObj->mktimeFromCanonical($CCL['params'][$A]); }
-				}
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : time convert : ".$CCL['params'][$A]));
+				$CCL['params'][$A] = $bts->TimeObj->mktimeFromCanonical($CCL['params'][$A]);
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : time convert : ".$CCL['params'][$A]));
+ 
+			}
 		}
 		// langConvert ----------------------------------------
-		if ( is_array($ptr['langConvert']) ) {
+		if ( is_array($ptr['langConvert'])) {
 			foreach ($ptr['langConvert'] as $A) { $CCL['params'][$A['t']] = $bts->CMObj->getLanguageListSubEntry($A['v'], 'lang_id'); }
 		}
 		//----------------------------------------
@@ -356,6 +355,7 @@ class CommandConsole {
 		
 		if ( is_array($CCL['sql']) ) {
 			foreach ( $CCL['sql'] as $Q ) {
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query `".$Q."`"));
 				$bts->SDDMObj->query($Q);
 				self::$report['executionPerformed']++;
 			}
@@ -388,7 +388,6 @@ class CommandConsole {
 		if ( $CCL['init']['cmd'] == "exit") { 
 			error_log("Exit has been called. I'm out!");
 			exit(0);
-
 		}
 
 		if ( is_array(self::$ActionTable[$CCL['init']['cmd']]) ) {
@@ -431,12 +430,14 @@ class CommandConsole {
 				// Entity not found
 				$CCL['errFlag'] = 1;
 				$CCL['errMsg'] = "unknown entity for that command";
+				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : unknown entity :`".$CCL['init']['entity']."`"));
 			}
 		}
 		else {
 			// Command not found
 			$CCL['errFlag'] = 1;
 			$CCL['errMsg'] = "Command not found";
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Command not found in \$ActionTable['".$CCL['init']['cmd']."']['".$CCL['init']['entity']."']"));
 		}
 		
 		self::$report['signal'] = ( $CCL['errFlag'] == 1 ) ? "ERR" : "OK";

@@ -189,7 +189,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		$T['Content']['1']['2']['2']['cont'] = $currentArticleObj->getDeadLineEntry('deadline_name')
 		."<input type='hidden' name='formParams1[name]' value='".$currentArticleObj->getDeadLineEntry('deadline_name')."'>\r"
 		;
-		$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams1[titre]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('deadline_title')."\">\r";
+		$T['Content']['1']['3']['2']['cont'] = "<input type='text' name='formParams1[title]' size='45' maxlength='255' value=\"".$currentArticleObj->getDeadLineEntry('deadline_title')."\">\r";
 		$T['Content']['1']['5']['2']['cont'] = date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_creation_date'));
 		$T['Content']['1']['6']['2']['cont'] = "<input type='text' name='formParams1[end_date]' size='45' maxlength='255' value=\"".date ( "Y-m-d G:i:s" , $currentArticleObj->getDeadLineEntry('deadline_end_date'))."\">\r";
 		$T['Content']['1']['7']['2']['cont'] = $articleList;

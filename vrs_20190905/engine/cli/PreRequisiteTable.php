@@ -776,6 +776,7 @@ self::$PreRequisiteTable['update']['article']['columns']		= &self::$PreRequisite
 self::$PreRequisiteTable['update']['deadline']['convert']		= &self::$PreRequisiteTable['add']['deadline']['convert'];
 self::$PreRequisiteTable['update']['deadline']['nextId']		= &self::$PreRequisiteTable['add']['deadline']['nextId'];
 self::$PreRequisiteTable['update']['deadline']['columns']		= &self::$PreRequisiteTable['add']['deadline']['columns'];
+self::$PreRequisiteTable['update']['deadline']['timeConvert']	= &self::$PreRequisiteTable['add']['deadline']['timeConvert'];
 
 self::$PreRequisiteTable['update']['document']					= self::$PreRequisiteTable['add']['document'];		// It's a copy not a reference!
 self::$PreRequisiteTable['update']['document']['execute']		= function (&$a) {

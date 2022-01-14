@@ -164,20 +164,20 @@ self::$CheckTable['insert']['content']['3']['s']	= "file";
 // DeadLine
 self::$CheckTable['add']['deadline']['0']['d']	= 3;
 self::$CheckTable['add']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['add']['deadline']['0']['m']	= "CLI_Bouclage_C001";
+self::$CheckTable['add']['deadline']['0']['m']	= "CLI_Deadline_C001";
 self::$CheckTable['add']['deadline']['0']['s']	= "name";
 self::$CheckTable['update']['deadline']['0']['d']	= 2;
 self::$CheckTable['update']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['deadline']['0']['c']	= "deadline_id";
-self::$CheckTable['update']['deadline']['0']['v']	= "deadline_id";
-self::$CheckTable['update']['deadline']['0']['m']	= "CLI_Bouclage_U001";
+self::$CheckTable['update']['deadline']['0']['v']	= "id";
+self::$CheckTable['update']['deadline']['0']['m']	= "CLI_Deadline_U001";
 self::$CheckTable['update']['deadline']['0']['p']	= "deadline";
 self::$CheckTable['update']['deadline']['0']['s']	= "name";
 self::$CheckTable['delete']['deadline']['0']['d']	= 2;
 self::$CheckTable['delete']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['delete']['deadline']['0']['c']	= "deadline_id";
 self::$CheckTable['delete']['deadline']['0']['v']	= "deadline_id";
-self::$CheckTable['delete']['deadline']['0']['m']	= "CLI_Bouclage_U001";
+self::$CheckTable['delete']['deadline']['0']['m']	= "CLI_Deadline_U001";
 self::$CheckTable['delete']['deadline']['0']['p']	= "deadline";
 self::$CheckTable['delete']['deadline']['0']['s']	= "name";
 

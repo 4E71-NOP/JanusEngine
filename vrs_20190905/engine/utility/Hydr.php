@@ -581,17 +581,18 @@ class Hydr {
 		if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
 			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
 			
-			$ClassLoaderObj->provisionClass ( 'CommandConsole' );
-			$CurrentSetObj->setInstanceOfWebSiteContextObj ( $WebSiteObj ); // Set an initial website context.
-			$CommandConsole = CommandConsole::getInstance ();
+			$ClassLoaderObj->provisionClass ('CommandConsole');
+			$CurrentSetObj->setInstanceOfWebSiteContextObj ($WebSiteObj); // Set an initial website context.
+			$CommandConsoleObj = CommandConsole::getInstance();
 			
 			$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
 			$Script = $FormToCommandLineObj->getCommandLineScript ();
 			switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
 				case "enabled" :
 					foreach ( $Script as $A ) {
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ExecuteCommand - ".$A) );
-						$CommandConsole->executeCommand ( $A );
+						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`".$A."`)") );
+						$CommandConsoleObj->executeCommand ( $A );
+						
 						// We have to reload website and user in case of one of them was updated was updated.
 						$WebSiteObj->getDataFromDBUsingShort();
 						$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );

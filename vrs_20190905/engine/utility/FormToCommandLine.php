@@ -47,22 +47,22 @@ class FormToCommandLine {
 			switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData','origin')) {
 				// Analyze the origin of the form
 				case "ModuleQuickSkin":
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleQuickSkin submitted a form."));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => " ModuleQuickSkin submitted a form."));
 					$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " pref_theme '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_pref_theme')."'";
 					$cln++;
 					break;
 				case "ModuleSelectLanguage":
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleSelectLanguage submitted a form."));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => " ModuleSelectLanguage submitted a form."));
 					$scr[$cln] = "update user name ".$UserObj->getUserEntry('user_login'). " lang '".$bts->RequestDataObj->getRequestDataSubEntry('userForm','user_lang')."'";
 					$cln++;
 					break;
 				case "profileManagement":
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Page profile management submitted a form."));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => " Page profile management submitted a form."));
 					if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData','modification') == "on" ) {
 						$n = 1;
 						while ( $n>0 ) {
 							if ( strlen($bts->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
-								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Profile management new command N°".$n."."));
+								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => " Profile management new command N°".$n."."));
 								$scr[$cln] = $this->createCommandFromPost($n);
 								$cln++;
 								$n++;
@@ -73,17 +73,18 @@ class FormToCommandLine {
 					break;
 				// All AdminDashboard will provide the necessary elements to build a set of command line.
 				case "AdminDashboard":
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "AdminDashboard submitted a form."));
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " AdminDashboard submitted a form."));
 					$n = 1;
 					while ( $n != 0 ) {
 						if ( strlen($bts->RequestDataObj->getRequestDataEntry('formCommand'.$n)) > 0 ) {
-							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing formCommand".$n));
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processing formCommand".$n));
 							
 							// $tab = $this->createCommandFromPost($n);
 							$formCommand	= $bts->RequestDataObj->getRequestDataEntry('formCommand'.$n);
 							$formEntity		= $bts->RequestDataObj->getRequestDataEntry('formEntity'.$n);
 							$formTarget		= $bts->RequestDataObj->getRequestDataEntry('formTarget'.$n);
 							$formParams		= $bts->RequestDataObj->getRequestDataEntry('formParams'.$n);
+							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Command concatenation =`".$formCommand.$formEntity."`"));
 							switch ($formCommand.$formEntity) {
 								case "assignlanguage":
 									// This one is an additive from website manipulation
@@ -92,7 +93,7 @@ class FormToCommandLine {
 									$n++;
 									foreach ($formTarget as $k => $v ) {
 										$str = "assign language ".$k." to_website ".$bts->RequestDataObj->getRequestDataSubEntry('site_context','site_nom').";";
-										$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "(assignlanguage) Processed =".$str));
+										$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " (assignlanguage) Processed =".$str));
 										$scr[$cln] = $str;
 										$cln++;
 										$n++;
@@ -106,7 +107,7 @@ class FormToCommandLine {
 									foreach ($formTarget as $k => $v) { $str .= $k." '".$v."' ";}
 									foreach ($formParams as $k => $v) { $str .= $k." '".$v."' ";}
 									$str .= ";";
-									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, __METHOD__ . 'msg' => "Processed =".$str));
+									$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processed =`".$str."`"));
 									$scr[$cln] = $str;
 									$cln++;
 									$n++;
