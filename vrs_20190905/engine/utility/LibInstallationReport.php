@@ -48,50 +48,97 @@ class LibInstallationReport {
 		return self::$Instance;
 	}
 	
-	public function renderReport ( &$src , $style ) {
-		reset ($src);
-		$R = array();
-		$counters= array('file' => 0, 'OK' => 0, 'WARN' => 0, 'ERR' => 0, );
+	/**
+	 * Renders a 2D array containing the report on a spécific installation section
+	 * @param string $section
+	 * @param array $style
+	 * @return array
+	 */
+	public function renderReport ($section , $style) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$T = array();
 
-		$l = 1;
-		foreach ( $src as $A ) {
-			$c = 1;
-			if ( $l == 1 ) {
-				foreach ( $style['titles'] as $B ) {
-					$R[$l][$c]['cont']	= $B;
-					$R[$l][$c]['tc']	= 4;
-					$R[$l][$c]['sc']	= 8;
-					$c++;
-				}
-				$c = 1;
-				$l++;
-			}
-			foreach ( $style['cols'] as $B ) {
-				$R[$l][$c]['tc']	= $style['tc'];
-				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_warning" ;	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
-				if ( $B == "ERR"  && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_error";	$R[$l][$c]['b'] =1;	$R[$l][$c]['tc'] +=2; }
-				$R[$l][$c]['cont']	= $A[$B];
-				if ($c != 1 ) { $counters[$B] += $A[$B]; }
-				$c++;
-			}
-			$l++;
-		}
-		// last values of the chart.
-		unset ($B);
-		$c = 1;
-		foreach ( $style['cols'] as $B ) {			
-			if ($c != 1 ) {
-				$R[$l][$c]['tc']	= $style['tc'];
-				if ( $B == "WARN" && $A[$B] > 0 ) { $R[$l][$c]['class'] = $style['block'] . "_warning" ;	$R[$l][$c]['tc'] +=2; }
-				if ( $B == "ERR" && $A[$B] > 0 )  { $R[$l][$c]['class'] = $style['block'] . "_error";	$R[$l][$c]['tc'] +=2; }
-				$R[$l][$c]['cont']	= $counters[$B];
-				$R[$l][$c]['b'] =1;
-			}
+		$l = $c = 1;
+		foreach ( $style['titles'] as $A ) {
+			$T[$l][$c]['cont'] = $A;
+			// error_log ( __METHOD__ . " : ".$A);
 			$c++;
 		}
-		return $R;
+		
+		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report')
+		." WHERE instreport_section = '".$section."'"
+		." ORDER BY instreport_name"
+		.";"
+		);
+		$l = 3;
+		$dataOk = $dataWrn = $dataErr = $dataTim = $dataQry = $dataCmd = 0;
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+			$T[$l]['1']['cont'] = $dbp['instreport_name'];
+			$T[$l]['2']['cont'] = $dbp['instreport_ok'];
+
+			if ( $dbp['instreport_wrn'] > 0 ) { 
+				$T[$l]['3']['class'] = $style['block'] . "_warning" ; 
+				$T[$l]['3']['b'] = 1 ; 
+			} 
+			$T[$l]['3']['cont'] = $dbp['instreport_wrn'];
+			
+			if ( $dbp['instreport_err'] > 0 ) { 
+				$T[$l]['4']['class'] = $style['block'] . "_error" ; 
+				$T[$l]['4']['b'] = 1; 
+			} 
+			$T[$l]['4']['cont'] =  $dbp['instreport_err'];
+
+			$T[$l]['5']['cont'] = round  ( (($dbp['instreport_end'] - $dbp['instreport_start'])/1000000000), 4 );
+			$T[$l]['6']['cont'] = $dbp['instreport_nbr_query'];
+			$T[$l]['7']['cont'] = $dbp['instreport_nbr_cmd'];
+
+			$dataOk		+= $dbp['instreport_ok'];
+			$dataWrn	+= $dbp['instreport_wrn'];
+			$dataErr	+= $dbp['instreport_err'];
+			$dataTim	+= ($dbp['instreport_end'] - $dbp['instreport_start']);
+			$dataQry	+= $dbp['instreport_nbr_query'];
+			$dataCmd	+= $dbp['instreport_nbr_cmd'];
+
+			$l++;
+		}
+
+		$l = 2;
+		$T[$l]['1']['b'] = 1;	$T[$l]['1']['cont'] = "Tot";
+		$T[$l]['2']['b'] = 1;	$T[$l]['2']['cont'] = $dataOk;
+		$T[$l]['3']['b'] = 1;	$T[$l]['3']['cont'] = $dataWrn;
+		$T[$l]['4']['b'] = 1;	$T[$l]['4']['cont'] = $dataErr;
+		$T[$l]['5']['b'] = 1;	$T[$l]['5']['cont'] = round(($dataTim/1000000000), 4 );
+		$T[$l]['6']['b'] = 1;	$T[$l]['6']['cont'] = $dataQry;
+		$T[$l]['7']['b'] = 1;	$T[$l]['7']['cont'] = $dataCmd;
+
+		if ( $dataWrn > 0 )  { $T[$l]['3']['class'] = $style['block'] . "_warning"; }
+		if ( $dataErr > 0 )  { $T[$l]['4']['class'] = $style['block'] . "_error"; }
+
+		return ($T);
 	}
-	
+
+	/**
+	 * Returns the number of lines in the installation reponrt table for a named section
+	 * @param string $section
+	 * @return integer
+
+	 */
+	public function getInstallSectionLineCount($section){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$n=0;
+		$dbquery = $bts->SDDMObj->query("SELECT count(*) as lineCount FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report')
+		." WHERE instreport_section = '".$section."';"
+		);
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lineCount']; }
+		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
+		return ($n);
+	}
+
+	/**
+	 * renderPerfomanceReport
+	 */
 	public function renderPerfomanceReport () {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();

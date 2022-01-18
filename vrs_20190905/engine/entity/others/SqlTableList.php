@@ -26,7 +26,7 @@ class SqlTableList {
 			'extension',		'extension_config',		'extension_dependency',		'extension_file',
 			'group',			'group_permission',		'group_user',			
 			'i18n',				
-			'installation',		
+			'installation',		'installation_report',		
 			'keyword',			'note',			
 			'language',			'language_website',		
 			'log',

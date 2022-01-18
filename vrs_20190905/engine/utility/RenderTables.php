@@ -81,7 +81,6 @@ class  RenderTables {
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " A table is on the bench. Let's get to work!"));
-// 		$legendClasses = "";
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
@@ -104,22 +103,7 @@ class  RenderTables {
 			$Height = ($tab_infos['Height'] > 0) ? "height:".$tab_infos['Height']."px; " : "height:auto; ";
 			$Content .= "<div id='AD_".$tab_infos['GroupName']."_".$tab_infos['DocumentName']."' class='".$Block."_tabFrame' style='width:100%; padding:0px; margin:0px; overflow:auto; ".$Height."' >\r"; // overflow:hidden;
 		}
-// 		$classTab= array (
-// 			0  =>	$Block."_fca",
-// 			1  =>	$Block."_fcb",
-// 			2  =>	$Block."_fcc",
-// 			3  =>	$Block."_fcd",
 
-// 			4  =>	$Block."_fcsa",
-// 			5  =>	$Block."_fcsb",
-// 			6  =>	$Block."_fcsa",
-// 			7  =>	$Block."_fcsb",
-				
-// 			8  =>	$Block."_fcta",
-// 			9  =>	$Block."_fctb",
-// 			10 =>	$Block."_fcta",
-// 			11 =>	$Block."_fctb",
-// 		);
 		$TableWidth = ($tab_infos['Width']-32);
 		$visibility = ($infos['initial_visibility']) ? $infos['initial_visibility'] : "visible";
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
@@ -170,17 +154,15 @@ class  RenderTables {
 					
 					$TRidx = $TRidx;
 					for ( $CurC = 1 ; $CurC <= $ADC['tabs'][$CurT]['NbrOfCells'] ; $CurC++ ) {
-						if ( $AD[$CurT][$CurL][$CurC]['desactive'] == 0 ) {
-							
-							$strDeco = " class='";
+						if ( $AD[$CurT][$CurL][$CurC]['disabled'] == 0 ) {
+								$strDeco = " class='";
 							$boldB = $boldE = "";
 							if ($AD[$CurT][$CurL][$CurC]['b'] == 1 ) {
 								$boldB = "<b>";
 								$boldE = "</b>"; 
 							}
 							if ( isset($AD[$CurT][$CurL][$CurC]['cc']) )	{ $strDeco .= $AD[$CurT][$CurL][$CurC]['cc']; }
-// 							if ( isset($AD[$CurT][$CurL][$CurC]['sc']) )	{ $strDeco .= $classTab[$AD[$CurT][$CurL][$CurC]['sc']]." "; }
-							if ( isset($AD[$CurT][$CurL][$CurC]['class']) )	{ $strDeco .= $AD[$CurT][$CurL][$CurC]['class']." "; }
+							if ( isset($AD[$CurT][$CurL][$CurC]['class']))	{ $strDeco .= $AD[$CurT][$CurL][$CurC]['class']." "; }
 							if ( $strDeco == " class='" ) { $strDeco = ""; }
 							else  { $strDeco = substr( $strDeco, 0, -1 ) . "'"; }
 							
@@ -259,7 +241,6 @@ class  RenderTables {
 		"RenderMode"		=> 1,
 		"HighLightType"		=> $HighLightType,
 		"Height"			=> $lines * 24,		// default
-		// "Width"				=> $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_module_internal_width'),
 		"Width"				=> 960, // Minimum size (we don't have theme_module_internal_width any more)
 		"GroupName"			=> "l",
 		"CellName"			=> "c",

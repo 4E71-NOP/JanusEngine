@@ -105,6 +105,7 @@ class LibInstallation {
 	*/
 	private function methodFilename (&$infos) {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Tmp = "";
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
@@ -117,7 +118,8 @@ class LibInstallation {
 		
 		$this->createMap($infos);
 		$this->commandFormatting ($infos);
-		
+		$timeStart = $bts->TimeObj->getHrtime();
+		$sqlCount = 0;
 		foreach ( $infos['FormattedCommand'] as $C ) {
 			if ( !isset($C['ordre']) ) {
 				$bts->SDDMObj->query($C['cont']);
@@ -129,10 +131,34 @@ class LibInstallation {
 				}
 				$this->report['lastReportExecution'] = time();
 				if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
+				$sqlCount++;
 			}
 		}
+
+		// Store data for later use
+		$this->report[$infos['section']][$infos['currentFileName']]['sqlCount'] = $sqlCount;
+		$this->report[$infos['section']][$infos['currentFileName']]['start'] = $timeStart;
+		$this->report[$infos['section']][$infos['currentFileName']]['end'] = $bts->TimeObj->getHrtime();
+
 		$bts->SDDMObj->query("FLUSH TABLES;");
 		$bts->SDDMObj->query("COMMIT;");
+
+		// If DB is ready we store directly into DB. Thank you captain obvious.
+		if ( $infos['section'] != 'tables_creation' ) { 
+			$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report'). " VALUES ("
+			."'".$bts->SDDMObj->createUniqueId()."', "
+			."'".$infos['section']."', "
+			."'".$this->report[$infos['section']][$infos['currentFileName']]['file']."', "
+			."'".$this->report[$infos['section']][$infos['currentFileName']]['OK']."', "
+			."'".$this->report[$infos['section']][$infos['currentFileName']]['WARN']."', "
+			."'".$this->report[$infos['section']][$infos['currentFileName']]['ERR']."', "
+			."'".$timeStart."', "
+			."'".$bts->TimeObj->getHrtime()."', "
+			."'".$sqlCount."',"
+			."'0'"
+			.");"
+			);	
+		}
 	}
 	
 	/**
@@ -142,6 +168,7 @@ class LibInstallation {
 	 */
 	private function methodCommand (&$infos) {
 		$CommandConsole = CommandConsole::getInstance();
+		$bts = BaseToolSet::getInstance(); 
 		
 		$Tmp = '';
 		foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
@@ -150,17 +177,20 @@ class LibInstallation {
 		$this->createMap($infos);
 		$this->commandFormatting ($infos);
 		
+		$timeStart = $bts->TimeObj->getHrtime();
+		$sqlCount = $CommandConsole->getReportEntry('executionPerformed');
+		$commandCount = 0;
 		foreach ( $infos['FormattedCommand'] as $C ) {
-			// the space case happens when some tab & spaces are after a ";" and no command is found before EOF.
+			// The space case happens when some tab & spaces are after a ";" and no command is found before EOF.
 			if ( !isset($C['ordre']) && $C['cont'] != " " ) {
 				$CommandConsole->executeCommand($C['cont']);
 				
 				switch ( $CommandConsole->getReportEntry('signal') ) {
-					case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
-					case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
-					case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
+					case "OK" :		$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
+					case "WARN" :	$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
+					case "ERR" :	$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
 				}
-// 				error_log ( "executeCommand: signal=".$CommandConsole->getReportEntry('signal').";section=".$infos['section']."; currentFileName=".$infos['currentFileName']."; OK=" .$this->report[$infos['section']][$infos['currentFileName']]['OK']. "; WARN=" .$this->report[$infos['section']][$infos['currentFileName']]['WARN']. "; ERR=" . $this->report[$infos['section']][$infos['currentFileName']]['ERR'] );
+				// error_log ( "executeCommand: signal=".$CommandConsole->getReportEntry('signal').";section=".$infos['section']."; currentFileName=".$infos['currentFileName']."; OK=" .$this->report[$infos['section']][$infos['currentFileName']]['OK']. "; WARN=" .$this->report[$infos['section']][$infos['currentFileName']]['WARN']. "; ERR=" . $this->report[$infos['section']][$infos['currentFileName']]['ERR'] );
 				$this->report['lastReportExecution'] = time();
 				$this->updateInsdtallationMonitor();
 				
@@ -170,22 +200,37 @@ class LibInstallation {
 					foreach ( $SpecialCommandBuffer as $S ) { 
 						$CommandConsole->executeCommand($S);
 						switch ( $CommandConsole->getReportEntry('signal') ) {
-							case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
-							case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
-							case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
+							case "OK" :		$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
+							case "WARN" :	$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
+							case "ERR" :	$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
 						}
 						$this->report['lastReportExecution'] = time();
 						if ( $infos['updateInsdtallationMonitor'] == 1 ) { $this->updateInsdtallationMonitor(); }
 					}
 					$CurrentSetObj->setDataSubEntry('cli', 'websiteCreation', 0);
 				}
+				$commandCount++;
 			}
 		}
+
+		$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report'). " VALUES ("
+		."'".$bts->SDDMObj->createUniqueId()."', "
+		."'".$infos['section']."', "
+		."'".$this->report[$infos['section']][$infos['currentFileName']]['file']."', "
+		."'".$this->report[$infos['section']][$infos['currentFileName']]['OK']."', "
+		."'".$this->report[$infos['section']][$infos['currentFileName']]['WARN']."', "
+		."'".$this->report[$infos['section']][$infos['currentFileName']]['ERR']."', "
+		."'".$timeStart."', "
+		."'".$bts->TimeObj->getHrtime()."', "
+		."'".($CommandConsole->getReportEntry('executionPerformed') - $sqlCount )."', "
+		."'".$commandCount."'"
+		.");"
+		);	
 	}
 
 	/**
 	 * SQL execution without formating . Especially usuful for tirgger commands which can contain several ';'.
-	 * Disabled for now as it's not critical and need more time to work on a proper 
+	 * Disabled for now as it's not critical and need more time to work on a proper solution
 	 * 
 	 * @param array $infos
 	 */
@@ -319,7 +364,7 @@ class LibInstallation {
 					case 1:		$FCMode = 1;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set comment mode
 					case 3:		$FCMode = 2;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set multiline comment mode
 					case 4:		$err = 1;																				break;		// error
-					case 5:		$FCMode = 3;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set citation1  mode
+					case 5:		$FCMode = 3;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set citation1 mode
 					case 6:		$FCMode = 4;	$compilation .= substr($Buffer, $Ptr, ($K-$Ptr));		$Ptr = $K;		break;		// set citation2 mode
 					case 12:	$FCMode = 0;															$Ptr = $K+1;	break;		// set initial mode
 					case 24:	$FCMode = 0;															$Ptr = $K+2;	break;		// set initial mode
@@ -367,9 +412,7 @@ class LibInstallation {
 
 		// 99993
 		foreach ( $Map as $K => $A ) {
-
 		}
-
 	}
 	
 	/**

@@ -13,6 +13,9 @@ $i18n = array(
 	't1c2' => "Ok",
 	't1c3' => "Warning",
 	't1c4' => "Error",
+	't1c5' => "Time",
+	't1c6' => "SQL",
+	't1c7' => "Commands",
 
 	't5c1' => "
 Those files must be saved (if not already saved) in the 'current/config/current/' directory.<br>\r

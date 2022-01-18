@@ -29,20 +29,12 @@ class InstallDocument {
 		
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
-		
-		// Required by included scripts
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
-		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$ClassLoaderObj = ClassLoader::getInstance ();
-		
+
 		$localisation = "Page";
 		$bts->MapperObj->AddAnotherLevel ( $localisation );
 		$bts->LMObj->logCheckpoint ( "Page" );
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "Page" );
-
-		$T = array ();
 
 		if ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
 			$bts->RequestDataObj->setRequestData ( 'PageInstall', 1 );
@@ -51,11 +43,14 @@ class InstallDocument {
 		switch ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' )) {
 			case "1" :
 				include ($infos['module']['module_directory']."/install_page_01.php");
+				$pageInstallObj = InstallPage01::getInstance();
 				break;
 			case "2" :
 				include ($infos['module']['module_directory']."/install_page_02.php");
+				$pageInstallObj = InstallPage02::getInstance();
 				break;
 		}
+		$DocContent .= $pageInstallObj->render($infos);
 		$DocContent .= "</div>\r</div>\r";
 
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
@@ -63,7 +58,7 @@ class InstallDocument {
 				$localisation,
 			);
 		}
-		return $Content;
+		return ($DocContent);
 	}
 }
 ?>

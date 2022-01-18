@@ -64,8 +64,8 @@ switch ($application) {
 	case 'website':
 		$ll = LOGLEVEL_WARNING;
 		$ll = LOGLEVEL_INFORMATION;
-		$ll = LOGLEVEL_STATEMENT;
-		$ll = LOGLEVEL_BREAKPOINT;
+		// $ll = LOGLEVEL_STATEMENT;
+		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'FileSelector':
 		$ll = LOGLEVEL_ERROR;
@@ -75,7 +75,9 @@ switch ($application) {
 		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	default :
-		$ll = LOGLEVEL_INFORMATION;
+		$ll = LOGLEVEL_ERROR;
+		// $ll = LOGLEVEL_WARNING;
+		// $ll = LOGLEVEL_INFORMATION;
 // 		$ll = LOGLEVEL_BREAKPOINT;
 		break;
 }

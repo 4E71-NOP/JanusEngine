@@ -155,7 +155,9 @@ class HydrInstall {
 
 		$ClassLoaderObj->provisionClass ( 'User' );
 		$CurrentSetObj->setInstanceOfUserObj ( new User () );
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$UserObj->setPermission('group_default_read_permission');
+
 
 		$ClassLoaderObj->provisionClass ( 'RenderDeco40Elegance' );
 		$ClassLoaderObj->provisionClass ( 'RenderDeco50Exquisite' );
@@ -282,6 +284,9 @@ class HydrInstall {
 			$DocContent .= $A['content'];
 		}
 	
+
+		$GeneratedScriptObj->AddObjectEntry ('TooltipConfig', "'install' : { 'State':1, 'X':'320', 'Y':'256' }");
+
 		// --------------------------------------------------------------------------------------------
 		// Javascript files
 		// --------------------------------------------------------------------------------------------

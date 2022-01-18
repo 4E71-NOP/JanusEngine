@@ -13,6 +13,9 @@ $i18n = array(
 	't1c2' => "Ok",
 	't1c3' => "Avertissement",
 	't1c4' => "Erreur",
+	't1c5' => "Temps",
+	't1c6' => "SQL",
+	't1c7' => "Commandes",
 
 	't5c1' => "
 Ces fihiers doivent être sauvegardés (si ce n'est pas déjà fait) dans le répertoire 'current/config/current/'.<br>\r

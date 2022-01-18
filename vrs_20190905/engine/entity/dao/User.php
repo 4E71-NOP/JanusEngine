@@ -320,6 +320,17 @@ class User extends Entity {
 	}
 
 	/**
+	 * Sets named permission
+	 * @param string
+	 * @return boolean
+	 */
+	public function setPermission($perm) {
+		if ( $this->hasPermission($perm) == false ) {
+			$this->User['permissionList'][$perm] = array('perm_name' => $perm , 'perm_level' => 2 );
+		}
+	}
+
+	/**
 	 * Returns bolean true/false on named Read permission
 	 * @param string
 	 * @return boolean

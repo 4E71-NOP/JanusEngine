@@ -30,10 +30,27 @@ class Time {
 	
 	/**
 	 * Returns the time to the millisecond.
+	 * @DEPRECATED
 	 * @return mixed
 	 */
 	public function microtime_chrono() {
 		return microtime ( TRUE );
+	}
+
+	/**
+	 * Returns the time with millisecond.
+	 * @return mixed
+	 */
+	public function getMicrotime() {
+		return microtime(true);
+	}
+
+	/**
+	 * Returns the hrTime (NanoSecond) as number.
+	 * @return mixed
+	 */
+	public function getHrtime() {
+		return hrtime(true);
 	}
 
 	/**

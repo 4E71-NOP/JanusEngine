@@ -90,6 +90,18 @@ class ModuleList {
 			"module_directory"   => "modules/initial/InstallDocument/", 
 			"module_file"   => "module_install_document.php", 
 		);
+		$this->ModuleList['tooltip'] = array(
+			"module_id" => "3",
+			"module_deco" => "1",
+			"module_deco_nbr" => "20",
+			"module_deco_default_text" => "",
+			"module_name" => "tooltip",
+			"module_classname" => "ModuleTooltip",
+			"module_container_name" => "InstallModuleTooltip",
+			"module_title" => "",
+			"module_directory"   => "modules/initial/Tooltip/", 
+			"module_file"   => "module_tooltip.php", 
+		);
 	}
 
 	/**
