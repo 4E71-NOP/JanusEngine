@@ -19,7 +19,7 @@ function InsertValue ( val , form , list ) {
 		elm.SetFormInputValue ( form , list[ptr] , val );
 	}
 }
-var OnKeypress = "InsertValue ( this.value , 'install_p02' );"
+//var OnKeypress = "InsertValue ( this.value , 'install_p02' );"
 
 function CreateRandomPassword( Longueur ) {
 	var Table = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';

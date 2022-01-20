@@ -13,7 +13,7 @@
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
 // implements iSddm 
-class SddmMySQLI {
+class SddmPqsql {
 	private static $Instance = null;
 
 	private $DBInstance = null;
@@ -26,11 +26,11 @@ class SddmMySQLI {
 
 	/**
 	 * Singleton : Will return the instance of this class.
-	 * @return SddmMySQLI
+	 * @return SddmPqsql
 	 */
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new SddmMySQLI();
+			self::$Instance = new SddmPqsql();
 		}
 		return self::$Instance;
 	}

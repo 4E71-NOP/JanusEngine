@@ -20,10 +20,10 @@
 
 function returnConfig () {
 	$tab = array();
-	$tab['type']				= "mysql";
+	$tab['type']				= "mysqli";
 	$tab['charset']				= "utf8mb4";
 	$tab['host']				= "mysql";
-	$tab['dal']					= "MYSQLI";						// MYSQLI , PDOMYSQL
+	$tab['dal']					= "PHP";						// MYSQLI , PDOMYSQL
 	$tab['db_user_login']		= "HydreBDD";
 	$tab['db_user_password']	= "Celeste";
 	$tab['dbprefix']			= "Hdr";

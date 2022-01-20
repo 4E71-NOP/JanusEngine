@@ -371,14 +371,14 @@ class InstallPage02 {
 			case "SQLITE":		break;
 			case "ADODB":		break;
 			case "PEARDB":			
-			case "PEARSQLITE":	
-				$r[] = "SET SESSION query_cache_type = OFF;";				// forbids cache usage
-				$r[] = "USE ".$bts->CMObj->getConfigurationEntry('dbprefix').";";
-				unset ( $A );
-				$db->loadModule('Manager');
-				foreach ( $db->listTables( $bts->CMObj->getConfigurationEntry('dbprefix') ) as $A ) { $r[] = "DROP TABLE ". $A .";"; }
-				$r[] = "FLUSH TABLES;";										// clean query_cache
-				$db->loadModule('Native');
+			case "PEARSQLITE":
+				// $r[] = "SET SESSION query_cache_type = OFF;";				// forbids cache usage
+				// $r[] = "USE ".$bts->CMObj->getConfigurationEntry('dbprefix').";";
+				// unset ( $A );
+				// $db->loadModule('Manager');
+				// foreach ( $db->listTables( $bts->CMObj->getConfigurationEntry('dbprefix') ) as $A ) { $r[] = "DROP TABLE ". $A .";"; }
+				// $r[] = "FLUSH TABLES;";										// clean query_cache
+				// $db->loadModule('Native');
 			break;
 			}
 		break; 
@@ -430,10 +430,7 @@ class InstallPage02 {
 
 		switch ( $this->form['operating_mode']) {
 			case 'directCnx':
-				foreach ( $qs as $q ){ 
-					$bts->SDDMObj->query($q); 
-					error_log(__METHOD__ . " : " . $q);
-				}
+				foreach ( $qs as $q ){ $bts->SDDMObj->query($q); }
 				break;
 			case 'createScript':
 				$this->createScript = array_merge($this->createScript, $qs);
@@ -509,11 +506,7 @@ class InstallPage02 {
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 				"COMMIT;",
 		);
-		foreach ( $r as $q ){
-			$this->processQueryScript($r);
-			// $bts->SDDMObj->query($q);
-			// error_log($q);
-		}
+		$this->processQueryScript($r);
 		unset ($r);
 	}
 	

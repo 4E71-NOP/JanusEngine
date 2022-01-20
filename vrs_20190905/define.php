@@ -62,6 +62,7 @@ switch ($application) {
 		// $ll = LOGLEVEL_WARNING;
 		break;
 	case 'website':
+		$ll = LOGLEVEL_ERROR;
 		$ll = LOGLEVEL_WARNING;
 		$ll = LOGLEVEL_INFORMATION;
 		// $ll = LOGLEVEL_STATEMENT;
@@ -70,15 +71,16 @@ switch ($application) {
 	case 'FileSelector':
 		$ll = LOGLEVEL_ERROR;
 		// $ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_INFORMATION;
+		// $ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	default :
 		$ll = LOGLEVEL_ERROR;
 		// $ll = LOGLEVEL_WARNING;
 		// $ll = LOGLEVEL_INFORMATION;
-// 		$ll = LOGLEVEL_BREAKPOINT;
+		// $ll = LOGLEVEL_STATEMENT;
+		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 }
 define ( "INTERNAL_LOG_LEVEL", $ll ) ;

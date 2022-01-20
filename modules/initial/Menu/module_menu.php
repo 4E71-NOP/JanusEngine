@@ -63,11 +63,11 @@ class ModuleMenu {
 			}
 			$Content .= "</div>\r";
 
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "modules/initial/Menu/javascript/MenuSlide.js");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/MenuSlide.js');
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.initialization(MenuData,'menuBlock');");
 			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('Css-File', "modules/initial/Menu/css/MenuSlide.css");
+			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('Css-File', $infos['module']['module_directory'].'css/MenuSlide.css');
 		}
 		
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {

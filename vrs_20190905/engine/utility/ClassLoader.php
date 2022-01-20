@@ -50,6 +50,7 @@ class ClassLoader {
 		"DalFacade"					=> _SDDM_DIRECTORY_."DalFacade.php",
 		"SddmADODB"					=> _SDDM_DIRECTORY_."SddmADODB.php",
 		"SddmMySQLI"				=> _SDDM_DIRECTORY_."SddmMySQLI.php",
+		"SddmPqsql"					=> _SDDM_DIRECTORY_."SddmPqsql.php",
 		"SddmPDO"					=> _SDDM_DIRECTORY_."SddmPDO.php",
 		"SddmPEARDB"				=> _SDDM_DIRECTORY_."SddmPEARDB.php",
 		"SddmTools"					=> _SDDM_DIRECTORY_."SddmTools.php",

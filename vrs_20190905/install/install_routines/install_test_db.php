@@ -45,8 +45,8 @@ switch ( $debug ) {
 case 1:
 	error_log ("-----------------------------------------------------------");
 	switch ( $db_['dal'] ) {
-	case "MYSQLI":		error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
-	case "PHPPDO":		error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
+	case "PHP":			error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
+	case "PDO":			error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
 	case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
 	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
 	}
@@ -63,24 +63,42 @@ $jsonApiResponse = array(
 
 switch ( $db_['dal'] ) {
 //	PHP/Mysqli ------------------------------------------------------------------------------------
-	case "MYSQLI":
-	$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix2'] );
-	if ($db1->connect_error) { 
-		$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
-		$jsonApiResponse['cnxToDB']	= false;
-	}
-	
-	$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
-	if ($db2->connect_error) { 
-		$_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2->connect_error;
-	}
-	else {
-		$jsonApiResponse['HydrDBAlreadyExist']	= true;
-	}
-break;
+	case "PHP":
+		switch ( $db_['type'] ) {
+			case "mysqli":
+				$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix2'] );
+				if ($db1->connect_error) { 
+					$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
+					$jsonApiResponse['cnxToDB']	= false;
+				}
+				
+				$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
+				if ($db2->connect_error) { 
+					$_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2->connect_error;
+				}
+				else {
+					$jsonApiResponse['HydrDBAlreadyExist']	= true;
+				}
+				break;
+			case "pssql":
+				$db1 = pg_connect("host=".$db_['host']." user=".$db_['user_login']." password=".$db_['user_password']);
+				if ( $db1 == false ) {
+					$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1; 
+					$jsonApiResponse['cnxToDB']	= false;
+				}
+				$db2 = pg_connect("host=".$db_['host']." user=".$db_['user_login']." password=".$db_['user_password']. " dbname=".$db_['dbprefix'] );
+				if ($db2 == false ) { 
+					$_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['dbprefix2'] .": ".$db2;
+				}
+				else {
+					$jsonApiResponse['HydrDBAlreadyExist']	= true;
+				}
+				break;
+		}
+	break;
 
 //	PHP/PDO ------------------------------------------------------------------------------------
-	case "PHPPDO":
+	case "PDO":
 	try {
 	$db = new PDO( $db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $db_['dbprefix2'] , $db_['user_login'] , $db_['user_password'] ); }
 	catch (PDOException $e) { $_REQUEST['SQL_tst']['1'] = 0; }

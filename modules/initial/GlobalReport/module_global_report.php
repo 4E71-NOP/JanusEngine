@@ -107,7 +107,7 @@ class ModuleGlobalReport {
 			$bts->RenderTablesObj->updateTabsTitle($T['ContentInfos'],$CurrentTab);
 
 			$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
-			$GeneratedScriptObj->insertString('JavaScript-File', 'modules/initial/GlobalReport/lib_GlobalReport.js');
+			$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'lib_GlobalReport.js');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');
 		}
 	

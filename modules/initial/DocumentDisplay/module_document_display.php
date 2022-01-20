@@ -147,7 +147,8 @@ class ModuleDocumentDisplay {
 				AND art.arti_validation_state = '1' 
 				AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 				AND art.fk_deadline_id = bcl.deadline_id 
-				AND bcl.deadline_state = '1'
+				AND bcl.deadline_state = '1' 
+				ORDER BY art.arti_page
 				;";
 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`".$q."`"));
 				$dbquery = $bts->SDDMObj->query($q);
@@ -155,27 +156,26 @@ class ModuleDocumentDisplay {
 				$pv = array();
 				$P2P_tab_ = array();
 				$tab_menu_selected = array();
-				$pv['1'] = 1;
-				$pv['2'] = $DocumentDataObj->getDocumentDataEntry ('arti_page');
-				$tab_menu_selected[$pv['2']] = " selected";
+				$idx = 1;
+				$pg = $DocumentDataObj->getDocumentDataEntry ('arti_page');
+				$tab_menu_selected[$pg] = " selected";
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-					$P2P_tab_[$pv['1']]['arti_id']			= $dbp['arti_id'];
-					$P2P_tab_[$pv['1']]['arti_ref']			= $dbp['arti_ref'];
-					$P2P_tab_[$pv['1']]['arti_slug']		= $dbp['arti_slug'];
-					$P2P_tab_[$pv['1']]['arti_subtitle']	= $dbp['arti_subtitle'];
-					$P2P_tab_[$pv['1']]['arti_page']		= $dbp['arti_page'];
-	// ?sw=".$WebSiteObj->getWebSiteEntry('ws_id')."&amp;l=".$WebSiteObj->getWebSiteEntry('ws_lang')."&amp;arti_ref=".$dbp['arti_ref']."&amp;arti_page=".$dbp['arti_page']."&amp;user_login=".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('login')."&amp;user_pass=".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('pass')."
-					$P2P_tab_[$pv['1']]['lien']				= "
-					<a class='".$Block."_lien ".$Block."_t2'
+					$P2P_tab_[$idx]['arti_id']			= $dbp['arti_id'];
+					$P2P_tab_[$idx]['arti_ref']			= $dbp['arti_ref'];
+					$P2P_tab_[$idx]['arti_slug']		= $dbp['arti_slug'];
+					$P2P_tab_[$idx]['arti_subtitle']	= $dbp['arti_subtitle'];
+					$P2P_tab_[$idx]['arti_page']		= $dbp['arti_page'];
+					$P2P_tab_[$idx]['lien']				= "
+					<a 
 					href='".$baseUrl.$dbp['arti_slug']."/".$dbp['arti_page']."'
 					onMouseOver=\"t.ToolTip('-> ". addslashes($dbp['arti_subtitle']) .", en page ".$dbp['arti_page']."');\"
 					onMouseOut=\"t.ToolTip();\">".$dbp['arti_page']." ".$dbp['arti_subtitle']."</a>\r
 					";
-					$P2P_tab_[$pv['1']]['menu_select']		= "<option value='".$dbp['arti_page']."' ".$tab_menu_selected[$pv['1']].">".$dbp['arti_page']." - ".$dbp['arti_subtitle']."</option>\r";
-					$pv['1']++;
+					$P2P_tab_[$idx]['menu_select']		= "<option value='".$dbp['arti_page']."' ".$tab_menu_selected[$idx].">".$dbp['arti_page']." - ".$dbp['arti_subtitle']."</option>\r";
+					$idx++;
 				}
 				
-				$pv['p2p_count'] = $pv['1'] -1;
+				$pv['p2p_count'] = $idx -1;
 			
 				switch ( $DocumentDataObj->getDocumentDataEntry ('arti_menu_type') ) {
 					case "1":
@@ -211,7 +211,7 @@ class ModuleDocumentDisplay {
 						<tr>\r
 						<td class='".$Block."_fca'>
 						<select name='newRoute[arti_page]' class='".$Block."_form_1' style='padding:5px;' onChange=\"javascript:this.form.submit();\">\r";
-						$pv['1'] = 1;
+						// $pv['1'] = 1;
 						foreach ( $P2P_tab_ as $A ) {
 							if ( $A['arti_page'] == $DocumentDataObj->getDocumentDataEntry('arti_page') ) { $pv['p2p_marque'] = $A['arti_page']; }
 							$ContentMenu .= $A['menu_select'];

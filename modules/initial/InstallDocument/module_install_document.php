@@ -17,6 +17,9 @@
 class InstallDocument {
 	public function __construct(){}
 	
+	/**
+	 * Render the install document
+	 */
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -58,6 +61,13 @@ class InstallDocument {
 				$localisation,
 			);
 		}
+
+		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_install.js');
+		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_testdb.js');
+		$GeneratedScriptObj->insertString('JavaScript-Init', 'var li = new LibInstall();');
+		$GeneratedScriptObj->insertString('JavaScript-Init', 'var tdb = new LibTestDB();');
+
 		return ($DocContent);
 	}
 }

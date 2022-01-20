@@ -313,8 +313,8 @@ class HydrInstallMonitor {
 		unset ( $A );
 
 		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js' );
-		$GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_test_db.js' );
-		$GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_fonctions.js' );
+		// $GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_test_db.js' );
+		// $GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_fonctions.js' );
 		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js' );
 		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_ElementAnimation.js' );
 

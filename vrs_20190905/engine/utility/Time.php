@@ -30,7 +30,7 @@ class Time {
 	
 	/**
 	 * Returns the time to the millisecond.
-	 * @DEPRECATED
+	 * @deprecated
 	 * @return mixed
 	 */
 	public function microtime_chrono() {

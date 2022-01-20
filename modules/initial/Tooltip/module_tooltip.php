@@ -34,7 +34,7 @@ class ModuleTooltip {
 			if ($cdx == 0) { $cdx = 192;}
 			if ($cdy == 0) { $cdy = 96;}
 	
-			$GeneratedScriptObj->insertString('JavaScript-File', 'modules/initial/Tooltip/lib_Tooltip.js');
+			$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'lib_Tooltip.js');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var t = new ToolTip();');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
 			$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
