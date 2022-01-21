@@ -207,48 +207,48 @@ class InstallPage01 {
 		$T = &$this->T['Content'];
 
 		$l=1;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_ip');
 		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('srv_hostname');
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_phpVrs');
 		$T[$t][$l]['2']['cont'] = "PHP vrs " . phpversion();
 
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_incPth');
 		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('include_path');
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('repertoire_courant');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_CurDir');
+		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('currentDirectory');
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_DisErr');
 		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('display_errors')." / ".$bts->I18nTransObj->getI18nTransEntry($ServerInfosObj->getServerInfosEntry('register_globals'))." / ".$ServerInfosObj->getServerInfosEntry('post_max_size');
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_MemLim');
 		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('memory_limit');
 		if ( intval(str_replace( "M", "", $ServerInfosObj->getServerInfosEntry('memory_limit') )) < 128 ) { $T[$t][$l]['2']['cont'] .= " (<span class='".$Block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
 		else { $T[$t][$l]['2']['cont'] .= " ".$bts->I18nTransObj->getI18nTransEntry('test_ok'); }
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_MaxTim');
 		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('max_execution_time') ."s";
 		if ( $ServerInfosObj->getServerInfosEntry('max_execution_time') >= 60 ) { $T[$t][$l]['2']['cont'] .= " (<span class='".$Block."_warning'>".$bts->I18nTransObj->getI18nTransEntry('test_nok')."</span>)"; }
 		else { $T[$t][$l]['2']['cont'] .= " ".$bts->I18nTransObj->getI18nTransEntry('test_ok'); }
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_DbSrvc');
 		$T[$t][$l]['2']['cont'] = $DBsupport;
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_PrcRam');
 		$T[$t][$l]['2']['cont'] = "<input type='text' size='2' name='form[memory_limit]'	value=''>M";
 
 		$l++;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_PrcTim');
 		$T[$t][$l]['2']['cont'] = "<input type='text' size='2' name='form[time_limit]'		value=''>s";
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig(10,2,2);		
@@ -279,7 +279,7 @@ class InstallPage01 {
 		$tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_dal');
 		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"li.selectMenuBuilder ( 'form[database_type_choix]' , listOfDBSupport[this.value] );\">\r";
+		$T[$t][$l]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"li.selectMenuBuilder ( 'form[selected_database_type]' , listOfDBSupport[this.value] );\">\r";
 		if ( $this->phpSupportEnabled == true )		{ $T[$t][$l]['3']['cont'] .= "<option value='PHP'		".$tab_['PHP'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_php')."</option>\r"; }
 		if ( $this->pdoSupportEnabled == true )		{ $T[$t][$l]['3']['cont'] .= "<option value='PDO'		".$tab_['PDO'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_pdo')."</option>\r"; }
 		if ( $this->adoSupportEnabled == true )		{ $T[$t][$l]['3']['cont'] .= "<option value='ADODB'		".$tab_['ADODB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_adodb')."</option>\r"; }
@@ -294,7 +294,7 @@ class InstallPage01 {
 		$tab_[$bts->CMObj->getConfigurationEntry('type')] = " selected ";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_type');
 		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<select id='form[database_type_choix]' name='form[database_type_choix]'>\r
+		$T[$t][$l]['3']['cont'] = "<select id='form[selected_database_type]' name='form[selected_database_type]'>\r
 		</select>\r
 		";
 		// <option value='mysql'	".$tab_['mysql'].">MySQL 3.x/4.x/5.x</option>\r
@@ -322,21 +322,21 @@ class InstallPage01 {
 		
 		// Prefix
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Db_prefix');
-		$T[$t][$l]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"li.insertValue ( this.value , '".$this->FormName."', ['form[db_hosting_prefix_copie_1]', 'form[db_hosting_prefix_copie_2]', 'form[db_hosting_prefix_copie_3]' ] );\">";
+		$T[$t][$l]['2']['cont'] = "<input type='text' name='form[db_hosting_prefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('db_hosting_prefix')."' OnKeyup=\"li.insertValue ( this.value , '".$this->FormName."', ['form[dbHostingPrefixCopy_1]', 'form[dbHostingPrefixCopy_2]', 'form[dbHostingPrefixCopy_3]' ] );\">";
 		$T[$t][$l]['3']['cont'] = "";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('Db_prefixInf')."</span>";
 		$l++;
 		
 		// DB name
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_name');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_1]' size='10' maxlength='255' value=''>";
+		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_1]' size='10' maxlength='255' value=''>";
 		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[dbprefix]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('dbprefix')."'>";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_nameInf')."</span>";
 		$l++;
 		
 		// Login
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_Admlogin');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_2]' size='10' maxlength='255' value=''>";
+		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_2]' size='10' maxlength='255' value=''>";
 		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[db_admin_user]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_user')."'>";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_AdmloginInf')."</span>";
 		$l++;
@@ -356,7 +356,7 @@ class InstallPage01 {
 		$SB['type']				= "button";
 		$SB['initialStyle']		= $Block."_submit_s1_n";
 		$SB['hoverStyle']		= $Block."_submit_s1_h";
-		$SB['onclick']			= "li.toggleDbResultDivs ('cnxToDB', false ); toggleDiv ('HydrDBAlreadyExist', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['".$this->FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$this->FormName."'].elements['form[db_admin_user]'].value + '@' + document.forms['".$this->FormName."'].elements['form[host]'].value  + ', Database: ' + document.forms['".$this->FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$this->FormName."'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '".$this->FormName."', [ 'form[chaine_connexion_test]']  );";
+		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('HydrDBAlreadyExist', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['".$this->FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$this->FormName."'].elements['form[db_admin_user]'].value + '@' + document.forms['".$this->FormName."'].elements['form[host]'].value  + ', Database: ' + document.forms['".$this->FormName."'].elements['form[db_hosting_prefix]'].value + document.forms['".$this->FormName."'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '".$this->FormName."', [ 'form[chaine_connexion_test]']  );";
 		$SB['message']			= "Test DB";
 		$SB['mode']				= 1;
 		$SB['size'] 			= 128;
@@ -381,7 +381,7 @@ class InstallPage01 {
 		
 		$GeneratedScriptObj->insertString('JavaScript-Data' , "var RequestURI = \"". $SrvUri . "\"");
 		$GeneratedScriptObj->insertString('JavaScript-Data' , "var FormName = \"".$this->FormName."\"");
-		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[database_type_choix]' , listOfDBSupport['PHP'] );" );
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[selected_database_type]' , listOfDBSupport['PHP'] );" );
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l,4,1);
 	}
@@ -399,9 +399,9 @@ class InstallPage01 {
 		$bubbleBegin = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='24' height='24' border='0' onMouseOver=\"t.ToolTip('";
 		$bubbleEnd = "', 'install')\" onMouseOut=\"t.ToolTip('','install')\">";
 		$l=1;
-		$T[$t]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('F2_intro');
-		$T[$t][$l]['1']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='li.setFormPreconizedSettings()' value='directCnx' checked>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o1').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide1').$bubbleEnd;
-		$T[$t][$l]['2']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='li.setFormPreconizedSettings()' value='createScript'>".$bts->I18nTransObj->getI18nTransEntry('F2_m1o2').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('F2_txt_aide2').$bubbleEnd;
+		$T[$t]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('MTH_intro');
+		$T[$t][$l]['1']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='li.setFormPreconizedSettings()' value='directCnx' checked>".$bts->I18nTransObj->getI18nTransEntry('MTH_opt1').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('MTH_opt1Help').$bubbleEnd;
+		$T[$t][$l]['2']['cont'] = "<input type='radio' name='form[operating_mode]' onClick='li.setFormPreconizedSettings()' value='createScript'>".$bts->I18nTransObj->getI18nTransEntry('MTH_opt2').$bubbleBegin.$bts->I18nTransObj->getI18nTransEntry('MTH_opt2Help').$bubbleEnd;
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l,2,0);
 
@@ -421,9 +421,9 @@ class InstallPage01 {
 		$T = &$this->T['Content'];
 		
 		$l = 1;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l'.$l.'c3');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SIT_Titlec1');
+		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SIT_Titlec2');
+		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SIT_Titlec3');
 
 		$i = 0;
 		$directory_list = array();
@@ -483,23 +483,23 @@ class InstallPage01 {
 		$lang = $CurrentSetObj->getDataEntry ('language');
 
         $l=1;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c3');
-		$T[$t][$l]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Titlec1');
+		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Titlec2');
+		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Titlec3');
+		$T[$t][$l]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Titlec4');
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_TbPrfx');
 		$T[$t][$l]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"li.insertValue ( 'Ex: ' + this.value + 'article_config' , '".$this->FormName."', ['form[db_hosting_tabprefix_copie_1]'] );\">";
 		$T[$t][$l]['3']['cont'] = "<input type='text' readonly disable name='form[db_hosting_tabprefix_copie_1]' size='20' maxlength='255' value=''>";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_TbPrfxInf')."</span>";
 		$GeneratedScriptObj->insertString('JavaScript-Onload' , "li.insertValue ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$this->FormName."', ['form[db_hosting_tabprefix_copie_1]' , 'form[db_hosting_tabprefix_copie_1]' ] );");
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[db_hosting_prefix_copie_3]' size='10' maxlength='255' value=''>";
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_DbUsrN');
+		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_3]' size='10' maxlength='255' value=''>";
 		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[database_user_login]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_login')."'>";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_DbUsrNInf')."</span>";
 		$l++;
 
 		$SB['id']				= "bouton_install_radompass";
@@ -512,53 +512,53 @@ class InstallPage01 {
 		$SB['size'] 			= 128;
 		$SB['lastSize']			= 128;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_DbUsrP');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<input type='password' id='form[database_user_password]' name='form[database_user_password]' size='20' maxlength='32' value='"
 		.$bts->CMObj->getConfigurationEntry('db_user_password')."'>\r<br>\r"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[database_user_password]').type = 'text';\" onmouseup=\"elm.Gebi('form[database_user_password]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>\r<br>\r<br>\r". $bts->InteractiveElementsObj->renderSubmitButton($SB);
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_DbUsrPInf')."</span>\r<br>\r<br>\r". $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_UsrRec');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[database_user_recreate]'>\r
 		<option value='non'>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 		<option value='oui' selected >".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
 		</select>\r
 		";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_UsrRecInf')."</span>";
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_WbUsrP');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<input type='password' name='form[standard_user_password]' id='form[standard_user_password]'size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'><br>"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[standard_user_password]').type = 'text';\" onmouseup=\"elm.Gebi('form[standard_user_password]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_WbUsrPInf')."</span>";
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_MkHtacs');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[creation_htaccess]'>\r
 		<option value='non' selected>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 		<option value='oui'>".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
 		</select>\r
 		";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_MkHtacsInf')."</span>";
 		$l++;
 
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Typexe');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[TypeExec]'>\r
 		<option value='ModuleApache' selected>".$bts->I18nTransObj->getI18nTransEntry('TypeExec1')."</option>\r
 		<option value='CLI'>".$bts->I18nTransObj->getI18nTransEntry('TypeExec2')."</option>\r
 		</select>\r
 		";
-		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c4')."</span>";
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_TypexeInf')."</span>";
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l,4,1);
 	}
@@ -573,20 +573,19 @@ class InstallPage01 {
 		$T = &$this->T['Content'];
 
 		$l=1;
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c3');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_Titlec1');
+		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c2');
+		// $T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c3');
 		$l++;
 		
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[db_detail_log_warn]'>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[db_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c3');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_db');
+		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[db_detail_log_warn]'>" . $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
+		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[db_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
 		$l++;
 		
-		
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c1');
-		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[console_detail_log_warn]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[console_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c3');
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_consol');
+		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[console_detail_log_warn]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
+		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[console_detail_log_err]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
 		
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l,3,1);
 

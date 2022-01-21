@@ -14,22 +14,28 @@
 //	Installation Stylesheeet (kickstart)
 // --------------------------------------------------------------------------------------------
 $mt_ = array (
-	"theme_id" => "2",
+	"theme_id" => "7852865738165185508",
 	"theme_directory" => "Aqua",
 	"theme_name" => "hydr_aqua_01",
 	"theme_title" => "Aqua",
 	"theme_desc" => "Aqualand",
-	"theme_date" => "1635087140",
+	"theme_date" => "1642694959",
 	"theme_stylesheet_1" => "hydr_aqua_01.css",
 	"theme_stylesheet_2" => "",
 	"theme_stylesheet_3" => "",
 	"theme_stylesheet_4" => "",
 	"theme_stylesheet_5" => "",
+	"theme_width" => "",
+	"theme_height" => "",
+	"theme_max_width" => "",
+	"theme_max_height" => "",
+	"theme_min_width" => "",
+	"theme_min_height" => "",
 	"theme_bg" => "aqua_bg.png",
+	"theme_bg_position" => "",
 	"theme_bg_repeat" => "repeat",
 	"theme_bg_color" => "000000",
 	"theme_logo" => "aqua_logo_hydr.png",
-	"theme_banner" => "",
 	"theme_divinitial_bg" => "",
 	"theme_divinitial_repeat" => "no-repeat",
 	"theme_divinitial_dx" => "0",
@@ -116,7 +122,8 @@ $mt_ = array (
 	"blockTCount" => "2",
 	"blockGCount" => "3",
 	"B01G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -421,7 +428,8 @@ $mt_ = array (
 		"2" => "20"
 	),
 	"B02G" => array (
- 		"ex11" => "aqua_B02_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B02_ex11.png",
 		"ex12" => "aqua_B02_ex12.png",
 		"ex13" => "aqua_B02_ex13.png",
 		"ex14" => "aqua_B02_ex14.png",
@@ -747,7 +755,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B03G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -1043,7 +1052,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B04G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -1339,7 +1349,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B05G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -1635,7 +1646,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B06G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -1931,7 +1943,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B07G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -2227,7 +2240,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B08G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -2523,7 +2537,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B09G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -2819,7 +2834,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B10G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -3115,7 +3131,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B11G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -3411,7 +3428,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B12G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -3707,7 +3725,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B13G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -4003,7 +4022,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B14G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -4299,7 +4319,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B15G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -4595,7 +4616,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B16G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -4891,7 +4913,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B17G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -5187,7 +5210,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B18G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -5483,7 +5507,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B19G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -5779,7 +5804,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B20G" => array (
- 		"ex11" => "aqua_B99_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B99_ex11.png",
 		"ex12" => "aqua_B99_ex12.png",
 		"ex13" => "aqua_B99_ex13.png",
 		"ex21" => "aqua_B99_ex21.png",
@@ -5995,7 +6021,8 @@ $mt_ = array (
 		"h7_special" => "font-weight:bold;"
 	),
 	"B21G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -6291,7 +6318,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B22G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -6587,7 +6615,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B23G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -6883,7 +6912,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B24G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -7179,7 +7209,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B25G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -7475,7 +7506,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B26G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -7771,7 +7803,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B27G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -8067,7 +8100,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B28G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -8363,7 +8397,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B29G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -8659,7 +8694,8 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B30G" => array (
- 		"ex11" => "aqua_B01_ex11.png",
+ 		"directory" => "Aqua",
+		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
 		"ex21" => "aqua_B01_ex21.png",
@@ -8955,7 +8991,7 @@ $mt_ = array (
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B00M" => array (
- 		"id" => "14",
+ 		"id" => "8794706759903758725",
 		"level" => "0",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9266,7 +9302,7 @@ $mt_ = array (
 		"2" => "1"
 	),
 	"B01M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9576,7 +9612,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B02M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9886,7 +9922,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B03M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10196,7 +10232,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B04M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10506,7 +10542,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B05M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10816,7 +10852,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B06M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11126,7 +11162,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B07M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11436,7 +11472,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B08M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11746,7 +11782,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B09M" => array (
- 		"id" => "15",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -12063,7 +12099,9 @@ $mt_ = array (
 	"ligne2" => "Stylesheet du theme",
 	"ligne3" => "Date de la generation",
 	"ligne4" => "Nom du fichier"
+
 );
+
 
 // --------------------------------------------------------------------------------------------
 
@@ -12075,7 +12113,7 @@ $stylesheet = "
 // Hydr - Generated stylesheet
 //----------------------------------------------------------------------------
 // Theme : hydr_aqua_01
-// Date : 2021-10-24 15:41:52
+// Date : 2022-01-21 14:14:02
 // fileName : hydr_aqua_01.css
 //----------------------------------------------------------------------------
 */
@@ -12156,6 +12194,16 @@ html { width:100%; height:100%;}
 .mt_B01_TblLgndBottom tr:last-child, .mt_B02_TblLgndBottom tr:last-child, .mt_B03_TblLgndBottom tr:last-child, .mt_B04_TblLgndBottom tr:last-child, .mt_B05_TblLgndBottom tr:last-child, .mt_B06_TblLgndBottom tr:last-child, .mt_B07_TblLgndBottom tr:last-child, .mt_B08_TblLgndBottom tr:last-child, .mt_B09_TblLgndBottom tr:last-child, .mt_B10_TblLgndBottom tr:last-child, .mt_B11_TblLgndBottom tr:last-child, .mt_B12_TblLgndBottom tr:last-child, .mt_B13_TblLgndBottom tr:last-child, .mt_B14_TblLgndBottom tr:last-child, .mt_B15_TblLgndBottom tr:last-child, .mt_B16_TblLgndBottom tr:last-child, .mt_B17_TblLgndBottom tr:last-child, .mt_B18_TblLgndBottom tr:last-child, .mt_B19_TblLgndBottom tr:last-child, .mt_B21_TblLgndBottom tr:last-child, .mt_B22_TblLgndBottom tr:last-child, .mt_B23_TblLgndBottom tr:last-child, .mt_B24_TblLgndBottom tr:last-child, .mt_B25_TblLgndBottom tr:last-child, .mt_B26_TblLgndBottom tr:last-child, .mt_B27_TblLgndBottom tr:last-child, .mt_B28_TblLgndBottom tr:last-child, .mt_B29_TblLgndBottom tr:last-child, .mt_B30_TblLgndBottom tr:last-child {background-color:#FFFFE0; }
 .mt_B01_TblLgndLeft td:first-child, .mt_B02_TblLgndLeft td:first-child, .mt_B03_TblLgndLeft td:first-child, .mt_B04_TblLgndLeft td:first-child, .mt_B05_TblLgndLeft td:first-child, .mt_B06_TblLgndLeft td:first-child, .mt_B07_TblLgndLeft td:first-child, .mt_B08_TblLgndLeft td:first-child, .mt_B09_TblLgndLeft td:first-child, .mt_B10_TblLgndLeft td:first-child, .mt_B11_TblLgndLeft td:first-child, .mt_B12_TblLgndLeft td:first-child, .mt_B13_TblLgndLeft td:first-child, .mt_B14_TblLgndLeft td:first-child, .mt_B15_TblLgndLeft td:first-child, .mt_B16_TblLgndLeft td:first-child, .mt_B17_TblLgndLeft td:first-child, .mt_B18_TblLgndLeft td:first-child, .mt_B19_TblLgndLeft td:first-child, .mt_B21_TblLgndLeft td:first-child, .mt_B22_TblLgndLeft td:first-child, .mt_B23_TblLgndLeft td:first-child, .mt_B24_TblLgndLeft td:first-child, .mt_B25_TblLgndLeft td:first-child, .mt_B26_TblLgndLeft td:first-child, .mt_B27_TblLgndLeft td:first-child, .mt_B28_TblLgndLeft td:first-child, .mt_B29_TblLgndLeft td:first-child, .mt_B30_TblLgndLeft td:first-child {background-color:#FFFFE0; }
 .mt_B01_TblLgndRight td:last-child, .mt_B02_TblLgndRight td:last-child, .mt_B03_TblLgndRight td:last-child, .mt_B04_TblLgndRight td:last-child, .mt_B05_TblLgndRight td:last-child, .mt_B06_TblLgndRight td:last-child, .mt_B07_TblLgndRight td:last-child, .mt_B08_TblLgndRight td:last-child, .mt_B09_TblLgndRight td:last-child, .mt_B10_TblLgndRight td:last-child, .mt_B11_TblLgndRight td:last-child, .mt_B12_TblLgndRight td:last-child, .mt_B13_TblLgndRight td:last-child, .mt_B14_TblLgndRight td:last-child, .mt_B15_TblLgndRight td:last-child, .mt_B16_TblLgndRight td:last-child, .mt_B17_TblLgndRight td:last-child, .mt_B18_TblLgndRight td:last-child, .mt_B19_TblLgndRight td:last-child, .mt_B21_TblLgndRight td:last-child, .mt_B22_TblLgndRight td:last-child, .mt_B23_TblLgndRight td:last-child, .mt_B24_TblLgndRight td:last-child, .mt_B25_TblLgndRight td:last-child, .mt_B26_TblLgndRight td:last-child, .mt_B27_TblLgndRight td:last-child, .mt_B28_TblLgndRight td:last-child, .mt_B29_TblLgndRight td:last-child, .mt_B30_TblLgndRight td:last-child {background-color:#FFFFE0; }
+.mt_B01_icon_directory, .mt_B02_icon_directory, .mt_B03_icon_directory, .mt_B04_icon_directory, .mt_B05_icon_directory, .mt_B06_icon_directory, .mt_B07_icon_directory, .mt_B08_icon_directory, .mt_B09_icon_directory, .mt_B10_icon_directory, .mt_B11_icon_directory, .mt_B12_icon_directory, .mt_B13_icon_directory, .mt_B14_icon_directory, .mt_B15_icon_directory, .mt_B16_icon_directory, .mt_B17_icon_directory, .mt_B18_icon_directory, .mt_B19_icon_directory, .mt_B21_icon_directory, .mt_B22_icon_directory, .mt_B23_icon_directory, .mt_B24_icon_directory, .mt_B25_icon_directory, .mt_B26_icon_directory, .mt_B27_icon_directory, .mt_B28_icon_directory, .mt_B29_icon_directory, .mt_B30_icon_directory  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_directory.png); }
+.mt_B01_icon_erase, .mt_B02_icon_erase, .mt_B03_icon_erase, .mt_B04_icon_erase, .mt_B05_icon_erase, .mt_B06_icon_erase, .mt_B07_icon_erase, .mt_B08_icon_erase, .mt_B09_icon_erase, .mt_B10_icon_erase, .mt_B11_icon_erase, .mt_B12_icon_erase, .mt_B13_icon_erase, .mt_B14_icon_erase, .mt_B15_icon_erase, .mt_B16_icon_erase, .mt_B17_icon_erase, .mt_B18_icon_erase, .mt_B19_icon_erase, .mt_B21_icon_erase, .mt_B22_icon_erase, .mt_B23_icon_erase, .mt_B24_icon_erase, .mt_B25_icon_erase, .mt_B26_icon_erase, .mt_B27_icon_erase, .mt_B28_icon_erase, .mt_B29_icon_erase, .mt_B30_icon_erase  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_erase.png); }
+.mt_B01_icon_ok, .mt_B02_icon_ok, .mt_B03_icon_ok, .mt_B04_icon_ok, .mt_B05_icon_ok, .mt_B06_icon_ok, .mt_B07_icon_ok, .mt_B08_icon_ok, .mt_B09_icon_ok, .mt_B10_icon_ok, .mt_B11_icon_ok, .mt_B12_icon_ok, .mt_B13_icon_ok, .mt_B14_icon_ok, .mt_B15_icon_ok, .mt_B16_icon_ok, .mt_B17_icon_ok, .mt_B18_icon_ok, .mt_B19_icon_ok, .mt_B21_icon_ok, .mt_B22_icon_ok, .mt_B23_icon_ok, .mt_B24_icon_ok, .mt_B25_icon_ok, .mt_B26_icon_ok, .mt_B27_icon_ok, .mt_B28_icon_ok, .mt_B29_icon_ok, .mt_B30_icon_ok  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_ok.png); }
+.mt_B01_icon_nok, .mt_B02_icon_nok, .mt_B03_icon_nok, .mt_B04_icon_nok, .mt_B05_icon_nok, .mt_B06_icon_nok, .mt_B07_icon_nok, .mt_B08_icon_nok, .mt_B09_icon_nok, .mt_B10_icon_nok, .mt_B11_icon_nok, .mt_B12_icon_nok, .mt_B13_icon_nok, .mt_B14_icon_nok, .mt_B15_icon_nok, .mt_B16_icon_nok, .mt_B17_icon_nok, .mt_B18_icon_nok, .mt_B19_icon_nok, .mt_B21_icon_nok, .mt_B22_icon_nok, .mt_B23_icon_nok, .mt_B24_icon_nok, .mt_B25_icon_nok, .mt_B26_icon_nok, .mt_B27_icon_nok, .mt_B28_icon_nok, .mt_B29_icon_nok, .mt_B30_icon_nok  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_ko.png); }
+.mt_B01_icon_left, .mt_B02_icon_left, .mt_B03_icon_left, .mt_B04_icon_left, .mt_B05_icon_left, .mt_B06_icon_left, .mt_B07_icon_left, .mt_B08_icon_left, .mt_B09_icon_left, .mt_B10_icon_left, .mt_B11_icon_left, .mt_B12_icon_left, .mt_B13_icon_left, .mt_B14_icon_left, .mt_B15_icon_left, .mt_B16_icon_left, .mt_B17_icon_left, .mt_B18_icon_left, .mt_B19_icon_left, .mt_B21_icon_left, .mt_B22_icon_left, .mt_B23_icon_left, .mt_B24_icon_left, .mt_B25_icon_left, .mt_B26_icon_left, .mt_B27_icon_left, .mt_B28_icon_left, .mt_B29_icon_left, .mt_B30_icon_left  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_left.png); }
+.mt_B01_icon_right, .mt_B02_icon_right, .mt_B03_icon_right, .mt_B04_icon_right, .mt_B05_icon_right, .mt_B06_icon_right, .mt_B07_icon_right, .mt_B08_icon_right, .mt_B09_icon_right, .mt_B10_icon_right, .mt_B11_icon_right, .mt_B12_icon_right, .mt_B13_icon_right, .mt_B14_icon_right, .mt_B15_icon_right, .mt_B16_icon_right, .mt_B17_icon_right, .mt_B18_icon_right, .mt_B19_icon_right, .mt_B21_icon_right, .mt_B22_icon_right, .mt_B23_icon_right, .mt_B24_icon_right, .mt_B25_icon_right, .mt_B26_icon_right, .mt_B27_icon_right, .mt_B28_icon_right, .mt_B29_icon_right, .mt_B30_icon_right  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_right.png); }
+.mt_B01_icon_top, .mt_B02_icon_top, .mt_B03_icon_top, .mt_B04_icon_top, .mt_B05_icon_top, .mt_B06_icon_top, .mt_B07_icon_top, .mt_B08_icon_top, .mt_B09_icon_top, .mt_B10_icon_top, .mt_B11_icon_top, .mt_B12_icon_top, .mt_B13_icon_top, .mt_B14_icon_top, .mt_B15_icon_top, .mt_B16_icon_top, .mt_B17_icon_top, .mt_B18_icon_top, .mt_B19_icon_top, .mt_B21_icon_top, .mt_B22_icon_top, .mt_B23_icon_top, .mt_B24_icon_top, .mt_B25_icon_top, .mt_B26_icon_top, .mt_B27_icon_top, .mt_B28_icon_top, .mt_B29_icon_top, .mt_B30_icon_top  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_up.png); }
+.mt_B01_icon_bottom, .mt_B02_icon_bottom, .mt_B03_icon_bottom, .mt_B04_icon_bottom, .mt_B05_icon_bottom, .mt_B06_icon_bottom, .mt_B07_icon_bottom, .mt_B08_icon_bottom, .mt_B09_icon_bottom, .mt_B10_icon_bottom, .mt_B11_icon_bottom, .mt_B12_icon_bottom, .mt_B13_icon_bottom, .mt_B14_icon_bottom, .mt_B15_icon_bottom, .mt_B16_icon_bottom, .mt_B17_icon_bottom, .mt_B18_icon_bottom, .mt_B19_icon_bottom, .mt_B21_icon_bottom, .mt_B22_icon_bottom, .mt_B23_icon_bottom, .mt_B24_icon_bottom, .mt_B25_icon_bottom, .mt_B26_icon_bottom, .mt_B27_icon_bottom, .mt_B28_icon_bottom, .mt_B29_icon_bottom, .mt_B30_icon_bottom  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_down.png); }
+.mt_B01_icon_question, .mt_B02_icon_question, .mt_B03_icon_question, .mt_B04_icon_question, .mt_B05_icon_question, .mt_B06_icon_question, .mt_B07_icon_question, .mt_B08_icon_question, .mt_B09_icon_question, .mt_B10_icon_question, .mt_B11_icon_question, .mt_B12_icon_question, .mt_B13_icon_question, .mt_B14_icon_question, .mt_B15_icon_question, .mt_B16_icon_question, .mt_B17_icon_question, .mt_B18_icon_question, .mt_B19_icon_question, .mt_B21_icon_question, .mt_B22_icon_question, .mt_B23_icon_question, .mt_B24_icon_question, .mt_B25_icon_question, .mt_B26_icon_question, .mt_B27_icon_question, .mt_B28_icon_question, .mt_B29_icon_question, .mt_B30_icon_question  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_question.png); }
+.mt_B01_icon_notification, .mt_B02_icon_notification, .mt_B03_icon_notification, .mt_B04_icon_notification, .mt_B05_icon_notification, .mt_B06_icon_notification, .mt_B07_icon_notification, .mt_B08_icon_notification, .mt_B09_icon_notification, .mt_B10_icon_notification, .mt_B11_icon_notification, .mt_B12_icon_notification, .mt_B13_icon_notification, .mt_B14_icon_notification, .mt_B15_icon_notification, .mt_B16_icon_notification, .mt_B17_icon_notification, .mt_B18_icon_notification, .mt_B19_icon_notification, .mt_B21_icon_notification, .mt_B22_icon_notification, .mt_B23_icon_notification, .mt_B24_icon_notification, .mt_B25_icon_notification, .mt_B26_icon_notification, .mt_B27_icon_notification, .mt_B28_icon_notification, .mt_B29_icon_notification, .mt_B30_icon_notification  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_notification.png); }
 
 .mt_B20_ft  { border-spacing: 0px; border: 0px; empty-cells: show; vertical-align: middle; } 
 .mt_B20_tabFrame  { padding: 5px ; vertical-align: top;    }
@@ -12183,6 +12231,16 @@ html { width:100%; height:100%;}
 .mt_B20_TableStd td { text-align:center; background-color:transparent;}
 .mt_B20_Table01  { border-spacing:0px; border-collapse:collapse; width:100% }
 .mt_B20_Table01 a:visited {color:#FFFFFF; }
+.mt_B20_icon_directory  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_directory.png); }
+.mt_B20_icon_erase  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_erase.png); }
+.mt_B20_icon_ok  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_ok.png); }
+.mt_B20_icon_nok  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_ko.png); }
+.mt_B20_icon_left  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_left.png); }
+.mt_B20_icon_right  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_right.png); }
+.mt_B20_icon_top  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_up.png); }
+.mt_B20_icon_bottom  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_down.png); }
+.mt_B20_icon_question  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_question.png); }
+.mt_B20_icon_notification  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_notification.png); }
 
 .mt_B01_ex11, .mt_B03_ex11, .mt_B04_ex11, .mt_B05_ex11, .mt_B06_ex11, .mt_B07_ex11, .mt_B08_ex11, .mt_B09_ex11, .mt_B10_ex11, .mt_B11_ex11, .mt_B12_ex11, .mt_B13_ex11, .mt_B14_ex11, .mt_B15_ex11, .mt_B16_ex11, .mt_B17_ex11, .mt_B18_ex11, .mt_B19_ex11, .mt_B21_ex11, .mt_B22_ex11, .mt_B23_ex11, .mt_B24_ex11, .mt_B25_ex11, .mt_B26_ex11, .mt_B27_ex11, .mt_B28_ex11, .mt_B29_ex11, .mt_B30_ex11  { position: absolute; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ex11.png); background-position:top left; vertical-align: bottom; width: 8px; height: 8px;  background-repeat : no-repeat; overflow:hidden }
 .mt_B01_ex12, .mt_B03_ex12, .mt_B04_ex12, .mt_B05_ex12, .mt_B06_ex12, .mt_B07_ex12, .mt_B08_ex12, .mt_B09_ex12, .mt_B10_ex12, .mt_B11_ex12, .mt_B12_ex12, .mt_B13_ex12, .mt_B14_ex12, .mt_B15_ex12, .mt_B16_ex12, .mt_B17_ex12, .mt_B18_ex12, .mt_B19_ex12, .mt_B21_ex12, .mt_B22_ex12, .mt_B23_ex12, .mt_B24_ex12, .mt_B25_ex12, .mt_B26_ex12, .mt_B27_ex12, .mt_B28_ex12, .mt_B29_ex12, .mt_B30_ex12  { position: absolute; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ex12.png); background-position:top left; vertical-align: bottom; width: 496px; height: 8px;  background-repeat : repeat-x; overflow:hidden }
@@ -12255,17 +12313,15 @@ html { width:100%; height:100%;}
 
 
  .centered { text-align: center; }
- 
- .mt_bareTable { border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px; }
- .mt_bareTable tr { background-color:transparent;  margin:0px; padding:0px; }
- .mt_bareTable tr:hover { background-color:transparent; }
- .mt_bareTable td {  margin:0px; padding:0px; }
- .mt_bareTable td:hover { background-color:transparent; }
- 
- .mt_modif_article { height:512px ; overflow:auto }
- .mt_modif_menu { height:512px ; overflow:auto }
-
- .mt_div_AdminControlSwitch { 
+.mt_bareTable {background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}
+.mt_bareTable tr {background-color:transparent !important; margin:0px; padding:0px;}
+.mt_bareTable td {background-color:transparent; margin:0px; padding:0px;}
+.mt_bareTable:hover {background-color:transparent}
+.mt_bareTable tr:hover {background-color:transparent}
+.mt_bareTable td:hover {background-color:transparent}
+.mt_modif_article { height:512px ; overflow:auto }
+.mt_modif_menu  { height:512px ; overflow:auto }
+.mt_div_AdminControlSwitch { 
   width: 96px; 
   height: 96px; 
   background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_admctrl_switch_bg.png); 
@@ -12277,11 +12333,10 @@ html { width:100%; height:100%;}
   background-repeat: repeat;
   position: fixed;
  }
- 
  .mt_div_AdminControlPanel {
   position: absolute; 
-  width: 90%; 
-  height: 90%; 
+  width: 90%;
+  height: 90%;
   border-style: solid; 
   border-width: 8px; 
   border-color: #FF8000; 
@@ -12327,11 +12382,10 @@ html { width:100%; height:100%;}
  /* Media screen */
 
 
-@media print { BODY { font-size: 10pt; } }
+ @media print { BODY { font-size: 10pt; } }
 
 -->
 </style>
-
 
 ";
 ?>

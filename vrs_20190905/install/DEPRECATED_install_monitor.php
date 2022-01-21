@@ -73,7 +73,7 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 
 // URL example
 // http://www.multiweb-manager.local/Hydr/current/install_monitor.php?
-// form[database_type_choix]=mysql
+// form[selected_database_type]=mysql
 // &form[database_dal_choix]=MYSQLI
 // &form[host]=localhost
 // &form[db_hosting_prefix]=

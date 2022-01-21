@@ -44,12 +44,12 @@ function CheckFormValues ( Tab , Langue , SessionID ) {
 	}
 
 	if ( stop == 0 ) { 
-		var DBTypeElm = elm.Gebi("form[database_type_choix]"); 
+		var DBTypeElm = elm.Gebi("form[selected_database_type]"); 
 		var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var DBTypeElm = elm.Gebi("form[dal]"); 
 		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var URLamp = "&";
-		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
+		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[selected_database_type]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
 		for ( var ptr in ListeChampsTstDB ) {
 			URLvar += URLamp + ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[ListeChampsTstDB[ptr]].value;
 		}

@@ -318,7 +318,7 @@ class InstallPage02 {
 
 		$bts->CMObj->setConfigurationEntry('db',
 			array(
-				"type"						=> $this->form['database_type_choix'],
+				"type"						=> $this->form['selected_database_type'],
 				"dal"						=> $this->form['dal'],
 				"host"						=> $this->form['host'],
 				"user_login"				=> $this->form['db_hosting_prefix'].$this->form['db_admin_user'],
@@ -334,9 +334,9 @@ class InstallPage02 {
 			)
 		);
 
-		$bts->CMObj->setConfigurationEntry('type',					$this->form['database_type_choix']);
+		$bts->CMObj->setConfigurationEntry('type',					$this->form['selected_database_type']);
 		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
-		$bts->CMObj->setConfigurationEntry('dal',					$this->form['database_type_choix']);
+		$bts->CMObj->setConfigurationEntry('dal',					$this->form['selected_database_type']);
 		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['db_hosting_prefix'].$this->form['db_admin_user'] );
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['db_admin_password']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);

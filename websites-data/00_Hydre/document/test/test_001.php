@@ -15,7 +15,7 @@
 
 $_REQUEST[server_infos][srv_hostname]		= gethostbyname('localhost'); 
 $_REQUEST[server_infos][include_path]		= get_include_path(); 
-$_REQUEST[server_infos][repertoire_courant]	= getcwd(); 
+$_REQUEST[server_infos][currentDirectory]	= getcwd(); 
 $_REQUEST[server_infos][uid]				= getmyuid(); 
 $_REQUEST[server_infos][gid]				= getmygid(); 
 $_REQUEST[server_infos][pid]				= getmypid(); 

@@ -82,7 +82,7 @@ $bts->CMObj->setConfigurationEntry('operating_mode', $form['operating_mode'] );
 
 $bts->CMObj->setConfigurationEntry('db',
 	array(
-		"type"						=> $form['database_type_choix'],
+		"type"						=> $form['selected_database_type'],
 		"dal"						=> $form['dal'],
 		"host"						=> $form['host'],
 		"user_login"				=> $form['db_hosting_prefix'].$form['db_admin_user'],
@@ -98,9 +98,9 @@ $bts->CMObj->setConfigurationEntry('db',
 	)
 );
 
-$bts->CMObj->setConfigurationEntry('type',					$form['database_type_choix']);
+$bts->CMObj->setConfigurationEntry('type',					$form['selected_database_type']);
 $bts->CMObj->setConfigurationEntry('host',					$form['host']);
-$bts->CMObj->setConfigurationEntry('dal',					$form['database_type_choix']);
+$bts->CMObj->setConfigurationEntry('dal',					$form['selected_database_type']);
 $bts->CMObj->setConfigurationEntry('db_user_login',			$form['db_hosting_prefix'].$form['db_admin_user'] );
 $bts->CMObj->setConfigurationEntry('db_user_password',		$form['db_admin_password']);
 $bts->CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);

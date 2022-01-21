@@ -28,7 +28,7 @@ switch ( $debug ) {
 
 $db_ = array();
 $db_['dal']						= $_REQUEST['form']['dal'];
-$db_['type']					= $_REQUEST['form']['database_type_choix'];
+$db_['type']					= $_REQUEST['form']['selected_database_type'];
 $db_['host']					= $_REQUEST['form']['host'];
 $db_['user_login']				= $_REQUEST['form']['db_hosting_prefix'] . $_REQUEST['form']['db_admin_user'];
 $db_['user_password']			= $_REQUEST['form']['db_admin_password'];

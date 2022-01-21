@@ -222,7 +222,7 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 21,
 $CellTab['t1l1c2']	= $ServerInfosObj->getServerInfosEntry('srv_hostname');
 $CellTab['t1l2c2']	= $Support['PHP_version'];
 $CellTab['t1l3c2']	= $ServerInfosObj->getServerInfosEntry('include_path');
-$CellTab['t1l4c2']	= $ServerInfosObj->getServerInfosEntry('repertoire_courant');
+$CellTab['t1l4c2']	= $ServerInfosObj->getServerInfosEntry('currentDirectory');
 $CellTab['t1l5c2']	= $ServerInfosObj->getServerInfosEntry('display_errors')." / ".$bts->I18nTransObj->getI18nTransEntry($ServerInfosObj->getServerInfosEntry('register_globals'))." / ".$ServerInfosObj->getServerInfosEntry('post_max_size');
 $CellTab['t1l6c2']	= $ServerInfosObj->getServerInfosEntry('memory_limit');
 $CellTab['t1l7c2']	= $ServerInfosObj->getServerInfosEntry('max_execution_time') ."s";
@@ -335,7 +335,7 @@ unset ($tab_);
 $tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
 $T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
 $T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"SelectMenuBuilder ( 'form[dal]' , 'form[database_type_choix]' , DBvsDALCompatility[this.value] );\">\r";
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"SelectMenuBuilder ( 'form[dal]' , 'form[selected_database_type]' , DBvsDALCompatility[this.value] );\">\r";
 
 if ( $Support['PHP']['PHP_mysqli_builtin']['state'] == 1 )	{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='MYSQLI'	".$tab_['MYSQLI'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_msqli')."</option>\r"; }
 if ( $Support['DAL']['ADOdb']['state'] == 1 )				{ $T['Content'][$CurrentTab][$lt]['3']['cont'] .= "<option value='ADODB'		".$tab_['ADODB'].">".	$bts->I18nTransObj->getI18nTransEntry('msdal_adodb')."</option>\r"; }
@@ -352,7 +352,7 @@ unset ($tab_);
 $tab_[$bts->CMObj->getConfigurationEntry('type')] = " selected ";
 $T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c1');
 $T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$lt.'c2');
-$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[database_type_choix]' name='form[database_type_choix]'>\r
+$T['Content'][$CurrentTab][$lt]['3']['cont'] = "<select id='form[selected_database_type]' name='form[selected_database_type]'>\r
 <option value='mysql'	".$tab_['mysql'].">MySQL 3.x/4.x/5.x</option>\r
 </select>\r
 ";

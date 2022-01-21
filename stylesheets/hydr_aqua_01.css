@@ -3,7 +3,7 @@
 // Hydr - Generated stylesheet
 //----------------------------------------------------------------------------
 // Theme : hydr_aqua_01
-// Date : 2021-12-30 21:37:41
+// Date : 2022-01-21 14:14:02
 // fileName : hydr_aqua_01.css
 //----------------------------------------------------------------------------
 */
@@ -204,17 +204,15 @@ html { width:100%; height:100%;}
 
 
  .centered { text-align: center; }
- 
- .mt_bareTable { border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px; }
- .mt_bareTable tr { background-color:transparent;  margin:0px; padding:0px; }
- .mt_bareTable tr:hover { background-color:transparent; }
- .mt_bareTable td {  margin:0px; padding:0px; }
- .mt_bareTable td:hover { background-color:transparent; }
- 
- .mt_modif_article { height:512px ; overflow:auto }
- .mt_modif_menu  { height:512px ; overflow:auto }
-
- .mt_div_AdminControlSwitch { 
+.mt_bareTable {background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}
+.mt_bareTable tr {background-color:transparent !important; margin:0px; padding:0px;}
+.mt_bareTable td {background-color:transparent; margin:0px; padding:0px;}
+.mt_bareTable:hover {background-color:transparent}
+.mt_bareTable tr:hover {background-color:transparent}
+.mt_bareTable td:hover {background-color:transparent}
+.mt_modif_article { height:512px ; overflow:auto }
+.mt_modif_menu  { height:512px ; overflow:auto }
+.mt_div_AdminControlSwitch { 
   width: 96px; 
   height: 96px; 
   background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_admctrl_switch_bg.png); 

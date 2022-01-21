@@ -16,21 +16,6 @@ class LibInstall {
 	constructor () { 
 		this.dbgInstFonction = 0;
 		this.ListeChampsTstDB = [ "form[host]", "form[db_hosting_prefix]", "form[db_admin_user]", "form[db_admin_password]", "form[dbprefix]", "form[tabprefix]" ];
-
-		this.dbgTstDb = 1;
-		this.xmlhttp;
-		if ( window.XMLHttpRequest ) { this.xmlhttp = new XMLHttpRequest(); }		// IE7+, Firefox, Chrome, Opera, Safari
-		else { this.xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }				// IE6, IE5
-	
-		// This will trigger on a state change of xmlhttp
-		this.xmlhttp.onreadystatechange = function () {
-			if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
-				res = JSON.parse(xmlhttp.response);
-				this.toggleDbResultDivs ( 'cnxToDB', res.cnxToDB);
-				this.toggleDbResultDivs ( 'HydrDBAlreadyExist', res.HydrDBAlreadyExist);
-			}
-			l.Log[dbgTstDb]( "install_test_db :  response = " + xmlhttp.responseText );
-		}
 	}
 
 	/**
@@ -104,12 +89,12 @@ class LibInstall {
 			}
 		
 			if ( stop == 0 ) { 
-				var DBTypeElm = elm.Gebi("form[database_type_choix]"); 
+				var DBTypeElm = elm.Gebi("form[selected_database_type]"); 
 				var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 				var DBTypeElm = elm.Gebi("form[dal]"); 
 				var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 				var URLamp = "&";
-				var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[database_type_choix]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
+				var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[selected_database_type]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
 				for ( var ptr in this.ListeChampsTstDB ) {
 					URLvar += URLamp + this.ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[this.ListeChampsTstDB[ptr]].value;
 				}
@@ -154,40 +139,4 @@ class LibInstall {
 			elm.SetFormInputValue ( form , list[ptr] , val );
 		}
 	}
-
-	/**
-	 * Call the URL. This URL is build with the form data. 
-	 */
-	testDbCnx() {
-		var debug = "";
-		var DBTypeElm = elm.Gebi("form[database_type_choix]"); 
-		var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
-		var DBTypeElm = elm.Gebi("form[dal]"); 
-		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
-		var URLamp = "&";
-		var URLvar = "http://" + document.domain + RequestURI + "/current/install/install_routines/install_test_db.php?form[database_type_choix]=" + DBType + "&form[dal]=" + DBDAL;
-		l.Log[dbgTstDb]("install_test_db : ListeChampsTstDB = " + "DBType="+DBType+"; DBDAL="+DBDAL );
-		
-		for ( var ptr in ListeChampsTstDB ) {
-	//		l.Log[dbgTstDb]("install_test_db : ListeChampsTstDB = document.forms["+FormName+"].elements["+ListeChampsTstDB[ptr]+"].value" );
-			URLvar += URLamp + ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[ListeChampsTstDB[ptr]].value;
-		}
-		l.Log[dbgTstDb]("install_test_db :  URLvar = " + URLvar)
-		xmlhttp.open( "GET" , URLvar , true );
-		xmlhttp.send();
-	}
-	
-	/**
-	 * Toggle the display and visibility of a set of div (ok & ko).
-	 * @param {*} id 
-	 * @param {*} toggle 
-	 */
-	toggleDbResultDivs ( id , toggle ) {
-		var DivOK = id + 'ok';
-		var DivKO = id + 'ko';
-		l.Log[dbgTstDb]( "DivOK=" + DivOK + "; DivKO=" + DivKO);
-		elm.Gebi(DivOK).style.visibility = (toggle==true) ? 'visible':'hidden';	elm.Gebi(DivOK).style.display = (toggle==true) ? 'block':'none';
-	}
-	
-
 }
