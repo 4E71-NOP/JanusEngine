@@ -488,9 +488,9 @@ self::$PreRequisiteTable['add']['user'] = array (
 			if ( $a['params']['name'] == "*user_install*" ) { $a['params']['name'] = $a['params']['login'] = $a['params']['perso_name'] = $a['Initiator']['db_login']; }
 			if ( $a['params']['password'] == "*user_install*" ) { $a['params']['password'] = hash("sha512",stripslashes($a['Initiator']['db_pass']));}
 			if ( $a['params']['password'] == "anonymous" ) { $a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));}
-			if ( $a['params']['password'] == "*standard_user_password*" ) { 
+			if ( $a['params']['password'] == "*websiteUserPassword*" ) { 
 				$bts = BaseToolSet::getInstance();
-				$a['params']['password'] = hash("sha512",stripslashes($bts->CMObj->getConfigurationSubEntry('db', 'standard_user_password'))); 
+				$a['params']['password'] = hash("sha512",stripslashes($bts->CMObj->getConfigurationSubEntry('db', 'websiteUserPassword'))); 
 			}
 			if ( strlen($a['params']['login'] == 0 )){ $a['params']['login'] = $a['params']['name'];}
 // 			$a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));

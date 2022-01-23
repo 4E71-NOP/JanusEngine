@@ -136,8 +136,8 @@ if ( $user['group_tag'] == 3 ) {
 
 	$_REQUEST['site_context']['site_nom']	= $website['ws_name'];
 	$_REQUEST['site_context']['language_website']	= $website['ws_lang'];
-	$_REQUEST['site_context']['user']		= $_REQUEST['form']['database_user_login'] = $db_['user_login'];
-	$_REQUEST['site_context']['password']	= $_REQUEST['form']['database_user_password'] = $db_['user_password'];
+	$_REQUEST['site_context']['user']		= $_REQUEST['form']['dataBaseUserLogin'] = $db_['user_login'];
+	$_REQUEST['site_context']['password']	= $_REQUEST['form']['dataBaseUserPassword'] = $db_['user_password'];
 	$chemin = "../extensions/".$_REQUEST['M_EXTENS']['extension_directory'];  $methode = "console de commandes";	$section = "script";
 	include ("install/install_routines/admin_creation_database.php");
 	statistique_checkpoint ( "Apres execution des scripts de commandes" );

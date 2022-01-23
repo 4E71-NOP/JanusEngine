@@ -78,6 +78,12 @@ class InstallPage02 {
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		$Content = "";
 
+		// We make sure '00_hydre' directory is the first in the list.
+		$dl = $bts->RequestDataObj->getRequestDataEntry('directory_list');
+		ksort($dl);
+		$bts->RequestDataObj->setRequestDataEntry('directory_list', $dl);
+		unset ($dl);
+
 		$langFile = $infos['module']['module_directory']."i18n/".$CurrentSetObj->getDataEntry ('language').".php";
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $langFile , "format" => "php" ));
 
@@ -311,48 +317,50 @@ class InstallPage02 {
 	 */
 	private function initSDDM() {
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
-		$bts->CMObj->setConfigurationEntry('operating_mode', $this->form['operating_mode'] );
+		$bts->CMObj->setConfigurationEntry('operantingMode', $this->form['operantingMode'] );
 
 		$bts->CMObj->setConfigurationEntry('db',
 			array(
-				"type"						=> $this->form['selected_database_type'],
+				"type"						=> $this->form['selectedDataBaseType'],
 				"dal"						=> $this->form['dal'],
 				"host"						=> $this->form['host'],
-				"user_login"				=> $this->form['db_hosting_prefix'].$this->form['db_admin_user'],
-				"user_password"				=> $this->form['db_admin_password'],
-				"hosting_prefix"			=> $this->form['db_hosting_prefix'],
+				"user_login"				=> $this->form['dataBaseHostingPrefix'].$this->form['dataBaseAdminUser'],
+				"user_password"				=> $this->form['dataBaseAdminPassword'],
+				"hosting_prefix"			=> $this->form['dataBaseHostingPrefix'],
 				"dbprefix"					=> $this->form['dbprefix'],
 				"tabprefix"					=> $this->form['tabprefix'],
-				"database_user_login"		=> $this->form['db_hosting_prefix'].$this->form['database_user_login'],
-				"database_user_password"	=> $this->form['database_user_password'],
-				"standard_user_password"	=> $this->form['standard_user_password'],
-				"database_profil"			=> $this->form['database_profil'],
-				"database_user_recreate"	=> $this->form['database_user_recreate'],
+				"dataBaseUserLogin"			=> $this->form['dataBaseHostingPrefix'].$this->form['dataBaseUserLogin'],
+				"dataBaseUserPassword"		=> $this->form['dataBaseUserPassword'],
+				"websiteUserPassword"		=> $this->form['websiteUserPassword'],
+				"dataBaseHostingProfile"	=> $this->form['dataBaseHostingProfile'],
+				"dataBaseUserRecreate"		=> $this->form['dataBaseUserRecreate'],
 			)
 		);
 
-		$bts->CMObj->setConfigurationEntry('type',					$this->form['selected_database_type']);
+		$bts->CMObj->setConfigurationEntry('type',					$this->form['selectedDataBaseType']);
 		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
-		$bts->CMObj->setConfigurationEntry('dal',					$this->form['selected_database_type']);
-		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['db_hosting_prefix'].$this->form['db_admin_user'] );
-		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['db_admin_password']);
+		$bts->CMObj->setConfigurationEntry('dal',					$this->form['selectedDataBaseType']);
+		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['dataBaseHostingPrefix'].$this->form['dataBaseAdminUser'] );
+		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);
 		$bts->CMObj->setConfigurationEntry('tabprefix',				$this->form['tabprefix']);
 
 		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
 
 
-		if ( $this->form['db_detail_log_err'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
-		if ( $this->form['db_detail_log_warn'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
+		if ( $this->form['dataBaseLogErr'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
+		if ( $this->form['dataBaseLogError'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
 
 		$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
 		$bts->initSddmObj();
 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -360,10 +368,11 @@ class InstallPage02 {
 	 */
 	private function databaseInitialization() {
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$r = array();
-		switch ( $bts->CMObj->getConfigurationSubEntry('db','database_profil') ) {
+		switch ( $bts->CMObj->getConfigurationSubEntry('db','dataBaseHostingProfile') ) {
 		case "hostplan":
 			switch ( $bts->CMObj->getConfigurationEntry('dal') ) {
 			case "MYSQLI":		break;	//Nothing to do : PHP
@@ -388,14 +397,15 @@ class InstallPage02 {
 			$r[] = "FLUSH PRIVILEGES;";
 			$r[] = "CREATE DATABASE ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').";";				// Create DB
 			$r[] = "USE ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').";";							// Use it
-			$r[] = "SET SESSION query_cache_type = ON;";				// clean query_cache
-			$r[] = "SET GLOBAL query_cache_size = 67108864;";			// 16 777 216;
+			// $r[] = "SET SESSION query_cache_type = ON;";				// clean query_cache
+			// $r[] = "SET GLOBAL query_cache_size = 67108864;";			// 16 777 216;
 			$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 			$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;
 
 		// 	$monSQLn += 9;
 		break;
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return ($r);
 	}
 
@@ -404,21 +414,23 @@ class InstallPage02 {
 	 */
 	private function databaseUserRecreate(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 		$r = array();
-		switch ( $bts->CMObj->getConfigurationSubEntry('db','database_user_recreate') ) {
-			case "oui":
-				$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%';";
-				$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost';";
-				$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-				$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+		switch ( $bts->CMObj->getConfigurationSubEntry('db','dataBaseUserRecreate') ) {
+			case "yes":
+				$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%';";
+				$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost';";
+				$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserPassword')."';";
+				$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserPassword')."';";
+				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 				$r[] = "FLUSH TABLES;";										// clean query_cache 
 				$r[] = "FLUSH PRIVILEGES;";
 			// 	$monSQLn += 8;
 			break;
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return ($r);
 	}
 
@@ -427,8 +439,9 @@ class InstallPage02 {
 	 */
 	private function processQueryScript($qs) {
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 
-		switch ( $this->form['operating_mode']) {
+		switch ( $this->form['operantingMode']) {
 			case 'directCnx':
 				foreach ( $qs as $q ){ $bts->SDDMObj->query($q); }
 				break;
@@ -437,6 +450,7 @@ class InstallPage02 {
 				break;
 		}
 		
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 
@@ -445,7 +459,7 @@ class InstallPage02 {
 	 */
 	private function processFileCreateTable(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_creation"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		$infos = array (
 				"path" => "websites-data/",
@@ -457,11 +471,12 @@ class InstallPage02 {
 		
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ( $infos['directory_list'] as $A ) {
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$A['name']));
 			if ( isset ($A['filesFound'] ) ) {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
-			
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -469,10 +484,10 @@ class InstallPage02 {
 	 */
 	private function processFileTableData(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_data"));
 		$infos = array (
 				"path" => "websites-data/",
 				"method" =>  "filename",
@@ -485,6 +500,7 @@ class InstallPage02 {
 		foreach ( $infos['directory_list'] as $A ) {
 			if ( isset ($A['filesFound'] ) ) { $LibInstallationObj->executeContent($infos, $A);	}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -492,6 +508,7 @@ class InstallPage02 {
 	 */
 	private function installTableInitialization(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		// --------------------------------------------------------------------------------------------
@@ -502,12 +519,13 @@ class InstallPage02 {
 				"FLUSH TABLES;",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$this->installationStartTime."' WHERE inst_name = 'start_date';",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';",
-				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('SessionID')."' WHERE inst_name = 'SessionID';",
+				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('InstallToken')."' WHERE inst_name = 'InstallToken';",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 				"COMMIT;",
 		);
 		$this->processQueryScript($r);
 		unset ($r);
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 	
 	/**
@@ -515,6 +533,7 @@ class InstallPage02 {
 	 */
 	private function processFileCommandConsole(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
@@ -532,6 +551,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 
@@ -540,6 +560,7 @@ class InstallPage02 {
 	 */
 	private function processFileTablePostInstall(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
@@ -557,6 +578,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 	
 	/**
@@ -564,6 +586,7 @@ class InstallPage02 {
 	 */
 	private function processFileRawSQL(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
@@ -580,6 +603,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}	
 
 	/**
@@ -587,6 +611,7 @@ class InstallPage02 {
 	 */
 	private function processFileRenderConfigFile(){
 		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
@@ -610,6 +635,7 @@ class InstallPage02 {
 			// }
 			$i++;
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 		
 

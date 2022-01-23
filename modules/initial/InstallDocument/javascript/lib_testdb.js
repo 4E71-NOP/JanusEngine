@@ -19,11 +19,11 @@ class LibTestDB {
 		this.xmlhttp;
 		this.dbgTstDb = 0;
 		if ( window.XMLHttpRequest ) { 
-			l.Log[this.dbgTstDb]( "install_test_db :  Modern browser! => window.XMLHttpRequest");
+			l.Log[this.dbgTstDb]( "LibTestDB : Modern browser! => window.XMLHttpRequest");
 			this.xmlhttp = new XMLHttpRequest(); 
 		}		// IE7+, Firefox, Chrome, Opera, Safari
 		else { 
-			l.Log[this.dbgTstDb]( "install_test_db :  Crappy browser! => window.XMLHttpRequest");
+			l.Log[this.dbgTstDb]( "LibTestDB : Crappy browser! => window.XMLHttpRequest");
 			this.xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); 
 		}		// IE6, IE5
 	
@@ -35,7 +35,7 @@ class LibTestDB {
 				tdb.toggleDbResultDivs ( 'cnxToDB', res.cnxToDB);
 				tdb.toggleDbResultDivs ( 'HydrDBAlreadyExist', res.HydrDBAlreadyExist);
 			}
-			// l.Log[1]( "install_test_db :  response = " + xmlhttp.responseText );
+			// l.Log[1]( "LibTestDB :  response = " + xmlhttp.responseText );
 		}
 	}
 
@@ -43,23 +43,23 @@ class LibTestDB {
 	 * Call the URL. This URL is build with the form data. 
 	 */
 	testDbCnx() {
-		var DBTypeElm = elm.Gebi("form[selected_database_type]"); 
+		var DBTypeElm = elm.Gebi("form[selectedDataBaseType]"); 
 		var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var DBTypeElm = elm.Gebi("form[dal]"); 
 		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var URLvar = "http://"+document.domain+RequestURI
 		+"/current/install/install_routines/install_test_db.php?"
 		+"form[dal]="+DBDAL
-		+"&form[selected_database_type]="+DBType
+		+"&form[selectedDataBaseType]="+DBType
 		;
-		l.Log[this.dbgTstDb]("install_test_db / ListeChampsTstDB : " + "DBType="+DBType+"; DBDAL="+DBDAL );
+		l.Log[this.dbgTstDb]("LibTestDB / testDbFieldList : " + "DBType="+DBType+"; DBDAL="+DBDAL );
 		
 		var URLamp = "&";
-		for ( var ptr in li.ListeChampsTstDB ) {
-	//		l.Log[this.dbgTstDb]("install_test_db : li.ListeChampsTstDB = document.forms["+FormName+"].elements["+li.ListeChampsTstDB[ptr]+"].value" );
-			URLvar += URLamp + li.ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[li.ListeChampsTstDB[ptr]].value;
+		for ( var ptr in li.testDbFieldList ) {
+	//		l.Log[this.dbgTstDb]("LibTestDB : li.testDbFieldList = document.forms["+FormName+"].elements["+li.testDbFieldList[ptr]+"].value" );
+			URLvar += URLamp + li.testDbFieldList[ptr] + "=" + document.forms[FormName].elements[li.testDbFieldList[ptr]].value;
 		}
-		l.Log[this.dbgTstDb]("install_test_db :  URLvar = " + URLvar)
+		l.Log[this.dbgTstDb]("LibTestDB :  URLvar = " + URLvar)
 		this.xmlhttp.open( "GET" , URLvar , true );
 		this.xmlhttp.send();
 	}

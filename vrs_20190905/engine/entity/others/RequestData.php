@@ -35,6 +35,8 @@ class RequestData {
 	}
 	
 	//@formatter:off
+	public function getRequestData () { return $this->RequestDataArray; }
+
 	public function getRequestDataEntry ($data) { return $this->RequestDataArray[$data]; }
 	public function getRequestDataSubEntry ($lvl1, $lvl2) { return $this->RequestDataArray[$lvl1][$lvl2]; }
 	

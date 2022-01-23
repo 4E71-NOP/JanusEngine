@@ -19,8 +19,8 @@ $_REQUEST[server_infos][currentDirectory]	= getcwd();
 $_REQUEST[server_infos][uid]				= getmyuid(); 
 $_REQUEST[server_infos][gid]				= getmygid(); 
 $_REQUEST[server_infos][pid]				= getmypid(); 
-/* $_REQUEST[server_infos][navigateur]			= get_browser(null, true); */ 
-$_REQUEST[server_infos][proprietaire]		= get_current_user(); 
+/* $_REQUEST[server_infos][browser]			= get_browser(null, true); */ 
+$_REQUEST[server_infos][serverOwner]		= get_current_user(); 
 
 echo print_r_debug ( $_REQUEST[server_infos] ) ;
 

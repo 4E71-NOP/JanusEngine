@@ -104,9 +104,9 @@ class HydrInstall {
 		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $form ['dbprefix'], $form ['tabprefix'] ) );
 
 		// We have a POST so we set RAM and execution time limit immediately.
-		if (isset ( $form ['memory_limit'] )) {
-			ini_set ( 'memory_limit', $form ['memory_limit'] . "M" );
-			ini_set ( 'max_execution_time', $form ['time_limit'] );
+		if (isset ( $form ['memoryLimit'] )) {
+			ini_set ( 'memoryLimit', $form ['memoryLimit'] . "M" );
+			ini_set ( 'max_execution_time', $form ['execTimeLimit'] );
 		}
 
 		// --------------------------------------------------------------------------------------------
@@ -245,9 +245,6 @@ class HydrInstall {
 			$ModuleLisObj->makeMonitorModuleList(); 
 			$ContentFragments = $LayoutProcessorObj->installRender('install_monitor.lyt.html');
 		}
-
-
-
 
 		$LayoutCommands = array(
 			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),

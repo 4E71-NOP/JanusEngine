@@ -53,12 +53,12 @@ switch ($application) {
 	case 'install' :
 		$ll = LOGLEVEL_ERROR;
 		$ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_INFORMATION;
-		// $ll = LOGLEVEL_STATEMENT;
+		$ll = LOGLEVEL_INFORMATION;
+		$ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'monitor' :
-		$ll = LOGLEVEL_ERROR;
+		// $ll = LOGLEVEL_ERROR;
 		// $ll = LOGLEVEL_WARNING;
 		break;
 	case 'website':

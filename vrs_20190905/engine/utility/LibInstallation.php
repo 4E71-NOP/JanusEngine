@@ -32,17 +32,21 @@ class LibInstallation {
 	 * @param array $infos
 	 */
 	public function scanDirectories ( &$infos ) {
-// 		$LMObj = LogManagement::getInstance();
+		// $LMObj = LogManagement::getInstance();
+		$bts = BaseToolSet::getInstance(); 
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Begin"));
 		
 		foreach ( $infos['directory_list'] as &$A ) {
 			$currentDir = $A['name'];
 			$dirFileList = array();
 			$handle = opendir( $infos['path'].$currentDir."/".$infos['section']."/" );
-// 			$LMObj->logDebug($infos['path'].$currentDir."/".$infos['section']."/<br>\r",0);
-
-			$infos['opendir'] = $handle;
+			// $LMObj->logDebug($infos['path'].$currentDir."/".$infos['section']."/<br>\r",0);
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing : ".$infos['path'].$currentDir."/".$infos['section']."/"));
+			
+			// $infos['opendir'] = $handle;
 			if ( $A['state'] == "on" && $handle != null ) {
 				while (false !== ($file = readdir($handle))) {
+					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing file : ".$file));
 					$acd_ERR = 0;
 					if ( $file == "." || $file == ".." ) { $acd_ERR = 1; }
 					if ( strpos($file, ".save" ) != FALSE ) { $acd_ERR = 1; }
@@ -56,6 +60,7 @@ class LibInstallation {
 				$A['filesFound'] = 1;
 			}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -66,9 +71,12 @@ class LibInstallation {
 	 */
 	public function executeContent (&$infos, &$list) {
 		$bts = BaseToolSet::getInstance();
-		
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Begin"));
+
 		foreach ( $list['filelist'] as $A ) {
 			$infos['currentFileName'] = $A;
+			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$infos['currentFileName']));
+			
 			$path = $infos['path'].$list['name']."/".$infos['section']."/".$A;
 			$infos['currentTableName']= $bts->CMObj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
 			$infos['currentFileStat'] = stat($path);
@@ -96,6 +104,7 @@ class LibInstallation {
 					break;
 			}
 		}
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -449,8 +458,8 @@ function returnConfig () {
 	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
 	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
 	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";						// MYSQLI , PDOMYSQL
-	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_login')."\";
-	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'database_user_password')."\";
+	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin')."\";
+	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword')."\";
 	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
 	\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
 	\$tab['SessionMaxAge']	= (60*60*24);

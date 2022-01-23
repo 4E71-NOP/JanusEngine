@@ -25,9 +25,9 @@ class ServerInfos {
 		$this->ServerInfos['uid']					= getmyuid();
 		$this->ServerInfos['gid']					= getmygid();
 		$this->ServerInfos['pid']					= getmypid();
-		$this->ServerInfos['navigateur']			= getenv("HTTP_USER_AGENT");
-		$this->ServerInfos['proprietaire']			= get_current_user();
-		$this->ServerInfos['memory_limit']			= ini_get('memory_limit');
+		$this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
+		$this->ServerInfos['serverOwner']			= get_current_user();
+		$this->ServerInfos['memoryLimit']			= ini_get('memory_limit');
 		$this->ServerInfos['display_errors']		= ini_get('display_errors');
 		$this->ServerInfos['register_globals']		= ini_get('register_globals');
 		$this->ServerInfos['post_max_size']			= ini_get('post_max_size');
@@ -35,7 +35,7 @@ class ServerInfos {
 
 		$this->ServerInfos['current_dir']			= getcwd();
 		$this->ServerInfos['owner']					= get_current_user();
-		$this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
+		// $this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
 		$this->ServerInfos['srv_host']				= $_SERVER['HTTP_HOST'];
 		$this->ServerInfos['sslState']				= 0;
 		

@@ -104,9 +104,9 @@ class HydrInstallMonitor {
 		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $form ['dbprefix'], $form ['tabprefix'] ) );
 
 		// We have a POST so we set RAM and execution time limit immediately.
-		if (isset ( $form ['memory_limit'] )) {
-			ini_set ( 'memory_limit', $form ['memory_limit'] . "M" );
-			ini_set ( 'max_execution_time', $form ['time_limit'] );
+		if (isset ( $form ['memoryLimit'] )) {
+			ini_set ( 'memoryLimit', $form ['memoryLimit'] . "M" );
+			ini_set ( 'max_execution_time', $form ['execTimeLimit'] );
 		}
 
 		// --------------------------------------------------------------------------------------------
@@ -156,8 +156,8 @@ class HydrInstallMonitor {
 		
 		$bts->CMObj->setConfigurationEntry('dal', $form['database_dal_choix']);
 		$bts->CMObj->setConfigurationEntry('host', $form['host']);
-		$bts->CMObj->setConfigurationEntry('db_user_login', $form['db_admin_user']);
-		$bts->CMObj->setConfigurationEntry('db_user_password', $form['db_admin_password']);
+		$bts->CMObj->setConfigurationEntry('db_user_login', $form['dataBaseAdminUser']);
+		$bts->CMObj->setConfigurationEntry('db_user_password', $form['dataBaseAdminPassword']);
 
 		$DALFacade = DalFacade::getInstance();
 		$DALFacade->createDALInstance();		// It connects too.
@@ -181,8 +181,8 @@ class HydrInstallMonitor {
 				$tmp[$idx]['inst_nbr']			= $dbp['inst_nbr'];
 				$tmp[$idx]['inst_txt']			= $dbp['inst_txt'];
 			}
-			$idx = $bts->RequestDataObj->getRequestDataEntry('SessionID');
-			if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $tmp['SessionID']['inst_nbr'] ) { $itd = $tmp; }
+			$idx = $bts->RequestDataObj->getRequestDataEntry('InstallToken');
+			if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $tmp['InstallToken']['inst_nbr'] ) { $itd = $tmp; }
 		}
 
 		$refresh = "";

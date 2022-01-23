@@ -57,9 +57,9 @@ class InstallMonitor {
 		// 2 SessionID nok		finished
 		// 3 SessionID ok		finished
 		$itd = $CurrentSetObj->getDataEntry('itd');
-		if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) {
+		if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) {
 			$score = 0;
-			if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) { $score +=1; }
+			if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) { $score +=1; }
 			if ( $itd['end_date']['inst_nbr'] > 0 ) { $score +=2; }
 			
 			switch ($score) {

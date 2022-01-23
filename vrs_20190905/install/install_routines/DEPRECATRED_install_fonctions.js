@@ -32,7 +32,7 @@ function CreateRandomPassword( Longueur ) {
 }
 
 // --------------------------------------------------------------------------------------------
-var ListeChampsTstDB = [ "form[host]", "form[db_hosting_prefix]", "form[db_admin_user]", "form[db_admin_password]", "form[dbprefix]", "form[tabprefix]" ];
+var testDbFieldList = [ "form[host]", "form[dataBaseHostingPrefix]", "form[dataBaseAdminUser]", "form[dataBaseAdminPassword]", "form[dbprefix]", "form[tabprefix]" ];
 
 function CheckFormValues ( Tab , Langue , SessionID ) {
 //	var FormName = 'install_page_init';
@@ -44,14 +44,14 @@ function CheckFormValues ( Tab , Langue , SessionID ) {
 	}
 
 	if ( stop == 0 ) { 
-		var DBTypeElm = elm.Gebi("form[selected_database_type]"); 
+		var DBTypeElm = elm.Gebi("form[selectedDataBaseType]"); 
 		var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var DBTypeElm = elm.Gebi("form[dal]"); 
 		var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 		var URLamp = "&";
-		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[selected_database_type]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
-		for ( var ptr in ListeChampsTstDB ) {
-			URLvar += URLamp + ListeChampsTstDB[ptr] + "=" + document.forms[FormName].elements[ListeChampsTstDB[ptr]].value;
+		var URLvar = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[selectedDataBaseType]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
+		for ( var ptr in testDbFieldList ) {
+			URLvar += URLamp + testDbFieldList[ptr] + "=" + document.forms[FormName].elements[testDbFieldList[ptr]].value;
 		}
 		URLvar += URLamp + 'l=' + Langue + URLamp + 'SessionID=' + SessionID;
 
@@ -73,7 +73,7 @@ function setFormPreconizedSettings() {
 	var time = 15;
 	var addTime = 0; 
 	
-	var method = document.forms['install_page_init'].elements['form[operating_mode]'].value;
+	var method = document.forms['install_page_init'].elements['form[operantingMode]'].value;
 	switch (method) {
 	case 'directCnx':
 		l.Log[dbgInstFonction]( 'method=: ' + method );
@@ -85,14 +85,14 @@ function setFormPreconizedSettings() {
 		break;
 	}
 	
-	for ( var ptr in ListCheckbox ) {
-		l.Log[dbgInstFonction]( 'ListCheckbox['+ptr+']=' + document.forms['install_page_init'].elements[ListCheckbox[ptr]].checked );
-		addMemory += (document.forms['install_page_init'].elements[ListCheckbox[ptr]].checked == true) ? 16: 0;
-		addTime += (document.forms['install_page_init'].elements[ListCheckbox[ptr]].checked == true) ? 25: 0;
+	for ( var ptr in enabledDirectoryList ) {
+		l.Log[dbgInstFonction]( 'enabledDirectoryList['+ptr+']=' + document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].checked );
+		addMemory += (document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].checked == true) ? 16: 0;
+		addTime += (document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].checked == true) ? 25: 0;
 	}
 	
-	document.forms['install_page_init'].elements['form[memory_limit]'].value = (memory + addMemory);
-	document.forms['install_page_init'].elements['form[time_limit]'].value = (time + addTime);
+	document.forms['install_page_init'].elements['form[memoryLimit]'].value = (memory + addMemory);
+	document.forms['install_page_init'].elements['form[execTimeLimit]'].value = (time + addTime);
 	
 }
 

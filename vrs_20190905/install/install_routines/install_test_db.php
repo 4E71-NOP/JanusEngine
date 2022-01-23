@@ -28,14 +28,14 @@ switch ( $debug ) {
 
 $db_ = array();
 $db_['dal']						= $_REQUEST['form']['dal'];
-$db_['type']					= $_REQUEST['form']['selected_database_type'];
+$db_['type']					= $_REQUEST['form']['selectedDataBaseType'];
 $db_['host']					= $_REQUEST['form']['host'];
-$db_['user_login']				= $_REQUEST['form']['db_hosting_prefix'] . $_REQUEST['form']['db_admin_user'];
-$db_['user_password']			= $_REQUEST['form']['db_admin_password'];
+$db_['user_login']				= $_REQUEST['form']['dataBaseHostingPrefix'] . $_REQUEST['form']['dataBaseAdminUser'];
+$db_['user_password']			= $_REQUEST['form']['dataBaseAdminPassword'];
 $db_['tabprefix']				= $_REQUEST['form']['prefix_des_tables'];
-$db_['database_user_login']		= $_REQUEST['form']['db_hosting_prefix'] . $_REQUEST['form']['database_user_login'];
-$db_['database_user_password']	= $_REQUEST['form']['database_user_password'];
-$db_['dbprefix']				= $_REQUEST['form']['db_hosting_prefix'] . $_REQUEST['form']['dbprefix'];
+$db_['dataBaseUserLogin']		= $_REQUEST['form']['dataBaseHostingPrefix'] . $_REQUEST['form']['dataBaseUserLogin'];
+$db_['dataBaseUserPassword']	= $_REQUEST['form']['dataBaseUserPassword'];
+$db_['dbprefix']				= $_REQUEST['form']['dataBaseHostingPrefix'] . $_REQUEST['form']['dbprefix'];
 $db_['dbprefix2']				= "mysql";
 
 // --------------------------------------------------------------------------------------------
@@ -45,10 +45,10 @@ switch ( $debug ) {
 case 1:
 	error_log ("-----------------------------------------------------------");
 	switch ( $db_['dal'] ) {
-	case "PHP":			error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
-	case "PDO":			error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
-	case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
-	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
+	case "PHP":			error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
+	case "PDO":			error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
+	case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
+	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
 	}
 	error_log ( "fin log : " . $db_['dal'] ."/". $db_['type'] );
 }
@@ -121,11 +121,11 @@ break;
 
 case "PEARDB":
 	include_once ("MDB2.php");
-	if ( isset($db_['dbprefix']) ) { $_REQUEST['form']['db_hosting_prefix'] = "/"; }
-	$db = MDB2::connect($db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix2'] ); 
+	if ( isset($db_['dbprefix']) ) { $_REQUEST['form']['dataBaseHostingPrefix'] = "/"; }
+	$db = MDB2::connect($db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix2'] ); 
 	if ( PEAR::isError($db) ) { $_REQUEST['SQL_tst']['1'] = 0; }
 
-	$db2 = MDB2::connect($db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] ); 
+	$db2 = MDB2::connect($db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] ); 
 	if ( PEAR::isError($db2) ) { $_REQUEST['SQL_tst']['2'] = 0; }
 
 break;
@@ -156,10 +156,10 @@ switch ( $displayDebug ) {
 	case 1:
 		echo("<br>\r");
 		switch ( $db_['dal'] ) {
-			case "MYSQLI":	echo ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type'] . $dbError);				break;
-		case "PHPPDO":	echo ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] . $db_['user_login'] . $db_['user_password'] .")" . $e ." | type = ". $db_['type']);		break;
-		case "ADODB":	echo ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);				break;
-		case "PEARDB":	echo ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['db_hosting_prefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
+			case "MYSQLI":	echo ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type'] . $dbError);				break;
+		case "PHPPDO":	echo ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] . $db_['user_login'] . $db_['user_password'] .")" . $e ." | type = ". $db_['type']);		break;
+		case "ADODB":	echo ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);				break;
+		case "PEARDB":	echo ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
 		}
 	break;
 	default :

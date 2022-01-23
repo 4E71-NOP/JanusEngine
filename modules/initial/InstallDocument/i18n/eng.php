@@ -4,7 +4,7 @@ $i18n = array(
 	'1'				=>		"Yes",
 	'Invite'		=>		"Welcome to Hydra",
 
-	'avcf' => "Please, fill the form.\\n\\Form:\\n",
+	'avcf' => "Please, fill the form.\\n\\Fieds:\\n",
 	'bouton' => "Install",
 
 	'F1_title' => "This server information",
@@ -16,7 +16,7 @@ $i18n = array(
 	'PHP_adodb_support'			=> "ADOdb support:",
 	'PHP_pdo_support'			=> "PDO support:",
 	'PHP_db_builtin_functions'	=> "PHP built-in DB functions:",
-	'unveilPassword'=> "Découvrir le mot de passe",
+	'unveilPassword'			=> "Unveil the password",
 
 	'tabTxt1'	=> "Server",
 	'tabTxt2'	=> "DB",

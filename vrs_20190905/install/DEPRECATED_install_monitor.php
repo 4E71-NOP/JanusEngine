@@ -73,12 +73,12 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 
 // URL example
 // http://www.multiweb-manager.local/Hydr/current/install_monitor.php?
-// form[selected_database_type]=mysql
+// form[selectedDataBaseType]=mysql
 // &form[database_dal_choix]=MYSQLI
 // &form[host]=localhost
-// &form[db_hosting_prefix]=
-// &form[db_admin_user]=dbadmin
-// &form[db_admin_password]=nimdabd
+// &form[dataBaseHostingPrefix]=
+// &form[dataBaseAdminUser]=dbadmin
+// &form[dataBaseAdminPassword]=nimdabd
 // &form[dbprefix]=Hdr
 // &form[prefix_des_tables]=HtTst_
 // &l=eng
@@ -89,8 +89,8 @@ $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['d
 
 $bts->CMObj->setConfigurationEntry('dal', $form['database_dal_choix']);
 $bts->CMObj->setConfigurationEntry('host', $form['host']);
-$bts->CMObj->setConfigurationEntry('db_user_login', $form['db_admin_user']);
-$bts->CMObj->setConfigurationEntry('db_user_password', $form['db_admin_password']);
+$bts->CMObj->setConfigurationEntry('db_user_login', $form['dataBaseAdminUser']);
+$bts->CMObj->setConfigurationEntry('db_user_password', $form['dataBaseAdminPassword']);
 
 $DALFacade = DalFacade::getInstance();
 $DALFacade->createDALInstance();		// It connects too.
@@ -111,7 +111,7 @@ if ( $dbquery != false && $SDDMObj->num_row_sql($dbquery) > 0 ) {
 		$tmp[$dbp['inst_name']]['inst_nbr']			= $dbp['inst_nbr'];
 		$tmp[$dbp['inst_name']]['inst_txt']			= $dbp['inst_txt'];
 	}
-	if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $tmp['SessionID']['inst_nbr'] ) {
+	if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $tmp['InstallToken']['inst_nbr'] ) {
 		$itd = $tmp; 
 	}
 }
@@ -283,9 +283,9 @@ $T['ContentInfos']['DocumentName']	= "doc";
 // 2 SessionID nok		finished
 // 3 SessionID ok		finished
 
-if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) {
+if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) {
 	$score = 0;
-	if ( $bts->RequestDataObj->getRequestDataEntry('SessionID') == $itd['SessionID']['inst_nbr'] ) { $score +=1; }
+	if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) { $score +=1; }
 	if ( $itd['end_date']['inst_nbr'] > 0 ) { $score +=2; }
 	
 	switch ($score) {

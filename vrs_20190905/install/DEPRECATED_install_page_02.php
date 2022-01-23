@@ -78,39 +78,39 @@ $tab_fc4 = $tab_fc[$tab_index];
 
 
 $form = $bts->RequestDataObj->getRequestDataEntry('form');
-$bts->CMObj->setConfigurationEntry('operating_mode', $form['operating_mode'] );
+$bts->CMObj->setConfigurationEntry('operantingMode', $form['operantingMode'] );
 
 $bts->CMObj->setConfigurationEntry('db',
 	array(
-		"type"						=> $form['selected_database_type'],
+		"type"						=> $form['selectedDataBaseType'],
 		"dal"						=> $form['dal'],
 		"host"						=> $form['host'],
-		"user_login"				=> $form['db_hosting_prefix'].$form['db_admin_user'],
-		"user_password"				=> $form['db_admin_password'],
-		"hosting_prefix"			=> $form['db_hosting_prefix'],
+		"user_login"				=> $form['dataBaseHostingPrefix'].$form['dataBaseAdminUser'],
+		"user_password"				=> $form['dataBaseAdminPassword'],
+		"hosting_prefix"			=> $form['dataBaseHostingPrefix'],
 		"dbprefix"					=> $form['dbprefix'],
 		"tabprefix"					=> $form['tabprefix'],
-		"database_user_login"		=> $form['db_hosting_prefix'].$form['database_user_login'],
-		"database_user_password"	=> $form['database_user_password'],
-		"standard_user_password"	=> $form['standard_user_password'],
-		"database_profil"			=> $form['database_profil'],
-		"database_user_recreate"	=> $form['database_user_recreate'],
+		"dataBaseUserLogin"		=> $form['dataBaseHostingPrefix'].$form['dataBaseUserLogin'],
+		"dataBaseUserPassword"	=> $form['dataBaseUserPassword'],
+		"websiteUserPassword"	=> $form['websiteUserPassword'],
+		"dataBaseHostingProfile"			=> $form['dataBaseHostingProfile'],
+		"dataBaseUserRecreate"	=> $form['dataBaseUserRecreate'],
 	)
 );
 
-$bts->CMObj->setConfigurationEntry('type',					$form['selected_database_type']);
+$bts->CMObj->setConfigurationEntry('type',					$form['selectedDataBaseType']);
 $bts->CMObj->setConfigurationEntry('host',					$form['host']);
-$bts->CMObj->setConfigurationEntry('dal',					$form['selected_database_type']);
-$bts->CMObj->setConfigurationEntry('db_user_login',			$form['db_hosting_prefix'].$form['db_admin_user'] );
-$bts->CMObj->setConfigurationEntry('db_user_password',		$form['db_admin_password']);
+$bts->CMObj->setConfigurationEntry('dal',					$form['selectedDataBaseType']);
+$bts->CMObj->setConfigurationEntry('db_user_login',			$form['dataBaseHostingPrefix'].$form['dataBaseAdminUser'] );
+$bts->CMObj->setConfigurationEntry('db_user_password',		$form['dataBaseAdminPassword']);
 $bts->CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);
 $bts->CMObj->setConfigurationEntry('tabprefix',				$form['tabprefix']);
 
 $bts->CMObj->setConfigurationEntry('execution_context',		'installation');
 
 
-if ( $form['db_detail_log_err'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
-if ( $form['db_detail_log_warn'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
+if ( $form['dataBaseLogErr'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
+if ( $form['dataBaseLogError'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
 
 $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
@@ -118,7 +118,7 @@ $bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry(
 $bts->initSddmObj();
 
 $r = array();
-switch ( $bts->CMObj->getConfigurationSubEntry('db','database_profil') ) {
+switch ( $bts->CMObj->getConfigurationSubEntry('db','dataBaseHostingProfile') ) {
 case "hostplan":
 	switch ( $bts->CMObj->getConfigurationEntry('dal') ) {
 	case "MYSQLI":		break;	//Nothing to do : PHP
@@ -152,14 +152,14 @@ case "absolute":
 break;
 }
 
-switch ( $bts->CMObj->getConfigurationSubEntry('db','database_user_recreate') ) {
+switch ( $bts->CMObj->getConfigurationSubEntry('db','dataBaseUserRecreate') ) {
 case "oui":
-	$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%';";
-	$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost';";
-	$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-	$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','database_user_password')."';";
-	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','database_user_login')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+	$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%';";
+	$r[] = "DROP USER IF EXISTS '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost';";
+	$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserPassword')."';";
+	$r[] = "CREATE USER '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost' IDENTIFIED BY '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserPassword')."';";
+	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+	$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON ".$bts->CMObj->getConfigurationSubEntry('db','dbprefix').".* TO '".$bts->CMObj->getConfigurationSubEntry('db','dataBaseUserLogin')."'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 	$r[] = "FLUSH TABLES;";										// clean query_cache 
 	$r[] = "FLUSH PRIVILEGES;";
 // 	$monSQLn += 8;
@@ -236,7 +236,7 @@ if ( $devDebug != 1 ) {
 			"FLUSH TABLES;",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$installationStartTime."' WHERE inst_name = 'start_date';",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';",
-			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('SessionID')."' WHERE inst_name = 'SessionID';",
+			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('InstallToken')."' WHERE inst_name = 'InstallToken';",
 			"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 			"COMMIT;",
 	);

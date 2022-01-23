@@ -195,7 +195,7 @@ class ModuleGlobalReport {
 			$pv['a']	= "license@rootwave.net";
 			$pv['b']	= "[HYDR-L] - " . $pv['def_text'];
 			$pv['c']	= "\r\n" . $_SERVER . "\r\n";
-			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['proprietaire'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
+			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['serverOwner'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
 			mail( $pv['a'], $pv['b'], $pv['c'], $pv['d'] );
 			
 			$pv['def_number'] = time();

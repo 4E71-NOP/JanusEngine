@@ -16,7 +16,7 @@ $i18n = array(
 	'PHP_adodb_support'			=> "Support ADOdb:",
 	'PHP_pdo_support'			=> "Support PDO:",
 	'PHP_db_builtin_functions'	=> "Fonctions BDD intégrées à PHP:",
-	'unveilPassword'=> "Découvrir le mot de passe",
+	'unveilPassword'			=> "Découvrir le mot de passe",
 
 	'tabTxt1'	=> "Serveur",
 	'tabTxt2'	=> "BDD",
