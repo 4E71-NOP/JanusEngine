@@ -62,7 +62,7 @@ class SddmMySQLI {
 			$SQLlogEntry['signal'] = "ERR";
 			$bts->LMObj->logSQLDetails ( array ( $timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono() ) );
 			$this->errorMsg();
-			$msg = "CONNEXION ERROR : err_msg" . $this->DBInstance->connect_error;
+			$msg = "CONNEXION ERROR / err_msg " . $this->DBInstance->connect_error;
 			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
 			$this->report['cnxErr'] = 1;
 			
@@ -135,7 +135,7 @@ class SddmMySQLI {
 	 * @return Number
 	 */
 	public function num_row_sql($data) {
-		$nbr = mysqli_num_rows ($data);
+		$nbr = $data->num_rows;
 		if ( $nbr == 0 ) { $this->SDDMTools->SLMEmptyResult (); }
 		return $nbr;
 	}
@@ -162,10 +162,17 @@ class SddmMySQLI {
 	 * Returns the err string.
 	 * @return string
 	 */
-	public function errorMsg() {
-		return "err";
+	public function getError() {
+		return $this->DBInstance->error;
 	}
 	
+	/**
+	 * Returns the errno string.
+	 * @return string
+	 */
+	public function getErrno(){
+		return $this->DBInstance->errno;
+	}
 	
 	/**
 	 * Returns the next (as greater number) ID number of any given table.

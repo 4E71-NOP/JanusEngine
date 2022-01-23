@@ -65,8 +65,10 @@ class InstallDocument {
 		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
 		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_install.js');
 		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_testdb.js');
+		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_monitorInstall.js');
 		$GeneratedScriptObj->insertString('JavaScript-Init', 'var li = new LibInstall();');
 		$GeneratedScriptObj->insertString('JavaScript-Init', 'var tdb = new LibTestDB();');
+		$GeneratedScriptObj->insertString('JavaScript-Init', 'var mi = new LibMonitorInstall();');
 
 		return ($DocContent);
 	}

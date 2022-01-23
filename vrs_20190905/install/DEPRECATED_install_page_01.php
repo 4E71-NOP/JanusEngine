@@ -587,14 +587,14 @@ $GeneratedScriptObj->insertString('JavaScript-Data' , " var AlertCheckFormValues
 
 // --------------------------------------------------------------------------------------------
 
-$SessionID = floor ( $bts->TimeObj->microtime_chrono() );
+$installToken = floor ( $bts->TimeObj->microtime_chrono() );
 
 $SB = array();
 $SB['id']				= "bouton_install_p1";
 $SB['type']				= "button";
 $SB['initialStyle']		= $Block."_submit_s2_n";
 $SB['hoverStyle']		= $Block."_submit_s3_h";
-$SB['onclick']			= "CheckFormValues( ListeChamps , '".$l."' , '".$SessionID."')";
+$SB['onclick']			= "CheckFormValues( ListeChamps , '".$l."' , '".$installToken."')";
 $SB['message']			= $bts->I18nTransObj->getI18nTransEntry('bouton');
 $SB['mode']				= 1;
 $SB['size'] 			= 256;
@@ -615,7 +615,7 @@ $bts->InteractiveElementsObj->renderSubmitButton($SB).
 </table>\r
 </div>
 <input type='hidden' name='PageInstall' value='2'>\r
-<input type='hidden' name='InstallToken' value='".$SessionID."'>\r
+<input type='hidden' name='installToken' value='".$installToken."'>\r
 <input type='hidden' name='l' value='".$l."'>\r
 		
 </form>\r

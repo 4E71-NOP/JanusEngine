@@ -47,8 +47,9 @@ class LibInstall {
 			"form[websiteUserPassword]",
 			"PageInstall",
 			"l",
-			"InstallToken"
+			"installToken"
 		];
+		this.saveConfig = {};
 
 		if ( window.XMLHttpRequest ) { 
 			l.Log[this.dbgInstFonction]( "LibInstall : Modern browser! => window.XMLHttpRequest");
@@ -60,13 +61,13 @@ class LibInstall {
 		}		// IE6, IE5
 
 		// The anonymous function scope will **NOT** be from this class. It's a standalone.
-		this.xmlhttp.onreadystatechange = function () {
-			if ( tdb.xmlhttp.readyState == 4 && tdb.xmlhttp.status == 200 ) {
-				alert("we got to the end of the install!","for real??")
-				// var res = JSON.parse(tdb.xmlhttp.response);
-			}
-			// l.Log[1]( "LibTestDB :  response = " + xmlhttp.responseText );
-		}
+		// this.xmlhttp.onreadystatechange = function () {
+		// 	if ( tdb.xmlhttp.readyState == 4 && tdb.xmlhttp.status == 200 ) {
+		// 		alert("we got to the end of the install!","for real??")
+		// 		// var res = JSON.parse(tdb.xmlhttp.response);
+		// 	}
+		// 	// l.Log[1]( "LibTestDB :  response = " + xmlhttp.responseText );
+		// }
 		
 	}
 
@@ -129,9 +130,9 @@ class LibInstall {
 	 * 
 	 * @param {*} Tab 
 	 * @param {*} Lang 
-	 * @param {*} SessionID 
+	 * @param {*} installToken 
 	 */
-	checkFormAndPost ( Tab , Lang , SessionID ) {
+	checkFormAndPost ( Tab , Lang , installToken ) {
 	//	var FormName = 'install_page_init';
 		var stop = 0;
 		for ( var i in Tab ) { Tab[i].err = 0; }
@@ -147,15 +148,6 @@ class LibInstall {
 			var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
 			var URLamp = "&";
 
-			// Monitor
-			var MonitorURL = "http://" + document.domain + RequestURI + "/install_monitor.php?PageInstall=monitor&form[selectedDataBaseType]=" + DBType + "&form[database_dal_choix]=" + DBDAL;
-			for ( var ptr in this.testDbFieldList ) {
-				MonitorURL += URLamp + this.testDbFieldList[ptr] + "=" + document.forms[FormName].elements[this.testDbFieldList[ptr]].value;
-			}
-			MonitorURL += URLamp + 'l=' + Lang + URLamp + 'SessionID=' + SessionID;
-			l.Log[this.dbgInstFonction]( 'Monitor URL=: `' +MonitorURL+"`" );
-			// window.open( MonitorURL, '_blank');
-			
 			let ajaxPost = false;
 			ajaxPost = !ajaxPost;
 			if ( ajaxPost == true) {
@@ -164,8 +156,9 @@ class LibInstall {
 				URLamp = "";
 				var InstallURL = "http://" + document.domain + RequestURI + "/install.php";
 				for ( let ptr in this.installFieldList ) {
-					l.Log[this.dbgInstFonction]( "Processing field `document.forms["+FormName+"].elements["+this.installFieldList[ptr]+"].value`");
+					// l.Log[this.dbgInstFonction]( "Processing field `document.forms["+FormName+"].elements["+this.installFieldList[ptr]+"].value`");
 					installFormData += URLamp + this.installFieldList[ptr] + "=" + document.forms[FormName].elements[this.installFieldList[ptr]].value;
+					this.saveConfig[this.installFieldList[ptr]] = document.forms[FormName].elements[this.installFieldList[ptr]].value;
 					URLamp = "&";
 				}
 
@@ -183,11 +176,21 @@ class LibInstall {
 					installFormData += URLamp+"directory_list["+DirectoryNameList[ptr]+"][name]="+DirectoryNameList[ptr];
 				}
 	
-				l.Log[this.dbgInstFonction]( 'Install URL=: `' +InstallURL+"?"+installFormData+"`" );
-				// this.xmlhttp.setOption(2) = 13056			//should ignore certificate errors
+				// l.Log[this.dbgInstFonction]( 'Install URL=: `' +InstallURL+"?"+installFormData+"`" );
 				this.xmlhttp.open( "POST" , InstallURL , true );
 				this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				this.xmlhttp.send(installFormData);
+
+				// Monitoring
+				mi.monitorToggleDisplay();
+				this.monitorURL = "http://" + document.domain + RequestURI + "/install_monitor.php"; 
+				URLamp = "?";
+				for (let ptr in this.saveConfig ) {
+					this.monitorURL += URLamp+ptr+"="+this.saveConfig[ptr];
+					URLamp = "&";
+				}
+				mi.setUrl(this.monitorURL);
+				mi.startInterval();
 			}
 			else { document.forms['install_page_init'].submit(); }
 		}

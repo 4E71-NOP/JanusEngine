@@ -34,7 +34,7 @@ function CreateRandomPassword( Longueur ) {
 // --------------------------------------------------------------------------------------------
 var testDbFieldList = [ "form[host]", "form[dataBaseHostingPrefix]", "form[dataBaseAdminUser]", "form[dataBaseAdminPassword]", "form[dbprefix]", "form[tabprefix]" ];
 
-function CheckFormValues ( Tab , Langue , SessionID ) {
+function CheckFormValues ( Tab , Langue , installToken ) {
 //	var FormName = 'install_page_init';
 	var stop = 0;
 	for ( var i in Tab ) { Tab[i].err = 0; }
@@ -53,7 +53,7 @@ function CheckFormValues ( Tab , Langue , SessionID ) {
 		for ( var ptr in testDbFieldList ) {
 			URLvar += URLamp + testDbFieldList[ptr] + "=" + document.forms[FormName].elements[testDbFieldList[ptr]].value;
 		}
-		URLvar += URLamp + 'l=' + Langue + URLamp + 'SessionID=' + SessionID;
+		URLvar += URLamp + 'l=' + Langue + URLamp + 'installToken=' + installToken;
 
 		window.open( URLvar, '_blank');
 		document.forms['install_page_init'].submit(); 

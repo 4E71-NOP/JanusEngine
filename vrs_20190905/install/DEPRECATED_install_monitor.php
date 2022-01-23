@@ -82,7 +82,7 @@ $ClassLoaderObj->provisionClass('SqlTableList');
 // &form[dbprefix]=Hdr
 // &form[prefix_des_tables]=HtTst_
 // &l=eng
-// &SessionID=1576417445
+// &installToken=1576417445
 
 $form = $bts->RequestDataObj->getRequestDataEntry('form');
 $CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance($form['dbprefix'],$form['tabprefix']) );
@@ -111,7 +111,7 @@ if ( $dbquery != false && $SDDMObj->num_row_sql($dbquery) > 0 ) {
 		$tmp[$dbp['inst_name']]['inst_nbr']			= $dbp['inst_nbr'];
 		$tmp[$dbp['inst_name']]['inst_txt']			= $dbp['inst_txt'];
 	}
-	if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $tmp['InstallToken']['inst_nbr'] ) {
+	if ( $bts->RequestDataObj->getRequestDataEntry('installToken') == $tmp['installToken']['inst_nbr'] ) {
 		$itd = $tmp; 
 	}
 }
@@ -279,13 +279,13 @@ $T['ContentInfos']['DocumentName']	= "doc";
 //	Choice matrix 
 //	session				Finished?
 // 0 Wut!?				not finished
-// 1 SessionID ok		not finished
-// 2 SessionID nok		finished
-// 3 SessionID ok		finished
+// 1 installToken ok		not finished
+// 2 installToken nok		finished
+// 3 installToken ok		finished
 
-if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) {
+if ( $bts->RequestDataObj->getRequestDataEntry('installToken') == $itd['installToken']['inst_nbr'] ) {
 	$score = 0;
-	if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) { $score +=1; }
+	if ( $bts->RequestDataObj->getRequestDataEntry('installToken') == $itd['installToken']['inst_nbr'] ) { $score +=1; }
 	if ( $itd['end_date']['inst_nbr'] > 0 ) { $score +=2; }
 	
 	switch ($score) {

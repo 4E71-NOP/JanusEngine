@@ -6,7 +6,7 @@ This project is ment to help people to implement website with more graphics and 
 # Downloads
 
 ## Source
-Downlad the source from this place and play. I believe you know whet you're doing.
+Downlad the source from this place and play. I believe you know what you're doing.
 
 ## Archives
 You can download 2 types of packages from the online archive:

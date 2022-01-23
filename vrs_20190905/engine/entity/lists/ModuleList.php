@@ -102,6 +102,19 @@ class ModuleList {
 			"module_directory"   => "modules/initial/Tooltip/", 
 			"module_file"   => "module_tooltip.php", 
 		);
+
+		$this->ModuleList['installmonitor'] = array(
+			"module_id" => "1",
+			"module_deco" => "1",
+			"module_deco_nbr" => "2",
+			"module_deco_default_text" => "",
+			"module_name" => "installmonitor",
+			"module_classname" => "InstallMonitor",
+			"module_container_name" => "InstallMonitorContainer",
+			"module_title" => "",
+			"module_directory"   => "modules/initial/InstallMonitor/", 
+			"module_file"   => "module_install_monitor.php", 
+		);
 	}
 
 	/**

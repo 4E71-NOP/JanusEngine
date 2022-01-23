@@ -49,60 +49,42 @@ class InstallMonitor {
 		$T['ContentInfos']['CellName']		= "frame01";
 		$T['ContentInfos']['DocumentName']	= "doc";
 		
-		
-		//	Choice matrix 
-		//	session				Finished?
-		// 0 Wut!?				not finished
-		// 1 SessionID ok		not finished
-		// 2 SessionID nok		finished
-		// 3 SessionID ok		finished
 		$itd = $CurrentSetObj->getDataEntry('itd');
-		if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) {
-			$score = 0;
-			if ( $bts->RequestDataObj->getRequestDataEntry('InstallToken') == $itd['InstallToken']['inst_nbr'] ) { $score +=1; }
-			if ( $itd['end_date']['inst_nbr'] > 0 ) { $score +=2; }
+		if ( $bts->RequestDataObj->getRequestDataEntry('installToken') == $itd['installToken']['inst_nbr'] ) {
+
 			
-			switch ($score) {
-				case 0: 	
-				case 2: 
-					$status = "?????";
-					break;
-				case 1: 
-					$time = (time() - $itd['last_activity']['inst_nbr']);
-					if ( $time > 60 ) { $status = "<span class='".$Block."_error'>" .$bts->I18nTransObj->getI18nTransEntry('inactive') . ": " . $time . "s.</span>"; }
-					else { $status = $bts->I18nTransObj->getI18nTransEntry('installState1'); }
-					break;	
-				case 3: $status = $bts->I18nTransObj->getI18nTransEntry('installState2');	break;
-			}
-			
-			$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nTransObj->getI18nTransEntry('status')."</b>";				
-			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<b>".$status."</b>";												
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<b>".$bts->I18nTransObj->getI18nTransEntry('status')."</b>";
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<b>"
+			."<span id='monitorStatusPending' style='display:block; visibility:visible'>".$bts->I18nTransObj->getI18nTransEntry('monitorStatusPending')."</span>"
+			."<span id='monitorStatusRunning' style='display:none; visibility:hidden'>".$bts->I18nTransObj->getI18nTransEntry('monitorStatusRunning')."</span>"
+			."</b>";
 			$lt++;
 			
-			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SQL_query_count');					
-			$T['Content'][$CurrentTab][$lt]['2']['cont'] = $itd['SQL_query_count']['inst_nbr'];								
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SQL_query_count');
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span id='monitor_SQL_query_count'></span>";
 			$lt++;
 			
-			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('command_count');						
-			$T['Content'][$CurrentTab][$lt]['2']['cont'] = $itd['command_count']['inst_nbr'];								
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('command_count');
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span id='monitor_command_count'></span>";
 			$lt++;
 			
-			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('start_date');							
-			$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['start_date']['inst_nbr']);	
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('start_date');
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span id='monitor_start_date'></span>";
+			$lt++;
+
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('end_date');
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span id='monitor_end_date'></span>";
+			$lt++;
+
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<span style='display:none; visibility:hidden' id='monitorInactive'>".$bts->I18nTransObj->getI18nTransEntry('inactive');
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span style='display:none; visibility:hidden' id='monitorInactiveTime'></span>";
+			$lt++;
 			
-			$isInactive = time() - $itd['last_activity']['inst_nbr'];
-			if ( $isInactive > 10 ) {
-				$lt++;
-				$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('inactive');		$T['Content'][$CurrentTab][$lt]['1']['class'] = $Block."_error";
-				$T['Content'][$CurrentTab][$lt]['2']['cont'] = $isInactive." s";										$T['Content'][$CurrentTab][$lt]['2']['class'] = $Block."_error"; 
-			}
-			
-			if ($itd['end_date']['inst_nbr'] != 0 ) {
-				$lt++;
-				$T['Content'][$CurrentTab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('end_date');						
-				$T['Content'][$CurrentTab][$lt]['2']['cont'] = $bts->TimeObj->timestampToDate($itd['end_date']['inst_nbr']);	
-			}
-			
+			$T['Content'][$CurrentTab][$lt]['1']['cont'] = "<span style='visibility:hidden' id='installStateEnded'>".$bts->I18nTransObj->getI18nTransEntry('installStateEnded')."</span>";
+			$T['Content'][$CurrentTab][$lt]['2']['cont'] = "<span style='visibility:hidden' id='installDuration'></span>";
+			$lt++;
+
+
 			$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 1;
 			
 			$Content .= $bts->RenderTablesObj->render($infos, $T)."</div>\r";

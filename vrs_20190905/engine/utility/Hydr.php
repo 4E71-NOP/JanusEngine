@@ -443,7 +443,7 @@ class Hydr {
 				switch ($this->authentificationAction) {
 					case USER_ACTION_DISCONNECT :
 						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : disconnect submitted") );
-						 $bts->SMObj->InitializeSession();
+						$bts->SMObj->InitializeSession();
 						$userName = ANONYMOUS_USER_NAME;
 						break;
 					case USER_ACTION_SIGN_IN :
@@ -460,7 +460,7 @@ class Hydr {
 			case "session" :
 				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with session mode. user_login='" . $bts->SMObj->getSessionEntry ( 'user_login' ) . "'") );
 				
-		// 		Assuming a session is valid (whatever it's 'anonymous' or someone else).
+				// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 				if (strlen ( $bts->SMObj->getSessionEntry ( 'user_login' ) ) == 0) {
 					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION strlen(user_login)=0") );
 				}
@@ -469,7 +469,7 @@ class Hydr {
 					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : session mode : " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
 					$bts->AUObj->checkUserCredential ( $UserObj, 'session' );
 				} else {
-		// 			No form then no user found it's defintely an anonymous user
+					// No form then no user found it's defintely an anonymous user
 					$bts->SMObj->InitializeSession();
 					$UserObj->resetUser ();
 					$UserObj->getDataFromDB ( 'anonymous', $WebSiteObj );

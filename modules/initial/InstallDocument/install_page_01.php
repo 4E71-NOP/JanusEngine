@@ -145,14 +145,14 @@ class InstallPage01 {
 		$GeneratedScriptObj->insertString('JavaScript-Data' , " var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
 
 		// --------------------------------------------------------------------------------------------
-		$SessionID = floor ( $bts->TimeObj->getMicrotime() );
+		$installToken = floor ( $bts->TimeObj->getMicrotime() );
 		
 		$SB = array();
 		$SB['id']				= "bouton_install_p1";
 		$SB['type']				= "button";
 		$SB['initialStyle']		= $Block."_submit_s2_n";
 		$SB['hoverStyle']		= $Block."_submit_s3_h";
-		$SB['onclick']			= "li.checkFormAndPost( ListeChamps , '".$CurrentSetObj->getDataEntry ('language')."' , '".$SessionID."')";
+		$SB['onclick']			= "li.checkFormAndPost( ListeChamps , '".$CurrentSetObj->getDataEntry ('language')."' , '".$installToken."')";
 		$SB['message']			= $bts->I18nTransObj->getI18nTransEntry('bouton');
 		$SB['mode']				= 1;
 		$SB['size'] 			= 256;
@@ -173,7 +173,7 @@ class InstallPage01 {
 		</table>\r
 		</div>
 		<input type='hidden' name='PageInstall' value='2'>\r
-		<input type='hidden' name='InstallToken' value='".$SessionID."'>\r
+		<input type='hidden' name='installToken' value='".$installToken."'>\r
 		<input type='hidden' name='l' value='".$CurrentSetObj->getDataEntry ('language')."'>\r
 				
 		</form>\r

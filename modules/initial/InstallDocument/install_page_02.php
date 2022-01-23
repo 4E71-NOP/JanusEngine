@@ -143,6 +143,7 @@ class InstallPage02 {
 		$this->processFileRenderConfigFile();
 
 		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");
+		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'installationFinished';");
 		
 		// --------------------------------------------------------------------------------------------
 		$CurrentTab = 1;
@@ -323,6 +324,7 @@ class InstallPage02 {
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
 		$bts->CMObj->setConfigurationEntry('operantingMode', $this->form['operantingMode'] );
 
+		// ***quality*** Revoir ce bout de tableau... n'a pas l'air de servir 
 		$bts->CMObj->setConfigurationEntry('db',
 			array(
 				"type"						=> $this->form['selectedDataBaseType'],
@@ -343,7 +345,7 @@ class InstallPage02 {
 
 		$bts->CMObj->setConfigurationEntry('type',					$this->form['selectedDataBaseType']);
 		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
-		$bts->CMObj->setConfigurationEntry('dal',					$this->form['selectedDataBaseType']);
+		$bts->CMObj->setConfigurationEntry('dal',					$this->form['dal']);
 		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['dataBaseHostingPrefix'].$this->form['dataBaseAdminUser'] );
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);
@@ -519,7 +521,7 @@ class InstallPage02 {
 				"FLUSH TABLES;",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$this->installationStartTime."' WHERE inst_name = 'start_date';",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';",
-				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('InstallToken')."' WHERE inst_name = 'InstallToken';",
+				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->RequestDataObj->getRequestDataEntry('installToken')."' WHERE inst_name = 'installToken';",
 				"UPDATE ".$SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'display';",
 				"COMMIT;",
 		);
