@@ -52,6 +52,10 @@ class InstallDocument {
 				include ($infos['module']['module_directory']."/install_page_02.php");
 				$pageInstallObj = InstallPage02::getInstance();
 				break;
+			case "3" :
+				include ($infos['module']['module_directory']."/install_page_03.php");
+				$pageInstallObj = InstallPage03::getInstance();
+				break;
 		}
 		$DocContent .= $pageInstallObj->render($infos);
 		$DocContent .= "</div>\r</div>\r";

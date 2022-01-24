@@ -587,7 +587,7 @@ $GeneratedScriptObj->insertString('JavaScript-Data' , " var AlertCheckFormValues
 
 // --------------------------------------------------------------------------------------------
 
-$installToken = floor ( $bts->TimeObj->microtime_chrono() );
+$installToken = floor ( $bts->TimeObj->getMicrotime() );
 
 $SB = array();
 $SB['id']				= "bouton_install_p1";

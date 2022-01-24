@@ -151,9 +151,9 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 	case "create":
 		$commandType = "add";
 		
-		$d = $bts->TimeObj->microtime_chrono();
+		$d = $bts->TimeObj->getMicrotime();
 		$e = $bts->TimeObj->timestampToDate($d);
-// 		$d = $bts->TimeObj->timestampToDate( $bts->TimeObj->microtime_chrono());
+// 		$d = $bts->TimeObj->timestampToDate( $bts->TimeObj->getMicrotime());
 				
 		$currentArticleObj->setArticle(
 				array (

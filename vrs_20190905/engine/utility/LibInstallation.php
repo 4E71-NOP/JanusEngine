@@ -34,7 +34,7 @@ class LibInstallation {
 	public function scanDirectories ( &$infos ) {
 		// $LMObj = LogManagement::getInstance();
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Begin"));
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		
 		foreach ( $infos['directory_list'] as &$A ) {
 			$currentDir = $A['name'];
@@ -422,65 +422,6 @@ class LibInstallation {
 		// 99993
 		foreach ( $Map as $K => $A ) {
 		}
-	}
-	
-	/**
-	 * Return a template of a config file. 
-	 * @param array $infos
-	 * @return string
-	 */
-	public function renderConfigFile (&$infos) {
-		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
-
-// 		$CurrentSetObj = CurrentSet::getInstance();
-		$Content = "
-<?php
-/*Hydre-licence-begin*/
-// --------------------------------------------------------------------------------------------
-//
-//	Hydre - Le petit moteur de web
-//	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
-//	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
-//
-// --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
-//	This config file has been generated.
-//	Date		:	".$bts->TimeObj->timestampToDate($bts->TimeObj->microtime_chrono())."
-//	Filename	:	site_".$infos['n']."_config.php
-//	
-//	
-// You may need to insert the 'account prefix' depending on web hosters.
-// ex DB = <user>_yourdatabase
-
-function returnConfig () {
-	\$tab = array();
-	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
-	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
-	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";						// MYSQLI , PDOMYSQL
-	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin')."\";
-	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword')."\";
-	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
-	\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
-	\$tab['SessionMaxAge']	= (60*60*24);
-	
-	\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
-	\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
-	\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
-	\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
-	
-	\$tab['execution_context']		= \"render\";
-	\$tab['InsertStatistics']		= 1;
-	\$tab['commandLineEngine'] = array(
-			\"state\"		=>	\"enabled\",
-	);
-	return \$tab;
-}
-
-?>
-";
-	
-	return $Content;
 	}
 	
 	//@formatter:off

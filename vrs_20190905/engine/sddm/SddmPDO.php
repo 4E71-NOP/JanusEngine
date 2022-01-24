@@ -35,7 +35,7 @@ class SddmPDO {
 		
 		$TabConfig = $bts->CMObj->getConfiguration();
 		$bts->LMObj->getInternalLog($bts->CMObj->toStringConfiguration());
-		$SQL_temps_depart = $bts->TimeObj->microtime_chrono ();
+		$SQL_temps_depart = $bts->TimeObj->getMicrotime ();
 		
 		$dsn = 
 		"mysql:host=".$TabConfig['host'].
@@ -64,7 +64,7 @@ class SddmPDO {
 			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
 			$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
 			$SQLlogEntry['signal'] = "ERR";
-			$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono() ) );
+			$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime() ) );
 			$this->errorMsg();
 			$msg = "CONNEXION ERROR : "."err_no" . $this->DBInstance->errorCode().", err_msg" . $this->DBInstance->errorInfo();
 			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
@@ -84,9 +84,9 @@ class SddmPDO {
 	 */
 	public function query($q) {
 		$bts = BaseToolSet::getInstance();
-		$timeBegin = $bts->TimeObj->microtime_chrono();
+		$timeBegin = $bts->TimeObj->getMicrotime();
 		
-		$SQL_temps_depart = $bts->TimeObj->microtime_chrono ();
+		$SQL_temps_depart = $bts->TimeObj->getMicrotime ();
 		$bts->LMObj->increaseSqlQueryNumber();
 		$db_result = $this->DBInstance->query($q);
 		$SQLlogEntry = array();
@@ -101,7 +101,7 @@ class SddmPDO {
 		}
 		
 		if ($bts->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $bts->LMObj->IncreaseSqlQueries(); }
-		$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->microtime_chrono () ) );
+		$bts->LMObj->logSQLDetails ( array ( $SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime () ) );
 		
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation" :
@@ -117,7 +117,7 @@ class SddmPDO {
 								$q,
 								$SQLlogEntry['err_no_expr'],
 								$SQLlogEntry['err_msg'],
-								$bts->TimeObj->microtime_chrono(),
+								$bts->TimeObj->getMicrotime(),
 						)
 						);
 				

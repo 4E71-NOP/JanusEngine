@@ -139,23 +139,26 @@ class LibInstallationReport {
 	/**
 	 * renderPerfomanceReport
 	 */
-	public function renderPerfomanceReport () {
+	public function renderPerfomanceReport ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		// $Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$SQLQueries = 0;
+		$memoryUsed = 0;
+		$RamB4 = 0;
 		$Content = array();
 		
-		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');	$Content['1']['1']['class'] = $Block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');	$Content['1']['2']['class'] = $Block."_tb3";
-		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');	$Content['1']['3']['class'] = $Block."_tb3";	$Content['1']['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');	$Content['1']['4']['class'] = $Block."_tb3";	$Content['1']['1']['4']['style'] = "text-align: center;";
-		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');	$Content['1']['5']['class'] = $Block."_tb3";	$Content['1']['1']['5']['style'] = "text-align: center;";
-// 		$Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');	$Content['1']['6']['class'] = $Block."_tb3";
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');
+		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');
+		// $Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
-		$sg['TempsMin'] = $bts->TimeObj->microtime_chrono();
+		$sg['TempsMin'] = $bts->TimeObj->getMicrotime();
 		$sg['TempsMax'] = 0;
 		
 		$TableStats = $bts->LMObj->getStatisticsLog();
@@ -178,16 +181,15 @@ class LibInstallationReport {
 			$A['TempsCheckpoint'] =  round ($A['temps'] - $sg['TempsMin'], 4 );
 			$sg['tempsAV'] = $A['temps'];
 			
-			$A['MemoireSegment'] = ( $A['memoire'] - $pv['mem_b4'] );
-			$pv['mem_b4'] = $A['memoire'];
+			$A['MemoireSegment'] = ( $A['memoire'] - $RamB4 );
+			$RamB4 = $A['memoire'];
 			
-			$Content[$i]['1']['cont'] = $A['position'];																	$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
-			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['2']['tc'] = 1;
-			$Content[$i]['3']['cont'] = $A['TempsPerf'];																$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";
-			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
-			$Content[$i]['5']['cont'] = $A['SQL_queries'];																$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
-// 			$Content[$i]['6']['cont'] = $A['context'];																	$Content[$i]['6']['tc'] = 1;
-// 			error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
+			$Content[$i]['1']['cont'] = $A['position'];																	$Content[$i]['1']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['3']['cont'] = $A['TempsPerf'];																$Content[$i]['3']['style'] = "text-align: center;";
+			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['style'] = "text-align: center;";
+			$Content[$i]['5']['cont'] = $A['SQL_queries'];																$Content[$i]['5']['style'] = "text-align: center;";
+			// $Content[$i]['6']['cont'] = $A['context'];																	
+			// error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
 
 			$SQLQueries += $A['SQL_queries'];
 			$memoryUsed += $A['MemoireSegment'];
@@ -198,11 +200,11 @@ class LibInstallationReport {
 		$timeSpent = round ($tLast - $t0, 4);
 		
 		$memoryUsed = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $memoryUsed);
-		$Content[$i]['1']['cont'] = "";								$Content[$i]['1']['tc'] = 1;	$Content[$i]['1']['style'] = "text-align: center;";
-		$Content[$i]['2']['cont'] = "";								$Content[$i]['2']['tc'] = 1;
-		$Content[$i]['3']['cont'] = $timeSpent;						$Content[$i]['3']['tc'] = 1;	$Content[$i]['3']['style'] = "text-align: center;";
-		$Content[$i]['4']['cont'] = $memoryUsed;					$Content[$i]['4']['tc'] = 1;	$Content[$i]['4']['style'] = "text-align: center;";
-		$Content[$i]['5']['cont'] = $SQLQueries;					$Content[$i]['5']['tc'] = 1;	$Content[$i]['5']['style'] = "text-align: center;";
+		$Content[$i]['1']['cont'] = "";				$Content[$i]['1']['style'] = "text-align: center;";
+		$Content[$i]['2']['cont'] = "";				
+		$Content[$i]['3']['cont'] = $timeSpent;		$Content[$i]['3']['style'] = "text-align: center;";
+		$Content[$i]['4']['cont'] = $memoryUsed;	$Content[$i]['4']['style'] = "text-align: center;";
+		$Content[$i]['5']['cont'] = $SQLQueries;	$Content[$i]['5']['style'] = "text-align: center;";
 		
 		$config = array(
 				"NbrOfLines" => $i,
@@ -212,6 +214,66 @@ class LibInstallationReport {
 		$package = array ("content" => $Content , "config" => $config);
 		return $package ;
 	}
+
+	/**
+	 * Return a template of a config file. 
+	 * @param array $infos
+	 * @return string
+	 */
+	public function renderConfigFile (&$infos) {
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
+
+// 		$CurrentSetObj = CurrentSet::getInstance();
+		$Content = "
+<?php
+/*Hydre-licence-begin*/
+// --------------------------------------------------------------------------------------------
+//
+//	Hydr
+//	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
+//	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
+//
+// --------------------------------------------------------------------------------------------
+/*Hydre-licence-fin*/
+//	This config file has been generated.
+//	Date		:	".$bts->TimeObj->timestampToDate($bts->TimeObj->getMicrotime())."
+//	Filename	:	site_".$infos['n']."_config.php
+//	
+//	
+// You may need to insert the 'account prefix' depending on web hosters.
+// ex DB = <user>_yourdatabase
+
+function returnConfig () {
+	\$tab = array();
+	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
+	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
+	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";
+	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin')."\";
+	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword')."\";
+	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
+	\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
+	\$tab['SessionMaxAge']	= (60*60*24);
+	
+	\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
+	\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
+	\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
+	\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
+	
+	\$tab['execution_context']		= \"render\";
+	\$tab['InsertStatistics']		= 1;
+	\$tab['commandLineEngine'] = array(
+			\"state\"		=>	\"enabled\",
+	);
+	return \$tab;
+}
+
+?>
+";
+	
+	return $Content;
+	}
+
 
 
 }

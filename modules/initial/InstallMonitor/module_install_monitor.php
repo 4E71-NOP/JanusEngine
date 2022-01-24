@@ -87,7 +87,27 @@ class InstallMonitor {
 
 			$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$CurrentTab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$CurrentTab]['TableCaptionPos'] = 1;
 			
-			$Content .= $bts->RenderTablesObj->render($infos, $T)."</div>\r";
+			$Content .= $bts->RenderTablesObj->render($infos, $T);
+			
+			$Content .= "
+			<br>\r
+			<div id='btnInstallReport' style='margin:auto; display:block; visibility:hidden;'>\r
+			";
+
+			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+				$infos , 'button', 
+				$bts->I18nTransObj->getI18nTransEntry('monitorBtnReport'), 192, 
+				'goToInstallReport', 
+				1, 1, 
+				"li.makeFormInstallReport()" 
+			);
+			$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
+			$Content .= "
+			</div>\r
+			<form id='formInstallReport' ACTION='install.php' method='post'>\r
+			</form>\r
+			</div>\r";
+
 		}
 	
 		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {

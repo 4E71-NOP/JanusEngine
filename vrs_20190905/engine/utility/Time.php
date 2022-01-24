@@ -33,7 +33,7 @@ class Time {
 	 * @deprecated
 	 * @return mixed
 	 */
-	public function microtime_chrono() {
+	public function micro_time_chrono() {
 		return microtime ( TRUE );
 	}
 

@@ -111,6 +111,9 @@ class LibMonitorInstall {
 			elm.Gebi('installDuration').innerHTML = (data.end_date - data.start_date)+"s";
 			elm.Gebi('installDuration').style.visibility = 'visible';
 			elm.Gebi('installDuration').style.display = 'block';
+			
+			elm.Gebi('btnInstallReport').style.visibility = 'visible';
+			
 
 			l.Log[this.dbgMonitorFonction]('installation finished => clearInterval');
 			clearInterval(this.monitorSentinel);

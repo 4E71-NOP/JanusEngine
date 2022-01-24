@@ -950,7 +950,7 @@ class Hydr {
 		
 		$bts->LMObj->logCheckpoint ( "index_before_stat" );
 		$bts->MapperObj->RemoveThisLevel ( "/ idx" );
-		$CurrentSetObj->setDataSubEntry ( 'timeStat', 'end', $bts->TimeObj->microtime_chrono () ); // We get time for later use in the stats.
+		$CurrentSetObj->setDataSubEntry ( 'timeStat', 'end', $bts->TimeObj->getMicrotime () ); // We get time for later use in the stats.
 		
 		$bts->LMObj->setStoreStatisticsStateOff ();
 		// --------------------------------------------------------------------------------------------

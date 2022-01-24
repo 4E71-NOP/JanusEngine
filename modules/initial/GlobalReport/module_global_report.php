@@ -331,7 +331,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		
 		$sg['MemoireMax'] = 0;
 		$sg['MemoireMin'] = 1000;
-		$sg['TempsMin'] = $bts->TimeObj->microtime_chrono(); 
+		$sg['TempsMin'] = $bts->TimeObj->getMicrotime(); 
 		$sg['TempsMax'] = 0;
 		
 		$TableStats = $bts->LMObj->getStatisticsLog();

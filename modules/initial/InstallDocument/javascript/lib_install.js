@@ -72,7 +72,7 @@ class LibInstall {
 	}
 
 	/**
-	 * 
+	 * selectMenuBuilder
 	 * @param {*} MSObj2 
 	 * @param {*} Table 
 	 */
@@ -96,7 +96,7 @@ class LibInstall {
 	}
 
 	/**
-	 * 
+	 * setFormPreconizedSettings
 	 */
 	setFormPreconizedSettings() {
 		var memory = 16;
@@ -127,13 +127,13 @@ class LibInstall {
 	}
 	
 	/**
-	 * 
+	 * checkFormAndPost
 	 * @param {*} Tab 
 	 * @param {*} Lang 
 	 * @param {*} installToken 
 	 */
 	checkFormAndPost ( Tab , Lang , installToken ) {
-	//	var FormName = 'install_page_init';
+		var FormName = 'install_page_init';
 		var stop = 0;
 		for ( var i in Tab ) { Tab[i].err = 0; }
 		for ( var i in Tab ) {
@@ -204,7 +204,47 @@ class LibInstall {
 	}
 
 	/**
-	 * 
+	 * makeFormInstallReport
+	 */
+	makeFormInstallReport () {
+		let f = document.forms['formInstallReport'];
+		let FormName = 'install_page_init';
+		var inputElm;
+		for ( let ptr in this.installFieldList ) {
+			inputElm = document.createElement("input");
+			inputElm.setAttribute('type', 'hidden');
+			if (this.installFieldList[ptr] == 'PageInstall') {
+				inputElm.setAttribute('name', 'PageInstall');
+				inputElm.setAttribute('value', '3');
+			}
+			else {
+				inputElm.setAttribute('name', this.installFieldList[ptr]);
+				inputElm.setAttribute('value', document.forms[FormName].elements[this.installFieldList[ptr]].value);
+			}
+			f.appendChild(inputElm);
+		}
+
+		// Adding directory list
+		let i = 1 ;
+		inputElm = document.createElement("input");
+		inputElm.setAttribute('type', 'hidden');
+		inputElm.setAttribute('name', 'directory_list['+i+']');
+		inputElm.setAttribute('value', '00_Hydre');
+		f.appendChild(inputElm);
+		i++;
+		for ( let ptr in DirectoryNameList ) {
+			inputElm = document.createElement("input");
+			inputElm.setAttribute('type', 'hidden');
+			inputElm.setAttribute('name', 'directory_list['+i+']');
+			inputElm.setAttribute('value', DirectoryNameList[ptr]);
+			f.appendChild(inputElm);
+			i++;
+		}
+		document.forms['formInstallReport'].submit();
+	}
+
+	/**
+	 * createRandomPassword
 	 * @param {*} Len 
 	 * @returns 
 	 */
@@ -219,7 +259,7 @@ class LibInstall {
 	}
 	
 	/**
-	 * 
+	 * insertValue
 	 * @param {*} val 
 	 * @param {*} form 
 	 * @param {*} list 
