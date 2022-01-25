@@ -354,8 +354,7 @@ class InstallPage01 {
 		$SB['size'] 			= 128;
 		$SB['lastSize']			= 128;
 		
-		$pv['div_cnx_db'] = "
-			<input type='text' readonly disable name='form[TestCnxString]' size='40' maxlength='255' value=''><br>\r";
+		$pv['div_cnx_db'] = "<input type='text' readonly disable name='form[TestCnxString]' size='40' maxlength='255' value=''><br>\r";
 		
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_tstcnx');
 		$T[$t][$l]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);

@@ -183,5 +183,7 @@ Make sure it's on the server. Make sure you edit it carfully. And make sure 'All
 
 	"JavaScriptI18nDbCnxAlert"	=>	"The database test isn't ok. Please make sure the DB is accessible and test it with the button in the form.",
 
+	"REPORT_badToken"	=>	"Bad installation token."
+
 );
 ?>

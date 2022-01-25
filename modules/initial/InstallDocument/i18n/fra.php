@@ -181,6 +181,7 @@ Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer a
 	't9c6' => "F",
 
 	"JavaScriptI18nDbCnxAlert"	=>	"Le test d'accès à la BDD n'est pas bon. Merci de vous assurer de l'accès à la base de donnée depuis le formulaire avec le bouton dédié.",
+	"REPORT_badToken"	=>	"Le jeton d'installation n'est pas le bon."
 
 );
 ?>
