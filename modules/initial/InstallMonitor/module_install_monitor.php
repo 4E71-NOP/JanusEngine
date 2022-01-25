@@ -34,7 +34,7 @@ class InstallMonitor {
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 
 		// --------------------------------------------------------------------------------------------
-		$$Content .= "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('title')."</h1>\r";
+		$Content = "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('title')."</h1>\r";
 		$CurrentTab = 1;
 		$lt = 1;
 		

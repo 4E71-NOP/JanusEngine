@@ -75,11 +75,13 @@ $i18n = array(
 
 	'DB_password'	=> "Password",
 
-	'DB_tstcnx'		=> "Test the database connexion",
-	'DB_tstcnxAok'	=> "The database connection suceeded.",
-	'DB_tstcnxAko'	=> "The database connection failed.",
-	'DB_tstcnxBok'	=> "WARNING A Hydr database has been found. The install process will erase this DB if you continue. Change the DB name if you want to keep the existing DB.",
-	'DB_tstcnxBko'	=> "Hydr database not found.",
+	'DB_tstcnx'					=>	"Test the database connexion",
+	'DB_cnxToDBok'				=>	"The database connection suceeded.",
+	'DB_cnxToDBko'				=>	"The database connection failed.",
+	'DB_HydrDBAlreadyExistok'	=>	"WARNING! A Hydr database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
+	'DB_HydrDBAlreadyExistko'	=>	"Hydr database not found.",
+	"DB_installationLockedok"	=>	"No lock found",
+	"DB_installationLockedko"	=>	"The installation is <b>locked!</b> The program will NOT install with these parameters unless the lock is removed.",
 
 	// Method
 	'MTH_intro'		=> "There are two ways to install Hydr. This method ease installation on a bigger number of plateforms.<br>\r<br>\r",
@@ -178,6 +180,8 @@ Make sure it's on the server. Make sure you edit it carfully. And make sure 'All
 	't9c4' => "D",
 	't9c5' => "E",
 	't9c6' => "F",
+
+	"JavaScriptI18nDbCnxAlert"	=>	"The database test isn't ok. Please make sure the DB is accessible and test it with the button in the form.",
 
 );
 ?>

@@ -126,23 +126,24 @@ class InstallPage01 {
 		$Content .= $bts->RenderTablesObj->render($infos, $this->T);
 
 		// --------------------------------------------------------------------------------------------
-		$pv['ListeChamps']['0']['id'] = 'form[host]';					$pv['ListeChamps']['0']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls0');	$pv['ListeChamps']['0']['err'] = 0;
-		$pv['ListeChamps']['1']['id'] = 'form[dataBaseAdminUser]';		$pv['ListeChamps']['1']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls1');	$pv['ListeChamps']['1']['err'] = 0;
-		$pv['ListeChamps']['2']['id'] = 'form[dataBaseAdminPassword]';	$pv['ListeChamps']['2']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls2');	$pv['ListeChamps']['2']['err'] = 0;
-		$pv['ListeChamps']['3']['id'] = 'form[dbprefix]';				$pv['ListeChamps']['3']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls3');	$pv['ListeChamps']['3']['err'] = 0;
-		$pv['ListeChamps']['4']['id'] = 'form[dataBaseUserLogin]';		$pv['ListeChamps']['4']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls4');	$pv['ListeChamps']['4']['err'] = 0;
-		$pv['ListeChamps']['5']['id'] = 'form[dataBaseUserPassword]';	$pv['ListeChamps']['5']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls5');	$pv['ListeChamps']['5']['err'] = 0;
-		$pv['ListeChamps']['6']['id'] = 'form[websiteUserPassword]';	$pv['ListeChamps']['6']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls6');	$pv['ListeChamps']['6']['err'] = 0;
+		$pv['checkFieldList']['0']['id'] = 'form[host]';					$pv['checkFieldList']['0']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls0');	$pv['checkFieldList']['0']['err'] = 0;
+		$pv['checkFieldList']['1']['id'] = 'form[dataBaseAdminUser]';		$pv['checkFieldList']['1']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls1');	$pv['checkFieldList']['1']['err'] = 0;
+		$pv['checkFieldList']['2']['id'] = 'form[dataBaseAdminPassword]';	$pv['checkFieldList']['2']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls2');	$pv['checkFieldList']['2']['err'] = 0;
+		$pv['checkFieldList']['3']['id'] = 'form[dbprefix]';				$pv['checkFieldList']['3']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls3');	$pv['checkFieldList']['3']['err'] = 0;
+		$pv['checkFieldList']['4']['id'] = 'form[dataBaseUserLogin]';		$pv['checkFieldList']['4']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls4');	$pv['checkFieldList']['4']['err'] = 0;
+		$pv['checkFieldList']['5']['id'] = 'form[dataBaseUserPassword]';	$pv['checkFieldList']['5']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls5');	$pv['checkFieldList']['5']['err'] = 0;
+		$pv['checkFieldList']['6']['id'] = 'form[websiteUserPassword]';		$pv['checkFieldList']['6']['name'] = $bts->I18nTransObj->getI18nTransEntry('ls6');	$pv['checkFieldList']['6']['err'] = 0;
 		
-		$pv['JSONListeChamps'] = "var ListeChamps = { \r";
+		$pv['JSONcheckFieldList'] = "var checkFieldList = { \r";
 		$i = 0;
-		foreach ( $pv['ListeChamps'] as $A ) {
-			$pv['JSONListeChamps'] .= "'".$i."' : { 'id':'".$A['id']."', 'name':'".$A['name']."', 'err':'0' },\r";
+		foreach ( $pv['checkFieldList'] as $A ) {
+			$pv['JSONcheckFieldList'] .= "\t'".$i."' : { 'id':'".$A['id']."', 'name':'".$A['name']."', 'err':false },\r";
 			$i++;
 		}
-		$pv['JSONListeChamps'] = substr ( $pv['JSONListeChamps'] , 0 , -2 ) . "}; ";
-		$GeneratedScriptObj->insertString('JavaScript-Data' , $pv['JSONListeChamps']);
-		$GeneratedScriptObj->insertString('JavaScript-Data' , " var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."'");
+		$pv['JSONcheckFieldList'] = substr ( $pv['JSONcheckFieldList'] , 0 , -2 ) . "\r}; ";
+		$GeneratedScriptObj->insertString('JavaScript-Data' , $pv['JSONcheckFieldList']);
+		$GeneratedScriptObj->insertString('JavaScript-Data' , "var AlertCheckFormValues = '". $bts->I18nTransObj->getI18nTransEntry('avcf') ."';\r");
+		$GeneratedScriptObj->insertString('JavaScript-Data' , "var JavaScriptI18nDbCnxAlert = \"". $bts->I18nTransObj->getI18nTransEntry('JavaScriptI18nDbCnxAlert') ."\";\r");
 
 		// --------------------------------------------------------------------------------------------
 		$installToken = floor ( $bts->TimeObj->getMicrotime() );
@@ -152,7 +153,7 @@ class InstallPage01 {
 			$bts->I18nTransObj->getI18nTransEntry('bouton'), 256, 
 			'bouton_install_p1', 
 			2, 3, 
-			"li.checkFormAndPost( ListeChamps , '".$CurrentSetObj->getDataEntry ('language')."' , '".$installToken."')"
+			"li.checkFormAndPost( checkFieldList )"
 		);
 
 		$Content .= "
@@ -290,17 +291,14 @@ class InstallPage01 {
 		unset ($tab_);
 		$tab_[$bts->CMObj->getConfigurationEntry('type')] = " selected ";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_type');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select id='form[selectedDataBaseType]' name='form[selectedDataBaseType]'>\r
 		</select>\r
 		";
-		// <option value='mysql'	".$tab_['mysql'].">MySQL 3.x/4.x/5.x</option>\r
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_typeInf')."</span>";
 		$l++;
 		
 		// Hosting plan
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_hosting');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		
 		$T[$t][$l]['3']['cont'] = "<select name='form[dataBaseHostingProfile]'>\r
 		<option value='absolute'>".$bts->I18nTransObj->getI18nTransEntry('dbp_asolute')."</option>\r
@@ -312,7 +310,6 @@ class InstallPage01 {
 		
 		// DB Server
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_server');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_serverInf');
 		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[host]' size='20' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('host')."'>";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_serverInf')."</span>";
 		$l++;
@@ -340,12 +337,10 @@ class InstallPage01 {
 		
 		// Password
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_password');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<input type='password' name='form[dataBaseAdminPassword]' id='form[dataBaseAdminPassword]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_password')."'><br>"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[dataBaseAdminPassword]').type = 'text';\" onmouseup=\"elm.Gebi('form[dataBaseAdminPassword]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
-		// $T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c4')."</span>";
 		$l++;
 		
 		
@@ -363,14 +358,17 @@ class InstallPage01 {
 			<input type='text' readonly disable name='form[TestCnxString]' size='40' maxlength='255' value=''><br>\r";
 		
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_tstcnx');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
-		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db'] . "
-			<div id='cnxToDBok'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok')													. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('DB_tstcnxAok')."</div>
-			<div id='cnxToDBko'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok')													. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('DB_tstcnxAko')."</div>
-			<div id='HydrDBAlreadyExistok'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='".$Block._CLASS_TXT_WARNING_."'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification')	. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('DB_tstcnxBok')."</div>
-			<div id='HydrDBAlreadyExistko'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'><img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok')													. "' width='24' height='24' border='0'>".	$bts->I18nTransObj->getI18nTransEntry('DB_tstcnxBko')."</div>
-			";
+		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='".$Block;
+
+		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
+			."<div id='cnxToDBok'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											".$divImgSrc."_icon_ok"				."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok')."</div>"
+			."<div id='cnxToDBko'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											".$divImgSrc."_icon_nok"			."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko')."</div>"
+			."<div id='HydrDBAlreadyExistok'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='".$Block._CLASS_TXT_WARNING_."'>	".$divImgSrc."_icon_notification"	."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistok')."</div>"
+			."<div id='HydrDBAlreadyExistko'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											".$divImgSrc."_icon_ok"				."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistko')."</div>"
+			."<div id='installationLockedok'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'  class='".$Block._CLASS_TXT_ERROR_."'>	".$divImgSrc."_icon_nok"			."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko')."</div>"
+			."<div id='installationLockedko'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											".$divImgSrc."_icon_ok"				."'></div> ".$bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok')."</div>"
+			;
 		
 		$SrvUri = $_SERVER['REQUEST_URI'];
 		$uriCut = strpos( $_SERVER['REQUEST_URI'] , "/Hydr/current/install/install_page_01.php" );

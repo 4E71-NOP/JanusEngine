@@ -14,15 +14,8 @@
 class LibInstall {
 	
 	constructor () { 
-		this.dbgInstFonction = 1;
-		this.testDbFieldList = [ 
-			"form[host]", 
-			"form[dataBaseHostingPrefix]", 
-			"form[dataBaseAdminUser]", 
-			"form[dataBaseAdminPassword]", 
-			"form[dbprefix]", 
-			"form[tabprefix]" 
-		];
+		this.dbgInstFonction = 0;
+
 		this.installFieldList = [ 
 			"form[consoleLogWarning]",
 			"form[consoleLogError]",
@@ -129,23 +122,34 @@ class LibInstall {
 	/**
 	 * checkFormAndPost
 	 * @param {*} Tab 
-	 * @param {*} Lang 
-	 * @param {*} installToken 
 	 */
-	checkFormAndPost ( Tab , Lang , installToken ) {
+	checkFormAndPost ( Tab ) {
 		var FormName = 'install_page_init';
-		var stop = 0;
-		for ( var i in Tab ) { Tab[i].err = 0; }
-		for ( var i in Tab ) {
+		var formValidation = true;
+		var dbDiagnostic = true;
+		var installGo = true;
+
+		for ( let i in Tab ) { Tab[i].err = false; }
+		for ( let i in Tab ) {
+			l.Log[this.dbgInstFonction]("Processing: "+Tab[i].id+"="+document.forms[FormName].elements[Tab[i].id].value);
 			var test = document.forms[FormName].elements[Tab[i].id].value;
-			if ( test.length == 0 ) { stop = 1; Tab[i].err = 1;	}
+			if ( test.length == 0 ) { formValidation = false; installGo = false; Tab[i].err = true;	}
 		}
-	
-		if ( stop == 0 ) { 
-			var DBTypeElm = elm.Gebi("form[selectedDataBaseType]"); 
-			var DBType = DBTypeElm.options[DBTypeElm.selectedIndex].value;
-			var DBTypeElm = elm.Gebi("form[dal]"); 
-			var DBDAL = DBTypeElm.options[DBTypeElm.selectedIndex].value;
+
+		if ( formValidation == false ) { 
+			let ErrorDesc = '';
+			for ( let i in Tab ) {
+				if ( Tab[i].err == true ) { ErrorDesc += "-> "+ Tab[i].name + '\n'; }
+			}
+			window.alert ( AlertCheckFormValues + ErrorDesc );
+		}
+
+		l.Log[this.dbgInstFonction]("Processing: tdb.resultTest.cnxToDB="+tdb.resultTest.cnxToDB+"; tdb.resultTest.installationLocked="+tdb.resultTest.installationLocked);
+		if ( tdb.resultTest.cnxToDB == false) { dbDiagnostic = false; installGo = false;}
+		if ( tdb.resultTest.installationLocked == true ) { dbDiagnostic = false; installGo = false;}
+		if ( dbDiagnostic == false ) { window.alert ( JavaScriptI18nDbCnxAlert ); }
+		
+		if ( installGo == true ) { 
 			var URLamp = "&";
 
 			let ajaxPost = false;
@@ -193,13 +197,6 @@ class LibInstall {
 				mi.startInterval();
 			}
 			else { document.forms['install_page_init'].submit(); }
-		}
-		else { 
-			var ErrorDesc = '';
-			for ( var j in Tab ) {
-				if ( Tab[j].err == 1 ) { ErrorDesc += "-> "+ Tab[j].name + '\n'; }
-			}
-			window.alert ( AlertCheckFormValues + ErrorDesc ); 
 		}
 	}
 
