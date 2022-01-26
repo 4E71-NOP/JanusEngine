@@ -58,13 +58,14 @@ $bts->I18nTransObj->apply(
 );
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('url_bypass') . "
-<p style='text-align:center'><a href='".
-$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
-"index.php?"._HYDRLINKURLTAG_."=1".
-"&arti_slug=admin-authentification"
-."&arti_page=1'>".$bts->I18nTransObj->getI18nTransEntry('url_bypass_name')."
-</a>
-</p>
+<p style='text-align:center;'>
+<br>\r
+<a href='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url').
+"index.php?"._HYDRLINKURLTAG_."=1&arti_slug=admin-authentification&arti_page=1' 
+style='background-color:#FF800080; border-radius:0.5cm; padding:0.5cm'
+>\r".$bts->I18nTransObj->getI18nTransEntry('url_bypass_name')."
+</a>\r
+</p>\r
 <br>\r
 <br>\r
 <hr>\r
