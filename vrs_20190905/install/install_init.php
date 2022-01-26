@@ -235,16 +235,16 @@ class HydrInstall {
 		$RenderModuleObj = RenderModule::getInstance ();
 
 		// Monitor or Install screens
-		if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is an install page") );
-			$ModuleLisObj->makeInstallModuleList();
-			$ContentFragments = $LayoutProcessorObj->installRender('install.lyt.html');
-		}
-		else { 
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );
-			$ModuleLisObj->makeMonitorModuleList(); 
-			$ContentFragments = $LayoutProcessorObj->installRender('install_monitor.lyt.html');
-		}
+		// if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
+		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is an install page") );
+		$ModuleLisObj->makeInstallModuleList();
+		$ContentFragments = $LayoutProcessorObj->installRender('install.lyt.html');
+		// }
+		// else { 
+		// 	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );
+		// 	$ModuleLisObj->makeMonitorModuleList(); 
+		// 	$ContentFragments = $LayoutProcessorObj->installRender('install_monitor.lyt.html');
+		// }
 
 		$LayoutCommands = array(
 			0 => array( "regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),

@@ -251,14 +251,12 @@ class Hydr {
 	
 			// --------------------------------------------------------------------------------------------
 			$bts->SDDMObj->disconnect_sql ();
-			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
-				
+			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");		
 		}
-
 	}
 
 	/**
-	 * 
+	 * prepareAuthProcess
 	 */
 	private function prepareAuthProcess(){
 		$bts = BaseToolSet::getInstance();
@@ -326,6 +324,7 @@ class Hydr {
 				break;
 		}
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState(). ", \$this->authentificationMode=".$this->authentificationMode."; \$this->authentificationAction=".$this->authentificationAction));
+		return (true);
 	}
 	
 	/**
@@ -344,6 +343,7 @@ class Hydr {
 		$bts->CMObj->LoadConfigFile ();
 		$bts->CMObj->setConfigurationEntry ( 'execution_context', "render" );
 		$bts->LMObj->setDebugLogEcho ( 0 );
+		return (true);
 	}
 
 	/**
@@ -380,7 +380,6 @@ class Hydr {
 			return (false);
 		}
 		return (true);
-
 	}
 	
 	/**
@@ -411,6 +410,7 @@ class Hydr {
 				break;
 		}
 		$bts->CMObj->setLangSupport (); // will set support=1 in the languagelist if website supports the language.
+		return (true);
 	}
 
 	/**
@@ -475,16 +475,15 @@ class Hydr {
 					$UserObj->getDataFromDB ( 'anonymous', $WebSiteObj );
 				}
 				break;
-		}
-		
+		}		
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
 		if ($bts->AUObj->getDataEntry ( 'error' ) === TRUE) {
 			$UserObj->getDataFromDB ( "anonymous", $WebSiteObj );
 		}
 		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
-
-	}		
+		return (true);
+	}
 
 	/**
 	 * Sets the language for the page. It chooses by priority.
@@ -552,8 +551,8 @@ class Hydr {
 		$I18nObj = I18nTrans::getInstance ();
 		$I18nObj->getI18nTransFromDB();
 		
-		$bts->LMObj->restoreLastInternalLogTarget ();
-		
+		$bts->LMObj->restoreLastInternalLogTarget ();		
+		return (true);
 	}
 
 	/**
@@ -622,6 +621,7 @@ class Hydr {
 				$WebSiteObj->getDataFromDB ( $id );
 				break;
 		}
+		return (true);
 	}
 
 	/**
@@ -719,7 +719,7 @@ class Hydr {
 		$ClassLoaderObj->provisionClass ( 'Article' );
 		$CurrentSetObj->setInstanceOfArticleObj(new Article());
 		$CurrentSetObj->getInstanceOfArticleObj()->getDataFromDB($CurrentSetObj->getDataSubEntry( 'article', 'arti_id'));
-
+		return (true);
 	}
 
 	/**
@@ -750,6 +750,7 @@ class Hydr {
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	document.title = '".$WebSiteObj->getWebSiteEntry ( 'ws_title' )." - ".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."';");
 		
 		$this->GeneratedScript->insertString('JavaScript-OnResize', "\telm.UpdateWindowSize ('');");
+		return (true);
 	}
 
 	/**
@@ -788,6 +789,7 @@ class Hydr {
 		$this->ThemeDataObj->setThemeName ( $ThemeDescriptorObj->getCssPrefix() );
 		$this->ThemeDataObj->setDecorationListFromDB ();
 		$this->ThemeDataObj->renderBlockData ();
+		return (true);
 	}
 
 	/**
@@ -845,6 +847,7 @@ class Hydr {
 				}
 			}
 		}
+		return (true);
 
 	}
 
@@ -864,6 +867,8 @@ class Hydr {
 
 		$RenderStylesheetObj = RenderStylesheet::getInstance ();
 		$this->stylesheet = $RenderStylesheetObj->render ( "mt_", $this->ThemeDataObj );
+		return (true);
+
 	}
 
 	/**
