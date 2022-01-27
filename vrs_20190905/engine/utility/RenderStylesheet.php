@@ -464,6 +464,9 @@ html { width:100%; height:100%;}\r\r
 		if ( strlen($p['icon_question'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_question",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_question']."); }\r");		}
 		if ( strlen($p['icon_notification'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_notification",	" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$infos['theme_directory']."/".$p['icon_notification']."); }\r");	}
 
+		if ( strlen($p['page_selector'])>0)				{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector",				" { ".$p['page_selector']." }\r");		}
+		if ( strlen($p['page_selector_highlight'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector_highlight",	" { ".$p['page_selector_highlight']." }\r");		}
+
 		// Add title lines (first/last line +  first/last column)
 		return "\r".$Content;
 	}

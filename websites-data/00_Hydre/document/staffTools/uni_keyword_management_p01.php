@@ -57,6 +57,10 @@ $bts->I18nTransObj->apply(
 			"kwType1"		=> "Vers une menu",
 			"kwType2"		=> "Vers une URL",
 			"kwType3"		=> "Tooltip",
+			"pageSelectorQueryLike"		=>	"Filtrer avec",
+			"pageSelectorDisplay"		=>	"Affichage",
+			"pageSelectorNbrPerPage"	=>	"entrées par page",
+			"pageSelectorBtnFilter"		=>	"Filtrer",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to manage keywords.",
@@ -69,24 +73,64 @@ $bts->I18nTransObj->apply(
 			"kwType1"		=> "Link to a menu",
 			"kwType2"		=> "Link to an URL",
 			"kwType3"		=> "Tooltip",
+			"pageSelectorQueryLike"		=>	"Filter with",
+			"pageSelectorDisplay"		=>	"Display",
+			"pageSelectorNbrPerPage"	=>	"entries per page",
+			"pageSelectorBtnFilter"		=>	"Filter",
 		)
 	)
 );
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+// --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+$pageSelectorData['query'] = "";
+$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+
+$pageSelectorData['clauseElements'] = array();
+$pageSelectorData['clauseElements'][] = array("left" => "kw.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
+$pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_state",	"operator" => "=",	"right" => "'1'" );
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
+	$pageSelectorData['clauseElements'][] = array( "left" => "kw.keyword_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+}
+
+$pageSelectorData['query'] = "SELECT"
+." COUNT(kw.keyword_id) AS ItemsCount "
+." FROM "
+.$SqlTableListObj->getSQLTableName('keyword')." kw "
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+.";"
+;
+
+$dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+
+if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+
+	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmOut'] = "</div>";
+	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
+}
 
 // --------------------------------------------------------------------------------------------
 $Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
 
 $clause = "";
 if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
-$dbquery = $bts->SDDMObj->query("
-SELECT *  
-FROM ".$SqlTableListObj->getSQLTableName('keyword')." 
-WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND keyword_state != '2' 
-".$clause." 
-;");
+$dbquery = $bts->SDDMObj->query("SELECT kw.* "
+." FROM "
+.$SqlTableListObj->getSQLTableName('keyword')." kw "
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+." ORDER BY kw.keyword_name"
+." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+.";");
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$i = 1;
@@ -130,47 +174,12 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10 
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
-$Content .= $bts->RenderTablesObj->render($infos, $T);
-
+$Content .= $bts->RenderTablesObj->render($infos, $T)
+."<br>\r"
+.$TemplateObj->renderFilterForm($infos)
+.$TemplateObj->renderAdminCreateButton($infos)
+;
 // --------------------------------------------------------------------------------------------
-
-$Content .= 
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-"<input type='hidden' name='arti_page'	value='2'>\r
-<br>\r
-<table width='100%' cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
-<tr>\r
-<td>\r <input type='text' name='keywordForm[filter]' size='35' maxlength='255' value='".$bts->RequestDataObj->getRequestDataSubEntry('keywordForm','filter')."' class='".$Block."_t3 ".$Block."_form_1'>\r
-</td>\r
-
-<td align='right'>\r";
-$SB = array(
-		"id"				=> "filterButton",
-		"type"				=> "submit",
-		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
-		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-		"onclick"			=> "",
-		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnFilter'),
-		"mode"				=> 1,
-		"size" 				=> 128,
-		"lastSize"			=> 0,
-);
-$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
-$Content .= "</form>\r
-</td>\r
-</tr>\r
-</table>\r
-";
-
-// --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('Template');
-$TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
-
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

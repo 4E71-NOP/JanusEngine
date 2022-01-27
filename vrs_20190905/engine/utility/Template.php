@@ -39,10 +39,6 @@ class Template {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-//		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
-// 		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
-		
 		$Content = "
 			<table style='width:100%; border-spacing: 16px;'>\r
 			<tr>\r
@@ -164,6 +160,9 @@ class Template {
 	}
 	
 	/**
+	 * renderAdminCreateButton
+	 * @param array $infos
+	 * @return string
 	 * 
 	 */
 	public function renderAdminCreateButton (&$infos) {
@@ -213,6 +212,7 @@ class Template {
 		$bts = BaseToolSet::getInstance();
 
 		$Content = "<div style='text-align:center; item-align:center; margin:0 auto;'>\r";
+		if ( strlen($data['selectionOffset']) == 0 ) { $data['selectionOffset'] = 0 ;}
 		if ( $data['nbrPerPage'] != 0 ) {
 			$data['PageNbr'] = $data['ItemsCount'] / $data['nbrPerPage'] ;
 			$data['remainder'] = $data['ItemsCount'] % $data['nbrPerPage'];
@@ -220,8 +220,7 @@ class Template {
 			$data['pageCounter'] = 0;
 			for ( $i = 1 ; $i <= $data['PageNbr'] ; $i++) {
 				if ( $data['selectionOffset'] != $data['pageCounter'] ) {
-					$Content .= ""
-					."<a style='display: inline;' href='"
+					$Content .= "<a style='display:inline;' href='"
 					."index.php?filterForm[selectionOffset]=".$data['pageCounter']
 					.$data['link']
 					."'>"
@@ -231,11 +230,60 @@ class Template {
 					."</a>\r"
 					;
 				}
-				else { $Content .= $data['elmInHighlight'].$i.$data['elmOut']; }
+				else { $Content .= $data['elmInHighlight'].$i.$data['elmOut']."\r"; }
 				$data['pageCounter']++;
 			}
 		}
 		$Content .= "</div>\r";
 		return $Content;
 	}
+
+
+	/**
+	 * renderFilterForm
+	 * @return string
+	 */
+	public function renderFilterForm ($infos) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos , 'submit', 
+			$bts->I18nTransObj->getI18nTransEntry('pageSelectorBtnFilter'), 128, 
+			'refreshButton', 
+			1, 1, 
+			"" 
+		);
+		
+		$Content = "</form>\r
+		<form ACTION='index.php?' method='post'>\r"
+		."<table class='".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
+		."<tr>\r"
+		."<td>".$bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryLike')."</td>\r"
+		."<td><input type='text' name='filterForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."'></td>\r"
+		."</tr>\r"
+
+		."<tr>\r"
+		."<td>".$bts->I18nTransObj->getI18nTransEntry('pageSelectorDisplay')."</td>\r"
+		."<td><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')."'> "
+		.$bts->I18nTransObj->getI18nTransEntry('pageSelectorNbrPerPage')
+		."</td>\r"
+		."</tr>\r"
+		.$infos['insertLines']
+		
+		."<tr>\r"
+		."<td></td>\r"
+		."<td>\r<br>\r"
+		.$bts->InteractiveElementsObj->renderSubmitButton($SB)
+		."</td>\r"
+		."</tr>\r"
+		
+		."</table>\r"
+		."</form>\r"
+		;
+		
+		return $Content;
+	}
+
+
 }

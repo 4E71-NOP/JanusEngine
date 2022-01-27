@@ -71,6 +71,23 @@ class SddmTools {
 		$tab['values'] = substr ($tab['values'], 0,-2);
 		return $tab;
 	}
+
+	/**
+	 * makeQueryClause
+	 * @param array $data
+	 * @return string
+	 */
+	public function makeQueryClause($data){
+		$bts = BaseToolSet::getInstance();
+		$Content = "";
+		$word = "WHERE";
+		foreach( $data as $A ) {
+			$Content .= " ".$word." ".$A['left']." ".$A['operator']." ".$A['right'];
+			$word = "AND";
+		}
+		return ($Content);
+	}
+
 }
 ?>
 

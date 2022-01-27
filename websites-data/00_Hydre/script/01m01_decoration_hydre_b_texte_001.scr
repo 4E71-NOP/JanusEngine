@@ -1,5 +1,5 @@
 add decoration 							
-name	'hydre_texte_001'						
+name	'hydr_text_001'						
 repertoire	'Hydre'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'
@@ -78,18 +78,22 @@ tab_down_a	'aqua_B01_tab_up_a.png'	tab_down_b	'aqua_B01_tab_up_b.png'	tab_down_c
 tab_up_a	'aqua_B01_tab_down_a.png'	tab_up_b	'aqua_B01_tab_down_b.png'	tab_up_c	'aqua_B01_tab_down_c.png'		
 tab_hover_a	'aqua_B01_tab_hover_a.png'	tab_hover_b	'aqua_B01_tab_hover_b.png'	tab_hover_c	'aqua_B01_tab_hover_c.png'		
 							
-icone_repertoire	'aqua_B01_icone_repertoire.png'						
-icone_efface	'aqua_B01_icone_efface.png'						
-icone_gauche	'aqua_B01_icone_fleche_gauche.png'						
-icone_droite	'aqua_B01_icone_fleche_droite.png'						
-icone_haut	'aqua_B01_icone_fleche_haut.png'						
-icone_bas	'aqua_B01_icone_fleche_bas.png'						
-icone_ok	'aqua_B01_icone_ok.png'						
-icone_nok	'aqua_B01_icone_nok.png'						
-icone_question	'aqua_B01_icone_question.png'						
-icone_notification	'aqua_B01_icone_notification.png'						
+icon_directory		'aqua_B01_icon_directory.png'						
+icon_erase			'aqua_B01_icon_erase.png'						
+icon_left			'aqua_B01_icon_left.png'						
+icon_right			'aqua_B01_icon_right.png'						
+icon_top			'aqua_B01_icon_top.png'						
+icon_bottom			'aqua_B01_icon_bottom.png'						
+icon_ok				'aqua_B01_icon_ok.png'						
+icon_nok			'aqua_B01_icon_nok.png'						
+icon_question		'aqua_B01_icon_question.png'						
+icon_notification	'aqua_B01_icon_notification.png'						
+
 transparent_8x8	'vide.gif'						
 							
 icone_dim_x	'32'						
-icone_dim_y	'32'						
+icone_dim_y	'32'
+
+page_selector			"display:inline-block; background-color:#8080FF30; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
+page_selector_highlight	"display:inline-block; background-color:#FFE00080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
 ;

@@ -1,7 +1,7 @@
 add decoration	
 name "hydre_menu_001"	
 graphique	'hydre_block_003'
-texte	'hydre_texte_001'
+texte	'hydr_text_001'
 type "menu"	
 directory	 "Hydre"	
 

@@ -51,6 +51,10 @@ $bts->I18nTransObj->apply(
 			"col_5_txt"		=> "Permission",
 			"col_6_txt"		=> "Panneau d'administration",
 			"tabTxt1"		=> "Informations",
+			"pageSelectorQueryLike"		=>	"Filtrer avec",
+			"pageSelectorDisplay"		=>	"Affichage",
+			"pageSelectorNbrPerPage"	=>	"entrées par page",
+			"pageSelectorBtnFilter"		=>	"Filtrer",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to create a module.",
@@ -62,23 +66,70 @@ $bts->I18nTransObj->apply(
 			"col_5_txt"		=> "Permission",
 			"col_6_txt"		=> "Administration panel",
 			"tabTxt1"		=> "Informations",
+			"pageSelectorQueryLike"		=>	"Filter with",
+			"pageSelectorDisplay"		=>	"Display",
+			"pageSelectorNbrPerPage"	=>	"entries per page",
+			"pageSelectorBtnFilter"		=>	"Filter",
 		)
 	)
 );
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
+// --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+$pageSelectorData['query'] = "";
+$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+
+$pageSelectorData['clauseElements'] = array();
+$pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
+$pageSelectorData['clauseElements'][] = array("left" => "m.module_id",		"operator" => "=",	"right" => "mw.fk_module_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id",		"operator" => "=",	"right" => "p.perm_id" );
+
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
+	$pageSelectorData['clauseElements'][] = array( "left" => "m.module_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+}
+
+$pageSelectorData['query'] = "SELECT"
+." COUNT(m.module_id) AS ItemsCount "
+." FROM "
+.$SqlTableListObj->getSQLTableName('module')." m , "
+.$SqlTableListObj->getSQLTableName('module_website')." mw, "
+.$SqlTableListObj->getSQLTableName('permission')." p"
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+.";"
+;
+
+$dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+
+if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+
+	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmOut'] = "</div>";
+	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
+}
+
+// --------------------------------------------------------------------------------------------
+
+
 $dbquery = $bts->SDDMObj->query(
 "SELECT m.*,p.perm_name"
 ." FROM "
 .$SqlTableListObj->getSQLTableName('module')." m , "
 .$SqlTableListObj->getSQLTableName('module_website')." mw, "
-.$SqlTableListObj->getSQLTableName('permission')." p"
-." WHERE m.module_id = mw.fk_module_id "
-." AND mw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'"
-." AND m.fk_perm_id = p.perm_id"
-." ORDER BY mw.module_position
-;");
+.$SqlTableListObj->getSQLTableName('permission')." p "
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+." ORDER BY m.module_name, mw.module_position "
+." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+.";");
 
 $groupTab = array();
 $table_infos_modules = array();
@@ -147,15 +198,11 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15)
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,6,1),
 );
-$Content .= $bts->RenderTablesObj->render($infos, $T);
-
+$Content .= $bts->RenderTablesObj->render($infos, $T)
+."<br>\r"
+.$TemplateObj->renderFilterForm($infos)
+.$TemplateObj->renderAdminCreateButton($infos)
+;
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('Template');
-$TemplateObj = Template::getInstance();
-$Content .= $TemplateObj->renderAdminCreateButton($infos);
-
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
-
 ?>

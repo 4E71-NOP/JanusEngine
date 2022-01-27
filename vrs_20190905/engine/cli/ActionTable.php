@@ -154,7 +154,7 @@ self::$ActionTable['disable']['keyword']		= function (&$a) { return array ("UPDA
 self::$ActionTable['disable']['layout']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout']		." SET layout_state=0		WHERE layout_id = '"		.$a['params']['id']."';"); };
 self::$ActionTable['disable']['layout_file']	= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout_file']	." SET layout_file_state=0	WHERE layout_file_id = '"	.$a['params']['id']."';"); };
 self::$ActionTable['disable']['menu']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['menu']			." SET menu_state=0			WHERE menu_id = '"			.$a['params']['id']."';"); };
-self::$ActionTable['disable']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=0		WHERE module_id = '"		.$a['params']['id']."';"); };
+//self::$ActionTable['disable']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=0		WHERE module_id = '"		.$a['params']['id']."';"); };
 self::$ActionTable['disable']['permission']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['permission']	." SET permission_state=0	WHERE permission_id = '"	.$a['params']['id']."';"); };
 self::$ActionTable['disable']['tag']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['tag']			." SET tag_state=0			WHERE tag_id = '"			.$a['params']['id']."';"); };
 self::$ActionTable['disable']['theme']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['theme']			." SET theme_state=0		WHERE theme_id = '"			.$a['params']['id']."';"); };
@@ -175,7 +175,7 @@ self::$ActionTable['delete']['keyword']			= function (&$a) { return array ("UPDA
 self::$ActionTable['delete']['layout']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout']		." SET layout_state=2		WHERE layout_id = '"		.$a['params']['id']."';"); };
 self::$ActionTable['delete']['layout_file']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['layout_file']	." SET layout_file_state=2	WHERE layout_file_id = '"	.$a['params']['id']."';"); };
 self::$ActionTable['delete']['menu']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['menu']			." SET menu_state=2			WHERE menu_id = '"			.$a['params']['id']."';"); };
-self::$ActionTable['delete']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=2		WHERE module_id = '"		.$a['params']['id']."';"); };
+//self::$ActionTable['delete']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=2		WHERE module_id = '"		.$a['params']['id']."';"); };
 self::$ActionTable['delete']['permission']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['permission']	." SET permission_state=2	WHERE permission_id = '"	.$a['params']['id']."';"); };
 self::$ActionTable['delete']['tag']				= function (&$a) { return array ("UPDATE ".$a['sqlTables']['tag']			." SET tag_state=2			WHERE tag_id = '"			.$a['params']['id']."';"); };
 self::$ActionTable['delete']['theme']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['theme']			." SET theme_state=2		WHERE theme_id = '"			.$a['params']['id']."';"); };

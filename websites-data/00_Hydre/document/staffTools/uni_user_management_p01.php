@@ -72,6 +72,10 @@ $bts->I18nTransObj->apply(
 			"select2_0"		=> "Inactif",
 			"select2_1"		=> "Actif",
 			"select2_2"		=> "Supprimé",
+			"pageSelectorQueryLike"		=>	"Filtrer avec",
+			"pageSelectorDisplay"		=>	"Affichage",
+			"pageSelectorNbrPerPage"	=>	"entrées par page",
+			"pageSelectorBtnFilter"		=>	"Filtrer",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to manage users.",
@@ -97,6 +101,10 @@ $bts->I18nTransObj->apply(
 			"select2_0"		=> "Disabled",
 			"select2_1"		=> "Active",
 			"select2_2"		=> "Deleted",
+			"pageSelectorQueryLike"		=>	"Filter with",
+			"pageSelectorDisplay"		=>	"Display",
+			"pageSelectorNbrPerPage"	=>	"entries per page",
+			"pageSelectorBtnFilter"		=>	"Filter",
 		)
 	)
 );
@@ -107,7 +115,8 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 $GDU_ = array();
 
 $GDU_['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($GDU_['nbrPerPage'] < 1 ) { $GDU_['nbrPerPage'] = 10;}
+				error_log( $data['selectionOffset'] ."!=". $data['pageCounter'] );
+if ($GDU_['nbrPerPage'] < 1 ) { $GDU_['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;}
 if ( $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('filterForm', 'group_id', null); }
 
 $clause_sql_element = array();
@@ -138,20 +147,19 @@ FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $GDU_['ItemsCount'] = $dbp['mucount']; }
 
 // --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
 if ( $GDU_['ItemsCount'] > $GDU_['nbrPerPage'] ) {
 
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQuryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'))>0 ) 	{$strGroupId	= "&filterForm[group_id]="		.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');}
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'))>0 )	{$strUserStatus	= "&filterForm[user_status]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status');}
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
 
-	$ClassLoaderObj->provisionClass('Template');
-	$TemplateObj = Template::getInstance();
-	$GDU_['link'] = $strQuryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$GDU_['elmIn'] = "<div style='display:inline-block; background-color:#00000030; border-radius:0.1cm; border:solid 1px #00000040; padding:0.2cm 0.35cm; margin:0.1cm;'>";
-	$GDU_['elmInHighlight'] = "<div style='display:inline-block; background-color:#FFFFFF80; border-radius:0.1cm; border:solid 1px #00000040; padding:0.2cm 0.35cm; margin:0.1cm;'>";
+	$GDU_['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$GDU_['elmIn'] = "<div class='".$Block."_page_selector'>";
+	$GDU_['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
 	$GDU_['elmOut'] = "</div>";
-	$GDU_['block'] = $Block;
 	$GDU_['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
 	$Content .= $TemplateObj->renderPageSelector($GDU_);
 }
@@ -161,10 +169,10 @@ SELECT usr.user_id,usr.user_login,user_name,usr.user_last_visit,gr.group_title,u
 FROM ".$SqlTableListObj->getSQLTableName('user')." usr, "
 .$SqlTableListObj->getSQLTableName('group')." gr, "
 .$SqlTableListObj->getSQLTableName('group_user')." gu, "
-.$SqlTableListObj->getSQLTableName('group_website')." gw 
-".$GDU_['clause_like']."  
-ORDER BY user_name, user_login  
-LIMIT ".($GDU_['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$GDU_['nbrPerPage']." 
+.$SqlTableListObj->getSQLTableName('group_website')." gw "
+.$GDU_['clause_like']
+." ORDER BY user_name, user_login "
+."LIMIT ".($GDU_['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$GDU_['nbrPerPage']." 
 ;");
 
 $GDU_['realNbrPerPage'] = $bts->SDDMObj->num_row_sql ( $dbquery );
@@ -206,91 +214,11 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15)
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,6,1),
 );
-$Content .= $bts->RenderTablesObj->render($infos, $T);
-
+$Content .= $bts->RenderTablesObj->render($infos, $T)
+."<br>\r"
+.$TemplateObj->renderFilterForm($infos)
+.$TemplateObj->renderAdminCreateButton($infos)
+;
 // --------------------------------------------------------------------------------------------
-$Content .= "<br>\r".$TemplateObj->renderAdminCreateButton($infos);
-
-// --------------------------------------------------------------------------------------------
-$Content .= "
-</form>\r
-
-<form ACTION='index.php?' method='post'>\r".
-"<table ".$ThemeDataObj->getThemeDataEntry('tab_std_rules')." style='width:100%'>\r
-<tr>\r
-<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_1')."</td>\r
-<td class='".$Block."_fca'><input type='text' name='filterForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."' class='".$Block."_t3 ".$Block."_form_1'></td>\r
-</tr>\r
-
-<tr>\r
-<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_2')."</td>\r
-<td class='".$Block."_fca'>";
-// Group
-$userMenuSelect = $CurrentSetObj->getInstanceOfUserObj()->getMenuOptionArray();
-$userMenuSelect['group']['name'] = "filterForm[group_id]";
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0 ) {
-	$userMenuSelect['group']['defaultSelected'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');	
-}
-$Content .= $bts->RenderFormObj->renderMenuSelect($userMenuSelect['group']);
-$Content .= "
-</td>\r
-</tr>\r
-
-<tr>\r
-<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_3')."</td>\r
-<td class='".$Block."_fca'>
-";
-// Status
-$userMenuSelect['status']['name'] = "filterForm[user_status]";
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'))>0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') != 0 ) { 
-	$userMenuSelect['status']['options'][$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status')]['s'] = " selected "; 
-}
-$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : userMenuSelect = " . $bts->StringFormatObj->arrayToString($userMenuSelect)));
-$Content .= $bts->RenderFormObj->renderMenuSelect($userMenuSelect['status']);
-
-$Content .= "
-</td>\r
-</tr>\r
-
-<tr>\r
-<td class='".$Block."_fca'>".$bts->I18nTransObj->getI18nTransEntry('table1_41')."</td>\r
-<td class='".$Block."_fca'><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$GDU_['nbrPerPage']."' class='".$Block."_t3 ".$Block."_form_1'> 
-".$bts->I18nTransObj->getI18nTransEntry('table1_42')."
-</td>\r
-</tr>\r
-</table>\r
-<br>\r
-
-<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: 0px; '>
-<tr>\r
-<td>\r
-";
-
-$SB = array(
-	"id"				=> "refreshButton",
-	"type"				=> "submit",
-	"initialStyle"		=> $Block."_t3 ".$Block."_submit_s1_n",
-	"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s1_h",
-	"onclick"			=> "",
-	"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnFilter'),
-	"mode"				=> 1,
-	"size" 				=> 128,
-	"lastSize"			=> 0,
-);
-
-
-$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
-
-$Content .= "
-</td>\r
-</tr>\r
-</table>\r
-<br>\r
-
-</form>\r
-<br>\r
-<br>\r
-<br>\r
-";
 /*Hydr-Content-End*/
 ?>

@@ -81,7 +81,7 @@ $i18n = array(
 	'DB_HydrDBAlreadyExistok'	=>	"ATTENTION! Une BDD Hydr est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
 	'DB_HydrDBAlreadyExistko'	=>	"BDD Hydr non trouvée.",
 	"DB_installationLockedok"	=>	"Pas de verrou trouvé.",
-	"DB_installationLockedko"	=>	"L'installation est  <b>vérrouillée!</b> Le programme n'installera pas à moins que le verrou soit enlevé.",
+	"DB_installationLockedko"	=>	"L'installation est  <b>vérrouillée!</b> Le programme n'installera pas tant que le verrou sera présent.",
 
 	// Method
 	'MTH_intro'		=> "Il y a deux types d'installation de Hydr. Ceci dans le but de permettre une installation facile sur un plus large nombre de plateformes.<br>\r<br>\r",
@@ -180,7 +180,7 @@ Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer a
 	't9c5' => "E",
 	't9c6' => "F",
 
-	"JavaScriptI18nDbCnxAlert"	=>	"Le test d'accès à la BDD n'est pas bon. Merci de vous assurer de l'accès à la base de donnée depuis le formulaire avec le bouton dédié.",
+	"JavaScriptI18nDbCnxAlert"	=>	"Le test d'accès à la BDD n'est pas bon. Merci de vous assurer de l'accès à la base de donnée depuis le formulaire avec le bouton dédié (onlget BDD).",
 	"REPORT_badToken"	=>	"Le jeton d'installation n'est pas le bon."
 
 );

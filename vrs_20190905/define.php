@@ -142,5 +142,9 @@ define ( "_CLASS_ADM_CTRL_PANEL_",			"div_AdminControlPanel");
 define ( "_CLASS_FILE_SELECTOR_CONTAINER_",	"FileSelectorContainer");
 define ( "_CLASS_FILE_SELECTOR_",			"FileSelector");
 
+// --------------------------------------------------------------------------------------------
+// Behavior
+define ( "_ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_",			10);
+
 ?>
 

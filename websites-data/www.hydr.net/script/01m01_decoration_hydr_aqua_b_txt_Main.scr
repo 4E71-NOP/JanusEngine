@@ -92,4 +92,8 @@ icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_noti
 transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						
+
+page_selector			"display:inline-block; background-color:#80C0FF80; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
+page_selector_highlight	"display:inline-block; background-color:#FFE00080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
+
 ;							

@@ -53,6 +53,10 @@ $bts->I18nTransObj->apply(
 			"docTyp3"		=> "Mixed",
 			"docModif0"		=> "Non",
 			"docModif1"		=> "Oui",
+			"pageSelectorQueryLike"		=>	"Filtrer avec",
+			"pageSelectorDisplay"		=>	"Affichage",
+			"pageSelectorNbrPerPage"	=>	"entrées par page",
+			"pageSelectorBtnFilter"		=>	"Filtrer",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to manage documents.",
@@ -66,19 +70,65 @@ $bts->I18nTransObj->apply(
 			"docTyp3"		=> "Mixed",
 			"docModif0"		=> "No",
 			"docModif1"		=> "Yes",
+			"pageSelectorQueryLike"		=>	"Filter with",
+			"pageSelectorDisplay"		=>	"Display",
+			"pageSelectorNbrPerPage"	=>	"entries per page",
+			"pageSelectorBtnFilter"		=>	"Filter",
 		)
 	)
 );
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+// --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+$pageSelectorData['query'] = "";
+$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
 
-$dbquery = $bts->SDDMObj->query("
-SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification 
-FROM ".$SqlTableListObj->getSQLTableName('document')." doc, ".$SqlTableListObj->getSQLTableName('document_share')." shr 
-WHERE shr.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-AND shr.fk_docu_id = doc.docu_id 
-AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-;");
+$pageSelectorData['clauseElements'] = array();
+$pageSelectorData['clauseElements'][] = array("left" => "shr.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
+$pageSelectorData['clauseElements'][] = array("left" => "shr.fk_docu_id",	"operator" => "=",	"right" => "doc.docu_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "doc.docu_origin",	"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
+	$pageSelectorData['clauseElements'][] = array( "left" => "doc.docu_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+}
+
+$pageSelectorData['query'] = "SELECT"
+." COUNT(doc.docu_id) AS ItemsCount "
+." FROM "
+.$SqlTableListObj->getSQLTableName('document')." doc, "
+.$SqlTableListObj->getSQLTableName('document_share')." shr "
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+.";"
+;
+
+$dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+
+if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
+	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+
+	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmOut'] = "</div>";
+	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
+}
+
+// --------------------------------------------------------------------------------------------
+
+$dbquery = $bts->SDDMObj->query("SELECT "
+."doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification "
+."FROM "
+.$SqlTableListObj->getSQLTableName('document')." doc, "
+.$SqlTableListObj->getSQLTableName('document_share')." shr "
+.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+." ORDER BY doc.docu_name"
+." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+.";");
 
 $T = array();
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
@@ -133,15 +183,11 @@ $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15)
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
 );
-$Content .= $bts->RenderTablesObj->render($infos, $T);
-
+$Content .= $bts->RenderTablesObj->render($infos, $T)
+."<br>\r"
+.$TemplateObj->renderFilterForm($infos)
+.$TemplateObj->renderAdminCreateButton($infos)
+;
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('Template');
-$TemplateObj = Template::getInstance();
-$Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
-
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
-
 ?>
