@@ -421,16 +421,12 @@ function computeInfoDebug () {\r
 <td align='right'>\r
 ";
 
-$SB = array(
-	"id"				=> "WebsiteUpdateButton",
-	"type"				=> "submit",
-	"initialStyle"		=> $Block."_submit_s3_n",
-	"hoverStyle"		=> $Block."_submit_s3_h",
-	"onclick"			=> "",
-	"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
-	"mode"				=> 1,
-	"size" 				=> 128,
-	"lastSize"			=> 0,
+$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+	$infos , 'submit', 
+	$bts->I18nTransObj->getI18nTransEntry('btnUpdate'), 128, 
+	'WebsiteUpdateButton', 
+	3, 3, 
+	"" 
 );
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 

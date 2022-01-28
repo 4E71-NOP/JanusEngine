@@ -1,7 +1,7 @@
 # Hydr
+This project is ment to help people to implement websites with more graphics and themes than usual (flat design). The code is under heavy changes at the moment. Things take time. In the mean time suggestions and constructive comments are welcomed. 
 
-This project is ment to help people to implement website with more graphics and themes. The jumpstart packkage contains documentation. So by installing this package on a local machine you'll have the docs and examples. 
-
+The jumpstart (see archives) packkage contains documentation. So by installing this package on a local machine you'll have the docs and examples. 
 
 # Downloads
 
@@ -11,9 +11,9 @@ Downlad the source from this place and play. I believe you know what you're doin
 ## Archives
 You can download 2 types of packages from the online archive:
 * **Minimal**     : only installs the engine. You'll have to provide the scripts to create a website.
-* **Jumpstart**    : Install the Hydr website (so you get the docs and script you can mimic).
+* **Jumpstart**   : Install the Hydr website (so you get the docs and script you can mimic).
 
-Note: The link aren't ready yet. So. Please be patient.
+Note: The links aren't ready yet. So. Please be patient.
 
 ## Tools
 There is a set of tools to help creators to implement the graphics (cutting one image in many components).
@@ -37,6 +37,4 @@ root@box:/mnt/web/directory/Hydr$ docker run --rm -v $(pwd):/data phpdoc/phpdoc:
 # License
 Licence : Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) 
 https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-
 

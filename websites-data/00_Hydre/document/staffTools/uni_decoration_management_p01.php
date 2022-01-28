@@ -27,8 +27,16 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
+// $bts->RequestDataObj->setRequestData('articleForm',
+// 	array(
+// 		'SQLlang'		=> 48,
+// 		'SQLdeadline'	=> 4,
+// 		'SQLnom'		=> "charg",
+// 		'action'		=> "",
+// 	)
+// );
+
+/*Hydr-Content-Begin*/
 
 $localisation = " / uni_decoration_management_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );

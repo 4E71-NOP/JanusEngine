@@ -67,6 +67,7 @@ $bts->I18nTransObj->apply(
 			"pageSelectorDisplay"		=>	"Affichage",
 			"pageSelectorNbrPerPage"	=>	"entrées par page",
 			"pageSelectorBtnFilter"		=>	"Filtrer",
+			"pageSelectorDeadline"		=>	"Deadline",
 		),
 		"eng" => array(
 			"invite1"		=> "This part will allow you to modify articles.",
@@ -84,6 +85,7 @@ $bts->I18nTransObj->apply(
 			"pageSelectorDisplay"		=>	"Display",
 			"pageSelectorNbrPerPage"	=>	"entries per page",
 			"pageSelectorBtnFilter"		=>	"Filter",
+			"pageSelectorDeadline"		=>	"Deadline",
 		)
 	)
 );
@@ -99,14 +101,18 @@ if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _A
 $pageSelectorData['clauseElements'] = array();
 $pageSelectorData['clauseElements'][] = array("left" => "mnu.fk_ws_id",			"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
 $pageSelectorData['clauseElements'][] = array("left" => "art.arti_ref",			"operator" => "=",	"right" => "mnu.fk_arti_ref" );
-$pageSelectorData['clauseElements'][] = array("left" => "art.fk_deadline_id",	"operator" => "=",	"right" => "bcl.deadline_id" );
-$pageSelectorData['clauseElements'][] = array("left" => "art.fk_ws_id",			"operator" => "=",	"right" => "bcl.fk_ws_id" );
-$pageSelectorData['clauseElements'][] = array("left" => "bcl.fk_ws_id",			"operator" => "=",	"right" => "mnu.fk_ws_id" );
-$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_state",		"operator" => "=",	"right" => "'2'" );
+$pageSelectorData['clauseElements'][] = array("left" => "art.fk_deadline_id",	"operator" => "=",	"right" => "dl.deadline_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "art.fk_ws_id",			"operator" => "=",	"right" => "dl.fk_ws_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "dl.fk_ws_id",			"operator" => "=",	"right" => "mnu.fk_ws_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_state",		"operator" => "=",	"right" => "'1'" );
 $pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_type",		"operator" => "IN",	"right" => "('1','0')" );
 
 if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
 	$pageSelectorData['clauseElements'][] = array( "left" => "art.arti_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+}
+$formDeadline = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'deadline');
+if ( strlen($formDeadline)>0 && $formDeadline != 0 ) {
+	$pageSelectorData['clauseElements'][] = array( "left" => "dl.deadline_id", "operator" => "=", "right" => $formDeadline );
 }
 
 $pageSelectorData['query'] = "SELECT"
@@ -114,7 +120,7 @@ $pageSelectorData['query'] = "SELECT"
 ." FROM "
 .$SqlTableListObj->getSQLTableName('article')." art, "
 .$SqlTableListObj->getSQLTableName('menu')." mnu, "
-.$SqlTableListObj->getSQLTableName('deadline')." bcl "
+.$SqlTableListObj->getSQLTableName('deadline')." dl "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 .";"
 ;
@@ -138,8 +144,6 @@ if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
 $langList = $bts->CMObj->getLanguageList();
 $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "langList=" . $bts->StringFormatObj->arrayToString($langList)));
 
-// --------------------------------------------------------------------------------------------
-//	Form
 // --------------------------------------------------------------------------------------------
 if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLlang')) > 0 ) { $langList[$bts->RequestDataObj->getRequestDataEntry('SQLlang')]['s'] = "selected"; }
 else { $langList[$CurrentSetObj->getDataEntry('language_id')]['s'] = "selected"; }
@@ -169,91 +173,36 @@ foreach ( $listDeadline as $A ) {
 	else { $A['deadline_title'] = "<span class='".$Block."_ok'>" . $A['deadline_title']; }
 	$A['deadline_title'] = $A['deadline_name'] . "</span>";
 }
-if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLdeadline')) > 0 ) { $listDeadline[$bts->RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected"; }
+if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'deadline')) > 0 ) { $listDeadline[$bts->RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected"; }
 
-// --------------------------------------------------------------------------------------------
-$Content .= "
-<form id='MH_001' ACTION='/' method='post'>\r
-<input type='hidden' name='formGenericData[mode]'	value='create'>
-<input type='hidden' name='arti_page'	value='2'>\r
-<table class='".$Block._CLASS_TABLE01_." ".$Block._CLASS_TBL_LGND_TOP_."'>\r
-<tr>\r
-<td colspan='2'>".$bts->I18nTransObj->getI18nTransEntry('caption')."</td>\r
-</tr>\r
+$tdStyle = " style='margin:0.1cm;'";
+$infos['insertLines'] = "<!-- deadline select -->"
+."<tr>\r"
+."<td ".$tdStyle.">".$bts->I18nTransObj->getI18nTransEntry('pageSelectorDeadline')."</td>\r"
+."<td ".$tdStyle.">"
+."<select name='articleForm[SQLdeadline]'>"
+;
 
-<tr>\r
-<td>".$bts->I18nTransObj->getI18nTransEntry('c1l1')."</td>\r
-<td><input type='text' name='articleForm[SQLnom]' size='15' value='".$bts->RequestDataObj->getRequestDataEntry('SQLnom')."' class='".$Block."_t3 " . $Block."_form_1'></td>\r
-</tr>\r
-
-<tr>\r
-<td>".$bts->I18nTransObj->getI18nTransEntry('c1l2')."</td>\r
-<td><select name='articleForm[SQLlang]' class='".$Block."_t3 " . $Block."_form_1'>
-";
-// unset ( $A , $B );
-reset( $langList );
-foreach ( $langList as $k => $v ) {
-	if ( !is_numeric($k) ) {
-		if ( $v['support'] == 1 ) { $Content .= "<option value='".$v['lang_639_3']."' ".$v['s'].">".$v['lang_original_name']."</option>\r"; }
-	}
-}
-$Content .= "</select>
-</td>\r
-</tr>\r
-
-<tr>\r
-<td>".$bts->I18nTransObj->getI18nTransEntry('c1l3')."</td>\r
-<td><select name='articleForm[SQLdeadline]' class='".$Block."_t3 " . $Block."_form_1'>
-";
 unset ( $A , $B );
 foreach ( $listDeadline as $A ) {
-	$Content .= "<option value='".$A['id']."' ".$A['selected'].">".$A['deadline_title']." / ".$A['deadline_name']."</option>\r";
+	$infos['insertLines'] .= "<option value='".$A['id']."' ".$A['selected'].">".$A['deadline_title']." / ".$A['deadline_name']."</option>\r";
 }
-$Content .= "</select></tr>\r
-</table>\r
 
-<table width='100%' cellpadding='16' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
-<tr>\r
-<td align='right'>\r
-";
-
-$SB = array(
-		"id"				=> "refreshButton",
-		"type"				=> "submit",
-		"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-		"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-		"onclick"			=> "",
-		"message"			=> $bts->I18nTransObj->getI18nTransEntry('btnRefresh'),
-		"mode"				=> 1,
-		"size" 				=> 128,
-		"lastSize"			=> 0,
-);
-$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
-$Content .= "
-</td>\r
-</tr>\r
-</table>\r
-</form>\r
-";
+$infos['insertLines'] .= $bts->I18nTransObj->getI18nTransEntry('pageSelectorNbrPerPage')
+."</select>\r"
+."</td>\r"
+."</tr>\r"
+;
 // --------------------------------------------------------------------------------------------
-
-$articleFormData = $bts->RequestDataObj->getRequestDataEntry('articleForm');
-$sqlClause = "";
-
-// if ( $articleFormData['action'] == "AFFICHAGE" ) {
-// 	if ( strlen($articleFormData['SQLnom']) > 0 ) { $sqlClause .= " AND art.arti_name LIKE '%".$articleFormData['SQLnom']."%'"; }
-// 	if ( $articleFormData['SQLlang'] != 0 ) { $sqlClause .= " AND mnu.fk_lang_id = '".$articleFormData['SQLlang']."'"; }
-// 	if ( $articleFormData['SQLdeadline'] != 0 ) { $sqlClause .= " AND bcl.deadline_id = '".$articleFormData['SQLdeadline']."'"; }
-// }
 
 $dbquery = $bts->SDDMObj->query("SELECT "
 ."art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, "
 ."mnu.fk_lang_id, "
-."bcl.deadline_name, bcl.deadline_title, bcl.deadline_state "
+."dl.deadline_name, dl.deadline_title, dl.deadline_state "
 ."FROM "
 .$SqlTableListObj->getSQLTableName('article')." art, "
 .$SqlTableListObj->getSQLTableName('menu')." mnu, "
-.$SqlTableListObj->getSQLTableName('deadline')." bcl "
+.$SqlTableListObj->getSQLTableName('deadline')." dl "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY art.arti_ref,art.arti_page"
 ." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']

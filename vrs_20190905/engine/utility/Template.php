@@ -254,26 +254,26 @@ class Template {
 			1, 1, 
 			"" 
 		);
-		
+		$tdStyle = " style='margin:0.1cm;'";
 		$Content = "</form>\r
 		<form ACTION='index.php?' method='post'>\r"
-		."<table class='".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
+		."<table class='".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."defaultTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
 		."<tr>\r"
-		."<td>".$bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryLike')."</td>\r"
-		."<td><input type='text' name='filterForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."'></td>\r"
+		."<td ".$tdStyle.">".$bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryLike')."</td>\r"
+		."<td ".$tdStyle."><input type='text' name='filterForm[query_like]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."'></td>\r"
 		."</tr>\r"
 
 		."<tr>\r"
-		."<td>".$bts->I18nTransObj->getI18nTransEntry('pageSelectorDisplay')."</td>\r"
-		."<td><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')."'> "
+		."<td ".$tdStyle.">".$bts->I18nTransObj->getI18nTransEntry('pageSelectorDisplay')."</td>\r"
+		."<td ".$tdStyle."><input type='text' name='filterForm[nbrPerPage]' size='2' value='".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')."'> "
 		.$bts->I18nTransObj->getI18nTransEntry('pageSelectorNbrPerPage')
 		."</td>\r"
 		."</tr>\r"
 		.$infos['insertLines']
 		
 		."<tr>\r"
-		."<td></td>\r"
-		."<td>\r<br>\r"
+		."<td ".$tdStyle."></td>\r"
+		."<td ".$tdStyle.">\r<br>\r"
 		.$bts->InteractiveElementsObj->renderSubmitButton($SB)
 		."</td>\r"
 		."</tr>\r"
