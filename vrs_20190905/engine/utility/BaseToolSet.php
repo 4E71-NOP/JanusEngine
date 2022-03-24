@@ -18,25 +18,25 @@
  *
  */
 class BaseToolSet {
-	public $TimeObj;
-	public $LMObj;
-	public $MapperObj;
-	public $RequestDataObj;
-	public $StringFormatObj;
-// 	public $SqlTableListObj;
-	public $CMObj;
-	public $SMObj;
 	public $AUObj;
-	public $SddmToolsObj;
-	public $SDDMObj;
+	public $CMObj;
+	public $CommandConsole;
 	public $I18nTransObj;
 	public $InteractiveElementsObj;
+	public $LMObj;
+	public $MapperObj;
 	public $RenderFormObj;
 	public $RenderModuleObj;
 	public $RenderTablesObj;
 	public $RenderTabsObj;
+	public $RequestDataObj;
 	public $Router;
-	public $CommandConsole;
+	public $SDDMObj;
+	public $SddmToolsObj;
+	public $SMObj;
+	public $StringFormatObj;
+	public $TimeObj;
+	// 	public $SqlTableListObj;
 	
 	private static $Instance = null;
 	

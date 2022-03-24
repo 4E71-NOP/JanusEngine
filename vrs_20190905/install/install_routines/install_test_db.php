@@ -71,16 +71,20 @@ switch ( $db_['dal'] ) {
 					$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
 					$jsonApiResponse['cnxToDB']	= false;
 				}
+				error_log('$db1: Check!');
 				
 				$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
 				if ($db2->connect_error) { $jsonApiResponse['connectionError'] = $db2->connect_error; }
-				else { $jsonApiResponse['HydrDBAlreadyExist'] = true; }
-
-				// error_log("SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;");
-				$dbquery = $db2->query("SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;");
-				while ( $dbp = $dbquery->fetch_assoc() ) {
-					if ( $dbp['inst_nbr'] == 1 ) { $jsonApiResponse['installationLocked'] = true; }
+				else { 
+					$jsonApiResponse['HydrDBAlreadyExist'] = true; 
+				
+					error_log("SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;");
+					$dbquery = $db2->query("SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;");
+					while ( $dbp = $dbquery->fetch_assoc() ) {
+						if ( $dbp['inst_nbr'] == 1 ) { $jsonApiResponse['installationLocked'] = true; }
+					}
 				}
+
 
 				break;
 			case "pssql":

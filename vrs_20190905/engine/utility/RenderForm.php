@@ -11,6 +11,11 @@
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
+
+/**
+ * The goal of this class is to make the syntax uniform amonst the code.
+ * Also it will put the default needed values so the client isn't bothered with it.
+ */
 class  RenderForm {
 	private static $Instance = null;
 	
@@ -39,7 +44,7 @@ class  RenderForm {
 		if ( strlen($name)>0 && strlen($method)>0) {
 			return "<form ACTION='".$action."' method='".$method."' name='".$name."'>\r";
 		}
-		return "ERR";
+		return false;
 	}
 	
 	/**
@@ -54,7 +59,7 @@ class  RenderForm {
 		if ( strlen($name)>0) {
 			return "<input type='text' name='".$name."'	size='".$size."' maxlength='".$maxlength."' value='".$value."'>\r";			
 		}
-		return "ERR";
+		return false;
 	}
 	
 	/**
@@ -83,7 +88,7 @@ class  RenderForm {
 		if ( strlen($id)>0 && strlen($name)>0 && strlen($text)>0 ) {
 			return "<input type='radio' id='".$id."' name='".$name."' value='".$id."'> <label for='".$id."'>".$text."</label><br>\r";
 		}
-		return "ERR";
+		return (false);
 	}
 	
 	/**
@@ -97,7 +102,7 @@ class  RenderForm {
 	 * @return string
 	 */
 	public function renderCheckbox($idAndName, $value, $text, $checked=false, $disabled=false, $onclik=''){
-		$content = "ERR";
+		$content = false;
 		if ( strlen($idAndName)>0 && strlen($value)>0 && strlen($text)>0 ) {
 		$content = 
 			"<input type='checkbox' id='".$idAndName."' name='".$idAndName."' ".
@@ -122,7 +127,7 @@ class  RenderForm {
 		if (strlen($name)>0 && strlen($value)>0) {
 			return "<input type='hidden' name='".$name."' value='".$value."'>\r";
 		}
-		return "ERR";
+		return (false);
 	}
 	
 }

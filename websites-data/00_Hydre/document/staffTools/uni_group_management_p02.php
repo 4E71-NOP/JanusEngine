@@ -35,7 +35,7 @@
 
 $bts->RequestDataObj->setRequestData('groupForm',
 		array(
-				'selectionId'	=>	30,
+				'selectionId'	=>	3268730576621700921,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -109,16 +109,22 @@ $AdminFormToolObj = AdminFormTool::getInstance();
 $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 
 // --------------------------------------------------------------------------------------------
-// Table preparation
-// --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Group');
 $currentGroupObj = new Group();
+
+// --------------------------------------------------------------------------------------------
+$ClassLoaderObj->provisionClass('FormBuilder');
+$formBuilderObj = FormBuilder::getInstance();
+
+
+// --------------------------------------------------------------------------------------------
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
 		$currentGroupObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
 		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
-		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$t1l3c2 = $formBuilderObj->getFormElementsEntry('groupForm[name]');
+		// $t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
@@ -128,13 +134,13 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		$currentGroupObj->setGroup(
 			array(
 			"group_id"		=> "*",
-			"group_tag"	=> 0,
+			"group_tag"		=> 0,
 			"group_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 			"group_title"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 			"group_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 			)
 		);
-		$t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		// $t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "add";
 		$processStep = "Create";
@@ -142,6 +148,14 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		break;
 }
+
+
+$formBuilderArray = array(
+	1 => array( 'type' => 'text',	'name' => 'groupForm[name]',	'value' => $currentGroupObj->getGroupEntry('group_title'),	'size' => 45,	'maxlength' => 255 ),
+);
+$formBuilderObj->buildFormElements($formBuilderArray);
+// $arr = $formBuilderObj->getFormElements();
+// $Content .= $bts->StringFormatObj->print_r_html( $arr ). "<br>". $bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId');
 
 
 $Content .= "
@@ -183,7 +197,7 @@ $T['Content']['1']['3']['2']['cont'] = $t1l3c2;
 
 $tabStateDealine = array(
 		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('anonymous'),		"db"=>"ANONYMOUS" ),
-		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('reader'),			"db"=>"READER" ),
+		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('reader'),		"db"=>"READER" ),
 		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('staff'),			"db"=>"STAFF" ),
 		3	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
 );
