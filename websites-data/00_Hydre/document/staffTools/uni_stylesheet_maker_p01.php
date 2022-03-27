@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 3	);
 
 /*Hydr-Content-Begin*/

@@ -50,7 +50,7 @@ class MenuData {
 		;";
 		$dbquery = $bts->SDDMObj->query($query);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { 
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : No rows for menu query."));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : No rows for menu query."));
 		}
 		else {
 			$this->MenuDataRaw = array();
@@ -113,7 +113,7 @@ class MenuData {
 	private function buildTree( &$treePos ){
 		$bts = BaseToolSet::getInstance();
 		foreach ( $treePos as &$A ) {
-			// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : A['menu_id']=".$A['menu_id']));
+			// $bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : A['menu_id']=".$A['menu_id']));
 
 			if ( $this->hasChild($A['menu_id']) === true ) {
 				$A['children'] = $this->buildBranch($A['menu_id']);

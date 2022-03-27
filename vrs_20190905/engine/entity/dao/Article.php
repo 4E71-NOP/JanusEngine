@@ -18,7 +18,7 @@ class Article extends Entity {
 	private $columns = array(
 		"arti_id"					=> "",
 		"arti_ref"					=> 0,
-		"deadline_id"				=> 0,
+		"fk_deadline_id"			=> 0,
 		"arti_name"					=> "new article",
 		"arti_desc"					=> "",
 		"arti_title"				=> "Nouvel article",
@@ -35,8 +35,8 @@ class Article extends Entity {
 		"arti_validation_state"		=> "NON_VALIDE",
 		
 		"arti_release_date"			=> 0,
-		"docu_id"					=> 0,
-		"ws_id"						=> 0
+		"fk_docu_id"				=> 0,
+		"fk_ws_id"					=> 0
 	);
 	//@formatter:on
 	
@@ -59,10 +59,8 @@ class Article extends Entity {
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')."
 			WHERE arti_id = '".$id."'
 			;");
-			// AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
-			// 			AND arti_page = '".$page."'
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { 
 					if (isset($this->columns[$A])) { $this->Article[$A] = $B; }
@@ -70,7 +68,7 @@ class Article extends Entity {
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article arti_id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article arti_id=".$id));
 		}
 	}
 	
@@ -114,8 +112,8 @@ class Article extends Entity {
 		
 		if ( $this->entityExistsInDb('deadline', $this->Article['deadline_id']) == false ) { $res = false; }
 		if ( $this->entityExistsInDb('article_config', $this->Article['config_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('document', $this->Article['docu_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('website', $this->Article['ws_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('document', $this->Article['fk_docu_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Article['fk_ws_id']) == false ) { $res = false; }
 		if ( $this->entityExistsInDb('user', $this->Article['arti_creator_id']) == false ) { $res = false; }
 		if ( $this->entityExistsInDb('user', $this->Article['arti_validator_id']) == false ) { $res = false; }
 		
@@ -136,7 +134,7 @@ class Article extends Entity {
 		$tab['arti_creator_id'] = $tab['arti_validator_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
 		$tab['arti_creation_date'] = $tab['arti_creation_date'] = $tab['arti_validation_date'] = $date;
 		
-		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;

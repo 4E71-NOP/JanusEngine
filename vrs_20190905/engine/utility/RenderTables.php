@@ -54,12 +54,12 @@ class  RenderTables {
 		$CurrentSetObj = CurrentSet::getInstance();
 		error_reporting (0);
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "<!-- Render Table Begin -->\r<div style='width:100%;'>\r";
 		if ( $T['ContentInfos']['NbrOfTabs'] == 0 ) { $T['ContentInfos']['NbrOfTabs'] = 1; }
 		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
 			if ( $this->javascriptAlreadyIncluded == false ) {
 				$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "current/engine/javascript/lib_TabsManagement.js");
 				$this->javascriptAlreadyIncluded = true;
@@ -80,11 +80,11 @@ class  RenderTables {
 		$tab_infos = &$T['ContentInfos'];
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " A table is on the bench. Let's get to work!"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " A table is on the bench. Let's get to work!"));
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));
 			switch ( $ADC['tabs'][$CurT]['TableCaptionPos'] ) {
 				case 1: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_TOP_;									break;// top
 				case 2: 	$ADC['tabs'][$CurT]['legendClasses'] .= $Block._CLASS_TBL_LGND_LEFT_;									break;// left
@@ -125,9 +125,9 @@ class  RenderTables {
 			}
 			
 			if ( $ADC['tabs'][$CurT]['NbrOfLines'] != 0 ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType']));
-// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType'])." ");
-// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType']));
+// 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC['tabs'][".$CurT."]['NbrOfLines']=".$ADC['tabs'][$CurT]['NbrOfLines']."; HighLightType=".$ADC['tabs'][$CurT]['HighLightType'])." ");
+// 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "ADC"));
 				if ( isset($ADC['tabs'][$CurT]['HighLightType'])) { $tab_infos['HighLightType'] = $ADC['tabs'][$CurT]['HighLightType']; }
 
 				$Content .= "<table class='".$Block._CLASS_TABLE01_." ".$ADC['tabs'][$CurT]['legendClasses']."' style='width:100%; empty-cells: show;'>\r" . $ListeColWidth; //table-layout: fixed; overflow:hidden;
@@ -199,7 +199,7 @@ class  RenderTables {
 			}
 			$tab_infos['HighLightType'] = $tab_infos['HighLightTypeBackup'];
 			if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End of tab :". $CurT));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End of tab :". $CurT));
 		}
 		if ( $tab_infos['EnableTabs'] != 0 ) { $Content .= "</div>\r"; }
 		
@@ -210,13 +210,13 @@ class  RenderTables {
 		);
 		$Content .= "</div>\r<!-- Render Table End -->\r";
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$tab_infos['RenderMode']:". $tab_infos['RenderMode']));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$tab_infos['RenderMode']:". $tab_infos['RenderMode']));
 		switch ( $tab_infos['RenderMode'] ) {
 			case 0:			echo ($Content);	unset ($Content);		break;
 			case 1:			return $Content;							break;
 		}
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		error_reporting(DEFAULT_ERROR_REPORTING);
 	}
 	

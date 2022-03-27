@@ -83,11 +83,11 @@ class HydrInstallMonitor {
 
 		$queryOk = true;
 		if ($bts->SDDMObj->getErrno() != 0 ) {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL Error flag : ". $bts->SDDMObj->getErrno() ) );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL Error flag : ". $bts->SDDMObj->getErrno() ) );
 			$queryOk = false;
 		}
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL no rows flag : ". $bts->SDDMObj->num_row_sql($dbquery) ) );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL no rows flag : ". $bts->SDDMObj->num_row_sql($dbquery) ) );
 			$queryOk = false;
 		}
 

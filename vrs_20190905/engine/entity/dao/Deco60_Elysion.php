@@ -25,13 +25,13 @@ class Deco60_Elysion {
 			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_60_elysion id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_60_elysion id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$this->Deco60_Elysion[$dbp['deco_variable_name']] = $dbp['deco_value'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_60_elysion id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_60_elysion id=".$id));
 		}
 		
 	}

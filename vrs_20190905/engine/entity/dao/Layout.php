@@ -43,7 +43,7 @@ class Layout extends Entity {
 			WHERE layout_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
 					if (isset($this->columns[$A])) { $this->Layout[$A] = $B; }
@@ -51,7 +51,7 @@ class Layout extends Entity {
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layout id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for layout id=".$id));
 		}
 	}
 	

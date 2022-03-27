@@ -54,7 +54,7 @@ class ModuleQuickSkin {
 				AND tw.theme_state = '1'
 				ORDER BY td.theme_name 
 				;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query=`". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query=`". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 				
 				if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {

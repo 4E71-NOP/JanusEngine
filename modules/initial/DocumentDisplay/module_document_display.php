@@ -107,7 +107,7 @@ class ModuleDocumentDisplay {
 			;";
 			$dbquery = $bts->SDDMObj->query($sqlQuery);
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $DocumentDataObj->setDocumentDataEntry ('arti_nbr_page', $dbp['arti_nbr_page']); }
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_nbr_page=`".$DocumentDataObj->getDocumentDataEntry ('arti_nbr_page')."`"));
 			
 			// --------------------------------------------------------------------------------------------
 			//	
@@ -136,7 +136,7 @@ class ModuleDocumentDisplay {
 			//
 			// 	If we have more than 1 page for this article, the menu is necessary.
 			if ( $DocumentDataObj->getDocumentDataEntry('arti_nbr_page') > 1 && $DocumentDataObj->getDocumentDataEntry('arti_menu_type') > 0 ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " menu needed"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " menu needed"));
 				
 				$q = "
 				SELECT art.arti_id, art.arti_ref, art.arti_slug, art.arti_subtitle, art.arti_page, bcl.deadline_name 
@@ -150,7 +150,7 @@ class ModuleDocumentDisplay {
 				AND bcl.deadline_state = '1' 
 				ORDER BY art.arti_page
 				;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`".$q."`"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`".$q."`"));
 				$dbquery = $bts->SDDMObj->query($q);
 				
 				$pv = array();
@@ -272,14 +272,14 @@ class ModuleDocumentDisplay {
 			
 			while ( $documentAnalyse['mode'] == "search" ) {
 				$documentAnalyse['start'] = stripos( $analysedContent , "[INCLUDE]");
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=". $documentAnalyse['nbr'] ));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=". $documentAnalyse['nbr'] ));
 				if ( $documentAnalyse['start'] !== FALSE ) {
 					$documentAnalyse['contenu_include']	= "";
 					$documentAnalyse['docu_type']			= 0; //MWMCODE
 					$documentAnalyse['stop']				= stripos( $analysedContent , "[/INCLUDE]", $documentAnalyse['start']+9);
 					$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
 					$documentAnalyse['include_docu_name']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : ". $documentAnalyse['include_docu_name'] ));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : ". $documentAnalyse['include_docu_name'] ));
 					$dbquery = $bts->SDDMObj->query("
 					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_examiner, doc.docu_examination_date
 					FROM "
@@ -291,7 +291,7 @@ class ModuleDocumentDisplay {
 					;");
 					
 					if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-						$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `".$documentAnalyse['include_docu_name']."` in INCLUDE." ));
+						$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `".$documentAnalyse['include_docu_name']."` in INCLUDE." ));
 						$documentAnalyse['contenu_include']	= " ";
 						$documentAnalyse['docu_type']			= 0; //MWMCODE
 					}
@@ -311,7 +311,7 @@ class ModuleDocumentDisplay {
 					$x = $DocumentDataObj->getDocumentDataEntry('docu_type');
 					$y = $documentAnalyse['docu_type'];
 					
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Document is now in the case N=". $ad[$x][$y] ));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Document is now in the case N=". $ad[$x][$y] ));
 					$DocumentDataObj->setDocumentDataEntry('docu_type', $ad[$x][$y]);
 					
 					$documentAnalyse['stop2'] = $documentAnalyse['stop'] + 10;

@@ -27,13 +27,22 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
+/*
+http://www.local-hydr.net/script-execution/1/index.php
+?HydrLink=1&arti_slug=script-execution
+&arti_ref=fra_script_execution
+&arti_page=2
+&formGenericData[mode]=edit
+&formGenericData[selectionId]=738544661492181301
+&formGenericData[selectionPage]=9
+*/
+
+$bts->LMObj->saveVectorSystemLogLevel();
+$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionRef'	=> "fra_doc_concepts",
-				'selectionPage'	=> 1,
+				'selectionId'	=> 8878682287057195096,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -57,64 +66,62 @@ $bts->LMObj->logCheckpoint("uni_article_management_p02.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_article_management_p02.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les articles.",
-		"invite2"		=> "Cette partie va vous permettre de créer un article.",
-		"tabTxt1"		=> "Article",
-		"tabTxt2"		=> "Utilisateurs",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Nom",
-		"t1l3c1"		=>	"Référence",
-		"t1l4c1"		=>	"Titre",
-		"t1l5c1"		=>	"Sous-titre",
-		"t1l6c1"		=>	"Bouclage",
-		"t1l7c1"		=>	"Page",
-		"t1l8c1"		=>	"Nom générique de présentaion",
-		"t1l9c1"		=>	"Document",
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les articles.",
+			"invite2"		=> "Cette partie va vous permettre de créer un article.",
+			"tabTxt1"		=> "Article",
+			"tabTxt2"		=> "Utilisateurs",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Nom",
+			"t1l3c1"		=>	"Référence",
+			"t1l4c1"		=>	"Titre",
+			"t1l5c1"		=>	"Sous-titre",
+			"t1l6c1"		=>	"Bouclage",
+			"t1l7c1"		=>	"Page",
+			"t1l8c1"		=>	"Nom générique de présentation",
+			"t1l9c1"		=>	"Document",
 
-		"t2l1c1"		=>	"Créateur",
-		"t2l2c1"		=>	"Date création",
-		"t2l3c1"		=>	"Validateur",
-		"t2l4c1"		=>	"Date validation",
-		"t2l5c1"		=>	"Etat validation",
-		"t2l6c1"		=>	"Date de parution",
-		
-		));
-		break;
-		
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "This part will allow you to manage articles.",
-		"invite2"		=> "This part will allow you to create an article.",
-		"col_1_txt"		=> "Name",
-		"col_2_txt"		=> "Type",
-		"col_3_txt"		=> "State",
-		"tabTxt1"		=> "Article",
-		"tabTxt2"		=> "Users",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Name",
-		"t1l3c1"		=>	"Reference",
-		"t1l4c1"		=>	"Title",
-		"t1l5c1"		=>	"Sub-title",
-		"t1l6c1"		=>	"Deadline",
-		"t1l7c1"		=>	"Page",
-		"t1l8c1"		=>	"Presentation generic name",
-		"t1l9c1"		=>	"Document",
-		
-		"t2l1c1"		=>	"Creator",
-		"t2l2c1"		=>	"Creation date",
-		"t2l3c1"		=>	"Validator",
-		"t2l4c1"		=>	"Validation date",
-		"t2l5c1"		=>	"Validation state",
-		"t2l6c1"		=>	"Publishing date",
-		
-		));
-		break;
-}
+			"t2l1c1"		=>	"Créateur",
+			"t2l2c1"		=>	"Date création",
+			"t2l3c1"		=>	"Validateur",
+			"t2l4c1"		=>	"Date validation",
+			"t2l5c1"		=>	"Etat validation",
+			"t2l6c1"		=>	"Date de parution",
+		),
+		"eng" => array(
+			"invite1"		=> "This part will allow you to manage articles.",
+			"invite2"		=> "This part will allow you to create an article.",
+			"col_1_txt"		=> "Name",
+			"col_2_txt"		=> "Type",
+			"col_3_txt"		=> "State",
+			"tabTxt1"		=> "Article",
+			"tabTxt2"		=> "Users",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Name",
+			"t1l3c1"		=>	"Reference",
+			"t1l4c1"		=>	"Title",
+			"t1l5c1"		=>	"Sub-title",
+			"t1l6c1"		=>	"Deadline",
+			"t1l7c1"		=>	"Page",
+			"t1l8c1"		=>	"Presentation generic name",
+			"t1l9c1"		=>	"Document",
+			
+			"t2l1c1"		=>	"Creator",
+			"t2l2c1"		=>	"Creation date",
+			"t2l3c1"		=>	"Validator",
+			"t2l4c1"		=>	"Validation date",
+			"t2l5c1"		=>	"Validation state",
+			"t2l6c1"		=>	"Publishing date",
+		),
+
+	)
+);
+
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('MenuSelectTable');
@@ -138,10 +145,7 @@ $currentArticleObj = new Article();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentArticleObj->getDataFromDB(
-			$bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionRef'),
-			$bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionPage')
-		);
+		$currentArticleObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('articleForm', 'selectionId'));
 		
 		$T['Content']['1']['2']['2']['cont'] = $currentArticleObj->getArticleEntry('arti_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
@@ -238,22 +242,31 @@ $T['Content']['1']['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('for
 // $T['Content']['1']['4']['2']['cont'] = "<input type='text' name='formParams[title]'		size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_title')."\">\r";
 // $T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[subtitle]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_subtitle')."\">\r";
 
-$tabDeadline[$currentArticleObj->getArticleEntry('deadline_id')]['s'] = " selected ";
+$ClassLoaderObj = ClassLoader::getInstance ();
+
+// Deadline
+$ClassLoaderObj->provisionClass ( 'DeadLine' );	// Make sure we got it loaded
+$deadlineTmpObj = new DeadLine();
+$deadlineTmpObj->getDataFromDB($currentArticleObj->getArticleEntry('fk_deadline_id'));
+$tabDeadline[$deadlineTmpObj->getDeadLineEntry('deadline_name')]['s'] = " selected ";
 $T['Content']['1']['6']['2']['cont'] = "<select name='formParams[deadline]'>\r";
 foreach ( $tabDeadline as $A ) { $T['Content']['1']['6']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['6']['2']['cont'] .= "</select>\r";
 
+// Page
 $T['Content']['1']['7']['2']['cont'] = "<input type='text' name='formParams[page]'	size='35' maxlength='255' value=\"".$currentArticleObj->getArticleEntry('arti_page')."\">\r";
 
-
+// Layout
 $tabLayout[$currentArticleObj->getArticleEntry('layout_generic_name')]['s'] = " selected ";
 $T['Content']['1']['8']['2']['cont'] = "<select name='formParams[layout_generic_name]'>\r";
 foreach ( $tabLayout as $A ) { $T['Content']['1']['8']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['8']['2']['cont'] .= "</select>\r";
 
-
-
-$tabDocument[$currentArticleObj->getArticleEntry('docu_id')]['s'] = " selected ";
+// Document
+$ClassLoaderObj->provisionClass ( 'Document' );	// Make sure we got it loaded
+$documentTmpObj = new Document();
+$documentTmpObj->getDataFromDB($currentArticleObj->getArticleEntry('fk_docu_id'));
+$tabDocument[$documentTmpObj->getDocumentEntry('docu_name')]['s'] = " selected ";
 $T['Content']['1']['9']['2']['cont'] = "<select name='formParams[document]'>\r";
 foreach ( $tabDocument as $A ) { $T['Content']['1']['9']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
 $T['Content']['1']['9']['2']['cont'] .= "</select>\r";
@@ -296,7 +309,6 @@ $infos['formName'] = "articleForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
+$bts->LMObj->restoreVectorSystemLogLevel();
 
 ?>

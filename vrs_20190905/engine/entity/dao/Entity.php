@@ -42,8 +42,8 @@ class Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-// 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." already exist in DB. Updating Id=".$data['entityId']));
+// 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." already exist in DB. Updating Id=".$data['entityId']));
 		$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($data['columns'], $data['data']);
 		
 		$bts->SDDMObj->query("
@@ -67,7 +67,7 @@ class Entity {
 		$res = true;
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." doesn't exist in DB. Inserting Id=".$data['entityId']));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." doesn't exist in DB. Inserting Id=".$data['entityId']));
 		$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($data['columns'], $data['data']);
 		$bts->SDDMObj->query("
 			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($data['targetTable'])." a

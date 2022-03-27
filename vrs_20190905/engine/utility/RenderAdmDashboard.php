@@ -132,11 +132,11 @@ class RenderAdmDashboard {
 		<tr style=' padding:0px 0px 5px 0px;'>\r
 		";
 		foreach ( $module_tab_adm_ as $m ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 			
 			$infos['module_name'] = $mn = &$m['module_name'];
 			$Content .= "
@@ -157,16 +157,16 @@ class RenderAdmDashboard {
 				
 				$ModuleRendererName = $m['module_classname'];
 				if (!class_exists($ModuleRendererName)) {
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
 					include ($m['module_directory'].$m['module_file']);
 				} else { $Content .= "!! !! !! !!"; }
 				
 				if (class_exists($ModuleRendererName)) { 
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
 					$ModuleRenderer = new $ModuleRendererName(); 
 				}
 				else { 
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
 					$infos['ModuleRendererName'] = $m['module_classname'];
 					$ModuleRenderer = new ModuleNotFound(); 
 				}

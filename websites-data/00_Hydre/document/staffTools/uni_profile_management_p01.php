@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // --------------------------------------------------------------------------------------------
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
@@ -61,9 +58,6 @@ $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_profile_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_profile_management_p01.php");
-
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -409,7 +403,7 @@ else {
 	unset ($T);
 	$T = array();
 	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')) == 0 ) { 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
 		$bts->RequestDataObj->setRequestDataSubEntry('browseTheme', 'theme_name', $ThemeDataObj->getThemeDataEntry('theme_name') );
 		$bts->RequestDataObj->setRequestData('browseTheme', 
 			array(
@@ -418,7 +412,7 @@ else {
 			)
 		);
 	}
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N=`".$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')."`"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N=`".$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')."`"));
 	
 	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('text_choix_theme')."</p>\r";
 	
@@ -427,7 +421,7 @@ else {
 	$PmThemeDataObj = new ThemeData();
 	
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "get theme data with name :".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name']." and id ".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id']."."));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "get theme data with name :".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name']." and id ".$themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id']."."));
 	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
@@ -447,7 +441,7 @@ else {
 	for ( $i = 1; $i < 31; $i++ ) {
 		$TmpBlockEntry = "theme_block_".$bts->StringFormatObj->getDecorationBlockName("", $i, "")."_name";
 		$TmpBlockName = $PmThemeDescriptorObj->getThemeDescriptorEntry($TmpBlockEntry);
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $TmpBlockName));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $TmpBlockName));
 		if ( strlen($TmpBlockName) > 0 ) {
 			$err = 0;
 			foreach ( $ListThemeBlock as $A) {
@@ -486,7 +480,7 @@ else {
 		$PmBlock = $PmThemeDataObj->getThemeName().$currentBlock;
 		
 		$mn = "MpBlock0".$Tab;
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $mn));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $mn));
 
 		$infosTmp = array(
 			'module_name' => $mn,
@@ -661,7 +655,7 @@ else {
 		$j = 0;
 		reset ($iconList);
 		foreach ( $iconList as $A ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " icon ".$A.": " . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " icon ".$A.": " . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)));
 			if ( strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A)) != 0 ) {
 				$PmIcon[$j] = "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],'directory')."/".$PmThemeDataObj->getThemeBlockEntry($infos['blockT'],$A).");";
 			}
@@ -767,8 +761,6 @@ else {
 	
 	$CurrentSetObj->restoreInstanceOfThemeDataObj();
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
-	
-// 	$LMObj->setInternalLogTarget($LOG_TARGET);
 	
 // --------------------------------------------------------------------------------------------
 }

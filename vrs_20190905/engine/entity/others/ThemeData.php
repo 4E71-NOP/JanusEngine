@@ -39,7 +39,7 @@ class ThemeData {
 		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
 		;";
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_id']]['deco_id']	=	$dbp['deco_id'];
@@ -75,7 +75,7 @@ class ThemeData {
 				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing theme_block_".$Block."_name / ".$CurrentBlock['name']." with deco_id=".$CurrentBlock['deco_id']));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing theme_block_".$Block."_name / ".$CurrentBlock['name']." with deco_id=".$CurrentBlock['deco_id']));
 				
 				$cbal = &$BlockAlreadyLoaded[$CurrentBlock['deco_type']][$CurrentBlock['deco_id']]; // Current Block Already Loaded
 				if ( !isset( $cbal ) ) {
@@ -193,7 +193,7 @@ class ThemeData {
 				$BlockM = "B" . $Block . "M";
 				$cbn = &$CurrentBlock['name'];
 				$CurrentBlock['deco_id'] = $this->DecorationList [$cbn]['deco_id'];
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu ".$cbn." with deco_id=".$CurrentBlock['deco_id']));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu ".$cbn." with deco_id=".$CurrentBlock['deco_id']));
 
 				$cbal = &$BlockAlreadyLoaded['10'][$CurrentBlock ['deco_id']];
 				if (!isset ( $cbal )) {
@@ -213,7 +213,7 @@ class ThemeData {
 					
 
 					$CurrentBlock['deco_id'] = $this->DecorationList [$p['text']]['deco_id'];
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Caligraph deco_id=".$CurrentBlock['deco_id']));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Caligraph deco_id=".$CurrentBlock['deco_id']));
 
 					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p['text']]['deco_type'];
 					$DecoTmpObj = new Deco20_Caligraph();
@@ -229,7 +229,7 @@ class ThemeData {
 					// --------------------------------------------------------------------------------------------
 					$CurrentBlock ['deco_id'] = $this->DecorationList[$p ['graphic']]['deco_id'];
 					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList [$p ['graphic']] ['deco_type'];
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Graphic Type=".$CurrentBlock['deco_type']."; deco_id=".$CurrentBlock['deco_id']));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Graphic Type=".$CurrentBlock['deco_type']."; deco_id=".$CurrentBlock['deco_id']));
 
 // 					echo ("<!-- \$p['deco_type']=".$p ['deco_type']."-->\r");
 					switch ($CurrentBlock ['deco_type']) {

@@ -58,7 +58,7 @@ self::$ActionTable['add']['layout_file']		= function (&$a) { return array ("INSE
 self::$ActionTable['add']['log']	= function (&$a) { 
 	$bts = BaseToolSet::getInstance();
 // 	$LMObj = LogManagement::getInstance();
-	$bts->LMObj->InternalLog($a);
+	$bts->LMObj->msgLog($a);
 };
 
 

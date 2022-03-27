@@ -69,11 +69,11 @@ class Hydr {
 		// --------------------------------------------------------------------------------------------
 		$Content =  "";
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Begining Hydr page                                                             |"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Begining Hydr page                                                             |"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 
 		$bts->LMObj->setStoreStatisticsStateOn ();
 		$bts->LMObj->logCheckpoint ( "Index" );
@@ -111,8 +111,8 @@ class Hydr {
 		//
 		$CurrentSetObj->setDataEntry ( 'sessionName', 'HydrWebsiteSessionId' );
 		$bts->initSmObj();
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 		// Scoring on what we recieved (or what's at disposal)
 		$this->prepareAuthProcess();
@@ -203,7 +203,7 @@ class Hydr {
 			// Rendering of the JavaScript
 			//
 			// --------------------------------------------------------------------------------------------
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to render javascript"));
 			$this->GeneratedScript->insertString('JavaScript-OnLoad', "\tconsole.log ( TabInfoModule );" );
 			$this->GeneratedScript->insertString('JavaScript-OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';" );
 			$this->GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js' );
@@ -241,13 +241,13 @@ class Hydr {
 				-->
 				";
 			
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
 	
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_INFORMATION,	'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_ERROR,		'msg' => __METHOD__ ." : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ." ));
 	
 			// --------------------------------------------------------------------------------------------
 			$bts->SDDMObj->disconnect_sql ();
@@ -288,7 +288,7 @@ class Hydr {
 				$bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) == "ModuleAuthentification") { $firstContactScore += 4; }
 		if (strlen ( $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'action' ) == "disconnection" )) { $firstContactScore += 8; }
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$firstContactScore='" . $firstContactScore . "'") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$firstContactScore='" . $firstContactScore . "'") );
 		$this->authentificationMode = "session";
 		$this->authentificationAction = USER_ACTION_SIGN_IN;
 		
@@ -323,7 +323,7 @@ class Hydr {
 				$this->authentificationAction = USER_ACTION_DISCONNECT;
 				break;
 		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState(). ", \$this->authentificationMode=".$this->authentificationMode."; \$this->authentificationAction=".$this->authentificationAction));
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState(). ", \$this->authentificationMode=".$this->authentificationMode."; \$this->authentificationAction=".$this->authentificationAction));
 		return (true);
 	}
 	
@@ -434,39 +434,39 @@ class Hydr {
 		$CurrentSetObj->setInstanceOfUserObj ( new User () );
 		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())) );
 		
 		// 		We have 2 variables used to drive the authentification process.
 		switch ($this->authentificationMode) {
 			case "form" :
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with form mode") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with form mode") );
 				switch ($this->authentificationAction) {
 					case USER_ACTION_DISCONNECT :
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : disconnect submitted") );
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : disconnect submitted") );
 						$bts->SMObj->InitializeSession();
 						$userName = ANONYMOUS_USER_NAME;
 						break;
 					case USER_ACTION_SIGN_IN :
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Connection attempt") );
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Connection attempt") );
 						$userName = $bts->RequestDataObj->getRequestDataSubEntry ( 'authentificationForm', 'user_login' );
 						break;
 				}
 				$bts->SMObj->InitializeSession(); // If a login comes from a form. The session object must be reset!
 				$UserObj->getDataFromDB ( $userName, $WebSiteObj );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : user_login=" . $UserObj->getUserEntry ( 'user_login' )) );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : user_login=" . $UserObj->getUserEntry ( 'user_login' )) );
 				$bts->AUObj->checkUserCredential ( $UserObj, 'form' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Connection attempt end") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Connection attempt end") );
 				break;
 			case "session" :
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with session mode. user_login='" . $bts->SMObj->getSessionEntry ( 'user_login' ) . "'") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Authentification with session mode. user_login='" . $bts->SMObj->getSessionEntry ( 'user_login' ) . "'") );
 				
 				// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 				if (strlen ( $bts->SMObj->getSessionEntry ( 'user_login' ) ) == 0) {
-					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION strlen(user_login)=0") );
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$_SESSION strlen(user_login)=0") );
 				}
 				$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
 				if ($UserObj->getUserEntry ( 'error_login_not_found' ) != 1) {
-					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : session mode : " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : session mode : " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
 					$bts->AUObj->checkUserCredential ( $UserObj, 'session' );
 				} else {
 					// No form then no user found it's defintely an anonymous user
@@ -476,12 +476,12 @@ class Hydr {
 				}
 				break;
 		}		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () )) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION )) );
 		if ($bts->AUObj->getDataEntry ( 'error' ) === TRUE) {
 			$UserObj->getDataFromDB ( "anonymous", $WebSiteObj );
 		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : checkUserCredential end") );
 		return (true);
 	}
 
@@ -502,7 +502,7 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "languageSelection" );
 
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Language selection start") );
 		$scoreLang = 0;
 		
 		if (strlen ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) != 0 && $bts->RequestDataObj->getRequestDataEntry ( 'l' ) != 0) {
@@ -515,24 +515,24 @@ class Hydr {
 			$scoreLang += 1;
 		}
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "'") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "'") );
 		
 		switch ($scoreLang) {
 			case 0 :
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language.") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language.") );
 				$CurrentSetObj->setDataEntry ( 'language', 'eng' );
 				$CurrentSetObj->setDataEntry ( 'language_id', '38' );
 				break;
 			case 1 :
 				$tmp = $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_639_3' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "->" . $tmp . ")") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ) . "->" . $tmp . ")") );
 				$CurrentSetObj->setDataEntry ( 'language', $tmp );
 				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $WebSiteObj->getWebSiteEntry ( 'fk_lang_id' ), 'lang_id' ) );
 				break;
 			case 2 :
 			case 3 :
 				$tmp = $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_639_3' );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says User priority (Case=" . $scoreLang . "; " . $UserObj->getUserEntry ( 'user_lang' ) . "->" . $tmp . ")") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says User priority (Case=" . $scoreLang . "; " . $UserObj->getUserEntry ( 'user_lang' ) . "->" . $tmp . ")") );
 				$CurrentSetObj->setDataEntry ( 'language', $tmp );
 				$CurrentSetObj->setDataEntry ( 'language_id', $bts->CMObj->getLanguageListSubEntry ( $UserObj->getUserEntry ( 'user_lang' ), 'lang_id' ) );
 				break;
@@ -541,7 +541,7 @@ class Hydr {
 			case 6 :
 			case 7 :
 				$tmp = strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) );
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says URL priority (Case=" . $scoreLang . "; " . $bts->RequestDataObj->getRequestDataEntry ( 'l' ) . "->" . $tmp . ")") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says URL priority (Case=" . $scoreLang . "; " . $bts->RequestDataObj->getRequestDataEntry ( 'l' ) . "->" . $tmp . ")") );
 				$CurrentSetObj->setDataEntry ( 'language', $tmp ); // URl/form asked, the king must be served!
 				$CurrentSetObj->setDataEntry ( 'language_id', strtolower ( $bts->RequestDataObj->getRequestDataEntry ( 'l' ) ) );
 				break;
@@ -551,7 +551,6 @@ class Hydr {
 		$I18nObj = I18nTrans::getInstance ();
 		$I18nObj->getI18nTransFromDB();
 		
-		$bts->LMObj->restoreLastInternalLogTarget ();		
 		return (true);
 	}
 
@@ -575,10 +574,10 @@ class Hydr {
 		$FormToCommandLineObj = FormToCommandLine::getInstance ();
 		$FormToCommandLineObj->analysis ();
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
 		
 		if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
 			
 			$ClassLoaderObj->provisionClass ('CommandConsole');
 			$CurrentSetObj->setInstanceOfWebSiteContextObj ($WebSiteObj); // Set an initial website context.
@@ -589,7 +588,7 @@ class Hydr {
 			switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
 				case "enabled" :
 					foreach ( $Script as $A ) {
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`".$A."`)") );
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`".$A."`)") );
 						$CommandConsoleObj->executeCommand ( $A );
 						
 						// We have to reload website and user in case of one of them was updated was updated.
@@ -601,12 +600,12 @@ class Hydr {
 				case "disabled" :
 				default :
 					foreach ( $Script as $A ) {
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
 					}
 					break;
 			}
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
 		}
 		
 		switch ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'origin' ) . $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'section' )) {
@@ -641,7 +640,7 @@ class Hydr {
 		$bts->MapperObj->setSqlApplicant ( "initializeArticle" );
 		
 		if (strlen ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') ) == 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
 			$sqlQuery = "
 				SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
 				FROM " . $this->SqlTableListObj->getSQLTableName ( 'menu' ) . " mnu, " . $this->SqlTableListObj->getSQLTableName ( 'deadline' ) . " bcl
@@ -655,7 +654,7 @@ class Hydr {
 				AND mnu.menu_initial_document = '1'
 				ORDER BY mnu.menu_parent,mnu.menu_position
 				;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
@@ -665,7 +664,7 @@ class Hydr {
 			$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', 1 );
 		} else {
 			// Is the user can read this article ?
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A route exists in the session. The target is `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A route exists in the session. The target is `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 	
 			// Special case for admin auth 
 			if ( $bts->SMObj->getSessionSubEntry('currentRoute', 'target') == "admin-authentification") {
@@ -674,7 +673,7 @@ class Hydr {
 					WHERE art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
 					AND art.arti_page = '1';
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			}
 			else {
@@ -692,11 +691,11 @@ class Hydr {
 					AND art.arti_slug = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."'
 					AND art.arti_page = '".$bts->SMObj->getSessionSubEntry('currentRoute', 'page')."';
 					;";
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 				$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			}
 			if ($bts->SDDMObj->num_row_sql ( $dbquery ) > 0) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : We got SQL rows for `".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 					$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', $dbp ['menu_id'] );
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', $dbp ['arti_id'] );
@@ -705,7 +704,7 @@ class Hydr {
 					$CurrentSetObj->setDataSubEntry ( 'article', 'arti_page', $dbp ['arti_page'] );
 				}
 			} else {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No SQL rows for ".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')));
 				$CurrentSetObj->setDataSubEntry ( 'article', 'menu_id', "" );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_id', "" );
 				$CurrentSetObj->setDataSubEntry ( 'article', 'arti_ref', $CurrentSetObj->getDataEntry ( 'language' ) ."_". 'article_not_found' );
@@ -840,7 +839,7 @@ class Hydr {
 								$this->GeneratedScript->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
+							$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
 							$A['content'] = $RenderModuleObj->render($A['module_name']);
 							break;
 					}
@@ -979,7 +978,7 @@ class Hydr {
 		$bts->MapperObj->RemoveThisLevel ( $localisation );
 		$bts->MapperObj->setSqlApplicant ( "buildFileSelector" );
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 		
 		$Content = "";
 		if ($CurrentSetObj->getDataEntry ( 'fsIdx' ) > 0) {

@@ -54,13 +54,13 @@ class ConfigurationManagement {
 // 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$configFile = "current/config/current/site_" . $bts->SMObj->getSessionEntry('ws') . "_config.php";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file `".$configFile."` doesn't exists -> reset session."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file `".$configFile."` doesn't exists -> reset session."));
 			$bts->SMObj->ResetSession();
 			$configFile = "current/config/current/site_" . $bts->SMObj->getSessionEntry('ws') . "_config.php";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
 			include ($configFile);
 		}
 		$CurrentConfig = returnConfig();
@@ -135,7 +135,7 @@ class ConfigurationManagement {
 					}
 				}
 
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "  : Render mode. LanguageList=".$bts->StringFormatObj->arrayToString($this->LanguageList)) );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "  : Render mode. LanguageList=".$bts->StringFormatObj->arrayToString($this->LanguageList)) );
 
 				break;
 		}

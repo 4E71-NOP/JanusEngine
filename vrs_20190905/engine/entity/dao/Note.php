@@ -45,7 +45,7 @@ class Note extends Entity {
 			WHERE note_id = '" . $id . "'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for note id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for note id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
 					if (isset($this->columns[$A])) { $this->Note[$A] = $B; }
@@ -53,7 +53,7 @@ class Note extends Entity {
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for note id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for note id=".$id));
 		}
 	}
 	

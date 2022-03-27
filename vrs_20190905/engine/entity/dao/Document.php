@@ -45,15 +45,16 @@ class Document extends Entity{
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*, shr.share_modification 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
-			WHERE shr.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
+			WHERE shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
-			AND shr.docu_id = doc.docu_id 
+			AND shr.fk_docu_id = doc.docu_id 
 			AND doc.docu_origin = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {
 					if (isset($this->columns[$A])) { $this->Document[$A] = $B; }
@@ -61,7 +62,7 @@ class Document extends Entity{
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
 		}
 	}
 	

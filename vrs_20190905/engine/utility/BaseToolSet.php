@@ -68,7 +68,6 @@ class BaseToolSet {
 		
 		$this->TimeObj					= Time::getInstance();
 		$this->LMObj					= LogManagement::getInstance();
-		$this->LMObj->setInternalLogTarget(LOG_TARGET);
 		$this->MapperObj				= Mapper::getInstance();
 		$this->RequestDataObj			= RequestData::getInstance();
 		$this->StringFormatObj			= StringFormat::getInstance();

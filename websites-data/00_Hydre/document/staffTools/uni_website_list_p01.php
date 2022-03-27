@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 /*Hydr-Content-Begin*/
 $localisation = " / uni_website_list_p01";
 $bts->MapperObj->AddAnotherLevel($localisation );

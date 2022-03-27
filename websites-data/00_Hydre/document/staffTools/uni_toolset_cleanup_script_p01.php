@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestDataEntry('scriptSrc',"
 add layout_content to_layout		'mwm_aqua_01_layout_par_defaut'		module_name		'blason'
 line	'1'	calculus_type 	'STATIC'

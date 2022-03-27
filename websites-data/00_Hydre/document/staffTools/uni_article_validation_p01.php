@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // $RequestDataObj->setRequestDataEntry('script_source',"");
 $bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 		array(

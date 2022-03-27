@@ -45,12 +45,13 @@ class HydrInstall {
 		$bts = BaseToolSet::getInstance();
 		
 		$bts->LMObj->setDebugLogEcho ( 1 );
-		$bts->LMObj->setInternalLogTarget ( INSTALL_LOG_TARGET );
+		$bts->LMObj->setVectorInternal(false);
+		$bts->LMObj->setVectorSystemLog(true);
 		$bts->CMObj->InitBasicSettings ();
 		
 		$ClassLoaderObj->provisionClass ( 'SessionManagement' );
 		$bts->initSmObj ();
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 		
@@ -214,7 +215,7 @@ class HydrInstall {
 			$CurrentSetObj->setDataEntry('language', "eng");
 		}
 
-		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Loading `current/install/i18n/install_init_" . $l . ".php`"));
+		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Loading `current/install/i18n/install_init_" . $l . ".php`"));
 		$bts->I18nTransObj->apply (
 			array(
 				"type"		=> "file", 
@@ -236,12 +237,12 @@ class HydrInstall {
 
 		// Monitor or Install screens
 		// if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is an install page") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is an install page") );
 		$ModuleLisObj->makeInstallModuleList();
 		$ContentFragments = $LayoutProcessorObj->installRender('install.lyt.html');
 		// }
 		// else { 
-		// 	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );
+		// 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );
 		// 	$ModuleLisObj->makeMonitorModuleList(); 
 		// 	$ContentFragments = $LayoutProcessorObj->installRender('install_monitor.lyt.html');
 		// }
@@ -268,7 +269,7 @@ class HydrInstall {
 								$GeneratedScriptObj->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
+							$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : `". $A['type'] ."`; for `". $A['module_name'] ."` and data ". $A['data'] ) );
 							$A['content'] = $RenderModuleObj->render($A['module_name']);
 							break;
 					}
@@ -277,7 +278,7 @@ class HydrInstall {
 		}
 		
 		foreach ( $ContentFragments as &$A ) {
-			//	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
+			//	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ". $C['content']));
 			$DocContent .= $A['content'];
 		}
 	

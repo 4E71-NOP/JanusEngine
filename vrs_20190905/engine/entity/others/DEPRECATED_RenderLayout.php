@@ -58,9 +58,9 @@ class RenderLayout {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				foreach ( $dbp as $A => $B ) { $this->ModuleList[$dbp['module_name']][$A] = $B; }
 			}
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
 		}
-		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for layout ")); }
+		else { $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for layout ")); }
 		
 		$switch_score = 10;
 
@@ -79,14 +79,14 @@ class RenderLayout {
 		AND pr.layout_id = sp.fk_layout_id
 		AND sp.fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 		;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$switch_score=".$switch_score));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$switch_score=".$switch_score));
 
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $layout_selection = $dbp['pr_layout_id']; }
 		if ( $layout_selection != 0 ) { $switch_score += 1000; }
 		
 		if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('layout_id') != 0 ) { $switch_score += 100; }
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		switch ($switch_score) {
 			case 1010 :
 			case 1110 :
@@ -104,7 +104,7 @@ class RenderLayout {
 					WHERE fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 					AND default_layout_content = '1'
 					;";
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :  \$sqlQuery=`".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 					$dbquery = $bts->SDDMObj->query($sqlQuery);
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->loadRawData ( $dbp['layout_id'] ); }
 				break;
@@ -113,10 +113,10 @@ class RenderLayout {
 // --------------------------------------------------------------------------------------------
 //	Part 2
 // --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : count(\$this->PL)=".count($this->PL)));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : count(\$this->PL)=".count($this->PL)));
 		foreach ( $this->PL as $A )  {
 			$m = $A['lyoc_module_name'];
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Module=".$m."; lyoc_calculation_type=".$A['lyoc_calculation_type']));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Module=".$m."; lyoc_calculation_type=".$A['lyoc_calculation_type']));
 			switch ( $A['lyoc_calculation_type'] ) {
 				case 0:
 					$this->Layout[$m]['lyoc_margin_left']		= $A['lyoc_margin_left'];
@@ -150,7 +150,7 @@ class RenderLayout {
 					
 					switch ( $dynamic_['note'] ) {
 						case 0:		
-							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Module=".$m." has a dynamic note of 0!!!"));
+							$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Module=".$m." has a dynamic note of 0!!!"));
 							break;
 						
 						case 1:
@@ -270,7 +270,7 @@ class RenderLayout {
 				$this->Layout[$m]['cdy'] = $A['lyoc_minimum_y'] + $this->Layout[$m]['lyoc_margin_top'] + $this->Layout[$m]['lyoc_margin_bottom'];
 			}
 			$this->Layout[$m]['lyoc_module_zindex'] = $A['lyoc_module_zindex'];
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Layout calulation for module '".$m."'. Layout[".$m."]= ". $bts->StringFormatObj->arrayToString($this->Layout[$m])));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Layout calulation for module '".$m."'. Layout[".$m."]= ". $bts->StringFormatObj->arrayToString($this->Layout[$m])));
 		}
 		
 		

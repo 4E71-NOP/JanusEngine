@@ -34,19 +34,19 @@ class LibInstallation {
 	public function scanDirectories ( &$infos ) {
 		// $LMObj = LogManagement::getInstance();
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		
 		foreach ( $infos['directory_list'] as &$A ) {
 			$currentDir = $A['name'];
 			$dirFileList = array();
 			$handle = opendir( $infos['path'].$currentDir."/".$infos['section']."/" );
 			// $LMObj->logDebug($infos['path'].$currentDir."/".$infos['section']."/<br>\r",0);
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing : ".$infos['path'].$currentDir."/".$infos['section']."/"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing : ".$infos['path'].$currentDir."/".$infos['section']."/"));
 			
 			// $infos['opendir'] = $handle;
 			if ( $A['state'] == "on" && $handle != null ) {
 				while (false !== ($file = readdir($handle))) {
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing file : ".$file));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Processing file : ".$file));
 					$acd_ERR = 0;
 					if ( $file == "." || $file == ".." ) { $acd_ERR = 1; }
 					if ( strpos($file, ".save" ) != FALSE ) { $acd_ERR = 1; }
@@ -60,7 +60,7 @@ class LibInstallation {
 				$A['filesFound'] = 1;
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -71,11 +71,11 @@ class LibInstallation {
 	 */
 	public function executeContent (&$infos, &$list) {
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Begin"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Begin"));
 
 		foreach ( $list['filelist'] as $A ) {
 			$infos['currentFileName'] = $A;
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$infos['currentFileName']));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$infos['currentFileName']));
 			
 			$path = $infos['path'].$list['name']."/".$infos['section']."/".$A;
 			$infos['currentTableName']= $bts->CMObj->getConfigurationEntry('tabprefix') . str_replace(".sql" , "" , $A );
@@ -88,7 +88,7 @@ class LibInstallation {
 			$this->report[$infos['section']][$infos['currentFileName']]['WARN']	= 0;	
 			$this->report[$infos['section']][$infos['currentFileName']]['ERR']	= 0;	
 			
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : processing file : `".$this->report[$infos['section']][$infos['currentFileName']]['file']."`"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : processing file : `".$this->report[$infos['section']][$infos['currentFileName']]['file']."`"));
 			
 			unset ( $infos['FormattedCommand']);
 			switch ( $infos['method'] ) {
@@ -104,7 +104,7 @@ class LibInstallation {
 					break;
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**

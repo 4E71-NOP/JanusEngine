@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // $CurrentSetObj->setDataEntry('TestMode', 1 ); 
 // $CurrentSetObj->setDataEntry('formScrExec', array(
 // // 		"inputFile"	=>	"../websites-data/00_Hydre/document/uni_actualite_p01.php",

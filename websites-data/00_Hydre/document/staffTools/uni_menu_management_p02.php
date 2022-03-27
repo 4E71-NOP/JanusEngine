@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestData('menuForm',
 		array(
 				'selectionId'	=> 150,
@@ -327,7 +324,5 @@ $Content .= $TemplateObj->renderAdminFormButtons($infos, $bts->i18nDoc);
 
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

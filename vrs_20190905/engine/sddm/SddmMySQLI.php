@@ -42,7 +42,7 @@ class SddmMySQLI {
 		$bts = BaseToolSet::getInstance();
 		
 		$TabConfig = $bts->CMObj->getConfiguration();
-		$bts->LMObj->getInternalLog($bts->CMObj->toStringConfiguration());
+		$bts->LMObj->getMsgLog($bts->CMObj->toStringConfiguration());
 		$timeBegin = $bts->TimeObj->getMicrotime ();
 		
 		switch ( $bts->CMObj->getConfigurationEntry('execution_context')) {
@@ -63,7 +63,7 @@ class SddmMySQLI {
 			$bts->LMObj->logSQLDetails ( array ( $timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime() ) );
 			// $this->errorMsg();
 			$msg = "CONNEXION ERROR / err_msg " . $this->DBInstance->connect_error;
-			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
+			$bts->LMObj->msgLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
 			$this->report['cnxErr'] = 1;
 			
 		}
@@ -98,7 +98,7 @@ class SddmMySQLI {
 		);
 		
 		if ($this->DBInstance->errno != 0) {
-			$bts->LMObj->InternalLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($q)."`." ));
+			$bts->LMObj->msgLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($q)."`." ));
 			$SQLlogEntry['signal'] = "ERR";
 			return false;
 			// error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");

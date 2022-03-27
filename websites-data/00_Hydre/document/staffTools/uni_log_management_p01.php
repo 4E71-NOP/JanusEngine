@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // --------------------------------------------------------------------------------------------
 $bts->RequestDataObj->setRequestData('lmForm', 
 	array(
@@ -397,7 +394,5 @@ $CurrentSetObj->getInstanceOfGeneratedScriptObj()->AddObjectEntry ('TooltipConfi
 
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

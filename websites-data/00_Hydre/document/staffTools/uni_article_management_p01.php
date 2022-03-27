@@ -27,11 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $bts->LMObj->setInternalLogTarget("both");
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-$bts->LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestData('articleForm',
 	array(
 		'SQLlang'		=> 48,
@@ -142,7 +137,7 @@ if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
 
 // --------------------------------------------------------------------------------------------
 $langList = $bts->CMObj->getLanguageList();
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "langList=" . $bts->StringFormatObj->arrayToString($langList)));
+$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "langList=" . $bts->StringFormatObj->arrayToString($langList)));
 
 // --------------------------------------------------------------------------------------------
 if ( strlen($bts->RequestDataObj->getRequestDataEntry('SQLlang')) > 0 ) { $langList[$bts->RequestDataObj->getRequestDataEntry('SQLlang')]['s'] = "selected"; }
@@ -244,9 +239,9 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	."&formGenericData[mode]=edit"
 	."&formGenericData[selectionId]=";
 	
-	$linkId2 = "&formGenericData[selectionPage]=";
-	$tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
-	$tranlation = $bts->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
+	// $linkId2 = "&formGenericData[selectionPage]=";
+	// $tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
+	// $tranlation = $bts->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
 	
 	foreach ( $articleList as &$A ) {
 		$i++;
@@ -254,7 +249,8 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 		unset ($B);
 		foreach ( $A as $B ) {
 			$T['Content']['1'][$i]['1']['cont'] = $B['arti_ref'];
-			$articlePageLink .= $linkId1.$B['arti_ref'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
+			$articlePageLink .= $linkId1.$B['arti_id']."'>".$B['arti_page']."</a>";
+			// $articlePageLink .= $linkId1.$B['arti_id'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
 			$articlePageLink .= " - ";
 			$T['Content']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
 			$T['Content']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";

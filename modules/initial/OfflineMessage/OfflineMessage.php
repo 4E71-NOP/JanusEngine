@@ -37,14 +37,14 @@ class ModuleOffLineMessage {
 		$WebSiteObj = new WebSite();
 		
 		if ( $infos['SQLFatalError'] == 1 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " SQLFatalError=1 The website is offline."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " SQLFatalError=1 The website is offline."));
 			$WebSiteObj->setWebSiteEntry('ws_name', "Doh!!!");
 			$WebSiteObj->setWebSiteEntry('ws_message', "Database connexion error!");
 			$WebSiteObj->setWebSiteEntry('ws_title', "Doh!!!");
 		}
 		
 		if ( $infos['bannerOffline'] == 1 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
 // 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 // 			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 			$WebSiteObj->setWebSiteEntry('ws_message', "FR : Le site est hors ligne.<br><br>ENG: The website is offline.");

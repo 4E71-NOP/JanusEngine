@@ -60,7 +60,7 @@ class WebSite extends Entity{
 				WHERE ws_id = '" . $bts->SMObj->getSessionEntry('ws') . "'
 				;" );
 			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$bts->SMObj->getSessionEntry('ws')));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$bts->SMObj->getSessionEntry('ws')));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 					foreach ( $dbp as $A => $B ) {
 						if (isset($this->columns[$A])) { $this->WebSite[$A] = $B; }
@@ -68,7 +68,7 @@ class WebSite extends Entity{
 				}
 			}
 			else {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$bts->SMObj->getSessionEntry('ws')));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$bts->SMObj->getSessionEntry('ws')));
 			}
 			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
 		}
@@ -95,7 +95,7 @@ class WebSite extends Entity{
 				WHERE ws_short = '" . $bts->SMObj->getSessionEntry('ws') . "'
 				;" );
 			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website short=".$bts->SMObj->getSessionEntry('ws')));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website short=".$bts->SMObj->getSessionEntry('ws')));
 				while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 					foreach ( $dbp as $A => $B ) {
 						if (isset($this->columns[$A])) { $this->WebSite[$A] = $B; }
@@ -103,7 +103,7 @@ class WebSite extends Entity{
 				}
 			}
 			else {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website short=".$bts->SMObj->getSessionEntry('ws')));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website short=".$bts->SMObj->getSessionEntry('ws')));
 			}
 			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'] ;		// Dédiée aux routines de manipulation
 		}
@@ -128,7 +128,7 @@ class WebSite extends Entity{
 			WHERE ws_id = '".$id."'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) { 
 					if (isset($this->columns[$A])) { $this->WebSite[$A] = $B; }
@@ -136,7 +136,7 @@ class WebSite extends Entity{
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$id));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=".$id));
 		}
 	}
 	

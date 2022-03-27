@@ -40,15 +40,15 @@ class PermissionList {
 		$q = "SELECT * FROM "
 			.$SqlTableListObj->getSQLTableName('permission')
             ." ORDER BY perm_name;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList query `".$bts->StringFormatObj->formatToLog($q)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				foreach ( $dbp as $A => $B ) { $this->PermissionList[$dbp['perm_id']][$A] = $B; }
 			}
-			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList ". $bts->StringFormatObj->arrayToString($this->PermissionList)));
+			// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList ". $bts->StringFormatObj->arrayToString($this->PermissionList)));
 		}
-		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for permission list ")); }		
+		else { $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for permission list ")); }		
 	}
 
 

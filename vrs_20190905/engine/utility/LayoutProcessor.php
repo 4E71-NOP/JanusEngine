@@ -68,7 +68,7 @@ class LayoutProcessor {
 		AND tw.fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
 		AND tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			$layout_id = $dbp ['layout_file_id'];
@@ -81,16 +81,16 @@ class LayoutProcessor {
 
 		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $finalFileName;
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
 		if ( $fileContentObj->getFileContent() === false ) { 
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : Layout file not found. Back to default layout filename `".$targetFilneName."`") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : Layout file not found. Back to default layout filename `".$targetFilneName."`") );
 			$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . "default.lyt.html"; 
 			$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
 		}
 		
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		// foreach ( $map as $A ) {
-		// 	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Map[] = ".$A['type']." / `".$A['data']."`") );
+		// 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Map[] = ".$A['type']." / `".$A['data']."`") );
 		// }
 		return ($map);
 	}
@@ -116,7 +116,7 @@ class LayoutProcessor {
 		$fileContentObj = FileContent::getInstance();
 //		$layoutFileObj = new LayoutFile();
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
 		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $targetFilneName;
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());

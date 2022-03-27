@@ -45,12 +45,13 @@ class FileSelectorRender {
 		$bts = BaseToolSet::getInstance();
 		
 		$bts->LMObj->setDebugLogEcho ( 1 );
-		$bts->LMObj->setInternalLogTarget ( FILESELECTOR_LOG_TARGET );
+		$bts->LMObj->setVectorInternal(false);
+		$bts->LMObj->setVectorSystemLog(true);
 		$bts->CMObj->InitBasicSettings ();
 		
 		$ClassLoaderObj->provisionClass ( 'SessionManagement' );
 		$bts->initSmObj ();
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 // 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 		
@@ -87,14 +88,14 @@ class FileSelectorRender {
 		$ClassLoaderObj->provisionClass ( 'ConfigurationManagement' );
 		$bts->CMObj->InitBasicSettings ();
 		$bts->initSmObj ();
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 		// --------------------------------------------------------------------------------------------
 		//
 		// Loading the configuration file associated with this website
 		//
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 		
 		$bts->CMObj->LoadConfigFile ();
 		$bts->CMObj->setConfigurationEntry ( 'execution_context', "render" );
@@ -108,7 +109,7 @@ class FileSelectorRender {
 		
 		// Is user_login is defined and different from 'anonymous' we consider the user is authenticated
 		if (strlen ( $bts->SMObj->getSessionEntry ( 'user_login' ) ) == 0 && $bts->SMObj->getSessionEntry ( 'user_login' ) != "anonymous") {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0") );
 			$bts->SMObj->ResetSession ();
 		}
 		
@@ -135,7 +136,7 @@ class FileSelectorRender {
 		$pathToExplore = realpath ( $entryPoint . "/" . $RequestDataObj->getRequestDataEntry ( 'path' ) );
 		$restrictTo = realpath ( $entryPoint . "/" . $RequestDataObj->getRequestDataEntry ( 'restrictTo' ) );
 		
-		$bts->LMObj->InternalLog ( array (
+		$bts->LMObj->msgLog ( array (
 				'level' => LOGLEVEL_STATEMENT,
 				'msg' => "fs.php brefore : entryPoint=`" . $entryPoint . "`, pathToExplore=`" . $pathToExplore . "`, restrictTo=`" . $restrictTo . "`."
 		) );
@@ -145,7 +146,7 @@ class FileSelectorRender {
 		if (strpos ( $pathToExplore, $entryPoint ) === FALSE) {
 			$pathToExplore = $entryPoint;
 		}
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php   after : entryPoint=`" . $entryPoint . "`, pathToExplore=`" . $pathToExplore . "`, restrictTo=`" . $restrictTo . "`.") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php   after : entryPoint=`" . $entryPoint . "`, pathToExplore=`" . $pathToExplore . "`, restrictTo=`" . $restrictTo . "`.") );
 		
 		$TfsIdx = $RequestDataObj->getRequestDataEntry ( 'idx' );
 		$selectionMode = $RequestDataObj->getRequestDataEntry ( 'mode' );
@@ -155,7 +156,7 @@ class FileSelectorRender {
 		$strAdd = $RequestDataObj->getRequestDataEntry ( 'strAdd' );
 		$displayType = $RequestDataObj->getRequestDataEntry ( 'displayType' );
 		
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php strAdd=`" . $strAdd . "`;strRemove=`" . $strRemove . "`; preg_replace=`" . $strAdd . preg_replace ( $strRemove, '', '../../dir/dir/file.php' )) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php strAdd=`" . $strAdd . "`;strRemove=`" . $strRemove . "`; preg_replace=`" . $strAdd . preg_replace ( $strRemove, '', '../../dir/dir/file.php' )) );
 		
 		$pos = strrpos ( $pathToExplore, "/" );
 		$pathToExploreUp = substr ( $pathToExplore, 0, $pos );
@@ -165,12 +166,12 @@ class FileSelectorRender {
 		$fileList ['1'] ['..']		= array ( "name" => "..",	"target" => str_replace ( $entryPoint, "", $pathToExploreUp ));
 		// exit();
 		$handle = opendir ( $pathToExplore );
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " exploring : " . $pathToExplore ));
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " exploring : " . $pathToExplore ));
 		while ( false !== ($f = readdir ( $handle )) ) {
 			if ($f != "." && $f != "..") {
 				$currentFile = $pathToExplore . "/" . $f;
 				if (is_dir ( $currentFile )) {
-					$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a directory." ));
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a directory." ));
 					$fileList ['1'] [$f] ['name'] = $f;
 					$fileList ['1'] [$f] ['target'] = str_replace ( $entryPoint, "", $currentFile );
 				} else {
@@ -178,16 +179,16 @@ class FileSelectorRender {
 						$fileList ['0'] [$f] ['name'] = $f;
 						$linkTargetPath = $pathToExplore . "/" .readlink($currentFile);
 						if ( file_exists($linkTargetPath)) {
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a valid link (".$linkTargetPath.")." ));
+							$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a valid link (".$linkTargetPath.")." ));
 							$fileList ['0'] [$f] ['type'] = 1;
 						} else {
-							$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a bad link.(".$linkTargetPath.")." ));
+							$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a bad link.(".$linkTargetPath.")." ));
 							$fileList ['0'] [$f] ['type'] = 2;
 						}
 						$fileList ['0'] [$f] ['target'] = str_replace ( $entryPoint, "", readlink ( $currentFile ) );
 					} 
 					else {
-						$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a regular file." ));
+						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a regular file." ));
 						$fileList ['0'] [$f] ['name'] = $f;
 						$fileList ['0'] [$f] ['type'] = 0;
 						$fileList ['0'] [$f] ['target'] = str_replace ( $entryPoint, "", $currentFile );
@@ -294,7 +295,7 @@ class FileSelectorRender {
 			case "fileList" :
 				$Content .= "<table class='".$Block._CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' width='100%'>\r";
 				$scoreMode = ($selectionMode == 'file') ? 0 : 4;
-				$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php selectionMode=`" . $selectionMode . "`;scoreMode=`" . $scoreMode . "`.") );
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php selectionMode=`" . $selectionMode . "`;scoreMode=`" . $scoreMode . "`.") );
 
 				foreach ( $fileList ['1'] as $A ) {
 					$target = (strlen ( $strRemove ) > 0) ? $strAdd . preg_replace ( $strRemove, '', $A ['target'] ) : $strAdd . $A ['target'];
@@ -353,8 +354,8 @@ echo ($fs->render());
 
 if ( session_write_close () === false ){
 	$bts = BaseToolSet::getInstance();
-	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()) );
-	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => "session_write_close() returned false. Something went wrong.") );
+	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()) );
+	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => "session_write_close() returned false. Something went wrong.") );
 }
 
 

@@ -84,7 +84,7 @@ class User extends Entity {
 			AND gu.fk_group_id = sg.fk_group_id
 			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -104,7 +104,7 @@ class User extends Entity {
 				WHERE fk_user_id = '" . $this->User['user_id'] . "'
 				ORDER BY fk_group_id
 				;";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 			$dbquery = $bts->SDDMObj->query ($sqlQuery);
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ($dbquery) ) {
 				$groupList01[] = $dbp ['fk_group_id'];
@@ -133,7 +133,7 @@ class User extends Entity {
 					}
 				}
 				else {
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) ."` did not return any rows. Most likely it's the end of the search process."));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) ."` did not return any rows. Most likely it's the end of the search process."));
 				}
 				
 				unset ( $A );
@@ -151,10 +151,10 @@ class User extends Entity {
 // 			foreach ( $groupList00 as $A ) { $strGrp .= "'" . $A . "', "; }
 			foreach ( $this->User['group'] as $A => $B ) { $strGrp .= "'" . $A . "', "; }
 			$this->User['clause_in_group'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
 			
 		} else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Login not found. Maybe a user mispelling the login."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Login not found. Maybe a user mispelling the login."));
 			$this->User['error_login_not_found'] == 1;
 		}
 		

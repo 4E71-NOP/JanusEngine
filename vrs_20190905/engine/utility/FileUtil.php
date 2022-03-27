@@ -39,11 +39,11 @@ class FileUtil {
 			$fileData = fread($fileHandle,filesize($filename));
 			fclose($fileHandle);
 
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : File loaded") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : File loaded") );
 			return ($fileData); 
 		}
 		else {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : File '".$filename ."' doesn't exist.") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : File '".$filename ."' doesn't exist.") );
 			return (false);
 		}
 	}

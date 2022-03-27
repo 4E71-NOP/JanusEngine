@@ -56,7 +56,7 @@ class GeneratedScript {
 			$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
 			foreach ($tab as $A ) { 
 				$Content .= $left .$baseUrl.$A . $right;
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left.$baseUrl.$A . $right."`. and ".$_SERVER['HTTP_HOST']));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left.$baseUrl.$A . $right."`. and ".$_SERVER['HTTP_HOST']));
 			}
 		}
 		return  $Content."\r";
@@ -77,7 +77,7 @@ class GeneratedScript {
 			$tab = &$this->GeneratedScript[$section];
 			foreach ($tab as $A ) { 
 				$Content .= $left .$A . $right;
-// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left . $A . $right."`"));
+// 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left . $A . $right."`"));
 				
 			}
 		}
@@ -98,7 +98,7 @@ class GeneratedScript {
 			$tab = &$this->GeneratedScript[$section];
 			foreach ($tab as $A ) { 
 				$Content .= $A . "\r"; 
-// 				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$A ."`"));
+// 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$A ."`"));
 			}
 		}
 		return  $Content."\r";

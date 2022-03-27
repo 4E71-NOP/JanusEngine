@@ -35,7 +35,7 @@ class RenderDeco301Div {
 // 		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
 		// $RenderLayoutObj = RenderLayout::getInstance();
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
 		$mn = $infos['module']['module_name'];
 		// $m = $RenderLayoutObj->getModuleList();
@@ -45,20 +45,20 @@ class RenderDeco301Div {
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Theme name =`".$TN."`"));
 		$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'G');
 
 		switch ($infos['module_display_mode']) {
 			case "bypass":
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'bypass'"));
 				$L['px'] = $infos['admin_control']['px'];
 				$L['py'] = $infos['admin_control']['py'];
 				break;
 			case "normal":
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'normal'"));
 				break;
 			case "menu":
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " display module mode is 'menu' : ".$mn));
 				$mnd = $infos['backup']['module_name'];
 				$B = $ThemeDataObj->getThemeDataEntry($infos['block'].'M');
 				$L['px'] = 0;
@@ -107,7 +107,7 @@ class RenderDeco301Div {
 		
 		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 30 );");
 		// $RenderLayoutObj->setLayoutEntry($mn, $L);		// Saving the updated dataset
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;

@@ -28,16 +28,15 @@ class ModuleAuthentification {
 			$bts->MapperObj->RemoveThisLevel($localisation );
 			$bts->MapperObj->setSqlApplicant("ModuleAuthentification");
 	
-			$bts->LMObj->setInternalLogTarget(LOG_TARGET);
 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
 			$Block = $ThemeDataObj->getThemeName().$infos['block'];
 	
 			$cnxResult = $bts->AUObj->getDataEntry('errorType');
 			$l = $CurrentSetObj->getDataEntry ('language');
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 			
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionEntry('user_login')));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionEntry('user_login')));
 			
 			if ( $bts->SMObj->getSessionEntry('user_login') == "anonymous") {
 				if ( $bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && 

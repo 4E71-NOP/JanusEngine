@@ -36,7 +36,7 @@ class RenderStylesheet {
 	public function render($tableName, $ThemeDataObj){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$bts->LMObj->InternalLog(array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." Start"));
+		$bts->LMObj->msgLog(array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." Start"));
 		
 // 		$StringFormat = StringFormat::getInstance();
 		

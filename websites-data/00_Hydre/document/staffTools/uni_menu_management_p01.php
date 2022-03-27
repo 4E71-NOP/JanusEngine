@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestData('menu_parent', 39);
 
 // --------------------------------------------------------------------------------------------
@@ -39,9 +36,6 @@ $bts->MapperObj->AddAnotherLevel($localisation );
 $bts->LMObj->logCheckpoint("uni_menu_management_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_menu_management_p01.php");
-
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -87,7 +81,7 @@ $sqlQuery = "
 	AND m.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 	GROUP BY m.fk_lang_id
 	;";
-	$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 	$dbquery = $bts->SDDMObj->query($bts->StringFormatObj->formatToLog($sqlQuery));
 
 $TabListLang = array();
@@ -102,7 +96,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$langClause .= $dbp['fk_lang_id'].", ";
 	$i++;
 }
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "CateTabList=".$bts->StringFormatObj->arrayToString($TabListLang)));
+$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "CateTabList=".$bts->StringFormatObj->arrayToString($TabListLang)));
 $bts->LMObj->logDebug($TabListLang, "CateTabList");
 $langClause = substr($langClause, 0, -2);
 $nbrTabs = $i-1;
@@ -133,7 +127,7 @@ AND lw.fk_ws_id = m.fk_ws_id
 AND m.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position 
 ;";
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
+$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 $dbquery = $bts->SDDMObj->query($sqlQuery);
 
 $stateTab = array(
@@ -221,7 +215,5 @@ $TemplateObj = Template::getInstance();
 $Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

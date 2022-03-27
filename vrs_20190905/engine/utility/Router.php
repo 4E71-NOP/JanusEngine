@@ -36,19 +36,19 @@ class Router {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		if ($bts->RequestDataObj->getRequestDataEntry ( 'formSubmitted' ) == 1 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A form has been submitted"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A form has been submitted"));
 			$this->updateSessionRouteFromForm();
 		}
 		else {
 			$url = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('request_uri');
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analyzing requested URI `".$url."`"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analyzing requested URI `".$url."`"));
 			if ( $this->isCleanUrl($url) === true ) {
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : URL is clean. We consider it's a slug thing."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : URL is clean. We consider it's a slug thing."));
 				$this->updateSessionRouteFromURL($url); 
 			}
 			else {
 				// Neither it is a Form or a Slug thing. We process it as a GET method.
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing with GET method."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing with GET method."));
 				$this->processHydrData($url);
 			}
 		}
@@ -63,10 +63,10 @@ class Router {
 		$bts = BaseToolSet::getInstance();
 		$match = $this->matchRoute("/^(http[s]?:\/\/)?([\w-]+\.)+([\w]+)([\/\w-]+)(\/?)/", $url);
 		if (strlen($match['0']) != strlen($url)) { 
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI isn't clean. \$match=`".$match['0']."`; \$url=`".$url."`"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI isn't clean. \$match=`".$match['0']."`; \$url=`".$url."`"));
 			return false; 
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI is clean."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI is clean."));
 		return true;
 	}
 	
@@ -79,9 +79,9 @@ class Router {
 		$bts = BaseToolSet::getInstance();
 		
 		$match = $this->matchRoute("/(\?|&)"._HYDRLINKURLTAG_."=1/", $url);
-// 		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : BP01 \$match['0']=" . $match['0'] . ", strlen=". strlen($match['0'])));
+// 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : BP01 \$match['0']=" . $match['0'] . ", strlen=". strlen($match['0'])));
 		if (strlen($match['0']) > 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '"._HYDRLINKURLTAG_."' field data. \$match=`".$match['0']."`. From RequestDataEntry "._HYDRLINKURLTAG_."=".$bts->RequestDataObj->getRequestDataEntry ( _HYDRLINKURLTAG_ )));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '"._HYDRLINKURLTAG_."' field data. \$match=`".$match['0']."`. From RequestDataEntry "._HYDRLINKURLTAG_."=".$bts->RequestDataObj->getRequestDataEntry ( _HYDRLINKURLTAG_ )));
 			
 			$tab = array('target'	=> 'home','page'		=> '1' ,);
 			if (strlen ($bts->RequestDataObj->getRequestDataEntry('arti_slug')) > 0 ) { $tab['target'] = $bts->RequestDataObj->getRequestDataEntry('arti_slug'); }
@@ -94,10 +94,10 @@ class Router {
 		
 		$match = $this->matchRoute("/(\?|&)sw=[0-9]+/", $url);
 		if (strlen($match['0']) > 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains 'sw' field data. \$match=`".$match['0']."`. From RequestDataEntry sw=".$bts->RequestDataObj->getRequestDataEntry ( 'sw' )));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains 'sw' field data. \$match=`".$match['0']."`. From RequestDataEntry sw=".$bts->RequestDataObj->getRequestDataEntry ( 'sw' )));
 			$bts->SMObj->setSessionEntry('sw', $bts->RequestDataObj->getRequestDataEntry ( 'sw' ));
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End reached on URL processing"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End reached on URL processing"));
 	}
 	
 	
@@ -108,7 +108,7 @@ class Router {
 		$bts = BaseToolSet::getInstance();
 		$match = $this->matchRoute("/^(http[s]?:\/\/)?([\w-]+\.)+([\w]+)\//", $url);
 		$str = str_replace($match['0'], "", $url);
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : The slug part looks like this. \$str=`".$str."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : The slug part looks like this. \$str=`".$str."`."));
 		if ( strlen($str) > 0) {
 			$expl = explode("/", $str);
 			$tab = array(
@@ -135,14 +135,14 @@ class Router {
 		// We still compare both slug and arti_ref. In the end only the slug will be considered
 		switch ( true ) {
 			case (strlen ( $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_ref' ) ) > 0 ):
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : strlen(arti_ref)>0; arti_ref=`".$bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_ref' )."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : strlen(arti_ref)>0; arti_ref=`".$bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_ref' )."`."));
 				$tab = array(
 					'target'	=> $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_ref' ),
 					'page'		=> $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_page' ),
 				);
 				break;
 			case (strlen ( $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_slug' ) ) > 0 ):
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : strlen(arti_slug)>0; arti_slug=`".$bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_slug' )."`."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : strlen(arti_slug)>0; arti_slug=`".$bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_slug' )."`."));
 				$tab = array(
 					'target'	=> $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_slug' ),
 					'page'		=> $bts->RequestDataObj->getRequestDataSubEntry ( 'newRoute', 'arti_page' ),
@@ -156,7 +156,7 @@ class Router {
 				$bts->SMObj->setSessionSubEntry('currentRoute', 'target', 'home');
 				$bts->SMObj->setSessionSubEntry('currentRoute', 'page', '1');
 			}
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found for routing. We take the last saved route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found for routing. We take the last saved route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
 			$tab = array(
 				'target'	=> $bts->SMObj->getSessionSubEntry('currentRoute', 'target'),
 				'page'		=> $bts->SMObj->getSessionSubEntry('currentRoute', 'page'),
@@ -181,7 +181,7 @@ class Router {
 		$match = array();
 		preg_match($regex, $url, $match);
 		if (strlen($match['0']) > 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Match found in `".$url."`. \$match=`".$match['0']."`" ));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Match found in `".$url."`. \$match=`".$match['0']."`" ));
 		}
 		return $match;
 	}

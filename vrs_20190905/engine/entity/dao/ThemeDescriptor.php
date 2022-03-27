@@ -145,7 +145,7 @@ class ThemeDescriptor extends Entity{
 		AND tw.theme_state = '1'
 		;";
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -170,11 +170,11 @@ class ThemeDescriptor extends Entity{
 		if ( $Dest == "mt_" ) {
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme') != 0 ) { 
 				$Dest = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. id=".$Dest ));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. id=".$Dest ));
 			}
 			else { 
 				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id'); // Problem with the prefered user theme
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. id=".$Dest ));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. id=".$Dest ));
 			}
 			// By default we use ID
 			$q = "
@@ -190,7 +190,7 @@ class ThemeDescriptor extends Entity{
 			// Case for displaying another theme to the user (browsing and choosing).
 			// in this case we use names as this was eventually sent to a command line which only uses names. 
 			$Dest = $bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme');
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. id=".$Dest ));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. id=".$Dest ));
 			$q = "
 			SELECT * FROM " 
 			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
@@ -201,7 +201,7 @@ class ThemeDescriptor extends Entity{
 			;";
 		}
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$Dest .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$Dest .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 		
 		// --------------------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ class ThemeDescriptor extends Entity{
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
 			LIMIT 1
 			;");
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));
 		}
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {

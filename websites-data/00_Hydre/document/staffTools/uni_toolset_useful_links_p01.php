@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // $RequestDataObj->setRequestDataEntry('script_source',"");
 
 /*Hydr-Content-Begin*/
@@ -108,7 +105,7 @@ foreach ( $collection as $key => $A ) {
 	foreach ( $A as $B ) {
 		$T['Content'][$tab][$i]['1']['cont']	= "<a class='".$Block."_lien' style='display:block;' target='_blank' href='".$B['url']."'>".$B['name']."</a>";
 		$T['Content'][$tab][$i]['1']['style']	= "padding:4px;";
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing tab[".$tab."]line[".$i."]/collection[" . $B['name']. ']'));
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Processing tab[".$tab."]line[".$i."]/collection[" . $B['name']. ']'));
 		$i++;
 
 	}

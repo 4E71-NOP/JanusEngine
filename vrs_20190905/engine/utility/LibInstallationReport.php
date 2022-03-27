@@ -132,7 +132,7 @@ class LibInstallationReport {
 		." WHERE instreport_section = '".$section."';"
 		);
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lineCount']; }
-		// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
+		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
 		return ($n);
 	}
 
@@ -222,7 +222,7 @@ class LibInstallationReport {
 	 */
 	public function renderConfigFile (&$infos) {
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
 
 // 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "

@@ -70,7 +70,7 @@ SELECT usr.user_login,s.ws_name
 FROM ".$SQL_tab_abrege['user']." usr , ".$SQL_tab_abrege['group_user']." gu , ".$SQL_tab_abrege['group_website']." sg , ".$SQL_tab_abrege['website']." s 
 WHERE usr.user_id = '".$document['docu_examiner']."' 
 AND gu.group_user_initial_group = '1' 
-AND usr.user_id = gu.user_id 
+AND usr.user_id = gu.fk_user_id 
 AND gu.group_id = sg.group_id 
 AND sg.ws_id = s.ws_id 
 ;");

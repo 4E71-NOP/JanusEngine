@@ -41,7 +41,7 @@ class LayoutParser {
 		$i = 0;
 		$ptrStart = 0;
 		foreach( $Result['0'] as $A ) {
-			$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Match! :`". $A['0'] ."` at position ". $A['1'] ) );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Match! :`". $A['0'] ."` at position ". $A['1'] ) );
 			
 			// Match N°1 maybe is at position 0 so...
 			// This case always is a command

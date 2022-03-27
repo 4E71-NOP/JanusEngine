@@ -27,12 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 $bts->RequestDataObj->setRequestData('groupForm',
 		array(
 				'selectionId'	=>	3268730576621700921,
@@ -293,7 +287,5 @@ $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
 
 /*Hydr-Content-End*/
-
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

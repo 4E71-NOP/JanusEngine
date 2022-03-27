@@ -195,7 +195,7 @@ if ( $devDebug != 1 ) {
 	//		Launching scripts.
 	//
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_creation"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_creation"));
 	$infos = array (
 			"path" => "websites-data/",
 			"method" =>  "filename",
@@ -212,7 +212,7 @@ if ( $devDebug != 1 ) {
 	}
 		
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_data"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : tables_data"));
 	$infos = array (
 			"path" => "websites-data/",
 			"method" =>  "filename",
@@ -229,7 +229,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
 	$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 	$r = array(
 			"COMMIT;",
@@ -247,7 +247,7 @@ if ( $devDebug != 1 ) {
 	unset ($r);
 	
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
 	$infos = array (
 			"path" => "websites-data/",
 			"method" =>  "commandConsole",
@@ -264,7 +264,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
 	$infos = array (
 			"path" => "websites-data/",
 			"method" =>  "filename",
@@ -281,7 +281,7 @@ if ( $devDebug != 1 ) {
 	}
 	
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
 	$infos = array (
 			"path" => "websites-data/",
 			"method" =>  "raw_sql",
@@ -297,7 +297,7 @@ if ( $devDebug != 1 ) {
 	}
 		
 	// --------------------------------------------------------------------------------------------
-	$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
+	$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
 	// $infos = array (
 	// 	"path" => "websites-data/",
 	// 	"method" =>  "",

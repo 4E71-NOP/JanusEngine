@@ -34,7 +34,7 @@ class RenderModule {
 		$RenderLayoutObj = RenderLayout::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "";
 		$ModuleTable = $RenderLayoutObj->getModuleList();
@@ -60,14 +60,14 @@ class RenderModule {
 		
 		foreach ( $ModuleTable as $m ) {
 			$_REQUEST['module_nbr'] = 1; // <-- A virer
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 			$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 			
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$m['module_group_allowed_to_see'] = " . $m['module_group_allowed_to_see'] ." and usergroup is " .$bts->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group'))));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "\$m['module_group_allowed_to_see'] = " . $m['module_group_allowed_to_see'] ." and usergroup is " .$bts->StringFormatObj->arrayToString($CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group'))));
 			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserGroupEntry('group', $m['module_group_allowed_to_see']) == 1 ) {
 				$nbr = $m['module_deco_nbr'];
 				$Block = $bts->StringFormatObj->getDecorationBlockName( "B", $nbr , "");
@@ -84,16 +84,16 @@ class RenderModule {
 				$ModuleRendererName = $m['module_classname'];
 				
 				if (!class_exists($ModuleRendererName)) {
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
 					include ($m['module_directory'].$m['module_file']);
 				} else { $Content .= "!! !! !! !!"; }
 				
 				if (class_exists($ModuleRendererName)) { 
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
 					$ModuleRenderer = new $ModuleRendererName(); 
 				}
 				else {
-					$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING , 'msg' => "Module classname doesn't exist. Something went wrong"));
 					$infos['ModuleRendererName'] = $m['module_classname'];
 					$ModuleRenderer = new ModuleNotFound(); 
 				}
@@ -127,16 +127,16 @@ class RenderModule {
 			if (strlen($extraContent)>0) { $Content .= $extraContent; }
 			$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
 			
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " >> END rendering of '".$m['module_name']. "' module is done"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " >> END rendering of '".$m['module_name']. "' module is done"));
 			
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." All module rendered. Getting out of foreach"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." All module rendered. Getting out of foreach"));
 		
 		
 		$Content .= "</div>\r
 			<!-- __________ Modules end __________ -->\r
 			";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
 		
 		switch ( $infos['mode'] ) {
 			case 0 :	echo $Content;		break;
@@ -151,12 +151,12 @@ class RenderModule {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		$Content = "";
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		
 		$err = FALSE;
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
 		switch ( $infos['deco_type'] ) {
 			case 30:	
 			case "1_div":
@@ -180,7 +180,7 @@ class RenderModule {
 				break;
 			default:
 				$mn = $infos['module_name'];
-				$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Decoration number:'".$infos['deco_type']."' (if == 10000 then it's ok)"));
 				$Content .= "
 					<div class='".$ThemeDataObj->getThemeName().$infos['block']."'>\r
 					<div id='".$mn."' class='".$ThemeDataObj->getThemeName().$infos['block']."_div_std' style='position: absolute; left:
@@ -201,7 +201,7 @@ class RenderModule {
 			$Content .= $RenderDeco->render($infos);
 			unset ($RenderDeco);
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"));
 		
 		return $Content;
 	}
@@ -220,7 +220,7 @@ class ModuleNotFound {
 		// 		"m"=>"RenderModule001",
 		// 		"t"=>"No class found for this module",
 		// ));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : No class found for module " . $infos['module_name'] . "; ClassName : `". $infos['ModuleRendererName']."`"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : No class found for module " . $infos['module_name'] . "; ClassName : `". $infos['ModuleRendererName']."`"));
 		
 // 		error_log ("No class found for module " . $infos['module_name'] . "; ClassName : ");
 	}

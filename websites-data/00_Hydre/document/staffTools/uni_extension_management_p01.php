@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
 
@@ -78,12 +75,12 @@ $bts->I18nTransObj->apply(
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group_tag') ));
+$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group_tag') ));
 
 // Will be replaced by a proper user permission management.
 $permissionOnExtenssion = 0;
 $groupList = $CurrentSetObj->getInstanceOfUserObj()->getGroupList();
-// $bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupList=" . $bts->StringFormatObj->arrayToString($groupList) ));
+// $bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupList=" . $bts->StringFormatObj->arrayToString($groupList) ));
 foreach ($groupList as $A) { if ( $A['group_tag'] == 3) { $permissionOnExtenssion = 1; } }
 
 
@@ -209,6 +206,5 @@ if ( $permissionOnExtenssion == 1 ) {
 else { $Content .= "!!!!!!!!!!!!!!!!"; }
 
 /*Hydr-Content-End*/
-// $LMObj->setInternalLogTarget($LOG_TARGET);
 
 ?>

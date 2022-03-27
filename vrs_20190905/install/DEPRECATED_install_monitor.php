@@ -20,14 +20,13 @@ $ClassLoaderObj = ClassLoader::getInstance();
 $ClassLoaderObj->provisionClass('BaseToolSet');		// First of them all as it is used by others.
 $bts = BaseToolSet::getInstance();
 $bts->LMObj->setDebugLogEcho(1);
-$bts->LMObj->setInternalLogTarget(LOG_TARGET);
 $bts->CMObj->InitBasicSettings();
 
 session_name("HydrInstallMonitorSessionId");
 // session_start();
-$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "Install_monitor : **!!** Break **!!**"));
+$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "Install_monitor : **!!** Break **!!**"));
 $bts->initSmObj();
-$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Install_monitor : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)." *** \$bts->SMObj->getSession() = ".$bts->StringFormatObj->arrayToString($bts->SMObj->getSession()). " *** EOL" ));
+$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Install_monitor : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)." *** \$bts->SMObj->getSession() = ".$bts->StringFormatObj->arrayToString($bts->SMObj->getSession()). " *** EOL" ));
 
 $ClassLoaderObj->provisionClass('WebSite');
 

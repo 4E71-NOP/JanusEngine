@@ -35,9 +35,10 @@ define ( "LOGLEVEL_WARNING",		2 ); // More
 define ( "LOGLEVEL_ERROR",			1 ); // Usual level
 define ( "LOGLEVEL_NO_LOG",			0 ); // You don't like to read. Or you don't wanna polute your server.
 
-define ( "LOG_TARGET", "both" ); // none, both, internal, system
-define ( "INSTALL_LOG_TARGET", "system" );
-define ( "FILESELECTOR_LOG_TARGET", "system" );
+// define ( "LOG_TARGET", "both" ); // none, both, internal, system
+
+// define ( "INSTALL_LOG_TARGET", "system" );			//DEPRECATED SOON
+// define ( "FILESELECTOR_LOG_TARGET", "system" );			//DEPRECATED SOON
 
 // --------------------------------------------------------------------------------------------
 // Object SendToDb mode
@@ -51,41 +52,42 @@ define ( "OBJECT_SENDTODB_MODE_UPDATEONLY", 2 );
 $ll = 0;
 switch ($application) {
 	case 'install' :
-		$ll = LOGLEVEL_ERROR;
-		// $ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_INFORMATION;
-		// $ll = LOGLEVEL_STATEMENT;
-		// $ll = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_WARNING;
+		$llvil = LOGLEVEL_WARNING;
 		break;
-	case 'monitor' :
+	// case 'monitor' :
+	// 	// $ll = LOGLEVEL_ERROR;
+	// 	// $ll = LOGLEVEL_WARNING;
+	// 	break;
+	case 'website':
 		// $ll = LOGLEVEL_ERROR;
 		// $ll = LOGLEVEL_WARNING;
-		break;
-	case 'website':
-		$ll = LOGLEVEL_ERROR;
-		$ll = LOGLEVEL_WARNING;
-		$ll = LOGLEVEL_INFORMATION;
+		// $ll = LOGLEVEL_INFORMATION;
 		// $ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_WARNING;
+		// $llvsl = LOGLEVEL_BREAKPOINT;
+
+		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'FileSelector':
-		$ll = LOGLEVEL_ERROR;
-		// $ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_INFORMATION;
-		// $ll = LOGLEVEL_STATEMENT;
-		// $ll = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_WARNING;
+		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	default :
-		$ll = LOGLEVEL_ERROR;
-		// $ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_INFORMATION;
-		// $ll = LOGLEVEL_STATEMENT;
-		// $ll = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_WARNING;
+		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 }
-define ( "INTERNAL_LOG_LEVEL", $ll ) ;
+define ( "SYSTEM_LOG_LEVEL", $llvsl ) ;
+define ( "INTERNAL_LOG_LEVEL", $llvil ) ;
 // error_log("Log level is set to : ". INTERNAL_LOG_LEVEL);
-unset ($ll);
+
+unset (
+	$ll,
+	$llvsl,
+	$llvil,
+);
 
 
 // --------------------------------------------------------------------------------------------

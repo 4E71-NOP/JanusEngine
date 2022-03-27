@@ -31,14 +31,13 @@ class DocumentData {
 		
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-// 		$LOG_TARGET = $bts->LMObj->getInternalLogTarget();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
 		
 // 		Checks if we have a requested article 
 // 		if ( !isset($_REQUEST['arti_ref']) || strlen($_REQUEST['arti_ref']) == 0 ) {
 // 		if ( strlen($bts->RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 		if (strlen ( $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref') ) == 0) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
 			$dbquery = $bts->SDDMObj->query ( "
 			SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
 			FROM " . $SqlTableListObj->getSQLTableName('menu') . " mnu, " 
@@ -60,7 +59,7 @@ class DocumentData {
 			$CurrentSetObj->setDataSubEntry('document', 'arti_page', 1);
 		}
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."`"), false );
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."`"), false );
 		$dbquery = $bts->SDDMObj->query("
 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
 		doc.docu_creator, doc.docu_creation_date,
@@ -81,7 +80,7 @@ class DocumentData {
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " article not found"), false );
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " article not found"), false );
 			
 			$dbquery = $bts->SDDMObj->query("
 			SELECT doc.*
@@ -94,12 +93,11 @@ class DocumentData {
 		}
 		
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Loading data"), false );
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Loading data"), false );
 			foreach ( $dbp as $A => $B ) { $this->DocumentData[$A] = $B; }
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " End"), false );
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " End"), false );
 
-// 		$bts->LMObj->setInternalLogTarget($LOG_TARGET);
 	}
 	
 	//@formatter:off

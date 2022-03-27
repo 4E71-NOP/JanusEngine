@@ -37,7 +37,7 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT DISTINCT arti_ref 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')." 
 			WHERE arti_validation_state = '1'
@@ -47,13 +47,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['arti_ref']]['t']	=	$tab[$dbp['arti_ref']]['db']	= $dbp['arti_ref'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -67,22 +67,22 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')."
-			WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			ORDER BY menu_name
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['menu_id']]['t']	=	$tab[$dbp['menu_id']]['db']	= $dbp['menu_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -96,22 +96,23 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')."
-			WHERE ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			ORDER BY deadline_name
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['deadline_id']]['t']	=	$tab[$dbp['deadline_id']]['db']	= $dbp['deadline_name'];
+				$tab[$dbp['deadline_name']]['t']	= $dbp['deadline_title'];
+				$tab[$dbp['deadline_name']]['db']	= $dbp['deadline_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		return $tab;
 	}
@@ -125,23 +126,23 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT doc.*
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." dp
-			WHERE doc.docu_id = dp.docu_id
-			AND dp.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." ds
+			WHERE doc.docu_id = ds.fk_docu_id
+			AND ds.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			ORDER BY doc.docu_name
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['docu_id']]['t']	=	$tab[$dbp['docu_id']]['db']	= $dbp['docu_name'];
+				$tab[$dbp['docu_name']]['t'] = $tab[$dbp['docu_name']]['db'] = $dbp['docu_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -156,22 +157,22 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT grp.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = sg.group_id
-			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND sg.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['group_id']]['t']	=	$tab[$dbp['group_id']]['db']	= $dbp['group_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -186,25 +187,28 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT p.*
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." p, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_theme')." tp, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." wt
-			WHERE p.layout_id = tp.layout_id
-			AND tp.theme_id = wt.theme_id
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." p, "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_theme')." lt, "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." wt
+			WHERE p.layout_id = lt.fk_layout_id
+			AND lt.fk_theme_id = wt.fk_theme_id
 			AND wt.theme_state = '1'
-			AND wt.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND wt.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.layout_name
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['layout_generic_name']]['t']	=	$tab[$dbp['layout_generic_name']]['db']	= $dbp['layout_generic_name'];
+				$tab[$dbp['layout_generic_name']]['t']	= $dbp['layout_generic_name'];
+				$tab[$dbp['layout_generic_name']]['db']	= $dbp['layout_generic_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -219,7 +223,7 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT l.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw 
 			WHERE l.lang_id = lw.fk_lang_id
@@ -228,13 +232,13 @@ class MenuSelectTable {
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['lang_id']]['t']	=	$tab[$dbp['lang_id']]['db']	= $dbp['lang_original_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -248,23 +252,23 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT t.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." st 
 			WHERE t.theme_id = st.theme_id
 			AND st.theme_state = '1' 
-			AND st.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND st.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['theme_id']]['t']	=	$tab[$dbp['theme_id']]['db']	= $dbp['theme_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;
@@ -278,27 +282,27 @@ class MenuSelectTable {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
+		$dbquery = $bts->SDDMObj->query("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." usr, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')." gu, " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group_website' ) . " sg , " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group' ) . " g
-			WHERE usr.user_id = gu.user_id
+			WHERE usr.user_id = gu.fk_user_id
 			AND gu.group_user_initial_group = '1'
 			AND g.group_tag IN (2,3)
-			AND gu.group_id = g.group_id
-			AND gu.group_id = sg.group_id
-			AND sg.ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND gu.fk_group_id = g.group_id
+			AND gu.fk_group_id = sg.fk_group_id
+			AND sg.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			ORDER BY usr.user_name
 		;");
 		$tab = array();
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['user_id']]['t']	=	$tab[$dbp['user_id']]['db']	= $dbp['user_name'];
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
 		}
 		
 		return $tab;	

@@ -37,7 +37,7 @@ class I18nTrans {
 	public function getI18nTransFromDB ($package = 'initial' ) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$bts->LMObj->InternalLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=".$CurrentSetObj->getDataEntry('language_id')) );
 		
 		$dbquery = $bts->SDDMObj->query ("
 			SELECT i18n_name, i18n_text 
@@ -64,20 +64,20 @@ class I18nTrans {
 				switch ($data['type']){
 					case "array": 
 						if ( is_array($data[$CurrentSetObj->getDataEntry('language')])){
-							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
+							$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
 							$this->I18nTrans = array_merge ($tab0, $data[$CurrentSetObj->getDataEntry ('language')]);
 						}
 						else {
-							$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't merge data. It's not an array."));
+							$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't merge data. It's not an array."));
 						}
 						break;
 					case "file":
 						switch ($data['format']) {
 							case 'php':
 								$i18n = array();
-								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading ".$data['file']));
+								$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading ".$data['file']));
 								include($data['file']); // will create $i18n
-								$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
+								$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Merging "));
 								$this->I18nTrans = array_merge ($tab0, $i18n);
 								break;
 							case 'lang':
@@ -91,7 +91,7 @@ class I18nTrans {
 			}
 		}
 		else {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : CurrentSetObj->language is empty. I don't know where to put the data."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : CurrentSetObj->language is empty. I don't know where to put the data."));
 		}
 		
 	}

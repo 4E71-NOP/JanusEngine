@@ -262,7 +262,7 @@ class InstallPage03 {
 	 */
 	private function initSDDM() {
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
@@ -306,7 +306,7 @@ class InstallPage03 {
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
 		$bts->initSddmObj();
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -315,8 +315,8 @@ class InstallPage03 {
 	private function processFileRenderConfigFile(){
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : renderConfigFile"));
 		$LibInstallationReportObj = LibInstallationReport::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$this->tabConfigFile = array();
@@ -330,7 +330,7 @@ class InstallPage03 {
 
 		$dl = $bts->RequestDataObj->getRequestDataEntry('directory_list');
 		foreach ( $dl as $A ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing " . $A));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing " . $A));
 
 			// $infos = array ( "n" => $i, );
 			$infos = array ( "n" => $shortNames[$A], );
@@ -339,7 +339,7 @@ class InstallPage03 {
 			$this->tabConfigFile[$i]['cont'] = $LibInstallationReportObj->renderConfigFile($infos);
 			$i++;
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 	
 	/**

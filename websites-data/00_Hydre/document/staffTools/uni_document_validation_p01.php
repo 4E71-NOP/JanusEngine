@@ -27,9 +27,6 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-// $LOG_TARGET = $LMObj->getInternalLogTarget();
-// $LMObj->setInternalLogTarget("both");
-
 // --------------------------------------------------------------------------------------------
 $bts->RequestDataObj->setRequestData('scriptFile', '01020203110001_p02.wmcode');
 $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');

@@ -47,7 +47,7 @@ class ModuleList {
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;";
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$bts->StringFormatObj->formatToLog($q)."`."));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -56,9 +56,9 @@ class ModuleList {
 				}
 				$this->ModuleList[$dbp['module_id']] = &$this->ModuleList[$dbp['module_name']]; 
 			}
-			// $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
+			// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList ". $bts->StringFormatObj->arrayToString($this->ModuleList)));
 		}
-		else { $bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for module list ")); }		
+		else { $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for module list ")); }		
 	}
 
 	/**

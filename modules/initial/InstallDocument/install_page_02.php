@@ -133,7 +133,7 @@ class InstallPage02 {
 	 */
 	private function initSDDM() {
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
@@ -177,7 +177,7 @@ class InstallPage02 {
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
 		$bts->initSddmObj();
 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -185,7 +185,7 @@ class InstallPage02 {
 	 */
 	private function databaseInitialization() {
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$r = array();
@@ -222,7 +222,7 @@ class InstallPage02 {
 		// 	$monSQLn += 9;
 		break;
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return ($r);
 	}
 
@@ -231,7 +231,7 @@ class InstallPage02 {
 	 */
 	private function databaseUserRecreate(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 		$r = array();
 		switch ( $bts->CMObj->getConfigurationSubEntry('db','dataBaseUserRecreate') ) {
@@ -247,7 +247,7 @@ class InstallPage02 {
 			// 	$monSQLn += 8;
 			break;
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return ($r);
 	}
 
@@ -256,7 +256,7 @@ class InstallPage02 {
 	 */
 	private function processQueryScript($qs) {
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 
 		switch ( $this->form['operantingMode']) {
 			case 'directCnx':
@@ -267,7 +267,7 @@ class InstallPage02 {
 				break;
 		}
 		
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 
@@ -276,7 +276,7 @@ class InstallPage02 {
 	 */
 	private function processFileCreateTable(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		$infos = array (
 				"path" => "websites-data/",
@@ -288,12 +288,12 @@ class InstallPage02 {
 		
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ( $infos['directory_list'] as $A ) {
-			$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$A['name']));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " .$A['name']));
 			if ( isset ($A['filesFound'] ) ) {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -301,7 +301,7 @@ class InstallPage02 {
 	 */
 	private function processFileTableData(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 
 		// --------------------------------------------------------------------------------------------
@@ -317,7 +317,7 @@ class InstallPage02 {
 		foreach ( $infos['directory_list'] as $A ) {
 			if ( isset ($A['filesFound'] ) ) { $LibInstallationObj->executeContent($infos, $A);	}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 	/**
@@ -325,11 +325,11 @@ class InstallPage02 {
 	 */
 	private function installTableInitialization(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
 		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
 		$r = array(
 				"COMMIT;",
@@ -342,7 +342,7 @@ class InstallPage02 {
 		);
 		$this->processQueryScript($r);
 		unset ($r);
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 	
 	/**
@@ -350,10 +350,10 @@ class InstallPage02 {
 	 */
 	private function processFileCommandConsole(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
 		$infos = array (
 				"path" => "websites-data/",
 				"method" =>  "commandConsole",
@@ -368,7 +368,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 
 
@@ -377,10 +377,10 @@ class InstallPage02 {
 	 */
 	private function processFileTablePostInstall(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
 		$infos = array (
 				"path" => "websites-data/",
 				"method" =>  "filename",
@@ -395,7 +395,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
 	
 	/**
@@ -403,10 +403,10 @@ class InstallPage02 {
 	 */
 	private function processFileRawSQL(){
 		$bts = BaseToolSet::getInstance(); 
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
 		$infos = array (
 				"path" => "websites-data/",
 				"method" =>  "raw_sql",
@@ -420,7 +420,7 @@ class InstallPage02 {
 				$LibInstallationObj->executeContent($infos, $A);
 			}
 		}
-		$bts->LMObj->InternalLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}	
 		
 
