@@ -2,7 +2,7 @@
 add document	name "doc_rw_fra_home_p01.htm"	type HTML;
 insert content	file "rw_fra_home_p01.htm"		into "doc_rw_fra_home_p01.htm";
 share document	name "doc_rw_fra_home_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_rw_fra_home_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_rw_fra_home_p01.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 
 
@@ -10,90 +10,90 @@ update document	name "doc_rw_fra_home_p01.htm"	checked YES	validator "*user_inst
 add document	name "doc_fra_dessiner_p01.htm"	type HTML;
 insert content	file "fra_dessiner_p01.htm"		into "doc_fra_dessiner_p01.htm";
 share document	name "doc_fra_dessiner_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_dessiner_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_dessiner_p01.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_dessiner_p02.htm"	type HTML;
 insert content	file "fra_dessiner_p02.htm"		into "doc_fra_dessiner_p02.htm";
 share document	name "doc_fra_dessiner_p02.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_dessiner_p02.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_dessiner_p02.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_dessiner_p03.htm"	type HTML;
 insert content	file "fra_dessiner_p03.htm"		into "doc_fra_dessiner_p03.htm";
 share document	name "doc_fra_dessiner_p03.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_dessiner_p03.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_dessiner_p03.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_dessiner_p04.htm"	type HTML;
 insert content	file "fra_dessiner_p04.htm"		into "doc_fra_dessiner_p04.htm";
 share document	name "doc_fra_dessiner_p04.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_dessiner_p04.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_dessiner_p04.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_dessiner_p05.htm"	type HTML;
 insert content	file "fra_dessiner_p05.htm"		into "doc_fra_dessiner_p05.htm";
 share document	name "doc_fra_dessiner_p05.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_dessiner_p05.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_dessiner_p05.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_galerie_dessin_peinture.php"	type "PHP";
 insert content	file "fra_galerie_dessin_peinture.php"		into "doc_fra_galerie_dessin_peinture.php";
 share document	name "doc_fra_galerie_dessin_peinture.php"	with_website rootwave	modification YES;
-update document	name "doc_fra_galerie_dessin_peinture.php"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_galerie_dessin_peinture.php"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_galerie_image_de_synthese.php"	type "PHP";
 insert content	file "fra_galerie_image_de_synthese.php"		into "doc_fra_galerie_image_de_synthese.php";
 share document	name "doc_fra_galerie_image_de_synthese.php"	with_website rootwave	modification YES;
-update document	name "doc_fra_galerie_image_de_synthese.php"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_galerie_image_de_synthese.php"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_galerie_photographie.php"	type "PHP";
 insert content	file "fra_galerie_photographie.php"		into "doc_fra_galerie_photographie.php";
 share document	name "doc_fra_galerie_photographie.php"	with_website rootwave	modification YES;
-update document	name "doc_fra_galerie_photographie.php"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_galerie_photographie.php"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_langage_c_p01.htm"	type HTML;
 insert content	file "fra_langage_c_p01.htm"		into "doc_fra_langage_c_p01.htm";
 share document	name "doc_fra_langage_c_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_langage_c_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_langage_c_p01.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_langage_c_p02.htm"	type HTML;
 insert content	file "fra_langage_c_p02.htm"		into "doc_fra_langage_c_p02.htm";
 share document	name "doc_fra_langage_c_p02.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_langage_c_p02.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_langage_c_p02.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_langage_c_p03.htm"	type HTML;
 insert content	file "fra_langage_c_p03.htm"		into "doc_fra_langage_c_p03.htm";
 share document	name "doc_fra_langage_c_p03.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_langage_c_p03.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_langage_c_p03.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p01.htm"	type HTML;
 insert content	file "fra_mc680x0_p01.htm"		into "doc_fra_mc680x0_p01.htm";
 share document	name "doc_fra_mc680x0_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p01.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p02.htm"	type HTML;
 insert content	file "fra_mc680x0_p02.htm"		into "doc_fra_mc680x0_p02.htm";
 share document	name "doc_fra_mc680x0_p02.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p02.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p02.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p03.htm"	type HTML;
 insert content	file "fra_mc680x0_p03.htm"		into "doc_fra_mc680x0_p03.htm";
 share document	name "doc_fra_mc680x0_p03.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p03.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p03.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p04.htm"	type HTML;
 insert content	file "fra_mc680x0_p04.htm"		into "doc_fra_mc680x0_p04.htm";
 share document	name "doc_fra_mc680x0_p04.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p04.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p04.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p05.htm"	type HTML;
 insert content	file "fra_mc680x0_p05.htm"		into "doc_fra_mc680x0_p05.htm";
 share document	name "doc_fra_mc680x0_p05.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p05.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p05.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_mc680x0_p06.htm"	type HTML;
 insert content	file "fra_mc680x0_p06.htm"		into "doc_fra_mc680x0_p06.htm";
 share document	name "doc_fra_mc680x0_p06.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_mc680x0_p06.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_mc680x0_p06.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 
 add document	name "doc_fra_sd_mc680x0_tableau_p01.htm"	type HTML;
 insert content	file "fra_sd_mc680x0_tableau_p01.htm"		into "doc_fra_sd_mc680x0_tableau_p01.htm";
 share document	name "doc_fra_sd_mc680x0_tableau_p01.htm"	with_website rootwave	modification YES;
-update document	name "doc_fra_sd_mc680x0_tableau_p01.htm"	checked YES	validator "*user_install*"	from_site rootwave;
+update document	name "doc_fra_sd_mc680x0_tableau_p01.htm"	validation YES	validator "*user_install*"	from_site rootwave;
 

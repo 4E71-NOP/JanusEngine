@@ -44,10 +44,9 @@ $bts->I18nTransObj->apply(
 		"type" => "array",
 		"fra" => array(
 			"invite1"		=>	"Cette partie va vous permettre de modifier les documents.",
-			"type0"			=>	"Hydr",
-			"type1"			=>	"Pas de code",
-			"type2"			=>	"PHP",
-			"type3"			=>	"Mixed",
+			"type0"			=>	"HTML",
+			"type1"			=>	"PHP",
+			"type2"			=>	"Mixé",
 			"modif0"		=>	"Non",
 			"modif1"		=>	"Oui",
 			"tabTxt1"		=>	"Informations",
@@ -59,10 +58,9 @@ $bts->I18nTransObj->apply(
 		),
 		"eng" => array(
 			"invite1"		=>	"This part will allow you to modify documents.",
-			"type0"			=>	"Hydr",
-			"type1"			=>	"No code",
-			"type2"			=>	"PHP",
-			"type3"			=>	"Mixed",
+			"type0"			=>	"HTML",
+			"type1"			=>	"PHP",
+			"type2"			=>	"Mixed",
 			"modif0"		=>	"No",
 			"modif1"		=>	"Yes",
 			"tabTxt1"		=>	"Informations",
@@ -85,8 +83,7 @@ FROM "
 .$SqlTableListObj->getSQLTableName('document_share')." shr 
 WHERE shr.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.fk_docu_id = doc.docu_id 
-AND doc.docu_examination = '0' 
-AND doc.docu_origin = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND doc.docu_validation = '0' 
 ;");
 
 $tab_modif = array(

@@ -42,42 +42,45 @@ $bts->LMObj->logCheckpoint("uni_article_validation_p01.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_article_validation_p01.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"Cette partie va vous permettre de valider des articles.",
-		"raf1"			=>	"Rien à afficher",
-		"cell_1_txt"	=> "Informations",
-		"col_1_txt"		=>	"Nom",
-		"col_2_txt"		=>	"Référence",
-		"col_3_txt"		=>	"Titre",
-		"col_4_txt"		=>	"Bouclage",
-		"btnCreate"		=>	"Créer un article",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=>	"This part will allow you to validate documents.",
-		"raf1"			=>	"Nothing to display",
-		"cell_1_txt"	=> "Informations",
-		"col_1_txt"		=>	"Name",
-		"col_2_txt"		=>	"Reference",
-		"col_3_txt"		=>	"Title",
-		"col_4_txt"		=>	"Deadline",
-		"btnCreate"		=>	"Create a article",
-		));
-		break;
-}
+
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=>	"Cette partie va vous permettre de valider des articles.",
+			"raf1"			=>	"Rien à afficher",
+			"tabTxt1"		=>	"Informations",
+			"col_1_txt"		=>	"Nom",
+			"col_2_txt"		=>	"Page",
+			"col_3_txt"		=>	"Référence",
+			"col_4_txt"		=>	"Titre",
+			"col_5_txt"		=>	"Bouclage",
+			"btnCreate"		=>	"Créer un article",
+		),
+		"eng" => array(
+			"invite1"		=>	"This part will allow you to validate documents.",
+			"raf1"			=>	"Nothing to display",
+			"tabTxt1"		=>	"Informations",
+			"col_1_txt"		=>	"Name",
+			"col_2_txt"		=>	"Page",
+			"col_3_txt"		=>	"Reference",
+			"col_4_txt"		=>	"Title",
+			"col_5_txt"		=>	"Deadline",
+			"btnCreate"		=>	"Create a article",
+		),
+	)
+);
 
 // --------------------------------------------------------------------------------------------
 $T = array();
 
 $dbquery = $bts->SDDMObj->query("
-SELECT art.* , bcl.deadline_name 
-FROM ".$SqlTableListObj->getSQLTableName('article')." art, ".$SqlTableListObj->getSQLTableName('deadline')." bcl 
-WHERE art.arti_validation_state = '0' 
-AND bcl.deadline_id = art.deadline_id 
-AND art.ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+SELECT art.* , dl.deadline_name 
+FROM ".$SqlTableListObj->getSQLTableName('article')." art, "
+.$SqlTableListObj->getSQLTableName('deadline')." dl 
+WHERE art.arti_validation_state = 0 
+AND dl.deadline_id = art.fk_deadline_id 
+AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 ;");
 
 $i = 1;
@@ -87,31 +90,35 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$T['Content']['1'][$i]['2']['cont'] = "";
 	$T['Content']['1'][$i]['3']['cont'] = "";
 	$T['Content']['1'][$i]['4']['cont'] = "";
+	$T['Content']['1'][$i]['5']['cont'] = "";
 }
 else {
 	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+	$T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
 		$T['Content']['1'][$i]['1']['cont']	= "
-		<a class='" . $Block."_lien' href='index.php?
-		&amp;M_ARTICL[arti_id_selection]=".$dbp['arti_id']."
-		&amp;M_ARTICL[arti_ref_selection]=".$dbp['arti_ref']."
-		&amp;M_ARTICL[arti_page_selection]=".$dbp['arti_page'].
-		$CurrentSetObj->getDataSubEntry('block_HTML', 'url_sldup')."
-		&amp;arti_page=2'
-		>".$dbp['arti_name']."</a>";
-		$T['Content']['1'][$i]['2']['cont']	= $dbp['arti_ref'];
-		$T['Content']['1'][$i]['3']['cont']	= $dbp['arti_title'];
-		$T['Content']['1'][$i]['4']['cont']	= $dbp['deadline_name'];
+		<a href='index.php?"
+		."index.php?"._HYDRLINKURLTAG_."=1"
+		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+		."&arti_page=2"
+		."&formGenericData[mode]=edit"
+		."&formGenericData[selectionId]=".$dbp['arti_id']
+		."'>".$dbp['arti_name']."</a>";
+		$T['Content']['1'][$i]['2']['cont']	= $dbp['arti_page'];
+		$T['Content']['1'][$i]['3']['cont']	= $dbp['arti_ref'];
+		$T['Content']['1'][$i]['4']['cont']	= $dbp['arti_title'];
+		$T['Content']['1'][$i]['5']['cont']	= $dbp['deadline_name'];
 	}
 }
 
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,4,1),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,5,1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 $Content .= "<br>\r";

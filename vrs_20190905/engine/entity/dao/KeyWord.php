@@ -19,8 +19,8 @@ class KeyWord extends Entity {
 		'keyword_id'		=> 0,
 		'keyword_state'		=> 0,
 		'keyword_name'		=> 'new Keyword',
-		'arti_id'			=> 0,
-		'ws_id'				=> 0,
+		'fk_arti_id'		=> 0,
+		'fk_ws_id'			=> 0,
 		'keyword_string'	=> "",
 		'keyword_count'		=> 0,
 		'keyword_type'		=> 0,
@@ -29,7 +29,7 @@ class KeyWord extends Entity {
 	//@formatter:on
 	
 	public function __construct() {
-		$this->KeyWord= $this->getDefaultValues();
+		$this->KeyWord = $this->getDefaultValues();
 	}
 	
 	/**
@@ -46,7 +46,7 @@ class KeyWord extends Entity {
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')."
 			WHERE keyword_id = '".$id."'
-			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -117,9 +117,13 @@ class KeyWord extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->KeyWord['keyword_name'] .= "-".date("d_M_Y_H:i:s", time());
-		
-		$this->KeyWord['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+		$tab['keyword_name']	= 'new Keyword name'.$date;
+		$tab['keyword_state']	= _ONLINE_;
+		$tab['keyword_string']	= 'This word';
+		$tab['keyword_count']	= 1;
+		$tab['keyword_type']	= 3;
+		$tab['fk_arti_id']		= 0;
+		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		return $tab;
@@ -133,6 +137,11 @@ class KeyWord extends Entity {
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array (
+			'type' => array(
+				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('kwType1')		),
+				2 => array( _MENU_OPTION_DB_ =>	 2,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('kwType2')		),
+				3 => array( _MENU_OPTION_DB_ =>	 3,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('kwType3')		),
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

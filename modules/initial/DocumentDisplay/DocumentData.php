@@ -63,7 +63,7 @@ class DocumentData {
 		$dbquery = $bts->SDDMObj->query("
 		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
 		doc.docu_creator, doc.docu_creation_date,
-		doc.docu_examiner, doc.docu_examination_date,
+		doc.docu_validator, doc.docu_validation_date,
 		doc.docu_origin, doc.docu_cont, w.ws_directory
 		FROM "
 		.$SqlTableListObj->getSQLTableName('article')." art, "

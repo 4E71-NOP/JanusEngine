@@ -29,7 +29,7 @@
 
 $bts->RequestDataObj->setRequestData('groupForm',
 		array(
-				'selectionId'	=>	3268730576621700921,
+				'selectionId'	=>	2430833223629620803,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -40,8 +40,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
 				'mode'			=> 'edit',
-//				'mode'			=> 'create',
-//				'mode'			=> 'delete',
+				'mode'			=> 'create',
+				// 'mode'			=> 'delete',
 		)
 );
 		
@@ -71,9 +71,9 @@ $bts->I18nTransObj->apply(
 			"t1l3c1"		=>	"Titre",
 			"t1l4c1"		=>	"Tag",
 			"t1l5c1"		=>	"Description",
-			"t1l6c1"		=>	"Fichier",
+			"t1l6c1"		=>	"Icone",
 			
-			"t1l2c2"		=>	"New_group",
+			"t1l2c2"		=>	"Nouveau_groupe ",
 		),
 		"eng" => array(
 			"anonymous"		=>	"Anonymous",
@@ -90,9 +90,9 @@ $bts->I18nTransObj->apply(
 			"t1l3c1"		=>	"Title",
 			"t1l4c1"		=>	"Tag",
 			"t1l5c1"		=>	"Description",
-			"t1l6c1"		=>	"File",
+			"t1l6c1"		=>	"Icon file",
 			
-			"t1l2c2"		=>	"New_group",
+			"t1l2c2"		=>	"New group ",
 		)
 	)
 );
@@ -108,34 +108,29 @@ $currentGroupObj = new Group();
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('FormBuilder');
-$formBuilderObj = FormBuilder::getInstance();
-
+// $formBuilderObj = FormBuilder::getInstance();
 
 // --------------------------------------------------------------------------------------------
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
 		$currentGroupObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
-		$t1l2c2 = $currentGroupObj->getGroupEntry('group_name');
-		$t1l3c2 = $formBuilderObj->getFormElementsEntry('groupForm[name]');
-		// $t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_title')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
 	case "create":
-		$currentGroupObj->setGroup(
+		$arrTmp = array_merge (
+			$currentGroupObj->getGroup(),
 			array(
 			"group_id"		=> "*",
-			"group_tag"		=> 0,
-			"group_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
-			"group_title"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
-			"group_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
+			"group_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2') . "name " . time(),
+			"group_title"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2') . "title " . time(),
+			"group_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2') . "desc " . time(),
 			)
 		);
-		// $t1l2c2 = "<input type='text' name='groupForm[name]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-		$t1l3c2 = "<input type='text' name='groupForm[title]' size='45' maxlength='255' value=\"".$bts->I18nTransObj->getI18nTransEntry('t1l2c2')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+		$currentGroupObj->setGroup($arrTmp);
 		$commandType = "add";
 		$processStep = "Create";
 		$processTarget = "edit";
@@ -143,24 +138,15 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		break;
 }
 
-
-$formBuilderArray = array(
-	1 => array( 'type' => 'text',	'name' => 'groupForm[name]',	'value' => $currentGroupObj->getGroupEntry('group_title'),	'size' => 45,	'maxlength' => 255 ),
-);
-$formBuilderObj->buildFormElements($formBuilderArray);
-// $arr = $formBuilderObj->getFormElements();
-// $Content .= $bts->StringFormatObj->print_r_html( $arr ). "<br>". $bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId');
-
-
-$Content .= "
-<form ACTION='index.php?' method='post' name='groupForm'>\r"
-."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='AdminGroupManagementP02'>\r"
-."<input type='hidden' name='formCommand1'				value='".$commandType."'>\r"
-."<input type='hidden' name='formEntity1'				value='group'>\r"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentGroupObj->getGroupEntry('group_name')."'>\r"
-."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='groupForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId')."'>\r"
+// --------------------------------------------------------------------------------------------
+$Content .= 
+$bts->RenderFormObj->renderformHeader('groupForm')
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminGroupManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"group" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentGroupObj->getGroupEntry('group_name') )
 ."<p>\r"
 ;
 
@@ -174,61 +160,66 @@ $T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 $T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
-// $tabYN = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('no'],		"db"=>"NO" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('yes'],	"db"=>"YES" ),
-// );
-// $tabLine = array(
-// 		0	=> array ( "t"=>$I18nObj->getI18nTransEntry('offline'],	"db"=>"OFFLINE" ),
-// 		1	=> array ( "t"=>$I18nObj->getI18nTransEntry('online'],		"db"=>"ONLINE" ),
-// 		2	=> array ( "t"=>$I18nObj->getI18nTransEntry('deleted'],	"db"=>"DELETED" ),
-// );
-
-
 $T['Content']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
-$T['Content']['1']['2']['2']['cont'] = $t1l2c2;
-$T['Content']['1']['3']['2']['cont'] = $t1l3c2;
+$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('groupForm[name]',	$currentGroupObj->getGroupEntry('group_name'));
+$T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('groupForm[title]',	$currentGroupObj->getGroupEntry('group_title'));
 
-$tabStateDealine = array(
-		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('anonymous'),		"db"=>"ANONYMOUS" ),
-		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('reader'),		"db"=>"READER" ),
-		2	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('staff'),			"db"=>"STAFF" ),
-		3	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('seniorStaff'),	"db"=>"SENIOR_STAFF" ),
+$Tab = $currentGroupObj->getMenuOptionArray();
+
+$T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+	'name' => 'formParams1[tag]',
+	'defaultSelected' => $currentGroupObj->getGroupEntry('group_tag'),
+	'options' => $Tab['tag'],
+));
+
+$T['Content']['1']['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[desc]',	$currentGroupObj->getGroupEntry('group_desc'));
+
+
+$FileSelectorConfig = array(
+	"width"				=> 80,	//in %
+	"height"			=> 50,	//in %
+	"formName"			=> "groupForm",
+	"formTargetId"		=> "formParams[group]",
+	"formInputSize"		=> 25 ,
+	"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
+	"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
+	"restrictTo"		=> "/websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
+	"strRemove"			=> "",
+	// "strRemove"			=> "/\.*\w*\//",
+	"strAdd"			=> "",
+	"selectionMode"		=> "file",
+	"displayType"		=> "imageMosaic",
+	"buttonId"			=> "t6l2c2",
+	"case"				=> 3,
+	"update"			=> 1,
+	"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
 );
-$tab = $tabStateDealine;
-
-switch ( $bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'mode') ) {
-	case "edit":	$tab[$currentGroupObj->getGroupEntry('group_tag')]['s'] = " selected";	break;
-	case "create":	$tab[1]['s'] = " selected";	break;
-}
-
-$T['Content']['1']['4']['2']['cont'] = "<select name ='formParams[tag]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tab as $A ) { $T['Content']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['Content']['1']['4']['2']['cont'] .= "</select>\r";
-
-$T['Content']['1']['5']['2']['cont'] = "<input type='text' name='formParams[desc]' size='45' maxlength='255' value=\"".$currentGroupObj->getGroupEntry('group_desc')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
-		array(
-				"width"				=> 80,	//in %
-				"height"			=> 50,	//in %
-				"formName"			=> "groupForm",
-				"formTargetId"		=> "inputFile",
-				"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
-				"selectionMode"		=> "file",
-		)
-);
-$infos['IconSelectFile'] = array(
-		"case"				=> 1 ,
-		"formName"			=> "groupForm",
-		"formInputId"		=> "inputFile",
-		"formInputSize"		=> 40 ,
-		"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
-		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
-);
+$infos['IconSelectFile'] = $FileSelectorConfig;
+$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+
+// $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
+// 		array(
+// 				"width"				=> 80,	//in %
+// 				"height"			=> 50,	//in %
+// 				"formName"			=> "groupForm",
+// 				"formTargetId"		=> "inputFile",
+// 				"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
+// 				"selectionMode"		=> "file",
+// 		)
+// );
+// $infos['IconSelectFile'] = array(
+// 		"case"				=> 1 ,
+// 		"formName"			=> "groupForm",
+// 		"formInputId"		=> "inputFile",
+// 		"formInputSize"		=> 40 ,
+// 		"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
+// 		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
+// 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+// );
+// $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
+// $T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
 // --------------------------------------------------------------------------------------------
@@ -239,45 +230,9 @@ $T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconS
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
-
-
-// --------------------------------------------------------------------------------------------
-//
-//	Display
-//
-//
-// --------------------------------------------------------------------------------------------
-// $T['ContentInfos']['EnableTabs']		= 1;
-// $T['ContentInfos']['NbrOfTabs']		= 1;
-// $T['ContentInfos']['TabBehavior']		= 0;
-// $T['ContentInfos']['RenderMode']		= 1;
-// $T['ContentInfos']['HighLightType']	= 0;
-// $T['ContentInfos']['Height']			= floor( $infos['fontSizeMin'] + ($infos['fontCoef']*3) +10 ) * 6; //T3 is default; total padding = 10; nbr line +1
-// $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
-// $T['ContentInfos']['GroupName']		= "list";
-// $T['ContentInfos']['CellName']			= "grp";
-// $T['ContentInfos']['DocumentName']		= "doc";
-// $T['ContentInfos']['cell_1_txt']		= $I18nObj->getI18nTransEntry('cell_1_txt');
-// $T['ContentInfos']['cell_2_txt']		= $I18nObj->getI18nTransEntry('cell_2_txt');
-// $T['ContentInfos']['cell_3_txt']		= $I18nObj->getI18nTransEntry('cell_3_txt');
-
-// $T['ContentCfg']['tabs']['1']['NbrOfLines']	= 5;	$T['ContentCfg']['tabs']['1']['NbrOfCells']	= 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos']		= 2;
-
-// $config = array(
-// 		"mode" => 1,
-// 		"module_display_mode" => "normal",
-// 		"module_z_index" => 2,
-// 		"block"		=> $infos['block'],
-// 		"blockG"	=> $infos['block']."G",
-// 		"blockT"	=> $infos['block']."T",
-// 		"deco_type"	=> 50,
-// 		"module"	=> $infos['module'],
-// );
-
-// $Content .= $RenderTablesObj->render($config, $T);
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');

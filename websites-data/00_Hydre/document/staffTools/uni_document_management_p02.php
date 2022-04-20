@@ -29,20 +29,18 @@
 
 $bts->RequestDataObj->setRequestData('documentForm',
 		array(
-				'mode'			=> 'edit',
-// 	 			'mode'			=> 'create',
-				'selectionId'	=> 105,
+				'selectionId'	=> 2599600816990218261,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
 	array(
-		'origin'			=> 'AdminDashboard',
-		'section'			=> 'AdminDocumentManagementP02',
+		'origin'		=> 'AdminDashboard',
+		'section'		=> 'AdminDocumentManagementP02',
 		'creation'		=> 'on',
 		'modification'	=> 'on',
 		'deletion'		=> 'on',
 		'mode'			=> 'edit',
-//		'mode'			=> 'create',
+		'mode'			=> 'create',
 //		'mode'			=> 'delete',
 	)
 );
@@ -54,52 +52,51 @@ $bts->LMObj->logCheckpoint("uni_document_management_p02.php");
 $bts->MapperObj->RemoveThisLevel($localisation );
 $bts->MapperObj->setSqlApplicant("uni_document_management_p02.php");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-		"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
-		"invite2"		=> "Cette partie va vous permettre de créer un document.",
-		"tabTxt1"		=> "Informations",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Nom",
-		"t1l3c1"		=>	"Type",
-		"t1l4c1"		=>	"Modifiable par un autre site",
-		"t1l5c1"		=>	"Vérifié par",
-		
-		"type0"			=>	"Hydr Code",
-		"type1"			=>	"No code",
-		"type2"			=>	"PHP",
-		"type3"			=>	"Mixed",
-		"goModif"		=>	"Modifier le contenu de ce document.",
-		));
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-		"no"			=>	"No",
-		"yes"			=>	"Yes",
-		"offline"		=> "Offline",
-		"online"		=> "Online",
-		
-		"invite1"		=> "This part will allow you to manage documents.",
-		"invite2"		=> "This part will allow you to create a document.",
-		"tabTxt1"		=> "Informations",
-		
-		"t1l1c1"		=>	"ID",
-		"t1l2c1"		=>	"Nom",
-		"t1l3c1"		=>	"Type",
-		"t1l4c1"		=>	"Update-able by another site",
-		"t1l5c1"		=>	"Checked by",
-		
-		"type0"			=>	"Hydr Code",
-		"type1"			=>	"No code",
-		"type2"			=>	"PHP",
-		"type3"			=>	"Mixed",
-		
-		"goModif"		=>	"Modify the document content.",
-		));
-		break;
-}
+
+$bts->I18nTransObj->apply(
+	array(
+		"type" => "array",
+		"fra" => array(
+			"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
+			"invite2"		=> "Cette partie va vous permettre de créer un document.",
+			"tabTxt1"		=> "Informations",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Nom",
+			"t1l3c1"		=>	"Type",
+			"t1l4c1"		=>	"Modifiable par un autre site",
+			"t1l5c1"		=>	"Vérifié par",
+			
+			"type0"			=>	"HTML",
+			"type1"			=>	"PHP",
+			"type2"			=>	"Mixé",
+			"goModif"		=>	"Modifier le contenu de ce document.",
+		),
+		"eng" => array(
+			"no"			=>	"No",
+			"yes"			=>	"Yes",
+			"offline"		=> "Offline",
+			"online"		=> "Online",
+			
+			"invite1"		=> "This part will allow you to manage documents.",
+			"invite2"		=> "This part will allow you to create a document.",
+			"tabTxt1"		=> "Informations",
+			
+			"t1l1c1"		=>	"ID",
+			"t1l2c1"		=>	"Nom",
+			"t1l3c1"		=>	"Type",
+			"t1l4c1"		=>	"Update-able by another site",
+			"t1l5c1"		=>	"Checked by",
+			
+			"type0"			=>	"HTML",
+			"type1"			=>	"PHP",
+			"type2"			=>	"Mixed",
+			
+			"goModif"		=>	"Modify the document content.",
+		)
+	)
+);
+
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('MenuSelectTable');
@@ -117,58 +114,47 @@ $T = array();
 
 $ClassLoaderObj->provisionClass('Document');
 $currentDocumentObj = new Document();
-switch ($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'mode')) {
+switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
 		$currentDocumentObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
-		
-		$T['Content']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
 		break;
 	case "create":
 		$commandType = "add";
-		// 		$d = date();
 		$currentDocumentObj->setDocument(
 				array (
 					"docu_id"				=>	"",
 					"docu_name"				=>	"NewDocument",
 					"docu_type"				=>	0,
 					"docu_origin"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-					"docu_creator"			=>	$UserObj->getUserEntry('user_id'),
-					"docu_creation_date"	=>	date(),
-					"docu_examination"		=>	0,
-					"docu_examiner"		=>	"",
-					"docu_examination_date"	=>	0,
+					"docu_creator"			=>	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id'),
+					"docu_creation_date"	=>	time(),
+					"docu_validation"		=>	0,
+					"docu_validator"		=>	"",
+					"docu_validation_date"	=>	0,
 					"docu_cont"				=>	"",
 				)
 		);
-		$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[name]' size='35' maxlength='255' value=\"NewCategory".date()."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
 }
 
-
 // --------------------------------------------------------------------------------------------
-$Content .= "
-<form ACTION='index.php?' method='post' name='documentForm'>\r"
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref')
-.$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_page')
-."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard".$processStep."'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='AdminDocumentManagementP02'>"
-."<input type='hidden' name='formCommand1'				value='".$commandType."'>"
-."<input type='hidden' name='formEntity1'				value='document'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$currentDocumentObj->getDocumentEntry('menu_name')."'>\r"
-."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
-."<input type='hidden' name='documentForm[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId')."'>\r"
+$Content .= 
+$bts->RenderFormObj->renderformHeader('documentForm')
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminDeadlineDocumentP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"document" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentDocumentObj->getDocumentEntry('docu_name') )
 ."<p>\r"
 ;
-
 
 $T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
 $T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
@@ -176,35 +162,32 @@ $T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
 $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 
+switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
+	case "edit":
+		$T['Content']['1']['1']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_id');
+		$T['Content']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
+		break;
+	case "create":
+		$T['Content']['1']['1']['2']['cont'] = "***";
+		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	"NewDocument".time());;
+		break;
+}
 
-$T['Content']['1']['1']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_id');
-$T['Content']['1']['2']['2']['cont'] = $currentDocumentObj->getDocumentEntry('docu_name');
+$documentMenuOption = $currentDocumentObj->getMenuOptionArray();
 
+$T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+	'name' => 'formParams[type]',
+	'defaultSelected' => $currentDocumentObj->getDocumentEntry('docu_type'),
+	'options' => $documentMenuOption['type'],
+));
 
-$tabType = array(
-		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type0'),	"db" => "WMCODE"),
-		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type1'),	"db" => "NOCODE"),
-		2 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type2'),	"db" => "PHP"),
-		3 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('type3'),	"db" => "MIXED"),
-);
-$tabType[$currentDocumentObj->getDocumentEntry('docu_type')]['s'] = " selected ";
-$T['Content']['1']['3']['2']['cont'] = "<select name='formParams[type]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tabType as $A ) { $T['Content']['1']['3']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['Content']['1']['3']['2']['cont'] .= "</select>\r";
+$T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+	'name' => 'formParams[modification]',
+	'defaultSelected' => $currentDocumentObj->getDocumentEntry('part_modification'),
+	'options' => $documentMenuOption['yesno'],
+));
 
-
-$tabYN = array(
-		0	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('no'),		"db"=>"NO" ),
-		1	=> array ( "t"=>$bts->I18nTransObj->getI18nTransEntry('yes'),	"db"=>"YES" ),
-);
-$tab = $tabYN;
-$tab[$currentDocumentObj->getDocumentEntry('part_modification')]['s'] = " selected ";
-$T['Content']['1']['4']['2']['cont'] = "<select name='formParams[modification]' class='".$Block."_t3 ".$Block."_form_1'>\r";
-foreach ( $tab as $A ) { $T['Content']['1']['4']['2']['cont'] .= "<option value='".$A['db']."' ".$A['s']."> ".$A['t']." </option>\r"; }
-$T['Content']['1']['4']['2']['cont'] .= "</select>\r";
-
-$T['Content']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocumentEntry('docu_examiner')]['t'];
-
+$T['Content']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocumentEntry('docu_validator')]['t'];
 
 
 // --------------------------------------------------------------------------------------------

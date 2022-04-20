@@ -77,7 +77,6 @@ class LogManagement {
 				"message" => ($msgFlag == 1) ? $log['msg']: "EMPTY LOG !!!!",
 		);
 
-
 		if ( $this->vectorInternal == true && $logLevel <= $this->vectorInternalLevel ) {
 			$this->msgLog [$this->msgLogIdx] = $data;
 			$this->msgLogIdx ++;

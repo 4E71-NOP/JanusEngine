@@ -50,6 +50,7 @@ class User extends Entity {
 	'user_pref_autorise_smilies'	=> 0,
 	'user_avatar_image'				=> 0,
 	'user_admin_comment'			=> 0,
+	'fk_group_id'					=> 0,
 	);
 	//@formatter:on
 	
@@ -71,7 +72,7 @@ class User extends Entity {
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 
 		$sqlQuery = "
-			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
+			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
 			FROM " 
 			.$SqlTableListObj->getSQLTableName ('user') . " usr, " 
 			.$SqlTableListObj->getSQLTableName ('group_user') . " gu, " 
@@ -133,7 +134,7 @@ class User extends Entity {
 					}
 				}
 				else {
-					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) ."` did not return any rows. Most likely it's the end of the search process."));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) ."` did not return any rows. Most likely it's the end of the group search process."));
 				}
 				
 				unset ( $A );
@@ -248,9 +249,42 @@ class User extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->User['user_name'] .= "-".date("d_M_Y_H:i:s", time());
-		$this->User['user_login'] .= "-".date("dMYHis", time());
-		
+
+		$tab['user_id']							= 0;
+		$tab['user_name']						= "New user name ".$date;
+		$tab['user_login']						= "New user login ".$date;
+		$tab['user_password']					= "1a2b3c4d5e";
+		$tab['user_subscription_date']			= $date;
+		$tab['user_status']						= _ENABLED_;
+		$tab['user_role_function']				= _READER_;
+		$tab['user_forum_access']				= _YES_;
+		$tab['user_email']						= "";
+		$tab['user_msn']						= "";
+		$tab['user_aim']						= "";
+		$tab['user_icq']						= "";
+		$tab['user_yim']						= "";
+		$tab['user_website']					= "";
+		$tab['user_perso_name']					= "";
+		$tab['user_perso_country']				= "";
+		$tab['user_perso_town']					= "";
+		$tab['user_perso_occupation']			= "";
+		$tab['user_perso_interest']				= "";
+		$tab['user_last_visit']					= 0;
+		$tab['user_last_ip']					= "0.0.0.0";
+		$tab['user_timezone']					= "";
+		$tab['user_lang']						= "";
+		$tab['user_pref_theme']					= "";
+		$tab['user_pref_newsletter']			= "";
+		$tab['user_pref_show_email']			= "";
+		$tab['user_pref_show_online_status']	= "";
+		$tab['user_pref_forum_notification']	= "";
+		$tab['user_pref_forum_pm']				= "";
+		$tab['user_pref_allow_bbcode']			= "";
+		$tab['user_pref_allow_html']			= "";
+		$tab['user_pref_autorise_smilies']		= "";
+		$tab['user_avatar_image']				= "";
+		$tab['user_admin_comment']				= "";
+		$tab['fk_group_id']						= "";
 		return $tab;
 	}
 	
@@ -263,19 +297,28 @@ class User extends Entity {
 		$bts = BaseToolSet::getInstance();
 
 		$res = array (
-			'status' => array (
-				'name' => "user_status",
-				'defaultSelected'=> 1,
-				'options' => array (
-					array( _MENU_OPTION_DB_ =>	 _DISABLED_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-					array( _MENU_OPTION_DB_ =>	 _ENABLED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')),
-					array( _MENU_OPTION_DB_ =>	 _DELETED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')),
-				)
+			'yesno' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')	),
+				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')	),	
 			),
-			'group' => array (
-				'name' => 'user_status',
-				'defaultSelected'=> 0,
-			)
+			'state' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 _DISABLED_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')	),
+				1 => array( _MENU_OPTION_DB_ =>	 _ENABLED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')	),
+				2 => array( _MENU_OPTION_DB_ =>	 _DELETED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')	),
+			),
+			'role' => array(
+				1	=> array ( _MENU_OPTION_DB_ => _PUBLIC_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('public')	),
+				2	=> array ( _MENU_OPTION_DB_ => _PRIVATE_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('private')	),
+			),
+			// 'status' => array (
+			// 	'name' => "user_status",
+			// 	'defaultSelected'=> 1,
+			// ),
+			
+			// 'group' => array (
+			// 	'name' => 'user_status',
+			// 	'defaultSelected'=> 0,
+			// )
 		);
 
 		$res['group']['options'] = array( 0=> array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => '') );

@@ -68,7 +68,7 @@ class  RenderForm {
 	 * @return string
 	 */
 	public function renderMenuSelect($arr) {
-		if (isset($arr['defaultSelected'])) { $arr['options'][$arr['defaultSelected']]['s'] = " selected ";}
+		if (strlen($arr['defaultSelected']) != 0 ) { $arr['options'][$arr['defaultSelected']]['s'] = " selected ";}
 		$content = "<select name='".$arr['name']."'>\r";
 		foreach ($arr['options'] as $A ) {
 			$content .= "<option value='".$A[_MENU_OPTION_DB_]."' ".$A[_MENU_OPTION_SELECTED_].">".$A[_MENU_OPTION_TXT_]."</option>\r";

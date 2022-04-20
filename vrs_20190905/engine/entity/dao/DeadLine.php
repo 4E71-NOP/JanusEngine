@@ -1,4 +1,4 @@
-<?php
+	<?php
 /* Hydre-licence-debut */
 // --------------------------------------------------------------------------------------------
 //
@@ -17,9 +17,9 @@ class DeadLine extends Entity{
 	//@formatter:off
 	private $columns = array(
 		'deadline_id'				=>	0,
-		'deadline_name'				=>	'New deadline',
-		'deadline_title'			=>	'New deadline title',
-		'deadline_state'			=>	0,
+		'deadline_name'				=>	"",
+		'deadline_title'			=>	"",
+		'deadline_state'			=>	_OFFLINE_,
 		'deadline_creation_date'	=>	0,
 		'deadline_end_date'			=>	0,
 		'fk_ws_id'					=>	0,
@@ -123,9 +123,11 @@ class DeadLine extends Entity{
 		$date = time();
 		
 		$tab = $this->columns;
+		$tab['deadline_name'] = "New Deadline name " . time();
+		$tab['deadline_title'] = "New Deadline title " . time();
 		$tab['deadline_creation_date'] = $date;
 		$tab['deadline_end_date'] = $date+(60*60*24*31*12*10);
-		// $tab['user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+
 		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
@@ -140,6 +142,10 @@ class DeadLine extends Entity{
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array ( 
+			'yesno' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
+				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),	
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

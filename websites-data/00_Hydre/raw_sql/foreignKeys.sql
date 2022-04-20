@@ -40,7 +40,7 @@ Trouver le moyen de faire arti_ref
 
 
 ALTER TABLE Hdr.Ht_document ADD CONSTRAINT Ht_document_FK FOREIGN KEY (docu_creator) REFERENCES Hdr.Ht_user(user_id);
-ALTER TABLE Hdr.Ht_document ADD CONSTRAINT Ht_document_FK_1 FOREIGN KEY (docu_examiner) REFERENCES Hdr.Ht_user(user_id);
+ALTER TABLE Hdr.Ht_document ADD CONSTRAINT Ht_document_FK_1 FOREIGN KEY (docu_validator) REFERENCES Hdr.Ht_user(user_id);
 
 ALTER TABLE Hdr.Ht_document_share ADD CONSTRAINT Ht_document_share_FK FOREIGN KEY (docu_id) REFERENCES Hdr.Ht_document(docu_id);
 ALTER TABLE Hdr.Ht_document_share ADD CONSTRAINT Ht_document_share_FK_1 FOREIGN KEY (ws_id) REFERENCES Hdr.Ht_website(ws_id);

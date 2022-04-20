@@ -18,9 +18,9 @@ docu_origin		    		BIGINT,
 docu_creator				BIGINT,
 docu_creation_date			INTEGER,
 
-docu_examination			INTEGER,
-docu_examiner				BIGINT,
-docu_examination_date		INTEGER,
+docu_validation		    	INTEGER,
+docu_validator				BIGINT,
+docu_validation_date		INTEGER,
 docu_cont 					BLOB,
 
 PRIMARY KEY (docu_id)

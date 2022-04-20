@@ -17,26 +17,26 @@ class Article extends Entity {
 	//@formatter:off
 	private $columns = array(
 		"arti_id"					=> "",
-		"arti_ref"					=> 0,
-		"fk_deadline_id"			=> 0,
-		"arti_name"					=> "new article",
+		"arti_ref"					=> "new article ref",
+		"fk_deadline_id"			=> "",
+		"arti_name"					=> "new article name",
 		"arti_desc"					=> "",
-		"arti_title"				=> "Nouvel article",
+		"arti_title"				=> "New article",
 		"arti_subtitle"				=> "",
-		"arti_page"					=> "1",
+		"arti_page"					=> 1,
 		
 		"layout_generic_name"		=> "default_layout",
-		"config_id"					=> 0,
+		"config_id"					=> "",
 		
-		"arti_creator_id"			=> 0,
-		"arti_creation_date"		=> 0,
-		"arti_validator_id"			=> 0,
-		"arti_validation_date"		=> 0,
-		"arti_validation_state"		=> "NON_VALIDE",
+		"arti_creator_id"			=> "",
+		"arti_creation_date"		=> "",
+		"arti_validator_id"			=> "",
+		"arti_validation_date"		=> "",
+		"arti_validation_state"		=> _NOT_VALIDATED_,
 		
 		"arti_release_date"			=> 0,
-		"fk_docu_id"				=> 0,
-		"fk_ws_id"					=> 0
+		"fk_docu_id"				=> "",
+		"fk_ws_id"					=> ""
 	);
 	//@formatter:on
 	
@@ -131,8 +131,11 @@ class Article extends Entity {
 		$date = time ();
 		$tab = $this->columns;
 		
-		$tab['arti_creator_id'] = $tab['arti_validator_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
-		$tab['arti_creation_date'] = $tab['arti_creation_date'] = $tab['arti_validation_date'] = $date;
+		$tab['arti_name']	= "New article name ".$date;
+		$tab['arti_title']	= "New article title ".$date;
+		$tab['arti_ref']	= "New article ref ".$date;
+		$tab['arti_creator_id']		= $tab['arti_validator_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['arti_creation_date']	= $tab['arti_creation_date'] = $tab['arti_validation_date'] = $date;
 		
 		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
@@ -148,6 +151,10 @@ class Article extends Entity {
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array ( 
+			'validation' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('invalid')),
+				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('valid')),
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

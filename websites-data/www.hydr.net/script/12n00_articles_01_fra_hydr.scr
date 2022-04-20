@@ -34,3 +34,9 @@ assign document name doc_fra_DOC_administration_p07.htm		to_article	fra_doc_admi
 assign document name doc_fra_DOC_administration_p08.htm		to_article	fra_doc_administration_p08;
 assign document name doc_fra_DOC_administration_p09.htm		to_article	fra_doc_administration_p09;
 assign document name doc_fra_DOC_tut_001_p01.htm			to_article	fra_doc_tut_001_p01;
+
+
+add article	name "fra_website_list_p02"							reference "fra_website_list"				slug "website-list"						deadline initial_online		desc "Admin en Francais"			title "Liste des sites"							subtitle "Liste des sites"									page "2"	validation_state "not_valid"	config "no_menu";
+add article	name "fra_website_list_p03"							reference "fra_website_list"				slug "website-list"						deadline initial_online		desc "Admin en Francais"			title "Liste des sites"							subtitle "Liste des sites"									page "3"	validation_state "not_valid"	config "no_menu";
+assign	document name "doc_uni_website_list_p01.php"					to_article "fra_website_list_p02";
+assign	document name "doc_uni_website_list_p01.php"					to_article "fra_website_list_p03";

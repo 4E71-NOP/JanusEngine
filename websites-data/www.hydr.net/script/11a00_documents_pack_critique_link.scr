@@ -56,3 +56,7 @@ share document	name "doc_uni_see_public_profile_p01.php"				with_website "Hydr"	
 
 share document	name "doc_uni_download_p01.php"							with_website "Hydr"	modification "NO";
 share document	name "doc_uni_news_p01.php"								with_website "Hydr"	modification "NO";
+
+
+share document	name "doc_uni_testDocument_p01.php"						with_website "Hydr"	modification "NO";
+share document	name "doc_uni_testDocument_p02.php"						with_website "Hydr"	modification "NO";

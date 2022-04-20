@@ -122,10 +122,23 @@ class Module extends Entity {
 	public function getDefaultValues () {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$date = time ();
+		$date = time();
 		$tab = $this->columns;
-		$this->Module['module_name'] .= "-".date("d_M_Y_H:i:s", time());
-		
+		$tab['module_deco']					= _ON_;
+		$tab['module_deco_nbr']				= 1;
+		$tab['module_deco_default_text']	= "Module";
+		$tab['module_name']					= "New Module name ".$date;
+		$tab['module_classname']			= "";
+		$tab['module_title']				= "Module title ".$date;
+		$tab['module_directory']			= 0;
+		$tab['module_file']					= 0;
+		$tab['module_desc']					= "Module description ".$date;
+		$tab['module_type']					= 0;
+		$tab['module_container_name']		= "Modulecontainer_".$date;
+		$tab['module_container_style']		= 0;
+		$tab['fk_perm_id']					= "";
+		$tab['module_adm_control']			= _NO_;
+		$tab['module_execution']			= _DURING_;
 		return $tab;
 	}
 	
@@ -137,6 +150,15 @@ class Module extends Entity {
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array (
+			'yesno' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
+				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),	
+			),
+			'execution' => array (
+				0	=>	array( _MENU_OPTION_DB_ =>	 'DURING',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_  => $bts->I18nTransObj->getI18nTransEntry('during')),
+				1	=>	array( _MENU_OPTION_DB_ =>	 'BEFORE',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_  => $bts->I18nTransObj->getI18nTransEntry('before')),
+				2	=>	array( _MENU_OPTION_DB_ =>	 'AFTER',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_  => $bts->I18nTransObj->getI18nTransEntry('after')),
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

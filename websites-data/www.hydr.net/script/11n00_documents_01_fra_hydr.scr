@@ -1,7 +1,7 @@
 add document	name "doc_hydr_fra_home_p01.htm"	type HTML;
 insert content	file "fra_home_p01.htm"		into "doc_hydr_fra_home_p01.htm";
 share document	name "doc_hydr_fra_home_p01.htm"	with_website Hydr	modification YES;
-update document	name "doc_hydr_fra_home_p01.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_hydr_fra_home_p01.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 
@@ -9,134 +9,134 @@ update document	name "doc_hydr_fra_home_p01.htm"	checked YES	validator "*user_in
 add document	name "doc_fra_DOC_administration_CC_header.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_CC_header.htm"		into "doc_fra_DOC_administration_CC_header.htm";
 share document	name "doc_fra_DOC_administration_CC_header.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_CC_header.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_CC_header.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_interface_header.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_interface_header.htm"		into "doc_fra_DOC_administration_interface_header.htm";
 share document	name "doc_fra_DOC_administration_interface_header.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_interface_header.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_interface_header.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 add document	name "doc_fra_DOC_administration_p01.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p01.htm"		into "doc_fra_DOC_administration_p01.htm";
 share document	name "doc_fra_DOC_administration_p01.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p01.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p01.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p02.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p02.htm"		into "doc_fra_DOC_administration_p02.htm";
 share document	name "doc_fra_DOC_administration_p02.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p02.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p02.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p03.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p03.htm"		into "doc_fra_DOC_administration_p03.htm";
 share document	name "doc_fra_DOC_administration_p03.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p03.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p03.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p04.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p04.htm"		into "doc_fra_DOC_administration_p04.htm";
 share document	name "doc_fra_DOC_administration_p04.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p04.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p04.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p05.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p05.htm"		into "doc_fra_DOC_administration_p05.htm";
 share document	name "doc_fra_DOC_administration_p05.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p05.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p05.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p06.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p06.htm"		into "doc_fra_DOC_administration_p06.htm";
 share document	name "doc_fra_DOC_administration_p06.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p06.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p06.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p07.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p07.htm"		into "doc_fra_DOC_administration_p07.htm";
 share document	name "doc_fra_DOC_administration_p07.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p07.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p07.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p08.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p08.htm"		into "doc_fra_DOC_administration_p08.htm";
 share document	name "doc_fra_DOC_administration_p08.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p08.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p08.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_p09.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_p09.htm"		into "doc_fra_DOC_administration_p09.htm";
 share document	name "doc_fra_DOC_administration_p09.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_p09.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_p09.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 add document	name "doc_fra_DOC_administration_tab_menu.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_menu.htm"		into "doc_fra_DOC_administration_tab_menu.htm";
 share document	name "doc_fra_DOC_administration_tab_menu.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_menu.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_menu.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_cdb.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_cdb.htm"		into "doc_fra_DOC_administration_tab_cdb.htm";
 share document	name "doc_fra_DOC_administration_tab_cdb.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_cdb.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_cdb.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_deadline.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_deadline.htm"		into "doc_fra_DOC_administration_tab_deadline.htm";
 share document	name "doc_fra_DOC_administration_tab_deadline.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_deadline.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_deadline.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_decoration.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_decoration.htm"		into "doc_fra_DOC_administration_tab_decoration.htm";
 share document	name "doc_fra_DOC_administration_tab_decoration.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_decoration.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_decoration.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_document.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_document.htm"		into "doc_fra_DOC_administration_tab_document.htm";
 share document	name "doc_fra_DOC_administration_tab_document.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_document.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_document.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_group.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_group.htm"		into "doc_fra_DOC_administration_tab_group.htm";
 share document	name "doc_fra_DOC_administration_tab_group.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_group.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_group.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_module.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_module.htm"		into "doc_fra_DOC_administration_tab_module.htm";
 share document	name "doc_fra_DOC_administration_tab_module.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_module.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_module.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_user.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_user.htm"		into "doc_fra_DOC_administration_tab_user.htm";
 share document	name "doc_fra_DOC_administration_tab_user.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_user.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_user.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_administration_tab_website.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_administration_tab_website.htm"		into "doc_fra_DOC_administration_tab_website.htm";
 share document	name "doc_fra_DOC_administration_tab_website.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_administration_tab_website.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_administration_tab_website.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 add document	name "doc_fra_DOC_concepts_p01.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_concepts_p01.htm"		into "doc_fra_DOC_concepts_p01.htm";
 share document	name "doc_fra_DOC_concepts_p01.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_concepts_p01.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_concepts_p01.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_concepts_p02.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_concepts_p02.htm"		into "doc_fra_DOC_concepts_p02.htm";
 share document	name "doc_fra_DOC_concepts_p02.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_concepts_p02.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_concepts_p02.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_concepts_p03.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_concepts_p03.htm"		into "doc_fra_DOC_concepts_p03.htm";
 share document	name "doc_fra_DOC_concepts_p03.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_concepts_p03.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_concepts_p03.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 add document	name "doc_fra_DOC_content_management_p01.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_content_management_p01.htm"		into "doc_fra_DOC_content_management_p01.htm";
 share document	name "doc_fra_DOC_content_management_p01.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_content_management_p01.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_content_management_p01.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 add document	name "doc_fra_DOC_content_management_p02.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_content_management_p02.htm"		into "doc_fra_DOC_content_management_p02.htm";
 share document	name "doc_fra_DOC_content_management_p02.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_content_management_p02.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_content_management_p02.htm"	validation YES	validator "*user_install*"	from_site Hydr;
 
 
 add document	name "doc_fra_DOC_tut_001_p01.htm"	type HTML;
 insert content	file "OnlineDoc_administration/fra_DOC_tut_001_p01.htm"		into "doc_fra_DOC_tut_001_p01.htm";
 share document	name "doc_fra_DOC_tut_001_p01.htm"	with_website Hydr	modification YES;
-update document	name "doc_fra_DOC_tut_001_p01.htm"	checked YES	validator "*user_install*"	from_site Hydr;
+update document	name "doc_fra_DOC_tut_001_p01.htm"	validation YES	validator "*user_install*"	from_site Hydr;

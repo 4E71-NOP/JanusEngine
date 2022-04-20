@@ -116,8 +116,11 @@ class Group extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$date = time ();
 		$tab = $this->columns;
-		$this->Group['group_name'] .= "-".date("d_M_Y_H:i:s", time());
-		
+		$tab['group_tag']	= _READER_;
+		$tab['group_name']	= "New Group name " .	$date;
+		$tab['group_title']	= "New Group title " .	$date;
+		$tab['group_desc']	= "New Group desc " .	$date;
+
 		return $tab;
 	}
 	
@@ -129,6 +132,12 @@ class Group extends Entity {
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array (
+			'tag' => array(
+				0 => array( _MENU_OPTION_DB_ =>	 'ANONYMOUS',		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('anonymous')),
+				1 => array( _MENU_OPTION_DB_ =>	 'READER',			_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('reader')),
+				2 => array( _MENU_OPTION_DB_ =>	 'STAFF',			_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('staff')),
+				3 => array( _MENU_OPTION_DB_ =>	 'SENIOR_STAFF',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('seniorStaff')),
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

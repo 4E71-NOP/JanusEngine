@@ -783,20 +783,20 @@ self::$InitTable['article_config'] = function (&$a) {
 
 self::$InitTable['document'] = function (&$a) {
 	$a['params'] = array(
-			"id"			=> "",
-			"name"			=> "",
-			"type"			=> "MIXED",
-			"origin"		=> $a['Context']['ws_id'],
-			"creator"		=> $a['Initiator']['db_login'],
-			"creation_date"	=> time(),
-			"validation"	=> "NO",
-			"validator"		=> $a['Initiator']['db_login'],
-			"validation"	=> 0,
-			"content"		=> "",
-			"from_site"		=> "",
-			"with_site"		=> "",
-			"modification"	=> "NO",
-			"to_article"	=> "",
+			"id"				=> "",
+			"name"				=> "",
+			"type"				=> "MIXED",
+			"origin"			=> $a['Context']['ws_id'],
+			"creator"			=> $a['Initiator']['db_login'],
+			"creation_date"		=> time(),
+			"validation"		=> "NO",
+			"validator"			=> $a['Initiator']['db_login'],
+			"validation_date"	=> 0,
+			"content"			=> "",
+			"from_site"			=> "",
+			"with_site"			=> "",
+			"modification"		=> "NO",
+			"to_article"		=> "",
 	);
 };
 

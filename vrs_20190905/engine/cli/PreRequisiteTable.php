@@ -166,9 +166,9 @@ self::$PreRequisiteTable['add']['document'] = array (
 				array ( "v" => "origin",			"t" => "docu_origin"),
 				array ( "v" => "creator_user_id",	"t" => "docu_creator"),
 				array ( "v" => "creation_date",		"t" => "docu_creation_date"),
-				array ( "v" => "validation",		"t" => "docu_examination"),
-				array ( "v" => "validator_user_id",	"t" => "docu_examiner"),
-				array ( "v" => "validation_date",	"t" => "docu_examination_date"),
+				array ( "v" => "validation",		"t" => "docu_validation"),
+				array ( "v" => "validator_user_id",	"t" => "docu_validator"),
+				array ( "v" => "validation_date",	"t" => "docu_validation_date"),
 				array ( "v" => "content",			"t" => "docu_cont"),
 		),
 );

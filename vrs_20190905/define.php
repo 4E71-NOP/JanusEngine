@@ -101,13 +101,14 @@ define ("_MENU_OPTION_DB_",			"db" );
 define ("_MENU_OPTION_SELECTED_",	"s" );
 define ("_MENU_OPTION_TXT_",		"t" );
 
-define ("_NULL_"		,0);
-define ("_NO_"			,0);
-define ("_OFF_"			,0);
-define ("_OFFLINE_"		,0);
-define ("_DISABLED_"	,0);
-define ("_STATIC_"		,0);
-define ("_DURING_"		,0);
+define ("_NULL_"			,0);
+define ("_NO_"				,0);
+define ("_OFF_"				,0);
+define ("_OFFLINE_"			,0);
+define ("_DISABLED_"		,0);
+define ("_STATIC_"			,0);
+define ("_DURING_"			,0);
+define ("_NOT_VALIDATED_"	,0);
 
 define ("_YES_"			,1);
 define ("_ON_"			,1);
@@ -116,6 +117,7 @@ define ("_ENABLED_"		,1);
 define ("_DYNAMIC_"		,1);
 define ("_PRIVATE_"		,1);
 define ("_BEFORE_"		,1);
+define ("_VALIDATED_"	,1);
 
 define ("_DELETED_"		,2);
 define ("_AFTER_"		,2);
@@ -124,6 +126,11 @@ define ("_PUBLIC_"		,2);
 define ("_FORBIDDEN_"	,0);
 define ("_READ_"		,1);
 define ("_WRITE_"		,2);
+
+define ("_ANONYMOUS_"		,0);
+define ("_READER_"			,1);
+define ("_STAFF_"			,2);
+define ("_SENIOR_STAFF_"	,3);
 
 // --------------------------------------------------------------------------------------------
 // Class names

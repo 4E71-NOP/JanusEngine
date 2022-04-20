@@ -31,9 +31,8 @@ class Menu extends Entity {
 		"menu_last_update"		=> 0,
 		"menu_role"				=> 0,
 		"menu_initial_document"	=> 0,
-		"menu_slug"				=> "",
-		"arti_ref"				=> 0,
-		
+		"fk_artie_slug"			=> "",
+		"fk_arti_ref"			=> 0,	
 	);
 	//@formatter:on
 	
@@ -55,7 +54,7 @@ class Menu extends Entity {
 			SELECT * 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." 
 			WHERE menu_id = '".$id."'
-			AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -69,7 +68,6 @@ class Menu extends Entity {
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for Menu id=".$id));
 		}
-		
 	}
 	
 	/**
@@ -137,12 +135,28 @@ class Menu extends Entity {
 		$tab = $this->columns;
 		$tab['menu_last_modif'] = $date;
 		
-		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render') 
+		$tab['menu_name']				= "New Menu name ".$date;
+		$tab['menu_title']				= "New Menu title ".$date;
+		$tab['menu_desc']				= "New Menu desc ".$date;
+		$tab['menu_type']				= 1;
+		$tab['fk_deadline_id']			= "";
+		$tab['menu_state']				= _OFFLINE_;
+		$tab['menu_parent']				= "";
+		$tab['menu_position']			= 1;
+		$tab['fk_perm_id']				= "";
+		$tab['menu_last_update']		= $date;
+		$tab['menu_role']				= _NULL_;
+		$tab['menu_initial_document']	= _NO_;
+		$tab['fk_artie_slug']			= "";
+		$tab['fk_arti_ref']				= "";
+
+		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render') 
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
 		
-		$tab['user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
-		$tab['lang_id'] = ($bts->CMObj->getExecutionContext() == 'render')
+		$tab['fk_user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+
+		$tab['fk_lang_id'] = ($bts->CMObj->getExecutionContext() == 'render')
 			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('lang_id')
 			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('lang_id');
 		
@@ -157,6 +171,21 @@ class Menu extends Entity {
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array (
+			'yesno' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
+				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),	
+			),
+			'type' => array (
+				0 =>	array ( _MENU_OPTION_DB_ => "article_racine",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('article_racine')	),
+				1 =>	array ( _MENU_OPTION_DB_ => "article",				_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('article')			),
+				2 =>	array ( _MENU_OPTION_DB_ => "menu_admin_racine",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('menu_admin_racine')	),
+				3 =>	array ( _MENU_OPTION_DB_ => "menu_admin",			_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('menu_admin')		),
+			),
+			'role' => array(
+				0 =>	array ( _MENU_OPTION_DB_ => 0,						_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('noRole')				),
+				1 =>	array ( _MENU_OPTION_DB_ => "correction_article",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('correction_article')	),
+				2 =>	array ( _MENU_OPTION_DB_ => "admin_conf_extension",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('admin_conf_extension')	),
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),
@@ -176,6 +205,5 @@ class Menu extends Entity {
 	//@formatter:off
 
 }
-
 
 ?>

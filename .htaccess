@@ -21,10 +21,12 @@ ErrorDocument 500 /500-internal-server-error
 # Rewrite
 
 # Avoid rewrite for : Developper docs, images
-RewriteRule DeveloperDocs\/(.*\.html?)?$ - [L]
-RewriteRule (\/media\/)[\w\-_\/]*\.(png|jpg|gif)$ - [L]
+RewriteRule (DeveloperDocs\/(.*\.html?)?)$ - [L]
+RewriteRule (media(\/(\w|\-)+)+\.(png|jpg|gif))$ - [L]
+RewriteRule (websites-data\/(\w|\-|\.)+\/data\/)$ - [L]
+RewriteRule (stylesheets/(\/(\w|\-)+))$ - [L]
 
-# Not a devdocs/image... rewrite
+# Not a devdocs or image... rewrite it as Hydr style
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	# RewriteBase /

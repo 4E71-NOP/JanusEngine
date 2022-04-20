@@ -55,7 +55,7 @@ class ModuleDocumentDisplay {
 			$DocumentDataObj->setDocumentDataEntry ('arti_validation_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_validation_date')) );
 			$DocumentDataObj->setDocumentDataEntry ('arti_release_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('arti_release_date')) );
 			$DocumentDataObj->setDocumentDataEntry ('docu_creation_date',		date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_creation_date')) );
-			$DocumentDataObj->setDocumentDataEntry ('docu_examination_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_examination_date')) );
+			$DocumentDataObj->setDocumentDataEntry ('docu_validation_date',	date ("Y M d - H:i:s",$DocumentDataObj->getDocumentDataEntry('docu_validation_date')) );
 			$DocumentDataObj->setDocumentDataEntry ('docu_cont_brut',			$DocumentDataObj->getDocumentDataEntry('docu_cont'));
 			
 			$document_list = array();
@@ -71,8 +71,8 @@ class ModuleDocumentDisplay {
 			$document_list[$LD_idx]['docu_name']				= $DocumentDataObj->getDocumentDataEntry('docu_name');
 			$document_list[$LD_idx]['docu_creator']				= $DocumentDataObj->getDocumentDataEntry('docu_creator');
 			$document_list[$LD_idx]['docu_creation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-			$document_list[$LD_idx]['docu_examiner']			= $DocumentDataObj->getDocumentDataEntry('docu_examiner');
-			$document_list[$LD_idx]['docu_examination_date']	= $DocumentDataObj->getDocumentDataEntry('docu_examination_date');
+			$document_list[$LD_idx]['docu_validator']			= $DocumentDataObj->getDocumentDataEntry('docu_validator');
+			$document_list[$LD_idx]['docu_validation_date']	= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
 			$LD_idx++;
 			
 			$position_float =array( '0' => "none", '1' => "left", '2' => "right");
@@ -281,7 +281,7 @@ class ModuleDocumentDisplay {
 					$documentAnalyse['include_docu_name']	= substr($analysedContent , $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']) );
 					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : ". $documentAnalyse['include_docu_name'] ));
 					$dbquery = $bts->SDDMObj->query("
-					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_examiner, doc.docu_examination_date
+					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_validator, doc.docu_validation_date
 					FROM "
 					.$SqlTableListObj->getSQLTableName('document')." doc, "
 					.$SqlTableListObj->getSQLTableName('document_share')." ds
@@ -303,8 +303,8 @@ class ModuleDocumentDisplay {
 							$document_list[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
 							$document_list[$LD_idx]['docu_creator']					= $DocumentDataObj->getDocumentDataEntry('docu_creator');
 							$document_list[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-							$document_list[$LD_idx]['docu_examiner']				= $DocumentDataObj->getDocumentDataEntry('docu_examiner');
-							$document_list[$LD_idx]['docu_examination_date']		= $DocumentDataObj->getDocumentDataEntry('docu_examination_date');
+							$document_list[$LD_idx]['docu_validator']				= $DocumentDataObj->getDocumentDataEntry('docu_validator');
+							$document_list[$LD_idx]['docu_validation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
 							$LD_idx++;
 						}
 					}
@@ -437,7 +437,7 @@ class ModuleDocumentDisplay {
 					else {
 						$pv['C'] = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['docu_creator']] .
 						$bts->I18nTransObj->getI18nTransEntry('authors_date') . $A['docu_creation_date'] . " - " .
-						$bts->I18nTransObj->getI18nTransEntry('authors_update') . $A['docu_examination_date'] . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['docu_examiner']] . "<br>\r";
+						$bts->I18nTransObj->getI18nTransEntry('authors_update') . $A['docu_validation_date'] . $bts->I18nTransObj->getI18nTransEntry('authors_by') . $ADP_users[$A['docu_validator']] . "<br>\r";
 					}
 					$Content .= $pv['C'];
 				}

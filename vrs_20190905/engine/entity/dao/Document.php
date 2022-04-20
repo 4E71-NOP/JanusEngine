@@ -22,9 +22,9 @@ class Document extends Entity{
 		'docu_origin'			=> 0,
 		'docu_creator'			=> 0,
 		'docu_creation_date'	=> 0,
-		'docu_examination'		=> 0,
-		'docu_examiner'			=> 0,
-		'docu_examination_date'	=> 0,
+		'docu_validation'		=> 0,
+		'docu_validator'			=> 0,
+		'docu_validation_date'	=> 0,
 		'docu_cont'				=> 0,
 	);
 	//@formatter:on
@@ -51,6 +51,38 @@ class Document extends Entity{
 			AND doc.docu_id = '".$id."' 
 			AND shr.fk_docu_id = doc.docu_id 
 			AND doc.docu_origin = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+		;");
+		
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) {
+					if (isset($this->columns[$A])) { $this->Document[$A] = $B; }
+				}
+			}
+		}
+		else {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
+		}
+	}
+	
+	/**
+	 * Gets document data from the database.<br>
+	 * <br>
+	 * Does not check for Origin. It's useful for admin management.
+	 * @param integer $id
+	 */
+	public function getDataFromDBNoOriginCheck($id) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT doc.*, shr.share_modification 
+			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
+			WHERE shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND doc.docu_id = '".$id."' 
+			AND shr.fk_docu_id = doc.docu_id 
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -106,7 +138,7 @@ class Document extends Entity{
 	public function checkDataConsistency () {
 		$res = true;
 		if ( $this->entityExistsInDb('user', $this->Document['docu_creator']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('user', $this->Document['docu_examiner']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Document['docu_validator']) == false ) { $res = false; }
 		
 		return $res;
 	}
@@ -129,8 +161,8 @@ class Document extends Entity{
 		$tab['docu_creator'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
 		$tab['docu_creation_date'] = $date;
 		
-		$tab['docu_examiner'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
-		$tab['docu_examination_date'] = $date;
+		$tab['docu_validator'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['docu_validation_date'] = $date;
 		
 		return $tab;
 	}
@@ -143,6 +175,16 @@ class Document extends Entity{
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
 		return array (
+			'type' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "HTML",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('type0')),
+				1 => array( _MENU_OPTION_DB_ =>	 "PHP",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('type1')),
+				2 => array( _MENU_OPTION_DB_ =>	 "MIXED",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('type2')),
+				// 3 => array( _MENU_OPTION_DB_ =>	 "WMCODE",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('type0')),
+			),
+			'yesno' => array (
+				0 => array( _MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
+				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),	
+			),
 			'state' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),

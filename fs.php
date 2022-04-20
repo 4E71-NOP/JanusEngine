@@ -222,7 +222,8 @@ class FileSelectorRender {
 		
 		switch ($displayType) {
 			case "imageMosaic" :
-				$baseURI = "http://" . $_SERVER ['HTTP_HOST'] . "/Hydr/";
+				$baseURI = "http://" . $_SERVER ['HTTP_HOST']."/";
+				// $baseURI = "http://" . $_SERVER ['HTTP_HOST'] . "/Hydr/";
 				$Content .= "<table class='".$Block._CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
 				$x = 0;
 				foreach ( $fileList [1] as $A ) {

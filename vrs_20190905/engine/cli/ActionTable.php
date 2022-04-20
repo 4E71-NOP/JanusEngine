@@ -278,7 +278,7 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 		$content = substr ( $content ,$startPtr , ($endPtr - $startPtr) );
 		$content = addslashes ($content);
 	}
-	return array ("UPDATE ".$a['sqlTables']['document']." SET docu_examination = '1', docu_examiner = '".$a['params']['validator_id']."', docu_cont = '".$content."' WHERE docu_id = '".$a['params']['docu_id']."';");
+	return array ("UPDATE ".$a['sqlTables']['document']." SET docu_validation = '1', docu_validator = '".$a['params']['validator_id']."', docu_cont = '".$content."' WHERE docu_id = '".$a['params']['docu_id']."';");
 	
 };
 	
