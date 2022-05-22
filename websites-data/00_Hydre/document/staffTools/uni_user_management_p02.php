@@ -186,7 +186,7 @@ $curTab = 1;
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "edit":
 		$commandType = "update";
-		$currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'selectionName'), $WebSiteObj);
+		$currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('userForm', 'selectionId'), $WebSiteObj);
 		$t1l2c2 = $currentUserObj->getUserEntry('user_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
@@ -247,12 +247,14 @@ $timezone = array(
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('ModuleForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminUserManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"user" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentUserObj->getUserEntry('user_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"ModuleForm[selectionId]"	,	$currentUserObj->getUserEntry('user_id') )
 ."<p>\r"
 ;
 

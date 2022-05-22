@@ -107,7 +107,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&formGenericData[selectionId]=".$dbp['arti_id']
+		."&articleForm[selectionId]=".$dbp['arti_id']
 		."'>".$dbp['arti_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['arti_page'];
 		$T['Content']['1'][$i]['3']['cont']	= $dbp['arti_ref'];

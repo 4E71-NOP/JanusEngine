@@ -158,7 +158,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&formGenericData[selectionId]=".$A1['keyword_id']
+		."&keywordForm[selectionId]=".$dbp['keyword_id']
 		."'>"
 		.$dbp['keyword_name']
 		."</a>\r";

@@ -144,7 +144,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&formGenericData[selectionId]=".$dbp['theme_id']
+		."&themeForm[selectionId]=".$dbp['theme_id']
 		."'>".$dbp['theme_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['theme_title'];
 		$T['Content']['1'][$i]['3']['cont']	= strftime ("%a %d %b %y - %H:%M",$dbp['theme_date'] );		

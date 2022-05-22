@@ -159,7 +159,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&formGenericData[selectionId]=".$dbp['docu_id']
+		."&documentForm[selectionId]=".$dbp['docu_id']
 		."'>"
 		.$dbp['docu_name']
 		."</a>\r";

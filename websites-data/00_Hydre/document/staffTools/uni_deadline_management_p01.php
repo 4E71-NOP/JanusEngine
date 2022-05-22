@@ -142,7 +142,7 @@ else {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&formGenericData[selectionId]=";
+	."&deadlineForm[selectionId]=";
 	
 	$tabState = array(
 		0	=> $bts->I18nTransObj->getI18nTransEntry('dlState0'),

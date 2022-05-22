@@ -159,12 +159,13 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('menuForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminMenuManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"menu" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentMenuObj->getMenuEntry('menu_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"menuForm[selectionId]"		,	$currentMenuObj->getMenuEntry('menu_id') )
 ."<p>\r"
 ;
 

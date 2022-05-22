@@ -150,6 +150,7 @@ class Article extends Entity {
 	 */
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
 		return array ( 
 			'validation' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('invalid')),
@@ -159,7 +160,8 @@ class Article extends Entity {
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),
 				2 => array( _MENU_OPTION_DB_ =>	 2,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-		));
+			),
+		);
 	}
 	
 	//@formatter:off

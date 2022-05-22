@@ -182,15 +182,16 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-
-$Content .= "
-<form ACTION='index.php?' method='post'>\r"
-."<input type='hidden' name='formGenericData[origin]'	value='AdminDashboard'>\r"
-."<input type='hidden' name='formGenericData[section]'	value='WebsiteManagementP01'>"   
-."<input type='hidden' name='formCommand1'				value='update'>"
-."<input type='hidden' name='formEntity1'				value='website'>"
-."<input type='hidden' name='formTarget1[name]'			value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>"
-."<input type='hidden' name='formGenericData[mode]'		value='".$processTarget."'>\r"
+$Content .= 
+$bts->RenderFormObj->renderformHeader('WebsiteForm')
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"WebsiteManagementP01" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	"update" )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"website" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$WebSiteObj->getWebSiteEntry('ws_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"ModuleForm[selectionId]"	,	$WebSiteObj->getWebSiteEntry('ws_id') )
 ."<p>\r"
 ;
 

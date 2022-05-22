@@ -78,13 +78,6 @@ self::$CheckTable['update']['article']['2']['v']	= "config_id";
 self::$CheckTable['update']['article']['2']['m']	= "CLI_Article_C003";
 self::$CheckTable['update']['article']['2']['p']	= "config";
 self::$CheckTable['update']['article']['2']['s']	= "config";
-self::$CheckTable['update']['article']['3']['d']	= 2;
-self::$CheckTable['update']['article']['3']['f']	= function ($a) { return array ("SELECT l.layout_id AS layout_id, l.layout_generic_name AS layout_generic_name FROM ".$a['sqlTables']['layout']." l , ".$a['sqlTables']['layout_theme']." lt WHERE layout_generic_name = '".$a['params']['layout_generic_name']."' AND l.fk_layout_id = lt.fk_layout_id AND lt.theme_id = '".$a['params']['theme_id']."';");};
-self::$CheckTable['update']['article']['3']['c']	= "layout_generic_name";
-self::$CheckTable['update']['article']['3']['v']	= "layout_generic_name";
-self::$CheckTable['update']['article']['3']['m']	= "CLI_Article_C004";
-self::$CheckTable['update']['article']['3']['p']	= "layout";
-self::$CheckTable['update']['article']['3']['s']	= "layout_generic_name";
 
 self::$CheckTable['delete']['article']['0']['d']	= 2;
 self::$CheckTable['delete']['article']['0']['f']	= function ($a) { return array ("SELECT arti_id,arti_name FROM ".$a['sqlTables']['article']." WHERE arti_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
@@ -166,18 +159,20 @@ self::$CheckTable['add']['deadline']['0']['d']	= 3;
 self::$CheckTable['add']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['deadline']['0']['m']	= "CLI_Deadline_C001";
 self::$CheckTable['add']['deadline']['0']['s']	= "name";
+
 self::$CheckTable['update']['deadline']['0']['d']	= 2;
 self::$CheckTable['update']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['deadline']['0']['c']	= "deadline_id";
-self::$CheckTable['update']['deadline']['0']['v']	= "id";
+self::$CheckTable['update']['deadline']['0']['v']	= "deadline_id";
 self::$CheckTable['update']['deadline']['0']['m']	= "CLI_Deadline_U001";
 self::$CheckTable['update']['deadline']['0']['p']	= "deadline";
 self::$CheckTable['update']['deadline']['0']['s']	= "name";
+
 self::$CheckTable['delete']['deadline']['0']['d']	= 2;
 self::$CheckTable['delete']['deadline']['0']['f']	= function ($a) { return array ("SELECT deadline_id FROM ".$a['sqlTables']['deadline']." WHERE deadline_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['delete']['deadline']['0']['c']	= "deadline_id";
 self::$CheckTable['delete']['deadline']['0']['v']	= "deadline_id";
-self::$CheckTable['delete']['deadline']['0']['m']	= "CLI_Deadline_U001";
+self::$CheckTable['delete']['deadline']['0']['m']	= "CLI_Deadline_D001";
 self::$CheckTable['delete']['deadline']['0']['p']	= "deadline";
 self::$CheckTable['delete']['deadline']['0']['s']	= "name";
 
@@ -228,7 +223,7 @@ self::$CheckTable['update']['document']['1']['d']	= 2;
 self::$CheckTable['update']['document']['1']['f']	= function ($a) { return array ("SELECT usr.user_login,usr.user_id  FROM ".$a['sqlTables']['user']." usr , ".$a['sqlTables']['group_user']." gu , ".$a['sqlTables']['group_website']." sg WHERE usr.user_login = '".$a['params']['validator']."' AND usr.user_id = gu.fk_user_id AND gu.fk_group_id = sg.fk_group_id AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['update']['document']['1']['c']	= "validator_user_id";
 self::$CheckTable['update']['document']['1']['v']	= "validator_user_id";
-self::$CheckTable['update']['document']['1']['m']	= "CLI_Document_U003";
+self::$CheckTable['update']['document']['1']['m']	= "CLI_Document_U002";
 self::$CheckTable['update']['document']['1']['p']	= "user";
 self::$CheckTable['update']['document']['1']['s']	= "validator";
 
@@ -237,7 +232,7 @@ self::$CheckTable['delete']['document']['0']['d']	= 2;
 self::$CheckTable['delete']['document']['0']['f']	= function ($a) { return array ("SELECT docu_id,docu_name FROM ".$a['sqlTables']['document']." WHERE docu_name = '".$a['params']['name']."';");};
 self::$CheckTable['delete']['document']['0']['c'] = "group_id";
 self::$CheckTable['delete']['document']['0']['v'] = "group_id";
-self::$CheckTable['delete']['document']['0']['m'] = "CLI_Document_U001";
+self::$CheckTable['delete']['document']['0']['m'] = "CLI_Document_D001";
 self::$CheckTable['delete']['document']['0']['p'] = "document";
 self::$CheckTable['delete']['document']['0']['s'] = "name";
 
@@ -297,8 +292,8 @@ self::$CheckTable['update']['group']['0']['f'] = function ($a) { return array ( 
 self::$CheckTable['update']['group']['0']['c'] = "group_id";
 self::$CheckTable['update']['group']['0']['v'] = "group_id";
 self::$CheckTable['update']['group']['0']['m'] = "CLI_group_U001";
-self::$CheckTable['update']['group']['1']['p'] = "group";
-self::$CheckTable['update']['group']['1']['s'] = "name";
+self::$CheckTable['update']['group']['0']['p'] = "group";
+self::$CheckTable['update']['group']['0']['s'] = "name";
 
 self::$CheckTable['update']['group']['1']['d'] = 2;
 self::$CheckTable['update']['group']['1']['f'] = function ($a) { return array ( "SELECT grp.group_id FROM ".$a['sqlTables']['group']." grp , ".$a['sqlTables']['group_website']." sg , ".$a['sqlTables']['website']." ws WHERE grp.group_name = '".$a['params']['name']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = ws.ws_id AND ws.ws_id = '".$a['Context']['ws_id']."';" ); };
@@ -312,8 +307,8 @@ self::$CheckTable['delete']['group']['0']['f'] = function ($a) { return array ( 
 self::$CheckTable['delete']['group']['0']['c'] = "group_id";
 self::$CheckTable['delete']['group']['0']['v'] = "group_id";
 self::$CheckTable['delete']['group']['0']['m'] = "CLI_group_D001";
-self::$CheckTable['delete']['group']['1']['p'] = "group";
-self::$CheckTable['delete']['group']['1']['s'] = "name";
+self::$CheckTable['delete']['group']['0']['p'] = "group";
+self::$CheckTable['delete']['group']['0']['s'] = "name";
 
 
 // KeyWord
@@ -505,32 +500,40 @@ self::$CheckTable['add']['module']['0']['d']	= 3;
 self::$CheckTable['add']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['name']."' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['module']['0']['m']	= "CLI_Module_C001";
 self::$CheckTable['add']['module']['0']['s']	= "name";
+
 self::$CheckTable['add']['module']['1']['d']	= 2;
 self::$CheckTable['add']['module']['1']['f']	= function ($a) { return array ("SELECT prm.perm_id AS perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['permission']."' ;");};
 self::$CheckTable['add']['module']['1']['c']	= "perm_id";
 self::$CheckTable['add']['module']['1']['v']	= "fk_perm_id";
-self::$CheckTable['add']['module']['1']['m']	= "CLI_menu_C004";
+self::$CheckTable['add']['module']['1']['m']	= "CLI_Module_C004";
 self::$CheckTable['add']['module']['1']['p']	= "permission";
 self::$CheckTable['add']['module']['1']['s']	= "name";
 
-self::$CheckTable['update']['module']['0']['d']	= 3;
+self::$CheckTable['update']['module']['0']['d']	= 2;
 self::$CheckTable['update']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['name']."' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['update']['module']['0']['m']	= "CLI_Module_U001";
+self::$CheckTable['update']['module']['0']['c']	= "module_id";
+self::$CheckTable['update']['module']['0']['v']	= "module_id";
+self::$CheckTable['update']['module']['0']['m']	= "CLI_Module_C001";
+self::$CheckTable['update']['module']['0']['p']	= "";
 self::$CheckTable['update']['module']['0']['s']	= "name";
 self::$CheckTable['update']['module']['1']['d']	= 2;
-self::$CheckTable['update']['module']['1']['f']	= function ($a) { return array ("SELECT grp.group_id AS group_id, grp.group_name AS group_name FROM ".$a['sqlTables']['group']." grp, ".$a['sqlTables']['group_website']." sg WHERE grp.group_name = '".$a['params']['group_who_can_see']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['update']['module']['1']['c']	= "group_id";
-self::$CheckTable['update']['module']['1']['v']	= "group_allowed_to_see_id";
-self::$CheckTable['update']['module']['1']['m']	= "CLI_Module_U002";
-self::$CheckTable['update']['module']['1']['p']	= "user";
-self::$CheckTable['update']['module']['1']['s']	= "group_who_can_see";
-self::$CheckTable['update']['module']['2']['d']	= 2;
-self::$CheckTable['update']['module']['2']['f']	= function ($a) { return array ("SELECT grp.group_id AS group_id, grp.group_name AS group_name FROM ".$a['sqlTables']['group']." grp, ".$a['sqlTables']['group_website']." sg WHERE grp.group_name = '".$a['params']['group_who_can_use']."' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = '".$a['Context']['ws_id']."';");};
-self::$CheckTable['update']['module']['2']['c']	= "group_id";
-self::$CheckTable['update']['module']['2']['v']	= "group_allowed_to_use_id";
-self::$CheckTable['update']['module']['2']['m']	= "CLI_Module_U003";
-self::$CheckTable['update']['module']['2']['p']	= "user";
-self::$CheckTable['update']['module']['2']['s']	= "group_who_can_use";
+self::$CheckTable['update']['module']['1']['f']	= function ($a) { return array ("SELECT prm.perm_id AS perm_id FROM ".$a['sqlTables']['permission']." prm WHERE prm.perm_name = '".$a['params']['permission']."' ;");};
+self::$CheckTable['update']['module']['1']['c']	= "perm_id";
+self::$CheckTable['update']['module']['1']['v']	= "fk_perm_id";
+self::$CheckTable['update']['module']['1']['m']	= "CLI_Module_C002";
+self::$CheckTable['update']['module']['1']['p']	= "permission";
+self::$CheckTable['update']['module']['1']['s']	= "name";
+
+// self::$CheckTable['update']['module']['0']['d']	= 2;
+// self::$CheckTable['update']['module']['0']['f']	= function ($a) { return array ("SELECT deco_name FROM ".$a['sqlTables']['decoration']." WHERE deco_name = '".$a['params']['name']."';");};
+// self::$CheckTable['update']['module']['1']['c']	= "deco_id";
+// self::$CheckTable['update']['module']['1']['v']	= "deco_nbr";
+// self::$CheckTable['update']['module']['0']['m']	= "CLI_Module_C003";
+// self::$CheckTable['update']['module']['1']['p']	= "decoration";
+// self::$CheckTable['update']['module']['0']['s']	= "name";
+
+
+
 
 self::$CheckTable['delete']['module']['0']['d']	= 2;
 self::$CheckTable['delete']['module']['0']['f']	= function ($a) { return array ("SELECT mdl.module_id FROM ".$a['sqlTables']['module']." mdl , ".$a['sqlTables']['module_website']." sm WHERE mdl.module_name = '".$a['params']['name']."' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '".$a['Context']['ws_id']."';");};

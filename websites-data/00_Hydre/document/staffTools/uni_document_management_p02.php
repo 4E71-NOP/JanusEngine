@@ -147,12 +147,14 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('documentForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminDeadlineDocumentP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"document" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentDocumentObj->getDocumentEntry('docu_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"documentForm[selectionId]"	,	$currentDocumentObj->getDocumentEntry('docu_id') )
 ."<p>\r"
 ;
 

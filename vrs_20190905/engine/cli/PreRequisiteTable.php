@@ -774,9 +774,9 @@ self::$PreRequisiteTable['update']['article']['timeCreate']		= &self::$PreRequis
 self::$PreRequisiteTable['update']['article']['columns']		= &self::$PreRequisiteTable['add']['article']['columns'];
 
 self::$PreRequisiteTable['update']['deadline']['convert']		= &self::$PreRequisiteTable['add']['deadline']['convert'];
-self::$PreRequisiteTable['update']['deadline']['nextId']		= &self::$PreRequisiteTable['add']['deadline']['nextId'];
 self::$PreRequisiteTable['update']['deadline']['columns']		= &self::$PreRequisiteTable['add']['deadline']['columns'];
 self::$PreRequisiteTable['update']['deadline']['timeConvert']	= &self::$PreRequisiteTable['add']['deadline']['timeConvert'];
+
 
 self::$PreRequisiteTable['update']['document']					= self::$PreRequisiteTable['add']['document'];		// It's a copy not a reference!
 self::$PreRequisiteTable['update']['document']['execute']		= function (&$a) {
@@ -784,6 +784,24 @@ self::$PreRequisiteTable['update']['document']['execute']		= function (&$a) {
 	if ( $a['params']['validator'] == "*user_install*" ) {$a['params']['validator'] = $a['Initiator']['db_login'];}
 };
 self::$PreRequisiteTable['update']['document']['nextId']		= 0;
+
+
+
+self::$PreRequisiteTable['update']['layout']['convert']		= &self::$PreRequisiteTable['add']['layout']['convert'];
+self::$PreRequisiteTable['update']['layout']['nextId']		= &self::$PreRequisiteTable['add']['layout']['nextId'];
+self::$PreRequisiteTable['update']['layout']['columns']		= &self::$PreRequisiteTable['add']['layout']['columns'];
+
+
+self::$PreRequisiteTable['update']['group']['convert']		= &self::$PreRequisiteTable['add']['group']['convert'];
+self::$PreRequisiteTable['update']['group']['nextId']		= &self::$PreRequisiteTable['add']['group']['nextId'];
+self::$PreRequisiteTable['update']['group']['columns']		= &self::$PreRequisiteTable['add']['group']['columns'];
+self::$PreRequisiteTable['update']['group']['timeCreate']	= &self::$PreRequisiteTable['add']['group']['timeCreate'];
+
+
+self::$PreRequisiteTable['update']['module']['convert']		= &self::$PreRequisiteTable['add']['module']['convert'];
+self::$PreRequisiteTable['update']['module']['nextId']		= &self::$PreRequisiteTable['add']['module']['nextId'];
+self::$PreRequisiteTable['update']['module']['columns']		= &self::$PreRequisiteTable['add']['module']['columns'];
+
 
 self::$PreRequisiteTable['update']['user']						= self::$PreRequisiteTable['add']['user'];		// It's a copy not a reference!
 self::$PreRequisiteTable['update']['user']['nextId']			= array();

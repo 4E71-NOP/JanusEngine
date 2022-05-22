@@ -115,9 +115,17 @@ class Decoration extends Entity {
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('offline')),
 				1 => array( _MENU_OPTION_DB_ =>	 1,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('online')),
 				2 => array( _MENU_OPTION_DB_ =>	 2,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-			));
+			),
+			'type' => array (
+				10 => array( _MENU_OPTION_DB_ => 'menu',		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('menu')),
+				20 => array( _MENU_OPTION_DB_ => 'caligraph',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('caligraph')),
+				30 => array( _MENU_OPTION_DB_ => '1_div',		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('1_div')),
+				40 => array( _MENU_OPTION_DB_ => 'elegance',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('elegance')),
+				50 => array( _MENU_OPTION_DB_ => 'exquisite',	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('exquisite')),
+				60 => array( _MENU_OPTION_DB_ => 'elysion',		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('elysion')),
+			)
+		);
 	}
-	
 	
 	//@formatter:off
 	public function getDecorationEntry ($data) { return $this->Decoration[$data]; }

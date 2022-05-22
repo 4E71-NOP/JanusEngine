@@ -42,7 +42,7 @@ $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionId'	=> 7517174913115681722,
+				'selectionId'	=> 7526169192682853807,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -84,6 +84,7 @@ $bts->I18nTransObj->apply(
 			"t1l7c1"		=>	"Page",
 			"t1l8c1"		=>	"Nom générique de présentation",
 			"t1l9c1"		=>	"Document",
+			"t1l10c1"		=>	"Config",
 
 			"t2l1c1"		=>	"Créateur",
 			"t2l2c1"		=>	"Date création",
@@ -113,6 +114,7 @@ $bts->I18nTransObj->apply(
 			"t1l7c1"		=>	"Page",
 			"t1l8c1"		=>	"Presentation generic name",
 			"t1l9c1"		=>	"Document",
+			"t1l10c1"		=>	"Configuration",
 			
 			"t2l1c1"		=>	"Creator",
 			"t2l2c1"		=>	"Creation date",
@@ -133,6 +135,7 @@ $ClassLoaderObj->provisionClass('MenuSelectTable');
 $MenuSelectTableObj = MenuSelectTable::getInstance();
 
 $tabUser		= $MenuSelectTableObj->getUserList();
+$tabArtiConfig	= $MenuSelectTableObj->getArtiConfigList();
 $tabDeadline	= $MenuSelectTableObj->getDeadlineList();
 $tabLayout		= $MenuSelectTableObj->getLayoutList();
 $tabDocument	= $MenuSelectTableObj->getDocumentList();
@@ -177,15 +180,17 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 
 $Content .= 
 $bts->RenderFormObj->renderformHeader('articleForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminArticleManagementP02" )
-.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
-.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"article" )
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
-.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentArticleObj->getArticleEntry('arti_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"			,	"AdminDashboard")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"			,	"AdminArticleManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"						,	$commandType )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"						,	"article" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"				,	$processTarget )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"					, 	$currentArticleObj->getArticleEntry('arti_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"formParams1[layout_generic_name]"	, 	$currentArticleObj->getArticleEntry('layout_generic_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"articleForm[selectionId]"			,	$currentArticleObj->getArticleEntry('arti_id'))
 ."<p>\r"
 ;
-
 
 $T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
 $T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
@@ -196,6 +201,7 @@ $T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l7c1');
 $T['Content']['1']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l8c1');
 $T['Content']['1']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l9c1');
+$T['Content']['1']['10']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l10c1');
 
 $T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
 $T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
@@ -227,7 +233,6 @@ $T['Content']['1']['7']['2']['cont'] = $bts->RenderFormObj->renderInputText('for
 // Layout
 $T['Content']['1']['8']['2']['cont'] = $currentArticleObj->getArticleEntry('layout_generic_name');
 
-
 // Document
 $ClassLoaderObj->provisionClass ( 'Document' );	// Make sure we got it loaded
 $documentTmpObj = new Document();
@@ -238,25 +243,27 @@ $T['Content']['1']['9']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(arr
 	'options' => $tabDocument,
 ));
 
+$T['Content']['1']['10']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+	'name' => 'formParams1[config]',
+	'defaultSelected' => $deadlineTmpObj->getDeadLineEntry('fk_config_id'),
+	'options' => $tabArtiConfig,
+));
+
+
 // --------------------------------------------------------------------------------------------
 $T['Content']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
 $T['Content']['2']['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
 $T['Content']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
 $T['Content']['2']['4']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
 
-$tabState = array(
-		0 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('invalid'),	"db" => "OFFLINE"),
-		1 =>	array ( "t" => $bts->I18nTransObj->getI18nTransEntry('valid'),		"db" => "ONLINE"),
-);
+$tab = $currentArticleObj->getMenuOptionArray();
+$tabState = $tab['state'];
 
 $T['Content']['2']['5']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[validation_state]',
 	'defaultSelected' => $currentArticleObj->getArticleEntry('arti_validation_state'),
 	'options' => $tabState,
 ));
-
-
-
 
 $T['Content']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_release_date'));
 
@@ -267,9 +274,9 @@ $T['Content']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentAr
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 11, 2);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(9,2,2),
+		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(10,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);

@@ -174,7 +174,7 @@ foreach ( $table_infos_modules AS $A1 ) {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&formGenericData[selectionId]=".$A1['module_id']
+	."&moduleForm[selectionId]=".$A1['module_id']
 	."'>"
 	.$A1['module_name']
 	."</a>\r";

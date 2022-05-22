@@ -153,12 +153,14 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('keywordForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminKeywordManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"keyword" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentKeyWordObj->getKeywordEntry('keyword_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"keywordForm[selectionId]"	,	$currentKeyWordObj->getKeywordEntry('keyword_id') )
 ."<p>\r"
 ;
 

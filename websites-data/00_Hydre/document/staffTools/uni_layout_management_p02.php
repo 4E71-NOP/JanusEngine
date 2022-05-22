@@ -144,12 +144,14 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 
 $Content .= 
 $bts->RenderFormObj->renderformHeader('layoutForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminArticleManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminLayoutManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
-.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"layyout" )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"layout" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentLayoutObj->getLayoutEntry('layout_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"layoutForm[selectionId]"	,	$currentLayoutObj->getLayoutEntry('layout_id') )
 ."<p>\r"
 ;
 
@@ -163,7 +165,7 @@ $T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 
 $T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',			$currentLayoutObj->getLayoutEntry('layout_title'));
 $T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[generic_name]',	$currentLayoutObj->getLayoutEntry('layout_generic_name') );
-$T['Content']['1']['5']['2']['cont'] = "<textarea name='formParams1[generic_name]' style='min-width:384px; min-height:32px;width=100%; height:100%;'>".$currentLayoutObj->getLayoutEntry('layout_desc')."</textarea>\r";
+$T['Content']['1']['5']['2']['cont'] = "<textarea name='formParams1[desc]' style='min-width:384px; min-height:32px;width=100%; height:100%;'>".$currentLayoutObj->getLayoutEntry('layout_desc')."</textarea>\r";
 
 
 $ClassLoaderObj = ClassLoader::getInstance ();

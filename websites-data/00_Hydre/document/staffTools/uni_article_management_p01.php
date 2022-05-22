@@ -237,7 +237,7 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&formGenericData[selectionId]=";
+	."&articleForm[selectionId]=";
 	
 	// $linkId2 = "&formGenericData[selectionPage]=";
 	// $tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');

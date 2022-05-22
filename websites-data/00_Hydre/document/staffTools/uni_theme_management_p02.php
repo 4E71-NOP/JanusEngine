@@ -197,12 +197,14 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('themeForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminThemeManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"menu" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentThemeObj->getThemeDescriptorEntry('theme_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"themeForm[selectionId]"	,	$currentThemeObj->getThemeDescriptorEntry('theme_id') )
 ."<p>\r"
 ;
 
@@ -624,25 +626,25 @@ $T['Content'][$curTab]['4']['2']['cont'] .= "
 switch ( $bts->CMObj->getConfigurationEntry('colorSelector') ){
 	case "Hydr":
 		$T['Content'][$curTab]['5']['2']['cont'] = "
-		#<input type='text' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
-		#<input type='text' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."\"	class='".$Block."_t3 ".$Block."_form_1'>\r /
-		#<input type='text' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."\"		class='".$Block."_t3 ".$Block."_form_1'>\r
-		<br>\r
-		<br>\r
-		<table style='border: 1px solid black; border-collapse: collapse'>\r
-		<tr>\r";
+		#<input type='text' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."\"	>\r /
+		#<input type='text' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."\"	>\r /
+		#<input type='text' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."\"		>\r
+		";
 		break;
 	case "system":
 		$T['Content'][$curTab]['5']['2']['cont'] = "
 		<input type='color' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."'	oninput='ThemeGradientMgmt()'>\r /
 		<input type='color' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."'	oninput='ThemeGradientMgmt()'>\r /
 		<input type='color' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."'		oninput='ThemeGradientMgmt()'>\r
-		<br>\r
-		<br>\r
-		<table style='border: 1px solid black; border-collapse: collapse'>\r
-		<tr>\r";
+		";
 		break;
 }
+
+$T['Content'][$curTab]['5']['2']['cont'] .= "
+<br>\r
+<br>\r
+<table style='border: 1px solid black; border-collapse: collapse'>\r
+<tr>\r";
 
 $gradientNbr = 30;
 $gradientWidth = 320;

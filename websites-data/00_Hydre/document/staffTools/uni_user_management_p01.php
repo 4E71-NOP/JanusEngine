@@ -190,7 +190,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&formGenericData[selectionId]=".$dbp['user_id']
+	."&userForm[selectionId]=".$dbp['user_id']
 	."'>"
 	.$dbp['user_login']
 	."</a>\r";

@@ -161,12 +161,14 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('ModuleForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminModuleManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"module" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentModuleObj->getModuleEntry('module_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"moduleForm[selectionId]"	,	$currentModuleObj->getModuleEntry('module_id') )
 ."<p>\r"
 ;
 
@@ -258,7 +260,7 @@ foreach ( $tabPerm as $A ) {
 }
 $T['Content']['2'][$line]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l6c1');
 $T['Content']['2'][$line]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[perm_name]',
+	'name' => 'formParams1[permission]',
 	'defaultSelected' => $currentModuleObj->getModuleEntry('fk_perm_id'),
 	'options' => $tabPermSelect,
 ));

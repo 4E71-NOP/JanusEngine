@@ -26,6 +26,8 @@
 /* @var $infos Array                                */
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
+$bts->LMObj->saveVectorSystemLogLevel();
+$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('deadlineForm',
 		array(
@@ -37,8 +39,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'AdminDeadlineManagementP02',
 				'mode'			=> 'create',
-				// 'mode'			=> 'edit',
-				'modification'	=> 'on',
+				'mode'			=> 'edit',
+				// 'modification'	=> 'on',
 				)
 );
 
@@ -128,16 +130,17 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 		$linkId1 = "<a href='"
 			."index.php?"._HYDRLINKURLTAG_."=1"
 			."&arti_slug=article_management"
-			."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+			// ."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 			."&arti_page=2"
 			."&formGenericData[mode]=edit"
 			."&articleForm[selectionId]=";
 		
 		$articleList = "";
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			$articleList .= $linkId1.$dbp['arti_ref']."&formGenericData[selectionPage]=1'>".$dbp['arti_title']."</a> - ";
+			$articleList .= $linkId1.$dbp['arti_ref']."'>".$dbp['arti_title']."</a> - ";
 		}
 		$commandType = "update";
+		$processTarget = "edit";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		break;
 	case "create":
@@ -152,6 +155,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 		);
 		$currentDeadlineObj->setDeadLine( $arrTmp );
 		$commandType = "add";
+		$processTarget = "edit";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
 
 		break;
@@ -161,12 +165,14 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 
 $Content .= 
 $bts->RenderFormObj->renderformHeader('deadlineForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"				,	"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminDeadlineManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"deadline" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentDeadlineObj->getDeadlineEntry('deadline_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"deadlineForm[selectionId]"	,	$currentDeadlineObj->getDeadLineEntry('deadline_id'))
 ."<p>\r"
 ;
 
@@ -225,5 +231,6 @@ $infos['formName'] = "deadlineForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
 /*Hydr-Content-End*/
+$bts->LMObj->restoreVectorSystemLogLevel();
 
 ?>

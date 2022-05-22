@@ -175,7 +175,7 @@ foreach ($tabListMenu as $A ) {
 	$T['Content'][$Tab][$l]['2']['cont'] = $A['menu_title'];
 	$T['Content'][$Tab][$l]['3']['cont'] = $tabListMenu[$A['menu_parent']]['menu_name'];
 	$T['Content'][$Tab][$l]['4']['cont'] = $A['menu_position'];
-	$T['Content'][$Tab][$l]['5']['cont'] = $buttonLink."&formGenericData[selection_id]=".$A['menu_id']."&formGenericData[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&formGenericData[menu_id]=".$A['menu_id']."&formGenericData[command]=moveDown".$buttonDown."</a>\r";
+	$T['Content'][$Tab][$l]['5']['cont'] = $buttonLink."&menuForm[selection_id]=".$A['menu_id']."&formGenericData[command]=moveUp".$buttonUp."</a>\r - \r".$buttonLink."&menuForm[menu_id]=".$A['menu_id']."&formGenericData[command]=moveDown".$buttonDown."</a>\r";
 	$T['Content'][$Tab][$l]['6']['cont'] = $stateTab[$dbp['menu_state']];
 	$l++;
 	$TabListLang[$A['fk_lang_id']]['count'] = $TabListLang[$A['fk_lang_id']]['linePtr'] = $l;

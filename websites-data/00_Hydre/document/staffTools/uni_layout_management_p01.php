@@ -149,7 +149,7 @@ else {
 		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
 		."&arti_page=2"
 		."&formGenericData[mode]=edit"
-		."&formGenericData[selectionId]=".$dbp['layout_id']
+		."&layoutForm[selectionId]=".$dbp['layout_id']
 		."'>".$dbp['layout_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['layout_title'];
 		$T['Content']['1'][$i]['3']['cont']	= $dbp['theme_title'];

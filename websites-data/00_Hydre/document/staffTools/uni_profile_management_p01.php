@@ -181,15 +181,13 @@ else {
 	}
 	
 	$Content .= "<br>\r
-	<form enctype='multipart/form-data' ACTION='index.php?' method='post' name='UserProfileForm'>\r
-
-	<input type='hidden' name='formSubmitted'					value='1'>
-	<input type='hidden' name='formGenericData[origin]'			value='profileManagement'>
-	<input type='hidden' name='formGenericData[section]'		value='UserProfileForm'>
-	<input type='hidden' name='formGenericData[modification]'	value='on'>
-	<input type='hidden' name='formEntity'						value='User'>
-	<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
-	";
+	<form enctype='multipart/form-data' ACTION='index.php?' method='post' name='UserProfileForm'>\r"
+	.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"			, "profileManagement")
+	.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"			, "UserProfileForm")
+	.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[modification]"		, "on")
+	.$bts->RenderFormObj->renderHiddenInput(	"formEntity"						, "User")
+	.$bts->RenderFormObj->renderHiddenInput(	"formTarget[name]"					, $UserObj->getUserEntry('user_login'))
+	;
 
 	$userPrefthemeId = $WebSiteObj->getWebSiteEntry('fk_theme_id');
 	if ( $UserObj->getUserEntry('pref_theme') != 0 ) { $userPrefthemeId = $UserObj->getUserEntry('pref_theme'); }
@@ -426,7 +424,6 @@ else {
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
-	// $PmThemeDataObj->setThemeDataEntry('theme_module_internal_width', $ThemeDataObj->getThemeDataEntry('theme_module_internal_width'));
 	
 	$CurrentSetObj->backupInstanceOfThemeDataObj();
 	$CurrentSetObj->setInstanceOfThemeDataObj($PmThemeDataObj);
@@ -464,7 +461,6 @@ else {
 	$T['ContentInfos']['Height']		= 512;
 	
 	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_bg'));
-	//$PmThemeDataObj->setThemeDataEntry('pathThemeDivInitialBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$PmThemeDataObj->getThemeDataEntry('theme_directory')."/".$PmThemeDataObj->getThemeDataEntry('theme_divinitial_bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
 	
 	$infos['module_nameBackup']	= $infos['module_name'];
@@ -531,12 +527,6 @@ else {
 			<h2>". $DocumentDataObj->getDocumentDataEntry('arti_subtitle') ."</h2>
 			";
 
-/*
-
-			<input type='hidden' name='formEntity'						value='User'>
-			<input type='hidden' name='formTarget[name]'				value='".$UserObj->getUserEntry('user_login')."'>\r
-
-*/		
 		if ( $Tab == 1 ) {
 			$T['Content'][$Tab]['1']['1']['cont'] .= "
 			<form ACTION='index.php?' method='post' name'ThemeSelection'>\r

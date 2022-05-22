@@ -39,9 +39,9 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'creation'		=> 'on',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
-				'mode'			=> 'edit',
+				// 'mode'			=> 'edit',
 				'mode'			=> 'create',
-				// 'mode'			=> 'delete',
+				'mode'			=> 'delete',
 		)
 );
 		
@@ -62,8 +62,8 @@ $bts->I18nTransObj->apply(
 			"staff"			=>	"Staff",
 			"seniorStaff"	=>	"Staff Sénior",
 			
-			"invite1"		=> "Cette partie va vous permettre de gérer le group.",
-			"invite2"		=> "Cette partie va vous permettre de créer un group.",
+			"invite1"		=> "Cette partie va vous permettre de gérer le groupe.",
+			"invite2"		=> "Cette partie va vous permettre de créer un groupe.",
 			"tabTxt1"		=> "Informations",
 			
 			"t1l1c1"		=>	"ID",
@@ -141,12 +141,14 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('groupForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard".$processStep )
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminGroupManagementP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"group" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentGroupObj->getGroupEntry('group_name') )
+.$bts->RenderFormObj->renderHiddenInput(	"groupForm[selectionId]"	,	$currentGroupObj->getGroupEntry('group_id') )
 ."<p>\r"
 ;
 
@@ -161,8 +163,8 @@ $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 $T['Content']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
-$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('groupForm[name]',	$currentGroupObj->getGroupEntry('group_name'));
-$T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('groupForm[title]',	$currentGroupObj->getGroupEntry('group_title'));
+$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentGroupObj->getGroupEntry('group_name'));
+$T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',	$currentGroupObj->getGroupEntry('group_title'));
 
 $Tab = $currentGroupObj->getMenuOptionArray();
 
@@ -179,7 +181,7 @@ $FileSelectorConfig = array(
 	"width"				=> 80,	//in %
 	"height"			=> 50,	//in %
 	"formName"			=> "groupForm",
-	"formTargetId"		=> "formParams[group]",
+	"formTargetId"		=> "formParams[file]",
 	"formInputSize"		=> 25 ,
 	"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
 	"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
@@ -198,29 +200,6 @@ $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-// $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),
-// 		array(
-// 				"width"				=> 80,	//in %
-// 				"height"			=> 50,	//in %
-// 				"formName"			=> "groupForm",
-// 				"formTargetId"		=> "inputFile",
-// 				"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
-// 				"selectionMode"		=> "file",
-// 		)
-// );
-// $infos['IconSelectFile'] = array(
-// 		"case"				=> 1 ,
-// 		"formName"			=> "groupForm",
-// 		"formInputId"		=> "inputFile",
-// 		"formInputSize"		=> 40 ,
-// 		"formInputVal"		=> $currentGroupObj->getGroupEntry('group_file'),
-// 		"path"				=> "websites-data/".$WebSiteObj->getWebSiteEntry('ws_name')."/data/images/avatars/",
-// 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
-// );
-// $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
-// $T['Content']['1']['6']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
 
 // --------------------------------------------------------------------------------------------
 //

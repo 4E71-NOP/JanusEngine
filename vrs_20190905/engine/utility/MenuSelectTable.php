@@ -58,6 +58,33 @@ class MenuSelectTable {
 		}
 		return $tab;
 	}
+
+	/**
+	 * Returns an array for HTML "menu select" containing the list of arti_ref(s) in the current website context.
+	 * @return array
+	 */
+	public function getArtiConfigList(){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$dbquery = $bts->SDDMObj->query("
+		SELECT *
+		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article_config')." ac 
+		WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		;");
+		$tab = array();
+		
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$tab[$dbp['config_id']]['t']	=	$tab[$dbp['config_id']]['db']	= $dbp['config_name'];
+			}
+		}
+		else {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned"));
+		}
+		return $tab;
+	}
 	
 	
 	/**
@@ -360,7 +387,8 @@ class MenuSelectTable {
 		for ( $i =1; $i<=30; $i++ ) {
 			$tabDecoNbr[$i] = array(
 				_MENU_OPTION_TXT_		=>	$i." - ".$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_block_', $i, '_name')),
-				_MENU_OPTION_DB_		=>	$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_block_', $i, '_name')),
+				_MENU_OPTION_DB_		=>	$i,
+				// _MENU_OPTION_DB_		=>	$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_block_', $i, '_name')),
 				_MENU_OPTION_SELECTED_	=> '',
 			);
 		}
