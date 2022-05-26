@@ -117,7 +117,13 @@ self::$ActionTable['update']['article_config']	= function (&$a) { return array (
 self::$ActionTable['update']['deadline']		= function (&$a) { return array ("UPDATE ".$a['sqlTables']['deadline']." SET ".$a['equalities']." WHERE deadline_id = '".$a['params']['deadline_id']."';"); };
 
 self::$ActionTable['update']['document']		= function (&$a) {
-	if ($a['params']['updateGO'] == 1 ) { return array ("UPDATE ".$a['sqlTables']['document']." SET ".$a['equalities']." WHERE docu_id = '".$a['params']['docu_id']."';"); }
+	if ($a['params']['updateGO'] == 1 ) { 
+		$arr = array ("UPDATE ".$a['sqlTables']['document']." SET ".$a['equalities']." WHERE docu_id = '".$a['params']['docu_id']."';");
+		if (is_numeric($a['params']['modification']) ) {
+			$arr[] = "UPDATE ".$a['sqlTables']['document_share']." SET share_modification='".$a['params']['modification']."' WHERE fk_docu_id = '".$a['params']['docu_id']."' AND fk_ws_id = '".$a['Context']['ws_id']."';";
+		}
+		return ($arr);
+	}
 	else { return array ("SELECT 'Nothing to do';"); }
 };
 
@@ -298,6 +304,24 @@ self::$ActionTable['set']['checkpoint']		= function (&$a) {
 self::$ActionTable['set']['variable']		= function (&$a) { 
 	$bts = BaseToolSet::getInstance();
 	$bts->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
+};
+
+//--------------------------------------------------------------------------------
+//	Show
+//--------------------------------------------------------------------------------
+self::$ActionTable['show']['articles']	= function (&$a) { };
+self::$ActionTable['show']['users']		= function (&$a) { 
+	return array (
+		"SELECT * FROM "
+		.$a['sqlTables']['user']." usr," 
+		.$a['sqlTables']['group_user']." gu," 
+		.$a['sqlTables']['group_website']." gw " 
+		."WHERE gw.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND gw.fk_group_id = gu.fk_group_id "
+		."AND gu.fk_user_id = usr.user_id "
+		."GROUP BY usr.user_id "
+		.";"
+	);
 };
 
 

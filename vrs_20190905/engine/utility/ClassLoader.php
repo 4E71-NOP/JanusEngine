@@ -43,6 +43,7 @@ class ClassLoader {
 		"RenderTabs"				=> _UTILITY_DIRECTORY_."RenderTabs.php",
 		"Router"					=> _UTILITY_DIRECTORY_."Router.php",
 		"SessionManagement"			=> _UTILITY_DIRECTORY_."SessionManagement.php",
+		"ScriptFormatting"			=> _UTILITY_DIRECTORY_."ScriptFormatting.php",
 		"StringFormat"				=> _UTILITY_DIRECTORY_."StringFormat.php",
 		"Template"					=> _UTILITY_DIRECTORY_."Template.php",
 		"Time"						=> _UTILITY_DIRECTORY_."Time.php",

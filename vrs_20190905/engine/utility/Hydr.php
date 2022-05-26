@@ -573,43 +573,66 @@ class Hydr {
 		$bts->LMObj->saveVectorSystemLogLevel();
 		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
-		$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
-		$FormToCommandLineObj = FormToCommandLine::getInstance ();
-		$FormToCommandLineObj->analysis ();
-		
-		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
-		
-		if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
-			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
-			
-			$ClassLoaderObj->provisionClass ('CommandConsole');
-			$CurrentSetObj->setInstanceOfWebSiteContextObj ($WebSiteObj); // Set an initial website context.
-			$CommandConsoleObj = CommandConsole::getInstance();
-			
-			$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
-			$Script = $FormToCommandLineObj->getCommandLineScript ();
-			switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
-				case "enabled" :
-					foreach ( $Script as $A ) {
-						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`".$A."`)") );
-						$CommandConsoleObj->executeCommand ( $A );
-						
-						// We have to reload website and user in case of one of them was updated was updated.
-						$WebSiteObj->getDataFromDBUsingShort();
-						$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
-						$this->languageSelection();
-					}
-					break;
-				case "disabled" :
-				default :
-					foreach ( $Script as $A ) {
-						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
-						$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
-					}
-					break;
-			}
-			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
+		$ClassLoaderObj->provisionClass ('CommandConsole');
+		$CurrentSetObj->setInstanceOfWebSiteContextObj ($WebSiteObj); // Set an initial website context.
+		$CommandConsoleObj = CommandConsole::getInstance();
+
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section') == "CommandConsole" ) {
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent") );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='".$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent')."'") );
+			// We consider we have a script 
+			$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' );		// enabled/disabled
+
+			$ClassLoaderObj->provisionClass ('ScriptFormatting');
+			$ScriptFormattingObj = ScriptFormatting::getInstance();
+
+			$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
+			$ScriptFormattingObj->createMap($CLiContent);
+			$ScriptFormattingObj->commandFormatting ($CLiContent);
+
+			unset($A);
+			foreach ( $CLiContent['FormattedCommand'] as $A ) { $Script[] = $A['cont']; }
 		}
+		else {
+			$ClassLoaderObj->provisionClass ( 'FormToCommandLine' );
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - FormToCommandLine") );
+			$FormToCommandLineObj = FormToCommandLine::getInstance ();
+			$FormToCommandLineObj->analysis ();
+			
+			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr ()) );
+			
+			if ($FormToCommandLineObj->getCommandLineNbr () > 0) {
+				$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :") );
+				
+				$bts->CMObj->setConfigurationSubEntry ( 'commandLineEngine', 'state', 'enabled' ); // enabled/disabled
+				$Script = $FormToCommandLineObj->getCommandLineScript ();
+
+			}
+		}
+		switch ($bts->CMObj->getConfigurationSubEntry ( 'commandLineEngine', 'state' )) {
+			case "enabled" :
+				foreach ( $Script as $A ) {
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`".$A."`)") );
+					$CommandConsoleObj->executeCommand ( $A );
+					
+					// We have to reload website and user in case of one of them was updated was updated.
+					$WebSiteObj->getDataFromDBUsingShort();
+					$UserObj->getDataFromDB ( $bts->SMObj->getSessionEntry ( 'user_login' ), $WebSiteObj );
+					$this->languageSelection();
+				}
+				break;
+			case "disabled" :
+			default :
+				foreach ( $Script as $A ) {
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command") );
+					$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A) );
+				}
+				break;
+		}
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - ".$A) );
+
+
+
 		$bts->LMObj->restoreVectorSystemLogLevel();
 
 

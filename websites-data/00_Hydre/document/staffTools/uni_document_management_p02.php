@@ -113,11 +113,14 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 $T = array();
 
 $ClassLoaderObj->provisionClass('Document');
+$ClassLoaderObj->provisionClass('DocumentShare');
 $currentDocumentObj = new Document();
+$currentDocumentShareObj = new DocumentShare;
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
 		$currentDocumentObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('documentForm', 'selectionId'));
+		$currentDocumentShareObj->getDataFromDBUsingDocuId( $currentDocumentObj->getDocumentEntry('docu_id') );
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -178,19 +181,19 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 $documentMenuOption = $currentDocumentObj->getMenuOptionArray();
 
 $T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams[type]',
+	'name' => 'formParams1[type]',
 	'defaultSelected' => $currentDocumentObj->getDocumentEntry('docu_type'),
 	'options' => $documentMenuOption['type'],
 ));
 
 $T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams[modification]',
-	'defaultSelected' => $currentDocumentObj->getDocumentEntry('part_modification'),
+	'name' => 'formParams1[modification]',
+	'defaultSelected' => $currentDocumentShareObj->getDocumentShareEntry('share_modification'),
 	'options' => $documentMenuOption['yesno'],
 ));
 
 $T['Content']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocumentEntry('docu_validator')]['t'];
-
+$Content .= $bts->RenderFormObj->renderHiddenInput(	"formParams1[validator]"	,	$tabUser[$currentDocumentObj->getDocumentEntry('docu_validator')]['t'] );
 
 // --------------------------------------------------------------------------------------------
 //

@@ -151,7 +151,7 @@ self::$PreRequisiteTable['add']['document'] = array (
 		"convert" => array(
 				array("v" => "type",			"s" => "document"),
 				array("v" => "validation",		"s" => "document"),
-				array("v" => "modificiation",	"s" => "document"),
+				array("v" => "modification",	"s" => "document"),
 		),
 		"nextId" => array (
 				array ("table" => "document",				"column" => "docu_id",			"target" => "id"),
@@ -840,6 +840,10 @@ self::$PreRequisiteTable['update']['website']['columns']			= array(
 		array ( "v" => "gal_border",	"t" => "ws_gal_border"),
 		array ( "v" => "ma_diff",		"t" => "ws_ma_diff"),
 );
+
+self::$PreRequisiteTable['show']['users'] = array();		// Empty array for 'show' commands
+
+
 
 
 

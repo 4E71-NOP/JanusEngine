@@ -23,7 +23,7 @@ class Document extends Entity{
 		'docu_creator'			=> 0,
 		'docu_creation_date'	=> 0,
 		'docu_validation'		=> 0,
-		'docu_validator'			=> 0,
+		'docu_validator'		=> 0,
 		'docu_validation_date'	=> 0,
 		'docu_cont'				=> 0,
 	);
@@ -47,8 +47,8 @@ class Document extends Entity{
 			SELECT doc.*, shr.share_modification 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
 			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
-			WHERE shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
-			AND doc.docu_id = '".$id."' 
+			WHERE doc.docu_id = '".$id."' 
+			AND shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 			AND shr.fk_docu_id = doc.docu_id 
 			AND doc.docu_origin = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
 		;");

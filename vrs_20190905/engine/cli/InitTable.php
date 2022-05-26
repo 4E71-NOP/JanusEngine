@@ -1136,6 +1136,13 @@ self::$InitTable['user'] = function (&$a) {
 	);
 };
 
+// For the show command
+self::$InitTable['users'] = function (&$a) {
+	$a['params'] = array(
+			"id"					=> "",
+	);
+};
+
 
 self::$InitTable['website'] = function (&$a) {
 	$a['params'] = array(

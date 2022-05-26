@@ -30,7 +30,6 @@ class DocumentShare extends Entity{
 	/**
 	 * Gets DocumentShare data from the database.<br>
 	 * <br>
-	 * It uses the current WebSiteObj to restrict the document selection to the website ID only.
 	 * @param integer $id
 	 */
 	public function getDataFromDB($id) {
@@ -55,7 +54,37 @@ class DocumentShare extends Entity{
 		}
 		
 	}
-	
+
+	/**
+	 * Gets DocumentShare data from the database using Docu_id.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the document selection to the current website ID only.
+	 * @param integer $id
+	 */
+	public function getDataFromDBUsingDocuId($id) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('document_share') . "
+			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND fk_docu_id = '" . $id . "'
+			;" );
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document_share id=".$id));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) {
+					if (isset($this->columns[$A])) { $this->DocumentShare[$A] = $B; }
+				}
+			}
+		}
+		else {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document_share id=".$id));
+		}	
+	}
+
+
 	/**
 	 * Updates or inserts in DB the local data.
 	 * mode ar available: <br>

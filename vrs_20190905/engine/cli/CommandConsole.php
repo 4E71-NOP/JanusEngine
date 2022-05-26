@@ -189,7 +189,7 @@ class CommandConsole {
 		
 		switch (strtolower($CCL['init']['cmd'])) {
 			case "update":
-				foreach ($CCL["params"] as &$C ) { $C = ""; }		// We clear any default value as it's an update command. So we can only select what's necessary to update later. We keep the array so we can check if a value given by the command doesn't fit
+				foreach ($CCL["params"] as &$C ) { $C = ""; }	// We clear any default value as it's an update command. So we can only select what's necessary to update later. We keep the array so we can check if a given value (by the command) doesn't fit
 				break;
 			case "add":
 			default:
@@ -250,8 +250,7 @@ class CommandConsole {
 								$dbquery = $bts->SDDMObj->query($q['0']);
 								if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 									$msg = str_replace ( '<A1>', $A['p'] , $bts->I18nTransObj->getI18nTransEntry('elementNotFound') );
-// 									$bts->LMObj->log(array ('i'=>'commandValidation' , 'a'=>$CCL['CommandString'] , 's'=>'ERR', 'm'=>$A['m'] ,'t'=>$msg) );
-									$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$CCL['params'][$A['s']]."'. ".$msg." Error at: " . $CCL['CommandString'] ));
+									$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." ".$A['m'].". Finding reference. About '".$A['s']."'. ".$msg." Error at: " . $CCL['CommandString'] ));
 									
 									$CCL['errFlag'] = 1;
 									$CCL['entityCheck'][$idx]['err'] = "<span style='color:#FF0000'>DBG: 0 results</span>";

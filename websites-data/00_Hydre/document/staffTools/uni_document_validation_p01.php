@@ -110,7 +110,17 @@ else {
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
 		$i++;
-		$T['Content']['1'][$i]['1']['cont']	= "<a class='" . $Block."_lien " . $Block."_t1' href='index.php?&amp;M_DOCUME[document_selection]=".$dbp['docu_id'].$bloc_html['url_sldup']."&amp;arti_page=2'>".$dbp['docu_name']."</a>";
+		$T['Content']['1'][$i]['1']['cont']	= "<a href='"
+		."index.php?"._HYDRLINKURLTAG_."=1"
+		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
+		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
+		."&arti_page=2"
+		."&formGenericData[mode]=edit"
+		."&documentForm[selectionId]="
+		.$dbp['docu_id']
+		."'>".$dbp['docu_name']."</a>"
+		;
+
 		$T['Content']['1'][$i]['2']['cont']	= $tab_type[$dbp['docu_type']];
 		$T['Content']['1'][$i]['3']['cont']	= $tab_modif[$dbp['part_modification']];
 	}
@@ -124,20 +134,18 @@ $T['ContentCfg']['tabs'] = array(
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
+
 $Content .= "
 <br>\r
-<br>\r
-
-<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: 0px; '>
-<tr>\r
-<td>\r
-<form ACTION='index.php?' method='post'>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_arti_ref').
-"<input type='hidden' name='arti_page'	value='2'>\r".
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_login').
-$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_pass')
+<br>\r"
+.$bts->RenderFormObj->renderformHeader('documentForm')
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"				,	"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminDocumentManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
+.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"document" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	"create" )
+."<p>\r"
 ;
 
 $SB = array(
