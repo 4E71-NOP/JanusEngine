@@ -111,9 +111,11 @@ $ClassLoaderObj->provisionClass('FormBuilder');
 // $formBuilderObj = FormBuilder::getInstance();
 
 // --------------------------------------------------------------------------------------------
+$T = array();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
+		$T['Content']['1']['2']['2']['cont'] = $currentGroupObj->getGroupEntry('group_name');
 		$currentGroupObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('groupForm', 'selectionId'));
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
@@ -130,6 +132,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 			"group_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2') . "desc " . time(),
 			)
 		);
+		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentGroupObj->getGroupEntry('group_name'));
 		$currentGroupObj->setGroup($arrTmp);
 		$commandType = "add";
 		$processStep = "Create";
@@ -153,8 +156,6 @@ $bts->RenderFormObj->renderformHeader('groupForm')
 ;
 
 // --------------------------------------------------------------------------------------------
-$T = array();
-
 $T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
 $T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
 $T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
@@ -163,7 +164,6 @@ $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
 
 $T['Content']['1']['1']['2']['cont'] = $currentGroupObj->getGroupEntry('group_id');
-$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentGroupObj->getGroupEntry('group_name'));
 $T['Content']['1']['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',	$currentGroupObj->getGroupEntry('group_title'));
 
 $Tab = $currentGroupObj->getMenuOptionArray();

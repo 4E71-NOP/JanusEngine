@@ -368,7 +368,7 @@ class ModuleDocumentDisplay {
 					$Content .= $ContentMenu;
 					break;
 			}
-			
+			$this->documentPostProcessing($Content, $infos);
 			// --------------------------------------------------------------------------------------------
 			//	Footer
 			// --------------------------------------------------------------------------------------------
@@ -537,26 +537,26 @@ class ModuleDocumentDisplay {
 		$dbquery = $bts->SDDMObj->query("
 		SELECT *
 		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')."
-		WHERE arti_id = '".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_id')."'
+		WHERE fk_arti_id = '".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_id')."'
 		AND keyword_state = '1'
-		AND ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			$pv['MC']['id']		= $dbp['keyword_id'];
-			$pv['MC']['chaine']	= $dbp['keyword_string'];
-			$pv['MC']['nbr']	= $dbp['mc_nbr'];
-			$pv['MC']['type']	= $dbp['keyword_type'];
-			$pv['MC']['donnee']	= $dbp['keyword_data'];
-			switch ($pv['MC']['type'] ) {
+			$KeyWordEntry['id']		= $dbp['keyword_id'];
+			$KeyWordEntry['string']	= $dbp['keyword_string'];
+			$KeyWordEntry['count']	= $dbp['keyword_count'];
+			$KeyWordEntry['type']	= $dbp['keyword_type'];
+			$KeyWordEntry['data']	= $dbp['keyword_data'];
+			switch ($KeyWordEntry['type'] ) {
 				case 1:
 					break;
 				case 2:
-					$pv['MC']['cible'] = "<a class='" . $Block."_lien' href='".$pv['MC']['donnee']."' target='_new'>".$pv['MC']['chaine']."</a>";
-					$inputContent = str_replace ( $pv['MC']['chaine'] , $pv['MC']['cible'] , $inputContent , $pv['MC']['nbr'] ) ;
+					$KeyWordEntry['ModifiedContent'] = "<a href='".$KeyWordEntry['data']."' target='_new'>".$KeyWordEntry['string']."</a>";
+					$inputContent = str_replace ( $KeyWordEntry['string'] , $KeyWordEntry['ModifiedContent'] , $inputContent , $KeyWordEntry['count'] ) ;
 					break;
 				case 3:
-					$pv['MC']['cible'] = "<span style='font-weight: bold;' onMouseOver=\"t.ToolTip('".$pv['MC']['donnee']."')\" onMouseOut=\"Bulle()\">".$pv['MC']['chaine']."</span>\r";
-					$inputContent = str_replace ( $pv['MC']['chaine'] , $pv['MC']['cible'] , $inputContent , $pv['MC']['nbr'] ) ;
+					$KeyWordEntry['ModifiedContent'] = "<span style='font-weight: bold;' onMouseOver=\"t.ToolTip('".$KeyWordEntry['data']."')\" onMouseOut=\"t.Tooltip()\">".$KeyWordEntry['string']."</span>\r";
+					$inputContent = str_replace ( $KeyWordEntry['string'] , $KeyWordEntry['ModifiedContent'] , $inputContent , $KeyWordEntry['count'] ) ;
 					break;
 			}
 		}

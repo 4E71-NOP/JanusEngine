@@ -356,6 +356,8 @@ class CommandConsole {
 			foreach ( $CCL['sql'] as $Q ) {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query `".$Q."`"));
 				$bts->SDDMObj->query($Q);
+				// *** Post query processing - AdminDashBoard CLI
+				// Mainly storing the results into an array for later processing
 				self::$report['executionPerformed']++;
 			}
 		}

@@ -65,7 +65,7 @@ $bts->I18nTransObj->apply(
 			"raf1"			=> "Rien a afficher",
 			"kwState0"		=> "Hors ligne",
 			"kwState1"		=> "En ligne",
-			"kwType1"		=> "Vers une menu",
+			"kwType1"		=> "Vers un menu",
 			"kwType2"		=> "Vers une URL",
 			"kwType3"		=> "Tooltip",
 			

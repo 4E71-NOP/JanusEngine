@@ -110,9 +110,11 @@ $ClassLoaderObj->provisionClass('FormBuilder');
 // $formBuilderObj = FormBuilder::getInstance();
 
 // --------------------------------------------------------------------------------------------
+$T = array();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
+		$T['Content']['1']['2']['2']['cont'] = $currentDecorationObj->getDecorationEntry('deco_name');
 		$currentDecorationObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('decorationForm', 'selectionId'));
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
@@ -127,6 +129,7 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 			"deco_name"		=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2') . "name " . time(),
 			)
 		);
+		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('decorationForm[name]',		$currentDecorationObj->getDecorationEntry('deco_name'));
 		$currentDecorationObj->setDecoration($arrTmp);
 		$commandType = "add";
 		$processStep = "Create";
@@ -150,7 +153,6 @@ $bts->RenderFormObj->renderformHeader('decorationForm')
 ;
 
 // --------------------------------------------------------------------------------------------
-$T = array();
 
 $T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
 $T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
@@ -158,7 +160,6 @@ $T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1
 $T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
 
 $T['Content']['1']['1']['2']['cont'] = $currentDecorationObj->getDecorationEntry('deco_id');
-$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('decorationForm[name]',		$currentDecorationObj->getDecorationEntry('deco_name'));
 
 $Tab = $currentDecorationObj->getMenuOptionArray();
 

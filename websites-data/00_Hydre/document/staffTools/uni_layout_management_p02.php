@@ -117,10 +117,9 @@ $currentLayoutObj = new Layout();
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentLayoutObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('layoutForm', 'selectionId'));
-		
+		$currentLayoutObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('layoutForm', 'selectionId'));		
 		$T['Content']['1']['1']['2']['cont'] = $currentLayoutObj->getLayoutEntry('layout_id');
-		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentLayoutObj->getLayoutEntry('layout_name') );
+		$T['Content']['1']['2']['2']['cont'] = $currentLayoutObj->getLayoutEntry('layout_name');
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
@@ -132,7 +131,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 		$e = $bts->TimeObj->timestampToDate($d);
 
 		$T['Content']['1']['1']['2']['cont'] = "***";
-		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	"NewArticle".time() );
+		$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentLayoutObj->getLayoutEntry('layout_name') );
 		$processStep = "Create";
 		$processTarget = "edit";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite2')."</p>\r";
