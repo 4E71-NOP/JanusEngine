@@ -396,8 +396,8 @@ class CommandConsole {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
-					"user_id" => $UserObj->getUserEntry('id'),
-					"user_name" => $UserObj->getUserEntry('nom'),				// 2020 01 06 - Change this by user_login
+					"user_id" => $UserObj->getUserEntry('user_id'),
+					"user_name" => $UserObj->getUserEntry('user_login'),
 					"db_login" => $TabConfig['db_user_login'],
 					"db_pass" => $TabConfig['db_user_password'],
 				);

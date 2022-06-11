@@ -31,15 +31,15 @@ class InteractiveElements {
 
 	/**
 	 * Returns an array with default values for InteractiveElements->renderSubmitButton()
-	 * @parma array $infos
-	 * @parma string $type
-	 * @parma string $message
-	 * @parma number $size
-	 * @parma string $id
-	 * @parma number $initialStyle
-	 * @parma number $hoverStyle 1 2 3 green blue red
-	 * @parma string $onclick javascript for OnClick
-	 * @parma number $mode 1 = keep track by saving the last used size. '0' = reuse the last size
+	 * @param array $infos
+	 * @param string $type
+	 * @param string $message
+	 * @param number $size
+	 * @param string $id
+	 * @param number $initialStyle
+	 * @param number $hoverStyle 1 2 3 green blue red
+	 * @param string $onclick javascript for OnClick
+	 * @param number $mode 1 = keep track by saving the last used size. '0' = reuse the last size
 	 * @return array
 	 * 
 	 */
@@ -116,6 +116,48 @@ class InteractiveElements {
 	}
 
 	// --------------------------------------------------------------------------------------------
+	/**
+	 * Returns an array with default values for InteractiveElements->renderIconSelectFile()
+	 * @param string $formName
+	 * @param string $targetId
+	 * @param number $inputSize
+	 * @param string $inputVal
+	 * @param string $buttonId
+	 * @return array
+	 */
+	public function getDefaultIconSelectFileConfig(
+		$formName='thisForm', 
+		$targetId='param[button]', 
+		$inputSize=25, 
+		$inputVal,
+		$path="/media/",
+		$restrictTo="/media/",
+		$buttonId,
+	) {
+		$CurrentSetObj = CurrentSet::getInstance();
+
+		return ( array (
+				"width"				=> 80,
+				"height"			=> 50,
+				"formName"			=> $formName,
+				"formTargetId"		=> $targetId,
+				"formInputSize"		=> $inputSize,
+				"formInputVal"		=> $inputVal,
+				"path"				=> $path,
+				"restrictTo"		=> "/media/",
+				"strRemove"			=> "/\.*\w*\//",
+				"strAdd"			=> "",
+				"selectionMode"		=> "file",
+				"displayType"		=> "fileList",
+				"buttonId"			=> $buttonId,
+				"case"				=> 3,
+				"update"			=> 1,
+				"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+			)
+		);
+	}
+
+
 	/**
 	 * Render the button that will open the fileSelector (fs.php)<br>
 	 * case 1 : renders the fileSelector button<br>

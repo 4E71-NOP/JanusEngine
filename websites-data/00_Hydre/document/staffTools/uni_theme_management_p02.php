@@ -29,7 +29,7 @@
 
 $bts->RequestDataObj->setRequestData('themeForm',
 		array(
-				'selectionId'	=>	8200283602852830133,
+				'selectionId'	=>	87500728700317434,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -274,23 +274,15 @@ $T['Content'][$curTab]['16']['1']['colspan']	= 2;
 $T['Content'][$curTab]['17']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l17c1');
 $T['Content'][$curTab]['18']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t'.$curTab.'l18c1');
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_directory]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_directory'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "directory",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l1c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_directory]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_directory'),
+	"/media/theme/",
+	"/media/theme/",
+	"t5l1c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -298,23 +290,14 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_stylesheet_1]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_1'),
-		"path"				=> "/stylesheets/",
-		"restrictTo"		=> "/stylesheets/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l2c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_stylesheet_1]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_1'),
+	"/stylesheets/",
+	"/stylesheets/",
+	"t5l2c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -322,23 +305,14 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['2']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_stylesheet_2]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_2'),
-		"path"				=> "/stylesheets/",
-		"restrictTo"		=> "/stylesheets/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l3c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_stylesheet_2]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_2'),
+	"/stylesheets/",
+	"/stylesheets/",
+	"t5l3c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -346,23 +320,14 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['3']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_stylesheet_3]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_3'),
-		"path"				=> "/stylesheets/",
-		"restrictTo"		=> "/stylesheets/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l4c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_stylesheet_3]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_3'),
+	"/stylesheets/",
+	"/stylesheets/",
+	"t5l4c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -370,23 +335,14 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_stylesheet_4]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_4'),
-		"path"				=> "/stylesheets/",
-		"restrictTo"		=> "/stylesheets/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l5c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_stylesheet_4]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_4'),
+	"/stylesheets/",
+	"/stylesheets/",
+	"t5l5c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -394,23 +350,14 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['5']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_stylesheet_5]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_5'),
-		"path"				=> "/stylesheets/",
-		"restrictTo"		=> "/stylesheets/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "t5l6c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_stylesheet_5]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_5'),
+	"/stylesheets/",
+	"/stylesheets/",
+	"t5l6c2",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -421,23 +368,16 @@ $T['Content'][$curTab]['6']['2']['cont']		= $bts->InteractiveElementsObj->render
 
 // --------------------------------------------------------------------------------------------
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l8c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+		"themeForm",
+		"formParams[theme_bg]",
+		25,
+		$currentThemeObj->getThemeDescriptorEntry('theme_bg'),
+		"/media/theme/",
+		"/media/theme/",
+		"t5l4c2",
+	), 
+	array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -445,25 +385,18 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['8']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $T['Content'][$curTab]['9']['2']['cont']		= "<input type='text' name='formParams[theme_bg_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r"; 
-$T['Content'][$curTab]['10']['2']['cont']	= "<input type='text' name='formParams[theme_bg_color]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_color')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['10']['2']['cont']		= "<input type='text' name='formParams[theme_bg_color]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_color')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_divinitial_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l12c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_divinitial_bg]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
+	"/media/theme/",
+	"/media/theme/",
+	"t5l12c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -475,23 +408,16 @@ $T['Content'][$curTab]['13']['2']['cont']	= "<input type='text' name='formParams
 $T['Content'][$curTab]['14']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dx]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dx')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 $T['Content'][$curTab]['15']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dy]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dy')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_divinitial_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l12c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_divinitial_bg]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
+	"/media/theme/",
+	"/media/theme/",
+	"t5l12c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -500,46 +426,33 @@ $T['Content'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->rende
 
 
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_logo]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_logo'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l17c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_logo]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_logo'),
+	"/media/theme/",
+	"/media/theme/",
+	"t5l17c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['17']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_banner]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_banner'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l18c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_banner]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_banner'),
+	"/media/theme/",
+	"/media/theme/",
+	"t5l18c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
@@ -557,46 +470,32 @@ $T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
 $T['Content'][$curTab]['6']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_admctrl_panel_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_admctrl_panel_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t6l1c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_admctrl_panel_bg]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_panel_bg'),
+	"/media/theme/",
+	"/media/theme/",
+	"t6l1c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 $T['Content'][$curTab]['1']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "themeForm",
-		"formTargetId"		=> "formParams[theme_admctrl_switch_bg]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentThemeObj->getThemeDescriptorEntry('theme_admctrl_switch_bg'),
-		"path"				=> "/media/theme/",
-		"restrictTo"		=> "/media/theme/",
-		"strRemove"			=> "/\.*\w*\//",
-		"strAdd"			=> "",
-		"selectionMode"		=> "file",
-		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t6l2c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = array_merge ($bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"themeForm",
+	"formParams[theme_admctrl_switch_bg]",
+	25,
+	$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_switch_bg'),
+	"/media/theme/",
+	"/media/theme/",
+	"t6l2c2",
+), 
+array( "displayType"		=> "imageMosaic" )
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);

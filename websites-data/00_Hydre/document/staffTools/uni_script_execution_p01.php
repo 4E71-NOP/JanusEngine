@@ -138,7 +138,7 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode')." HTML</p>\r<hr>\r";
 			$fileHandle = fopen($fileName,"r");
 			$fileData = fread($fileHandle,filesize($fileName));
-			if ($fileData === FALSE) {$Content .= "ERRRRRRR<br>\r";}
+			if ($fileData === FALSE) {$Content .= "ERROR : Something horrible happended!<br>\r";}
 // 			$this->documentConvertion($fileData, $infos);		// ModuleDocument->documentConvertion()
 			fclose($fileHandle);
 		break;
