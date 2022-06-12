@@ -31,12 +31,6 @@ share document	name "doc_uni_article_moved_p01.php"	with_website Hydre	modificat
 update document	name "doc_uni_article_moved_p01.php"	validation YES	validator "*user_install*"	from_site Hydre;
 
 
-add document	name "doc_uni_article_test_p01.php"	type PHP;
-insert content	file "staffTools/uni_article_test_p01.php"		into "doc_uni_article_test_p01.php";
-share document	name "doc_uni_article_test_p01.php"	with_website Hydre	modification NO;
-update document	name "doc_uni_article_test_p01.php"	validation YES	validator "*user_install*"	from_site Hydre;
-
-
 add document	name "doc_uni_article_validation_p01.php"	type PHP;
 insert content	file "staffTools/uni_article_validation_p01.php"		into "doc_uni_article_validation_p01.php";
 share document	name "doc_uni_article_validation_p01.php"	with_website Hydre	modification NO;

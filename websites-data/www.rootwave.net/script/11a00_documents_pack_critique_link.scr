@@ -35,7 +35,6 @@ share document	name "doc_uni_user_management_p02.php"					with_website "rootwave
 share document	name "doc_uni_website_management_p01.php"				with_website "rootwave"	modification "NO";
 
 share document	name "doc_uni_critical_information_p01.php"				with_website "rootwave"	modification "NO";
-share document	name "doc_uni_article_test_p01.php"						with_website "rootwave"	modification "NO";
 share document	name "doc_uni_article_validation_p01.php"				with_website "rootwave"	modification "NO";
 share document	name "doc_uni_article_validation_p02.php"				with_website "rootwave"	modification "NO";
 share document	name "doc_uni_toolset_type_conversion_p01.php"			with_website "rootwave"	modification "NO";
