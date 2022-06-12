@@ -39,7 +39,9 @@ class DeadLine extends Entity{
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$dbquery = $bts->SDDMObj->query("
 		SELECT dl.*
 		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl "
@@ -62,7 +64,11 @@ class DeadLine extends Entity{
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deadline id=".$id));
 			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => 'No rows returned for deadline id='.$id );
+			$res = false;
 		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -74,6 +80,10 @@ class DeadLine extends Entity{
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
 		$genericActionArray = array(
 				'columns'		=> $this->columns,
 				'data'			=> $this->DeadLine,
@@ -82,8 +92,11 @@ class DeadLine extends Entity{
 				'entityId'		=> $this->DeadLine['deadline_id'],
 				'entityTitle'	=> 'deadline'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**

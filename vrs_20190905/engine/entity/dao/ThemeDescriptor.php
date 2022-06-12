@@ -148,12 +148,20 @@ class ThemeDescriptor extends Entity{
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {
 				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
+				}
 			}
 		}
-		// $this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
+		else {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$id));
+			$res = false;
+		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -223,7 +231,7 @@ class ThemeDescriptor extends Entity{
 				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
 			}
 		}
-		// $this->ThemeDescriptor['theme_date'] = date ("Y M d - H:i:s",$this->ThemeDescriptor['theme_date']);
+		return true;
 	}
 	
 
@@ -237,7 +245,10 @@ class ThemeDescriptor extends Entity{
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
-		
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
 			'data'			=> $this->ThemeDescriptor,
@@ -246,8 +257,11 @@ class ThemeDescriptor extends Entity{
 			'entityId'		=> $this->ThemeDescriptor['theme_id'],
 			'entityTitle'	=> 'ThemeDescriptor'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**

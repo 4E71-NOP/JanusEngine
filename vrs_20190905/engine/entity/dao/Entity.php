@@ -38,9 +38,9 @@ class Entity {
 	 * @param array $data
 	 */
 	public function genericInsertInDb ($data) {
-		$res = true;
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$res = true;
 		
 // 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : QueryColumnDescription - ".$bts->StringFormatObj->arrayToString($QueryColumnDescription) ));
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." already exist in DB. Updating Id=".$data['entityId']));
@@ -93,6 +93,7 @@ class Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
+		$column = "";
 
 		switch ($entity) {
 			case "article" :				$column = "arti_id";
@@ -125,7 +126,6 @@ class Entity {
 			case "theme_website" :			$column = "theme_website_id";
 			case "user" :					$column = "user_id";
 			case "website" :				$column = "ws_id";
-//			case "" :						$column = "";
 		}
 
 		$dbquery = $bts->SDDMObj->query("

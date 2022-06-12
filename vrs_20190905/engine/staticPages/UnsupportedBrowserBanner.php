@@ -71,9 +71,9 @@ border-spacing: 32px;
 <td style='text-align:center;'>	".$lo." <img src='../media/_staticPages/LogoOpera.png' border='0'>		".$lz."	</td>
 </tr>
 <tr>
-<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$lc." Google Chrome".$lz."</td>
-<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$lf." Mozilla Firefox".$lz."</td>
-<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$li." Microsoft Edge".$lz."</td>
+<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$lc." Chrome".$lz."</td>
+<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$lf." Firefox".$lz."</td>
+<td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$li." Edge".$lz."</td>
 <td style='width: 160px; text-align:center; font-weight: bold; font-size: 20px;'>".$lo." Opera".$lz."</td>
 </tr>
 </table>

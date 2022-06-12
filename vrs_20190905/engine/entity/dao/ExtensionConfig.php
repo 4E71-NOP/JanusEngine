@@ -34,7 +34,9 @@ class ExtensionConfig extends Entity {
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
 			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('extension_config') . "
@@ -50,7 +52,11 @@ class ExtensionConfig extends Entity {
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for extension_config id=".$id));
+			$res = false;
 		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -63,6 +69,9 @@ class ExtensionConfig extends Entity {
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
 		$genericActionArray = array(
 				'columns'		=> $this->columns,
 				'data'			=> $this->ExtensionConfig,
@@ -71,8 +80,11 @@ class ExtensionConfig extends Entity {
 				'entityId'		=> $this->ExtensionConfig['config_id'],
 				'entityTitle'	=> 'extensionConfig'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**

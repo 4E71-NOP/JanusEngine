@@ -36,7 +36,9 @@ class PermissionList {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
-		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$q = "SELECT * FROM "
 			.$SqlTableListObj->getSQLTableName('permission')
             ." ORDER BY perm_name;";
@@ -48,7 +50,13 @@ class PermissionList {
 			}
 			// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList ". $bts->StringFormatObj->arrayToString($this->PermissionList)));
 		}
-		else { $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for permission list ")); }		
+		else { 
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : no SQL rows for permission list ")); 
+			$res = false;
+		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 
 

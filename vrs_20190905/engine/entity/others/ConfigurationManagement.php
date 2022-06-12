@@ -65,6 +65,7 @@ class ConfigurationManagement {
 		}
 		$CurrentConfig = returnConfig();
 		foreach ( $CurrentConfig as $A => $B ) { $this->Configuration[$A] = $B; }
+		return true;
 	}
 	
 	/**
@@ -139,6 +140,7 @@ class ConfigurationManagement {
 
 				break;
 		}
+		return true;
 	}
 	
 	public function setLangSupport () {

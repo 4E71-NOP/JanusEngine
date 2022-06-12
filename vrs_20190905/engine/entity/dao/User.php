@@ -127,7 +127,10 @@ class User extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
@@ -200,6 +203,7 @@ class User extends Entity {
 		} else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Login not found. Maybe a user mispelling the login."));
 			$this->User['error_login_not_found'] == 1;
+			$res = false;
 		}
 		
 		// building the permission list
@@ -238,6 +242,9 @@ class User extends Entity {
 		if ( $this->User['user_pref_theme'] == 0 ) {
 			$this->User['user_pref_theme'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('theme_id');
 		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -249,6 +256,10 @@ class User extends Entity {
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
 			'data'			=> $this->User,
@@ -257,8 +268,11 @@ class User extends Entity {
 			'entityId'		=> $this->User['user_id'],
 			'entityTitle'	=> 'user'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**

@@ -53,6 +53,8 @@ class Article extends Entity {
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT *
@@ -69,18 +71,25 @@ class Article extends Entity {
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for article arti_id=".$id));
+			$res = false;
 		}
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
 	 * Updates or inserts in DB the local data.
-	 * mode ar available: <br>
+	 * mode are available: <br>
 	 * <br>
 	 * 0 = insert or update - Depending on the Id existing in DB or not, it'll be UPDATE or INSERT<br>
 	 * 1 = insert only - Supposedly a new ID and not an existing one<br>
 	 * 2 = update only - Supposedly an existing ID<br>
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
 		$genericActionArray = array(
 			'columns'		=> $this->columns,
 			'data'			=> $this->Article,
@@ -89,8 +98,11 @@ class Article extends Entity {
 			'entityId'		=> $this->Article['arti_id'],
 			'entityTitle'	=> 'article'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -110,12 +122,12 @@ class Article extends Entity {
 		if ( $this->Article['validation_state'] < 0 && $this->Article['validation_state'] > 2) { $res = false; }
 		if ( $this->Article['arti_creation_date'] == 0 ) { $res = false; }
 		
-		if ( $this->entityExistsInDb('deadline', $this->Article['deadline_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('article_config', $this->Article['config_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('document', $this->Article['fk_docu_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('website', $this->Article['fk_ws_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('user', $this->Article['arti_creator_id']) == false ) { $res = false; }
-		if ( $this->entityExistsInDb('user', $this->Article['arti_validator_id']) == false ) { $res = false; }
+		if ( $this->entityExistsInDb('deadline', $this->Article['deadline_id']) == false )		{ $res = false; }
+		if ( $this->entityExistsInDb('article_config', $this->Article['config_id']) == false )	{ $res = false; }
+		if ( $this->entityExistsInDb('document', $this->Article['fk_docu_id']) == false )		{ $res = false; }
+		if ( $this->entityExistsInDb('website', $this->Article['fk_ws_id']) == false )			{ $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Article['arti_creator_id']) == false )		{ $res = false; }
+		if ( $this->entityExistsInDb('user', $this->Article['arti_validator_id']) == false )	{ $res = false; }
 		
 		return $res;
 	}
@@ -150,7 +162,7 @@ class Article extends Entity {
 	 */
 	public function getMenuOptionArray () {
 		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
+		// $CurrentSetObj = CurrentSet::getInstance();
 		return array ( 
 			'validation' => array (
 				0 => array( _MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('invalid')),

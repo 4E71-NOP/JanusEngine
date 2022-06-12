@@ -87,7 +87,9 @@ class Hydr {
 		ini_set ( 'display_errors', 0 );
 		
 		// --------------------------------------------------------------------------------------------
-		// MSIE/edge/newEdge must die!!! Still thinking about Edge
+		// Don't push me cuz i'm close to the edge !!!
+		// It’s like a jungle sometimes, it makes me wonder how I keep from going under...
+		// MSIE / Edge must die!!! for good this time.
 		$Navigator = getenv ( "HTTP_USER_AGENT" );
 		if (strpos ( $Navigator, "MSIE" ) !== FALSE) {
 			if (strpos ( $Navigator, "DOM" ) !== FALSE) {

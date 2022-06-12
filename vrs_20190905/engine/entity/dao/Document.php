@@ -42,7 +42,9 @@ class Document extends Entity{
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+				
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*, shr.share_modification 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
@@ -63,7 +65,11 @@ class Document extends Entity{
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
+			$res = false;
 		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -75,6 +81,8 @@ class Document extends Entity{
 	public function getDataFromDBNoOriginCheck($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*, shr.share_modification 
@@ -92,10 +100,11 @@ class Document extends Entity{
 					if (isset($this->columns[$A])) { $this->Document[$A] = $B; }
 				}
 			}
+			$res = false;
 		}
-		else {
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for document id=".$id));
-		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**
@@ -108,6 +117,9 @@ class Document extends Entity{
 	 */
 	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
 		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+		
 		$tmp = $this->Document['docu_cont'];
 		$this->Document['docu_cont'] = $bts->SDDMObj->escapeString($tmp); 
 		$genericActionArray = array(
@@ -118,9 +130,12 @@ class Document extends Entity{
 				'entityId'		=> $this->Document['docu_id'],
 				'entityTitle'	=> 'document'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $this->genericInsertInDb($genericActionArray); }
+		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
+		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
 		$this->Document['docu_cont'] = $tmp;
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	/**

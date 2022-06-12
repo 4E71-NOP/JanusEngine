@@ -1,3 +1,3 @@
 add keyword	name kw_fra_home_p01_001		article hydr_fra_home_p01	string "webdesign"	        count 1		type TOOLTIP	data "Anglissisme désignant le developpement de site web";
-add keyword	name kw_fra_home_p01_002		article hydr_fra_home_p01	string "moteur de portail"  count 1		type TOOLTIP	data "Solution logicielle pour créer des porttail facilement.";
+add keyword	name kw_fra_home_p01_002		article hydr_fra_home_p01	string "moteur de portail"  count 1		type TOOLTIP	data "Solution logicielle pour créer des portails facilement.";
 add keyword	name kw_fra_home_p01_003		article hydr_fra_home_p01	string "HTML"               count 2		type TO_URL 	data "https://fr.wikipedia.org/wiki/Hypertext_Markup_Language";

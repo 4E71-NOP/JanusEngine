@@ -18,6 +18,8 @@ class Deco30_1Div {
 	public function getDeco30_1DivDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
@@ -32,8 +34,11 @@ class Deco30_1Div {
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_30_1_div id=".$id));
+			$res = false;
 		}
 		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 
 	//@formatter:off

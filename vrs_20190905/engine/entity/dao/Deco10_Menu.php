@@ -18,6 +18,8 @@ class Deco10_Menu {
 	public function getDeco10_MenuDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
@@ -32,8 +34,11 @@ class Deco10_Menu {
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for deco_10_menu id=".$id));
+			$res = false;
 		}
 		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
 	}
 	
 	//@formatter:off
