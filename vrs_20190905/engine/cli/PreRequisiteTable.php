@@ -803,8 +803,8 @@ self::$PreRequisiteTable['update']['module']['nextId']		= &self::$PreRequisiteTa
 self::$PreRequisiteTable['update']['module']['columns']		= &self::$PreRequisiteTable['add']['module']['columns'];
 
 
-self::$PreRequisiteTable['update']['user']						= self::$PreRequisiteTable['add']['user'];		// It's a copy not a reference!
-self::$PreRequisiteTable['update']['user']['nextId']			= array();
+self::$PreRequisiteTable['update']['user']['convert']		= &self::$PreRequisiteTable['add']['user']['convert'];
+self::$PreRequisiteTable['update']['user']['columns']		= &self::$PreRequisiteTable['add']['user']['columns'];
 
 
 self::$PreRequisiteTable['website']['context'] = array (

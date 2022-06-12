@@ -171,6 +171,7 @@ class CommandConsole {
 			}
 			$ptr ++;
 		}
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : assocArray=". $bts->StringFormatObj->arrayToString($assocArray)));
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 		return $assocArray;
 	}
@@ -330,6 +331,7 @@ class CommandConsole {
 		//----------------------------------------
 		// Associate columns in a compatible syntax to use with SQL statements.
 		$equality = $columns = $values = "";
+		$colCount = 0;
 		if ( is_array($ptr['columns']) ) {
 			foreach ($ptr['columns'] as $A) {
 				if ( strlen($CCL['params'][$A['v']]) != 0 ) {
@@ -337,6 +339,7 @@ class CommandConsole {
 					$columns .= $A['t']. ", ";
 					$values .= "'".$CCL['params'][$A['v']]."', ";
 					$CCL['params']['updateGO'] = 1;
+					$colCount++;
 				}
 			}
 			$CCL['equalities'] = substr ( $equality , 0 , -2 );
@@ -344,7 +347,10 @@ class CommandConsole {
 			$CCL['values'] = substr ( $values , 0 , -2 );
 		}
 		else { $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ ." : ptr['columns'] is not an array.")); }
+		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : equalities=". $bts->StringFormatObj->arrayToString($CCL['equalities'])));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : colCount=". $colCount ));
 		
+
 		// Selects and run the function that will return the SQL queries to execute.
 		// In case of directive N°4 it will not return an array but execute what's needed.
 		$af = self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']];
@@ -396,10 +402,10 @@ class CommandConsole {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
-					"user_id" => $UserObj->getUserEntry('user_id'),
-					"user_name" => $UserObj->getUserEntry('user_login'),
-					"db_login" => $TabConfig['db_user_login'],
-					"db_pass" => $TabConfig['db_user_password'],
+					// "user_id"	=> $UserObj->getUserEntry('id'),
+					// "user_name"	=> $UserObj->getUserEntry('nom'),
+					"db_login"	=> $TabConfig['db_user_login'],
+					"db_pass"	=> $TabConfig['db_user_password'],
 				);
 				
 				$this->commandInitialization($CCL);

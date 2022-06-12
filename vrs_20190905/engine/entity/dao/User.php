@@ -57,17 +57,48 @@ class User extends Entity {
 	public function __construct() {
 		$this->User = $this->getDefaultValues();
 	}
-	
+
 	/**
-	 * Gets the user data from the DB<br>
+	 * Gets the user data from the DB using ID<br>
 	 * <br>
 	 * It uses the current WebSiteObj to restrict the user selection to the website ID only.
 	 * 
 	 * @param User $UserLogin
 	 * @param WebSite $WebSiteObj
 	 */
-	public function getDataFromDB($UserLogin) {
-		$bts = BaseToolSet::getInstance();
+	public function getDataFromDB($UserId) {
+		// $bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$SqlTableListObj = SqlTableList::getInstance(null, null);
+
+		$sqlQuery = "
+			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
+			FROM " 
+			.$SqlTableListObj->getSQLTableName ('user') . " usr, " 
+			.$SqlTableListObj->getSQLTableName ('group_user') . " gu, " 
+			.$SqlTableListObj->getSQLTableName ('group_website') . " sg, " 
+			.$SqlTableListObj->getSQLTableName ('group') . " g
+			WHERE usr.user_id = '" . $UserId . "'
+			AND usr.user_id = gu.fk_user_id
+			AND gu.group_user_initial_group = '1'
+			AND gu.fk_group_id = g.group_id
+			AND gu.fk_group_id = sg.fk_group_id
+			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			;";
+		$this->loadDataFromDB($sqlQuery);
+	}
+
+	
+	/**
+	 * Gets the user data from the DB using login<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the user selection to the website ID only.
+	 * 
+	 * @param User $UserLogin
+	 * @param WebSite $WebSiteObj
+	 */
+	public function getDataFromDBUsingLogin($UserLogin) {
+		// $bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
 
@@ -85,6 +116,18 @@ class User extends Entity {
 			AND gu.fk_group_id = sg.fk_group_id
 			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 			;";
+		$this->loadDataFromDB($sqlQuery);
+	}
+
+
+	/**
+	 * Load data from DB using the argument (query)
+	 */
+	private function loadDataFromDB($sqlQuery){
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
 		if ($bts->SDDMObj->num_row_sql ( $dbquery ) != 0) {
@@ -302,13 +345,13 @@ class User extends Entity {
 				1 => array( _MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')	),	
 			),
 			'state' => array (
-				0 => array( _MENU_OPTION_DB_ =>	 _DISABLED_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')	),
-				1 => array( _MENU_OPTION_DB_ =>	 _ENABLED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')	),
-				2 => array( _MENU_OPTION_DB_ =>	 _DELETED_,		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')	),
+				0 => array( _MENU_OPTION_DB_ =>	 "DISABLED",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')	),
+				1 => array( _MENU_OPTION_DB_ =>	 "ENABLED",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')	),
+				2 => array( _MENU_OPTION_DB_ =>	 "DELETED",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')	),
 			),
 			'role' => array(
-				1	=> array ( _MENU_OPTION_DB_ => _PUBLIC_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('public')	),
-				2	=> array ( _MENU_OPTION_DB_ => _PRIVATE_,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('private')	),
+				1	=> array ( _MENU_OPTION_DB_ => "PUBLIC",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('public')	),
+				2	=> array ( _MENU_OPTION_DB_ => "PRIVATE",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('private')	),
 			),
 			// 'status' => array (
 			// 	'name' => "user_status",

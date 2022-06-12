@@ -69,7 +69,7 @@ switch ($l) {
 //
 // --------------------------------------------------------------------------------------------
 $currentUserObj = new User();
-$currentUserObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('publicProfil', 'userLogin'), $WebSiteObj);
+$currentUserObj->getDataFromDBUsingLogin($bts->RequestDataObj->getRequestDataSubEntry('publicProfil', 'userLogin'), $WebSiteObj);
 
 $T = array();
 $T['Content']['1']['1']['1']['cont'] = $i18nDoc['l_1_txt'];

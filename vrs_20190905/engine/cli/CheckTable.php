@@ -662,7 +662,7 @@ self::$CheckTable['add']['user']['2']['s']	= "null";
 self::$CheckTable['update']['user']				= self::$CheckTable['add']['user'];		// It's a copy not a reference!
 self::$CheckTable['update']['user']['0']['d']	= 2;
 self::$CheckTable['update']['user']['0']['c']	= "user_id";
-self::$CheckTable['update']['user']['0']['v']	= "id";
+self::$CheckTable['update']['user']['0']['v']	= "user_id";
 self::$CheckTable['update']['user']['0']['m']	= "CLI_User_U001";
 
 self::$CheckTable['update']['user']['1']['m']	= "CLI_User_U002";

@@ -144,7 +144,7 @@ class InteractiveElements {
 				"formInputSize"		=> $inputSize,
 				"formInputVal"		=> $inputVal,
 				"path"				=> $path,
-				"restrictTo"		=> "/media/",
+				"restrictTo"		=> $restrictTo,
 				"strRemove"			=> "/\.*\w*\//",
 				"strAdd"			=> "",
 				"selectionMode"		=> "file",

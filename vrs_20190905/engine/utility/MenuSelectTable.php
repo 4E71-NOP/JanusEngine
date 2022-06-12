@@ -300,7 +300,8 @@ class MenuSelectTable {
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				$tab[$dbp['lang_id']]['t']	=	$tab[$dbp['lang_id']]['db']	= $dbp['lang_original_name'];
+				$tab[$dbp['lang_id']]['t']	=$dbp['lang_original_name'];
+				$tab[$dbp['lang_id']]['db']	= $dbp['lang_639_3'];
 			}
 		}
 		else {
@@ -321,7 +322,7 @@ class MenuSelectTable {
 		$dbquery = $bts->SDDMObj->query("
 			SELECT t.* 
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." st 
-			WHERE t.theme_id = st.theme_id
+			WHERE t.theme_id = st.fk_theme_id
 			AND st.theme_state = '1' 
 			AND st.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
 		;");
@@ -329,6 +330,8 @@ class MenuSelectTable {
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data"));
+			$tab['0']['t']	= 'Ø';
+			$tab['0']['db']	= '';
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tab[$dbp['theme_id']]['t']	=	$tab[$dbp['theme_id']]['db']	= $dbp['theme_name'];
 			}

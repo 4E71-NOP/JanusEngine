@@ -29,8 +29,8 @@
 
 $bts->RequestDataObj->setRequestData('userForm',
 		array(
-				'selectionId'	=>	0,
-				'selectionName'	=>	"chef_de_rubrique_senior",
+				'selectionId'		=>	582827471352630418,
+				// 'selectionLogin'	=>	"auteur_senior",
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -41,8 +41,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
 				'mode'			=> 'edit',
-				'mode'			=> 'create',
-//				'mode'			=> 'delete',
+				// 'mode'			=> 'create',
+				// 'mode'			=> 'delete',
 		)
 );
 
@@ -193,7 +193,6 @@ switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')
 		$processTarget = "edit";
 		$T['Content'][$curTab]['2']['2']['cont'] = $currentUserObj->getUserEntry('user_name');
 		$T['Content'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_login');
-
 		break;
 	case "create":
 		$commandType = "add";
@@ -246,7 +245,7 @@ $timezone = array(
 
 // --------------------------------------------------------------------------------------------
 $Content .= 
-$bts->RenderFormObj->renderformHeader('ModuleForm')
+$bts->RenderFormObj->renderformHeader('userForm')
 .$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminUserManagementP02" )
@@ -270,24 +269,39 @@ $T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 
 $T['Content'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
 
-$FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "userForm",
-		"formTargetId"		=> "formParams[user_avatar_image]",
-		"formInputSize"		=> 25 ,
-		"formInputVal"		=> $currentUserObj->getUserEntry('user_avatar_image'),
-		"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
-		"restrictTo"		=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
-		"strRemove"			=> "/\.*\w*\//",
+
+$FileSelectorConfig = array_merge ( $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"userForm",
+	"formParams[user_avatar_image]",
+	25,
+	$currentUserObj->getUserEntry('user_avatar_image'),
+	"/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
+	"/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
+	"t5l8c2",
+	),
+	array( 
 		"strAdd"			=> "../",
-		"selectionMode"		=> "file",
 		"displayType"		=> "imageMosaic",
-		"buttonId"			=> "t5l8c2",
-		"case"				=> 3,
-		"update"			=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+	)
 );
+// $FileSelectorConfig = array(
+// 		"width"				=> 80,	//in %
+// 		"height"			=> 50,	//in %
+// 		"formName"			=> "userForm",
+// 		"formTargetId"		=> "formParams[user_avatar_image]",
+// 		"formInputSize"		=> 25 ,
+// 		"formInputVal"		=> $currentUserObj->getUserEntry('user_avatar_image'),
+// 		"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
+// 		"restrictTo"		=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
+// 		"strRemove"			=> "/\.*\w*\//",
+// 		"strAdd"			=> "../",
+// 		"selectionMode"		=> "file",
+// 		"displayType"		=> "imageMosaic",
+// 		"buttonId"			=> "t5l8c2",
+// 		"case"				=> 3,
+// 		"update"			=> 1,
+// 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+// );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
@@ -306,8 +320,9 @@ $T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 
 $bts->LMObj->logDebug($currentUserObj, 'currentUserObj');
 
+// Group shouldn't be there. It's better to create a group-user link management interface
 $T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[group]',
+	'name' => 'formParams1[group_DEPRECATED]',
 	'defaultSelected' => $currentUserObj->getUserEntry('fk_group_id'),
 	'options' => $tabGroup,
 ));
@@ -319,7 +334,7 @@ $T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect
 ));
 
 $T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[role]',
+	'name' => 'formParams1[role_function]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_role_function'),
 	'options' => $tab['role'],
 ));
@@ -340,12 +355,12 @@ $T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l5c1');
 $T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l6c1');
 
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_email]',		$currentUserObj->getUserEntry('user_email'));
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_msn]',		$currentUserObj->getUserEntry('user_msn'));
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_aim]',		$currentUserObj->getUserEntry('user_aim'));
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_icq]',		$currentUserObj->getUserEntry('user_icq'));
-$T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_yim]',		$currentUserObj->getUserEntry('user_yim'));
-$T['Content'][$curTab]['6']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[user_website]',	$currentUserObj->getUserEntry('user_website'));
+$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[email]',	$currentUserObj->getUserEntry('user_email'));
+$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[msn]',		$currentUserObj->getUserEntry('user_msn'));
+$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[aim]',		$currentUserObj->getUserEntry('user_aim'));
+$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[icq]',		$currentUserObj->getUserEntry('user_icq'));
+$T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[yim]',		$currentUserObj->getUserEntry('user_yim'));
+$T['Content'][$curTab]['6']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[website]',	$currentUserObj->getUserEntry('user_website'));
 
 
 // --------------------------------------------------------------------------------------------
@@ -372,7 +387,7 @@ $T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
 
 $T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_lang]',
+	'name' => 'formParams1[lang]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_lang'),
 	'options' => $tabLanguage,
 ));
@@ -395,55 +410,55 @@ $T['Content'][$curTab]['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $T['Content'][$curTab]['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l9c1');
 
 $T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_theme]',
+	'name' => 'formParams1[pref_theme]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_theme'),
 	'options' => $tabTheme,
 ));
 
 $T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_newsletter]',
+	'name' => 'formParams1[pref_newsletter]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_newsletter'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_show_email]',
+	'name' => 'formParams1[pref_show_email]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_show_email'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_show_online_status]',
+	'name' => 'formParams1[pref_show_online_status]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_show_online_status'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_forum_notification]',
+	'name' => 'formParams1[pref_forum_notification]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_forum_notification'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['6']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_forum_pm]',
+	'name' => 'formParams1[pref_forum_pm]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_forum_pm'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['7']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_allow_bbcode]',
+	'name' => 'formParams1[pref_allow_bbcode]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_allow_bbcode'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['8']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_allow_html]',
+	'name' => 'formParams1[pref_allow_html]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_allow_html'),
 	'options' => $tab['yesno'],
 ));
 
 $T['Content'][$curTab]['9']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[user_pref_autorise_smilies]',
+	'name' => 'formParams1[pref_autorise_smilies]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_autorise_smilies'),
 	'options' => $tab['yesno'],
 ));
