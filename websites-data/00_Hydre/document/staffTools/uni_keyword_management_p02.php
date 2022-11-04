@@ -193,7 +193,7 @@ $T['Content']['1']['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(arr
 ));
 
 $T['Content']['1']['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[string]',	$currentKeyWordObj->getKeyWordEntry('keyword_string'));
-$T['Content']['1']['6']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[value]',	$currentKeyWordObj->getKeyWordEntry('keyword_count'));
+$T['Content']['1']['6']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[count]',	$currentKeyWordObj->getKeyWordEntry('keyword_count'));
 
 $T['Content']['1']['7']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[type]',

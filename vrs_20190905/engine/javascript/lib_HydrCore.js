@@ -57,12 +57,12 @@ class DetectionEnvironment {
 		this.BrowserList = {
 			'Chrome':	{	'string':this.NavUsrAgent,		'pattern':'Chrome',		'response':'Chrome',										'offset':1,	'length':2		},
 			'OmniWeb':	{ 	'string':this.NavUsrAgent,		'pattern':'OmniWeb',	'response':'OmniWeb',		patternExtraction:'OmniWeb/',	'offset':1,	'length':2		},
-			'Apple':	{	'string':navigator.vendor,			'pattern':'Apple',		'response':'Safari',		patternExtraction:'Version',	'offset':1,	'length':2		},
-			'Opera':	{	'string':window.opera,				'pattern':'Opera',		'response':'Opera',											'offset':1,	'length':2		},
-			'iCab':		{	'string':navigator.vendor,			'pattern':'iCab',		'response':'iCab',											'offset':1,	'length':2		},
-			'KDE':		{	'string':navigator.vendor,			'pattern':'KDE',		'response':'Konqueror',										'offset':1,	'length':2		},
+			'Apple':	{	'string':navigator.vendor,		'pattern':'Apple',		'response':'Safari',		patternExtraction:'Version',	'offset':1,	'length':2		},
+			'Opera':	{	'string':window.opera,			'pattern':'Opera',		'response':'Opera',											'offset':1,	'length':2		},
+			'iCab':		{	'string':navigator.vendor,		'pattern':'iCab',		'response':'iCab',											'offset':1,	'length':2		},
+			'KDE':		{	'string':navigator.vendor,		'pattern':'KDE',		'response':'Konqueror',										'offset':1,	'length':2		},
 			'Firefox':	{	'string':this.NavUsrAgent,		'pattern':'Firefox',	'response':'Firefox',										'offset':1,	'length':2		},
-			'Camino':	{	'string':navigator.vendor,			'pattern':'Camino',		'response':'Camino',										'offset':1,	'length':2		},
+			'Camino':	{	'string':navigator.vendor,		'pattern':'Camino',		'response':'Camino',										'offset':1,	'length':2		},
 			'Netscape':	{	'string':this.NavUsrAgent,		'pattern':'Netscape',	'response':'Netscape',										'offset':1,	'length':2		},
 			'MSIE':		{	'string':this.NavUsrAgent,		'pattern':'MSIE',		'response':'Explorer',										'offset':1,	'length':2		},
 			'Gecko':	{	'string':this.NavUsrAgent,		'pattern':'Gecko',		'response':'Mozilla',		patternExtraction:'rv',			'offset':1,	'length':2		},
@@ -90,31 +90,31 @@ class DetectionEnvironment {
 		};
 
 		var browserSection = this.BrowserSupportList.Chrome;
-		for (let i=60 ; i<=100 ; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=1 ; i<=1000 ; i++ ) { browserSection[i] = "DOM"; }
 		
 		browserSection = this.BrowserSupportList.Explorer;
 		for (let i=5 ; i<=15 ; i++ ) { browserSection[i] = "MSIE"+i; }
 
 		var browserSection = this.BrowserSupportList.Firefox;
-		for (let i=60 ; i<=200 ; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=1 ; i<=1000 ; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.Konqueror;
-		for (let i=3 ; i<=200 ; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=3 ; i<=1000 ; i++ ) { browserSection[i] = "DOM"; }
 		
 		var browserSection = this.BrowserSupportList.Opera;
-		for (let i=5 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=5 ; i<=1000; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.Safari;
-		for (let i=3 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=3 ; i<=1000; i++ ) { browserSection[i] = "DOM"; }
 
 		var browserSection = this.BrowserSupportList.inconnu;
-		for (let i=1 ; i<=200; i++ ) { browserSection[i] = "DOM"; }
+		for (let i=1 ; i<=1000; i++ ) { browserSection[i] = "DOM"; }
 		
 		
 		
 		if (navigator.userAgentData) { this.userAgentDataImplemented = true; }
 		
-		if ("geolocation" in navigator) { navigator.geolocation.getCurrentPosition(
+		if ("geolocation" in navigator && location.protocol === 'https:') { navigator.geolocation.getCurrentPosition(
 			this.geoSuccess, 
 			this.geoFailure, {
 				enableHighAccuracy: true,
@@ -149,7 +149,6 @@ class DetectionEnvironment {
 		
 		this.cliEnv.browser.support = this.BrowserSupportList[this.cliEnv.browser.agent][this.cliEnv.browser.version];
 		this.cliEnv.browser.CompleteName = this.BrowserList[this.cliEnv.browser.agent].string;
-	
 	}
 	
 	geoSuccess(pos) { this.GeoLocationCurrentPosition = pos; }
@@ -516,15 +515,13 @@ class MouseManagement {
 		var now = MTime - this.mouseData.lastExec;
 		if ( now > this.mouseData.Frequency ) {
 			for ( var i in this.mouseFunctionList ) {
-// l.Log[cfg.CoreDbg]("LocateMouse : " + this.mouseFunctionList[i].obj+";
-// method:"+this.mouseFunctionList[i].method);
+				// l.Log[cfg.CoreDbg]("LocateMouse : " + this.mouseFunctionList[i].obj+"; method:"+this.mouseFunctionList[i].method);
 				var obj = this.mouseFunctionList[i].obj;
 				obj.MouseEvent();
 			}
 			this.mouseData.lastExec = MTime;
 		}
-// l.Log[cfg.CoreDbg]("Mouse Location:
-// PosX="+this.mouseData.PosX+"PosY="+this.mouseData.PosY);
+		l.Log[cfg.CoreDbg]("Type:" + de.cliEnv.browser.support + "; Mouse Location:PosX="+this.mouseData.PosX+"PosY="+this.mouseData.PosY);
 	}
 	
 	SetCursorDefault ()		{ document.body.style.cursor = 'default'; }
@@ -618,7 +615,7 @@ de.cliEnv.document.width	= elm.UpdateWindowSize('x');
 de.cliEnv.document.height	= elm.UpdateWindowSize('y');
 
 l.Log[cfg.CoreDbg]("_______________________Dump Javascript_______________________");
-l.Log[cfg.CoreDbg](de.cliEnv);
+// l.Log[cfg.CoreDbg](de);
 
 // document.onkeypress = k.stopRKey;
 document.onmousemove = function (e) { m.LocateMouse(e);};

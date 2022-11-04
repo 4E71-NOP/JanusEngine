@@ -29,7 +29,7 @@
 
 $bts->RequestDataObj->setRequestData('documentForm',
 		array(
-				'selectionId'	=> 1868244585737455932,
+				'selectionId'	=> 3713950451103223709,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -155,6 +155,8 @@ $bts->RenderFormObj->renderformHeader('documentForm')
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentDocumentObj->getDocumentEntry('docu_name') )
 .$bts->RenderFormObj->renderHiddenInput(	"documentForm[selectionId]"	,	$currentDocumentObj->getDocumentEntry('docu_id') )
+.$bts->RenderFormObj->renderHiddenInput(	"formParams1[validator]"	,	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry ( 'user_login' ) )
+.$bts->RenderFormObj->renderHiddenInput(	"formParams1[validation]"	,	"YES" )
 ."<p>\r"
 ;
 

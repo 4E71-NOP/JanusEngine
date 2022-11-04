@@ -28,7 +28,7 @@
 /*Hydre-IDE-end*/
 $bts->RequestDataObj->setRequestData('moduleForm',
 		array(
-				'selectionId'	=>	520779038210083227,
+				'selectionId'	=>	4216503454399097004,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -39,8 +39,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
 				'mode'			=> 'edit',
-				'mode'			=> 'create',
-//				'mode'			=> 'delete',
+				// 'mode'			=> 'create',
+				// 'mode'			=> 'delete',
 		)
 );
 

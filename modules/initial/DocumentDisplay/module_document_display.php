@@ -555,7 +555,7 @@ class ModuleDocumentDisplay {
 					$inputContent = str_replace ( $KeyWordEntry['string'] , $KeyWordEntry['ModifiedContent'] , $inputContent , $KeyWordEntry['count'] ) ;
 					break;
 				case 3:
-					$KeyWordEntry['ModifiedContent'] = "<span style='font-weight: bold;' onMouseOver=\"t.ToolTip('".$KeyWordEntry['data']."')\" onMouseOut=\"t.Tooltip()\">".$KeyWordEntry['string']."</span>\r";
+					$KeyWordEntry['ModifiedContent'] = "<span style='font-weight: bold;' onMouseOver=\"t.ToolTip('".$KeyWordEntry['data']."')\" onMouseOut=\"t.ToolTip()\">".$KeyWordEntry['string']."</span>\r";
 					$inputContent = str_replace ( $KeyWordEntry['string'] , $KeyWordEntry['ModifiedContent'] , $inputContent , $KeyWordEntry['count'] ) ;
 					break;
 			}

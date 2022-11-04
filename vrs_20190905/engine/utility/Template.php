@@ -38,7 +38,27 @@ class Template {
 	public function renderAdminFormButtons (&$infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+
+		$btnTxtTab = array(
+			"delete"	=>	$bts->I18nTransObj->getI18nTransEntry('btnDelete'),
+			"edit"		=>	$bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
+			"create"	=>	$bts->I18nTransObj->getI18nTransEntry('btnCreate'),
+		);
+
+		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos, 
+			'submit', 
+			$btnTxtTab[$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')], 
+			192, 
+			'updateButton', 
+			2, 
+			2, 
+			" ",
+			1,
+			true
+		);
+
 		$Content = "
 			<table style='width:100%; border-spacing: 16px;'>\r
 			<tr>\r
@@ -46,7 +66,10 @@ class Template {
 			<div style='display:block; width:100%; height:100%' 
 				onmouseover=\"this.parentNode.style.backgroundColor='#00000020';\" 
 				onmouseout=\"this.parentNode.style.backgroundColor='transparent';\" 
-				onclick=\"elm.Gebi('confirmCheckboxEdit').checked ^= 1;\">\r
+				onclick=\"elm.Gebi('confirmCheckboxEdit').checked ^= 1;
+				if (elm.Gebi('confirmCheckboxEdit').checked == 1) { elm.Gebi('".$SB['id']."02').disabled = false; }
+				else { elm.Gebi('".$SB['id']."02').disabled = true; }
+				\">\r
 			";
 		
 		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
@@ -64,19 +87,6 @@ class Template {
 		<td align='right'>\r
 		";
 				
-		$btnTxtTab = array(
-				"delete"	=>	$bts->I18nTransObj->getI18nTransEntry('btnDelete'),
-				"edit"		=>	$bts->I18nTransObj->getI18nTransEntry('btnUpdate'),
-				"create"	=>	$bts->I18nTransObj->getI18nTransEntry('btnCreate'),
-		);
-		
-		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-			$infos , 'submit', 
-			$btnTxtTab[$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')], 192, 
-			'updateButton', 
-			2, 2, 
-			""
-		);
 		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
 		$Content .= "</td>\r
@@ -85,11 +95,11 @@ class Template {
 		
 		<!-- __________Return button__________ -->\r
 		<form ACTION='index.php?' method='post'>\r"
-		."<input type='hidden'	name='formSubmitted'			value='1'>\r"
-		."<input type='hidden'	name='formGenericData[origin]'	value='AdminDashboard'>\r"
-		."<input type='hidden'	name='formGenericData[mode]'	value='routing'>\r"
-		."<input type='hidden'	name='newRoute[arti_slug]'		value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
-		."<input type='hidden'	name='newRoute[arti_page]'		value='1'>\r"
+		.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"				,	"1")
+		.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
+		.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	"routing" )
+		.$bts->RenderFormObj->renderHiddenInput(	"newRoute[arti_slug]"		,	$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug') )
+		.$bts->RenderFormObj->renderHiddenInput(	"newRoute[arti_page]"		,	1 )
 		."
 		<tr>\r
 		<td>\r
@@ -98,11 +108,16 @@ class Template {
 		";
 		
 		$SB = array_merge($SB, $SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-			$infos , 'submit', 
-			$bts->I18nTransObj->getI18nTransEntry('btnReturn'), 0, 
+			$infos , 
+			'submit', 
+			$bts->I18nTransObj->getI18nTransEntry('btnReturn'), 
+			0, 
 			'returnButton', 
-			1, 1,
-			"",1)
+			1, 
+			1,
+			"",
+			1,
+			false)
 		);
 		$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		
@@ -114,35 +129,46 @@ class Template {
 		switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 			case "delete":
 			case "edit":
+			 $SB = array_merge($SB, $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+					$infos , 
+					'submit', 
+					$bts->I18nTransObj->getI18nTransEntry('btnDelete'), 
+					0, 
+					'deleteButton', 
+					3, 
+					3, 
+					"",
+					1,
+					true)
+				);
+
 				$Content .= "
 				<!-- __________Delete button__________ -->\r
 				<form ACTION='index.php?' method='post'>\r"
-				."<input type='hidden'	name='formSubmitted'						value='1'>\r"
-				."<input type='hidden'	name='formGenericData[origin]'				value='AdminDashboard'>\r"
-				."<input type='hidden'	name='formGenericData[mode]'				value='delete'>\r"
-				."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
-				."<input type='hidden'	name='newRoute[arti_page]'					value='1'>\r"
-				."<input type='hidden'	name='".$infos['formName']."[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId')."'>\r"
+				.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"						,	"1")
+				.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"			,	"AdminDashboard")
+				.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"						,	"DELETE" )
+				.$bts->RenderFormObj->renderHiddenInput(	"formEntity1"						,	"menu" )
+				.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"				,	"routing" )
+				.$bts->RenderFormObj->renderHiddenInput(	"newRoute[arti_slug]"				,	$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug') )
+				.$bts->RenderFormObj->renderHiddenInput(	"newRoute[arti_page]"				,	1 )
+				.$bts->RenderFormObj->renderHiddenInput(	$infos['formName']."[selectionId]"	,	$bts->RequestDataObj->getRequestDataSubEntry($infos['formName'], 'selectionId') )
 				."
 				<tr>\r
 				<td>\r
 				<div style='display:block; width:100%; height:100%' 
 				onmouseover=\"this.parentNode.style.backgroundColor='#00000020';\" 
 				onmouseout=\"this.parentNode.style.backgroundColor='transparent';\" 
-				onclick=\"elm.Gebi('confirmCheckboxDelete').checked ^= 1;\">\r
+				onclick=\"elm.Gebi('confirmCheckboxDelete').checked ^= 1;
+				if (elm.Gebi('confirmCheckboxDelete').checked == 1) { elm.Gebi('".$SB['id']."02').disabled = false; }
+				else { elm.Gebi('".$SB['id']."02').disabled = true; }
+				\">\r
 				<input type='checkbox' id='confirmCheckboxDelete' name='formGenericData[deletion]'>".$bts->I18nTransObj->getI18nTransEntry('deleteConfirm')."
 				</div>\r
 				</td>\r
 				<td align='right'>\r
 				";
-				
-				$SB = array_merge($SB, $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-					$infos , 'submit', 
-					$bts->I18nTransObj->getI18nTransEntry('btnDelete'), 0, 
-					'deleteButton', 
-					3, 3, 
-					"",1)
-				);
+
 				$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 				
 				$Content .= "
@@ -155,6 +181,7 @@ class Template {
 		
 		
 		$Content .= "</table>\r";
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return $Content;
 		
 	}

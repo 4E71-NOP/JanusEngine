@@ -531,6 +531,7 @@ switch ( $bts->CMObj->getConfigurationEntry('colorSelector') ){
 		";
 		break;
 	case "system":
+	default:
 		$T['Content'][$curTab]['5']['2']['cont'] = "
 		<input type='color' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."'	oninput='ThemeGradientMgmt()'>\r /
 		<input type='color' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."'	oninput='ThemeGradientMgmt()'>\r /

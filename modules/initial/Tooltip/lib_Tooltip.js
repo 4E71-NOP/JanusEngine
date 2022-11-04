@@ -187,14 +187,14 @@ class ToolTip {
 			this.FadeTransparent (Obj.id);
 			this.MouseEvent();		//Move the div.
 	
-//			var str = 'AiDyn :\nShiftX=' + this.cfg.ShiftX + ', ShiftY=' + this.cfg.ShiftY +
-//			'\n DivSizeX=' + this.cfg.DivSizeX + ', DivSizeY=' + this.cfg.DivSizeY +
-//			'\n FirstTime=' + this.cfg.FirstTime + ', DivState=' + this.cfg.DivState +
-//			'\n Souris : Mouse X=' + m.mouseData.PosX + ', Mouse Y=' + m.mouseData.PosY +
-//			'\n PosX=' + this.cfg.PosX + ', PosY=' + this.cfg.PosY +
-//			'\n de.cliEnv.document.width=' + de.cliEnv.document.width + ', de.cliEnv.document.height=' + de.cliEnv.document.height +
-//			'\n Direction=' + Obj.Anim_Direction + ', Progression=' +  Obj.Anim_Progress + 
-//			'\n fin';
+			// var str = 'AiDyn :\nShiftX=' + this.cfg.ShiftX + ', ShiftY=' + this.cfg.ShiftY +
+			// '\n DivSizeX=' + this.cfg.DivSizeX + ', DivSizeY=' + this.cfg.DivSizeY +
+			// '\n FirstTime=' + this.cfg.FirstTime + ', DivState=' + this.cfg.DivState +
+			// '\n Souris : Mouse X=' + m.mouseData.PosX + ', Mouse Y=' + m.mouseData.PosY +
+			// '\n PosX=' + this.cfg.PosX + ', PosY=' + this.cfg.PosY +
+			// '\n de.cliEnv.document.width=' + de.cliEnv.document.width + ', de.cliEnv.document.height=' + de.cliEnv.document.height +
+			// '\n Direction=' + Obj.Anim_Direction + ', Progression=' +  Obj.Anim_Progress + 
+			// '\n fin';
 
 			var str = 'Direction=' + Obj.Anim_Direction + ', Progression=' +  Obj.Anim_Progress;
 			l.Log[this.dbgToolTip](str);

@@ -42,7 +42,7 @@ class  RenderForm {
 	 */
 	public function renderformHeader( $name, $action="/", $method="post" ){
 		if ( strlen($name)>0 && strlen($method)>0) {
-			return "<form ACTION='".$action."' method='".$method."' name='".$name."'>\r";
+			return "<form ACTION='".$action."' method='".$method."' name='".$name."' id='".$name."'>\r";
 		}
 		return false;
 	}

@@ -197,52 +197,6 @@ class StringFormat {
 		self::$ConvertTable['website']['dynamic']				= 1;
 		self::$ConvertTable['website']['base']					= 0;
 		
-					
-		// self::$ConvertTable['M_SITWEB']['base']					= 1;
-		// self::$ConvertTable['M_SITWEB']['fichier']				= 2;
-		// self::$ConvertTable['M_SITWEB']['database']				= &self::$ConvertTable['M_SITWEB']['base'];
-		// self::$ConvertTable['M_SITWEB']['file']					= &self::$ConvertTable['M_SITWEB']['fichier'];
-		// self::$ConvertTable['M_UTILIS']['publique']				= 2;
-		// self::$ConvertTable['M_UTILIS']['prive']				= 1;
-		// self::$ConvertTable['M_UTILIS']['privee']				= &self::$ConvertTable['M_UTILIS']['prive'];
-		// self::$ConvertTable['M_UTILIS']['public']				= &self::$ConvertTable['M_UTILIS']['publique'];
-		// self::$ConvertTable['M_UTILIS']['private']				= &self::$ConvertTable['M_UTILIS']['prive'];
-		// self::$ConvertTable['M_TAG']['top-left']				= 0;
-		// self::$ConvertTable['M_TAG']['bottom-left']				= 1;
-		// self::$ConvertTable['M_TAG']['center-left']				= 2;
-		// self::$ConvertTable['M_TAG']['top-right']				= 4;
-		// self::$ConvertTable['M_TAG']['bottom-right']			= 5;
-		// self::$ConvertTable['M_TAG']['center-right']			= 6;
-		// self::$ConvertTable['M_TAG']['top-center']				= 8;
-		// self::$ConvertTable['M_TAG']['bottom-center']			= 9;
-		// self::$ConvertTable['M_TAG']['center-center']			= 10;
-		// self::$ConvertTable['M_TAG']['haut-gauche']				= &self::$ConvertTable['M_TAG']['top-left'];
-		// self::$ConvertTable['M_TAG']['bas-gauche']				= &self::$ConvertTable['M_TAG']['bottom-left'];
-		// self::$ConvertTable['M_TAG']['centre-gauche']			= &self::$ConvertTable['M_TAG']['center-left'];
-		// self::$ConvertTable['M_TAG']['haut-droite']				= &self::$ConvertTable['M_TAG']['top-right'];
-		// self::$ConvertTable['M_TAG']['bas-droite']				= &self::$ConvertTable['M_TAG']['bottom-right'];
-		// self::$ConvertTable['M_TAG']['centre-droite']			= &self::$ConvertTable['M_TAG']['center-right'];
-		// self::$ConvertTable['M_TAG']['haut-centre']				= &self::$ConvertTable['M_TAG']['top-center'];
-		// self::$ConvertTable['M_TAG']['bas-centre']				= &self::$ConvertTable['M_TAG']['bottom-center'];
-		// self::$ConvertTable['M_TAG']['centre-centre']			= &self::$ConvertTable['M_TAG']['center-center'];
-		// self::$ConvertTable['M_THEME']['top-left']				= 0;
-		// self::$ConvertTable['M_THEME']['bottom-left']			= 1;
-		// self::$ConvertTable['M_THEME']['center-left']			= 2;
-		// self::$ConvertTable['M_THEME']['top-right']				= 4;
-		// self::$ConvertTable['M_THEME']['bottom-right']			= 5;
-		// self::$ConvertTable['M_THEME']['center-right']			= 6;
-		// self::$ConvertTable['M_THEME']['top-center']			= 8;
-		// self::$ConvertTable['M_THEME']['bottom-center']			= 9;
-		// self::$ConvertTable['M_THEME']['center-center']			= 10;
-		// self::$ConvertTable['M_THEME']['haut-gauche']			= &self::$ConvertTable['M_THEME']['top-left'];
-		// self::$ConvertTable['M_THEME']['bas-gauche']			= &self::$ConvertTable['M_THEME']['bottom-left'];
-		// self::$ConvertTable['M_THEME']['centre-gauche']			= &self::$ConvertTable['M_THEME']['center-left'];
-		// self::$ConvertTable['M_THEME']['haut-droite']			= &self::$ConvertTable['M_THEME']['top-right'];
-		// self::$ConvertTable['M_THEME']['bas-droite']			= &self::$ConvertTable['M_THEME']['bottom-right'];
-		// self::$ConvertTable['M_THEME']['centre-droite']			= &self::$ConvertTable['M_THEME']['center-right'];
-		// self::$ConvertTable['M_THEME']['haut-centre']			= &self::$ConvertTable['M_THEME']['top-center'];
-		// self::$ConvertTable['M_THEME']['bas-centre']			= &self::$ConvertTable['M_THEME']['bottom-center'];
-		// self::$ConvertTable['M_THEME']['centre-centre']			= &self::$ConvertTable['M_THEME']['center-center'];
 	}
 	
 	/**

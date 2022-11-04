@@ -27,22 +27,12 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-/*
-http://www.local-hydr.net/script-execution/1/index.php
-?HydrLink=1&arti_slug=script-execution
-&arti_ref=fra_script_execution
-&arti_page=2
-&formGenericData[mode]=edit
-&formGenericData[selectionId]=738544661492181301
-&formGenericData[selectionPage]=9
-*/
-
 $bts->LMObj->saveVectorSystemLogLevel();
 $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionId'	=> 7517174913115681722,
+				'selectionId'	=> 7843562880049273739,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -122,7 +112,6 @@ $bts->I18nTransObj->apply(
 			"valid"			=>	"Valid",
 			"invalid"		=>	"Invalid",
 		),
-
 	)
 );
 
@@ -173,13 +162,17 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 // --------------------------------------------------------------------------------------------
 $Content .= 
 $bts->RenderFormObj->renderformHeader('articleForm')
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminArticleManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminArticleValidationP02" )
 .$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"article" )
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentArticleObj->getArticleEntry('arti_name') )
 .$bts->RenderFormObj->renderHiddenInput(	"articleForm[selectionId]"	,	$currentArticleObj->getArticleEntry('arti_id'))
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[validator]"		, 	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry ( 'user_login' ) )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[validation_date]"	, 	time()  )
+.$bts->RenderFormObj->renderHiddenInput(	"formTarget1[validation_state]"	, 	"VALID" )
 ."<p>\r"
 ;
 

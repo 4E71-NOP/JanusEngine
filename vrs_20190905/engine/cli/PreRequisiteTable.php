@@ -778,13 +778,12 @@ self::$PreRequisiteTable['update']['deadline']['columns']		= &self::$PreRequisit
 self::$PreRequisiteTable['update']['deadline']['timeConvert']	= &self::$PreRequisiteTable['add']['deadline']['timeConvert'];
 
 
-self::$PreRequisiteTable['update']['document']					= self::$PreRequisiteTable['add']['document'];		// It's a copy not a reference!
+self::$PreRequisiteTable['update']['document']['convert']		= &self::$PreRequisiteTable['add']['document']['convert'];
+self::$PreRequisiteTable['update']['document']['columns']		= &self::$PreRequisiteTable['add']['document']['columns'];
 self::$PreRequisiteTable['update']['document']['execute']		= function (&$a) {
 	if ( $a['params']['creator'] == "*user_install*" ) {$a['params']['creator'] = $a['Initiator']['db_login'];}
 	if ( $a['params']['validator'] == "*user_install*" ) {$a['params']['validator'] = $a['Initiator']['db_login'];}
 };
-self::$PreRequisiteTable['update']['document']['nextId']		= 0;
-
 
 
 self::$PreRequisiteTable['update']['layout']['convert']		= &self::$PreRequisiteTable['add']['layout']['convert'];
@@ -797,6 +796,8 @@ self::$PreRequisiteTable['update']['group']['nextId']		= &self::$PreRequisiteTab
 self::$PreRequisiteTable['update']['group']['columns']		= &self::$PreRequisiteTable['add']['group']['columns'];
 self::$PreRequisiteTable['update']['group']['timeCreate']	= &self::$PreRequisiteTable['add']['group']['timeCreate'];
 
+self::$PreRequisiteTable['update']['keyword']['convert']	= &self::$PreRequisiteTable['add']['keyword']['convert'];
+self::$PreRequisiteTable['update']['keyword']['columns']	= &self::$PreRequisiteTable['add']['keyword']['columns'];
 
 self::$PreRequisiteTable['update']['module']['convert']		= &self::$PreRequisiteTable['add']['module']['convert'];
 self::$PreRequisiteTable['update']['module']['nextId']		= &self::$PreRequisiteTable['add']['module']['nextId'];

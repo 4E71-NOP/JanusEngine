@@ -65,6 +65,7 @@ switch ($application) {
 		// $ll = LOGLEVEL_INFORMATION;
 		// $ll = LOGLEVEL_STATEMENT;
 		// $ll = LOGLEVEL_BREAKPOINT;
+		
 		$llvsl = LOGLEVEL_WARNING;
 		// $llvsl = LOGLEVEL_BREAKPOINT;
 

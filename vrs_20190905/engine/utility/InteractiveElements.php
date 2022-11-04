@@ -40,10 +40,22 @@ class InteractiveElements {
 	 * @param number $hoverStyle 1 2 3 green blue red
 	 * @param string $onclick javascript for OnClick
 	 * @param number $mode 1 = keep track by saving the last used size. '0' = reuse the last size
+	 * @param bool   $disabled
 	 * @return array
 	 * 
 	 */
-	public function getDefaultSubmitButtonConfig ($infos , $type='submit', $message='', $size=128, $id='defaultButton', $initialStyle=1, $hoverStyle=1, $onclick='', $mode=1 ) {
+	public function getDefaultSubmitButtonConfig (
+			$infos , 
+			$type='submit', 
+			$message='', 
+			$size=128, 
+			$id='defaultButton', 
+			$initialStyle=1, 
+			$hoverStyle=1, 
+			$onclick='', 
+			$mode=1 , 
+			$disabled=false 
+		) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
@@ -58,6 +70,7 @@ class InteractiveElements {
 			"message"			=> $message,
 			"mode"				=> $mode,
 			"size" 				=> $size,
+			"disabled"			=> $disabled,
 //			"lastSize"			=> 0,
 		);
 		return ($tab);
@@ -105,8 +118,16 @@ class InteractiveElements {
 			break;
 			case FALSE:	$infos['lastSize'] = 0 ;	break;
 		}
-	
-		$Content .= "border:0px; padding:0px; margin:0px'></td>\r
+
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->saveVectorSystemLogLevel();
+		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : '".$infos['message']."' , infos['disabled']=".$infos['disabled']));
+		$bts->LMObj->restoreVectorSystemLogLevel();
+
+		$Content .= "border:0px; padding:0px; margin:0px'"
+		.(($infos['disabled'] == true) ? " disabled='disabled'" : " ")
+		."></td>\r
 		<td id='".$infos['id']."03' class='".$infos['initialStyle']."03' ".$animation."></td>\r
 		</tr>\r
 		</table>\r
