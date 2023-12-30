@@ -90,11 +90,11 @@ $bts->CMObj->setConfigurationEntry('db',
 		"hosting_prefix"			=> $form['dataBaseHostingPrefix'],
 		"dbprefix"					=> $form['dbprefix'],
 		"tabprefix"					=> $form['tabprefix'],
-		"dataBaseUserLogin"		=> $form['dataBaseHostingPrefix'].$form['dataBaseUserLogin'],
-		"dataBaseUserPassword"	=> $form['dataBaseUserPassword'],
-		"websiteUserPassword"	=> $form['websiteUserPassword'],
-		"dataBaseHostingProfile"			=> $form['dataBaseHostingProfile'],
-		"dataBaseUserRecreate"	=> $form['dataBaseUserRecreate'],
+		"dataBaseUserLogin"			=> $form['dataBaseHostingPrefix'].$form['dataBaseUserLogin'],
+		"dataBaseUserPassword"		=> $form['dataBaseUserPassword'],
+		"websiteUserPassword"		=> $form['websiteUserPassword'],
+		"dataBaseHostingProfile"	=> $form['dataBaseHostingProfile'],
+		"dataBaseUserRecreate"		=> $form['dataBaseUserRecreate'],
 	)
 );
 

@@ -16,7 +16,7 @@
  * This object will store any volatile data.
  * It will provide access to any script or class that require to use/access the current XX (User, ThemeData etc).
  * Also it stores some variables in an array ($data)
- * @author faust
+ * @author Faust
  * 
  */
 class CurrentSet {
@@ -82,8 +82,8 @@ class CurrentSet {
 	public function restoreInstanceOfThemeDataObj(){ $this->InstanceOfThemeDataObj = $this->InstanceOfThemeDataObjBackup; }
 	
 	//@formatter:off
-	public function getInstanceOfServerInfosObj()			{ return $this->InstanceOfServerInfos; }
-	public function getInstanceOfSqlTableListObj()			{ return $this->InstanceOfSqlTableList; }
+	public function getInstanceOfServerInfosObj()			{ return $this->InstanceOfServerInfosObj;}
+	public function getInstanceOfSqlTableListObj()			{ return $this->InstanceOfSqlTableListObj; }
 	public function getInstanceOfWebSiteObj()				{ return $this->InstanceOfWebSiteObj; }
 	public function getInstanceOfWebSiteContextObj()		{ return $this->InstanceOfWebSiteContextObj; }
 	public function getInstanceOfUserObj()					{ return $this->InstanceOfUserObj; }
@@ -96,8 +96,8 @@ class CurrentSet {
 	public function getInstanceOfArticleObj()				{ return $this->InstanceOfArticleObj; }
 	public function getData()								{ return $this->data; }
 	
-	public function setInstanceOfServerInfosObj($InstanceOfServerInfos) 					{ $this->InstanceOfServerInfos = $InstanceOfServerInfos; }
-	public function setInstanceOfSqlTableListObj($InstanceOfSqlTableList)					{ $this->InstanceOfSqlTableList = $InstanceOfSqlTableList; }
+	public function setInstanceOfServerInfosObj($InstanceOfServerInfos) 					{ $this->InstanceOfServerInfosObj = $InstanceOfServerInfos; }
+	public function setInstanceOfSqlTableListObj($InstanceOfSqlTableList)					{ $this->InstanceOfSqlTableListObj = $InstanceOfSqlTableList; }
 	public function setInstanceOfWebSiteObj($InstanceOfWebSiteObj)							{ $this->InstanceOfWebSiteObj = $InstanceOfWebSiteObj; }
 	public function setInstanceOfWebSiteContextObj($InstanceOfWebSiteContextObj)			{ $this->InstanceOfWebSiteContextObj = $InstanceOfWebSiteContextObj; }
 	public function setInstanceOfUserObj($InstanceOfUserObj)								{ $this->InstanceOfUserObj = $InstanceOfUserObj; }
@@ -109,8 +109,5 @@ class CurrentSet {
 	public function setInstanceOfModuleListObj($InstanceOfModuleListObj)					{ $this->InstanceOfModuleListObj = $InstanceOfModuleListObj; }
 	public function setInstanceOfArticleObj($InstanceOfArticleObj)							{ $this->InstanceOfArticleObj = $InstanceOfArticleObj; }
 	//@formatter:on
-
-
-
 	
 }

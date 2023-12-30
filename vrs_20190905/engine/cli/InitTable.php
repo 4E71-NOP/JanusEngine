@@ -10,6 +10,7 @@ self::$InitTable['article'] = function (&$a) {
 	$a['params'] = array(
 			"id" => "",
 			"ref" => 0,
+			"slug" => "",
 			"deadline" => "initial_offline",
 			"name" => "new article",
 			"desc" => "",

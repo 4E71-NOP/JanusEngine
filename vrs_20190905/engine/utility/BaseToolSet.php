@@ -36,6 +36,7 @@ class BaseToolSet {
 	public $SMObj;
 	public $StringFormatObj;
 	public $TimeObj;
+	public $SQLlogEntry;
 	// 	public $SqlTableListObj;
 	
 	private static $Instance = null;
@@ -110,7 +111,6 @@ class BaseToolSet {
 	 * It is done this ways because the session isn't initialized right away at the start or when this class is loaded.
 	 */
 	public function initSmObj (){
-// 		$this->SMObj					= SessionManagement::getInstance($this->CMObj);
 		$this->SMObj					= SessionManagement::getInstance();
 	}
 	

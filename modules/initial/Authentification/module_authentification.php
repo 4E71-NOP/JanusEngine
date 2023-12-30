@@ -20,6 +20,8 @@ class ModuleAuthentification {
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+
 		$Content = "";
 		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
 			$localisation = " / ModuleAuthentification";
@@ -36,9 +38,9 @@ class ModuleAuthentification {
 			$l = $CurrentSetObj->getDataEntry ('language');
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 			
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionEntry('user_login')));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : user_login=".$bts->SMObj->getSessionSubEntry($currentWs, 'user_login')));
 			
-			if ( $bts->SMObj->getSessionEntry('user_login') == "anonymous") {
+			if ( $bts->SMObj->getSessionSubEntry($currentWs, 'user_login') == "anonymous") {
 				if ( $bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 && 
 						$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous" &&
 						$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') != "disconnection"
@@ -110,7 +112,7 @@ class ModuleAuthentification {
 				<tr>\r
 				<td style='text-align:center; padding-top:10px;'>\r".
 				$bts->I18nTransObj->getI18nTransEntry('txt1').
-				"<span style='font-weight:bold;'>".$bts->SMObj->getSessionEntry('user_login')."</span>\r".$pv['SSL_etat']."
+				"<span style='font-weight:bold;'>".$bts->SMObj->getSessionSubEntry($currentWs, 'user_login')."</span>\r".$pv['SSL_etat']."
 				</td>\r
 				</tr>\r
 				

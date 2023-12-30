@@ -1,7 +1,7 @@
 add	decoration
-name	'hydr_tronic_menu_002'
-graphic	'hydr_tronic_block_tooltip'
-text	'hydr_tronic_txt_menu'
+name	'rw_tronic_menu_002'
+graphic	'rw_tronic_block_002'
+text	'rw_tronic_txt_menu'
 type	'menu'
 directory	'Tronic'
 	

@@ -1,3 +1,5 @@
+assign theme name "rw_tronic_01" to_website "rootwave";
+
 set checkpoint name "Rootwave - End";
 blurg comand lol;
    

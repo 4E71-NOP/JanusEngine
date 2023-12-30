@@ -77,6 +77,8 @@ class Router {
 	 */
 	private function processHydrData($url) {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		
 		$match = $this->matchRoute("/(\?|&)"._HYDRLINKURLTAG_."=1/", $url);
 // 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : BP01 \$match['0']=" . $match['0'] . ", strlen=". strlen($match['0'])));
@@ -88,7 +90,7 @@ class Router {
 			if (strlen ($bts->RequestDataObj->getRequestDataEntry('arti_page')) > 0 ) { $tab['page'] = $bts->RequestDataObj->getRequestDataEntry('arti_page'); }
 			
 			$bts->SMObj->backupRoute();
-			$bts->SMObj->setSessionEntry('currentRoute', $tab);
+			$bts->SMObj->setSessionSubEntry($currentWs, 'currentRoute', $tab);
 			$bts->SMObj->syncSuperGlobalSession();
 		}
 		
@@ -106,6 +108,9 @@ class Router {
 	 */
 	private function updateSessionRouteFromURL ($url) {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+
 		$match = $this->matchRoute("/^(http[s]?:\/\/)?([\w-]+\.)+([\w]+)\//", $url);
 		$str = str_replace($match['0'], "", $url);
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : The slug part looks like this. \$str=`".$str."`."));
@@ -120,7 +125,7 @@ class Router {
 			$tab = array('target'	=> 'home', 'page'		=> '1' ,);
 		}
 		$bts->SMObj->backupRoute();
-		$bts->SMObj->setSessionEntry('currentRoute', $tab);
+		$bts->SMObj->setSessionSubEntry($currentWs, 'currentRoute', $tab);
 		$bts->SMObj->syncSuperGlobalSession();
 	}
 	
@@ -130,6 +135,8 @@ class Router {
 	private function updateSessionRouteFromForm () {
 		// A form asked for a arti_ref. We need to 
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		
 		// 2021 03 18 : Form arti_ref (or slug) take precedence on URL slug for now.
 		// We still compare both slug and arti_ref. In the end only the slug will be considered
@@ -152,20 +159,20 @@ class Router {
 			// It's coming from Quickskin and such who doesn't change navigation.
 			// so we take the current route
 			default :
-			if ( strlen($bts->SMObj->getSessionSubEntry('currentRoute', 'target')) == 0 ) {
-				$bts->SMObj->setSessionSubEntry('currentRoute', 'target', 'home');
-				$bts->SMObj->setSessionSubEntry('currentRoute', 'page', '1');
+			if ( strlen($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target')) == 0 ) {
+				$bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target', 'home');
+				$bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'page', '1');
 			}
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found for routing. We take the last saved route =`".$bts->SMObj->getSessionSubEntry('currentRoute', 'target')."`."));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Nothing found for routing. We take the last saved route =`".$bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target')."`."));
 			$tab = array(
-				'target'	=> $bts->SMObj->getSessionSubEntry('currentRoute', 'target'),
-				'page'		=> $bts->SMObj->getSessionSubEntry('currentRoute', 'page'),
+				'target'	=> $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target'),
+				'page'		=> $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'page'),
 			);
 				break;
 		}
 		
 		$bts->SMObj->backupRoute();
-		$bts->SMObj->setSessionEntry('currentRoute', $tab);
+		$bts->SMObj->setSessionSubEntry($currentWs, 'currentRoute', $tab);
 		$bts->SMObj->syncSuperGlobalSession();
 		
 	}

@@ -47,11 +47,12 @@ class DocumentData {
 			AND mnu.fk_deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 			AND mnu.menu_type IN ('0','1')
-			AND mnu.fk_group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
 			AND mnu.menu_state = '1'
 			AND menu_initial_document = '1'
 			ORDER BY mnu.menu_parent,mnu.menu_position
 			;" );
+//			AND mnu.fk_group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());
 				$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $dbp['arti_ref']);

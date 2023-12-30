@@ -18,30 +18,26 @@
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
-function returnConfig () {
-	$tab = array();
-	$tab['type']				= "mysqli";
-	$tab['charset']				= "utf8mb4";
-	$tab['host']				= "mysql";
-	$tab['dal']					= "PHP";						// MYSQLI , PDOMYSQL
-	$tab['db_user_login']		= "HydreBDD";
-	$tab['db_user_password']	= "Celeste";
-	$tab['dbprefix']			= "Hdr";
-	$tab['tabprefix']			= "Ht_";
-	$tab['SessionMaxAge'] = (60*60*24);							// 24 hours by default
-	
-	$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
-	$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Command console
-	$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
-	$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
+$fileContent = array(
+	"type"				=> "mysqli",
+	"charset"			=> "utf8mb4",
+	"host"				=> "mysql",
+	"dal"				=> "PHP",				// MYSQLI , PDOMYSQL
+	"db_user_login"		=> "HydreBDD",
+	"db_user_password"	=> "Celeste",
+	"dbprefix"			=> "Hdr",
+	"tabprefix"			=> "Ht_",
+	"SessionMaxAge" 	=> (60*60*24),			// 24 hours by default
+	"DebugLevel_SQL"	=> LOGLEVEL_WARNING,	// SDDM
+	"DebugLevel_CC"		=> LOGLEVEL_WARNING,	// Command console
+	"DebugLevel_PHP"	=> LOGLEVEL_WARNING,	// 
+	"DebugLevel_JS"		=> LOGLEVEL_WARNING,	// 
+	"execution_context"	=> "render",
+	"InsertStatistics"	=> 1,
+	"commandLineEngine"	=> array(
+		"state"			=>	"enabled"
+	)
 
-	$tab['execution_context'] 	= "render";
-	$tab['InsertStatistics'] = 1;
-	$tab['commandLineEngine'] = array(
-			"state"		=>	"enabled",
-	);
-	return $tab;
-}
-
+);
 
 ?>

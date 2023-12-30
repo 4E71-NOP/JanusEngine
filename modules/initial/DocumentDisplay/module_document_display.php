@@ -139,7 +139,7 @@ class ModuleDocumentDisplay {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " menu needed"));
 				
 				$q = "
-				SELECT art.arti_id, art.arti_ref, art.arti_slug, art.arti_subtitle, art.arti_page, bcl.deadline_name 
+				SELECT art.arti_id, art.arti_ref, art.arti_slug, art.arti_title, art.arti_subtitle, art.arti_page, bcl.deadline_name 
 				FROM "
 				.$SqlTableListObj->getSQLTableName('article')." art, "
 				.$SqlTableListObj->getSQLTableName('deadline')." bcl 
@@ -163,6 +163,7 @@ class ModuleDocumentDisplay {
 					$P2P_tab_[$idx]['arti_id']			= $dbp['arti_id'];
 					$P2P_tab_[$idx]['arti_ref']			= $dbp['arti_ref'];
 					$P2P_tab_[$idx]['arti_slug']		= $dbp['arti_slug'];
+					$P2P_tab_[$idx]['arti_title']		= $dbp['arti_title'];
 					$P2P_tab_[$idx]['arti_subtitle']	= $dbp['arti_subtitle'];
 					$P2P_tab_[$idx]['arti_page']		= $dbp['arti_page'];
 					$P2P_tab_[$idx]['lien']				= "

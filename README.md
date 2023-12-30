@@ -6,7 +6,7 @@ The jumpstart (see archives) packkage contains documentation. So by installing t
 # Downloads
 
 ## Source
-Downlad the source from this place and play. I believe you know what you're doing.
+Download the source from this place and play. I believe you know what you're doing.
 
 ## Archives
 You can download 2 types of packages from the online archive:

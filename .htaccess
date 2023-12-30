@@ -19,12 +19,19 @@ ErrorDocument 500 /500-internal-server-error
 
 # ----------------------------------------------------------------------------
 # Rewrite
+# Avoid rewrite for : Developper docs, images, websites-data/xxxxx/data/xxx.img
 
-# Avoid rewrite for : Developper docs, images
-RewriteRule (DeveloperDocs\/(.*\.html?)?)$ - [L]
-RewriteRule (media(\/(\w|\-)+)+\.(png|jpg|gif))$ - [L]
-RewriteRule (websites-data\/(\w|\-|\.)+\/data\/)$ - [L]
-RewriteRule (stylesheets/(\/(\w|\-)+))$ - [L]
+# http://www.local-rootwave.net/media/theme/Tronic/tronic_B01_ex15.png
+RewriteRule media\/.+\.(png|jpg|gif)$ - [L]
+
+# http://www.local-rootwave.net/websites-data/www.rootwave.net/data/documents/doc_fra_dessiner_p02.htm/Crayon_v1.0.png
+RewriteRule websites-data\/(.*\/)*data\/.*\/.+\.(png|gif|jpg)$ - [L]
+
+# http://www.local-rootwave.net/modules/initial/Menu/css/MenuSlide.css
+RewriteRule stylesheets\/.*\/.+\.css$ - [L]
+
+# www.local-hydr.net/DeveloperDocs/classes/AdminFormTool.html
+RewriteRule DeveloperDocs\/.+\.html$ - [L]
 
 # Not a devdocs or image... rewrite it as Hydr style
 <IfModule mod_rewrite.c>

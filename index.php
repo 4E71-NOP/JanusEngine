@@ -18,7 +18,7 @@ include ("current/engine/utility/Hydr.php");
 $R = Hydr::getInstance();
 echo ( $R->render() ) ;
 
-if ( session_write_close () === false ){
+if ( session_write_close() === false ){
 	$bts = BaseToolSet::getInstance();
 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()) );
 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => "session_write_close() returned false. Something went wrong.") );

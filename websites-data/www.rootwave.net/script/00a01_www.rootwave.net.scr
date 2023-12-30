@@ -12,7 +12,7 @@ short				RW
 lang				fra
 lang_select			YES 
 title				"R o o t w a v e" 
-home				"www.rootwave.net" 
+home				"www.local-rootwave.net" 
 directory			"www.rootwave.net" 
 info_debug			"49215"
 stylesheet			DYNAMIC 

@@ -51,16 +51,22 @@ class SessionManagement {
 	 */
 	public function InitializeSession(){
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+		if ( strlen($currentWs) == 0 ) {
+			$currentWs = DEFAULT_SITE_ID;
+		}
+
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : InitializeSession has been called"));
 		
-		$this->session['SessionMaxAge']			= $bts->CMObj->getConfigurationEntry('SessionMaxAge');
-		$this->session['user_login']			= "anonymous";
-		$this->session['ws']					= DEFAULT_SITE_ID;
-		$this->session['err']					= FALSE;
-		$this->session['last_REMOTE_ADDR']		= $_SERVER['REMOTE_ADDR'];
-		$this->session['last_REMOTE_PORT']		= $_SERVER['REMOTE_PORT'];
-		$this->session['last_HTTP_USER_AGENT']	= $_SERVER['HTTP_USER_AGENT'];
-		$this->session['last_REQUEST_TIME']		= $_SERVER['REQUEST_TIME'];
+		$this->session[$currentWs]['SessionMaxAge']			= $bts->CMObj->getConfigurationEntry('SessionMaxAge');
+		$this->session[$currentWs]['user_login']			= "anonymous";
+		$this->session[$currentWs]['ws']					= DEFAULT_SITE_ID;
+		$this->session[$currentWs]['err']					= FALSE;
+		$this->session[$currentWs]['last_REMOTE_ADDR']		= $_SERVER['REMOTE_ADDR'];
+		$this->session[$currentWs]['last_REMOTE_PORT']		= $_SERVER['REMOTE_PORT'];
+		$this->session[$currentWs]['last_HTTP_USER_AGENT']	= $_SERVER['HTTP_USER_AGENT'];
+		$this->session[$currentWs]['last_REQUEST_TIME']		= $_SERVER['REQUEST_TIME'];
 	}
 	
 	/**
@@ -86,37 +92,39 @@ class SessionManagement {
 	 */
 	public function CheckSession() {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
 		
-		if ( isset($_SESSION['last_REMOTE_ADDR']) )	{ 
-			if ($_SESSION['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
+		if ( isset($_SESSION[$currentWs]['last_REMOTE_ADDR']) )	{ 
+			if ($_SESSION[$currentWs]['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) { 
 				$this->session['err'] = TRUE; $this->report['errMsg'] = "Not the same remote IP address";
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Not the same remote IP address"));
 			} 
 		}
-		else { $_SESSION['last_REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];}
+		else { $_SESSION[$currentWs]['last_REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];}
 		
-		$_SESSION['last_REMOTE_PORT'] = $_SERVER['REMOTE_PORT'];
+		$_SESSION[$currentWs]['last_REMOTE_PORT'] = $_SERVER['REMOTE_PORT'];
 		
-		if ( isset($_SESSION['last_HTTP_USER_AGENT'])) { 
-			if ($_SESSION['last_HTTP_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']) { 
+		if ( isset($_SESSION[$currentWs]['last_HTTP_USER_AGENT'])) { 
+			if ($_SESSION[$currentWs]['last_HTTP_USER_AGENT'] != $_SERVER['HTTP_USER_AGENT']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Not the same HTTP user agent";
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Not the same HTTP user agent"));
 			}
 		}
-		else {$_SESSION['last_HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];}
+		else {$_SESSION[$currentWs]['last_HTTP_USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];}
 		
-		if (isset($_SESSION['last_REQUEST_TIME']))	{ 
-			$this->session['SessionAge'] = ($_SERVER['REQUEST_TIME'] - $_SESSION['last_REQUEST_TIME']);
-			if ($this->session['SessionAge'] > $this->session['SessionMaxAge']) { 
+		if (isset($_SESSION[$currentWs]['last_REQUEST_TIME']))	{ 
+			$this->session[$currentWs]['SessionAge'] = ($_SERVER['REQUEST_TIME'] - $_SESSION[$currentWs]['last_REQUEST_TIME']);
+			if ($this->session[$currentWs]['SessionAge'] > $this->session[$currentWs]['SessionMaxAge']) { 
 				$this->session['err'] = TRUE;
 				$this->report['errMsg'] = "Session too old";
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session is too old. SessionAge=".$this->session['SessionAge']." > SessionMaxAge=".$this->session['SessionMaxAge']));
 			} 
 		}
-		else {$_SESSION['last_REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];}
+		else {$_SESSION[$currentWs]['last_REQUEST_TIME'] = $_SERVER['REQUEST_TIME'];}
 		
 		// Any error leads to reset!
 		if ($this->session['err'] === TRUE) { 
@@ -126,8 +134,8 @@ class SessionManagement {
 			$this->syncSuperGlobalSession();
 		}
 		else {
-		$this->session['sessionMode'] = 1;
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session seems ok. ws='" . $this->session['ws']."'"));
+		$this->session[$currentWs]['sessionMode'] = 1;
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Session seems ok. ws='" . $this->session[$currentWs]['ws']."'"));
 		
 		}
 	}
@@ -151,9 +159,12 @@ class SessionManagement {
 	 */
 	public function ResetSession() {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ResetSession() has been called"));
 		$this->restartSession();
-		$this->session['user_login'] = "anonymous";
+		$this->session[$currentWs]['user_login'] = "anonymous";
 		$this->InitializeSession();
 	}
 	
@@ -164,6 +175,7 @@ class SessionManagement {
 	public function StoreUserCredential() {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		$mode = $CurrentSetObj->getDataSubEntry('autentification', 'mode');
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "StoreUserCredential mode=".$mode. ". Saving user into the session"));
@@ -180,7 +192,7 @@ class SessionManagement {
 				// We save directly the data into the session.
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form content: " . $bts->StringFormatObj->arrayToString($bts->RequestDataObj->getRequestDataEntry('authentificationForm'))));
 				$this->InitializeSession();
-				$this->session['user_login']	=	$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
+				$this->session[$currentWs]['user_login']	=	$bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login');
 // 				$this->session['ws']			=	$bts->RequestDataObj->getRequestDataEntry('ws');
 				$this->syncSuperGlobalSession();
 				break;
@@ -195,9 +207,12 @@ class SessionManagement {
 	 */
 	public function backupRoute () {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Backing up the last route"));
-		$this->session['previousRoute'] = $this->session['currentRoute'];
-		$this->session['currentRoute'] = array();
+		$this->session[$currentWs]['previousRoute'] = $this->session[$currentWs]['currentRoute'];
+		$this->session[$currentWs]['currentRoute'] = array();
 		$this->syncSuperGlobalSession();
 	}
 	
@@ -227,9 +242,11 @@ class SessionManagement {
 	public function getSession() {return $this->session;}
 	public function getSessionEntry($data) {return $this->session[$data];}
 	public function getSessionSubEntry($lvl1, $lvl2) { return $this->session[$lvl1][$lvl2]; }
+	public function getSession3rdLvlEntry($lvl1, $lvl2, $lvl3) { return $this->session[$lvl1][$lvl2][$lvl3]; }
 	
 	public function setSessionEntry($entry, $data) {$this->session[$entry] = $data;}
 	public function setSessionSubEntry($lvl1, $lvl2, $data) { $this->session[$lvl1][$lvl2] = $data; }
+	public function setSession3rdLvlEntry($lvl1, $lvl2, $lvl3, $data) { $this->session[$lvl1][$lvl2][$lvl3] = $data; }
 	
 	public function setReport($report) {$this->report = $report;}
 	public function setSession($session) {$this->session = $session;}

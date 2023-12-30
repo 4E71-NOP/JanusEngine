@@ -51,20 +51,22 @@ class ConfigurationManagement {
 	 */
 	public function LoadConfigFile() {
 		$bts = BaseToolSet::getInstance();
-// 		$CurrentSetObj = CurrentSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		
-		$configFile = "current/config/current/site_" . $bts->SMObj->getSessionEntry('ws') . "_config.php";
+		$configFile = "current/config/current/site_" . $currentWs . "_config.php";
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
 		if ( file_exists($configFile)) { include ($configFile); }
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file `".$configFile."` doesn't exists -> reset session."));
 			$bts->SMObj->ResetSession();
-			$configFile = "current/config/current/site_" . $bts->SMObj->getSessionEntry('ws') . "_config.php";
+			$configFile = "current/config/current/site_" . $currentWs . "_config.php";
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`".$configFile."`."));
 			include ($configFile);
 		}
-		$CurrentConfig = returnConfig();
-		foreach ( $CurrentConfig as $A => $B ) { $this->Configuration[$A] = $B; }
+		//$CurrentConfig = returnConfig();
+		// $fileContent is assign in the config file
+		foreach ( $fileContent as $A => $B ) { $this->Configuration[$A] = $B; }
 		return true;
 	}
 	
@@ -79,6 +81,8 @@ class ConfigurationManagement {
 	 * Create a table with the supported languages informations we need to support I18N on this site.
 	 */
 	public function PopulateLanguageList () {
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		
 		switch ( $this->Configuration['execution_context'] ) {
 			case "installation":
@@ -117,7 +121,7 @@ class ConfigurationManagement {
 					FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw,
 					".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." ws 
 					WHERE ws.ws_id = lw.fk_ws_id 
-					AND ws.ws_short = '".$bts->SMObj->getSessionEntry('ws')."'
+					AND ws.ws_short = '".$currentWs."'
 					;");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $TabLangueAdmises[] = $dbp['fk_lang_id']; }
 				sort ( $TabLangueAdmises );
