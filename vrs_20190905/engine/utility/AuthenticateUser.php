@@ -41,12 +41,13 @@ class AuthenticateUser {
 
 		if ( strlen($UserObj->getUserEntry('error_login_not_found')) == 0 ) {
 			$CurrentSetObj = CurrentSet::getInstance();
+			$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 			$CurrentSetObj->setDataSubEntry('autentification', 'mode', $mode);
 			
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : mode=".$mode));
 			switch ($mode) {
 				case "session" :
-					if ($UserObj->getUserEntry('user_login') != $_SESSION['user_login'] ) {
+					if ($UserObj->getUserEntry('user_login') != $_SESSION[$currentWs]['user_login'] ) {
 						$this->data['error'] = TRUE;
 						$this->data['errorType'] = 2;
 						$this->data['errorInternalLog'][] = "UserObj/user_login != \$_SESSION/UserLogin";
@@ -58,11 +59,11 @@ class AuthenticateUser {
 // 						$this->data['errorType'] = 1;
 // 						$this->data['errorInternalLog'][] = "Wrong password";
 // 					}
-					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :            user_login='".$UserObj->getUserEntry ('user_login')."'"));
-					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :    session user_login='".$_SESSION['user_login']."'"));
-					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :         user_password='".$UserObj->getUserEntry ('user_password')."'"));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :            user_login='".$UserObj->getUserEntry('user_login')."'"));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :    session user_login='".$_SESSION[$currentWs]['user_login']."'"));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials :         user_password='".$UserObj->getUserEntry('user_password')."'"));
 // 					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session checkUserCredentials : session user_password='".$_SESSION['user_password']."'");
-					$this->report['user_login'] = $_SESSION['user_login'];
+					$this->report['user_login'] = $_SESSION[$currentWs]['user_login'];
 					break;
 				case "form" :
 					if ( $bts->RequestDataObj->getRequestDataSubEntry('authentificationForm', 'user_login') != "anonymous") {

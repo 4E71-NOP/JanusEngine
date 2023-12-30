@@ -1,6 +1,6 @@
 <?php
+session_name ( "HydrWebsiteSessionId" );
 session_start ();
-// session_name ( "HydrWebsiteSessionId" );
 /* Hydre-licence-debut */
 // --------------------------------------------------------------------------------------------
 //

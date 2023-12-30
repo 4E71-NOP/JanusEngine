@@ -42,6 +42,13 @@ class DalFacade {
 	public function createDALInstance () {
 		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();				// Make sure it's loaded
+
+		// Disconnects a pre-existing connection. We won't have multiple connections.
+		if ( $this->DALInstance) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Pre-existing connetion found. Diconnecting..."));
+			$this->DALInstance->disconnect_sql();
+		}
+
 		switch ( $bts->CMObj->getConfigurationEntry('dal')) {
 			case "PHP" :
 				switch ( $bts->CMObj->getConfigurationEntry('type')) {

@@ -120,14 +120,15 @@ class Hydr
 		//
 		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 		$bts->initSmObj();
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()));
 
 		// If $_SESSION is empty we have to check what website is to be selected
 		$wsSession = $_SESSION[$_SERVER['HTTP_HOST']];
-		if (empty($wsSession)) {
+		if (empty($_SESSION[$wsSession])) {
 			// We load the default config file 'Hdr' which in the session object
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION is empty. Initialize the session for the chosen website."));
-			$CurrentSetObj->setDataEntry('ws', 'Hdr');
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION is empty. Initializing the session for the chosen website : " . $_SERVER['HTTP_HOST'] . "."));
+			$CurrentSetObj->setDataEntry('ws', 'HdrBase'); // HdrBase config should have the necessary privileges to log ot the DB.
 			$this->loadConfigFile();
 			if ($this->initializeSDDM() == true) {
 				$bts->CMObj->PopulateLanguageList(); // Not before we have access to the DB. Better isn't it?
@@ -141,9 +142,8 @@ class Hydr
 				if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Getting short name for HTTP_HOST=" . $_SERVER['HTTP_HOST']));
 					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-						// $bts->SMObj->setSessionEntry('ws', $dbp['ws_short']);
 						$bts->SMObj->setSessionEntry($_SERVER['HTTP_HOST'], $dbp['ws_short']);
-						// $CurrentSetObj->setDataEntry('ws', $dbp['ws_short']);
+						$CurrentSetObj->setDataEntry('ws', $dbp['ws_short']);
 						$bts->SMObj->InitializeSession();
 						$bts->SMObj->syncSuperGlobalSession();
 					}
@@ -399,7 +399,7 @@ class Hydr
 		$bts->MapperObj->RemoveThisLevel($localisation);
 		$bts->MapperObj->setSqlApplicant("loadConfigFile");
 
-		// A this point we have a ws in the session so we don't use the URI parameter anymore.
+		// A this point we have a ws in the CurrentSet so we don't use the URI parameter anymore.
 		$bts->CMObj->LoadConfigFile();
 		$bts->CMObj->setConfigurationEntry('execution_context', "render");
 		$bts->LMObj->setDebugLogEcho(0);
