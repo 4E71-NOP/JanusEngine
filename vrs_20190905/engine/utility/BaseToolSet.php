@@ -17,7 +17,8 @@
  * @author faust
  *
  */
-class BaseToolSet {
+class BaseToolSet
+{
 	public $AUObj;
 	public $CMObj;
 	public $CommandConsole;
@@ -38,11 +39,12 @@ class BaseToolSet {
 	public $TimeObj;
 	public $SQLlogEntry;
 	// 	public $SqlTableListObj;
-	
+
 	private static $Instance = null;
-	
-	private function __construct() {
-		include_once ("current/engine/utility/ClassLoader.php");			// Make sure we got this loaded.
+
+	private function __construct()
+	{
+		include_once("current/engine/utility/ClassLoader.php");			// Make sure we got this loaded.
 		$ClassLoaderObj = ClassLoader::getInstance();
 		//error_log("BREAKPOINT");
 		$ClassLoaderObj->provisionClass('LogManagement');
@@ -50,7 +52,7 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('Mapper');
 		$ClassLoaderObj->provisionClass('RequestData');
 		$ClassLoaderObj->provisionClass('StringFormat');
-// 		$ClassLoaderObj->provisionClass('SqlTableList');					// Need configuration to be loaded first
+		// 		$ClassLoaderObj->provisionClass('SqlTableList');					// Need configuration to be loaded first
 		$ClassLoaderObj->provisionClass('ConfigurationManagement');
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
@@ -63,16 +65,16 @@ class BaseToolSet {
 		$ClassLoaderObj->provisionClass('RenderTables');
 		$ClassLoaderObj->provisionClass('RenderTabs');
 		$ClassLoaderObj->provisionClass('Router');
-		
+
 		// Every entity extends 'Entity', so...
 		$ClassLoaderObj->provisionClass('Entity');
-		
+
 		$this->TimeObj					= Time::getInstance();
 		$this->LMObj					= LogManagement::getInstance();
 		$this->MapperObj				= Mapper::getInstance();
 		$this->RequestDataObj			= RequestData::getInstance();
 		$this->StringFormatObj			= StringFormat::getInstance();
-// 		$this->SqlTableListObj			= SqlTableList::getInstance ( '', '' ); 			// Need configuration to be loaded first
+		// 		$this->SqlTableListObj			= SqlTableList::getInstance ( '', '' ); 			// Need configuration to be loaded first
 		$this->CMObj					= ConfigurationManagement::getInstance();
 		$this->CMObj->InitBasicSettings();
 		$this->AUObj					= AuthenticateUser::getInstance();
@@ -85,43 +87,48 @@ class BaseToolSet {
 		$this->RenderTabsObj			= RenderTabs::getInstance();
 		$this->Router					= Router::getInstance();
 	}
-	
+
 	/**
 	 * Singleton : Will return the instance of this class.
 	 * @return BaseToolSet
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
 			self::$Instance = new BaseToolSet();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Loads and prepare the command console class. 
 	 */
-	public function InitCommandConsole() {
+	public function InitCommandConsole()
+	{
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('CommandConsole');
 		$this->CommandConsole			= CommandConsole::getInstance();
 	}
-	
+
 	/**
 	 * Sets the session management instance.
 	 * It is done this ways because the session isn't initialized right away at the start or when this class is loaded.
 	 */
-	public function initSmObj (){
+	public function initSmObj()
+	{
+		error_log("BREAKPOINT");
 		$this->SMObj					= SessionManagement::getInstance();
+		error_log("BREAKPOINT");
 	}
-	
+
 	/**
 	 * Sets the DAL instance.
 	 * This require a valid configuration to be loaded. In most cases the configuration isn't ready when this class is loaded.
 	 */
-	public function initSddmObj(){
+	public function initSddmObj()
+	{
 		$DALFacade = DalFacade::getInstance();
 		$DALFacade->createDALInstance();			//It connects too.
 		$this->SDDMObj					= $DALFacade->getDALInstance();
 	}
-	
 }

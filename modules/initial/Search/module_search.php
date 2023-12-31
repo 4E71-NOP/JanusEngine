@@ -37,19 +37,25 @@ class ModuleSearch {
 	
 			$Content = "";
 			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("connected_group_read_permission") == true ) {
-				$Content .= "<span>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>
-				<form ACTION='index.php?' method='post'>\r".
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_login').
-				$CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_pass').
-				"
-				<input type='hidden' name='formSubmitted'	value='1'>
-				<input type='hidden' name='origin'			value='ModuleSearch'>
-				<input type='hidden' name='arti_ref'		value='".$l."_recherche'>\r
-				<input type='hidden' name='arti_page'		value='1'>\r
+				$Content .= "<span>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>"
+				. $bts->RenderFormObj->renderformHeader("ModuleSearchForm")
+				. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",	"ModuleSearch")
+				. $bts->RenderFormObj->renderHiddenInput("formSubmitted",			"1")
+				. $bts->RenderFormObj->renderHiddenInput("arti_ref",				$l."_recherche")
+				. $bts->RenderFormObj->renderHiddenInput("arti_page",				"1")
+
+				// <form ACTION='index.php?' method='post'>\r".
+				// $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_sw').
+				// $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_l').
+				// $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_login').
+				// $CurrentSetObj->getDataSubEntry('block_HTML', 'post_hidden_user_pass').
+				// "
+				// <input type='hidden' name='formSubmitted'	value='1'>
+				// <input type='hidden' name='origin'			value='ModuleSearch'>
+				// <input type='hidden' name='arti_ref'		value='".$l."_recherche'>\r
+				// <input type='hidden' name='arti_page'		value='1'>\r
 				
-				<table style='width:100%; margin-right:auto; margin-left:auto' >
+				."<table style='width:100%; margin-right:auto; margin-left:auto' >
 				<tr>\r
 				<td>\r
 				<input type='radio' name='searchForm[searchType]'	value='T'>".$bts->I18nTransObj->getI18nTransEntry('radio1')."\r

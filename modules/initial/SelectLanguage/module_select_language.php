@@ -71,13 +71,13 @@ class ModuleSelectLanguage {
 							else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image']; }
 							
 							$Content .= "
-							<td>\r
-							<form method='post' id='FormSelect_".$language_website_[$A]['lang_639_3']."'>\r
-							<input type='hidden' name='formSubmitted'					value='1'>\r
-							<input type='hidden' name='formGenericData[origin]'			value='ModuleSelectLanguage'>\r
-							<input type='hidden' name='formGenericData[modification]'	value='on'>\r
-							<input type='hidden' name='userForm[user_lang]'				value='".$language_website_[$A]['lang_639_3']."'>\r
-							<button style='background-color:#FF00FF00; border-width:0px; background-image: url(".$pv['img_src']."); height:64px; width:64px; background-size: cover;'\r
+							<td>\r"
+							. $bts->RenderFormObj->renderformHeader("FormSelect_".$language_website_[$A]['lang_639_3'])
+							. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"ModuleSelectLanguage")
+							. $bts->RenderFormObj->renderHiddenInput("formGenericData[modification]",	"on")
+							. $bts->RenderFormObj->renderHiddenInput("formSubmitted",					"1")
+							. $bts->RenderFormObj->renderHiddenInput("userForm[user_lang]",				$language_website_[$A]['lang_639_3'])
+							."<button style='background-color:#FF00FF00; border-width:0px; background-image: url(".$pv['img_src']."); height:64px; width:64px; background-size: cover;'\r
 								onMouseOver=\"t.ToolTip('".$language_website_[$A]['lang_original_name']."')\" onMouseOut='t.ToolTip()'>
 							</form>\r
 							</td>";

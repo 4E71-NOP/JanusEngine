@@ -48,20 +48,19 @@ class ModuleAuthentification {
 					$Content .= "<span class='" . $Block."_warning' style='text-align: center;'>". $bts->I18nTransObj->getI18nTransEntry('cnxResult'.$cnxResult) ."</span>"; 
 				}
 	
-				$Content .= "
-				<form ACTION='/' method='post'>\r
-			
-				<table style='width:100%; margin-right: auto; margin-left: auto'>\r
+				$Content .= 
+				$bts->RenderFormObj->renderformHeader('AuthentificationModule')
+				."<table style='width:100%; margin-right: auto; margin-left: auto'>\r
 				<tr>\r<td style='text-align:center;'>".$bts->I18nTransObj->getI18nTransEntry('id')."</td>\r</tr>\r
 				<tr>\r<td style='text-align:center; padding-bottom:8px;'><input type='text' name='authentificationForm[user_login]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
 				<tr>\r<td style='text-align:center;'>".$bts->I18nTransObj->getI18nTransEntry('ps')."</td>\r</tr>\r
 				<tr>\r<td style='text-align:center; padding-bottom:8px;'><input type='password' name='authentificationForm[user_password]' size='16' maxlength='64' value='anonymous'></td>\r</tr>\r
-				</table>\r
-				<input type='hidden' name='formSubmitted'				value='1'>
-				<input type='hidden' name='formGenericData[origin]'		value='ModuleAuthentification'>
-				<input type='hidden' name='formGenericData[action]' 	value='connectionAttempt'>\r
-	
-				<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
+				</table>\r"
+				. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"ModuleAuthentification")
+				. $bts->RenderFormObj->renderHiddenInput("formGenericData[action]",			"connectionAttempt")
+				. $bts->RenderFormObj->renderHiddenInput("formSubmitted",					"1")
+
+				."<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 				<tr>\r
 				<td>\r
 				";

@@ -58,9 +58,9 @@ class ModuleQuickSkin {
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 				
 				if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
-					$Content .= "
-					<form ACTION='/' method='post'>\r
-					<tr>\r<td>\r&nbsp;</td>\r</tr>\r
+					$Content .= 
+					$bts->RenderFormObj->renderformHeader('QuickSkin')
+					."<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 					<tr>\r<td>\r
 					".$bts->I18nTransObj->getI18nTransEntry('txt2')."
 					</td>\r</tr>\r
@@ -95,12 +95,11 @@ class ModuleQuickSkin {
 					$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 					$Content .= "
 					</center>
-					</td>\r</tr>\r
-					<input type='hidden' name='formSubmitted'					value='1'>
-					<input type='hidden' name='formGenericData[origin]'			value='ModuleQuickSkin'>
-					<input type='hidden' name='formGenericData[modification]'	value='on'>
-
-					</form>\r
+					</td>\r</tr>\r"
+					. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"ModuleQuickSkin")
+					. $bts->RenderFormObj->renderHiddenInput("formGenericData[modification]",	"on")
+					. $bts->RenderFormObj->renderHiddenInput("formSubmitted",					"1")
+					."</form>\r
 					<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 
 					<tr>\r<td>\r
