@@ -116,9 +116,7 @@ class BaseToolSet
 	 */
 	public function initSmObj()
 	{
-		error_log("BREAKPOINT");
 		$this->SMObj					= SessionManagement::getInstance();
-		error_log("BREAKPOINT");
 	}
 
 	/**

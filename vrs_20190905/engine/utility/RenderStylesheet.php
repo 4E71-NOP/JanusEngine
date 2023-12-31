@@ -600,7 +600,7 @@ html { width:100%; height:100%;}\r\r
 	private function makeCssSelectorList (&$infos, $block, $type, $id, $item, $css ) {
 		$p = explode( " ", trim($block." ".$infos[$block.$type]['blockList']) ); // trim removes the last space in the string
 		$str = "";
-		foreach ($p as $A) { $str .= ".".$infos['tableName'].$A.$id." ".$item.", ";}
+		foreach ($p as $A) { $str .= ".".$infos['tableName'].$A.$id. ((strlen($item) > 0) ? " ".$item : "") .", ";}
 		$str = substr ( $str , 0 , -2 )." ".$css."\r";
 		return $str;
 	}

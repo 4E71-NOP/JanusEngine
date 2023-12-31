@@ -222,9 +222,13 @@ $T['Content'][$Tab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 
 // $T['Content'][$Tab]['1']['2']['cont'] = "<input type='text' name='formParams1[name]'			size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_name')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 $T['Content'][$Tab]['1']['2']['cont'] = $WebSiteObj->getWebSiteEntry('ws_name');
-$T['Content'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['Content'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
-$T['Content'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+$T['Content'][$Tab]['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[abrege]',	$WebSiteObj->getWebSiteEntry('ws_short'), "", 20);
+$T['Content'][$Tab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',	$WebSiteObj->getWebSiteEntry('ws_title'), "" ,20);
+$T['Content'][$Tab]['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[home]',	$WebSiteObj->getWebSiteEntry('ws_home'), "" ,20);
+
+// $T['Content'][$Tab]['2']['2']['cont'] = "<input type='text' name='formParams1[abrege]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_short')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+// $T['Content'][$Tab]['3']['2']['cont'] = "<input type='text' name='formParams1[title]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_title')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
+// $T['Content'][$Tab]['4']['2']['cont'] = "<input type='text' name='formParams1[home]'	size='20' maxlength='255' value='".$WebSiteObj->getWebSiteEntry('ws_home')."'			class='" . $Block."_t3 " . $Block."_form_1'>\r";
 
 
 // --------------------------------------------------------------------------------------------

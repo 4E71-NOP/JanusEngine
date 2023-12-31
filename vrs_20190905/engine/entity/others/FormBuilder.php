@@ -42,10 +42,10 @@ class FormBuilder {
 			$ptr = &$this->formElements[$A['name']];
 			switch ( $A['type']) {
 				case 'text':
-					$ptr .= $bts->RenderFormObj->renderInputText($A['name'], $A['value'], $A['size'], $A['maxlength'] );
+					$ptr .= $bts->RenderFormObj->renderInputText($A['name'], $A['value'], $A['placeholder'], $A['size'], $A['maxlength'] );
 					break;
 				case 'radio':
-					$ptr .= $bts->RenderFormObj->renderRadioSelection($A['id'], $A['name'], $A['text']);
+					$ptr .= $bts->RenderFormObj->renderRadioSelection($A['name'], $A['value'], $A['text']);
 					break;
 				case 'checkbox':
 					$ptr .= $bts->RenderFormObj->renderCheckbox($A['idAndName'], $A['value'], $A['text'], $A['checked'], $A['disabled'], $A['onclik']);

@@ -52,7 +52,6 @@ class HydrInstall
 		$bts->LMObj->setVectorInternal(false);
 		$bts->LMObj->setVectorSystemLog(true);
 		$bts->CMObj->InitBasicSettings();
-
 		
 		// --------------------------------------------------------------------------------------------
 		//
@@ -73,6 +72,11 @@ class HydrInstall
 		$WebSiteObj->setInstallationInstance();
 		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj);
 
+		// --------------------------------------------------------------------------------------------
+		//
+		// Session management
+		//
+		//
 		$CurrentSetObj->setDataEntry('ws', 'HdrBase');
 
 		$ClassLoaderObj->provisionClass('SessionManagement');

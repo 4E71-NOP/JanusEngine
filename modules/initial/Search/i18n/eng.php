@@ -1,4 +1,5 @@
 <?php 
+$i18n['placeholder'] = "Enter an expression"; 				
 $i18n['txt1'] = "Search";
 $i18n['txt2'] = "Go";
 $i18n['txt10'] = "Not supposed to see it";

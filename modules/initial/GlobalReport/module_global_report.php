@@ -32,6 +32,7 @@ class ModuleGlobalReport {
 			
 			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
 			$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
+			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfServerInfosObj(),	"urrentSetObj->getInstanceOfServerInfosObj");
 			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),"User");
 			$bts->LMObj->logDebug($infos,											"infos");
 			$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
@@ -219,8 +220,13 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		// This will be implemented with "'" at the end of the string 
+		// Reference URL : https://cdnjs.com/libraries/Chart.js
+		// Since 4.0.0 we have to use the UMD version
 		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js' integrity='sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' integrity='sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' integrity='sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==' crossorigin='anonymous' referrerpolicy='no-referrer");
 
 		$log = $bts->LMObj->getStatisticsLog();
 		$stepOne = true;
@@ -546,9 +552,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
 		$Content = array();
-		
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t10l11');
 		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t10l12');
 		

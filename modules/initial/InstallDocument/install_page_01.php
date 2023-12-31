@@ -55,6 +55,7 @@ class InstallPage01 {
 	private $phpSupportEnabled = false;
 	private $phpJavascriptObj = array();
 
+	private $availableSupport = array();
 	public function __construct() {}
 	
 	/**
@@ -122,7 +123,6 @@ class InstallPage01 {
 		$this->personalization($infos, 5);
 		$this->logConfig($infos, 6);
 
-		// echo ($bts->StringFormatObj->print_r_html($this->T) );
 		$Content .= $bts->RenderTablesObj->render($infos, $this->T);
 
 		// --------------------------------------------------------------------------------------------
@@ -243,11 +243,11 @@ class InstallPage01 {
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_PrcRam');
-		$T[$t][$l]['2']['cont'] = "<input type='text' size='2' name='form[memoryLimit]'	value=''>M";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("form[memoryLimit]", "", "",2) . "M";
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_PrcTim');
-		$T[$t][$l]['2']['cont'] = "<input type='text' size='2' name='form[execTimeLimit]'		value=''>s";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("form[execTimeLimit]", "", "",2) . "s";
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig(10,2,2);		
 	}
@@ -276,7 +276,7 @@ class InstallPage01 {
 		unset ($tab_);
 		$tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_dal');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
+		// TODO check if using RenderForm does some good
 		$T[$t][$l]['3']['cont'] = "<select id='form[dal]' name='form[dal]' onChange=\"li.selectMenuBuilder ( 'form[selectedDataBaseType]' , listOfDBSupport[this.value] );\">\r";
 		if ( $this->phpSupportEnabled == true )		{ $T[$t][$l]['3']['cont'] .= "<option value='PHP'		".$tab_['PHP'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_php')."</option>\r"; }
 		if ( $this->pdoSupportEnabled == true )		{ $T[$t][$l]['3']['cont'] .= "<option value='PDO'		".$tab_['PDO'].">".		$bts->I18nTransObj->getI18nTransEntry('msdal_pdo')."</option>\r"; }
@@ -310,34 +310,51 @@ class InstallPage01 {
 		
 		// DB Server
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_server');
-		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[host]' size='20' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('host')."'>";
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputText("form[host]", $bts->CMObj->getConfigurationEntry('host'), "", 20);
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_serverInf')."</span>";
 		$l++;
 		
 		// Prefix
+		$arrInputText1 = array(
+			"id" => "form[dataBaseHostingPrefix]",
+			"name" => "form[dataBaseHostingPrefix]",
+			"size" => 10,
+			"value" => $bts->CMObj->getConfigurationEntry('dataBaseHostingPrefix'),
+			"onkeyup" => "li.insertValue ( this.value , '".$this->FormName."', ['form[dbHostingPrefixCopy_1]', 'form[dbHostingPrefixCopy_2]', 'form[dbHostingPrefixCopy_3]' ] );"
+		);
+
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Db_prefix');
-		$T[$t][$l]['2']['cont'] = "<input type='text' name='form[dataBaseHostingPrefix]' size='10' maxlength='255' value='".$bts->CMObj->getConfigurationEntry('dataBaseHostingPrefix')."' OnKeyup=\"li.insertValue ( this.value , '".$this->FormName."', ['form[dbHostingPrefixCopy_1]', 'form[dbHostingPrefixCopy_2]', 'form[dbHostingPrefixCopy_3]' ] );\">";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1);
 		$T[$t][$l]['3']['cont'] = "";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('Db_prefixInf')."</span>";
 		$l++;
 		
 		// DB name
+		$arrInputText1['id'] = "form[dbHostingPrefixCopy_1]";
+		$arrInputText1['name'] = "form[dbHostingPrefixCopy_1]";
+		$arrInputText1['value'] = "";
+		$arrInputText1['readonly'] = true;
+		$arrInputText1['disable'] = true;
+		$arrInputText1['opkeyup'] = "";
+
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_name');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_1]' size='10' maxlength='255' value=''>";
-		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[dbprefix]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('dbprefix')."'>";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1);
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputText("form[dbprefix]", $bts->CMObj->getConfigurationEntry('dbprefix'), "", 20, 32 );
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_nameInf')."</span>";
 		$l++;
 		
 		// Login
+		$arrInputText1['id'] = "form[dbHostingPrefixCopy_2]";
+		$arrInputText1['name'] = "form[dbHostingPrefixCopy_2]";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_Admlogin');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_2]' size='10' maxlength='255' value=''>";
-		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[dataBaseAdminUser]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_user')."'>";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1);
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputText("form[dataBaseAdminUser]", $bts->CMObj->getConfigurationEntry('admin_user'), "", 20, 32);
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_AdmloginInf')."</span>";
 		$l++;
 		
 		// Password
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_password');
-		$T[$t][$l]['3']['cont'] = "<input type='password' name='form[dataBaseAdminPassword]' id='form[dataBaseAdminPassword]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('admin_password')."'><br>"
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputPassword("form[dataBaseAdminPassword]", $bts->CMObj->getConfigurationEntry('admin_password'), "", 20, 32) . "\r<br>\r"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[dataBaseAdminPassword]').type = 'text';\" onmouseup=\"elm.Gebi('form[dataBaseAdminPassword]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
@@ -354,8 +371,11 @@ class InstallPage01 {
 		$SB['size'] 			= 128;
 		$SB['lastSize']			= 128;
 		
-		$pv['div_cnx_db'] = "<input type='text' readonly disable name='form[TestCnxString]' size='40' maxlength='255' value=''><br>\r";
-		
+		$arrInputText1['id'] = "form[TestCnxString]";
+		$arrInputText1['name'] = "form[TestCnxString]";
+		$arrInputText1['size'] = 40;
+		$pv['div_cnx_db'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1) . "\r<br>\r";
+
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_tstcnx');
 		$T[$t][$l]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
 		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='".$Block;
@@ -488,16 +508,37 @@ class InstallPage01 {
 		$T[$t][$l]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Titlec4');
 		$l++;
 
+
+		$arrInputText1 = array(
+			"id" => "form[tabprefix]",
+			"name" => "form[tabprefix]",
+			"size" => 10,
+			"maxlength" => 32,
+			"value" => $bts->CMObj->getConfigurationEntry('tabprefix'),
+			"onkeyup" => "li.insertValue ( 'Ex: ' + this.value + 'article_config' , '".$this->FormName."', ['form[ExamplePrefix]'] );"
+		);
+
+		$arrInputText2 = array(
+			"id" => "form[ExamplePrefix]",
+			"name" => "form[ExamplePrefix]",
+			"size" => 20,
+			"value" => "",
+			"readonly" => true,
+			"disable" => true,
+		);
+
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_TbPrfx');
-		$T[$t][$l]['2']['cont'] = "<input type='text' name='form[tabprefix]' size='10' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('tabprefix')."' OnKeyup=\"li.insertValue ( 'Ex: ' + this.value + 'article_config' , '".$this->FormName."', ['form[dbHostingPrefixCopy_1]'] );\">";
-		$T[$t][$l]['3']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_1]' size='20' maxlength='255' value=''>";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1);
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText2);
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_TbPrfxInf')."</span>";
 		$GeneratedScriptObj->insertString('JavaScript-Onload' , "li.insertValue ( 'Ex: ".$bts->CMObj->getConfigurationEntry('tabprefix')."article_config' , '".$this->FormName."', ['form[dbHostingPrefixCopy_1]' , 'form[dbHostingPrefixCopy_1]' ] );");
 		$l++;
 
+		$arrInputText2['id'] = "form[dbHostingPrefixCopy_3]";
+		$arrInputText2['name'] = "form[dbHostingPrefixCopy_3]";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_DbUsrN');
-		$T[$t][$l]['2']['cont'] = "<input type='text' readonly disable name='form[dbHostingPrefixCopy_3]' size='10' maxlength='255' value=''>";
-		$T[$t][$l]['3']['cont'] = "<input type='text' name='form[dataBaseUserLogin]' size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_login')."'>";
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText2);
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputText("form[dataBaseUserLogin]", $bts->CMObj->getConfigurationEntry('db_user_login'), "", 20, 32);
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('PER_DbUsrNInf')."</span>";
 		$l++;
 
@@ -512,9 +553,7 @@ class InstallPage01 {
 		$SB['lastSize']			= 128;
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_DbUsrP');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<input type='password' id='form[dataBaseUserPassword]' name='form[dataBaseUserPassword]' size='20' maxlength='32' value='"
-		.$bts->CMObj->getConfigurationEntry('db_user_password')."'>\r<br>\r"
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputPassword("form[dataBaseUserPassword]", $bts->CMObj->getConfigurationEntry('db_user_password'), "", 20, 32) . "\r<br>\r"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[dataBaseUserPassword]').type = 'text';\" onmouseup=\"elm.Gebi('form[dataBaseUserPassword]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
@@ -522,7 +561,6 @@ class InstallPage01 {
 		$l++;
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_UsrRec');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[dataBaseUserRecreate]'>\r
 		<option value='no'>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 		<option value='yes' selected >".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
@@ -532,8 +570,7 @@ class InstallPage01 {
 		$l++;
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_WbUsrP');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
-		$T[$t][$l]['3']['cont'] = "<input type='password' name='form[websiteUserPassword]' id='form[websiteUserPassword]'size='20' maxlength='32' value='".$bts->CMObj->getConfigurationEntry('db_user_password')."'><br>"
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputPassword("form[websiteUserPassword]", $bts->CMObj->getConfigurationEntry('db_user_password'), "", 20, 32) . "\r<br>\r"
 		."<span style='font-size:75%;' onmousedown=\"elm.Gebi('form[websiteUserPassword]').type = 'text';\" onmouseup=\"elm.Gebi('form[websiteUserPassword]').type = 'password';\">"
 		.$bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 		."</span>";
@@ -541,7 +578,6 @@ class InstallPage01 {
 		$l++;
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_MkHtacs');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[creationHtaccess]'>\r
 		<option value='no' selected>".$bts->I18nTransObj->getI18nTransEntry('dbr_n')."</option>\r
 		<option value='yes'>".$bts->I18nTransObj->getI18nTransEntry('dbr_o')."</option>\r
@@ -551,7 +587,6 @@ class InstallPage01 {
 		$l++;
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_Typexe');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l'.$l.'c2');
 		$T[$t][$l]['3']['cont'] = "<select name='form[TypeExec]'>\r
 		<option value='ModuleApache' selected>".$bts->I18nTransObj->getI18nTransEntry('TypeExec1')."</option>\r
 		<option value='CLI'>".$bts->I18nTransObj->getI18nTransEntry('TypeExec2')."</option>\r
@@ -573,8 +608,6 @@ class InstallPage01 {
 
 		$l=1;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_Titlec1');
-		// $T[$t][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c2');
-		// $T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l'.$l.'c3');
 		$l++;
 		
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_db');

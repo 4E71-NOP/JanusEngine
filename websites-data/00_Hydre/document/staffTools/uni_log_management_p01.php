@@ -172,7 +172,8 @@ $T['Content'][$Tab][$lt]['2']['cont'] = "
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
-$T['Content'][$Tab][$lt]['2']['cont'] = "<input type='text' name='lmForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
+$T['Content'][$Tab][$lt]['2']['cont'] = $bts->RenderFormObj->renderInputText("lmForm[nbr_par_page]", $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'), "", 15);
+// ."<input type='text' name='lmForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
 
 // $T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 

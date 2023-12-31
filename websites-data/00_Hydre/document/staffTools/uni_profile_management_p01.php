@@ -242,7 +242,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_upload');
 
 	$T['Content']['1']['1']['2']['cont'] = "<input type='text' name='formParams[login]' value='" . $UserObj->getUserEntry('user_login') . "' size='15' maxlength='255' disabled>";
-	$T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[user_email]'	value='" .	$UserObj->getUserEntry('user_email')	. "' size='30' maxlength='255'>";
+	$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText("formParams[user_email]", $UserObj->getUserEntry('user_email'), "", 30);
+	// $T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[user_email]'	value='" .	$UserObj->getUserEntry('user_email')	. "' size='30' maxlength='255'>";
 
 	if (strlen($PmListTheme['user_avatar_image']) != 1024) {
 		$T['Content']['1']['3']['2']['cont'] = "<img src='" . $PmListTheme['user_avatar_image'] . "' width='48' height='48' alt='[Avatar]'>";
@@ -634,11 +635,11 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit #" . $Tab . ". <br>\r
 		<br>\r
 		<a>Exemple de lien simple</a><br>\r
-		<br>\r
-		<input type='text' name='PmExample01' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255' ><br>\r
-		<br>\r
-		<input type='text' name='PmExample02' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
-		<br>\r
+		<br>\r"
+		. $bts->RenderFormObj->renderInputText("PmExample01", "Lorem ipsum dolor sit amet, consectetur adipiscing elit", "", 25)
+		."<br>\r<br>\r"
+		. $bts->RenderFormObj->renderInputText("PmExample02", "Lorem ipsum dolor sit amet, consectetur adipiscing elit", "", 25)
+		."<br>\r
 		</p>
 
 		<table class='" . $PmBlock . _CLASS_TABLE_STD_ . "'>\r
@@ -659,10 +660,12 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		<tr>\r
 		<td colspan='4'>\r
 		<a>Lorem ipsum dolor sit amet, consectetur adipiscing elit</a><br>\r
-		<br>\r
-		<input type='text' name='PmExample03' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
-		<br>\r
-		<input type='text' name='PmExample04' value='Lorem ipsum dolor sit amet, consectetur adipiscing elit' size='25' maxlength='255'><br>\r
+		<br>\r"
+		. $bts->RenderFormObj->renderInputText("PmExample03", "Lorem ipsum dolor sit amet", "", 25)
+		."<br>\r
+		<br>\r"
+		. $bts->RenderFormObj->renderInputText("PmExample04", "Lorem ipsum dolor sit amet", "", 25)
+		."<br>\r
 		</td>\r
 		</tr>\r
 

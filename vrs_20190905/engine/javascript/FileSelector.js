@@ -54,7 +54,8 @@ class FileSelector {
 		elm.Gebi('FileSelectorCaption').style.display = (d.displayType == 'fileList') ? 'block':'none'; 
 		
 //		l.Log[this.dbgFS](data);
-		let URLvar = "http://" + document.domain + RequestURI
+// let URLvar = "http://" + document.domain + RequestURI
+		let URLvar = "http://" + location.hostname
 		+"/fs.php?idx="+d.idx
 		+"&mode="+d.selectionMode
 		+"&formName="+d.formName

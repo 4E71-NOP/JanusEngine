@@ -1,4 +1,5 @@
 <?php
+$i18n['placeholder'] = "Entrez votre recherche"; 				
 $i18n['txt1'] = "Rechercher:"; 				
 $i18n['txt2'] = "Valider"; 					
 $i18n['txt10'] = "Pas suppos&eacute; voir ca";
