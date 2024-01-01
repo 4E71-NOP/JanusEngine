@@ -83,6 +83,7 @@ class LogManagement {
 		}
 		if ( $this->vectorSystemLog == true && $logLevel <= $this->vectorSystemLogLevel ) {
 			error_log ( $log['level']."<=".$this->vectorInternalLevel."; InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] );
+			$this->msgLogIdx ++;
 		}
 		error_reporting(DEFAULT_ERROR_REPORTING);
 	}

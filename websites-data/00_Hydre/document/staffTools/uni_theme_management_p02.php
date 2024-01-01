@@ -285,6 +285,7 @@ $FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConf
 	"/media/theme/",
 	"t5l1c2",
 );
+$FileSelectorConfig['selectionMode'] = "directory";
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);

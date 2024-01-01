@@ -39,6 +39,9 @@ class FileSelectorRender
 	 */
 	public function render()
 	{
+		session_name("HydrWebsiteSessionId");
+		session_start();
+
 		$application = 'FileSelector';
 		include("current/define.php");
 
@@ -178,7 +181,7 @@ class FileSelectorRender
 			if ($f != "." && $f != "..") {
 				$currentFile = $pathToExplore . "/" . $f;
 				if (is_dir($currentFile)) {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a directory."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " exploring : " . $currentFile . " is a directory."));
 					$fileList['1'][$f]['name'] = $f;
 					$fileList['1'][$f]['target'] = str_replace($entryPoint, "", $currentFile);
 				} else {
@@ -186,15 +189,15 @@ class FileSelectorRender
 						$fileList['0'][$f]['name'] = $f;
 						$linkTargetPath = $pathToExplore . "/" . readlink($currentFile);
 						if (file_exists($linkTargetPath)) {
-							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a valid link (" . $linkTargetPath . ")."));
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " exploring : " . $currentFile . " is a valid link (" . $linkTargetPath . ")."));
 							$fileList['0'][$f]['type'] = 1;
 						} else {
-							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a bad link.(" . $linkTargetPath . ")."));
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " exploring : " . $currentFile . " is a bad link.(" . $linkTargetPath . ")."));
 							$fileList['0'][$f]['type'] = 2;
 						}
 						$fileList['0'][$f]['target'] = str_replace($entryPoint, "", readlink($currentFile));
 					} else {
-						$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "exploring : " . $currentFile . " is a regular file."));
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " exploring : " . $currentFile . " is a regular file."));
 						$fileList['0'][$f]['name'] = $f;
 						$fileList['0'][$f]['type'] = 0;
 						$fileList['0'][$f]['target'] = str_replace($entryPoint, "", $currentFile);
