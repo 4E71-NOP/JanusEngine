@@ -696,11 +696,7 @@ class Hydr
 				break;
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - " . $A));
-
-
-
 		$bts->LMObj->restoreVectorSystemLogLevel();
-
 
 		switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') . $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')) {
 			case "AdminDashboardUserProfileForm":

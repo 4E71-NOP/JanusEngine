@@ -146,7 +146,7 @@ class ClassLoader {
 		if ( isset ( $this->classTab[$ClassName])) {
 			if ( !class_exists($ClassName) ) { 
 				if ( file_exists($this->classTab[$ClassName])) { 
- 					error_log("ClassLoader::provisionClass : including " . $this->classTab[$ClassName]);
+ 					// error_log("ClassLoader::provisionClass : including " . $this->classTab[$ClassName]);
 					include ($this->classTab[$ClassName]); 
 				}
 				else { 
@@ -155,7 +155,7 @@ class ClassLoader {
 			}
 		}
 		else { 
-			error_log("ClassLoader::provisionClass : " . $ClassName ." doesn't exist.");
+			// error_log("ClassLoader::provisionClass : " . $ClassName ." doesn't exist.");
 			$ret = "ERR"; }
 		return $ret;
 	}

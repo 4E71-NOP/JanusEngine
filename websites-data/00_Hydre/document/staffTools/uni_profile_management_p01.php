@@ -32,21 +32,17 @@ $bts->RequestDataObj->setRequestData(
 	'formGenericData',
 	array(
 		'origin'		=> 'profileManagement',
-		'section'		=> 'BrowseThemeForm',
-		// 'creation'		=> 'on',
+		'section'		=> 'browseTheme',
 		'modification'	=> 'on',
-		// 'deletion'		=> 'on',
 		'mode'			=> 'edit',
-		//				'mode'			=> 'create',
-		//				'mode'			=> 'delete',
 	)
 );
 
 $bts->RequestDataObj->setRequestData(
 	'browseTheme',
 	array(
-		"theme_id"			=>	3748884111131853825,
-		"theme_name"		=>	"hydr_magma_01",
+		"theme_id"			=>	1952994312284275436,
+		"theme_name"		=>	"hydr_tronic_01",
 	)
 );
 
@@ -421,18 +417,19 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 	unset($T);
 	$T = array();
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')) == 0) {
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "No requested theme in the form, using the main theme."));
+	$tmpStr = $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name');
+	if (strlen($tmpStr) == 0) {
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No requested theme in the form, using the main theme."));
 		$bts->RequestDataObj->setRequestDataSubEntry('browseTheme', 'theme_name', $ThemeDataObj->getThemeDataEntry('theme_name'));
 		$bts->RequestDataObj->setRequestData(
 			'browseTheme',
 			array(
-				"SelectedThemeId"	=>	$ThemeDataObj->getThemeDataEntry('theme_id'),
-				"SelectedTheme"		=>	$ThemeDataObj->getThemeDataEntry('theme_name'),
+				"theme_id"		=>	$ThemeDataObj->getThemeDataEntry('theme_id'),
+				"theme_name"	=>	$ThemeDataObj->getThemeDataEntry('theme_name'),
 			)
 		);
 	}
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Requested theme N=`" . $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') . "`"));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Requested theme N=`" . $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') . "`"));
 
 	$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('text_choix_theme') . "</p>\r";
 
@@ -441,7 +438,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$PmThemeDataObj = new ThemeData();
 
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "get theme data with name :" . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] . " and id " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] . "."));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " get theme data with name :" . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] . " and id " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] . "."));
 	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setDecorationListFromDB();
@@ -571,9 +568,9 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 		if ($Tab == 1) {
 			$T['Content'][$Tab]['1']['1']['cont'] .=
-				$bts->RenderFormObj->renderformHeader('ThemeSelection')
+				$bts->RenderFormObj->renderformHeader('ThemeSelectionForm')
 				. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"profileManagement")
-				. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]",		"BrowseThemeForm")
+				. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]",		"browseTheme")
 				. $bts->RenderFormObj->renderHiddenInput("formGenericData[modification]",	"on")
 				. $bts->RenderFormObj->renderHiddenInput("formEntity",						"User")
 				. $bts->RenderFormObj->renderHiddenInput("formTarget[name]",				$UserObj->getUserEntry('user_login'))
