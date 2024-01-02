@@ -62,7 +62,7 @@ class ModuleAuthentification
 					. "</td>\r</tr>\r
 				<tr>\r<td style='text-align:center;'>" . $bts->I18nTransObj->getI18nTransEntry('ps') . "</td>\r</tr>\r
 				<tr>\r<td style='text-align:center; padding-bottom:8px;'>"
-					. $bts->RenderFormObj->renderInputText("authentificationForm[user_password]", "", "Password", 16)
+					. $bts->RenderFormObj->renderInputPassword("authentificationForm[user_password]", "", "Password", 16)
 					. "</td>\r</tr>\r
 				</table>\r"
 					. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"ModuleAuthentification")
