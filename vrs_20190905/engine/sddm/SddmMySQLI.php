@@ -141,7 +141,7 @@ class SddmMySQLI {
 	}
 
 	/**
-	 * Returns the Nth row from a result. 
+	 * Returns a row from a the data which is produced by a query. 
 	 * @param mysqli_result $data
 	 * @return Array
 	 */

@@ -40,9 +40,10 @@
 // $_REQUEST['CC']['fichier'] = "";
 // $_REQUEST['requete_insert'] = "show user";
 
-$bts->RequestDataObj->setRequestData('formCommand',
+$bts->RequestDataObj->setRequestData('formConsole',
 array(
-	'command'		=> 'show user',
+	"CLiContent"		=> "show user",
+	"CLiContentResult"	=> array("result 01", "result 02", "result 03", "result 04", "result 05"),
 	)
 );
 
@@ -136,51 +137,49 @@ $T = array();
 $BlockT = $infos['blockT'];
 
 $T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l1');
-$T['Content']['1']['2']['1']['cont'] = "<br>\r".$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent')."<br>\r&nbsp;";
+$T['Content']['1']['2']['1']['cont'] = "<br>\r>>> ".$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent')."<br>\r&nbsp;";
 $T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l3');
-$T['Content']['1']['4']['1']['cont'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult');
+$T['Content']['1']['4']['1']['cont'] = $bts->StringFormatObj->arrayToHtmlTable($bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult'), $infos);
 $T['Content']['1']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_l5');
-$T['Content']['1']['6']['1']['cont'] = "<textarea name='formConsole[CLiContent]' style='width:100%' rows='6'></textarea>";
+$T['Content']['1']['6']['1']['cont'] = "<textarea name='formConsole[CLiContent]' style='width:90%' rows='6'></textarea>";
 $T['Content']['1']['6']['1']['style'] = "text-align:center;";
 
-$SB = array(
-	"id"				=> "submitButton",
-	"type"				=> "submit",
-	"initialStyle"		=> $Block."_t3 ".$Block."_submit_s2_n",
-	"hoverStyle"		=> $Block."_t3 ".$Block."_submit_s2_h",
-	"onclick"			=> "",
-	"message"			=> $bts->I18nTransObj->getI18nTransEntry('btn1'),
-	"mode"				=> 0,
-	"size" 				=> 0,
-	"lastSize"			=> 0,
+$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+	$infos,
+	"submit",
+	$bts->I18nTransObj->getI18nTransEntry('btn1'),
+	0,
+	"T01submitButton",
+	2,
+	2,
+	"",
+	0
 );
+
 $T['Content']['1']['7']['1']['cont'] .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
 $T['ContentCfg']['tabs']['1']['NbrOfLines'] = 7;	$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 1;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 
 // --------------------------------------------------------------------------------------------
 //	Tab 02
-$FileSelectorConfig = array(
-	"width"				=> 80,	//in %
-	"height"			=> 50,	//in %
-	"formName"			=> "formConsole",
-	"formTargetId"		=> "formConsole[inputFile]",
-	"formInputSize"		=> 60 ,
-	"formInputVal"		=> $formInputFile,
-	"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory')."/document",
-	"restrictTo"		=> "websites-data",
-	"strRemove"			=> "",
-	"strAdd"			=> "../",
-	"selectionMode"		=> "file",
-	"displayType"		=> "fileList",
-	"buttonId"			=> "buttonCommandConsole",
-	"case"				=> 1,
-	"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+	"formConsole",
+	"formConsole[inputFile]",
+	60,
+	$formInputFile,
+	$WebSiteObj->getWebSiteEntry('ws_directory')."/document",
+	"websites-data",
+	"buttonCommandConsole",
 );
+$FileSelectorConfig['strRemove'] = "";
+$FileSelectorConfig['strAdd'] = "../";
+$FileSelectorConfig['case'] = 1;
+
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
 
+$SB['id'] = "T02submitButton";
 $T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l1');
 $T['Content']['2']['2']['1']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 $T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2_l3');
@@ -252,7 +251,7 @@ $T['ContentCfg']['tabs'] = array(
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 $Content .= 
-$bts->RenderFormObj->renderformHeader('documentForm')
+$bts->RenderFormObj->renderformHeader('ConsoleCommandForm')
 .$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"CommandConsole" )

@@ -361,9 +361,30 @@ class CommandConsole {
 		if ( is_array($CCL['sql']) ) {
 			foreach ( $CCL['sql'] as $Q ) {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query `".$Q."`"));
-				$bts->SDDMObj->query($Q);
-				// *** Post query processing - AdminDashBoard CLI
-				// Mainly storing the results into an array for later processing
+
+				// If $CCL['command'] is a 'show' we execute the query and load result in a specific part of the form object
+				switch (strtolower($CCL['init']['cmd'])) {
+					case "show":
+						$dbquery = $bts->SDDMObj->query($Q);
+						if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+							$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data on show command."));
+							$tabTmp = array();
+							while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+								foreach ( $dbp as $A => $B ) { 
+									$tabTmp[$A] = $B;
+								}
+							}
+							$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", $tabTmp);
+						}
+						break;
+
+						default:
+							$bts->SDDMObj->query($Q);
+						// *** Post query processing - AdminDashBoard CLI
+						// Mainly storing the results into an array for later processing
+
+						break;
+				}
 				self::$report['executionPerformed']++;
 			}
 		}

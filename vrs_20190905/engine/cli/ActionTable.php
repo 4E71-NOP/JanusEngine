@@ -309,7 +309,105 @@ self::$ActionTable['set']['variable']		= function (&$a) {
 //--------------------------------------------------------------------------------
 //	Show
 //--------------------------------------------------------------------------------
-self::$ActionTable['show']['articles']	= function (&$a) { };
+self::$ActionTable['show']['articles']	= function (&$a) {
+	return array (
+		"SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, mnu.fk_lang_id, dl.deadline_name, dl.deadline_title, dl.deadline_state FROM"
+		.$a['sqlTables']['article'] . " art,"
+		.$a['sqlTables']['menu'] . " mnu,"
+		.$a['sqlTables']['deadline'] . " dl"
+		."WHERE mnu.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND art.arti_ref = mnu.fk_arti_ref "
+		."AND art.fk_deadline_id = dl.deadline_id "
+		."AND art.fk_ws_id = dl.fk_ws_id "
+		."AND dl.fk_ws_id = mnu.fk_ws_id "
+		."AND arti_page = 1 "
+		."AND mnu.menu_state = '1' "
+		."AND mnu.menu_type IN ('1', '0') "
+		."ORDER BY art.arti_ref, art.arti_page;"
+	);
+ };
+
+
+ self::$ActionTable['show']['deadlines']	= function (&$a) {
+	return array (
+		"SELECT dl.* FROM"
+		.$a['sqlTables']['article'] . " dl "
+		."WHERE dl.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."ORDER BY dl.deadline_name;"
+	);
+};
+
+self::$ActionTable['show']['decorations']	= function (&$a) {
+	return array (
+		"SELECT d.* FROM "
+		.$a['sqlTables']['decoration'] . " d "
+		."ORDER BY d.deco_name;"
+	);
+};
+
+self::$ActionTable['show']['documents']	= function (&$a) {
+	return array (
+		"SELECT doc.docu_id, doc.docu_name, doc.docu_type, shr.share_modification FROM"
+		.$a['sqlTables']['document'] . " doc, "
+		.$a['sqlTables']['document_share'] . " shr "
+		."WHERE shr.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND shr.fk_docu_id = doc.docu_id "
+		."AND doc.docu_origin = '".$a['Context']['ws_id']. "' "
+		."ORDER BY doc.docu_name;"
+	);
+};
+
+self::$ActionTable['show']['groups']	= function (&$a) { 
+	return array (
+		"SELECT grp.group_name FROM "
+		.$a['sqlTables']['group'] . " grp,"
+		.$a['sqlTables']['group_website']." wg"
+		."WHERE wg.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND grp.group_id = wg.fk_group_id "
+		."AND grp.group_name != 'Server_owner' "
+		."ORDER BY grp.group_name;"
+	);
+};
+
+self::$ActionTable['show']['keywords']	= function (&$a) {
+	return array (
+		"SELECT kw.* FROM "
+		.$a['sqlTables']['keyword'] . " kw "
+		."WHERE kw.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND kw.keyword_state = '1' "
+		."ORDER BY kw.keyword_name;"
+	);
+};
+
+self::$ActionTable['show']['menus']	= function (&$a) {
+	return array (
+		"SELECT m.* FROM "
+		.$a['sqlTables']['menu'] . " m, "
+		.$a['sqlTables']['language_website'] . " lw "
+		."WHERE m.menu_type IN (0, 1) "
+		."AND m.menu_state = '1' "
+		."AND m.fk_lang_id IN (38, 48) "
+		."AND m.fk_lang_id = lw.fk_lang_id "
+		."AND lw.fk_ws_id = m.fk_ws_id "
+		."AND m.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position ;"
+	);
+};
+
+self::$ActionTable['show']['modules']	= function (&$a) {
+	return array (
+		"SELECT m.*, p.perm_name FROM "
+		.$a['sqlTables']['module'] . " m , "
+		.$a['sqlTables']['module_website'] . " mw, "
+		.$a['sqlTables']['permission'] . " p "
+		."WHERE mw.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND m.module_id = mw.fk_module_id "
+		."AND m.fk_perm_id = p.perm_id "
+		."ORDER BY m.module_name, mw.module_position;"
+	);
+};
+
+
 self::$ActionTable['show']['users']		= function (&$a) { 
 	return array (
 		"SELECT * FROM "
@@ -324,6 +422,13 @@ self::$ActionTable['show']['users']		= function (&$a) {
 	);
 };
 
+self::$ActionTable['show']['websites']	= function (&$a) {
+	return array (
+		"SELECT ws_id, ws_name, ws_directory FROM "
+		.$a['sqlTables']['website']." "
+		."ORDER BY ws_id;"
+	);
+};
 
 //--------------------------------------------------------------------------------
 //	Share

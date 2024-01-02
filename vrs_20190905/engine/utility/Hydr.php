@@ -677,15 +677,22 @@ class Hydr
 		}
 		switch ($bts->CMObj->getConfigurationSubEntry('commandLineEngine', 'state')) {
 			case "enabled":
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Commande console                                                               |"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
 				foreach ($Script as $A) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`" . $A . "`)"));
 					$CommandConsoleObj->executeCommand($A);
 
-					// We have to reload website and user in case of one of them was updated was updated.
+					// We have to reload website and user in case of one of them was updated.
 					$WebSiteObj->getDataFromDBUsingShort();
-					$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionEntry('user_login'), $WebSiteObj);
+					$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'user_login'), $WebSiteObj);
+					
 					$this->languageSelection();
 				}
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Fin Commande console                                                           |"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
 				break;
 			case "disabled":
 			default:

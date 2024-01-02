@@ -842,10 +842,19 @@ self::$PreRequisiteTable['update']['website']['columns']			= array(
 		array ( "v" => "ma_diff",		"t" => "ws_ma_diff"),
 );
 
-self::$PreRequisiteTable['show']['users'] = array();		// Empty array for 'show' commands
-
-
-
+//--------------------------------------------------------------------------------
+//	Update
+//--------------------------------------------------------------------------------
+self::$PreRequisiteTable['show']['articles']	= &self::$PreRequisiteTable['add']['article'];		// Empty array for 'show' commands
+self::$PreRequisiteTable['show']['deadlines']	= &self::$PreRequisiteTable['add']['deadline'];
+self::$PreRequisiteTable['show']['decorations']	= &self::$PreRequisiteTable['add']['decoration'];
+self::$PreRequisiteTable['show']['documents']	= &self::$PreRequisiteTable['add']['document'];
+self::$PreRequisiteTable['show']['groups']		= &self::$PreRequisiteTable['add']['group'];	
+self::$PreRequisiteTable['show']['keywords']	= &self::$PreRequisiteTable['add']['keyword'];	
+self::$PreRequisiteTable['show']['menus']		= &self::$PreRequisiteTable['add']['menu'];	
+self::$PreRequisiteTable['show']['modules']		= &self::$PreRequisiteTable['add']['module'];	
+self::$PreRequisiteTable['show']['users']		= &self::$PreRequisiteTable['add']['user'];	
+self::$PreRequisiteTable['show']['websites']	= &self::$PreRequisiteTable['add']['website'];	
 
 
 ?>
