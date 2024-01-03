@@ -34,7 +34,7 @@ t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'fon
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				
 							
-t01_tr_bg_even_col	'AADAFF'						
+t01_tr_bg_even_col	'AADAFF'	t01_td_special	'padding:5px;'				
 t01_tr_bg_hover_col	'ACEDD4'						
 							
 		t01_legend_bg_col	'FFFFE0'				
@@ -92,8 +92,4 @@ icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_noti
 transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						
-
-page_selector			"display:inline-block; background-color:#80C0FF80; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
-page_selector_highlight	"display:inline-block; background-color:#FFE00080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
-
 ;							

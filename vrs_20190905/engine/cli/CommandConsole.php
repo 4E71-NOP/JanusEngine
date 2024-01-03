@@ -366,15 +366,26 @@ class CommandConsole {
 				switch (strtolower($CCL['init']['cmd'])) {
 					case "show":
 						$dbquery = $bts->SDDMObj->query($Q);
-						if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-							$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data on show command."));
-							$tabTmp = array();
-							while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-								foreach ( $dbp as $A => $B ) { 
-									$tabTmp[$A] = $B;
+						if ($bts->SDDMObj->getErrno() == 0 ) {
+							if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
+								$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data on show command."));
+								$tabTmp = array();
+								$i = 1;
+								while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+									foreach ( $dbp as $A => $B ) { $tabTmp[$i][$A] = $B; }
+									$i++;
 								}
+								$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", $tabTmp);
 							}
-							$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", $tabTmp);
+						} else {
+							$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", 
+								array( 
+									array(
+										"ErrNo" => $bts->SDDMObj->getErrno(),
+										"ErrMsg" => $bts->SDDMObj->getError(),
+									) 
+								)	
+							);	
 						}
 						break;
 

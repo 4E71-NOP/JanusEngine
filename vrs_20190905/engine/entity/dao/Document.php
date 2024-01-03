@@ -13,6 +13,7 @@
 /* Hydre-licence-fin */
 class Document extends Entity{
 	private $Document = array ();
+	private $Decoration = array();
 	
 	//@formatter:off
 	private $columns = array(

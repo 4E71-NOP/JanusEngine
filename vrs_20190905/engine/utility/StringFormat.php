@@ -303,7 +303,7 @@ class StringFormat
 	}
 
 	/**
-	 * Return a string describing an array in canonical form.
+	 * Returns the HTML code of an array
 	 * @param array $data
 	 */
 	public function arrayToHtmlTable($data, $infos)
@@ -312,11 +312,23 @@ class StringFormat
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName() . $infos['block'];
 		$str = "Empty result";
 
+		$doHeader = true;
 		if (is_array($data)) {
-			$str = "<table class='" . $Block . _CLASS_TABLE01_ . "'>\r";
+			$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
 
-			foreach ($data as $A => $B) {
-				$str .= "<tr><td>" . $A . "</td><td>" . $B . "</td></tr>\r";
+			if ($doHeader == true) {
+				$tmpCol = reset($data);
+				foreach ($tmpCol as $A => $B ) { $str .= "<td>" . $A . "</td>\r"; }
+				$doHeader = false;
+			}
+
+			reset($data);
+			foreach ($data as $tmpRecord) {
+				$str .= "<tr>\r";
+				foreach ($tmpRecord as $A => $B) {
+					$str .= "<td>" . $B . "</td>\r";
+				}
+				$str .= "</tr>\r";
 			}
 			$str .= "</table>\r";
 		}

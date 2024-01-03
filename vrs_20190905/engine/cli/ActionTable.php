@@ -311,10 +311,20 @@ self::$ActionTable['set']['variable']		= function (&$a) {
 //--------------------------------------------------------------------------------
 self::$ActionTable['show']['articles']	= function (&$a) {
 	return array (
-		"SELECT art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, mnu.fk_lang_id, dl.deadline_name, dl.deadline_title, dl.deadline_state FROM"
-		.$a['sqlTables']['article'] . " art,"
-		.$a['sqlTables']['menu'] . " mnu,"
-		.$a['sqlTables']['deadline'] . " dl"
+		"SELECT "
+		."art.arti_ref AS 'Ref', "
+		."art.arti_id AS Id, "
+		."art.arti_name AS Name, "
+		."art.arti_title AS 'Title', "
+		."art.arti_page AS 'Page', "
+		."mnu.fk_lang_id AS 'Lang', "
+		."dl.deadline_name AS 'Deadline', "
+		."dl.deadline_title AS 'DL Title', "
+		."dl.deadline_state AS 'DL State' "
+		."FROM "
+		.$a['sqlTables']['article'] . " art, "
+		.$a['sqlTables']['menu'] . " mnu, "
+		.$a['sqlTables']['deadline'] . " dl "
 		."WHERE mnu.fk_ws_id = '".$a['Context']['ws_id']. "' "
 		."AND art.arti_ref = mnu.fk_arti_ref "
 		."AND art.fk_deadline_id = dl.deadline_id "
@@ -323,15 +333,21 @@ self::$ActionTable['show']['articles']	= function (&$a) {
 		."AND arti_page = 1 "
 		."AND mnu.menu_state = '1' "
 		."AND mnu.menu_type IN ('1', '0') "
-		."ORDER BY art.arti_ref, art.arti_page;"
+		."ORDER BY art.arti_ref, art.arti_page"
 	);
  };
 
 
  self::$ActionTable['show']['deadlines']	= function (&$a) {
 	return array (
-		"SELECT dl.* FROM"
-		.$a['sqlTables']['article'] . " dl "
+		"SELECT "
+		."deadline_name AS 'Name', "
+		."deadline_title AS 'Title', "
+		."deadline_state AS 'State', "
+		."FROM_UNIXTIME(deadline_creation_date) AS 'Creation', "
+		."FROM_UNIXTIME(deadline_end_date) AS 'End' "
+		."FROM "
+		.$a['sqlTables']['deadline'] . " dl "
 		."WHERE dl.fk_ws_id = '".$a['Context']['ws_id']. "' "
 		."ORDER BY dl.deadline_name;"
 	);
@@ -339,7 +355,11 @@ self::$ActionTable['show']['articles']	= function (&$a) {
 
 self::$ActionTable['show']['decorations']	= function (&$a) {
 	return array (
-		"SELECT d.* FROM "
+		"SELECT "
+		."deco_name AS 'Name', "
+		."deco_state AS 'State', "
+		."deco_type AS 'Type' "
+		."FROM "
 		.$a['sqlTables']['decoration'] . " d "
 		."ORDER BY d.deco_name;"
 	);
@@ -347,21 +367,34 @@ self::$ActionTable['show']['decorations']	= function (&$a) {
 
 self::$ActionTable['show']['documents']	= function (&$a) {
 	return array (
-		"SELECT doc.docu_id, doc.docu_name, doc.docu_type, shr.share_modification FROM"
-		.$a['sqlTables']['document'] . " doc, "
-		.$a['sqlTables']['document_share'] . " shr "
+		"SELECT "
+		."doc.docu_name AS 'Name', "
+		."doc.docu_type AS 'Type', "
+		."ws.ws_name AS 'Origin', "
+		."shr.share_modification 'Modifiable', "
+		."(SELECT u1.user_name FROM Ht_user u1 WHERE u1.user_id = doc.docu_creator) AS 'Creator', "
+		."(SELECT u2.user_name FROM Ht_user u2 WHERE u2.user_id = doc.docu_validator) AS 'Validator' "
+		."FROM "
+		.$a['sqlTables']['document']." doc, "
+		.$a['sqlTables']['document_share']." shr, "
+		.$a['sqlTables']['website']." ws "
 		."WHERE shr.fk_ws_id = '".$a['Context']['ws_id']. "' "
+		."AND ws.ws_id = '".$a['Context']['ws_id']. "' "
 		."AND shr.fk_docu_id = doc.docu_id "
 		."AND doc.docu_origin = '".$a['Context']['ws_id']. "' "
-		."ORDER BY doc.docu_name;"
+		."ORDER BY doc.docu_name"
 	);
 };
 
 self::$ActionTable['show']['groups']	= function (&$a) { 
 	return array (
-		"SELECT grp.group_name FROM "
-		.$a['sqlTables']['group'] . " grp,"
-		.$a['sqlTables']['group_website']." wg"
+		"SELECT "
+		."grp.group_name AS 'Name', "
+		."grp.group_title 'Title', "
+		."grp.group_desc 'Description' "
+		."FROM "
+		.$a['sqlTables']['group'] . " grp, "
+		.$a['sqlTables']['group_website']." wg "
 		."WHERE wg.fk_ws_id = '".$a['Context']['ws_id']. "' "
 		."AND grp.group_id = wg.fk_group_id "
 		."AND grp.group_name != 'Server_owner' "
@@ -371,32 +404,67 @@ self::$ActionTable['show']['groups']	= function (&$a) {
 
 self::$ActionTable['show']['keywords']	= function (&$a) {
 	return array (
-		"SELECT kw.* FROM "
-		.$a['sqlTables']['keyword'] . " kw "
+		"SELECT "
+		."ws.ws_name AS 'Website', "
+		."art.arti_name AS 'Article', "
+		."kw.keyword_name AS 'Name', "
+		."kw.keyword_string AS 'Needle', "
+		."kw.keyword_count AS 'Count', "
+		."kw.keyword_type AS 'Type', "
+		."kw.keyword_state AS 'State' "
+		."FROM "
+		.$a['sqlTables']['keyword'] . " kw, "
+		.$a['sqlTables']['article'] . " art, "
+		.$a['sqlTables']['website'] . " ws "
 		."WHERE kw.fk_ws_id = '".$a['Context']['ws_id']. "' "
 		."AND kw.keyword_state = '1' "
-		."ORDER BY kw.keyword_name;"
+		."AND kw.fk_arti_id = art.arti_id "
+		."AND kw.fk_ws_id = ws.ws_id "
+		."ORDER BY kw.keyword_name"
 	);
 };
 
 self::$ActionTable['show']['menus']	= function (&$a) {
 	return array (
-		"SELECT m.* FROM "
+		"SELECT "
+		."m.menu_name AS 'Name', "
+		."m.menu_title AS 'Title', "
+		."m.menu_desc AS 'Desc', "
+		."dl.deadline_name AS 'Deadline', "
+		."(SELECT m1.menu_name FROM Hdr.Ht_menu m1 WHERE m1.menu_id = m.menu_parent) AS 'Parent', "
+		."m.menu_position AS 'Pos', "
+		."perm.perm_name AS 'Permission', "
+		."m.fk_arti_slug AS 'Slug', "
+		."m.fk_arti_ref AS 'Ref article', "
+		."CONCAT(lang.lang_original_name, ' (', lang.lang_639_3, ')') AS 'Language' "
+		."FROM "
 		.$a['sqlTables']['menu'] . " m, "
-		.$a['sqlTables']['language_website'] . " lw "
+		.$a['sqlTables']['language_website'] . " lw, "
+		.$a['sqlTables']['language'] . " lang, "
+		.$a['sqlTables']['deadline'] . " dl, "
+		.$a['sqlTables']['permission'] . " perm "
 		."WHERE m.menu_type IN (0, 1) "
 		."AND m.menu_state = '1' "
-		."AND m.fk_lang_id IN (38, 48) "
 		."AND m.fk_lang_id = lw.fk_lang_id "
 		."AND lw.fk_ws_id = m.fk_ws_id "
+		."AND lw.fk_lang_id = lang.lang_id "
+		."AND m.fk_deadline_id = dl.deadline_id "
+		."AND m.fk_perm_id = perm.perm_id "
 		."AND m.fk_ws_id = '".$a['Context']['ws_id']. "' "
-		."ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position ;"
+		."ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position "
 	);
 };
 
 self::$ActionTable['show']['modules']	= function (&$a) {
 	return array (
-		"SELECT m.*, p.perm_name FROM "
+		"SELECT "
+		."m.module_name AS 'Name', "
+		."m.module_title AS 'Title', "
+		."m.module_directory AS 'Dir', "
+		."m.module_file AS 'File', "
+		."m.module_desc AS 'Desc', "
+		."p.perm_name AS 'Permission'"
+		."FROM "
 		.$a['sqlTables']['module'] . " m , "
 		.$a['sqlTables']['module_website'] . " mw, "
 		.$a['sqlTables']['permission'] . " p "
@@ -408,23 +476,34 @@ self::$ActionTable['show']['modules']	= function (&$a) {
 };
 
 
+
 self::$ActionTable['show']['users']		= function (&$a) { 
 	return array (
-		"SELECT * FROM "
+		"SELECT "
+		."usr.user_name AS 'Name', "
+		."usr.user_login AS 'Login', "
+		."FROM_UNIXTIME(usr.user_subscription_date) AS 'Subscription', "
+		."usr.user_status AS 'Statut', "
+		."usr.user_perso_name AS 'Name', "
+		."FROM_UNIXTIME(usr.user_last_visit) AS 'Last visit', "
+		."usr.user_last_ip AS 'Last IP' "
+		."FROM "
 		.$a['sqlTables']['user']." usr," 
 		.$a['sqlTables']['group_user']." gu," 
 		.$a['sqlTables']['group_website']." gw " 
 		."WHERE gw.fk_ws_id = '".$a['Context']['ws_id']. "' "
 		."AND gw.fk_group_id = gu.fk_group_id "
 		."AND gu.fk_user_id = usr.user_id "
-		."GROUP BY usr.user_id "
-		.";"
+		."GROUP BY usr.user_id"
 	);
 };
 
 self::$ActionTable['show']['websites']	= function (&$a) {
 	return array (
-		"SELECT ws_id, ws_name, ws_directory FROM "
+		"SELECT ".
+		"ws_name AS 'Name', "
+		."ws_directory AS 'Directory' "
+		."FROM "
 		.$a['sqlTables']['website']." "
 		."ORDER BY ws_id;"
 	);
@@ -433,7 +512,7 @@ self::$ActionTable['show']['websites']	= function (&$a) {
 //--------------------------------------------------------------------------------
 //	Share
 //--------------------------------------------------------------------------------
-self::$ActionTable['share']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document_share']."  (".$a['columns'].") VALUES (".$a['values'].");"); };
+self::$ActionTable['share']['document']		= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['document_share']." (".$a['columns'].") VALUES (".$a['values'].");"); };
 
 //--------------------------------------------------------------------------------
 //	Website
