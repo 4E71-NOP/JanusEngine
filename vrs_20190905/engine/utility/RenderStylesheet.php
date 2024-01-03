@@ -162,7 +162,7 @@ html { width:100%; height:100%;}\r\r
 	
 	.".".$tableName."bareTable			{background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}\r"
 	.".".$tableName."bareTable tr		{background-color:transparent !important; margin:0px; padding:0px;}\r"
-	.".".$tableName."bareTable td		{background-color:transparent; margin:0px; padding:0px;}\r"
+	.".".$tableName."bareTable td		{background-color:transparent; margin:0px !important; padding:0px !important;}\r"
 	.".".$tableName."bareTable:hover	{background-color:transparent}\r"
 	.".".$tableName."bareTable tr:hover {background-color:transparent}\r"
 	.".".$tableName."bareTable td:hover	{background-color:transparent}\r"
@@ -417,6 +417,7 @@ html { width:100%; height:100%;}\r\r
 		if ( strlen( $p['t01_tr_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n+1)",	"{ background-color:".$p['t01_tr_bg_odd_col'].";	}");	}
 		if ( strlen( $p['t01_tr_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n)",		"{ background-color:".$p['t01_tr_bg_even_col'].";	}");	}
 		if ( strlen( $p['t01_tr_bg_hover_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:hover",				"{ background-color:".$p['t01_tr_bg_hover_col'].";	}");	}
+		if ( strlen( $p['t01_td_special'])	>0 )		{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td",					"{ ".$p['t01_td_special'].";						}"); 	}
 		if ( strlen( $p['t01_td_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n+1)",	"{ background-color:".$p['t01_td_bg_odd_col'].";	}"); 	}
 		if ( strlen( $p['t01_td_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n)",		"{ background-color:".$p['t01_td_bg_even_col'].";	}");	}
 		
