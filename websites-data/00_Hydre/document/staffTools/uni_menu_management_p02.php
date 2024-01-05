@@ -29,19 +29,20 @@
 
 $bts->RequestDataObj->setRequestData('menuForm',
 		array(
-				'selectionId'	=> 4755864227160964769,
+				'selectionId'	=> 2098047359813338403,
+				'selectionId'	=> 2962598504421245606,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
-				'origin'				=> 'AdminDashboard',
-				'section'				=> 'AdminmenuManagementP02',
+				'origin'		=> 'AdminDashboard',
+				'section'		=> 'AdminmenuManagementP02',
 				'creation'		=> 'on',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
 				'mode'			=> 'edit',
-				'mode'			=> 'create',
-//				'mode'			=> 'delete',
+				// 'mode'			=> 'create',
+				// 'mode'			=> 'delete',
 		)
 );
 
@@ -56,8 +57,8 @@ $bts->I18nTransObj->apply(
 	array(
 		"type" => "array",
 		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les catégories.",
-			"invite2"		=> "Cette partie va vous permettre de créer une catégorie.",
+			"invite1"		=> "Cette partie va vous permettre de gérer les menus.",
+			"invite2"		=> "Cette partie va vous permettre de créer un menu.",
 			"tabTxt1"		=> "Général",
 			"tabTxt2"		=> "Détail",
 			

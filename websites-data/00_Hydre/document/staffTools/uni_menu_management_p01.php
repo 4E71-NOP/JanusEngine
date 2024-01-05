@@ -168,7 +168,7 @@ foreach ($tabListMenu as $A ) {
 	."&arti_ref=".$CurrentSetObj->getDataSubEntry ('article', 'arti_ref')
 	."&arti_page=2"
 	."&formGenericData[mode]=edit"
-	."&formGenericData[selectionId]=".$A['menu_id']
+	."&menuForm[selectionId]=".$A['menu_id']
 	."'>"
 	.$A['menu_name']
 	."</a>\r";
