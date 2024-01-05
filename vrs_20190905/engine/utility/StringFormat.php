@@ -312,25 +312,26 @@ class StringFormat
 		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName() . $infos['block'];
 		$str = "Empty result";
 
-		$doHeader = true;
+		// $doHeader = true;
 		if (is_array($data)) {
-			$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
-
-			if ($doHeader == true) {
-				$tmpCol = reset($data);
-				foreach ($tmpCol as $A => $B ) { $str .= "<td>" . $A . "</td>\r"; }
-				$doHeader = false;
-			}
-
-			reset($data);
-			foreach ($data as $tmpRecord) {
-				$str .= "<tr>\r";
-				foreach ($tmpRecord as $A => $B) {
-					$str .= "<td>" . $B . "</td>\r";
+			
+			foreach ($data as $resultEntry ) {
+				$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
+				// if ($doHeader == true) {
+					$tmpCol = reset($resultEntry);
+					foreach ($tmpCol as $A => $B ) { $str .= "<td>" . $A . "</td>\r"; }
+					$doHeader = false;
+				// }
+				reset($resultEntry);
+				foreach ($resultEntry as $tmpRecord) {
+					$str .= "<tr>\r";
+					foreach ($tmpRecord as $A => $B) {
+						$str .= "<td>" . $B . "</td>\r";
+					}
+					$str .= "</tr>\r";
 				}
-				$str .= "</tr>\r";
+				$str .= "</table>\r<br>\r<hr>\r<br>\r";
 			}
-			$str .= "</table>\r";
 		}
 		return $str;
 	}

@@ -359,12 +359,15 @@ class CommandConsole {
 		$CCL['sql'] = $af($CCL);
 		
 		if ( is_array($CCL['sql']) ) {
+			$showFound = false;
+			$j = 1;
 			foreach ( $CCL['sql'] as $Q ) {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Query `".$Q."`"));
 
-				// If $CCL['command'] is a 'show' we execute the query and load result in a specific part of the form object
+				// If $CCL['command'] is a 'show' we execute the query and save results in RequestDataObj.
 				switch (strtolower($CCL['init']['cmd'])) {
 					case "show":
+						$showFound = true;
 						$dbquery = $bts->SDDMObj->query($Q);
 						if ($bts->SDDMObj->getErrno() == 0 ) {
 							if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {
@@ -372,10 +375,10 @@ class CommandConsole {
 								$tabTmp = array();
 								$i = 1;
 								while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-									foreach ( $dbp as $A => $B ) { $tabTmp[$i][$A] = $B; }
+									foreach ( $dbp as $A => $B ) { $tabTmp[$j][$i][$A] = $B; }
 									$i++;
 								}
-								$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", $tabTmp);
+								$j++;
 							}
 						} else {
 							$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", 
@@ -383,21 +386,24 @@ class CommandConsole {
 									array(
 										"ErrNo" => $bts->SDDMObj->getErrno(),
 										"ErrMsg" => $bts->SDDMObj->getError(),
-									) 
-								)	
-							);	
-						}
-						break;
-
-						default:
-							$bts->SDDMObj->query($Q);
+										) 
+										)	
+									);	
+								}
+								break;
+								
+								default:
+								$bts->SDDMObj->query($Q);
 						// *** Post query processing - AdminDashBoard CLI
 						// Mainly storing the results into an array for later processing
-
+						
 						break;
+					}
+					self::$report['executionPerformed']++;
 				}
-				self::$report['executionPerformed']++;
-			}
+				if ($showFound) {
+					$bts->RequestDataObj->setRequestDataSubEntry('formConsole', "CLiContentResult", $tabTmp);
+				}
 		}
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 	}
