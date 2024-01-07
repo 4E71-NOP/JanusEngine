@@ -13,114 +13,118 @@
 /* Hydre-licence-fin */
 class ThemeDescriptor extends Entity{
 	private $ThemeDescriptor = array ();
+	private $ThemeDefinition = array ();
 	private $CssPrefix = "";
 	
 	//@formatter:off
 	private $columns = array(
 		'theme_id'						=> 0,
-		'theme_directory'				=> 0,
 		'theme_name'					=> "New theme",
 		'theme_title'					=> 0,
 		'theme_desc'					=> 0,
 		'theme_date'					=> 0,
-		'theme_stylesheet_1'			=> 0,
-		'theme_stylesheet_2'			=> 0,
-		'theme_stylesheet_3'			=> 0,
-		'theme_stylesheet_4'			=> 0,
-		'theme_stylesheet_5'			=> 0,
-		'theme_width'					=> 0,
-		'theme_height'					=> 0,
-		'theme_max_width'				=> 0,
-		'theme_max_height'				=> 0,
-		'theme_min_width'				=> 0,
-		'theme_min_height'				=> 0,
-		'theme_bg'						=> 0,
-		'theme_bg_position'				=> 0,
-		'theme_bg_repeat'				=> 0,
-		'theme_bg_color'				=> 0,
-		'theme_logo'					=> 0,
-		'theme_divinitial_bg'			=> 0,
-		'theme_divinitial_repeat'		=> 0,
-		'theme_divinitial_dx'			=> 0,
-		'theme_divinitial_dy'			=> 0,
-		'theme_block_01_name'			=> 0,
-		'theme_block_01_text'			=> 0,
-		'theme_block_02_name'			=> 0,
-		'theme_block_02_text'			=> 0,
-		'theme_block_03_name'			=> 0,
-		'theme_block_03_text'			=> 0,
-		'theme_block_04_name'			=> 0,
-		'theme_block_04_text'			=> 0,
-		'theme_block_05_name'			=> 0,
-		'theme_block_05_text'			=> 0,
-		'theme_block_06_name'			=> 0,
-		'theme_block_06_text'			=> 0,
-		'theme_block_07_name'			=> 0,
-		'theme_block_07_text'			=> 0,
-		'theme_block_08_name'			=> 0,
-		'theme_block_08_text'			=> 0,
-		'theme_block_09_name'			=> 0,
-		'theme_block_09_text'			=> 0,
-		'theme_block_10_name'			=> 0,
-		'theme_block_10_text'			=> 0,
-		'theme_block_11_name'			=> 0,
-		'theme_block_11_text'			=> 0,
-		'theme_block_12_name'			=> 0,
-		'theme_block_12_text'			=> 0,
-		'theme_block_13_name'			=> 0,
-		'theme_block_13_text'			=> 0,
-		'theme_block_14_name'			=> 0,
-		'theme_block_14_text'			=> 0,
-		'theme_block_15_name'			=> 0,
-		'theme_block_15_text'			=> 0,
-		'theme_block_16_name'			=> 0,
-		'theme_block_16_text'			=> 0,
-		'theme_block_17_name'			=> 0,
-		'theme_block_17_text'			=> 0,
-		'theme_block_18_name'			=> 0,
-		'theme_block_18_text'			=> 0,
-		'theme_block_19_name'			=> 0,
-		'theme_block_19_text'			=> 0,
-		'theme_block_20_name'			=> 0,
-		'theme_block_20_text'			=> 0,
-		'theme_block_21_name'			=> 0,
-		'theme_block_21_text'			=> 0,
-		'theme_block_22_name'			=> 0,
-		'theme_block_22_text'			=> 0,
-		'theme_block_23_name'			=> 0,
-		'theme_block_23_text'			=> 0,
-		'theme_block_24_name'			=> 0,
-		'theme_block_24_text'			=> 0,
-		'theme_block_25_name'			=> 0,
-		'theme_block_25_text'			=> 0,
-		'theme_block_26_name'			=> 0,
-		'theme_block_26_text'			=> 0,
-		'theme_block_27_name'			=> 0,
-		'theme_block_27_text'			=> 0,
-		'theme_block_28_name'			=> 0,
-		'theme_block_28_text'			=> 0,
-		'theme_block_29_name'			=> 0,
-		'theme_block_29_text'			=> 0,
-		'theme_block_30_name'			=> 0,
-		'theme_block_30_text'			=> 0,
-		'theme_block_00_menu'			=> 0,
-		'theme_block_01_menu'			=> 0,
-		'theme_block_02_menu'			=> 0,
-		'theme_block_03_menu'			=> 0,
-		'theme_block_04_menu'			=> 0,
-		'theme_block_05_menu'			=> 0,
-		'theme_block_06_menu'			=> 0,
-		'theme_block_07_menu'			=> 0,
-		'theme_block_08_menu'			=> 0,
-		'theme_block_09_menu'			=> 0,
-		'theme_admctrl_panel_bg'		=> 0,
-		'theme_admctrl_switch_bg'		=> 0,
-		'theme_admctrl_width'			=> 0,
-		'theme_admctrl_height'			=> 0,
-		'theme_admctrl_position'		=> 0,
-		'theme_gradient_start_color'	=> 0,
-		'theme_gradient_middle_color'	=> 0,
-		'theme_gradient_end_color'		=> 0,
+		);
+
+	private $themeDefinitionList = array(
+		'directory'				=> 0,
+		'stylesheet_1'			=> 0,
+		'stylesheet_2'			=> 0,
+		'stylesheet_3'			=> 0,
+		'stylesheet_4'			=> 0,
+		'stylesheet_5'			=> 0,
+		'width'					=> 0,
+		'height'					=> 0,
+		'max_width'				=> 0,
+		'max_height'				=> 0,
+		'min_width'				=> 0,
+		'min_height'				=> 0,
+		'bg'						=> 0,
+		'bg_position'				=> 0,
+		'bg_repeat'				=> 0,
+		'bg_color'				=> 0,
+		'logo'					=> 0,
+		'divinitial_bg'			=> 0,
+		'divinitial_repeat'		=> 0,
+		'divinitial_dx'			=> 0,
+		'divinitial_dy'			=> 0,
+		'block_01_name'			=> 0,
+		'block_01_text'			=> 0,
+		'block_02_name'			=> 0,
+		'block_02_text'			=> 0,
+		'block_03_name'			=> 0,
+		'block_03_text'			=> 0,
+		'block_04_name'			=> 0,
+		'block_04_text'			=> 0,
+		'block_05_name'			=> 0,
+		'block_05_text'			=> 0,
+		'block_06_name'			=> 0,
+		'block_06_text'			=> 0,
+		'block_07_name'			=> 0,
+		'block_07_text'			=> 0,
+		'block_08_name'			=> 0,
+		'block_08_text'			=> 0,
+		'block_09_name'			=> 0,
+		'block_09_text'			=> 0,
+		'block_10_name'			=> 0,
+		'block_10_text'			=> 0,
+		'block_11_name'			=> 0,
+		'block_11_text'			=> 0,
+		'block_12_name'			=> 0,
+		'block_12_text'			=> 0,
+		'block_13_name'			=> 0,
+		'block_13_text'			=> 0,
+		'block_14_name'			=> 0,
+		'block_14_text'			=> 0,
+		'block_15_name'			=> 0,
+		'block_15_text'			=> 0,
+		'block_16_name'			=> 0,
+		'block_16_text'			=> 0,
+		'block_17_name'			=> 0,
+		'block_17_text'			=> 0,
+		'block_18_name'			=> 0,
+		'block_18_text'			=> 0,
+		'block_19_name'			=> 0,
+		'block_19_text'			=> 0,
+		'block_20_name'			=> 0,
+		'block_20_text'			=> 0,
+		'block_21_name'			=> 0,
+		'block_21_text'			=> 0,
+		'block_22_name'			=> 0,
+		'block_22_text'			=> 0,
+		'block_23_name'			=> 0,
+		'block_23_text'			=> 0,
+		'block_24_name'			=> 0,
+		'block_24_text'			=> 0,
+		'block_25_name'			=> 0,
+		'block_25_text'			=> 0,
+		'block_26_name'			=> 0,
+		'block_26_text'			=> 0,
+		'block_27_name'			=> 0,
+		'block_27_text'			=> 0,
+		'block_28_name'			=> 0,
+		'block_28_text'			=> 0,
+		'block_29_name'			=> 0,
+		'block_29_text'			=> 0,
+		'block_30_name'			=> 0,
+		'block_30_text'			=> 0,
+		'block_00_menu'			=> 0,
+		'block_01_menu'			=> 0,
+		'block_02_menu'			=> 0,
+		'block_03_menu'			=> 0,
+		'block_04_menu'			=> 0,
+		'block_05_menu'			=> 0,
+		'block_06_menu'			=> 0,
+		'block_07_menu'			=> 0,
+		'block_08_menu'			=> 0,
+		'block_09_menu'			=> 0,
+		'admctrl_panel_bg'		=> 0,
+		'admctrl_switch_bg'		=> 0,
+		'admctrl_width'			=> 0,
+		'admctrl_height'			=> 0,
+		'admctrl_position'		=> 0,
+		'gradient_start_color'	=> 0,
+		'gradient_middle_color'	=> 0,
+		'gradient_end_color'		=> 0,
 	);
 	//@formatter:on
 	
@@ -145,15 +149,15 @@ class ThemeDescriptor extends Entity{
 		AND tw.theme_state = '1'
 		;";
 
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading header for theme ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
-
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {
 				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
 				}
 			}
+			$this->loadThemeData($id);
 		}
 		else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for theme descriptor id=".$id));
@@ -164,6 +168,34 @@ class ThemeDescriptor extends Entity{
 		return $res;
 	}
 	
+	/**
+	 * Gets theme data from the database.<br>
+	 * 
+	 */
+	private function loadThemeData($id) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
+		$q = "
+		SELECT * FROM " 
+		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_definition')." td "
+		."WHERE td.fk_theme_id = '".$id . "' "
+		."ORDER BY td.def_name;";
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Loading data for theme ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
+		$dbquery = $bts->SDDMObj->query ( $q );
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$ClassLoaderObj = ClassLoader::getInstance();
+			$ClassLoaderObj->provisionClass('ThemeData');
+
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				$tmpTab = array();
+				foreach ( $dbp as $A => $B ) { $tmpTab[$A] = $B; }
+				$this->ThemeDefinition[$tmpTab['def_name']] = $tmpTab;
+			}
+		}
+	}
+
 	/**
 	 * Gets theme descriptor data from the database using the priority system.<br>
 	 * 
@@ -216,9 +248,7 @@ class ThemeDescriptor extends Entity{
 		//	Case when an admin goofs (murphy's law) even though an admin cannot goof.
 		//	"Yo dawg i heard you like admin Ungoofing so i put an admin ungoof in yo admin ungoof..."
 		// --------------------------------------------------------------------------------------------
-		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-		}
-		else {
+		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
@@ -226,15 +256,16 @@ class ThemeDescriptor extends Entity{
 			;");
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));
 		}
+
+		// --------------------------------------------------------------------------------------------
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			foreach ( $dbp as $A => $B ) {
 				if (isset($this->columns[$A])) { $this->ThemeDescriptor[$A] = $B; }
 			}
+			$this->loadThemeData($this->ThemeDescriptor['theme_id']);
 		}
 		return true;
 	}
-	
-
 
 	/**
 	 * Updates or inserts in DB the local data.
@@ -313,19 +344,27 @@ class ThemeDescriptor extends Entity{
 	}
 	
 	//@formatter:off
-	public function getThemeDescriptorEntry ($data) { return $this->ThemeDescriptor[$data]; }
 	public function getThemeDescriptor() { return $this->ThemeDescriptor; }
 	public function getCssPrefix() { return $this->CssPrefix; }
-	
-	public function setThemeDescriptorEntry ($entry, $data) { 
-		if ( isset($this->ThemeDescriptor[$entry])) { $this->ThemeDescriptor[$entry] = $data; }	// DB Entity objects do NOT accept new columns!  
-	}
+	public function getThemeDescriptorEntry ($data) { return $this->ThemeDescriptor[$data]; }
 	
 	public function setThemeDescriptor($ThemeDescriptor) { $this->ThemeDescriptor = $ThemeDescriptor; }
 	public function setCssPrefix($data) { $this->CssPrefix = $data; }
+	public function setThemeDescriptorEntry ($entry, $data) { 
+		if ( isset($this->ThemeDescriptor[$entry])) { $this->ThemeDescriptor[$entry] = $data; }	// DB Entity objects do NOT accept new columns!  
+	}
+
+	// --------------------------------------------------------------------------------------------
+	public function getThemeDefinition(){ return $this->ThemeDefinition; }
+	public function getThemeDefinitionEntry ($data) { return $this->ThemeDefinition[$data]; }
+	public function getThemeDefinitionSubEntry ($lvl1, $lvl2) { return $this->ThemeDefinition[$lvl1][$lvl2]; }
+
+	public function setThemeDefinition($data){ $this->ThemeDefinition = $data; }
+	public function setThemeDefinitionEntry ($entry, $data) { $this->ThemeDefinition[$entry] = $data; }
+	public function setThemeDefinitionSubEntry ($lvl1, $lvl2, $data) { $this->ThemeDefinition[$lvl1][$lvl2] = $data; }
+
 	//@formatter:off
 
 }
-
 
 ?>

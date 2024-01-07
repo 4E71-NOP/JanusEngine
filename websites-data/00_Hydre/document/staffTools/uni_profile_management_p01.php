@@ -455,8 +455,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 	$ListThemeBlock = array();
 	for ($i = 1; $i < 31; $i++) {
-		$TmpBlockEntry = "theme_block_" . $bts->StringFormatObj->getDecorationBlockName("", $i, "") . "_name";
-		$TmpBlockName = $PmThemeDescriptorObj->getThemeDescriptorEntry($TmpBlockEntry);
+		$TmpBlockEntry = "block_" . $bts->StringFormatObj->getDecorationBlockName("", $i, "") . "_name";
+		$TmpBlockName = $PmThemeDescriptorObj->getThemeDefinitionEntry($TmpBlockEntry);
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " processing : " . $TmpBlockName));
 		if (strlen($TmpBlockName) > 0) {
 			$err = 0;
@@ -481,7 +481,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['ContentInfos']['Height']		= 1024;
 	$T['ContentInfos']['Height']		= 512;
 
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $PmThemeDataObj->getThemeDataEntry('theme_bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
 
 	$infos['module_nameBackup']	= $infos['module_name'];
@@ -514,7 +514,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 		$T['Content'][$Tab]['1']['1']['cont'] .= "
 		<div style='
-		background-image: url(" . $PmThemeDataObj->getThemeDataEntry('pathThemeBg') . "); background-color: " . $PmThemeDataObj->getThemeDataEntry('theme_bg_color') . ";
+		background-image: url(" . $PmThemeDataObj->getThemeDataEntry('pathThemeBg') . "); background-color: " . $PmThemeDataObj->getDefinitionValue('bg_color') . ";
 		width: " . ($T['ContentInfos']['Width'] - 32) . "px; height: " . ($T['ContentInfos']['Height'] - 32) . "px;
 		'>
 		";
@@ -741,7 +741,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 	$T['Content'][$Tab]['1']['1']['cont'] .= "
 	<div style='
-	background-image: url(" . $PmThemeDataObj->getThemeDataEntry('pathThemeBg') . "); background-color: " . $PmThemeDataObj->getThemeDataEntry('theme_bg_color') . ";
+	background-image: url(" . $PmThemeDataObj->getThemeDataEntry('pathThemeBg') . "); background-color: " . $PmThemeDataObj->getDefinitionValue('bg_color') . ";
 	width: " . ($T['ContentInfos']['Width'] - 32) . "px; height: " . ($T['ContentInfos']['Height'] - 64) . "px;
 	'>
 	";

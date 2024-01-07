@@ -104,15 +104,15 @@ class InstallPage01 {
 		);
 		$Content .= "<p style='text-align: center;'>\r";
 		foreach ( $LangageSelector as $A ) {
-			$Content .= "<a href='install.php?l=".$A['code']."'><img src='media/theme/".$ThemeDataObj->getThemeDataEntry('theme_directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
+			$Content .= "<a href='install.php?l=".$A['code']."'><img src='media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
 		}
 		$Content .= "</p><br>\r";
 		unset ($LangageSelector);
 
 
 		// --------------------------------------------------------------------------------------------
-		$infos['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='18' height='18' border='0'>";
-		$infos['iconGoNoGoNok'] = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification').	"' width='18' height='18' border='0'>";
+		$infos['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='18' height='18' border='0'>";
+		$infos['iconGoNoGoNok'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification').	"' width='18' height='18' border='0'>";
 		
 		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 18, 6);
 
@@ -410,7 +410,7 @@ class InstallPage01 {
 
 		$T = &$this->T['Content'];
 
-		$bubbleBegin = "<img src='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='24' height='24' border='0' onMouseOver=\"t.ToolTip('";
+		$bubbleBegin = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_question') . "' width='24' height='24' border='0' onMouseOver=\"t.ToolTip('";
 		$bubbleEnd = "', 'install')\" onMouseOut=\"t.ToolTip('','install')\">";
 		$l=1;
 		$T[$t]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('MTH_intro');

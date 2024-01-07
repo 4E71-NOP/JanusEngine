@@ -15,6 +15,7 @@
 class ThemeData {
 	private $ThemeName = "";
 	private $ThemeData = array();
+	private $ThemeDefinition = array();
 	private $DecorationList = array();
 	
 	public function __construct() {
@@ -44,9 +45,10 @@ class ThemeData {
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$this->DecorationList[$dbp['deco_name']]['deco_id']		=	$this->DecorationList[$dbp['deco_id']]['deco_id']	=	$dbp['deco_id'];
 			$this->DecorationList[$dbp['deco_name']]['deco_type']	=	$this->DecorationList[$dbp['deco_id']]['deco_type']	=	$dbp['deco_type'];
+			$this->DecorationList[$dbp['deco_name']]['deco_name']	=	$this->DecorationList[$dbp['deco_id']]['deco_name']	=	$dbp['deco_name'];
 		}
 	}
-		
+
 	/**
 	 * Create the entries for block definitions.
 	 * Make sure no decoration gets loaded 2 times.
@@ -54,6 +56,8 @@ class ThemeData {
 	public function renderBlockData() {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
+		$ClassLoaderObj = ClassLoader::getInstance();
+		$ClassLoaderObj->provisionClass('ThemeData');
 
 		$CurrentBlock = array();
 		$pv = array();
@@ -69,13 +73,14 @@ class ThemeData {
 			$BlockG = "B" . $Block . "G";
 			$BlockT = "B" . $Block . "T";
 			
-			$CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_name'];
+			// $CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_name'];
+			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_name']['def_string'];
 			
 			if ( strlen($CurrentBlock['name']) > 0 ) {
 				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
-				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing theme_block_".$Block."_name / ".$CurrentBlock['name']." with deco_id=".$CurrentBlock['deco_id']));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing block_".$Block."_name / ".$CurrentBlock['name']." with decoration " . $CurrentBlock['deco_name'] . " (id=" . $CurrentBlock['deco_id'] . "; type=" . $CurrentBlock['deco_type'] . ")"));
 				
 				$cbal = &$BlockAlreadyLoaded[$CurrentBlock['deco_type']][$CurrentBlock['deco_id']]; // Current Block Already Loaded
 				if ( !isset( $cbal ) ) {
@@ -131,7 +136,9 @@ class ThemeData {
 			// --------------------------------------------------------------------------------------------
 			//	Specific to Caligraph decoration type.
 			// --------------------------------------------------------------------------------------------
-			$CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_text'];
+			// $CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_text'];
+			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_text']['def_string'];
+
 			if ( strlen($CurrentBlock['name']) > 0 ) {
 				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
@@ -188,7 +195,8 @@ class ThemeData {
 
 		for($i = 0; $i <= 9; $i ++) {
 			$Block = $bts->StringFormatObj->getDecorationBlockName ( "", $i, "" );
-			$CurrentBlock['name'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
+			// $CurrentBlock['name'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
+			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_menu']['def_string'];
 			if (strlen ( $CurrentBlock['name'] ) > 0) {
 				$BlockM = "B" . $Block . "M";
 				$cbn = &$CurrentBlock['name'];
@@ -286,6 +294,9 @@ class ThemeData {
 		
 		$this->ThemeData['tableStdRules'] = " style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;' ";
 		
+		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "this->ThemeData : =". $bts->StringFormatObj->print_r_debug($this->ThemeData) ));
+		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "this->ThemeDefinition : =". $bts->StringFormatObj->print_r_debug($this->ThemeDefinition) ));
+		// exit();
 	}
 	
 	/**
@@ -298,7 +309,18 @@ class ThemeData {
 		}
 	}
 	
-	
+	public function getDefinitionValue($name) {
+		switch ($this->ThemeDefinition[$name]['def_type']) {
+			case 0:
+				return $this->ThemeDefinition[$name]['def_number'];
+				break;
+			case 1:
+				return $this->ThemeDefinition[$name]['def_string'];
+				break;
+		}
+		return false;
+	}
+
 	//@formatter:off
 	public function getThemeDataEntry ($data) { return $this->ThemeData[$data]; }
 	public function getThemeBlockEntry($lvl1 , $lvl2) { return $this->ThemeData[$lvl1][$lvl2]; }
@@ -306,6 +328,7 @@ class ThemeData {
 	public function getThemeName() { return $this->ThemeName; }
 	public function getThemeData() { return $this->ThemeData; }
 	public function getDecorationList() { return $this->DecorationList; }
+	public function getThemeDefinition(){ return $this->ThemeDefinition; }
 
 	public function setThemeDataEntry ($entry , $data) { $this->ThemeData[$entry] = $data; }
 	public function setThemetBlockEntry($lvl1 , $lvl2, $data) { $this->ThemeData[$lvl1][$lvl2] = $data; }
@@ -313,7 +336,7 @@ class ThemeData {
 	public function setThemeName($ThemeName) { $this->ThemeName = $ThemeName; }
 	public function setThemeData($ThemeData) { $this->ThemeData = $ThemeData; }
 	public function setDecorationList($DecorationList) { $this->DecorationList = $DecorationList; }
-
+	public function setThemeDefinition($data){ $this->ThemeDefinition = $data; }
 	//@formatter:on
 }
 

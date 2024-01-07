@@ -1024,59 +1024,71 @@ self::$InitTable['tag'] = function (&$a) {
 
 self::$InitTable['theme'] = function (&$a) {
 	$a['params'] = array(
-		"id"			=> "",
-		"name"			=> "New Layout",
-		"directory"		=> "",
-		"title"			=> "Nouveau theme",
-		"desc"			=> "Nouveau theme",
-		"date"			=> time(),
-
-		"stylesheet_1"	=> "",
-		"stylesheet_2"	=> "",
-		"stylesheet_3"	=> "",
-		"stylesheet_4"	=> "",
-		"stylesheet_5"	=> "",
-
-		"width"			=> "",
-		"height"		=> "",
-		"max_width"		=> "",
-		"max_height"	=> "",
-		"min_width"		=> "",
-		"min_height"	=> "",
-		"bg"			=> "",
-		"bg_position"	=> "",
-		"bg_repeat" 	=> "repeat",
-		"bg_color" 		=> "",
-		"logo"			=> "",
-
-		"divinitial_bg"		=> "",
-		"divinitial_repeat"	=> "no-repeat",
-		"divinitial_dx"		=> 0,
-		"divinitial_dy"		=> 0,
-
-		"admctrl_panel_bg"			=> "vide.gif",
-		"admctrl_switch_bg"			=> "vide.gif",
-		"admctrl_width"				=> 32,
-		"admctrl_height"			=> 32,
-		"admctrl_position"			=> 1,
-		"color_gradient_start"		=> "000000",
-		"color_gradient_middle"		=> "808000",
-		"color_gradient_end"		=> "FF0000",
-
+		"id"	=> "",
+		"name"	=> "New Layout",
+		"title"	=> "Nouveau theme",
+		"desc"	=> "Nouveau theme",
+		"date"	=> time(),
 		"state" => "ONLINE",
-		"to_website" => "",
+		
+		// "directory"		=> "",
+		// "stylesheet_1"	=> "",
+		// "stylesheet_2"	=> "",
+		// "stylesheet_3"	=> "",
+		// "stylesheet_4"	=> "",
+		// "stylesheet_5"	=> "",
+
+		// "width"			=> "",
+		// "height"		=> "",
+		// "max_width"		=> "",
+		// "max_height"	=> "",
+		// "min_width"		=> "",
+		// "min_height"	=> "",
+		// "bg"			=> "",
+		// "bg_position"	=> "",
+		// "bg_repeat" 	=> "repeat",
+		// "bg_color" 		=> "",
+		// "logo"			=> "",
+
+		// "divinitial_bg"		=> "",
+		// "divinitial_repeat"	=> "no-repeat",
+		// "divinitial_dx"		=> 0,
+		// "divinitial_dy"		=> 0,
+
+		// "admctrl_panel_bg"			=> "vide.gif",
+		// "admctrl_switch_bg"			=> "vide.gif",
+		// "admctrl_width"				=> 32,
+		// "admctrl_height"			=> 32,
+		// "admctrl_position"			=> 1,
+		// "color_gradient_start"		=> "000000",
+		// "color_gradient_middle"		=> "808000",
+		// "color_gradient_end"		=> "FF0000",
+
+		// "to_website" => "",
 	);
-	for ($i = 1; $i <= 30; $i++) {
-		$j = sprintf("%02u", $i);
-		$a['params']['block_' . $j . '_name'] = "";
-		$a['params']['block_' . $j . '_text'] = "";
-	}
-	for ($i = 0; $i <= 9; $i++) {
-		$a['params']['block_' . sprintf("%02u", $i) . '_menu']	= "";
-	}
+	// for ($i = 1; $i <= 30; $i++) {
+	// 	$j = sprintf("%02u", $i);
+	// 	$a['params']['block_' . $j . '_name'] = "";
+	// 	$a['params']['block_' . $j . '_text'] = "";
+	// }
+	// for ($i = 0; $i <= 9; $i++) {
+	// 	$a['params']['block_' . sprintf("%02u", $i) . '_menu']	= "";
+	// }
 };
 
 
+
+self::$InitTable['theme_definition'] = function (&$a) {
+	$a['params'] = array(
+		'def_id'		=> 0,
+		'for_theme'		=> "",
+		'fk_theme_id'	=> 0,
+		'def_type'		=> 1,
+		'def_name'		=> "bg",
+		'def_number'	=> 0,
+		'def_string'	=> "bg.png",
+	);
+};
 
 self::$InitTable['translation'] = function (&$a) {
 	$a['params'] = array(

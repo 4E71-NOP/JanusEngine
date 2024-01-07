@@ -110,7 +110,7 @@ class RenderAdmDashboard {
 			width:80%; height:80%;
 			top:0px; left:0px;
 			margin:0 auto; padding:10px;
-			background-color:#".$ThemeDataObj->getThemeDataEntry('theme_bg_color').";' 
+			background-color:#".$ThemeDataObj->getDefinitionValue('bg_color').";' 
 			>\r
 			";
 		$infos['module_z_index'] += 4;
@@ -120,7 +120,7 @@ class RenderAdmDashboard {
 		// 2	10	6
 		// 1	9	5
 		
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_position').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_width').", ".$ThemeDataObj->getThemeDataEntry('theme_admctrl_height').");");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getDefinitionValue('admctrl_position').", ".$ThemeDataObj->getDefinitionValue('admctrl_width').", ".$ThemeDataObj->getDefinitionValue('admctrl_height').");");
 		
 		$cellList = array (
 			1 => array( 'width'=> '25%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '2cm',	'minHeight' => '10cm'),

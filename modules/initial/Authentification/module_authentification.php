@@ -129,7 +129,7 @@ class ModuleAuthentification
 				
 				<tr>\r
 				<td style='text-align:center; padding-top:10px;'>\r
-				<div style='display:inline-block; margin:0 auto'>\r"
+				<br>\r<div style='display:inline-block; margin:0 auto'>\r"
 					. $bts->InteractiveElementsObj->renderSubmitButton($SB)
 					. "</div>\r
 				</td>\r

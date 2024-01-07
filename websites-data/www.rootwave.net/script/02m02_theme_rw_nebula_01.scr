@@ -1,9 +1,11 @@
 add theme			
 name	'rw_nebula_01'		
-directory	'Nebula'		
 title	'Nebula'		
 desc	'Nebula'		
-			
+;
+
+/*
+directory	'Nebula'		
 stylesheet_1	'rw_nebula_01.css'		
 			
 height	'100%'		
@@ -71,3 +73,4 @@ gradient_color_start	'C33A09'
 gradient_color_middle	'0897DF'		
 gradient_color_end	'CFC600'		
 ;			
+*/

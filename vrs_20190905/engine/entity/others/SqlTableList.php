@@ -35,7 +35,7 @@ class SqlTableList {
 			'permission',		'pv',				
 			'stored_event',		
 			'tag',				
-			'theme_descriptor',	'theme_website',
+			'theme_definition',	'theme_descriptor',	'theme_website',
 			'user',				'user_permission',
 			'website',			'group_website',		'theme_website',
 	);

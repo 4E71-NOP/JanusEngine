@@ -27,4 +27,7 @@ class RenderDeco20Caligraph {
 		}
 		return self::$Instance;
 	}
+
+	public function render ( $infos ){}
+
 }

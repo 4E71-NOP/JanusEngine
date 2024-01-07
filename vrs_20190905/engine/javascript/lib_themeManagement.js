@@ -57,6 +57,6 @@ function ThemeGradientMgmt () {
 	var Deb = document.themeForm.TM_gradient_start_color.value.replace('#','');
 	var Mil = document.themeForm.TM_gradient_middle_color.value.replace('#','');
 	var Fin = document.themeForm.TM_gradient_end_color.value.replace('#','');
-	gradientUpdate ( 'theme_gradient_' , Deb , Mil , Fin , 30 );
+	gradientUpdate ( 'gradient_' , Deb , Mil , Fin , 30 );
 }
 

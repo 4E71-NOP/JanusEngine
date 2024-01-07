@@ -112,6 +112,7 @@ class ClassLoader {
 		"Note"						=> _ENTITY_DIRECTORY_."dao/Note.php",
 		"SmallVariable"				=> _ENTITY_DIRECTORY_."dao/SmallVariable.php",
 		"Tag"						=> _ENTITY_DIRECTORY_."dao/Tag.php",
+		"ThemeDefinition"			=> _ENTITY_DIRECTORY_."dao/ThemeDefinition.php",
 		"ThemeDescriptor"			=> _ENTITY_DIRECTORY_."dao/ThemeDescriptor.php",
 		"ThemeWebsite"				=> _ENTITY_DIRECTORY_."dao/ThemeWebsite.php",
 		"User"						=> _ENTITY_DIRECTORY_."dao/User.php",

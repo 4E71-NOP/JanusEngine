@@ -70,8 +70,8 @@ class ModuleCalendar {
 				'table_height' => 64 ,
 				'table_width' => 72,
 			);
-			$pv['table_margintop'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_internal_height') - $pv['table_height'] ) /2);
-			$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') - $pv['table_width'] ) /2);
+			$pv['table_margintop'] = floor (( $ThemeDataObj->getDefinitionValue('module_internal_height') - $pv['table_height'] ) /2);
+			$pv['table_marginright'] = floor (( $ThemeDataObj->getDefinitionValue('module_internal_width') - $pv['table_width'] ) /2);
 			
 			$Content .= "
 			<table class='".$Block._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>

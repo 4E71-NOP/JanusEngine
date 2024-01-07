@@ -227,20 +227,21 @@ class Hydr
 
 			// StyleSheet
 			$this->renderStylsheet();
+			
 			// Build document
 			$Content = $this->buildDocument();
 			// Checkpoint ("index_before_stat");
 			$Content .= $this->buidAdminDashboard();
 			// File selector if necessary
 			$Content .= $this->buildFileSelector();
-
+			
 			// --------------------------------------------------------------------------------------------
 			// Rendering of the CSS
 			//
 			// --------------------------------------------------------------------------------------------
 			$CssContent  = "<!-- Extra CSS -->\r";
 			$CssContent .= $this->GeneratedScript->renderScriptFileWithBaseURL("Css-File", "<link rel='stylesheet' href='", "'>\r");
-
+			
 			// --------------------------------------------------------------------------------------------
 			// Rendering of the JavaScript
 			//
@@ -295,6 +296,7 @@ class Hydr
 			$bts->SDDMObj->disconnect_sql();
 			$bts->SMObj->syncSuperGlobalSession(); // One last time to make sure it's saved
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :\n \$_SESSION:" . $bts->StringFormatObj->print_r_debug($_SESSION) . "\n \$bts->SMObj->getSession():" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession())));
+			// return ($Content . $CssContent . $licence . "</body>\r</html>\r");
 			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
 		}
 	}
@@ -886,6 +888,8 @@ class Hydr
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 		$this->ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
 		$this->ThemeDataObj->setThemeData($ThemeDescriptorObj->getThemeDescriptor()); // Better to give an array than the object itself.
+		$this->ThemeDataObj->setThemeDefinition($ThemeDescriptorObj->getThemeDefinition());
+
 		$this->ThemeDataObj->setThemeName($ThemeDescriptorObj->getCssPrefix());
 		$this->ThemeDataObj->setDecorationListFromDB();
 		$this->ThemeDataObj->renderBlockData();
@@ -1001,7 +1005,7 @@ class Hydr
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-					<link rel='stylesheet' href='" . $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getThemeDataEntry('theme_stylesheet_1') . "'>
+					<link rel='stylesheet' href='" . $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
 					</head>\r
 					";
 				break;
@@ -1009,39 +1013,39 @@ class Hydr
 		$Content .= "<body id='HydrBody' ";
 		$Content .= "style='";
 
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_width')) > 0) {
-			$Content .= "width:" .			$this->ThemeDataObj->getThemeDataEntry('theme_width') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('width')) > 0) {
+			$Content .= "width:" .			$this->ThemeDataObj->getDefinitionValue('width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_heigth')) > 0) {
-			$Content .= "height:" .		$this->ThemeDataObj->getThemeDataEntry('theme_height') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('heigth')) > 0) {
+			$Content .= "height:" .		$this->ThemeDataObj->getDefinitionValue('height') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_min_width')) > 0) {
-			$Content .= "min-width:" .		$this->ThemeDataObj->getThemeDataEntry('theme_min_width') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width')) > 0) {
+			$Content .= "min-width:" .		$this->ThemeDataObj->getDefinitionValue('min_width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_min_height')) > 0) {
-			$Content .= "min-height:" .	$this->ThemeDataObj->getThemeDataEntry('theme_min_height') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('min_height')) > 0) {
+			$Content .= "min-height:" .	$this->ThemeDataObj->getDefinitionValue('min_height') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_max_width')) > 0) {
-			$Content .= "max-width:" .		$this->ThemeDataObj->getThemeDataEntry('theme_max_width') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('max_width')) > 0) {
+			$Content .= "max-width:" .		$this->ThemeDataObj->getDefinitionValue('max_width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_max_height')) > 0) {
-			$Content .= "max-height:" .	$this->ThemeDataObj->getThemeDataEntry('theme_max_height') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('max_height')) > 0) {
+			$Content .= "max-height:" .	$this->ThemeDataObj->getDefinitionValue('max_height') . "; ";
 		}
 
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_bg')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg')) > 0) {
 			$Content .= "background-image: url("
 				. $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
-				. "media/theme/" . $this->ThemeDataObj->getThemeDataEntry('theme_directory') . "/" . $this->ThemeDataObj->getThemeDataEntry('theme_bg') . "); ";
+				. "media/theme/" . $this->ThemeDataObj->getDefinitionValue('directory') . "/" . $this->ThemeDataObj->getDefinitionValue('bg') . "); ";
 		}
 
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_bg_position')) > 0) {
-			$Content .= "background-position:" .	$this->ThemeDataObj->getThemeDataEntry('theme_bg_position') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position')) > 0) {
+			$Content .= "background-position:" .	$this->ThemeDataObj->getDefinitionValue('bg_position') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_bg_repeat')) > 0) {
-			$Content .= "background-repeat:" .		$this->ThemeDataObj->getThemeDataEntry('theme_bg_repeat') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_repeat')) > 0) {
+			$Content .= "background-repeat:" .		$this->ThemeDataObj->getDefinitionValue('bg_repeat') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getThemeDataEntry('theme_bg_color')) > 0) {
-			$Content .= "background-color:#" .		$this->ThemeDataObj->getThemeDataEntry('theme_bg_color') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_color')) > 0) {
+			$Content .= "background-color:#" .		$this->ThemeDataObj->getDefinitionValue('bg_color') . "; ";
 		}
 		$Content .= "'\r";
 

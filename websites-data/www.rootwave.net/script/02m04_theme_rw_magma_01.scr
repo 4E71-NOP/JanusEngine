@@ -1,9 +1,11 @@
 add theme			
 name	'rw_magma_01'		
-directory	'Magma'		
 title	'Magma'		
 desc	'Volcanic'		
-			
+;
+
+/*
+directory	'Magma'		
 stylesheet_1	'rw_magma_01.css'		
 			
 			
@@ -71,3 +73,4 @@ gradient_color_start	'00FF00'
 gradient_color_middle	'808020'		
 gradient_color_end	'FF0040'		
 ;			
+*/

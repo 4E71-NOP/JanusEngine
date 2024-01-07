@@ -1,9 +1,11 @@
 add theme			
 name	'hydr_abysses_01'		
-directory	'Abysses'		
 title	'Abysses'		
 desc	'Deep sea'		
-			
+;
+
+/*
+directory	'Abysses'		
 stylesheet_1	'hydr_abysses_01.css'		
 			
 			
@@ -71,3 +73,4 @@ gradient_color_start	'000080'
 gradient_color_middle	'00C0FF'		
 gradient_color_end	'FF8000'		
 ;			
+*/

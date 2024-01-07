@@ -1,9 +1,11 @@
 add theme			
 name	'hydr_aqua_01'		
-directory	'Aqua'		
 title	'Aqua'		
 desc	'Aqualand'		
-			
+;
+
+/*
+directory	'Aqua'		
 stylesheet_1	'hydr_aqua_01.css'		
 			
 			
@@ -71,3 +73,4 @@ gradient_color_start	'00FF00'
 gradient_color_middle	'808020'		
 gradient_color_end	'FF0040'		
 ;			
+*/

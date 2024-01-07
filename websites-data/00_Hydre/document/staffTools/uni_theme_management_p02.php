@@ -233,9 +233,9 @@ for ($i = 2; $i <= 3; $i++) {
 		$decoCount2 = sprintf("%02u", $decoCount1);
 		$T['Content'][$i][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
 		$T['Content'][$i][$j]['2']['cont'] =
-			$bts->RenderFormObj->renderInputText('formParams1[theme_block_".$decoCount2."_nom]',	$currentThemeObj->getThemeDescriptorEntry('theme_block_' . $decoCount2 . '_name'))
+			$bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_nom]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_name'))
 			. "&nbsp;&nbsp;&nbsp;&nbsp;"
-			. $bts->RenderFormObj->renderInputText('formParams1[theme_block_".$decoCount2."_text]',	$currentThemeObj->getThemeDescriptorEntry('theme_block_' . $decoCount2 . '_text'));
+			. $bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_text]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_text'));
 		$decoCount1++;
 	}
 }
@@ -245,8 +245,8 @@ $decoCount1 = 0;
 for ($j = 1; $j <= 30; $j++) {
 	$decoCount2 = sprintf("%02u", $decoCount1);
 	$T['Content']['4'][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
-	$T['Content']['4'][$j]['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[theme_block_".$decoCount2."_menu]',	$currentThemeObj->getThemeDescriptorEntry('theme_block_' . $decoCount2 . '_menu'));
-	// "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_block_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+	$T['Content']['4'][$j]['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_menu]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_menu'));
+	// "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('block_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
 	$decoCount1++;
 }
 

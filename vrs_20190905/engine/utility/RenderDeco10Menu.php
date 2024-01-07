@@ -27,6 +27,6 @@ class RenderDeco10Menu {
 		}
 		return self::$Instance;
 	}
-	// public function render ( ThemeData $ThemeDataObj, RenderLayout $RenderLayoutObj, $m, $Mode ){}
-	public function render ( ){}
+
+	public function render ( $infos ){}
 }

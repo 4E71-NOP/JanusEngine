@@ -126,8 +126,8 @@ class RenderDeco50Exquisite {
 		$L['pos_x_ex55'] = &$L['pos_x2_ex22'];					$L['pos_y_ex55'] = &$L['pos_y3_ex22'];
 
 		// --------------------------------------------------------------------------------------------
-		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
-		$ThemeDataObj->setThemeDataEntry('theme_module_internal_height', $L['dim_y_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('module_internal_width', $L['dim_x_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('module_internal_height', $L['dim_y_ex22'] - 16);
 		$DivIdList = array();
 		$DivList = array ( "ex11", "ex12", "ex13", "ex14", "ex15", "ex21", "ex22", "ex23", "ex25", "ex31", "ex35", "ex41", "ex45", "ex51", "ex52", "ex53", "ex54", "ex55" );
 		foreach ( $DivList as $A ) { $DivIdList[$A] = "id='" . $mn . "_".$A."' "; }
@@ -180,7 +180,7 @@ class RenderDeco50Exquisite {
 			ex55 : {	'isEnabled':true,	'DimX':".$B['ex55_x'].",	'DimY':".$B['ex55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
 			}";
 	
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 50, '".$mcn."', ".$argAddModule." );");
+		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 50, '".$mcn."', ".$argAddModule.");");
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

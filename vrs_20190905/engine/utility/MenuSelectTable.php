@@ -389,9 +389,9 @@ class MenuSelectTable {
 		$tabDecoNbr = array();
 		for ( $i =1; $i<=30; $i++ ) {
 			$tabDecoNbr[$i] = array(
-				_MENU_OPTION_TXT_		=>	$i." - ".$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_block_', $i, '_name')),
+				_MENU_OPTION_TXT_		=>	$i." - ".$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('block_', $i, '_name')),
 				_MENU_OPTION_DB_		=>	$i,
-				// _MENU_OPTION_DB_		=>	$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('theme_block_', $i, '_name')),
+				// _MENU_OPTION_DB_		=>	$ThemeDataObj->getThemeDataEntry($bts->StringFormatObj->getDecorationBlockName('block_', $i, '_name')),
 				_MENU_OPTION_SELECTED_	=> '',
 			);
 		}

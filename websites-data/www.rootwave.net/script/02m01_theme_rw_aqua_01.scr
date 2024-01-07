@@ -1,17 +1,12 @@
 add theme			
 name	'rw_aqua_01'		
-directory	'Aqua'		
 title	'Aqua'		
 desc	'Aqualand'		
-			
+;
+
+/*
+directory	'Aqua'		
 stylesheet_1	'rw_aqua_01.css'		
-			
-			
-			
-			
-			
-			
-			
 bg	'aqua_bg.png'		
 			
 bg_repeat	'repeat'		
@@ -71,3 +66,4 @@ gradient_color_start	'00FF00'
 gradient_color_middle	'808020'		
 gradient_color_end	'FF0040'		
 ;			
+*/

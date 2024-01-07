@@ -1,9 +1,12 @@
 add theme	
 name		"Hydre"	
-directory	"Hydre"	
 title		"Template theme"	
 desc		"DO NOT DELETE / NE PAS EFFACER"	
+state OFFLINE	
+;
 
+/*
+directory	"Hydre"	
 stylesheet_1 "hydre_01.css"	
 stylesheet_2 "hydre_01_popmenu.css"	
 
@@ -44,5 +47,6 @@ admctrl_position "top-left"
 color_gradient_start "00AA00"	
 color_gradient_end "FF0000"	
 
-state OFFLINE	
 ;
+*/
+

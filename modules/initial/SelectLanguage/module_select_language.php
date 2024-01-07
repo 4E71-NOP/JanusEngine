@@ -67,8 +67,8 @@ class ModuleSelectLanguage {
 							$pv['1'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang');
 							$pv['1'] = $language_website_[$pv['offset']][$pv['1']];
 							$baseUrl = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
-							if ( !file_exists ( "media/theme/". $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }
-							else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeDataEntry('theme_directory')."/".$language_website_[$A]['lang_image']; }
+							if ( !file_exists ( "media/theme/". $CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }
+							else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image']; }
 							
 							$Content .= "
 							<td>\r"

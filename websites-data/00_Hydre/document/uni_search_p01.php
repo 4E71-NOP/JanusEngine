@@ -158,7 +158,7 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 		$T['ContentInfos']['RenderMode']	= 1;
 		$T['ContentInfos']['HighLightType']	= 1;
 		$T['ContentInfos']['Height']		= $RenderLayoutObj->getLayoutModuleEntry($infos['module_name'], 'dim_y_ex22' ) - $ThemeDataObj->getThemeBlockEntry($infos['blockG'],'tab_y' )-512;
-		$T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width');
+		$T['ContentInfos']['Width']			= $ThemeDataObj->getDefinitionValue('module_internal_width');
 		$T['ContentInfos']['GroupName']		= "list";
 		$T['ContentInfos']['CellName']		= "grp";
 		$T['ContentInfos']['DocumentName']	= "doc";

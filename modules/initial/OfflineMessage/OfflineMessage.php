@@ -22,7 +22,6 @@ class ModuleOffLineMessage {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
-		// $ClassLoaderObj->provisionClass('RenderLayout');
 		$ClassLoaderObj->provisionClass('ThemeData');
 		$ClassLoaderObj->provisionClass('WebSite');
 		
@@ -45,8 +44,6 @@ class ModuleOffLineMessage {
 		
 		if ( $infos['bannerOffline'] == 1 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " bannerOffline=1 The website is offline."));
-// 			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-// 			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
 			$WebSiteObj->setWebSiteEntry('ws_message', "FR : Le site est hors ligne.<br><br>ENG: The website is offline.");
 		}
 		
@@ -56,8 +53,8 @@ class ModuleOffLineMessage {
 		$mt_ = array_merge(
 				$mt_,
 				array(
-					'theme_module_internal_width'=> 896,
-					'theme_module_width' => 896,)
+					'module_internal_width'=> 896,
+					'module_width' => 896,)
 		);
 		
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
@@ -68,12 +65,12 @@ class ModuleOffLineMessage {
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
 		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedScript());
 		
-		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dx', 512);
-		$ThemeDataObj->setThemeDataEntry('theme_divinitial_dy', 1024);
+		$ThemeDataObj->setThemeDataEntry('divinitial_dx', 512);
+		$ThemeDataObj->setThemeDataEntry('divinitial_dy', 1024);
 		
 		$Content = "<!-- __________ start of modules __________ -->\r
-		width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px;
-		height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;".
+		width:".$ThemeDataObj->getDefinitionValue('divinitial_dx')."px;
+		height:".$ThemeDataObj->getDefinitionValue('divinitial_dy')."px;".
 		"'>\r";
 		
 		$infos = array(
@@ -118,10 +115,10 @@ class ModuleOffLineMessage {
 			<title>".$WebSiteObj->getWebSiteEntry('ws_title')."</title>\r
 			".$stylesheet."\r
 			</head>\r
-			<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../media/theme/".$ThemeDataObj->getThemeDataEntry ( 'theme_directory' ) . "/" . $ThemeDataObj->getThemeDataEntry ( 'theme_bg' )."'>\r\r
+			<body id='HydrBody' text='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')."' link='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')."' vlink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')."' alink='".$ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')."' background='../media/theme/".$ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bg')."'>\r\r
 			<!-- __________ start of modules __________ -->\r
-			width:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dx')."px; 
-			height:".$ThemeDataObj->getThemeDataEntry('theme_divinitial_dy')."px;
+			width:".$ThemeDataObj->getDefinitionValue('divinitial_dx')."px; 
+			height:".$ThemeDataObj->getDefinitionValue('divinitial_dy')."px;
 			'>\r".
 			$RenderDeco->render($infos).
 			"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>".

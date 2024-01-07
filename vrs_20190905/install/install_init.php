@@ -189,8 +189,8 @@ class HydrInstall
 			"' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col') .
 			"' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col') .
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col') .
-			"' background='media/theme/" . $ThemeDataObj->getThemeDataEntry('theme_directory') .
-			"/" . $ThemeDataObj->getThemeDataEntry('theme_bg')
+			"' background='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') .
+			"/" . $ThemeDataObj->getDefinitionValue('bg')
 			. "' style='height:100%;'>\r\r
 			";
 

@@ -240,7 +240,7 @@ class User extends Entity {
 		}
 		// Set a default theme if none is specified.
 		if ( $this->User['user_pref_theme'] == 0 ) {
-			$this->User['user_pref_theme'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('theme_id');
+			$this->User['user_pref_theme'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id');
 		}
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));

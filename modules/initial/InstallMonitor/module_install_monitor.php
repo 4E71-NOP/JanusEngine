@@ -44,7 +44,7 @@ class InstallMonitor {
 		$T['ContentInfos']['RenderMode']	= 1;
 		$T['ContentInfos']['HighLightType']	= 0; // 1:ligne, 2:cellule
 		$T['ContentInfos']['Height']		= 380;
-		// $T['ContentInfos']['Width']			= $ThemeDataObj->getThemeDataEntry('theme_module_internal_width') -24;  
+		// $T['ContentInfos']['Width']			= $ThemeDataObj->getDefinitionValue('module_internal_width') -24;  
 		$T['ContentInfos']['GroupName']		= "inst1";
 		$T['ContentInfos']['CellName']		= "frame01";
 		$T['ContentInfos']['DocumentName']	= "doc";

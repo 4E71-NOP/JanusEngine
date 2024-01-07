@@ -180,6 +180,10 @@ class StringFormat
 		self::$ConvertTable['theme']['bottom-center']			= 9;
 		self::$ConvertTable['theme']['center-center']			= 10;
 
+		//Theme_definition
+		self::$ConvertTable['theme_definition']['number']		= 0;
+		self::$ConvertTable['theme_definition']['string']		= 1;
+
 		// User
 		self::$ConvertTable['user']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['user']['yes']						= &self::$ConvertTable['universal']['yes'];

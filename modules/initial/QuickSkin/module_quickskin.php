@@ -40,7 +40,7 @@ class ModuleQuickSkin {
 			$Content = "
 			<table class='".$Block._CLASS_TABLE_STD_."'>\r
 			<tr>\r<td>\r
-			".$bts->I18nTransObj->getI18nTransEntry('txt1')." <span class='" . $Block."_t3b'>".$ThemeDataObj->getThemeDataEntry('theme_title')."<br></span>\r
+			".$bts->I18nTransObj->getI18nTransEntry('txt1')." <span class='" . $Block."_t3b'>".$ThemeDataObj->getDefinitionValue('title')."<br></span>\r
 			</td>\r</tr>\r
 			";
 
@@ -68,7 +68,7 @@ class ModuleQuickSkin {
 					<select name='userForm[user_pref_theme]' class='" . $Block."_form_1 " . $Block."_t3'>
 					";
 					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-						if ( $dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
+						if ( $dbp['theme_id'] == $ThemeDataObj->getDefinitionValue('id') ) { $Content .= "<option value='".$dbp['theme_name']."' selected>".$dbp['theme_title']."</option>\r"; }
 						else { 	$Content .= "<option value='".$dbp['theme_name']."'>".$dbp['theme_title']."</option>\r"; }
 					}
 					$Content .= "</select>\r

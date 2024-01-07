@@ -27,18 +27,36 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
+/*
+7829697035489902880	rw_aqua_txt_menu		1	20
+1376390842557310209	rw_aqua_block_003		1	30
+6248703030553951542	rw_aqua_block_tooltip	1	40
+6934007531439518613	rw_aqua_block_001		1	40
+4314493755035226185	rw_aqua_block_002		1	50
+
+
+
+208155152267464141	rw_tronic_menu_002	1	10
+298824726801067985	rw_tronic_menu_001	1	10
+4436066655177218932	rw_tronic_txt_tooltip	1	20
+8563118030885512150	rw_tronic_txt_main	1	20
+1160640270064654582	rw_tronic_txt_menu	1	20
+2459253984909702737	rw_tronic_block_001	1	50
+6202873271653932378	rw_tronic_block_002	1	50
+
+*/
 $bts->RequestDataObj->setRequestData('decorationForm',
 		array(
-				'selectionId'	=>	4656895238074219866,
+				'selectionId'	=>	6248703030553951542,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
 		array(
 				'origin'		=> 'AdminDashboard',
 				'section'		=> 'AdminDécorationManagementP02',
-				'creation'		=> 'on',
+				// 'creation'		=> 'on',
 				'modification'	=> 'on',
-				'deletion'		=> 'on',
+				// 'deletion'		=> 'on',
 				'mode'			=> 'edit',
 				// 'mode'			=> 'create',
 				// 'mode'			=> 'delete',
@@ -114,8 +132,8 @@ $T = array();
 switch ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode') ) {
 	case "delete":
 	case "edit":
-		$T['Content']['1']['2']['2']['cont'] = $currentDecorationObj->getDecorationEntry('deco_name');
 		$currentDecorationObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('decorationForm', 'selectionId'));
+		$T['Content']['1']['2']['2']['cont'] = $currentDecorationObj->getDecorationEntry('deco_name');
 		$commandType = "update";
 		$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('invite1')."</p>\r";
 		$processStep = "";
@@ -190,7 +208,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 $tmpDecoThemeData = new ThemeData();
-
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "Deco_type is : " . $currentDecorationObj->getDecorationEntry('deco_type')));
 switch ( $currentDecorationObj->getDecorationEntry('deco_type') ) {
 	case 10:
 		$ClassLoaderObj->provisionClass('Deco10_Menu');
@@ -236,13 +254,24 @@ switch ( $currentDecorationObj->getDecorationEntry('deco_type') ) {
 		break;
 }
 
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . 
+		"infos = " . $bts->StringFormatObj->print_r_debug($infos)
+		));
+
+		//	Trouver le bloc courant 
+		//		dans le theme associé au site courant 
+		//		qui correspond au nom de la décoration.
+		// Faire le rendu du CSS associé (s'inspirer de profil)
+		
 
 $infosTmp = array(
     'module_name' 			=> 'decoSample_'.$currentDecorationObj->getDecorationEntry('deco_type'),
-    'block'					=> 'B01',
-    'blockG'				=> 'B01G',
-    'blockT'				=> 'B01T',
+    'block'					=> 'B20',
+    'blockG'				=> 'B20G',
+    'blockT'				=> 'B20T',
     'deco_type'				=> $currentDecorationObj->getDecorationEntry('deco_type'),
+	'forcedWidth'			=> 'width:100%',
+	'forcedHeight'			=> 'height:100%',
 	'module_display_mode'	=> 'normal',
 	// 'module_display_mode'	=> 'bypass',
 	'mode'					=> 1,
@@ -253,25 +282,27 @@ $infosTmp = array(
 		)
 	);
 
-$Content .= "<br><div style='background-color:#00000080; width:100% height:768px; padding:64px'>"
+$Content .= "<br>\r".
+"<div style='background-color:#00000080; width:90%; height:512px; padding:64px'>\r"
 .$DecoRenderer->render($infosTmp)
-."<h1>H1 Lorem Ipsum</h1>"
-."<h2>H2 Lorem Ipsum</h2>"
-."<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed ipsum sed nibh tincidunt eleifend sit amet quis arcu. Quisque molestie interdum nulla vitae maximus. Nullam efficitur et leo id iaculis. Aenean id elit nec magna egestas gravida feugiat ut velit. Morbi mattis, risus quis auctor sagittis, neque massa fermentum risus, at dictum ex leo eu urna. Donec ut nulla non turpis condimentum congue. Curabitur tristique lorem nec est pulvinar, vel commodo diam tincidunt. Nulla cursus orci ac enim posuere venenatis. Aliquam eu odio ultricies, pharetra enim a, luctus ex. Aliquam tortor mauris, pharetra vitae aliquam vel, viverra a urna. Vestibulum euismod augue at ligula aliquet, at vehicula nisl sollicitudin. Phasellus at arcu enim. Quisque eleifend nunc sed blandit vehicula. Sed condimentum velit a nibh maximus, quis viverra velit ultrices. Sed sodales pulvinar convallis. Cras lorem tellus, aliquam sed lorem id, consectetur fermentum risus.</p>"
-."<h3>H3 Lorem Ipsum</h3>"
-."<p>Vestibulum et auctor odio. Vestibulum eu vestibulum est, quis euismod sem. Integer et augue hendrerit velit viverra dictum ac id massa. Sed dui diam, malesuada a varius at, tincidunt vel nulla. Duis augue felis, scelerisque nec sem quis, ultricies condimentum ligula. Vestibulum rhoncus enim sit amet dui vestibulum finibus. Integer magna felis, molestie ac eros eu, consequat bibendum quam. Maecenas vehicula vel metus non accumsan. Sed sodales leo et tortor venenatis porttitor. </p>"
-."</div>"
-."</div>"
-;
+."<h1>H1 Lorem Ipsum</h1>\r"
+."<h2>H2 Lorem Ipsum</h2>\r"
+."<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed ipsum sed nibh tincidunt eleifend sit amet quis arcu. Quisque molestie interdum nulla vitae maximus. Nullam efficitur et leo id iaculis. Aenean id elit nec magna egestas gravida feugiat ut velit. Morbi mattis, risus quis auctor sagittis, neque massa fermentum risus, at dictum ex leo eu urna. Donec ut nulla non turpis condimentum congue. Curabitur tristique lorem nec est pulvinar, vel commodo diam tincidunt. Nulla cursus orci ac enim posuere venenatis. Aliquam eu odio ultricies, pharetra enim a, luctus ex. Aliquam tortor mauris, pharetra vitae aliquam vel, viverra a urna. Vestibulum euismod augue at ligula aliquet, at vehicula nisl sollicitudin. Phasellus at arcu enim. Quisque eleifend nunc sed blandit vehicula. Sed condimentum velit a nibh maximus, quis viverra velit ultrices. Sed sodales pulvinar convallis. Cras lorem tellus, aliquam sed lorem id, consectetur fermentum risus.</p>\r"
+."<h3>H3 Lorem Ipsum</h3>\r"
+."<p>Vestibulum et auctor odio. Vestibulum eu vestibulum est, quis euismod sem. Integer et augue hendrerit velit viverra dictum ac id massa. Sed dui diam, malesuada a varius at, tincidunt vel nulla. Duis augue felis, scelerisque nec sem quis, ultricies condimentum ligula. Vestibulum rhoncus enim sit amet dui vestibulum finibus. Integer magna felis, molestie ac eros eu, consequat bibendum quam. Maecenas vehicula vel metus non accumsan. Sed sodales leo et tortor venenatis porttitor. </p>\r"
+// DIV content decospample
+."</div>\r"
+// DIV container decospample
+."</div>\r"
+// DIV of lorem ipsum
+."</div>\r";
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $infos['formName'] = "decorationForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
-
-
-
+ 
 
 /*Hydr-Content-End*/
 

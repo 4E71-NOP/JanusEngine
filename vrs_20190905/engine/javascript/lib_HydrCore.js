@@ -546,6 +546,9 @@ class ModuleManagement {
 	 */
 	AddModule ( ModuleName, DecoType, Container ,object ) {
 		switch ( DecoType) {
+			case 30:
+				var DivList = ['one_div'];
+				break;
 			case 40:
 				var DivList = [
 					'ex11', 'ex12', 'ex13', 

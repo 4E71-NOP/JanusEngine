@@ -1,9 +1,11 @@
 add theme			
 name	'rw_tronic_01'		
-directory	'Tronic'		
 title	'Tronic'		
 desc	'Tron tribute'		
-			
+;
+
+/*
+directory	'Tronic'		
 stylesheet_1	'rw_tronic_01.css'		
 			
 			
@@ -71,3 +73,4 @@ gradient_color_start	'0000FF'
 gradient_color_middle	'804080'		
 gradient_color_end	'FF8000'		
 ;			
+*/

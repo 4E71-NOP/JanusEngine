@@ -155,8 +155,8 @@ class RenderDeco60Elysion {
 		$L['dim_y_in35'] = $L['dim_y_ex22'] - $B['in15_y'] - $B['in25_y'] - $B['in45_y'] - $B['in55_y'];
 		
 		// --------------------------------------------------------------------------------------------
-		$ThemeDataObj->setThemeDataEntry('theme_module_internal_width', $L['dim_x_ex22'] - 16);
-		$ThemeDataObj->setThemeDataEntry('theme_module_internal_height', $L['dim_y_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('module_internal_width', $L['dim_x_ex22'] - 16);
+		$ThemeDataObj->setThemeDataEntry('module_internal_height', $L['dim_y_ex22'] - 16);
 		$DivIdList = array();
 		$DivList = array (
 			"ex11", "ex12", "ex13", "ex14", "ex15", "ex21", "ex22", "ex25", "ex31", "ex35", "ex41", "ex45",	"ex51", "ex52", "ex53", "ex54", "ex55",

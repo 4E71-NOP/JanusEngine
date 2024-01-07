@@ -1,9 +1,11 @@
 add theme			
 name	'hydr_magma_01'		
-directory	'Magma'		
 title	'Magma'		
 desc	'Volcanic'		
-			
+;
+
+/*			
+directory	'Magma'		
 stylesheet_1	'hydr_magma_01.css'		
 			
 			
@@ -67,7 +69,8 @@ admctrl_width	'96'
 admctrl_height	'96'		
 admctrl_position	'top-left'		
 			
-gradient_color_start	'00FF00'		
+gradient_color_rt	'00FF00'		
 gradient_color_middle	'808020'		
 gradient_color_end	'FF0040'		
 ;			
+*/
