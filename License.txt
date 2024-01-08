@@ -1,4 +1,9 @@
-Author : Faust MARIA DE AREVALO
+MWM - Multi Web Manager
+Sous licence Creative common	
+Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
+CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
+
+(c)Faust MARIA DE AREVALO faust@rootwave.com
 
 Licence : Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) 
 https://creativecommons.org/licenses/by-nc-sa/4.0/
