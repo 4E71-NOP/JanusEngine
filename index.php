@@ -9,7 +9,7 @@ session_start ();
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 //
-// (c)Faust MARIA DE AREVALO faust@club-internet.fr
+// (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */

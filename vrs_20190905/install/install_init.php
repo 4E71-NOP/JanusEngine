@@ -7,7 +7,7 @@
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 //
-// (c)Faust MARIA DE AREVALO faust@club-internet.fr
+// (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
@@ -159,7 +159,9 @@ class HydrInstall
 		$ClassLoaderObj->provisionClass('ThemeData');
 		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
 		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		// $mt_ & $ThemeDefinitionInstall are arrays for ThemeData
 		$ThemeDataObj->setThemeData($mt_); // Better to give an array than the object itself.
+		$ThemeDataObj->setThemeDefinition($ThemeDefinitionInstall);
 		$ThemeDataObj->setThemeName('mt_');
 
 		$ClassLoaderObj->provisionClass('ThemeDescriptor');

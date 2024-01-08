@@ -1,12 +1,12 @@
 <?php
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
-//	Sous licence Creative Common
+//	MWM - Multi Web Manager
+//	Sous licence Creative common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 //
-//	(c)Faust MARIA DE AREVALO faust@rootwave.net
+//	(c)Faust MARIA DE AREVALO faust@rootwave.com
 //
 // --------------------------------------------------------------------------------------------
 
@@ -14,11 +14,110 @@
 //	Installation Stylesheeet (kickstart)
 // --------------------------------------------------------------------------------------------
 $mt_ = array (
-	"theme_id" => "9086995248375251520",
+	"theme_id" => "7852865738165185508",
+	"theme_directory" => "Aqua",
 	"theme_name" => "hydr_aqua_01",
 	"theme_title" => "Aqua",
 	"theme_desc" => "Aqualand",
-	"theme_date" => "1704702844",
+	"theme_date" => "1642694959",
+	"theme_stylesheet_1" => "hydr_aqua_01.css",
+	"theme_stylesheet_2" => "",
+	"theme_stylesheet_3" => "",
+	"theme_stylesheet_4" => "",
+	"theme_stylesheet_5" => "",
+	"theme_width" => "",
+	"theme_height" => "",
+	"theme_max_width" => "",
+	"theme_max_height" => "",
+	"theme_min_width" => "",
+	"theme_min_height" => "",
+	"theme_bg" => "aqua_bg.png",
+	"theme_bg_position" => "",
+	"theme_bg_repeat" => "repeat",
+	"theme_bg_color" => "000000",
+	"theme_logo" => "aqua_logo_hydr.png",
+	"theme_divinitial_bg" => "",
+	"theme_divinitial_repeat" => "no-repeat",
+	"theme_divinitial_dx" => "0",
+	"theme_divinitial_dy" => "0",
+	"block_01_name" => "hydr_aqua_block_001",
+	"block_01_text" => "hydr_aqua_txt_main",
+	"block_02_name" => "hydr_aqua_block_002",
+	"block_02_text" => "hydr_aqua_txt_main",
+	"block_03_name" => "hydr_aqua_block_001",
+	"block_03_text" => "hydr_aqua_txt_main",
+	"block_04_name" => "hydr_aqua_block_001",
+	"block_04_text" => "hydr_aqua_txt_main",
+	"block_05_name" => "hydr_aqua_block_001",
+	"block_05_text" => "hydr_aqua_txt_main",
+	"block_06_name" => "hydr_aqua_block_001",
+	"block_06_text" => "hydr_aqua_txt_main",
+	"block_07_name" => "hydr_aqua_block_001",
+	"block_07_text" => "hydr_aqua_txt_main",
+	"block_08_name" => "hydr_aqua_block_001",
+	"block_08_text" => "hydr_aqua_txt_main",
+	"block_09_name" => "hydr_aqua_block_001",
+	"block_09_text" => "hydr_aqua_txt_main",
+	"block_10_name" => "hydr_aqua_block_001",
+	"block_10_text" => "hydr_aqua_txt_main",
+	"block_11_name" => "hydr_aqua_block_001",
+	"block_11_text" => "hydr_aqua_txt_main",
+	"block_12_name" => "hydr_aqua_block_001",
+	"block_12_text" => "hydr_aqua_txt_main",
+	"block_13_name" => "hydr_aqua_block_001",
+	"block_13_text" => "hydr_aqua_txt_main",
+	"block_14_name" => "hydr_aqua_block_001",
+	"block_14_text" => "hydr_aqua_txt_main",
+	"block_15_name" => "hydr_aqua_block_001",
+	"block_15_text" => "hydr_aqua_txt_main",
+	"block_16_name" => "hydr_aqua_block_001",
+	"block_16_text" => "hydr_aqua_txt_main",
+	"block_17_name" => "hydr_aqua_block_001",
+	"block_17_text" => "hydr_aqua_txt_main",
+	"block_18_name" => "hydr_aqua_block_001",
+	"block_18_text" => "hydr_aqua_txt_main",
+	"block_19_name" => "hydr_aqua_block_001",
+	"block_19_text" => "hydr_aqua_txt_main",
+	"block_20_name" => "hydr_aqua_block_tooltip",
+	"block_20_text" => "hydr_aqua_txt_tooltip",
+	"block_21_name" => "hydr_aqua_block_001",
+	"block_21_text" => "hydr_aqua_txt_main",
+	"block_22_name" => "hydr_aqua_block_001",
+	"block_22_text" => "hydr_aqua_txt_main",
+	"block_23_name" => "hydr_aqua_block_001",
+	"block_23_text" => "hydr_aqua_txt_main",
+	"block_24_name" => "hydr_aqua_block_001",
+	"block_24_text" => "hydr_aqua_txt_main",
+	"block_25_name" => "hydr_aqua_block_001",
+	"block_25_text" => "hydr_aqua_txt_main",
+	"block_26_name" => "hydr_aqua_block_001",
+	"block_26_text" => "hydr_aqua_txt_main",
+	"block_27_name" => "hydr_aqua_block_001",
+	"block_27_text" => "hydr_aqua_txt_main",
+	"block_28_name" => "hydr_aqua_block_001",
+	"block_28_text" => "hydr_aqua_txt_main",
+	"block_29_name" => "hydr_aqua_block_001",
+	"block_29_text" => "hydr_aqua_txt_main",
+	"block_30_name" => "hydr_aqua_block_001",
+	"block_30_text" => "hydr_aqua_txt_main",
+	"block_00_menu" => "hydr_aqua_menu_001",
+	"block_01_menu" => "hydr_aqua_menu_002",
+	"block_02_menu" => "hydr_aqua_menu_002",
+	"block_03_menu" => "hydr_aqua_menu_002",
+	"block_04_menu" => "hydr_aqua_menu_002",
+	"block_05_menu" => "hydr_aqua_menu_002",
+	"block_06_menu" => "hydr_aqua_menu_002",
+	"block_07_menu" => "hydr_aqua_menu_002",
+	"block_08_menu" => "hydr_aqua_menu_002",
+	"block_09_menu" => "hydr_aqua_menu_002",
+	"theme_admctrl_panel_bg" => "aqua_B01_bgc_fca.png",
+	"theme_admctrl_switch_bg" => "aqua_admctrl_switch_bg.png",
+	"theme_admctrl_width" => "96",
+	"theme_admctrl_height" => "96",
+	"theme_admctrl_position" => "0",
+	"theme_gradient_start_color" => "000000",
+	"theme_gradient_middle_color" => "808000",
+	"theme_gradient_end_color" => "FF0000",
 	"blockMCount" => "2",
 	"blockTCount" => "2",
 	"blockGCount" => "3",
@@ -145,7 +244,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -322,8 +420,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -479,7 +575,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -656,8 +751,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -779,7 +872,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -956,8 +1048,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -1079,7 +1169,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -1256,8 +1345,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -1379,7 +1466,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -1556,8 +1642,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -1679,7 +1763,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -1856,8 +1939,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -1979,7 +2060,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -2156,8 +2236,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -2279,7 +2357,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -2456,8 +2533,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -2579,7 +2654,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -2756,8 +2830,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -2879,7 +2951,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -3056,8 +3127,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -3179,7 +3248,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -3356,8 +3424,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -3479,7 +3545,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -3656,8 +3721,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -3779,7 +3842,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -3956,8 +4018,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -4079,7 +4139,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -4256,8 +4315,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -4379,7 +4436,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -4556,8 +4612,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -4679,7 +4733,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -4856,8 +4909,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -4979,7 +5030,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -5156,8 +5206,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -5279,7 +5327,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -5456,8 +5503,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -5579,7 +5624,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -5756,8 +5800,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -5976,9 +6018,7 @@ $mt_ = array (
 		"h7_font_family" => "Arial",
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#FFFFFF",
-		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;"
+		"h7_special" => "font-weight:bold;"
 	),
 	"B21G" => array (
  		"directory" => "Aqua",
@@ -6098,7 +6138,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -6275,8 +6314,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -6398,7 +6435,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -6575,8 +6611,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -6698,7 +6732,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -6875,8 +6908,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -6998,7 +7029,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -7175,8 +7205,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -7298,7 +7326,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -7475,8 +7502,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -7598,7 +7623,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -7775,8 +7799,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -7898,7 +7920,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -8075,8 +8096,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -8198,7 +8217,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -8375,8 +8393,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -8498,7 +8514,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -8675,8 +8690,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
@@ -8798,7 +8811,6 @@ $mt_ = array (
 		"t01_tr_bg_even_col" => "#AADAFF",
 		"t01_tr_bg_hover_col" => "#ACEDD4",
 		"t01_td_bg_odd_col" => "#FFFFFF40",
-		"t01_td_special" => "padding:5px;",
 		"ca_txt_col" => "#000000",
 		"ca_txt_bg_col" => "transparent",
 		"cb_txt_col" => "#000000",
@@ -8975,13 +8987,11 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"duplicateList" => "B02T B03T B04T B05T B06T B07T B08T B09T B10T B11T B12T B13T B14T B15T B16T B17T B18T B19T B21T B22T B23T B24T B25T B26T B27T B28T B29T B30T ",
 		"blockList" => "B02 B03 B04 B05 B06 B07 B08 B09 B10 B11 B12 B13 B14 B15 B16 B17 B18 B19 B21 B22 B23 B24 B25 B26 B27 B28 B29 B30 "
 	),
 	"B00M" => array (
- 		"id" => "1448009029204727009",
+ 		"id" => "8794706759903758725",
 		"level" => "0",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9249,8 +9259,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -9294,7 +9302,7 @@ $mt_ = array (
 		"2" => "1"
 	),
 	"B01M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9562,8 +9570,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -9606,7 +9612,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B02M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -9874,8 +9880,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -9918,7 +9922,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B03M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10186,8 +10190,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -10230,7 +10232,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B04M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10498,8 +10500,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -10542,7 +10542,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B05M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -10810,8 +10810,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -10854,7 +10852,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B06M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11122,8 +11120,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -11166,7 +11162,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B07M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11434,8 +11430,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -11478,7 +11472,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B08M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -11746,8 +11740,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -11790,7 +11782,7 @@ $mt_ = array (
 		"levelList" => "2 3 4 5 6 7 8 9 "
 	),
 	"B09M" => array (
- 		"id" => "7350259658991764757",
+ 		"id" => "2043252585545332977",
 		"level" => "1",
 		"directory" => "Aqua",
 		"graphic" => "hydr_aqua_block_001",
@@ -12058,8 +12050,6 @@ $mt_ = array (
 		"h7_font_size" => "14",
 		"h7_txt_col" => "#000000",
 		"h7_special" => "font-weight:bold;",
-		"page_selector" => "display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
-		"page_selector_highlight" => "display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm;",
 		"ex11" => "aqua_B01_ex11.png",
 		"ex12" => "aqua_B01_ex12.png",
 		"ex13" => "aqua_B01_ex13.png",
@@ -12109,691 +12099,13 @@ $mt_ = array (
 	"ligne2" => "Stylesheet du theme",
 	"ligne3" => "Date de la generation",
 	"ligne4" => "Nom du fichier"
+
 );
 
-$ThemeDefinitionInstall = array (
-	"admctrl_height" => array (
- 		"def_id" => "6710121440963240734",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "0",
-		"def_name" => "admctrl_height",
-		"def_number" => "96",
-		"def_string" => "bg.png"
-	),
-	"admctrl_panel_bg" => array (
- 		"def_id" => "3458890402426264123",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "admctrl_panel_bg",
-		"def_number" => "0",
-		"def_string" => "aqua_B01_bgc_fca.png"
-	),
-	"admctrl_position" => array (
- 		"def_id" => "9159907062306196857",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "0",
-		"def_name" => "admctrl_position",
-		"def_number" => "0",
-		"def_string" => "top-left"
-	),
-	"admctrl_switch_bg" => array (
- 		"def_id" => "6197772889018401045",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "admctrl_switch_bg",
-		"def_number" => "0",
-		"def_string" => "aqua_admctrl_switch_bg.png"
-	),
-	"admctrl_width" => array (
- 		"def_id" => "7934949101444767018",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "0",
-		"def_name" => "admctrl_width",
-		"def_number" => "96",
-		"def_string" => "bg.png"
-	),
-	"bg" => array (
- 		"def_id" => "8512099408913986147",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "bg",
-		"def_number" => "0",
-		"def_string" => "aqua_bg.png"
-	),
-	"bg_color" => array (
- 		"def_id" => "10090820217581784",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "bg_color",
-		"def_number" => "0",
-		"def_string" => "000000"
-	),
-	"bg_repeat" => array (
- 		"def_id" => "7466587646062883175",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "bg_repeat",
-		"def_number" => "0",
-		"def_string" => "repeat"
-	),
-	"block_00_menu" => array (
- 		"def_id" => "1687731946130990236",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_00_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_001"
-	),
-	"block_01_menu" => array (
- 		"def_id" => "586284814641987104",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_01_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_01_name" => array (
- 		"def_id" => "2396857282020076425",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_01_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_01_text" => array (
- 		"def_id" => "868274041449253",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_01_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_02_menu" => array (
- 		"def_id" => "4528064252055030767",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_02_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_02_name" => array (
- 		"def_id" => "581370216528265900",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_02_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_002"
-	),
-	"block_02_text" => array (
- 		"def_id" => "174208413355927834",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_02_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_03_menu" => array (
- 		"def_id" => "2282393590840698692",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_03_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_03_name" => array (
- 		"def_id" => "4390020630299067978",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_03_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_03_text" => array (
- 		"def_id" => "1453971182044862678",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_03_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_04_menu" => array (
- 		"def_id" => "246356523553491838",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_04_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_04_name" => array (
- 		"def_id" => "3356192530054327",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_04_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_04_text" => array (
- 		"def_id" => "218886111528608193",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_04_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_05_menu" => array (
- 		"def_id" => "8570882526922838985",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_05_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_05_name" => array (
- 		"def_id" => "709946659144940585",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_05_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_05_text" => array (
- 		"def_id" => "5311215415635372863",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_05_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_06_menu" => array (
- 		"def_id" => "5864450995208527805",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_06_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_06_name" => array (
- 		"def_id" => "3449827308089826484",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_06_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_06_text" => array (
- 		"def_id" => "9186125037026628018",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_06_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_07_menu" => array (
- 		"def_id" => "3355651051925111623",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_07_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_07_name" => array (
- 		"def_id" => "6829467657316550482",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_07_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_07_text" => array (
- 		"def_id" => "9196827931851924366",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_07_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_08_menu" => array (
- 		"def_id" => "6054431546913756795",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_08_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_08_name" => array (
- 		"def_id" => "4130693049866423289",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_08_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_08_text" => array (
- 		"def_id" => "8265469953080781590",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_08_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_09_menu" => array (
- 		"def_id" => "3917330659824633455",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_09_menu",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_menu_002"
-	),
-	"block_09_name" => array (
- 		"def_id" => "6836173478319694860",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_09_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_09_text" => array (
- 		"def_id" => "2312177623778189672",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_09_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_10_name" => array (
- 		"def_id" => "473328184597387642",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_10_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_10_text" => array (
- 		"def_id" => "1136976630244807063",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_10_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_11_name" => array (
- 		"def_id" => "1412864870735417595",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_11_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_11_text" => array (
- 		"def_id" => "5888497958933599224",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_11_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_12_name" => array (
- 		"def_id" => "70453875445195102",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_12_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_12_text" => array (
- 		"def_id" => "3193510684585541315",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_12_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_13_name" => array (
- 		"def_id" => "4974454994612971197",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_13_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_13_text" => array (
- 		"def_id" => "2311169463712041728",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_13_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_14_name" => array (
- 		"def_id" => "197907746317047536",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_14_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_14_text" => array (
- 		"def_id" => "1170747390216375011",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_14_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_15_name" => array (
- 		"def_id" => "1096370832696901344",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_15_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_15_text" => array (
- 		"def_id" => "247285104482896826",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_15_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_16_name" => array (
- 		"def_id" => "3287806139628880025",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_16_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_16_text" => array (
- 		"def_id" => "4667250048567660480",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_16_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_17_name" => array (
- 		"def_id" => "491438024658034093",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_17_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_17_text" => array (
- 		"def_id" => "1041818751576262531",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_17_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_18_name" => array (
- 		"def_id" => "4766882285432286887",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_18_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_18_text" => array (
- 		"def_id" => "6686779056541595073",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_18_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_19_name" => array (
- 		"def_id" => "8948206219226649582",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_19_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_19_text" => array (
- 		"def_id" => "7101222130349722881",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_19_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_20_name" => array (
- 		"def_id" => "2650567138951338998",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_20_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_tooltip"
-	),
-	"block_20_text" => array (
- 		"def_id" => "7287836382297422542",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_20_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_tooltip"
-	),
-	"block_21_name" => array (
- 		"def_id" => "5746269549228595099",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_21_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_21_text" => array (
- 		"def_id" => "6685211260090932211",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_21_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_22_name" => array (
- 		"def_id" => "7546383248768430881",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_22_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_22_text" => array (
- 		"def_id" => "1188452840038523585",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_22_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_23_name" => array (
- 		"def_id" => "8942001792294906031",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_23_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_23_text" => array (
- 		"def_id" => "5749367978848241659",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_23_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_24_name" => array (
- 		"def_id" => "6560206318145939605",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_24_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_24_text" => array (
- 		"def_id" => "4545970306051249959",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_24_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_25_name" => array (
- 		"def_id" => "7522957881180139783",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_25_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_25_text" => array (
- 		"def_id" => "6509017287318826627",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_25_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_26_name" => array (
- 		"def_id" => "4278430523426845966",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_26_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_26_text" => array (
- 		"def_id" => "155495136734895140",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_26_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_27_name" => array (
- 		"def_id" => "2167583201618342937",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_27_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_27_text" => array (
- 		"def_id" => "1487182776762448751",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_27_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_28_name" => array (
- 		"def_id" => "7444371803245578879",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_28_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_28_text" => array (
- 		"def_id" => "1197943079013524101",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_28_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_29_name" => array (
- 		"def_id" => "3167961295673385484",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_29_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_29_text" => array (
- 		"def_id" => "125486598149253896",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_29_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"block_30_name" => array (
- 		"def_id" => "6503260850773773495",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_30_name",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_block_001"
-	),
-	"block_30_text" => array (
- 		"def_id" => "8631469170928037790",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "block_30_text",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_txt_main"
-	),
-	"directory" => array (
- 		"def_id" => "7725335319269211835",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "directory",
-		"def_number" => "0",
-		"def_string" => "Aqua"
-	),
-	"gradient_color_end" => array (
- 		"def_id" => "5285109072315528417",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "gradient_color_end",
-		"def_number" => "0",
-		"def_string" => "FF0040"
-	),
-	"gradient_color_middle" => array (
- 		"def_id" => "1144396269649921710",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "gradient_color_middle",
-		"def_number" => "0",
-		"def_string" => "808020"
-	),
-	"gradient_color_start" => array (
- 		"def_id" => "6267207217581235228",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "gradient_color_start",
-		"def_number" => "0",
-		"def_string" => "00FF00"
-	),
-	"logo" => array (
- 		"def_id" => "7876846682750267477",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "logo",
-		"def_number" => "0",
-		"def_string" => "aqua_logo_hydr.png"
-	),
-	"stylesheet_1" => array (
- 		"def_id" => "3976287493421861268",
-		"fk_theme_id" => "9086995248375251520",
-		"def_type" => "1",
-		"def_name" => "stylesheet_1",
-		"def_number" => "0",
-		"def_string" => "hydr_aqua_01.css"
-	)
-);
 
 // --------------------------------------------------------------------------------------------
 
-
-
-
 $stylesheet = "
-
-
 <style type='text/css'>
 <!--
 /*
@@ -12801,12 +12113,11 @@ $stylesheet = "
 // Hydr - Generated stylesheet
 //----------------------------------------------------------------------------
 // Theme : hydr_aqua_01
-// Date : 2024-01-8 9:12:44
+// Date : 2022-01-21 14:14:02
 // fileName : hydr_aqua_01.css
 //----------------------------------------------------------------------------
 */
 html { width:100%; height:100%;}
-
 
 .mt_B01_ft, .mt_B02_ft, .mt_B03_ft, .mt_B04_ft, .mt_B05_ft, .mt_B06_ft, .mt_B07_ft, .mt_B08_ft, .mt_B09_ft, .mt_B10_ft, .mt_B11_ft, .mt_B12_ft, .mt_B13_ft, .mt_B14_ft, .mt_B15_ft, .mt_B16_ft, .mt_B17_ft, .mt_B18_ft, .mt_B19_ft, .mt_B21_ft, .mt_B22_ft, .mt_B23_ft, .mt_B24_ft, .mt_B25_ft, .mt_B26_ft, .mt_B27_ft, .mt_B28_ft, .mt_B29_ft, .mt_B30_ft  { border-spacing: 0px; border: 0px; empty-cells: show; vertical-align: middle; } 
 .mt_B01_ft1, .mt_B02_ft1, .mt_B03_ft1, .mt_B04_ft1, .mt_B05_ft1, .mt_B06_ft1, .mt_B07_ft1, .mt_B08_ft1, .mt_B09_ft1, .mt_B10_ft1, .mt_B11_ft1, .mt_B12_ft1, .mt_B13_ft1, .mt_B14_ft1, .mt_B15_ft1, .mt_B16_ft1, .mt_B17_ft1, .mt_B18_ft1, .mt_B19_ft1, .mt_B21_ft1, .mt_B22_ft1, .mt_B23_ft1, .mt_B24_ft1, .mt_B25_ft1, .mt_B26_ft1, .mt_B27_ft1, .mt_B28_ft1, .mt_B29_ft1, .mt_B30_ft1  { padding: 0px; border: 0px; width: 32px; height: 64px; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ft1.png);  } 
@@ -12842,12 +12153,12 @@ html { width:100%; height:100%;}
 .mt_B01_tab_hover_c, .mt_B02_tab_hover_c, .mt_B03_tab_hover_c, .mt_B04_tab_hover_c, .mt_B05_tab_hover_c, .mt_B06_tab_hover_c, .mt_B07_tab_hover_c, .mt_B08_tab_hover_c, .mt_B09_tab_hover_c, .mt_B10_tab_hover_c, .mt_B11_tab_hover_c, .mt_B12_tab_hover_c, .mt_B13_tab_hover_c, .mt_B14_tab_hover_c, .mt_B15_tab_hover_c, .mt_B16_tab_hover_c, .mt_B17_tab_hover_c, .mt_B18_tab_hover_c, .mt_B19_tab_hover_c, .mt_B21_tab_hover_c, .mt_B22_tab_hover_c, .mt_B23_tab_hover_c, .mt_B24_tab_hover_c, .mt_B25_tab_hover_c, .mt_B26_tab_hover_c, .mt_B27_tab_hover_c, .mt_B28_tab_hover_c, .mt_B29_tab_hover_c, .mt_B30_tab_hover_c  { background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_tab_c.png); padding-top: 0px; padding-left: 0px; vertical-align: bottom; width: 8px; height: 32px; background-position: 0px -64px; background-repeat : no-repeat; overflow:hidden; text-align: center; color: #FFFFFF;                         ; }
 .mt_B01_tabFrame, .mt_B02_tabFrame, .mt_B03_tabFrame, .mt_B04_tabFrame, .mt_B05_tabFrame, .mt_B06_tabFrame, .mt_B07_tabFrame, .mt_B08_tabFrame, .mt_B09_tabFrame, .mt_B10_tabFrame, .mt_B11_tabFrame, .mt_B12_tabFrame, .mt_B13_tabFrame, .mt_B14_tabFrame, .mt_B15_tabFrame, .mt_B16_tabFrame, .mt_B17_tabFrame, .mt_B18_tabFrame, .mt_B19_tabFrame, .mt_B21_tabFrame, .mt_B22_tabFrame, .mt_B23_tabFrame, .mt_B24_tabFrame, .mt_B25_tabFrame, .mt_B26_tabFrame, .mt_B27_tabFrame, .mt_B28_tabFrame, .mt_B29_tabFrame, .mt_B30_tabFrame  { padding: 5px ; vertical-align: top;   background-color: #55749280; }
 
-.mt_B01, .mt_B02, .mt_B03, .mt_B04, .mt_B05, .mt_B06, .mt_B07, .mt_B08, .mt_B09, .mt_B10, .mt_B11, .mt_B12, .mt_B13, .mt_B14, .mt_B15, .mt_B16, .mt_B17, .mt_B18, .mt_B19, .mt_B21, .mt_B22, .mt_B23, .mt_B24, .mt_B25, .mt_B26, .mt_B27, .mt_B28, .mt_B29, .mt_B30 {font-family:Arial; font-size:14px; color:#000000; }
-.mt_B01_ok, .mt_B02_ok, .mt_B03_ok, .mt_B04_ok, .mt_B05_ok, .mt_B06_ok, .mt_B07_ok, .mt_B08_ok, .mt_B09_ok, .mt_B10_ok, .mt_B11_ok, .mt_B12_ok, .mt_B13_ok, .mt_B14_ok, .mt_B15_ok, .mt_B16_ok, .mt_B17_ok, .mt_B18_ok, .mt_B19_ok, .mt_B21_ok, .mt_B22_ok, .mt_B23_ok, .mt_B24_ok, .mt_B25_ok, .mt_B26_ok, .mt_B27_ok, .mt_B28_ok, .mt_B29_ok, .mt_B30_ok {color:#008000; }
-.mt_B01_warning, .mt_B02_warning, .mt_B03_warning, .mt_B04_warning, .mt_B05_warning, .mt_B06_warning, .mt_B07_warning, .mt_B08_warning, .mt_B09_warning, .mt_B10_warning, .mt_B11_warning, .mt_B12_warning, .mt_B13_warning, .mt_B14_warning, .mt_B15_warning, .mt_B16_warning, .mt_B17_warning, .mt_B18_warning, .mt_B19_warning, .mt_B21_warning, .mt_B22_warning, .mt_B23_warning, .mt_B24_warning, .mt_B25_warning, .mt_B26_warning, .mt_B27_warning, .mt_B28_warning, .mt_B29_warning, .mt_B30_warning {color:#FF8000; }
-.mt_B01_error, .mt_B02_error, .mt_B03_error, .mt_B04_error, .mt_B05_error, .mt_B06_error, .mt_B07_error, .mt_B08_error, .mt_B09_error, .mt_B10_error, .mt_B11_error, .mt_B12_error, .mt_B13_error, .mt_B14_error, .mt_B15_error, .mt_B16_error, .mt_B17_error, .mt_B18_error, .mt_B19_error, .mt_B21_error, .mt_B22_error, .mt_B23_error, .mt_B24_error, .mt_B25_error, .mt_B26_error, .mt_B27_error, .mt_B28_error, .mt_B29_error, .mt_B30_error {color:#FF0000; }
-.mt_B01_fade, .mt_B02_fade, .mt_B03_fade, .mt_B04_fade, .mt_B05_fade, .mt_B06_fade, .mt_B07_fade, .mt_B08_fade, .mt_B09_fade, .mt_B10_fade, .mt_B11_fade, .mt_B12_fade, .mt_B13_fade, .mt_B14_fade, .mt_B15_fade, .mt_B16_fade, .mt_B17_fade, .mt_B18_fade, .mt_B19_fade, .mt_B21_fade, .mt_B22_fade, .mt_B23_fade, .mt_B24_fade, .mt_B25_fade, .mt_B26_fade, .mt_B27_fade, .mt_B28_fade, .mt_B29_fade, .mt_B30_fade {color:#C0C0C0; }
-.mt_B01_highlight, .mt_B02_highlight, .mt_B03_highlight, .mt_B04_highlight, .mt_B05_highlight, .mt_B06_highlight, .mt_B07_highlight, .mt_B08_highlight, .mt_B09_highlight, .mt_B10_highlight, .mt_B11_highlight, .mt_B12_highlight, .mt_B13_highlight, .mt_B14_highlight, .mt_B15_highlight, .mt_B16_highlight, .mt_B17_highlight, .mt_B18_highlight, .mt_B19_highlight, .mt_B21_highlight, .mt_B22_highlight, .mt_B23_highlight, .mt_B24_highlight, .mt_B25_highlight, .mt_B26_highlight, .mt_B27_highlight, .mt_B28_highlight, .mt_B29_highlight, .mt_B30_highlight {color:#404000; }
+.mt_B01 , .mt_B02 , .mt_B03 , .mt_B04 , .mt_B05 , .mt_B06 , .mt_B07 , .mt_B08 , .mt_B09 , .mt_B10 , .mt_B11 , .mt_B12 , .mt_B13 , .mt_B14 , .mt_B15 , .mt_B16 , .mt_B17 , .mt_B18 , .mt_B19 , .mt_B21 , .mt_B22 , .mt_B23 , .mt_B24 , .mt_B25 , .mt_B26 , .mt_B27 , .mt_B28 , .mt_B29 , .mt_B30  {font-family:Arial; font-size:14px; color:#000000; }
+.mt_B01_ok , .mt_B02_ok , .mt_B03_ok , .mt_B04_ok , .mt_B05_ok , .mt_B06_ok , .mt_B07_ok , .mt_B08_ok , .mt_B09_ok , .mt_B10_ok , .mt_B11_ok , .mt_B12_ok , .mt_B13_ok , .mt_B14_ok , .mt_B15_ok , .mt_B16_ok , .mt_B17_ok , .mt_B18_ok , .mt_B19_ok , .mt_B21_ok , .mt_B22_ok , .mt_B23_ok , .mt_B24_ok , .mt_B25_ok , .mt_B26_ok , .mt_B27_ok , .mt_B28_ok , .mt_B29_ok , .mt_B30_ok  {color:#008000; }
+.mt_B01_warning , .mt_B02_warning , .mt_B03_warning , .mt_B04_warning , .mt_B05_warning , .mt_B06_warning , .mt_B07_warning , .mt_B08_warning , .mt_B09_warning , .mt_B10_warning , .mt_B11_warning , .mt_B12_warning , .mt_B13_warning , .mt_B14_warning , .mt_B15_warning , .mt_B16_warning , .mt_B17_warning , .mt_B18_warning , .mt_B19_warning , .mt_B21_warning , .mt_B22_warning , .mt_B23_warning , .mt_B24_warning , .mt_B25_warning , .mt_B26_warning , .mt_B27_warning , .mt_B28_warning , .mt_B29_warning , .mt_B30_warning  {color:#FF8000; }
+.mt_B01_error , .mt_B02_error , .mt_B03_error , .mt_B04_error , .mt_B05_error , .mt_B06_error , .mt_B07_error , .mt_B08_error , .mt_B09_error , .mt_B10_error , .mt_B11_error , .mt_B12_error , .mt_B13_error , .mt_B14_error , .mt_B15_error , .mt_B16_error , .mt_B17_error , .mt_B18_error , .mt_B19_error , .mt_B21_error , .mt_B22_error , .mt_B23_error , .mt_B24_error , .mt_B25_error , .mt_B26_error , .mt_B27_error , .mt_B28_error , .mt_B29_error , .mt_B30_error  {color:#FF0000; }
+.mt_B01_fade , .mt_B02_fade , .mt_B03_fade , .mt_B04_fade , .mt_B05_fade , .mt_B06_fade , .mt_B07_fade , .mt_B08_fade , .mt_B09_fade , .mt_B10_fade , .mt_B11_fade , .mt_B12_fade , .mt_B13_fade , .mt_B14_fade , .mt_B15_fade , .mt_B16_fade , .mt_B17_fade , .mt_B18_fade , .mt_B19_fade , .mt_B21_fade , .mt_B22_fade , .mt_B23_fade , .mt_B24_fade , .mt_B25_fade , .mt_B26_fade , .mt_B27_fade , .mt_B28_fade , .mt_B29_fade , .mt_B30_fade  {color:#C0C0C0; }
+.mt_B01_highlight , .mt_B02_highlight , .mt_B03_highlight , .mt_B04_highlight , .mt_B05_highlight , .mt_B06_highlight , .mt_B07_highlight , .mt_B08_highlight , .mt_B09_highlight , .mt_B10_highlight , .mt_B11_highlight , .mt_B12_highlight , .mt_B13_highlight , .mt_B14_highlight , .mt_B15_highlight , .mt_B16_highlight , .mt_B17_highlight , .mt_B18_highlight , .mt_B19_highlight , .mt_B21_highlight , .mt_B22_highlight , .mt_B23_highlight , .mt_B24_highlight , .mt_B25_highlight , .mt_B26_highlight , .mt_B27_highlight , .mt_B28_highlight , .mt_B29_highlight , .mt_B30_highlight  {color:#404000; }
 .mt_B01 h1, .mt_B02 h1, .mt_B03 h1, .mt_B04 h1, .mt_B05 h1, .mt_B06 h1, .mt_B07 h1, .mt_B08 h1, .mt_B09 h1, .mt_B10 h1, .mt_B11 h1, .mt_B12 h1, .mt_B13 h1, .mt_B14 h1, .mt_B15 h1, .mt_B16 h1, .mt_B17 h1, .mt_B18 h1, .mt_B19 h1, .mt_B21 h1, .mt_B22 h1, .mt_B23 h1, .mt_B24 h1, .mt_B25 h1, .mt_B26 h1, .mt_B27 h1, .mt_B28 h1, .mt_B29 h1, .mt_B30 h1 {font-family:Arial; font-size:26px; color:#000000; font-weight:bold;; }
 .mt_B01 h2, .mt_B02 h2, .mt_B03 h2, .mt_B04 h2, .mt_B05 h2, .mt_B06 h2, .mt_B07 h2, .mt_B08 h2, .mt_B09 h2, .mt_B10 h2, .mt_B11 h2, .mt_B12 h2, .mt_B13 h2, .mt_B14 h2, .mt_B15 h2, .mt_B16 h2, .mt_B17 h2, .mt_B18 h2, .mt_B19 h2, .mt_B21 h2, .mt_B22 h2, .mt_B23 h2, .mt_B24 h2, .mt_B25 h2, .mt_B26 h2, .mt_B27 h2, .mt_B28 h2, .mt_B29 h2, .mt_B30 h2 {font-family:Arial; font-size:24px; color:#000000; font-weight:bold;; }
 .mt_B01 h3, .mt_B02 h3, .mt_B03 h3, .mt_B04 h3, .mt_B05 h3, .mt_B06 h3, .mt_B07 h3, .mt_B08 h3, .mt_B09 h3, .mt_B10 h3, .mt_B11 h3, .mt_B12 h3, .mt_B13 h3, .mt_B14 h3, .mt_B15 h3, .mt_B16 h3, .mt_B17 h3, .mt_B18 h3, .mt_B19 h3, .mt_B21 h3, .mt_B22 h3, .mt_B23 h3, .mt_B24 h3, .mt_B25 h3, .mt_B26 h3, .mt_B27 h3, .mt_B28 h3, .mt_B29 h3, .mt_B30 h3 {font-family:Arial; font-size:22px; color:#000000; font-weight:bold;; }
@@ -12865,14 +12176,13 @@ html { width:100%; height:100%;}
 .mt_B01 select, .mt_B02 select, .mt_B03 select, .mt_B04 select, .mt_B05 select, .mt_B06 select, .mt_B07 select, .mt_B08 select, .mt_B09 select, .mt_B10 select, .mt_B11 select, .mt_B12 select, .mt_B13 select, .mt_B14 select, .mt_B15 select, .mt_B16 select, .mt_B17 select, .mt_B18 select, .mt_B19 select, .mt_B21 select, .mt_B22 select, .mt_B23 select, .mt_B24 select, .mt_B25 select, .mt_B26 select, .mt_B27 select, .mt_B28 select, .mt_B29 select, .mt_B30 select {color:#000000; background-color:#FFFFFF; }
 .mt_B01 textarea, .mt_B02 textarea, .mt_B03 textarea, .mt_B04 textarea, .mt_B05 textarea, .mt_B06 textarea, .mt_B07 textarea, .mt_B08 textarea, .mt_B09 textarea, .mt_B10 textarea, .mt_B11 textarea, .mt_B12 textarea, .mt_B13 textarea, .mt_B14 textarea, .mt_B15 textarea, .mt_B16 textarea, .mt_B17 textarea, .mt_B18 textarea, .mt_B19 textarea, .mt_B21 textarea, .mt_B22 textarea, .mt_B23 textarea, .mt_B24 textarea, .mt_B25 textarea, .mt_B26 textarea, .mt_B27 textarea, .mt_B28 textarea, .mt_B29 textarea, .mt_B30 textarea {color:#000000; background-color:#FFFFFF; }
 .mt_B01 code, .mt_B02 code, .mt_B03 code, .mt_B04 code, .mt_B05 code, .mt_B06 code, .mt_B07 code, .mt_B08 code, .mt_B09 code, .mt_B10 code, .mt_B11 code, .mt_B12 code, .mt_B13 code, .mt_B14 code, .mt_B15 code, .mt_B16 code, .mt_B17 code, .mt_B18 code, .mt_B19 code, .mt_B21 code, .mt_B22 code, .mt_B23 code, .mt_B24 code, .mt_B25 code, .mt_B26 code, .mt_B27 code, .mt_B28 code, .mt_B29 code, .mt_B30 code {color:#008000; background-color:#000000CC; padding-top:3mm; padding-bottom:5mm; padding-left:3mm; padding-right:3mm; display:block; border-radius:2.5mm;; }
-.mt_B01_TableStd, .mt_B02_TableStd, .mt_B03_TableStd, .mt_B04_TableStd, .mt_B05_TableStd, .mt_B06_TableStd, .mt_B07_TableStd, .mt_B08_TableStd, .mt_B09_TableStd, .mt_B10_TableStd, .mt_B11_TableStd, .mt_B12_TableStd, .mt_B13_TableStd, .mt_B14_TableStd, .mt_B15_TableStd, .mt_B16_TableStd, .mt_B17_TableStd, .mt_B18_TableStd, .mt_B19_TableStd, .mt_B21_TableStd, .mt_B22_TableStd, .mt_B23_TableStd, .mt_B24_TableStd, .mt_B25_TableStd, .mt_B26_TableStd, .mt_B27_TableStd, .mt_B28_TableStd, .mt_B29_TableStd, .mt_B30_TableStd { border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}
+.mt_B01_TableStd , .mt_B02_TableStd , .mt_B03_TableStd , .mt_B04_TableStd , .mt_B05_TableStd , .mt_B06_TableStd , .mt_B07_TableStd , .mt_B08_TableStd , .mt_B09_TableStd , .mt_B10_TableStd , .mt_B11_TableStd , .mt_B12_TableStd , .mt_B13_TableStd , .mt_B14_TableStd , .mt_B15_TableStd , .mt_B16_TableStd , .mt_B17_TableStd , .mt_B18_TableStd , .mt_B19_TableStd , .mt_B21_TableStd , .mt_B22_TableStd , .mt_B23_TableStd , .mt_B24_TableStd , .mt_B25_TableStd , .mt_B26_TableStd , .mt_B27_TableStd , .mt_B28_TableStd , .mt_B29_TableStd , .mt_B30_TableStd  { border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}
 .mt_B01_TableStd td, .mt_B02_TableStd td, .mt_B03_TableStd td, .mt_B04_TableStd td, .mt_B05_TableStd td, .mt_B06_TableStd td, .mt_B07_TableStd td, .mt_B08_TableStd td, .mt_B09_TableStd td, .mt_B10_TableStd td, .mt_B11_TableStd td, .mt_B12_TableStd td, .mt_B13_TableStd td, .mt_B14_TableStd td, .mt_B15_TableStd td, .mt_B16_TableStd td, .mt_B17_TableStd td, .mt_B18_TableStd td, .mt_B19_TableStd td, .mt_B21_TableStd td, .mt_B22_TableStd td, .mt_B23_TableStd td, .mt_B24_TableStd td, .mt_B25_TableStd td, .mt_B26_TableStd td, .mt_B27_TableStd td, .mt_B28_TableStd td, .mt_B29_TableStd td, .mt_B30_TableStd td { text-align:center; background-color:transparent;}
-.mt_B01_Table01, .mt_B02_Table01, .mt_B03_Table01, .mt_B04_Table01, .mt_B05_Table01, .mt_B06_Table01, .mt_B07_Table01, .mt_B08_Table01, .mt_B09_Table01, .mt_B10_Table01, .mt_B11_Table01, .mt_B12_Table01, .mt_B13_Table01, .mt_B14_Table01, .mt_B15_Table01, .mt_B16_Table01, .mt_B17_Table01, .mt_B18_Table01, .mt_B19_Table01, .mt_B21_Table01, .mt_B22_Table01, .mt_B23_Table01, .mt_B24_Table01, .mt_B25_Table01, .mt_B26_Table01, .mt_B27_Table01, .mt_B28_Table01, .mt_B29_Table01, .mt_B30_Table01 { border-spacing:0px; border-collapse:collapse; width:100% }
+.mt_B01_Table01 , .mt_B02_Table01 , .mt_B03_Table01 , .mt_B04_Table01 , .mt_B05_Table01 , .mt_B06_Table01 , .mt_B07_Table01 , .mt_B08_Table01 , .mt_B09_Table01 , .mt_B10_Table01 , .mt_B11_Table01 , .mt_B12_Table01 , .mt_B13_Table01 , .mt_B14_Table01 , .mt_B15_Table01 , .mt_B16_Table01 , .mt_B17_Table01 , .mt_B18_Table01 , .mt_B19_Table01 , .mt_B21_Table01 , .mt_B22_Table01 , .mt_B23_Table01 , .mt_B24_Table01 , .mt_B25_Table01 , .mt_B26_Table01 , .mt_B27_Table01 , .mt_B28_Table01 , .mt_B29_Table01 , .mt_B30_Table01  { border-spacing:0px; border-collapse:collapse; width:100% }
 .mt_B01_Table01 caption, .mt_B02_Table01 caption, .mt_B03_Table01 caption, .mt_B04_Table01 caption, .mt_B05_Table01 caption, .mt_B06_Table01 caption, .mt_B07_Table01 caption, .mt_B08_Table01 caption, .mt_B09_Table01 caption, .mt_B10_Table01 caption, .mt_B11_Table01 caption, .mt_B12_Table01 caption, .mt_B13_Table01 caption, .mt_B14_Table01 caption, .mt_B15_Table01 caption, .mt_B16_Table01 caption, .mt_B17_Table01 caption, .mt_B18_Table01 caption, .mt_B19_Table01 caption, .mt_B21_Table01 caption, .mt_B22_Table01 caption, .mt_B23_Table01 caption, .mt_B24_Table01 caption, .mt_B25_Table01 caption, .mt_B26_Table01 caption, .mt_B27_Table01 caption, .mt_B28_Table01 caption, .mt_B29_Table01 caption, .mt_B30_Table01 caption {background-color:#FFFFE0; color: #000000; font-size:16px;font-style:italic;padding:2.5mm;}
 .mt_B01_Table01 tr, .mt_B02_Table01 tr, .mt_B03_Table01 tr, .mt_B04_Table01 tr, .mt_B05_Table01 tr, .mt_B06_Table01 tr, .mt_B07_Table01 tr, .mt_B08_Table01 tr, .mt_B09_Table01 tr, .mt_B10_Table01 tr, .mt_B11_Table01 tr, .mt_B12_Table01 tr, .mt_B13_Table01 tr, .mt_B14_Table01 tr, .mt_B15_Table01 tr, .mt_B16_Table01 tr, .mt_B17_Table01 tr, .mt_B18_Table01 tr, .mt_B19_Table01 tr, .mt_B21_Table01 tr, .mt_B22_Table01 tr, .mt_B23_Table01 tr, .mt_B24_Table01 tr, .mt_B25_Table01 tr, .mt_B26_Table01 tr, .mt_B27_Table01 tr, .mt_B28_Table01 tr, .mt_B29_Table01 tr, .mt_B30_Table01 tr { background-color:#A0D0FF; color:#000000;  }
 .mt_B01_Table01 tr:nth-child(2n), .mt_B02_Table01 tr:nth-child(2n), .mt_B03_Table01 tr:nth-child(2n), .mt_B04_Table01 tr:nth-child(2n), .mt_B05_Table01 tr:nth-child(2n), .mt_B06_Table01 tr:nth-child(2n), .mt_B07_Table01 tr:nth-child(2n), .mt_B08_Table01 tr:nth-child(2n), .mt_B09_Table01 tr:nth-child(2n), .mt_B10_Table01 tr:nth-child(2n), .mt_B11_Table01 tr:nth-child(2n), .mt_B12_Table01 tr:nth-child(2n), .mt_B13_Table01 tr:nth-child(2n), .mt_B14_Table01 tr:nth-child(2n), .mt_B15_Table01 tr:nth-child(2n), .mt_B16_Table01 tr:nth-child(2n), .mt_B17_Table01 tr:nth-child(2n), .mt_B18_Table01 tr:nth-child(2n), .mt_B19_Table01 tr:nth-child(2n), .mt_B21_Table01 tr:nth-child(2n), .mt_B22_Table01 tr:nth-child(2n), .mt_B23_Table01 tr:nth-child(2n), .mt_B24_Table01 tr:nth-child(2n), .mt_B25_Table01 tr:nth-child(2n), .mt_B26_Table01 tr:nth-child(2n), .mt_B27_Table01 tr:nth-child(2n), .mt_B28_Table01 tr:nth-child(2n), .mt_B29_Table01 tr:nth-child(2n), .mt_B30_Table01 tr:nth-child(2n) { background-color:#AADAFF; }
 .mt_B01_Table01 tr:hover, .mt_B02_Table01 tr:hover, .mt_B03_Table01 tr:hover, .mt_B04_Table01 tr:hover, .mt_B05_Table01 tr:hover, .mt_B06_Table01 tr:hover, .mt_B07_Table01 tr:hover, .mt_B08_Table01 tr:hover, .mt_B09_Table01 tr:hover, .mt_B10_Table01 tr:hover, .mt_B11_Table01 tr:hover, .mt_B12_Table01 tr:hover, .mt_B13_Table01 tr:hover, .mt_B14_Table01 tr:hover, .mt_B15_Table01 tr:hover, .mt_B16_Table01 tr:hover, .mt_B17_Table01 tr:hover, .mt_B18_Table01 tr:hover, .mt_B19_Table01 tr:hover, .mt_B21_Table01 tr:hover, .mt_B22_Table01 tr:hover, .mt_B23_Table01 tr:hover, .mt_B24_Table01 tr:hover, .mt_B25_Table01 tr:hover, .mt_B26_Table01 tr:hover, .mt_B27_Table01 tr:hover, .mt_B28_Table01 tr:hover, .mt_B29_Table01 tr:hover, .mt_B30_Table01 tr:hover { background-color:#ACEDD4; }
-.mt_B01_Table01 td, .mt_B02_Table01 td, .mt_B03_Table01 td, .mt_B04_Table01 td, .mt_B05_Table01 td, .mt_B06_Table01 td, .mt_B07_Table01 td, .mt_B08_Table01 td, .mt_B09_Table01 td, .mt_B10_Table01 td, .mt_B11_Table01 td, .mt_B12_Table01 td, .mt_B13_Table01 td, .mt_B14_Table01 td, .mt_B15_Table01 td, .mt_B16_Table01 td, .mt_B17_Table01 td, .mt_B18_Table01 td, .mt_B19_Table01 td, .mt_B21_Table01 td, .mt_B22_Table01 td, .mt_B23_Table01 td, .mt_B24_Table01 td, .mt_B25_Table01 td, .mt_B26_Table01 td, .mt_B27_Table01 td, .mt_B28_Table01 td, .mt_B29_Table01 td, .mt_B30_Table01 td { padding:5px;;      }
 .mt_B01_Table01 td:nth-child(2n+1), .mt_B02_Table01 td:nth-child(2n+1), .mt_B03_Table01 td:nth-child(2n+1), .mt_B04_Table01 td:nth-child(2n+1), .mt_B05_Table01 td:nth-child(2n+1), .mt_B06_Table01 td:nth-child(2n+1), .mt_B07_Table01 td:nth-child(2n+1), .mt_B08_Table01 td:nth-child(2n+1), .mt_B09_Table01 td:nth-child(2n+1), .mt_B10_Table01 td:nth-child(2n+1), .mt_B11_Table01 td:nth-child(2n+1), .mt_B12_Table01 td:nth-child(2n+1), .mt_B13_Table01 td:nth-child(2n+1), .mt_B14_Table01 td:nth-child(2n+1), .mt_B15_Table01 td:nth-child(2n+1), .mt_B16_Table01 td:nth-child(2n+1), .mt_B17_Table01 td:nth-child(2n+1), .mt_B18_Table01 td:nth-child(2n+1), .mt_B19_Table01 td:nth-child(2n+1), .mt_B21_Table01 td:nth-child(2n+1), .mt_B22_Table01 td:nth-child(2n+1), .mt_B23_Table01 td:nth-child(2n+1), .mt_B24_Table01 td:nth-child(2n+1), .mt_B25_Table01 td:nth-child(2n+1), .mt_B26_Table01 td:nth-child(2n+1), .mt_B27_Table01 td:nth-child(2n+1), .mt_B28_Table01 td:nth-child(2n+1), .mt_B29_Table01 td:nth-child(2n+1), .mt_B30_Table01 td:nth-child(2n+1) { background-color:#FFFFFF40; }
 .mt_B01_Table01 a, .mt_B02_Table01 a, .mt_B03_Table01 a, .mt_B04_Table01 a, .mt_B05_Table01 a, .mt_B06_Table01 a, .mt_B07_Table01 a, .mt_B08_Table01 a, .mt_B09_Table01 a, .mt_B10_Table01 a, .mt_B11_Table01 a, .mt_B12_Table01 a, .mt_B13_Table01 a, .mt_B14_Table01 a, .mt_B15_Table01 a, .mt_B16_Table01 a, .mt_B17_Table01 a, .mt_B18_Table01 a, .mt_B19_Table01 a, .mt_B21_Table01 a, .mt_B22_Table01 a, .mt_B23_Table01 a, .mt_B24_Table01 a, .mt_B25_Table01 a, .mt_B26_Table01 a, .mt_B27_Table01 a, .mt_B28_Table01 a, .mt_B29_Table01 a, .mt_B30_Table01 a {color:#000000; text-decoration:none; }
 .mt_B01_Table01 a:hover, .mt_B02_Table01 a:hover, .mt_B03_Table01 a:hover, .mt_B04_Table01 a:hover, .mt_B05_Table01 a:hover, .mt_B06_Table01 a:hover, .mt_B07_Table01 a:hover, .mt_B08_Table01 a:hover, .mt_B09_Table01 a:hover, .mt_B10_Table01 a:hover, .mt_B11_Table01 a:hover, .mt_B12_Table01 a:hover, .mt_B13_Table01 a:hover, .mt_B14_Table01 a:hover, .mt_B15_Table01 a:hover, .mt_B16_Table01 a:hover, .mt_B17_Table01 a:hover, .mt_B18_Table01 a:hover, .mt_B19_Table01 a:hover, .mt_B21_Table01 a:hover, .mt_B22_Table01 a:hover, .mt_B23_Table01 a:hover, .mt_B24_Table01 a:hover, .mt_B25_Table01 a:hover, .mt_B26_Table01 a:hover, .mt_B27_Table01 a:hover, .mt_B28_Table01 a:hover, .mt_B29_Table01 a:hover, .mt_B30_Table01 a:hover {color:#000000; }
@@ -12894,18 +12204,16 @@ html { width:100%; height:100%;}
 .mt_B01_icon_bottom, .mt_B02_icon_bottom, .mt_B03_icon_bottom, .mt_B04_icon_bottom, .mt_B05_icon_bottom, .mt_B06_icon_bottom, .mt_B07_icon_bottom, .mt_B08_icon_bottom, .mt_B09_icon_bottom, .mt_B10_icon_bottom, .mt_B11_icon_bottom, .mt_B12_icon_bottom, .mt_B13_icon_bottom, .mt_B14_icon_bottom, .mt_B15_icon_bottom, .mt_B16_icon_bottom, .mt_B17_icon_bottom, .mt_B18_icon_bottom, .mt_B19_icon_bottom, .mt_B21_icon_bottom, .mt_B22_icon_bottom, .mt_B23_icon_bottom, .mt_B24_icon_bottom, .mt_B25_icon_bottom, .mt_B26_icon_bottom, .mt_B27_icon_bottom, .mt_B28_icon_bottom, .mt_B29_icon_bottom, .mt_B30_icon_bottom  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_down.png); }
 .mt_B01_icon_question, .mt_B02_icon_question, .mt_B03_icon_question, .mt_B04_icon_question, .mt_B05_icon_question, .mt_B06_icon_question, .mt_B07_icon_question, .mt_B08_icon_question, .mt_B09_icon_question, .mt_B10_icon_question, .mt_B11_icon_question, .mt_B12_icon_question, .mt_B13_icon_question, .mt_B14_icon_question, .mt_B15_icon_question, .mt_B16_icon_question, .mt_B17_icon_question, .mt_B18_icon_question, .mt_B19_icon_question, .mt_B21_icon_question, .mt_B22_icon_question, .mt_B23_icon_question, .mt_B24_icon_question, .mt_B25_icon_question, .mt_B26_icon_question, .mt_B27_icon_question, .mt_B28_icon_question, .mt_B29_icon_question, .mt_B30_icon_question  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_question.png); }
 .mt_B01_icon_notification, .mt_B02_icon_notification, .mt_B03_icon_notification, .mt_B04_icon_notification, .mt_B05_icon_notification, .mt_B06_icon_notification, .mt_B07_icon_notification, .mt_B08_icon_notification, .mt_B09_icon_notification, .mt_B10_icon_notification, .mt_B11_icon_notification, .mt_B12_icon_notification, .mt_B13_icon_notification, .mt_B14_icon_notification, .mt_B15_icon_notification, .mt_B16_icon_notification, .mt_B17_icon_notification, .mt_B18_icon_notification, .mt_B19_icon_notification, .mt_B21_icon_notification, .mt_B22_icon_notification, .mt_B23_icon_notification, .mt_B24_icon_notification, .mt_B25_icon_notification, .mt_B26_icon_notification, .mt_B27_icon_notification, .mt_B28_icon_notification, .mt_B29_icon_notification, .mt_B30_icon_notification  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_notification.png); }
-.mt_B01_page_selector, .mt_B02_page_selector, .mt_B03_page_selector, .mt_B04_page_selector, .mt_B05_page_selector, .mt_B06_page_selector, .mt_B07_page_selector, .mt_B08_page_selector, .mt_B09_page_selector, .mt_B10_page_selector, .mt_B11_page_selector, .mt_B12_page_selector, .mt_B13_page_selector, .mt_B14_page_selector, .mt_B15_page_selector, .mt_B16_page_selector, .mt_B17_page_selector, .mt_B18_page_selector, .mt_B19_page_selector, .mt_B21_page_selector, .mt_B22_page_selector, .mt_B23_page_selector, .mt_B24_page_selector, .mt_B25_page_selector, .mt_B26_page_selector, .mt_B27_page_selector, .mt_B28_page_selector, .mt_B29_page_selector, .mt_B30_page_selector  { display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm; }
-.mt_B01_page_selector_highlight, .mt_B02_page_selector_highlight, .mt_B03_page_selector_highlight, .mt_B04_page_selector_highlight, .mt_B05_page_selector_highlight, .mt_B06_page_selector_highlight, .mt_B07_page_selector_highlight, .mt_B08_page_selector_highlight, .mt_B09_page_selector_highlight, .mt_B10_page_selector_highlight, .mt_B11_page_selector_highlight, .mt_B12_page_selector_highlight, .mt_B13_page_selector_highlight, .mt_B14_page_selector_highlight, .mt_B15_page_selector_highlight, .mt_B16_page_selector_highlight, .mt_B17_page_selector_highlight, .mt_B18_page_selector_highlight, .mt_B19_page_selector_highlight, .mt_B21_page_selector_highlight, .mt_B22_page_selector_highlight, .mt_B23_page_selector_highlight, .mt_B24_page_selector_highlight, .mt_B25_page_selector_highlight, .mt_B26_page_selector_highlight, .mt_B27_page_selector_highlight, .mt_B28_page_selector_highlight, .mt_B29_page_selector_highlight, .mt_B30_page_selector_highlight  { display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm; }
 
 .mt_B20_ft  { border-spacing: 0px; border: 0px; empty-cells: show; vertical-align: middle; } 
 .mt_B20_tabFrame  { padding: 5px ; vertical-align: top;    }
 
-.mt_B20 {font-family:Arial; font-size:14px; color:#FFFFFF; }
-.mt_B20_ok {color:#008000; }
-.mt_B20_warning {color:#FF8000; }
-.mt_B20_error {color:#FF0000; }
-.mt_B20_fade {color:#C0C0C0; }
-.mt_B20_highlight {color:#404000; }
+.mt_B20  {font-family:Arial; font-size:14px; color:#FFFFFF; }
+.mt_B20_ok  {color:#008000; }
+.mt_B20_warning  {color:#FF8000; }
+.mt_B20_error  {color:#FF0000; }
+.mt_B20_fade  {color:#C0C0C0; }
+.mt_B20_highlight  {color:#404000; }
 .mt_B20 h1 {font-family:Arial; font-size:26px; color:#FFFFFF; font-weight:bold;; }
 .mt_B20 h2 {font-family:Arial; font-size:24px; color:#FFFFFF; font-weight:bold;; }
 .mt_B20 h3 {font-family:Arial; font-size:22px; color:#FFFFFF; font-weight:bold;; }
@@ -12919,9 +12227,9 @@ html { width:100%; height:100%;}
 .mt_B20 a:hover {font-weight:bold;display:block;; }
 .mt_B20 a:active {color:#FFFFFF;  color: inherit;}
 .mt_B20 code {color:#FFFFFF; background-color:#000000; }
-.mt_B20_TableStd { border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}
+.mt_B20_TableStd  { border-spacing:0px; width:100%; margin-left:0px; margin-right:auto;}
 .mt_B20_TableStd td { text-align:center; background-color:transparent;}
-.mt_B20_Table01 { border-spacing:0px; border-collapse:collapse; width:100% }
+.mt_B20_Table01  { border-spacing:0px; border-collapse:collapse; width:100% }
 .mt_B20_Table01 a:visited {color:#FFFFFF; }
 .mt_B20_icon_directory  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_directory.png); }
 .mt_B20_icon_erase  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_erase.png); }
@@ -12933,8 +12241,6 @@ html { width:100%; height:100%;}
 .mt_B20_icon_bottom  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_down.png); }
 .mt_B20_icon_question  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_question.png); }
 .mt_B20_icon_notification  { background-size: contain; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_icon_notification.png); }
-.mt_B20_page_selector  { display:inline-block; background-color:#80808030; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm; }
-.mt_B20_page_selector_highlight  { display:inline-block; background-color:#80808080; border-radius:0.1cm; border:solid 1px #00000080; padding:0.2cm 0.35cm; margin:0.1cm; }
 
 .mt_B01_ex11, .mt_B03_ex11, .mt_B04_ex11, .mt_B05_ex11, .mt_B06_ex11, .mt_B07_ex11, .mt_B08_ex11, .mt_B09_ex11, .mt_B10_ex11, .mt_B11_ex11, .mt_B12_ex11, .mt_B13_ex11, .mt_B14_ex11, .mt_B15_ex11, .mt_B16_ex11, .mt_B17_ex11, .mt_B18_ex11, .mt_B19_ex11, .mt_B21_ex11, .mt_B22_ex11, .mt_B23_ex11, .mt_B24_ex11, .mt_B25_ex11, .mt_B26_ex11, .mt_B27_ex11, .mt_B28_ex11, .mt_B29_ex11, .mt_B30_ex11  { position: absolute; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ex11.png); background-position:top left; vertical-align: bottom; width: 8px; height: 8px;  background-repeat : no-repeat; overflow:hidden }
 .mt_B01_ex12, .mt_B03_ex12, .mt_B04_ex12, .mt_B05_ex12, .mt_B06_ex12, .mt_B07_ex12, .mt_B08_ex12, .mt_B09_ex12, .mt_B10_ex12, .mt_B11_ex12, .mt_B12_ex12, .mt_B13_ex12, .mt_B14_ex12, .mt_B15_ex12, .mt_B16_ex12, .mt_B17_ex12, .mt_B18_ex12, .mt_B19_ex12, .mt_B21_ex12, .mt_B22_ex12, .mt_B23_ex12, .mt_B24_ex12, .mt_B25_ex12, .mt_B26_ex12, .mt_B27_ex12, .mt_B28_ex12, .mt_B29_ex12, .mt_B30_ex12  { position: absolute; background-image: url(http://www.local-hydr.net/media/theme/Aqua/aqua_B01_ex12.png); background-position:top left; vertical-align: bottom; width: 496px; height: 8px;  background-repeat : repeat-x; overflow:hidden }
@@ -13007,9 +12313,9 @@ html { width:100%; height:100%;}
 
 
  .centered { text-align: center; }
-.mt_bareTable   {background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}
-.mt_bareTable tr  {background-color:transparent !important; margin:0px; padding:0px;}
-.mt_bareTable td  {background-color:transparent; margin:0px !important; padding:0px !important;}
+.mt_bareTable {background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}
+.mt_bareTable tr {background-color:transparent !important; margin:0px; padding:0px;}
+.mt_bareTable td {background-color:transparent; margin:0px; padding:0px;}
 .mt_bareTable:hover {background-color:transparent}
 .mt_bareTable tr:hover {background-color:transparent}
 .mt_bareTable td:hover {background-color:transparent}

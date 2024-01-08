@@ -1083,10 +1083,10 @@ self::$InitTable['theme_definition'] = function (&$a) {
 		'def_id'		=> 0,
 		'for_theme'		=> "",
 		'fk_theme_id'	=> 0,
-		'def_type'		=> 1,
-		'def_name'		=> "bg",
-		'def_number'	=> 0,
-		'def_string'	=> "bg.png",
+		'type'			=> 1,
+		'name'			=> "bg",
+		'number'		=> 0,
+		'string'		=> "bg.png",
 	);
 };
 

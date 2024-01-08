@@ -3,8 +3,11 @@
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
-//	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
-//	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
+//	Sous licence Creative Common
+//	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
+//	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
+//
+//	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
@@ -27,7 +30,7 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 3	);
+$bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 9086995248375251520	);
 
 /*Hydr-Content-Begin*/
 $localisation = " / uni_stylesheet_maker_p01";
@@ -97,6 +100,7 @@ $dbquery = $bts->SDDMObj->query("
 	.$SqlTableListObj->getSQLTableName('theme_website')." tw 
 	WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
 	AND td.theme_id = tw.fk_theme_id 
+	ORDER BY td.theme_title
 	;");
 
 $SGEtat = array(
@@ -144,12 +148,14 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	$WorkingThemeData = new ThemeData();
 	$WorkingThemeDescriptorObj = new ThemeDescriptor();
 	$WorkingThemeDescriptorObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTheme'));
-	$WorkingThemeData->setThemeName('mt_');				// Change the to the Maint Theme acronym "mt_" for rendering
+	$WorkingThemeData->setThemeName('mt_');				// Change the to the Main Theme acronym "mt_" for rendering
 	$WorkingThemeData->setThemeData($WorkingThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
+	$WorkingThemeData->setThemeDefinition($WorkingThemeDescriptorObj->getThemeDefinition());
 	$WorkingThemeData->setDecorationListFromDB();
 	$WorkingThemeData->renderBlockData();
 	
-	$theme_vars = "\$" . $WorkingThemeData->getThemeName()." = array (\n".$bts->StringFormatObj->print_r_code($WorkingThemeData->getThemeData(), "	")."\n);";
+	$theme_vars = "\$" . $WorkingThemeData->getThemeName()." = array (\n".$bts->StringFormatObj->print_r_code($WorkingThemeData->getThemeData(), "	") . "\n);\n\n"
+	."\$ThemeDefinitionInstall = array (\n" . $bts->StringFormatObj->print_r_code($WorkingThemeData->getThemeDefinition(), "	") . "\n);";
 	
 	$stylesheet = $RenderStylesheetObj->render($WorkingThemeData->getThemeName(), $WorkingThemeData );
 	$stylesheet = str_replace("	" , " ", $stylesheet);
