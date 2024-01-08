@@ -43,6 +43,6 @@ add theme_definition for_theme "Hydre"	name "admctrl_panel_bg"		type	"string"	st
 add theme_definition for_theme "Hydre"	name "admctrl_switch_bg"	type	"string"	string	"admctrl_switch_bg.gif";
 add theme_definition for_theme "Hydre"	name "admctrl_width"		type	"number"	number	64;
 add theme_definition for_theme "Hydre"	name "admctrl_height"		type	"number"	number	64;	
-add theme_definition for_theme "Hydre"	name "admctrl_position"		type	"string"	string	"Top-left"	number	"1";
+add theme_definition for_theme "Hydre"	name "admctrl_position"		type	"number"	string	"top-left"	number	"1";
 add theme_definition for_theme "Hydre"	name "color_gradient_start"	type	"string"	string	"00AA00";	
 add theme_definition for_theme "Hydre"	name "color_gradient_end"	type	"string"	string	"FF0000";	

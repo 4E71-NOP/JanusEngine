@@ -96,21 +96,21 @@ class StringFormat
 		self::$ConvertTable['decoration']['elysion']			= 60;
 
 		self::$ConvertTable['article_config']['no']				= &self::$ConvertTable['universal']['no'];
-		self::$ConvertTable['article_config']['yes']				= &self::$ConvertTable['universal']['yes'];
-		self::$ConvertTable['article_config']['offline']			= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['article_config']['yes']			= &self::$ConvertTable['universal']['yes'];
+		self::$ConvertTable['article_config']['offline']		= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['article_config']['online']			= &self::$ConvertTable['universal']['online'];
-		self::$ConvertTable['article_config']['table']				= 1;
-		self::$ConvertTable['article_config']['menu_select']		= 2;
+		self::$ConvertTable['article_config']['table']			= 1;
+		self::$ConvertTable['article_config']['menu_select']	= 2;
 		self::$ConvertTable['article_config']['normal']			= 1;
-		self::$ConvertTable['article_config']['float']				= 2;
-		self::$ConvertTable['article_config']['none']				= 0;
-		self::$ConvertTable['article_config']['left']				= 1;
-		self::$ConvertTable['article_config']['right']				= 2;
-		self::$ConvertTable['article_config']['no_menu']			= 0;
-		self::$ConvertTable['article_config']['top']				= 1;
+		self::$ConvertTable['article_config']['float']			= 2;
+		self::$ConvertTable['article_config']['none']			= 0;
+		self::$ConvertTable['article_config']['left']			= 1;
+		self::$ConvertTable['article_config']['right']			= 2;
+		self::$ConvertTable['article_config']['no_menu']		= 0;
+		self::$ConvertTable['article_config']['top']			= 1;
 		self::$ConvertTable['article_config']['bottom']			= 2;
-		self::$ConvertTable['article_config']['both']				= 3;
-		self::$ConvertTable['article_config']['store']				= 4;
+		self::$ConvertTable['article_config']['both']			= 3;
+		self::$ConvertTable['article_config']['store']			= 4;
 
 
 		self::$ConvertTable['document']['no']					= &self::$ConvertTable['universal']['no'];
@@ -167,7 +167,7 @@ class StringFormat
 		self::$ConvertTable['permission']['read']				= 1;
 		self::$ConvertTable['permission']['write']				= 2;
 
-		//Theme
+		// Theme
 		self::$ConvertTable['theme']['offline']					= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['theme']['online']					= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['theme']['top-left']				= 0;
@@ -180,7 +180,7 @@ class StringFormat
 		self::$ConvertTable['theme']['bottom-center']			= 9;
 		self::$ConvertTable['theme']['center-center']			= 10;
 
-		//Theme_definition
+		// Theme_definition
 		self::$ConvertTable['theme_definition']['number']		= 0;
 		self::$ConvertTable['theme_definition']['string']		= 1;
 
@@ -385,7 +385,7 @@ class StringFormat
 	 */
 	public function conversion_expression($val, $section)
 	{
-		return self::$ConvertTable[$section][strtolower($val)];
+		return self::$ConvertTable[strtolower($section)][strtolower($val)];
 	}
 
 	/**

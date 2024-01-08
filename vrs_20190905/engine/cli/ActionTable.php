@@ -98,7 +98,7 @@ self::$ActionTable['add']['theme_definition']	= function (&$a) {
 		"bottom-center"		=> 9,
 		"center-center"		=> 10
 	);
-	$a['params']['number'] = $pos[$a['params']['string']];
+	$a['params']['def_number'] = $pos[strtolower($a['params']['string'])];
 	return array ("INSERT INTO ".$a['sqlTables']['theme_definition']." (".$a['columns'].") VALUES (".$a['values'].");",);
 };
 

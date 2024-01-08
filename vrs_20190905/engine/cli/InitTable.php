@@ -1080,10 +1080,10 @@ self::$InitTable['theme'] = function (&$a) {
 
 self::$InitTable['theme_definition'] = function (&$a) {
 	$a['params'] = array(
-		'def_id'		=> 0,
+		'id'			=> 0,
 		'for_theme'		=> "",
 		'fk_theme_id'	=> 0,
-		'type'			=> 1,
+		'type'			=> "string",
 		'name'			=> "bg",
 		'number'		=> 0,
 		'string'		=> "bg.png",

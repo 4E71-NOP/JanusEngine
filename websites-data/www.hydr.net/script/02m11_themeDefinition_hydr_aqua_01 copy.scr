@@ -83,7 +83,7 @@ add theme_definition for_theme "hydr_aqua_01"	name "admctrl_panel_bg"			type	"st
 add theme_definition for_theme "hydr_aqua_01"	name "admctrl_switch_bg"		type	"string"	string	"aqua_admctrl_switch_bg.png";
 add theme_definition for_theme "hydr_aqua_01"	name "admctrl_width"			type	"number"	number	"96";
 add theme_definition for_theme "hydr_aqua_01"	name "admctrl_height"			type	"number"	number	"96";
-add theme_definition for_theme "hydr_aqua_01"	name "admctrl_position"			type	"string"	string	"top-left"	number	"1";
+add theme_definition for_theme "hydr_aqua_01"	name "admctrl_position"			type	"number"	string	"top-left"	number	"1";
 add theme_definition for_theme "hydr_aqua_01"	name "gradient_color_start"		type	"string"	string	"00FF00";
 add theme_definition for_theme "hydr_aqua_01"	name "gradient_color_middle"	type	"string"	string	"808020";
 add theme_definition for_theme "hydr_aqua_01"	name "gradient_color_end"		type	"string"	string	"FF0040";

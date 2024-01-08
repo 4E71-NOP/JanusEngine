@@ -86,7 +86,7 @@ add theme_definition for_theme "hydr_nebula_01"	name "admctrl_panel_bg"			type	"
 add theme_definition for_theme "hydr_nebula_01"	name "admctrl_switch_bg"		type	"string"	string	"nebula_admctrl_switch_bg.png";
 add theme_definition for_theme "hydr_nebula_01"	name "admctrl_width"			type	"number"	number	"64";
 add theme_definition for_theme "hydr_nebula_01"	name "admctrl_height"			type	"number"	number	"64";
-add theme_definition for_theme "hydr_nebula_01"	name "admctrl_position"			type	"string"	string	"top-left"	number	"1";
+add theme_definition for_theme "hydr_nebula_01"	name "admctrl_position"			type	"number"	string	"top-left"	number	"1";
 add theme_definition for_theme "hydr_nebula_01"	name "gradient_color_start"		type	"string"	string	"C33A09";
 add theme_definition for_theme "hydr_nebula_01"	name "gradient_color_middle"	type	"string"	string	"0897DF";
 add theme_definition for_theme "hydr_nebula_01"	name "gradient_color_end"		type	"string"	string	"CFC600";
