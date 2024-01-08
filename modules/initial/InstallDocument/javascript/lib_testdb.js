@@ -65,7 +65,6 @@ class LibTestDB {
 	 */
 	testDbCnx() {
 		var FormName = 'install_page_init';
-		// var URLvar = "http://"+document.domain+RequestURI+"/current/install/install_routines/install_test_db.php";
 		var URLvar = "http://" + location.hostname + RequestURI+"/current/install/install_routines/install_test_db.php";
 
 		var URLamp = "?";

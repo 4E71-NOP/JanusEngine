@@ -355,7 +355,7 @@ class Hydr
 		switch ($firstContactScore) {
 			case 0:
 				$bts->SMObj->InitializeSession();
-				$bts->SMObj->UpdatePhpSession();
+				$bts->SMObj->syncSuperGlobalSession();
 				break;
 			case 1:
 				$bts->SMObj->CheckSession();
