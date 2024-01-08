@@ -134,6 +134,7 @@ class LibInstallation {
 		$sqlCount = 0;
 		foreach ( $infos['FormattedCommand'] as $C ) {
 			if ( !isset($C['ordre']) ) {
+				// $bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Query '" . $C['cont'] . "'"));
 				$bts->SDDMObj->query($C['cont']);
 				$res = $bts->LMObj->getLastSQLDetails();
 				switch ( $res['signal'] ) {

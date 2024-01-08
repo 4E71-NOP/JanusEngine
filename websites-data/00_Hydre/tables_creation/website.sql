@@ -24,7 +24,7 @@ ws_gal_y			INTEGER,
 ws_gal_border		INTEGER,
 ws_ma_diff			INTEGER,
 
-row_creation		TIMESTAMP NULL NULL,
+row_creation		TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 row_user_creation	VARCHAR(255),
 row_update			TIMESTAMP NULL NULL,
 row_user_update		VARCHAR(255),
