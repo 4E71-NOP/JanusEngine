@@ -170,19 +170,19 @@ class StringFormat
 		// Theme
 		self::$ConvertTable['theme']['offline']					= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['theme']['online']					= &self::$ConvertTable['universal']['online'];
-		self::$ConvertTable['theme']['top-left']				= 0;
-		self::$ConvertTable['theme']['bottom-left']				= 1;
-		self::$ConvertTable['theme']['center-left']				= 2;
-		self::$ConvertTable['theme']['top-right']				= 4;
-		self::$ConvertTable['theme']['bottom-right']			= 5;
-		self::$ConvertTable['theme']['center-right']			= 6;
-		self::$ConvertTable['theme']['top-center']				= 8;
-		self::$ConvertTable['theme']['bottom-center']			= 9;
-		self::$ConvertTable['theme']['center-center']			= 10;
 
 		// Theme_definition
-		self::$ConvertTable['theme_definition']['number']		= 0;
-		self::$ConvertTable['theme_definition']['string']		= 1;
+		self::$ConvertTable['theme_definition']['top-left']			= 0;
+		self::$ConvertTable['theme_definition']['bottom-left']		= 1;
+		self::$ConvertTable['theme_definition']['center-left']		= 2;
+		self::$ConvertTable['theme_definition']['top-right']		= 4;
+		self::$ConvertTable['theme_definition']['bottom-right']		= 5;
+		self::$ConvertTable['theme_definition']['center-right']		= 6;
+		self::$ConvertTable['theme_definition']['top-center']		= 8;
+		self::$ConvertTable['theme_definition']['bottom-center']	= 9;
+		self::$ConvertTable['theme_definition']['center-center']	= 10;
+		self::$ConvertTable['theme_definition']['number']			= 0;
+		self::$ConvertTable['theme_definition']['string']			= 1;
 
 		// User
 		self::$ConvertTable['user']['no']						= &self::$ConvertTable['universal']['no'];
@@ -383,9 +383,23 @@ class StringFormat
 	 * @param string $section
 	 * @return mixed
 	 */
-	public function conversion_expression($val, $section)
+	public function conversionExpression($val, $section)
 	{
 		return self::$ConvertTable[strtolower($section)][strtolower($val)];
+	}
+
+
+	/**
+	 * Converts a value with $section and $val and save into $data[$target]
+	 * @param string $val
+	 * @param string $section
+	 * @return mixed
+	 */
+	public function conversionExpressionIntoTarget($val, $section, &$data, $target)
+	{
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : val=". $val . "; section=" . $section . "; target=" . $target ));
+		$data['params'][$target] = self::$ConvertTable[strtolower($section)][strtolower($val)];
 	}
 
 	/**

@@ -85,20 +85,6 @@ self::$ActionTable['add']['theme']			= function (&$a) { return array (
 };
 
 self::$ActionTable['add']['theme_definition']	= function (&$a) { 
-	/* The only way to convert a value before inserting in DB */
-	/* This is an exception, it'll change if more cases like this appear */
-	$pos = array(
-		"top-left"			=> 0,
-		"bottom-left"		=> 1,
-		"center-left"		=> 2,
-		"top-right"			=> 4,
-		"bottom-right"		=> 5,
-		"center-right"		=> 6,
-		"top-center"		=> 8,
-		"bottom-center"		=> 9,
-		"center-center"		=> 10
-	);
-	$a['params']['def_number'] = $pos[strtolower($a['params']['string'])];
 	return array ("INSERT INTO ".$a['sqlTables']['theme_definition']." (".$a['columns'].") VALUES (".$a['values'].");",);
 };
 

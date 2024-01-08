@@ -303,7 +303,16 @@ class CommandConsole {
 		$ptr = &self::$PreRequisiteTable[$CCL['init']['cmd']][$CCL['init']['entity']];
 		// convert ----------------------------------------
 		if ( is_array($ptr['convert']) ) {
-			foreach ($ptr['convert'] as $A){ $CCL['params'][$A['v']] = $bts->StringFormatObj->conversion_expression($CCL['params'][$A['v']], $A['s']); }
+			foreach ($ptr['convert'] as $A){ $CCL['params'][$A['v']] = $bts->StringFormatObj->conversionExpression($CCL['params'][$A['v']], $A['s']); }
+		}
+		//----------------------------------------
+		// Convert selected values and store it into a target varaible
+		if ( is_array($ptr['convertIntoTarget']) ) {
+			foreach ($ptr['convertIntoTarget'] as $A){ 
+				if ( $A['n'] == $CCL['params']['name'] ) {
+					$bts->StringFormatObj->conversionExpressionIntoTarget($CCL['params'][$A['v']], $A['s'], $CCL, $A['t']); 
+				}
+			}
 		}
 		// Next Id ----------------------------------------
 		if ( is_array($ptr['nextId']) && $CCL['init']['cmd'] != 'update') {

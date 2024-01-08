@@ -371,6 +371,9 @@ self::$PreRequisiteTable['add']['theme_definition'] = array (
 	"convert" => array(
 		array("v" => "type",	"s" => "theme_definition"),
 	),
+	"convertIntoTarget" => array(
+		array("n" => "admctrl_position",	"v" => "string",	"s" => "theme_definition",	"t" => "number"),
+	),
 	"nextId" => array (
 		array ("table" => "theme_definition",		"column" => "def_id",			"target" => "id"),
 	),
