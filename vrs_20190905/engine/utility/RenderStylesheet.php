@@ -124,11 +124,11 @@ html { width:100%; height:100%;}\r\r
 				$Content .= "}\r";
 				
 				$maybeMoreContent = "";
-				if ( strlen($p['a_hover_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
-				if ( strlen($p['a_hover_bg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
-				if ( strlen($p['a_hover_decoration'] ?? '') > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
-				if ( strlen($p['a_hover_special'] ?? '') > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
-				if ( strlen( $maybeMoreContent ?? '') > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
+				if ( strlen($p['a_hover_fg_col']) > 0 )		{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
+				if ( strlen($p['a_hover_bg_col']) > 0 )		{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
+				if ( strlen($p['a_hover_decoration']) > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
+				if ( strlen($p['a_hover_special']) > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
+				if ( strlen( $maybeMoreContent) > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
 				
 				$maybeMoreContent = "";
 				if ( strlen($p['a_active_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_active_fg_col']		.";	"; }
