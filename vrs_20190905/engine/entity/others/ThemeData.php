@@ -76,7 +76,7 @@ class ThemeData {
 			// $CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_name'];
 			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_name']['def_string'];
 			
-			if ( strlen($CurrentBlock['name']) > 0 ) {
+			if ( strlen($CurrentBlock['name'] ?? '') > 0 ) {
 				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
@@ -139,7 +139,7 @@ class ThemeData {
 			// $CurrentBlock['name'] = $this->ThemeData['theme_block_'.$Block.'_text'];
 			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_text']['def_string'];
 
-			if ( strlen($CurrentBlock['name']) > 0 ) {
+			if ( strlen($CurrentBlock['name'] ?? '') > 0 ) {
 				$cbn = $CurrentBlock['name'];
 				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
 				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
@@ -155,7 +155,7 @@ class ThemeData {
 							$this->ThemeData[$BlockT] = $DecoTmpObj->getDeco20_Caligraph();
 							$addBlockFlag = 1;
 							
-							if ( strlen($DecoTmpObj->getDeco20_CaligraphEntry('txt_font_filename_normal')) > 0 ) {
+							if ( strlen($DecoTmpObj->getDeco20_CaligraphEntry('txt_font_filename_normal') ?? '') > 0 ) {
 								if ( $BlockT == "B01T" ) {
 									$this->ThemeData['stylesheet_at_fontface'] = "
 									@font-face {
@@ -197,7 +197,7 @@ class ThemeData {
 			$Block = $bts->StringFormatObj->getDecorationBlockName ( "", $i, "" );
 			// $CurrentBlock['name'] = $this->ThemeData["theme_block_" . $Block . "_menu"];
 			$CurrentBlock['name'] = $this->ThemeDefinition['block_'.$Block.'_menu']['def_string'];
-			if (strlen ( $CurrentBlock['name'] ) > 0) {
+			if (strlen ( $CurrentBlock['name']  ?? '') > 0) {
 				$BlockM = "B" . $Block . "M";
 				$cbn = &$CurrentBlock['name'];
 				$CurrentBlock['deco_id'] = $this->DecorationList [$cbn]['deco_id'];
@@ -305,7 +305,7 @@ class ThemeData {
 	 */
 	private function colorToHtmlFormat (&$data) {
 		foreach ( $data as $A => &$B ) {
-			if ( strpos ( $A , "_col" ) !== FALSE && strpos ( $A , "#" ) === FALSE && strlen($B) != 0 && $B != "transparent" ) { $B = "#" . $B; }
+			if ( strpos ( $A , "_col" ) !== FALSE && strpos ( $A , "#" ) === FALSE && strlen($B ?? '') != 0 && $B != "transparent" ) { $B = "#" . $B; }
 		}
 	}
 	

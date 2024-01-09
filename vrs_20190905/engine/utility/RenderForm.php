@@ -81,21 +81,21 @@ class  RenderForm
 	 */
 	public function renderInputTextEnhanced($arr)
 	{
-		if (strlen($arr['name']) > 0) {
+		if (strlen($arr['name'] ?? '') > 0) {
 			$builder = "";
 			$spacer = "";
-			if (strlen($arr['id']) > 0) { $builder .= $spacer . "id='" . $arr['id'] . "'"; $spacer = " "; }
-			if (strlen($arr['name']) > 0) { $builder .= $spacer . "name='" . $arr['name'] . "'"; $spacer = " "; }
-			if (strlen($arr['value']) > 0) { $builder .= $spacer . "value='" . $arr['value'] . "'"; $spacer = " "; }
-			if (strlen($arr['size']) > 0) { $builder .= $spacer . "size='" . $arr['size'] . "'"; $spacer = " "; }
-			if (strlen($arr['maxlength']) > 0) { $builder .= $spacer . "maxlength='" . $arr['maxlength'] . "'"; $spacer = " "; }
-			if (strlen($arr['placeholder']) > 0) { $builder .= $spacer . "placeholder='" . $arr['placeholder'] . "'"; $spacer = " "; }
+			if (strlen($arr['id'] ?? '') > 0) { $builder .= $spacer . "id='" . $arr['id'] . "'"; $spacer = " "; }
+			if (strlen($arr['name'] ?? '') > 0) { $builder .= $spacer . "name='" . $arr['name'] . "'"; $spacer = " "; }
+			if (strlen($arr['value'] ?? '') > 0) { $builder .= $spacer . "value='" . $arr['value'] . "'"; $spacer = " "; }
+			if (strlen($arr['size'] ?? '') > 0) { $builder .= $spacer . "size='" . $arr['size'] . "'"; $spacer = " "; }
+			if (strlen($arr['maxlength'] ?? '') > 0) { $builder .= $spacer . "maxlength='" . $arr['maxlength'] . "'"; $spacer = " "; }
+			if (strlen($arr['placeholder'] ?? '') > 0) { $builder .= $spacer . "placeholder='" . $arr['placeholder'] . "'"; $spacer = " "; }
 			if ($arr['readonly'] == true) { $builder .= $spacer . "readonly"; $spacer = " "; }
 			if ($arr['disable'] == true) { $builder .= $spacer . "disable"; $spacer = " "; }
-			if (strlen($arr['oninput']) > 0) { $builder .= $spacer . "onInput=\"" . $arr['oninput'] . "\""; $spacer = " "; }
-			if (strlen($arr['onkeyup']) > 0) { $builder .= $spacer . "onKeyUp=\"" . $arr['onkeyup'] . "\""; $spacer = " "; }
-			if (strlen($arr['javascript']) > 0) { $builder .= $spacer . "javascript=\"" . $arr['javascript'] . "\""; $spacer = " "; }
-			if (strlen($arr['special']) > 0) { $builder .= $spacer . "special='" . $arr['special'] . "'"; $spacer = " "; }
+			if (strlen($arr['oninput'] ?? '') > 0) { $builder .= $spacer . "onInput=\"" . $arr['oninput'] . "\""; $spacer = " "; }
+			if (strlen($arr['onkeyup'] ?? '') > 0) { $builder .= $spacer . "onKeyUp=\"" . $arr['onkeyup'] . "\""; $spacer = " "; }
+			if (strlen($arr['javascript'] ?? '') > 0) { $builder .= $spacer . "javascript=\"" . $arr['javascript'] . "\""; $spacer = " "; }
+			if (strlen($arr['special'] ?? '') > 0) { $builder .= $spacer . "special='" . $arr['special'] . "'"; $spacer = " "; }
 
 			return "<input type='text' " . $builder . ">\r";
 		}

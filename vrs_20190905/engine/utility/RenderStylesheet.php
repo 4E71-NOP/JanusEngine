@@ -116,33 +116,33 @@ html { width:100%; height:100%;}\r\r
 				$Content .= $css_menu_div . " { position: absolute; margin: 0px; padding: 0px ; border: 0px; }\r";
 				$Content .= $css_menu_lnn . " { ";
 				$maybeMoreContent = "";
-				if ( strlen($p['txt_font_family']) > 0 )		{ $Content .= "font-family:".		$p['txt_font_family']	.";	"; }
-				if ( strlen($p['a_fg_col']) > 0 )				{ $Content .= "color:".				$p['a_fg_col']			.";	"; }
-				if ( strlen($p['a_bg_col']) > 0 )				{ $Content .= "background-color:".	$p['a_bg_col']			.";	"; }
-				if ( strlen($p['a_decoration']) > 0 )			{ $Content .= "text-decoration:".	$p['a_decoration']		.";	"; }
-				if ( strlen($p['a_special']) > 0 )				{ $Content .= 						$p['a_special']; }
+				if ( strlen($p['txt_font_family'] ?? '') > 0 )		{ $Content .= "font-family:".		$p['txt_font_family']	.";	"; }
+				if ( strlen($p['a_fg_col'] ?? '') > 0 )				{ $Content .= "color:".				$p['a_fg_col']			.";	"; }
+				if ( strlen($p['a_bg_col'] ?? '') > 0 )				{ $Content .= "background-color:".	$p['a_bg_col']			.";	"; }
+				if ( strlen($p['a_decoration'] ?? '') > 0 )			{ $Content .= "text-decoration:".	$p['a_decoration']		.";	"; }
+				if ( strlen($p['a_special'] ?? '') > 0 )			{ $Content .= 						$p['a_special']; }
 				$Content .= "}\r";
 				
 				$maybeMoreContent = "";
-				if ( strlen($p['a_hover_fg_col']) > 0 )			{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
-				if ( strlen($p['a_hover_bg_col']) > 0 )			{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
-				if ( strlen($p['a_hover_decoration']) > 0 )		{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
-				if ( strlen($p['a_hover_special']) > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
-				if ( strlen( $maybeMoreContent ) > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
+				if ( strlen($p['a_hover_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
+				if ( strlen($p['a_hover_bg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
+				if ( strlen($p['a_hover_decoration'] ?? '') > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
+				if ( strlen($p['a_hover_special'] ?? '') > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
+				if ( strlen( $maybeMoreContent ?? '') > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
 				
 				$maybeMoreContent = "";
-				if ( strlen($p['a_active_fg_col']) > 0 )		{ $maybeMoreContent .= "color:".			$p['a_active_fg_col']		.";	"; }
-				if ( strlen($p['a_active_bg_col']) > 0 )		{ $maybeMoreContent .= "background-color:".	$p['a_active_bg_col']		.";	"; }
-				if ( strlen($p['a_active_decoration']) > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_active_decoration']	.";	"; }
-				if ( strlen($p['a_active_special']) > 0 )		{ $maybeMoreContent .= 						$p['a_active_special']; }
-				if ( strlen( $maybeMoreContent ) > 0 )			{ $Content .= $css_menu_lna ." { ".$maybeMoreContent." }\r"; }
+				if ( strlen($p['a_active_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_active_fg_col']		.";	"; }
+				if ( strlen($p['a_active_bg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "background-color:".	$p['a_active_bg_col']		.";	"; }
+				if ( strlen($p['a_active_decoration'] ?? '') > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_active_decoration']	.";	"; }
+				if ( strlen($p['a_active_special'] ?? '') > 0 )		{ $maybeMoreContent .= 						$p['a_active_special']; }
+				if ( strlen( $maybeMoreContent ?? '') > 0 )			{ $Content .= $css_menu_lna ." { ".$maybeMoreContent." }\r"; }
 				
 				$maybeMoreContent = "";
-				if ( strlen($p['a_visited_fg_col']) > 0 )		{ $maybeMoreContent .= "color:".			$p['a_visited_fg_col']		.";	"; }
-				if ( strlen($p['a_visited_bg_col']) > 0 )		{ $maybeMoreContent .= "background-color:".	$p['a_visited_bg_col']		.";	"; }
-				if ( strlen($p['a_visited_decoration']) > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_visited_decoration']	.";	"; }
-				if ( strlen($p['a_visited_special']) > 0 )		{ $maybeMoreContent .= 						$p['a_visited_special']; }
-				if ( strlen( $maybeMoreContent ) > 0 )			{ $Content .= $css_menu_lnv ." { ".$maybeMoreContent." }\r"; }
+				if ( strlen($p['a_visited_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_visited_fg_col']		.";	"; }
+				if ( strlen($p['a_visited_bg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "background-color:".	$p['a_visited_bg_col']		.";	"; }
+				if ( strlen($p['a_visited_decoration'] ?? '') > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_visited_decoration']	.";	"; }
+				if ( strlen($p['a_visited_special'] ?? '') > 0 )	{ $maybeMoreContent .= 						$p['a_visited_special']; }
+				if ( strlen( $maybeMoreContent ?? '') > 0 )			{ $Content .= $css_menu_lnv ." { ".$maybeMoreContent." }\r"; }
 				
 				switch ( $themeArray[$themeArray['currentBlock']."M"]['deco_type'] ) {
 					case 30:	case "1_div":		$Content .= $this->renderStylesheetDeco30($themeArray);	break;
@@ -213,11 +213,11 @@ html { width:100%; height:100%;}\r\r
 		border-color: ".$themeArray['B01T']['txt_warning_col']."; 
 		margin : 0mm;
 		padding : 0.5mm;".
-		((strlen($themeArray['B01T']['txt_font_family'])>0) ? "font-family:".$themeArray['B01T']['txt_font_family'].";":"").
-		((strlen($themeArray['B01T']['txt_font_size'])>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
-		((strlen($themeArray['B01T']['txt_col'])>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
-		((strlen($themeArray['B01T']['tab_frame_bg_img'])>0) ? "background-image: url(".$baseUrl."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory")."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
-		((strlen($themeArray['B01T']['tab_frame_bg_col'])>0) ? "background-color: ".$themeArray['B01T']['tab_frame_bg_col'].";":"")."
+		((strlen($themeArray['B01T']['txt_font_family'] ?? '')>0) ? "font-family:".$themeArray['B01T']['txt_font_family'].";":"").
+		((strlen($themeArray['B01T']['txt_font_size'] ?? '')>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
+		((strlen($themeArray['B01T']['txt_col'] ?? '')>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
+		((strlen($themeArray['B01T']['tab_frame_bg_img'] ?? '')>0) ? "background-image: url(".$baseUrl."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory")."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
+		((strlen($themeArray['B01T']['tab_frame_bg_col'] ?? '')>0) ? "background-color: ".$themeArray['B01T']['tab_frame_bg_col'].";":"")."
 		visibility: hidden; display : none; 
 		cursor: pointer;
 	}
@@ -263,42 +263,42 @@ html { width:100%; height:100%;}\r\r
 		$Content = "";
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft",					" { border-spacing: 0px; border: 0px;	empty-cells: show; vertical-align: middle; } \r");
 		// If no background image is defined the style isn't rendered.
-		if ( strlen($p['ft1_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] )>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft1_bg'].");" :"")."	".$p['ft1_special']. " } \r");																												}
-		if ( strlen($p['ft2_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;									height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] )>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");									}
-		if ( strlen($p['ft3_bg'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft3_bg'] )>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft3_bg'].");" :"")."	".$p['ft3_special']. " } \r");																												}
+		if ( strlen($p['ft1_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft1_bg'].");" :"")."	".$p['ft1_special']. " } \r");																												}
+		if ( strlen($p['ft2_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;									height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");									}
+		if ( strlen($p['ft3_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft3_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft3_bg'].");" :"")."	".$p['ft3_special']. " } \r");																												}
 
-		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
-		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
-		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
-		if ( strlen($p['s1_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_a'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
-		if ( strlen($p['s1_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_b'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
-		if ( strlen($p['s1_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_c'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s1_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
+		if ( strlen($p['s1_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].	";		font-weight:".$p['s1_txt_weight'].";		".$p['s1_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s1_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
+		if ( strlen($p['s1_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_a'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s1_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h02",		" { 								height: ".$p['s1_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_b'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";	font-weight:".$p['s1_txt_hover_weight'].";	".$p['s1_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s1_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_h03",		" { width: ".$p['s1_03_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_c'].");	background-position: ".$p['s1_offset_x']."px -".$p['s1_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_hover_col'].";}\r");																																}
 
-		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
-		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
-		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
-		if ( strlen($p['s2_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_a'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
-		if ( strlen($p['s2_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_b'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
-		if ( strlen($p['s2_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_c'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s2_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
+		if ( strlen($p['s2_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";		font-weight:".$p['s2_txt_weight'].";		".$p['s2_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s2_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_n03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_col'].";}\r");																																		}
+		if ( strlen($p['s2_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h01",		" { width: ".$p['s2_01_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_a'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s2_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h02",		" { 								height: ".$p['s2_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_b'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";	font-weight:".$p['s2_txt_hover_weight'].";	".$p['s2_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s2_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s2_h03",		" { width: ".$p['s2_03_width']."px;	height: ".$p['s2_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s2_c'].");	background-position: ".$p['s2_offset_x']."px -".$p['s2_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s2_txt_hover_col'].";}\r");																																}
 
-		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
-		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	 }
-		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
-		if ( strlen($p['s3_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_a'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");																																}
-		if ( strlen($p['s3_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_b'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
-		if ( strlen($p['s3_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_c'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");																																}
+		if ( strlen($p['s3_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
+		if ( strlen($p['s3_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_b'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";		font-weight:".$p['s3_txt_weight'].";		".$p['s3_txt_special'].";		font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	 }
+		if ( strlen($p['s3_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_n03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_c'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_col'].";}\r");																																		}
+		if ( strlen($p['s3_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h01",		" { width: ".$p['s3_01_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_a'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r");																																}
+		if ( strlen($p['s3_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h02",		" { 								height: ".$p['s3_01_height']."px; background: transparent;		background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_b'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";	font-weight:".$p['s3_txt_hover_weight'].";	".$p['s3_txt_hover_special'].";	font-size:".$p['txt_font_size']."px;	font-family: '".$p['txt_font_family']."';}\r");	}
+		if ( strlen($p['s3_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s3_h03",		" { width: ".$p['s3_03_width']."px;	height: ".$p['s3_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s3_c'].");	background-position: ".$p['s3_offset_x']."px -".$p['s3_offset_y']."px;	border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s3_txt_hover_col'].";}\r\r");																																}
 
-		if ( strlen($p['tab_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		)."; }\r");										}
-		if ( strlen($p['tab_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	".((strlen($p['tab_down_txt_weight'])>0) ? "font-weight:".$p['tab_down_txt_weight'].";":"")."	".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		).";	".$p['tab_down_txt_special']."	}\r");	}
-		if ( strlen($p['tab_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																									".((strlen($p['tab_down_txt_bg_col']	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	: ""	)."; }\r");										}
-		if ( strlen($p['tab_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r");										}
-		if ( strlen($p['tab_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	".((strlen($p['tab_up_txt_weight'])>0) ? "font-weight:".$p['tab_up_txt_weight'].";":"")."		".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	).";	".$p['tab_up_txt_special']."	}\r" );	}
-		if ( strlen($p['tab_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																									".((strlen($p['tab_up_txt_bg_col']		)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r" );									}
-		if ( strlen($p['tab_a'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
-		if ( strlen($p['tab_b'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	".((strlen($p['tab_hover_txt_weight'])>0) ? "font-weight:".$p['tab_hover_txt_weight'].";":"")."	".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	).";	".$p['tab_hover_txt_special']."	}\r");	}
-		if ( strlen($p['tab_c'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																									".((strlen($p['tab_hover_txt_bg_col']	)>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
+		if ( strlen($p['tab_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_a",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																											".((strlen($p['tab_down_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		)."; }\r");										}
+		if ( strlen($p['tab_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_b",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";	".((strlen($p['tab_down_txt_weight'] ?? '')>0) ? "font-weight:".$p['tab_down_txt_weight'].";":"")."		".((strlen($p['tab_down_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	:""		).";	".$p['tab_down_txt_special']."	}\r");	}
+		if ( strlen($p['tab_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_down_c",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*0)."px -".($p['tab_offset_y']*0)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_down_txt_col'].";																											".((strlen($p['tab_down_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_down_txt_bg_col']	: ""	)."; }\r");										}
+		if ( strlen($p['tab_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_a",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																											".((strlen($p['tab_up_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r");										}
+		if ( strlen($p['tab_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_b",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";	".((strlen($p['tab_up_txt_weight'] ?? '')>0) ? "font-weight:".$p['tab_up_txt_weight'].";":"")."			".((strlen($p['tab_up_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	).";	".$p['tab_up_txt_special']."	}\r" );	}
+		if ( strlen($p['tab_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_up_c",		" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*1)."px -".($p['tab_offset_y']*1)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_up_txt_col'].";																											".((strlen($p['tab_up_txt_bg_col']  ?? ''	)>0) ? "background-color:".$p['tab_up_txt_bg_col']		: ""	)."; }\r" );									}
+		if ( strlen($p['tab_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_a",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_a'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_a_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																											".((strlen($p['tab_hover_txt_bg_col']  ?? '')>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
+		if ( strlen($p['tab_b'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_b",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_b'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;									height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : repeat-x;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";	".((strlen($p['tab_hover_txt_weight'] ?? '')>0) ? "font-weight:".$p['tab_hover_txt_weight'].";":"")."	".((strlen($p['tab_hover_txt_bg_col']  ?? '')>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	).";	".$p['tab_hover_txt_special']."	}\r");	}
+		if ( strlen($p['tab_c'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tab_hover_c",	" { background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_c'].");	padding-top: 0px;	padding-left: 0px;	vertical-align: bottom;	width: ".$p['tab_c_width']."px;	height: ".$p['tab_height']."px;	background-position: ".($p['tab_offset_x']*2)."px -".($p['tab_offset_y']*2)."px;	background-repeat : no-repeat;	overflow:hidden;	text-align: center;	color: ".$p['tab_hover_txt_col'].";																											".((strlen($p['tab_hover_txt_bg_col']  ?? '')>0) ? "background-color:".$p['tab_hover_txt_bg_col']	: ""	)."; }\r");										}
 
-		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tabFrame",			" { padding: 5px ; vertical-align: top; ".((strlen($p['tab_frame_bg_img'])>0) ? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_frame_bg_img'].");" : "")."  ".((strlen($p['tab_frame_bg_col'])>0) ? "background-color: ".$p['tab_frame_bg_col'].";":"")." }\r\r");
+		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tabFrame",			" { padding: 5px ; vertical-align: top; ".((strlen($p['tab_frame_bg_img'] ?? '')>0) ? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_frame_bg_img'].");" : "")."  ".((strlen($p['tab_frame_bg_col'] ?? '')>0) ? "background-color: ".$p['tab_frame_bg_col'].";":"")." }\r\r");
 
 		$protocol = ( $ServerInfosObj->getServerInfosEntry('sslState') == 1) ? "https://" : "http://" ;
 		// New stylsheet
@@ -335,63 +335,63 @@ html { width:100%; height:100%;}\r\r
 		// Main module class
 		$list= array( "font_family",	"font_dl_url",	"font_size",	"col");
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"",			"{".$str."}");}
 
 		$list= array( "ok_col",	);
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_ok",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_ok",				"",			"{".$str."}");}
 		$list= array( "warning_col",	);
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_warning",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_warning",				"",			"{".$str."}");}
 		$list= array( "error_col",	);
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_error",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_error",				"",			"{".$str."}");}
 		$list= array( "fade_col",	);
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_fade",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_fade",				"",			"{".$str."}");}
 		$list= array( "highlight_col",	);
 		$str = $this->testAndRenderCssStyle("txt", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_highlight",				"",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_highlight",				"",			"{".$str."}");}
 		
 		// Hx
 		$list= array( "font_family",	"font_size",	"txt_col",	"special" );
 		for ( $hx=1; $hx<=7; $hx++) {
 			$str = $this->testAndRenderCssStyle("h".$hx, $list, $p);
-			if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"h".$hx,			"{".$str."}");}
+			if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"h".$hx,			"{".$str."}");}
 		}
 		// P
 		$list= array( "txt_indent",	"txt_align",	"font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right" );
 		$str = $this->testAndRenderCssStyle("p", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"p",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"p",			"{".$str."}");}
 		// a
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a",			"{".$str."}");}
 		// a:visited
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a_visited", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:visited",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:visited",	"{".$str."}");}
 		// a:hover
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a_hover", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:hover",		"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:hover",		"{".$str."}");}
 		// a:active
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a_active", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:active",		"{".$str." color: inherit;}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"a:active",		"{".$str." color: inherit;}");}
 		
 		//form
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("input", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"textarea",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"textarea",	"{".$str."}");}
 		
 		// code
 		$list= array( "font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right", "special" ); 
 		$str = $this->testAndRenderCssStyle("code", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"code",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"code",			"{".$str."}");}
 		
 		
 		// Table with no background. Usually used to align elements like images.
@@ -399,56 +399,56 @@ html { width:100%; height:100%;}\r\r
 		$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE_STD_,		"td",			"{ text-align:center; background-color:transparent;}");
 		
 		// Table01
-		if ( strlen($p['table_rules'])			> 0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"",				"{ ".$p['table_rules']." }"); }
+		if ( strlen($p['table_rules'] ?? '')	> 0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"",				"{ ".$p['table_rules']." }"); }
 		$valTest = 0;
 		$sv = array();
-		if ( strlen( $p['t01_caption_bg_col'])	> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_caption_bg_col'].";";}
-		if ( strlen( $p['t01_caption_fg_col'])	> 0 )	{ $valTest++; $sv['b'] = "color: ".$p['t01_caption_fg_col'].";";}
-		if ( strlen( $p['t01_caption_special'])	> 0 )	{ $valTest++; $sv['c'] = $p['t01_caption_special'];}
+		if ( strlen( $p['t01_caption_bg_col'] ?? '')	> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_caption_bg_col'].";";}
+		if ( strlen( $p['t01_caption_fg_col'] ?? '')	> 0 )	{ $valTest++; $sv['b'] = "color: ".$p['t01_caption_fg_col'].";";}
+		if ( strlen( $p['t01_caption_special'] ?? '')	> 0 )	{ $valTest++; $sv['c'] = $p['t01_caption_special'];}
 		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"caption",				"{".$sv['a']." ".$sv['b']." ".$sv['c']."}");}
 		
 		// TR
 		$valTest = 0;
 		$sv = array();
-		if ( strlen( $p['t01_tr_bg_col'])	> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_tr_bg_col'].";";}
-		if ( strlen( $p['t01_txt_col'])		> 0 )	{ $valTest++; $sv['b'] = "color:".$p['t01_txt_col']."; "; }
-		if ( strlen( $p['t01_tr_special'])	> 0 )	{ $valTest++; $sv['c'] = $p['t01_tr_special'].";";}
+		if ( strlen( $p['t01_tr_bg_col'] ?? '')		> 0 )	{ $valTest++; $sv['a'] = "background-color:".$p['t01_tr_bg_col'].";";}
+		if ( strlen( $p['t01_txt_col'] ?? '')		> 0 )	{ $valTest++; $sv['b'] = "color:".$p['t01_txt_col']."; "; }
+		if ( strlen( $p['t01_tr_special'] ?? '')	> 0 )	{ $valTest++; $sv['c'] = $p['t01_tr_special'].";";}
 		if ( $valTest > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr",	"{ ".$sv['a']." ".$sv['b']." ".$sv['c']."}"); }
 		
 		// TR specific
-		if ( strlen( $p['t01_tr_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n+1)",	"{ background-color:".$p['t01_tr_bg_odd_col'].";	}");	}
-		if ( strlen( $p['t01_tr_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n)",		"{ background-color:".$p['t01_tr_bg_even_col'].";	}");	}
-		if ( strlen( $p['t01_tr_bg_hover_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:hover",				"{ background-color:".$p['t01_tr_bg_hover_col'].";	}");	}
-		if ( strlen( $p['t01_td_special'])	>0 )		{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td",					"{ ".$p['t01_td_special'].";						}"); 	}
-		if ( strlen( $p['t01_td_bg_odd_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n+1)",	"{ background-color:".$p['t01_td_bg_odd_col'].";	}"); 	}
-		if ( strlen( $p['t01_td_bg_even_col'])	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n)",		"{ background-color:".$p['t01_td_bg_even_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_odd_col'] ?? '')		>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n+1)",	"{ background-color:".$p['t01_tr_bg_odd_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_even_col'] ?? '')	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:nth-child(2n)",		"{ background-color:".$p['t01_tr_bg_even_col'].";	}");	}
+		if ( strlen( $p['t01_tr_bg_hover_col'] ?? '')	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"tr:hover",				"{ background-color:".$p['t01_tr_bg_hover_col'].";	}");	}
+		if ( strlen( $p['t01_td_special'] ?? '')		>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td",					"{ ".$p['t01_td_special'].";						}"); 	}
+		if ( strlen( $p['t01_td_bg_odd_col'] ?? '')		>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n+1)",	"{ background-color:".$p['t01_td_bg_odd_col'].";	}"); 	}
+		if ( strlen( $p['t01_td_bg_even_col'] ?? '')	>0 )	{ $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,		"td:nth-child(2n)",		"{ background-color:".$p['t01_td_bg_even_col'].";	}");	}
 		
 		// td a
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a",			"{".$str."}");}
 		// td a:hover
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a_hover", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:hover",		"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:hover",		"{".$str."}");}
 		// td a:active
 		$list= array( "font",	"fg_col",	"bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("td_a_active", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:active",		"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:active",		"{".$str."}");}
 		// td a:visited
 		$list= array( "font",	"fg_col",	"td_bg_col",	"decoration",	"special");
 		$str = $this->testAndRenderCssStyle("a_visited", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:visited",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"a:visited",	"{".$str."}");}
 		//td form
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("td_input", $list, $p);
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"input[type=text]",	"{".$str."}");}
-		if ( strlen($str) > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"select",			"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"input[type=text]",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TABLE01_,				"select",			"{".$str."}");}
 		
 		// Table01 legend 
 		$list= array( "txt_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("t01_legend", $list, $p);
-		if ( strlen($str) > 0 ) { 
+		if ( strlen($str ?? '') > 0 ) { 
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_TOP_,			"tr:first-child",	"{".$str."}");
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_BOTTOM_,		"tr:last-child",	"{".$str."}");
 			$Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	_CLASS_TBL_LGND_LEFT_,			"td:first-child",	"{".$str."}");
@@ -456,19 +456,19 @@ html { width:100%; height:100%;}\r\r
 		}
 		
 		// Icons
-		if ( strlen($p['icon_directory'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_directory",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_directory']."); }\r");		}
-		if ( strlen($p['icon_erase'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_erase",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_erase']."); }\r");			}
-		if ( strlen($p['icon_ok'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_ok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_ok']."); }\r");				}
-		if ( strlen($p['icon_nok'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_nok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_nok']."); }\r");				}
-		if ( strlen($p['icon_left'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_left",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_left']."); }\r");			}
-		if ( strlen($p['icon_right'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_right",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_right']."); }\r");			}
-		if ( strlen($p['icon_top'])>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_top",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_top']."); }\r");				}
-		if ( strlen($p['icon_bottom'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_bottom",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_bottom']."); }\r");			}
-		if ( strlen($p['icon_question'])>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_question",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_question']."); }\r");		}
-		if ( strlen($p['icon_notification'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_notification",	" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_notification']."); }\r");	}
+		if ( strlen($p['icon_directory'] ?? '')>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_directory",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_directory']."); }\r");		}
+		if ( strlen($p['icon_erase'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_erase",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_erase']."); }\r");			}
+		if ( strlen($p['icon_ok'] ?? '')>0)				{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_ok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_ok']."); }\r");				}
+		if ( strlen($p['icon_nok'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_nok",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_nok']."); }\r");				}
+		if ( strlen($p['icon_left'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_left",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_left']."); }\r");			}
+		if ( strlen($p['icon_right'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_right",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_right']."); }\r");			}
+		if ( strlen($p['icon_top'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_top",			" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_top']."); }\r");				}
+		if ( strlen($p['icon_bottom'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_bottom",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_bottom']."); }\r");			}
+		if ( strlen($p['icon_question'] ?? '')>0)		{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_question",		" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_question']."); }\r");		}
+		if ( strlen($p['icon_notification'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_icon_notification",	" { background-size: contain;	background-image: url(".$baseUrl."media/theme/".$dir."/".$p['icon_notification']."); }\r");	}
 
-		if ( strlen($p['page_selector'])>0)				{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector",				" { ".$p['page_selector']." }\r");		}
-		if ( strlen($p['page_selector_highlight'])>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector_highlight",	" { ".$p['page_selector_highlight']." }\r");		}
+		if ( strlen($p['page_selector'] ?? '')>0)			{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector",				" { ".$p['page_selector']." }\r");		}
+		if ( strlen($p['page_selector_highlight'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_page_selector_highlight",	" { ".$p['page_selector_highlight']." }\r");		}
 
 		// Add title lines (first/last line +  first/last column)
 		return "\r".$Content;
@@ -489,7 +489,7 @@ html { width:100%; height:100%;}\r\r
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
-		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
+		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 	
 		$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], $type, "_ex11", " { position: absolute; background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ex11'].");	background-position:".str_replace('-', ' ', $p['ex11_bgp']).";	vertical-align: bottom;	width: ".$p['ex11_x']."px;	height: ".$p['ex11_y']."px;		background-repeat : no-repeat;	overflow:hidden }\r");
@@ -512,7 +512,7 @@ html { width:100%; height:100%;}\r\r
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
-		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
+		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 		
 		$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], $type, "_ex11", " { position: absolute; background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ex11'].");	background-position:".str_replace('-', ' ', $p['ex11_bgp']).";	vertical-align: bottom;	width: ".$p['ex11_x']."px;	height: ".$p['ex11_y']."px;		background-repeat : no-repeat;	overflow:hidden }\r");
@@ -543,7 +543,7 @@ html { width:100%; height:100%;}\r\r
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
-		if ( strlen($p['repertoire']) != 0 ) { $dir = $p['repertoire']; }
+		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
 		if ( $p['a_line_height'] > 0 ) { $supLH = "; line-height: ". $p['a_line_height']."px;"; }
 		
 		$Content .= $this->makeCssIdString ($infos, ".", $infos['currentBlock'], $type, "_ex11", " { position: absolute; background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ex11'].");	background-position:".str_replace('-', ' ', $p['ex11_bgp']).";	vertical-align: bottom;	width: ".$p['ex11_x']."px;	height: ".$p['ex11_y']."px;		background-repeat : no-repeat;	overflow:hidden }\r");
@@ -603,7 +603,7 @@ html { width:100%; height:100%;}\r\r
 	private function makeCssSelectorList (&$infos, $block, $type, $id, $item, $css ) {
 		$p = explode( " ", trim($block." ".$infos[$block.$type]['blockList']) ); // trim removes the last space in the string
 		$str = "";
-		foreach ($p as $A) { $str .= ".".$infos['tableName'].$A.$id. ((strlen($item) > 0) ? " ".$item : "") .", ";}
+		foreach ($p as $A) { $str .= ".".$infos['tableName'].$A.$id. ((strlen($item ?? '') > 0) ? " ".$item : "") .", ";}
 		$str = substr ( $str , 0 , -2 )." ".$css."\r";
 		return $str;
 	}
@@ -685,10 +685,10 @@ html { width:100%; height:100%;}\r\r
 				case "ok_col":
 				case "txt_align":
 				case "warning_col":
-					if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= $tab[$A] .":".$p[$elm.'_'.$A]."; ";}
+					if ( strlen( $p[$elm.'_'.$A] ?? '')> 0 )	{ $str .= $tab[$A] .":".$p[$elm.'_'.$A]."; ";}
 					break;
 				case "special":
-					if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= $p[$elm.'_'.$A]."; ";}
+					if ( strlen( $p[$elm.'_'.$A] ?? '')> 0 )	{ $str .= $p[$elm.'_'.$A]."; ";}
 					break;
 				// case "directory":
 				// case "erase":

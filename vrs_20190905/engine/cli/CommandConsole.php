@@ -103,7 +103,7 @@ class CommandConsole {
 		$CommandLine = trim($CommandLine);
 		$CommandLine = str_replace ($tab_rch,$tab_rpl,$CommandLine);
 		
-		$length = strlen($CommandLine);
+		$length = strlen($CommandLine ?? '');
 		$retArray = array();
 		$retArrayPtr= $ptrBegin = $ptrEnd = 0;
 		
@@ -343,7 +343,7 @@ class CommandConsole {
 		$colCount = 0;
 		if ( is_array($ptr['columns']) ) {
 			foreach ($ptr['columns'] as $A) {
-				if ( strlen($CCL['params'][$A['v']]) != 0 ) {
+				if ( strlen($CCL['params'][$A['v']] ?? '') != 0 ) {
 					$equality .= $A['t']. "='".$CCL['params'][$A['v']]."', ";
 					$columns .= $A['t']. ", ";
 					$values .= "'".$CCL['params'][$A['v']]."', ";

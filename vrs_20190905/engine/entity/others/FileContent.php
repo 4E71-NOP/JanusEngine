@@ -14,7 +14,7 @@
 
 class FileContent {
 	private static $Instance = null;
-	private static $fileContent = null;
+	private $fileContent = null;
 
 	public function __construct() {}
 	
@@ -31,7 +31,7 @@ class FileContent {
 	
    	//@formatter:off
     public function getFileContent (){return ($this->fileContent); }
-    public function setFileContent ($fileContent){$this->fileContent = $fileContent; }
+    public function setFileContent ($data){$this->fileContent = $data; }
 	//@formatter:on
 
 

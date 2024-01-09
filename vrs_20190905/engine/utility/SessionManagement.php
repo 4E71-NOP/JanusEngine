@@ -53,7 +53,7 @@ class SessionManagement {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
-		if ( strlen($currentWs) == 0 ) {
+		if ( strlen($currentWs ?? '') == 0 ) {
 			$currentWs = DEFAULT_SITE_ID;
 		}
 

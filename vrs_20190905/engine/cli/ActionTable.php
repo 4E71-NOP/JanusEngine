@@ -23,7 +23,7 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 
 	foreach ( $vl as $V ) {
 // 		if (strlen($a['params'][$V])!=0 || $a['params'][$V]!=0) {
-		if (strlen($a['params'][$V])!=0) {
+		if (strlen($a['params'][$V] ?? '')!=0) {
 			$a['values2'] .= "('".$l."','".$a['params']['id']."','".$V."','".$a['params'][$V]."'),";
 			$l++;
 		}
@@ -280,8 +280,8 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 			$a['errMsg'][] = "Incorrect tag count in file '".$a['fichier_cible']."' ( D: ".$startTagCount." ; F: ".$startTagCount." ).";
 		}
 		
-		if ( strlen($content) > 65536 ) {
-			$sizeDocument = (strlen($content) / 1024 ) ;
+		if ( strlen($content ?? '') > 65536 ) {
+			$sizeDocument = (strlen($content ?? '') / 1024 ) ;
 			$a['errMsg'][] = "The content is larger than 64Kb (".$sizeDocument." Kb). Some Databases are limited to 64Kb by default on BLOB.";
 		}
 		$content = substr ( $content ,$startPtr , ($endPtr - $startPtr) );

@@ -40,13 +40,13 @@ class RenderModule {
 
 		// Failsafe for the old authorization model. 
 		// To be removed when the upated 2021 layout system is fully operationnal
-		if (strlen($m['module_name']) == 0 ) {
+		if (strlen($m['module_name'] ?? '') == 0 ) {
 			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : No module availaible with this name (".$module_name.")") );	
 			return ("");
 		}
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION,	'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'])+3))) . "|" ));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION,	'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'] ?? '')+3))) . "|" ));
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
@@ -106,7 +106,7 @@ class RenderModule {
 		$infos['module_z_index'] += 2;
 			
 		$extraContent = $CurrentSetObj->getDataSubEntry('RenderModule', 'extraContent' );
-		if (strlen($extraContent)>0) { $Content .= $extraContent; }
+		if (strlen($extraContent ?? '')>0) { $Content .= $extraContent; }
 		$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " rendering of '".$m['module_name']. "' module is done"));

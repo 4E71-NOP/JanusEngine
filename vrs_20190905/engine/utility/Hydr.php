@@ -333,18 +333,18 @@ class Hydr
 		if (session_status() === PHP_SESSION_ACTIVE) {
 			$firstContactScore++;
 		}
-		if (strlen($bts->RequestDataObj->getRequestDataEntry('ws')) != 0) {
+		if (strlen($bts->RequestDataObj->getRequestDataEntry('ws') ?? '') != 0) {
 			$firstContactScore += 2;
 		}
 		if (
 			strlen(
-				$bts->RequestDataObj->getRequestDataEntry('formSubmitted')
+				$bts->RequestDataObj->getRequestDataEntry('formSubmitted') ?? ''
 			) == 1 &&
 			$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') == "ModuleAuthentification"
 		) {
 			$firstContactScore += 4;
 		}
-		if (strlen($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection")) {
+		if (strlen($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection") ?? '') {
 			$firstContactScore += 8;
 		}
 
@@ -527,7 +527,7 @@ class Hydr
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Authentification with session mode. user_login='" . $bts->SMObj->getSessionEntry('user_login') . "'"));
 
 				// Assuming a session is valid (whatever it's 'anonymous' or someone else).
-				if (strlen($bts->SMObj->getSessionSubEntry($currentWs, 'user_login')) == 0) {
+				if (strlen($bts->SMObj->getSessionSubEntry($currentWs, 'user_login') ?? '') == 0) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION strlen(user_login)=0"));
 				}
 				$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($currentWs, 'user_login'), $WebSiteObj);
@@ -572,13 +572,13 @@ class Hydr
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection start"));
 		$scoreLang = 0;
 
-		if (strlen($bts->RequestDataObj->getRequestDataEntry('l')) != 0 && $bts->RequestDataObj->getRequestDataEntry('l') != 0) {
+		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0 && $bts->RequestDataObj->getRequestDataEntry('l') != 0) {
 			$scoreLang += 4;
 		}
-		if (strlen($UserObj->getUserEntry('user_lang')) != 0) {
+		if (strlen($UserObj->getUserEntry('user_lang') ?? '') != 0) {
 			$scoreLang += 2;
 		}
-		if (strlen($WebSiteObj->getWebSiteEntry('fk_lang_id')) != 0 && $WebSiteObj->getWebSiteEntry('fk_lang_id') != 0) {
+		if (strlen($WebSiteObj->getWebSiteEntry('fk_lang_id') ?? '') != 0 && $WebSiteObj->getWebSiteEntry('fk_lang_id') != 0) {
 			$scoreLang += 1;
 		}
 
@@ -741,7 +741,7 @@ class Hydr
 
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
-		if (strlen($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target')) == 0) {
+		if (strlen($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') ?? '') == 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
 			$sqlQuery = "
 				SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
@@ -1013,43 +1013,43 @@ class Hydr
 		$Content .= "<body id='HydrBody' ";
 		$Content .= "style='";
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('width')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('width') ?? '') > 0) {
 			$Content .= "width:" .			$this->ThemeDataObj->getDefinitionValue('width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('heigth')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('heigth') ?? '') > 0) {
 			$Content .= "height:" .		$this->ThemeDataObj->getDefinitionValue('height') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width') ?? '') > 0) {
 			$Content .= "min-width:" .		$this->ThemeDataObj->getDefinitionValue('min_width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('min_height')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('min_height') ?? '') > 0) {
 			$Content .= "min-height:" .	$this->ThemeDataObj->getDefinitionValue('min_height') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('max_width')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('max_width') ?? '') > 0) {
 			$Content .= "max-width:" .		$this->ThemeDataObj->getDefinitionValue('max_width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('max_height')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('max_height') ?? '') > 0) {
 			$Content .= "max-height:" .	$this->ThemeDataObj->getDefinitionValue('max_height') . "; ";
 		}
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg') ?? '') > 0) {
 			$Content .= "background-image: url("
 				. $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
 				. "media/theme/" . $this->ThemeDataObj->getDefinitionValue('directory') . "/" . $this->ThemeDataObj->getDefinitionValue('bg') . "); ";
 		}
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position') ?? '') > 0) {
 			$Content .= "background-position:" .	$this->ThemeDataObj->getDefinitionValue('bg_position') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_repeat')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_repeat') ?? '') > 0) {
 			$Content .= "background-repeat:" .		$this->ThemeDataObj->getDefinitionValue('bg_repeat') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_color')) > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_color') ?? '') > 0) {
 			$Content .= "background-color:#" .		$this->ThemeDataObj->getDefinitionValue('bg_color') . "; ";
 		}
 		$Content .= "'\r";
 
-		if (strlen($this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col')) > 0) {
+		if (strlen($this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') ?? '') > 0) {
 			$Content .= "text='" . $this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
 				"' link='" . $this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
 				"' vlink='" . $this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .

@@ -1,0 +1,30 @@
+add	decoration
+name	'tronic_menu_002'
+graphic	'tronic_block_tooltip'
+text	'tronic_txt_menu'
+type	'menu'
+directory	'Tronic'
+	
+genre	'2'
+animation	'ftgvs'
+	
+div_width	'256'
+	
+	
+	
+target_dock	'Bottom-right'
+dock_decal_x	'-32'
+dock_decal_y	'4'
+	
+display_icons	'NO'
+	
+	
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;	

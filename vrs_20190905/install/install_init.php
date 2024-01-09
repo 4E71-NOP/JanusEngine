@@ -209,7 +209,7 @@ class HydrInstall
 		$bts->MapperObj->RemoveThisLevel($localisation);
 		$bts->MapperObj->setSqlApplicant("Content");
 
-		if (strlen($bts->RequestDataObj->getRequestDataEntry('l')) != 0) {
+		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0) {
 			$langComp = array(
 				"fra",
 				"eng"

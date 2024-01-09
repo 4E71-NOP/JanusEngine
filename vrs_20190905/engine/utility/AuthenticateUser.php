@@ -39,7 +39,7 @@ class AuthenticateUser {
 	public function checkUserCredential ( User $UserObj, $mode ) {
 		$bts = BaseToolSet::getInstance();
 
-		if ( strlen($UserObj->getUserEntry('error_login_not_found')) == 0 ) {
+		if ( strlen($UserObj->getUserEntry('error_login_not_found') ?? '') == 0 ) {
 			$CurrentSetObj = CurrentSet::getInstance();
 			$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 			$CurrentSetObj->setDataSubEntry('autentification', 'mode', $mode);

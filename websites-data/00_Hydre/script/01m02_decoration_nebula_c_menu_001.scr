@@ -1,0 +1,30 @@
+add	decoration
+name	'nebula_menu_001'
+graphic	'nebula_block_001'
+text	'nebula_txt_menu'
+type	'menu'
+directory	'Nebula'
+	
+genre	'2'
+animation	'ftghsdlssth'
+	
+div_width	'128'
+	
+	
+	
+target_dock	'Bottom-right'
+dock_decal_x	'0'
+dock_decal_y	'0'
+	
+display_icons	'NO'
+	
+	
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;	

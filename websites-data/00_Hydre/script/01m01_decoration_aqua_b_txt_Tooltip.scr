@@ -1,0 +1,95 @@
+add decoration 							
+name	'aqua_txt_tooltip'						
+directory	'Aqua'						
+type	'caligraph'						
+main_unit	'mm'	txt_font_unit	'px'				
+txt_font_family	'Arial'	txt_font_size	'14'				
+							
+							
+							
+							
+h1_font_family	'Arial'	h1_font_size	'26'	h1_txt_col	'FFFFFF'	h1_special	'font-weight:bold;'
+h2_font_family	'Arial'	h2_font_size	'24'	h2_txt_col	'FFFFFF'	h2_special	'font-weight:bold;'
+h3_font_family	'Arial'	h3_font_size	'22'	h3_txt_col	'FFFFFF'	h3_special	'font-weight:bold;'
+h4_font_family	'Arial'	h4_font_size	'20'	h4_txt_col	'FFFFFF'	h4_special	'font-weight:bold;'
+h5_font_family	'Arial'	h5_font_size	'18'	h5_txt_col	'FFFFFF'	h5_special	'font-weight:bold;'
+h6_font_family	'Arial'	h6_font_size	'16'	h6_txt_col	'FFFFFF'	h6_special	'font-weight:bold;'
+h7_font_family	'Arial'	h7_font_size	'14'	h7_txt_col	'FFFFFF'	h7_special	'font-weight:bold;'
+							
+		p_txt_align	'justify'				
+							
+		p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+							
+							
+txt_col	'FFFFFF'	txt_highlight_col	'404000'			txt_title_col	'FFFFFF'
+txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
+							
+a_fg_col	'FFFFFF'			a_decoration	'none'	a_special	'display:block;'
+						a_hover_special	'font-weight:bold;display:block;'
+a_active_fg_col	'FFFFFF'						
+a_visited_fg_col	'FFFFFF'						
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+icon_directory	'aqua_B01_icon_directory.png'	icon_erase	'aqua_B01_icon_erase.png'				
+icon_ok	'aqua_B01_icon_ok.png'	icon_nok	'aqua_B01_icon_ko.png'				
+icon_left	'aqua_B01_icon_left.png'	icon_right	'aqua_B01_icon_right.png'	icon_top	'aqua_B01_icon_up.png'	icon_bottom	'aqua_B01_icon_down.png'
+icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_notification.png'				
+transparent_8x8	'empty.gif'						
+icon_width	'32'						
+icon_height	'32'						
+;							

@@ -1,0 +1,28 @@
+add	decoration
+name	'aqua_menu_002'
+graphic	'aqua_block_001'
+text	'aqua_txt_menu'
+type	'menu'
+directory	'Aqua'
+	
+genre	'2'
+animation	'ftgvs'
+	
+div_width	'192'
+div_height	'52'
+	
+	
+target_dock	'Bottom-right'
+dock_decal_x	'-64'
+dock_decal_y	'-4'
+	
+display_icons	'NO'
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;	

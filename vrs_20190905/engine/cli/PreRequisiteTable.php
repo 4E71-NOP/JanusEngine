@@ -15,8 +15,8 @@
 
 self::$PreRequisiteTable['add']['article'] = array (
 		"execute" => function (&$a) {
-			if ( strlen($a['params']['creator']) == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
-			if ( strlen($a['params']['validator']) == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
+			if ( strlen($a['params']['creator'] ?? '') == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
+			if ( strlen($a['params']['validator'] ?? '') == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
 		},
 		
 		"convert" => array(
@@ -145,8 +145,8 @@ self::$PreRequisiteTable['add']['article_config'] = array (
 
 self::$PreRequisiteTable['add']['document'] = array (
 		"execute" => function (&$a) {
-			if ( strlen($a['params']['creator']) == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
-			if ( strlen($a['params']['validator']) == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
+			if ( strlen($a['params']['creator'] ?? '') == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
+			if ( strlen($a['params']['validator'] ?? '') == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
 		},
 		"convert" => array(
 				array("v" => "type",			"s" => "document"),
@@ -410,7 +410,7 @@ self::$PreRequisiteTable['add']['user'] = array (
 				$bts = BaseToolSet::getInstance();
 				$a['params']['password'] = hash("sha512",stripslashes($bts->CMObj->getConfigurationSubEntry('db', 'websiteUserPassword'))); 
 			}
-			if ( strlen($a['params']['login'] == 0 )){ $a['params']['login'] = $a['params']['name'];}
+			if ( strlen($a['params']['login'] ?? '') == 0 ){ $a['params']['login'] = $a['params']['name'];}
 // 			$a['params']['password'] = hash("sha512",stripslashes($a['params']['password']));
 		},
 		"convert" => array(
@@ -648,8 +648,8 @@ self::$PreRequisiteTable['assign']['user'] = array (
 //--------------------------------------------------------------------------------
 self::$PreRequisiteTable['insert']['content'] = array (
 		"execute" => function (&$a) {
-			if ( strlen($a['params']['creator']) == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
-			if ( strlen($a['params']['validator']) == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
+			if ( strlen($a['params']['creator'] ?? '') == 0 ) { $a['params']['creator'] = $a['Initiator']['db_login']; }
+			if ( strlen($a['params']['validator'] ?? '') == 0 ) { $a['params']['validator'] = $a['Initiator']['db_login'];}
 		},
 		"columns" => array(
 				array ( "v" => "docu_id",				"t" => "docu_id"),
