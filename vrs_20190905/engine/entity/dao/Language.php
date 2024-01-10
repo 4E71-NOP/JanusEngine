@@ -41,7 +41,7 @@ class Language extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('language') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('language') . "
 			WHERE lang_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

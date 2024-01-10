@@ -142,8 +142,8 @@ class ThemeDescriptor extends Entity{
 
 		$q = "
 		SELECT * FROM " 
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
+		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
 		WHERE td.theme_id = '".$id."'
 		AND td.theme_id = tw.fk_theme_id
 		AND tw.theme_state = '1'
@@ -178,7 +178,7 @@ class ThemeDescriptor extends Entity{
 
 		$q = "
 		SELECT * FROM " 
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_definition')." td "
+		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_definition')." td "
 		."WHERE td.fk_theme_id = '".$id . "' "
 		."ORDER BY td.def_name;";
 
@@ -208,19 +208,19 @@ class ThemeDescriptor extends Entity{
 		$Dest = $this->CssPrefix;
 		// mt_ as Main Theme
 		if ( $Dest == "mt_" ) {
-			if ( $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme') != 0 ) { 
-				$Dest = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
+			if ( $CurrentSetObj->UserObj->getUserEntry('user_pref_theme') != 0 ) { 
+				$Dest = $CurrentSetObj->UserObj->getUserEntry('user_pref_theme'); 	// By default the user theme is prefered
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting user theme. id=".$Dest ));
 			}
 			else { 
-				$Dest = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id'); // Problem with the prefered user theme
+				$Dest = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_theme_id'); // Problem with the prefered user theme
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. id=".$Dest ));
 			}
 			// By default we use ID
 			$q = "
 			SELECT * FROM " 
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
 			WHERE td.theme_id = '".$Dest."'
 			AND td.theme_id = tw.fk_theme_id
 			AND tw.theme_state = '1'
@@ -233,8 +233,8 @@ class ThemeDescriptor extends Entity{
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. id=".$Dest ));
 			$q = "
 			SELECT * FROM " 
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
 			WHERE td.theme_name = '".$Dest."'
 			AND td.theme_id = tw.fk_theme_id
 			AND tw.theme_state = '1'
@@ -251,7 +251,7 @@ class ThemeDescriptor extends Entity{
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')."
 			LIMIT 1
 			;");
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));

@@ -40,7 +40,7 @@ class Router {
 			$this->updateSessionRouteFromForm();
 		}
 		else {
-			$url = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('request_uri');
+			$url = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analyzing requested URI `".$url."`"));
 			if ( $this->isCleanUrl($url) === true ) {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : URL is clean. We consider it's a slug thing."));

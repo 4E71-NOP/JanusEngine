@@ -22,7 +22,7 @@ class ModuleSelectLanguage {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('connected_group_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('connected_group_read_permission') === true ) {
 			$localisation = " / ModuleSelectLanguage";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleSelectLanguage");
@@ -30,8 +30,8 @@ class ModuleSelectLanguage {
 			$bts->MapperObj->setSqlApplicant("ModuleSelectLanguage");
 			
 			$language_website_ = array();
-			if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang_select') == 1 ) {
-				$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language').";");
+			if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang_select') == 1 ) {
+				$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language').";");
 				$pv['1'] = 1;
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					$language_website_[$pv['1']]['lang_id']				= $dbp['lang_id'];
@@ -45,9 +45,9 @@ class ModuleSelectLanguage {
 				$dbquery = $bts->SDDMObj->query("
 					SELECT l.lang_id
 					FROM "
-					.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw, "
-					.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l
-					WHERE lw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+					.$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." lw, "
+					.$CurrentSetObj->SqlTableListObj->getSQLTableName('language')." l
+					WHERE lw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 					AND lw.fk_lang_id = l.lang_id
 					;");
 				
@@ -63,12 +63,12 @@ class ModuleSelectLanguage {
 						$language_website_support[$pv['offset']] = $pv['offset'];
 					}
 					foreach ( $language_website_support as $A ) {
-						if ( $A == $language_website_[$A]['lang_id'] && $A != $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('lang') ) {
-							$pv['1'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang');
+						if ( $A == $language_website_[$A]['lang_id'] && $A != $CurrentSetObj->UserObj->getUserEntry('lang') ) {
+							$pv['1'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang');
 							$pv['1'] = $language_website_[$pv['offset']][$pv['1']];
-							$baseUrl = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
-							if ( !file_exists ( "media/theme/". $CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }
-							else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image']; }
+							$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+							if ( !file_exists ( "media/theme/". $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }
+							else { $pv['img_src'] = $baseUrl."media/theme/".$CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image']; }
 							
 							$Content .= "
 							<td>\r"

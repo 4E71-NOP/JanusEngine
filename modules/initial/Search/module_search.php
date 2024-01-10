@@ -26,21 +26,21 @@ class ModuleSearch
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ($CurrentSetObj->getInstanceOfUserObj()->hasPermission('connected_group_read_permission') === true) {
+		if ($CurrentSetObj->UserObj->hasPermission('connected_group_read_permission') === true) {
 			$localisation = " / ModuleSearch";
 			$bts->MapperObj->AddAnotherLevel($localisation);
 			$bts->LMObj->logCheckpoint("ModuleSearch");
 			$bts->MapperObj->RemoveThisLevel($localisation);
 			$bts->MapperObj->setSqlApplicant("ModuleSearch");
 
-			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 			$l = $CurrentSetObj->getDataEntry('language');
 			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "/i18n/" . $l . ".php", "format" => "php"));
 			$Block = $ThemeDataObj->getThemeName() . $infos['block'];
 
 			$Content = "";
-			if ($CurrentSetObj->getInstanceOfUserObj()->hasPermission("connected_group_read_permission") == true) {
+			if ($CurrentSetObj->UserObj->hasPermission("connected_group_read_permission") == true) {
 				$Content .= "<span>" . $bts->I18nTransObj->getI18nTransEntry('txt1') . "</span>"
 					. $bts->RenderFormObj->renderformHeader("ModuleSearchForm")
 					. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",	"ModuleSearch")
@@ -94,7 +94,7 @@ class ModuleSearch
 			}
 		}
 
-		if ($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10) {
+		if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
 			unset(
 				$localisation,
 				$CurrentSetObj,

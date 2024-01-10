@@ -83,7 +83,7 @@ class User extends Entity {
 			AND gu.group_user_initial_group = '1'
 			AND gu.fk_group_id = g.group_id
 			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			;";
 		$this->loadDataFromDB($sqlQuery);
 	}
@@ -114,7 +114,7 @@ class User extends Entity {
 			AND gu.group_user_initial_group = '1'
 			AND gu.fk_group_id = g.group_id
 			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '" . $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			;";
 		$this->loadDataFromDB($sqlQuery);
 	}
@@ -236,11 +236,11 @@ class User extends Entity {
 
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
-			$this->User['user_lang'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang');
+			$this->User['user_lang'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang');
 		}
 		// Set a default theme if none is specified.
 		if ( $this->User['user_pref_theme'] == 0 ) {
-			$this->User['user_pref_theme'] = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('fk_theme_id');
+			$this->User['user_pref_theme'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_theme_id');
 		}
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));

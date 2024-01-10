@@ -40,9 +40,9 @@ class LanguageWebsite extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')."
 			WHERE lang_website_id = '".$id."'
-			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -124,8 +124,8 @@ class LanguageWebsite extends Entity {
 		$tab = $this->columns;
 		
 		$this->LanguageWebsite['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

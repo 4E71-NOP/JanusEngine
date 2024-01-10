@@ -40,7 +40,7 @@ class Decoration extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('decoration') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('decoration') . "
 			WHERE deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

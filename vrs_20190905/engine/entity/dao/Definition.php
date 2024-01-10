@@ -40,7 +40,7 @@ class Definition extends Entity {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('definition') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('definition') . "
 			WHERE def_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

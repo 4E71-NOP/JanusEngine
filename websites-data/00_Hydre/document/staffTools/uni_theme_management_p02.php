@@ -615,8 +615,8 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------
 
-$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "current/engine/javascript/lib_themeManagement.js");
-$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', 'ThemeGradientMgmt();');
+$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', "current/engine/javascript/lib_themeManagement.js");
+$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', 'ThemeGradientMgmt();');
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();

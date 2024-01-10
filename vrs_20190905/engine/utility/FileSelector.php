@@ -35,8 +35,8 @@ class FileSelector {
 		$bts = BaseToolSet::getInstance();
 		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();		// we use it this way for syntaxic ease. instead of $CurrentSetObj->getInstanceOfThemeDataObj()->xxxx()
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj();		// we use it this way for syntaxic ease. instead of $CurrentSetObj->ThemeDataObj->xxxx()
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj();
 		
 		$Content = "";
 		$zIndex = 500;

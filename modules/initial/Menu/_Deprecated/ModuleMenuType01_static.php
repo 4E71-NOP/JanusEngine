@@ -54,7 +54,7 @@ class ModuleMenuType01 {
 			}
 			
 			$infos['function_parameters'] = array (
-					"arti_request"	=> $CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentData('arti_ref'),
+					"arti_request"	=> $CurrentSetObj->DocumentDataObj->getDocumentData('arti_ref'),
 					"menu_parent" 	=> $racine_menu,
 					"espacement" 	=> 0
 			);
@@ -63,7 +63,7 @@ class ModuleMenuType01 {
 		}
 		$Content .= "</ul>";
 		
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$menu_principal ,
 					$dbquery ,

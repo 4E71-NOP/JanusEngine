@@ -27,14 +27,14 @@ class ModuleAuthentification
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
 		$Content = "";
-		if ($CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true) {
+		if ($CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true) {
 			$localisation = " / ModuleAuthentification";
 			$bts->MapperObj->AddAnotherLevel($localisation);
 			$bts->LMObj->logCheckpoint("ModuleAuthentification");
 			$bts->MapperObj->RemoveThisLevel($localisation);
 			$bts->MapperObj->setSqlApplicant("ModuleAuthentification");
 
-			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
 			$Block = $ThemeDataObj->getThemeName() . $infos['block'];
 
@@ -102,7 +102,7 @@ class ModuleAuthentification
 					2,
 					""
 				);
-				$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 				$pv['SSL_etat'] = "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(" . $baseUrl . "/media/img/universal/ssl_ko.png)'></div>";
 				if (isset($_SERVER['HTTPS'])) {
 					if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == '443')) {
@@ -142,7 +142,7 @@ class ModuleAuthentification
 		}
 
 		// Cleaning up
-		if ($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10) {
+		if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
 			unset(
 				$i18n,
 				$localisation,

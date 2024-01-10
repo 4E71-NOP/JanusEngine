@@ -158,7 +158,7 @@ class LibInstallation {
 
 		// If DB is ready we store directly into DB. Thank you captain obvious.
 		if ( $infos['section'] != 'tables_creation' ) { 
-			$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report'). " VALUES ("
+			$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report'). " VALUES ("
 			."'".$bts->SDDMObj->createUniqueId()."', "
 			."'".$infos['section']."', "
 			."'".$this->report[$infos['section']][$infos['currentFileName']]['file']."', "
@@ -229,7 +229,7 @@ class LibInstallation {
 			}
 		}
 
-		$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report'). " VALUES ("
+		$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report'). " VALUES ("
 		."'".$bts->SDDMObj->createUniqueId()."', "
 		."'".$infos['section']."', "
 		."'".$this->report[$infos['section']][$infos['currentFileName']]['file']."', "
@@ -294,13 +294,13 @@ class LibInstallation {
 		
 		if ( ($this->report['lastReportExecution'] - $this->report['lastReportExecutionSaved']) > 3 ) {
 			$CommandConsole = CommandConsole::getInstance();
-			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
+			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$CommandConsole->getReportEntry('executionPerformed')."' WHERE inst_name = 'command_count';" );
 			$this->report['lastReportExecutionSaved'] = $this->report['lastReportExecution'];
 
-			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".$bts->LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
+			$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".$bts->LMObj->getSqlQueryNumber()."' WHERE inst_name = 'SQL_query_count';" );
 			$this->report['lastSQLExecutionSaved'] = $this->report['lastSQLExecution'];
 		}
-		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
+		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'last_activity';" );
 	}
 	
 	//@formatter:off

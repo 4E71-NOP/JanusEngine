@@ -23,7 +23,7 @@ class Deco40_Elegance {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_40_elegance') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_40_elegance') . "
 			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

@@ -43,7 +43,7 @@ class ThemeWebsite extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')."
 			WHERE theme_website_id = '".$id."'
 		;");
 		
@@ -128,8 +128,8 @@ class ThemeWebsite extends Entity {
 		$tab = $this->columns;
 		
 		$this->ThemeWebsite['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

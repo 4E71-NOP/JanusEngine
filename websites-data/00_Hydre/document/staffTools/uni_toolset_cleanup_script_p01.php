@@ -59,7 +59,7 @@ $bts->I18nTransObj->apply(
 		)
 	)
 );
-$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
+$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
 
 $textAreaCols=50;
 $textAreaRows=16;

@@ -37,14 +37,14 @@ class MenuData {
 		
 		$query = "
 		SELECT mnu.* FROM "
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." mnu, "
-		.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." bcl
-		WHERE mnu.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		.$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')." mnu, "
+		.$CurrentSetObj->SqlTableListObj->getSQLTableName('deadline')." bcl
+		WHERE mnu.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND mnu.fk_lang_id = '".$CurrentSetObj->getDataEntry ( 'language_id')."'
 		AND mnu.fk_deadline_id = bcl.deadline_id
 		AND bcl.deadline_state = '1'
 		AND mnu.menu_type IN ('0','1')
-		AND mnu.fk_perm_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
+		AND mnu.fk_perm_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_perm')."
 		AND mnu.menu_state = '1'
 		ORDER BY mnu.menu_parent,mnu.menu_position
 		;";
@@ -71,7 +71,7 @@ class MenuData {
 			}
 			$this->MenuDataTree[$this->EntryPoint] = $this->MenuDataRaw[$this->EntryPoint];
 			$this->buildTree($this->MenuDataTree);
-			$this->MenuDataTree['theme_name'] = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName();
+			$this->MenuDataTree['theme_name'] = $CurrentSetObj->ThemeDataObj->getThemeName();
 		}
 	}
 

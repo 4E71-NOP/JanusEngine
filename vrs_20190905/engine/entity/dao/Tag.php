@@ -39,7 +39,7 @@ class Tag extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('tag') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('tag') . "
 			WHERE tag_id = '" . $id . "'
 			;" );
 			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -120,8 +120,8 @@ class Tag extends Entity {
 		$this->Tag['tag_name'] .= "-".date("d_M_Y_H:i:s", time());
 		
 		$this->Tag['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

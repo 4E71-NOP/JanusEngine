@@ -31,7 +31,7 @@ class RenderDeco40Elegance {
 	public function render ( $infos ){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
@@ -152,7 +152,7 @@ class RenderDeco40Elegance {
 		ex33 : {	'isEnabled':true,	'DimX':".$B['ex33_x'].",	'DimY':".$B['ex33_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},
 		}";
 
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 40 , '".$mcn."', ".$argAddModule.");");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 40 , '".$mcn."', ".$argAddModule.");");
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

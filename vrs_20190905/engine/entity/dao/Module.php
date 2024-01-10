@@ -54,10 +54,10 @@ class Module extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query("
 			SELECT m.*,mw.module_state
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." m , ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." mw
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module')." m , ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')." mw
 			WHERE m.module_id = '".$id."'
 			AND m.module_id = mw.fk_module_id
-			AND mw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND mw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

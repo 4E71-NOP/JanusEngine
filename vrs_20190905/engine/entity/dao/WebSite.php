@@ -62,7 +62,7 @@ class WebSite extends Entity
 		if ($currentWs) {
 			$dbquery = $bts->SDDMObj->query("
 				SELECT * 
-				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website') . " 
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
 				WHERE ws_id = '" . $currentWs . "'
 				;");
 			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
@@ -105,7 +105,7 @@ class WebSite extends Entity
 		if ($currentWs > 1) {
 			$dbquery = $bts->SDDMObj->query("
 				SELECT * 
-				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website') . " 
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
 				WHERE ws_short = '" . $currentWs . "'
 				;");
 			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
@@ -145,7 +145,7 @@ class WebSite extends Entity
 
 		$dbquery = $bts->SDDMObj->query(
 			"SELECT * 
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website') . " 
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
 			WHERE ws_id = '" . $id . "'
 			;"
 		);

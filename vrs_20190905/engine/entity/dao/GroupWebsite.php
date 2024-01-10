@@ -40,7 +40,7 @@ class GroupWebsite extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('group_website') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('group_website') . "
 			WHERE group_website_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

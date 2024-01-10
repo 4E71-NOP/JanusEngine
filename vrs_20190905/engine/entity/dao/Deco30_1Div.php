@@ -23,7 +23,7 @@ class Deco30_1Div {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_30_1_div') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_30_1_div') . "
 			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

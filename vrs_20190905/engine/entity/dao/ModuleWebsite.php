@@ -40,7 +40,7 @@ class ModuleWebsite extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')."
 			WHERE module_website_id = '".$id."' 
 			;");
 		
@@ -73,9 +73,9 @@ class ModuleWebsite extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')." 
 			WHERE fk_module_id = '".$id."' 
-			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -157,8 +157,8 @@ class ModuleWebsite extends Entity {
 		$tab = $this->columns;
 		
 		$this->ModuleWebsite['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

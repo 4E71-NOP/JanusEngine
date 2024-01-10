@@ -22,14 +22,14 @@ class ModuleTooltip {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
 			$localisation = " / ModuleTooltip";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleTooltip");
 			$bts->MapperObj->RemoveThisLevel($localisation );
 			$bts->MapperObj->setSqlApplicant("ModuleTooltip");
 			
-			$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+			$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 			$cdx = $cdy = 0;
 			if ($cdx == 0) { $cdx = 192;}
 			if ($cdy == 0) { $cdy = 96;}

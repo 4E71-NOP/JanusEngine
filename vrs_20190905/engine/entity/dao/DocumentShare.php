@@ -40,7 +40,7 @@ class DocumentShare extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('document_share') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('document_share') . "
 			WHERE share_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -74,8 +74,8 @@ class DocumentShare extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('document_share') . "
-			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('document_share') . "
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND fk_docu_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -159,8 +159,8 @@ class DocumentShare extends Entity{
 		$tab = $this->columns;
 
 		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-		? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-		: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+		? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+		: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

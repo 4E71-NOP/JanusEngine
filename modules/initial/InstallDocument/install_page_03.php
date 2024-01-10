@@ -73,8 +73,8 @@ class InstallPage03 {
 	public function render($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		$Content = "";
 
@@ -301,7 +301,7 @@ class InstallPage03 {
 		if ( $this->form['dataBaseLogErr'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
 		if ( $this->form['dataBaseLogError'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
 
-		$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
+		$CurrentSetObj->setSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
 		$bts->initSddmObj();
@@ -323,7 +323,7 @@ class InstallPage03 {
 		$i=0;
 
 		$shortNames = array();
-		$dbquery = $bts->SDDMObj->query("SELECT ws_directory,ws_short FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website').";");
+		$dbquery = $bts->SDDMObj->query("SELECT ws_directory,ws_short FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('website').";");
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 			$shortNames[$dbp['ws_directory']] = $dbp['ws_short'];
 		}
@@ -352,7 +352,7 @@ class InstallPage03 {
 		$tokenValidation = false;
 		$formVal = $bts->RequestDataObj->getRequestDataEntry('installToken');
 
-		$dbquery = $bts->SDDMObj->query("SELECT inst_nbr FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')
+		$dbquery = $bts->SDDMObj->query("SELECT inst_nbr FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')
 		." WHERE inst_name = 'installToken'"
 		." LIMIT 1"
 		.";"

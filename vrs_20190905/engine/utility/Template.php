@@ -196,8 +196,8 @@ class Template {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
-		$bareTableClass = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."bareTable";
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
+		$bareTableClass = $CurrentSetObj->ThemeDataObj->getThemeName()."bareTable";
 		
 		$Content = "
 			<table class='".$bareTableClass."' style='padding:16px'>\r
@@ -285,7 +285,7 @@ class Template {
 		$Content = "</form>\r"
 		. $bts->RenderFormObj->renderformHeader("FilterForm")
 		// ."<form ACTION='index.php?' method='post'>\r"
-		."<table class='".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."defaultTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
+		."<table class='".$CurrentSetObj->ThemeDataObj->getThemeName()."defaultTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
 		."<tr>\r"
 		."<td ".$tdStyle.">".$bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryLike')."</td>\r"
 		."<td ".$tdStyle.">"

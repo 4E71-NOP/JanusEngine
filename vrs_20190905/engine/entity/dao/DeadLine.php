@@ -13,7 +13,8 @@
 /* Hydre-licence-fin */
 class DeadLine extends Entity{
 	private $DeadLine = array ();
-	
+	private $LastExecutionReport = array();
+
 	//@formatter:off
 	private $columns = array(
 		'deadline_id'				=>	0,
@@ -44,8 +45,8 @@ class DeadLine extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query("
 		SELECT dl.*
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')." dl "
-		."WHERE dl.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('deadline')." dl "
+		."WHERE dl.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		AND dl.deadline_id ='".$id."'
 		;");
 		if ( $dbquery === false ) { 
@@ -142,8 +143,8 @@ class DeadLine extends Entity{
 		$tab['deadline_end_date'] = $date+(60*60*24*31*12*10);
 
 		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

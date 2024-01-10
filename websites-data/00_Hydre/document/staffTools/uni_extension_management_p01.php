@@ -75,11 +75,11 @@ $bts->I18nTransObj->apply(
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('group_tag') ));
+$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->UserObj->getUserEntry('group_tag') ));
 
 // Will be replaced by a proper user permission management.
 $permissionOnExtenssion = 0;
-$groupList = $CurrentSetObj->getInstanceOfUserObj()->getGroupList();
+$groupList = $CurrentSetObj->UserObj->getGroupList();
 // $bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupList=" . $bts->StringFormatObj->arrayToString($groupList) ));
 foreach ($groupList as $A) { if ( $A['group_tag'] == 3) { $permissionOnExtenssion = 1; } }
 

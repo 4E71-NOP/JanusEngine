@@ -29,7 +29,7 @@ class RenderAdmDashboard {
 	public function render(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$localisation = " / ModuleMenu";
 		$bts->MapperObj->AddAnotherLevel($localisation );
@@ -41,11 +41,11 @@ class RenderAdmDashboard {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module')." a, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('module_website')." b
-			WHERE b.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry ('ws_id')."'
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module')." a, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')." b
+			WHERE b.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry ('ws_id')."'
 			AND a.module_id = b.fk_module_id
 			AND b.module_state = '1'
-			AND a.fk_perm_id ". $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
+			AND a.fk_perm_id ". $CurrentSetObj->UserObj->getUserEntry('clause_in_perm')."
 			AND a.module_adm_control > '0'
 			ORDER BY module_position
 			;");
@@ -120,7 +120,7 @@ class RenderAdmDashboard {
 		// 2	10	6
 		// 1	9	5
 		
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getDefinitionValue('admctrl_position').", ".$ThemeDataObj->getDefinitionValue('admctrl_width').", ".$ThemeDataObj->getDefinitionValue('admctrl_height').");");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.SetAdminSwitchLocation ( 'AdminControlSwitch', ".$ThemeDataObj->getDefinitionValue('admctrl_position').", ".$ThemeDataObj->getDefinitionValue('admctrl_width').", ".$ThemeDataObj->getDefinitionValue('admctrl_height').");");
 		
 		$cellList = array (
 			1 => array( 'width'=> '25%' , 'height' => '100%', 'forcedWidth' => '100%',	'forcedHeight' => '100%',	'minWidth' => '2cm',	'minHeight' => '10cm'),
@@ -144,7 +144,7 @@ class RenderAdmDashboard {
 			<td style='width:".$cellList[$n]['width']."; height:".$cellList[$n]['height']."; min-width:".$cellList[$n]['minWidth']."; min-height:".$cellList[$n]['minHeight'].";'>
 			";
 			
-			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("admin_default_write_permission") == true ) {
+			if ( $CurrentSetObj->UserObj->hasPermission("admin_default_write_permission") == true ) {
 				if ( $m['module_deco'] == 1 ) { 
 					$infos['block'] = $bts->StringFormatObj->getDecorationBlockName( "B", $m['module_deco_nbr'] , ""); 
 				}

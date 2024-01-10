@@ -42,10 +42,10 @@ class ModuleList {
 		$q = "SELECT * FROM "
 			.$SqlTableListObj->getSQLTableName('module')." m, "
 			.$SqlTableListObj->getSQLTableName('module_website')." wm
-			WHERE wm.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			WHERE wm.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND m.module_id = wm.fk_module_id
 			AND wm.module_state = '1'
-			AND m.fk_perm_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_perm')."
+			AND m.fk_perm_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_perm')."
 			AND m.module_adm_control = '0'
 			ORDER BY module_position
 			;";

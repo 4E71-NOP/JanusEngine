@@ -80,8 +80,8 @@ class FileSelectorRender
 		$ClassLoaderObj->provisionClass('ServerInfos');
 		$ClassLoaderObj->provisionClass('CurrentSet');
 		$CurrentSetObj = CurrentSet::getInstance();
-		$CurrentSetObj->setInstanceOfServerInfosObj(new ServerInfos());
-		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
+		$CurrentSetObj->setServerInfosObj(new ServerInfos());
+		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		$CurrentSetObj->setDataEntry('fsIdx', 0); // Useful for FileSelector
 		$CurrentSetObj->setDataEntry('ws', 'HdrBase');
 

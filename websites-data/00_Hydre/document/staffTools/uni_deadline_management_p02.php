@@ -149,8 +149,8 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 			array(
 				'deadline_state'	=>	1,
 				'fk_ws_id'			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-				'fk_user_id'		=>	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id'),
-				'fk_user_login'		=>	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_login'),
+				'fk_user_id'		=>	$CurrentSetObj->UserObj->getUserEntry('user_id'),
+				'fk_user_login'		=>	$CurrentSetObj->UserObj->getUserEntry('user_login'),
 			)
 		);
 		$currentDeadlineObj->setDeadLine( $arrTmp );

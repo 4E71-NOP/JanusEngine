@@ -29,8 +29,8 @@ class Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		return ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 	}
 	
 	/**
@@ -47,7 +47,7 @@ class Entity {
 		$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($data['columns'], $data['data']);
 		
 		$bts->SDDMObj->query("
-			INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($data['targetTable'])."
+			INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName($data['targetTable'])."
 			(".$QueryColumnDescription['columns'].")
 			VALUES
 			(".$QueryColumnDescription['values'].")
@@ -70,7 +70,7 @@ class Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ".$data['entityTitle']." doesn't exist in DB. Inserting Id=".$data['entityId']));
 		$QueryColumnDescription = $bts->SddmToolsObj->makeQueryColumnDescription($data['columns'], $data['data']);
 		$bts->SDDMObj->query("
-			UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($data['targetTable'])." a
+			UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName($data['targetTable'])." a
 			SET ".$QueryColumnDescription['equality']."
 			WHERE a.".$data['targetColumn']." ='".$data['entityId']."'
 			;");
@@ -92,7 +92,7 @@ class Entity {
 		$res = true;
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
+		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 		$column = "";
 
 		switch ($entity) {

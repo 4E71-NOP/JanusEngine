@@ -130,7 +130,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 					"docu_name"				=>	"NewDocument",
 					"docu_type"				=>	0,
 					"docu_origin"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-					"docu_creator"			=>	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id'),
+					"docu_creator"			=>	$CurrentSetObj->UserObj->getUserEntry('user_id'),
 					"docu_creation_date"	=>	time(),
 					"docu_validation"		=>	0,
 					"docu_validator"		=>	"",
@@ -155,7 +155,7 @@ $bts->RenderFormObj->renderformHeader('documentForm')
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	$processTarget )
 .$bts->RenderFormObj->renderHiddenInput(	"formTarget1[name]"			, 	$currentDocumentObj->getDocumentEntry('docu_name') )
 .$bts->RenderFormObj->renderHiddenInput(	"documentForm[selectionId]"	,	$currentDocumentObj->getDocumentEntry('docu_id') )
-.$bts->RenderFormObj->renderHiddenInput(	"formParams1[validator]"	,	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry ( 'user_login' ) )
+.$bts->RenderFormObj->renderHiddenInput(	"formParams1[validator]"	,	$CurrentSetObj->UserObj->getUserEntry ( 'user_login' ) )
 .$bts->RenderFormObj->renderHiddenInput(	"formParams1[validation]"	,	"YES" )
 ."<p>\r"
 ;

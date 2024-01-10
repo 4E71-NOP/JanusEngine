@@ -58,7 +58,7 @@ class InteractiveElements {
 		) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 
 		$tab = array(
@@ -95,7 +95,7 @@ class InteractiveElements {
 	 */
 	public function renderSubmitButton (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		if ( strlen($infos['hoverStyle']) > 0 ) { 
 			$animation = " onmouseover=\"elm.ButtonHover('".$infos['id']."', '".$infos['hoverStyle']."');\" onmouseout=\"elm.ButtonHover('".$infos['id']."', '".$infos['initialStyle']."');\" ";
@@ -190,7 +190,7 @@ class InteractiveElements {
 	 */
 	public function renderIconSelectFile ($infos){
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$i = &$infos['IconSelectFile'];
 		
 		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_width');
@@ -202,13 +202,13 @@ class InteractiveElements {
 		$contenu_A = "
 			<input type='text' readonly name='".$i['formTargetId']."' id='".$i['formTargetId']."' size='".$i['formInputSize']."' maxlength='255' value='".$i['formInputVal']."' style='text-align:right;' >\r
 			<span Onclick=\"fs.getDirectoryContent(".$i['array'].", '".$i['path']."', 0); elm.FillScreenDiv('FileSelectorDarkFade', 1 ); elm.SwitchDisplayCenter('FileSelectorFrame')\">\r
-			<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>
 			";
 		
 		$contenu_B = "
 			<span Onclick=\"document.forms['".$i['formName']."'].elements['".$i['formTargetId']."'].value = '';\">
-			<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0'>
+			<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0'>
 			</span>\r
 			";
 		
@@ -243,7 +243,7 @@ class InteractiveElements {
 	 */
 	public function renderIconSelectImage ( $cas , $FormNom , $ForgeFormElement, $ForgeFormElementX, $ForgeFormElementY, $FormRepertoire , $InputVal , $DivCible , $JavascriptRoutine , $ModType , $infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 		$X = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_width');
 		$Y = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_height');
@@ -252,7 +252,7 @@ class InteractiveElements {
 		$contenu_A = "
 	<input type='text' name='".$ForgeFormElement."' id='".$ForgeFormElement."' size='20' maxlength='255' value='".$InputVal."' 
 	onChange=\"
-	var NewU = 'url(\'".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
+	var NewU = 'url(\'".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/' + document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value + '/'+ this.value + '\')';
 	elm.Gebi('".$DivCible."').style.backgroundImage = NewU;\r
 	\">\r
 			
@@ -262,7 +262,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	RenderFSJS('".$FormNom."','".$ForgeFormElement."', '".$ForgeFormElementX."', '".$ForgeFormElementY."', document.forms['".$FormNom."'].elements['".$FormRepertoire."'].value , 'FSJavaScript' , 'FSJS_C_' , '".$JavascriptRoutine."' )\">
-	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'></span>\r
+	<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_directory') . "' width='".$X."' height='".$Y."' border='0'></span>\r
 	";
 		
 		$contenu_B = "
@@ -271,7 +271,7 @@ class InteractiveElements {
 	CDMExec.NomModule = '".$DivCible."';
 	CDMExec.FormCible = '".$FormNom."';
 	".$JavascriptRoutine."();\">\r
-	<img src='".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
+	<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'icon_erase') . "' width='".$X."' height='".$Y."' border='0' alt=''></span>\r
 	";
 		
 		$contenu_R = "";

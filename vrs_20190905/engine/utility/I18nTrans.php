@@ -41,7 +41,7 @@ class I18nTrans {
 		
 		$dbquery = $bts->SDDMObj->query ("
 			SELECT i18n_name, i18n_text 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('i18n')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('i18n')."
 			WHERE i18n_package = '".$package."'
 			AND fk_lang_id = '". $CurrentSetObj->getDataEntry('language_id')."' 
 			");

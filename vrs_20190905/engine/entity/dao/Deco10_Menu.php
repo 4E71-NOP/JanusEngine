@@ -23,7 +23,7 @@ class Deco10_Menu {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_10_menu') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_10_menu') . "
 			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

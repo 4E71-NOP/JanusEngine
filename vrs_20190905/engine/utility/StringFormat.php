@@ -313,7 +313,7 @@ class StringFormat
 	public function arrayToHtmlTable($data, $infos)
 	{
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName() . $infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
 		$str = "Empty result";
 
 		// $doHeader = true;
@@ -448,7 +448,7 @@ class StringFormat
 	{
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName() . $infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
 		$TabUnits = array(
 			"<span class='" . $Block . "_ok'>b</span>",
 			"<span class='" . $Block . "_warning'>Kb</span>",

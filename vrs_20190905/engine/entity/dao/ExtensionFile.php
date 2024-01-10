@@ -13,6 +13,7 @@
 /* Hydre-licence-fin */
 class ExtensionFile extends Entity{
 	private $ExtensionFile = array ();
+	private $ExtensionConfig = array ();
 	
 	//@formatter:off
 	private $columns = array(
@@ -41,7 +42,7 @@ class ExtensionFile extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('extension_file') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_file') . "
 			WHERE file_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

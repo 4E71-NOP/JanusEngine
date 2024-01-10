@@ -47,7 +47,8 @@ class HydrInstallMonitor {
 		$bts = BaseToolSet::getInstance();
 		$form = $bts->RequestDataObj->getRequestDataEntry ( 'form' );
 		$CurrentSetObj = CurrentSet::getInstance ();
-		$CurrentSetObj->setInstanceOfSqlTableListObj ( SqlTableList::getInstance ( $form['dbprefix'], $form['tabprefix'] ) );
+		$CurrentSetObj->setSqlTableListObj ( SqlTableList::getInstance () );
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
 
 		// We have a POST so we set RAM and execution time limit immediately.
 		if (isset ( $form ['memoryLimit'] )) {
@@ -73,7 +74,7 @@ class HydrInstallMonitor {
 		// $DALFacade->createDALInstance();		// It connects too.
 		$bts->initSddmObj ();
 
-		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
+		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 		
 		$sqlQuery = "SELECT *"
 		." FROM " . $SqlTableListObj->getSQLTableName ( 'installation' )

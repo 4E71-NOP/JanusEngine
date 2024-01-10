@@ -54,9 +54,9 @@ class Menu extends Entity {
 				
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT * 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')." 
 			WHERE menu_id = '".$id."'
-			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -163,14 +163,14 @@ class Menu extends Entity {
 		$tab['fk_arti_ref']				= "";
 
 		$tab['fk_ws_id'] = ($bts->CMObj->getExecutionContext() == 'render') 
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		
-		$tab['fk_user_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['fk_user_id'] = $CurrentSetObj->UserObj->getUserEntry('user_id');
 
 		$tab['fk_lang_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('lang_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('lang_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('lang_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('lang_id');
 		
 		return $tab;
 	}

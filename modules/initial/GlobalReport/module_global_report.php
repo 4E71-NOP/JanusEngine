@@ -25,28 +25,28 @@ class ModuleGlobalReport {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('admin_default_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('admin_default_read_permission') === true ) {
 
-// 			$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 			$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 			$l = $CurrentSetObj->getDataEntry ( 'language');
 			
 			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
 			$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
-			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfServerInfosObj(),	"urrentSetObj->getInstanceOfServerInfosObj");
-			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfUserObj()->getUser(),"User");
+			$bts->LMObj->logDebug($CurrentSetObj->ServerInfosObj,					"CurrentSetObj->getInstanceOfServerInfosObj");
+			$bts->LMObj->logDebug($CurrentSetObj->UserObj->getUser(),				"User");
 			$bts->LMObj->logDebug($infos,											"infos");
 			$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
 			$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
 			$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
-			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
-			$bts->LMObj->logDebug($CurrentSetObj->getInstanceOfThemeDataObj()->getThemeData(),					"ThemeDataObj->getThemeData()");
+			$bts->LMObj->logDebug($CurrentSetObj->ThemeDescriptorObj->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
+			$bts->LMObj->logDebug($CurrentSetObj->ThemeDataObj->getThemeData(),					"ThemeDataObj->getThemeData()");
 			
 			$T = array();
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 			
 			$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25,8);
 			$T['ContentInfos']['NbrOfTabs'] = 0;
-			$dbgLvl = $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');
+			$dbgLvl = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
 			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : \$dbgLvl=".$dbgLvl.", binary is:`".sprintf('%016b', $dbgLvl)."`") );
 			$CurrentTab = 0;	
 			if ( ($dbgLvl & 0b0000000000000001 ) != 0)	{ 
@@ -107,7 +107,7 @@ class ModuleGlobalReport {
 			
 			$bts->RenderTablesObj->updateTabsTitle($T['ContentInfos'],$CurrentTab);
 
-			$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+			$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 			$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'lib_GlobalReport.js');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');
 		}
@@ -149,7 +149,7 @@ class ModuleGlobalReport {
 		$Content['2']['2']['cont']		= round(($memory_['peak']/1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
 		$Content['3']['2']['cont']		= phpversion();																	
 		$Content['4']['2']['cont']		= round(($memory_['usage']/1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['5']['2']['cont']		= $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug');	
+		$Content['5']['2']['cont']		= $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');	
 		$Content['6']['2']['cont']		= get_include_path();															
 		$Content['7']['2']['cont']		= getcwd();																		
 		$Content['8']['2']['cont']		= getmyuid();																	
@@ -157,7 +157,7 @@ class ModuleGlobalReport {
 		$Content['10']['2']['cont']		= getmypid();																	
 		$Content['11']['2']['cont']		= getenv("HTTP_USER_AGENT");													
 		$Content['12']['2']['cont']		= get_current_user();															
-		$Content['13']['2']['cont']		= $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('request_uri');
+		$Content['13']['2']['cont']		= $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
 		;																												
 		
 		$config = $bts->RenderTablesObj->getDefaultTableConfig(13,2,2);
@@ -172,12 +172,12 @@ class ModuleGlobalReport {
 		// --------------------------------------------------------------------------------------------
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('definition')."
 			WHERE def_name = 'sl'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$bts->SDDMObj->query("
-			INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition')." VALUES (
+			INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName('definition')." VALUES (
 			'1',
 			'sl',
 			'0',
@@ -202,7 +202,7 @@ class ModuleGlobalReport {
 			$pv['def_number'] = time();
 		}
 		$bts->SDDMObj->query("
-		UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('definition')." SET
+		UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('definition')." SET
 		def_number = '".$pv['def_number']."'
 		WHERE def_name = 'sl'
 		;");
@@ -222,11 +222,11 @@ class ModuleGlobalReport {
 		// This will be implemented with "'" at the end of the string 
 		// Reference URL : https://cdnjs.com/libraries/Chart.js
 		// Since 4.0.0 we have to use the UMD version
-		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
-		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
-		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js' integrity='sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==' crossorigin='anonymous' referrerpolicy='no-referrer");
-		// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' integrity='sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==' crossorigin='anonymous' referrerpolicy='no-referrer");
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' integrity='sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js' integrity='sha512-vBmx0N/uQOXznm/Nbkp7h0P1RfLSj0HQrFSzV8m7rOGyj30fYAOKHYvCNez+yM8IrfnW0TCodDEjRqf6fodf/Q==' crossorigin='anonymous");
+		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js' integrity='sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' integrity='sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' integrity='sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==' crossorigin='anonymous' referrerpolicy='no-referrer");
 
 		$log = $bts->LMObj->getStatisticsLog();
 		$stepOne = true;
@@ -279,7 +279,7 @@ var Chart02 = new Chart(document.getElementById('statChart2'), ".$dataObjectEnco
 var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEncoded3 ."\r);\r\r
 ";
 		
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data',$javaScriptForChartJs."\r");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Data',$javaScriptForChartJs."\r");
 		$Content = array();
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed')." : ". $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
@@ -325,7 +325,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$Content = array();
 		
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l11');	$Content['1']['1']['class'] = $Block."_tb3";	$Content['1']['1']['1']['style'] = "text-align: center;";
@@ -392,7 +392,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = array();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$Content = array();
 		
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l11');	$Content['1']['1']['class'] = $Block."_tb3";	$Content['1']['1']['style'] = "text-align: center;";
@@ -414,8 +414,8 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$pv['log_date'] = time();
 		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('log')."
-			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('log')."
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY log_id DESC
 			LIMIT 0,15
 			;");
@@ -468,7 +468,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = array();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		
 		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l11');	$Content['1']['1']['style'] = "text-align: center;";  
 		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l12');
@@ -518,7 +518,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = array();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		
 		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l11');	$Content['1']['1']['style'] = "text-align: center;";
 		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l12');	

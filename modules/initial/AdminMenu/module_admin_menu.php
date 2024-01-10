@@ -22,7 +22,7 @@ class ModuleAdministration {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('admin_default_write_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('admin_default_write_permission') === true ) {
 
 			$localisation = " / ModuleAdministration";
 			$bts->MapperObj->AddAnotherLevel($localisation );
@@ -33,14 +33,14 @@ class ModuleAdministration {
 			$Content = "";
 			$dbquery = $bts->SDDMObj->query ("
 				SELECT * 
-				FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')." 
+				FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')." 
 				WHERE menu_type IN ('2', '3') 
 				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ('language_id')."' 
 				AND menu_state = '1' 
 				ORDER BY menu_position , menu_name
 				;");
-				// AND fk_group_id ".$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')." 
-				// AND fk_ws_id IN ('1', '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."')
+				// AND fk_group_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_group')." 
+				// AND fk_ws_id IN ('1', '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."')
 
 			if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
 			else {
@@ -73,7 +73,7 @@ class ModuleAdministration {
 				$Content .= "</ul>\r";
 			}
 		}
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$dbquery ,
 					$dbp,
@@ -85,8 +85,8 @@ class ModuleAdministration {
 	
 	private function renderAdminMenu (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url'); 
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url'); 
 		$Content = "";
 		$tabDecal = str_repeat("\t",$infos['parameters']['level']*2);
 		foreach ( $infos['menuData'] as $A ) {

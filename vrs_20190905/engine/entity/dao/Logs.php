@@ -23,13 +23,13 @@ class Logs {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('log') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('log') . "
 			WHERE log_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for log id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-				foreach ( $dbp as $A => $B ) { $this->Log[$A] = $B; }
+				foreach ( $dbp as $A => $B ) { $this->Logs[$A] = $B; }
 			}
 		}
 		else {

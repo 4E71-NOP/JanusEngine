@@ -29,7 +29,7 @@ class RenderTabs {
 
 	public function render($infos, $T) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$tab_infos = &$T['ContentInfos'];
 		
@@ -135,7 +135,7 @@ class RenderTabs {
 		$JavaScriptTableLength = strlen($JavaScriptTable) - 2;
 		$JavaScriptTable = substr( $JavaScriptTable, 0 , $JavaScriptTableLength) . "\r};\r";
 		
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$GeneratedScriptObj->insertString('JavaScript-Init', "var tm = new TabsManagement();");
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\ttm.InitTabs (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\ttm.TabsResize (TabsData_".$tab_infos['GroupName'].$tab_infos['CellName'].$tab_infos['DocumentName'].");");

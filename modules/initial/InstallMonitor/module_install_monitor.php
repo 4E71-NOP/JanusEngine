@@ -31,7 +31,7 @@ class InstallMonitor {
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 
 		// --------------------------------------------------------------------------------------------
 		$Content = "<h1 style='text-align: center;'>".$bts->I18nTransObj->getI18nTransEntry('title')."</h1>\r";
@@ -110,7 +110,7 @@ class InstallMonitor {
 
 		}
 	
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,
 			);

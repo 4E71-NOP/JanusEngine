@@ -30,7 +30,7 @@ class DocumentData {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
 		
 // 		Checks if we have a requested article 
@@ -51,10 +51,10 @@ class DocumentData {
 			AND menu_initial_document = '1'
 			ORDER BY mnu.menu_parent,mnu.menu_position
 			;" );
-//			AND mnu.fk_group_id " . $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('clause_in_group')."
+//			AND mnu.fk_group_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_group')."
 
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());
+				$CurrentSetObj->setDocumentDataObj(new DocumentData());
 				$CurrentSetObj->setDataSubEntry('document', 'arti_ref', $dbp['arti_ref']);
 			}
 			$CurrentSetObj->setDataSubEntry('document', 'arti_page', 1);

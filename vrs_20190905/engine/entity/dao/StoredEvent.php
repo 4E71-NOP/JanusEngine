@@ -29,7 +29,7 @@ class StoredEvent {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 				SELECT *
-				FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('stored_event') . "
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('stored_event') . "
 				WHERE stored_event_id = '" . $id . "'
 				;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

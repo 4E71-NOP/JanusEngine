@@ -44,7 +44,7 @@ class Permission extends Entity {
 				
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('permission')."
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('permission')."
 			WHERE perm_id = '".$id."'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

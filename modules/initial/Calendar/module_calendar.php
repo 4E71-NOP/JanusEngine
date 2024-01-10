@@ -20,13 +20,13 @@ class ModuleCalendar {
 	public function render ($infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
 			$localisation = " / ModuleCalendar";
 			$bts->MapperObj->AddAnotherLevel($localisation );
 			$bts->LMObj->logCheckpoint("ModuleCalendar");

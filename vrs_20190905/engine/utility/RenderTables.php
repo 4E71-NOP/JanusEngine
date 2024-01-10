@@ -61,7 +61,7 @@ class  RenderTables {
 		if ( $T['ContentInfos']['EnableTabs'] != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Tabs are enabled"));
 			if ( $this->javascriptAlreadyIncluded == false ) {
-				$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', "current/engine/javascript/lib_TabsManagement.js");
+				$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', "current/engine/javascript/lib_TabsManagement.js");
 				$this->javascriptAlreadyIncluded = true;
 			}
 			$Content .= $bts->RenderTabsObj->render($infos, $T); 
@@ -81,7 +81,7 @@ class  RenderTables {
 		$tab_infos['HighLightTypeBackup'] = $tab_infos['HighLightType'];
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " A table is on the bench. Let's get to work!"));
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		
 		for ( $CurT = 1 ; $CurT <= $tab_infos['NbrOfTabs'] ; $CurT++ ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Legend for Tab number ".$CurT." is " . $ADC['tabs'][$CurT]['TableCaptionPos']));

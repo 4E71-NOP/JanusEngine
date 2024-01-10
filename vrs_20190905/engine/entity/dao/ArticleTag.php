@@ -27,12 +27,14 @@ class ArticleTag extends Entity {
 	}
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . CurrentSet::getInstance()->getInstanceOfSqlTableListObj()->getSQLTableName ('article_tag') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('article_tag') . "
 			WHERE article_tag_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -108,12 +110,12 @@ class ArticleTag extends Entity {
 		$date = time ();
 		$tab = $this->columns;
 		
-		$tab['arti_creator_id'] = $tab['arti_validator_id'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['arti_creator_id'] = $tab['arti_validator_id'] = $CurrentSetObj->UserObj->getUserEntry('user_id');
 		$tab['arti_creation_date'] = $tab['arti_creation_date'] = $tab['arti_validation_date'] = $date;
 		
 		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

@@ -22,7 +22,7 @@ class ModuleDocumentDisplay {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
 
 			$localisation = " / ModuleDocument";
 			$bts->MapperObj->AddAnotherLevel($localisation );
@@ -36,17 +36,17 @@ class ModuleDocumentDisplay {
 			$ClassLoaderObj->provisionClass('InteractiveElements');
 			
 			$SqlTableListObj = SqlTableList::getInstance(null, null);
-			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
-			$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
+			$WebSiteObj = $CurrentSetObj->WebSiteObj;
 			
 			$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 			$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
 
-			$baseUrl = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 			
 			if (!class_exists("DocumentData")) { include ("modules/initial/DocumentDisplay/DocumentData.php"); }
-			$CurrentSetObj->setInstanceOfDocumentDataObj(new DocumentData());
-			$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
+			$CurrentSetObj->setDocumentDataObj(new DocumentData());
+			$DocumentDataObj = $CurrentSetObj->DocumentDataObj;
 			$DocumentDataObj->getDataFromDB();
 
 
@@ -475,7 +475,7 @@ class ModuleDocumentDisplay {
 	 */
 	private function documentExecution (&$inputContent, $infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
-		$DocumentDataObj = $CurrentSetObj->getInstanceOfDocumentDataObj();
+		$DocumentDataObj = $CurrentSetObj->DocumentDataObj;
 		
 		$pv = array();
 		$StartPos		= 0;
@@ -534,13 +534,13 @@ class ModuleDocumentDisplay {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$dbquery = $bts->SDDMObj->query("
 		SELECT *
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('keyword')."
-		WHERE fk_arti_id = '".$CurrentSetObj->getInstanceOfDocumentDataObj()->getDocumentDataEntry('arti_id')."'
+		FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('keyword')."
+		WHERE fk_arti_id = '".$CurrentSetObj->DocumentDataObj->getDocumentDataEntry('arti_id')."'
 		AND keyword_state = '1'
-		AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$KeyWordEntry['id']		= $dbp['keyword_id'];

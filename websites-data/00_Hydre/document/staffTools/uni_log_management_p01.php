@@ -390,8 +390,8 @@ $Content .= "
 </form>\r
 ".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'selection_page')."
 ";
-// $CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "var TooltipByPass = { logMgmt : { 'State':1, 'X':196, 'Y':256 }};");
-$CurrentSetObj->getInstanceOfGeneratedScriptObj()->AddObjectEntry ('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");
+// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', "var TooltipByPass = { logMgmt : { 'State':1, 'X':196, 'Y':256 }};");
+$CurrentSetObj->GeneratedScriptObj->AddObjectEntry ('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");
 
 
 /*Hydr-Content-End*/

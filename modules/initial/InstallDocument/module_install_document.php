@@ -60,13 +60,13 @@ class InstallDocument {
 		$DocContent .= $pageInstallObj->render($infos);
 		$DocContent .= "</div>\r</div>\r";
 
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,
 			);
 		}
 
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_install.js');
 		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_testdb.js');
 		$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/lib_monitorInstall.js');

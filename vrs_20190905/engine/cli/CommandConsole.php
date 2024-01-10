@@ -44,8 +44,8 @@ class CommandConsole {
 	private static function loadI18n () {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_lang'), 'lang_639_3');
+// 		$WebSiteObj = $CurrentSetObj->WebSiteObj();
+		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 		$i18n = array();
 		include ("current/engine/cli/i18n/".$l.".php");
 		$bts->I18nTransObj->apply($i18n);
@@ -217,7 +217,7 @@ class CommandConsole {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
-		$CCL['sqlTables'] = $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLWholeTableName();
+		$CCL['sqlTables'] = $CurrentSetObj->SqlTableListObj->getSQLWholeTableName();
 
 		//----------------------------------------
 		// Execute specific functions
@@ -318,7 +318,7 @@ class CommandConsole {
 		if ( is_array($ptr['nextId']) && $CCL['init']['cmd'] != 'update') {
 			foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->createUniqueId();}
 		}
-		// 	foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName($A['table']), $A['column']); }
+		// 	foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->SqlTableListObj->getSQLTableName($A['table']), $A['column']); }
 		//timeCreate ----------------------------------------
 		$time = time ();
 		if ( is_array($ptr['timeCreate']) ) {
@@ -429,8 +429,8 @@ class CommandConsole {
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start : " . $CommandLine));
 		
-		$WebSiteContextObj = $CurrentSetObj->getInstanceOfWebSiteContextObj(); //We consider the website context is already set.
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$WebSiteContextObj = $CurrentSetObj->WebSiteContextObj; //We consider the website context is already set.
+		$UserObj = $CurrentSetObj->UserObj;
 		$TabConfig = $bts->CMObj->getConfiguration();
 		
 		// CCL  = Current Command line

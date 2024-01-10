@@ -128,7 +128,7 @@ $Content .= "
 <hr>\r
 ";
 
-$path = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('DOCUMENT_ROOT')."websites-data/";
+$path = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT')."websites-data/";
 $fileName = $path.$formInputFile;
 
 if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {

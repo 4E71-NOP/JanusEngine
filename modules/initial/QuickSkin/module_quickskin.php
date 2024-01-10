@@ -22,9 +22,9 @@ class ModuleQuickSkin {
 		$CurrentSetObj = CurrentSet::getInstance();
 	
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('connected_group_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('connected_group_read_permission') === true ) {
 
-			$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 			
 			$localisation = " / ModuleQuickSkin";
 			$bts->MapperObj->AddAnotherLevel($localisation );
@@ -44,12 +44,12 @@ class ModuleQuickSkin {
 			</td>\r</tr>\r
 			";
 
-			if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission("connected_group_read_permission") == true ) {
+			if ( $CurrentSetObj->UserObj->hasPermission("connected_group_read_permission") == true ) {
 				$sqlQuery = "
 				SELECT td.theme_id, td.theme_name, td.theme_title FROM "
-				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." td , "
-				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." tw
-				WHERE tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+				.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
+				.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
+				WHERE tw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 				AND td.theme_id = tw.fk_theme_id
 				AND tw.theme_state = '1'
 				ORDER BY td.theme_name 
@@ -110,7 +110,7 @@ class ModuleQuickSkin {
 				}
 			}
 		}
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$i18n,
 					$localisation,

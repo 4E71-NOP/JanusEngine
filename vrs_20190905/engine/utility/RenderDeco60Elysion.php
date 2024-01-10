@@ -31,7 +31,7 @@ class RenderDeco60Elysion {
 	public function render ( $infos ){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"), false );
 		
@@ -250,7 +250,7 @@ class RenderDeco60Elysion {
 			$argAddModule .= ( $B['in55_e'] == 1 ) ? "in55 : {	'isEnabled':true,	'DimX':".$B['in55_x'].",	'DimY':".$B['in55_y'].",	'PosX':0,	'PosY':0,	'DivObj':0	},\r" : "in55 : {	'isEnabled':false },\r";
 
 			$argAddModule .= "}";
-		$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Command', "mod.AddModule ( '".$mn."' , 60 , '".$mcn."', ".$argAddModule.");");
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " End"), false );
 		
 		switch ( $infos['mode'] ) {

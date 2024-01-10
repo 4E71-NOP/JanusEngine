@@ -57,13 +57,13 @@ class ModuleOffLineMessage {
 					'module_width' => 896,)
 		);
 		
-		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$CurrentSetObj->setThemeDataObj(new ThemeData());
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj();
 		$ThemeDataObj->setThemeData($mt_); //Better to give an array than the object itself.
 		$ThemeDataObj->setThemeName('mt_');
 		
 		$ClassLoaderObj->provisionClass('GeneratedJavaScript');
-		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedScript());
+		$CurrentSetObj->setGeneratedScriptObj(new GeneratedScript());
 		
 		$ThemeDataObj->setThemeDataEntry('divinitial_dx', 512);
 		$ThemeDataObj->setThemeDataEntry('divinitial_dy', 1024);

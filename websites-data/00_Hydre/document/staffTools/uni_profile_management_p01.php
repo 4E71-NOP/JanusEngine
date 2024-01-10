@@ -162,7 +162,7 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+$UserObj = $CurrentSetObj->UserObj();
 if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$Content .= $bts->I18nTransObj->getI18nTransEntry("anonDeny");
 } else {
@@ -193,8 +193,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	}
 	$dbquery = $bts->SDDMObj->query("
 	SELECT u.*,td.theme_name,td.theme_id
-	FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user') . " u , "
-		. $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor') . " td 
+	FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('user') . " u , "
+		. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td 
 	WHERE u.user_id = '" . $UserObj->getUserEntry('user_id') . "' 
 	AND td.theme_id = '" . $userPrefthemeId . "' 
 	;");
@@ -332,8 +332,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['Content']['2']['9']['2']['cont'] = "<select name='formParams[lang]'>\r";
 	$dbqueryL = $bts->SDDMObj->query("
 		SELECT lw.fk_lang_id FROM "
-		. $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website') . " lw , "
-		. $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website') . " w 
+		. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw , "
+		. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " w 
 		WHERE w.ws_id ='" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
 		AND lw.fk_ws_id = w.ws_id
 		;");
@@ -445,7 +445,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$PmThemeDataObj->renderBlockData();
 
 	$CurrentSetObj->backupInstanceOfThemeDataObj();
-	$CurrentSetObj->setInstanceOfThemeDataObj($PmThemeDataObj);
+	$CurrentSetObj->setThemeDataObj($PmThemeDataObj);
 
 	$ClassLoaderObj->provisionClass('RenderStylesheet');
 	$RenderStylesheetObj = RenderStylesheet::getInstance();
@@ -481,7 +481,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['ContentInfos']['Height']		= 1024;
 	$T['ContentInfos']['Height']		= 512;
 
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
 
 	$infos['module_nameBackup']	= $infos['module_name'];
@@ -696,7 +696,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		foreach ($iconList as $A) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " icon " . $A . ": " . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A)));
 			if (strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A)) != 0) {
-				$PmIcon[$j] = "background-image: url(" . $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A) . ");";
+				$PmIcon[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A) . ");";
 			}
 			$j++;
 		}
@@ -759,7 +759,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$themeEntries = array();
 	foreach ($themeList as $A) {
 		if (strlen($PmThemeDataObj->getThemeDataEntry($A)) != 0) {
-			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "media/theme/" . $themeDir . "/" . $PmThemeDataObj->getThemeDataEntry($A) . ");";
+			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $themeDir . "/" . $PmThemeDataObj->getThemeDataEntry($A) . ");";
 			$j++;
 		}
 	}

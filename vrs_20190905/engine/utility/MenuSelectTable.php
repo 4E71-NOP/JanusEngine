@@ -39,9 +39,9 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT arti_ref, arti_slug  
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article')." 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article')." 
 			WHERE arti_validation_state = '1'
-			AND fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND arti_page = 1 
 			ORDER BY arti_slug
 		;");
@@ -69,8 +69,8 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 		SELECT *
-		FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('article_config')." ac 
-		WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article_config')." ac 
+		WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -97,8 +97,8 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('menu')."
-			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')."
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY menu_name
 		;");
 		$tab = array();
@@ -126,8 +126,8 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('deadline')."
-			WHERE fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('deadline')."
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY deadline_name
 		;");
 		$tab = array();
@@ -156,9 +156,9 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT doc.*
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." ds
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_id = ds.fk_docu_id
-			AND ds.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND ds.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY doc.docu_name
 		;");
 		$tab = array();
@@ -187,10 +187,10 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT grp.* 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group')." grp , "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_website')." sg
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('group')." grp , "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND sg.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -218,13 +218,13 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT p.*
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." p, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_theme')." lt, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." wt
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('layout')." p, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('layout_theme')." lt, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." wt
 			WHERE p.layout_id = lt.fk_layout_id
 			AND lt.fk_theme_id = wt.fk_theme_id
 			AND wt.theme_state = '1'
-			AND wt.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND wt.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.layout_name
 		;");
 		$tab = array();
@@ -253,15 +253,15 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT lf.*
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout')." p, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_theme')." lt, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('layout_file')." lf, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." wt
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('layout')." p, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('layout_theme')." lt, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('layout_file')." lf, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." wt
 			WHERE lf.layout_file_id = p.fk_layout_file_id 
 			AND p.layout_id = lt.fk_layout_id
 			AND lt.fk_theme_id = wt.fk_theme_id
 			AND wt.theme_state = '1'
-			AND wt.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND wt.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.layout_name
 		;");
 		$tab = array();
@@ -291,9 +291,9 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT l.* 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language')." l, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language')." l, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." lw 
 			WHERE l.lang_id = lw.fk_lang_id
-			AND lw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND lw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -321,10 +321,10 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT t.* 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('theme_website')." st 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." st 
 			WHERE t.theme_id = st.fk_theme_id
 			AND st.theme_state = '1' 
-			AND st.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND st.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -353,13 +353,13 @@ class MenuSelectTable {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT usr.*, g.group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('user')." usr, ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('group_user')." gu, " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group_website' ) . " sg , " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'group' ) . " g
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('user')." usr, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('group_user')." gu, " . $CurrentSetObj->SqlTableListObj->getSQLTableName ( 'group_website' ) . " sg , " . $CurrentSetObj->SqlTableListObj->getSQLTableName ( 'group' ) . " g
 			WHERE usr.user_id = gu.fk_user_id
 			AND gu.group_user_initial_group = '1'
 			AND g.group_tag IN (2,3)
 			AND gu.fk_group_id = g.group_id
 			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			AND sg.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY usr.user_name
 		;");
 		$tab = array();
@@ -383,7 +383,7 @@ class MenuSelectTable {
 	public function getDecorationList(){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 		// Data is already in RAM so we just have to get it.
 		$tabDecoNbr = array();

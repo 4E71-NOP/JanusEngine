@@ -45,7 +45,7 @@ class RenderStylesheet {
 		// $this->themeDefinitionArray = $ThemeDataObj->getThemeDefinition(); // ThemeDefinitionArray
 		$themeArray['tableName'] = $tableName;
 		
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		$Content = "
 <style type='text/css'>
 <!--
@@ -249,7 +249,7 @@ html { width:100%; height:100%;}\r\r
 	private function renderStylesheetDeco20 (&$infos) {
 		// 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ServerInfosObj = CurrentSet::getInstance()->getInstanceOfServerInfosObj();
+		$ServerInfosObj = $CurrentSetObj->ServerInfosObj;
 		$p = &$infos[$infos['currentBlock']."T"];
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
 
@@ -258,7 +258,7 @@ html { width:100%; height:100%;}\r\r
 		// Font are the exeption as it can be tricky sometimes depending on browsers.
 		$mainUnit = $p['main_unit'];
 		$fontUnit = $p['txt_font_unit'];
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		
 		$Content = "";
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft",					" { border-spacing: 0px; border: 0px;	empty-cells: show; vertical-align: middle; } \r");
@@ -306,7 +306,7 @@ html { width:100%; height:100%;}\r\r
 		// 	$Content .= "@font-face {	font-family: '".$p['txt_font_dl_name']."';							".((strlen($p['txt_font_name_normal'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$dir."/".$p['txt_font_dl_url']."'":"").");}\r";
 		// }
 			
-		$rootPath = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('DOCUMENT_ROOT')."/media/theme/".$dir."/";
+		$rootPath = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT')."/media/theme/".$dir."/";
 
 		if ( 
 			isset($p['txt_font_name_normal']) 
@@ -485,7 +485,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
@@ -508,7 +508,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
@@ -539,7 +539,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
@@ -701,7 +701,7 @@ html { width:100%; height:100%;}\r\r
 				// case "question":
 				// case "notification":
 				// 	$CurrentSetObj = CurrentSet::getInstance();
-				// 	if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= "background-image: url(".$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory").$p[$elm.'_'.$A].");";}
+				// 	if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= "background-image: url(".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory").$p[$elm.'_'.$A].");";}
 				// 	break;
 			}
 		}

@@ -37,7 +37,7 @@ class FormToCommandLine {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analysis started."));
 		
 		$CurrentSetObj = CurrentSet::getInstance();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$UserObj = $CurrentSetObj->UserObj();
 		
 		$scr = &$this->CommandLineScript;
 		$cln = &$this->CommandLineNbr;

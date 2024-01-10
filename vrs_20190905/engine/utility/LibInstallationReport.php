@@ -66,7 +66,7 @@ class LibInstallationReport {
 			$c++;
 		}
 		
-		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report')
+		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
 		." WHERE instreport_section = '".$section."'"
 		." ORDER BY instreport_name"
 		.";"
@@ -128,7 +128,7 @@ class LibInstallationReport {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$n=0;
-		$dbquery = $bts->SDDMObj->query("SELECT count(*) as lineCount FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report')
+		$dbquery = $bts->SDDMObj->query("SELECT count(*) as lineCount FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
 		." WHERE instreport_section = '".$section."';"
 		);
 		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lineCount']; }
@@ -143,7 +143,7 @@ class LibInstallationReport {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-		// $Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		// $Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$SQLQueries = 0;
 		$memoryUsed = 0;
 		$RamB4 = 0;

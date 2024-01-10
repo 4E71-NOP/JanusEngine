@@ -41,7 +41,7 @@ class Layout extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('layout') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('layout') . "
 			WHERE layout_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

@@ -28,7 +28,7 @@ class ModuleMenu {
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Content = "";
-		if ( $CurrentSetObj->getInstanceOfUserObj()->hasPermission('group_default_read_permission') === true ) {
+		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('MenuData');
 
@@ -37,7 +37,7 @@ class ModuleMenu {
 
 			$JavaScriptData = "var MenuData = {\r
 				'EntryPoint':'m".$MenuDataObj->getEntryPoint()."',\r
-				'theme_name':'".$CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName()."',\r
+				'theme_name':'".$CurrentSetObj->ThemeDataObj->getThemeName()."',\r
 				'menu_id':'m".$CurrentSetObj->getDataSubEntry ( 'article', 'menu_id')."',\r
 				'block':'".$infos['block']."',\r
 				'Payload':{\r";
@@ -48,7 +48,7 @@ class ModuleMenu {
 				$JavaScriptData .= "'".$A['menu_id']."':".json_encode($A,JSON_FORCE_OBJECT).",\r"; 
 			}
 			$JavaScriptData .= "}\r}\r";
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Data', $JavaScriptData);
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Data', $JavaScriptData);
 			
 			$Content .= "
 			<div id='menuTitle' class='menuSlideTitle' >\r</div>\r
@@ -63,14 +63,14 @@ class ModuleMenu {
 			}
 			$Content .= "</div>\r";
 
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/MenuSlide.js');
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.initialization(MenuData,'menuBlock');");
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
-			$CurrentSetObj->getInstanceOfGeneratedScriptObj()->insertString('Css-File', $infos['module']['module_directory'].'css/MenuSlide.css');
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/MenuSlide.js');
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tms.initialization(MenuData,'menuBlock');");
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
+			$CurrentSetObj->GeneratedScriptObj->insertString('Css-File', $infos['module']['module_directory'].'css/MenuSlide.css');
 		}
 		
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$i18n,
 			);

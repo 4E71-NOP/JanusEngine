@@ -42,20 +42,26 @@ class SqlTableList {
 
 	// 'layout_content',		
 
-	private function __construct( $dbprefix , $tabprefix ){
-		foreach ( $this->TableList as $A ) { 
-			$this->SQLTableName[$A] = $dbprefix . "." .  $tabprefix . $A;
-			// $this->SQLTableShortName[$A] = $tabprefix . $A;		// Deprecated
-		}
+
+	private function __construct(){
 	}
 	
-	public static function getInstance($dbprefix , $tabprefix) {
+	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new SqlTableList($dbprefix , $tabprefix);
+			self::$Instance = new SqlTableList();
 		}
 		return self::$Instance;
 	}
 	
+
+	public function makeSqlTableList($dbprefix , $tabprefix) {
+		foreach ( $this->TableList as $A ) { 
+			$this->SQLTableName[$A] = $dbprefix . "." .  $tabprefix . $A;
+		}
+
+	}
+
+
 	//@formatter:off
 	public function getSQLTableName( $data ) { return $this->SQLTableName[$data]; }
 	public function getSQLWholeTableName() { return $this->SQLTableName; }

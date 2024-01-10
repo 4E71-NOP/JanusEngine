@@ -37,7 +37,7 @@ class ThemeData {
 		
 		$sqlQuery = "
 		SELECT *
-		FROM ". $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('decoration')."
+		FROM ". $CurrentSetObj->SqlTableListObj->getSQLTableName('decoration')."
 		;";
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `".$bts->StringFormatObj->formatToLog($sqlQuery)."`."));
@@ -207,7 +207,7 @@ class ThemeData {
 				if (!isset ( $cbal )) {
 					$dbquery = $bts->SDDMObj->query ( "
 						SELECT *
-						FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ( 'deco_10_menu' ) . "
+						FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ( 'deco_10_menu' ) . "
 						WHERE fk_deco_id = '" . $CurrentBlock['deco_id'] . "'
 						;" );
 					$p = &$this->ThemeData[$BlockM];

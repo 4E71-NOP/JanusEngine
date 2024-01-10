@@ -63,14 +63,14 @@ class HydrInstall
 		$ClassLoaderObj->provisionClass('WebSite');
 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$CurrentSetObj->setInstanceOfServerInfosObj(new ServerInfos());
-		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
+		$CurrentSetObj->setServerInfosObj(new ServerInfos());
+		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		
-		$CurrentSetObj->setInstanceOfWebSiteObj(new WebSite());
+		$CurrentSetObj->setWebSiteObj(new WebSite());
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "BP01-----------------------------------------"));
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$WebSiteObj->setInstallationInstance();
-		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj);
+		$CurrentSetObj->setWebSiteContextObj($WebSiteObj);
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -114,7 +114,9 @@ class HydrInstall
 		$ClassLoaderObj->provisionClass('SqlTableList');
 
 		$form = $bts->RequestDataObj->getRequestDataEntry('form');
-		$CurrentSetObj->setInstanceOfSqlTableListObj(SqlTableList::getInstance($form['dbprefix'], $form['tabprefix']));
+		
+		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
 
 		// We have a POST so we set RAM and execution time limit immediately.
 		if (isset($form['memoryLimit'])) {
@@ -150,27 +152,27 @@ class HydrInstall
 
 		$ClassLoaderObj->provisionClass('GeneratedScript');
 		// include ("engine/entity/others/GeneratedScript.php");
-		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedScript());
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$CurrentSetObj->setGeneratedScriptObj(new GeneratedScript());
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 
 		$module_['module_deco'] = 1;
 
 		// --------------------------------------------------------------------------------------------
 		$ClassLoaderObj->provisionClass('ThemeData');
-		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$CurrentSetObj->setThemeDataObj(new ThemeData());
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		// $mt_ & $ThemeDefinitionInstall are arrays for ThemeData
 		$ThemeDataObj->setThemeData($mt_); // Better to give an array than the object itself.
 		$ThemeDataObj->setThemeDefinition($ThemeDefinitionInstall);
 		$ThemeDataObj->setThemeName('mt_');
 
 		$ClassLoaderObj->provisionClass('ThemeDescriptor');
-		$CurrentSetObj->setInstanceOfThemeDescriptorObj(new ThemeDescriptor());
-		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj();
+		$CurrentSetObj->setThemeDescriptorObj(new ThemeDescriptor());
+		$ThemeDescriptorObj = $CurrentSetObj->ThemeDescriptorObj;
 
 		$ClassLoaderObj->provisionClass('User');
-		$CurrentSetObj->setInstanceOfUserObj(new User());
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$CurrentSetObj->setUserObj(new User());
+		$UserObj = $CurrentSetObj->UserObj;
 		$UserObj->setPermission('group_default_read_permission');
 
 
@@ -242,8 +244,8 @@ class HydrInstall
 			";
 
 		$ClassLoaderObj->provisionClass('ModuleList');
-		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
-		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
+		$CurrentSetObj->setModuleListObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->ModuleListObj;
 
 		$ClassLoaderObj->provisionClass('LayoutProcessor');
 		$LayoutProcessorObj = LayoutProcessor::getInstance();

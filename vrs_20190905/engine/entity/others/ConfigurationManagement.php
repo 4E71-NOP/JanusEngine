@@ -118,8 +118,8 @@ class ConfigurationManagement {
 				$TabLangueAdmises = array();
 				$dbquery = $bts->SDDMObj->query("
 					SELECT ws.ws_short, lw.fk_lang_id 
-					FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw,
-					".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." ws 
+					FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." lw,
+					".$CurrentSetObj->SqlTableListObj->getSQLTableName('website')." ws 
 					WHERE ws.ws_id = lw.fk_ws_id 
 					AND ws.ws_short = '".$currentWs."'
 					;");
@@ -128,7 +128,7 @@ class ConfigurationManagement {
 				
 				$dbquery = $bts->SDDMObj->query("
 				SELECT * FROM "
-				.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language').";");
+				.$CurrentSetObj->SqlTableListObj->getSQLTableName('language').";");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					$idx = $dbp['lang_id'];
 					$TableRendu = 0;
@@ -153,9 +153,9 @@ class ConfigurationManagement {
 		
 		$dbquery = $bts->SDDMObj->query("
 			SELECT lw.fk_lang_id FROM "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('language_website')." lw , "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website')." w
-			WHERE w.ws_id ='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." lw , "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('website')." w
+			WHERE w.ws_id ='".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND lw.fk_ws_id = w.ws_id
 			;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $this->LanguageList[$dbp['fk_lang_id']]['support'] = 1; }

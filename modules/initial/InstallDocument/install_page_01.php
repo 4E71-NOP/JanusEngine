@@ -75,8 +75,8 @@ class InstallPage01 {
 	public function render($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 
 		// --------------------------------------------------------------------------------------------
@@ -196,9 +196,9 @@ class InstallPage01 {
 	private function serverInfos($infos, $t) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$ServerInfosObj = $CurrentSetObj->getInstanceOfServerInfosObj();
+		$ServerInfosObj = $CurrentSetObj->ServerInfosObj;
 
 		$DBsupport = $this->detectionPHPbuiltinSupport($infos).$this->detectionPDOSupport($infos).$this->detectionADODBSupport($infos).$this->detectionPEARSupport($infos);
 
@@ -258,9 +258,9 @@ class InstallPage01 {
 	private function databaseAccess($infos, $t){
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$Content ="";
 
 		$T = &$this->T['Content'];
@@ -406,7 +406,7 @@ class InstallPage01 {
 	private function installationMethod($infos, $t) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 		$T = &$this->T['Content'];
 
@@ -427,9 +427,9 @@ class InstallPage01 {
 	private function siteSelection($infos, $t) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$Content ="";
 
 		$T = &$this->T['Content'];
@@ -493,9 +493,9 @@ class InstallPage01 {
 	private function personalization($infos, $t){
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
-		$GeneratedScriptObj = $CurrentSetObj->getInstanceOfGeneratedScriptObj ();
+		$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 		$Content ="";
 		
 		$T = &$this->T['Content'];
@@ -654,7 +654,7 @@ class InstallPage01 {
 	private function detectionPEARSupport ($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$Content ="<b>".$bts->I18nTransObj->getI18nTransEntry('PHP_pear_support')."</b><br>";
 
 		$pearSupportedDB = array(
@@ -697,7 +697,7 @@ class InstallPage01 {
 	private function detectionADODBSupport ($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 
 
 		$Content ="<b>".$bts->I18nTransObj->getI18nTransEntry('PHP_adodb_support')."</b><br>";
@@ -734,7 +734,7 @@ class InstallPage01 {
 	private function detectionPDOSupport($infos){
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$Content ="<b>".$bts->I18nTransObj->getI18nTransEntry('PHP_pdo_support')."</b><br>";
 
 
@@ -786,7 +786,7 @@ class InstallPage01 {
 	private function detectionPHPbuiltinSupport ($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$Block = $CurrentSetObj->getInstanceOfThemeDataObj()->getThemeName().$infos['block'];
+		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$Content ="<b>".$bts->I18nTransObj->getI18nTransEntry('PHP_db_builtin_functions')."</b><br>";
 
 		// https://www.php.net/manual/fr/refs.database.php

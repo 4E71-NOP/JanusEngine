@@ -40,7 +40,7 @@ class LayoutFile extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('layout_file') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('layout_file') . "
 			WHERE layout_file_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

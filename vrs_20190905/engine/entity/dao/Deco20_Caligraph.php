@@ -25,7 +25,7 @@ class Deco20_Caligraph {
 		
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('deco_20_caligraph') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_20_caligraph') . "
 			WHERE fk_deco_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

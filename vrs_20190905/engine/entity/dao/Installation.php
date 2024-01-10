@@ -34,7 +34,7 @@ class Installation {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('installation') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('installation') . "
 			WHERE inst_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

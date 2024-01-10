@@ -22,44 +22,44 @@
 class CurrentSet {
 	private static $Instance = null;
 	
-	/* @var $InstanceOfServerInfosObj ServerInfos */
-	private $InstanceOfServerInfosObj = null;
+	/* @var $ServerInfosObj ServerInfos */
+	public $ServerInfosObj = null;
 
-	/* @var $InstanceOfSqlTableListObj SqlTableList */
-	private $InstanceOfSqlTableListObj = null;
+	/* @var $SqlTableListObj SqlTableList */
+	public $SqlTableListObj = null;
 	
-	/* @var $InstanceOfWebSiteObj WebSite */
-	private $InstanceOfWebSiteObj = null;
+	/* @var $WebSiteObj WebSite */
+	public $WebSiteObj = null;
 
-	/* @var $InstanceOfWebSiteContextObj WebSiteContext */
-	private $InstanceOfWebSiteContextObj = null;
+	/* @var $WebSiteContextObj WebSiteContext */
+	public $WebSiteContextObj = null;
 	
-	/* @var $InstanceOfUserObj User */
-	private $InstanceOfUserObj = null;
+	/* @var $UserObj User */
+	public $UserObj = null;
 	
-	/* @var $InstanceOfThemeDescriptorObj ThemeDescriptor */
-	private $InstanceOfThemeDescriptorObj = null;
+	/* @var $ThemeDescriptorObj ThemeDescriptor */
+	public $ThemeDescriptorObj = null;
 
-	/* @var $InstanceOfThemeDataObj ThemeData */
-	private $InstanceOfThemeDataObj = null;
+	/* @var $ThemeDataObj ThemeData */
+	public $ThemeDataObj = null;
 
-	/* @var $InstanceOfThemeDataObjBackup ThemeData */
-	private $InstanceOfThemeDataObjBackup  = null;
+	/* @var $ThemeDataObjBackup ThemeData */
+	public $ThemeDataObjBackup  = null;
 	
-	/* @var $InstanceOfGeneratedScriptObj GeneratedScript */
-	private $InstanceOfGeneratedScriptObj = null;
+	/* @var $GeneratedScriptObj GeneratedScript */
+	public $GeneratedScriptObj = null;
 
-	/* @var $InstanceOfDocumentDataObj DocumentData */
-	private $InstanceOfDocumentDataObj = null;
+	/* @var $DocumentDataObj DocumentData */
+	public $DocumentDataObj = null;
 
-	/* @var $InstanceOfModuleListObj ModuleList */
-	private $InstanceOfModuleListObj = null;
+	/* @var $ModuleListObj ModuleList */
+	public $ModuleListObj = null;
 
-	/* @var $InstanceOfLayoutObj Layout */
-	private $InstanceOfLayoutObj = null;
+	/* @var $LayoutObj Layout */
+	public $LayoutObj = null;
 
-	/* @var $InstanceOfArticleObj Article */
-	private $InstanceOfArticleObj = null;
+	/* @var $ArticleObj Article */
+	public $ArticleObj = null;
 
 	/* @var $data array */
 	private $data = array();
@@ -73,41 +73,41 @@ class CurrentSet {
 		return self::$Instance;
 	}
 	
+	//@formatter:off
 	public function getDataEntry ($lvl1) { return $this->data[$lvl1]; }
 	public function setDataEntry ($lvl1, $data) { $this->data[$lvl1] = $data; }
 	public function getDataSubEntry ($lvl1, $lvl2) { return $this->data[$lvl1][$lvl2]; }
 	public function setDataSubEntry ($lvl1, $lvl2, $data) { $this->data[$lvl1][$lvl2] = $data; }
 	
-	public function backupInstanceOfThemeDataObj(){ $this->InstanceOfThemeDataObjBackup = $this->InstanceOfThemeDataObj; }
-	public function restoreInstanceOfThemeDataObj(){ $this->InstanceOfThemeDataObj = $this->InstanceOfThemeDataObjBackup; }
+	public function backupInstanceOfThemeDataObj(){ $this->ThemeDataObjBackup = $this->ThemeDataObj; }
+	public function restoreInstanceOfThemeDataObj(){ $this->ThemeDataObj = $this->ThemeDataObjBackup; }
 	
-	//@formatter:off
-	public function getInstanceOfServerInfosObj()			{ return $this->InstanceOfServerInfosObj;}
-	public function getInstanceOfSqlTableListObj()			{ return $this->InstanceOfSqlTableListObj; }
-	public function getInstanceOfWebSiteObj()				{ return $this->InstanceOfWebSiteObj; }
-	public function getInstanceOfWebSiteContextObj()		{ return $this->InstanceOfWebSiteContextObj; }
-	public function getInstanceOfUserObj()					{ return $this->InstanceOfUserObj; }
-	public function getInstanceOfThemeDescriptorObj()		{ return $this->InstanceOfThemeDescriptorObj; }
-	public function getInstanceOfThemeDataObj()				{ return $this->InstanceOfThemeDataObj; }
-	public function getInstanceOfGeneratedScriptObj()		{ return $this->InstanceOfGeneratedScriptObj; }
-	public function getInstanceOfDocumentDataObj()			{ return $this->InstanceOfDocumentDataObj; }
-	public function getInstanceOfLayoutObj()				{ return $this->InstanceOfLayoutObj; }
-	public function getInstanceOfModuleListObj()			{ return $this->InstanceOfModuleListObj; }
-	public function getInstanceOfArticleObj()				{ return $this->InstanceOfArticleObj; }
-	public function getData()								{ return $this->data; }
+	// public function getServerInfosObj()			{ return $this->ServerInfosObj;}
+	// public function getSqlTableListObj()		{ return $this->SqlTableListObj; }
+	// public function getWebSiteObj()				{ return $this->WebSiteObj; }
+	// public function getWebSiteContextObj()		{ return $this->WebSiteContextObj; }
+	// public function getUserObj()				{ return $this->UserObj; }
+	// public function getThemeDescriptorObj()		{ return $this->ThemeDescriptorObj; }
+	// public function getThemeDataObj()			{ return $this->ThemeDataObj; }
+	// public function getGeneratedScriptObj()		{ return $this->GeneratedScriptObj; }
+	// public function getDocumentDataObj()		{ return $this->DocumentDataObj; }
+	// public function getLayoutObj()				{ return $this->LayoutObj; }
+	// public function getModuleListObj()			{ return $this->ModuleListObj; }
+	// public function getArticleObj()				{ return $this->ArticleObj; }
+	public function getData()					{ return $this->data; }
 	
-	public function setInstanceOfServerInfosObj($InstanceOfServerInfos) 					{ $this->InstanceOfServerInfosObj = $InstanceOfServerInfos; }
-	public function setInstanceOfSqlTableListObj($InstanceOfSqlTableList)					{ $this->InstanceOfSqlTableListObj = $InstanceOfSqlTableList; }
-	public function setInstanceOfWebSiteObj($InstanceOfWebSiteObj)							{ $this->InstanceOfWebSiteObj = $InstanceOfWebSiteObj; }
-	public function setInstanceOfWebSiteContextObj($InstanceOfWebSiteContextObj)			{ $this->InstanceOfWebSiteContextObj = $InstanceOfWebSiteContextObj; }
-	public function setInstanceOfUserObj($InstanceOfUserObj)								{ $this->InstanceOfUserObj = $InstanceOfUserObj; }
-	public function setInstanceOfThemeDescriptorObj($InstanceOfThemeDescriptorObj)			{ $this->InstanceOfThemeDescriptorObj = $InstanceOfThemeDescriptorObj; }
-	public function setInstanceOfThemeDataObj($InstanceOfThemeDataObj)						{ $this->InstanceOfThemeDataObj = $InstanceOfThemeDataObj; }
-	public function setInstanceOfGeneratedScriptObj($InstanceOfGeneratedScriptObj)			{ $this->InstanceOfGeneratedScriptObj = $InstanceOfGeneratedScriptObj; }
-	public function setInstanceOfDocumentDataObj($InstanceOfDocumentDataObj)				{ $this->InstanceOfDocumentDataObj = $InstanceOfDocumentDataObj; }
-	public function setInstanceOfLayoutObj($InstanceOfLayoutObj)							{ $this->InstanceOfLayoutObj = $InstanceOfLayoutObj; }
-	public function setInstanceOfModuleListObj($InstanceOfModuleListObj)					{ $this->InstanceOfModuleListObj = $InstanceOfModuleListObj; }
-	public function setInstanceOfArticleObj($InstanceOfArticleObj)							{ $this->InstanceOfArticleObj = $InstanceOfArticleObj; }
+	public function setServerInfosObj($ServerInfos) 			{ $this->ServerInfosObj		= $ServerInfos; }
+	public function setSqlTableListObj($SqlTableList)			{ $this->SqlTableListObj	= $SqlTableList; }
+	public function setWebSiteObj($WebSiteObj)					{ $this->WebSiteObj			= $WebSiteObj; }
+	public function setWebSiteContextObj($WebSiteContextObj)	{ $this->WebSiteContextObj	= $WebSiteContextObj; }
+	public function setUserObj($UserObj)						{ $this->UserObj			= $UserObj; }
+	public function setThemeDescriptorObj($ThemeDescriptorObj)	{ $this->ThemeDescriptorObj	= $ThemeDescriptorObj; }
+	public function setThemeDataObj($ThemeDataObj)				{ $this->ThemeDataObj		= $ThemeDataObj; }
+	public function setGeneratedScriptObj($GeneratedScriptObj)	{ $this->GeneratedScriptObj	= $GeneratedScriptObj; }
+	public function setDocumentDataObj($DocumentDataObj)		{ $this->DocumentDataObj	= $DocumentDataObj; }
+	public function setLayoutObj($LayoutObj)					{ $this->LayoutObj			= $LayoutObj; }
+	public function setModuleListObj($ModuleListObj)			{ $this->ModuleListObj		= $ModuleListObj; }
+	public function setArticleObj($ArticleObj)					{ $this->ArticleObj			= $ArticleObj; }
 	//@formatter:on
 	
 }

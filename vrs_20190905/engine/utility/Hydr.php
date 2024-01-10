@@ -24,7 +24,7 @@ class Hydr
 	private static $Instance = null;
 	private $authentificationMode;
 	private $authentificationAction;
-	private $SqlTableListObj;
+	// private $SqlTableListObj;
 	private $GeneratedScript;
 	private $ThemeDataObj;
 	private $WebSiteObj;
@@ -112,8 +112,8 @@ class Hydr
 		$ClassLoaderObj->provisionClass('ServerInfos');
 		$ClassLoaderObj->provisionClass('CurrentSet');
 		$CurrentSetObj = CurrentSet::getInstance();
-		$CurrentSetObj->setInstanceOfServerInfosObj(new ServerInfos());
-		$CurrentSetObj->getInstanceOfServerInfosObj()->getInfosFromServer();
+		$CurrentSetObj->setServerInfosObj(new ServerInfos());
+		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		$CurrentSetObj->setDataEntry('fsIdx', 0);		// Useful for FileSelector
 		// --------------------------------------------------------------------------------------------
 		// Session management
@@ -136,7 +136,7 @@ class Hydr
 				// Searching for the website entry
 				$dbquery = $bts->SDDMObj->query("
 						SELECT ws_short 
-						FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('website') . " 
+						FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
 						WHERE ws_home = '" . $_SERVER['HTTP_HOST'] . "'
 						;");
 				if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
@@ -177,7 +177,7 @@ class Hydr
 			// if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
 			if (
 				$bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 &&
-				$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_login') != 'anonymous'
+				$CurrentSetObj->UserObj->getUserEntry('user_login') != 'anonymous'
 			) {
 				$this->formManagement();
 			}
@@ -425,8 +425,9 @@ class Hydr
 
 
 		$ClassLoaderObj->provisionClass('SqlTableList');
-		$CurrentSetObj->setInstanceOfSqlTableListObj(SqlTableList::getInstance($bts->CMObj->getConfigurationEntry('dbprefix'), $bts->CMObj->getConfigurationEntry('tabprefix')));
-		$this->SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
+		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($bts->CMObj->getConfigurationEntry('dbprefix'), $bts->CMObj->getConfigurationEntry('tabprefix'));
+		// $this->SqlTableListObj = $CurrentSetObj->SqlTableListObj();
 
 		// --------------------------------------------------------------------------------------------
 		$ClassLoaderObj->provisionClass('SddmTools');
@@ -461,8 +462,8 @@ class Hydr
 		$bts->MapperObj->setSqlApplicant("initializeWebsite");
 
 		$ClassLoaderObj->provisionClass('WebSite');
-		$CurrentSetObj->setInstanceOfWebSiteObj(new WebSite());
-		$this->WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$CurrentSetObj->setWebSiteObj(new WebSite());
+		$this->WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$this->WebSiteObj->getDataFromDBUsingShort();
 
 		switch ($this->WebSiteObj->getWebSiteEntry('ws_state')) {
@@ -485,7 +486,8 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		/* TODO virer la variable locale */
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
 		$localisation = " authentificationCheck";
 		$bts->MapperObj->AddAnotherLevel($localisation);
@@ -496,8 +498,8 @@ class Hydr
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
 		$ClassLoaderObj->provisionClass('User');
 
-		$CurrentSetObj->setInstanceOfUserObj(new User());
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$CurrentSetObj->setUserObj(new User());
+		$UserObj = $CurrentSetObj->UserObj;
 
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())));
@@ -560,8 +562,8 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$UserObj = $CurrentSetObj->UserObj;
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
 		$localisation = " languageSelection";
 		$bts->MapperObj->AddAnotherLevel($localisation);
@@ -629,8 +631,8 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$UserObj = $CurrentSetObj->UserObj;
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
 		$localisation = " formManagement";
 		$bts->MapperObj->AddAnotherLevel($localisation);
@@ -642,7 +644,7 @@ class Hydr
 		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 		$ClassLoaderObj->provisionClass('CommandConsole');
-		$CurrentSetObj->setInstanceOfWebSiteContextObj($WebSiteObj); // Set an initial website context.
+		$CurrentSetObj->setWebSiteContextObj($WebSiteObj); // Set an initial website context.
 		$CommandConsoleObj = CommandConsole::getInstance();
 
 		if ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section') == "CommandConsole") {
@@ -730,8 +732,8 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj();
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
+		$UserObj = $CurrentSetObj->UserObj;
 
 		$localisation = " initializeArticle";
 		$bts->MapperObj->AddAnotherLevel($localisation);
@@ -745,7 +747,7 @@ class Hydr
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
 			$sqlQuery = "
 				SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
-				FROM " . $this->SqlTableListObj->getSQLTableName('menu') . " mnu, " . $this->SqlTableListObj->getSQLTableName('deadline') . " bcl
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " bcl
 				WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 				AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "'
 				AND mnu.fk_deadline_id = bcl.deadline_id
@@ -771,7 +773,7 @@ class Hydr
 			// Special case for admin auth 
 			if ($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') == "admin-authentification") {
 				$sqlQuery = "
-					SELECT * FROM " . $this->SqlTableListObj->getSQLTableName('article') . " art
+					SELECT * FROM " . $$CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
 					WHERE art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "'
 					AND art.arti_page = '1';
 					;";
@@ -782,8 +784,8 @@ class Hydr
 				$sqlQuery = "
 					SELECT * 
 					FROM "
-					. $this->SqlTableListObj->getSQLTableName('menu') . " mnu, "
-					. $this->SqlTableListObj->getSQLTableName('article') . " art
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, "
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
 					WHERE mnu.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry('ws_id') . "')
 					AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "' 
 					AND mnu.fk_perm_id " . $UserObj->getUserEntry('clause_in_perm') . " 
@@ -817,8 +819,8 @@ class Hydr
 		}
 
 		$ClassLoaderObj->provisionClass('Article');
-		$CurrentSetObj->setInstanceOfArticleObj(new Article());
-		$CurrentSetObj->getInstanceOfArticleObj()->getDataFromDB($CurrentSetObj->getDataSubEntry('article', 'arti_id'));
+		$CurrentSetObj->setArticleObj(new Article());
+		$CurrentSetObj->ArticleObj->getDataFromDB($CurrentSetObj->getDataSubEntry('article', 'arti_id'));
 		return (true);
 	}
 
@@ -830,7 +832,7 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$WebSiteObj = $CurrentSetObj->getInstanceOfWebSiteObj();
+		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
 		$localisation = " initializeJavascript";
 		$bts->MapperObj->AddAnotherLevel($localisation);
@@ -839,14 +841,14 @@ class Hydr
 		$bts->MapperObj->setSqlApplicant("initializeJavascript");
 
 		$ClassLoaderObj->provisionClass('GeneratedScript');
-		$CurrentSetObj->setInstanceOfGeneratedScriptObj(new GeneratedScript());
-		$this->GeneratedScript = $CurrentSetObj->getInstanceOfGeneratedScriptObj();
+		$CurrentSetObj->setGeneratedScriptObj(new GeneratedScript());
+		$this->GeneratedScript = $CurrentSetObj->GeneratedScriptObj;
 		$this->GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js');
 
 		// $this->GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript_lib_calculs_decoration.js');
 		// We got the route definition in the $CurrentSet and the session.
 		// Inserting the URL in the browser bar.
-		$urlBar = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "/" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "/";
+		$urlBar = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "/" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "/";
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	window.history.pushState( null , '" . $WebSiteObj->getWebSiteEntry('ws_title') . "', '" . $urlBar . "');");
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	document.title = '" . $WebSiteObj->getWebSiteEntry('ws_title') . " - " . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "';");
 
@@ -878,15 +880,15 @@ class Hydr
 		$ClassLoaderObj->provisionClass('Deco60_Elysion');
 		$ClassLoaderObj->provisionClass('ThemeDescriptor');
 
-		$CurrentSetObj->setInstanceOfThemeDescriptorObj(new ThemeDescriptor());
-		$ThemeDescriptorObj = $CurrentSetObj->getInstanceOfThemeDescriptorObj();
+		$CurrentSetObj->setThemeDescriptorObj(new ThemeDescriptor());
+		$ThemeDescriptorObj = $CurrentSetObj->ThemeDescriptorObj;
 
 		$ThemeDescriptorObj->setCssPrefix("mt_");
 		$ThemeDescriptorObj->getDataFromDBByPriority();
 
 		$ClassLoaderObj->provisionClass('ThemeData');
-		$CurrentSetObj->setInstanceOfThemeDataObj(new ThemeData());
-		$this->ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$CurrentSetObj->setThemeDataObj(new ThemeData());
+		$this->ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		$this->ThemeDataObj->setThemeData($ThemeDescriptorObj->getThemeDescriptor()); // Better to give an array than the object itself.
 		$this->ThemeDataObj->setThemeDefinition($ThemeDescriptorObj->getThemeDefinition());
 
@@ -912,8 +914,8 @@ class Hydr
 		$bts->MapperObj->setSqlApplicant("initializeLayout");
 
 		$ClassLoaderObj->provisionClass('ModuleList');
-		$CurrentSetObj->setInstanceOfModuleListObj(new ModuleList());
-		$ModuleLisObj = $CurrentSetObj->getInstanceOfModuleListObj();
+		$CurrentSetObj->setModuleListObj(new ModuleList());
+		$ModuleLisObj = $CurrentSetObj->ModuleListObj;
 		$ModuleLisObj->makeModuleList();
 
 		$ClassLoaderObj->provisionClass('LayoutProcessor');
@@ -1005,7 +1007,7 @@ class Hydr
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-					<link rel='stylesheet' href='" . $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
+					<link rel='stylesheet' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
 					</head>\r
 					";
 				break;
@@ -1034,7 +1036,7 @@ class Hydr
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg') ?? '') > 0) {
 			$Content .= "background-image: url("
-				. $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
+				. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
 				. "media/theme/" . $this->ThemeDataObj->getDefinitionValue('directory') . "/" . $this->ThemeDataObj->getDefinitionValue('bg') . "); ";
 		}
 

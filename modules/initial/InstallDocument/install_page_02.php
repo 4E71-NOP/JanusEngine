@@ -35,6 +35,7 @@ class InstallPage02 {
 	private $form = array();
 	private $createScript= array();
 	private $installationStartTime = 0;
+	private $errorRaised;
 
 	public function __construct() {
 		$this->installationStartTime = time();
@@ -57,7 +58,7 @@ class InstallPage02 {
 	public function render($infos) {
 		$bts = BaseToolSet::getInstance(); 
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj ();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
 		// We make sure '00_hydre' directory is the first in the list.
 		$dl = $bts->RequestDataObj->getRequestDataEntry('directory_list');
@@ -98,7 +99,7 @@ class InstallPage02 {
 		// We could not store into DB informations about table creation. Now we can.
 		$tab = $LibInstallationObj->getReport();
 		foreach ( $tab['tables_creation'] as $k => $v )  {
-			$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation_report'). " VALUES ("
+			$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report'). " VALUES ("
 			."'".$bts->SDDMObj->createUniqueId()."', "
 			."'tables_creation', "
 			."'".$k."', "
@@ -121,9 +122,9 @@ class InstallPage02 {
 		$this->processFileTablePostInstall();
 		$this->processFileRawSQL();
 
-		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");
-		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'installationFinished';");
-		$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('installation')." VALUES ( 100, 0, 'installationLocked', '1', '');");
+		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '".time()."' WHERE inst_name = 'end_date';");
+		$bts->SDDMObj->query("UPDATE ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." SET inst_nbr = '1' WHERE inst_name = 'installationFinished';");
+		$bts->SDDMObj->query("INSERT INTO ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation')." VALUES ( 100, 0, 'installationLocked', '1', '');");
 
 	}
 
@@ -172,7 +173,7 @@ class InstallPage02 {
 		if ( $this->form['dataBaseLogErr'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 1); }
 		if ( $this->form['dataBaseLogError'] == "on" )	{ $bts->CMObj->setConfigurationSubEntry('debug_option', 'SQL_debug_level', 2); }
 
-		$CurrentSetObj->setInstanceOfSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
+		$CurrentSetObj->setSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
 		$bts->initSddmObj();
@@ -330,7 +331,7 @@ class InstallPage02 {
 		$CurrentSetObj = CurrentSet::getInstance();
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : Initialization of table installation"));
-		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj();
+		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 		$r = array(
 				"COMMIT;",
 				"FLUSH TABLES;",

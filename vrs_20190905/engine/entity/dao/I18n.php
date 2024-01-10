@@ -40,7 +40,7 @@ class I18n extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('i18n') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('i18n') . "
 			WHERE i18n_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

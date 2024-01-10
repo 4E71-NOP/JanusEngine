@@ -107,7 +107,7 @@ class AuthenticateUser {
 				$bts->SMObj->StoreUserCredential();
 				
 				$bts->SDDMObj->query ( "
-				UPDATE " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('user') . " SET
+				UPDATE " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('user') . " SET
 				user_last_ip = '".$_SERVER['REMOTE_ADDR']."',
 				user_last_visit = '".$_SERVER['REQUEST_TIME']."'
 				WHERE user_id = '".$UserObj->getUserEntry ('user_id')."'

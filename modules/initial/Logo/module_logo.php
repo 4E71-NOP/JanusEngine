@@ -37,19 +37,19 @@ class ModuleLogo {
 		
 		$Content .= "
 		<div style='text-align: center;'>\r
-		<a href='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
+		<a href='".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
 		<img src='".
-			$CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url')
-			."media/theme/".$CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('directory')
-			."/".$CurrentSetObj->getInstanceOfThemeDataObj()->getDefinitionValue('logo')
-			."' alt='".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_name')."' style='border:0px'
+			$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+			."media/theme/".$CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
+			."/".$CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
+			."' alt='".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name')."' style='border:0px'
 		>\r
 		</a>\r
 		</div>\r
 		";
 		
 		// Cleaning up
-		if ( $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_info_debug') < 10 ) {
+		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 				$localisation,
 				$CurrentSetObj,

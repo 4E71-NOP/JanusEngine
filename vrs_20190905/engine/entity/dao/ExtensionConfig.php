@@ -13,6 +13,8 @@
 /* Hydre-licence-fin */
 class ExtensionConfig extends Entity {
 	private $ExtensionConfig = array ();
+	private $ExtensionFile = array ();
+	
 	//@formatter:off
 	private $columns = array(
 		'config_id'				=> 0,
@@ -39,7 +41,7 @@ class ExtensionConfig extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('extension_config') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_config') . "
 			WHERE config_id = '" . $id . "'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -119,8 +121,8 @@ class ExtensionConfig extends Entity {
 		$tab = $this->columns;
 		
 		$tab['ws_id'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		return $tab;
 	}
 	

@@ -52,7 +52,7 @@ class LayoutProcessor {
 		$fileContentObj = FileContent::getInstance();
 		$layoutFileObj = new LayoutFile();
 
-		$SqlTableListObj = $CurrentSetObj->getInstanceOfSqlTableListObj ();
+		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 
 		$sqlQuery = "
 		SELECT lfi.layout_file_id, lfi.layout_file_filename, lyt.layout_id, lth.fk_theme_id, tw.fk_ws_id 
@@ -61,12 +61,12 @@ class LayoutProcessor {
 		. $SqlTableListObj->getSQLTableName ( 'layout' ) . " lyt, "
 		. $SqlTableListObj->getSQLTableName ( 'layout_theme' ) . " lth, "
 		. $SqlTableListObj->getSQLTableName ( 'theme_website' ) . " tw 
-		WHERE lyt.layout_generic_name = '".$CurrentSetObj->getInstanceOfArticleObj()->getArticleEntry('layout_generic_name')."'
+		WHERE lyt.layout_generic_name = '".$CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name')."'
 		AND lyt.fk_layout_file_id = lfi.layout_file_id 
 		AND lyt.layout_id = lth.fk_layout_id
 		AND lth.fk_theme_id = tw.fk_theme_id
-		AND tw.fk_theme_id = '".$CurrentSetObj->getInstanceOfThemeDescriptorObj()->getThemeDescriptorEntry('theme_id')."'
-		AND tw.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."'
+		AND tw.fk_theme_id = '".$CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
+		AND tw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;";
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
 		$dbquery = $bts->SDDMObj->query ($sqlQuery);
@@ -76,15 +76,15 @@ class LayoutProcessor {
 		$layoutFileObj->getDataFromDB($layout_id);
 
 		$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
-		$UserObj = $CurrentSetObj->getInstanceOfUserObj ();
+		$UserObj = $CurrentSetObj->UserObj;
 		if ( $UserObj->getUserEntry('user_login') != "anonymous") { $finalFileName = str_replace ( ".lyt.html", "_connected.lyt.html", $finalFileName); }
 
-		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $finalFileName;
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $finalFileName;
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
 		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
 		if ( $fileContentObj->getFileContent() === false ) { 
 			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : Layout file not found. Back to default layout filename `".$targetFilneName."`") );
-			$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . "default.lyt.html"; 
+			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . "default.lyt.html"; 
 			$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
 		}
 		
@@ -117,7 +117,7 @@ class LayoutProcessor {
 //		$layoutFileObj = new LayoutFile();
 		
 		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
-		$targetFilneName = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $targetFilneName;
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $targetFilneName;
 		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		return ($map);

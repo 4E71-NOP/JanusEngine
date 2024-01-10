@@ -53,7 +53,7 @@ class GeneratedScript {
 		if ( isset($this->GeneratedScript[$section])) {
 			reset ($this->GeneratedScript[$section]);
 			$tab = &$this->GeneratedScript[$section];
-			$baseUrl  = $CurrentSetObj->getInstanceOfServerInfosObj()->getServerInfosEntry('base_url');
+			$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 			foreach ($tab as $A ) { 
 				$Content .= $left .$baseUrl.$A . $right;
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Adding `".$left.$baseUrl.$A . $right."`. and ".$_SERVER['HTTP_HOST']));

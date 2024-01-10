@@ -43,7 +43,7 @@ class Note extends Entity {
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('note') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('note') . "
 			WHERE note_id = '" . $id . "'
 			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {

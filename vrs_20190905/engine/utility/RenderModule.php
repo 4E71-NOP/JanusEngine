@@ -31,12 +31,12 @@ class RenderModule {
 	public function render($module_name) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		
 		$Content = "";
-		$m = $CurrentSetObj->getInstanceOfModuleListObj()->getModuleListEntry($module_name);
+		$m = $CurrentSetObj->ModuleListObj->getModuleListEntry($module_name);
 
 		// Failsafe for the old authorization model. 
 		// To be removed when the upated 2021 layout system is fully operationnal
@@ -118,7 +118,7 @@ class RenderModule {
 		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 		$Content = "";

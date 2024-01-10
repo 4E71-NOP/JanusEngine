@@ -523,8 +523,8 @@ self::$ActionTable['share']['document']		= function (&$a) { return array ("INSER
 
 self::$ActionTable['website']['context'] = function (&$a) {
 	$CurrentSetObj = CurrentSet::getInstance();
-	$CurrentSetObj->setInstanceOfWebSiteContextObj(new WebSite());
-	$CurrentSetObj->getInstanceOfWebSiteContextObj()->changeWebSiteContext($a['params']['ws_id']);
+	$CurrentSetObj->setWebSiteContextObj(new WebSite());
+	$CurrentSetObj->WebSiteContextObj->changeWebSiteContext($a['params']['ws_id']);
 	return 0; 
 };
 

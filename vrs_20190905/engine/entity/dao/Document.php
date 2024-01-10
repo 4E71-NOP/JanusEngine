@@ -48,12 +48,12 @@ class Document extends Entity{
 				
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*, shr.share_modification 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." shr 
 			WHERE doc.docu_id = '".$id."' 
-			AND shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND shr.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND shr.fk_docu_id = doc.docu_id 
-			AND doc.docu_origin = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			AND doc.docu_origin = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 		;");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
@@ -87,9 +87,9 @@ class Document extends Entity{
 		
 		$dbquery = $dbquery = $bts->SDDMObj->query("
 			SELECT doc.*, shr.share_modification 
-			FROM ".$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document')." doc, "
-			.$CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName('document_share')." shr 
-			WHERE shr.fk_ws_id = '".$CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')."' 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." shr 
+			WHERE shr.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND doc.docu_id = '".$id."' 
 			AND shr.fk_docu_id = doc.docu_id 
 		;");
@@ -171,13 +171,13 @@ class Document extends Entity{
 		$tab = $this->columns;
 		
 		$tab['docu_origin'] = ($bts->CMObj->getExecutionContext() == 'render')
-			? $CurrentSetObj->getInstanceOfWebSiteObj()->getWebSiteEntry('ws_id')
-			: $CurrentSetObj->getInstanceOfWebSiteContextObj()->getWebSiteEntry('ws_id');
+			? $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			: $CurrentSetObj->WebSiteContextObj->getWebSiteEntry('ws_id');
 		
-		$tab['docu_creator'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['docu_creator'] = $CurrentSetObj->UserObj->getUserEntry('user_id');
 		$tab['docu_creation_date'] = $date;
 		
-		$tab['docu_validator'] = $CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id');
+		$tab['docu_validator'] = $CurrentSetObj->UserObj->getUserEntry('user_id');
 		$tab['docu_validation_date'] = $date;
 		
 		return $tab;

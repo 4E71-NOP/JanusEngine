@@ -133,7 +133,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 					"docu_name"				=>	"NewDocument",
 					"docu_type"				=>	0,
 					"docu_origin"			=>	$WebSiteObj->getWebSiteEntry('ws_id'),
-					"docu_creator"			=>	$CurrentSetObj->getInstanceOfUserObj()->getUserEntry('user_id'),
+					"docu_creator"			=>	$CurrentSetObj->UserObj->getUserEntry('user_id'),
 					"docu_creation_date"	=>	time(),
 					"docu_validation"		=>	0,
 					"docu_validator"		=>	"",

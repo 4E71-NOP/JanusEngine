@@ -40,7 +40,7 @@ class GroupUser extends Entity{
 				
 		$dbquery = $bts->SDDMObj->query ( "
 			SELECT *
-			FROM " . $CurrentSetObj->getInstanceOfSqlTableListObj()->getSQLTableName ('group_user') . "
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('group_user') . "
 			WHERE group_user_id = '" . $id . "'
 			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
