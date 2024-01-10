@@ -59,14 +59,18 @@ class SessionManagement {
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : InitializeSession has been called"));
 		
-		$this->session[$currentWs]['SessionMaxAge']			= $bts->CMObj->getConfigurationEntry('SessionMaxAge');
-		$this->session[$currentWs]['user_login']			= "anonymous";
-		$this->session[$currentWs]['ws']					= DEFAULT_SITE_ID;
-		$this->session[$currentWs]['err']					= false;
-		$this->session[$currentWs]['last_REMOTE_ADDR']		= $_SERVER['REMOTE_ADDR'];
-		$this->session[$currentWs]['last_REMOTE_PORT']		= $_SERVER['REMOTE_PORT'];
-		$this->session[$currentWs]['last_HTTP_USER_AGENT']	= $_SERVER['HTTP_USER_AGENT'];
-		$this->session[$currentWs]['last_REQUEST_TIME']		= $_SERVER['REQUEST_TIME'];
+		$sessionArray = &$this->session[$currentWs];
+		
+		$sessionArray['ws']						= DEFAULT_SITE_ID;
+		$sessionArray['SessionMaxAge']			= $bts->CMObj->getConfigurationEntry('SessionMaxAge');
+		$sessionArray['user_login']				= "anonymous";
+		$sessionArray['err']					= false;
+		$sessionArray['last_REMOTE_ADDR']		= $_SERVER['REMOTE_ADDR'];
+		$sessionArray['last_REMOTE_PORT']		= $_SERVER['REMOTE_PORT'];
+		$sessionArray['last_HTTP_USER_AGENT']	= $_SERVER['HTTP_USER_AGENT'];
+		$sessionArray['last_REQUEST_TIME']		= $_SERVER['REQUEST_TIME'];
+		$sessionArray['currentRoute']			= array("target" => "home", "page" => 1);
+		$sessionArray['previousRoute']			= array("target" => "home", "page" => 1);
 	}
 	
 	/**
@@ -173,7 +177,7 @@ class SessionManagement {
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : ResetSession() has been called"));
 		$this->restartSession();
-		$this->session[$currentWs]['user_login'] = "anonymous";
+		// $this->session[$currentWs]['user_login'] = "anonymous";
 		$this->InitializeSession();
 	}
 	
