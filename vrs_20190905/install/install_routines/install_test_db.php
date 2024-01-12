@@ -30,6 +30,7 @@ $db_ = array();
 $db_['dal']						= $_REQUEST['form']['dal'];
 $db_['type']					= $_REQUEST['form']['selectedDataBaseType'];
 $db_['host']					= $_REQUEST['form']['host'];
+$db_['port']					= $_REQUEST['form']['port'];
 $db_['user_login']				= $_REQUEST['form']['dataBaseHostingPrefix'] . $_REQUEST['form']['dataBaseAdminUser'];
 $db_['user_password']			= $_REQUEST['form']['dataBaseAdminPassword'];
 $db_['tabprefix']				= $_REQUEST['form']['tabprefix'];
@@ -38,6 +39,8 @@ $db_['dataBaseUserPassword']	= $_REQUEST['form']['dataBaseUserPassword'];
 $db_['dbprefix']				= $_REQUEST['form']['dataBaseHostingPrefix'] . $_REQUEST['form']['dbprefix'];
 $db_['firstMysqlDb']			= "mysql";
 
+
+
 // --------------------------------------------------------------------------------------------
 $_REQUEST['SQL_tst']['1'] = $_REQUEST['SQL_tst']['2'] = 1;
 
@@ -45,10 +48,15 @@ switch ( $debug ) {
 case 1:
 	error_log ("-----------------------------------------------------------");
 	switch ( $db_['dal'] ) {
-	case "PHP":			error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
-	case "PDO":			error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
-	case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
-	case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
+		case "PHP":			
+			switch ( $db_['type'] ) {
+				case "mysqli":	error_log ("MYSQLI mysqli(". $db_['host'].",". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);											break;
+				case "pgsql":	error_log ("PGSQL pgsql(". $db_['host'].":5432,". $db_['user_login'] .",". $db_['user_password'] .",". $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .")" . $e ." | type = ". $db_['type']);												break;
+				}
+			break;
+		case "PDO":			error_log ("PHPPDO PDO = (".$db_['type'] . ":host=" . $db_['host'] . ";dbname=" . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] , $db_['user_login'] , $db_['user_password'] .")" . $e ." | type = ". $db_['type']);					break;
+		case "ADODB":		error_log ("ADODB " . $db_['type'] . " -> Connect( ".$db_['host']." , ".$db_['user_login']." , ".$db_['user_password']." , ".$_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);								break;
+		case "PEARDB":		error_log ("MDB2::connect(".$db_['type']."://".$db_['user_login'].":".$db_['user_password']."@".$db_['host'] . $_REQUEST['form']['dataBaseHostingPrefix'] . $db_['dbprefix'] .") | type = ". $db_['type']);												break;
 	}
 	error_log ( "fin log : " . $db_['dal'] ."/". $db_['type'] );
 }
@@ -67,50 +75,72 @@ switch ( $db_['dal'] ) {
 	case "PHP":
 		switch ( $db_['type'] ) {
 			case "mysqli":
-				$db1 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['firstMysqlDb'] );
-				if ($db1->connect_error) { 
-					$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
-					$jsonApiResponse['cnxToDB']	= false;
-				}
-				error_log("Install_test_db - Connexion state = " . (($jsonApiResponse['cnxToDB'] ) ? "True" : "False"));
-				
 				try {
-					$db2 = new mysqli( $db_['host'] , $db_['user_login'] , $db_['user_password'], $db_['dbprefix'] );
-					// If it fails it raises an Exception.
+					if (strlen(($db_['port'] ?? '')) == 0) { $db_['port'] = 3306;}
+
+					$db1 = new mysqli( $db_['host'], $db_['user_login'] , $db_['user_password'], $db_['firstMysqlDb'], $db['port']);
+					if ($db1->connect_error) { 
+						$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1->connect_error; 
+						$jsonApiResponse['cnxToDB']	= false;
+					}
+					error_log("Install_test_db - Connexion state = " . (($jsonApiResponse['cnxToDB'] ) ? "True" : "False"));
 					
-					$jsonApiResponse['HydrDBAlreadyExist'] = true; 
-	
-					$q = "SELECT * FROM information_schema.tables "
-					."WHERE table_schema = '".$db_['dbprefix']."' "
-					."AND table_name = '".$db_['tabprefix']."installation' "
-					."LIMIT 1";
-	
-					error_log("Install_test_db - " . $q);
-					$dbquery = $db2->query($q);
+					try {
+						$db2 = new mysqli( $db_['host'], $db_['user_login'] , $db_['user_password'], $db_['dbprefix'], $db['port'] );
+						// If it fails it raises an Exception.
 						
-					if ( $dbquery->num_rows > 0 ) {
-						$jsonApiResponse['HydrDBInstallTableExists'] = true;
-						$q = "SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;";
+						$jsonApiResponse['HydrDBAlreadyExist'] = true; 
+		
+						$q = "SELECT * FROM information_schema.tables "
+						."WHERE table_schema = '".$db_['dbprefix']."' "
+						."AND table_name = '".$db_['tabprefix']."installation' "
+						."LIMIT 1";
+		
 						error_log("Install_test_db - " . $q);
 						$dbquery = $db2->query($q);
-						while ( $dbp = $dbquery->fetch_assoc() ) {
-							if ( $dbp['inst_nbr'] == 1 ) { $jsonApiResponse['installationLocked'] = true; }
-						}
-					}	
+							
+						if ( $dbquery->num_rows > 0 ) {
+							$jsonApiResponse['HydrDBInstallTableExists'] = true;
+							$q = "SELECT * FROM ".$db_['dbprefix'].".".$db_['tabprefix']."installation WHERE inst_name = 'installationLocked' LIMIT 1;";
+							error_log("Install_test_db - " . $q);
+							$dbquery = $db2->query($q);
+							while ( $dbp = $dbquery->fetch_assoc() ) {
+								if ( $dbp['inst_nbr'] == 1 ) { $jsonApiResponse['installationLocked'] = true; }
+							}
+						}	
+					} catch ( Exception $e ) {
+						error_log("Install_test_db - Exception on connection #2 to " . $db_['dbprefix']);
+					}
 				} catch ( Exception $e ) {
-					error_log("Install_test_db - Exception on connection to " . $db_['dbprefix']);
+					error_log("Install_test_db - Exception on connection #1 to " . $db_['dbprefix']);
 				}
 				break;
 
-			case "pssql":
-				$db1 = pg_connect("host=".$db_['host']." user=".$db_['user_login']." password=".$db_['user_password']);
-				if ( $db1 == false ) {
-					$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1; 
-					$jsonApiResponse['cnxToDB']	= false;
+			case "pgsql":
+				try {
+					if (strlen(($db_['port'] ?? '')) == 0) { $db_['port'] = 5432; }
+
+					$strCnx = "host=".$db_['host']." port=".$db_['port']." user=".$db_['user_login']." password=".$db_['user_password'];
+					$db1 = pg_connect($strCnx);
+					if ( $db1 == false ) {
+						$_REQUEST['SQL_tst']['1'] = 0; $dbError .= $db_['dbprefix'] .": ". $db1; 
+						$jsonApiResponse['cnxToDB']	= false;
+					}
+					error_log("Install_test_db - Connexion #1 state = " . (($jsonApiResponse['cnxToDB'] ) ? "True" : "False") . " | " . $strCnx);
+					
+				} catch ( Exception $e ) {
+					error_log("Install_test_db - Exception on connection #1 to " . $db_['dbprefix']);
 				}
-				$db2 = pg_connect("host=".$db_['host']." user=".$db_['user_login']." password=".$db_['user_password']. " dbname=".$db_['dbprefix'] );
-				if ($db2 == false ) { $_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['firstMysqlDb'] .": ".$db2;	}
-				else { $jsonApiResponse['HydrDBAlreadyExist']	= true; }
+				try {
+					$strCnx = "host=".$db_['host']." port=".$db_['port']." user=".$db_['user_login']." password=".$db_['user_password']. " dbname=".$db_['dbprefix'];
+					$db2 = pg_connect($strCnx);
+					if ($db2 == false ) { $_REQUEST['SQL_tst']['2'] = 0; $dbError .= "<br>" . $db_['firstMysqlDb'] .": ".$db2;	}
+					else { $jsonApiResponse['HydrDBAlreadyExist']	= true; }
+					error_log("Install_test_db - Connexion #2 HydrDBAlreadyExist = " . (($jsonApiResponse['HydrDBAlreadyExist']) ? "True" : "False") . " | " . $strCnx . ", state = " . (($jsonApiResponse['cnxToDB'] ) ? "True" : "False") . "");
+
+				} catch ( Exception $e ) {
+					error_log("Install_test_db - Exception on connection #2 to " . $db_['dbprefix']);
+				}
 				break;
 		}
 	break;
@@ -166,7 +196,7 @@ switch ( $db_['dal'] ) {
 // }
 
 // --------------------------------------------------------------------------------------------
-error_log("Install_test_db - Ready to launch");
+error_log("Install_test_db - Ready send results");
 header('Content-Type: application/json');
 echo json_encode($jsonApiResponse);
 // echo ( $reponse );

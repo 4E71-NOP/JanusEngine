@@ -106,7 +106,7 @@ class InstallPage01 {
 		foreach ( $LangageSelector as $A ) {
 			$Content .= "<a href='install.php?l=".$A['code']."'><img src='media/theme/".$ThemeDataObj->getDefinitionValue('directory')."/".$A['file']."' alt='' height='64' width='64' border='0'></a>\r";
 		}
-		$Content .= "</p><br>\r";
+		$Content .= "</p>\r";
 		unset ($LangageSelector);
 
 
@@ -114,7 +114,7 @@ class InstallPage01 {
 		$infos['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='18' height='18' border='0'>";
 		$infos['iconGoNoGoNok'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification').	"' width='18' height='18' border='0'>";
 		
-		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 18, 6);
+		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, 6);
 
 		$this->serverInfos($infos, 1);
 		$this->databaseAccess($infos, 2);
@@ -249,7 +249,7 @@ class InstallPage01 {
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_PrcTim');
 		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("form[execTimeLimit]", "", "",2) . "s";
 
-		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig(10,2,2);		
+		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l,2,2);		
 	}
 
 	/**
@@ -314,6 +314,12 @@ class InstallPage01 {
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_serverInf')."</span>";
 		$l++;
 		
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_server_port');
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderInputText("form[port]", $bts->CMObj->getConfigurationEntry('port'), "", 20);
+		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>".$bts->I18nTransObj->getI18nTransEntry('DB_server_portInf')."</span>";
+		$l++;
+		
+
 		// Prefix
 		$arrInputText1 = array(
 			"id" => "form[dataBaseHostingPrefix]",

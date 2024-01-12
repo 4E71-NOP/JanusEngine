@@ -64,6 +64,9 @@ $i18n = array(
 	'DB_server' 	=> "Database server",	
 	'DB_serverInf'	=> "This is the server where the database is. use 'localhost' or 'mysql' (Docker, etc) or the server IP address. Otherwise check with the webhosting provider.",
 
+	'DB_server_port'		=> "Database server port",
+	'DB_server_portInf' 	=> "Leave the field empty to use the default port.",
+
 	'Db_prefix'		=> "Prefix",
 	'Db_prefixInf'	=> "Sometimes a prefix is needed. Usually it's your account login provided by your webhosting provider. Ex : myaccount_ + DBuser. Enter the prefix in this filed only.",
 

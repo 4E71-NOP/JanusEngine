@@ -64,6 +64,9 @@ $i18n = array(
 	'DB_server'	 	=> "Serveur de base de données",
 	'DB_serverInf' 	=> "C'est le serveur de base de données. Utilisez 'localhost' or 'mysql' (Docker, etc.) ou l'adresse IP du serveur. Sinon, vérifiez les informations avec l'hébergeur.",
 
+	'DB_server_port'		=> "Port du serveur de base de données",
+	'DB_server_portInf' 	=> "Laissez le champ vide pour utiliser le port par défaut.",
+
 	'Db_prefix'		=> "Préfixe",
 	'Db_prefixInf'	=> "Parfois un préfixe est requis. Habituellement c'est le nom de votre compte pourvu par votre hébergeur. Ex MonCompte_ + utilisateurDB. Entrez uniquement le préfixe dans ce champ.",
 

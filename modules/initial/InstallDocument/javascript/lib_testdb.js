@@ -16,7 +16,7 @@
 class LibTestDB {
 	
 	constructor () { 
-		this.dbgTstDb = 0;
+		this.dbgTstDb = 1;
 		this.resultTest = {
 			'cnxToDB':false,
 			'HydrDBAlreadyExist':false,
@@ -25,6 +25,7 @@ class LibTestDB {
 
 		this.testDbFieldList = [ 
 			"form[host]", 
+			"form[port]", 
 			"form[dal]",
 			"form[dataBaseHostingPrefix]", 
 			"form[dataBaseAdminUser]", 
@@ -68,9 +69,15 @@ class LibTestDB {
 		var URLvar = "http://" + location.hostname + RequestURI+"/current/install/install_routines/install_test_db.php";
 
 		var URLamp = "?";
+
+		// var prt = document.forms[FormName].elements['port'];
+		// if ( prt.value.length == 0 ) 
 		for ( var ptr in this.testDbFieldList ) {
-			URLvar += URLamp + this.testDbFieldList[ptr] + "=" + document.forms[FormName].elements[this.testDbFieldList[ptr]].value;
-			URLamp = "&";
+			var tmpFormData = document.forms[FormName].elements[this.testDbFieldList[ptr]].value;
+			if (tmpFormData.length > 0 ) {
+				URLvar += URLamp + this.testDbFieldList[ptr] + "=" + tmpFormData;
+				URLamp = "&";
+			}
 		}
 		l.Log[this.dbgTstDb]("LibTestDB :  URLvar = " + URLvar)
 		this.xmlhttp.open( "GET" , URLvar , true );
