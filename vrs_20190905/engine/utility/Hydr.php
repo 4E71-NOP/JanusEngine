@@ -120,7 +120,7 @@ class Hydr
 		//
 		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 		$bts->initSmObj();
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
+		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()));
 
 		// If $_SESSION sub array is empty we have to check what website is to be selected
@@ -166,7 +166,8 @@ class Hydr
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Something went wrong with SDDM initialisation."));
 			}
 		} else {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session sub array is '" . $CurrentSetObj->setDataEntry('ws', $_SESSION[$wsSession]['ws']) . "'."));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session sub array is '" . $wsSession . "'."));
+			$CurrentSetObj->setDataEntry('ws', $wsSession);
 		}
 
 		// $CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
