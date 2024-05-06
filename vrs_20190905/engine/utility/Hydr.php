@@ -123,36 +123,55 @@ class Hydr
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()));
 
-		// If $_SESSION is empty we have to check what website is to be selected
+		// If $_SESSION sub array is empty we have to check what website is to be selected
 		$wsSession = $_SESSION[$_SERVER['HTTP_HOST']];
 		if (empty($_SESSION[$wsSession])) {
-			// We load the default config file 'Hdr' which in the session object
+			// The sub array in the session object is empty. 
+			// 1 Checking if the config file exists
+			// 2 If it doesn't, getting the default_website definition with the root website
+			// 3 Setting the website and loading config (considering default_website is ok)
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION is empty. Initializing the session for the chosen website : " . $_SERVER['HTTP_HOST'] . "."));
-			$CurrentSetObj->setDataEntry('ws', 'HdrBase'); // HdrBase config should have the necessary privileges to log ot the DB.
+			$configFile = "current/config/current/site_" . $_SERVER['HTTP_HOST'] . "_config.php";
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : config file =`" . $configFile . "`."));
+
+			if (!file_exists($configFile)) {
+				// HdrBase config should have the necessary privileges to log to the DB and retrieve the default_website definition.
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Definition is empty. Falling back to 'HdrBase'."));
+				$CurrentSetObj->setDataEntry('ws', 'HdrBase');
+				$this->loadConfigFile();
+				if ($this->initializeSDDM() == true) {
+					$ClassLoaderObj->provisionClass('Definition');
+					$definitionObj = new Definition();
+					$definitionObj->getDataFromDBUsingName('default_website');
+					if (strlen($definitionObj->getDefinitionEntry('def_text')) > 0) {
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Definition default_website is '" . $definitionObj->getDefinitionEntry('def_text') . "'."));
+						$CurrentSetObj->setDataEntry('ws', $definitionObj->getDefinitionEntry('def_text'));
+					} else {
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Definition default_website is empty... catastrophic failure"));
+					}
+				} else {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Something went wrong with SDDM initialisation."));
+				}
+			}
+
+			// Loading the config file
 			$this->loadConfigFile();
 			if ($this->initializeSDDM() == true) {
 				$bts->CMObj->PopulateLanguageList(); // Not before we have access to the DB. Better isn't it?
-
-				// Searching for the website entry
-				$dbquery = $bts->SDDMObj->query("
-						SELECT ws_short 
-						FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
-						WHERE ws_home = '" . $_SERVER['HTTP_HOST'] . "'
-						;");
-				if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Getting short name for HTTP_HOST=" . $_SERVER['HTTP_HOST']));
-					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-						$bts->SMObj->setSessionEntry($_SERVER['HTTP_HOST'], $dbp['ws_short']);
-						$CurrentSetObj->setDataEntry('ws', $dbp['ws_short']);
-						$bts->SMObj->InitializeSession();
-						$bts->SMObj->syncSuperGlobalSession();
-					}
-				} else {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for HTTP_HOST=" . $_SERVER['HTTP_HOST']));
-				}
+				$bts->SMObj->setSessionEntry($_SERVER['HTTP_HOST'], $CurrentSetObj->getDataEntry('ws'));
+				$CurrentSetObj->setDataEntry('ws', $CurrentSetObj->getDataEntry('ws'));
+				$bts->SMObj->InitializeSession();
+				$bts->SMObj->syncSuperGlobalSession();
+			} else {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Something went wrong with SDDM initialisation."));
 			}
+		} else {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session sub array is '" . $CurrentSetObj->setDataEntry('ws', $_SESSION[$wsSession]['ws']) . "'."));
 		}
-		$CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
+
+		// $CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
+
+		// --------------------------------------------------------------------------------------------
 
 		// Scoring on what we recieved (or what's at disposal)
 		$this->prepareAuthProcess();
@@ -227,21 +246,21 @@ class Hydr
 
 			// StyleSheet
 			$this->renderStylsheet();
-			
+
 			// Build document
 			$Content = $this->buildDocument();
 			// Checkpoint ("index_before_stat");
 			$Content .= $this->buidAdminDashboard();
 			// File selector if necessary
 			$Content .= $this->buildFileSelector();
-			
+
 			// --------------------------------------------------------------------------------------------
 			// Rendering of the CSS
 			//
 			// --------------------------------------------------------------------------------------------
 			$CssContent  = "<!-- Extra CSS -->\r";
 			$CssContent .= $this->GeneratedScript->renderScriptFileWithBaseURL("Css-File", "<link rel='stylesheet' href='", "'>\r");
-			
+
 			// --------------------------------------------------------------------------------------------
 			// Rendering of the JavaScript
 			//
@@ -691,7 +710,7 @@ class Hydr
 					// We have to reload website and user in case of one of them was updated.
 					$WebSiteObj->getDataFromDBUsingShort();
 					$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'user_login'), $WebSiteObj);
-					
+
 					$this->languageSelection();
 				}
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
@@ -998,6 +1017,7 @@ class Hydr
 				$Content .= "
 				<head>\r
 				<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
+				<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_beast_001.png' sizes='32x32'>\r
 				<title>" . $this->WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
 			";
 				$Content .= $this->stylesheet . "</head>\r";
@@ -1007,6 +1027,7 @@ class Hydr
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
+					<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_beast_001.png' sizes='32x32'>\r
 					<link rel='stylesheet' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
 					</head>\r
 					";

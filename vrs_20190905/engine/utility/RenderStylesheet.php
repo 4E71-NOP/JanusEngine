@@ -38,11 +38,9 @@ class RenderStylesheet {
 	public function render($tableName, $ThemeDataObj){
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$bts->LMObj->msgLog(array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." Start"));
 
 		$this->ThemeDataObj = $ThemeDataObj;
 		$themeArray = $ThemeDataObj->getThemeData();
-		// $this->themeDefinitionArray = $ThemeDataObj->getThemeDefinition(); // ThemeDefinitionArray
 		$themeArray['tableName'] = $tableName;
 		
 		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
@@ -124,11 +122,11 @@ html { width:100%; height:100%;}\r\r
 				$Content .= "}\r";
 				
 				$maybeMoreContent = "";
-				if ( strlen($p['a_hover_fg_col']) > 0 )		{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
-				if ( strlen($p['a_hover_bg_col']) > 0 )		{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
-				if ( strlen($p['a_hover_decoration']) > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
-				if ( strlen($p['a_hover_special']) > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
-				if ( strlen( $maybeMoreContent) > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
+				if ( strlen($p['a_hover_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_hover_fg_col']		.";	"; }
+				if ( strlen($p['a_hover_bg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "background-color: ".$p['a_hover_bg_col']		.";	"; }
+				if ( strlen($p['a_hover_decoration'] ?? '') > 0 )	{ $maybeMoreContent .= "text-decoration:".	$p['a_hover_decoration']	.";	"; }
+				if ( strlen($p['a_hover_special'] ?? '') > 0 )		{ $maybeMoreContent .=						$p['a_hover_special']; }
+				if ( strlen( $maybeMoreContent ?? '') > 0 )			{ $Content .= $css_menu_lnh ." { ".$maybeMoreContent." }\r"; }
 				
 				$maybeMoreContent = "";
 				if ( strlen($p['a_active_fg_col'] ?? '') > 0 )		{ $maybeMoreContent .= "color:".			$p['a_active_fg_col']		.";	"; }
@@ -154,8 +152,8 @@ html { width:100%; height:100%;}\r\r
 				
 			}
 		}
-		
-		// --------------------------------------------------------------------------------
+
+	// --------------------------------------------------------------------------------
 	// top: ". floor( $themeArray['theme_admctrl_width']/ 2 )."px; 
 	// left: ".floor( $themeArray['theme_admctrl_height']/ 2 )."px; 
 	$Content .= "
@@ -213,11 +211,11 @@ html { width:100%; height:100%;}\r\r
 		border-color: ".$themeArray['B01T']['txt_warning_col']."; 
 		margin : 0mm;
 		padding : 0.5mm;".
-		((strlen($themeArray['B01T']['txt_font_family'] ?? '')>0) ? "font-family:".$themeArray['B01T']['txt_font_family'].";":"").
-		((strlen($themeArray['B01T']['txt_font_size'] ?? '')>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
-		((strlen($themeArray['B01T']['txt_col'] ?? '')>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
-		((strlen($themeArray['B01T']['tab_frame_bg_img'] ?? '')>0) ? "background-image: url(".$baseUrl."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory")."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
-		((strlen($themeArray['B01T']['tab_frame_bg_col'] ?? '')>0) ? "background-color: ".$themeArray['B01T']['tab_frame_bg_col'].";":"")."
+		((strlen($themeArray['B01T']['txt_font_family']		?? '')>0) ? "font-family:".$themeArray['B01T']['txt_font_family'].";":"").
+		((strlen($themeArray['B01T']['txt_font_size']		?? '')>0) ? "font-size:".$themeArray['B01T']['txt_font_size']."px;":"").
+		((strlen($themeArray['B01T']['txt_col']				?? '')>0) ? "color:".$themeArray['B01T']['txt_col'].";":"").
+		((strlen($themeArray['B01T']['tab_frame_bg_img']	?? '')>0) ? "background-image: url(".$baseUrl."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory")."/".$themeArray['B01T']['tab_frame_bg_img'].");":"").
+		((strlen($themeArray['B01T']['tab_frame_bg_col']	?? '')>0) ? "background-color: ".$themeArray['B01T']['tab_frame_bg_col'].";":"")."
 		visibility: hidden; display : none; 
 		cursor: pointer;
 	}
@@ -237,7 +235,8 @@ html { width:100%; height:100%;}\r\r
 
 
 	@media print { BODY { font-size: 10pt; } }\r\r-->\r</style>\r";
-		return $Content;
+
+	return $Content;
 		
 	}
 	
@@ -247,7 +246,7 @@ html { width:100%; height:100%;}\r\r
 	 * @return string
 	 */
 	private function renderStylesheetDeco20 (&$infos) {
-		// 		$bts = BaseToolSet::getInstance();
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ServerInfosObj = $CurrentSetObj->ServerInfosObj;
 		$p = &$infos[$infos['currentBlock']."T"];
@@ -301,10 +300,6 @@ html { width:100%; height:100%;}\r\r
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_tabFrame",			" { padding: 5px ; vertical-align: top; ".((strlen($p['tab_frame_bg_img'] ?? '')>0) ? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['tab_frame_bg_img'].");" : "")."  ".((strlen($p['tab_frame_bg_col'] ?? '')>0) ? "background-color: ".$p['tab_frame_bg_col'].";":"")." }\r\r");
 
 		$protocol = ( $ServerInfosObj->getServerInfosEntry('sslState') == 1) ? "https://" : "http://" ;
-		// New stylsheet
-		// if (isset($p['txt_font_name_normal']) ) {
-		// 	$Content .= "@font-face {	font-family: '".$p['txt_font_dl_name']."';							".((strlen($p['txt_font_name_normal'])>0) ? "src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$dir."/".$p['txt_font_dl_url']."'":"").");}\r";
-		// }
 			
 		$rootPath = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT')."/media/theme/".$dir."/";
 
@@ -482,11 +477,12 @@ html { width:100%; height:100%;}\r\r
 	}
 	
 	private function renderStylesheetDeco40 (&$infos) {
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
-		
+
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
 		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
@@ -505,11 +501,12 @@ html { width:100%; height:100%;}\r\r
 	}
 	
 	private function renderStylesheetDeco50 (&$infos) {
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
-		
+
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
 		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
@@ -536,11 +533,12 @@ html { width:100%; height:100%;}\r\r
 	}
 	
 	private function renderStylesheetDeco60 (&$infos) {
+		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
 		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
-		
+
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
 		if ( strlen($p['repertoire'] ?? '') != 0 ) { $dir = $p['repertoire']; }
@@ -690,19 +688,6 @@ html { width:100%; height:100%;}\r\r
 				case "special":
 					if ( strlen( $p[$elm.'_'.$A] ?? '')> 0 )	{ $str .= $p[$elm.'_'.$A]."; ";}
 					break;
-				// case "directory":
-				// case "erase":
-				// case "ok":
-				// case "nok":
-				// case "left":
-				// case "right":
-				// case "top":
-				// case "bottom":
-				// case "question":
-				// case "notification":
-				// 	$CurrentSetObj = CurrentSet::getInstance();
-				// 	if ( strlen( $p[$elm.'_'.$A])> 0 )	{ $str .= "background-image: url(".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."media/theme/".$this->ThemeDataObj->getDefinitionValue("directory").$p[$elm.'_'.$A].");";}
-				// 	break;
 			}
 		}
 		return $str;

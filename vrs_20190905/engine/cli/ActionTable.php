@@ -7,6 +7,9 @@ self::$ActionTable['add']['article_config']		= function (&$a) { return array ("I
 
 self::$ActionTable['add']['deadline']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['deadline']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
+self::$ActionTable['add']['definition']			= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['definition']." (".$a['columns'].") VALUES (".$a['values'].");");};
+
+
 self::$ActionTable['add']['decoration']			= function (&$a) {
 	switch ( $a['params']['type']) {
 		case 10:	$targetTable = "deco_10_menu";			$idv="10_id";	break;
@@ -22,7 +25,6 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 	$l = &$a['params'][$idv];
 
 	foreach ( $vl as $V ) {
-// 		if (strlen($a['params'][$V])!=0 || $a['params'][$V]!=0) {
 		if (strlen($a['params'][$V] ?? '')!=0) {
 			$a['values2'] .= "('".$l."','".$a['params']['id']."','".$V."','".$a['params'][$V]."'),";
 			$l++;

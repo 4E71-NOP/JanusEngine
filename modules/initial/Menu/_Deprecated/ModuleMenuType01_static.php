@@ -80,9 +80,9 @@ class ModuleMenuType01 {
 		$CurrentSet = CurrentSet::getInstance();
 // 		$WebSiteObj = $CurrentSet->getInstanceOfWebSiteObj();
 // 		$UserObj = $CurrentSet->getInstanceOfUserObj();
-		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSet->ThemeDataObj;
 // 		$GeneratedScriptObj = $CurrentSet->getInstanceOfGeneratedScriptObj();
-		$ThemeDataObj = $CurrentSet->getInstanceOfThemeDataObj();
+		$ThemeDataObj = $CurrentSet->ThemeDataObj;
 		
 		$Content = "";
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
@@ -95,7 +95,7 @@ class ModuleMenuType01 {
 					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_tb3' href=\"#\">".$A['menu_title']."</a>\r<ul style='padding-left: 5px; list-style: none;'>\r";
 					$function_parametres_save = $function_parameters['menu_parent'];
 					$function_parameters['menu_parent'] = $A['menu_id'];
-					$this->menu_affichage_statique();
+					$this->menu_affichage_statique($infos);
 					$function_parameters['menu_parent'] = $function_parametres_save;
 					$Content .= "</ul>\r</li>\r";
 				}
@@ -103,7 +103,7 @@ class ModuleMenuType01 {
 					$Content .= "<li><a  class='" . $Block."_lien ".$Block."_t3' href=\"#\">".$A['menu_title']."</a></li>\r";
 				}
 				else {
-					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['fk_arti_ref']."&amp;arti_page=1".$bloc_html['url_slup']."\">".$A['menu_title']."</a></li>\r";
+					$Content .= "<li>	<a  class='" . $Block."_lien ".$Block."_t3' href=\"index.php?arti_ref=".$A['fk_arti_ref']."&amp;arti_page=1\">".$A['menu_title']."</a></li>\r";
 				}
 			}
 		}

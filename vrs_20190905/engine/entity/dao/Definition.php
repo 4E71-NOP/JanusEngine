@@ -26,12 +26,16 @@ class Definition extends Entity {
 		"def_id"		=> 0,
 		"def_name"		=> "New definition",
 		"def_number"	=> 0,
-		"def_text"		=> 0,
+		"def_text"		=> "-",
 	);
 	//@formatter:on
 
 	public function __construct() {
 	}
+
+	/**
+	 * 
+	 */
 	public function getDataFromDB($id) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -57,6 +61,39 @@ class Definition extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
 		return $res;
 	}
+
+
+	/**
+	 * 
+	 */
+	public function getDataFromDBUsingName($name) {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+		
+		// we get the last definition named xxxx
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('definition') . "
+			WHERE def_name = '" . $name . "'
+			ORDER BY def_id DESC 
+			LIMIT 1;" );
+		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for definition name=".$name));
+			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+				foreach ( $dbp as $A => $B ) { $this->Definition[$A] = $B; }
+			}
+		}
+		else {
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for definition name=".$name));
+			$res = false;
+		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
+	}
+
 
 	/**
 	 * Updates or inserts in DB the local data.
@@ -102,7 +139,7 @@ class Definition extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$res = true;
-		if ( strlen($this->Definition['def_name'] == 0) ) { $res = false; }
+		if ( strlen($this->Definition['def_name'] == 0) ?? '') { $res = false; }
 
 		return $res;
 	}

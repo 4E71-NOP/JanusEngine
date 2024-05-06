@@ -24,5 +24,7 @@ password			"*user_install*"
 
 website context name Hydr	user "*user_install*"	password "*user_install*";
 
+add definition name default_website text Hdr;
+
 //show debug_off;
 set checkpoint name "Hydr - Begin";

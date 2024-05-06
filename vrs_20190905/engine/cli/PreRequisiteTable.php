@@ -116,6 +116,20 @@ self::$PreRequisiteTable['add']['decoration'] = array (
 		),
 );
 
+
+self::$PreRequisiteTable['add']['definition'] = array (
+	"nextId" => array (
+			array ("table" => "definition",				"column" => "def_id",			"target" => "id"),
+	),
+	"columns" => array(
+				array ( "v" => "id",				"t" => "def_id"),
+				array ( "v" => "name",				"t" => "def_name"),
+				array ( "v" => "number",			"t" => "def_number"),
+				array ( "v" => "text",				"t" => "def_text"),
+	),
+);
+
+
 self::$PreRequisiteTable['add']['article_config'] = array (
 		"convert" => array(
 				array("v" => "menu_type",				"s" => "article_config"),

@@ -27,7 +27,7 @@ class AdminFormTool {
 	public function checkAdminDashboardForm (&$infos) {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$ThemeDataObj = $CurrentSetObj->ThemeDataObj();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
 		$Block = $ThemeDataObj->getThemeName().$infos['block'];
 		

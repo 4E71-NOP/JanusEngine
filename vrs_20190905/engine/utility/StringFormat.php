@@ -206,7 +206,7 @@ class StringFormat
 	}
 
 	/**
-	 * Return a string strip of caracters that would clutter the logs and make it unreadable.
+	 * Return a string striped of caracters that would clutter the logs and make it unreadable.
 	 * @param string $data
 	 * @return string
 	 * 

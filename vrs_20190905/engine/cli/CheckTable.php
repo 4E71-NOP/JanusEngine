@@ -191,6 +191,13 @@ self::$CheckTable['add']['article_config']['0']['m']	= "CLI_ArticleConfig_C001";
 self::$CheckTable['add']['article_config']['0']['s']	= "name";
 
 
+// Definition
+self::$CheckTable['add']['definition']['1']['d']	= 3;
+self::$CheckTable['add']['definition']['1']['f']	= function ($a) { return array ("SELECT def.def_id  FROM ".$a['sqlTables']['definition']." def WHERE def.def_name = '".$a['params']['name']."';");};
+self::$CheckTable['add']['definition']['1']['m']	= "CLI_Definition_C001";
+self::$CheckTable['add']['definition']['1']['s']	= "def_id";
+
+
 // Document
 self::$CheckTable['add']['document']['0']['d']	= 3;
 self::$CheckTable['add']['document']['0']['f']	= function ($a) { return array ("SELECT docu_id,docu_name FROM ".$a['sqlTables']['document']." WHERE docu_name = '".$a['params']['name']."';");};

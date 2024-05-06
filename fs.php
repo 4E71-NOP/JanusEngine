@@ -118,7 +118,7 @@ class FileSelectorRender
 		//
 
 		// Is user_login is defined and different from 'anonymous' we consider the user is authenticated
-		if (strlen($bts->SMObj->getSessionEntry('user_login')) == 0 && $bts->SMObj->getSessionEntry('user_login') != "anonymous") {
+		if (strlen($bts->SMObj->getSessionEntry('user_login') ?? '') == 0 && $bts->SMObj->getSessionEntry('user_login') != "anonymous") {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php : \$_SESSION strlen(user_login)=0"));
 			$bts->SMObj->ResetSession();
 		}

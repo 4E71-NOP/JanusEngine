@@ -19,12 +19,12 @@ class WebSite extends Entity
 	//@formatter:off
 	private $columns = array(
 		'ws_id'				=> 0,
-		'ws_name'			=> "New Website",
-		'ws_short'			=> "nw",
+		'ws_name'			=> "Hdr Base",
+		'ws_short'			=> "HdrBase",
 		'fk_lang_id'		=> 0,
 		'ws_lang_select'	=> 0,
 		'fk_theme_id'		=> 0,
-		'ws_title'			=> "New Website",
+		'ws_title'			=> "Hdr Base",
 		'ws_home'			=> 0,
 		'ws_directory'		=> 0,
 		'ws_state'			=> 0,

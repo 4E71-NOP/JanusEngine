@@ -21,7 +21,7 @@
 $fileContent = array(
 	"type"				=> "mysqli",
 	"charset"			=> "utf8mb4",
-	"host"				=> "mysql",
+	"host"				=> "localhost",
 	"dal"				=> "PHP",				// MYSQLI , PDOMYSQL
 	"db_user_login"		=> "HydreBDD",
 	"db_user_password"	=> "Celeste",

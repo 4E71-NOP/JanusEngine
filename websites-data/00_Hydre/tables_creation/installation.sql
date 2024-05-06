@@ -9,7 +9,9 @@ inst_nbr		INTEGER DEFAULT 0,
 inst_txt		VARCHAR(255),
 
 PRIMARY KEY (inst_id), 
+KEY idx_!IdxNom!_inst_name (inst_name)
 );
-/* KEY idx_!IdxNom!_inst_name (inst_name) */
 
+/*
 CREATE INDEX idx_!IdxNom!_inst_name ON !table! (inst_name);
+*/

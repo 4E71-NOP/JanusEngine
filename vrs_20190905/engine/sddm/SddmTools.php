@@ -59,7 +59,6 @@ class SddmTools {
 			'values' => '',
 		);
 		foreach ($columns as $k => $v) {
-// 			error_log($k .": (".strlen($values[$k]).") `".$values[$k]."`");
 			if ( strlen($values[$k]) > 0 ) {
 				$tab['equality'] .= $k. "='".$values[$k]."', ";
 				$tab['columns'] .= $k. ", ";

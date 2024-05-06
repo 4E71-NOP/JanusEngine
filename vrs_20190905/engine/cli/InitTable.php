@@ -87,6 +87,16 @@ self::$InitTable['deadline'] = function (&$a) {
 	//	$a['params']['date_expiration']	= &$a['params']['end_date'];
 };
 
+self::$InitTable['definition'] = function (&$a) {
+	$a['params'] = array(
+		"id"		=> 0,
+		"name"		=> "New definition",
+		"number"	=> 0,
+		"text"		=> "_",
+	);
+};
+
+
 self::$InitTable['decoration'] = function (&$a) {
 	$a['params'] = array(
 		"name"			=> "New Decoration",
@@ -1189,9 +1199,11 @@ self::$InitTable['variable'] = function (&$a) {
 
 //--------------------------------------------------------------------------------
 // For the show command
+// TODO what??????
 self::$InitTable['articles']	= self::$InitTable['article'];
 self::$InitTable['deadlines']	= self::$InitTable['deadline'];
 self::$InitTable['decorations'] = self::$InitTable['decoration'];
+self::$InitTable['definition']  = self::$InitTable['definition'];
 self::$InitTable['documents']	= self::$InitTable['document'];
 self::$InitTable['groups']		= self::$InitTable['group'];
 self::$InitTable['keywords']	= self::$InitTable['keyword'];
