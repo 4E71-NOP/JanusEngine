@@ -67,7 +67,7 @@ class LibInstallationReport {
 		}
 		
 		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
-		." WHERE instreport_section = '".$section."'"
+		." WHERE instreport_section LIKE '".$section."%'"
 		." ORDER BY instreport_name"
 		.";"
 		);

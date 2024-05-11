@@ -115,9 +115,6 @@ class HydrInstall
 
 		$form = $bts->RequestDataObj->getRequestDataEntry('form');
 		
-		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
-		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
-
 		// We have a POST so we set RAM and execution time limit immediately.
 		if (isset($form['memoryLimit'])) {
 			ini_set('memoryLimit', $form['memoryLimit'] . "M");
@@ -129,6 +126,10 @@ class HydrInstall
 		// Loading the configuration file associated with this website
 		//
 		$bts->CMObj->LoadConfigFile();
+
+		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
+
 		$bts->CMObj->setExecutionContext("installation");
 		$bts->CMObj->PopulateLanguageList();
 
@@ -182,12 +183,13 @@ class HydrInstall
 
 		// --------------------------------------------------------------------------------------------
 		// <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
-
+		$randomNumber = sprintf('%03d', random_int(1,2));
 		$DocContent = "<!DOCTYPE html>
 			<html>\r
 			<head>\r
 			<title>INSTALL</title>\r
 			" . $stylesheet . "\r
+			<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_".$randomNumber.".png' sizes='32x32'>\r
 			</head>\r
 			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
 			"' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col') .

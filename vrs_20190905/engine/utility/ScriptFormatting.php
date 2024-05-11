@@ -79,7 +79,7 @@ class ScriptFormatting {
 	public function commandFormatting (&$infos) {
 		$TabRch01 = array ( "\n",	"\r",	"\t",	"    ",	"   ",	"  " );
 		$TabRpl01 = array ( " ",	" ",	" ",	" ",	" ",	" ");
-		$TabRpl02 = array ( "",		"",		"",		"",		"",		"");
+		$TabRpl02 = array ( "",		"",		" ",	" ",	" ",	" ");
 // 		$strRch02 = array ( "",		"",		" ",	" " );
 		$err = 0;
 		

@@ -304,6 +304,7 @@ class InstallPage03 {
 		$CurrentSetObj->setSqlTableListObj( SqlTableList::getInstance( $bts->CMObj->getConfigurationSubEntry('db','dbprefix'), $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') ));
 
 		$bts->CMObj->setConfigurationEntry('dal', $bts->CMObj->getConfigurationSubEntry('db', 'dal') ); //internal copy to prepare for DAL 
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($this->form['dbprefix'], $this->form['tabprefix']);
 		$bts->initSddmObj();
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));

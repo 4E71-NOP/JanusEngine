@@ -149,7 +149,6 @@ html { width:100%; height:100%;}\r\r
 					case 60:	case "elysion":		$Content .= $this->renderStylesheetDeco60($themeArray);	break;
 				}
 				$Content .= "\r\r";
-				
 			}
 		}
 

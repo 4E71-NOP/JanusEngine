@@ -19,7 +19,7 @@
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
-	"type"				=> "mysqli",
+	"type"				=> "mysql",
 	"charset"			=> "utf8mb4",
 	"host"				=> "localhost",
 	"dal"				=> "PHP",				// MYSQLI , PDOMYSQL

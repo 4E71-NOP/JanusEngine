@@ -131,6 +131,20 @@ $Content .= "
 $path = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT')."websites-data/";
 $fileName = $path.$formInputFile;
 
+$logTitle = "Script Execution - Start";
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $logTitle . str_repeat(" ", (82 - (strlen($logTitle ?? '') + 3))) . "|"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+
+$bts->LMObj->msgLog(array(
+	'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ . 
+	"Route state : currentRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute')) 
+		. " / previousRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'previousRoute'))
+));
+
 if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('processing').$formInputFile."<br>\r";
 	switch ( true ) {
@@ -152,6 +166,20 @@ if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
 	}
 	$Content .= $fileData;
 }
+
+$bts->LMObj->msgLog(array(
+	'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ . 
+	"Route state : currentRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute')) 
+		. " / previousRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'previousRoute'))
+));
+
+$logTitle = "Script Execution - End";
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $logTitle . str_repeat(" ", (82 - (strlen($logTitle ?? '') + 3))) . "|"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+
 /*Hydr-Content-End*/
 
 ?>

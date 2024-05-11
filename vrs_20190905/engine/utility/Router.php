@@ -42,7 +42,7 @@ class Router
 
 		$routerTitle = "Router";
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "|" . $routerTitle . str_repeat(" ", (83 - (strlen($routerTitle ?? '') + 3))) . "|"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $routerTitle . str_repeat(" ", (82 - (strlen($routerTitle ?? '') + 3))) . "|"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
 

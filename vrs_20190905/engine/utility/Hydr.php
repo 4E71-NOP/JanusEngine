@@ -447,6 +447,16 @@ class Hydr
 		$ClassLoaderObj->provisionClass('SqlTableList');
 		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
 		$CurrentSetObj->SqlTableListObj->makeSqlTableList($bts->CMObj->getConfigurationEntry('dbprefix'), $bts->CMObj->getConfigurationEntry('tabprefix'));
+
+		switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
+			case "mysql":
+				$CurrentSetObj->SqlTableListObj->makeSqlTableList($bts->CMObj->getConfigurationEntry('dbprefix'), $bts->CMObj->getConfigurationEntry('tabprefix'));
+				break;
+			case "pgsql":
+				$CurrentSetObj->SqlTableListObj->makeSqlTableList("public", $bts->CMObj->getConfigurationEntry('tabprefix'));
+				break;
+		}
+
 		// $this->SqlTableListObj = $CurrentSetObj->SqlTableListObj();
 
 		// --------------------------------------------------------------------------------------------
@@ -1012,13 +1022,14 @@ class Hydr
 		$bts->MapperObj->RemoveThisLevel($localisation);
 		$bts->MapperObj->setSqlApplicant("buildDocument");
 
+		$randomNumber = sprintf('%03d', random_int(1, 2));
 		$Content = "<!DOCTYPE html>\r<html>";
 		switch ($this->WebSiteObj->getWebSiteEntry('ws_stylesheet')) {
 			case 1: // dynamic
 				$Content .= "
 				<head>\r
 				<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-				<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_beast_001.png' sizes='32x32'>\r
+				<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
 				<title>" . $this->WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
 			";
 				$Content .= $this->stylesheet . "</head>\r";
@@ -1028,7 +1039,7 @@ class Hydr
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-					<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_beast_001.png' sizes='32x32'>\r
+					<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
 					<link rel='stylesheet' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
 					</head>\r
 					";

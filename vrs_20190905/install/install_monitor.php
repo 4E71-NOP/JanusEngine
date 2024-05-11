@@ -11,9 +11,11 @@
 //
 // --------------------------------------------------------------------------------------------
 /* Hydre-licence-fin */
-class HydrInstallMonitor {
+class HydrInstallMonitor
+{
 	private static $Instance = null;
-	private function __construct() {
+	private function __construct()
+	{
 	}
 
 	/**
@@ -21,9 +23,10 @@ class HydrInstallMonitor {
 	 *
 	 * @return HydrInstall
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
-			self::$Instance = new HydrInstallMonitor ();
+			self::$Instance = new HydrInstallMonitor();
 		}
 		return self::$Instance;
 	}
@@ -34,82 +37,78 @@ class HydrInstallMonitor {
 	 *
 	 * @return string
 	 */
-	public function render() {
+	public function render()
+	{
 		$application = 'install';
-		include ("current/define.php");
-		include ("current/engine/utility/ClassLoader.php");
-		$ClassLoaderObj = ClassLoader::getInstance ();
-		$ClassLoaderObj->provisionClass ( 'BaseToolSet' ); // First of them all as it is used by others.
-		
-		$ClassLoaderObj->provisionClass ( 'SqlTableList' );
-		$ClassLoaderObj->provisionClass ( 'CurrentSet' );
-		
+		include("current/define.php");
+		include("current/engine/utility/ClassLoader.php");
+		$ClassLoaderObj = ClassLoader::getInstance();
+		$ClassLoaderObj->provisionClass('BaseToolSet'); // First of them all as it is used by others.
+
+		$ClassLoaderObj->provisionClass('SqlTableList');
+		$ClassLoaderObj->provisionClass('CurrentSet');
+
 		$bts = BaseToolSet::getInstance();
-		$form = $bts->RequestDataObj->getRequestDataEntry ( 'form' );
-		$CurrentSetObj = CurrentSet::getInstance ();
-		$CurrentSetObj->setSqlTableListObj ( SqlTableList::getInstance () );
-		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
+		$form = $bts->RequestDataObj->getRequestDataEntry('form');
+		$CurrentSetObj = CurrentSet::getInstance();
 
 		// We have a POST so we set RAM and execution time limit immediately.
-		if (isset ( $form ['memoryLimit'] )) {
-			ini_set ( 'memoryLimit', $form ['memoryLimit'] . "M" );
-			ini_set ( 'max_execution_time', $form ['execTimeLimit'] );
+		if (isset($form['memoryLimit'])) {
+			ini_set('memoryLimit', $form['memoryLimit'] . "M");
+			ini_set('max_execution_time', $form['execTimeLimit']);
 		}
 
 		// We get the conf from the posted vars		
-		$bts->CMObj->InitBasicSettings ();
+		$bts->CMObj->InitBasicSettings();
 
 		$bts->CMObj->setConfigurationEntry('type',					$form['selectedDataBaseType']);
 		$bts->CMObj->setConfigurationEntry('host',					$form['host']);
 		$bts->CMObj->setConfigurationEntry('dal',					$form['dal']);
-		$bts->CMObj->setConfigurationEntry('db_user_login',			$form['dataBaseHostingPrefix'].$form['dataBaseAdminUser'] );
+		$bts->CMObj->setConfigurationEntry('db_user_login',			$form['dataBaseHostingPrefix'] . $form['dataBaseAdminUser']);
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);
 		$bts->CMObj->setConfigurationEntry('tabprefix',				$form['tabprefix']);
 
 		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
 
-
+		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
+		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
+		
 		// $DALFacade = DalFacade::getInstance();
 		// $DALFacade->createDALInstance();		// It connects too.
-		$bts->initSddmObj ();
+		$bts->initSddmObj();
 
 		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
-		
+
 		$sqlQuery = "SELECT *"
-		." FROM " . $SqlTableListObj->getSQLTableName ( 'installation' )
-		.";";
+			. " FROM " . $SqlTableListObj->getSQLTableName('installation')
+			. ";";
 		$data = array();
-		$dbquery = $bts->SDDMObj->query ($sqlQuery);
+		$dbquery = $bts->SDDMObj->query($sqlQuery);
 
 		$queryOk = true;
-		if ($bts->SDDMObj->getErrno() != 0 ) {
-			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL Error flag : ". $bts->SDDMObj->getErrno() ) );
+		if ($bts->SDDMObj->getErrno() != 0) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL Error flag : " . $bts->SDDMObj->getErrno()));
 			$queryOk = false;
 		}
-		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL no rows flag : ". $bts->SDDMObj->num_row_sql($dbquery) ) );
+		if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL no rows flag : " . $bts->SDDMObj->num_row_sql($dbquery)));
 			$queryOk = false;
 		}
 
-		if ( $queryOk == true ) {
-			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		if ($queryOk == true) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$data[$dbp['inst_name']] = $dbp['inst_nbr'];
 			}
-			if ( $data['instalToken'] == $form['instalToken'] ) {
+			if ($data['instalToken'] == $form['instalToken']) {
 				$data['mainAnswer'] = "report";
 				$Content = json_encode($data);
+			} else {
+				$Content = json_encode(array('mainAnswer' => 'Invalid token'));
 			}
-			else {
-				$Content = json_encode( array( 'mainAnswer' => 'Invalid token') );
-			}
-		}
-		else{
-			$Content = json_encode( array( 'mainAnswer' => 'noDataAvailable') );
+		} else {
+			$Content = json_encode(array('mainAnswer' => 'noDataAvailable'));
 		}
 		return $Content;
-
 	}
-
 }
-?>

@@ -92,7 +92,7 @@ class SddmPqsql {
 		$db_result = $this->DBInstance->query ($q);
 		$SQLlogEntry = array(
 			"err_no"		=> $this->DBInstance->errno,
-			"err_no_expr"	=> "PHP MysqlI Err : " . $this->DBInstance->errno,
+			"err_no_expr"	=> "PHP Pgsql Err : " . $this->DBInstance->errno,
 			"err_msg"		=> $this->DBInstance->error,
 			"signal"		=> "OK",
 		);

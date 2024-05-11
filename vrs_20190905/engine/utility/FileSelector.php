@@ -79,7 +79,7 @@ class FileSelector {
 			width:75%;	height:50%;
 			display:none; visibility:hidden; z-index:".($zIndex+1).";
 			line-height:normal; overflow:auto;
-			background-color:#".$ThemeDataObj->getThemeData('bg_color').";'>\r
+			background-color:#000000C0;'>\r
 			
 			<div id='FileSelectorCaption'>
 			

@@ -205,7 +205,7 @@ class FileSelectorRender
 
 					$fStat = stat($currentFile);
 					$fileList['0'][$f]['size'] = $fStat['size'];
-					$fileList['0'][$f]['time'] = strftime("%a %d %b %y - %H:%M", $fStat['mtime']);
+					$fileList['0'][$f]['time'] = date("Y-m-d H:i:s", $fStat['mtime']);
 				}
 			}
 		}

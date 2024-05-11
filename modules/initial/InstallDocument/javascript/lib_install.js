@@ -180,21 +180,34 @@ class LibInstall {
 					installFormData += URLamp+"directory_list["+DirectoryNameList[ptr]+"][name]="+DirectoryNameList[ptr];
 				}
 	
-				// l.Log[this.dbgInstFonction]( 'Install URL=: `' +InstallURL+"?"+installFormData+"`" );
+				// The install call
+				l.Log[this.dbgInstFonction]( 'Install URL=: `' +InstallURL+"?"+installFormData+"`" );
+
+				// let mainInstallRequest = new XMLHttpRequest(); 
+				// mainInstallRequest.open( "POST" , InstallURL , true );
+				// mainInstallRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				// mainInstallRequest.timeout = 10; // we don't need an answer.
+				// mainInstallRequest.send(installFormData);
+				// mainInstallRequest = null;
 				this.xmlhttp.open( "POST" , InstallURL , true );
 				this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				this.xmlhttp.send(installFormData);
 
 				// Monitoring
 				mi.monitorToggleDisplay();
-				this.monitorURL = "http://" + document.domain + RequestURI + "/install_monitor.php"; 
+				// this.monitorURL = "http://" + document.domain + RequestURI + "/install_monitor.php"; 
+				this.monitorURL = "http://" + window.location.hostname + RequestURI + "/install_monitor.php"; 
+				
 				URLamp = "?";
 				for (let ptr in this.saveConfig ) {
 					this.monitorURL += URLamp+ptr+"="+this.saveConfig[ptr];
 					URLamp = "&";
 				}
+				// l.Log[this.dbgInstFonction]( 'Monitor URL=: `' +this.monitorURL+"`" );
 				mi.setUrl(this.monitorURL);
 				mi.startInterval();
+
+
 			}
 			else { document.forms['install_page_init'].submit(); }
 		}

@@ -324,6 +324,7 @@ class ThemeData {
 	//@formatter:off
 	public function getThemeDataEntry ($data) { return $this->ThemeData[$data]; }
 	public function getThemeBlockEntry($lvl1 , $lvl2) { return $this->ThemeData[$lvl1][$lvl2]; }
+	public function getThemeDefinitionEntry($data){ return $this->ThemeDefinition[$data]; }
 	
 	public function getThemeName() { return $this->ThemeName; }
 	public function getThemeData() { return $this->ThemeData; }
@@ -332,6 +333,7 @@ class ThemeData {
 
 	public function setThemeDataEntry ($entry , $data) { $this->ThemeData[$entry] = $data; }
 	public function setThemetBlockEntry($lvl1 , $lvl2, $data) { $this->ThemeData[$lvl1][$lvl2] = $data; }
+	public function setThemetDefinitionEntry($lvl1 , $lvl2, $data) { $this->ThemeDefinition[$lvl1][$lvl2] = $data; }
 
 	public function setThemeName($ThemeName) { $this->ThemeName = $ThemeName; }
 	public function setThemeData($ThemeData) { $this->ThemeData = $ThemeData; }

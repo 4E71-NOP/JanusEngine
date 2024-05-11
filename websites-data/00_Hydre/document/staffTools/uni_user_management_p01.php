@@ -112,7 +112,7 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 $GDU_ = array();
 
 $GDU_['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-				error_log( $data['selectionOffset'] ."!=". $data['pageCounter'] );
+				// error_log( $data['selectionOffset'] ."!=". $data['pageCounter'] );
 if ($GDU_['nbrPerPage'] < 1 ) { $GDU_['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;}
 if ( $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') == 0 ) { $bts->RequestDataObj->setRequestDataSubEntry('filterForm', 'group_id', null); }
 

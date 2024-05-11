@@ -185,8 +185,8 @@ class ThemeDescriptor extends Entity{
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Loading data for theme ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
-			$ClassLoaderObj = ClassLoader::getInstance();
-			$ClassLoaderObj->provisionClass('ThemeData');
+			// $ClassLoaderObj = ClassLoader::getInstance();
+			// $ClassLoaderObj->provisionClass('ThemeData');
 
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				$tmpTab = array();

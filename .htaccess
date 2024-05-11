@@ -33,12 +33,23 @@ RewriteRule stylesheets\/.*\/.+\.css$ - [L]
 # www.local-hydr.net/DeveloperDocs/classes/AdminFormTool.html
 RewriteRule DeveloperDocs\/.+\.html$ - [L]
 
+# Bad ones on specific directories
+# http://www.local-hydr.net/media/theme/(nothing)
+RewriteRule media\/theme\/$ media/img/universal/vide.gif
+
+# http://www.local-hydr.net/media/theme//
+# Probably an image url malformed
+RewriteRule ^http.*\/+$ media/img/universal/vide.gif
+
 # Not a devdocs or image... rewrite it as Hydr style
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	# RewriteBase /
+	# Not a file
 	RewriteCond %{REQUEST_FILENAME} !-f
+	# Not a directory
 	RewriteCond %{REQUEST_FILENAME} !-d
+	# Here we go
 	RewriteRule ([a-zA-Z0-9\.-]+)(\/[0-9]+)?\/?$ index.php?url=$1 [L,QSA]
 </IfModule>
 

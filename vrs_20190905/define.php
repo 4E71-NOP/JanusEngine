@@ -57,10 +57,10 @@ switch ($application) {
 		// $llvsl = LOGLEVEL_BREAKPOINT;
 		// $llvil = LOGLEVEL_BREAKPOINT;
 		break;
-	// case 'monitor' :
-	// 	// $ll = LOGLEVEL_ERROR;
-	// 	// $ll = LOGLEVEL_WARNING;
-	// 	break;
+	case 'monitor' :
+		$ll = LOGLEVEL_ERROR;
+		$ll = LOGLEVEL_WARNING;
+		break;
 	case 'website':
 		// $ll = LOGLEVEL_ERROR;
 		// $ll = LOGLEVEL_WARNING;

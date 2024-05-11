@@ -44,13 +44,20 @@ class CommandConsole {
 	private static function loadI18n () {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-// 		$WebSiteObj = $CurrentSetObj->WebSiteObj();
+
 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-		$i18n = array();
-		include ("current/engine/cli/i18n/".$l.".php");
-		$bts->I18nTransObj->apply($i18n);
+		// if ($bts->CMObj->getConfigurationEntry('execution_context') == "installation") {
+		// 	$l = "eng"; // Fallback
+		// }
+
+		// $i18n = array();
+		// include ("current/engine/cli/i18n/".$l.".php");
+		// $bts->I18nTransObj->apply($i18n);
+		$langFile = "current/engine/cli/i18n/".$l.".php";
+		$bts->I18nTransObj->apply(array("type" => "file", "file" => $langFile, "format" => "php"));
+
+
 		unset ($i18n);
-// 		self::$i18n = $i18n;
 	}
 	
 	/**
@@ -184,7 +191,7 @@ class CommandConsole {
 		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : Start"));
 		
-		$SDDMObj = DalFacade::getInstance()->getDALInstance();
+		// $SDDMObj = DalFacade::getInstance()->getDALInstance();
 		$af  = self::$InitTable[$CCL['init']['entity']];
 		$af($CCL);
 		
@@ -196,7 +203,8 @@ class CommandConsole {
 			default:
 				break;
 		}
-		foreach ($CCL['incoming'] as $A => $B ) {$CCL['params'][$A] = $SDDMObj->escapeString($B);}
+		// foreach ($CCL['incoming'] as $A => $B ) {$CCL['params'][$A] = $SDDMObj->escapeString($B);}
+		foreach ($CCL['incoming'] as $A => $B ) {$CCL['params'][$A] = $bts->SDDMObj->escapeString($B);}
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : End"));
 	}
 	
@@ -244,7 +252,7 @@ class CommandConsole {
 								}
 							}
 							break;
-						// Directive = 2 : Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
+						// Directive = 2 : Return the data in a variable. If an error occurs, a message is stored and a flag is set.
 						case 2:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ( $q != -1 ) {
@@ -403,6 +411,7 @@ class CommandConsole {
 								
 								default:
 								$bts->SDDMObj->query($Q);
+								$bts->SDDMObj->query("COMMIT;");
 						// *** Post query processing - AdminDashBoard CLI
 						// Mainly storing the results into an array for later processing
 						
@@ -446,7 +455,7 @@ class CommandConsole {
 
 		if ( is_array(self::$ActionTable[$CCL['init']['cmd']]) ) {
 			if ( is_callable(self::$ActionTable[$CCL['init']['cmd']][$CCL['init']['entity']])) {
-				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action table is an array and the command is a callable."));
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : The action exists and the entry is a callable."));
 				$CCL['Context'] = $WebSiteContextObj->getWebSite();
 				$CCL['Initiator'] = array (
 					// "user_id"	=> $UserObj->getUserEntry('id'),
@@ -471,7 +480,7 @@ class CommandConsole {
 							"website context name '".$CCL['params']['name']."' user '*user_install*' password '*user_install*'",
 							"add group name 'Server_owner' parent origin title ROOT tag SENIOR_STAFF file 'media/img/universal/icon_dev_001.jpg' desc 'Owner'",
 							"add group name Reader parent Server_owner title Reader tag READER file 'media/img/universal/icon_dev_001.jpg' desc 'Reader'",
-							"add group name Anonymous parent reader title Anonymous tag ANONYMOUS file 'media/img/universal/icon_dev_001.jpg' desc 'Nobody'",
+							"add group name Anonymous parent Reader title Anonymous tag ANONYMOUS file 'media/img/universal/icon_dev_001.jpg' desc 'Nobody'",
 							"add user name \"".   $CCL['params']['user']."\" login \"".$CCL['params']['user']."\" perso_name \"".$CCL['params']['user']."\" password \"".$CCL['params']['password']."\" status ACTIVE role_function PRIVATE",
 							"assign user name \"".$CCL['params']['user']."\" to_group 'Server_owner' primary_group YES"
 						);

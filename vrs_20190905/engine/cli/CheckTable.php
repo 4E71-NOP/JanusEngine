@@ -556,16 +556,14 @@ self::$CheckTable['add']['permission']['0']['m']	= "CLI_Permission_C001";
 self::$CheckTable['add']['permission']['0']['s']	= "name";
 
 // Tag
-// Usage of 'BINARY' because of collation : utf8mb4_general_ci
-// https://stackoverflow.com/questions/5629111/how-can-i-make-sql-case-sensitive-string-comparison-on-mysql
-// http://mysqlserverteam.com/new-collations-in-mysql-8-0-0/
+// Name is brought as lowercase for not having to do some weird stuff for each DB type.
 self::$CheckTable['add']['tag']['0']['d']	= 3;
-self::$CheckTable['add']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['add']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE tag_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['add']['tag']['0']['m']	= "CLI_Tag_C001";
 self::$CheckTable['add']['tag']['0']['s']	= "name";
 
 self::$CheckTable['assign']['tag']['0']['d']	= 2;
-self::$CheckTable['assign']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE BINARY tag_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
+self::$CheckTable['assign']['tag']['0']['f']	= function ($a) { return array ("SELECT tag_id,tag_name FROM ".$a['sqlTables']['tag']." WHERE tag_name = '".$a['params']['name']."' AND fk_ws_id = '".$a['Context']['ws_id']."';");};
 self::$CheckTable['assign']['tag']['0']['c']	= "tag_id";
 self::$CheckTable['assign']['tag']['0']['v']	= "tag_id";
 self::$CheckTable['assign']['tag']['0']['m']	= "CLI_Tag_A001";

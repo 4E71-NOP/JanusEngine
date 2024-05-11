@@ -438,13 +438,14 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$PmThemeDataObj = new ThemeData();
 
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " User preference theme name: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] . " and id: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] . "."));
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Form browseTheme name: " . $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') . "."));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "User preference theme name: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] . " and id: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] . "."));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form browseTheme name: " . $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') . "."));
 	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
 
 	// $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "  PmThemeDescriptorObj :" . $bts->StringFormatObj->print_r_debug($PmThemeDescriptorObj) ));
 
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
+	$PmThemeDataObj->setThemeDefinition($PmThemeDescriptorObj->getThemeDefinition());
 	$PmThemeDataObj->setDecorationListFromDB();
 	$PmThemeDataObj->renderBlockData();
 
@@ -471,8 +472,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 				}
 			}
 			if ($err == 0) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "Inserting :" . $TmpBlockEntry['def_string']));
-			$ListThemeBlock[$TmpBlockEntry['def_string']]['name'] = $TmpBlockName;
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "Inserting :" . $TmpBlockEntry['def_string']));
+				$ListThemeBlock[$TmpBlockEntry['def_string']]['name'] = $TmpBlockName;
 				$ListThemeBlock[$TmpBlockEntry['def_string']]['pos'] = $i;
 			}
 		}
@@ -486,8 +487,10 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	}
 	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, count($ListThemeBlock) + 1, 1, 0, 'tabTxtThm');
 	$T['ContentInfos']['GroupName']		= "pm";
-	$T['ContentInfos']['Height']		= 1024;
-	$T['ContentInfos']['Height']		= 512;
+	$T['ContentInfos']['Width']			= 768;
+	$T['ContentInfos']['Height']		= 1200;
+	$T['ContentInfos']['padding-h']		= "128px";
+	$T['ContentInfos']['padding-v']		= "16px";
 
 	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
@@ -525,8 +528,10 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		$T['Content'][$Tab]['1']['1']['cont'] .= "
 		<div style='
 		background-image: url(" . $PmThemeDataObj->getThemeDataEntry('pathThemeBg') . "); background-color: " . $PmThemeDataObj->getDefinitionValue('bg_color') . ";
-		width: " . ($T['ContentInfos']['Width'] - 32) . "px; height: " . ($T['ContentInfos']['Height'] - 32) . "px;
-		'>
+		width: 100%; height: " . $T['ContentInfos']['Height'] . "px;
+		max-width: 768px; max_height:120px;
+		padding:" . $T['ContentInfos']['padding-v'] . " " . $T['ContentInfos']['padding-h'] . " " . $T['ContentInfos']['padding-v'] . " " . $T['ContentInfos']['padding-h'] . ";
+		'>	
 		";
 
 		// Brutal... But efficient!!!
@@ -561,7 +566,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 				$decoTmp = $PmRenderDeco->render($infosTmp);
 				break;
 			default:
-				$decoTmp = "<div id='" . $mn . "' style='position:absolute; left:0px; top:0px; width:640px; height:640px; '>\r";
+				$decoTmp = "<div id='" . $mn . "' style='position:absolute; left:0px; top:0px; width:100%; height:1200px; '>\r";
 				break;
 		}
 		$T['Content'][$Tab]['1']['1']['cont'] .= $decoTmp;
@@ -767,11 +772,12 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['Content'][$Tab]['1']['1']['cont'] .= "<!-- Last tabs showing the specific items. -->\r";
 	$j = 0;
 	$themeDir = $PmThemeDataObj->getThemeBlockEntry('B01T', 'directory');
-	$themeList = array('theme_logo');
+	$themeList = array('logo');
 	$themeEntries = array();
 	foreach ($themeList as $A) {
-		if (strlen($PmThemeDataObj->getThemeDataEntry($A) ?? '') != 0) {
-			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $themeDir . "/" . $PmThemeDataObj->getThemeDataEntry($A) . ");";
+		$tmpArrayDefEntry = $PmThemeDataObj->getThemeDefinitionEntry($A);
+		if (strlen( $tmpArrayDefEntry['def_string'] ?? '') != 0) {
+			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $themeDir . "/" . $tmpArrayDefEntry['def_string'] . ");";
 			$j++;
 		}
 	}

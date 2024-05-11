@@ -52,7 +52,7 @@ class DalFacade {
 		switch ( $bts->CMObj->getConfigurationEntry('dal')) {
 			case "PHP" :
 				switch ( $bts->CMObj->getConfigurationEntry('type')) {
-					case "mysqli":
+					case "mysql":
 							$ClassLoaderObj->provisionClass('SddmMySQLI');
 							$this->DALInstance = SddmMySQLI::getInstance ();
 							break;
@@ -68,14 +68,14 @@ class DalFacade {
 				break;
 			case "SQLITE" :
 				break;
-			case "ADODB" :
-				$ClassLoaderObj->provisionClass('SddmADODB');
-				$this->DALInstance = SddmADODB::getInstance();
-				break;
-			case "PEARDB" :
-				$ClassLoaderObj->provisionClass('SddmPEARDB');
-				$this->DALInstance = SddmPEARDB::getInstance();
-				break;
+			// case "ADODB" :
+			// 	$ClassLoaderObj->provisionClass('SddmADODB');
+			// 	$this->DALInstance = SddmADODB::getInstance();
+			// 	break;
+			// case "PEARDB" :
+			// 	$ClassLoaderObj->provisionClass('SddmPEARDB');
+			// 	$this->DALInstance = SddmPEARDB::getInstance();
+			// 	break;
 		}
 		$this->DALInstance->connect();
 	}

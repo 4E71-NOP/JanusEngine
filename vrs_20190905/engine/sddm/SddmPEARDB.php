@@ -13,6 +13,11 @@
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
 
+/**
+ * PEAR seems to be abandonned at the time
+ * 
+ * @deprecated
+ */
 class SddmPEARDB {
 	private static $Instance = null;
 	

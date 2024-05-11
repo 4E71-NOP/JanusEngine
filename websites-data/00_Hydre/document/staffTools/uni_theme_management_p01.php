@@ -133,6 +133,19 @@ if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 	$T['Content']['1'][$i]['3']['cont'] = "";
 }
 else {
+	$formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+
+	$fmt = new IntlDateFormatter(
+		'fr_FR',
+		IntlDateFormatter::FULL,
+		IntlDateFormatter::FULL,
+		'America/Los_Angeles',
+		IntlDateFormatter::GREGORIAN,
+		'MM/dd/yyyy'
+	);
+
+	echo $formatter->format(time());
+
 	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
@@ -147,11 +160,12 @@ else {
 		."&themeForm[selectionId]=".$dbp['theme_id']
 		."'>".$dbp['theme_name']."</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['theme_title'];
-		$T['Content']['1'][$i]['3']['cont']	= strftime ("%a %d %b %y - %H:%M",$dbp['theme_date'] );		
+		$T['Content']['1'][$i]['3']['cont']	= date("Y-m-d H:i:s", $dbp['theme_date'] );		
 		$T['Content']['1'][$i]['2']['tc']	= 2;
 		$T['Content']['1'][$i]['3']['tc']	= 1;
 	}
 }
+
 
 // --------------------------------------------------------------------------------------------
 //
