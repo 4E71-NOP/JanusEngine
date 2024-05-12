@@ -54,28 +54,28 @@ switch ($application) {
 	case 'install' :
 		$llvsl = LOGLEVEL_WARNING;
 		$llvil = LOGLEVEL_WARNING;
+
 		// $llvsl = LOGLEVEL_BREAKPOINT;
 		// $llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'monitor' :
-		$ll = LOGLEVEL_ERROR;
-		$ll = LOGLEVEL_WARNING;
+		$llvsl = LOGLEVEL_ERROR;
+		$llvil = LOGLEVEL_ERROR;
+
+		// $llvsl = LOGLEVEL_WARNING;
+		// $llvil = LOGLEVEL_WARNING;
 		break;
 	case 'website':
-		// $ll = LOGLEVEL_ERROR;
-		// $ll = LOGLEVEL_WARNING;
-		// $ll = LOGLEVEL_INFORMATION;
-		// $ll = LOGLEVEL_STATEMENT;
-		// $ll = LOGLEVEL_BREAKPOINT;
-		
 		$llvsl = LOGLEVEL_WARNING;
-		$llvsl = LOGLEVEL_BREAKPOINT;
+		$llvil = LOGLEVEL_WARNING;
 
+		$llvsl = LOGLEVEL_BREAKPOINT;
 		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'FileSelector':
 		$llvsl = LOGLEVEL_WARNING;
 		$llvil = LOGLEVEL_BREAKPOINT;
+
 		$llvsl = LOGLEVEL_BREAKPOINT;
 		$llvil = LOGLEVEL_BREAKPOINT;
 		break;

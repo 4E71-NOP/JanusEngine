@@ -142,7 +142,7 @@ $dbquery = $bts->SDDMObj->query("
 SELECT * FROM "
 .$SqlTableListObj->getSQLTableName('decoration'). " d"
 ." ORDER BY  d.deco_name"
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage']." OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 $T = array();

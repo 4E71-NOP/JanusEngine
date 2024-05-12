@@ -255,7 +255,7 @@ self::$ActionTable['assign']['user']		= function (&$a) {
 //--------------------------------------------------------------------------------
 //	Insert
 //--------------------------------------------------------------------------------
-self::$ActionTable['insert']['content']		= function (&$a) {
+self::$ActionTable['insert']['content']		= function (&$a, &$sddmObj) {
 	$bts = BaseToolSet::getInstance();
 // 	$CMObj = ConfigurationManagement::getInstance();
 	switch ( $bts->CMObj->getConfigurationEntry("execution_context") ) {
@@ -287,7 +287,11 @@ self::$ActionTable['insert']['content']		= function (&$a) {
 			$a['errMsg'][] = "The content is larger than 64Kb (".$sizeDocument." Kb). Some Databases are limited to 64Kb by default on BLOB.";
 		}
 		$content = substr ( $content ,$startPtr , ($endPtr - $startPtr) );
-		$content = addslashes ($content);
+
+		$content = $bts->SDDMObj->escapeString($content);
+
+		// $content = $sddmObj->escapeString($content);
+		// $content = addslashes ($content);
 	}
 	return array ("UPDATE ".$a['sqlTables']['document']." SET docu_validation = '1', docu_validator = '".$a['params']['validator_id']."', docu_cont = '".$content."' WHERE docu_id = '".$a['params']['docu_id']."';");
 	

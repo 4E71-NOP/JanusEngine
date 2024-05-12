@@ -122,7 +122,7 @@ $dbquery = $bts->SDDMObj->query("SELECT "
 .$SqlTableListObj->getSQLTableName('document_share')." shr "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY doc.docu_name"
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage']." OFFSET " .($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 $T = array();

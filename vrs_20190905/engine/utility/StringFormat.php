@@ -119,10 +119,10 @@ class StringFormat
 		self::$ConvertTable['document']['php']					= 1;
 		self::$ConvertTable['document']['mixed']				= 2;
 
-		self::$ConvertTable['group']['anonymous']				= 0;
-		self::$ConvertTable['group']['reader']					= 1;
-		self::$ConvertTable['group']['staff']					= 2;
-		self::$ConvertTable['group']['senior_staff']			= 3;
+		self::$ConvertTable['group']['anonymous']				= _ANONYMOUS_;
+		self::$ConvertTable['group']['reader']					= _READER_;
+		self::$ConvertTable['group']['staff']					= _STAFF_;
+		self::$ConvertTable['group']['senior_staff']			= _SENIOR_STAFF_;
 
 		self::$ConvertTable['module']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['module']['yes']					= &self::$ConvertTable['universal']['yes'];

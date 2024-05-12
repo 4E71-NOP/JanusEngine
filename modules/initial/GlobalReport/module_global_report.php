@@ -417,7 +417,7 @@ var Chart03 = new Chart(document.getElementById('statChart3'), ".$dataObjectEnco
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('log')."
 			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY log_id DESC
-			LIMIT 0,15
+			LIMIT 15
 			;");
 		
 		$i = 2;

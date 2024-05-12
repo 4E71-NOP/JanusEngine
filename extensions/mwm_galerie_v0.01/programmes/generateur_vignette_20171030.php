@@ -234,8 +234,8 @@ if ( $pv['echec'] < 100 ) {
 		imagefilledrectangle ($GAL_['DEBUG_thumbnail'], 0, 0, $GAL_['Debug_x'], $GAL_['Debug_y'], $GAL_['bg']);
 		$GAL_['textcolor'] = imagecolorallocate($GAL_['DEBUG_thumbnail'], 0, 0, 0);
 
-		$debug_info[] = "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 0,1;";
-		$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 0,1;");
+		$debug_info[] = "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;";
+		$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;");
 		while ($dbp = fetch_array_sql($dbquery)) { $debug_info[] = "Gal_id =" . $dbp['gal_id'] + 1; }
 		$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'] ;
 		$gal_debug_line = 0;
@@ -257,7 +257,7 @@ if ( $pv['echec'] < 100 ) {
 	switch ($GAL_['action']) {
 		case "DB_INSERT":
 			$GAL_['id_count'] = 1;
-			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 0,1;");
+			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;");
 			while ($dbp = fetch_array_sql($dbquery)) { $GAL_['id_count'] = $dbp['gal_id'] + 1; }
 			$GAL_['db_Thumbnail'] = addslashes($GAL_['binaryThumbnail']);
 			$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'] ;

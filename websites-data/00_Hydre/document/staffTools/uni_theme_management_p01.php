@@ -27,17 +27,18 @@
 /* @var $l String                                   */
 /*Hydre-IDE-end*/
 
-$bts->RequestDataObj->setRequestData('test',
-		array(
-				'test'		=> 1,
-		)
-		);
+$bts->RequestDataObj->setRequestData(
+	'test',
+	array(
+		'test'		=> 1,
+	)
+);
 
 /*Hydr-Content-Begin*/
 $localisation = " / uni_theme_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
+$bts->MapperObj->AddAnotherLevel($localisation);
 $bts->LMObj->logCheckpoint("uni_theme_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
+$bts->MapperObj->RemoveThisLevel($localisation);
 $bts->MapperObj->setSqlApplicant("uni_theme_management_p01.php");
 
 $bts->I18nTransObj->apply(
@@ -71,44 +72,51 @@ $bts->I18nTransObj->apply(
 		)
 	)
 );
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+if ($pageSelectorData['nbrPerPage'] < 1) {
+	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
+}
 
 $pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
-$pageSelectorData['clauseElements'][] = array("left" => "td.theme_id",		"operator" => "=",	"right" => "tw.fk_theme_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "td.theme_id",		"operator" => "=",	"right" => "tw.fk_theme_id");
 
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
-	$pageSelectorData['clauseElements'][] = array( "left" => "m.theme_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "m.theme_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 
 $pageSelectorData['query'] = "SELECT"
-." COUNT(td.theme_id) AS ItemsCount "
-." FROM "
-.$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
-.$SqlTableListObj->getSQLTableName('theme_website')." tw "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-.";"
-;
+	. " COUNT(td.theme_id) AS ItemsCount "
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('theme_descriptor') . " td, "
+	. $SqlTableListObj->getSQLTableName('theme_website') . " tw "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. ";";
 
 $dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+	$pageSelectorData['ItemsCount'] = $dbp['ItemsCount'];
+}
 
-if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
+	}
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')) > 0) {
+		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+	}
 
 	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
-	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmIn'] = "<div class='" . $Block . "_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
 	$pageSelectorData['elmOut'] = "</div>";
-	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$pageSelectorData['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
 	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
 }
 
@@ -119,20 +127,19 @@ if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
 $dbquery = $bts->SDDMObj->query("
 SELECT td.theme_id, td.theme_name, td.theme_title, td.theme_date 
 FROM "
-.$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
-.$SqlTableListObj->getSQLTableName('theme_website')." tw "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-." ORDER BY td.theme_name "
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
-.";");
+	. $SqlTableListObj->getSQLTableName('theme_descriptor') . " td, "
+	. $SqlTableListObj->getSQLTableName('theme_website') . " tw "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. " ORDER BY td.theme_name "
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. ";");
 
 $i = 1;
-if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
+if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 	$T['Content']['1'][$i]['2']['cont'] = "";
 	$T['Content']['1'][$i]['3']['cont'] = "";
-}
-else {
+} else {
 	$formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
 
 	$fmt = new IntlDateFormatter(
@@ -149,18 +156,18 @@ else {
 	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;
 		$T['Content']['1'][$i]['1']['cont']	= "<a href='"
-		."index.php?"._HYDRLINKURLTAG_."=1"
-		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
-		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
-		."&arti_page=2"
-		."&formGenericData[mode]=edit"
-		."&themeForm[selectionId]=".$dbp['theme_id']
-		."'>".$dbp['theme_name']."</a>";
+			. "index.php?" . _HYDRLINKURLTAG_ . "=1"
+			. "&arti_slug=" . $CurrentSetObj->getDataSubEntry('article', 'arti_slug')
+			. "&arti_ref=" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref')
+			. "&arti_page=2"
+			. "&formGenericData[mode]=edit"
+			. "&themeForm[selectionId]=" . $dbp['theme_id']
+			. "'>" . $dbp['theme_name'] . "</a>";
 		$T['Content']['1'][$i]['2']['cont']	= $dbp['theme_title'];
-		$T['Content']['1'][$i]['3']['cont']	= date("Y-m-d H:i:s", $dbp['theme_date'] );		
+		$T['Content']['1'][$i]['3']['cont']	= date("Y-m-d H:i:s", $dbp['theme_date']);
 		$T['Content']['1'][$i]['2']['tc']	= 2;
 		$T['Content']['1'][$i]['3']['tc']	= 1;
 	}
@@ -175,13 +182,11 @@ else {
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T)
-."<br>\r"
-.$TemplateObj->renderFilterForm($infos)
-.$TemplateObj->renderAdminCreateButton($infos)
-;
+	. "<br>\r"
+	. $TemplateObj->renderFilterForm($infos)
+	. $TemplateObj->renderAdminCreateButton($infos);
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-End*/
-?>

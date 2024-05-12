@@ -125,7 +125,7 @@ $dbquery = $bts->SDDMObj->query(
 .$SqlTableListObj->getSQLTableName('permission')." p "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY m.module_name, mw.module_position "
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage'] . " OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 $groupTab = array();

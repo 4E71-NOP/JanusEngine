@@ -127,7 +127,7 @@ $dbquery = $bts->SDDMObj->query("SELECT "
 .$SqlTableListObj->getSQLTableName('theme_descriptor')." td "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY l.layout_name "
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage'] . " OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {

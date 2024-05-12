@@ -220,7 +220,7 @@ SELECT *
 FROM ".$SqlTableListObj->getSQLTableName('log')."
 WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 ORDER BY log_id DESC
-LIMIT 0,10
+LIMIT 10
 ;");
 
 

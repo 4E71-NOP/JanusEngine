@@ -126,7 +126,7 @@ $dbquery = $bts->SDDMObj->query("SELECT kw.* "
 .$SqlTableListObj->getSQLTableName('keyword')." kw "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY kw.keyword_name"
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage'] . " OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {

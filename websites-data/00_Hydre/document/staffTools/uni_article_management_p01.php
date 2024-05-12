@@ -200,7 +200,7 @@ $dbquery = $bts->SDDMObj->query("SELECT "
 .$SqlTableListObj->getSQLTableName('deadline')." dl "
 .$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 ." ORDER BY art.arti_ref,art.arti_page"
-." LIMIT ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset')).",".$pageSelectorData['nbrPerPage']
+." LIMIT ".$pageSelectorData['nbrPerPage'].", OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 .";");
 
 $T = array();

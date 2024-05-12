@@ -256,7 +256,7 @@ class InstallPage02
 						$r[] = "DROP SCHEMA IF EXISTS " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " CASCADE;";
 						$r[] = "CREATE SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";
 						$r[] = "SET SCHEMA '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "';";
-						$r[] = "COMMIT;";
+						// $r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						// $r[] = "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "' AND leader_pid IS NULL AND usename <> '" . $bts->CMObj->getConfigurationSubEntry('db', 'user_login') . "';";
 						// $r[] = "DROP DATABASE IF EXISTS \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" WITH (FORCE);";	// Kill database
 						// $r[] = "COMMIT;";
@@ -311,6 +311,8 @@ class InstallPage02
 						$r[] = "DROP USER IF EXISTS \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						$r[] = "CREATE USER \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\" WITH PASSWORD '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
 						$r[] = "GRANT ALL PRIVILEGES ON DATABASE \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
+						$r[] = "GRANT ALL ON SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
+						$r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						break;
 				}
 

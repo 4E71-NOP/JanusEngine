@@ -2,4 +2,4 @@
 /*	deco_20_caligraph.sql																											*/
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-ALTER TABLE public.!table! ADD INDEX(fk_deco_id);
+ALTER TABLE !table! ADD INDEX(fk_deco_id);

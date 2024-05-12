@@ -87,6 +87,14 @@ class SddmPDO
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $msg));
 			// 			error_log ($msg);
 			$this->report['cnxErr'] = 1;
+		} else {
+			switch ($TabConfig['type']) {
+				case "mysql":
+					break;
+				case "pgsql":
+					$this->DBInstance->query("SET SCHEMA '" . $TabConfig['dbprefix'] . "';");
+					break;
+			}
 		}
 	}
 
@@ -94,6 +102,7 @@ class SddmPDO
 	{
 		$this->DBInstance = null;		// this is the way PDO works. https://www.php.net/manual/en/pdo.connections.php
 	}
+
 	/**
 	 * 
 	 * @param String $q
@@ -152,15 +161,23 @@ class SddmPDO
 	{
 		return $res->rowCount();			//Only work because we have "PDO::FETCH_ASSOC". Don't change it.
 	}
+
 	public function fetch_array_sql($res)
 	{
 		return $res->fetch(PDO::FETCH_ASSOC);
 	}
+
 	public function escapeString($res)
 	{
+		// PDO is wonderful...
+		// $s = array("\"", "'");
+		// $r = array("\\\"", "\\'");
+		// $res = str_replace($s, $r, $res);
+
+		$res = $this->DBInstance->quote($res);
 		// No need for the first and last quote.
-		$str = $this->DBInstance->quote($res);
-		return substr($str, 1, (strlen($str)-2) );
+		return substr($res, 1, -1);
+		// return $res;
 	}
 
 	public function errorMsg()
@@ -181,7 +198,9 @@ class SddmPDO
 		$val = 0;
 		$dbquery = $this->query("SELECT " . $column . " FROM " . $table . " ORDER BY " . $column . " DESC LIMIT 1;");
 		while ($dbp = $this->fetch_array_sql($dbquery)) {
-			if ($dbp[$column] > $val) { $val = $dbp[$column]; }
+			if ($dbp[$column] > $val) {
+				$val = $dbp[$column];
+			}
 		}
 		$val++;
 		return $val;
@@ -191,7 +210,8 @@ class SddmPDO
 	 * Create an UID with random function
 	 * @return string
 	 */
-	public function createUniqueId(){
+	public function createUniqueId()
+	{
 		return random_int(1, 9223372036854775807);
 	}
 
