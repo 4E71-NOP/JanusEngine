@@ -20,7 +20,7 @@
 // 
 class FileSelector {
 	constructor(target) {
-		this.dbgFS = 1;
+		this.dbgFS = 0;
 		if (window.XMLHttpRequest) { 
 			this.xmlHttp = new XMLHttpRequest();		// IE7+, Firefox, Chrome, Opera, Safari
 			l.Log[this.dbgFS]("FileSelector : DOM"); 

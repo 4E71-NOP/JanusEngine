@@ -49,6 +49,7 @@ class ClassLoader {
 		"Time"						=> _UTILITY_DIRECTORY_."Time.php",
 		
 		"DalFacade"					=> _SDDM_DIRECTORY_."DalFacade.php",
+		"SddmCore"					=> _SDDM_DIRECTORY_."SddmCore.php",
 		"SddmADODB"					=> _SDDM_DIRECTORY_."SddmADODB.php",
 		"SddmMySQLI"				=> _SDDM_DIRECTORY_."SddmMySQLI.php",
 		"SddmPgsql"					=> _SDDM_DIRECTORY_."SddmPgsql.php",

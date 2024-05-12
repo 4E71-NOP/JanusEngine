@@ -57,6 +57,7 @@ class BaseToolSet
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
 		$ClassLoaderObj->provisionClass('I18nTrans');
+		$ClassLoaderObj->provisionClass('SddmCore');
 		$ClassLoaderObj->provisionClass('SddmTools');
 		$ClassLoaderObj->provisionClass('DalFacade');
 		$ClassLoaderObj->provisionClass('InteractiveElements');

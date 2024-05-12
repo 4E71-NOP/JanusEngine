@@ -175,6 +175,8 @@ class InstallPage02
 				"type"						=> $this->form['selectedDataBaseType'],
 				"dal"						=> $this->form['dal'],
 				"host"						=> $this->form['host'],
+				"port"						=> $this->form['port'],
+				"charset"					=> "utf8mb4",
 				"user_login"				=> $this->form['dataBaseHostingPrefix'] . $this->form['dataBaseAdminUser'],
 				"user_password"				=> $this->form['dataBaseAdminPassword'],
 				"hosting_prefix"			=> $this->form['dataBaseHostingPrefix'],
@@ -190,12 +192,13 @@ class InstallPage02
 
 		$bts->CMObj->setConfigurationEntry('type',					$this->form['selectedDataBaseType']);
 		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
+		$bts->CMObj->setConfigurationEntry('port',					$this->form['port']);
+		$bts->CMObj->setConfigurationEntry('charset',				"utf8mb4");
 		$bts->CMObj->setConfigurationEntry('dal',					$this->form['dal']);
 		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['dataBaseHostingPrefix'] . $this->form['dataBaseAdminUser']);
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);
 		$bts->CMObj->setConfigurationEntry('tabprefix',				$this->form['tabprefix']);
-
 		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
 
 
@@ -256,22 +259,19 @@ class InstallPage02
 						$r[] = "DROP SCHEMA IF EXISTS " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " CASCADE;";
 						$r[] = "CREATE SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";
 						$r[] = "SET SCHEMA '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "';";
-						// $r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
-						// $r[] = "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "' AND leader_pid IS NULL AND usename <> '" . $bts->CMObj->getConfigurationSubEntry('db', 'user_login') . "';";
-						// $r[] = "DROP DATABASE IF EXISTS \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" WITH (FORCE);";	// Kill database
-						// $r[] = "COMMIT;";
 						break;
 					case "mysql":
 					default:
 						$r[] = "DROP DATABASE IF EXISTS " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";	// Kill database
-						$r[] = "FLUSH TABLES;";										// clean query_cache
+						$r[] = "FLUSH TABLES;";																				// clean query_cache
 						$r[] = "FLUSH PRIVILEGES;";
-						$r[] = "CREATE DATABASE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";				// Create DB
-						$r[] = "USE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";				// Use it
+						$r[] = "CREATE DATABASE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') 
+								. " CHARACTER SET utf8mb4;";	// Create DB
+						$r[] = "USE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";						// Use it
 						$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 						$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;
 						// $r[] = "SET SESSION query_cache_type = ON;";				// clean query_cache
-						// $r[] = "SET GLOBAL query_cache_size = 67108864;";			// 16 777 216;
+						// $r[] = "SET GLOBAL query_cache_size = 67108864;";		// 16 777 216;
 						break;
 				}
 

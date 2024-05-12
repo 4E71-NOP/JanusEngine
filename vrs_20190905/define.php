@@ -62,11 +62,11 @@ switch ($application) {
 		$llvsl = LOGLEVEL_ERROR;
 		$llvil = LOGLEVEL_ERROR;
 
-		// $llvsl = LOGLEVEL_WARNING;
-		// $llvil = LOGLEVEL_WARNING;
+		$llvsl = LOGLEVEL_WARNING;
+		$llvil = LOGLEVEL_WARNING;
 
-		// $llvsl = LOGLEVEL_BREAKPOINT;
-		// $llvil = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_BREAKPOINT;
+		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	case 'website':
 		$llvsl = LOGLEVEL_WARNING;

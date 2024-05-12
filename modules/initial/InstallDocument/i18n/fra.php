@@ -90,7 +90,7 @@ $i18n = array(
 	'MTH_intro'		=> "Il y a deux types d'installation de Hydr. Ceci dans le but de permettre une installation facile sur un plus large nombre de plateformes.<br>\r<br>\r",
 	'MTH_opt1'		=> "Connexion directe à la base",
 	'MTH_opt2'		=> "Création d'un script",
-	'MTH_opt1Help'	=> "Choix d'une installation directe:<br>L'installateur va se connecter à la base (soit locale soit distante) et va créer les tables nécessaires pour que le moteur fonctionne. Les paramètres entrés dans la configuration de cette instalation serviront pour le site en tant que tel.<br><br>N'oubliez pas de copier les fichiers sur le serveur.",
+	'MTH_opt1Help'	=> "Choix d'une installation directe:<br>L'installateur va se connecter à la base (soit locale soit distante) et va créer les tables nécessaires pour que le moteur puisse fonctionner. Les paramètres entrés dans la configuration de cette instalation serviront pour le site en tant que tel.<br><br>N'oubliez pas de copier les fichiers (et fichiers de configuration) sur le serveur.",
 	'MTH_opt2Help'	=> "Choix d'une installation par script:<br>L'installateur va créer un script qui permettra à l'utilisateur de le charger sur une interface de type PhpMyAdmin. Ce genre de cas s\'applique avec des hébergeurs qui ne permettent pas une connexion directe au serveur de base de données. Cela tend à être plus rare de nos jours.<br>",
 
 	// Site Selection

@@ -16,7 +16,7 @@
 class LibTestDB {
 	
 	constructor () { 
-		this.dbgTstDb = 1;
+		this.dbgTstDb = 0;
 		this.resultTest = {
 			'cnxToDB':false,
 			'HydrDBAlreadyExist':false,

@@ -13,19 +13,21 @@
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
 
-class SddmPDO
+class SddmPDO extends SddmCore
 {
 	private static $Instance = null;
-
 	private $DBInstance = null;
-	private $SDDMTools = 0;
-	private $report;
+	private $SDDMTools = null;
 
-	public function __construct()
+	private function __construct()
 	{
 		$this->SDDMTools = SddmTools::getInstance();
 	}
 
+	/**
+	 * Singleton : Will return the instance of this class.
+	 * @return SddmPDO
+	 */
 	public static function getInstance()
 	{
 		if (self::$Instance == null) {
@@ -34,6 +36,9 @@ class SddmPDO
 		return self::$Instance;
 	}
 
+	/**
+	 * Connects to the database.
+	 */
 	public function connect()
 	{
 		$bts = BaseToolSet::getInstance();
@@ -44,10 +49,6 @@ class SddmPDO
 
 		$dsn = $TabConfig['type'] . ":host=" . $TabConfig['host'] .
 			";dbname=" . $TabConfig['dbprefix'];
-		// $dsn = 
-		// "mysql:host=".$TabConfig['host'].
-		// ";dbname=".$TabConfig['dbprefix'].
-		// ";charset=".$TabConfig['charset'];
 
 		switch ($TabConfig['type']) {
 			case "mysql":
@@ -160,7 +161,11 @@ class SddmPDO
 
 	public function num_row_sql($res)
 	{
-		return $res->rowCount();			//Only work because we have "PDO::FETCH_ASSOC". Don't change it.
+		$nbr = $res->rowCount();			//Only work because we have "PDO::FETCH_ASSOC". Don't change it.
+		if ($nbr == 0) {
+			$this->SDDMTools->SLMEmptyResult();
+		}
+		return $nbr;
 	}
 
 	public function fetch_array_sql($res)
@@ -199,7 +204,6 @@ class SddmPDO
 		return $this->DBInstance->errno;
 	}
 
-
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
 	 * It will always add 1. It won't find a free number.
@@ -220,33 +224,4 @@ class SddmPDO
 		$val++;
 		return $val;
 	}
-
-	/**
-	 * Create an UID with random function
-	 * @return string
-	 */
-	public function createUniqueId()
-	{
-		return random_int(1, 9223372036854775807);
-	}
-
-
-	//@formatter:off
-	public function getReport()
-	{
-		return $this->report;
-	}
-
-
-	public function getReportEntry($data)
-	{
-		return $this->report[$data];
-	}
-
-	public function setReport($report)
-	{
-		$this->report = $report;
-	}
-	//@formatter:on
-
 }

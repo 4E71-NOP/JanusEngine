@@ -12,14 +12,12 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
-// implements iSddm 
-class SddmMySQLI
+
+class SddmMySQLI extends SddmCore
 {
 	private static $Instance = null;
-
 	private $DBInstance = null;
 	private $SDDMTools = null;
-	private $report;
 
 	private function __construct()
 	{
@@ -49,13 +47,20 @@ class SddmMySQLI
 		$bts->LMObj->getMsgLog($bts->CMObj->toStringConfiguration());
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
+		$bts->LMObj->msgLog(array(
+			'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " DB connection parameters : '"
+				. " host=" . $TabConfig['host']
+				. "; db_user_login=" . $TabConfig['db_user_login']
+				. "; dbprefix=" . $TabConfig['dbprefix']
+				. "; port=" . $TabConfig['port']
+		));
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$this->DBInstance = new mysqli($TabConfig['host'], $TabConfig['db_user_login'], $TabConfig['db_user_password']);
+				$this->DBInstance = new mysqli($TabConfig['host'], $TabConfig['db_user_login'], $TabConfig['db_user_password'], null, (strlen($TabConfig['port'] ?? '') > 0 ? $TabConfig['port'] : null));
 				break;
 			case "render":
 			default:
-				$this->DBInstance = new mysqli($TabConfig['host'], $TabConfig['db_user_login'], $TabConfig['db_user_password'], $TabConfig['dbprefix']);
+				$this->DBInstance = new mysqli($TabConfig['host'], $TabConfig['db_user_login'], $TabConfig['db_user_password'], $TabConfig['dbprefix'], (strlen($TabConfig['port'] ?? '') > 0 ? $TabConfig['port'] : null));
 				break;
 		}
 		if ($this->DBInstance->connect_error) {
@@ -207,31 +212,4 @@ class SddmMySQLI
 		$val++;
 		return $val;
 	}
-
-	/**
-	 * Create an UID with random function
-	 * @return int
-	 */
-	public function createUniqueId()
-	{
-		return random_int(1, 9223372036854775807);
-	}
-
-	//@formatter:off
-
-	public function getReport()
-	{
-		return $this->report;
-	}
-	public function getReportEntry($data)
-	{
-		return $this->report[$data];
-	}
-
-	public function setReport($report)
-	{
-		$this->report = $report;
-	}
-	//@formatter:on
-
 }

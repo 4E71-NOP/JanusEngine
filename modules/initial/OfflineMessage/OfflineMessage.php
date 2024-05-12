@@ -101,7 +101,6 @@ class ModuleOffLineMessage
 					"module_title" => "",
 					"module_file" => "",
 					"module_desc" => "",
-					"module_container_name" => "",
 					// "module_group_allowed_to_see" => 31,
 					// "module_group_allowed_to_use" => 31,
 					"module_adm_control" => 0,
@@ -116,6 +115,35 @@ class ModuleOffLineMessage
 			$RenderDeco = RenderDeco40Elegance::getInstance();
 
 			// --------------------------------------------------------------------------------------------
+
+			$Content = "
+				<!DOCTYPE html>
+				<html>\r
+				<head>\r
+				<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
+				<title>" . $WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
+				" . $stylesheet . "\r
+				</head>\r
+				<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')
+				. "' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')
+				. "' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')
+				. "' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')
+				. "' background='../media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bg') . "'>\r\r
+				<div style='
+				width:80%; 
+				height:80%;
+				margin-left:auto;
+				margin-right:auto;
+				margin-top:128px;
+
+				'>\r" .
+				$RenderDeco->render($infos) .
+				"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>
+				This website is currently offline</span><br>\r" .
+				"
+				</div>\r
+				</div>\r";
+
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js');
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js');
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';");
@@ -146,43 +174,12 @@ class ModuleOffLineMessage
 			$JavaScriptContent .= "function WindowOnLoad () {\r";
 			$JavaScriptContent .= $CurrentSetObj->GeneratedScriptObj->renderScriptCrudeMode("JavaScript-OnLoad");
 			$JavaScriptContent .= "
-		}\r
-		window.onresize = WindowOnResize;\r
-		window.onload = WindowOnLoad;\r
-		</script>\r";
+			}\r
+			window.onresize = WindowOnResize;\r
+			window.onload = WindowOnLoad;\r
+			</script>\r";
 
-		/*
-						width:" . $ThemeDataObj->getDefinitionValue('divinitial_dx') . "px; 
-				height:" . $ThemeDataObj->getDefinitionValue('divinitial_dy') . "px;
-
-		*/
-			$Content = "
-				<!DOCTYPE html>
-				<html>\r
-				<head>\r
-				<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'>\r
-				<title>" . $WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
-				" . $stylesheet . "\r
-				</head>\r
-				<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')
-				. "' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')
-				. "' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')
-				. "' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')
-				. "' background='../media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bg') . "'>\r\r
-				<div style='
-				width:100%; 
-				height:100%;
-				'>\r" .
-				$RenderDeco->render($infos) .
-				"<span style='font-size: 150%; font-weight:bold; text-align:center; margin-top:50px; display:block;'>
-				This website is currently offline</span><br>\r" .
-				"
-				</div>\r
-				</div>\r
-				</body>\r"
-				.$JavaScriptContent
-				."</html>\r
-				";
+			$Content .= $JavaScriptContent . "</body>\r</html>\r";
 
 			echo ($Content);
 		} else {

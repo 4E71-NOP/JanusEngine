@@ -62,12 +62,14 @@ class HydrInstallMonitor
 		$bts->CMObj->InitBasicSettings();
 
 		$bts->CMObj->setConfigurationEntry('type',					$form['selectedDataBaseType']);
-		$bts->CMObj->setConfigurationEntry('host',					$form['host']);
 		$bts->CMObj->setConfigurationEntry('dal',					$form['dal']);
+		$bts->CMObj->setConfigurationEntry('host',					$form['host']);
+		$bts->CMObj->setConfigurationEntry('port',					$form['port']);
 		$bts->CMObj->setConfigurationEntry('db_user_login',			$form['dataBaseHostingPrefix'] . $form['dataBaseAdminUser']);
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$form['dbprefix']);
 		$bts->CMObj->setConfigurationEntry('tabprefix',				$form['tabprefix']);
+		$bts->CMObj->setConfigurationEntry('charset',				"utf8mb4");
 
 		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
 

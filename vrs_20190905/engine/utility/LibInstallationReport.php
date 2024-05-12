@@ -249,6 +249,7 @@ function returnConfig () {
 	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\";
 	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
 	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";
+	\$tab['port']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'port')."\";
 	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin')."\";
 	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword')."\";
 	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";

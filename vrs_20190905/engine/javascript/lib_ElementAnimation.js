@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------
 
-var dbgAnimDoc = 1;
+var dbgAnimDoc = 0;
 
 function ADDA_div_init ( Objnom , Bouton , iconep0 , iconep1 , position, frequence , duree , hauteurdiv ) {
 	var Obj = elm.Gebi( Objnom );

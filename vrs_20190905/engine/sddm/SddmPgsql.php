@@ -12,14 +12,12 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
-// implements iSddm 
-class SddmPgsql
+
+class SddmPgsql extends SddmCore
 {
 	private static $Instance = null;
-
 	private $DBInstance = null;
 	private $SDDMTools = null;
-	private $report;
 
 	private function __construct()
 	{
@@ -49,15 +47,23 @@ class SddmPgsql
 		$bts->LMObj->getMsgLog($bts->CMObj->toStringConfiguration());
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
-		$dsn = "host=" . $TabConfig['host'] . " dbname=" . $TabConfig['dbprefix'];
+		$bts->LMObj->msgLog(array(
+			'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " DB connection parameters : '"
+				. " host=" . $TabConfig['host']
+				. "; db_user_login=" . $TabConfig['db_user_login']
+				. "; dbprefix=" . $TabConfig['dbprefix']
+				. "; port=" . $TabConfig['port']
+		));
+
+		$dsn = "host=" . $TabConfig['host'] . " dbname=" . $TabConfig['dbprefix'] . (strlen($TabConfig['port'] ?? '') > 0 ? $TabConfig['port'] : '');
 
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$this->DBInstance = pg_connect($dsn . "user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
+				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
 				break;
 			case "render":
 			default:
-				$this->DBInstance = pg_connect($dsn . "user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
+				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
 			break;
 		}
 
@@ -71,8 +77,8 @@ class SddmPgsql
 			$SQLlogEntry['err_msg'] = "xxxxxxxxxxxxxxxxxxxxxxx";
 			$SQLlogEntry['signal'] = "ERR";
 			$bts->LMObj->logSQLDetails(array($timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime()));
-			$this->errorMsg();
-			$msg = "CONNEXION ERROR : err_msg" . "***************************";
+			$this->getError();
+			$msg = "CONNEXION ERROR : err_msg" . "*********************************";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $msg));
 			$this->report['cnxErr'] = 1;
 		}
@@ -83,7 +89,7 @@ class SddmPgsql
 	 */
 	public function disconnect_sql()
 	{
-		$this->DBInstance->close();
+		pg_close($this->DBInstance);
 	}
 
 	/**
@@ -141,12 +147,12 @@ class SddmPgsql
 
 	/**
 	 * Returns the number of row from the given resultset. 
-	 * @param mysqli_result $data
+	 * @param PgSql\Result $data
 	 * @return Number
 	 */
 	public function num_row_sql($data)
 	{
-		$nbr = mysqli_num_rows($data);
+		$nbr = pg_num_rows($data);
 		if ($nbr == 0) {
 			$this->SDDMTools->SLMEmptyResult();
 		}
@@ -155,12 +161,12 @@ class SddmPgsql
 
 	/**
 	 * Returns the Nth row from a result. 
-	 * @param mysqli_result $data
+	 * @param PgSql\Result $data
 	 * @return Array
 	 */
 	public function fetch_array_sql($data)
 	{
-		return $data->fetch_assoc();
+		return pg_fetch_assoc($data);
 	}
 
 	/**
@@ -170,18 +176,27 @@ class SddmPgsql
 	 */
 	public function escapeString($data)
 	{
-		return $this->DBInstance->real_escape_string($data);
+		return pg_escape_string($this->DBInstance, $data);
 	}
 
 	/**
 	 * Returns the err string.
 	 * @return string
 	 */
-	public function errorMsg()
+	public function getError()
 	{
-		return "err";
+		return pg_last_error($this->DBInstance);
 	}
 
+	/**
+	 * Returns the errno string.
+	 * @return string
+	 */
+	public function getErrno()
+	{
+		return pg_last_error($this->DBInstance);
+		
+	}
 
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
@@ -203,31 +218,5 @@ class SddmPgsql
 		$val++;
 		return $val;
 	}
-
-	/**
-	 * Create an UID with random function
-	 * @return int
-	 */
-	public function createUniqueId()
-	{
-		return random_int(1, 9223372036854775807);
-	}
-
-	//@formatter:off
-
-	public function getReport()
-	{
-		return $this->report;
-	}
-	public function getReportEntry($data)
-	{
-		return $this->report[$data];
-	}
-
-	public function setReport($report)
-	{
-		$this->report = $report;
-	}
-	//@formatter:on
 
 }

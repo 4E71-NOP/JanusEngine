@@ -14,7 +14,7 @@
 class LibMonitorInstall {
 
 	constructor() {
-		this.dbgMonitorFonction = 1;
+		this.dbgMonitorFonction = 0;
 		this.monitorSentinel = null;
 		this.monitorXmlhttp = null;
 		this.monitorXmlhttpBusyState = false;

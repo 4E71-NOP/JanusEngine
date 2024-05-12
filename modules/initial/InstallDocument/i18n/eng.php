@@ -90,7 +90,7 @@ $i18n = array(
 	'MTH_intro'		=> "There are two ways to install Hydr. This method ease installation on a bigger number of plateforms.<br>\r<br>\r",
 	'MTH_opt1'		=> "Direct connection to the DB",
 	'MTH_opt2'		=> "Script creation",
-	'MTH_opt1Help'	=> "Direct connection<br>The install tool will connect to the database (local or remote) and will create the necessary tables for engine to be functionning.The parameters entered in the config panel will be used when the website will operate. <br><br>Don\'t forget to copy the files on the server.",
+	'MTH_opt1Help'	=> "Direct connection<br>The install tool will connect to the database (local or remote) and will create the necessary tables for the engine to be able to function.The parameters entered in the config panel will be used when the website will operate. <br><br>Don\'t forget to copy the files (and config files) on the server.",
 	'MTH_opt2Help'	=> "Scripted installation<br>The install tool will create a script you will be able to load on a PhpMyAdmin interface (for example). This is used when the hosting service do not allow direct connection to the server. Nowdays it seems to be rare.<br>",
 
 	// Site Selection

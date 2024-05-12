@@ -8,7 +8,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.com
 //
 // --------------------------------------------------------------------------------------------
-var dbgMenuBanner = 1;
+var dbgMenuBanner = 0;
 
 var PremierBanner = 0;
 

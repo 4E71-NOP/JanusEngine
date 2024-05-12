@@ -480,7 +480,8 @@ class CommandConsole
 		self::$report['signal'] = "OK";
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start : " . $CommandLine));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "--------------------------------------------------------------------------------"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " -> " . $CommandLine));
 
 		$WebSiteContextObj = $CurrentSetObj->WebSiteContextObj; //We consider the website context is already set.
 		$UserObj = $CurrentSetObj->UserObj;
