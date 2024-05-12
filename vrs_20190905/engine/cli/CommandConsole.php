@@ -518,7 +518,7 @@ class CommandConsole
 						// Special routine for website creation.
 						// Adding basic set of users and groups in order to make the website viable.
 						// At this point; some data have been converted. In this case user credential given by the "add website" command.
-						$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Website creation"));
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Website creation named `" . $CCL['params']['name'] . "`"));
 						$CurrentSetObj->setDataSubEntry('cli', 'websiteCreation', 1);
 						$SpecialCommandBuffer = array(
 							"website context name '" . $CCL['params']['name'] . "' user '*user_install*' password '*user_install*'",

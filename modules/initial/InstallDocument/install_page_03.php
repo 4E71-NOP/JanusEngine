@@ -266,7 +266,7 @@ class InstallPage03 {
 		$CurrentSetObj = CurrentSet::getInstance();
 		
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
-		$bts->CMObj->setConfigurationEntry('operantingMode', $this->form['operantingMode'] );
+		$bts->CMObj->setConfigurationEntry('operatingMode', $this->form['operatingMode'] );
 
 		// ***quality*** Revoir ce bout de tableau... n'a pas l'air de servir 
 		$bts->CMObj->setConfigurationEntry('db',

@@ -166,7 +166,7 @@ class InstallPage02
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$this->form = $bts->RequestDataObj->getRequestDataEntry('form');
-		$bts->CMObj->setConfigurationEntry('operantingMode', $this->form['operantingMode']);
+		$bts->CMObj->setConfigurationEntry('operatingMode', $this->form['operatingMode']);
 
 		// ***quality*** Revoir ce bout de tableau... n'a pas l'air de servir 
 		$bts->CMObj->setConfigurationEntry(
@@ -331,7 +331,7 @@ class InstallPage02
 		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 
-		switch ($this->form['operantingMode']) {
+		switch ($this->form['operatingMode']) {
 			case 'directCnx':
 				foreach ($qs as $q) {
 					$bts->SDDMObj->query($q);

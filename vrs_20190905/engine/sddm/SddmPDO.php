@@ -63,7 +63,7 @@ class SddmPDO
 		];
 
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "Trying : '" . $dsn . "'"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Trying : '" . $dsn . "'"));
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
 				$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
@@ -82,7 +82,7 @@ class SddmPDO
 			$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
 			$SQLlogEntry['signal'] = "ERR";
 			$bts->LMObj->logSQLDetails(array($SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime()));
-			$this->errorMsg();
+			$this->getError();
 			$msg = "CONNEXION ERROR : " . "err_no" . $this->DBInstance->errorCode() . ", err_msg" . $this->DBInstance->errorInfo();
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $msg));
 			// 			error_log ($msg);
@@ -95,6 +95,7 @@ class SddmPDO
 					$this->DBInstance->query("SET SCHEMA '" . $TabConfig['dbprefix'] . "';");
 					break;
 			}
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Connected to '" . $TabConfig['dbprefix'] . "'."));
 		}
 	}
 
@@ -180,10 +181,24 @@ class SddmPDO
 		// return $res;
 	}
 
-	public function errorMsg()
+	/**
+	 * Returns the err string.
+	 * @return string
+	 */
+	public function getError()
 	{
-		return "err";
+		return $this->DBInstance->error;
 	}
+
+	/**
+	 * Returns the errno string.
+	 * @return string
+	 */
+	public function getErrno()
+	{
+		return $this->DBInstance->errno;
+	}
+
 
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
@@ -215,12 +230,14 @@ class SddmPDO
 		return random_int(1, 9223372036854775807);
 	}
 
-	//@formatter:off
 
+	//@formatter:off
 	public function getReport()
 	{
 		return $this->report;
 	}
+
+
 	public function getReportEntry($data)
 	{
 		return $this->report[$data];

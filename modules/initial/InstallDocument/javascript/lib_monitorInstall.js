@@ -14,10 +14,10 @@
 class LibMonitorInstall {
 
 	constructor() {
+		this.dbgMonitorFonction = 1;
 		this.monitorSentinel = null;
 		this.monitorXmlhttp = null;
 		this.monitorXmlhttpBusyState = false;
-		this.dbgMonitorFonction = 0;
 		this.intervalDelay = 500
 
 		if (window.XMLHttpRequest) {
@@ -70,7 +70,7 @@ class LibMonitorInstall {
 	*/
 	monitorGetReport() {
 		let str = "";
-		// l.Log[mi.dbgMonitorFonction]('monitorGetReport Monitor URL=: `' + mi.monitorURL + "`");
+		l.Log[mi.dbgMonitorFonction]('monitorGetReport Monitor URL=: `' + mi.monitorURL + "`");
 		if (!this.monitorXmlhttpBusyState) {
 			str = "Calling..."
 			this.monitorXmlhttpBusyState = true;

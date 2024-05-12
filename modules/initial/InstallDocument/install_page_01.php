@@ -453,8 +453,8 @@ class InstallPage01
 		$bubbleEnd = "', 'install')\" onMouseOut=\"t.ToolTip('','install')\">";
 		$l = 1;
 		$T[$t]['caption']['cont'] = $bts->I18nTransObj->getI18nTransEntry('MTH_intro');
-		$T[$t][$l]['1']['cont'] = "<input type='radio' name='form[operantingMode]' onClick='li.setFormPreconizedSettings()' value='directCnx' checked>" . $bts->I18nTransObj->getI18nTransEntry('MTH_opt1') . $bubbleBegin . $bts->I18nTransObj->getI18nTransEntry('MTH_opt1Help') . $bubbleEnd;
-		$T[$t][$l]['2']['cont'] = "<input type='radio' name='form[operantingMode]' onClick='li.setFormPreconizedSettings()' value='createScript'>" . $bts->I18nTransObj->getI18nTransEntry('MTH_opt2') . $bubbleBegin . $bts->I18nTransObj->getI18nTransEntry('MTH_opt2Help') . $bubbleEnd;
+		$T[$t][$l]['1']['cont'] = "<input type='radio' name='form[operatingMode]' onClick='li.setFormPreconizedSettings()' value='directCnx' checked>" . $bts->I18nTransObj->getI18nTransEntry('MTH_opt1') . $bubbleBegin . $bts->I18nTransObj->getI18nTransEntry('MTH_opt1Help') . $bubbleEnd;
+		$T[$t][$l]['2']['cont'] = "<input type='radio' name='form[operatingMode]' onClick='li.setFormPreconizedSettings()' value='createScript'>" . $bts->I18nTransObj->getI18nTransEntry('MTH_opt2') . $bubbleBegin . $bts->I18nTransObj->getI18nTransEntry('MTH_opt2Help') . $bubbleEnd;
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 2, 0);
 	}

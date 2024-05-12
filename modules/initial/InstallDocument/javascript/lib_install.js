@@ -33,7 +33,7 @@ class LibInstall {
 			"form[dataBaseUserRecreate]",
 			"form[host]", 
 			"form[memoryLimit]",
-			"form[operantingMode]",
+			"form[operatingMode]",
 			"form[selectedDataBaseType]",
 			"form[tabprefix]",
 			"form[TypeExec]",
@@ -97,7 +97,7 @@ class LibInstall {
 		var time = 15;
 		var addTime = 0; 
 		
-		var method = document.forms['install_page_init'].elements['form[operantingMode]'].value;
+		var method = document.forms['install_page_init'].elements['form[operatingMode]'].value;
 		switch (method) {
 		case 'directCnx':
 			l.Log[this.dbgInstFonction]( 'method=: ' + method );

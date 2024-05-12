@@ -39,7 +39,7 @@ class HydrInstallMonitor
 	 */
 	public function render()
 	{
-		$application = 'install';
+		$application = 'monitor';
 		include("current/define.php");
 		include("current/engine/utility/ClassLoader.php");
 		$ClassLoaderObj = ClassLoader::getInstance();
@@ -73,7 +73,7 @@ class HydrInstallMonitor
 
 		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
 		$CurrentSetObj->SqlTableListObj->makeSqlTableList($form['dbprefix'], $form['tabprefix']);
-		
+
 		// $DALFacade = DalFacade::getInstance();
 		// $DALFacade->createDALInstance();		// It connects too.
 		$bts->initSddmObj();
@@ -84,19 +84,23 @@ class HydrInstallMonitor
 			. " FROM " . $SqlTableListObj->getSQLTableName('installation')
 			. ";";
 		$data = array();
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : query =`" . $sqlQuery . "`."));
+
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
 
-		$queryOk = true;
+		$queryState = true;
 		if ($bts->SDDMObj->getErrno() != 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL Error flag : " . $bts->SDDMObj->getErrno()));
-			$queryOk = false;
+			$queryState = false;
 		}
 		if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . "SQL no rows flag : " . $bts->SDDMObj->num_row_sql($dbquery)));
-			$queryOk = false;
+			$queryState = false;
 		}
 
-		if ($queryOk == true) {
+		if ($queryState == true) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : query has no error."));
+
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$data[$dbp['inst_name']] = $dbp['inst_nbr'];
 			}
@@ -109,6 +113,7 @@ class HydrInstallMonitor
 		} else {
 			$Content = json_encode(array('mainAnswer' => 'noDataAvailable'));
 		}
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Content = `" . $Content . "`."));
 		return $Content;
 	}
 }
