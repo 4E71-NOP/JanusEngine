@@ -1,5 +1,5 @@
 <?php
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -13,102 +13,112 @@
 /*Hydre-licence-fin*/
 // --------------------------------------------------------------------------------------------
 // implements iSddm 
-class SddmPqsql {
+class SddmPgsql
+{
 	private static $Instance = null;
 
 	private $DBInstance = null;
 	private $SDDMTools = null;
 	private $report;
 
-	private function __construct(){
+	private function __construct()
+	{
 		$this->SDDMTools = SddmTools::getInstance();
 	}
 
 	/**
 	 * Singleton : Will return the instance of this class.
-	 * @return SddmPqsql
+	 * @return SddmPgsql
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
-			self::$Instance = new SddmPqsql();
+			self::$Instance = new SddmPgsql();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Connects to the database.
 	 */
-	public function connect() {
+	public function connect()
+	{
 		$bts = BaseToolSet::getInstance();
-		
+
 		$TabConfig = $bts->CMObj->getConfiguration();
 		$bts->LMObj->getMsgLog($bts->CMObj->toStringConfiguration());
-		$timeBegin = $bts->TimeObj->getMicrotime ();
-		
-		switch ( $bts->CMObj->getConfigurationEntry('execution_context')) {
+		$timeBegin = $bts->TimeObj->getMicrotime();
+
+		$dsn = "host=" . $TabConfig['host'] . " dbname=" . $TabConfig['dbprefix'];
+
+		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$this->DBInstance = new mysqli( $TabConfig['host'] , $TabConfig['db_user_login'] , $TabConfig['db_user_password'] );
+				$this->DBInstance = pg_connect($dsn . "user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
 				break;
 			case "render":
 			default:
-				$this->DBInstance = new mysqli( $TabConfig['host'] , $TabConfig['db_user_login'] , $TabConfig['db_user_password'] , $TabConfig['dbprefix'] );
-				break;
+				$this->DBInstance = pg_connect($dsn . "user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
+			break;
 		}
-		if ($this->DBInstance->connect_error) {
+
+		if ($this->DBInstance) {
+			pg_exec($this->DBInstance, "SET SCHEMA '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "';");
+		} else {
 			$SQLlogEntry = array();
-			$SQLlogEntry['err_no'] = $this->DBInstance->connect_error;
-			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
-			$SQLlogEntry['err_msg'] = $this->DBInstance->connect_error;
+			// TODO try to complete and get errors.
+			$SQLlogEntry['err_no'] = "xxxxx";
+			$SQLlogEntry['err_no_expr'] = "PHP PgSql Err : " . $SQLlogEntry['err_no'];
+			$SQLlogEntry['err_msg'] = "xxxxxxxxxxxxxxxxxxxxxxx";
 			$SQLlogEntry['signal'] = "ERR";
-			$bts->LMObj->logSQLDetails ( array ( $timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime() ) );
+			$bts->LMObj->logSQLDetails(array($timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime()));
 			$this->errorMsg();
-			$msg = "CONNEXION ERROR : err_msg" . $this->DBInstance->connect_error;
-			$bts->LMObj->msgLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $msg));
+			$msg = "CONNEXION ERROR : err_msg" . "***************************";
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $msg));
 			$this->report['cnxErr'] = 1;
-			
-		}
-		else {
-			$this->DBInstance->autocommit(TRUE);
 		}
 	}
-	
+
 	/**
 	 * Disconnects from the database.
 	 */
-	public function disconnect_sql () {
+	public function disconnect_sql()
+	{
 		$this->DBInstance->close();
 	}
-	
+
 	/**
 	 * Sends a query to the database and manage errors
 	 * @param String $q
 	 * @return mysqli_result|boolean
 	 */
-	public function query($q) {
+	public function query($q)
+	{
 		$bts = BaseToolSet::getInstance();
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$bts->LMObj->increaseSqlQueryNumber();
-		$db_result = $this->DBInstance->query ($q);
+		$db_result = pg_exec($this->DBInstance, $q);
 		$SQLlogEntry = array(
 			"err_no"		=> $this->DBInstance->errno,
 			"err_no_expr"	=> "PHP Pgsql Err : " . $this->DBInstance->errno,
 			"err_msg"		=> $this->DBInstance->error,
 			"signal"		=> "OK",
 		);
-		
+
 		if ($this->DBInstance->errno != 0) {
-			$bts->LMObj->msgLog( array('level'=> LOGLEVEL_ERROR , 'msg'=> __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($q)."`." ));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($q) . "`."));
 			$SQLlogEntry['signal'] = "ERR";
 			return false;
 			// error_log ("ERR " . time() . " (" . $this->DBInstance->errno . ") " . $this->DBInstance->error . " Query : " . $q ." ");
 		}
-		
-		if ($bts->CMObj->getConfigurationEntry('InsertStatistics') == 1) { $bts->LMObj->IncreaseSqlQueries(); }
-		$bts->LMObj->logSQLDetails ( array ( $timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime () ) );
-		
+
+		if ($bts->CMObj->getConfigurationEntry('InsertStatistics') == 1) {
+			$bts->LMObj->IncreaseSqlQueries();
+		}
+		$bts->LMObj->logSQLDetails(array($timeBegin, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $SQLlogEntry['signal'], $q, $SQLlogEntry['err_no_expr'], $SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime()));
+
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
-			case "installation" :
+			case "installation":
 				$StringFormatObj = StringFormat::getInstance();
 				$bts->LMObj->increaseSqlQueryNumber();
 				$q = $StringFormatObj->shorteningExpression($q, 256);
@@ -134,9 +144,12 @@ class SddmPqsql {
 	 * @param mysqli_result $data
 	 * @return Number
 	 */
-	public function num_row_sql($data) {
-		$nbr = mysqli_num_rows ($data);
-		if ( $nbr == 0 ) { $this->SDDMTools->SLMEmptyResult (); }
+	public function num_row_sql($data)
+	{
+		$nbr = mysqli_num_rows($data);
+		if ($nbr == 0) {
+			$this->SDDMTools->SLMEmptyResult();
+		}
 		return $nbr;
 	}
 
@@ -145,8 +158,9 @@ class SddmPqsql {
 	 * @param mysqli_result $data
 	 * @return Array
 	 */
-	public function fetch_array_sql($data) {
-		return $data->fetch_assoc ();
+	public function fetch_array_sql($data)
+	{
+		return $data->fetch_assoc();
 	}
 
 	/**
@@ -154,19 +168,21 @@ class SddmPqsql {
 	 * @param String $data
 	 * @return String
 	 */
-	public function escapeString($data) {
+	public function escapeString($data)
+	{
 		return $this->DBInstance->real_escape_string($data);
 	}
-	
+
 	/**
 	 * Returns the err string.
 	 * @return string
 	 */
-	public function errorMsg() {
+	public function errorMsg()
+	{
 		return "err";
 	}
-	
-	
+
+
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
 	 * It will always add 1. It won't find a free number.
@@ -175,32 +191,43 @@ class SddmPqsql {
 	 * @param string $column
 	 * @return number
 	 */
-	public function findNextId ($table , $column ) {
+	public function findNextId($table, $column)
+	{
 		$val = 0;
-		$dbquery = $this->query("SELECT ".$column." FROM ".$table." ORDER BY ".$column." DESC LIMIT 1;");
+		$dbquery = $this->query("SELECT " . $column . " FROM " . $table . " ORDER BY " . $column . " DESC LIMIT 1;");
 		while ($dbp = $this->fetch_array_sql($dbquery)) {
-			if ( $dbp[$column] > $val ) { $val = $dbp[$column]; }
+			if ($dbp[$column] > $val) {
+				$val = $dbp[$column];
+			}
 		}
 		$val++;
 		return $val;
 	}
-	
+
 	/**
 	 * Create an UID with random function
 	 * @return int
 	 */
-	public function createUniqueId(){
+	public function createUniqueId()
+	{
 		return random_int(1, 9223372036854775807);
 	}
 
 	//@formatter:off
-	
-	public function getReport() {return $this->report;}
-	public function getReportEntry($data) {return $this->report[$data];}
 
-	public function setReport($report) {$this->report = $report;}
+	public function getReport()
+	{
+		return $this->report;
+	}
+	public function getReportEntry($data)
+	{
+		return $this->report[$data];
+	}
+
+	public function setReport($report)
+	{
+		$this->report = $report;
+	}
 	//@formatter:on
-	
-}
 
-?>
+}

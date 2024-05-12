@@ -203,7 +203,7 @@ class SddmPDO
 	/**
 	 * Returns the next (as greater number) ID number of any given table.
 	 * It will always add 1. It won't find a free number.
-	 *
+	 * @deprecated
 	 * @param string $table
 	 * @param string $column
 	 * @return number

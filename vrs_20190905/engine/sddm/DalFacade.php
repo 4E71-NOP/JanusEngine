@@ -56,9 +56,9 @@ class DalFacade {
 							$ClassLoaderObj->provisionClass('SddmMySQLI');
 							$this->DALInstance = SddmMySQLI::getInstance ();
 							break;
-					case "pqsql":
-							$ClassLoaderObj->provisionClass('SddmPqsql');
-							$this->DALInstance = SddmPqsql::getInstance();
+					case "pgsql":
+							$ClassLoaderObj->provisionClass('SddmPgsql');
+							$this->DALInstance = SddmPgsql::getInstance();
 					break;
 				}
 				break;

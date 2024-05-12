@@ -357,7 +357,7 @@ class CommandConsole
 				$CCL['params'][$A['target']] = $bts->SDDMObj->createUniqueId();
 			}
 		}
-		// 	foreach ($ptr['nextId'] as $A ){ $CCL['params'][$A['target']] = $bts->SDDMObj->findNextId($CurrentSetObj->SqlTableListObj->getSQLTableName($A['table']), $A['column']); }
+
 		//timeCreate ----------------------------------------
 		$time = time();
 		if (is_array($ptr['timeCreate'])) {
