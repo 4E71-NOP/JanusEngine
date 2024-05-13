@@ -43,8 +43,8 @@ class ModuleDocumentDisplay
 			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 			$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-			$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
-			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "/i18n/" . $l . ".php", "format" => "php"));
+			$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');
+			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "i18n/" . $l . ".php", "format" => "php"));
 
 			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 
@@ -57,12 +57,12 @@ class ModuleDocumentDisplay
 
 
 			// 		We have a document object. Now we have to process it.
-			$DocumentDataObj->setDocumentDataEntry('arti_creation_date',		date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_creation_date')));
-			$DocumentDataObj->setDocumentDataEntry('arti_validation_date',		date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_validation_date')));
+			$DocumentDataObj->setDocumentDataEntry('arti_creation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_creation_date')));
+			$DocumentDataObj->setDocumentDataEntry('arti_validation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_validation_date')));
 			$DocumentDataObj->setDocumentDataEntry('arti_release_date',		date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_release_date')));
-			$DocumentDataObj->setDocumentDataEntry('docu_creation_date',		date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_creation_date')));
+			$DocumentDataObj->setDocumentDataEntry('docu_creation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_creation_date')));
 			$DocumentDataObj->setDocumentDataEntry('docu_validation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_validation_date')));
-			$DocumentDataObj->setDocumentDataEntry('docu_cont_brut',			$DocumentDataObj->getDocumentDataEntry('docu_cont'));
+			$DocumentDataObj->setDocumentDataEntry('docu_cont_brut',		$DocumentDataObj->getDocumentDataEntry('docu_cont'));
 
 			$document_list = array();
 			$LD_idx = 1;
