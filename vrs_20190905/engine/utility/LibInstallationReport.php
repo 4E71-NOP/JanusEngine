@@ -156,44 +156,44 @@ class LibInstallationReport {
 		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');
 		// $Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');
 		
-		$sg['MemoireMax'] = 0;
-		$sg['MemoireMin'] = 1000;
-		$sg['TempsMin'] = $bts->TimeObj->getMicrotime();
-		$sg['TempsMax'] = 0;
+		$sg['MemoryMax'] = 0;
+		$sg['MemoryMin'] = 1000;
+		$sg['timeMin'] = $bts->TimeObj->getMicrotime();
+		$sg['timeMax'] = 0;
 		
 		$TableStats = $bts->LMObj->getStatisticsLog();
 		reset ( $TableStats );
 		
 		foreach ( $TableStats as &$A ) {
-			$A['SgMem'] = round(( $A['memoire'] / 1024 ), 2 );
-			if ( $A['SgMem'] > $sg['MemoireMax'] )	{ $sg['MemoireMax'] = $A['SgMem']; }
-			if ( $A['SgMem'] < $sg['MemoireMin'] )	{ $sg['MemoireMin'] = $A['SgMem']; }
-			if ( $A['temps'] > $sg['TempsMax'] )	{ $sg['TempsMax'] = $A['temps']; }
-			if ( $A['temps'] < $sg['TempsMin'] )	{ $sg['TempsMin'] = $A['temps']; }
+			$A['SgMem'] = round(( $A['memory'] / 1024 ), 2 );
+			if ( $A['SgMem'] > $sg['MemoryMax'] )	{ $sg['MemoryMax'] = $A['SgMem']; }
+			if ( $A['SgMem'] < $sg['MemoryMin'] )	{ $sg['MemoryMin'] = $A['SgMem']; }
+			if ( $A['time'] > $sg['timeMax'] )	{ $sg['timeMax'] = $A['time']; }
+			if ( $A['time'] < $sg['timeMin'] )	{ $sg['timeMin'] = $A['time']; }
 		}
 		$i = 2;
 		foreach ( $TableStats as &$A ) {
 			if ( $i == 2 ) { 
-				$sg['tempsAV'] = $A['temps'];
-				$t0 = $A['temps'];
+				$sg['timeB4'] = $A['time'];
+				$t0 = $A['time'];
 			}
-			$A['TempsPerf'] =  round ( ($A['temps'] - $sg['tempsAV']), 4 );
-			$A['TempsCheckpoint'] =  round ($A['temps'] - $sg['TempsMin'], 4 );
-			$sg['tempsAV'] = $A['temps'];
+			$A['timePerf'] =  round ( ($A['time'] - $sg['timeB4']), 4 );
+			$A['timeCheckpoint'] =  round ($A['time'] - $sg['timeMin'], 4 );
+			$sg['timeB4'] = $A['time'];
 			
-			$A['MemoireSegment'] = ( $A['memoire'] - $RamB4 );
-			$RamB4 = $A['memoire'];
+			$A['MemorySegment'] = ( $A['memory'] - $RamB4 );
+			$RamB4 = $A['memory'];
 			
 			$Content[$i]['1']['cont'] = $A['position'];																	$Content[$i]['1']['style'] = "text-align: center;";
-			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['3']['cont'] = $A['TempsPerf'];																$Content[$i]['3']['style'] = "text-align: center;";
-			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemoireSegment'] );	$Content[$i]['4']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['3']['cont'] = $A['timePerf'];																$Content[$i]['3']['style'] = "text-align: center;";
+			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemorySegment'] );	$Content[$i]['4']['style'] = "text-align: center;";
 			$Content[$i]['5']['cont'] = $A['SQL_queries'];																$Content[$i]['5']['style'] = "text-align: center;";
 			// $Content[$i]['6']['cont'] = $A['context'];																	
 			// error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
 
 			$SQLQueries += $A['SQL_queries'];
-			$memoryUsed += $A['MemoireSegment'];
-			$tLast = $A['temps'];
+			$memoryUsed += $A['MemorySegment'];
+			$tLast = $A['time'];
 			$i++;
 		}
 		

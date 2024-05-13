@@ -24,6 +24,7 @@ $i18n = array(
 	't1l111'	=>	"Navigateur",
 	't1l112'	=>	"Utilisateur du process",
 	't1l113'	=>	"Requête URI",
+	't1l114'	=>	"Parametres base de données",	
 
 	'tGraphLabelM'	=>	"Mémoire",
 	'tGraphLabelT'	=>	"Temps",

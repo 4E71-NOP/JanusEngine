@@ -103,8 +103,8 @@ class LogManagement {
 			$this->StatisticsLog [$this->StatisticsIndex] ['position'] = $this->StatisticsIndex;
 			$this->StatisticsLog [$this->StatisticsIndex] ['context'] = $bts->MapperObj->getWhereWeAreAt ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['routine'] = $routine;
-			$this->StatisticsLog [$this->StatisticsIndex] ['temps'] = $bts->TimeObj->getMicrotime ();
-			$this->StatisticsLog [$this->StatisticsIndex] ['memoire'] = memory_get_usage ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['time'] = $bts->TimeObj->getMicrotime ();
+			$this->StatisticsLog [$this->StatisticsIndex] ['memory'] = memory_get_usage ();
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_err'] = 0;
 			$this->StatisticsLog [$this->StatisticsIndex] ['SQL_queries'] = 0;
 		}

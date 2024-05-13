@@ -23,7 +23,8 @@ $i18n = array(
 	't1l101'	=>	"Process ID",
 	't1l111'	=>	"Browser",
 	't1l112'	=>	"Process Owner",
-	't1l113'	=>	"Resquested URI",
+	't1l113'	=>	"Resquested URI",	
+	't1l114'	=>	"Database parameters",	
 
 	'tGraphLabelM'	=>	"Memory",
 	'tGraphLabelT'	=>	"Time",

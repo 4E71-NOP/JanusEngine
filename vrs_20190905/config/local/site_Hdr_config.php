@@ -19,9 +19,9 @@
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
-	"type"				=> "mysql",
+	"type"				=> "pgsql",
 	"charset"			=> "utf8mb4",
-	"host"				=> "mysql",
+	"host"				=> "postgres",
 	"port"				=> "",
 	"dal"				=> "PDO",				// MYSQLI , PDOMYSQL
 	"db_user_login"		=> "HydreBDD",

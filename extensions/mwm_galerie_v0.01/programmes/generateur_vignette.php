@@ -43,8 +43,8 @@ function statistique_checkpoint ( $routine ) {
 		$statistiques_[$i]['position'] = $i;
 		$statistiques_[$i]['context'] = $_REQUEST['localisation'];
 		$statistiques_[$i]['routine'] = $routine;
-		$statistiques_[$i]['temps'] = microtime_chrono();
-		$statistiques_[$i]['memoire'] = memory_get_usage();
+		$statistiques_[$i]['time'] = microtime_chrono();
+		$statistiques_[$i]['memory'] = memory_get_usage();
 		$statistiques_[$i]['SQL_err'] = 0;
 		$statistiques_[$i]['SQL_queries'] = 0;
 	}
