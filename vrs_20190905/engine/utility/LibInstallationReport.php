@@ -62,12 +62,11 @@ class LibInstallationReport {
 		$l = $c = 1;
 		foreach ( $style['titles'] as $A ) {
 			$T[$l][$c]['cont'] = $A;
-			// error_log ( __METHOD__ . " : ".$A);
 			$c++;
 		}
 		
 		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
-		." WHERE instreport_section LIKE '".$section."%'"
+		." WHERE instreport_section = '".$section."'"
 		." ORDER BY instreport_name"
 		.";"
 		);
@@ -128,11 +127,11 @@ class LibInstallationReport {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$n=0;
-		$dbquery = $bts->SDDMObj->query("SELECT count(*) as lineCount FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
+		$dbquery = $bts->SDDMObj->query("SELECT COUNT(*) as lc FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
 		." WHERE instreport_section = '".$section."';"
 		);
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lineCount']; }
-		// $bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
+		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lc']; }
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
 		return ($n);
 	}
 
