@@ -242,8 +242,7 @@ class HydrInstall
 			)
 		);
 
-		$DocContent .= "<!-- __________ start of modules __________ -->\r
-			";
+		$DocContent .= "<!-- __________ start of modules __________ -->\r";
 
 		$ClassLoaderObj->provisionClass('ModuleList');
 		$CurrentSetObj->setModuleListObj(new ModuleList());

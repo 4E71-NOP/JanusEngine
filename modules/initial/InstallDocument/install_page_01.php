@@ -431,8 +431,8 @@ class InstallPage01
 		$uriCut = strpos($_SERVER['REQUEST_URI'], "/Hydr/current/install/install_page_01.php");
 		$SrvUri = substr($_SERVER['REQUEST_URI'], 0, $uriCut);
 
-		$GeneratedScriptObj->insertString('JavaScript-Data', "var RequestURI = \"" . $SrvUri . "\"");
-		$GeneratedScriptObj->insertString('JavaScript-Data', "var FormName = \"" . $this->FormName . "\"");
+		$GeneratedScriptObj->insertString('JavaScript-Data', "var RequestURI = \"" . $SrvUri . "\";");
+		$GeneratedScriptObj->insertString('JavaScript-Data', "var FormName = \"" . $this->FormName . "\";");
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[selectedDataBaseType]' , listOfDBSupport['PHP'] );");
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 4, 1);

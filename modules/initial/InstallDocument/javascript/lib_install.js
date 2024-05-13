@@ -191,6 +191,7 @@ class LibInstall {
 				// mainInstallRequest = null;
 				this.xmlhttp.open("POST", InstallURL, true);
 				this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				// this.xmlhttp.timeout = 10;
 				this.xmlhttp.send(installFormData);
 
 				// Monitoring

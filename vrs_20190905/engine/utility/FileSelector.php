@@ -105,7 +105,7 @@ class FileSelector {
 		$Uri = substr ( $_SERVER['REQUEST_URI'] , 0 , $RootUri );
 		
 		$GeneratedScriptObj->insertString('JavaScript-File' , "current/engine/javascript/FileSelector.js");
-		$GeneratedScriptObj->insertString('JavaScript-Data' , "var RequestURI = \"".$Uri. "\"");
+		$GeneratedScriptObj->insertString('JavaScript-Data' , "var RequestURI = \"".$Uri. "\";");
 		$GeneratedScriptObj->insertString('JavaScript-Init' , "var fs = new FileSelector('FileSelectorLines');");
 		
 		unset ( $ThemeDataObj , $GeneratedScriptObj );
