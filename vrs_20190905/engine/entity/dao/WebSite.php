@@ -278,9 +278,10 @@ class WebSite extends Entity
 	public function setInstallationInstance()
 	{
 		$this->WebSite = array(
-			"ws_id" => "1",
-			"ws_title" => "Hydr Installation",
-			"ws_lang" => 38,
+			"ws_id"			=> "1",
+			"ws_title"		=> "Hydr Installation",
+			'fk_lang_id'	=> 38,
+			"ws_lang"		=> 38, // <- deprecated
 		);
 		// 38 = Eng
 	}

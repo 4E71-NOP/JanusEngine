@@ -48,7 +48,7 @@ class CommandConsole
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
+		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');
 		// if ($bts->CMObj->getConfigurationEntry('execution_context') == "installation") {
 		// 	$l = "eng"; // Fallback
 		// }

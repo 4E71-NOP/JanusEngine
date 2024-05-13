@@ -43,7 +43,7 @@ class DocumentData {
 			FROM " . $SqlTableListObj->getSQLTableName('menu') . " mnu, " 
 			. $SqlTableListObj->getSQLTableName('deadline') . " bcl
 			WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
-			AND mnu.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('ws_lang'). "'
+			AND mnu.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('fk_lang_id'). "'
 			AND mnu.fk_deadline_id = bcl.deadline_id
 			AND bcl.deadline_state = '1'
 			AND mnu.menu_type IN ('0','1')

@@ -170,7 +170,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$pv['ws_state2']	= "select_o1_1_" . $dbp['ws_state'];
 	$pv['ws_state']		= $dbp['ws_state'];
 	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('msg_01').$bts->I18nTransObj->getI18nTransEntry($pv['ws_state2'])."<br>\r<br>\r</p>\r";
-	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['ws_lang']);
+	$WebSiteObj->setWebSiteEntry('sw_default_lang', $dbp['fk_lang_id']);
 }
 
 // --------------------------------------------------------------------------------------------

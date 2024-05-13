@@ -31,7 +31,6 @@ class ModuleGlobalReport
 		$Content = "";
 		if ($CurrentSetObj->UserObj->hasPermission('admin_default_read_permission') === true) {
 
-			// 			$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang'), 'lang_639_3');
 			$l = $CurrentSetObj->getDataEntry('language');
 
 			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");

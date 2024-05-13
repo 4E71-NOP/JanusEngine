@@ -64,7 +64,7 @@ class ModuleSelectLanguage {
 					}
 					foreach ( $language_website_support as $A ) {
 						if ( $A == $language_website_[$A]['lang_id'] && $A != $CurrentSetObj->UserObj->getUserEntry('lang') ) {
-							$pv['1'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang');
+							$pv['1'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_lang_id');
 							$pv['1'] = $language_website_[$pv['offset']][$pv['1']];
 							$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 							if ( !file_exists ( "media/theme/". $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')."/".$language_website_[$A]['lang_image'] ) ) { $pv['img_src'] = $baseUrl."media/img/universal/".$language_website_[$A]['lang_image']; }

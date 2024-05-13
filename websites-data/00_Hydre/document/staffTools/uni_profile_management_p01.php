@@ -342,7 +342,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		$langList[$dbpL['lang_id']]['support'] = 1;
 	}
 	if ($PmListTheme['user_lang'] == 0) {
-		$langList[$WebSiteObj->getWebSiteEntry('ws_lang')]['s'] = " selected ";
+		$langList[$WebSiteObj->getWebSiteEntry('fk_lang_id')]['s'] = " selected ";
 	} else {
 		$langList[$PmListTheme['user_lang']]['s'] = " selected ";
 	}

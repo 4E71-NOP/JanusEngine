@@ -236,7 +236,7 @@ class User extends Entity {
 
 		// Set a default language if none is specified.
 		if ( $this->User['user_lang'] == 0 ) {
-			$this->User['user_lang'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang');
+			$this->User['user_lang'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_lang_id');
 		}
 		// Set a default theme if none is specified.
 		if ( $this->User['user_pref_theme'] == 0 ) {
