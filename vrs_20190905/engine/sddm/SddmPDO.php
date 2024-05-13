@@ -47,14 +47,25 @@ class SddmPDO extends SddmCore
 		$bts->LMObj->getMsgLog($bts->CMObj->toStringConfiguration());
 		$SQL_temps_depart = $bts->TimeObj->getMicrotime();
 
-		$dsn = $TabConfig['type'] . ":host=" . $TabConfig['host'] .
-			";dbname=" . $TabConfig['dbprefix'];
+		$dsn = $TabConfig['type'] . ":host=" . $TabConfig['host'];
 
 		switch ($TabConfig['type']) {
 			case "mysql":
-				$dsn .= ";charset=" . $TabConfig['charset'];
-				break;
+				switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
+					case "installation":
+						// Nothing to do
+						break;
+					case "render":
+					default:
+						$dsn .= ";dbname=" . $TabConfig['dbprefix'];
+						break;
+					}
+
+					$dsn .= ";charset=" . $TabConfig['charset'];
+					break;
+
 			case "pgsql":
+				$dsn .= ";dbname=" . $TabConfig['dbprefix'];
 				break;
 		}
 		$options = [
@@ -66,15 +77,7 @@ class SddmPDO extends SddmCore
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " PDO Trying : '" . $dsn . "'"));
 		try {
-			switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
-				case "installation":
-					$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
-					break;
-				case "render":
-				default:
-					$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
-					break;
-			}
+			$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
 
 			switch ($TabConfig['type']) {
 				case "mysql":
@@ -84,12 +87,10 @@ class SddmPDO extends SddmCore
 					break;
 			}
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Connected to '" . $TabConfig['dbprefix'] . "'."));
-	
 		} catch (Exception $e) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " PDO connection failed"));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " *** ERROR *** PDO connection failed"));
 			$this->report['cnxErr'] = 1;
 		}
-
 	}
 
 	public function disconnect_sql()

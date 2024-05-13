@@ -262,11 +262,12 @@ class InstallPage02
 						break;
 					case "mysql":
 					default:
+						// Mysql "CHARACTER SET utf8mb4 COLLATE utf8mb4_bin" so 'é' is not equal to 'e'.
 						$r[] = "DROP DATABASE IF EXISTS " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";	// Kill database
 						$r[] = "FLUSH TABLES;";																				// clean query_cache
 						$r[] = "FLUSH PRIVILEGES;";
 						$r[] = "CREATE DATABASE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') 
-								. " CHARACTER SET utf8mb4;";	// Create DB
+								. " CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;";	// Create DB
 						$r[] = "USE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";						// Use it
 						$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 						$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;

@@ -357,9 +357,9 @@ self::$PreRequisiteTable['add']['permission'] = array(
 
 
 self::$PreRequisiteTable['add']['tag'] = array(
-	"execute" => function (&$a) {
-		$a['params']['name'] = strtolower($a['params']['name']);
-	},
+	// "execute" => function (&$a) {
+	// 	$a['params']['name'] = strtolower($a['params']['name']);
+	// },
 	"convert" => array(),
 	"nextId" => array(
 		array("table" => "tag",	"column" => "tag_id",		"target" => "id"),
