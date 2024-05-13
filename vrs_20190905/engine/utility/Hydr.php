@@ -291,11 +291,10 @@ class Hydr
 			$JavaScriptContent .= "}\r";
 			$JavaScriptContent .= "function WindowOnLoad () {\r";
 			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-OnLoad");
-			$JavaScriptContent .= "
-		}\r
-		window.onresize = WindowOnResize;\r
-		window.onload = WindowOnLoad;\r
-		</script>\r";
+			$JavaScriptContent .= "}\r
+									window.onresize = WindowOnResize;\r
+									window.onload = WindowOnLoad;\r
+									</script>\r";
 
 			$licence = "
 				<!--
@@ -318,6 +317,10 @@ class Hydr
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :\n \$_SESSION:" . $bts->StringFormatObj->print_r_debug($_SESSION) . "\n \$bts->SMObj->getSession():" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession())));
 			// return ($Content . $CssContent . $licence . "</body>\r</html>\r");
 			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
+		} else {
+			$this->WebSiteObj->setWebSiteEntry('banner_offline', 1);
+			include("modules/initial/OfflineMessage/OfflineMessage.php");
+
 		}
 	}
 

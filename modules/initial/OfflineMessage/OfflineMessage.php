@@ -131,7 +131,7 @@ class ModuleOffLineMessage
 				. "' background='../media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bg') . "'>\r\r
 				<div style='
 				width:80%; 
-				height:80%;
+				height:256px;
 				margin-left:auto;
 				margin-right:auto;
 				margin-top:128px;

@@ -64,31 +64,18 @@ class SddmPDO extends SddmCore
 		];
 
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Trying : '" . $dsn . "'"));
-		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
-			case "installation":
-				$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
-				break;
-			case "render":
-			default:
-				$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
-				break;
-		}
-		// List of error code
-		// https://docstore.mik.ua/orelly/java-ent/jenut/ch08_06.htm
-		if ($this->DBInstance->errorCode() != '00000') {
-			$SQLlogEntry = array();
-			$SQLlogEntry['err_no'] = $this->DBInstance->errorCode();
-			$SQLlogEntry['err_no_expr'] = "PHP MysqlI Err : " . $SQLlogEntry['err_no'];
-			$SQLlogEntry['err_msg'] = $this->DBInstance->errorInfo();
-			$SQLlogEntry['signal'] = "ERR";
-			$bts->LMObj->logSQLDetails(array($SQL_temps_depart, $bts->LMObj->getSqlQueryNumber(), $bts->MapperObj->getSqlApplicant(), $bts->SQLlogEntry['signal'], "Connexion", $bts->SQLlogEntry['err_no_expr'], $bts->SQLlogEntry['err_msg'], $bts->TimeObj->getMicrotime()));
-			$this->getError();
-			$msg = "CONNEXION ERROR : " . "err_no" . $this->DBInstance->errorCode() . ", err_msg" . $this->DBInstance->errorInfo();
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $msg));
-			// 			error_log ($msg);
-			$this->report['cnxErr'] = 1;
-		} else {
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " PDO Trying : '" . $dsn . "'"));
+		try {
+			switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
+				case "installation":
+					$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
+					break;
+				case "render":
+				default:
+					$this->DBInstance = new PDO($dsn, $TabConfig['db_user_login'], $TabConfig['db_user_password'], $options);
+					break;
+			}
+
 			switch ($TabConfig['type']) {
 				case "mysql":
 					break;
@@ -97,7 +84,12 @@ class SddmPDO extends SddmCore
 					break;
 			}
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Connected to '" . $TabConfig['dbprefix'] . "'."));
+	
+		} catch (Exception $e) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " PDO connection failed"));
+			$this->report['cnxErr'] = 1;
 		}
+
 	}
 
 	public function disconnect_sql()
