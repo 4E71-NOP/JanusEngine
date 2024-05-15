@@ -15,6 +15,7 @@
 if(session_status() !== PHP_SESSION_ACTIVE || session_status() === PHP_SESSION_NONE ) {
 	if ( session_start() === false ){
 		error_log( "*** WARNING *** session_start() returned false. Something went wrong and it's not a good start.");
+		error_log( "Save path is = " . session_save_path());
 		session_unset();
 		session_destroy();
 		session_write_close();
