@@ -81,8 +81,10 @@ $i18n = array(
 	'DB_tstcnx'					=>	"Tester la connexion à la base de donnée.",
 	'DB_cnxToDBok'				=>	"La connexion à la base a réussi.",
 	'DB_cnxToDBko'				=>	"La connexion à la base a échoué.",
-	'DB_HydrDBAlreadyExistok'	=>	"ATTENTION! Une BDD Hydr est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
-	'DB_HydrDBAlreadyExistko'	=>	"BDD Hydr non trouvée.",
+	'DB_HydrDBAlreadyExistsok'	=>	"ATTENTION! Une BDD Hydr est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
+	'DB_HydrDBAlreadyExistsko'	=>	"BDD Hydr non trouvée.",
+	'DB_HydrUserAlreadyExistsok'	=>	"ATTENTION! L'utilisateur a été trouvé. L'installateur ne fera que <b>modifier ses privilèges</b>.",
+	'DB_HydrUserAlreadyExistsko'	=>	"L'utilisateur n'a pas étyé trouvé. L'installateur le créera.",
 	"DB_installationLockedok"	=>	"Pas de verrou trouvé.",
 	"DB_installationLockedko"	=>	"L'installation est  <b>vérrouillée!</b> Le programme n'installera pas tant que le verrou sera présent.",
 

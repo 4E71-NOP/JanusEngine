@@ -404,7 +404,7 @@ class InstallPage01
 		$SB['type']				= "button";
 		$SB['initialStyle']		= $Block . "_submit_s1_n";
 		$SB['hoverStyle']		= $Block . "_submit_s1_h";
-		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('HydrDBAlreadyExist', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
+		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('HydrDBAlreadyExists', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
 		$SB['message']			= "Test DB";
 		$SB['mode']				= 1;
 		$SB['size'] 			= 128;
@@ -420,12 +420,14 @@ class InstallPage01
 		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='" . $Block;
 
 		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
-			. "<div id='cnxToDBok'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
-			. "<div id='cnxToDBko'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>		" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
-			. "<div id='HydrDBAlreadyExistok'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistok') . "</div>"
-			. "<div id='HydrDBAlreadyExistko'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistko') . "</div>"
-			. "<div id='installationLockedok'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'  class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko') . "</div>"
-			. "<div id='installationLockedko'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>											" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok') . "</div>";
+			. "<div id='cnxToDBTrue'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
+			. "<div id='cnxToDBFalse'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
+			. "<div id='HydrDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistsok') . "</div>"
+			. "<div id='HydrDBAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistsko') . "</div>"
+			. "<div id='HydrUserAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrUserAlreadyExistsok') . "</div>"
+			. "<div id='HydrUserAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrUserAlreadyExistsko') . "</div>"
+			. "<div id='installationLockedTrue'			style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko') . "</div>"
+			. "<div id='installationLockedFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok') . "</div>";
 
 		$SrvUri = $_SERVER['REQUEST_URI'];
 		$uriCut = strpos($_SERVER['REQUEST_URI'], "/Hydr/current/install/install_page_01.php");

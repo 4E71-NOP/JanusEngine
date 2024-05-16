@@ -81,8 +81,10 @@ $i18n = array(
 	'DB_tstcnx'					=>	"Test the database connexion",
 	'DB_cnxToDBok'				=>	"The database connection suceeded.",
 	'DB_cnxToDBko'				=>	"The database connection failed.",
-	'DB_HydrDBAlreadyExistok'	=>	"WARNING! A Hydr database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
-	'DB_HydrDBAlreadyExistko'	=>	"Hydr database not found.",
+	'DB_HydrDBAlreadyExistsok'	=>	"WARNING! A Hydr database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
+	'DB_HydrDBAlreadyExistsko'	=>	"Hydr database not found.",
+	'DB_HydrUserAlreadyExistsok'	=>	"WARNING! The user has been found. The install process <b>will only update privileges</b>.",
+	'DB_HydrUserAlreadyExistsko'	=>	"User not found. The install process will create it.",
 	"DB_installationLockedok"	=>	"No lock found",
 	"DB_installationLockedko"	=>	"The installation is <b>locked!</b> The program will NOT install with these parameters as the lock is there.",
 
