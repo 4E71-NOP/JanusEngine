@@ -142,7 +142,7 @@ class DetectionEnvironment {
 				'inputEncoding':document.inputEncoding,
 				'implementation':document.implementation,
 				'URI':document.documentURI,
-				'domain':document.domain,
+				'domain':location.hostname,
 				'mode':document.documentMode
 			}
 		};

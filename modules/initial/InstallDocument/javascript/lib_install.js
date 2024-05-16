@@ -158,7 +158,7 @@ class LibInstall {
 				// Post
 				var installFormData = "";
 				URLamp = "";
-				var InstallURL = "http://" + document.domain + RequestURI + "/install.php";
+				var InstallURL = "http://" + location.hostname + RequestURI + "/install.php";
 				for (let ptr in this.installFieldList) {
 					// l.Log[this.dbgInstFonction]( "Processing field `document.forms["+FormName+"].elements["+this.installFieldList[ptr]+"].value`");
 					installFormData += URLamp + this.installFieldList[ptr] + "=" + document.forms[FormName].elements[this.installFieldList[ptr]].value;
@@ -196,7 +196,6 @@ class LibInstall {
 
 				// Monitoring
 				mi.monitorToggleDisplay();
-				// this.monitorURL = "http://" + document.domain + RequestURI + "/install_monitor.php"; 
 				this.monitorURL = "http://" + window.location.hostname + RequestURI + "/install_monitor.php";
 
 				URLamp = "?";
