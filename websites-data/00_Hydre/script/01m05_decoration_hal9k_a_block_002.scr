@@ -1,0 +1,23 @@
+add decoration		
+name 'hal9k_block_002'		
+type 'exquise'		
+directory 'Hal9k'		
+		
+ex11 'hal9k_B02_ex11.png'	ex11_x '24'	ex11_y '32'
+ex12 'hal9k_B02_ex12.png'	ex12_x '24'	ex12_y '32'
+ex13 'hal9k_B02_ex13.png'	ex13_x '432'	ex13_y '32'
+ex14 'hal9k_B02_ex14.png'	ex14_x '8'	ex14_y '32'
+ex15 'hal9k_B02_ex15.png'	ex15_x '24'	ex15_y '32'
+ex21 'hal9k_B02_ex21.png'	ex21_x '24'	ex21_y '8'
+ex22 'hal9k_B02_ex22.png'	ex22_x '464'	ex22_y '456'
+ex25 'hal9k_B02_ex25.png'	ex25_x '24'	ex25_y '8'
+ex31 'hal9k_B02_ex31.png'	ex31_x '24'	ex31_y '440'
+ex35 'hal9k_B02_ex35.png'	ex35_x '24'	ex35_y '440'
+ex41 'hal9k_B02_ex41.png'	ex41_x '24'	ex41_y '8'
+ex45 'hal9k_B02_ex45.png'	ex45_x '24'	ex45_y '8'
+ex51 'hal9k_B02_ex51.png'	ex51_x '24'	ex51_y '24'
+ex52 'hal9k_B02_ex52.png'	ex52_x '8'	ex52_y '24'
+ex53 'hal9k_B02_ex53.png'	ex53_x '448'	ex53_y '24'
+ex54 'hal9k_B02_ex54.png'	ex54_x '8'	ex54_y '24'
+ex55 'hal9k_B02_ex55.png'	ex55_x '24'	ex55_y '24'
+;		

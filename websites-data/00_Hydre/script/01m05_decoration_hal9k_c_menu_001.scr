@@ -1,0 +1,30 @@
+add	decoration
+name	'Hal9k_menu_001'
+graphic	'Hal9k_block_001'
+text	'Hal9k_txt_menu'
+type	'menu'
+directory	'Aqua'
+	
+genre	'2'
+animation	'ftgvs'
+	
+div_width	'160'
+	
+	
+	
+target_dock	'Bottom-right'
+dock_decal_x	'0'
+dock_decal_y	'0'
+	
+display_icons	'NO'
+	
+	
+	
+	
+	
+	
+	
+	
+	
+a_line_height	'20'
+;	

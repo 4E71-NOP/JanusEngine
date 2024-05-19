@@ -1,5 +1,5 @@
 <?php
- /*Hydre-licence-debut*/
+/*Hydre-licence-debut*/
 // --------------------------------------------------------------------------------------------
 //
 //	Hydre - Le petit moteur de web
@@ -12,23 +12,27 @@
 // --------------------------------------------------------------------------------------------
 /*Hydre-licence-fin*/
 
-class LayoutProcessor {
+class LayoutProcessor
+{
 	private static $Instance = null;
 	private static $LayoutProcessor = null;
 
-	public function __construct() {}
-	
+	public function __construct()
+	{
+	}
+
 	/**
 	 * Singleton : Will return the instance of this class.
 	 * @return LayoutProcessor
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
-			self::$Instance = new LayoutProcessor ();
+			self::$Instance = new LayoutProcessor();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Returns an array containing the content chunks and the "to be rendered module" information
 	 * 
@@ -38,7 +42,8 @@ class LayoutProcessor {
 	 * We stop before rendering the module in order to seprate things (generally speaking) and to stay closer to the root level. 
 	 * @return array
 	 */
-	public function render(){
+	public function render()
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
@@ -52,46 +57,54 @@ class LayoutProcessor {
 		$fileContentObj = FileContent::getInstance();
 		$layoutFileObj = new LayoutFile();
 
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 
 		$sqlQuery = "
 		SELECT lfi.layout_file_id, lfi.layout_file_filename, lyt.layout_id, lth.fk_theme_id, tw.fk_ws_id 
-		FROM " 
-		. $SqlTableListObj->getSQLTableName ( 'layout_file' ) . " lfi, "
-		. $SqlTableListObj->getSQLTableName ( 'layout' ) . " lyt, "
-		. $SqlTableListObj->getSQLTableName ( 'layout_theme' ) . " lth, "
-		. $SqlTableListObj->getSQLTableName ( 'theme_website' ) . " tw 
-		WHERE lyt.layout_generic_name = '".$CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name')."'
+		FROM "
+			. $SqlTableListObj->getSQLTableName('layout_file') . " lfi, "
+			. $SqlTableListObj->getSQLTableName('layout') . " lyt, "
+			. $SqlTableListObj->getSQLTableName('layout_theme') . " lth, "
+			. $SqlTableListObj->getSQLTableName('theme_website') . " tw 
+		WHERE lyt.layout_generic_name = '" . $CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name') . "'
 		AND lyt.fk_layout_file_id = lfi.layout_file_id 
 		AND lyt.layout_id = lth.fk_layout_id
 		AND lth.fk_theme_id = tw.fk_theme_id
-		AND tw.fk_theme_id = '".$CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id')."'
-		AND tw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
+		AND tw.fk_theme_id = '" . $CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id') . "'
+		AND tw.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;";
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." `". $bts->StringFormatObj->formatToLog($sqlQuery)."`."));
-		$dbquery = $bts->SDDMObj->query ($sqlQuery);
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
-			$layout_id = $dbp ['layout_file_id'];
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
+		$dbquery = $bts->SDDMObj->query($sqlQuery);
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+			$layout_id = $dbp['layout_file_id'];
 		}
 		$layoutFileObj->getDataFromDB($layout_id);
 
 		$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
 		$UserObj = $CurrentSetObj->UserObj;
-		if ( $UserObj->getUserEntry('user_login') != "anonymous") { $finalFileName = str_replace ( ".lyt.html", "_connected.lyt.html", $finalFileName); }
-
-		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $finalFileName;
-		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
-		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
-		if ( $fileContentObj->getFileContent() === false ) { 
-			$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ ." : Layout file not found. Back to default layout filename `".$targetFilneName."`") );
-			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . "default.lyt.html"; 
-			$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
+		if ($UserObj->getUserEntry('user_login') != "anonymous") {
+			$finalFileName = str_replace(".lyt.html", "_connected.lyt.html", $finalFileName);
 		}
+
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . $finalFileName;
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Loading file :'" . $targetFilneName . "'"));
+
+		$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout filename `" . $targetFilneName . "`"));
 		
+		if ($fileContentObj->getFileContent() === false) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Layout file not found. Back to default layout filename `" . $targetFilneName . "`"));
+			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . "default.lyt.html";
+			$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
+		}
+
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		// foreach ( $map as $A ) {
 		// 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : Map[] = ".$A['type']." / `".$A['data']."`") );
 		// }
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+
 		return ($map);
 	}
 
@@ -101,7 +114,8 @@ class LayoutProcessor {
 	 * 
 	 */
 
-	public function installRender($targetFilneName) {
+	public function installRender($targetFilneName)
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
@@ -114,16 +128,12 @@ class LayoutProcessor {
 		$fileUtilObj = FileUtil::getInstance();
 		$layoutParserObj = LayoutParser::getInstance();
 		$fileContentObj = FileContent::getInstance();
-//		$layoutFileObj = new LayoutFile();
-		
-		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : layout filename `".$targetFilneName."`") );
-		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir')."/"._LAYOUTS_DIRECTORY_ . $targetFilneName;
-		$fileContentObj->setFileContent( $fileUtilObj->getFileContent($targetFilneName));
+		//		$layoutFileObj = new LayoutFile();
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout filename `" . $targetFilneName . "`"));
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . $targetFilneName;
+		$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		return ($map);
-
 	}
-
-
 }
-?>
