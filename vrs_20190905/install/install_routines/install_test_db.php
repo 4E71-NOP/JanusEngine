@@ -312,6 +312,9 @@ class InstallTestDb
 				$jsonApiResponse['HydrDBAlreadyExists'] = true;
 				$this->actionsOn['test_2_db_found']($this);
 
+				$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['mysql_find_user']);
+				$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+
 				$dbquery = $db2->query($this->queryCatalog['mysql_find_table']);
 				if ($dbquery->num_rows > 0) {
 					$this->actionsOn['test_3_table_found']($this);
@@ -328,8 +331,6 @@ class InstallTestDb
 					$this->actionsOn['test_3_table_not_found']($this);
 				}
 
-				$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['mysql_find_user']);
-				$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 			} catch (Exception $e) {
 				$this->actionsOn['test_2_db_not_found']($this, $e->getMessage());
 			}
@@ -357,7 +358,10 @@ class InstallTestDb
 			if ($db2 !== false) {
 				$this->actionsOn['test_2_db_found']($this);
 
-				$dbquery = pg_query($db2, $this->queryCatalog['pgsql_find_table']);
+				$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['pgsql_find_user']);
+				$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+	
+					$dbquery = pg_query($db2, $this->queryCatalog['pgsql_find_table']);
 				if (!$dbquery) {
 					$this->actionsOn['test_3_table_not_found']($this);
 				} else {
@@ -375,9 +379,6 @@ class InstallTestDb
 			} else {
 				$this->actionsOn['test_2_db_not_found']($this, "pg_connect returned false.");
 			}
-
-			$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['pgsql_find_user']);
-			$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 
 			if ($dbquery) {
 				while ($dbp = pg_fetch_assoc($dbquery)) {
@@ -409,26 +410,19 @@ class InstallTestDb
 		}
 
 		try {
-			$this->messageLog[] = "Install_test_db - Connexion #1 Trying : '" . $strCnx1 . "," . $this->db_['user_login'] . ",******PWD******'";
+			$this->messageLog[] = "Install_test_db - Connexion #1 Trying : '" . $strCnx1 . " / " . $this->db_['user_login'] . ",******PWD******'";
 			$db = new PDO($strCnx1, $this->db_['user_login'], $this->db_['user_password'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 			// If it fails it raises an Exception.
 			$this->actionsOn['test_1_cnx_Ok']($this);
 
 			try {
 				$db = null; // cleaning
-				$this->messageLog[] = "Install_test_db - Connexion #2 Trying : '" . $strCnx2 . "," . $this->db_['user_login'] . ",******PWD******'";
+				$this->messageLog[] = "Install_test_db - Connexion #2 Trying : '" . $strCnx2 . " / " . $this->db_['user_login'] . ",******PWD******'";
 				$db2 = new PDO($strCnx2, $this->db_['user_login'], $this->db_['user_password'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 				// If it fails it raises an Exception.
 				$this->actionsOn['test_2_db_found']($this);
 
-				$dbquery =  $db2->query($this->queryCatalog['pgsql_find_lock']);
-				while ($dbp = $dbquery->fetch(PDO::FETCH_ASSOC)) {
-					if ($dbp['inst_nbr'] == 1) {
-						$this->actionsOn['test_4_lock_found']($this);
-					} else {
-						$this->actionsOn['test_4_lock_not_found']($this);
-					}
-				}
+
 				switch ($this->db_['type']) {
 					case "mysql":
 						$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['mysql_find_user']);
@@ -440,6 +434,17 @@ class InstallTestDb
 						break;
 				}
 				$this->actionsOn['test_5_results']($this);
+
+
+
+				$dbquery =  $db2->query($this->queryCatalog['pgsql_find_lock']);
+				while ($dbp = $dbquery->fetch(PDO::FETCH_ASSOC)) {
+					if ($dbp['inst_nbr'] == 1) {
+						$this->actionsOn['test_4_lock_found']($this);
+					} else {
+						$this->actionsOn['test_4_lock_not_found']($this);
+					}
+				}
 			} catch (PDOException $e) {
 				$this->actionsOn['test_2_db_not_found']($this, $e->getMessage());
 			}

@@ -14,7 +14,7 @@
 class LibInstall {
 
 	constructor() {
-		this.dbgInstFonction = 0;
+		this.dbgInstFonction = 1;
 
 		this.installFieldList = [
 			"form[consoleLogWarning]",
@@ -180,8 +180,12 @@ class LibInstall {
 					installFormData += URLamp + "directory_list[" + DirectoryNameList[ptr] + "][name]=" + DirectoryNameList[ptr];
 				}
 
+				// Special user discovery
+				installFormData += URLamp + "form[HydrUserAlreadyExists]=" + ((tdb.resultTest.HydrUserAlreadyExists ) ? "on" : "");
+
 				// The install call
 				l.Log[this.dbgInstFonction]('Install URL=: `' + InstallURL + "?" + installFormData + "`");
+
 
 				// let mainInstallRequest = new XMLHttpRequest(); 
 				// mainInstallRequest.open( "POST" , InstallURL , true );

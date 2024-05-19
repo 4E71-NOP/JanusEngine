@@ -608,8 +608,8 @@ class InstallPage01
 
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('PER_UsrRec');
 		$T[$t][$l]['3']['cont'] = "<select name='form[dataBaseUserRecreate]'>\r
-		<option value='no'>" . $bts->I18nTransObj->getI18nTransEntry('dbr_n') . "</option>\r
-		<option value='yes' selected >" . $bts->I18nTransObj->getI18nTransEntry('dbr_o') . "</option>\r
+		<option value='no' selected >" . $bts->I18nTransObj->getI18nTransEntry('dbr_n') . "</option>\r
+		<option value='yes'>" . $bts->I18nTransObj->getI18nTransEntry('dbr_o') . "</option>\r
 		</select>\r
 		";
 		$T[$t][$l]['4']['cont'] = "<span style='font-size:80%;'>" . $bts->I18nTransObj->getI18nTransEntry('PER_UsrRecInf') . "</span>";

@@ -97,7 +97,7 @@ class InstallPage02
 				break;
 		}
 
-		$qs = array_merge($qs, $this->databaseUserRecreate(), $SqlSequence);
+		$qs = array_merge($qs, $this->databaseUserConfiguration(), $SqlSequence);
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "Query list:" . $bts->StringFormatObj->arrayToString($qs)));
 
 		if ($this->processQueryScript($qs) == false) {
@@ -187,19 +187,22 @@ class InstallPage02
 				"websiteUserPassword"		=> $this->form['websiteUserPassword'],
 				"dataBaseHostingProfile"	=> $this->form['dataBaseHostingProfile'],
 				"dataBaseUserRecreate"		=> $this->form['dataBaseUserRecreate'],
+				"HydrUserAlreadyExists"		=> $this->form['HydrUserAlreadyExists'],
 			)
 		);
 
+		// What the configuration file would look like with the posted data.
 		$bts->CMObj->setConfigurationEntry('type',					$this->form['selectedDataBaseType']);
+		$bts->CMObj->setConfigurationEntry('dal',					$this->form['dal']);
 		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
 		$bts->CMObj->setConfigurationEntry('port',					$this->form['port']);
 		$bts->CMObj->setConfigurationEntry('charset',				"utf8mb4");
-		$bts->CMObj->setConfigurationEntry('dal',					$this->form['dal']);
 		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['dataBaseHostingPrefix'] . $this->form['dataBaseAdminUser']);
 		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['dataBaseAdminPassword']);
 		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);
 		$bts->CMObj->setConfigurationEntry('tabprefix',				$this->form['tabprefix']);
 		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
+		$bts->CMObj->setConfigurationEntry('HydrUserAlreadyExists',	$this->form['HydrUserAlreadyExists']);
 
 
 		if ($this->form['dataBaseLogErr'] == "on") {
@@ -238,10 +241,10 @@ class InstallPage02
 						break;	//Nothing to do : PDO
 					case "SQLITE":
 						break;
-					// case "ADODB":
-					// 	break;
-					// case "PEARDB":
-					// case "PEARSQLITE":
+						// case "ADODB":
+						// 	break;
+						// case "PEARDB":
+						// case "PEARSQLITE":
 						// $r[] = "SET SESSION query_cache_type = OFF;";				// forbids cache usage
 						// $r[] = "USE ".$bts->CMObj->getConfigurationEntry('dbprefix').";";
 						// unset ( $A );
@@ -266,8 +269,8 @@ class InstallPage02
 						$r[] = "DROP DATABASE IF EXISTS " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";	// Kill database
 						$r[] = "FLUSH TABLES;";																				// clean query_cache
 						$r[] = "FLUSH PRIVILEGES;";
-						$r[] = "CREATE DATABASE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') 
-								. " CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;";	// Create DB
+						$r[] = "CREATE DATABASE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')
+							. " CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;";	// Create DB
 						$r[] = "USE " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ";";						// Use it
 						$r[] = "SET GLOBAL tmp_table_size = 67108864;";				// 16 777 216;
 						$r[] = "SET GLOBAL max_heap_table_size = 67108864;";		// 16 777 216;
@@ -283,43 +286,84 @@ class InstallPage02
 	}
 
 	/**
-	 * databaseUserRecreate
+	 * databaseUserConfiguration
 	 */
-	private function databaseUserRecreate()
+	private function databaseUserConfiguration()
 	{
 		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$r = array();
-		switch ($bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate')) {
-			case "yes":
-				switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
-					case "mysql":
-					default:
+
+		// Should we recreate the user (default no) ?
+		// user doesn't exist				->	0	-> create
+		// user exists						->	1	-> nothing
+		// Recreate / user doesn't exist 	->	2	-> drop and create
+		// Recreate / user exists 			->	3	-> drop and create
+		$score = 0;
+		if ($bts->CMObj->getConfigurationSubEntry('db', 'HydrUserAlreadyExists') == "on") {
+			$score += 1;
+		}
+		if ($bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate') == "yes") {
+			$score += 2;
+		}
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Soring - "
+		. "HydrUserAlreadyExists=" . $bts->CMObj->getConfigurationSubEntry('db', 'HydrUserAlreadyExists')
+		. "; dataBaseUserRecreate=" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate')
+		. "-> score=" . $score
+		));
+
+		
+
+		switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
+			case "mysql":
+			default:
+				switch ($score) {
+					case 0:
+						$r[] = "CREATE USER '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' IDENTIFIED BY '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
+						$r[] = "CREATE USER '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' IDENTIFIED BY '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
+						break;
+					case 1:
+						break;
+					case 2:
+					case 3:
 						$r[] = "DROP USER IF EXISTS '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%';";
 						$r[] = "DROP USER IF EXISTS '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost';";
 						$r[] = "CREATE USER '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' IDENTIFIED BY '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
 						$r[] = "CREATE USER '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' IDENTIFIED BY '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
-						$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-						$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-						$r[] = "FLUSH TABLES;";										// clean query_cache 
-						$r[] = "FLUSH PRIVILEGES;";
 						break;
-					case "pgsql":
+				}
+
+				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				$r[] = "FLUSH TABLES;";										// clean query_cache 
+				$r[] = "FLUSH PRIVILEGES;";
+				break;
+			case "pgsql":
+				switch ($score) {
+					case 0:
+						$r[] = "CREATE USER \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\" WITH PASSWORD '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
+						break;
+					case 1:
+						break;
+					case 2:
+					case 3:
 						$r[] = "REASSIGN OWNED BY \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\" TO pg_database_owner;"; // trusted role
 						$r[] = "DROP OWNED BY \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						$r[] = "DROP USER IF EXISTS \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						$r[] = "CREATE USER \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\" WITH PASSWORD '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "';";
-						$r[] = "GRANT ALL PRIVILEGES ON DATABASE \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
-						$r[] = "GRANT ALL ON SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
-						$r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 						break;
 				}
 
-				// 	$monSQLn += 8;
+				$r[] = "GRANT ALL PRIVILEGES ON DATABASE \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
+				$r[] = "GRANT ALL ON SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
+				$r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 				break;
 		}
+
+		// 	$monSQLn += 8;
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 		return ($r);
 	}
@@ -335,6 +379,7 @@ class InstallPage02
 		switch ($this->form['operatingMode']) {
 			case 'directCnx':
 				foreach ($qs as $q) {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' =>  __METHOD__ . " Processing query -> '" . $q . "'."));
 					$bts->SDDMObj->query($q);
 				}
 				break;

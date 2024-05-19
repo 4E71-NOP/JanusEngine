@@ -16,11 +16,12 @@
 class LibTestDB {
 
 	constructor() {
-		this.dbgTstDb = 1;
+		this.dbgTstDb = 0;
 		this.resultTest = {
 			'cnxToDB': false,
 			'HydrDBAlreadyExists': false,
 			'installationLocked': false,
+			'HydrUserAlreadyExists':false,
 		};
 
 		this.testDbFieldList = [
