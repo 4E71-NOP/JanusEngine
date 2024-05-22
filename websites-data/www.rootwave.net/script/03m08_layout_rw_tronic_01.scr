@@ -1,14 +1,15 @@
-add layout_file name	'rw_tronic_default_layout'		generic_name	'default_layout'		description	'rw_default_layout'		filename	'rw_tronic_default.lyt.html';
-add layout_file name	'rw_tronic_user_profile'		generic_name	'user_profile'			description	'rw_user_profile'		filename	'rw_tronic_default.lyt.html';
-add layout_file name	'rw_tronic_script_exec'			generic_name	'script_execution'		description	'rw_script_exec'		filename	'rw_tronic_default.lyt.html';
-add layout_file name	'rw_tronic_decoration_mgmt'		generic_name	'decoration_management'	description	'rw_decoration_mgmt'	filename	'rw_tronic_default.lyt.html';
+add layout_file name 'rw_tronic_default'  generic_name 'default'  description 'rw_default' filename 'rw_tronic_default.lyt.html';
+add layout name 'rw_tronic_01_default' title 'Présentation par défaut'   generic_name 'default'  description 'rw_tronic default'   layout_file 'rw_tronic_default';
+assign layout name 'rw_tronic_01_default' to_theme 'rw_tronic_01' default YES;
 
-add layout name	'rw_tronic_01_default_layout'	title 'Présentation par défaut'			generic_name	'default_layout'		description	'rw_tronic Default layout'			layout_file	'rw_tronic_default_layout';
-add layout name	'rw_tronic_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'rw_tronic User profile'			layout_file	'rw_tronic_user_profile';
-add layout name	'rw_tronic_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'rw_tronic Script execution'		layout_file	'rw_tronic_script_exec';
-add layout name	'rw_tronic_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'rw_tronic Decoration management'	layout_file	'rw_tronic_decoration_mgmt';
+add layout_file name 'rw_tronic_user_profile'  generic_name 'user_profile'  description 'rw_user_profile' filename 'rw_tronic_user_profile.lyt.html';
+add layout name 'rw_tronic_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'rw_tronic user_profile'   layout_file 'rw_tronic_user_profile';
+assign layout name 'rw_tronic_01_user_profile' to_theme 'rw_tronic_01';
 
-assign layout name	'rw_tronic_01_default_layout'	to_theme	'rw_tronic_01'	default YES;
-assign layout name	'rw_tronic_01_user_profile'		to_theme	'rw_tronic_01';
-assign layout name	'rw_tronic_01_script_exec'		to_theme	'rw_tronic_01';
-assign layout name	'rw_tronic_01_decoration_mgmt'	to_theme	'rw_tronic_01';
+add layout_file name 'rw_tronic_script'  generic_name 'script'  description 'rw_script' filename 'rw_tronic_script.lyt.html';
+add layout name 'rw_tronic_01_script' title 'Exécution de script'   generic_name 'script'  description 'rw_tronic script'   layout_file 'rw_tronic_script';
+assign layout name 'rw_tronic_01_script' to_theme 'rw_tronic_01';
+
+add layout_file name 'rw_tronic_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'rw_tronic_decoration.lyt.html';
+add layout name 'rw_tronic_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_tronic decoration'   layout_file 'rw_tronic_decoration';
+assign layout name 'rw_tronic_01_decoration' to_theme 'rw_tronic_01';
