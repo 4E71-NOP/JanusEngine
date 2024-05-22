@@ -1,6 +1,0 @@
-update website name "Hydr"	theme "hydr_hal9k_01";
-
-assign layout name "hydr_hal9k_01_default_layout"	    	to_theme "hydr_hal9k_01"	default YES;
-assign layout name "hydr_hal9k_01_gestion_profil"			to_theme "hydr_hal9k_01";
-assign layout name "hydr_hal9k_01_test_script"			to_theme "hydr_hal9k_01";
-assign layout name "hydr_hal9k_01_gestion_decoration"		to_theme "hydr_hal9k_01";
