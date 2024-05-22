@@ -25,7 +25,7 @@ class Article extends Entity {
 		"arti_subtitle"				=> "",
 		"arti_page"					=> 1,
 		
-		"layout_generic_name"		=> "default_layout",
+		"layout_generic_name"		=> "default",
 		"config_id"					=> "",
 		
 		"arti_creator_id"			=> "",

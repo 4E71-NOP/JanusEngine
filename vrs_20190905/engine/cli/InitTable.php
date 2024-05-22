@@ -18,7 +18,7 @@ self::$InitTable['article'] = function (&$a) {
 		"subtitle" => "",
 		"page" => "1",
 
-		"layout_generic_name" => "default_layout",
+		"layout_generic_name" => "default",
 		"config" => "par_defaut",
 		"config_id" => 0,
 
@@ -854,7 +854,7 @@ self::$InitTable['layout'] = function (&$a) {
 		"title"				=> "New Layout",
 		"generic_name"		=> "New Layout",
 		"desc"				=> "",
-		"layout_file"		=> "hydr_default_layout",
+		"layout_file"		=> "default.lyt.html",
 		"to_theme"			=> "",
 		"default"			=> "NO",
 	);
