@@ -6,9 +6,9 @@ add layout_file name 'rw_nebula_user_profile'  generic_name 'user_profile'  desc
 add layout name 'rw_nebula_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'rw_nebula user_profile'   layout_file 'rw_nebula_user_profile';
 assign layout name 'rw_nebula_01_user_profile' to_theme 'rw_nebula_01';
 
-add layout_file name 'rw_nebula_script'  generic_name 'script'  description 'rw_script' filename 'rw_nebula_script.lyt.html';
-add layout name 'rw_nebula_01_script' title 'Exécution de script'   generic_name 'script'  description 'rw_nebula script'   layout_file 'rw_nebula_script';
-assign layout name 'rw_nebula_01_script' to_theme 'rw_nebula_01';
+add layout_file name 'rw_nebula_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'rw_nebula_script_execution.lyt.html';
+add layout name 'rw_nebula_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_nebula script_execution'   layout_file 'rw_nebula_script_execution';
+assign layout name 'rw_nebula_01_script_execution' to_theme 'rw_nebula_01';
 
 add layout_file name 'rw_nebula_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'rw_nebula_decoration.lyt.html';
 add layout name 'rw_nebula_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_nebula decoration'   layout_file 'rw_nebula_decoration';

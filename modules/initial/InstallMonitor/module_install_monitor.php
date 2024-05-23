@@ -21,12 +21,7 @@ class InstallMonitor {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		
-
-		$localisation = " / InstallMonitor";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("InstallMonitor");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("InstallMonitor");
+		$bts->mapSegmentLocation(__METHOD__, "InstallMonitor");
 		
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
@@ -115,6 +110,8 @@ class InstallMonitor {
 				$localisation,
 			);
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return $Content;
 	}
 }

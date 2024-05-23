@@ -28,11 +28,7 @@
 /*Hydre-IDE-end*/
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_critical_information_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_critical_information_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_critical_information_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_critical_information_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -67,6 +63,8 @@ style='background-color:#FF800080; border-radius:0.5cm; padding:0.5cm'
 <br>\r
 <hr>\r
 ";
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

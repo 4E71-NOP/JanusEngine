@@ -29,11 +29,7 @@
 
 /*Hydr-Content-Begin*/
 
-$localisation = " / uni_download_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_download_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_download_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_download_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -89,6 +85,8 @@ $T['ContentCfg']['tabs'] = array(
 
 $T['ContentCfg']['tabs']['1']['NbrOfLines'] = $i;		$T['ContentCfg']['tabs']['1']['NbrOfCells'] = 2;	$T['ContentCfg']['tabs']['1']['TableCaptionPos'] = 1;
 $Content .= $bts->RenderTablesObj->render($infos, $T);
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

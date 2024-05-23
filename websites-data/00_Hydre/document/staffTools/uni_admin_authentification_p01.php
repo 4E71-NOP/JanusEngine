@@ -32,12 +32,7 @@
 $bts->SMObj->setSessionEntry('user_login', 'anonymous');
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_admin_authentification_p01";
-
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_admin_authentification_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_admin_authentification_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_admin_authentification_p01");
 
 switch ($l) {
 	case "fra":
@@ -59,6 +54,8 @@ if ( !class_exists('ModuleAuthentification')) {
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite');
 $obj = new ModuleAuthentification();
 $Content .= $obj->render($infos);
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

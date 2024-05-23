@@ -35,11 +35,8 @@ $bts->RequestDataObj->setRequestDataEntry('publicProfil',
 		),
 );
 /*Hydr-Content-Begin*/
-$localisation = " / uni_see_public_profile_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_see_public_profile_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_see_public_profile_p01.php");
+
+$bts->mapSegmentLocation(__METHOD__, "uni_see_public_profile_p01");
 
 switch ($l) {
 	case "fra":
@@ -107,8 +104,7 @@ $config = array(
 );
 $Content .= $bts->RenderTablesObj->render($config, $T);
 
-
-
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

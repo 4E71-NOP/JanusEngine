@@ -27,12 +27,7 @@ class ModuleDocumentDisplay
 
 		$Content = "";
 		if ($CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true) {
-
-			$localisation = " / ModuleDocument";
-			$bts->MapperObj->AddAnotherLevel($localisation);
-			$bts->LMObj->logCheckpoint("ModuleDocument");
-			$bts->MapperObj->RemoveThisLevel($localisation);
-			$bts->MapperObj->setSqlApplicant("ModuleDocument");
+			$bts->mapSegmentLocation(__METHOD__, "ModuleDocumentDisplay");
 
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('AdminFormTool');
@@ -440,10 +435,10 @@ class ModuleDocumentDisplay
 				}
 
 				$Content .= "<div id='document_infos' "
-				. " class='" . $Block . _CLASS_TXT_FADE_ . "'"
-				. " style='font-size:" . (floor($ThemeDataObj->getThemeBlockEntry($infos['block'] . "T", "txt_font_size") * 0.75)) . "px;"
-				. " width:100%;"
-				. " position:absolute; bottom:0;'
+					. " class='" . $Block . _CLASS_TXT_FADE_ . "'"
+					. " style='font-size:" . (floor($ThemeDataObj->getThemeBlockEntry($infos['block'] . "T", "txt_font_size") * 0.75)) . "px;"
+					. " width:100%;"
+					. " position:absolute; bottom:0;'
 				>\r
 				<hr>\r
 				";
@@ -469,6 +464,8 @@ class ModuleDocumentDisplay
 
 			// --------------------------------------------------------------------------------------------
 			//	All processing finished. We ship it.
+
+			$bts->segmentEnding(__METHOD__);
 		}
 		if ($WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
 			unset(

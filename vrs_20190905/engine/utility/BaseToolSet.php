@@ -130,4 +130,27 @@ class BaseToolSet
 		$DALFacade->createDALInstance();			//It connects too.
 		$this->SDDMObj					= $DALFacade->getDALInstance();
 	}
+
+	/**
+	 * Make all that is needed fort location and logs in one single method.
+	 */
+	public function mapSegmentLocation($method, $location)
+	{
+		$this->MapperObj->AddAnotherLevel(" / " . $location);
+		$this->LMObj->logCheckpoint($location);
+		$this->MapperObj->RemoveThisLevel(" / " . $location);
+		$this->MapperObj->setSqlApplicant($location);
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "| " . $method . " started"));
+	}
+
+	/**
+	 * 
+	 */
+	public function segmentEnding ($method) {
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "| " . $method . " ended --------------------"));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
+	}
+
+
 }

@@ -23,12 +23,7 @@ class ModuleAdministration {
 		
 		$Content = "";
 		if ( $CurrentSetObj->UserObj->hasPermission('admin_default_write_permission') === true ) {
-
-			$localisation = " / ModuleAdministration";
-			$bts->MapperObj->AddAnotherLevel($localisation );
-			$bts->LMObj->logCheckpoint("ModuleAdministration");
-			$bts->MapperObj->RemoveThisLevel($localisation );
-			$bts->MapperObj->setSqlApplicant("ModuleAdministration");
+			$bts->mapSegmentLocation(__METHOD__, "ModuleAdministration");
 			
 			$Content = "";
 			$dbquery = $bts->SDDMObj->query ("
@@ -68,11 +63,13 @@ class ModuleAdministration {
 					"level"			=> 0,
 					"arti_request"	=> $CurrentSetObj->getDataSubEntry('article', 'arti_ref'),
 				);
-	// 			$Content .= "<!--\r".$StringFormatObj->print_r_debug($infos)."\r-->\r\r";
+				// $Content .= "<!--\r".$StringFormatObj->print_r_debug($infos)."\r-->\r\r";
 				$Content .= $this->renderAdminMenu($infos);
 				$Content .= "</ul>\r";
 			}
-		}
+
+			$bts->segmentEnding(__METHOD__);
+			}
 		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
 					$dbquery ,

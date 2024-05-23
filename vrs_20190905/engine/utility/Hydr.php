@@ -237,11 +237,8 @@ class Hydr
 			// Module 
 			//
 			//
-			$localisation = " / Modules";
-			$bts->MapperObj->AddAnotherLevel($localisation);
-			$bts->LMObj->logCheckpoint("Module Processing");
-			$bts->MapperObj->RemoveThisLevel($localisation);
-			$bts->MapperObj->setSqlApplicant("Module Processing");
+
+			$bts->mapSegmentLocation(__METHOD__, "Modules");
 
 			$ClassLoaderObj->provisionClass('InteractiveElements'); // Responsible for rendering buttons
 
@@ -320,7 +317,6 @@ class Hydr
 		} else {
 			$this->WebSiteObj->setWebSiteEntry('banner_offline', 1);
 			include("modules/initial/OfflineMessage/OfflineMessage.php");
-
 		}
 	}
 
@@ -333,11 +329,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
-		$localisation = " / prepareAuthProcess";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("prepareAuthProcess");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("prepareAuthProcess");
+		$bts->mapSegmentLocation(__METHOD__, "prepareAuthProcess");
 
 		// case matrix  
 		//	0	Reset session (anonymous user)
@@ -408,6 +400,8 @@ class Hydr
 				break;
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState() . ", \$this->authentificationMode=" . $this->authentificationMode . "; \$this->authentificationAction=" . $this->authentificationAction));
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -418,16 +412,14 @@ class Hydr
 	{
 		$bts = BaseToolSet::getInstance();
 
-		$localisation = " loadConfigFile";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("loadConfigFile");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("loadConfigFile");
+		$bts->mapSegmentLocation(__METHOD__, "loadConfigFile");
 
 		// A this point we have a ws in the CurrentSet so we don't use the URI parameter anymore.
 		$bts->CMObj->LoadConfigFile();
 		$bts->CMObj->setConfigurationEntry('execution_context', "render");
 		$bts->LMObj->setDebugLogEcho(0);
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -440,12 +432,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " initializeSDDM";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeSDDM");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeSDDM");
-
+		$bts->mapSegmentLocation(__METHOD__, "initializeSDDM");
 
 		$ClassLoaderObj->provisionClass('SqlTableList');
 		$CurrentSetObj->setSqlTableListObj(SqlTableList::getInstance());
@@ -476,6 +463,8 @@ class Hydr
 			));
 			return (false);
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -488,11 +477,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " initializeWebsite";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeWebsite");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeWebsite");
+		$bts->mapSegmentLocation(__METHOD__, "initializeWebsite");
 
 		$ClassLoaderObj->provisionClass('WebSite');
 		$CurrentSetObj->setWebSiteObj(new WebSite());
@@ -508,6 +493,8 @@ class Hydr
 				break;
 		}
 		$bts->CMObj->setLangSupport(); // will set support=1 in the languagelist if website supports the language.
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -522,11 +509,7 @@ class Hydr
 		/* TODO virer la variable locale */
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-		$localisation = " authentificationCheck";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("authentificationCheck");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("authentificationCheck");
+		$bts->mapSegmentLocation(__METHOD__, "authentificationCheck");
 
 		$ClassLoaderObj->provisionClass('AuthenticateUser');
 		$ClassLoaderObj->provisionClass('User');
@@ -583,6 +566,8 @@ class Hydr
 			$UserObj->getDataFromDBUsingLogin("anonymous", $WebSiteObj);
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : checkUserCredential end"));
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -598,11 +583,7 @@ class Hydr
 		$UserObj = $CurrentSetObj->UserObj;
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-		$localisation = " languageSelection";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("languageSelection");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("languageSelection");
+		$bts->mapSegmentLocation(__METHOD__, "languageSelection");
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection start"));
 		$scoreLang = 0;
@@ -653,6 +634,7 @@ class Hydr
 		$I18nObj = I18nTrans::getInstance();
 		$I18nObj->getI18nTransFromDB();
 
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -667,11 +649,7 @@ class Hydr
 		$UserObj = $CurrentSetObj->UserObj;
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-		$localisation = " formManagement";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("formManagement");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("formManagement");
+		$bts->mapSegmentLocation(__METHOD__, "formManagement");
 
 		$bts->LMObj->saveVectorSystemLogLevel();
 		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
@@ -754,6 +732,8 @@ class Hydr
 				$WebSiteObj->getDataFromDB($id);
 				break;
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -768,11 +748,7 @@ class Hydr
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$UserObj = $CurrentSetObj->UserObj;
 
-		$localisation = " initializeArticle";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeArticle");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeArticle");
+		$bts->mapSegmentLocation(__METHOD__, "initializeArticle");
 
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
@@ -854,6 +830,8 @@ class Hydr
 		$ClassLoaderObj->provisionClass('Article');
 		$CurrentSetObj->setArticleObj(new Article());
 		$CurrentSetObj->ArticleObj->getDataFromDB($CurrentSetObj->getDataSubEntry('article', 'arti_id'));
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -867,11 +845,7 @@ class Hydr
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-		$localisation = " initializeJavascript";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeJavascript");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeJavascript");
+		$bts->mapSegmentLocation(__METHOD__, "initializeJavascript");
 
 		$ClassLoaderObj->provisionClass('GeneratedScript');
 		$CurrentSetObj->setGeneratedScriptObj(new GeneratedScript());
@@ -886,6 +860,8 @@ class Hydr
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	document.title = '" . $WebSiteObj->getWebSiteEntry('ws_title') . " - " . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "';");
 
 		$this->GeneratedScript->insertString('JavaScript-OnResize', "\telm.UpdateWindowSize ('');");
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -898,11 +874,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " initializeTheme";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeTheme");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeTheme");
+		$bts->mapSegmentLocation(__METHOD__, "initializeTheme");
 
 		// Those are ENTITIES(DAO), they're not UTILITY classes.
 		$ClassLoaderObj->provisionClass('Deco10_Menu');
@@ -928,6 +900,8 @@ class Hydr
 		$this->ThemeDataObj->setThemeName($ThemeDescriptorObj->getCssPrefix());
 		$this->ThemeDataObj->setDecorationListFromDB();
 		$this->ThemeDataObj->renderBlockData();
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -940,11 +914,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " initializeLayout";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("initializeLayout");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("initializeLayout");
+		$bts->mapSegmentLocation(__METHOD__, "initializeLayout");
 
 		$ClassLoaderObj->provisionClass('ModuleList');
 		$CurrentSetObj->setModuleListObj(new ModuleList());
@@ -987,6 +957,8 @@ class Hydr
 				}
 			}
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -999,14 +971,12 @@ class Hydr
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('RenderStylesheet');
 
-		$localisation = " renderStylsheet";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("renderStylsheet");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("renderStylsheet");
+		$bts->mapSegmentLocation(__METHOD__, "renderStylsheet");
 
 		$RenderStylesheetObj = RenderStylesheet::getInstance();
 		$this->stylesheet = $RenderStylesheetObj->render("mt_", $this->ThemeDataObj);
+
+		$bts->segmentEnding(__METHOD__);
 		return (true);
 	}
 
@@ -1019,11 +989,8 @@ class Hydr
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " buildDocument";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("buildDocument");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("buildDocument");
+
+		$bts->mapSegmentLocation(__METHOD__, "buildDocument");
 
 		$randomNumber = sprintf('%03d', random_int(1, 2));
 		$Content = "<!DOCTYPE html>\r<html>";
@@ -1098,6 +1065,8 @@ class Hydr
 		foreach ($this->ContentFragments as &$A) {
 			$Content .= $A['content'];
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return ($Content);
 	}
 
@@ -1111,11 +1080,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " buidAdminDashboard";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("buidAdminDashboard");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("buidAdminDashboard");
+		$bts->mapSegmentLocation(__METHOD__, "buidAdminDashboard");
 
 		$bts->LMObj->logCheckpoint("index_before_stat");
 		$bts->MapperObj->RemoveThisLevel("/ idx");
@@ -1125,6 +1090,8 @@ class Hydr
 		// --------------------------------------------------------------------------------------------
 		$ClassLoaderObj->provisionClass('RenderAdmDashboard');
 		$RenderAdmDashboardObj = RenderAdmDashboard::getInstance();
+
+		$bts->segmentEnding(__METHOD__);
 		return ($RenderAdmDashboardObj->render());
 	}
 
@@ -1138,11 +1105,7 @@ class Hydr
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$localisation = " buildFileSelector";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("buildFileSelector");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("buildFileSelector");
+		$bts->mapSegmentLocation(__METHOD__, "buildFileSelector");
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : About to process file selector"));
 
@@ -1165,6 +1128,8 @@ class Hydr
 			$str = substr($str, 0, -2) . "\r};\r";
 			$this->GeneratedScript->insertString('JavaScript-Data', $str);
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return ($Content);
 	}
 }

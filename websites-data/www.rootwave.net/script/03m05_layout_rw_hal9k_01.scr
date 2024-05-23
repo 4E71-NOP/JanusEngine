@@ -6,9 +6,9 @@ add layout_file name 'rw_hal9k_user_profile'  generic_name 'user_profile'  descr
 add layout name 'rw_hal9k_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'rw_hal9k user_profile'   layout_file 'rw_hal9k_user_profile';
 assign layout name 'rw_hal9k_01_user_profile' to_theme 'rw_hal9k_01';
 
-add layout_file name 'rw_hal9k_script'  generic_name 'script'  description 'rw_script' filename 'rw_hal9k_script.lyt.html';
-add layout name 'rw_hal9k_01_script' title 'Exécution de script'   generic_name 'script'  description 'rw_hal9k script'   layout_file 'rw_hal9k_script';
-assign layout name 'rw_hal9k_01_script' to_theme 'rw_hal9k_01';
+add layout_file name 'rw_hal9k_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'rw_hal9k_script_execution.lyt.html';
+add layout name 'rw_hal9k_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_hal9k script_execution'   layout_file 'rw_hal9k_script_execution';
+assign layout name 'rw_hal9k_01_script_execution' to_theme 'rw_hal9k_01';
 
 add layout_file name 'rw_hal9k_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'rw_hal9k_decoration.lyt.html';
 add layout name 'rw_hal9k_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_hal9k decoration'   layout_file 'rw_hal9k_decoration';

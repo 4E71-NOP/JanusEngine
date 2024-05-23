@@ -50,11 +50,7 @@ $bts->CMObj->setConfigurationEntry('colorSelector', 'system');		//"or Hydr"
 
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_theme_management_p02";
-$bts->MapperObj->AddAnotherLevel($localisation);
-$bts->LMObj->logCheckpoint("uni_theme_management_p02.php");
-$bts->MapperObj->RemoveThisLevel($localisation);
-$bts->MapperObj->setSqlApplicant("uni_theme_management_p02.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_theme_management_p02");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -623,5 +619,5 @@ $TemplateObj = Template::getInstance();
 $infos['formName'] = "themeForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
-
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/

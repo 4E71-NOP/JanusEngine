@@ -28,11 +28,7 @@
 /*Hydre-IDE-end*/
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_website_list_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_website_list_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_website_list_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_website_list_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -83,5 +79,6 @@ $T['ContentCfg']['tabs'] = array(
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 ?>

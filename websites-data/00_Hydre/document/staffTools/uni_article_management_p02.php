@@ -60,11 +60,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_article_management_p02";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_article_management_p02.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_article_management_p02.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_article_management_p02");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -286,6 +282,8 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $infos['formName'] = "articleForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 $bts->LMObj->restoreVectorSystemLogLevel();

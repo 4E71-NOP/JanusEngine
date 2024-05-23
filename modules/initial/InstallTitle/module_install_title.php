@@ -21,11 +21,7 @@ class InstallTitle {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " / InstallTitle";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("InstallTitle");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("InstallTitle");
+		$bts->mapSegmentLocation(__METHOD__, "InstallTitle");
 		
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
@@ -38,6 +34,8 @@ class InstallTitle {
 				$localisation,
 			);
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		return $Content;
 	}
 }

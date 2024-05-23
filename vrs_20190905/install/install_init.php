@@ -89,11 +89,7 @@ class HydrInstall
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->setStoreStatisticsStateOn();
 		
-		$localisation = " / inst";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("Install Init");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("Install Init");
+		$bts->mapSegmentLocation(__METHOD__, "inst");
 		
 		// --------------------------------------------------------------------------------------------
 		// Install options
@@ -145,11 +141,8 @@ class HydrInstall
 		// JavaScript Object
 		//
 		//
-		$localisation = "Prepare JavaScript Object";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("Prepare JavaScript Object");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("Prepare JavaScript Object");
+
+		$bts->mapSegmentLocation(__METHOD__, "Prepare JavaScript Object");
 
 		$ClassLoaderObj->provisionClass('GeneratedScript');
 		// include ("engine/entity/others/GeneratedScript.php");
@@ -207,11 +200,7 @@ class HydrInstall
 		//
 		//
 		// --------------------------------------------------------------------------------------------
-		$localisation = "Content";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("Content");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("Content");
+		$bts->mapSegmentLocation(__METHOD__, "Content");
 
 		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0) {
 			$langComp = array(

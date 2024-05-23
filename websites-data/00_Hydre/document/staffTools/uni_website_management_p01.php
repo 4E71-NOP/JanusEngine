@@ -42,11 +42,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_website_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_website_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_website_management_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_website_management_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -437,5 +433,6 @@ $Content .= "
 </form>\r
 ";
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 ?>

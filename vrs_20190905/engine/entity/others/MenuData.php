@@ -29,11 +29,7 @@ class MenuData {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " / MenuData";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("MenuData");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("MenuData");
+		$bts->mapSegmentLocation(__METHOD__, "MenuData");
 		
 		$query = "
 		SELECT mnu.* FROM "
@@ -73,6 +69,9 @@ class MenuData {
 			$this->buildTree($this->MenuDataTree);
 			$this->MenuDataTree['theme_name'] = $CurrentSetObj->ThemeDataObj->getThemeName();
 		}
+
+
+		$bts->segmentEnding(__METHOD__);
 	}
 
 	/**

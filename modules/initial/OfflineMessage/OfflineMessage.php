@@ -30,11 +30,7 @@ class ModuleOffLineMessage
 		$ClassLoaderObj->provisionClass('GeneratedScript');
 		$ClassLoaderObj->provisionClass('RenderDeco40Elegance');
 
-		$localisation = " / ModuleOffLineMessage";
-		$bts->MapperObj->AddAnotherLevel($localisation);
-		$bts->LMObj->logCheckpoint("ModuleOffLineMessage");
-		$bts->MapperObj->RemoveThisLevel($localisation);
-		$bts->MapperObj->setSqlApplicant("ModuleOffLineMessage");
+		$bts->mapSegmentLocation(__METHOD__, "ModuleOffLineMessage");
 
 		$l = "eng";
 		// --------------------------------------------------------------------------------------------
@@ -185,6 +181,8 @@ class ModuleOffLineMessage
 		} else {
 			echo ("Catastrophic failure! Could not read css_admin_install.php. Sorry.");
 		}
+
+		$bts->segmentEnding(__METHOD__);
 		exit();
 	}
 }

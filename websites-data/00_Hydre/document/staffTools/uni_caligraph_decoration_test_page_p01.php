@@ -43,12 +43,7 @@
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-
-$localisation = " / uni_script_execution_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_script_execution_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_script_execution_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_script_execution_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -185,6 +180,8 @@ $SB["id"]				= "Test03";
 $SB["initialStyle"]		= $Block."_submit_s3_n";
 $SB["hoverStyle"]		= $Block."_submit_s3_h";
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB) . "<br>\r<br>\r";
+
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 
 ?>

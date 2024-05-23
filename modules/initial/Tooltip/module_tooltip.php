@@ -23,11 +23,7 @@ class ModuleTooltip {
 		
 		$Content = "";
 		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
-			$localisation = " / ModuleTooltip";
-			$bts->MapperObj->AddAnotherLevel($localisation );
-			$bts->LMObj->logCheckpoint("ModuleTooltip");
-			$bts->MapperObj->RemoveThisLevel($localisation );
-			$bts->MapperObj->setSqlApplicant("ModuleTooltip");
+			$bts->mapSegmentLocation(__METHOD__, "ModuleTooltip");
 			
 			$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
 			$cdx = $cdy = 0;
@@ -39,7 +35,9 @@ class ModuleTooltip {
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'm.mouseFunctionList.ToolTip = { "obj": t, "method":"MouseEvent"};');
 			$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tt.InitToolTip('".$infos['module']['module_container_name']."' , '".$infos['module']['module_name']."_ex22' , '".$cdx."' , '".$cdy."' );");
 			$GeneratedScriptObj->AddObjectEntry ('TooltipConfig', "'default' : { 'State':1, 'X':'".$cdx."', 'Y':'".$cdy."' }");
-		}
+
+			$bts->segmentEnding(__METHOD__);
+			}
 
 		// Cleaning up
 	

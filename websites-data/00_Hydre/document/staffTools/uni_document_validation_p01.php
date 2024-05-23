@@ -33,11 +33,7 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-$localisation = " / uni_document_validation_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_document_validation_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_document_validation_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_document_validation_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -169,5 +165,6 @@ $Content .= "<br>\r&nbsp;
 <br>\r
 ";
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 ?>

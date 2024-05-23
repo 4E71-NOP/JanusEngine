@@ -21,11 +21,7 @@ class ModuleLogo {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " / ModuleLogo";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("ModuleLogo");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("ModuleLogo");
+		$bts->mapSegmentLocation(__METHOD__, "ModuleLogo");
 		
 		$l = $CurrentSetObj->getDataEntry('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ) );
@@ -56,6 +52,7 @@ class ModuleLogo {
 				);
 		}
 		
+		$bts->segmentEnding(__METHOD__);
 		return $Content;
 		
 	}

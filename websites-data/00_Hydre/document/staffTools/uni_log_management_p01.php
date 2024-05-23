@@ -43,11 +43,7 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-$localisation = " / uni_log_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation);
-$bts->LMObj->logCheckpoint("uni_log_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation);
-$bts->MapperObj->setSqlApplicant("uni_log_management_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_log_management_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -411,5 +407,6 @@ $Content .= "
 // $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', "var TooltipByPass = { logMgmt : { 'State':1, 'X':196, 'Y':256 }};");
 $CurrentSetObj->GeneratedScriptObj->AddObjectEntry('TooltipConfig', "'logMgmt' : { 'State':1, 'X':'196', 'Y':'256' }");
 
-
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
+?>

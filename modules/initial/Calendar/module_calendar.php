@@ -27,12 +27,7 @@ class ModuleCalendar {
 		
 		$Content = "";
 		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
-			$localisation = " / ModuleCalendar";
-			$bts->MapperObj->AddAnotherLevel($localisation );
-			$bts->LMObj->logCheckpoint("ModuleCalendar");
-			$bts->MapperObj->RemoveThisLevel($localisation );
-			$bts->MapperObj->setSqlApplicant("ModuleCalendar");
-			
+			$bts->mapSegmentLocation(__METHOD__, "ModuleCalendar");
 	
 			$tabDay = array(
 				1 => "monday",
@@ -85,7 +80,9 @@ class ModuleCalendar {
 			</tr>\r
 			</table>\r
 			";
-		}
+
+			$bts->segmentEnding(__METHOD__);
+			}
 		
 		if ( $WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (

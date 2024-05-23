@@ -42,12 +42,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-
-$localisation = " / uni_script_execution_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_script_execution_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_script_execution_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_script_execution_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -180,6 +175,7 @@ $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+-----------
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $logTitle . str_repeat(" ", (82 - (strlen($logTitle ?? '') + 3))) . "|"));
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 
 ?>

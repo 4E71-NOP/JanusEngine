@@ -31,11 +31,7 @@ $bts->RequestDataObj->setRequestData('menu_parent', 39);
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-$localisation = " / uni_menu_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_menu_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_menu_management_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_menu_management_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -214,6 +210,6 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $Content .= "<br>\r" . $TemplateObj->renderAdminCreateButton($infos);
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
-
 ?>

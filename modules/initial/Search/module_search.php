@@ -27,11 +27,7 @@ class ModuleSearch
 
 		$Content = "";
 		if ($CurrentSetObj->UserObj->hasPermission('connected_group_read_permission') === true) {
-			$localisation = " / ModuleSearch";
-			$bts->MapperObj->AddAnotherLevel($localisation);
-			$bts->LMObj->logCheckpoint("ModuleSearch");
-			$bts->MapperObj->RemoveThisLevel($localisation);
-			$bts->MapperObj->setSqlApplicant("ModuleSearch");
+			$bts->mapSegmentLocation(__METHOD__, "ModuleSearch");
 
 			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
@@ -92,7 +88,9 @@ class ModuleSearch
 			} else {
 				$Content .= $bts->I18nTransObj->getI18nTransEntry('txt10');
 			}
-		}
+
+			$bts->segmentEnding(__METHOD__);
+			}
 
 		if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
 			unset(

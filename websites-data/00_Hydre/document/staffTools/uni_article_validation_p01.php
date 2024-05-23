@@ -36,12 +36,7 @@ $bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 		);
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_article_validation_p01.php";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_article_validation_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_article_validation_p01.php");
-
+$bts->mapSegmentLocation(__METHOD__, "uni_article_validation_p01.php");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -129,6 +124,7 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $Content .= $TemplateObj->renderAdminCreateButton($infos);
 
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

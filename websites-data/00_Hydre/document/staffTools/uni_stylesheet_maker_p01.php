@@ -33,11 +33,7 @@
 $bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme', 9086995248375251520	);
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_stylesheet_maker_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_stylesheet_maker_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_stylesheet_maker_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_stylesheet_maker_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -246,5 +242,7 @@ if ( $bts->RequestDataObj->getRequestDataSubEntry('stylesheetMaker', 'selectedTh
 	
 	";
 }
+
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 ?>

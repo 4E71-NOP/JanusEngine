@@ -48,11 +48,7 @@ array(
 );
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_command_console_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_command_console_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_command_console_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_command_console_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -271,6 +267,8 @@ $bts->RenderFormObj->renderformHeader('ConsoleCommandForm')
 ;
 
 $Content .= "</form>\r";
+
+$bts->segmentEnding(__METHOD__);
 
 // --------------------------------------------------------------------------------------------
 

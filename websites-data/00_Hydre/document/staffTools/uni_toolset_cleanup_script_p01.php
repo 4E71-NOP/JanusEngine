@@ -38,11 +38,7 @@ module_zindex	'10';
 ");
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_toolset_cleanup_script_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_toolset_cleanup_script_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_toolset_cleanup_script_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_toolset_cleanup_script_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -107,5 +103,6 @@ $Content .= "
 </form>\r
 ";
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 ?>

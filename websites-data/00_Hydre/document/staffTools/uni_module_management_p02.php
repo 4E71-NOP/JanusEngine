@@ -45,11 +45,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_module_management_p02";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_module_management_p02.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_module_management_p02.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_module_management_p02");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -303,7 +299,7 @@ $TemplateObj = Template::getInstance();
 $infos['formName'] = "formGenericData";
 $Content .= $TemplateObj->renderAdminFormButtons($infos);
 
-
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
 
 ?>

@@ -31,11 +31,7 @@ class RenderAdmDashboard {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 		
-		$localisation = " / ModuleMenu";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("ModuleMenu");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("ModuleMenu");
+		$bts->mapSegmentLocation(__METHOD__, "ModuleMenu");
 		
 		$Content = "";
 		
@@ -191,6 +187,8 @@ class RenderAdmDashboard {
 		</table>\r
 		</div>\r";
 
+
+		$bts->segmentEnding(__METHOD__);
 		return $Content;
 		}
 	}

@@ -28,11 +28,7 @@ class ModuleAuthentification
 
 		$Content = "";
 		if ($CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true) {
-			$localisation = " / ModuleAuthentification";
-			$bts->MapperObj->AddAnotherLevel($localisation);
-			$bts->LMObj->logCheckpoint("ModuleAuthentification");
-			$bts->MapperObj->RemoveThisLevel($localisation);
-			$bts->MapperObj->setSqlApplicant("ModuleAuthentification");
+			$bts->mapSegmentLocation(__METHOD__, "ModuleAuthentification");
 
 			$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : start"));
@@ -139,7 +135,9 @@ class ModuleAuthentification
 				</form>\r
 				";
 			}
-		}
+
+			$bts->segmentEnding(__METHOD__);
+			}
 
 		// Cleaning up
 		if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {

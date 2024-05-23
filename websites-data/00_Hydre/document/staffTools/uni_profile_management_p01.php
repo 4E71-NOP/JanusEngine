@@ -51,11 +51,7 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-Begin*/
-$localisation = " / uni_profile_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation);
-$bts->LMObj->logCheckpoint("uni_profile_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation);
-$bts->MapperObj->setSqlApplicant("uni_profile_management_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_profile_management_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -575,13 +571,30 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		$T['Content'][$Tab]['1']['1']['cont'] .= "
 			<table class='" . $PmBlock . "_ft'>\r
 			<tr style='background-color:transparent;'>\r
-			<td class='" . $PmBlock . "_ft1' style='background-color:transparent;'></td>\r
-			<td class='" . $PmBlock . "_ft2' style='background-color:transparent;'>" . $DocumentDataObj->getDocumentDataEntry('arti_title') . "</td>\r
-			<td class='" . $PmBlock . "_ft3' style='background-color:transparent;'></td>\r
+			<td class='" . $PmBlock . "_ft1' style='padding:0px; background-color:transparent;'></td>\r
+			<td class='" . $PmBlock . "_ft2' style='padding:0px; background-color:transparent;'>" . $DocumentDataObj->getDocumentDataEntry('arti_title') . "</td>\r
+			<td class='" . $PmBlock . "_ft3' style='padding:0px; background-color:transparent;'></td>\r
 			</tr>\r
 			</table>\r
 			<h2>" . $DocumentDataObj->getDocumentDataEntry('arti_subtitle') . "</h2>
 			";
+			
+			/*
+			
+
+style='background-color:transparent;'
+style='background-color:transparent;'
+style='background-color:transparent;'
+
+
+			<table class='" . $Block . "_ft'>\r
+			<tr>\r
+			<td class='" . $Block . "_ft1'></td>\r
+			<td class='" . $Block . "_ft2'>" . $DocumentDataObj->getDocumentDataEntry('arti_title') . "</td>\r
+			<td class='" . $Block . "_ft3'></td>\r
+			</tr>\r
+			</table>\r
+*/
 
 		if ($Tab == 1) {
 			$T['Content'][$Tab]['1']['1']['cont'] .=
@@ -823,4 +836,5 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	// --------------------------------------------------------------------------------------------
 }
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/

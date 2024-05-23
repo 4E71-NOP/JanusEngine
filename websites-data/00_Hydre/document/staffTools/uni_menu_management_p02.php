@@ -47,11 +47,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_menu_management_p02";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_menu_management_p02.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_menu_management_p02.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_menu_management_p02");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -264,6 +260,6 @@ $infos['formName'] = "menuForm";
 $Content .= $TemplateObj->renderAdminFormButtons($infos, $bts->i18nDoc);
 
 
+$bts->segmentEnding(__METHOD__);
 /*Hydr-Content-End*/
-
 ?>

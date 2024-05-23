@@ -42,12 +42,7 @@ $bts->RequestDataObj->setRequestDataEntry('searchForm' ,
 
 /* -------------------------------------------------------------------------------------------- */
 /*Hydr-Content-Begin*/
-$localisation = " / uni_search_p01.php";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_search_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_search_p01.php");
-
+$bts->mapSegmentLocation(__METHOD__, "uni_search_p01.php");
 
 if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search') ) > 3 ) {
 	switch ($bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'searchType')) {
@@ -194,6 +189,8 @@ if ( strlen( $bts->RequestDataObj->getRequestDataSubEntry('searchForm', 'search'
 else {
 	$Content .= "<p class='".$Block."_p'>".$i18nDoc['err1']."</p>";
 }
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

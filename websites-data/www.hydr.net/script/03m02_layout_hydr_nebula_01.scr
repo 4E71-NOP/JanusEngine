@@ -6,9 +6,9 @@ add layout_file name 'hydr_nebula_user_profile'  generic_name 'user_profile'  de
 add layout name 'hydr_nebula_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'hydr_nebula user_profile'   layout_file 'hydr_nebula_user_profile';
 assign layout name 'hydr_nebula_01_user_profile' to_theme 'hydr_nebula_01';
 
-add layout_file name 'hydr_nebula_script'  generic_name 'script'  description 'hydr_script' filename 'hydr_nebula_script.lyt.html';
-add layout name 'hydr_nebula_01_script' title 'Exécution de script'   generic_name 'script'  description 'hydr_nebula script'   layout_file 'hydr_nebula_script';
-assign layout name 'hydr_nebula_01_script' to_theme 'hydr_nebula_01';
+add layout_file name 'hydr_nebula_script_execution'  generic_name 'script_execution'  description 'hydr_script_execution' filename 'hydr_nebula_script_execution.lyt.html';
+add layout name 'hydr_nebula_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'hydr_nebula script_execution'   layout_file 'hydr_nebula_script_execution';
+assign layout name 'hydr_nebula_01_script_execution' to_theme 'hydr_nebula_01';
 
 add layout_file name 'hydr_nebula_decoration'  generic_name 'decoration'  description 'hydr_decoration' filename 'hydr_nebula_decoration.lyt.html';
 add layout name 'hydr_nebula_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'hydr_nebula decoration'   layout_file 'hydr_nebula_decoration';

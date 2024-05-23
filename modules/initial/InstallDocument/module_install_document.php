@@ -24,20 +24,9 @@ class InstallDocument {
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$localisation = " / InstallDocument";
-		$bts->MapperObj->AddAnotherLevel($localisation );
-		$bts->LMObj->logCheckpoint("InstallDocument");
-		$bts->MapperObj->RemoveThisLevel($localisation );
-		$bts->MapperObj->setSqlApplicant("InstallDocument");
-		
+		$bts->mapSegmentLocation(__METHOD__, "InstallDocument");
 		$l = $CurrentSetObj->getDataEntry ('language');
 		$bts->I18nTransObj->apply(array( "type" => "file", "file" => $infos['module']['module_directory']."/i18n/".$l.".php", "format" => "php" ));
-
-		$localisation = "Page";
-		$bts->MapperObj->AddAnotherLevel ( $localisation );
-		$bts->LMObj->logCheckpoint ( "Page" );
-		$bts->MapperObj->RemoveThisLevel ( $localisation );
-		$bts->MapperObj->setSqlApplicant ( "Page" );
 
 		if ($bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) == null) {
 			$bts->RequestDataObj->setRequestData ( 'PageInstall', 1 );
@@ -74,6 +63,8 @@ class InstallDocument {
 		$GeneratedScriptObj->insertString('JavaScript-Init', 'var tdb = new LibTestDB();');
 		$GeneratedScriptObj->insertString('JavaScript-Init', 'var mi = new LibMonitorInstall();');
 
+
+		$bts->segmentEnding(__METHOD__);
 		return ($DocContent);
 	}
 }

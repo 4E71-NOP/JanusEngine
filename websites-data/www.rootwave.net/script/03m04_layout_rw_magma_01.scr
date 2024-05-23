@@ -1,14 +1,15 @@
-add layout_file name	'rw_magma_default_layout'		generic_name	'default_layout'		description	'rw_default_layout'		filename	'rw_magma_default.lyt.html';
-add layout_file name	'rw_magma_user_profile'			generic_name	'user_profile'			description	'rw_user_profile'		filename	'rw_magma_default.lyt.html';
-add layout_file name	'rw_magma_script_exec'			generic_name	'script_execution'		description	'rw_script_exec'		filename	'rw_magma_default.lyt.html';
-add layout_file name	'rw_magma_decoration_mgmt'		generic_name	'decoration_management'	description	'rw_decoration_mgmt'	filename	'rw_magma_default.lyt.html';
+add layout_file name 'rw_magma_default'  generic_name 'default'  description 'rw_default' filename 'rw_magma_default.lyt.html';
+add layout name 'rw_magma_01_default' title 'Présentation par défaut'   generic_name 'default'  description 'rw_magma default'   layout_file 'rw_magma_default';
+assign layout name 'rw_magma_01_default' to_theme 'rw_magma_01' default YES;
 
-add layout name	'rw_magma_01_default_layout'	title 'Présentation par défaut'			generic_name	'default_layout'		description	'rw_magma Default layout'			layout_file	'rw_magma_default_layout';
-add layout name	'rw_magma_01_user_profile'		title 'Présentation gestion profil'		generic_name	'user_profile'			description	'rw_magma User profile'				layout_file	'rw_magma_user_profile';
-add layout name	'rw_magma_01_script_exec'		title 'Présentation gestion profil'		generic_name	'script_execution'		description	'rw_magma Script execution'			layout_file	'rw_magma_script_exec';
-add layout name	'rw_magma_01_decoration_mgmt'	title 'Présentation gestion décoration'	generic_name	'decoration_management'	description	'rw_magma Decoration management'	layout_file	'rw_magma_decoration_mgmt';
+add layout_file name 'rw_magma_user_profile'  generic_name 'user_profile'  description 'rw_user_profile' filename 'rw_magma_user_profile.lyt.html';
+add layout name 'rw_magma_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'rw_magma user_profile'   layout_file 'rw_magma_user_profile';
+assign layout name 'rw_magma_01_user_profile' to_theme 'rw_magma_01';
 
-assign layout name	'rw_magma_01_default_layout'	to_theme	'rw_magma_01'	default YES;
-assign layout name	'rw_magma_01_user_profile'		to_theme	'rw_magma_01';
-assign layout name	'rw_magma_01_script_exec'		to_theme	'rw_magma_01';
-assign layout name	'rw_magma_01_decoration_mgmt'	to_theme	'rw_magma_01';
+add layout_file name 'rw_magma_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'rw_magma_script_execution.lyt.html';
+add layout name 'rw_magma_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_magma script_execution'   layout_file 'rw_magma_script_execution';
+assign layout name 'rw_magma_01_script_execution' to_theme 'rw_magma_01';
+
+add layout_file name 'rw_magma_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'rw_magma_decoration.lyt.html';
+add layout name 'rw_magma_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_magma decoration'   layout_file 'rw_magma_decoration';
+assign layout name 'rw_magma_01_decoration' to_theme 'rw_magma_01';

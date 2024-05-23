@@ -29,11 +29,7 @@
 
 /*Hydr-Content-Begin*/
 
-$localisation = " / uni_staff_member_list_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_staff_member_list_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_staff_member_list_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_staff_member_list_p01");
 
 switch ( $l ) {
 	case "fra":
@@ -108,6 +104,8 @@ foreach ( $user_liste as $B ) {
 		$Content .= "</table>\r<br>\r";
 	}
 }
+
+$bts->segmentEnding(__METHOD__);
 
 /*Hydr-Content-End*/
 ?>

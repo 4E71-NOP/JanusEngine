@@ -34,11 +34,7 @@ $bts->RequestDataObj->setRequestData('test',
 );
 
 /*Hydr-Content-Begin*/
-$localisation = " / uni_keyword_management_p01";
-$bts->MapperObj->AddAnotherLevel($localisation );
-$bts->LMObj->logCheckpoint("uni_keyword_management_p01.php");
-$bts->MapperObj->RemoveThisLevel($localisation );
-$bts->MapperObj->setSqlApplicant("uni_keyword_management_p01.php");
+$bts->mapSegmentLocation(__METHOD__, "uni_keyword_management_p01");
 
 $bts->I18nTransObj->apply(
 	array(
@@ -176,6 +172,8 @@ $Content .= $bts->RenderTablesObj->render($infos, $T)
 .$TemplateObj->renderFilterForm($infos)
 .$TemplateObj->renderAdminCreateButton($infos)
 ;
+
+$bts->segmentEnding(__METHOD__);
 // --------------------------------------------------------------------------------------------
 /*Hydr-Content-End*/
 
