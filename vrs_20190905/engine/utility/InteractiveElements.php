@@ -102,7 +102,7 @@ class InteractiveElements {
 		}
 		$bareTableClass = $ThemeDataObj->getThemeName()."bareTable";
 		$Content = "
-		<table class='".$bareTableClass."'>\r 
+		<table class='".$bareTableClass."' style='margin-left:auto; margin-right:auto;'>\r 
 		<tr>\r
 		<td			id='".$infos['id']."01' class='".$infos['initialStyle']."01' ".$animation."></td>\r
 		<td><input	id='".$infos['id']."02' class='".$infos['initialStyle']."02' ".$animation." 
