@@ -81,7 +81,8 @@ class ModuleSelectLanguage
 								. $bts->RenderFormObj->renderHiddenInput("formSubmitted",					"1")
 								. $bts->RenderFormObj->renderHiddenInput("userForm[user_lang]",				$language_website_[$A]['lang_639_3'])
 								. "<button style='background-color:#FF00FF00; border-width:0px; background-image: url(" . $pv['img_src'] . "); height:64px; width:64px; background-size: cover;'\r
-								onMouseOver=\"t.ToolTip('" . $language_website_[$A]['lang_original_name'] . "')\" onMouseOut='t.ToolTip()'>
+								onMouseOver=\"t.ToolTip('" . $language_website_[$A]['lang_original_name'] . "')\" onMouseOut='t.ToolTip()'>\r
+								</button>\r
 							</form>\r
 							</td>";
 						}

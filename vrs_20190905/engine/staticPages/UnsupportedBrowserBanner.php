@@ -13,10 +13,10 @@
 /*Hydre-licence-fin*/
 // ../media/IE6_redirect/fond.jpg
 
-$lc = "<a style='color: #FFFFFF;' target='_new' href='https://www.google.com/chrome/'>";
-$lf = "<a style='color: #FFFFFF;' target='_new' href='https://www.mozilla.org/fr/firefox/new/'>";
-$li = "<a style='color: #FFFFFF;' target='_new' href='https://www.microsoft.com/fr-fr/windows/microsoft-edge'>";
-$lo = "<a style='color: #FFFFFF;' target='_new' href='http://www.opera.com/'>";
+$lc = "<a style='color: #FFFFFF;' target='new' href='https://www.google.com/chrome/'>";
+$lf = "<a style='color: #FFFFFF;' target='new' href='https://www.mozilla.org/fr/firefox/new/'>";
+$li = "<a style='color: #FFFFFF;' target='new' href='https://www.microsoft.com/fr-fr/windows/microsoft-edge'>";
+$lo = "<a style='color: #FFFFFF;' target='new' href='http://www.opera.com/'>";
 
 $lz = "</a>";
 

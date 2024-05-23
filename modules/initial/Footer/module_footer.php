@@ -36,7 +36,7 @@ class ModuleFooter
 			<table style='margin-left: auto; margin-right: auto;'>\r
 			<tr>\r
 			<td style='text-align: right;'>
-			" . $bts->I18nTransObj->getI18nTransEntry('engine') . "<a href='http://" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_home') . "' target='_new'>Hydr</a><br>" . $bts->I18nTransObj->getI18nTransEntry('author') . "<br>" . $bts->I18nTransObj->getI18nTransEntry('license') . "<span style='font-weight: bold;'>CC-by-nc-sa</span></td>\r
+			" . $bts->I18nTransObj->getI18nTransEntry('engine') . "<a href='http://" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_home') . "' target='new'>Hydr</a><br>" . $bts->I18nTransObj->getI18nTransEntry('author') . "<br>" . $bts->I18nTransObj->getI18nTransEntry('license') . "<span style='font-weight: bold;'>CC-by-nc-sa</span></td>\r
 			<td style='text-align: left;'><a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'><img alt='Licence Creative Commons' style='border-width:0' src='https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png'/></a></td>\r
 			</tr>\r
 			</table>\r

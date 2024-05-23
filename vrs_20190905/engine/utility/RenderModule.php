@@ -125,7 +125,7 @@ class RenderModule {
 		if ( $infos['module']['module_deco'] != 1 ) { $infos['deco_type'] = 10000; }
 		
 		$err = FALSE;
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " '".$infos['deco_type']."' selected"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Type '".$infos['deco_type']."' selected"));
 		switch ( $infos['deco_type'] ) {
 			case 30:	
 			case "1_div":
@@ -138,7 +138,7 @@ class RenderModule {
 				$RenderDeco = RenderDeco40Elegance::getInstance();
 				break;
 			case 50:	
-			case "exquise":	
+			case "exquisite":	
 				$ClassLoaderObj->provisionClass("RenderDeco50Exquisite");
 				$RenderDeco = RenderDeco50Exquisite::getInstance();
 				break;

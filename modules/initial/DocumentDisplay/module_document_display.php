@@ -438,7 +438,7 @@ class ModuleDocumentDisplay
 					. " class='" . $Block . _CLASS_TXT_FADE_ . "'"
 					. " style='font-size:" . (floor($ThemeDataObj->getThemeBlockEntry($infos['block'] . "T", "txt_font_size") * 0.75)) . "px;"
 					. " width:100%;"
-					. " position:absolute; bottom:0;'
+					. " position:absolute;' 
 				>\r
 				<hr>\r
 				";
@@ -573,7 +573,7 @@ class ModuleDocumentDisplay
 				case 1:
 					break;
 				case 2:
-					$KeyWordEntry['ModifiedContent'] = "<a href='" . $KeyWordEntry['data'] . "' target='_new'>" . $KeyWordEntry['string'] . "</a>";
+					$KeyWordEntry['ModifiedContent'] = "<a href='" . $KeyWordEntry['data'] . "' target='new'>" . $KeyWordEntry['string'] . "</a>";
 					$inputContent = str_replace($KeyWordEntry['string'], $KeyWordEntry['ModifiedContent'], $inputContent, $KeyWordEntry['count']);
 					break;
 				case 3:

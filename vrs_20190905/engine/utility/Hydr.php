@@ -1082,8 +1082,6 @@ class Hydr
 
 		$bts->mapSegmentLocation(__METHOD__, "buidAdminDashboard");
 
-		$bts->LMObj->logCheckpoint("index_before_stat");
-		$bts->MapperObj->RemoveThisLevel("/ idx");
 		$CurrentSetObj->setDataSubEntry('timeStat', 'end', $bts->TimeObj->getMicrotime()); // We get time for later use in the stats.
 
 		$bts->LMObj->setStoreStatisticsStateOff();

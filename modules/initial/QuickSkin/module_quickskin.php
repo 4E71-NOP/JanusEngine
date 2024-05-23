@@ -81,7 +81,6 @@ class ModuleQuickSkin
 						"
 					<tr>\r<td>\r&nbsp;</td>\r</tr>\r
 					<tr>\r<td>\r
-					<center>
 					";
 
 					$SB = array(
@@ -97,7 +96,6 @@ class ModuleQuickSkin
 					);
 					$Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 					$Content .= "
-					</center>
 					</td>\r</tr>\r"
 						. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"ModuleQuickSkin")
 						. $bts->RenderFormObj->renderHiddenInput("formGenericData[modification]",	"on")

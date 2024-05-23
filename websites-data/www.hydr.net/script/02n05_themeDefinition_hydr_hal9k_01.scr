@@ -89,7 +89,7 @@ add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_panel_bg' type 'str
 add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_switch_bg' type 'string'  string 'hal9k_admctrl_switch_bg.png';
 add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_width' type 'number'  number '96';
 add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_height' type 'number'  number '96';
-add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_position' type 'string'  string 'top-left';
+add theme_definition for_theme 'hydr_hal9k_01' name 'admctrl_position' type 'number'  string 'top-left';
 
 add theme_definition for_theme 'hydr_hal9k_01' name 'gradient_color_start' type 'string'  string '00FF00';
 add theme_definition for_theme 'hydr_hal9k_01' name 'gradient_color_middle' type 'string'  string '808020';

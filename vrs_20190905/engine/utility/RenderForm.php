@@ -160,7 +160,8 @@ class  RenderForm
 	{
 		if (strlen($name) > 0 && strlen($text) > 0) {
 			$selectText = ($selected == true) ? " checked" : "";
-			return "<input type='radio' id='" . $name . "' name='" . $name . "' value='" . $value . "'" . $selectText . "> <label for='" . $name . "'>" . $text . "</label><br>\r";
+			return "<input type='radio' name='" . $name . "' value='" . $value . "'" . $selectText . "> <label for='" . $name . "'>" . $text . "</label><br>\r";
+			// return "<input type='radio' id='" . $name . "' name='" . $name . "' value='" . $value . "'" . $selectText . "> <label for='" . $name . "'>" . $text . "</label><br>\r";
 		}
 		return (false);
 	}

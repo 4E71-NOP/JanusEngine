@@ -67,7 +67,7 @@ ORDER BY ws_id
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$T['Content']['1'][$i]['1']['cont'] = $dbp['ws_name'];
 	$T['Content']['1'][$i]['2']['cont'] = $dbp['ws_directory'];
-	$T['Content']['1'][$i]['3']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='_new'>".$bts->I18nTransObj->getI18nTransEntry('link')."</a>";
+	$T['Content']['1'][$i]['3']['cont'] = "<a class='" .$Block."_lien " .$Block."_t2' href='index.php?sw=".$dbp['ws_id']."' target='new'>".$bts->I18nTransObj->getI18nTransEntry('link')."</a>";
 	$i++;
 }
 

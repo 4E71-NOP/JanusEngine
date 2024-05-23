@@ -37,7 +37,7 @@ class RenderDeco50Exquisite {
 		
 		$mn = $infos['module']['module_name'];
 		$TN = $ThemeDataObj->getThemeName();
-		if (! isset($infos['module_z_index'])) { $infos['module_z_index'] = 1; }
+		if (!isset($infos['module_z_index'])) { $infos['module_z_index'] = 1; }
 		
 		$Content = "";
 		$L['NomModule'] = $mnd = $mn; // module name (& default)
@@ -135,7 +135,7 @@ class RenderDeco50Exquisite {
 		$Content .= "
 		<!-- _______________________________________ Decoration of module ".$mn." (Begin) _______________________________________ -->\r
 		";
-		$containerStyle = (strlen($infos['module']['module_container_style'] ?? '') > 0 ) ? " ".$infos['module']['module_container_style']." " : "";
+		$containerStyle = (strlen($infos['module']['module_container_style'] ?? '') > 0 ) ? " ".$infos['module']['module_container_style'].";" : "";
 		$containerWidth		= (isset($infos['forcedWidth'])) ? $infos['forcedWidth'] : $L['dx']."px";
 		$containerHeight	= (isset($infos['forcedHeight'])) ? $infos['forcedHeight'] : $L['dy']."px";
 		$Content .= "
