@@ -69,7 +69,7 @@ class ModuleCalendar {
 			$pv['table_marginright'] = floor (( $ThemeDataObj->getThemeDataEntry('module_internal_width') - $pv['table_width'] ) /2);
 			
 			$Content .= "
-			<table class='".$Block._CLASS_TABLE_STD_."' style='height: ".$pv['table_height']."px; margin-top: ".$pv['table_margintop']."px;'>
+			<table class='".$Block._CLASS_TABLE_STD_."' style='margin:auto;'>
 							
 			<tr>\r
 			<td style='font-size:125%'>\r".$bts->I18nTransObj->getI18nTransEntry($tabDay[$date['day']])."</td>\r
