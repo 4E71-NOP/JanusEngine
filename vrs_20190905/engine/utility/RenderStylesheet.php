@@ -355,7 +355,7 @@ html { width:100%; height:100%;}\r\r
 			if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"h".$hx,			"{".$str."}");}
 		}
 		// P
-		$list= array( "txt_indent",	"txt_align",	"font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right" );
+		$list= array( "txt_indent",	"txt_align",	"font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right", "special" );
 		$str = $this->testAndRenderCssStyle("p", $list, $p);
 		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"p",			"{".$str."}");}
 		// a

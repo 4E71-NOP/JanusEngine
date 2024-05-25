@@ -1,5 +1,5 @@
 add decoration		
-name 'hal9k_block_Tooltip'		
+name 'hal9k_block_tooltip'		
 type 'exquisite'		
 directory 'Hal9k'		
 		

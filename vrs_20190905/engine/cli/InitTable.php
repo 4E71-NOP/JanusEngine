@@ -221,7 +221,7 @@ self::$InitTable['decoration'] = function (&$a) {
 		"txt_fonte_size_min" => 12,	"txt_fonte_size_max" => 24,
 		// "txt_fonte_size" => 12,
 		// "txt_fonte_dl_nom" => "",	"txt_fonte_dl_url" => "",
-		"p_txt_indent" => 0,		"p_txt_align" => "justify",
+		"p_txt_indent" => 0,		"p_txt_align" => "justify",	"p_special" => "",
 
 		"txt_col" => "000000",		"txt_highlight_col" => "000000",		"txt_bg_col" => "transparent",			"txt_titre_col" => 		"000000",
 		"txt_ok_col" => "000000",	"txt_avert_col" => "000000",			"txt_erreur_col" => "000000",			"txt_fade_col" => "000000",
@@ -295,7 +295,7 @@ self::$InitTable['decoration'] = function (&$a) {
 		"txt_font_name_bold" => 	"", 	"txt_font_filename_bold" => 	"",
 		"txt_font_name_italic" => 	"", 	"txt_font_filename_italic" => 	"",
 
-		"p_txt_indent" => 	"", 	"p_txt_align" => 	"",
+		"p_txt_indent" => 	"", 	"p_txt_align" => 	"",		"p_special" => "",
 		"p_mrg_top" => 	"", 		"p_mrg_bottom" => 	"", 	"p_mrg_left" => 	"", 	"p_mrg_right" => 	"",
 		"p_pad_top" => 	"", 		"p_pad_bottom" => 	"", 	"p_pad_left" => 	"", 	"p_pad_right" => 	"",
 		"p_special" => 	"",
@@ -452,7 +452,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"txt_fonte",			"txt_fonte_size_min",		"txt_fonte_size_max",
 			"txt_fonte_size",
 			"txt_fonte_dl_nom",		"txt_fonte_dl_url",
-			"p_txt_indent",			"p_txt_align",
+			"p_txt_indent",			"p_txt_align",									"p_special",
 
 			"main_unit",			"txt_font_unit",
 			"txt_col",				"txt_highlight_col",		"txt_bg_col",		"txt_titre_col",
@@ -555,7 +555,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"txt_font_name_bold", 		"txt_font_filename_bold",
 			"txt_font_name_italic", 	"txt_font_filename_italic",
 
-			"p_txt_indent", 	"p_txt_align",
+			"p_txt_indent", 	"p_txt_align",								"p_special",
 			"p_mrg_top", 		"p_mrg_bottom", 		"p_mrg_left", 		"p_mrg_right",
 			"p_pad_top", 		"p_pad_bottom", 		"p_pad_left", 		"p_pad_right",
 			"p_special",

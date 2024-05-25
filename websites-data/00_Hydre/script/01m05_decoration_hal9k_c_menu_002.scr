@@ -1,9 +1,9 @@
 add	decoration
-name	'Hal9k_menu_002'
-graphic	'Hal9k_block_001'
-text	'Hal9k_txt_menu'
+name	'hal9k_menu_002'
+graphic	'hal9k_block_001'
+text	'hal9k_txt_menu'
 type	'menu'
-directory	'Aqua'
+directory	'Hal9k'
 	
 genre	'2'
 animation	'ftgvs'
