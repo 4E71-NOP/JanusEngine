@@ -19,7 +19,7 @@ class ServerInfos {
 	
 	public function getInfosFromServer () {
 		$this->ServerInfos['srv_hostname']			= php_uname('s') . " " . php_uname('n') . " ". php_uname('m') . " / " . $this->get_real_ip();
-		$this->ServerInfos['currentDirectory']	= getcwd();
+		$this->ServerInfos['currentDirectory']		= getcwd();
 		$this->ServerInfos['DOCUMENT_ROOT']			= $_SERVER['DOCUMENT_ROOT'];
 		$this->ServerInfos['include_path']			= get_include_path();
 		$this->ServerInfos['uid']					= getmyuid();

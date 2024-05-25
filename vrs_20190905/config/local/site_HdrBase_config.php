@@ -19,6 +19,7 @@
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
+	"ws_short"			=> "HdrBase",
 	"type"				=> "mysql",
 	"charset"			=> "utf8mb4",
 	"host"				=> "mysql",

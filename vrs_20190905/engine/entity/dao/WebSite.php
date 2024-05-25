@@ -131,6 +131,49 @@ class WebSite extends Entity
 		return $res;
 	}
 
+	/**
+	 * Gets website data from the database.<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the website selection to the website FULL name (home) only.
+	 * 
+	 */
+	public function getDataFromDBUsingHome() {
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
+		if ($currentWs > 1) {
+			$dbquery = $bts->SDDMObj->query("
+				SELECT * 
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
+				WHERE ws_home = '" . $currentWs . "'
+				;");
+			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website home=" . $currentWs));
+				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+					foreach ($dbp as $A => $B) {
+						if (isset($this->columns[$A])) {
+							$this->WebSite[$A] = $B;
+						}
+					}
+				}
+			} else {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website home=" . $currentWs));
+				$res = false;
+			}
+			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'];		// Dédiée aux routines de manipulation
+		} else {
+			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");
+			exit(1);
+		}
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
+	}
+
 
 	/**
 	 * Change website context

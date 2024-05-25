@@ -115,17 +115,20 @@ class Hydr
 		$CurrentSetObj->setServerInfosObj(new ServerInfos());
 		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		$CurrentSetObj->setDataEntry('fsIdx', 0);		// Useful for FileSelector
+
 		// --------------------------------------------------------------------------------------------
 		// Session management
 		//
 		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
+		$CurrentSetObj->setDataEntry('ws', $_SERVER['HTTP_HOST']);
 		$bts->initSmObj();
 		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()));
 
 		// If $_SESSION sub array is empty we have to check what website is to be selected
-		$wsSession = $_SESSION[$_SERVER['HTTP_HOST']];
+		$wsSession = $_SERVER['HTTP_HOST'];
 		if (empty($_SESSION[$wsSession])) {
+		// if (empty($_SESSION[$wsSession])) {
 			// The sub array in the session object is empty. 
 			// 1 Checking if the config file exists
 			// 2 If it doesn't, getting the default_website definition with the root website
@@ -169,6 +172,9 @@ class Hydr
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session sub array is '" . $wsSession . "'."));
 			$CurrentSetObj->setDataEntry('ws', $wsSession);
 		}
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : --------------------------------------------------------------------------------------------"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($_SESSION[$wsSession]) . "'."));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession()) . "'."));
 
 		// $CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
 
@@ -179,6 +185,10 @@ class Hydr
 
 		// Loading the configuration file associated with this website
 		$this->loadConfigFile();
+		// If the configuration has a ws_short we use it 
+		if ( strlen($bts->CMObj->getConfigurationEntry("ws_short") ?? '' ) > 0 ) {
+			$CurrentSetObj->setDataEntry('ws', $bts->CMObj->getConfigurationEntry("ws_short"));
+		}
 
 		// Creating the necessary arrays for Sql Db Dialog Management
 		if ($this->initializeSDDM() == true) {
@@ -483,6 +493,7 @@ class Hydr
 		$CurrentSetObj->setWebSiteObj(new WebSite());
 		$this->WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$this->WebSiteObj->getDataFromDBUsingShort();
+		// $this->WebSiteObj->getDataFromDBUsingHome();
 
 		switch ($this->WebSiteObj->getWebSiteEntry('ws_state')) {
 			case 0: // Offline
@@ -518,7 +529,7 @@ class Hydr
 		$UserObj = $CurrentSetObj->UserObj;
 
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$WebSiteObj" . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$WebSiteObj : " . $bts->StringFormatObj->arrayToString($WebSiteObj->getWebSite())));
 
 		// 		We have 2 variables used to drive the authentification process.
 		switch ($this->authentificationMode) {
@@ -546,7 +557,8 @@ class Hydr
 
 				// Assuming a session is valid (whatever it's 'anonymous' or someone else).
 				if (strlen($bts->SMObj->getSessionSubEntry($currentWs, 'user_login') ?? '') == 0) {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION strlen(user_login)=0"));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION strlen(user_login)=0 (let's go anonymous)"));
+					$bts->SMObj->setSessionSubEntry($currentWs, 'user_login', 'anonymous');
 				}
 				$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($currentWs, 'user_login'), $WebSiteObj);
 				if ($UserObj->getUserEntry('error_login_not_found') != 1) {
@@ -591,14 +603,14 @@ class Hydr
 		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0 && $bts->RequestDataObj->getRequestDataEntry('l') != 0) {
 			$scoreLang += 4;
 		}
-		if (strlen($UserObj->getUserEntry('user_lang') ?? '') != 0) {
+		if (is_numeric($UserObj->getUserEntry('user_lang')) && $UserObj->getUserEntry('user_lang') != 0) {
 			$scoreLang += 2;
 		}
 		if (strlen($WebSiteObj->getWebSiteEntry('fk_lang_id') ?? '') != 0 && $WebSiteObj->getWebSiteEntry('fk_lang_id') != 0) {
 			$scoreLang += 1;
 		}
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : fk_lang_id='" . $WebSiteObj->getWebSiteEntry('fk_lang_id') . "'"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Website fk_lang_id='" . $WebSiteObj->getWebSiteEntry('fk_lang_id') . "'"));
 
 		switch ($scoreLang) {
 			case 0:

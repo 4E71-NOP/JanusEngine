@@ -12,16 +12,17 @@
 //	Le nom du site utilisé pour la base de données
 //	The name used for the database
 //	Gen : 2018-07-01
-//	www.rootwave.net
+//	www.hydr.net
 
 // Vous serrez peut etre obligé de rajouter le préfix de votre compte chez l'hébergeur.
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
-	"type"				=> "mysql",
+	"ws_short"			=> "Hdr",
+	"type"				=> "pgsql",
 	"charset"			=> "utf8mb4",
-	"host"				=> "mysql",
+	"host"				=> "postgres",
 	"port"				=> "",
 	"dal"				=> "PDO",				// MYSQLI , PDOMYSQL
 	"db_user_login"		=> "HydreBDD",
