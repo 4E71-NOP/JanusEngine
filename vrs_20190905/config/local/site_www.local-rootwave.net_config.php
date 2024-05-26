@@ -19,7 +19,7 @@
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
-	"ws_short"			=> "RW",
+	"ws_short"			=> "Rw",
 	"type"				=> "mysql",
 	"charset"			=> "utf8mb4",
 	"host"				=> "mysql",

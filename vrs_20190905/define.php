@@ -28,6 +28,7 @@ define ("_ENTITY_DIRECTORY_"	, "current/engine/entity/");
 
 // --------------------------------------------------------------------------------------------
 // Logs
+define ( "LOGLEVEL_DEBUG_LVL0",		6 ); // Byte by byte...
 define ( "LOGLEVEL_BREAKPOINT",		5 ); // You definitely like to read or you're a crappy developper
 define ( "LOGLEVEL_STATEMENT",		4 ); // Every statements like "I'm the <class::method> and i recieved this data"
 define ( "LOGLEVEL_INFORMATION",	3 ); // Moaar

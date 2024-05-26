@@ -7,8 +7,8 @@
 */
 
 add website 
-name				rootwave 
-short				RW 
+name				Rootwave 
+short				Rw 
 lang				fra
 lang_select			YES 
 title				"R o o t w a v e" 
@@ -22,7 +22,7 @@ user				"*user_install*"
 password			"*user_install*"
 ;
 
-website context name rootwave			user "*user_install*"	password "*user_install*";
+website context name Rootwave			user "*user_install*"	password "*user_install*";
 
 //show debug_off;
 set checkpoint name "Rootwave - Begin";
