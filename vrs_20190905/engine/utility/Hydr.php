@@ -122,7 +122,7 @@ class Hydr
 		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 		$CurrentSetObj->setDataEntry('ws', $_SERVER['HTTP_HOST']);
 		$bts->initSmObj();
-		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :\n" . $bts->StringFormatObj->arrayToString($_SESSION) . "\n *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . "\n---------------------------------------- *** EOL"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => $bts->SMObj->getInfoSessionState()));
 
 		// If $_SESSION sub array is empty we have to check what website is to be selected
@@ -172,9 +172,9 @@ class Hydr
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session sub array is '" . $wsSession . "'."));
 			$CurrentSetObj->setDataEntry('ws', $wsSession);
 		}
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : --------------------------------------------------------------------------------------------"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($_SESSION[$wsSession]) . "'."));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession()) . "'."));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : --------------------------------------------------------------------------------------------"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($_SESSION[$wsSession]) . "'."));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession()) . "'."));
 
 		// $CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
 
@@ -310,7 +310,7 @@ class Hydr
 				-->
 				";
 
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)));
 
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,	'msg' => __METHOD__ . " : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ."));
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ . " : Test logging with levels (Between parenthesis) `Citation` array( \$PhpVariable ) \$Php_Variable array([module_id]=`5387701299386917658`, [index]=`1`, [index]=`1`) ."));
@@ -321,7 +321,7 @@ class Hydr
 			// --------------------------------------------------------------------------------------------
 			$bts->SDDMObj->disconnect_sql();
 			$bts->SMObj->syncSuperGlobalSession(); // One last time to make sure it's saved
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " :\n \$_SESSION:" . $bts->StringFormatObj->print_r_debug($_SESSION) . "\n \$bts->SMObj->getSession():" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession())));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " :\n \$_SESSION:" . $bts->StringFormatObj->print_r_debug($_SESSION) . "\n \$bts->SMObj->getSession():" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession())));
 			// return ($Content . $CssContent . $licence . "</body>\r</html>\r");
 			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
 		} else {
@@ -572,8 +572,8 @@ class Hydr
 				}
 				break;
 		}
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession())));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession())));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)));
 		if ($bts->AUObj->getDataEntry('error') === TRUE) {
 			$UserObj->getDataFromDBUsingLogin("anonymous", $WebSiteObj);
 		}

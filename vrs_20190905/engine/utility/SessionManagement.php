@@ -34,10 +34,10 @@ class SessionManagement
 		$this->InitializeSession();
 		if (!empty($_SESSION)) {
 			$bts = BaseToolSet::getInstance();
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session data will be merged."));
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : this->session :'" . $bts->StringFormatObj->print_r_debug($this->session) . "'."));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : session data will be merged."));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : this->session :'" . $bts->StringFormatObj->print_r_debug($this->session) . "'."));
 			$this->session = array_merge($this->session, $_SESSION);
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :'" . $bts->StringFormatObj->print_r_debug($_SESSION) . "'."));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :'" . $bts->StringFormatObj->print_r_debug($_SESSION) . "'."));
 		}
 	}
 
@@ -121,7 +121,7 @@ class SessionManagement
 
 		if (strlen($currentWs ?? '') > 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$CurrentSetObj->getDataEntry('ws') :`" . $currentWs . "`"));
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
 
 			if (isset($_SESSION[$currentWs]['last_REMOTE_ADDR'])) {
 				if ($_SESSION[$currentWs]['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) {
@@ -240,7 +240,7 @@ class SessionManagement
 				$this->syncSuperGlobalSession();
 				break;
 		}
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION is now : " . $bts->StringFormatObj->arrayToString($_SESSION)));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION is now : " . $bts->StringFormatObj->arrayToString($_SESSION)));
 	}
 
 	/**

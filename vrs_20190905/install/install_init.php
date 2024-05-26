@@ -82,7 +82,7 @@ class HydrInstall
 		$ClassLoaderObj->provisionClass('SessionManagement');
 		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
 		$bts->initSmObj();
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
 		
 		$ClassLoaderObj->provisionClass('WebSite');
 		
@@ -246,7 +246,7 @@ class HydrInstall
 		// if ( $bts->RequestDataObj->getRequestDataEntry ( 'PageInstall' ) != "monitor" ) {
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : This is an install page"));
 		$ModuleLisObj->makeInstallModuleList();
-		$ContentFragments = $LayoutProcessorObj->installRender('install.lyt.html');
+		$ContentFragments = $LayoutProcessorObj->installRender('default/install.lyt.html');
 		// }
 		// else { 
 		// 	$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ ." : This is a monitor page") );

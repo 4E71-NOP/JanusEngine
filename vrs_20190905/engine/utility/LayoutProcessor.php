@@ -95,7 +95,7 @@ class LayoutProcessor
 		
 		if ($fileContentObj->getFileContent() === false) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Layout file not found. Back to default layout filename `" . $targetFilneName . "`"));
-			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . "default.lyt.html";
+			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . "default/default.lyt.html";
 			$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 		}
 

@@ -198,7 +198,7 @@ class User extends Entity {
 // 			foreach ( $groupList00 as $A ) { $strGrp .= "'" . $A . "', "; }
 			foreach ( $this->User['group'] as $A => $B ) { $strGrp .= "'" . $A . "', "; }
 			$this->User['clause_in_group'] = " IN ( " . substr ( $strGrp, 0, - 2 ) . " ) ";
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
 			
 		} else {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Login not found. Maybe a user mispelling the login."));

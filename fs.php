@@ -58,7 +58,7 @@ class FileSelectorRender
 
 		// $ClassLoaderObj->provisionClass ( 'SessionManagement' );
 		// $bts->initSmObj ();
-		// $bts->LMObj->msgLog ( array ('level' => LOGLEVEL_STATEMENT, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
 
 		// 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 
@@ -98,13 +98,12 @@ class FileSelectorRender
 
 		$bts->initSmObj();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->SMObj->getInfoSessionState()));
-		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
 
 		// --------------------------------------------------------------------------------------------
 		//
 		// Loading the configuration file associated with this website
 		//
-		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$bts->SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
 
 		$bts->CMObj->LoadConfigFile();
 		// $bts->CMObj->setConfigurationEntry('execution_context', "render");

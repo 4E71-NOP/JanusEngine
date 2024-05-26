@@ -1,15 +1,15 @@
-add layout_file name 'rw_nebula_default'  generic_name 'default'  description 'rw_default' filename 'rw_nebula_default.lyt.html';
+add layout_file name 'rw_nebula_default'  generic_name 'default'  description 'rw_default' filename 'Rootwave/rw_nebula_default.lyt.html';
 add layout name 'rw_nebula_01_default' title 'Présentation par défaut'   generic_name 'default'  description 'rw_nebula default'   layout_file 'rw_nebula_default';
 assign layout name 'rw_nebula_01_default' to_theme 'rw_nebula_01' default YES;
 
-add layout_file name 'rw_nebula_user_profile'  generic_name 'user_profile'  description 'rw_user_profile' filename 'rw_nebula_user_profile.lyt.html';
-add layout name 'rw_nebula_01_user_profile' title 'Profile utilisateur'   generic_name 'user_profile'  description 'rw_nebula user_profile'   layout_file 'rw_nebula_user_profile';
+add layout_file name 'rw_nebula_user_profile'  generic_name 'user_profile'  description 'rw_user_profile' filename 'Rootwave/rw_nebula_user_profile.lyt.html';
+add layout name 'rw_nebula_01_user_profile' title 'Profil utilisateur'   generic_name 'user_profile'  description 'rw_nebula user_profile'   layout_file 'rw_nebula_user_profile';
 assign layout name 'rw_nebula_01_user_profile' to_theme 'rw_nebula_01';
 
-add layout_file name 'rw_nebula_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'rw_nebula_script_execution.lyt.html';
+add layout_file name 'rw_nebula_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'Rootwave/rw_nebula_script_execution.lyt.html';
 add layout name 'rw_nebula_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_nebula script_execution'   layout_file 'rw_nebula_script_execution';
 assign layout name 'rw_nebula_01_script_execution' to_theme 'rw_nebula_01';
 
-add layout_file name 'rw_nebula_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'rw_nebula_decoration.lyt.html';
+add layout_file name 'rw_nebula_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'Rootwave/rw_nebula_decoration.lyt.html';
 add layout name 'rw_nebula_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_nebula decoration'   layout_file 'rw_nebula_decoration';
 assign layout name 'rw_nebula_01_decoration' to_theme 'rw_nebula_01';
