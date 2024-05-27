@@ -14,3 +14,5 @@ assign document name "doc_uni_search_p01.php"					to_article "fra_search_p01";
 assign document name "doc_uni_staff_member_list_p01.php"		to_article "fra_staff_member_list_p01";
 assign document name "doc_uni_what_we_do_p01.php"				to_article "fra_what_we_do_p01";
 
+add article	name "fra_test_niv6_p01"				reference "fra_test_niv6"				slug "test-n6"				deadline "initial_online"		desc "Test"							title "Test"										subtitle "Menu niveau 6"				page "1"	validation_state "VALID"	config "no_menu";
+assign document name "doc_uni_testDocument_p02.php"				to_article "fra_test_niv6_p01";

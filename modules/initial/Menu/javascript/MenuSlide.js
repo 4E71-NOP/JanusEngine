@@ -43,12 +43,16 @@ class MenuSlide {
 		
 		// Sets the menu level/branch on the article at hand
 		if ( this.locateMenuId(this.EntryPoint) == true ) {
-			if ( this.level > 1 ) {	
+			if (this.level > 1) {
+				this.md[1].classList.toggle('moveIn'); // The first one has a moveIn by default
 				this.level--;		// We know level will get +1;
 				this.slideDeeper(this.currentMenu); 
 			}
 			l.Log[dbgMenu]("MenuSlide.initialization / currentMenu:'"+this.currentMenu+"', menu_id:'"+this.menu_id+"', tmpLevel:'"+this.tmpLevel+"'");
 		}
+		for (let n = 1; n <= this.maxMenuLevel; n++) { 
+			if (n < this.level - 1) { this.md[n].classList.toggle('slideLeftExit'); }
+		 }
 		for (let n=1; n<=this.maxMenuLevel; n++) { this.md[n].style.visibility = "visible"; }
 	}
 
@@ -62,7 +66,7 @@ class MenuSlide {
 		let d = this.data;
 		for (let n in d ) {
 			if ( d[n].menu_parent == id ) {
-				if ( this.checkChildren(d[n].menu_id) === true ) {
+				if ( this.checkChild(d[n].menu_id) === true ) {
 					this.tmpLevel++;
 					if ( this.locateMenuId(d[n].menu_id) === true ) { return true; }
 					this.tmpLevel--;
@@ -80,7 +84,7 @@ class MenuSlide {
 
 
 	/**
-	 * Stuff the a div with the menu children that has been clicked on
+	 * Stuff the div with the menu children that has been clicked on
 	 */
 	makeMenu(){
 		let c = this.data[this.currentMenu];
@@ -98,7 +102,7 @@ class MenuSlide {
 		let d = this.data;
 		for ( let n in d ){
 			if ( d[n].menu_parent == this.currentMenu ) {
-				if ( this.checkChildren(d[n].menu_id) === true) {
+				if ( this.checkChild(d[n].menu_id) === true) {
 					str += "<li class='"
 						+this.themeName
 						+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"
@@ -136,7 +140,7 @@ class MenuSlide {
 	 * @param {*} id 
 	 * @returns boolean
 	 */
-	checkChildren(id){
+	checkChild(id){
 		let d = this.data;
 		for ( let n in d ){ 
 			if ( d[n].menu_parent == id ) { return true; }
