@@ -1,8 +1,8 @@
 <?php
-/* Hydre-licence-debut */
+/* JanusEngine-license-start */
 // --------------------------------------------------------------------------------------------
 //
-// Hydre - Le petit moteur de web
+// Janus Engine - Le petit moteur de web
 // Sous licence Creative Common
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,8 +10,8 @@
 // (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/* Hydre-licence-fin */
-class HydrInstall
+/* JanusEngine-license-end */
+class JnsEngInstall
 {
 	private static $Instance = null;
 	private function __construct()
@@ -21,12 +21,12 @@ class HydrInstall
 	/**
 	 * Singleton : Will return the instance of this class.
 	 *
-	 * @return HydrInstall
+	 * @return JnsEngInstall
 	 */
 	public static function getInstance()
 	{
 		if (self::$Instance == null) {
-			self::$Instance = new HydrInstall();
+			self::$Instance = new JnsEngInstall();
 		}
 		return self::$Instance;
 	}
@@ -77,10 +77,10 @@ class HydrInstall
 		// Session management
 		//
 		//
-		$CurrentSetObj->setDataEntry('ws', 'HdrBase');
+		$CurrentSetObj->setDataEntry('ws', 'JnsEngCore');
 
 		$ClassLoaderObj->provisionClass('SessionManagement');
-		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
+		$CurrentSetObj->setDataEntry('sessionName', 'JanusEngineWebsiteSessionId');
 		$bts->initSmObj();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
 		
@@ -97,7 +97,7 @@ class HydrInstall
 		ini_set('log_errors', "On");
 		ini_set('error_log', "/var/log/apache2/error.log");
 		ini_set('display_errors', 0);
-		error_log("********** Hydr installation Begin **********");
+		error_log("********** Janus Engine installation Begin **********");
 		
 		// --------------------------------------------------------------------------------------------
 		//
@@ -184,7 +184,7 @@ class HydrInstall
 			" . $stylesheet . "\r
 			<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_".$randomNumber.".png' sizes='32x32'>\r
 			</head>\r
-			<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
+			<body id='JnsEngBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
 			"' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col') .
 			"' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col') .
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col') .
@@ -297,7 +297,7 @@ class HydrInstall
 		// --------------------------------------------------------------------------------------------
 		unset($A);
 
-		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js');
+		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_JnsEngCore.js');
 		// $GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_test_db.js' );
 		// $GeneratedScriptObj->insertString('JavaScript-File', 'current/install/install_routines/install_fonctions.js' );
 		$GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js');
@@ -305,7 +305,7 @@ class HydrInstall
 
 		$GeneratedScriptObj->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
-		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'HydrBody' ).style.visibility = 'visible';");
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi( 'JnsEngBody' ).style.visibility = 'visible';");
 
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "console.log ( TabInfoModule );");
 
@@ -340,7 +340,7 @@ class HydrInstall
 
 		error_log("> memory_get_peak_usage (real)=" . floor((memory_get_peak_usage($real_usage = TRUE) / 1024)) . "Kb" . "; memory_get_usage (real)=" . floor((memory_get_usage($real_usage = TRUE) / 1024)) . "Kb");
 		error_log("> memory_get_peak_usage=" . floor((memory_get_peak_usage() / 1024)) . "Kb" . "; memory_get_usage=" . floor((memory_get_usage() / 1024)) . "Kb");
-		error_log("********** Hydr installation End **********");
+		error_log("********** Janus Engine installation End **********");
 		// 		session_write_close ();
 		return ($DocContent);
 	}

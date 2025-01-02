@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
 //
-//	MWM - Multi Web Manager
+//	JnsEng - Janus Engine
 //	Sous licence Creative common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -113,29 +113,29 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 	for ( var ptr in Tab ) {
 		var Obj = elm.Gebi ( String(Tab[ptr].id ) );
 
-		Obj.HdrBackupStyle_marginTop		= Obj.style.marginTop;
-		Obj.HdrBackupStyle_opacticy			= Obj.style.opacity;
-		Obj.HdrBackupStyle_MozOpacity		= Obj.style.MozOpacity;
-		Obj.HdrBackupStyle_filter			= Obj.style.filter;
-		Obj.HdrBackupStyle_zIndex			= Obj.style.zIndex;
-		Obj.HdrBackupStyle_letterSpacing	= Obj.style.letterSpacing;
-		Obj.HdrBackupStyle_lineHeight		= Obj.style.lineHeight;
-		Obj.HdrBackupStyle_lineHeightN		= Number(Obj.style.lineHeight.replace( RegExp ('px', 'g') , '' ));
-		Obj.HdrBackupStyle_width			= Number (Tab[ptr].width);
-		Obj.HdrBackupStyle_height			= Obj.clientHeight;
+		Obj.JnsEngBackupStyle_marginTop		= Obj.style.marginTop;
+		Obj.JnsEngBackupStyle_opacticy			= Obj.style.opacity;
+		Obj.JnsEngBackupStyle_MozOpacity		= Obj.style.MozOpacity;
+		Obj.JnsEngBackupStyle_filter			= Obj.style.filter;
+		Obj.JnsEngBackupStyle_zIndex			= Obj.style.zIndex;
+		Obj.JnsEngBackupStyle_letterSpacing	= Obj.style.letterSpacing;
+		Obj.JnsEngBackupStyle_lineHeight		= Obj.style.lineHeight;
+		Obj.JnsEngBackupStyle_lineHeightN		= Number(Obj.style.lineHeight.replace( RegExp ('px', 'g') , '' ));
+		Obj.JnsEngBackupStyle_width			= Number (Tab[ptr].width);
+		Obj.JnsEngBackupStyle_height			= Obj.clientHeight;
 
-		Obj.Hdr_Root				= 1;
-		Obj.Hdr_Type				= Tab[ptr].typ;
-		Obj.Hdr_Directory			= Number ( Tab[ptr].dos );
-		Obj.Hdr_State				= 1;
-		Obj.Hdr_PlannedAnimation	= 0;
-		Obj.Hdr_Progression			= 0;
-		Obj.Hdr_Direction			= 0;
-		Obj.Hdr_Level				= Number ( Tab[ptr].niv );
-		Obj.Hdr_Deco				= Number ( Tab[ptr].deco );
-		Obj.Hdr_Animation			= Tab[ptr].anim;
-		Obj.Hdr_Parent				= elm.Gebi ( Tab[ptr].p );
-		Obj.Hdr_StopPropagation		= 1;
+		Obj.JnsEng_Root				= 1;
+		Obj.JnsEng_Type				= Tab[ptr].typ;
+		Obj.JnsEng_Directory			= Number ( Tab[ptr].dos );
+		Obj.JnsEng_State				= 1;
+		Obj.JnsEng_PlannedAnimation	= 0;
+		Obj.JnsEng_Progression			= 0;
+		Obj.JnsEng_Direction			= 0;
+		Obj.JnsEng_Level				= Number ( Tab[ptr].niv );
+		Obj.JnsEng_Deco				= Number ( Tab[ptr].deco );
+		Obj.JnsEng_Animation			= Tab[ptr].anim;
+		Obj.JnsEng_Parent				= elm.Gebi ( Tab[ptr].p );
+		Obj.JnsEng_StopPropagation		= 1;
 
 // Adds sentinels instead of replacing them to keep those already declared intact.
 		if( Obj.addEventListener ) { 
@@ -157,8 +157,8 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 				if ( DivHauteurAjuste > Tab[ptr].min_height ) { ModuleInfo[Tab[ptr].id]['DimConteneurY'] = DivHauteurAjuste; }
 				else { ModuleInfo[Tab[ptr].id]['DimConteneurY'] = Tab[ptr].min_height; }
 
-				Obj.Hdr_State = 0;
-				Obj.Hdr_Root = 0;
+				Obj.JnsEng_State = 0;
+				Obj.JnsEng_Root = 0;
 				//if ( Tab[ptr].niv == 0 ) { Obj.style.visibility = 'visible'; } else { Obj.style.visibility = 'hidden'; }
 				Obj.style.display = 'block';
 				Obj.MWM_AnimationEnCoursOUT = 0;
@@ -184,8 +184,8 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 				Obj.style.left = ( Number(NewDivPx) + Number(Tab[ptr].decal_x) ) + 'px';
 				Obj.style.top = ( Number(NewDivPy) + Number(Tab[ptr].decal_y) ) + 'px';
 
-				Obj.HdrBackupStyle_top				= Obj.style.top;
-				Obj.HdrBackupStyle_left			= Obj.style.left;
+				Obj.JnsEngBackupStyle_top				= Obj.style.top;
+				Obj.JnsEngBackupStyle_left			= Obj.style.left;
 
 				var DivDecoList = Obj.childNodes;
 				for ( var IdxDeco = 0 ; IdxDeco < Obj.childNodes.length ; IdxDeco++ ) {
@@ -199,7 +199,7 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 			}
 		break;
 		case 'a':
-			if ( Obj.Hdr_Directory == 1 ) { 
+			if ( Obj.JnsEng_Directory == 1 ) { 
 				Obj.MWM_Fils = Tab[ptr].f.a1;
 				var ObjF = elm.Gebi ( Obj.MWM_Fils );
 				var ObjP = Obj.parentNode.style;
@@ -214,8 +214,8 @@ function InitMenuDiv ( Tab , ModuleInfo ) {
 		break;
 		}
 		if ( Tab[ptr].p != 'root' ) { 
-			Obj.Hdr_State = 0;
-			Obj.Hdr_Root = 0;
+			Obj.JnsEng_State = 0;
+			Obj.JnsEng_Root = 0;
 		}
 
 		l.Log[dbgPopMenu](
@@ -244,17 +244,17 @@ function CustomEventMouseOver ( e ) {
 		case 'MSIE7':	
 			e.cancelBubble = true;	
 			e.returnValue = false;	
-			if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
+			if ( e.srcElement.JnsEng_StopPropagation ) { var CibleFinale = e.srcElement; }
 			else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 		break;
 		default:		
 			e.stopPropagation();	
 			e.preventDefault();
-			if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
+			if ( e.target.JnsEng_StopPropagation ) { var CibleFinale = e.target; }
 			else { var CibleFinale = e.target.parentNode.parentNode; }	
 		break;
 		}
-		l.Log[dbgPopMenu]("CustomEventMouseOver IN on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
+		l.Log[dbgPopMenu]("CustomEventMouseOver IN on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.JnsEng_Type);
 		GestionMenu ( CibleFinale , 1 );
 	break;
 	}
@@ -266,17 +266,17 @@ function CustomEventMouseOut ( e ) {
 	case 'MSIE7':
 		e.cancelBubble = true;	
 		e.returnValue = false;	
-		if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
+		if ( e.srcElement.JnsEng_StopPropagation ) { var CibleFinale = e.srcElement; }
 		else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 	break;
 	default:		
 		e.stopPropagation();	
 		e.preventDefault();
-		if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
+		if ( e.target.JnsEng_StopPropagation ) { var CibleFinale = e.target; }
 		else { var CibleFinale = e.target.parentNode.parentNode; }	
 	break;
 	}
-	l.Log[dbgPopMenu]("CustomEventMouseOut OUT on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
+	l.Log[dbgPopMenu]("CustomEventMouseOut OUT on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.JnsEng_Type);
 	GestionMenu ( CibleFinale , 0 );
 }
 
@@ -290,17 +290,17 @@ function CustomEventMouseClick ( e ) {
 		case 'MSIE7':
 			e.cancelBubble = true;	
 			e.returnValue = false;	
-			if ( e.srcElement.Hdr_StopPropagation ) { var CibleFinale = e.srcElement; }
+			if ( e.srcElement.JnsEng_StopPropagation ) { var CibleFinale = e.srcElement; }
 			else { var CibleFinale = e.srcElement.parentNode.parentNode; }	
 		break;
 		default:		
 			e.stopPropagation();	
 			e.preventDefault();
-			if ( e.target.Hdr_StopPropagation ) { var CibleFinale = e.target; }
+			if ( e.target.JnsEng_StopPropagation ) { var CibleFinale = e.target; }
 			else { var CibleFinale = e.target.parentNode.parentNode; }	
 		break;
 		}
-		l.Log[dbgPopMenu]("CustomEventMouseClick CLICK on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.Hdr_Type);
+		l.Log[dbgPopMenu]("CustomEventMouseClick CLICK on " + e.srcElement.id + ", CibleFinale=" + CibleFinale.id + "; Type:" + CibleFinale.JnsEng_Type);
 		GestionMenu ( CibleFinale , 1 );
 	break;
 	}
@@ -315,23 +315,23 @@ function GestionMenu ( Obj , TypeEve ) {
 	var a = 0, b = '', c = '', Np = 0, AParents = 0, AFils = 0, Secu = 0;
 
 	if ( TypeEve == 1 ) { a = a + 32; b += '32_'; }
-	l.Log[dbgPopMenu]("GestionMenu id="+Obj.id+"; Type:"+Obj.Hdr_Type);
+	l.Log[dbgPopMenu]("GestionMenu id="+Obj.id+"; Type:"+Obj.JnsEng_Type);
 
-	switch ( Obj.Hdr_Type ) {
+	switch ( Obj.JnsEng_Type ) {
 	case 'a':		
 		a = a + 16; b += '16_';
-		if ( Obj.Hdr_Directory == 1 ) {
+		if ( Obj.JnsEng_Directory == 1 ) {
 			a = a + 8; b += '8_';
 			var ObjF = elm.Gebi ( Obj.MWM_Fils );
-			if ( ObjF.Hdr_State != 0 )	{ a = a + 4; b += '4_'; }
-			if ( ObjF.Hdr_PlannedAnimation == 1 )	{ a = a + 2; b += '2_'; }
-			if ( ObjF.Hdr_Progression > 0 )	{ a = a + 1; b += '1_'; }
+			if ( ObjF.JnsEng_State != 0 )	{ a = a + 4; b += '4_'; }
+			if ( ObjF.JnsEng_PlannedAnimation == 1 )	{ a = a + 2; b += '2_'; }
+			if ( ObjF.JnsEng_Progression > 0 )	{ a = a + 1; b += '1_'; }
 		}
 	break;
 	case 'div':
-		if ( Obj.Hdr_State != 0 )	{ a = a + 4; b += '4_'; }
-		if ( Obj.Hdr_PlannedAnimation == 1 )	{ a = a + 2; b += '2_'; }
-		if ( Obj.Hdr_Progression > 0 )	{ a = a + 1; b += '1_'; }
+		if ( Obj.JnsEng_State != 0 )	{ a = a + 4; b += '4_'; }
+		if ( Obj.JnsEng_PlannedAnimation == 1 )	{ a = a + 2; b += '2_'; }
+		if ( Obj.JnsEng_Progression > 0 )	{ a = a + 1; b += '1_'; }
 	break;
 	}
 
@@ -358,15 +358,15 @@ function GestionMenu ( Obj , TypeEve ) {
 
 	var Ptr = 0;
 	if ( Np == 1 ) {
-		if ( Obj.Hdr_Type == 'a' ) {
+		if ( Obj.JnsEng_Type == 'a' ) {
 			ObjF = elm.Gebi ( Obj.MWM_Fils );
 			switch ( AFils ) {
 			case 10 :
-				ObjF.Hdr_Direction = 0;	ObjF.Hdr_PlannedAnimation = 1;	Ptr = ObjF.Hdr_Animation;
+				ObjF.JnsEng_Direction = 0;	ObjF.JnsEng_PlannedAnimation = 1;	Ptr = ObjF.JnsEng_Animation;
 				ObjF.MWM_AnimationEnCoursOUT = setTimeout( 'CacheSousMenuExplorateur ( \'' + ObjF.id + '\' );' , ChoixAnimation[Ptr].sca );
 			break;
 			case 11 :
-				ObjF.Hdr_Direction = 1;	ObjF.Hdr_PlannedAnimation = 1;	Ptr = ObjF.Hdr_Animation;
+				ObjF.JnsEng_Direction = 1;	ObjF.JnsEng_PlannedAnimation = 1;	Ptr = ObjF.JnsEng_Animation;
 				ObjF.MWM_AnimationEnCoursIN = setTimeout( 'AfficheSousMenuExplorateur ( \'' + ObjF.id + '\' );' , ChoixAnimation[Ptr].eca );
 			break;
 			case 20 :	NettoyageTimers ( ObjF , 0 );		break;
@@ -375,47 +375,47 @@ function GestionMenu ( Obj , TypeEve ) {
 		}
 
 		while ( Np == 1 ) {
-			if ( Obj.Hdr_Root == 1 || Obj.Hdr_Level == 0 ) { Np = 0; }
-			if ( Obj.Hdr_Type == 'div' && Np == 1 ) {
+			if ( Obj.JnsEng_Root == 1 || Obj.JnsEng_Level == 0 ) { Np = 0; }
+			if ( Obj.JnsEng_Type == 'div' && Np == 1 ) {
 				switch ( AParents ) {
 				case 10 :
 					NettoyageTimers ( Obj , 0 );
-					Obj.Hdr_Direction = 0;	Obj.Hdr_PlannedAnimation = 1;	Ptr = Obj.Hdr_Animation;
+					Obj.JnsEng_Direction = 0;	Obj.JnsEng_PlannedAnimation = 1;	Ptr = Obj.JnsEng_Animation;
 					Obj.MWM_AnimationEnCoursOUT = setTimeout( 'CacheSousMenuExplorateur ( \'' + Obj.id + '\' );' , ChoixAnimation[Ptr].sca );
 				break;
 				case 11 :
 					NettoyageTimers ( Obj , 1 );
-					Obj.Hdr_Direction = 1;	Obj.Hdr_PlannedAnimation = 1;	Ptr = Obj.Hdr_Animation;
+					Obj.JnsEng_Direction = 1;	Obj.JnsEng_PlannedAnimation = 1;	Ptr = Obj.JnsEng_Animation;
 					Obj.MWM_AnimationEnCoursIN = setTimeout( 'AfficheSousMenuExplorateur ( \'' + Obj.id + '\' );' , ChoixAnimation[Ptr].eca );
 				break;
 				case 20 :	NettoyageTimers ( Obj , 0 );	break;
 				case 21 :	NettoyageTimers ( Obj , 1 );	break;
 				}
 			}
-			Obj = Obj.Hdr_Parent;
+			Obj = Obj.JnsEng_Parent;
 		}
 	}
 }
 
 function AfficheSousMenuExplorateur ( ObjId ) {
-	var Obj = elm.Gebi( ObjId ), Ptr = Obj.Hdr_Animation;
+	var Obj = elm.Gebi( ObjId ), Ptr = Obj.JnsEng_Animation;
 	Obj.MWM_AnimationEnCoursIN = setTimeout( 'GestionnaireAnimation ( \'' + ObjId + '\' );', ( ChoixAnimation[Ptr].ecd / 10 ) );
 }
  
 function CacheSousMenuExplorateur ( ObjId ) {
-	var Obj = elm.Gebi( ObjId ), Ptr = Obj.Hdr_Animation;
+	var Obj = elm.Gebi( ObjId ), Ptr = Obj.JnsEng_Animation;
 	Obj.MWM_AnimationEnCoursOUT = setTimeout( 'GestionnaireAnimation ( \'' + ObjId + '\' );', ( ChoixAnimation[Ptr].scd / 10 ) );
 }
 
 
 function NettoyageTimers ( Obj , Sens ) {
 	var a = ( Sens * 2 );
-	if ( Obj.Hdr_Progression > 0 ) { a = a + 1; }
+	if ( Obj.JnsEng_Progression > 0 ) { a = a + 1; }
 	switch ( a ) {
-	case 0 :	clearTimeout( Obj.MWM_AnimationEnCoursIN );		Obj.Hdr_Direction = 0;	Obj.Hdr_PlannedAnimation = 0;	break;
-	case 1 :													Obj.Hdr_Direction = 0;									break;
-	case 2 :	clearTimeout( Obj.MWM_AnimationEnCoursOUT );	Obj.Hdr_Direction = 1;	Obj.Hdr_PlannedAnimation = 0;	break;
-	case 3 :													Obj.Hdr_Direction = 1;									break;
+	case 0 :	clearTimeout( Obj.MWM_AnimationEnCoursIN );		Obj.JnsEng_Direction = 0;	Obj.JnsEng_PlannedAnimation = 0;	break;
+	case 1 :													Obj.JnsEng_Direction = 0;									break;
+	case 2 :	clearTimeout( Obj.MWM_AnimationEnCoursOUT );	Obj.JnsEng_Direction = 1;	Obj.JnsEng_PlannedAnimation = 0;	break;
+	case 3 :													Obj.JnsEng_Direction = 1;									break;
 	}
 }
 
@@ -423,10 +423,10 @@ function NettoyageTimers ( Obj , Sens ) {
 function GestionnaireAnimation ( ObjId ) {
 	var Obj = elm.Gebi( ObjId );
 
-	if ( Obj.Hdr_Progression < 1 ) {
-		Obj.Hdr_State = 2;
+	if ( Obj.JnsEng_Progression < 1 ) {
+		Obj.JnsEng_State = 2;
 		var NombreDePas = ( 1000 / NbrAnimParSec );
-		var Ptr = Obj.Hdr_Animation;
+		var Ptr = Obj.JnsEng_Animation;
 		for ( var Elm in ChoixAnimation[Ptr].LTb ) {
 			switch ( ChoixAnimation[Ptr].LTb[Elm] ) {
 			case 'FT':			FonduTransparent			( Obj , ChoixAnimation[Ptr].LTA[Elm] );	break
@@ -445,56 +445,56 @@ function GestionnaireAnimation ( ObjId ) {
 			case 'SC':			SimpleCommutation			( Obj , ChoixAnimation[Ptr].LTA[Elm] );	break
 			}
 		}
-		switch ( Obj.Hdr_Direction ) {
-		case 0 :	clearTimeout( Obj.MWM_AnimationEnCoursIN );		Obj.MWM_AnimationEnCoursOUT =	setTimeout( 'GestionnaireAnimation ( \'' + Obj.id + '\' );', ( ChoixAnimation[Ptr].scd / NombreDePas ) );	Obj.style.zIndex = Obj.HdrBackupStyle_zIndex - 1; break;
-		case 1 :	clearTimeout( Obj.MWM_AnimationEnCoursOUT );	Obj.MWM_AnimationEnCoursIN =	setTimeout( 'GestionnaireAnimation ( \'' + Obj.id + '\' );', ( ChoixAnimation[Ptr].ecd / NombreDePas ) );	Obj.style.zIndex = Obj.HdrBackupStyle_zIndex + 1; break;
+		switch ( Obj.JnsEng_Direction ) {
+		case 0 :	clearTimeout( Obj.MWM_AnimationEnCoursIN );		Obj.MWM_AnimationEnCoursOUT =	setTimeout( 'GestionnaireAnimation ( \'' + Obj.id + '\' );', ( ChoixAnimation[Ptr].scd / NombreDePas ) );	Obj.style.zIndex = Obj.JnsEngBackupStyle_zIndex - 1; break;
+		case 1 :	clearTimeout( Obj.MWM_AnimationEnCoursOUT );	Obj.MWM_AnimationEnCoursIN =	setTimeout( 'GestionnaireAnimation ( \'' + Obj.id + '\' );', ( ChoixAnimation[Ptr].ecd / NombreDePas ) );	Obj.style.zIndex = Obj.JnsEngBackupStyle_zIndex + 1; break;
 		}
-		Obj.Hdr_Progression = Obj.Hdr_Progression + ( 1 / NombreDePas );
+		Obj.JnsEng_Progression = Obj.JnsEng_Progression + ( 1 / NombreDePas );
 	}
 	else {
-		switch ( Obj.Hdr_Direction ) {
+		switch ( Obj.JnsEng_Direction ) {
 		case 0 :
 			clearTimeout( Obj.MWM_AnimationEnCoursOUT );
 			Obj.style.visibility 		= 'hidden';
 			Obj.style.display 			= 'none';
-			Obj.Hdr_State 				= 0;
+			Obj.JnsEng_State 				= 0;
 		break;
 		case 1 :
 			clearTimeout( Obj.MWM_AnimationEnCoursIN );
 			Obj.style.visibility 		= 'visible';
 			Obj.style.display 			= 'block';
-			Obj.Hdr_State 				= 1;
+			Obj.JnsEng_State 				= 1;
 		break;
 		}
-		Obj.Hdr_Progression 		= 0;
-		Obj.Hdr_PlannedAnimation 	= 0;
+		Obj.JnsEng_Progression 		= 0;
+		Obj.JnsEng_PlannedAnimation 	= 0;
 
-		Obj.style.top 			= Obj.HdrBackupStyle_top;
-		Obj.style.left 			= Obj.HdrBackupStyle_left;
-		Obj.style.width 		= Obj.HdrBackupStyle_width +'px';
-		Obj.style.height 		= Obj.HdrBackupStyle_height +'px';
-		Obj.style.marginTop 	= Obj.HdrBackupStyle_marginTop;
-		Obj.style.opacity 	 	= Obj.HdrBackupStyle_opacticy;
-		Obj.style.MozOpacity 	= Obj.HdrBackupStyle_MozOpacity;
-		Obj.style.filter 		= Obj.HdrBackupStyle_filter;
-		Obj.style.zIndex 		= Obj.HdrBackupStyle_zIndex;
-		Obj.style.letterSpacing = Obj.HdrBackupStyle_letterSpacing;
+		Obj.style.top 			= Obj.JnsEngBackupStyle_top;
+		Obj.style.left 			= Obj.JnsEngBackupStyle_left;
+		Obj.style.width 		= Obj.JnsEngBackupStyle_width +'px';
+		Obj.style.height 		= Obj.JnsEngBackupStyle_height +'px';
+		Obj.style.marginTop 	= Obj.JnsEngBackupStyle_marginTop;
+		Obj.style.opacity 	 	= Obj.JnsEngBackupStyle_opacticy;
+		Obj.style.MozOpacity 	= Obj.JnsEngBackupStyle_MozOpacity;
+		Obj.style.filter 		= Obj.JnsEngBackupStyle_filter;
+		Obj.style.zIndex 		= Obj.JnsEngBackupStyle_zIndex;
+		Obj.style.letterSpacing = Obj.JnsEngBackupStyle_letterSpacing;
 	}
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------
 function SimpleCommutation ( Obj ) {
-	switch ( Obj.Hdr_Direction ) {
+	switch ( Obj.JnsEng_Direction ) {
 	case 0 :	Obj.style.visibility = 'hidden';	Obj.style.display = 'none';		break;
 	case 1 :	Obj.style.visibility = 'visible';	Obj.style.display = 'block';	break;
 	}
-	Obj.Hdr_Progression = 2;
+	Obj.JnsEng_Progression = 2;
 }
 
 
 function FonduTransparent ( Obj ) {
-	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);
-	var a = ( Obj.Hdr_Direction * 2 );
+	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);
+	var a = ( Obj.JnsEng_Direction * 2 );
 	if ( de.cliEnv.browser.support == 'MSIE7' ) { a = a + 1 }
 	switch ( a ) {
 	case 0 :	Obj.style.opacity =  Obj.style.MozOpacity = 1 - ProgressionSin;					break;
@@ -508,9 +508,9 @@ function FonduTransparent ( Obj ) {
 
 
 function GlissementVerticalSin ( Obj , da , db ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * ( 1 - Obj.Hdr_Progression ));	break;
-	case 1 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * Obj.Hdr_Progression );			break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * ( 1 - Obj.JnsEng_Progression ));	break;
+	case 1 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * Obj.JnsEng_Progression );			break;
 	}
 	switch ( Number( db ) ) {
 	case 1 :	Obj.style.marginTop = ( Math.floor(( 0 - da ) + ( ProgressionSin * da ))) + 'px';	break;
@@ -519,9 +519,9 @@ function GlissementVerticalSin ( Obj , da , db ) {
 }
 
 function GlissementVerticalCos ( Obj , da , db ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * ( 1 - Obj.Hdr_Progression ));	break;
-	case 1 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * Obj.Hdr_Progression );			break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * ( 1 - Obj.JnsEng_Progression ));	break;
+	case 1 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * Obj.JnsEng_Progression );			break;
 	}
 	switch ( Number( db ) ) {
 	case 1 :	Obj.style.marginTop = ( Math.floor( 0 - ( ProgressionSin * da ))) + 'px';	break;
@@ -530,9 +530,9 @@ function GlissementVerticalCos ( Obj , da , db ) {
 }
 
 function GlissementHorizontalSin ( Obj , da , db ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * ( 1 - Obj.Hdr_Progression ));	break;
-	case 1 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * Obj.Hdr_Progression );			break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * ( 1 - Obj.JnsEng_Progression ));	break;
+	case 1 :	var ProgressionSin = Math.sin(( Math.PI / 2 ) * Obj.JnsEng_Progression );			break;
 	}
 	switch ( Number( db ) ) {
 	case 1 :	Obj.style.marginLeft = ( Math.floor(( 0 - da ) + ( ProgressionSin * da ))) + 'px';	break;
@@ -541,9 +541,9 @@ function GlissementHorizontalSin ( Obj , da , db ) {
 }
 
 function GlissementHorizontalCos ( Obj , da , db ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * ( 1 - Obj.Hdr_Progression ));	break;
-	case 1 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * Obj.Hdr_Progression );			break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * ( 1 - Obj.JnsEng_Progression ));	break;
+	case 1 :	var ProgressionSin = Math.cos(( Math.PI / 2 ) * Obj.JnsEng_Progression );			break;
 	}
 	switch ( Number( db ) ) {
 	case 1 :	Obj.style.marginLeft = ( Math.floor( 0 - ( ProgressionSin * da ))) + 'px';	break;
@@ -552,14 +552,14 @@ function GlissementHorizontalCos ( Obj , da , db ) {
 }
 
 function TailleHorizontale ( Obj , da , db ) { 
-	var TRef = Obj.HdrBackupStyle_width;
-	var Action = Obj.Hdr_Direction + ( da * 2 );
+	var TRef = Obj.JnsEngBackupStyle_width;
+	var Action = Obj.JnsEng_Direction + ( da * 2 );
 
 	switch ( Action ) {
-	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
-	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
-	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
-	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
+	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
+	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
+	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
+	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurX'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	}
 	dm.UpdateAllDecoModule ( TabInfoModule , Obj.id );
 
@@ -569,50 +569,50 @@ function TailleHorizontale ( Obj , da , db ) {
 }
 
 function TailleVerticale ( Obj , da , db ) {
-	var TRef = Obj.HdrBackupStyle_height;
-	var Action = Obj.Hdr_Direction + ( da * 2 );
+	var TRef = Obj.JnsEngBackupStyle_height;
+	var Action = Obj.JnsEng_Direction + ( da * 2 );
 	switch ( Action ) {
-	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
-	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
-	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
-	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
+	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
+	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef - ( ProgressionSin * TRef * db ) );	break;
+	case 2 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);			TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
+	case 3 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	TabInfoModule[Obj.id]['DimConteneurY'] = Math.floor( TRef + ( ProgressionSin * TRef * db ) );	break;
 	}
 	dm.UpdateAllDecoModule ( TabInfoModule , Obj.id );
 
 }
 
 function DilatationLetterSpacingSin ( Obj , da ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);			break;
-	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);			break;
+	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	break;
 	}
 	Obj.style.letterSpacing = '+' + ( Math.floor( ProgressionSin * Number( da ) )) + 'px';
 }
 
 function DilatationLetterSpacingCos ( Obj , da ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.cos(Math.PI * Obj.Hdr_Progression / 2);			break;
-	case 1 :	var ProgressionSin = Math.cos(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.cos(Math.PI * Obj.JnsEng_Progression / 2);			break;
+	case 1 :	var ProgressionSin = Math.cos(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	break;
 	}
 	Obj.style.letterSpacing = '+' + ( Math.floor( ProgressionSin * Number( da ) )) + 'px';
 }
 
 function DilatationLineHeightSin ( Obj , da ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.Hdr_Progression / 2);				break;
-	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);		break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.sin(Math.PI * Obj.JnsEng_Progression / 2);				break;
+	case 1 :	var ProgressionSin = Math.sin(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);		break;
 	}
-	Obj.style.lineHeight = ( Math.floor( Obj.HdrBackupStyle_lineHeightN + ( ProgressionSin * Number( da ) ) ) ) + 'px';	//Haaaaaaaaaaaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!
+	Obj.style.lineHeight = ( Math.floor( Obj.JnsEngBackupStyle_lineHeightN + ( ProgressionSin * Number( da ) ) ) ) + 'px';	//Haaaaaaaaaaaaaaaaaaaaaaaa!!!!!!!!!!!!!!!!!
 	var Objex22 = elm.Gebi ( Obj.id + '_ex22' );
 	Objex22.style.lineHeight = Obj.style.lineHeight
 }
 
 function DilatationLineHeightCos ( Obj , da ) { 
-	switch ( Obj.Hdr_Direction ) {
-	case 0 :	var ProgressionSin = Math.cos(Math.PI * Obj.Hdr_Progression / 2);			break;
-	case 1 :	var ProgressionSin = Math.cos(Math.PI * ( 1 - Obj.Hdr_Progression ) / 2);	break;
+	switch ( Obj.JnsEng_Direction ) {
+	case 0 :	var ProgressionSin = Math.cos(Math.PI * Obj.JnsEng_Progression / 2);			break;
+	case 1 :	var ProgressionSin = Math.cos(Math.PI * ( 1 - Obj.JnsEng_Progression ) / 2);	break;
 	}
-	Obj.style.lineHeight = ( Math.floor( Obj.HdrBackupStyle_lineHeightN + ( ProgressionSin * Number( da ) ))) + 'px';
+	Obj.style.lineHeight = ( Math.floor( Obj.JnsEngBackupStyle_lineHeightN + ( ProgressionSin * Number( da ) ))) + 'px';
 	var Objex22 = elm.Gebi ( Obj.id + '_ex22' );
 	Objex22.style.lineHeight = Obj.style.lineHeight
 }

@@ -1,7 +1,7 @@
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -9,7 +9,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 // http://www.w3schools.com/php/php_ajax_xml.asp
 
@@ -19,9 +19,9 @@ class LibTestDB {
 		this.dbgTstDb = 0;
 		this.resultTest = {
 			'cnxToDB': false,
-			'HydrDBAlreadyExists': false,
+			'JnsEngDBAlreadyExists': false,
 			'installationLocked': false,
-			'HydrUserAlreadyExists':false,
+			'JnsEngUserAlreadyExists':false,
 		};
 
 		this.testDbFieldList = [
@@ -58,15 +58,15 @@ class LibTestDB {
 				l.Log[tdb.dbgTstDb](res);
 
 				tdb.toggleDbResultDivsVisibilty('cnxToDB', false);
-				tdb.toggleDbResultDivsVisibilty('HydrDBAlreadyExists', false);
-				tdb.toggleDbResultDivsVisibilty('HydrUserAlreadyExists', false);
+				tdb.toggleDbResultDivsVisibilty('JnsEngDBAlreadyExists', false);
+				tdb.toggleDbResultDivsVisibilty('JnsEngUserAlreadyExists', false);
 				tdb.toggleDbResultDivsVisibilty('installationLocked', false);
 
 
 				tdb.toggleDbResultDivs('cnxToDB', res.cnxToDB);
 				if (res.cnxToDB) {
-					tdb.toggleDbResultDivs('HydrDBAlreadyExists', res.HydrDBAlreadyExists);
-					tdb.toggleDbResultDivs('HydrUserAlreadyExists', res.HydrUserAlreadyExists);
+					tdb.toggleDbResultDivs('JnsEngDBAlreadyExists', res.JnsEngDBAlreadyExists);
+					tdb.toggleDbResultDivs('JnsEngUserAlreadyExists', res.JnsEngUserAlreadyExists);
 					tdb.toggleDbResultDivs('installationLocked', res.installationLocked);
 				}
 			}

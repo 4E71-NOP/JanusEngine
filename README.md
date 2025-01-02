@@ -1,4 +1,4 @@
-# Hydr
+# Janus Engine
 This project is ment to help people to implement websites with more graphics and themes than usual (flat design). The code is under heavy changes at the moment. Things take time. In the mean time suggestions and constructive comments are welcomed. 
 
 The jumpstart (see archives) packkage contains documentation. So by installing this package on a local machine you'll have the docs and examples. 
@@ -11,7 +11,7 @@ Download the source from this place and play. I believe you know what you're doi
 ## Archives
 You can download 2 types of packages from the online archive:
 * **Minimal**     : only installs the engine. You'll have to provide the scripts to create a website.
-* **Jumpstart**   : Install the Hydr website (so you get the docs and script you can mimic).
+* **Jumpstart**   : Install the Janus Engine website (so you get the docs and script you can mimic).
 
 Note: The links aren't ready yet. So. Please be patient.
 
@@ -31,7 +31,7 @@ See the [online documentation](https://docs.phpdoc.org/latest/guide/getting-star
 
 Shortcut:
 ```sh
-root@box:/mnt/web/directory/Hydr$ docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d . -t ./DeveloperDocs
+root@box:/mnt/web/directory/JanusEngine$ docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 -d . -t ./DeveloperDocs
 ```
 
 # License

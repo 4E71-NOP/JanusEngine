@@ -1,0 +1,19 @@
+add decoration	
+name "JnsEng_menu_002"	
+graphique	'JnsEng_block_003'
+texte	'JnsEng_text_001'
+type "menu"	
+directory	 "Janus_Engine_Core"	
+
+genre					1	
+animation				"ftgvs"	
+
+a_line_height			"18"	
+
+dock_decal_x			"-16"	
+
+display_icons			"NO"	
+icons_width			"16"	
+icons_height			"16"	
+icone_repertoire_01		"icone_dossier.png"	
+;

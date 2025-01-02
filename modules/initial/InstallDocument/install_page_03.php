@@ -1,15 +1,15 @@
 <?php
-/*Hydre-licence-begin*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
 //	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
-/*Hydre-IDE-begin*/
+/*JanusEngine-IDE-begin*/
 // Some definitions in order to ease the IDE work.
 /* $CMObj ConfigurationManagement              */
 /* $LMObj LogManagement                        */
@@ -20,9 +20,9 @@
 /* $SDDMObj DalFacade                          */
 /* $StringFormatObj StringFormat               */
 
-/*Hydre-IDE-end*/
+/*JanusEngine-IDE-end*/
 
-/*Hydre-IDE-begin*/
+/*JanusEngine-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
 /* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
@@ -38,7 +38,7 @@
 /* @var $Block String                               */
 /* @var $infos Array                                */
 /* @var $l String                                   */
-/*Hydre-IDE-end*/
+/*JanusEngine-IDE-end*/
 
 // --------------------------------------------------------------------------------------------
 //		Installation page 03

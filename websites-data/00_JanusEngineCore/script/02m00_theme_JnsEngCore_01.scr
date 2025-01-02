@@ -1,0 +1,52 @@
+add theme	
+name		"JanusEngineCore"	
+title		"Template theme"	
+desc		"DO NOT DELETE / NE PAS EFFACER"	
+state OFFLINE	
+;
+
+/*
+directory	"Janus_Engine_Core"	
+stylesheet_1 "JnsEng_01.css"	
+stylesheet_2 "JnsEng_01_popmenu.css"	
+
+bg			"JnsEng_bg.jpg"	
+bg_repeat	"repeat"	
+logo		"JnsEng_logo.gif"	
+banner		"JnsEng_banniere.gif"	
+
+block_01_name	"JnsEngCore_block_003"		block_01_text	"JnsEngCore_text_002"	
+block_02_name	"JnsEngCore_block_003"		block_02_text	"JnsEngCore_text_002"	
+block_03_name	"JnsEngCore_block_003"		block_03_text	"JnsEngCore_text_002"	
+block_04_name	"JnsEngCore_block_004"		block_04_text	"JnsEngCore_text_002"	
+block_05_name	"JnsEngCore_block_005"		block_05_text	"JnsEngCore_text_002"	
+block_06_name	"JnsEngCore_block_005"		block_06_text	"JnsEngCore_text_002"	
+block_07_name	"JnsEngCore_block_005"		block_07_text	"JnsEngCore_text_002"	
+block_08_name	"JnsEngCore_block_005"		block_08_text	"JnsEngCore_text_002"	
+block_09_name	"JnsEngCore_block_005"		block_09_text	"JnsEngCore_text_002"	
+block_10_name	"JnsEngCore_block_005"		block_10_text	"JnsEngCore_text_002"	
+
+block_00_menu	"JnsEngCore_menu_001"	
+block_01_menu	"JnsEngCore_menu_002"	
+block_02_menu	"JnsEngCore_menu_002"	
+block_03_menu	"JnsEngCore_menu_002"	
+block_04_menu	"JnsEngCore_menu_002"	
+block_05_menu	"JnsEngCore_menu_002"	
+block_06_menu	"JnsEngCore_menu_002"	
+block_07_menu	"JnsEngCore_menu_002"	
+block_08_menu	"JnsEngCore_menu_002"	
+block_09_menu	"JnsEngCore_menu_002"	
+
+
+admctrl_panel_bg "JnsEng_s01_bgc_1.gif"	
+admctrl_switch_bg "admctrl_switch_bg.gif"	
+admctrl_width 64	
+admctrl_height 64	
+admctrl_position "top-left"	
+
+color_gradient_start "00AA00"	
+color_gradient_end "FF0000"	
+
+;
+*/
+

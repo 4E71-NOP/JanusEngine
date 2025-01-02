@@ -1,8 +1,8 @@
 <?php
- /*Hydre-licence-debut*/
+ /*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,8 +10,8 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
-/*Hydr-Content-Begin*/
+/*JanusEngine-license-end*/
+/*JanusEngine-Content-Begin*/
 /* -------------------------------------------------------------------------------------------- */
 /*	Galerie Photographie																		*/
 /* -------------------------------------------------------------------------------------------- */
@@ -36,5 +36,5 @@ $pv['galerie_album'] = "../extensions/".$PA['extension_directory']."/programmes/
 include ( $pv['galerie_album'] );
 
 
-/*Hydr-Content-End*/
+/*JanusEngine-Content-End*/
 ?>

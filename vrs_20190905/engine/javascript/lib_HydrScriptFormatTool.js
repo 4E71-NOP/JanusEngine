@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
 //
-//	MWM - Multi Web Manager
+//	JnsEng - Janus Engine
 //	Sous licence Creative common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -21,7 +21,7 @@ var TabProcessusRegExpRep = {
 	"spcvirgule":	{	"n":"1",	"s":" ;",	"d":";"		}
 };
 
-function formatHydrScript ( Form , src , dst ) {
+function formatJnsEngScript ( Form , src , dst ) {
 	var strSrc = document.forms[Form].elements[src].value;
 	var strDst = "";
 

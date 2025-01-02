@@ -1,0 +1,31 @@
+/*
++---------------------------------------+
+|		JanusEngineCore (JnsEngCore) 	|
+|		www.janus-engine.com	 		|
+|		Initial Configuration site 		|
++---------------------------------------+
+*/
+
+add website 
+name				"JanusEngineCore"	
+short				"JnsEngCore"	
+lang 				"fra"	
+lang_select			"YES"	
+title 				"Janus Engine Core"	
+home				"www.janus-engine.com"	
+directory			"00_JnsEngCore"	
+info_debug			"49215"
+stylesheet			"DYNAMIC"	
+state				"OFFLINE"	
+group				"Server_owner"	
+user				"*user_install*"	
+password			"*user_install*"	
+;
+
+website context name JanusEngineCore				user "*user_install*"	password "*user_install*";
+
+//show debug_off;
+set checkpoint name "Janus Engine Core - Begin";
+set variable name "installMonitor"		value "1";
+set variable name "DebugLevel_CC"		value "1";
+

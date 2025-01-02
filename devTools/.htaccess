@@ -1,7 +1,7 @@
 #
 # Protection for critical files. 
 # The best is to remove this directory after installation.
-# the default user is 'HydrAdmin'
+# the default user is 'JanusEngineAdmin'
 # You can use https://hostingcanada.org/htpasswd-generator/ to help you create htpasswd file.
 #
 <FilesMatch "^.*\.php$">

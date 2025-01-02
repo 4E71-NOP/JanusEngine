@@ -1,8 +1,8 @@
 <?php
- /*Hydre-licence-debut*/
+ /*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 /**
  * @author faust
@@ -39,7 +39,7 @@ class GeneratedScript {
 	public function getGeneratedScriptEntry ($data) { return $this->GeneratedScript[$data]; }
 
 	/**
-	 * Render a JavaScript to get a local website ressource (ie Hydr scripts)
+	 * Render a JavaScript to get a local website ressource (ie JnsEng scripts)
 	 * @param String $section
 	 * @param String $left
 	 * @param String $right

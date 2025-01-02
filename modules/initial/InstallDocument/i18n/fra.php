@@ -2,7 +2,7 @@
 $i18n = array(
 	'0'				=>		"Non",
 	'1'				=>		"Oui",
-	'Invite'		=>		"Bienvenue sur Hydre",
+	'Invite'		=>		"Bienvenue sur Janus Engine",
 
 	'avcf'	 => "Veuillez compl\351ter le formulaire.\\n\\nChamps du fomulaire:\\n",
 	'bouton'	=> "Installer",
@@ -81,15 +81,15 @@ $i18n = array(
 	'DB_tstcnx'					=>	"Tester la connexion à la base de donnée.",
 	'DB_cnxToDBok'				=>	"La connexion à la base a réussi.",
 	'DB_cnxToDBko'				=>	"La connexion à la base a échoué.",
-	'DB_HydrDBAlreadyExistsok'	=>	"ATTENTION! Une BDD Hydr est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
-	'DB_HydrDBAlreadyExistsko'	=>	"BDD Hydr non trouvée.",
-	'DB_HydrUserAlreadyExistsok'	=>	"ATTENTION! L'utilisateur a été trouvé. L'installateur ne fera que <b>modifier ses privilèges</b> à moins que la 'personalisation' spécifie le contraire.",
-	'DB_HydrUserAlreadyExistsko'	=>	"L'utilisateur n'a pas étyé trouvé. L'installateur le créera.",
+	'DB_JnsEngDBAlreadyExistsok'	=>	"ATTENTION! Une BDD Janus Engine est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",
+	'DB_JnsEngDBAlreadyExistsko'	=>	"BDD Janus Engine non trouvée.",
+	'DB_JnsEngUserAlreadyExistsok'	=>	"ATTENTION! L'utilisateur a été trouvé. L'installateur ne fera que <b>modifier ses privilèges</b> à moins que la 'personalisation' spécifie le contraire.",
+	'DB_JnsEngUserAlreadyExistsko'	=>	"L'utilisateur n'a pas été trouvé. L'installateur le créera.",
 	"DB_installationLockedok"	=>	"Pas de verrou trouvé.",
 	"DB_installationLockedko"	=>	"L'installation est  <b>vérrouillée!</b> Le programme n'installera pas tant que le verrou sera présent.",
 
 	// Method
-	'MTH_intro'		=> "Il y a deux types d'installation de Hydr. Ceci dans le but de permettre une installation facile sur un plus large nombre de plateformes.<br>\r<br>\r",
+	'MTH_intro'		=> "Il y a deux types d'installation de Janus Engine. Ceci dans le but de permettre une installation facile sur un plus large nombre de plateformes.<br>\r<br>\r",
 	'MTH_opt1'		=> "Connexion directe à la base",
 	'MTH_opt2'		=> "Création d'un script",
 	'MTH_opt1Help'	=> "Choix d'une installation directe:<br>L'installateur va se connecter à la base (soit locale soit distante) et va créer les tables nécessaires pour que le moteur puisse fonctionner. Les paramètres entrés dans la configuration de cette instalation serviront pour le site en tant que tel.<br><br>N'oubliez pas de copier les fichiers (et fichiers de configuration) sur le serveur.",
@@ -109,7 +109,7 @@ $i18n = array(
 	'PER_TbPrfx'	=> "Préfixes des tables",
 	'PER_TbPrfxInf'	=> "Chaque table aura ce préfixe. Suivant la base de données cela peut s'avérer utile.",
 
-	'PER_DbUsrN'	=> "Nom d'utilisateur Hydr sur la BDD",
+	'PER_DbUsrN'	=> "Nom d'utilisateur Janus Engine sur la BDD",
 	'PER_DbUsrNInf'	=> "C'est l'utilisateur virtuel. Le script l'utilisera pour se connecter a la base de données. Faites en sorte que ce nom soit différent du propriétaire du serveur. Suivant l'hébergeur vous aurez a déclarer la base et l'utilisateur avant d'installer.",
 	'boutonpass'	=> "Générer",
 

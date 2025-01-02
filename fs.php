@@ -1,8 +1,8 @@
 <?php
-/* Hydre-licence-debut */
+/* JanusEngine-license-start */
 // --------------------------------------------------------------------------------------------
 //
-// Hydre - Le petit moteur de web
+// Janus Engine - Le petit moteur de web
 // Sous licence Creative Common
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 // (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/* Hydre-licence-fin */
+/* JanusEngine-license-end */
 class FileSelectorRender
 {
 	private static $Instance = null;
@@ -21,7 +21,7 @@ class FileSelectorRender
 	/**
 	 * Singleton : Will return the instance of this class.
 	 *
-	 * @return HydrInstall
+	 * @return FileSelectorRender
 	 */
 	public static function getInstance()
 	{
@@ -39,7 +39,7 @@ class FileSelectorRender
 	 */
 	public function render()
 	{
-		session_name("HydrWebsiteSessionId");
+		session_name("JanusEngineWebsiteSessionId");
 		session_start();
 
 		$application = 'FileSelector';
@@ -70,7 +70,7 @@ class FileSelectorRender
 		ini_set('log_errors', "On");
 		ini_set('error_log', "/var/log/apache2/error.log");
 		ini_set('display_errors', 0);
-		error_log("********** Hydr FileSelector Begin **********");
+		error_log("********** JanusEngine FileSelector Begin **********");
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -83,7 +83,7 @@ class FileSelectorRender
 		$CurrentSetObj->setServerInfosObj(new ServerInfos());
 		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		$CurrentSetObj->setDataEntry('fsIdx', 0); // Useful for FileSelector
-		$CurrentSetObj->setDataEntry('ws', 'HdrBase');
+		$CurrentSetObj->setDataEntry('ws', 'JnsEngCore');
 
 		// --------------------------------------------------------------------------------------------
 		//
@@ -91,8 +91,7 @@ class FileSelectorRender
 		//
 		//
 		$ClassLoaderObj->provisionClass('SessionManagement');
-		// session_name("Hydr_Ws".$RequestDataObj->getRequestDataEntry('sw'));
-		$CurrentSetObj->setDataEntry('sessionName', 'HydrWebsiteSessionId');
+		$CurrentSetObj->setDataEntry('sessionName', 'JanusEngineWebsiteSessionId');
 		$ClassLoaderObj->provisionClass('ConfigurationManagement');
 		$bts->CMObj->InitBasicSettings();
 
@@ -128,7 +127,7 @@ class FileSelectorRender
 		//
 		//
 
-		// http://www.local-hydr.net/current/fs.php
+		// http://www.local-janus-engine.com/current/fs.php
 		// ?idx=0
 		// &mode=file
 		// &formName=UserProfileForm
@@ -136,8 +135,8 @@ class FileSelectorRender
 		// &displayType=fileList
 		// &strAdd=../
 		// &strRemove=
-		// &path=websites-data/www.hydr.net/data/images/avatars/
-		// &restrictTo=websites-data/www.hydr.net/data/images/avatars/
+		// &path=websites-data/www.janus-engine.net/data/images/avatars/
+		// &restrictTo=websites-data/www.janus-engine.net/data/images/avatars/
 
 		$ClassLoaderObj->provisionClass('StringFormat');
 
@@ -230,7 +229,6 @@ class FileSelectorRender
 		switch ($displayType) {
 			case "imageMosaic":
 				$baseURI = "http://" . $_SERVER['HTTP_HOST'] . "/";
-				// $baseURI = "http://" . $_SERVER ['HTTP_HOST'] . "/Hydr/";
 				$Content .= "<table class='" . $Block . _CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
 				$x = 0;
 				foreach ($fileList[1] as $A) {

@@ -1,8 +1,8 @@
 <?php
- /*Hydre-licence-debut*/
+ /*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 class InteractiveElements {
 	private static $Instance = null;
@@ -121,9 +121,9 @@ class InteractiveElements {
 
 		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->saveVectorSystemLogLevel();
-		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
+		// $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : '".$infos['message']."' , infos['disabled']=".$infos['disabled']));
-		$bts->LMObj->restoreVectorSystemLogLevel();
+		// $bts->LMObj->restoreVectorSystemLogLevel();
 
 		$Content .= "border:0px; padding:0px; margin:0px'"
 		.(($infos['disabled'] == true) ? " disabled='disabled'" : " ")

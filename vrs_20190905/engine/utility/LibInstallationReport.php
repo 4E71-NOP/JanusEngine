@@ -1,8 +1,8 @@
 <?php 
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,8 +10,8 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
-/*Hydre-IDE-begin*/
+/*JanusEngine-license-end*/
+/*JanusEngine-IDE-begin*/
 // Some definitions in order to ease the IDE work.
 /* @var $bts BaseToolSet                            */
 /* @var $CMObj ConfigurationManagement              */
@@ -34,7 +34,7 @@
 /* @var $Block String                               */
 /* @var $infos array                                */
 /* @var $l String                                   */
-/*Hydre-IDE-end*/
+/*JanusEngine-IDE-end*/
 
 class LibInstallationReport {
 	private static $Instance = null;
@@ -226,15 +226,15 @@ class LibInstallationReport {
 // 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "
 <?php
-/*Hydre-licence-begin*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydr
+//	Janus Engine
 //	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
 //	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 //	This config file has been generated.
 //	Date		:	".$bts->TimeObj->timestampToDate($bts->TimeObj->getMicrotime())."
 //	Filename	:	site_".$infos['n']."_config.php

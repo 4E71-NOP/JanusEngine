@@ -18,7 +18,7 @@ GRANT ALL PRIVILEGES ON *.* TO `dbadmin`@`localhost`;
 
 Se connecter avec l'utilisateur ```docker```. Ajouter les utilisateurs/roles ```dbadmin``` avec l'option superuser.
 
-Créer la DB <myDb> (Par défaut 'Hdr').
+Créer la DB <myDb> (Par défaut 'JnsEng').
 
 
 

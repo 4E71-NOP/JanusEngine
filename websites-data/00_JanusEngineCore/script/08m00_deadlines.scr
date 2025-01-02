@@ -1,0 +1,3 @@
+add deadline name "initial_offline"	title "Initial deadline: OFFLINE by default"			state OFFLINE;
+add deadline name "initial_online"	title "JnsEng deadline : Online default"				state ONLINE;
+

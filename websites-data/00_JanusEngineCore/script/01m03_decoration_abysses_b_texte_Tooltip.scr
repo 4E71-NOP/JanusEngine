@@ -1,0 +1,85 @@
+add decoration 							
+name	'JnsEng_abysses_txt_tooltip'						
+directory	'Abysses'						
+type	'caligraph'						
+main_unit	'mm'	txt_font_unit	'px'				
+txt_font	'Arial, Helvetica, Sans-serif'	txt_font_size	'12'				
+							
+							
+		p_txt_align	'justify'				
+							
+		p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+							
+							
+txt_col	'FFFFFF'	txt_highlight_col	'404000'			txt_title_col	'FFFFFF'
+txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
+							
+a_fg_col	'FFFFFF'			a_decoration	'none'	a_special	'display:block;'
+						a_hover_special	'font-weight:bold;display:block;'
+a_active_fg_col	'FFFFFF'						
+a_visited_fg_col	'FFFFFF'						
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+icon_directory	'aqua_B01_icone_repertoire.png'	icon_erase	'aqua_B01_icone_efface.png'				
+icon_ok	'aqua_B01_icone_ok.png'	icon_nok	'aqua_B01_icone_nok.png'				
+icon_left	'aqua_B01_icone_gauche.png'	icon_right	'aqua_B01_icone_droite.png'	icon_top	'aqua_B01_icone_haut.png'	icon_bottom	'aqua_B01_icone_bas.png'
+icon_question	'aqua_B01_icone_question.png'	icon_notification	'aqua_B01_icone_notification.png'				
+transparent_8x8	'empty.gif'						
+icon_width	'32'						
+icon_height	'32'						
+;							

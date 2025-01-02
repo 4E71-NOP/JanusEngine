@@ -1,8 +1,8 @@
 <?php
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 class LibInstallation
 {
@@ -228,12 +228,13 @@ class LibInstallation
 	}
 
 	/**
-	 * Load a file, call for formatting methods and execute the Hydr commands.
+	 * Load a file, call for formatting methods and execute the JnsEng commands.
 	 * 
 	 * @param array $infos
 	 */
 	private function methodCommand(&$infos)
 	{
+		$CurrentSetObj = CurrentSet::getInstance();
 		$CommandConsole = CommandConsole::getInstance();
 		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
@@ -272,7 +273,6 @@ class LibInstallation
 				$this->report['lastReportExecution'] = time();
 				$this->updateInstallationMonitor();
 
-				$CurrentSetObj = CurrentSet::getInstance();
 				if ($CurrentSetObj->getDataSubEntry('cli', 'websiteCreation') == 1) {
 					$SpecialCommandBuffer = $CurrentSetObj->getDataSubEntry('cli', 'websiteCreationCmd');
 					foreach ($SpecialCommandBuffer as $S) {

@@ -1,8 +1,8 @@
 <?php
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 //	Test DB cnx
 // --------------------------------------------------------------------------------------------
 
@@ -23,10 +23,10 @@ class InstallTestDb
 	private $messageLog = array();
 	private $jsonApiResponse = array(
 		"cnxToDB"					=>	false,
-		"HydrDBAlreadyExists"		=>	false,
-		"HydrUserAlreadyExists"		=>	false,
-		"HydrBDDuserPermission"		=>	false,
-		"HydrDBInstallTableExists"	=>	false,
+		"JnsEngDBAlreadyExists"		=>	false,
+		"JnsEngUserAlreadyExists"		=>	false,
+		"JnsEngBDDuserPermission"		=>	false,
+		"JnsEngDBInstallTableExists"	=>	false,
 		"installationLocked"		=>	false,
 	);
 	private $actionsOn = array();
@@ -236,7 +236,7 @@ class InstallTestDb
 			"mysql_find_table" => "SELECT * FROM information_schema.tables WHERE table_schema = '" . $this->db_['dbprefix'] . "' AND table_name = '" . $this->db_['tabprefix'] . "installation' LIMIT 1",
 			"mysql_find_lock" => "SELECT * FROM " . $this->db_['dbprefix'] . "." . $this->db_['tabprefix'] . "installation WHERE inst_name = 'installationLocked' LIMIT 1;",
 
-			"pgsql_find_table" => "SELECT * FROM information_schema.tables WHERE table_catalog like '%Hdr%' AND table_name like 'Ht_inst%' LIMIT 1",
+			"pgsql_find_table" => "SELECT * FROM information_schema.tables WHERE table_catalog like '%JnsEng%' AND table_name like 'Ht_inst%' LIMIT 1",
 			"pgsql_find_lock" => "SELECT * FROM " . $this->db_['dbprefix'] . "." . $this->db_['tabprefix'] . "installation WHERE inst_name = 'installationLocked' LIMIT 1;",
 
 			"mysql_find_user" => "SELECT COUNT(*) AS nbr FROM mysql.user WHERE User = '<dataBaseUserLogin>';",
@@ -260,26 +260,26 @@ class InstallTestDb
 			},
 
 			"test_2_db_not_found" => function ($obj, $err) {
-				$obj->jsonApiResponse['HydrDBAlreadyExists']	= false;
-				$obj->messageLog[] = "Install_test_db - Exception on test #2 (HydrDBAlreadyExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "' doesn't exist. Error : " . $err;
+				$obj->jsonApiResponse['JnsEngDBAlreadyExists']	= false;
+				$obj->messageLog[] = "Install_test_db - Exception on test #2 (JnsEngDBAlreadyExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "' doesn't exist. Error : " . $err;
 			},
 			"test_2_db_found" => function ($obj) {
-				$obj->jsonApiResponse['HydrDBAlreadyExists']	= true;
-				$obj->messageLog[] = "Install_test_db - test #2 (HydrDBAlreadyExists) '" . $obj->db_['dbprefix'] . "' already exists.";
+				$obj->jsonApiResponse['JnsEngDBAlreadyExists']	= true;
+				$obj->messageLog[] = "Install_test_db - test #2 (JnsEngDBAlreadyExists) '" . $obj->db_['dbprefix'] . "' already exists.";
 			},
 
 			"test_3_table_not_found" => function ($obj) {
-				$obj->jsonApiResponse['HydrDBInstallTableExists']	= false;
-				$obj->messageLog[] = "Install_test_db - test #3 Table not found (HydrDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'";
+				$obj->jsonApiResponse['JnsEngDBInstallTableExists']	= false;
+				$obj->messageLog[] = "Install_test_db - test #3 Table not found (JnsEngDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'";
 			},
 			"test_3_table_found" => function ($obj) {
-				$obj->jsonApiResponse['HydrDBInstallTableExists']	= true;
-				$obj->messageLog[] = "Install_test_db - test #3 Table found (HydrDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'.";
+				$obj->jsonApiResponse['JnsEngDBInstallTableExists']	= true;
+				$obj->messageLog[] = "Install_test_db - test #3 Table found (JnsEngDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'.";
 			},
 
 			"test_4_lock_not_found" => function ($obj) {
 				$obj->jsonApiResponse['installationLocked']	= false;
-				$obj->messageLog[] = "Install_test_db - test #4 Lock not found (HydrDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'";
+				$obj->messageLog[] = "Install_test_db - test #4 Lock not found (JnsEngDBInstallTableExists) '" . $obj->db_['host'] . ":" . $obj->db_['port'] . "'";
 			},
 			"test_4_lock_found" => function ($obj) {
 				$obj->jsonApiResponse['installationLocked']	= true;
@@ -287,10 +287,10 @@ class InstallTestDb
 			},
 
 			"test_5_results" => function ($obj) {
-				$b = $obj->jsonApiResponse['HydrUserAlreadyExists'];
+				$b = $obj->jsonApiResponse['JnsEngUserAlreadyExists'];
 				$obj->messageLog[] = "Install_test_db - test #5 User '" . $obj->db_['dataBaseUserLogin'] . "'" .
 					(($b) ? " not" : "")
-					. " found (HydrUserAlreadyExists).";
+					. " found (JnsEngUserAlreadyExists).";
 			},
 		);
 	}
@@ -309,11 +309,11 @@ class InstallTestDb
 			try {
 				$db2 = new mysqli($this->db_['host'], $this->db_['user_login'], $this->db_['user_password'], $this->db_['dbprefix'], $this->db_['port']);
 				// If it fails it raises an Exception.
-				$jsonApiResponse['HydrDBAlreadyExists'] = true;
+				$jsonApiResponse['JnsEngDBAlreadyExists'] = true;
 				$this->actionsOn['test_2_db_found']($this);
 
 				$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['mysql_find_user']);
-				$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+				$this->jsonApiResponse['JnsEngUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 
 				$dbquery = $db2->query($this->queryCatalog['mysql_find_table']);
 				if ($dbquery->num_rows > 0) {
@@ -359,7 +359,7 @@ class InstallTestDb
 				$this->actionsOn['test_2_db_found']($this);
 
 				$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['pgsql_find_user']);
-				$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+				$this->jsonApiResponse['JnsEngUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 	
 					$dbquery = pg_query($db2, $this->queryCatalog['pgsql_find_table']);
 				if (!$dbquery) {
@@ -382,7 +382,7 @@ class InstallTestDb
 
 			if ($dbquery) {
 				while ($dbp = pg_fetch_assoc($dbquery)) {
-					$this->jsonApiResponse['HydrUserAlreadyExists'] = ($dbp['nbr'] > 0);
+					$this->jsonApiResponse['JnsEngUserAlreadyExists'] = ($dbp['nbr'] > 0);
 				}
 			} else {
 				$this->messageLog[] = "Null returned upon query : '" . $q . "'.";
@@ -426,11 +426,11 @@ class InstallTestDb
 				switch ($this->db_['type']) {
 					case "mysql":
 						$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['mysql_find_user']);
-						$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+						$this->jsonApiResponse['JnsEngUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 						break;
 					case "pgsql":
 						$q = str_replace("<dataBaseUserLogin>", $this->db_['dataBaseUserLogin'], $this->queryCatalog['pgsql_find_user']);
-						$this->jsonApiResponse['HydrUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
+						$this->jsonApiResponse['JnsEngUserAlreadyExists'] = ($this->genericCount($db2, $q) > 0);
 						break;
 				}
 				$this->actionsOn['test_5_results']($this);

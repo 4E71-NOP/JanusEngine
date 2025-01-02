@@ -1,0 +1,36 @@
+add article	name JnsEng_eng_home_p01								reference JnsEng_eng_home							slug home							deadline initial_online		desc "English admin"		title Welcome					subtitle Welcome								page 1	validation_state VALID;
+
+add article	name eng_doc_concepts_p01							reference eng_doc_concepts						slug doc-concepts					deadline initial_online		desc "English admin"		title "Concept"					subtitle "User concepts"						page 1	validation_state VALID;
+add article	name eng_doc_concepts_p02							reference eng_doc_concepts						slug doc-concepts					deadline initial_online		desc "English admin"		title "Concept"					subtitle "Document Concepts"					page 2	validation_state VALID;
+add article	name eng_doc_concepts_p03							reference eng_doc_concepts						slug doc-concepts					deadline initial_online		desc "English admin"		title "Concept"					subtitle "Decoration Concepts"					page 3	validation_state VALID;
+
+add article	name eng_doc_content_management_p01					reference eng_doc_content_management			slug doc-content-management			deadline initial_online		desc "English admin"		title "Content managment"		subtitle "Element hierarchy"					page 1	validation_state VALID;
+add article	name eng_doc_content_management_p02					reference eng_doc_content_management			slug doc-content-management			deadline initial_online		desc "English admin"		title "Content managment"		subtitle "Content lifecycle"					page 2	validation_state VALID;
+
+add article	name eng_doc_administration_p01						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Introduction"							page 1	validation_state VALID;
+add article	name eng_doc_administration_p02						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Interface - Site"						page 2	validation_state VALID;
+add article	name eng_doc_administration_p03						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Interface - Users"					page 3	validation_state VALID;
+add article	name eng_doc_administration_p04						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Interface - Document"					page 4	validation_state VALID;
+add article	name eng_doc_administration_p05						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Interface - Decoration"				page 5	validation_state VALID;
+add article	name eng_doc_administration_p06						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Command line - Site"					page 6	validation_state VALID;
+add article	name eng_doc_administration_p07						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Command line - Users"					page 7	validation_state VALID;
+add article	name eng_doc_administration_p08						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Command line - Document"				page 8	validation_state VALID;
+add article	name eng_doc_administration_p09						reference eng_doc_administration				slug doc-administration				deadline initial_online		desc "English admin"		title Administration			subtitle "Command line - Decoration"			page 9	validation_state VALID;
+add article	name eng_doc_tut_001_p01							reference eng_doc_tut_001						slug doc-tut-001					deadline initial_online		desc "English admin"		title Administration			subtitle "Introduction"							page 1	validation_state VALID;
+
+assign document name doc_JnsEng_eng_home_p01.htm			to_article	JnsEng_eng_home_p01;
+assign document name doc_eng_DOC_concepts_p01.htm			to_article	eng_doc_concepts_p01;
+assign document name doc_eng_DOC_concepts_p02.htm			to_article	eng_doc_concepts_p02;
+assign document name doc_eng_DOC_concepts_p03.htm			to_article	eng_doc_concepts_p03;
+assign document name doc_eng_DOC_content_management_p01.htm	to_article	eng_doc_content_management_p01;
+assign document name doc_eng_DOC_content_management_p02.htm	to_article	eng_doc_content_management_p02;
+assign document name doc_eng_DOC_administration_p01.htm		to_article	eng_doc_administration_p01;
+assign document name doc_eng_DOC_administration_p02.htm		to_article	eng_doc_administration_p02;
+assign document name doc_eng_DOC_administration_p03.htm		to_article	eng_doc_administration_p03;
+assign document name doc_eng_DOC_administration_p04.htm		to_article	eng_doc_administration_p04;
+assign document name doc_eng_DOC_administration_p05.htm		to_article	eng_doc_administration_p05;
+assign document name doc_eng_DOC_administration_p06.htm		to_article	eng_doc_administration_p06;
+assign document name doc_eng_DOC_administration_p07.htm		to_article	eng_doc_administration_p07;
+assign document name doc_eng_DOC_administration_p08.htm		to_article	eng_doc_administration_p08;
+assign document name doc_eng_DOC_administration_p09.htm		to_article	eng_doc_administration_p09;
+assign document name doc_eng_DOC_tut_001_p01.htm			to_article	eng_doc_tut_001_p01;

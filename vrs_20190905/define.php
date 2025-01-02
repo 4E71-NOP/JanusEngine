@@ -5,8 +5,12 @@
 
 /* @var $application String */
 
+define ( "JANUS_ENGINE_CORE_TITLE", ("Janus Engine Core") );
+define ( "JANUS_ENGINE_CORE_SHORT", ("JnsEngCore") );
+define ( "JANUS_ENGINE_CORE_SCRIPT_DIR", ("00_JanusEngineCore") );
+
 define ( "DEFAULT_ERROR_REPORTING", (E_ALL ^ E_WARNING ^ E_NOTICE) );
-define ( "DEFAULT_SITE_ID", "Hdr" );
+define ( "DEFAULT_SITE_ID", "janus-engine" );
 
 define ( "USER_ACTION_SIGN_IN", "singIn" );
 define ( "USER_ACTION_DISCONNECT", "disconnect" );
@@ -101,7 +105,7 @@ unset (
 
 // --------------------------------------------------------------------------------------------
 // URL elements
-define ( "_HYDRLINKURLTAG_", "HydrLink");
+define ( "_JNSENGLINKURLTAG_", "JnsEngLink");
 
 // --------------------------------------------------------------------------------------------
 // Option menu arrays 

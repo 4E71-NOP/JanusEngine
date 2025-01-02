@@ -1,8 +1,8 @@
 <?php
- /*Hydre-licence-debut*/
+ /*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 /*
 Il faut que la fonction puisse agir de différente manière. 
@@ -36,20 +36,20 @@ $tampon_commande = '
 commande arg 1 arg 2;
 /*
 +---------------------------------------+
-|		Multi-Web Manager (MWM) 		|
-|		www.multiweb-manager.net 		|
+|		Janus Engine (JnsEng) 			|
+|		www.janus-engine.net	 		|
 |		Initial Configuration site 		|
 +---------------------------------------+
 */
 
 add site 
-name				"MWM_base" 
-abrege				"MB" 
+name				"janus-engine-core" 
+abrege				"JnsEngCore" 
 lang 				"fra" 
 lang_select			"YES" 
 title 				"M W M" 
-home				"www.rootwave.net" 
-directory			"00_Hydre" 
+home				"www.janus-engine.net" 
+directory			"00_JanusEngineCore" 
 debug_info_level	"1" 
 stylesheet			"DYNAMIC" 
 etat				"OFFLINE" 
@@ -58,9 +58,9 @@ user				"*utilisateur_install*"
 password			"*utilisateur_install*"
 ;
 
-site_context site MWM_base	user "*utilisateur_install*"	password "*utilisateur_install*";
+site_context site janus-engine-core	user "*utilisateur_install*"	password "*utilisateur_install*";
 show debug_off;
-show checkpoint "Base critique - Debut";
+show checkpoint "janus-engine-core critique - Debut";
 variable "authorisation_moniteur"	"1";
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
@@ -78,7 +78,7 @@ arti_correction_etat		NON_CORRIGE 0 CORRIGE 1
 CREATE TABLE !table! (
 arti_id 					INTEGER NOT NULL,
 arti_ref					VARCHAR(255),
-deadline_id				INTEGER,
+deadline_id					INTEGER,
 arti_name					VARCHAR(255),
 arti_desc					VARCHAR(255),
 arti_title					VARCHAR(255),
@@ -88,10 +88,10 @@ arti_page					INTEGER,
 layout_generic_name			VARCHAR(255),
 config_id					INTEGER,
 
-arti_creator_id		INTEGER,
+arti_creator_id				INTEGER,
 arti_creation_date			INTEGER,
 
-arti_validator_id	INTEGER,
+arti_validator_id			INTEGER,
 arti_validation_date		INTEGER,
 arti_validation_state		INTEGER,
 

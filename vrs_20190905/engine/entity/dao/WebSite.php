@@ -1,8 +1,8 @@
 <?php
-/* Hydre-licence-debut */
+/* JanusEngine-license-start */
 // --------------------------------------------------------------------------------------------
 //
-// Hydre - Le petit moteur de web
+// Janus Engine - Le petit moteur de web
 // Sous licence Creative Common
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 // (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/* Hydre-licence-fin */
+/* JanusEngine-license-end */
 
 class WebSite extends Entity
 {
@@ -19,12 +19,12 @@ class WebSite extends Entity
 	//@formatter:off
 	private $columns = array(
 		'ws_id'				=> 0,
-		'ws_name'			=> "Hdr Base",
-		'ws_short'			=> "HdrBase",
+		'ws_name'			=> JANUS_ENGINE_CORE_TITLE,
+		'ws_short'			=> JANUS_ENGINE_CORE_SHORT,
 		'fk_lang_id'		=> 0,
 		'ws_lang_select'	=> 0,
 		'fk_theme_id'		=> 0,
-		'ws_title'			=> "Hdr Base",
+		'ws_title'			=> JANUS_ENGINE_CORE_TITLE,
 		'ws_home'			=> 0,
 		'ws_directory'		=> 0,
 		'ws_state'			=> 0,
@@ -322,7 +322,7 @@ class WebSite extends Entity
 	{
 		$this->WebSite = array(
 			"ws_id"			=> "1",
-			"ws_title"		=> "Hydr Installation",
+			"ws_title"		=> "Janus Engine Installation",
 			'fk_lang_id'	=> 38,
 			"ws_lang"		=> 38, // <- deprecated
 		);

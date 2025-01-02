@@ -1,15 +1,15 @@
 <?php
-/*Hydre-licence-begin*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
 //	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
-/*Hydre-IDE-begin*/
+/*JanusEngine-IDE-begin*/
 // Some definitions in order to ease the IDE work.
 /* @var $bts BaseToolSet                            */
 /* @var $CMObj ConfigurationManagement              */
@@ -32,7 +32,7 @@
 /* @var $Block String                               */
 /* @var $infos array                                */
 /* @var $l String                                   */
-/*Hydre-IDE-end*/
+/*JanusEngine-IDE-end*/
 
 // --------------------------------------------------------------------------------------------
 //		Installation page 01
@@ -404,7 +404,7 @@ class InstallPage01
 		$SB['type']				= "button";
 		$SB['initialStyle']		= $Block . "_submit_s1_n";
 		$SB['hoverStyle']		= $Block . "_submit_s1_h";
-		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('HydrDBAlreadyExists', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
+		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('JnsEngDBAlreadyExists', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
 		$SB['message']			= "Test DB";
 		$SB['mode']				= 1;
 		$SB['size'] 			= 128;
@@ -422,15 +422,15 @@ class InstallPage01
 		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
 			. "<div id='cnxToDBTrue'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
 			. "<div id='cnxToDBFalse'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
-			. "<div id='HydrDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistsok') . "</div>"
-			. "<div id='HydrDBAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrDBAlreadyExistsko') . "</div>"
-			. "<div id='HydrUserAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrUserAlreadyExistsok') . "</div>"
-			. "<div id='HydrUserAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_HydrUserAlreadyExistsko') . "</div>"
+			. "<div id='JnsEngDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsok') . "</div>"
+			. "<div id='JnsEngDBAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsko') . "</div>"
+			. "<div id='JnsEngUserAlreadyExistsTrue'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsok') . "</div>"
+			. "<div id='JnsEngUserAlreadyExistsFalse'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsko') . "</div>"
 			. "<div id='installationLockedTrue'			style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko') . "</div>"
 			. "<div id='installationLockedFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok') . "</div>";
 
 		$SrvUri = $_SERVER['REQUEST_URI'];
-		$uriCut = strpos($_SERVER['REQUEST_URI'], "/Hydr/current/install/install_page_01.php");
+		$uriCut = strpos($_SERVER['REQUEST_URI'], "/JanusEngine/current/install/install_page_01.php");
 		$SrvUri = substr($_SERVER['REQUEST_URI'], 0, $uriCut);
 
 		$GeneratedScriptObj->insertString('JavaScript-Data', "var RequestURI = \"" . $SrvUri . "\";");
@@ -497,7 +497,7 @@ class InstallPage01
 		$DirectoryStateList = array();
 		$FormDirectoryNameList = array();
 		foreach ($directory_list as $a) {
-			if ($a == "00_Hydre") {
+			if ($a == JANUS_ENGINE_CORE_SCRIPT_DIR) {
 				$T[$t][$i]['1']['cont'] = "<span style='font-style:italic'>" . $a . "</span>\r";
 				$T[$t][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][plouf]' disabled checked >";
 				$T[$t][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][plouf2]' disabled checked >\r

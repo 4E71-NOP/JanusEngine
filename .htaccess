@@ -30,18 +30,18 @@ RewriteRule websites-data\/(.*\/)*data\/.*\/.+\.(png|gif|jpg)$ - [L]
 # http://www.local-rootwave.net/modules/initial/Menu/css/MenuSlide.css
 RewriteRule stylesheets\/.*\/.+\.css$ - [L]
 
-# www.local-hydr.net/DeveloperDocs/classes/AdminFormTool.html
+# www.local-janus-engine.com/DeveloperDocs/classes/AdminFormTool.html
 RewriteRule DeveloperDocs\/.+\.html$ - [L]
 
 # Bad ones on specific directories
-# http://www.local-hydr.net/media/theme/(nothing)
+# http://www.local-janus-engine.com/media/theme/(nothing)
 RewriteRule media\/theme\/$ media/img/universal/vide.gif
 
-# http://www.local-hydr.net/media/theme//
+# http://www.local-janus-engine.com/media/theme//
 # Probably an image url malformed
 RewriteRule ^http.*\/+$ media/img/universal/vide.gif
 
-# Not a devdocs or image... rewrite it as Hydr style
+# Not a devdocs or image... rewrite it as Janus Engine style
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	# RewriteBase /
@@ -115,13 +115,13 @@ RewriteRule ^http.*\/+$ media/img/universal/vide.gif
 # ----------------------------------------------------------------------------
 # Protection for critical files. 
 # The best is to remove 'install.php' and 'install_monitor.php' after installation.
-# the default user is 'HydrAdmin'
+# the default user is 'JanusEngineAdmin'
 # You can use https://hostingcanada.org/htpasswd-generator/ to help you create htpasswd file.
 #
 <FilesMatch "^(install|install_monitor).php$">
 	AuthName "*** Rescticted access ***"
 	AuthType Basic
-	AuthUserFile /var/www/html/.htpasswd
+	AuthUserFile /var/www/JanusEngine/.htpasswd
 	Require valid-user
 </FilesMatch>
 

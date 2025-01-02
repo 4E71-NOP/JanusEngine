@@ -1,7 +1,7 @@
 <?php
 // --------------------------------------------------------------------------------------------
 //
-//	MWM - Multi Web Manager
+//	JnsEng - Janus Engine
 //	Sous licence Creative common
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -9,25 +9,21 @@
 //	(c)2005-∞ Faust MARIA DE AREVALO faust@multiweb-manager.net
 //
 // --------------------------------------------------------------------------------------------
-//	Le nom du site utilisé pour la base de données
-//	The name used for the database
-//	Gen : 2018-07-01
-//	www.rootwave.net
-
 // Vous serrez peut etre obligé de rajouter le préfix de votre compte chez l'hébergeur.
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
 $fileContent = array(
+	"ws_short"			=> "Rw",
 	"type"				=> "mysql",
 	"charset"			=> "utf8mb4",
 	"host"				=> "localhost",
 	"port"				=> "",
 	"dal"				=> "PHP",				// MYSQLI , PDOMYSQL
-	"db_user_login"		=> "HydreBDD",
-	"db_user_password"	=> "Celeste",
-	"dbprefix"			=> "Hdr",
-	"tabprefix"			=> "Ht_",
+	"db_user_login"		=> "JnsEngAdmDB",
+	"db_user_password"	=> "9eBFs>vQX(kt.Ptfr>4x",
+	"dbprefix"			=> "JnsEng",
+	"tabprefix"			=> "Jt_",
 	"SessionMaxAge" 	=> (60*60*24),			// 24 hours by default
 	"DebugLevel_SQL"	=> LOGLEVEL_WARNING,	// SDDM
 	"DebugLevel_CC"		=> LOGLEVEL_WARNING,	// Command console

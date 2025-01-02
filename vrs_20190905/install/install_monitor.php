@@ -1,8 +1,8 @@
 <?php
-/* Hydre-licence-debut */
+/* JanusEngine-license-start */
 // --------------------------------------------------------------------------------------------
 //
-// Hydre - Le petit moteur de web
+// Janus Engine - Le petit moteur de web
 // Sous licence Creative Common
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,8 +10,8 @@
 // (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/* Hydre-licence-fin */
-class HydrInstallMonitor
+/* JanusEngine-license-end */
+class JnsEngInstallMonitor
 {
 	private static $Instance = null;
 	private function __construct()
@@ -21,12 +21,12 @@ class HydrInstallMonitor
 	/**
 	 * Singleton : Will return the instance of this class.
 	 *
-	 * @return HydrInstall
+	 * @return JnsEngInstall
 	 */
 	public static function getInstance()
 	{
 		if (self::$Instance == null) {
-			self::$Instance = new HydrInstallMonitor();
+			self::$Instance = new JnsEngInstallMonitor();
 		}
 		return self::$Instance;
 	}

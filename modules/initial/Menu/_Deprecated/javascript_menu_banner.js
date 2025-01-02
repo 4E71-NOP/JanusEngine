@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------
 //
-//	MWM - Multi Web Manager
+//	JnsEng - Janus Engine
 //	Sous licence Creative common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike

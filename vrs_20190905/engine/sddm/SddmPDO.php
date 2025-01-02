@@ -1,8 +1,8 @@
 <?php
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 // --------------------------------------------------------------------------------------------
 
 class SddmPDO extends SddmCore
@@ -61,7 +61,9 @@ class SddmPDO extends SddmCore
 						break;
 					}
 
-					$dsn .= ";charset=" . $TabConfig['charset'];
+					if ( strlen($TabConfig['charset']) > 0 ) { 
+						$dsn .= ";charset=" . $TabConfig['charset'];
+					}
 					break;
 
 			case "pgsql":
@@ -89,6 +91,7 @@ class SddmPDO extends SddmCore
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Connected to '" . $TabConfig['dbprefix'] . "'."));
 		} catch (Exception $e) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " *** ERROR *** PDO connection failed"));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $e->getCode() . ": ". $e->getMessage() ));
 			$this->report['cnxErr'] = 1;
 		}
 	}

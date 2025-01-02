@@ -1,8 +1,8 @@
 <?php
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 //	Module : ModuleOffLineMessage
 // --------------------------------------------------------------------------------------------
 
@@ -120,7 +120,7 @@ class ModuleOffLineMessage
 				<title>" . $WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
 				" . $stylesheet . "\r
 				</head>\r
-				<body id='HydrBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')
+				<body id='JnsEngBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_col')
 				. "' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')
 				. "' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')
 				. "' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')
@@ -140,9 +140,9 @@ class ModuleOffLineMessage
 				</div>\r
 				</div>\r";
 
-			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrCore.js');
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_JnsEngCore.js');
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_DecorationManagement.js');
-			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi('HydrBody').style.visibility = 'visible';");
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\telm.Gebi('JnsEngBody').style.visibility = 'visible';");
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);");

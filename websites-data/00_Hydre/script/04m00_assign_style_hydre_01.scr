@@ -1,6 +1,0 @@
-assign theme name "Hydre" to_website "Hydre";
-
-assign layout	name hydre_default_layout				to_theme Hydre	default YES;
-assign layout	name hydre_gestion_profil				to_theme Hydre;
-assign layout	name hydre_test_script					to_theme Hydre;
-assign layout	name hydre_gestion_decoration			to_theme Hydre;

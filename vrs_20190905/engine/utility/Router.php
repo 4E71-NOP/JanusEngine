@@ -1,8 +1,8 @@
 <?php
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 class Router
 {
@@ -58,7 +58,7 @@ class Router
 			} else {
 				// Neither it is a Form or a Slug thing. We process it as a GET method.
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing with GET method."));
-				$this->processHydrData($url);
+				$this->processJnsEngData($url);
 			}
 		}
 
@@ -92,20 +92,20 @@ class Router
 	}
 
 	/**
-	 * Updates the session route if the URL contains defined _HYDRLINKURLTAG_. It will also process 'sw'. 
+	 * Updates the session route if the URL contains defined _JNSENGLINKURLTAG_. It will also process 'sw'. 
 	 * @param String $url
 	 * @return boolean
 	 */
-	private function processHydrData($url)
+	private function processJnsEngData($url)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
 
-		$match = $this->matchRoute("/(\?|&)" . _HYDRLINKURLTAG_ . "=1/", $url);
+		$match = $this->matchRoute("/(\?|&)" . _JNSENGLINKURLTAG_ . "=1/", $url);
 		// 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : BP01 \$match['0']=" . $match['0'] . ", strlen=". strlen($match['0'])));
 		if (strlen($match['0'] ?? '') > 0) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '" . _HYDRLINKURLTAG_ . "' field data. \$match=`" . $match['0'] . "`. From RequestDataEntry " . _HYDRLINKURLTAG_ . "=" . $bts->RequestDataObj->getRequestDataEntry(_HYDRLINKURLTAG_)));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Requested URI contains '" . _JNSENGLINKURLTAG_ . "' field data. \$match=`" . $match['0'] . "`. From RequestDataEntry " . _JNSENGLINKURLTAG_ . "=" . $bts->RequestDataObj->getRequestDataEntry(_JNSENGLINKURLTAG_)));
 
 			$tab = array('target'	=> 'home', 'page'		=> '1',);
 			if (strlen($bts->RequestDataObj->getRequestDataEntry('arti_slug') ?? '') > 0) {

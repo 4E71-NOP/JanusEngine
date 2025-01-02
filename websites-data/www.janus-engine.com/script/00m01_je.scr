@@ -1,0 +1,30 @@
+/*
++---------------------------------------+
+|		janus-engine					|
+|		www.janus-engine.net 			|
+|		Configuration site N°1			|
++---------------------------------------+
+*/
+
+add website 
+name				"JanusEngine" 
+short				"JnsEng" 
+lang 				"fra" 
+lang_select			"YES" 
+title 				"Janus Engine" 
+home				"www.local-janus-engine.com"
+directory			"www.janus-engine.net"
+info_debug			"49215"
+stylesheet			"DYNAMIC"
+state				"ONLINE"
+group				"Server_owner" 
+user				"*user_install*" 
+password			"*user_install*"
+;
+
+website context name janus-engine	user "*user_install*"	password "*user_install*";
+
+add definition name default_website text Je;
+
+//show debug_off;
+set checkpoint name "Janus Engine - Begin";

@@ -2,7 +2,7 @@
 $i18n = array(
 	'0'				=>		"No",
 	'1'				=>		"Yes",
-	'Invite'		=>		"Welcome to Hydra",
+	'Invite'		=>		"Welcome to Janus Engine",
 
 	'avcf' => "Please, fill the form.\\n\\Fieds:\\n",
 	'bouton' => "Install",
@@ -81,15 +81,15 @@ $i18n = array(
 	'DB_tstcnx'					=>	"Test the database connexion",
 	'DB_cnxToDBok'				=>	"The database connection suceeded.",
 	'DB_cnxToDBko'				=>	"The database connection failed.",
-	'DB_HydrDBAlreadyExistsok'	=>	"WARNING! A Hydr database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
-	'DB_HydrDBAlreadyExistsko'	=>	"Hydr database not found.",
-	'DB_HydrUserAlreadyExistsok'	=>	"WARNING! The user has been found. The install process <b>will only update privileges</b> unless 'personalization' says otherwise.",
-	'DB_HydrUserAlreadyExistsko'	=>	"User not found. The install process will create it.",
+	'DB_JnsEngDBAlreadyExistsok'	=>	"WARNING! A Janus Engine database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
+	'DB_JnsEngDBAlreadyExistsko'	=>	"Janus Engine database not found.",
+	'DB_JnsEngUserAlreadyExistsok'	=>	"WARNING! The user has been found. The install process <b>will only update privileges</b> unless 'personalization' says otherwise.",
+	'DB_JnsEngUserAlreadyExistsko'	=>	"User not found. The install process will create it.",
 	"DB_installationLockedok"	=>	"No lock found",
 	"DB_installationLockedko"	=>	"The installation is <b>locked!</b> The program will NOT install with these parameters as the lock is there.",
 
 	// Method
-	'MTH_intro'		=> "There are two ways to install Hydr. This method ease installation on a bigger number of plateforms.<br>\r<br>\r",
+	'MTH_intro'		=> "There are two ways to install Janus Engine. This method ease installation on a bigger number of plateforms.<br>\r<br>\r",
 	'MTH_opt1'		=> "Direct connection to the DB",
 	'MTH_opt2'		=> "Script creation",
 	'MTH_opt1Help'	=> "Direct connection<br>The install tool will connect to the database (local or remote) and will create the necessary tables for the engine to be able to function.The parameters entered in the config panel will be used when the website will operate. <br><br>Don\'t forget to copy the files (and config files) on the server.",
@@ -109,7 +109,7 @@ $i18n = array(
 	'PER_TbPrfx'	=> "Table Prefix",
 	'PER_TbPrfxInf'	=> "Each table will have this prefix. Depending on database it can be usefull.",
 
-	'PER_DbUsrN'	=> "Hydr username for database",
+	'PER_DbUsrN'	=> "Janus Engine username for database",
 	'PER_DbUsrNInf'	=> "This is the virtual user. The script will use this username to connect to the database. Make sure it's different from the admin user. Depending on webhosting provider you may have to create the DB and the user before installing. In this case it's better to use the script method or install locally and ex/import the DB.",
 	'boutonpass'	=> "Generate",
 

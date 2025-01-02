@@ -269,15 +269,15 @@ self::$ActionTable['insert']['content']		= function (&$a, &$sddmObj) {
 		$content = "";
 		foreach ( $fileContent as $line ) { $content .= $line; }
 		
-		$startPtr = stripos( $content , "/*Hydr-Content-Begin*/" , 0) + 23 ;
-		$endPtr = stripos( $content , "/*Hydr-Content-End*/" , 0);
+		$startPtr = stripos( $content , "/*JanusEngine-Content-Begin*/" , 0) + 23 ;
+		$endPtr = stripos( $content , "/*JanusEngine-Content-End*/" , 0);
 		if ( $startPtr > $endPtr ) {
 			$a['errFlag'] = 1;
 			$a['errMsg'][] = "End tag found before StartTag";
 		}
 		
-		$startTagCount = substr_count( $content , "/*Hydr-Content-Begin*/");
-		$endTagCount = substr_count( $content , "/*Hydr-Content-End*/");
+		$startTagCount = substr_count( $content , "/*JanusEngine-Content-Begin*/");
+		$endTagCount = substr_count( $content , "/*JanusEngine-Content-End*/");
 		if ( $startTagCount != 1 || $endTagCount != 1 ) {
 			$a['errMsg'][] = "Incorrect tag count in file '".$a['fichier_cible']."' ( D: ".$startTagCount." ; F: ".$startTagCount." ).";
 		}
@@ -440,7 +440,7 @@ self::$ActionTable['show']['menus']	= function (&$a) {
 		."m.menu_title AS 'Title', "
 		."m.menu_desc AS 'Desc', "
 		."dl.deadline_name AS 'Deadline', "
-		."(SELECT m1.menu_name FROM Hdr.Ht_menu m1 WHERE m1.menu_id = m.menu_parent) AS 'Parent', "
+		."(SELECT m1.menu_name FROM " . $a['sqlTables']['menu'] . " m1 WHERE m1.menu_id = m.menu_parent) AS 'Parent', "
 		."m.menu_position AS 'Pos', "
 		."perm.perm_name AS 'Permission', "
 		."m.fk_arti_slug AS 'Slug', "

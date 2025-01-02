@@ -1,8 +1,8 @@
 <?php
-/* Hydre-licence-debut */
+/* JanusEngine-license-start */
 // --------------------------------------------------------------------------------------------
 //
-// Hydre - Le petit moteur de web
+// Janus Engine - Le petit moteur de web
 // Sous licence Creative Common
 // Under Creative Common licence CC-by-nc-sa (http://creativecommons.org)
 // CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -10,7 +10,7 @@
 // (c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/* Hydre-licence-fin */
+/* JanusEngine-license-end */
 
 if(session_status() !== PHP_SESSION_ACTIVE || session_status() === PHP_SESSION_NONE ) {
 	if ( session_start() === false ){
@@ -19,7 +19,7 @@ if(session_status() !== PHP_SESSION_ACTIVE || session_status() === PHP_SESSION_N
 		session_unset();
 		session_destroy();
 		session_write_close();
-		session_name ( "HydrWebsiteSessionId" );
+		session_name ( "JanusEngineWebsiteSessionId" );
 		setcookie(session_name(), '', ['expires' => 0, 'path' => '/']);
 		session_regenerate_id(true);
 		session_start();
@@ -28,7 +28,7 @@ if(session_status() !== PHP_SESSION_ACTIVE || session_status() === PHP_SESSION_N
 }
 
 include_once ("current/install/install_init.php");
-$R = HydrInstall::getInstance ();
+$R = JnsEngInstall::getInstance ();
 echo ($R->render ());
 
 if ( session_write_close () === false ){

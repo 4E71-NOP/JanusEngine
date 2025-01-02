@@ -1,7 +1,7 @@
-/*Hydre-licence-debut*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	Sous licence Creative Common	
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
@@ -9,7 +9,7 @@
 //	(c)Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
 class LibInstall {
 
@@ -166,13 +166,13 @@ class LibInstall {
 					URLamp = "&";
 				}
 
-				installFormData += URLamp + "directory_list[00_Hydre][name]=00_Hydre";
-				installFormData += URLamp + "directory_list[00_Hydre][state]=on";
-				installFormData += URLamp + "directory_list[00_Hydre][code_verification]=on";
+				installFormData += URLamp + "directory_list[00_JanusEngineCore][name]=00_JanusEngineCore";
+				installFormData += URLamp + "directory_list[00_JanusEngineCore][state]=on";
+				installFormData += URLamp + "directory_list[00_JanusEngineCore][code_verification]=on";
 
 				for (let ptr in enabledDirectoryList) {
 					// l.Log[this.dbgInstFonction]( 'enabledDirectoryList['+ptr+']=' + document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].checked );
-					installFormData += URLamp + enabledDirectoryList[ptr] + "=" + document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].value;
+					installFormData += URLamp + enabledDirectoryList[ptr] + "=" + ((document.forms['install_page_init'].elements[enabledDirectoryList[ptr]].checked) ? "on" : "off");
 				}
 
 				for (let ptr in DirectoryNameList) {
@@ -181,7 +181,7 @@ class LibInstall {
 				}
 
 				// Special user discovery
-				installFormData += URLamp + "form[HydrUserAlreadyExists]=" + ((tdb.resultTest.HydrUserAlreadyExists ) ? "on" : "");
+				installFormData += URLamp + "form[JnsEngUserAlreadyExists]=" + ((tdb.resultTest.JnsEngUserAlreadyExists ) ? "on" : "off");
 
 				// The install call
 				l.Log[this.dbgInstFonction]('Install URL=: `' + InstallURL + "?" + installFormData + "`");
@@ -243,7 +243,7 @@ class LibInstall {
 		inputElm = document.createElement("input");
 		inputElm.setAttribute('type', 'hidden');
 		inputElm.setAttribute('name', 'directory_list[' + i + ']');
-		inputElm.setAttribute('value', '00_Hydre');
+		inputElm.setAttribute('value', "00_JanusEngineCore");
 		f.appendChild(inputElm);
 		i++;
 		for (let ptr in DirectoryNameList) {

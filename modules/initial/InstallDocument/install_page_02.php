@@ -1,15 +1,15 @@
 <?php
-/*Hydre-licence-begin*/
+/*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
-//	Hydre - Le petit moteur de web
+//	Janus Engine - Le petit moteur de web
 //	licence Creative Common licence, CC-by-nc-sa (http://creativecommons.org)
 //	Author : Faust MARIA DE AREVALO, mailto:faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
-/*Hydre-licence-fin*/
+/*JanusEngine-license-end*/
 
-/*Hydre-IDE-begin*/
+/*JanusEngine-IDE-begin*/
 // Some definitions in order to ease the IDE work and to provide information about what is already available in this context.
 /* @var $bts BaseToolSet                            */
 /* @var $CurrentSetObj CurrentSet                   */
@@ -25,7 +25,7 @@
 /* @var $Block String                               */
 /* @var $infos Array                                */
 /* @var $l String                                   */
-/*Hydre-IDE-end*/
+/*JanusEngine-IDE-end*/
 
 // --------------------------------------------------------------------------------------------
 //		Installation page 02
@@ -64,11 +64,15 @@ class InstallPage02
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
 
-		// We make sure '00_hydre' directory is the first in the list.
+		// We make sure '00_JanusEngineCore' directory is the first in the list.
 		$dl = $bts->RequestDataObj->getRequestDataEntry('directory_list');
 		ksort($dl);
 		$bts->RequestDataObj->setRequestDataEntry('directory_list', $dl);
 		unset($dl);
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . 
+			$bts->StringFormatObj->print_r_debug(
+				$bts->RequestDataObj->getRequestDataEntry('directory_list')
+			)));
 
 		$langFile = $infos['module']['module_directory'] . "i18n/" . $CurrentSetObj->getDataEntry('language') . ".php";
 		$bts->I18nTransObj->apply(array("type" => "file", "file" => $langFile, "format" => "php"));
@@ -187,22 +191,22 @@ class InstallPage02
 				"websiteUserPassword"		=> $this->form['websiteUserPassword'],
 				"dataBaseHostingProfile"	=> $this->form['dataBaseHostingProfile'],
 				"dataBaseUserRecreate"		=> $this->form['dataBaseUserRecreate'],
-				"HydrUserAlreadyExists"		=> $this->form['HydrUserAlreadyExists'],
+				"JnsEngUserAlreadyExists"	=> $this->form['JnsEngUserAlreadyExists'],
 			)
 		);
 
 		// What the configuration file would look like with the posted data.
-		$bts->CMObj->setConfigurationEntry('type',					$this->form['selectedDataBaseType']);
-		$bts->CMObj->setConfigurationEntry('dal',					$this->form['dal']);
-		$bts->CMObj->setConfigurationEntry('host',					$this->form['host']);
-		$bts->CMObj->setConfigurationEntry('port',					$this->form['port']);
-		$bts->CMObj->setConfigurationEntry('charset',				"utf8mb4");
-		$bts->CMObj->setConfigurationEntry('db_user_login',			$this->form['dataBaseHostingPrefix'] . $this->form['dataBaseAdminUser']);
-		$bts->CMObj->setConfigurationEntry('db_user_password',		$this->form['dataBaseAdminPassword']);
-		$bts->CMObj->setConfigurationEntry('dbprefix',				$this->form['dbprefix']);
-		$bts->CMObj->setConfigurationEntry('tabprefix',				$this->form['tabprefix']);
-		$bts->CMObj->setConfigurationEntry('execution_context',		'installation');
-		$bts->CMObj->setConfigurationEntry('HydrUserAlreadyExists',	$this->form['HydrUserAlreadyExists']);
+		$bts->CMObj->setConfigurationEntry('type',						$this->form['selectedDataBaseType']);
+		$bts->CMObj->setConfigurationEntry('dal',						$this->form['dal']);
+		$bts->CMObj->setConfigurationEntry('host',						$this->form['host']);
+		$bts->CMObj->setConfigurationEntry('port',						$this->form['port']);
+		$bts->CMObj->setConfigurationEntry('charset',					"utf8mb4");
+		$bts->CMObj->setConfigurationEntry('db_user_login',				$this->form['dataBaseHostingPrefix'] . $this->form['dataBaseAdminUser']);
+		$bts->CMObj->setConfigurationEntry('db_user_password',			$this->form['dataBaseAdminPassword']);
+		$bts->CMObj->setConfigurationEntry('dbprefix',					$this->form['dbprefix']);
+		$bts->CMObj->setConfigurationEntry('tabprefix',					$this->form['tabprefix']);
+		$bts->CMObj->setConfigurationEntry('execution_context',			'installation');
+		$bts->CMObj->setConfigurationEntry('JnsEngUserAlreadyExists',	$this->form['JnsEngUserAlreadyExists']);
 
 
 		if ($this->form['dataBaseLogErr'] == "on") {
@@ -302,20 +306,22 @@ class InstallPage02
 		// Recreate / user doesn't exist 	->	2	-> drop and create
 		// Recreate / user exists 			->	3	-> drop and create
 		$score = 0;
-		if ($bts->CMObj->getConfigurationSubEntry('db', 'HydrUserAlreadyExists') == "on") {
+		if ($bts->CMObj->getConfigurationSubEntry('db', 'JnsEngUserAlreadyExists') == "on") {
 			$score += 1;
 		}
 		if ($bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate') == "yes") {
 			$score += 2;
 		}
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Soring - "
-		. "HydrUserAlreadyExists=" . $bts->CMObj->getConfigurationSubEntry('db', 'HydrUserAlreadyExists')
-		. "; dataBaseUserRecreate=" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate')
-		. "-> score=" . $score
+		$bts->LMObj->msgLog(array(
+			'level' => LOGLEVEL_BREAKPOINT,
+			'msg' => __METHOD__ . " Soring - "
+				. "JnsEngUserAlreadyExists=" . $bts->CMObj->getConfigurationSubEntry('db', 'JnsEngUserAlreadyExists')
+				. "; dataBaseUserRecreate=" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate')
+				. "-> score=" . $score
 		));
 
-		
+
 
 		switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
 			case "mysql":
@@ -414,9 +420,11 @@ class InstallPage02
 
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ($infos['directory_list'] as $A) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " . $A['name']));
-			if (isset($A['filesFound'])) {
-				$LibInstallationObj->executeContent($infos, $A);
+			if ($A['state'] == 'on') {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing : " . $A['name']));
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
 			}
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
@@ -443,8 +451,10 @@ class InstallPage02
 
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ($infos['directory_list'] as $A) {
-			if (isset($A['filesFound'])) {
-				$LibInstallationObj->executeContent($infos, $A);
+			if ($A['state'] == 'on') {
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
 			}
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
@@ -497,8 +507,10 @@ class InstallPage02
 		// error_log($bts->StringFormatObj->arrayToString($infos));
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ($infos['directory_list'] as $A) {
-			if (isset($A['filesFound'])) {
-				$LibInstallationObj->executeContent($infos, $A);
+			if ($A['state'] == 'on') {
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
 			}
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
@@ -526,8 +538,10 @@ class InstallPage02
 		$LibInstallationObj->scanDirectories($infos);
 		// error_log($bts->StringFormatObj->arrayToString($infos));
 		foreach ($infos['directory_list'] as $A) {
-			if (isset($A['filesFound'])) {
-				$LibInstallationObj->executeContent($infos, $A);
+			if ($A['state'] == 'on') {
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
 			}
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
@@ -553,8 +567,11 @@ class InstallPage02
 		);
 		$LibInstallationObj->scanDirectories($infos);
 		foreach ($infos['directory_list'] as $A) {
-			if (isset($A['filesFound'])) {
-				$LibInstallationObj->executeContent($infos, $A);
+			if ($A['state'] == 'on') {
+
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
 			}
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
