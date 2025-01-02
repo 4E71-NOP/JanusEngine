@@ -1,4 +1,3 @@
-// update website name "JnsEng"	theme "JnsEng_aqua_01";
-assign theme name "JnsEng_aqua_01" to_website "JnsEng";
+assign theme name "JnsEng_aqua_01" to_website "JanusEngine";
 
 set checkpoint name "Janus Engine - End";

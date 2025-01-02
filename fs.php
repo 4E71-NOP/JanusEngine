@@ -14,9 +14,7 @@
 class FileSelectorRender
 {
 	private static $Instance = null;
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -58,7 +56,7 @@ class FileSelectorRender
 
 		// $ClassLoaderObj->provisionClass ( 'SessionManagement' );
 		// $bts->initSmObj ();
-		$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString ( $_SESSION ) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString ( $bts->SMObj->getSession () ) . " *** EOL") );
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
 
 		// 		$ClassLoaderObj->provisionClass ( 'WebSite' );
 
@@ -83,7 +81,7 @@ class FileSelectorRender
 		$CurrentSetObj->setServerInfosObj(new ServerInfos());
 		$CurrentSetObj->ServerInfosObj->getInfosFromServer();
 		$CurrentSetObj->setDataEntry('fsIdx', 0); // Useful for FileSelector
-		$CurrentSetObj->setDataEntry('ws', 'JnsEngCore');
+		$CurrentSetObj->setDataEntry('ws', 'JnsEng');
 
 		// --------------------------------------------------------------------------------------------
 		//

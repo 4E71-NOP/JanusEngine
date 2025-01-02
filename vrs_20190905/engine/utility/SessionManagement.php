@@ -122,6 +122,7 @@ class SessionManagement
 		if (strlen($currentWs ?? '') > 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$CurrentSetObj->getDataEntry('ws') :`" . $currentWs . "`"));
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
+			// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION = " . $bts->StringFormatObj->arrayToString($_SESSION)));
 
 			if (isset($_SESSION[$currentWs]['last_REMOTE_ADDR'])) {
 				if ($_SESSION[$currentWs]['last_REMOTE_ADDR'] != $_SERVER['REMOTE_ADDR']) {

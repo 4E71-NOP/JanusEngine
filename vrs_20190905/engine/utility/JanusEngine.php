@@ -31,9 +31,7 @@ class JanusEngine
 	private $ContentFragments;
 	private $stylesheet;
 
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -129,7 +127,7 @@ class JanusEngine
 		// If $_SESSION sub array is empty we have to check what website is to be selected
 		$wsSession = $_SERVER['HTTP_HOST'];
 		if (empty($_SESSION[$wsSession])) {
-		// if (empty($_SESSION[$wsSession])) {
+			// if (empty($_SESSION[$wsSession])) {
 			// The sub array in the session object is empty. 
 			// 1 Checking if the config file exists
 			// 2 If it doesn't, getting the default_website definition with the root website
@@ -177,7 +175,6 @@ class JanusEngine
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($_SESSION[$wsSession]) . "'."));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : Selected session content is '" . $bts->StringFormatObj->print_r_debug($bts->SMObj->getSession()) . "'."));
 
-		// $CurrentSetObj->setDataEntry('ws', $bts->SMObj->getSessionEntry($_SERVER['HTTP_HOST']));
 
 		// --------------------------------------------------------------------------------------------
 
@@ -187,7 +184,7 @@ class JanusEngine
 		// Loading the configuration file associated with this website
 		$this->loadConfigFile();
 		// If the configuration has a ws_short we use it 
-		if ( strlen($bts->CMObj->getConfigurationEntry("ws_short") ?? '' ) > 0 ) {
+		if (strlen($bts->CMObj->getConfigurationEntry("ws_short") ?? '') > 0) {
 			$CurrentSetObj->setDataEntry('ws', $bts->CMObj->getConfigurationEntry("ws_short"));
 		}
 

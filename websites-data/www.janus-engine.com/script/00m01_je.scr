@@ -13,7 +13,7 @@ lang 				"fra"
 lang_select			"YES" 
 title 				"Janus Engine" 
 home				"www.local-janus-engine.com"
-directory			"www.janus-engine.net"
+directory			"www.janus-engine.com"
 info_debug			"49215"
 stylesheet			"DYNAMIC"
 state				"ONLINE"
@@ -22,7 +22,7 @@ user				"*user_install*"
 password			"*user_install*"
 ;
 
-website context name janus-engine	user "*user_install*"	password "*user_install*";
+website context name JanusEngine	user "*user_install*"	password "*user_install*";
 
 add definition name default_website text Je;
 

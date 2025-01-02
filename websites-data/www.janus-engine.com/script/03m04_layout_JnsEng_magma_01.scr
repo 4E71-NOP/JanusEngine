@@ -1,0 +1,15 @@
+add layout_file name 'JnsEng_magma_default'  generic_name 'default'  description 'JnsEng_default' filename 'JnsEng/JnsEng_magma_default.lyt.html';
+add layout name 'JnsEng_magma_01_default' title 'Présentation par défaut'   generic_name 'default'  description 'JnsEng_magma default'   layout_file 'JnsEng_magma_default';
+assign layout name 'JnsEng_magma_01_default' to_theme 'JnsEng_magma_01' default YES;
+
+add layout_file name 'JnsEng_magma_user_profile'  generic_name 'user_profile'  description 'JnsEng_user_profile' filename 'JnsEng/JnsEng_magma_user_profile.lyt.html';
+add layout name 'JnsEng_magma_01_user_profile' title 'Profil utilisateur'   generic_name 'user_profile'  description 'JnsEng_magma user_profile'   layout_file 'JnsEng_magma_user_profile';
+assign layout name 'JnsEng_magma_01_user_profile' to_theme 'JnsEng_magma_01';
+
+add layout_file name 'JnsEng_magma_script_execution'  generic_name 'script_execution'  description 'JnsEng_script_execution' filename 'JnsEng/JnsEng_magma_script_execution.lyt.html';
+add layout name 'JnsEng_magma_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'JnsEng_magma script_execution'   layout_file 'JnsEng_magma_script_execution';
+assign layout name 'JnsEng_magma_01_script_execution' to_theme 'JnsEng_magma_01';
+
+add layout_file name 'JnsEng_magma_decoration'  generic_name 'decoration'  description 'JnsEng_decoration' filename 'JnsEng/JnsEng_magma_decoration.lyt.html';
+add layout name 'JnsEng_magma_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'JnsEng_magma decoration'   layout_file 'JnsEng_magma_decoration';
+assign layout name 'JnsEng_magma_01_decoration' to_theme 'JnsEng_magma_01';

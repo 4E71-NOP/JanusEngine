@@ -23,8 +23,8 @@ $fileContent = array(
 	"db_user_login"		=> "JnsEngAdmBDD",
 	"db_user_password"	=> "9eBFs>vQX(kt.Ptfr>4x",
 	"dbprefix"			=> "JnsEng",
-	"tabprefix"			=> "Jt_",
-	"SessionMaxAge" 	=> (60*60*24),			// 24 hours by default
+	"tabprefix"			=> "Jet_",
+	"SessionMaxAge" 	=> (60 * 60 * 24),			// 24 hours by default
 	"DebugLevel_SQL"	=> LOGLEVEL_WARNING,	// SDDM
 	"DebugLevel_CC"		=> LOGLEVEL_WARNING,	// Command console
 	"DebugLevel_PHP"	=> LOGLEVEL_WARNING,	// 
@@ -36,5 +36,3 @@ $fileContent = array(
 	)
 
 );
-
-?>
