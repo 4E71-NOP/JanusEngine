@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------------------------
 #
 #	JnsEng - Janus Engine
-#	Sous licence Creative common	
+#	Sous licence Creative common
 #	Under Creative Common licence	CC-by-nc-sa (http:#creativecommons.org)
 #	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 #
@@ -9,10 +9,9 @@
 #
 # --------------------------------------------------------------------------------------------
 
-echo "Core documentq"
+echo "Core documents"
 cd document
 rm -rf core_documents
 ln -s ../../00_JanusEngineCore/document/ core_documents
 
 echo "End"
-

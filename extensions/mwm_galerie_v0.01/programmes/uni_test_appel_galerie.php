@@ -23,12 +23,12 @@ $_REQUEST['GG']['tag'] = "Thumbplouf_";
 /*MWM-file_content*/
 $_REQUEST['sql_initiateur'] = "Test du plugin MWMGalerie";
 
-$pv['requete'] = "UPDATE ".$SQL_tab_abrege['pv']." SET pv_number = 1 WHERE pv_name = 'galerie_ticket';";
-manipulation_traitement_requete ( $pv['requete'] );
+$pv['requete'] = "UPDATE " . $SQL_tab_abrege['pv'] . " SET pv_number = 1 WHERE pv_name = 'galerie_ticket';";
+manipulation_traitement_requete($pv['requete']);
 $pv['i'] = 1;
 
 
-$PA = Plugin_Appel ( "MWM_Galerie"  );
+$PA = Plugin_Appel("MWM_Galerie");
 $PLC = &$PA['plugin_config'];
 $PLF = &$PA['plugin_fichiers'];
 
@@ -38,24 +38,26 @@ $PLF = &$PA['plugin_fichiers'];
 $GAL_table_colones = 3;
 $GAL_table_lignes = 3;
 $GAL_nom = "Photographie";
-$GAL_dir = "../websites-datas/".$website['ws_directory']."/data/documents/".${$document_tableau}['arti_ref']."_p0".${$document_tableau}['arti_page'];
-if (!isset($_REQUEST['GAL_page_selection'])) { $_REQUEST['GAL_page_selection'] = 1; }
+$GAL_dir = "../websites-datas/" . $website['ws_directory'] . "/data/document/" . ${$document_tableau}['arti_ref'] . "_p0" . ${$document_tableau}['arti_page'];
+if (!isset($_REQUEST['GAL_page_selection'])) {
+	$_REQUEST['GAL_page_selection'] = 1;
+}
 
 
 
-$pv['fichier'] = "../plugins/".$PA['plugin_repertoire']."/programmes/".$PLF['vignette']['fichier_nom'];
+$pv['fichier'] = "../plugins/" . $PA['plugin_repertoire'] . "/programmes/" . $PLF['vignette']['fichier_nom'];
 $PLF = &$PA['plugin_fichiers'];
 
-echo("
-<img src='".$pv['fichier']."?
+echo ("
+<img src='" . $pv['fichier'] . "?
 src=001-1.jpg
-&m=".$PLC['mode']."
-&x=".$PLC['x']."
-&l=".$PLC['liserai']."
-&q=".$PLC['qualite']."
-&t=".$PLC['fichier_tag']."
-&fc=".$fichier_config."
-&n=".$pv['i']."
+&m=" . $PLC['mode'] . "
+&x=" . $PLC['x'] . "
+&l=" . $PLC['liserai'] . "
+&q=" . $PLC['qualite'] . "
+&t=" . $PLC['fichier_tag'] . "
+&fc=" . $fichier_config . "
+&n=" . $pv['i'] . "
 &debug=0
 '>\r
 ");
@@ -63,21 +65,21 @@ src=001-1.jpg
 
 
 
-echo ( 
-	"<br><span class='" . $theme_tableau . $_REQUEST['bloc']."_t1'>".
-	print_r_html ( $PA ) . "<br>".
-	print_r_html ( $pv['fichier'] ) . "<br>".
-	print_r_html ( $_REQUEST['server_infos'] ) . "<br></span>"
+echo (
+	"<br><span class='" . $theme_tableau . $_REQUEST['bloc'] . "_t1'>" .
+	print_r_html($PA) . "<br>" .
+	print_r_html($pv['fichier']) . "<br>" .
+	print_r_html($_REQUEST['server_infos']) . "<br></span>"
 );
 
 
 
-if ( $website['ws_info_debug'] < 10 ) {
-	unset (
+if ($website['ws_info_debug'] < 10) {
+	unset(
 		$PA,
-		$PLC , 
-		$PLF , 
-		$dbp , 
+		$PLC,
+		$PLF,
+		$dbp,
 		$GAL_mode_select,
 		$PF_,
 		$PFC_,
@@ -86,4 +88,3 @@ if ( $website['ws_info_debug'] < 10 ) {
 	);
 }
 /*MWM-content_end*/
-?>

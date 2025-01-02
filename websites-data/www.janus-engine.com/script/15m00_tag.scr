@@ -2,12 +2,12 @@ add tag	name acceuil;
 add tag	name debut;
 add tag	name début;
 add tag	name homepage;
-add tag	name JnsEng;
+add tag	name jnseng;
 assign tag	name acceuil  to_article JnsEng_fra_home_p01;
 assign tag	name debut    to_article JnsEng_fra_home_p01;
 assign tag	name début    to_article JnsEng_fra_home_p01;
 assign tag	name homepage to_article JnsEng_fra_home_p01;
-assign tag	name JnsEng   to_article JnsEng_fra_home_p01;
+assign tag	name jnseng   to_article JnsEng_fra_home_p01;
 
 
 add tag	name equipe;

@@ -22,7 +22,8 @@
 //	Donc on a un code dans un EVAL qui appel le fichier call_galerie qui reference l'image en
 //	utilisant ce script.
 // --------------------------------------------------------------------------------------------
-function microtime_chrono() {
+function microtime_chrono()
+{
 	list($usec, $sec) = explode(" ", microtime());
 	return ((float)$usec + (float)$sec);
 }
@@ -36,16 +37,17 @@ $_REQUEST['localisation'] = "";
 $statistiques_ = array();
 $statistiques_index = 0;
 
-include ("../../../version_actuelle/".$_REQUEST['fc']);
-include ("../../../version_actuelle/engine/fonctions_universelles.php");
+include("../../../version_actuelle/" . $_REQUEST['fc']);
+include("../../../version_actuelle/engine/fonctions_universelles.php");
 $SQL_tab = array();
 $SQL_tab_abrege = array();
 config_variable();
-include ("../../../version_actuelle/engine/preparatifs_sql.php");
+include("../../../version_actuelle/engine/preparatifs_sql.php");
 
-function statistique_checkpoint ( $routine ) {
-	if ( $_REQUEST['StatistiqueInsertion'] == 1 ) {
-		global $statistiques_ , $statistiques_index;
+function statistique_checkpoint($routine)
+{
+	if ($_REQUEST['StatistiqueInsertion'] == 1) {
+		global $statistiques_, $statistiques_index;
 		$statistiques_index++;
 		$i = $statistiques_index;
 		$statistiques_[$i]['position'] = $i;
@@ -58,12 +60,12 @@ function statistique_checkpoint ( $routine ) {
 	}
 }
 
-if ( isset($_REQUEST['GAL_debug']) ) {
-	error_reporting(E_ERROR | E_WARNING | E_PARSE );							// http://fr2.php.net/error_reporting
+if (isset($_REQUEST['GAL_debug'])) {
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);							// http://fr2.php.net/error_reporting
 	ini_set('log_errors', "On");
-	ini_set('error_log' , "/var/log/apache2/php_err.log");
+	ini_set('error_log', "/var/log/apache2/php_err.log");
 
-	$_REQUEST['src'] = "../../../websites-datas/www.rootwave.net/data/documents/fra_gallerie_dessin_peinture_p01/001-2.jpg";
+	$_REQUEST['src'] = "../../../websites-datas/www.rootwave.net/data/document/fra_gallerie_dessin_peinture_p01/001-2.jpg";
 	$_REQUEST['m'] = 1;
 	$_REQUEST['x'] = 128;
 	$_REQUEST['y'] = 128;
@@ -87,18 +89,23 @@ if ( isset($_REQUEST['GAL_debug']) ) {
 
 $pv['ticket_valide'] = 0;
 $pv['compteur'] = 1;
-while ( $pv['ticket_valide'] == 0 && $pv['compteur'] < 100 ) {
-	$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM ".$SQL_tab_abrege['pv']." WHERE pv_name = 'galerie_ticket';" );
-	while ($dbp = fetch_array_sql($dbquery)) { $_REQUEST['n_comp'] = $dbp['pv_number']; }
-	if ( $_REQUEST['n_comp'] ==  $_REQUEST['n'] ) { $pv['ticket_valide'] = 1; }
-	else { usleep(100000); }
+while ($pv['ticket_valide'] == 0 && $pv['compteur'] < 100) {
+	$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM " . $SQL_tab_abrege['pv'] . " WHERE pv_name = 'galerie_ticket';");
+	while ($dbp = fetch_array_sql($dbquery)) {
+		$_REQUEST['n_comp'] = $dbp['pv_number'];
+	}
+	if ($_REQUEST['n_comp'] ==  $_REQUEST['n']) {
+		$pv['ticket_valide'] = 1;
+	} else {
+		usleep(100000);
+	}
 	$pv['compteur']++;
 }
 //exit(0);
 
 // --------------------------------------------------------------------------------------------
 // GO
-if ( $pv['echec'] < 100 ) {
+if ($pv['echec'] < 100) {
 
 	$GAL_['X_par_defaut'] = $_REQUEST['x'] = 128;
 	$GAL_['Y_par_defaut'] = $_REQUEST['y'] = 128;
@@ -122,22 +129,32 @@ if ( $pv['echec'] < 100 ) {
 
 
 
-	$GAL_['fichier_extenssion'] = substr ( $_REQUEST['src'] , strlen($_REQUEST['src'])-4 , 4);
+	$GAL_['fichier_extenssion'] = substr($_REQUEST['src'], strlen($_REQUEST['src']) - 4, 4);
 	switch ($GAL_['fichier_extenssion']) {
-		case ".jpg": $GAL_['src_image'] = imagecreatefromjpeg($_REQUEST['src']);	break;
-		case ".gif": $GAL_['src_image'] = imagecreatefromgif($_REQUEST['src']);		break;
-		case ".bmp": $GAL_['src_image'] = imagecreatefromwbmp($_REQUEST['src']);	break;
-		case "jpeg": $GAL_['src_image'] = imagecreatefromjpeg($_REQUEST['src']);	break;
-		case ".png": $GAL_['src_image'] = imagecreatefrompng($_REQUEST['src']);		break;
+		case ".jpg":
+			$GAL_['src_image'] = imagecreatefromjpeg($_REQUEST['src']);
+			break;
+		case ".gif":
+			$GAL_['src_image'] = imagecreatefromgif($_REQUEST['src']);
+			break;
+		case ".bmp":
+			$GAL_['src_image'] = imagecreatefromwbmp($_REQUEST['src']);
+			break;
+		case "jpeg":
+			$GAL_['src_image'] = imagecreatefromjpeg($_REQUEST['src']);
+			break;
+		case ".png":
+			$GAL_['src_image'] = imagecreatefrompng($_REQUEST['src']);
+			break;
 		default:
 			$GAL_['thumbnail_temp'] = imagecreatetruecolor($GAL_['X_par_defaut'], $GAL_['Y_par_defaut']);
 			$GAL_['bg'] = imagecolorallocate($GAL_['thumbnail_temp'], 255, 255, 255);
-			imagefilledrectangle ($GAL_['thumbnail_temp'], 0, 0, $GAL_['X_par_defaut'], $GAL_['Y_par_defaut'], $GAL_['bg']);
+			imagefilledrectangle($GAL_['thumbnail_temp'], 0, 0, $GAL_['X_par_defaut'], $GAL_['Y_par_defaut'], $GAL_['bg']);
 			$GAL_['textcolor'] = imagecolorallocate($GAL_['thumbnail_temp'], 0, 0, 0);
-			imagestring($GAL_['thumbnail_temp'], 5, ($GAL_['X_par_defaut']/2)-4 , ($GAL_['Y_par_defaut']/2)-4 , "?", $GAL_['textcolor']);
+			imagestring($GAL_['thumbnail_temp'], 5, ($GAL_['X_par_defaut'] / 2) - 4, ($GAL_['Y_par_defaut'] / 2) - 4, "?", $GAL_['textcolor']);
 			$GAL_['textcolor'] = imagecolorallocate($GAL_['thumbnail_temp'], 255, 0, 0);
-			imagestring($GAL_['thumbnail_temp'], 5, ($GAL_['X_par_defaut']/2)-5 , ($GAL_['Y_par_defaut']/2)-5 , "?", $GAL_['textcolor']);
-			imageJPEG($GAL_['thumbnail_temp'],'',100);
+			imagestring($GAL_['thumbnail_temp'], 5, ($GAL_['X_par_defaut'] / 2) - 5, ($GAL_['Y_par_defaut'] / 2) - 5, "?", $GAL_['textcolor']);
+			imageJPEG($GAL_['thumbnail_temp'], '', 100);
 			exit(0);
 	}
 
@@ -152,16 +169,15 @@ if ( $pv['echec'] < 100 ) {
 	$GAL_['dest_Y'] = $GAL_['taille_totale_vignette_Y'] - ($_REQUEST['l'] * 2);
 	*/
 
-	$GAL_['SrcCoef'] = ( $GAL_['src_X'] / $GAL_['src_Y'] );
-	$GAL_['MaxCoef'] = ( $_REQUEST['x'] / $_REQUEST['y'] );
-	if ( $GAL_['MaxCoef'] <= $GAL_['SrcCoef'] ) {
-		$GAL_['taille_totale_vignette_X'] = $_REQUEST['x']; 
+	$GAL_['SrcCoef'] = ($GAL_['src_X'] / $GAL_['src_Y']);
+	$GAL_['MaxCoef'] = ($_REQUEST['x'] / $_REQUEST['y']);
+	if ($GAL_['MaxCoef'] <= $GAL_['SrcCoef']) {
+		$GAL_['taille_totale_vignette_X'] = $_REQUEST['x'];
 		$GAL_['dest_X'] = $GAL_['taille_totale_vignette_X'] - ($_REQUEST['l'] * 2);
-		$GAL_['taille_totale_vignette_Y'] = floor ( $_REQUEST['x'] * ( $GAL_['src_Y'] / $GAL_['src_X'] ));
+		$GAL_['taille_totale_vignette_Y'] = floor($_REQUEST['x'] * ($GAL_['src_Y'] / $GAL_['src_X']));
 		$GAL_['dest_Y'] = $GAL_['taille_totale_vignette_Y'] - ($_REQUEST['l'] * 2);
-	}
-	else {
-		$GAL_['taille_totale_vignette_X'] = floor ( $_REQUEST['y'] * ( $GAL_['src_X'] / $GAL_['src_Y'] )); 
+	} else {
+		$GAL_['taille_totale_vignette_X'] = floor($_REQUEST['y'] * ($GAL_['src_X'] / $GAL_['src_Y']));
 		$GAL_['dest_X'] = $GAL_['taille_totale_vignette_X'] - ($_REQUEST['l'] * 2);
 		$GAL_['taille_totale_vignette_Y'] = $_REQUEST['y'];
 		$GAL_['dest_Y'] = $GAL_['taille_totale_vignette_Y'] - ($_REQUEST['l'] * 2);
@@ -174,43 +190,51 @@ if ( $pv['echec'] < 100 ) {
 		switch ($_REQUEST['m']) {
 			case "2":
 				$GAL_['fichier_vignette'] = $_REQUEST['src'] . $_REQUEST['t'];
-				if (file_exists($GAL_['fichier_vignette'])) { readfile($GAL_['fichier_vignette']); }
-				else { $_REQUEST['m'] = 0; $GAL_['action'] = "SAUVEGARDE_FICHIER"; }
-			break;
+				if (file_exists($GAL_['fichier_vignette'])) {
+					readfile($GAL_['fichier_vignette']);
+				} else {
+					$_REQUEST['m'] = 0;
+					$GAL_['action'] = "SAUVEGARDE_FICHIER";
+				}
+				break;
 
-	// --------------------------------------------------------------------------------------------
+				// --------------------------------------------------------------------------------------------
 			case "1":
-				$SQL_tab_abrege['galerie'] = $db_['tabprefix']."galerie";
+				$SQL_tab_abrege['galerie'] = $db_['tabprefix'] . "galerie";
 				$GAL_['taille_vignette_cible'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'];													// Constitue l'expression scripturale de la taille
-				$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM ".$SQL_tab_abrege['galerie']." WHERE gal_fichier = '".$_REQUEST['src']."';");
-				$debug_info[] = "taille_vignette_cible = ".$GAL_['taille_vignette_cible']; 
-				if( num_row_sql($dbquery) != 0 ) {																							// Controle qu'il y a bien un contenu
+				$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT * FROM " . $SQL_tab_abrege['galerie'] . " WHERE gal_fichier = '" . $_REQUEST['src'] . "';");
+				$debug_info[] = "taille_vignette_cible = " . $GAL_['taille_vignette_cible'];
+				if (num_row_sql($dbquery) != 0) {																							// Controle qu'il y a bien un contenu
 					while ($dbp = fetch_array_sql($dbquery)) {																				// Demarre la lecture des données
-						if ( $dbp['gal_taille'] != $GAL_['taille_vignette_cible'] ) {														// on regarde sur le thumbnail est a la bonne taille
-							requete_sql($_REQUEST['sql_initiateur'], "DELETE FROM ".$SQL_tab_abrege['galerie']." WHERE gal_id = '".$dbp['gal_id']."';");
-							$debug_info[] = "DELETE FROM ".$SQL_tab_abrege['galerie']." WHERE gal_id = '".$dbp['gal_id']."';"; 
-							$_REQUEST['m'] = 0; $GAL_['action'] = "DB_INSERT";																// reprise du mode dynamique pour remplacement
-						}
-						else {
+						if ($dbp['gal_taille'] != $GAL_['taille_vignette_cible']) {														// on regarde sur le thumbnail est a la bonne taille
+							requete_sql($_REQUEST['sql_initiateur'], "DELETE FROM " . $SQL_tab_abrege['galerie'] . " WHERE gal_id = '" . $dbp['gal_id'] . "';");
+							$debug_info[] = "DELETE FROM " . $SQL_tab_abrege['galerie'] . " WHERE gal_id = '" . $dbp['gal_id'] . "';";
+							$_REQUEST['m'] = 0;
+							$GAL_['action'] = "DB_INSERT";																// reprise du mode dynamique pour remplacement
+						} else {
 							$GAL_['binaryThumbnail'] = $dbp['gal_data'];																	// Nom de fichier et taille ok; affichage
 							$debug_info[] = "Chargement image effectue";
 						}
 					}
-				}
-				else { $_REQUEST['m'] = 0; $GAL_['action'] = "DB_INSERT"; }																	// Pas de contenu on passe en mode dynamique et stockage
-			break;
+				} else {
+					$_REQUEST['m'] = 0;
+					$GAL_['action'] = "DB_INSERT";
+				}																	// Pas de contenu on passe en mode dynamique et stockage
+				break;
 		}
 	}
 
 	if ($_REQUEST['m'] == 0) {
 		$GAL_['qualite'] = "40";
-		if ( isset($_REQUEST['q']) ) { $GAL_['qualite'] = $_REQUEST['q']; }
+		if (isset($_REQUEST['q'])) {
+			$GAL_['qualite'] = $_REQUEST['q'];
+		}
 		$GAL_['thumbnail_temp'] = imagecreatetruecolor($GAL_['taille_totale_vignette_X'], $GAL_['taille_totale_vignette_Y']);
 		$GAL_['bg'] = imagecolorallocate($GAL_['thumbnail_temp'], 255, 255, 255);
-		imagefilledrectangle ($GAL_['thumbnail_temp'], 0, 0, $GAL_['taille_totale_vignette_X'], $GAL_['taille_totale_vignette_Y'], $GAL_['bg']);
-		imagecopyresampled($GAL_['thumbnail_temp'], $GAL_['src_image'], $_REQUEST['l'], $_REQUEST['l'], 0, 0, $GAL_['dest_X'], $GAL_['dest_Y'],$GAL_['src_X'], $GAL_['src_Y']);
+		imagefilledrectangle($GAL_['thumbnail_temp'], 0, 0, $GAL_['taille_totale_vignette_X'], $GAL_['taille_totale_vignette_Y'], $GAL_['bg']);
+		imagecopyresampled($GAL_['thumbnail_temp'], $GAL_['src_image'], $_REQUEST['l'], $_REQUEST['l'], 0, 0, $GAL_['dest_X'], $GAL_['dest_Y'], $GAL_['src_X'], $GAL_['src_Y']);
 		ob_start();
-		imageJPEG($GAL_['thumbnail_temp'],'',$GAL_['qualite']);
+		imageJPEG($GAL_['thumbnail_temp'], '', $GAL_['qualite']);
 		$GAL_['binaryThumbnail'] = ob_get_contents();
 		ob_end_clean();
 	}
@@ -218,37 +242,41 @@ if ( $pv['echec'] < 100 ) {
 	// --------------------------------------------------------------------------------------------
 	//	Affichage
 	// --------------------------------------------------------------------------------------------
-	header( "Content-Type: image/jpeg"); 
-	if ( $_REQUEST['debug'] == 1 ) {
-		error_reporting(E_ERROR | E_WARNING | E_PARSE );							// http://fr2.php.net/error_reporting
+	header("Content-Type: image/jpeg");
+	if ($_REQUEST['debug'] == 1) {
+		error_reporting(E_ERROR | E_WARNING | E_PARSE);							// http://fr2.php.net/error_reporting
 		ini_set('log_errors', "On");
-		ini_set('error_log' , "/var/log/apache2/php_err.log");
+		ini_set('error_log', "/var/log/apache2/php_err.log");
 
 		$GAL_['Debug_x'] = 1024;
 		$GAL_['Debug_y'] = 128;
-		$debug_info[] = "GAL_action = ".$GAL_['action'];
-		$debug_info[] = "x =" . $_REQUEST['x'] . "y =" . $_REQUEST['y'] ." - l =" . $_REQUEST['l'] . " - q =" . $_REQUEST['q'] . " - t =" . $_REQUEST['t'] . " - fc =" . $_REQUEST['fc'] ;
+		$debug_info[] = "GAL_action = " . $GAL_['action'];
+		$debug_info[] = "x =" . $_REQUEST['x'] . "y =" . $_REQUEST['y'] . " - l =" . $_REQUEST['l'] . " - q =" . $_REQUEST['q'] . " - t =" . $_REQUEST['t'] . " - fc =" . $_REQUEST['fc'];
 
 		$GAL_['DEBUG_thumbnail'] = imagecreatetruecolor($GAL_['Debug_x'], $GAL_['Debug_y']);
 		$GAL_['bg'] = imagecolorallocate($GAL_['DEBUG_thumbnail'], 255, 255, 255);
-		imagefilledrectangle ($GAL_['DEBUG_thumbnail'], 0, 0, $GAL_['Debug_x'], $GAL_['Debug_y'], $GAL_['bg']);
+		imagefilledrectangle($GAL_['DEBUG_thumbnail'], 0, 0, $GAL_['Debug_x'], $GAL_['Debug_y'], $GAL_['bg']);
 		$GAL_['textcolor'] = imagecolorallocate($GAL_['DEBUG_thumbnail'], 0, 0, 0);
 
-		$debug_info[] = "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;";
-		$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;");
-		while ($dbp = fetch_array_sql($dbquery)) { $debug_info[] = "Gal_id =" . $dbp['gal_id'] + 1; }
-		$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'] ;
+		$debug_info[] = "SELECT gal_id FROM " . $SQL_tab_abrege['galerie'] . " ORDER BY gal_id DESC LIMIT 1;";
+		$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM " . $SQL_tab_abrege['galerie'] . " ORDER BY gal_id DESC LIMIT 1;");
+		while ($dbp = fetch_array_sql($dbquery)) {
+			$debug_info[] = "Gal_id =" . $dbp['gal_id'] + 1;
+		}
+		$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'];
 		$gal_debug_line = 0;
-		foreach ( $debug_info as $A ) {
-			imagestring($GAL_['DEBUG_thumbnail'], 1 , 2 , 2+(12 * $gal_debug_line) , $A, $GAL_['textcolor']);
+		foreach ($debug_info as $A) {
+			imagestring($GAL_['DEBUG_thumbnail'], 1, 2, 2 + (12 * $gal_debug_line), $A, $GAL_['textcolor']);
 			$gal_debug_line++;
 		}
-		imageJPEG($GAL_['DEBUG_thumbnail'],'',100);
+		imageJPEG($GAL_['DEBUG_thumbnail'], '', 100);
 		echo $GAL_['DEBUG_thumbnail'];
-	}
-	else {
-		if ( $_REQUEST['GAL_debug'] == 1 ) { echo addslashes($GAL_['binaryThumbnail']) . "</body></html>"; }
-		else { echo $GAL_['binaryThumbnail']; }
+	} else {
+		if ($_REQUEST['GAL_debug'] == 1) {
+			echo addslashes($GAL_['binaryThumbnail']) . "</body></html>";
+		} else {
+			echo $GAL_['binaryThumbnail'];
+		}
 	}
 
 	// --------------------------------------------------------------------------------------------
@@ -257,29 +285,29 @@ if ( $pv['echec'] < 100 ) {
 	switch ($GAL_['action']) {
 		case "DB_INSERT":
 			$GAL_['id_count'] = 1;
-			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM ".$SQL_tab_abrege['galerie']." ORDER BY gal_id DESC LIMIT 1;");
-			while ($dbp = fetch_array_sql($dbquery)) { $GAL_['id_count'] = $dbp['gal_id'] + 1; }
+			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "SELECT gal_id FROM " . $SQL_tab_abrege['galerie'] . " ORDER BY gal_id DESC LIMIT 1;");
+			while ($dbp = fetch_array_sql($dbquery)) {
+				$GAL_['id_count'] = $dbp['gal_id'] + 1;
+			}
 			$GAL_['db_Thumbnail'] = addslashes($GAL_['binaryThumbnail']);
-			$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'] ;
+			$GAL_['vignette_taille'] = $GAL_['dest_X'] . "x" . $GAL_['dest_Y'];
 			$GAL_['temp_rendu'] = microtime_chrono() - $GAL_['temp_debut'];
-			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "INSERT INTO ".$SQL_tab_abrege['galerie']." VALUES ('".$GAL_['id_count']."','".$_REQUEST['src']."','".$GAL_['vignette_taille']."','".mktime()."','".$GAL_['temp_rendu']."','".$GAL_['db_Thumbnail']."');");
+			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "INSERT INTO " . $SQL_tab_abrege['galerie'] . " VALUES ('" . $GAL_['id_count'] . "','" . $_REQUEST['src'] . "','" . $GAL_['vignette_taille'] . "','" . mktime() . "','" . $GAL_['temp_rendu'] . "','" . $GAL_['db_Thumbnail'] . "');");
 			$dbquery = requete_sql($_REQUEST['sql_initiateur'], "FLUSH TABLES;");
-		break;
+			break;
 		case "SAUVEGARDE_FICHIER":
-			imageJPEG($GAL_['thumbnail_temp'],$GAL_['fichier_vignette'],$GAL_['qualite']);
-		break;
+			imageJPEG($GAL_['thumbnail_temp'], $GAL_['fichier_vignette'], $GAL_['qualite']);
+			break;
 	}
 }
 
 $_REQUEST['n']++;
-$dbquery = requete_sql($_REQUEST['sql_initiateur'], "UPDATE ".$SQL_tab['pv']." SET pv_number = '".$_REQUEST['n']."' WHERE pv_name = 'galerie_ticket';");
+$dbquery = requete_sql($_REQUEST['sql_initiateur'], "UPDATE " . $SQL_tab['pv'] . " SET pv_number = '" . $_REQUEST['n'] . "' WHERE pv_name = 'galerie_ticket';");
 $db->close();
 
-unset (
+unset(
 	$dbquery,
 	$dbp,
 	$debug_info,
 	$GAL_
 );
-
-?>

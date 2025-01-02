@@ -16,6 +16,11 @@ define("USER_ACTION_SIGN_IN", "singIn");
 define("USER_ACTION_DISCONNECT", "disconnect");
 define("ANONYMOUS_USER_NAME", "anonymous");
 
+define("DOCUMENT_TAG_BEGIN", "/*JanusEngine-Content-Begin*/");
+define("DOCUMENT_TAG_BEGIN_OFFSET", strlen(DOCUMENT_TAG_BEGIN) + 1);
+define("DOCUMENT_TAG_END", "/*JanusEngine-Content-End*/");
+
+
 // --------------------------------------------------------------------------------------------
 // Directories 
 define("_EXTENSIONS_DIRECTORY_", "extensions/");
@@ -32,13 +37,13 @@ define("_ENTITY_DIRECTORY_", "current/engine/entity/");
 
 // --------------------------------------------------------------------------------------------
 // Logs
-define("LOGLEVEL_DEBUG_LVL0",		6); // Byte by byte...
-define("LOGLEVEL_BREAKPOINT",		5); // You definitely like to read or you're a crappy developper
-define("LOGLEVEL_STATEMENT",		4); // Every statements like "I'm the <class::method> and i recieved this data"
+define("LOGLEVEL_DEBUG_LVL0",	6); // Byte by byte...
+define("LOGLEVEL_BREAKPOINT",	5); // You definitely like to read or you're a crappy developper
+define("LOGLEVEL_STATEMENT",	4); // Every statements like "I'm the <class::method> and i recieved this data"
 define("LOGLEVEL_INFORMATION",	3); // Moaar
 define("LOGLEVEL_WARNING",		2); // More
-define("LOGLEVEL_ERROR",			1); // Usual level
-define("LOGLEVEL_NO_LOG",			0); // You don't like to read. Or you don't wanna polute your server.
+define("LOGLEVEL_ERROR",		1); // Usual level
+define("LOGLEVEL_NO_LOG",		0); // You don't like to read. Or you don't wanna polute your server.
 
 // define ( "LOG_TARGET", "both" ); // none, both, internal, system
 

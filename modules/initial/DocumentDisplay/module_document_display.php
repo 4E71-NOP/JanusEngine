@@ -16,9 +16,7 @@
 
 class ModuleDocumentDisplay
 {
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 
 	public function render($infos)
 	{
@@ -286,62 +284,67 @@ class ModuleDocumentDisplay
 			$ad['2']['2'] = 2;
 
 			while ($documentAnalyse['mode'] == "search") {
-				$documentAnalyse['start'] = stripos($analysedContent, "[INCLUDE]");
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=" . $documentAnalyse['nbr']));
-				if ($documentAnalyse['start'] !== FALSE) {
-					$documentAnalyse['contenu_include']	= "";
-					$documentAnalyse['docu_type']			= 0; //MWMCODE
-					$documentAnalyse['stop']				= stripos($analysedContent, "[/INCLUDE]", $documentAnalyse['start'] + 9);
-					$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
-					$documentAnalyse['include_docu_name']	= substr($analysedContent, $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']));
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : " . $documentAnalyse['include_docu_name']));
-					$dbquery = $bts->SDDMObj->query("
+				if ($analysedContent != null) {
+					$documentAnalyse['start'] = stripos($analysedContent, "[INCLUDE]");
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=" . $documentAnalyse['nbr']));
+					if ($documentAnalyse['start'] !== FALSE) {
+						$documentAnalyse['contenu_include']	= "";
+						$documentAnalyse['docu_type']			= 0; //MWMCODE
+						$documentAnalyse['stop']				= stripos($analysedContent, "[/INCLUDE]", $documentAnalyse['start'] + 9);
+						$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
+						$documentAnalyse['include_docu_name']	= substr($analysedContent, $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']));
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : " . $documentAnalyse['include_docu_name']));
+						$dbquery = $bts->SDDMObj->query("
 					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_validator, doc.docu_validation_date
 					FROM "
-						. $SqlTableListObj->getSQLTableName('document') . " doc, "
-						. $SqlTableListObj->getSQLTableName('document_share') . " ds
+							. $SqlTableListObj->getSQLTableName('document') . " doc, "
+							. $SqlTableListObj->getSQLTableName('document_share') . " ds
 					WHERE doc.docu_name = '" . $documentAnalyse['include_docu_name'] . "'
 					AND doc.docu_id = ds.fk_docu_id
 					AND ds.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 					;");
 
-					if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
-						$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `" . $documentAnalyse['include_docu_name'] . "` in INCLUDE."));
-						$documentAnalyse['contenu_include']	= " ";
-						$documentAnalyse['docu_type']			= 0; //MWMCODE
-					} else {
-						while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-							$documentAnalyse['contenu_include']	= $dbp['docu_cont'];
-							$documentAnalyse['docu_type']		= $dbp['docu_type'];
-							$document_list[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
-							$document_list[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
-							$document_list[$LD_idx]['docu_creator']					= $DocumentDataObj->getDocumentDataEntry('docu_creator');
-							$document_list[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-							$document_list[$LD_idx]['docu_validator']				= $DocumentDataObj->getDocumentDataEntry('docu_validator');
-							$document_list[$LD_idx]['docu_validation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
-							$LD_idx++;
+						if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `" . $documentAnalyse['include_docu_name'] . "` in INCLUDE."));
+							$documentAnalyse['contenu_include']	= " ";
+							$documentAnalyse['docu_type']			= 0; //MWMCODE
+						} else {
+							while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+								$documentAnalyse['contenu_include']	= $dbp['docu_cont'];
+								$documentAnalyse['docu_type']		= $dbp['docu_type'];
+								$document_list[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
+								$document_list[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
+								$document_list[$LD_idx]['docu_creator']					= $DocumentDataObj->getDocumentDataEntry('docu_creator');
+								$document_list[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
+								$document_list[$LD_idx]['docu_validator']				= $DocumentDataObj->getDocumentDataEntry('docu_validator');
+								$document_list[$LD_idx]['docu_validation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
+								$LD_idx++;
+							}
 						}
+						$x = $DocumentDataObj->getDocumentDataEntry('docu_type');
+						$y = $documentAnalyse['docu_type'];
+
+						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Document is now in the case N=" . $ad[$x][$y]));
+						$DocumentDataObj->setDocumentDataEntry('docu_type', $ad[$x][$y]);
+
+						$documentAnalyse['stop2'] = $documentAnalyse['stop'] + 10;
+						$documentAnalyse['taille_fin'] = strlen($analysedContent) - $documentAnalyse['stop2'];
+						$phpMarkupB = ($documentAnalyse['docu_type'] == 1) ? " <?php\r " : "";
+						$phpMarkupE = ($documentAnalyse['docu_type'] == 1) ? " ?>\r " : "";
+
+						// Will allow modular document to use external ressources from the included document
+						$search = array("{[DataLocation]}");
+						$replace = array($baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/document/" . $document_list[$LD_idx]['docu_name'] . "/");
+						$documentAnalyse['contenu_include'] = str_replace($search, $replace, $documentAnalyse['contenu_include']);
+
+						$analysedContent = substr($analysedContent, 0, $documentAnalyse['start']) . $phpMarkupB . $documentAnalyse['contenu_include'] . $phpMarkupE . substr($analysedContent, $documentAnalyse['stop2'], $documentAnalyse['taille_fin']);
+					} else {
+						$documentAnalyse['mode'] = "exit";
 					}
-					$x = $DocumentDataObj->getDocumentDataEntry('docu_type');
-					$y = $documentAnalyse['docu_type'];
-
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Document is now in the case N=" . $ad[$x][$y]));
-					$DocumentDataObj->setDocumentDataEntry('docu_type', $ad[$x][$y]);
-
-					$documentAnalyse['stop2'] = $documentAnalyse['stop'] + 10;
-					$documentAnalyse['taille_fin'] = strlen($analysedContent) - $documentAnalyse['stop2'];
-					$phpMarkupB = ($documentAnalyse['docu_type'] == 1) ? " <?php\r " : "";
-					$phpMarkupE = ($documentAnalyse['docu_type'] == 1) ? " ?>\r " : "";
-
-					// Will allow modular document to use external ressources from the included document
-					$search = array("{[DataLocation]}");
-					$replace = array($baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/documents/" . $document_list[$LD_idx]['docu_name'] . "/");
-					$documentAnalyse['contenu_include'] = str_replace($search, $replace, $documentAnalyse['contenu_include']);
-
-					$analysedContent = substr($analysedContent, 0, $documentAnalyse['start']) . $phpMarkupB . $documentAnalyse['contenu_include'] . $phpMarkupE . substr($analysedContent, $documentAnalyse['stop2'], $documentAnalyse['taille_fin']);
 				} else {
-					$documentAnalyse['mode'] = "exit";
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " The 'analysedContent' variable is null `"));
 				}
+
 				if ($documentAnalyse['nbr'] == 15) {
 					$documentAnalyse['mode'] = "exit";
 				}
@@ -350,8 +353,10 @@ class ModuleDocumentDisplay
 
 			// 		We need to modify the css classnames expressions in the script
 			$search = array('{[block]}',	"{[DataLocation]}");
-			$replace = array($Block,			$baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/documents/" . $DocumentDataObj->getDocumentDataEntry('docu_name') . "/");
-			$analysedContent = str_replace($search, $replace, $analysedContent);
+			$replace = array($Block,			$baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/document/" . $DocumentDataObj->getDocumentDataEntry('docu_name') . "/");
+			if ($analysedContent != null) {
+				$analysedContent = str_replace($search, $replace, $analysedContent);
+			}
 
 			// --------------------------------------------------------------------------------------------
 			//  
