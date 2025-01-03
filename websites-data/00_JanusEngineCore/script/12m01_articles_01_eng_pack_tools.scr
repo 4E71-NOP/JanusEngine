@@ -5,6 +5,7 @@ add article	name "eng_see_public_profile_p01"		reference "eng_see_public_profile
 add article	name "eng_search_p01"					reference "eng_search"					slug "search"				deadline "initial_online"		desc "Search"						title "Search"										subtitle "...and find"					page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_staff_member_list_p01"		reference "eng_staff_member_list"		slug "staff-member-list"	deadline "initial_online"		desc "Introduction"					title "The team"									subtitle "The staff"					page "1"	validation_state "VALID"	config "no_menu";
 add article	name "eng_what_we_do_p01"				reference "eng_what_we_do"				slug "what-we-do"			deadline "initial_online"		desc "What do we do?"				title "What do we do?"								subtitle "The staff"					page "1"	validation_state "VALID"	config "no_menu";
+add article	name "eng_who_are_we_p01"				reference "eng_who_are_we"				slug "who-are-we"			deadline "initial_online"		desc "Who are we ?"					title "Who are we ?"								subtitle "The staff"					page "1"	validation_state "VALID"	config "no_menu";
 
 assign document name "doc_uni_download_p01.php"					to_article "eng_download_p01";
 assign document name "doc_uni_enroll_p01.php"					to_article "eng_enroll_p01";
@@ -13,4 +14,5 @@ assign document name "doc_uni_see_public_profile_p01.php"		to_article "eng_see_p
 assign document name "doc_uni_search_p01.php"					to_article "eng_search_p01";
 assign document name "doc_uni_staff_member_list_p01.php"		to_article "eng_staff_member_list_p01";
 assign document name "doc_uni_what_we_do_p01.php"				to_article "eng_what_we_do_p01";
+assign document name "doc_uni_who_are_we_p01.php"				to_article "eng_who_are_we_p01";
 

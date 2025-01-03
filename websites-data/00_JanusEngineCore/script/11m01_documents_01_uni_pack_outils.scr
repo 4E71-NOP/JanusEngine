@@ -10,6 +10,12 @@ share document	name "doc_uni_enroll_p01.php"	with_website JanusEngineCore	modifi
 update document	name "doc_uni_enroll_p01.php"	validation YES	validator "*user_install*"	from_site JanusEngineCore;
 
 
+add document	name "doc_uni_who_are_we_p01.php"	type PHP;
+insert content	file "uni_who_are_we_p01.php"		into "doc_uni_who_are_we_p01.php";
+share document	name "doc_uni_who_are_we_p01.php"	with_website JanusEngineCore	modification NO;
+update document	name "doc_uni_who_are_we_p01.php"	validation YES	validator "*user_install*"	from_site JanusEngineCore;
+
+
 add document	name "doc_uni_news_p01.php"	type PHP;
 insert content	file "uni_news_p01.php"		into "doc_uni_news_p01.php";
 share document	name "doc_uni_news_p01.php"	with_website JanusEngineCore	modification NO;

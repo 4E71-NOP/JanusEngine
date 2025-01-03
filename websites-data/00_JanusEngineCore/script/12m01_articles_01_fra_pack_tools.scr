@@ -5,6 +5,7 @@ add article	name "fra_see_public_profile_p01"		reference "fra_see_public_profile
 add article	name "fra_search_p01"					reference "fra_search"					slug "search"				deadline "initial_online"		desc "search"						title "search"										subtitle "...et résultat"				page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_staff_member_list_p01"		reference "fra_staff_member_list"		slug "staff-member-list"	deadline "initial_online"		desc "Presentation l'équipe"		title "Présentation de l'équipe"					subtitle "Le staff"						page "1"	validation_state "VALID"	config "no_menu";
 add article	name "fra_what_we_do_p01"				reference "fra_what_we_do"				slug "what-we-do"			deadline "initial_online"		desc "Presentation l'activité"		title "Présentation de l'activité"					subtitle "Ce qu'on fait"				page "1"	validation_state "VALID"	config "no_menu";
+add article	name "fra_who_are_we_p01"				reference "fra_who_are_we"				slug "who-are-we"			deadline "initial_online"		desc "Qui sommes nous ?"			title "Qui sommes nous ?"							subtitle "The staff"					page "1"	validation_state "VALID"	config "no_menu";
 
 assign document name "doc_uni_download_p01.php"					to_article "fra_download_p01";
 assign document name "doc_uni_enroll_p01.php"					to_article "fra_enroll_p01";
@@ -13,6 +14,7 @@ assign document name "doc_uni_see_public_profile_p01.php"		to_article "fra_see_p
 assign document name "doc_uni_search_p01.php"					to_article "fra_search_p01";
 assign document name "doc_uni_staff_member_list_p01.php"		to_article "fra_staff_member_list_p01";
 assign document name "doc_uni_what_we_do_p01.php"				to_article "fra_what_we_do_p01";
+assign document name "doc_uni_who_are_we_p01.php"				to_article "fra_who_are_we_p01";
 
 add article	name "fra_test_niv6_p01"				reference "fra_test_niv6"				slug "test-n6"				deadline "initial_online"		desc "Test"							title "Test"										subtitle "Menu niveau 6"				page "1"	validation_state "VALID"	config "no_menu";
 assign document name "doc_uni_testDocument_p02.php"				to_article "fra_test_niv6_p01";

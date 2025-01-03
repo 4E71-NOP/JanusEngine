@@ -27,39 +27,33 @@
 /* @var $l String                                   */
 /*JanusEngine-IDE-end*/
 
+//http://www.local-janus-engine.com/enroll/1/
+
 /*JanusEngine-Content-Begin*/
 
 $bts->I18nTransObj->apply(
 	array(
 		"type" => "array",
 		"fra" => array(
-			"invite1"		=>	"Janus Engine, de manière a devenir international a besoin de traducteurs pour ses articles, code, commentaires.<br>\r
-		<br>\r
-		Si vous avez des sujets intéressants pour Janus Engine n'hésitez pas a en proposer.<br>\r
-		<br>\r
-		Si vous avez des suggestions (constructives) concernant Janus Engine vous pourrez nous contacter à l'adresse suivante.<br>\r
-		<br>\r
-		<p style='text-align: center;' >\r
-		<a class='" . $Block . "_lien " . $Block . "_t4' href='mailto:someone@somedomain.net'>mailto:someone@somedomain.net</a>
-		</p>
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		"
+			"invite1"		=>	"C'est un petit développeur dans sa campagne qui lance ce projet.<br>\r
+			<br>\r
+			Si vous souhaitez aider, allez sur <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "enroll'>cette page</a>.<br>\r
+			<br>\r
+			<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			"
 		),
 		"eng" => array(
-			"invite1"		=>	"In order to become international Janus Engine needs traducers for article, code, comments.<br>\r
-		<br>\r
-		If you have interesting topics for  Janus Engine don't hesitate to submit some.<br>\r
-		<br>\r
-		If you have suggestions for Janus Engine you can write to this address.<br>\r
-		<br>\r
-		<p style='text-align: center;' >\r
-		<a class='" . $Block . "_lien " . $Block . "_t4' href='mailto:someone@somedomain.net'>mailto:someone@somedomain.net</a>
-		</p>
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
-		<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			"invite1"		=>	"This is a single developer lost in the jungle who launch this project.<br>\r
+			<br>\r
+			If you want to help, go to <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "enroll'>this page</a>.<br>\r
+			<br>\r
+			<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
+			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
 		"
 		)
 	)

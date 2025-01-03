@@ -48,6 +48,7 @@ share document	name "doc_uni_article_not_found_p01.php"				with_website "JanusEn
 share document	name "doc_uni_article_moved_p01.php"			    	with_website "JanusEngine"	modification "NO";
 share document	name "doc_uni_staff_member_list_p01.php"				with_website "JanusEngine"	modification "NO";
 share document	name "doc_uni_what_we_do_p01.php"						with_website "JanusEngine"	modification "NO";
+share document	name "doc_uni_who_are_we_p01.php"						with_website "JanusEngine"	modification "NO";
 
 share document	name "doc_uni_enroll_p01.php"							with_website "JanusEngine"	modification "NO";
 share document	name "doc_uni_search_p01.php"							with_website "JanusEngine"	modification "NO";
