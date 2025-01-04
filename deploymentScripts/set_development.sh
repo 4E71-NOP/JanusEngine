@@ -11,6 +11,7 @@ ln -s vrs_20190905 current
 
 # Define
 cd current
+rm define.php
 ln -s define_development.php define.php
 cd ../
 
