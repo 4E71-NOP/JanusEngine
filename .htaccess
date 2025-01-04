@@ -35,11 +35,11 @@ RewriteRule DeveloperDocs\/.+\.html$ - [L]
 
 # Bad ones on specific directories
 # http://www.local-janus-engine.com/media/theme/(nothing)
-RewriteRule media\/theme\/$ media/img/universal/vide.gif
+RewriteRule media\/theme\/$ media/img/universal/empty.png
 
 # http://www.local-janus-engine.com/media/theme//
 # Probably an image url malformed
-RewriteRule ^http.*\/+$ media/img/universal/vide.gif
+RewriteRule ^http.*\/+$ media/img/universal/empty.png
 
 # Not a devdocs or image... rewrite it as Janus Engine style
 <IfModule mod_rewrite.c>

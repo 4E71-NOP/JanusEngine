@@ -17,7 +17,7 @@ url(../gfx/HAL-9000/hal-9000_B03_bgc_fcc.png)
 url(../gfx/HAL-9000/hal-9000_B03_bgc_fcd.png)
 url(../gfx/HAL-9000/hal-9000_B03_bgc_fcta.png)
 url(../gfx/HAL-9000/hal-9000_B03_bgc_fctb.png)
-url(../gfx/HAL-9000/vide.gif)
+url(../gfx/HAL-9000/empty.png)
 url(../gfx/HAL-9000/hal-9000_B03_bgc_fco.png)
 url(../gfx/HAL-9000/hal-9000_B03_submit_s1_n01.png)
 url(../gfx/HAL-9000/hal-9000_B03_submit_s1_n02.png)
@@ -286,8 +286,8 @@ visibility:hidden;
 .theme_princ_B01_fcd, .theme_princ_B06_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B03_bgc_fcd.png);  color: #FFFFFF; }
 .theme_princ_B01_fcta, .theme_princ_B06_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B03_bgc_fcta.png); color: #FFFFFF; }
 .theme_princ_B01_fctb, .theme_princ_B06_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B03_bgc_fctb.png); color: #FFFFFF; }
-.theme_princ_B01_fcsa, .theme_princ_B06_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B01_fcsb, .theme_princ_B06_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B01_fcsa, .theme_princ_B06_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B01_fcsb, .theme_princ_B06_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B01_fco, .theme_princ_B06_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B03_bgc_fco.png);  color: #FFFFFF; }
 
 .theme_princ_B01_highlight, .theme_princ_B06_highlight  { color: #FFFF80; }
@@ -408,8 +408,8 @@ td > .theme_princ_B01_form_2, td > .theme_princ_B06_form_2  { font-weight: norma
 .theme_princ_B02_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B02_bgc_fcd.png);  color: #FFFFFF; }
 .theme_princ_B02_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B02_bgc_fcta.png); color: #FFFFFF; }
 .theme_princ_B02_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B02_bgc_fctb.png); color: #FFFFFF; }
-.theme_princ_B02_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B02_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B02_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B02_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B02_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B02_bgc_fco.png);  color: #FFFFFF; }
 
 .theme_princ_B02_highlight  { color: #FFFF80; }
@@ -530,8 +530,8 @@ td > .theme_princ_B02_form_2  { font-weight: normal; color: #285191; background-
 .theme_princ_B03_fcd, .theme_princ_B08_fcd, .theme_princ_B09_fcd, .theme_princ_B10_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B01_bgc_fcd.png);  color: #FFFFFF; }
 .theme_princ_B03_fcta, .theme_princ_B08_fcta, .theme_princ_B09_fcta, .theme_princ_B10_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B01_bgc_fcta.png); color: #FFFFFF; }
 .theme_princ_B03_fctb, .theme_princ_B08_fctb, .theme_princ_B09_fctb, .theme_princ_B10_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B01_bgc_fctb.png); color: #FFFFFF; }
-.theme_princ_B03_fcsa, .theme_princ_B08_fcsa, .theme_princ_B09_fcsa, .theme_princ_B10_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B03_fcsb, .theme_princ_B08_fcsb, .theme_princ_B09_fcsb, .theme_princ_B10_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B03_fcsa, .theme_princ_B08_fcsa, .theme_princ_B09_fcsa, .theme_princ_B10_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B03_fcsb, .theme_princ_B08_fcsb, .theme_princ_B09_fcsb, .theme_princ_B10_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B03_fco, .theme_princ_B08_fco, .theme_princ_B09_fco, .theme_princ_B10_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B01_bgc_fco.png);  color: #FFFFFF; }
 
 .theme_princ_B03_highlight, .theme_princ_B08_highlight, .theme_princ_B09_highlight, .theme_princ_B10_highlight  { color: #FFFF80; }
@@ -652,8 +652,8 @@ td > .theme_princ_B03_form_2, td > .theme_princ_B08_form_2, td > .theme_princ_B0
 .theme_princ_B04_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B04_bgc_fcd.png);  color: #FFFFFF; }
 .theme_princ_B04_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B04_bgc_fcta.png); color: #FFFFFF; }
 .theme_princ_B04_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B04_bgc_fctb.png); color: #FFFFFF; }
-.theme_princ_B04_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B04_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B04_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B04_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B04_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B04_bgc_fco.png);  color: #FFFFFF; }
 
 .theme_princ_B04_highlight  { color: #FFFF80; }
@@ -774,8 +774,8 @@ td > .theme_princ_B04_form_2  { font-weight: normal; color: #802080; background-
 .theme_princ_B05_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B05_bgc_fcd.png);  color: #000000; }
 .theme_princ_B05_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B05_bgc_fcta.png); color: #000000; }
 .theme_princ_B05_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B05_bgc_fctb.png); color: #000000; }
-.theme_princ_B05_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B05_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B05_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B05_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B05_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B05_bgc_fco.png);  color: #000000; }
 
 .theme_princ_B05_highlight  { color: #FFFF80; }
@@ -896,8 +896,8 @@ td > .theme_princ_B05_form_2  { font-weight: normal; color: #FFCC20; background-
 .theme_princ_B07_fcd  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B99_bgc_fcd.png);  color: #FFFFFF; }
 .theme_princ_B07_fcta  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B99_bgc_fcta.png); color: #FFFFFF; }
 .theme_princ_B07_fctb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B99_bgc_fctb.png); color: #FFFFFF; }
-.theme_princ_B07_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
-.theme_princ_B07_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/vide.gif); color: #000000; }
+.theme_princ_B07_fcsa  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
+.theme_princ_B07_fcsb  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/empty.png); color: #000000; }
 .theme_princ_B07_fco  { padding: 5px ; vertical-align: top; background-image: url(../gfx/HAL-9000/hal-9000_B99_bgc_fco.png);  color: #FFFFFF; }
 
 .theme_princ_B07_highlight  { color: #FFFF80; }

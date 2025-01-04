@@ -207,17 +207,17 @@ td > .theme_princ_B01_form_2, td > .theme_princ_B02_form_2, td > .theme_princ_B0
 .theme_princ_B02_in13, .theme_princ_B20_in13 { position: absolute; background-image: url(../gfx/Magma/magma_B02_in13.png);  vertical-align: bottom; width: 448px; height: 12px;   background-repeat : repeat-x; overflow:hidden }
 .theme_princ_B02_in14, .theme_princ_B20_in14 { position: absolute; background-image: url(../gfx/Magma/magma_B02_in14.png);  vertical-align: bottom; width: 8px; height: 12px;   background-repeat : no-repeat; overflow:hidden }
 .theme_princ_B02_in15, .theme_princ_B20_in15 { position: absolute; background-image: url(../gfx/Magma/magma_B02_in15.png);  vertical-align: bottom; width: 8px; height: 12px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in21, .theme_princ_B20_in21 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in25, .theme_princ_B20_in25 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in31, .theme_princ_B20_in31 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-y; overflow:hidden }
-.theme_princ_B02_in35, .theme_princ_B20_in35 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-y; overflow:hidden }
-.theme_princ_B02_in41, .theme_princ_B20_in41 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in45, .theme_princ_B20_in45 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in51, .theme_princ_B20_in51 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in52, .theme_princ_B20_in52 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in53, .theme_princ_B20_in53 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-x; overflow:hidden }
-.theme_princ_B02_in54, .theme_princ_B20_in54 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
-.theme_princ_B02_in55, .theme_princ_B20_in55 { position: absolute; background-image: url(../gfx/Magma/vide.gif);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in21, .theme_princ_B20_in21 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in25, .theme_princ_B20_in25 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in31, .theme_princ_B20_in31 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-y; overflow:hidden }
+.theme_princ_B02_in35, .theme_princ_B20_in35 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-y; overflow:hidden }
+.theme_princ_B02_in41, .theme_princ_B20_in41 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in45, .theme_princ_B20_in45 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in51, .theme_princ_B20_in51 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in52, .theme_princ_B20_in52 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in53, .theme_princ_B20_in53 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : repeat-x; overflow:hidden }
+.theme_princ_B02_in54, .theme_princ_B20_in54 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
+.theme_princ_B02_in55, .theme_princ_B20_in55 { position: absolute; background-image: url(../gfx/Magma/empty.png);  vertical-align: bottom; width: 2px; height: 2px;   background-repeat : no-repeat; overflow:hidden }
 
  
 

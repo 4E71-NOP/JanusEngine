@@ -89,7 +89,7 @@ icon_nok			'aqua_B01_icon_nok.png'
 icon_question		'aqua_B01_icon_question.png'						
 icon_notification	'aqua_B01_icon_notification.png'						
 
-transparent_8x8	'vide.gif'						
+transparent_8x8	'empty.png'						
 							
 icone_dim_x	'32'						
 icone_dim_y	'32'

@@ -83,7 +83,7 @@ icone_ok	'abysses_B01_icone_ok.png'
 icone_nok	'abysses_B01_icone_nok.png'						
 icone_question	'abysses_B01_icone_question.png'						
 icone_notification	'abysses_B01_icone_notification.png'						
-transparent_8x8	'vide.gif'						
+transparent_8x8	'empty.png'						
 							
 icone_dim_x	'32'						
 icone_dim_y	'32'						
