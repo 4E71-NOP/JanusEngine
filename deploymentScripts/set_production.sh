@@ -2,8 +2,8 @@ cd ../
 
 # Basic entry points
 rm index.htm index.html
-ls -s index.php index.htm
-ls -s index.php index.html
+ln -s index.php index.htm
+ln -s index.php index.html
 
 # Main content
 rm current
