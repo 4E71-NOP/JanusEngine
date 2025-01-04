@@ -87,10 +87,11 @@ class JanusEngine
 		// error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
 		// error_reporting ( E_ALL ^ E_NOTICE );
 		error_reporting(E_ALL);
-		ini_set('log_errors', "On");
-		ini_set('error_log', "/var/log/apache2/error.log"); // Local
-		// ini_set('error_log', "/var/log/apache2/error.log"); // HostGator
-		ini_set('display_errors', 0);
+		ini_set('display_errors', LOG_CONFIG_DISPLAY_ERROR);
+		if (strlen(LOG_CONFIG_ERROR_LOG) > 0) {
+			ini_set('log_errors', LOG_CONFIG_LOG_ERRORS);
+			ini_set('error_log', LOG_CONFIG_ERROR_LOG); // Local
+		}
 
 		// --------------------------------------------------------------------------------------------
 		// Don't push me cuz i'm close to the edge !!!
@@ -100,7 +101,6 @@ class JanusEngine
 		if (strpos($Navigator, "MSIE") !== FALSE) {
 			if (strpos($Navigator, "DOM") !== FALSE) {
 				include("current/engine/staticPages/UnsupportedBrowserBanner.php");
-				exit();
 			}
 		}
 		unset($Navigator);

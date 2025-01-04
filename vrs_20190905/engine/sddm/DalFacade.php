@@ -19,74 +19,75 @@
  * @author Faust
  *
  */
-class DalFacade {
+class DalFacade
+{
 	private static $Instance = null;
 	private $DALInstance = null;
-	private function __construct() {
-	}
-	
+	private function __construct() {}
+
 	/**
 	 * Singleton : Will return the instance of this class.
 	 * @return DalFacade
 	 */
-	public static function getInstance() {
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
-			self::$Instance = new DalFacade ();
+			self::$Instance = new DalFacade();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Will load the desired class depending on configuration.
 	 */
-	public function createDALInstance () {
+	public function createDALInstance()
+	{
 		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();				// Make sure it's loaded
 
 		// Disconnects a pre-existing connection. We won't have multiple connections.
-		if ( $this->DALInstance) {
+		if ($this->DALInstance) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Pre-existing connetion found. Diconnecting..."));
 			$this->DALInstance->disconnect_sql();
 		}
 
-		switch ( $bts->CMObj->getConfigurationEntry('dal')) {
-			case "PHP" :
-				switch ( $bts->CMObj->getConfigurationEntry('type')) {
+		switch ($bts->CMObj->getConfigurationEntry('dal')) {
+			case "PHP":
+				switch ($bts->CMObj->getConfigurationEntry('type')) {
 					case "mysql":
-							$ClassLoaderObj->provisionClass('SddmMySQLI');
-							$this->DALInstance = SddmMySQLI::getInstance ();
-							break;
+						$ClassLoaderObj->provisionClass('SddmMySQLI');
+						$this->DALInstance = SddmMySQLI::getInstance();
+						break;
 					case "pgsql":
-							$ClassLoaderObj->provisionClass('SddmPgsql');
-							$this->DALInstance = SddmPgsql::getInstance();
-					break;
+						$ClassLoaderObj->provisionClass('SddmPgsql');
+						$this->DALInstance = SddmPgsql::getInstance();
+						break;
 				}
 				break;
-			case "PDO" :
+			case "PDO":
 				$ClassLoaderObj->provisionClass('SddmPDO');
 				$this->DALInstance = SddmPDO::getInstance();
 				break;
-			case "SQLITE" :
+			case "SQLITE":
 				break;
-			// case "ADODB" :
-			// 	$ClassLoaderObj->provisionClass('SddmADODB');
-			// 	$this->DALInstance = SddmADODB::getInstance();
-			// 	break;
-			// case "PEARDB" :
-			// 	$ClassLoaderObj->provisionClass('SddmPEARDB');
-			// 	$this->DALInstance = SddmPEARDB::getInstance();
-			// 	break;
+				// case "ADODB" :
+				// 	$ClassLoaderObj->provisionClass('SddmADODB');
+				// 	$this->DALInstance = SddmADODB::getInstance();
+				// 	break;
+				// case "PEARDB" :
+				// 	$ClassLoaderObj->provisionClass('SddmPEARDB');
+				// 	$this->DALInstance = SddmPEARDB::getInstance();
+				// 	break;
 		}
 		$this->DALInstance->connect();
 	}
-	
+
 	/**
 	 * Returns the current Database Abstraction Layer class instance. 
 	 * @return SddmMySQLI|SddmPDO|SddmADODB|SddmPEARDB
 	 */
-	public function getDALInstance() {
+	public function getDALInstance()
+	{
 		return $this->DALInstance;
 	}
 }
-?>
-

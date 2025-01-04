@@ -128,7 +128,7 @@ class BaseToolSet
 	{
 		$DALFacade = DalFacade::getInstance();
 		$DALFacade->createDALInstance();			//It connects too.
-		$this->SDDMObj					= $DALFacade->getDALInstance();
+		$this->SDDMObj = $DALFacade->getDALInstance();
 	}
 
 	/**
@@ -147,10 +147,9 @@ class BaseToolSet
 	/**
 	 * 
 	 */
-	public function segmentEnding ($method) {
+	public function segmentEnding($method)
+	{
 		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "| " . $method . " ended --------------------"));
 		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
 	}
-
-
 }

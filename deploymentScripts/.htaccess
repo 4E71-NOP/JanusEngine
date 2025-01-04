@@ -1,0 +1,12 @@
+#
+# Protection for critical files. 
+# The best is to remove this directory after installation.
+# the default user is 'JanusEngineAdmin'
+# You can use https://hostingcanada.org/htpasswd-generator/ to help you create htpasswd file.
+#
+<FilesMatch "^.*\.php$">
+AuthName "*** Rescticted access ***"
+AuthType Basic
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
+</FilesMatch>
