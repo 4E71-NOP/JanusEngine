@@ -83,7 +83,7 @@ $pageSelectorData['clauseElements'] = array();
 $pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "td.theme_id",		"operator" => "=",	"right" => "tw.fk_theme_id");
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "m.theme_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 
@@ -101,10 +101,10 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 }
 
 if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
 	}
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
 		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
 	}
 

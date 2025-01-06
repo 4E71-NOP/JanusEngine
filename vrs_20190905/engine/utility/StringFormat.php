@@ -318,13 +318,15 @@ class StringFormat
 
 		// $doHeader = true;
 		if (is_array($data)) {
-			
-			foreach ($data as $resultEntry ) {
+
+			foreach ($data as $resultEntry) {
 				$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
 				// if ($doHeader == true) {
-					$tmpCol = reset($resultEntry);
-					foreach ($tmpCol as $A => $B ) { $str .= "<td>" . $A . "</td>\r"; }
-					$doHeader = false;
+				$tmpCol = reset($resultEntry);
+				foreach ($tmpCol as $A => $B) {
+					$str .= "<td>" . $A . "</td>\r";
+				}
+				$doHeader = false;
 				// }
 				reset($resultEntry);
 				foreach ($resultEntry as $tmpRecord) {
@@ -363,7 +365,7 @@ class StringFormat
 	{
 		foreach ($data as &$a) {
 			$str = $a;
-			$b = strlen($a);
+			$b = strlen($a ?? '');
 			$a .= " : ";
 			for ($c = 0; $c <= $b; $c++) {
 				$a .= dechex(ord($str[$c])) . " ";
@@ -385,6 +387,8 @@ class StringFormat
 	 */
 	public function conversionExpression($val, $section)
 	{
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : val='" . $val . "'; section='" . $section));
 		return self::$ConvertTable[strtolower($section)][strtolower($val)];
 	}
 
@@ -398,7 +402,7 @@ class StringFormat
 	public function conversionExpressionIntoTarget($val, $section, &$data, $target)
 	{
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : val=". $val . "; section=" . $section . "; target=" . $target ));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : val='" . $val . "'; section='" . $section . "'; target='" . $target . "'"));
 		$data['params'][$target] = self::$ConvertTable[strtolower($section)][strtolower($val)];
 	}
 
@@ -421,7 +425,7 @@ class StringFormat
 	 */
 	public function shorteningExpression($expr, $l0)
 	{
-		$ls = strlen($expr);
+		$ls = strlen($expr ?? '');
 		$l1 = floor($l0 / 2);
 		$l2 = $l1 - 4;
 		switch (TRUE) {

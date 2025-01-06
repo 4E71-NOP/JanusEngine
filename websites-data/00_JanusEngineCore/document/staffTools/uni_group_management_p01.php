@@ -79,37 +79,44 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+if ($pageSelectorData['nbrPerPage'] < 1) {
+	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
+}
 
 $pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "wg.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
-$pageSelectorData['clauseElements'][] = array("left" => "grp.group_id",		"operator" => "=",	"right" => "wg.fk_group_id" );
-$pageSelectorData['clauseElements'][] = array("left" => "grp.group_name",	"operator" => "!=",	"right" => "'Server_owner'" );
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
-	$pageSelectorData['clauseElements'][] = array( "left" => "grp.group_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+$pageSelectorData['clauseElements'][] = array("left" => "wg.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "grp.group_id",		"operator" => "=",	"right" => "wg.fk_group_id");
+$pageSelectorData['clauseElements'][] = array("left" => "grp.group_name",	"operator" => "!=",	"right" => "'Server_owner'");
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "grp.group_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 
 $pageSelectorData['query'] = "SELECT"
-." COUNT(grp.group_id) AS ItemsCount "
-." FROM "
-.$SqlTableListObj->getSQLTableName('group')." grp, "
-.$SqlTableListObj->getSQLTableName('group_website')." wg "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-.";"
-;
+	. " COUNT(grp.group_id) AS ItemsCount "
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('group') . " grp, "
+	. $SqlTableListObj->getSQLTableName('group_website') . " wg "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. ";";
 
 $dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+	$pageSelectorData['ItemsCount'] = $dbp['ItemsCount'];
+}
 
-if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
+	}
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
+		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+	}
 
 	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
-	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmIn'] = "<div class='" . $Block . "_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
 	$pageSelectorData['elmOut'] = "</div>";
-	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$pageSelectorData['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
 	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
 }
 
@@ -118,29 +125,29 @@ if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
 $T = array();
 $dbquery = $bts->SDDMObj->query("
 SELECT grp.*, wg.group_state "
-." FROM "
-.$SqlTableListObj->getSQLTableName('group')." grp, "
-.$SqlTableListObj->getSQLTableName('group_website')." wg"
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-." ORDER BY  grp.group_name"
-." LIMIT ".$pageSelectorData['nbrPerPage']." OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
-.";");
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('group') . " grp, "
+	. $SqlTableListObj->getSQLTableName('group_website') . " wg"
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. " ORDER BY  grp.group_name"
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. ";");
 $i = 1;
 $T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 $T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 $T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$i++;
 	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
-	."index.php?"._JNSENGLINKURLTAG_."=1"
-	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
-	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
-	."&arti_page=2"
-	."&formGenericData[mode]=edit"
-	."&groupForm[selectionId]=".$dbp['group_id']
-	."'>"
-	.$dbp['group_name']
-	."</a>\r";
+		. "index.php?" . _JNSENGLINKURLTAG_ . "=1"
+		. "&arti_slug=" . $CurrentSetObj->getDataSubEntry('article', 'arti_slug')
+		. "&arti_ref=" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref')
+		. "&arti_page=2"
+		. "&formGenericData[mode]=edit"
+		. "&groupForm[selectionId]=" . $dbp['group_id']
+		. "'>"
+		. $dbp['group_name']
+		. "</a>\r";
 	$T['Content']['1'][$i]['2']['cont'] = $dbp['group_title'];
 	$T['Content']['1'][$i]['2']['tc'] = 2;
 	$T['Content']['1'][$i]['3']['cont'] = $tagTab[$dbp['group_tag']];
@@ -152,15 +159,13 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T)
-."<br>\r"
-.$TemplateObj->renderFilterForm($infos)
-.$TemplateObj->renderAdminCreateButton($infos)
-;
+	. "<br>\r"
+	. $TemplateObj->renderFilterForm($infos)
+	. $TemplateObj->renderAdminCreateButton($infos);
 
 $bts->segmentEnding(__METHOD__);
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-Content-End*/
-?>

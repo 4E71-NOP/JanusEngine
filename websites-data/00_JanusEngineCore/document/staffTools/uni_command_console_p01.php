@@ -40,10 +40,11 @@
 // $_REQUEST['CC']['fichier'] = "";
 // $_REQUEST['requete_insert'] = "show user";
 
-$bts->RequestDataObj->setRequestData('formConsole',
-array(
-	"CLiContent"		=> "show user",
-	"CLiContentResult"	=> array("result 01", "result 02", "result 03", "result 04", "result 05"),
+$bts->RequestDataObj->setRequestData(
+	'formConsole',
+	array(
+		"CLiContent"		=> "show user",
+		"CLiContentResult"	=> array("result 01", "result 02", "result 03", "result 04", "result 05"),
 	)
 );
 
@@ -123,7 +124,7 @@ $bts->I18nTransObj->apply(
 		)
 	)
 );
-		
+
 // --------------------------------------------------------------------------------------------
 //	Affichage
 // --------------------------------------------------------------------------------------------
@@ -147,14 +148,16 @@ $SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
 );
 
 $T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_l1');
-$T['Content'][$Tab]['2']['1']['cont'] = "<br>\r>>> ".$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent')."<br>\r&nbsp;";
+$T['Content'][$Tab]['2']['1']['cont'] = "<br>\r>>> " . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "<br>\r&nbsp;";
 $T['Content'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_CmdToExec');
 $T['Content'][$Tab]['4']['1']['cont'] = "<textarea name='formConsole[CLiContent]' style='width:97%' rows='6'></textarea>";
 $T['Content'][$Tab]['4']['1']['style'] = "text-align:center;";
 $T['Content'][$Tab]['5']['1']['cont'] .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
 
-$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 5;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 5;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
 // --------------------------------------------------------------------------------------------
 //	Tab File mode
@@ -164,7 +167,7 @@ $FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConf
 	"formConsole[inputFile]",
 	60,
 	$formInputFile,
-	$WebSiteObj->getWebSiteEntry('ws_directory')."/document",
+	$WebSiteObj->getWebSiteEntry('ws_directory') . "/document",
 	"websites-data",
 	"buttonCommandConsole",
 );
@@ -173,15 +176,17 @@ $FileSelectorConfig['strAdd'] = "../";
 $FileSelectorConfig['case'] = 1;
 
 $infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'),$FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
+$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
+$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
 
 $SB['id'] = "T02submitButton";
 $T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('file_select');
 $T['Content'][$Tab]['2']['1']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 $T['Content'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('file_info');
 $T['Content'][$Tab]['3']['1']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
-$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 3;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 3;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
 // --------------------------------------------------------------------------------------------
 //	Tab Results
@@ -189,7 +194,9 @@ $Tab = 3;
 
 $T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_result');
 $T['Content'][$Tab]['2']['1']['cont'] = $bts->StringFormatObj->arrayToHtmlTable($bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult'), $infos);
-$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 2;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 2;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
 // --------------------------------------------------------------------------------------------
 //	Tab Logs
@@ -203,18 +210,18 @@ $T['Content'][$Tab]['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('L
 $T['Content'][$Tab]['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Logs_c6');
 $T['Content'][$Tab]['1']['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Logs_c7');
 
-$tab = array (
-	0	=>	"<span class='".$Block."_error'>Erreur</span>",
-	1	=>	"<span class='".$Block."_ok ".$Block."_t1'>OK</span>",
-	2	=>	"<span class='".$Block."_warning'>Avertissement</span>",
+$tab = array(
+	0	=>	"<span class='" . $Block . "_error'>Erreur</span>",
+	1	=>	"<span class='" . $Block . "_ok " . $Block . "_t1'>OK</span>",
+	2	=>	"<span class='" . $Block . "_warning'>Avertissement</span>",
 	3	=>	"Information",
 	4	=>	"Autre",
 );
 
 $dbquery = $bts->SDDMObj->query("
 SELECT *
-FROM ".$SqlTableListObj->getSQLTableName('log')."
-WHERE fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+FROM " . $SqlTableListObj->getSQLTableName('log') . "
+WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 ORDER BY log_id DESC
 LIMIT 10
 ;");
@@ -222,49 +229,56 @@ LIMIT 10
 
 $l = 2;
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-	$log_action_longeur = strlen($dbp['log_action']);
+	$log_action_longeur = strlen($dbp['log_action'] ?? '');
 	switch (TRUE) {
-		case ($log_action_longeur < 128 && $log_action_longeur > 64):	$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] ";		break;
-		case ($log_action_longeur > 128):								$dbp['log_action'] = substr ($dbp['log_action'],0,59) . " [...] " . substr ($dbp['log_action'],($log_action_longeur - 64) ,$log_action_longeur );		break;
+		case ($log_action_longeur < 128 && $log_action_longeur > 64):
+			$dbp['log_action'] = substr($dbp['log_action'], 0, 59) . " [...] ";
+			break;
+		case ($log_action_longeur > 128):
+			$dbp['log_action'] = substr($dbp['log_action'], 0, 59) . " [...] " . substr($dbp['log_action'], ($log_action_longeur - 64), $log_action_longeur);
+			break;
 	}
 	$T['Content'][$Tab][$l]['1']['cont'] = $dbp['log_id'];
-	$T['Content'][$Tab][$l]['2']['cont'] = date ( "Y m d H:i:s" , $dbp['log_date'] );
+	$T['Content'][$Tab][$l]['2']['cont'] = date("Y m d H:i:s", $dbp['log_date']);
 	$T['Content'][$Tab][$l]['3']['cont'] = $dbp['log_initiator'];
 	$T['Content'][$Tab][$l]['4']['cont'] = $dbp['log_action'];
 	$T['Content'][$Tab][$l]['5']['cont'] = $tab[$dbp['log_signal']];
 	$T['Content'][$Tab][$l]['6']['cont'] = $dbp['log_msgid'];
 	$T['Content'][$Tab][$l]['7']['cont'] = $dbp['log_contenu'];
-	
+
 	$l++;
 }
-$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 10;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 7;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 10;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 7;
+$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
 // --------------------------------------------------------------------------------------------
 //	Tab Help
 $Tab = 5;
 
 $T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('help01');
-$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 1;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 0;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
+$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 0;
 
 
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, 5);
 
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,1,1),
-		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(3,1,1),
-		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(2,1,1),
-		4	=>	$bts->RenderTablesObj->getDefaultTableConfig(10,7,1),
-		5	=>	$bts->RenderTablesObj->getDefaultTableConfig(1,1,0),
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5, 1, 1),
+	2	=>	$bts->RenderTablesObj->getDefaultTableConfig(3, 1, 1),
+	3	=>	$bts->RenderTablesObj->getDefaultTableConfig(2, 1, 1),
+	4	=>	$bts->RenderTablesObj->getDefaultTableConfig(10, 7, 1),
+	5	=>	$bts->RenderTablesObj->getDefaultTableConfig(1, 1, 0),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
-$Content .= 
-$bts->RenderFormObj->renderformHeader('ConsoleCommandForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"	,				"1")
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"CommandConsole" )
-;
+$Content .=
+	$bts->RenderFormObj->renderformHeader('ConsoleCommandForm')
+	. $bts->RenderFormObj->renderHiddenInput("formSubmitted",				"1")
+	. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",	"AdminDashboard")
+	. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]",	"CommandConsole");
 
 $Content .= "</form>\r";
 
@@ -273,4 +287,3 @@ $bts->segmentEnding(__METHOD__);
 // --------------------------------------------------------------------------------------------
 
 /*JanusEngine-Content-End*/
-?>

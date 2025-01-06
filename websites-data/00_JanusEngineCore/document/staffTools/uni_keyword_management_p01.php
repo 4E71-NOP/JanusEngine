@@ -27,10 +27,11 @@
 /* @var $l String                                   */
 /*JanusEngine-IDE-end*/
 
-$bts->RequestDataObj->setRequestData('test',
-		array(
-				'test'		=> 1,
-		)
+$bts->RequestDataObj->setRequestData(
+	'test',
+	array(
+		'test'		=> 1,
+	)
 );
 
 /*JanusEngine-Content-Begin*/
@@ -74,107 +75,112 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+if ($pageSelectorData['nbrPerPage'] < 1) {
+	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
+}
 
 $pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "kw.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
-$pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_state",	"operator" => "=",	"right" => "'1'" );
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
-	$pageSelectorData['clauseElements'][] = array( "left" => "kw.keyword_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+$pageSelectorData['clauseElements'][] = array("left" => "kw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_state",	"operator" => "=",	"right" => "'1'");
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 
 $pageSelectorData['query'] = "SELECT"
-." COUNT(kw.keyword_id) AS ItemsCount "
-." FROM "
-.$SqlTableListObj->getSQLTableName('keyword')." kw "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-.";"
-;
+	. " COUNT(kw.keyword_id) AS ItemsCount "
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('keyword') . " kw "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. ";";
 
 $dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+	$pageSelectorData['ItemsCount'] = $dbp['ItemsCount'];
+}
 
-if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
+	}
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
+		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+	}
 
 	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
-	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmIn'] = "<div class='" . $Block . "_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
 	$pageSelectorData['elmOut'] = "</div>";
-	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$pageSelectorData['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
 	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
 }
 
 // --------------------------------------------------------------------------------------------
-$Content .="<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
+$Content .= "<form ACTION='index.php?' method='post' name='formulaire_module'>\r";
 
 $clause = "";
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')) > 0) { $clause = " AND keyword_name like '%".$bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE','filtre')."%' "; }
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE', 'filtre') ?? '') > 0) {
+	$clause = " AND keyword_name like '%" . $bts->RequestDataObj->getRequestDataSubEntry('M_MOTCLE', 'filtre') . "%' ";
+}
 $dbquery = $bts->SDDMObj->query("SELECT kw.* "
-." FROM "
-.$SqlTableListObj->getSQLTableName('keyword')." kw "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-." ORDER BY kw.keyword_name"
-." LIMIT ".$pageSelectorData['nbrPerPage'] . " OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
-.";");
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('keyword') . " kw "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. " ORDER BY kw.keyword_name"
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. ";");
 
-if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
+if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 	$i = 1;
 	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('raf1');
 	$T['Content']['1'][$i]['2']['cont'] = "";
 	$T['Content']['1'][$i]['3']['cont'] = "";
-}
-else {
-	
+} else {
+
 	$tabState = array(
-			0	=> $bts->I18nTransObj->getI18nTransEntry('kwState0'),
-			1	=> $bts->I18nTransObj->getI18nTransEntry('kwState1'),
+		0	=> $bts->I18nTransObj->getI18nTransEntry('kwState0'),
+		1	=> $bts->I18nTransObj->getI18nTransEntry('kwState1'),
 	);
 	$tabType = array(
-			1	=> $bts->I18nTransObj->getI18nTransEntry('kwType1'),
-			2	=> $bts->I18nTransObj->getI18nTransEntry('kwType2'),
-			3	=> $bts->I18nTransObj->getI18nTransEntry('kwType3'),
+		1	=> $bts->I18nTransObj->getI18nTransEntry('kwType1'),
+		2	=> $bts->I18nTransObj->getI18nTransEntry('kwType2'),
+		3	=> $bts->I18nTransObj->getI18nTransEntry('kwType3'),
 	);
 	$i = 1;
 	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$i++;
 		$T['Content']['1'][$i]['1']['cont']	= "<a href='"
-		."index.php?"._JNSENGLINKURLTAG_."=1"
-		."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
-		."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
-		."&arti_page=2"
-		."&formGenericData[mode]=edit"
-		."&keywordForm[selectionId]=".$dbp['keyword_id']
-		."'>"
-		.$dbp['keyword_name']
-		."</a>\r";
+			. "index.php?" . _JNSENGLINKURLTAG_ . "=1"
+			. "&arti_slug=" . $CurrentSetObj->getDataSubEntry('article', 'arti_slug')
+			. "&arti_ref=" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref')
+			. "&arti_page=2"
+			. "&formGenericData[mode]=edit"
+			. "&keywordForm[selectionId]=" . $dbp['keyword_id']
+			. "'>"
+			. $dbp['keyword_name']
+			. "</a>\r";
 		$T['Content']['1'][$i]['2']['cont']	= $tabType[$dbp['keyword_type']];
 		$T['Content']['1'][$i]['3']['cont']	= $tabState[$dbp['keyword_state']];
 	}
 }
 
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10 ,1, 0);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 1, 0);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,3,1),
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T)
-."<br>\r"
-.$TemplateObj->renderFilterForm($infos)
-.$TemplateObj->renderAdminCreateButton($infos)
-;
+	. "<br>\r"
+	. $TemplateObj->renderFilterForm($infos)
+	. $TemplateObj->renderAdminCreateButton($infos);
 
 $bts->segmentEnding(__METHOD__);
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-Content-End*/
-
-?>

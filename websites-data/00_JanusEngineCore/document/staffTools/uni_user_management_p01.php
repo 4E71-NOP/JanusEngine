@@ -123,15 +123,15 @@ $clause_sql_element['2'] = $clause_sql_element['3'] = $clause_sql_element['4'] =
 
 $clause_sql_element_offset = 1;
 $GDU_['clause_like'] = "";
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " usr.user_login LIKE '%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%' ";
 	$clause_sql_element_offset++;
 }
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id')) > 0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') ?? '') > 0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
 	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " gr.group_id = '" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') . "' ";
 	$clause_sql_element_offset++;
 }
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status')) > 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') ?? '') > 0) {
 	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " usr.user_status = '" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') . "' ";
 	$clause_sql_element_offset++;
 }
@@ -167,16 +167,16 @@ $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 if ($GDU_['ItemsCount'] > $GDU_['nbrPerPage']) {
 
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
 	}
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
 		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
 	}
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') ?? '') > 0) {
 		$strGroupId	= "&filterForm[group_id]="		. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');
 	}
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status')) > 0) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') ?? '') > 0) {
 		$strUserStatus	= "&filterForm[user_status]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status');
 	}
 

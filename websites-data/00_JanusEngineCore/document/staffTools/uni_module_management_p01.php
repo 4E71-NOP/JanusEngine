@@ -67,46 +67,53 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1 ) { $pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_; }
+if ($pageSelectorData['nbrPerPage'] < 1) {
+	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
+}
 
 $pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id",		"operator" => "=",	"right" => "'".$WebSiteObj->getWebSiteEntry('ws_id')."'" );
-$pageSelectorData['clauseElements'][] = array("left" => "m.module_id",		"operator" => "=",	"right" => "mw.fk_module_id" );
-$pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id",		"operator" => "=",	"right" => "p.perm_id" );
+$pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "m.module_id",		"operator" => "=",	"right" => "mw.fk_module_id");
+$pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id",		"operator" => "=",	"right" => "p.perm_id");
 
-if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 ) {
-	$pageSelectorData['clauseElements'][] = array( "left" => "m.module_name", "operator" => "LIKE", "right" => "'%".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like')."%'" );
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "m.module_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 
 $pageSelectorData['query'] = "SELECT"
-." COUNT(m.module_id) AS ItemsCount "
-." FROM "
-.$SqlTableListObj->getSQLTableName('module')." m , "
-.$SqlTableListObj->getSQLTableName('module_website')." mw, "
-.$SqlTableListObj->getSQLTableName('permission')." p"
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-.";"
-;
+	. " COUNT(m.module_id) AS ItemsCount "
+	. " FROM "
+	. $SqlTableListObj->getSQLTableName('module') . " m , "
+	. $SqlTableListObj->getSQLTableName('module_website') . " mw, "
+	. $SqlTableListObj->getSQLTableName('permission') . " p"
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. ";";
 
 $dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { $pageSelectorData['ItemsCount'] = $dbp['ItemsCount']; }
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+	$pageSelectorData['ItemsCount'] = $dbp['ItemsCount'];
+}
 
-if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'))>0 )	{$strQueryLike	= "&filterForm[query_like]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');}
-	if ( strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage'))>0 )	{$strNbrPerPage	= "&filterForm[nbrPerPage]="	.$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');}
+if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
+	}
+	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
+		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+	}
 
 	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$pageSelectorData['elmIn'] = "<div class='".$Block."_page_selector'>";
-	$pageSelectorData['elmInHighlight'] = "<div class='".$Block."_page_selector_highlight'>";
+	$pageSelectorData['elmIn'] = "<div class='" . $Block . "_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
 	$pageSelectorData['elmOut'] = "</div>";
-	$pageSelectorData['selectionOffset'] = "".$bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$pageSelectorData['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
 	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
 }
 
@@ -114,38 +121,41 @@ if ( $pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage'] ) {
 
 
 $dbquery = $bts->SDDMObj->query(
-"SELECT m.*,p.perm_name"
-." FROM "
-.$SqlTableListObj->getSQLTableName('module')." m , "
-.$SqlTableListObj->getSQLTableName('module_website')." mw, "
-.$SqlTableListObj->getSQLTableName('permission')." p "
-.$bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-." ORDER BY m.module_name, mw.module_position "
-." LIMIT ".$pageSelectorData['nbrPerPage'] . " OFFSET ".($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
-.";");
+	"SELECT m.*,p.perm_name"
+		. " FROM "
+		. $SqlTableListObj->getSQLTableName('module') . " m , "
+		. $SqlTableListObj->getSQLTableName('module_website') . " mw, "
+		. $SqlTableListObj->getSQLTableName('permission') . " p "
+		. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+		. " ORDER BY m.module_name, mw.module_position "
+		. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+		. ";"
+);
 
 $groupTab = array();
 $table_infos_modules = array();
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$module_id_index = $dbp['module_id'];
-	foreach ( $dbp as $A => $B ) { $table_infos_modules[$module_id_index][$A] = $B; }
+	foreach ($dbp as $A => $B) {
+		$table_infos_modules[$module_id_index][$A] = $B;
+	}
 }
 
 $dbquery = $bts->SDDMObj->query("
 SELECT * 
-FROM ".$SqlTableListObj->getSQLTableName('group')."
+FROM " . $SqlTableListObj->getSQLTableName('group') . "
 ;");
-while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) { 
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$i = $dbp['group_id'];
 	$groupTab[$i] = $dbp['group_title'];
 }
 
 $tab_module_state = array(
-	0 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nTransObj->getI18nTransEntry('disabled')."</span>",
+	0 => "<span class='" . $Block . "_avert " . $Block . "_t1'>" . $bts->I18nTransObj->getI18nTransEntry('disabled') . "</span>",
 	1 => $bts->I18nTransObj->getI18nTransEntry('enabled'),
-	2 => "<span class='".$Block."_avert ".$Block."_t1'>".$bts->I18nTransObj->getI18nTransEntry('deleted')."</span>",
+	2 => "<span class='" . $Block . "_avert " . $Block . "_t1'>" . $bts->I18nTransObj->getI18nTransEntry('deleted') . "</span>",
 );
-		
+
 $tab_module_deco = array(
 	0 => $bts->I18nTransObj->getI18nTransEntry('no'),
 	1 => $bts->I18nTransObj->getI18nTransEntry('yes'),
@@ -159,21 +169,21 @@ $T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col
 $T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
 $T['Content']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
 
-foreach ( $table_infos_modules AS $A1 ) {
+foreach ($table_infos_modules as $A1) {
 	$i++;
 	$A2 = $A1['module_state'];
 	$A3 = $A1['module_deco'];
 	$A4 = $A1['module_adm_control'];
 	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
-	."index.php?"._JNSENGLINKURLTAG_."=1"
-	."&arti_slug=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')
-	."&arti_ref=".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')
-	."&arti_page=2"
-	."&formGenericData[mode]=edit"
-	."&moduleForm[selectionId]=".$A1['module_id']
-	."'>"
-	.$A1['module_name']
-	."</a>\r";
+		. "index.php?" . _JNSENGLINKURLTAG_ . "=1"
+		. "&arti_slug=" . $CurrentSetObj->getDataSubEntry('article', 'arti_slug')
+		. "&arti_ref=" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref')
+		. "&arti_page=2"
+		. "&formGenericData[mode]=edit"
+		. "&moduleForm[selectionId]=" . $A1['module_id']
+		. "'>"
+		. $A1['module_name']
+		. "</a>\r";
 
 	$T['Content']['1'][$i]['2']['cont'] = $A1['module_desc'];
 	$T['Content']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
@@ -189,15 +199,13 @@ foreach ( $table_infos_modules AS $A1 ) {
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 $T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,6,1),
+	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 6, 1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T)
-."<br>\r"
-.$TemplateObj->renderFilterForm($infos)
-.$TemplateObj->renderAdminCreateButton($infos)
-;
+	. "<br>\r"
+	. $TemplateObj->renderFilterForm($infos)
+	. $TemplateObj->renderAdminCreateButton($infos);
 
 $bts->segmentEnding(__METHOD__);
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-Content-End*/
-?>

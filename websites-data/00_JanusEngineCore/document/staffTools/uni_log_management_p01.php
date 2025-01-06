@@ -92,7 +92,7 @@ $bts->I18nTransObj->apply(
 // --------------------------------------------------------------------------------------------
 //	Realisation des suppresions demandées
 // --------------------------------------------------------------------------------------------
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action')) != 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action') ?? '') != 0) {
 	switch ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action')) {
 		case "DELETE":
 			$DeleteSelection = " WHERE log_id IN (";
@@ -144,7 +144,7 @@ if ($CheckClauseType > 0) {
 }
 unset($A, $B);
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')) == 0) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page') ?? '') == 0) {
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_par_page', 10);
 }
 $criteriaUrl .= "&amp;lmForm[nbr_par_page]=" . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page');
@@ -235,7 +235,7 @@ $Content .= "
 <form id='lmForm_002' ACTION='index.php?' method='post'>\r
 <input type='hidden' name='lmForm[action]'	value='SUPPRESSION'>\r";
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') == 0)) {
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') ?? '') == 0) {
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'page', 0);
 }
 
@@ -329,7 +329,7 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 	$T['Content'][$Tab][$lt]['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_7_txt');
 
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-		$pv['log_action_longeur'] = strlen($dbp['log_contenu']);
+		$pv['log_action_longeur'] = strlen($dbp['log_contenu'] ?? '');
 		switch (TRUE) {
 			case ($pv['log_action_longeur'] < 128 && $pv['log_action_longeur'] > 64):
 				$dbp['log_contenu2'] = substr($dbp['log_contenu'], 0, 59) . " [...] ";
@@ -409,4 +409,3 @@ $CurrentSetObj->GeneratedScriptObj->AddObjectEntry('TooltipConfig', "'logMgmt' :
 
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/
-?>

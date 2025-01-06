@@ -20,9 +20,7 @@ class  RenderForm
 {
 	private static $Instance = null;
 
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -64,12 +62,24 @@ class  RenderForm
 		if (strlen($name) > 0) {
 			$builder = "";
 			$spacer = "";
-			if (strlen($value) > 0) { $builder .= $spacer . "value='" . $value . "'"; $spacer = " "; }
-			if (strlen($placeholder) > 0) { $builder .= $spacer . "placeholder='" . $placeholder . "'"; $spacer = " "; }
-			if ($size > 0) { $builder .= $spacer . "size='" . $size . "'"; $spacer = " "; }
-			if ($maxlength > 0) { $builder .= $spacer . "maxlength='" . $maxlength . "'"; $spacer = " "; }
+			if (strlen($value ?? '') > 0) {
+				$builder .= $spacer . "value='" . $value . "'";
+				$spacer = " ";
+			}
+			if (strlen($placeholder ?? '') > 0) {
+				$builder .= $spacer . "placeholder='" . $placeholder . "'";
+				$spacer = " ";
+			}
+			if ($size > 0) {
+				$builder .= $spacer . "size='" . $size . "'";
+				$spacer = " ";
+			}
+			if ($maxlength > 0) {
+				$builder .= $spacer . "maxlength='" . $maxlength . "'";
+				$spacer = " ";
+			}
 
-			return "<input type='text' name='" . $name . "' id='".$name."' " . $builder . ">\r";
+			return "<input type='text' name='" . $name . "' id='" . $name . "' " . $builder . ">\r";
 		}
 		return false;
 	}
@@ -84,18 +94,54 @@ class  RenderForm
 		if (strlen($arr['name'] ?? '') > 0) {
 			$builder = "";
 			$spacer = "";
-			if (strlen($arr['id'] ?? '') > 0) { $builder .= $spacer . "id='" . $arr['id'] . "'"; $spacer = " "; }
-			if (strlen($arr['name'] ?? '') > 0) { $builder .= $spacer . "name='" . $arr['name'] . "'"; $spacer = " "; }
-			if (strlen($arr['value'] ?? '') > 0) { $builder .= $spacer . "value='" . $arr['value'] . "'"; $spacer = " "; }
-			if (strlen($arr['size'] ?? '') > 0) { $builder .= $spacer . "size='" . $arr['size'] . "'"; $spacer = " "; }
-			if (strlen($arr['maxlength'] ?? '') > 0) { $builder .= $spacer . "maxlength='" . $arr['maxlength'] . "'"; $spacer = " "; }
-			if (strlen($arr['placeholder'] ?? '') > 0) { $builder .= $spacer . "placeholder='" . $arr['placeholder'] . "'"; $spacer = " "; }
-			if ($arr['readonly'] == true) { $builder .= $spacer . "readonly"; $spacer = " "; }
-			if ($arr['disable'] == true) { $builder .= $spacer . "disable"; $spacer = " "; }
-			if (strlen($arr['oninput'] ?? '') > 0) { $builder .= $spacer . "onInput=\"" . $arr['oninput'] . "\""; $spacer = " "; }
-			if (strlen($arr['onkeyup'] ?? '') > 0) { $builder .= $spacer . "onKeyUp=\"" . $arr['onkeyup'] . "\""; $spacer = " "; }
-			if (strlen($arr['javascript'] ?? '') > 0) { $builder .= $spacer . "javascript=\"" . $arr['javascript'] . "\""; $spacer = " "; }
-			if (strlen($arr['special'] ?? '') > 0) { $builder .= $spacer . "special='" . $arr['special'] . "'"; $spacer = " "; }
+			if (strlen($arr['id'] ?? '') > 0) {
+				$builder .= $spacer . "id='" . $arr['id'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['name'] ?? '') > 0) {
+				$builder .= $spacer . "name='" . $arr['name'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['value'] ?? '') > 0) {
+				$builder .= $spacer . "value='" . $arr['value'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['size'] ?? '') > 0) {
+				$builder .= $spacer . "size='" . $arr['size'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['maxlength'] ?? '') > 0) {
+				$builder .= $spacer . "maxlength='" . $arr['maxlength'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['placeholder'] ?? '') > 0) {
+				$builder .= $spacer . "placeholder='" . $arr['placeholder'] . "'";
+				$spacer = " ";
+			}
+			if ($arr['readonly'] == true) {
+				$builder .= $spacer . "readonly";
+				$spacer = " ";
+			}
+			if ($arr['disable'] == true) {
+				$builder .= $spacer . "disable";
+				$spacer = " ";
+			}
+			if (strlen($arr['oninput'] ?? '') > 0) {
+				$builder .= $spacer . "onInput=\"" . $arr['oninput'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['onkeyup'] ?? '') > 0) {
+				$builder .= $spacer . "onKeyUp=\"" . $arr['onkeyup'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['javascript'] ?? '') > 0) {
+				$builder .= $spacer . "javascript=\"" . $arr['javascript'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['special'] ?? '') > 0) {
+				$builder .= $spacer . "special='" . $arr['special'] . "'";
+				$spacer = " ";
+			}
 
 			return "<input type='text' " . $builder . ">\r";
 		}
@@ -116,12 +162,24 @@ class  RenderForm
 		if (strlen($name) > 0) {
 			$builder = "";
 			$spacer = "";
-			if (strlen($value) > 0) { $builder .= $spacer . "value='" . $value . "'"; $spacer = " "; }
-			if (strlen($placeholder) > 0) { $builder .= $spacer . "placeholder='" . $placeholder . "'"; $spacer = " "; }
-			if ($size > 0) { $builder .= $spacer . "size='" . $size . "'"; $spacer = " "; }
-			if ($maxlength > 0) { $builder .= $spacer . "maxlength='" . $maxlength . "'"; $spacer = " "; }
+			if (strlen($value) > 0) {
+				$builder .= $spacer . "value='" . $value . "'";
+				$spacer = " ";
+			}
+			if (strlen($placeholder) > 0) {
+				$builder .= $spacer . "placeholder='" . $placeholder . "'";
+				$spacer = " ";
+			}
+			if ($size > 0) {
+				$builder .= $spacer . "size='" . $size . "'";
+				$spacer = " ";
+			}
+			if ($maxlength > 0) {
+				$builder .= $spacer . "maxlength='" . $maxlength . "'";
+				$spacer = " ";
+			}
 
-			return "<input type='password' name='" . $name . "' id='".$name."' " . $builder . ">\r";
+			return "<input type='password' name='" . $name . "' id='" . $name . "' " . $builder . ">\r";
 
 			// return "<input type='password' name='" . $name . "'	size='" . $size . "' maxlength='" . $maxlength . "' value='" . $value . "' placeholder='" . $placeholder . "'>\r";
 		}
@@ -138,7 +196,7 @@ class  RenderForm
 	 */
 	public function renderMenuSelect($arr)
 	{
-		if (strlen($arr['defaultSelected']) != 0) {
+		if (strlen($arr['defaultSelected'] ?? '') != 0) {
 			$arr['options'][$arr['defaultSelected']]['s'] = " selected ";
 		}
 		$content = "<select name='" . $arr['name'] . "'>\r";
@@ -201,7 +259,7 @@ class  RenderForm
 	 */
 	public function renderHiddenInput($name, $value)
 	{
-		if (strlen($name) > 0 && strlen($value) > 0) {
+		if (strlen($name ?? '') > 0 && strlen($value ?? '') > 0) {
 			return "<input type='hidden' name='" . $name . "' value='" . $value . "'>\r";
 		}
 		return (false);

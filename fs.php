@@ -40,6 +40,14 @@ class FileSelectorRender
 		session_name("JanusEngineWebsiteSessionId");
 		session_start();
 
+		// --------------------------------------------------------------------------------------------
+		error_reporting(E_ALL ^ E_NOTICE);
+		ini_set('log_errors', "On");
+		ini_set('error_log', "/var/log/apache2/error.log");
+		ini_set('display_errors', 0);
+		error_log("********** JanusEngine FileSelector Begin **********");
+
+
 		$application = 'FileSelector';
 		include("current/define.php");
 
@@ -54,21 +62,9 @@ class FileSelectorRender
 		$bts->LMObj->setVectorSystemLog(true);
 		$bts->CMObj->InitBasicSettings();
 
-		// $ClassLoaderObj->provisionClass ( 'SessionManagement' );
-		// $bts->initSmObj ();
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => "*** index.php : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION) . " *** \$SMObj->getSession() = " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession()) . " *** EOL"));
-
-		// 		$ClassLoaderObj->provisionClass ( 'WebSite' );
-
 		// --------------------------------------------------------------------------------------------
 		$RequestDataObj = RequestData::getInstance();
 		$Content = "";
-		// --------------------------------------------------------------------------------------------
-		error_reporting(E_ALL ^ E_NOTICE);
-		ini_set('log_errors', "On");
-		ini_set('error_log', "/var/log/apache2/error.log");
-		ini_set('display_errors', 0);
-		error_log("********** JanusEngine FileSelector Begin **********");
 
 		// --------------------------------------------------------------------------------------------
 		//
