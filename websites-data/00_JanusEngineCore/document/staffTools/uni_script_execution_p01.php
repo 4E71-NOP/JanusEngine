@@ -27,17 +27,20 @@
 /* @var $l String                                   */
 /*JanusEngine-IDE-end*/
 
-$CurrentSetObj->setDataEntry('TestMode', 1 ); 
-$CurrentSetObj->setDataEntry('formScrExec', array(
-// 		"inputFile"	=>	"../websites-data/00_JanusEngineCore/document/uni_actualite_p01.php",
+$CurrentSetObj->setDataEntry('TestMode', 1);
+$CurrentSetObj->setDataEntry(
+	'formScrExec',
+	array(
+		// 		"inputFile"	=>	"../websites-data/00_JanusEngineCore/document/uni_actualite_p01.php",
 		"inputFile"	=>	"websites-data/www.janus-engine.net/document/eng_acceuil_p01.htm",
 	)
 );
 
-$bts->RequestDataObj->setRequestData('formGenericData',
-		array(
-				'origin'				=> 'AdminScriptExecutionP01',
-		)
+$bts->RequestDataObj->setRequestData(
+	'formGenericData',
+	array(
+		'origin'				=> 'AdminScriptExecutionP01',
+	)
 );
 
 // --------------------------------------------------------------------------------------------
@@ -63,25 +66,25 @@ $bts->I18nTransObj->apply(
 $formInputFile = $bts->RequestDataObj->getRequestDataSubEntry('formScrExec', 'inputFile');
 
 $FileSelectorConfig = array(
-		"width"				=> 80,	//in %
-		"height"			=> 50,	//in %
-		"formName"			=> "formScrExec",
-		"formTargetId"		=> "formScrExec[inputFile]",
-		"formInputSize"		=> 60 ,
-		"formInputVal"		=> $formInputFile,
-		"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory')."/document",
-		"restrictTo"		=> "websites-data",
-		"strRemove"			=> "",
-		"strAdd"			=> "../",
-		"selectionMode"		=> "file",
-		"displayType"		=> "fileList",
-		"buttonId"			=> "buttonScriptExec",
-		"case"				=> 1,
-		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
+	"width"				=> 80,	//in %
+	"height"			=> 50,	//in %
+	"formName"			=> "formScrExec",
+	"formTargetId"		=> "formScrExec[inputFile]",
+	"formInputSize"		=> 60,
+	"formInputVal"		=> $formInputFile,
+	"path"				=> $WebSiteObj->getWebSiteEntry('ws_directory') . "/document",
+	"restrictTo"		=> "websites-data",
+	"strRemove"			=> "",
+	"strAdd"			=> "../",
+	"selectionMode"		=> "file",
+	"displayType"		=> "fileList",
+	"buttonId"			=> "buttonScriptExec",
+	"case"				=> 1,
+	"array"				=> "tableFileSelector[" . $CurrentSetObj->getDataEntry('fsIdx') . "]",
 );
 $infos['IconSelectFile'] = $FileSelectorConfig;
 $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx')+1 );
+$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
 
 // --------------------------------------------------------------------------------------------
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1');
@@ -93,8 +96,8 @@ $Content .= "
 <table cellpadding='0' cellspacing='0' style='width:100%;'>
 <tr>\r
 <td colspan='2'>\r"
-.$bts->InteractiveElementsObj->renderIconSelectFile($infos)
-."</td>\r
+	. $bts->InteractiveElementsObj->renderIconSelectFile($infos)
+	. "</td>\r
 </tr>\r
 
 <tr>\r
@@ -105,11 +108,14 @@ $Content .= "
 ";
 
 $SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-	$infos , 'submit', 
-	$bts->I18nTransObj->getI18nTransEntry('btnExecute'), 128, 
-	'scriptExecButton', 
-	1, 1, 
-	"" 
+	$infos,
+	'submit',
+	$bts->I18nTransObj->getI18nTransEntry('btnExecute'),
+	128,
+	'scriptExecButton',
+	1,
+	1,
+	""
 );
 $Content .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
 
@@ -123,8 +129,8 @@ $Content .= "
 <hr>\r
 ";
 
-$path = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT')."websites-data/";
-$fileName = $path.$formInputFile;
+$path = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/";
+$fileName = str_replace("//",  "/", $path . $formInputFile);
 
 $logTitle = "Script Execution - Start";
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
@@ -133,39 +139,49 @@ $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "|           
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
 
 $bts->LMObj->msgLog(array(
-	'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ . 
-	"Route state : currentRoute=" .
-		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute')) 
+	'level' => LOGLEVEL_BREAKPOINT,
+	'msg' => __METHOD__ .
+		"Route state : currentRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute'))
 		. " / previousRoute=" .
 		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'previousRoute'))
 ));
 
-if ( file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1 ) {
-	$Content .= "<p>".$bts->I18nTransObj->getI18nTransEntry('processing').$formInputFile."<br>\r";
-	switch ( true ) {
-		case ( strpos($fileName ,".htm") ):
-			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode')." HTML</p>\r<hr>\r";
-			$fileHandle = fopen($fileName,"r");
-			$fileData = fread($fileHandle,filesize($fileName));
-			if ($fileData === FALSE) {$Content .= "ERROR : Something horrible happended!<br>\r";}
-// 			$this->documentConvertion($fileData, $infos);		// ModuleDocument->documentConvertion()
+$bts->LMObj->msgLog(array(
+	'level' => LOGLEVEL_BREAKPOINT,
+	'msg' =>  __METHOD__ . " Processing file : '" . $fileName . "'.'"
+));
+if (file_exists($fileName) && $CurrentSetObj->getDataEntry('TestMode') != 1) {
+	$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('processing') . $formInputFile . "<br>\r";
+
+
+	switch (true) {
+		case (strpos($fileName, ".htm")):
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' =>  __METHOD__ . " File type is HTML"));
+			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode') . " HTML</p>\r<hr>\r";
+			$fileHandle = fopen($fileName, "r");
+			$fileData = fread($fileHandle, filesize($fileName));
+			if ($fileData === FALSE) {
+				$Content .= "ERROR : Something horrible happended!<br>\r";
+			}
+			// 			$this->documentConvertion($fileData, $infos);		// ModuleDocument->documentConvertion()
 			fclose($fileHandle);
-		break;
-		case ( strpos($fileName ,".php") ):
-			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode')."PHP</p>\r<hr>\r";
-			$fileData = include ($fileName);
-		break;
-		case ( strpos($fileName ,".mvmcode") ):
-			// removed
-		break;
+			break;
+		case (strpos($fileName, ".php")):
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' =>  __METHOD__ . " File type is PHP"));
+			$Content .= $bts->I18nTransObj->getI18nTransEntry('mode') . "PHP</p>\r<hr>\r";
+			$fileData = include($fileName);
+			break;
 	}
 	$Content .= $fileData;
+} else {
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING,	'msg' =>  __METHOD__ . " File '" . $fileName . "' not found. From PWD '" . $path . "'."));
 }
 
 $bts->LMObj->msgLog(array(
-	'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ . 
-	"Route state : currentRoute=" .
-		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute')) 
+	'level' => LOGLEVEL_BREAKPOINT,
+	'msg' => __METHOD__ . 	"Route state : currentRoute=" .
+		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'currentRoute'))
 		. " / previousRoute=" .
 		$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'previousRoute'))
 ));
@@ -177,5 +193,3 @@ $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+-----------
 
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/
-
-?>

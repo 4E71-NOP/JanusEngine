@@ -517,9 +517,7 @@ self::$PreRequisiteTable['add']['website'] = array(
 		array("v" => "lang_select",			"s" => "website"),
 		array("v" => "stylesheet",			"s" => "website"),
 		array("v" => "state",				"s" => "website"),
-		array("v" => "gal_mode",			"s" => "website"),
 		array("v" => "ma_diff",				"s" => "website"),
-		array("v" => "gal_mode",			"s" => "website"),
 	),
 	"nextId" => array(
 		array("table" => "website",	"column" => "ws_id",		"target" => "ws_id"),
