@@ -19,24 +19,25 @@
  * @author Faust
  * 
  */
-class CurrentSet {
+class CurrentSet
+{
 	private static $Instance = null;
-	
+
 	/* @var $ServerInfosObj ServerInfos */
 	public $ServerInfosObj = null;
 
 	/* @var $SqlTableListObj SqlTableList */
 	public $SqlTableListObj = null;
-	
+
 	/* @var $WebSiteObj WebSite */
 	public $WebSiteObj = null;
 
 	/* @var $WebSiteContextObj WebSiteContext */
 	public $WebSiteContextObj = null;
-	
+
 	/* @var $UserObj User */
 	public $UserObj = null;
-	
+
 	/* @var $ThemeDescriptorObj ThemeDescriptor */
 	public $ThemeDescriptorObj = null;
 
@@ -45,7 +46,7 @@ class CurrentSet {
 
 	/* @var $ThemeDataObjBackup ThemeData */
 	public $ThemeDataObjBackup  = null;
-	
+
 	/* @var $GeneratedScriptObj GeneratedScript */
 	public $GeneratedScriptObj = null;
 
@@ -63,10 +64,11 @@ class CurrentSet {
 
 	/* @var $data array */
 	private $data = array();
-	
-	private function __construct(){}
 
-	public static function getInstance() {
+	private function __construct() {}
+
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
 			self::$Instance = new CurrentSet();
 		}
@@ -109,5 +111,5 @@ class CurrentSet {
 	public function setModuleListObj($ModuleListObj)			{ $this->ModuleListObj		= $ModuleListObj; }
 	public function setArticleObj($ArticleObj)					{ $this->ArticleObj			= $ArticleObj; }
 	//@formatter:on
-	
+
 }

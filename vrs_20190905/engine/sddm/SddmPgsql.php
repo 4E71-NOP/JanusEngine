@@ -48,7 +48,8 @@ class SddmPgsql extends SddmCore
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$bts->LMObj->msgLog(array(
-			'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " DB connection parameters : '"
+			'level' => LOGLEVEL_BREAKPOINT,
+			'msg' => __METHOD__ . " DB connection parameters : '"
 				. " host=" . $TabConfig['host']
 				. "; db_user_login=" . $TabConfig['db_user_login']
 				. "; dbprefix=" . $TabConfig['dbprefix']
@@ -59,12 +60,12 @@ class SddmPgsql extends SddmCore
 
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
+				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=" . $TabConfig['db_user_password']);
 				break;
 			case "render":
 			default:
-				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=". $TabConfig['db_user_password']);
-			break;
+				$this->DBInstance = pg_connect($dsn . " user=" . $TabConfig['db_user_login'] . " password=" . $TabConfig['db_user_password']);
+				break;
 		}
 
 		if ($this->DBInstance) {
@@ -145,6 +146,16 @@ class SddmPgsql extends SddmCore
 		return $db_result;
 	}
 
+
+	public function executeContent($script)
+	{
+		$bts = BaseToolSet::getInstance();
+
+		$db_result = $this->DBInstance->execute($script);
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Mysqli::execute() returned : '" . $db_result . "'."));
+	}
+
+
 	/**
 	 * Returns the number of row from the given resultset. 
 	 * @param PgSql\Result $data
@@ -195,7 +206,6 @@ class SddmPgsql extends SddmCore
 	public function getErrno()
 	{
 		return pg_last_error($this->DBInstance);
-		
 	}
 
 	/**
@@ -218,5 +228,4 @@ class SddmPgsql extends SddmCore
 		$val++;
 		return $val;
 	}
-
 }

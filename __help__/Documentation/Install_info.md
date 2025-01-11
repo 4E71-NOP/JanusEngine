@@ -1,31 +1,24 @@
 
 # Installation d'un environnement
 
-
-
 # Dans les DBs
-
 
 ## Mysql/MariaDB
 ```sql
-CREATE USER `dbadmin`@`%` IDENTIFIED BY 'nimdabd';
-CREATE USER `dbadmin`@`localhost` IDENTIFIED BY 'nimdabd';
+CREATE USER `dbadmin`@`%` IDENTIFIED BY 'mypassword';
+CREATE USER `dbadmin`@`localhost` IDENTIFIED BY 'mypassword';
 GRANT ALL PRIVILEGES ON *.* TO `dbadmin`@`%`; 
 GRANT ALL PRIVILEGES ON *.* TO `dbadmin`@`localhost`;
 ```
 
 ## Postgres
-
 Se connecter avec l'utilisateur ```docker```. Ajouter les utilisateurs/roles ```dbadmin``` avec l'option superuser.
 
 Créer la DB <myDb> (Par défaut 'JnsEng').
 
 
 
-
 # Fichiers
-
-
 PHP var écrire les sessions dans ```/var/www/sessions``` d'après sa configuration (session.save_path). Ce répertoire se trouve dans ```<monDockerCompose>/_data/www/sessions/```
 
 Le docker/php doit pouvoir écrire dans ce répertoire. Si en plus c'est monté sur un filer/NAS; ne pas trop hésiter... Un bon ```CHMOD 777``` des familles fera l'affaire.

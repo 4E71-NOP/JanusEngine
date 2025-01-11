@@ -69,7 +69,7 @@ class InstallPage02
 		ksort($dl);
 		$bts->RequestDataObj->setRequestDataEntry('directory_list', $dl);
 		unset($dl);
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . 
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ .
 			$bts->StringFormatObj->print_r_debug(
 				$bts->RequestDataObj->getRequestDataEntry('directory_list')
 			)));
@@ -314,8 +314,8 @@ class InstallPage02
 		}
 
 		$bts->LMObj->msgLog(array(
-			'level' => LOGLEVEL_BREAKPOINT,
-			'msg' => __METHOD__ . " Soring - "
+			'level' => LOGLEVEL_WARNING,
+			'msg' => __METHOD__ . " Scoring - "
 				. "JnsEngUserAlreadyExists=" . $bts->CMObj->getConfigurationSubEntry('db', 'JnsEngUserAlreadyExists')
 				. "; dataBaseUserRecreate=" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserRecreate')
 				. "-> score=" . $score
@@ -342,8 +342,10 @@ class InstallPage02
 						break;
 				}
 
-				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
-				$r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				$r[] = "GRANT ALL PRIVILEGES ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				$r[] = "GRANT ALL PRIVILEGES ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				// $r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE, TRIGGER ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'%' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
+				// $r[] = "GRANT CREATE, DROP, SELECT, INSERT, UPDATE, DELETE, TRIGGER ON " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . ".* TO '" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "'@'localhost' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;";
 				$r[] = "FLUSH TABLES;";										// clean query_cache 
 				$r[] = "FLUSH PRIVILEGES;";
 				break;

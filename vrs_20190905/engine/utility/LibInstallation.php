@@ -18,9 +18,7 @@ class LibInstallation
 
 	private $report = array();
 
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	public static function getInstance()
 	{
@@ -317,44 +315,65 @@ class LibInstallation
 
 	/**
 	 * SQL execution without formating . Especially usuful for tirgger commands which can contain several ';'.
-	 * Disabled for now as it's not critical and need more time to work on a proper solution
 	 * 
 	 * @param array $infos
 	 */
 	public function methodRawSql(&$infos)
 	{
-		// $bts = BaseToolSet::getInstance();
-		// $SqlTableListObj = CurrentSet::getInstance()->getInstanceOfSqlTableListObj();
+		$bts = BaseToolSet::getInstance();
+		$TabSrch = array();
+		$TabRpl = array();
 
-		// $TabSrch = array();
-		// $TabRpl = array();
-		// $tblList = $SqlTableListObj->getTableList();
-		// foreach ( $tblList as $A ) {
-		// 	$TabSrch[] = "!table_".$A."!";
-		// 	$TabRpl[] = $SqlTableListObj->getSQLTableName($A);
-		// }
-		// // $TabSrch	= array_merge ( $TabSrch,	array ( "\n",	"	",	chr(13) ));
-		// // $TabRpl		= array_merge ( $TabRpl,	array ( " ",	" ",	" " ));
+		$CurrentSetObj = CurrentSet::getInstance();
+		$tblList = $CurrentSetObj->SqlTableListObj->getTableList();
 
-		// $Tmp = "";
-		// foreach ( $infos['currentFileContent'] as $L => $C ) { $Tmp .= $C; }
-		// $infos['currentFileContent'] = $Tmp;
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Processing as rawSql: " . $infos['currentFileName']));
 
-		// $infos['currentFileContent'] = str_replace ($TabSrch,$TabRpl,$infos['currentFileContent']);
-		// unset ( $TabSrch, $TabRpl );
+		foreach ($tblList as $A) {
+			$TabSrch[] = "!table_" . $A . "!";
+			$TabRpl[] = $CurrentSetObj->SqlTableListObj->getSQLTableName($A);
+		}
 
-		// $this->createMap($infos);
+		$TabConfig	= $bts->CMObj->getConfiguration();
+		$TabSrch[]	= "!db!";
+		$TabRpl[]	= $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix');
 
-		// $bts->SDDMObj->query($infos['currentFileContent']);
+		$TabSrch[]	= "*user_install*";
+		$TabRpl[]	= $TabConfig['db_user_login'];
 
-		// $res = $bts->LMObj->getLastSQLDetails();
-		// switch ( $res['signal'] ) {
-		// 	case "OK" :			$this->report[$infos['section']][$infos['currentFileName']]['OK']++;	break;
-		// 	case "WARN" :		$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;	break;
-		// 	case "ERR" :		$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;	break;
-		// }
-		// $this->report['lastReportExecution'] = time();
-		// if ( $infos['updateInstallationMonitor'] == 1 ) { $this->updateInstallationMonitor(); }
+		$TabSrch[]	= "!host!";
+		$TabRpl[]	= "localhost";
+
+		$Tmp = "";
+		foreach ($infos['currentFileContent'] as $L => $C) {
+			$Tmp .= $C;
+		}
+		$infos['currentFileContent'] = $Tmp;
+		$infos['currentFileContent'] = str_replace($TabSrch, $TabRpl, $infos['currentFileContent']);
+		unset($TabSrch, $TabRpl);
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Query ||\n" . $infos['currentFileContent'] . "\n||"));
+
+
+		// $bts->SDDMObj->prepare($infos['currentFileContent']);
+		$bts->SDDMObj->executeContent($infos['currentFileContent']);
+
+		$res = $bts->LMObj->getLastSQLDetails();
+		switch ($res['signal']) {
+			case "OK":
+				$this->report[$infos['section']][$infos['currentFileName']]['OK']++;
+				break;
+			case "WARN":
+				$this->report[$infos['section']][$infos['currentFileName']]['WARN']++;
+				break;
+			case "ERR":
+				$this->report[$infos['section']][$infos['currentFileName']]['ERR']++;
+				break;
+		}
+		$this->report['lastReportExecution'] = time();
+		if ($infos['updateInstallationMonitor'] == 1) {
+			$this->updateInstallationMonitor();
+		}
 	}
 
 	/**

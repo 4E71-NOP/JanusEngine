@@ -48,7 +48,8 @@ class SddmMySQLI extends SddmCore
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$bts->LMObj->msgLog(array(
-			'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " DB connection parameters : '"
+			'level' => LOGLEVEL_BREAKPOINT,
+			'msg' => __METHOD__ . " DB connection parameters : '"
 				. " host=" . $TabConfig['host']
 				. "; db_user_login=" . $TabConfig['db_user_login']
 				. "; dbprefix=" . $TabConfig['dbprefix']
@@ -138,6 +139,14 @@ class SddmMySQLI extends SddmCore
 				break;
 		}
 		return $db_result;
+	}
+
+	public function executeContent($script)
+	{
+		$bts = BaseToolSet::getInstance();
+
+		$db_result = $this->DBInstance->execute($script);
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Mysqli::execute() returned : '" . $db_result . "'."));
 	}
 
 	/**

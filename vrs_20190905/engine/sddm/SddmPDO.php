@@ -59,12 +59,12 @@ class SddmPDO extends SddmCore
 					default:
 						$dsn .= ";dbname=" . $TabConfig['dbprefix'];
 						break;
-					}
+				}
 
-					if ( strlen($TabConfig['charset']) > 0 ) { 
-						$dsn .= ";charset=" . $TabConfig['charset'];
-					}
-					break;
+				if (strlen($TabConfig['charset']) > 0) {
+					$dsn .= ";charset=" . $TabConfig['charset'];
+				}
+				break;
 
 			case "pgsql":
 				$dsn .= ";dbname=" . $TabConfig['dbprefix'];
@@ -91,7 +91,7 @@ class SddmPDO extends SddmCore
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Connected to '" . $TabConfig['dbprefix'] . "'."));
 		} catch (Exception $e) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " *** ERROR *** PDO connection failed"));
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $e->getCode() . ": ". $e->getMessage() ));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . $e->getCode() . ": " . $e->getMessage()));
 			$this->report['cnxErr'] = 1;
 		}
 	}
@@ -153,6 +153,14 @@ class SddmPDO extends SddmCore
 				break;
 		}
 		return $db_result;
+	}
+
+	public function executeContent($script)
+	{
+		$bts = BaseToolSet::getInstance();
+
+		$db_result = $this->DBInstance->exec($script);
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " PDO::exec() : '" . $db_result . "' row(s) modified."));
 	}
 
 	public function num_row_sql($res)
