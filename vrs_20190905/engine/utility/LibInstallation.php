@@ -321,6 +321,7 @@ class LibInstallation
 	public function methodRawSql(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
+		$timeStart = $bts->TimeObj->getHrtime();
 		$TabSrch = array();
 		$TabRpl = array();
 
@@ -352,13 +353,15 @@ class LibInstallation
 		$infos['currentFileContent'] = str_replace($TabSrch, $TabRpl, $infos['currentFileContent']);
 		unset($TabSrch, $TabRpl);
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Query ||\n" . $infos['currentFileContent'] . "\n||"));
 
 
 		// $bts->SDDMObj->prepare($infos['currentFileContent']);
 		$bts->SDDMObj->executeContent($infos['currentFileContent']);
 
 		$res = $bts->LMObj->getLastSQLDetails();
+		// $bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : res='" . $bts->StringFormatObj->print_r_debug($res) . "'"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : section='" . $infos['section'] . "', currentFileName:='" . $infos['currentFileName'] . "'"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query ||\n" . $infos['currentFileContent'] . "\n||"));
 		switch ($res['signal']) {
 			case "OK":
 				$this->report[$infos['section']][$infos['currentFileName']]['OK']++;
@@ -374,6 +377,21 @@ class LibInstallation
 		if ($infos['updateInstallationMonitor'] == 1) {
 			$this->updateInstallationMonitor();
 		}
+
+		$bts->SDDMObj->query(
+			"INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " VALUES ("
+				. "'" . $bts->SDDMObj->createUniqueId() . "', "
+				. "'" . $infos['section'] . "', "
+				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['file'] . "', "
+				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['OK'] . "', "
+				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['WARN'] . "', "
+				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['ERR'] . "', "
+				. "'" . $timeStart . "', "
+				. "'" . $bts->TimeObj->getHrtime() . "', "
+				. "'" . 1 . "', "
+				. "'" . 1 . "'"
+				. ");"
+		);
 	}
 
 	/**

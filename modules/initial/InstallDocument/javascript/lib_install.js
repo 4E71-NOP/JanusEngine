@@ -181,7 +181,7 @@ class LibInstall {
 				}
 
 				// Special user discovery
-				installFormData += URLamp + "form[JnsEngUserAlreadyExists]=" + ((tdb.resultTest.JnsEngUserAlreadyExists ) ? "on" : "off");
+				installFormData += URLamp + "form[JnsEngUserAlreadyExists]=" + ((tdb.resultTest.JnsEngUserAlreadyExists) ? "on" : "off");
 
 				// The install call
 				l.Log[this.dbgInstFonction]('Install URL=: `' + InstallURL + "?" + installFormData + "`");

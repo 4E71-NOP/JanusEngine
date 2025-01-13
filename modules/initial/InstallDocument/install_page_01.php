@@ -57,9 +57,7 @@ class InstallPage01
 	private $phpJavascriptObj = array();
 
 	private $availableSupport = array();
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -435,7 +433,7 @@ class InstallPage01
 
 		$GeneratedScriptObj->insertString('JavaScript-Data', "var RequestURI = \"" . $SrvUri . "\";");
 		$GeneratedScriptObj->insertString('JavaScript-Data', "var FormName = \"" . $this->FormName . "\";");
-		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[selectedDataBaseType]' , listOfDBSupport['PHP'] );");
+		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[selectedDataBaseType]' , listOfDBSupport['PDO'] );");
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 4, 1);
 	}
@@ -743,36 +741,36 @@ class InstallPage01
 	 */
 	private function detectionADODBSupport($infos)
 	{
-	// 	$bts = BaseToolSet::getInstance();
-	// 	$CurrentSetObj = CurrentSet::getInstance();
-	// 	$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
+		// 	$bts = BaseToolSet::getInstance();
+		// 	$CurrentSetObj = CurrentSet::getInstance();
+		// 	$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
 
 
-	// 	$Content = "<b>" . $bts->I18nTransObj->getI18nTransEntry('PHP_adodb_support') . "</b><br>";
-	// 	if (file_exists("/usr/share/php/adodb/adodb.inc.php")) {
-	// 		include("/usr/share/php/adodb/adodb.inc.php");
-	// 		$Content .= $infos['iconGoNoGoOk'] . "<span style='vertical-align:super;'>ADOdb " . $bts->I18nTransObj->getI18nTransEntry('PHP_builtin_ok') . "(" . $ADODB_vers . "). </span><br>\r";
+		// 	$Content = "<b>" . $bts->I18nTransObj->getI18nTransEntry('PHP_adodb_support') . "</b><br>";
+		// 	if (file_exists("/usr/share/php/adodb/adodb.inc.php")) {
+		// 		include("/usr/share/php/adodb/adodb.inc.php");
+		// 		$Content .= $infos['iconGoNoGoOk'] . "<span style='vertical-align:super;'>ADOdb " . $bts->I18nTransObj->getI18nTransEntry('PHP_builtin_ok') . "(" . $ADODB_vers . "). </span><br>\r";
 
-	// 		$adoSupportedDB = array(
-	// 			'db2' =>			array('enabled' => true,	'name' => 'db2',			'section' => 'ADO_DB2',		'title' => 'IBM DB2'),
-	// 			'mssqlnative' =>	array('enabled' => true,	'name' => 'mssqlnative',	'section' => 'ADO_MSSQL',	'title' => 'Microsoft SQL server'),
-	// 			'mysql' =>			array('enabled' => true,	'name' => 'mysql',			'section' => 'ADO_MYSQL',	'title' => 'mysql'),
-	// 			'oci8' =>			array('enabled' => true,	'name' => 'oci8',			'section' => 'ADO_OCI8',	'title' => 'Oracle'),
-	// 			'pgsql' =>			array('enabled' => true,	'name' => 'pqsql',			'section' => 'ADO_PGSQL',	'title' => 'PostgreSQL'),
-	// 			'sqlite' =>			array('enabled' => true,	'name' => 'sqlite',			'section' => 'ADO_SQLITE',	'title' => 'SQLite'),
-	// 		);
-	// 		$this->adoJavascriptObj = "\t'ADODB' :  {\r";
-	// 		foreach ($adoSupportedDB as $A) {
-	// 			if ($A['enabled'] == true) {
-	// 				$this->adoJavascriptObj .= "\t\t'" . $A['name'] . "' : { v:'" . $A['name'] . "',	't':'" . $A['title'] . "'}, \r";
-	// 			}
-	// 		}
-	// 		$this->adoJavascriptObj = substr($this->adoJavascriptObj, 0, -3) . "\r\t},\r";
-	// 		$this->adoSupportEnabled = true;
-	// 	} else {
-	// 		$Content .= $infos['iconGoNoGoNok'] . "<span class='" . $Block . "_warning' style='vertical-align:super;'>ADOdb " . $bts->I18nTransObj->getI18nTransEntry('PHP_builtin_nok') . ". </span><br>\r";
-	// 	}
-	// 	return ($Content);
+		// 		$adoSupportedDB = array(
+		// 			'db2' =>			array('enabled' => true,	'name' => 'db2',			'section' => 'ADO_DB2',		'title' => 'IBM DB2'),
+		// 			'mssqlnative' =>	array('enabled' => true,	'name' => 'mssqlnative',	'section' => 'ADO_MSSQL',	'title' => 'Microsoft SQL server'),
+		// 			'mysql' =>			array('enabled' => true,	'name' => 'mysql',			'section' => 'ADO_MYSQL',	'title' => 'mysql'),
+		// 			'oci8' =>			array('enabled' => true,	'name' => 'oci8',			'section' => 'ADO_OCI8',	'title' => 'Oracle'),
+		// 			'pgsql' =>			array('enabled' => true,	'name' => 'pqsql',			'section' => 'ADO_PGSQL',	'title' => 'PostgreSQL'),
+		// 			'sqlite' =>			array('enabled' => true,	'name' => 'sqlite',			'section' => 'ADO_SQLITE',	'title' => 'SQLite'),
+		// 		);
+		// 		$this->adoJavascriptObj = "\t'ADODB' :  {\r";
+		// 		foreach ($adoSupportedDB as $A) {
+		// 			if ($A['enabled'] == true) {
+		// 				$this->adoJavascriptObj .= "\t\t'" . $A['name'] . "' : { v:'" . $A['name'] . "',	't':'" . $A['title'] . "'}, \r";
+		// 			}
+		// 		}
+		// 		$this->adoJavascriptObj = substr($this->adoJavascriptObj, 0, -3) . "\r\t},\r";
+		// 		$this->adoSupportEnabled = true;
+		// 	} else {
+		// 		$Content .= $infos['iconGoNoGoNok'] . "<span class='" . $Block . "_warning' style='vertical-align:super;'>ADOdb " . $bts->I18nTransObj->getI18nTransEntry('PHP_builtin_nok') . ". </span><br>\r";
+		// 	}
+		// 	return ($Content);
 	}
 
 	/**

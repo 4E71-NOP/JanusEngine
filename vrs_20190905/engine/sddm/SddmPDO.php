@@ -134,34 +134,42 @@ class SddmPDO extends SddmCore
 
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$StringFormatObj = StringFormat::getInstance();
-				$bts->LMObj->increaseSqlQueryNumber();
-				$q = $StringFormatObj->shorteningExpression($q, 256);
-				$bts->LMObj->logSQLDetails(
-					array(
-						$timeBegin,
-						$bts->LMObj->getSqlQueryNumber(),
-						$bts->MapperObj->getWhereWeAreAt(),
-						$SQLlogEntry['signal'],
-						$q,
-						$SQLlogEntry['err_no_expr'],
-						$SQLlogEntry['err_msg'],
-						$bts->TimeObj->getMicrotime(),
-					)
-				);
-
+				$this->logToSqlDetails($q, $SQLlogEntry, $timeBegin);
 				break;
 		}
 		return $db_result;
 	}
 
+	/**
+	 * 
+	 */
 	public function executeContent($script)
 	{
 		$bts = BaseToolSet::getInstance();
+		$timeBegin = $bts->TimeObj->getMicrotime();
 
-		$db_result = $this->DBInstance->exec($script);
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " PDO::exec() : '" . $db_result . "' row(s) modified."));
+		$this->DBInstance->exec($script);
+
+		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
+			case "installation":
+				$SQLlogEntry = array(
+					"err_no"		=> $this->DBInstance->errno,
+					"err_no_expr"	=> "PHP PDO Err : " . $this->DBInstance->errno,
+					"err_msg"		=> $this->DBInstance->error,
+					"signal"		=> ($this->DBInstance->errno == 0) ? "OK" : "ERR",
+				);
+				$this->logToSqlDetails($script, $SQLlogEntry, $timeBegin);
+				break;
+			default:
+				if ($this->DBInstance->errno != 0) {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($script) . "`."));
+					return false;
+				}
+				break;
+		}
 	}
+
+
 
 	public function num_row_sql($res)
 	{

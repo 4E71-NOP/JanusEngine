@@ -104,7 +104,7 @@ class SddmPgsql extends SddmCore
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$bts->LMObj->increaseSqlQueryNumber();
-		$db_result = pg_exec($this->DBInstance, $q);
+		$db_result = pg_execute($this->DBInstance, $q);
 		$SQLlogEntry = array(
 			"err_no"		=> $this->DBInstance->errno,
 			"err_no_expr"	=> "PHP Pgsql Err : " . $this->DBInstance->errno,
@@ -126,21 +126,7 @@ class SddmPgsql extends SddmCore
 
 		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
 			case "installation":
-				$StringFormatObj = StringFormat::getInstance();
-				$bts->LMObj->increaseSqlQueryNumber();
-				$q = $StringFormatObj->shorteningExpression($q, 256);
-				// $bts->LMObj->logSQLDetails(
-				// 	array (
-				// 		$timeBegin,
-				// 			$bts->LMObj->getSqlQueryNumber(),
-				// 			$bts->MapperObj->getWhereWeAreAt(),
-				// 		$SQLlogEntry['signal'],
-				// 		$q,
-				// 		$SQLlogEntry['err_no_expr'],
-				// 		$SQLlogEntry['err_msg'],
-				// 			$bts->TimeObj->getMicrotime(),
-				// 	)
-				// );
+				$this->logToSqlDetails($q, $SQLlogEntry, $timeBegin);
 				break;
 		}
 		return $db_result;
@@ -149,10 +135,30 @@ class SddmPgsql extends SddmCore
 
 	public function executeContent($script)
 	{
-		$bts = BaseToolSet::getInstance();
 
-		$db_result = $this->DBInstance->execute($script);
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Mysqli::execute() returned : '" . $db_result . "'."));
+		$bts = BaseToolSet::getInstance();
+		$timeBegin = $bts->TimeObj->getMicrotime();
+
+		$db_result = pg_execute($this->DBInstance, $script);
+
+		switch ($bts->CMObj->getConfigurationEntry('execution_context')) {
+			case "installation":
+				$SQLlogEntry = array(
+					"err_no"		=> 0,
+					"err_no_expr"	=> "PHP PgSql Err : " . 0,
+					"err_msg"		=> "",
+					"signal"		=> ($db_result == true) ? "OK" : "ERR",
+				);
+
+				$this->logToSqlDetails($script, $SQLlogEntry, $timeBegin);
+				break;
+			default:
+				if ($this->DBInstance->errno != 0) {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : " . $this->DBInstance->errno . " " . $this->DBInstance->error . " Query : `" . $bts->StringFormatObj->formatToLog($script) . "`."));
+					return false;
+				}
+				break;
+		}
 	}
 
 
