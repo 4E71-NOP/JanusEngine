@@ -1,4 +1,5 @@
-add layout name "JnsEngCore_default_layout"		title "Présentation par défaut"				generic_name "default_layout"		description "JnsEngCore_default_layout"		layout_file "JnsEngCore_default_layout";
-add layout name "JnsEngCore_gestion_profil"		title "Présentation gestion profil"			generic_name "gestion_profil"		description "JnsEngCore_gestion_profil"		layout_file "JnsEngCore_gestion_profil";
-add layout name "JnsEngCore_test_script"		title "Présentation Test de script"			generic_name "test_script" 			description "JnsEngCore_test_script"		layout_file "JnsEngCore_test_script";
-add layout name "JnsEngCore_gestion_decoration"	title "Présentation gestion décoration"		generic_name "gestion_decoration" 	description "JnsEngCore_gestion_decoration"	layout_file "JnsEngCore_gestion_decoration";
+add layout name "JnsEngCore_default_layout"					title "Présentation par défaut"				generic_name "default_layout"				description "JnsEngCore_default_layout"					layout_file "JnsEngCore_default_layout";
+add layout name "JnsEngCore_gestion_profil"					title "Présentation gestion profil"			generic_name "gestion_profil"				description "JnsEngCore_gestion_profil"					layout_file "JnsEngCore_gestion_profil";
+add layout name "JnsEngCore_test_script"					title "Présentation Test de script"			generic_name "test_script" 					description "JnsEngCore_test_script"					layout_file "JnsEngCore_test_script";
+add layout name "JnsEngCore_gestion_decoration"				title "Présentation gestion décoration"		generic_name "gestion_decoration" 			description "JnsEngCore_gestion_decoration"				layout_file "JnsEngCore_gestion_decoration";
+add layout name "JnsEngCore_manage_full_width"	title "Présentation manage"					generic_name "manage_full_width" 	description "JnsEngCore_manage_full_width"	layout_file "JnsEngCore_manage_full_width";

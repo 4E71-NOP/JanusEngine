@@ -1,4 +1,0 @@
-// update website name "Hydr"	theme "hydr_aqua_01";
-assign theme name "hydr_aqua_01" to_website "Hydr";
-
-set checkpoint name "hydr - End";

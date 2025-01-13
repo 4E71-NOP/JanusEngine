@@ -1,0 +1,7 @@
+assign theme name "JanusEngineCore" to_website "JanusEngineCore";
+
+assign layout	name JnsEngCore_default_layout				to_theme JanusEngineCore	default YES;
+assign layout	name JnsEngCore_gestion_profil				to_theme JanusEngineCore;
+assign layout	name JnsEngCore_test_script					to_theme JanusEngineCore;
+assign layout	name JnsEngCore_gestion_decoration			to_theme JanusEngineCore;
+assign layout	name JnsEngCore_manage_full_width	to_theme JanusEngineCore;

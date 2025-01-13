@@ -17,9 +17,7 @@ class LayoutProcessor
 	private static $Instance = null;
 	private static $LayoutProcessor = null;
 
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -82,20 +80,20 @@ class LayoutProcessor
 		$layoutFileObj->getDataFromDB($layout_id);
 
 		$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Associated layout filename `" . $finalFileName . "`"));
 		$UserObj = $CurrentSetObj->UserObj;
 		if ($UserObj->getUserEntry('user_login') != "anonymous") {
 			$finalFileName = str_replace(".lyt.html", "_connected.lyt.html", $finalFileName);
 		}
 
 		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . $finalFileName;
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Loading file :'" . $targetFilneName . "'"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing file :'" . $targetFilneName . "'"));
 
 		$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout filename `" . $targetFilneName . "`"));
-		
+
 		if ($fileContentObj->getFileContent() === false) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Layout file not found. Back to default layout filename `" . $targetFilneName . "`"));
 			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . "default/default.lyt.html";
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Layout file not found. Back to default layout filename `" . $targetFilneName . "`"));
 			$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 		}
 

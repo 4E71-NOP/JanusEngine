@@ -6,6 +6,10 @@ add layout_file name 'JnsEng_aqua_user_profile'  generic_name 'user_profile'  de
 add layout name 'JnsEng_aqua_01_user_profile' title 'Profil utilisateur'   generic_name 'user_profile'  description 'JnsEng_aqua user_profile'   layout_file 'JnsEng_aqua_user_profile';
 assign layout name 'JnsEng_aqua_01_user_profile' to_theme 'JnsEng_aqua_01';
 
+add layout_file name 'JnsEng_aqua_manage_full_width'  generic_name 'manage_full_width'  description 'JnsEng_manage_full_width' filename 'JnsEng/JnsEng_aqua_manage_full_width.lyt.html';
+add layout name 'JnsEng_aqua_01_manage_full_width' title 'Exécution de script'   generic_name 'manage_full_width'  description 'JnsEng_aqua manage_full_width'   layout_file 'JnsEng_aqua_manage_full_width';
+assign layout name 'JnsEng_aqua_01_manage_full_width' to_theme 'JnsEng_aqua_01';
+
 add layout_file name 'JnsEng_aqua_script_execution'  generic_name 'script_execution'  description 'JnsEng_script_execution' filename 'JnsEng/JnsEng_aqua_script_execution.lyt.html';
 add layout name 'JnsEng_aqua_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'JnsEng_aqua script_execution'   layout_file 'JnsEng_aqua_script_execution';
 assign layout name 'JnsEng_aqua_01_script_execution' to_theme 'JnsEng_aqua_01';
