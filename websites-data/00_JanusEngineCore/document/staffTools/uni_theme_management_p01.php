@@ -117,9 +117,6 @@ if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
 }
 
 // --------------------------------------------------------------------------------------------
-
-
-
 $dbquery = $bts->SDDMObj->query("
 SELECT td.theme_id, td.theme_name, td.theme_title, td.theme_date 
 FROM "
@@ -136,19 +133,6 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 	$T['Content']['1'][$i]['2']['cont'] = "";
 	$T['Content']['1'][$i]['3']['cont'] = "";
 } else {
-	$formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-
-	$fmt = new IntlDateFormatter(
-		'fr_FR',
-		IntlDateFormatter::FULL,
-		IntlDateFormatter::FULL,
-		'America/Los_Angeles',
-		IntlDateFormatter::GREGORIAN,
-		'MM/dd/yyyy'
-	);
-
-	echo $formatter->format(time());
-
 	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
 	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
 	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
@@ -168,7 +152,6 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 		$T['Content']['1'][$i]['3']['tc']	= 1;
 	}
 }
-
 
 // --------------------------------------------------------------------------------------------
 //

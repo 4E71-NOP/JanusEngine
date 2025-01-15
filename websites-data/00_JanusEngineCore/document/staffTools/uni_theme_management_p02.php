@@ -30,7 +30,7 @@
 $bts->RequestDataObj->setRequestData(
 	'themeForm',
 	array(
-		'selectionId'	=>	87500728700317434,
+		'selectionId'	=>	2056201610955903802,
 	)
 );
 $bts->RequestDataObj->setRequestData(
@@ -165,19 +165,28 @@ $Content .= $AdminFormToolObj->checkAdminDashboardForm($infos);
 // Table preparation
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('ThemeDescriptor');
-$currentThemeObj = new ThemeDescriptor();
+$tmpThemeObj = new ThemeDescriptor();
+$targetThemeData = new ThemeData();
+
 switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode')) {
 	case "edit":
 		$commandType = "update";
-		$currentThemeObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'));
-		$t1l2c2 = $currentThemeObj->getThemeDescriptorEntry('theme_name');
+		$tmpThemeObj->getDataFromDB($bts->RequestDataObj->getRequestDataSubEntry('themeForm', 'selectionId'));
+		$t1l2c2 = $targetThemeData->getThemeDataEntry('theme_name');
 		$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>\r";
 		$processStep = "";
 		$processTarget = "edit";
+
+		$targetThemeData->setThemeData($tmpThemeObj->getThemeDescriptor());
+		$targetThemeData->setThemeDefinition($tmpThemeObj->getThemeDefinition());
+		$t1l2c2 = $bts->RenderFormObj->renderInputText('formParams1[name]',	$targetThemeData->getThemeDataEntry('theme_name'));
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ThemeData = `" . $bts->StringFormatObj->arrayToString($targetThemeData->getThemeData()) . "`"));
+
 		break;
 	case "create":
 		$commandType = "add";
-		$currentThemeObj->setThemeDescriptor(
+		$tmpThemeObj->setThemeDescriptor(
 			array(
 				"theme_id"		=> "*",
 				"theme_name"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
@@ -185,12 +194,12 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 				"theme_desc"	=> $bts->I18nTransObj->getI18nTransEntry('t1l2c2'),
 			)
 		);
-		$t1l2c2 = $bts->RenderFormObj->renderInputText('formParams1[name]',	$currentThemeObj->getThemeDescriptorEntry('theme_name'));
 		$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite2') . "</p>\r";
 		$processStep = "Create";
 		$processTarget = "edit";
 		break;
 }
+unset($tmpThemeObj);
 
 // --------------------------------------------------------------------------------------------
 $Content .=
@@ -201,8 +210,8 @@ $Content .=
 	. $bts->RenderFormObj->renderHiddenInput("formCommand1",	$commandType)
 	. $bts->RenderFormObj->renderHiddenInput("formEntity1",	"menu")
 	. $bts->RenderFormObj->renderHiddenInput("formGenericData[mode]",	$processTarget)
-	. $bts->RenderFormObj->renderHiddenInput("formTarget1[name]", 	$currentThemeObj->getThemeDescriptorEntry('theme_name'))
-	. $bts->RenderFormObj->renderHiddenInput("themeForm[selectionId]",	$currentThemeObj->getThemeDescriptorEntry('theme_id'))
+	. $bts->RenderFormObj->renderHiddenInput("formTarget1[name]", 	$targetThemeData->getThemeDataEntry('theme_name'))
+	. $bts->RenderFormObj->renderHiddenInput("themeForm[selectionId]",	$targetThemeData->getThemeDataEntry('theme_id'))
 	. "<p>\r";
 
 // --------------------------------------------------------------------------------------------
@@ -216,11 +225,10 @@ $T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
 
 
-$T['Content'][$curTab]['1']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_id');
+$T['Content'][$curTab]['1']['2']['cont'] = $targetThemeData->getThemeDataEntry('theme_id');
 $T['Content'][$curTab]['2']['2']['cont'] = $t1l2c2;
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',	$currentThemeObj->getThemeDescriptorEntry('theme_title'));
-$T['Content'][$curTab]['4']['2']['cont'] = $currentThemeObj->getThemeDescriptorEntry('theme_desc');
-
+$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[title]',	$targetThemeData->getThemeDataEntry('theme_title'));
+$T['Content'][$curTab]['4']['2']['cont'] = $targetThemeData->getThemeDataEntry('theme_desc');
 
 // --------------------------------------------------------------------------------------------
 $decoCount1 = 1;
@@ -229,9 +237,9 @@ for ($i = 2; $i <= 3; $i++) {
 		$decoCount2 = sprintf("%02u", $decoCount1);
 		$T['Content'][$i][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
 		$T['Content'][$i][$j]['2']['cont'] =
-			$bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_nom]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_name'))
+			$bts->RenderFormObj->renderInputText("formParams1[block_" . $decoCount2 . "_nom]",	$targetThemeData->getThemeDefinitionSubEntry('block_' . $decoCount2 . '_name', 'def_name'))
 			. "&nbsp;&nbsp;&nbsp;&nbsp;"
-			. $bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_text]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_text'));
+			. $bts->RenderFormObj->renderInputText("formParams1[block_" . $decoCount2 . "_text]",	$targetThemeData->getThemeDefinitionSubEntry('block_' . $decoCount2 . '_text', 'def_name'));
 		$decoCount1++;
 	}
 }
@@ -241,11 +249,9 @@ $decoCount1 = 0;
 for ($j = 1; $j <= 30; $j++) {
 	$decoCount2 = sprintf("%02u", $decoCount1);
 	$T['Content']['4'][$j]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2lxc1') . "_" . $decoCount2;
-	$T['Content']['4'][$j]['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[block_".$decoCount2."_menu]',	$currentThemeObj->getThemeDescriptorEntry('block_' . $decoCount2 . '_menu'));
-	// "<input type='text' name='formParams[theme_bloc_".$decoCount2."_menu]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('block_'.$decoCount2.'_menu')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+	$T['Content']['4'][$j]['2']['cont'] = $bts->RenderFormObj->renderInputText("formParams1[block_" . $decoCount2 . "_menu]",	$targetThemeData->getThemeDefinitionSubEntry('block_' . $decoCount2 . '_menu', 'def_name'));
 	$decoCount1++;
 }
-
 
 // --------------------------------------------------------------------------------------------
 $curTab = 5;
@@ -271,12 +277,11 @@ $T['Content'][$curTab]['16']['1']['colspan']	= 2;
 $T['Content'][$curTab]['17']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t' . $curTab . 'l17c1');
 $T['Content'][$curTab]['18']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t' . $curTab . 'l18c1');
 
-
 $FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 	"themeForm",
-	"formParams[theme_directory]",
+	"formParams[directory]",
 	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_directory'),
+	$targetThemeData->getThemeDefinitionSubEntry('directory', 'def_string'),
 	"/media/theme/",
 	"/media/theme/",
 	"t5l1c2",
@@ -288,90 +293,34 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1)
 $T['Content'][$curTab]['1']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
-	"themeForm",
-	"formParams[theme_stylesheet_1]",
-	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_1'),
-	"/stylesheets/",
-	"/stylesheets/",
-	"t5l2c2",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['2']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-
-$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
-	"themeForm",
-	"formParams[theme_stylesheet_2]",
-	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_2'),
-	"/stylesheets/",
-	"/stylesheets/",
-	"t5l3c2",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['3']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-
-$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
-	"themeForm",
-	"formParams[theme_stylesheet_3]",
-	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_3'),
-	"/stylesheets/",
-	"/stylesheets/",
-	"t5l4c2",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['4']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-
-$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
-	"themeForm",
-	"formParams[theme_stylesheet_4]",
-	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_4'),
-	"/stylesheets/",
-	"/stylesheets/",
-	"t5l5c2",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['5']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
-
-$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
-	"themeForm",
-	"formParams[theme_stylesheet_5]",
-	25,
-	$currentThemeObj->getThemeDescriptorEntry('theme_stylesheet_5'),
-	"/stylesheets/",
-	"/stylesheets/",
-	"t5l6c2",
-);
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['6']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-
+// --------------------------------------------------------------------------------------------
+// Stylesheets
+$j = 1;
+for ($i = 2; $i <= 6; $i++) {
+	$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
+		"themeForm",
+		"formParams[stylesheet_" . $j . "]",
+		25,
+		$targetThemeData->getThemeDefinitionSubEntry('stylesheet_' . $j, 'def_string'),
+		"/stylesheets/",
+		"/stylesheets/",
+		"t5l" . $i . "c2",
+	);
+	$infos['IconSelectFile'] = $FileSelectorConfig;
+	$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
+	$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
+	$T['Content'][$curTab][$i]['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+	$j++;
+}
 
 
 // --------------------------------------------------------------------------------------------
-
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_bg]",
+		"formParams[bg]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_bg'),
+		$targetThemeData->getThemeDefinitionSubEntry('bg', 'def_string'),
 		"/media/theme/",
 		"/media/theme/",
 		"t5l4c2",
@@ -383,17 +332,15 @@ $CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $Fi
 $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
 $T['Content'][$curTab]['8']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['Content'][$curTab]['9']['2']['cont']		= $bts->RenderFormObj->renderInputText("formParams[theme_bg_repeat]", $currentThemeObj->getThemeDescriptorEntry('theme_bg_repeat'), "", 25);
-$T['Content'][$curTab]['10']['2']['cont']		= $bts->RenderFormObj->renderInputText("formParams[theme_bg_color]", $currentThemeObj->getThemeDescriptorEntry('theme_bg_color'), "", 25);
-// $T['Content'][$curTab]['9']['2']['cont']		= "<input type='text' name='formParams[theme_bg_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r"; 
-// $T['Content'][$curTab]['10']['2']['cont']		= "<input type='text' name='formParams[theme_bg_color]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_bg_color')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['9']['2']['cont']		= $bts->RenderFormObj->renderInputText("formParams[theme_bg_repeat]", $targetThemeData->getThemeDataEntry('theme_bg_repeat'), "", 25);
+$T['Content'][$curTab]['10']['2']['cont']		= $bts->RenderFormObj->renderInputText("formParams[theme_bg_color]", $targetThemeData->getThemeDataEntry('theme_bg_color'), "", 25);
 
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_divinitial_bg]",
+		"formParams[divinitial_bg]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
+		$targetThemeData->getThemeDataEntry('theme_divinitial_bg'),
 		"/media/theme/",
 		"/media/theme/",
 		"t5l12c2",
@@ -406,19 +353,16 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1)
 $T['Content'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 
-$T['Content'][$curTab]['13']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_repeat]", $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_repeat'), "", 25);
-$T['Content'][$curTab]['14']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_dx]", $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dx'), "", 25);
-$T['Content'][$curTab]['15']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_dy]", $currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dy'), "", 25);
-// $T['Content'][$curTab]['13']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_repeat]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_repeat')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-// $T['Content'][$curTab]['14']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dx]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dx')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
-// $T['Content'][$curTab]['15']['2']['cont']	= "<input type='text' name='formParams[theme_divinitial_dy]' size='25' maxlength='255' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_dy')."\" class='".$Block."_t3 ".$Block."_form_1'>\r";
+$T['Content'][$curTab]['13']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_repeat]", $targetThemeData->getThemeDataEntry('theme_divinitial_repeat'), "", 25);
+$T['Content'][$curTab]['14']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_dx]", $targetThemeData->getThemeDataEntry('theme_divinitial_dx'), "", 25);
+$T['Content'][$curTab]['15']['2']['cont']	= $bts->RenderFormObj->renderInputText("formParams[theme_divinitial_dy]", $targetThemeData->getThemeDataEntry('theme_divinitial_dy'), "", 25);
 
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_divinitial_bg]",
+		"formParams[divinitial_bg]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_divinitial_bg'),
+		$targetThemeData->getThemeDataEntry('theme_divinitial_bg'),
 		"/media/theme/",
 		"/media/theme/",
 		"t5l12c2",
@@ -435,9 +379,9 @@ $T['Content'][$curTab]['12']['2']['cont']		= $bts->InteractiveElementsObj->rende
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_logo]",
+		"formParams[logo]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_logo'),
+		$targetThemeData->getThemeDefinitionSubEntry('logo', 'def_string'),
 		"/media/theme/",
 		"/media/theme/",
 		"t5l17c2",
@@ -453,9 +397,9 @@ $T['Content'][$curTab]['17']['2']['cont']		= $bts->InteractiveElementsObj->rende
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_banner]",
+		"formParams[banner]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_banner'),
+		$targetThemeData->getThemeDefinitionSubEntry('banner', 'def_string'),
 		"/media/theme/",
 		"/media/theme/",
 		"t5l18c2",
@@ -481,9 +425,9 @@ $T['Content'][$curTab]['6']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_admctrl_panel_bg]",
+		"formParams[admctrl_panel_bg]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_panel_bg'),
+		$targetThemeData->getThemeDataEntry('admctrl_panel_bg'),
 		"/media/theme/",
 		"/media/theme/",
 		"t6l1c2",
@@ -498,9 +442,9 @@ $T['Content'][$curTab]['1']['2']['cont'] = $bts->InteractiveElementsObj->renderI
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"themeForm",
-		"formParams[theme_admctrl_switch_bg]",
+		"formParams[admctrl_switch_bg]",
 		25,
-		$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_switch_bg'),
+		$targetThemeData->getThemeDefinitionSubEntry('admctrl_switch_bg', 'def_string'),
 		"/media/theme/",
 		"/media/theme/",
 		"t6l2c2",
@@ -513,16 +457,12 @@ $CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1)
 $T['Content'][$curTab]['2']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
 $T['Content'][$curTab]['3']['2']['cont'] =
-	$bts->RenderFormObj->renderInputText("formParams[admctrl_size_x]", $currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_x'), "", 8) . "px\r / "
-	. $bts->RenderFormObj->renderInputText("formParams[admctrl_size_y]", $currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_y'), "", 8) . "px\r";
-// $T['Content'][$curTab]['3']['2']['cont'] = "
-// 	<input type='text' name='formParams[admctrl_size_x]' size='8' maxlength='255' value='".$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_x')."' class='".$Block."_t3 ".$Block."_form_1'>px\r /
-// 	<input type='text' name='formParams[admctrl_size_y]' size='8' maxlength='255' value='".$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_size_y')."' class='".$Block."_t3 ".$Block."_form_1'>px\r"
-// ;
+	$bts->RenderFormObj->renderInputText("formParams[admctrl_size_x]", $targetThemeData->getThemeDefinitionSubEntry('admctrl_width', 'def_number'), "", 8) . "px\r / "
+	. $bts->RenderFormObj->renderInputText("formParams[admctrl_size_y]", $targetThemeData->getThemeDefinitionSubEntry('admctrl_height', 'def_number'), "", 8) . "px\r";
 
 $T['Content'][$curTab]['4']['2']['cont'] = "<select name ='formParams['admctrl_position']' class='" . $Block . "_t3 " . $Block . "_form_1'>\r";
 $admctrl_position = array();
-$admctrl_position[$currentThemeObj->getThemeDescriptorEntry('theme_admctrl_position')] = " selected ";
+$admctrl_position[$targetThemeData->getThemeDefinitionSubEntry('admctrl_position', 'def_string')] = " selected ";
 $T['Content'][$curTab]['4']['2']['cont'] .= "
 <option value='1' " . $admctrl_position['1'] . "> " . $bts->I18nTransObj->getI18nTransEntry('acpUp') . " - " .		$bts->I18nTransObj->getI18nTransEntry('acpLeft')	. " </option>\r
 <option value='2' " . $admctrl_position['2'] . "> " . $bts->I18nTransObj->getI18nTransEntry('acpUp') . " - " .		$bts->I18nTransObj->getI18nTransEntry('acpMiddle')	. " </option>\r
@@ -536,46 +476,52 @@ $T['Content'][$curTab]['4']['2']['cont'] .= "
 
 
 $arrInputText1 = array(
-	"id" => "TM_gradient_start_color",
-	"name" => "formParams[gradient_start_color]",
+	"id" => "TM_gradient_color_start",
+	"name" => "formParams[gradient_color_start]",
 	"size" => 8,
 	"maxlength" => 6,
-	"value" => $currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color'),
+	"value" =>
+	$targetThemeData->getThemeDefinitionSubEntry('gradient_color_start', 'def_string'),
 );
 
 $arrInputText3 = $arrInputText2 = $arrInputText1;
 
-$arrInputText2['id'] = "TM_gradient_middle_color";
-$arrInputText2['name'] = "formParams[gradient_start_color]";
-$arrInputText2['value'] = $currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color');
+$arrInputText2['id'] = "TM_gradient_color_middle";
+$arrInputText2['name'] = "formParams[gradient_color_middle]";
+$arrInputText2['value'] = $targetThemeData->getThemeDefinitionSubEntry('gradient_color_middle', 'def_string');
 
-$arrInputText3['id'] = "TM_gradient_end_color";
-$arrInputText3['name'] = "formParams[gradient_end_color]";
-$arrInputText3['value'] = $currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color');
+$arrInputText3['id'] = "TM_gradient_color_end";
+$arrInputText3['name'] = "formParams[gradient_color_end]";
+$arrInputText3['value'] = $targetThemeData->getThemeDefinitionSubEntry('gradient_color_end', 'def_string');
+
 
 switch ($bts->CMObj->getConfigurationEntry('colorSelector')) {
 	case "JnsEng":
 		// $T['Content'][$curTab]['5']['2']['cont'] = "
-		// #<input type='text' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."\"	>\r /
-		// #<input type='text' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."\"	>\r /
-		// #<input type='text' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		size='8' maxlength='6' value=\"".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."\"		>\r
+		// #<input type='text' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		size='8' maxlength='6' value=\"".$targetThemeData->getThemeDataEntry('theme_gradient_start_color')."\"	>\r /
+		// #<input type='text' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	size='8' maxlength='6' value=\"".$targetThemeData->getThemeDataEntry('theme_gradient_middle_color')."\"	>\r /
+		// #<input type='text' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		size='8' maxlength='6' value=\"".$targetThemeData->getThemeDataEntry('theme_gradient_end_color')."\"		>\r
 		// ";
 		break;
 	case "system":
 	default:
 		$arrInputText3['oninput'] = $arrInputText2['oninput'] = $arrInputText1['oninput'] = "ThemeGradientMgmt()";
 		// $T['Content'][$curTab]['5']['2']['cont'] = "
-		// <input type='color' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_start_color')."'	oninput='ThemeGradientMgmt()'>\r /
-		// <input type='color' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_middle_color')."'	oninput='ThemeGradientMgmt()'>\r /
-		// <input type='color' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		value='#".$currentThemeObj->getThemeDescriptorEntry('theme_gradient_end_color')."'		oninput='ThemeGradientMgmt()'>\r
+		// <input type='color' id='TM_gradient_start_color'	name='formParams[gradient_start_color]'		value='#".$targetThemeData->getThemeDataEntry('theme_gradient_start_color')."'	oninput='ThemeGradientMgmt()'>\r /
+		// <input type='color' id='TM_gradient_middle_color'	name='formParams[gradient_middle_color]'	value='#".$targetThemeData->getThemeDataEntry('theme_gradient_middle_color')."'	oninput='ThemeGradientMgmt()'>\r /
+		// <input type='color' id='TM_gradient_end_color'		name='formParams[gradient_end_color]'		value='#".$targetThemeData->getThemeDataEntry('theme_gradient_end_color')."'		oninput='ThemeGradientMgmt()'>\r
 		// ";
 		break;
 }
 
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ThemeDefinition = `" . $bts->StringFormatObj->arrayToString($arrInputText1) . "`"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ThemeDefinition = `" . $bts->StringFormatObj->arrayToString($arrInputText2) . "`"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ThemeDefinition = `" . $bts->StringFormatObj->arrayToString($arrInputText3) . "`"));
+
 $T['Content'][$curTab]['5']['2']['cont'] =
- "# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1) . " / \r"
-."# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText2) . " / \r"
-."# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText3) . "\r";
+	"# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1) . " / \r"
+	. "# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText2) . " / \r"
+	. "# " . $bts->RenderFormObj->renderInputTextEnhanced($arrInputText3) . "\r";
 
 
 
@@ -588,7 +534,7 @@ $T['Content'][$curTab]['5']['2']['cont'] .= "
 $gradientNbr = 30;
 $gradientWidth = 320;
 for ($i = 1; $i <= $gradientNbr; $i++) {
-	$T['Content'][$curTab]['5']['2']['cont'] .= "<td id='theme_gradient_" . $i . "' style='width: " . floor($gradientWidth / $gradientNbr) . "px; height: 32px; background-color: #000000; border: 0px'></td>\r";
+	$T['Content'][$curTab]['5']['2']['cont'] .= "<td id='gfx_gradient_" . $i . "' style='width: " . floor($gradientWidth / $gradientNbr) . "px; height: 32px; background-color: #000000; border: 0px'></td>\r";
 }
 $T['Content'][$curTab]['5']['2']['cont'] .= "</tr>\r</table>\r";
 
