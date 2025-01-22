@@ -6,6 +6,10 @@ add layout_file name 'rw_magma_user_profile'  generic_name 'user_profile'  descr
 add layout name 'rw_magma_01_user_profile' title 'Profil utilisateur'   generic_name 'user_profile'  description 'rw_magma user_profile'   layout_file 'rw_magma_user_profile';
 assign layout name 'rw_magma_01_user_profile' to_theme 'rw_magma_01';
 
+add layout_file name 'rw_magma_manage_full_width'  generic_name 'manage_full_width'  description 'rw_manage_full_width' filename 'Rootwave/rw_magma_manage_full_width.lyt.html';
+add layout name 'rw_magma_01_manage_full_width' title 'Exécution de script'   generic_name 'manage_full_width'  description 'rw_magma manage_full_width'   layout_file 'rw_magma_manage_full_width';
+assign layout name 'rw_magma_01_manage_full_width' to_theme 'rw_magma_01';
+
 add layout_file name 'rw_magma_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'Rootwave/rw_magma_script_execution.lyt.html';
 add layout name 'rw_magma_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_magma script_execution'   layout_file 'rw_magma_script_execution';
 assign layout name 'rw_magma_01_script_execution' to_theme 'rw_magma_01';

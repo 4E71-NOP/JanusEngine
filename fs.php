@@ -158,14 +158,14 @@ class FileSelectorRender
 		$strAdd = $RequestDataObj->getRequestDataEntry('strAdd');
 		$displayType = $RequestDataObj->getRequestDataEntry('displayType');
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php strAdd=`" . $strAdd . "`;strRemove=`" . $strRemove . "`; preg_replace=`" . $strAdd . preg_replace($strRemove, '', '../../dir/dir/file.php')));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "fs.php strAdd=`" . $strAdd . "`;strRemove=`" . $strRemove . "`; preg_replace=`" . $strAdd . preg_replace($strRemove, '', '../../dir/dir-rid/dir/file.php')));
 
 		$pos = strrpos($pathToExplore, "/");
 		$pathToExploreUp = substr($pathToExplore, 0, $pos);
-		$fileList = array();
-		$fileList['0'] = array();
-		$fileList['1']['.']		= array("name" => ".",		"target" => str_replace($entryPoint, "", $pathToExplore));
-		$fileList['1']['..']		= array("name" => "..",	"target" => str_replace($entryPoint, "", $pathToExploreUp));
+		$fileList				= array();
+		$fileList['0']			= array();
+		$fileList['1']['.']		= array("name" => ".",	"target" => str_replace($entryPoint, "", $pathToExplore));
+		$fileList['1']['..']	= array("name" => "..",	"target" => str_replace($entryPoint, "", $pathToExploreUp));
 		// exit();
 		$handle = opendir($pathToExplore);
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " exploring : " . $pathToExplore));
@@ -218,73 +218,76 @@ class FileSelectorRender
 		$cellWidth = 128;
 		$cellHeight = 128;
 		$cellContent = "";
-		$ImagePerLine = 4;
+		$ImagePerLine = 8;
 
 		switch ($displayType) {
 			case "imageMosaic":
 				$baseURI = "http://" . $_SERVER['HTTP_HOST'] . "/";
 				$Content .= "<table class='" . $Block . _CLASS_TABLE01_ . "' style='table-layout: auto; border-spacing: 1px; empty-cells: show; vertical-align: top;'>\r";
-				$x = 0;
-				foreach ($fileList[1] as $A) {
-					if ($x == 0) {
+				$x = 1;
+				foreach ($fileList['1'] as $A) {
+					if ($x == 1) {
 						$Content .= "<tr>\r";
 					}
 					$Content .= "<td  
-				style='
-				width:" . $cellWidth . "px; height:" . $cellHeight . "px; 
-				vertical-align:middle; text-align:center; 
-				border-style:solid; border-width:1px; border-color:#00000080; 
-				background-image: url(" . $baseURI . "media/img/universal/uni_directory.png); background-size: cover; 
-				' 
-				onClick=\"fs.getDirectoryContent ( tableFileSelector[" . $TfsIdx . "], '" . $A['target'] . "', 1)\">
-				[" . $A['name'] . "]
-				</td>\r";
+						style='
+						width:" . $cellWidth . "px; height:" . $cellHeight . "px; 
+						max-width:" . $cellWidth . "px; max-height:" . $cellHeight . "px; 
+						vertical-align:middle; text-align:center; 
+						border-style:solid; border-width:1px; border-color:#00000080; 
+						background-image: url(" . $baseURI . "media/img/universal/uni_directory.png); background-size: cover; background-repeat: no-repeat;
+						' 
+						onClick=\"fs.getDirectoryContent ( tableFileSelector[" . $TfsIdx . "], '" . $A['target'] . "', 1)\">
+						[" . $A['name'] . "]
+						</td>\r";
 					$x++;
 					if ($x > $ImagePerLine) {
 						$Content .= "</tr>\r";
-						$x = 0;
+						$x = 1;
 					}
 				}
 
 				unset($A);
-				foreach ($fileList[0] as $A) {
-					if ($x == 0) {
+				foreach ($fileList['0'] as $A) {
+					if ($x == 1) {
 						$Content .= "<tr>\r";
 					}
 					$target = (strlen($strRemove) > 0) ? $strAdd . preg_replace($strRemove, '', $A['target']) : $strAdd . $A['target'];
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " strAdd : '" . $strAdd . "', strRemove :'" . $strRemove . "'."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " target : '" . $target . "'."));
 
 					if (preg_match('/(\.jpg|\.jpeg|\.png|\.gif)/', $A['target'])) {
 						$Content .= "<td 
-					style='
-					border-style:solid; border-width:1px; border-color:#00000080;
-					background-color:#00000040;
-					width:" . $cellWidth . "px; height:" . $cellHeight . "px;
-					vertical-align:middle; text-align:center;
-					' 
-					onClick=\"elm.SetFormInputValue ( '" . $formName . "' , '" . $formTargetId . "', '" . $target . "' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">
-					<img style='max-width: " . $cellWidth . "px; max-height:" . $cellHeight . "px' src='" . $baseURI . $A['target'] . "'>
-					</td>\r";
+							style='
+							border-style:solid; border-width:1px; border-color:#00000080;
+							background-color:#00000040;
+							width:" . $cellWidth . "px; height:" . $cellHeight . "px;
+							vertical-align:middle; text-align:center; 
+							' 
+							onClick=\"elm.SetFormInputValue ( '" . $formName . "' , '" . $formTargetId . "', '" . $target . "' ); elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">
+							<img style='max-width: " . $cellWidth . "px; max-height:" . $cellHeight . "px' src='" . $baseURI . $A['target'] . "'>
+							</td>\r";
 					} else {
 						$Content .= "<td 
-					style='
-					border-style:solid; border-width:1px; border-color:#00000080;
-					background-color:#00000040;
-					width:" . $cellWidth . "px; height:" . $cellHeight . "px;
-					vertical-align:middle; text-align:center;
-					' 
-					onClick=\"elm.SetFormInputValue ( '" . $formName . "' , '" . $formTargetId . "', '" . $target . "' );elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">
-					" . $A['name'] . "
-					</td>\r";
+							style='
+							border-style:solid; border-width:1px; border-color:#00000080;
+							background-color:#00000040;
+							width:" . $cellWidth . "px; height:" . $cellHeight . "px;
+							vertical-align:middle; text-align:center;
+							' 
+							onClick=\"elm.SetFormInputValue ( '" . $formName . "' , '" . $formTargetId . "', '" . $target . "' );elm.SwitchDisplay('FileSelectorDarkFade'); elm.SwitchDisplay('FileSelectorFrame');\">
+							" . $A['name'] . "
+							</td>\r";
 					}
 					$x++;
 					if ($x > $ImagePerLine) {
 						$Content .= "</tr>\r";
-						$x = 0;
+						$x = 1;
 					}
 				}
-				if ($x < $ImagePerLine) {
-					for ($i = $x; $i < $ImagePerLine; $i++) {
-						$Content .= "<td></td>\r";
+				if ($x > 1 && $x < $ImagePerLine) {
+					for ($i = $x; $i <= $ImagePerLine; $i++) {
+						$Content .= "<td>&nbsp;</td>\r";
 					}
 					$Content .= "</tr>\r";
 				}

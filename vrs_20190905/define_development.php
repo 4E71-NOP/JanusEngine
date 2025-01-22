@@ -89,8 +89,8 @@ switch ($application) {
 		$llvsl = LOGLEVEL_WARNING;
 		$llvil = LOGLEVEL_BREAKPOINT;
 
-		// $llvsl = LOGLEVEL_BREAKPOINT;
-		// $llvil = LOGLEVEL_BREAKPOINT;
+		$llvsl = LOGLEVEL_BREAKPOINT;
+		$llvil = LOGLEVEL_BREAKPOINT;
 		break;
 	default:
 		$llvsl = LOGLEVEL_WARNING;

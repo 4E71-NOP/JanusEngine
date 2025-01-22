@@ -72,15 +72,23 @@ class LayoutProcessor
 		AND tw.fk_theme_id = '" . $CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id') . "'
 		AND tw.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;";
+
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
-		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			$layout_id = $dbp['layout_file_id'];
-		}
-		$layoutFileObj->getDataFromDB($layout_id);
 
-		$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Associated layout filename `" . $finalFileName . "`"));
+		$finalFileName = "";
+		if ($bts->SDDMObj->num_row_sql($dbquery) > 0) {
+			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+				$layout_id = $dbp['layout_file_id'];
+			}
+			$layoutFileObj->getDataFromDB($layout_id);
+
+			$finalFileName = $layoutFileObj->getLayoutFileEntry('layout_file_filename');
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Associated layout filename `" . $finalFileName . "`"));
+		} else {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : No result returned for layout generic name '" . $CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name') . "'"));
+		}
+
 		$UserObj = $CurrentSetObj->UserObj;
 		if ($UserObj->getUserEntry('user_login') != "anonymous") {
 			$finalFileName = str_replace(".lyt.html", "_connected.lyt.html", $finalFileName);
