@@ -31,8 +31,13 @@ $fileContent = array(
 	"DebugLevel_JS"		=> LOGLEVEL_WARNING,	// 
 	"execution_context"	=> "render",
 	"InsertStatistics"	=> 1,
+	"mail"				=> array(
+		"host" => "mail.rootwave.net",
+		"username" => "cfdt@rootwave.net",
+		"password" => "Rcvbplsw20!!"
+	),
 	"commandLineEngine"	=> array(
-		"state"			=>	"enabled"
+		"state"				=> "enabled"
 	)
 
 );

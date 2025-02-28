@@ -54,6 +54,9 @@ share document	name "doc_uni_enroll_p01.php"							with_website "JanusEngine"	mo
 share document	name "doc_uni_search_p01.php"							with_website "JanusEngine"	modification "NO";
 share document	name "doc_uni_see_public_profile_p01.php"				with_website "JanusEngine"	modification "NO";
 
+share document	name "doc_uni_signup_p01.php"							with_website "JanusEngine"	modification "NO";
+share document	name "doc_uni_reset_password_p01.php"					with_website "JanusEngine"	modification "NO";
+
 share document	name "doc_uni_download_p01.php"							with_website "JanusEngine"	modification "NO";
 share document	name "doc_uni_news_p01.php"								with_website "JanusEngine"	modification "NO";
 

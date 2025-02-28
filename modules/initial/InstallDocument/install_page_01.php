@@ -51,10 +51,10 @@ class InstallPage01
 	// private $adoJavascriptObj = array();
 
 	private $pdoSupportEnabled = false;
-	private $pdoJavascriptObj = array();
+	private $pdoJavascriptObj;
 
 	private $phpSupportEnabled = false;
-	private $phpJavascriptObj = array();
+	private $phpJavascriptObj;
 
 	private $availableSupport = array();
 	public function __construct() {}
@@ -117,14 +117,15 @@ class InstallPage01
 		$infos['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='18' height='18' border='0'>";
 		$infos['iconGoNoGoNok'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification') .	"' width='18' height='18' border='0'>";
 
-		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, 6);
+		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, 7);
 
 		$this->serverInfos($infos, 1);
 		$this->databaseAccess($infos, 2);
-		$this->installationMethod($infos, 3);
-		$this->siteSelection($infos, 4);
-		$this->personalization($infos, 5);
-		$this->logConfig($infos, 6);
+		$this->mailConfig($infos, 3);
+		$this->installationMethod($infos, 4);
+		$this->siteSelection($infos, 5);
+		$this->personalization($infos, 6);
+		$this->logConfig($infos, 7);
 
 		$Content .= $bts->RenderTablesObj->render($infos, $this->T);
 
@@ -436,6 +437,39 @@ class InstallPage01
 		$GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tli.selectMenuBuilder ( 'form[selectedDataBaseType]' , listOfDBSupport['PDO'] );");
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 4, 1);
+	}
+
+	/**
+	 * installationMethod
+	 */
+	private function mailConfig($infos, $t)
+	{
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$ThemeDataObj = $CurrentSetObj->ThemeDataObj;
+
+		$T = &$this->T['Content'];
+
+		$l = 1;
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Mail_Titlec1');
+		$l++;
+
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailHost');
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("mail[host]", $bts->CMObj->getConfigurationSubEntry('mail', 'host'), "", 20, 32);
+		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailHostInfo');
+		$l++;
+
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailUsername');
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("mail[username]", $bts->CMObj->getConfigurationSubEntry('mail', 'username'), "", 20, 32);
+		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailUsernameInfo');
+		$l++;
+
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailPassword');
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderInputPassword("mail[password]", $bts->CMObj->getConfigurationSubEntry('mail', 'password'), "", 20, 32);
+		$T[$t][$l]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('mailPasswordInfo');
+		$l++;
+
+		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 3, 1);
 	}
 
 	/**

@@ -20,10 +20,11 @@ $i18n = array(
 
 	'tabTxt1'	=> "Server",
 	'tabTxt2'	=> "DB",
-	'tabTxt3'	=> "Method",
-	'tabTxt4'	=> "Sites",
-	'tabTxt5'	=> "Personalization",
-	'tabTxt6'	=> "Logs",
+	'tabTxt3'	=> "Mail",
+	'tabTxt4'	=> "Method",
+	'tabTxt5'	=> "Sites",
+	'tabTxt6'	=> "Personalization",
+	'tabTxt7'	=> "Logs",
 
 	// Server
 	'SRV_ip'		=> "This server Hostname / IP",
@@ -47,7 +48,7 @@ $i18n = array(
 	'DB_Titlec4'	=> "Information",
 
 	'DB_dal'		=> "Abstraction Layer",
-	'DB_dalInf'		=> "Select the DAL you want to use. Warning PEAR DB is deprecated. AdoDB is experimental at the moment.",			
+	'DB_dalInf'		=> "Select the DAL you want to use. Warning PEAR DB is deprecated. AdoDB is experimental at the moment.",
 	'msdal_php'		=> "PHP functions (default)",
 	'msdal_pdo'		=> "PHP PDO",
 	'msdal_adodb'	=> "ADOdb (check webhosting plan)",
@@ -61,7 +62,7 @@ $i18n = array(
 	'dbp_hosted'	=> "Hosting plan",
 	'dbp_asolute'	=> "I'm god on my server",
 
-	'DB_server' 	=> "Database server",	
+	'DB_server' 	=> "Database server",
 	'DB_serverInf'	=> "This is the server where the database is. use 'localhost' or 'mysql' (Docker, etc) or the server IP address. Otherwise check with the webhosting provider.",
 
 	'DB_server_port'		=> "Database server port",
@@ -87,6 +88,15 @@ $i18n = array(
 	'DB_JnsEngUserAlreadyExistsko'	=>	"User not found. The install process will create it.",
 	"DB_installationLockedok"	=>	"No lock found",
 	"DB_installationLockedko"	=>	"The installation is <b>locked!</b> The program will NOT install with these parameters as the lock is there.",
+
+	// mail
+	"Mail_Titlec1"		=> "Mail",
+	"mailHost"			=> "SMTP host",
+	"mailUsername"		=> "Username",
+	"mailPassword"		=> "Password",
+	"mailHostInfo"		=> "The mail server that will be used to send emails.",
+	"mailUsernameInfo"	=> "This will be seen as the email sender.",
+	"mailPasswordInfo"	=> "",
 
 	// Method
 	'MTH_intro'		=> "There are two ways to install Janus Engine. This method ease installation on a bigger number of plateforms.<br>\r<br>\r",
@@ -123,7 +133,7 @@ $i18n = array(
 
 	'PER_WbUsrP'	=> "Websites user Password",
 	'PER_WbUsrPInf'	=> "The engine will create at least one website user. Enter the password for those website users.",
-	
+
 	'PER_MkHtacs'		=> "Make .htaccess",
 	'PER_MkHtacsInf'	=> "The .htaccess file is a ruleset that defines access authorizations to files on the web server. It helps to protect the files that contain certain information such as password etc. The file given use classical rules. The behavior of this ruleset also depends on the webserver.",
 	'TypeExec1'		=> "Apache module",
@@ -172,13 +182,13 @@ Make sure it's on the server. Make sure you edit it carfully. And make sure 'All
 <br>\r
 ",
 	'BtnSelect' => "Select",
-	
+
 	"perfTab01"	=>	"N",
 	"perfTab02"	=>	"Point de contrôle",
 	"perfTab03"	=>	"Temps",
 	"perfTab04"	=>	"Mémoire",
 	"perfTab05"	=>	"Requêtes",
-	
+
 	't9c1' => "A",
 	't9c2' => "B",
 	't9c3' => "C",
@@ -191,4 +201,3 @@ Make sure it's on the server. Make sure you edit it carfully. And make sure 'All
 	"REPORT_badToken"	=>	"Bad installation token."
 
 );
-?>

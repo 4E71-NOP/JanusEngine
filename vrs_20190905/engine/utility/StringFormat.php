@@ -57,6 +57,8 @@ class StringFormat
 		self::$ConvertTable['menu']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['menu']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['menu']['online']				= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['menu']['hidden']				= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['menu']['visible']				= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['menu']['article_racine']		= 0;
 		self::$ConvertTable['menu']['article']				= 1;
 		self::$ConvertTable['menu']['menu_admin_racine']	= 2;
@@ -191,6 +193,7 @@ class StringFormat
 		self::$ConvertTable['user']['public']					= 2;
 		self::$ConvertTable['user']['disabled']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['user']['active']					= &self::$ConvertTable['universal']['yes'];
+		self::$ConvertTable['user']['signingup']				= 2;
 		self::$ConvertTable['user']['off']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['user']['on']						= &self::$ConvertTable['universal']['yes'];
 

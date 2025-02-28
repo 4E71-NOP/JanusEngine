@@ -43,7 +43,7 @@ class  RenderForm
 	 */
 	public function renderformHeader($name, $action = "/", $method = "post")
 	{
-		if (strlen($name) > 0 && strlen($method) > 0) {
+		if (strlen($name ?? '') > 0 && strlen($method ?? '') > 0) {
 			return "<form ACTION='" . $action . "' method='" . $method . "' name='" . $name . "' id='" . $name . "'>\r";
 		}
 		return false;
@@ -59,7 +59,7 @@ class  RenderForm
 	 */
 	public function renderInputText($name, $value = "", $placeholder = "", $size = 35, $maxlength = 255)
 	{
-		if (strlen($name) > 0) {
+		if (strlen($name ?? '') > 0) {
 			$builder = "";
 			$spacer = "";
 			if (strlen($value ?? '') > 0) {
@@ -159,14 +159,14 @@ class  RenderForm
 	 */
 	public function renderInputPassword($name, $value, $placeholder = "", $size = 35, $maxlength = 255)
 	{
-		if (strlen($name) > 0) {
+		if (strlen($name ?? '') > 0) {
 			$builder = "";
 			$spacer = "";
-			if (strlen($value) > 0) {
+			if (strlen($value ?? '') > 0) {
 				$builder .= $spacer . "value='" . $value . "'";
 				$spacer = " ";
 			}
-			if (strlen($placeholder) > 0) {
+			if (strlen($placeholder ?? '') > 0) {
 				$builder .= $spacer . "placeholder='" . $placeholder . "'";
 				$spacer = " ";
 			}
@@ -185,6 +185,74 @@ class  RenderForm
 		}
 		return false;
 	}
+
+
+	/**
+	 * Returns the html input type=text.
+	 * @param Array $arr
+	 * @return string
+	 */
+	public function renderInputPasswordEnhanced($arr)
+	{
+		if (strlen($arr['name'] ?? '') > 0) {
+			$builder = "";
+			$spacer = "";
+			if (strlen($arr['id'] ?? '') > 0) {
+				$builder .= $spacer . "id='" . $arr['id'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['name'] ?? '') > 0) {
+				$builder .= $spacer . "name='" . $arr['name'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['value'] ?? '') > 0) {
+				$builder .= $spacer . "value='" . $arr['value'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['size'] ?? '') > 0) {
+				$builder .= $spacer . "size='" . $arr['size'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['maxlength'] ?? '') > 0) {
+				$builder .= $spacer . "maxlength='" . $arr['maxlength'] . "'";
+				$spacer = " ";
+			}
+			if (strlen($arr['placeholder'] ?? '') > 0) {
+				$builder .= $spacer . "placeholder='" . $arr['placeholder'] . "'";
+				$spacer = " ";
+			}
+			if ($arr['readonly'] == true) {
+				$builder .= $spacer . "readonly";
+				$spacer = " ";
+			}
+			if ($arr['disable'] == true) {
+				$builder .= $spacer . "disable";
+				$spacer = " ";
+			}
+			if (strlen($arr['oninput'] ?? '') > 0) {
+				$builder .= $spacer . "onInput=\"" . $arr['oninput'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['onkeyup'] ?? '') > 0) {
+				$builder .= $spacer . "onKeyUp=\"" . $arr['onkeyup'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['javascript'] ?? '') > 0) {
+				$builder .= $spacer . "javascript=\"" . $arr['javascript'] . "\"";
+				$spacer = " ";
+			}
+			if (strlen($arr['special'] ?? '') > 0) {
+				$builder .= $spacer . "special='" . $arr['special'] . "'";
+				$spacer = " ";
+			}
+
+			return "<input type='password' " . $builder . ">\r";
+		}
+
+		return false;
+	}
+
+
 
 	/**
 	 * Returns the html select menu (standard html - no fast search).<br>
@@ -216,7 +284,7 @@ class  RenderForm
 	 */
 	public function renderRadioSelection($name, $value, $text, $selected = false)
 	{
-		if (strlen($name) > 0 && strlen($text) > 0) {
+		if (strlen($name ?? '') > 0 && strlen($text ?? '') > 0) {
 			$selectText = ($selected == true) ? " checked" : "";
 			return "<input type='radio' name='" . $name . "' value='" . $value . "'" . $selectText . "> <label for='" . $name . "'>" . $text . "</label><br>\r";
 			// return "<input type='radio' id='" . $name . "' name='" . $name . "' value='" . $value . "'" . $selectText . "> <label for='" . $name . "'>" . $text . "</label><br>\r";
@@ -237,12 +305,12 @@ class  RenderForm
 	public function renderCheckbox($idAndName, $value, $text, $checked = false, $disabled = false, $onclik = '')
 	{
 		$content = false;
-		if (strlen($idAndName) > 0 && strlen($value) > 0 && strlen($text) > 0) {
+		if (strlen($idAndName ?? '') > 0 && strlen($value ?? '') > 0 && strlen($text ?? '') > 0) {
 			$content =
 				"<input type='checkbox' id='" . $idAndName . "' name='" . $idAndName . "' " .
 				(($checked == true) ? "checked " : "") .
 				(($disabled == true) ? "disabled='disabled " : "") .
-				((strlen($onclik) > 0) ? "onclick='" . $onclik . "'" : "") .
+				((strlen($onclik ?? '') > 0) ? "onclick='" . $onclik . "'" : "") .
 				"value='" . $value . "'
 			>\r
 			<label for='" . $idAndName . "'>" . $text . "</label> <br>\r";

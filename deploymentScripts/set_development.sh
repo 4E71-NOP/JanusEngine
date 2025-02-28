@@ -26,3 +26,8 @@ cd layouts/Rootwave/
 rm *.lyt.html
 ./make_symbolic_link_for_lazy_ppl.sh
 cd ../../
+
+# PHPmailer
+cd current/engine/extlib/phpmailer/
+rm current
+ln -s 6.9.3 current

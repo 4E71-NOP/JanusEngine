@@ -44,6 +44,8 @@ add article	name "fra_user_management_p01"						reference "fra_user_management"	
 add article	name "fra_user_management_p02"						reference "fra_user_management"				slug "user-management"					deadline initial_online		desc "Admin en Francais"			title "Gestion des utilisateurs"				subtitle "Modifier/créer un utilisateur"					page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 add article	name "fra_website_list_p01"							reference "fra_website_list"				slug "website-list"						deadline initial_online		desc "Admin en Francais"			title "Liste des sites"							subtitle "Liste des sites"									page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 add article	name "fra_website_management_p01"					reference "fra_website_management"			slug "website-management"				deadline initial_online		desc "Admin en Francais"			title "Gestion du site"							subtitle "Modifier le site"									page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
+add article	name "fra_signup_p01"								reference "fra_signup_p01"					slug "sign-up"							deadline initial_online		desc "Admin en Francais"			title "Créer un compte"							subtitle "Inscription"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
+add article	name "fra_reset_password_p01"						reference "fra_reset_password_p01"			slug "reset-password"					deadline initial_online		desc "Admin en Francais"			title "Mot de passe"							subtitle "Réinitialisation"									page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 
 
 assign	document name "doc_uni_admin_authentification_p01.php"			to_article "fra_admin_authentification_p01";
@@ -92,3 +94,5 @@ assign	document name "doc_uni_toolset_cleanup_script_p01.php"			to_article "fra_
 assign	document name "doc_uni_toolset_useful_links_p01.php"			to_article "fra_toolset_useful_links_p01";
 assign	document name "doc_uni_website_list_p01.php"					to_article "fra_website_list_p01";
 assign	document name "doc_uni_website_management_p01.php"				to_article "fra_website_management_p01";
+assign	document name "doc_uni_signup_p01.php"							to_article "fra_signup_p01";
+assign	document name "doc_uni_reset_password_p01.php"					to_article "fra_reset_password_p01";

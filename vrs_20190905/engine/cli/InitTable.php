@@ -1661,6 +1661,7 @@ self::$InitTable['menu'] = function (&$a) {
 		"title"			=> "New menu",
 		"desc"			=> "New menu",
 		"type"			=> "ARTICLE",
+		"visibility"	=> "VISIBLE",
 		"ws_id"			=> $a['Context']['ws_id'],
 		"lang"			=> "eng",
 		"deadline"		=> "",

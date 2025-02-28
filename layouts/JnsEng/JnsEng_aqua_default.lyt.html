@@ -14,8 +14,9 @@
 			</div>
 			<div id="layout_authentification" style="
 				display:block; 
-				min-height:4.5cm; 
-				overflow:auto;
+				min-height:5.5cm; 
+				max-height: 20cm;
+				/* overflow:visible; */
 				margin:0px auto 10px auto;
 				">
 				{{ render_module( 'authentification' ) }}
@@ -54,7 +55,7 @@
 				padding-bottom: 0px;
 				margin:0px 0px 10px auto;
 			">
-			{{ render_module( 'document' ) }}
+				{{ render_module( 'document' ) }}
 			</div>
 		</td>
 	</tr>
@@ -75,7 +76,6 @@
 	</tr>
 </table>
 
-<div id="layout_tooltip" 
-style="top:0px; left:0px; width:1cm; height:1cm; z-index:500;">
-{{ render_module( 'tooltip' ) }}
+<div id="layout_tooltip" style="top:0px; left:0px; width:1cm; height:1cm; z-index:500;">
+	{{ render_module( 'tooltip' ) }}
 </div>

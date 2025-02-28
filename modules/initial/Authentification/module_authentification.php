@@ -16,9 +16,7 @@
 
 class ModuleAuthentification
 {
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 
 	public function render($infos)
 	{
@@ -86,6 +84,9 @@ class ModuleAuthentification
 				</tr>\r
 				</table>\r
 				</form>\r
+				<br>\r
+				<a href='/sign-up/1'>" . $bts->I18nTransObj->getI18nTransEntry('signup') . "</a>\r
+				<br>\r
 				";
 			} else {
 				$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
@@ -100,7 +101,7 @@ class ModuleAuthentification
 				);
 				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 				$pv['SSL_etat'] = "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(" . $baseUrl . "/media/img/universal/ssl_ko.png)'></div>";
-				if (isset($_SERVER['HTTPS'])) {
+				if ($CurrentSetObj->ServerInfosObj->getServerInfosEntry('sslState') == 0) {
 					if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == '443')) {
 						$pv['SSL_etat'] = "<div style='width:60px;height:24px; background-size:contain; background-image: url(" . $baseUrl . "/media/img/universal/ssl_ok.png)'></div>";
 					}
@@ -112,7 +113,7 @@ class ModuleAuthentification
 					. $bts->RenderFormObj->renderHiddenInput("formGenericData[action]",		"disconnection")
 					. $bts->RenderFormObj->renderHiddenInput("formSubmitted",				"1")
 					. $bts->RenderFormObj->renderHiddenInput("user_login",					"anonymous")
-					. $bts->RenderFormObj->renderHiddenInput("user_pass",					"")
+					. $bts->RenderFormObj->renderHiddenInput("user_password",				"")
 
 					. "<table class='mt_bareTable' style='margin-left:auto; margin-right:auto;'>
 			
@@ -137,7 +138,7 @@ class ModuleAuthentification
 			}
 
 			$bts->segmentEnding(__METHOD__);
-			}
+		}
 
 		// Cleaning up
 		if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {

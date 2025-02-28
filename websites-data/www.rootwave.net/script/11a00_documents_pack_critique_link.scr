@@ -48,9 +48,13 @@ share document	name "doc_uni_article_moved_p01.php"		    		with_website "Rootwav
 share document	name "doc_uni_staff_member_list_p01.php"				with_website "Rootwave"	modification "NO";
 share document	name "doc_uni_what_we_do_p01.php"						with_website "Rootwave"	modification "NO";
 
+share document	name "doc_uni_signup_p01.php"							with_website "Rootwave"	modification "NO";
+share document	name "doc_uni_reset_password_p01.php"					with_website "Rootwave"	modification "NO";
+
 share document	name "doc_uni_enroll_p01.php"							with_website "Rootwave"	modification "NO";
 share document	name "doc_uni_search_p01.php"							with_website "Rootwave"	modification "NO";
 share document	name "doc_uni_see_public_profile_p01.php"				with_website "Rootwave"	modification "NO";
+
 
 share document	name "doc_uni_download_p01.php"							with_website "Rootwave"	modification "NO";
 share document	name "doc_uni_news_p01.php"								with_website "Rootwave"	modification "NO";

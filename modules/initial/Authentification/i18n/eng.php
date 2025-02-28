@@ -10,4 +10,5 @@ $i18n['txt1'] = "Welcome : ";
 $i18n['disconnect'] = "Log off";
 $i18n['viassl'] = "(SLL is on)";
 $i18n['via80'] = "(SLL is off)";
-?>
+
+$i18n['signup'] = "Sign up";

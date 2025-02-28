@@ -392,13 +392,14 @@ class ModuleDocumentDisplay
 			// --------------------------------------------------------------------------------------------
 			//	Footer
 			// --------------------------------------------------------------------------------------------
-			$Content .= "
-			<br>\r
-			</div>\r
-			<div id='document_pied_de_page' style='width:100%;'>\r
-			<p>";
-
 			if ($pv['p2p_count'] > 1) {
+
+				$Content .= "
+				<br>\r
+				</div>\r
+				<div id='document_footer' style='width:100%;'>\r
+				<p>";
+
 				$currentRouteSlug = $CurrentSetObj->getDataSubEntry('article', 'arti_slug');
 				$CurrentArtiPage = $CurrentSetObj->getDataSubEntry('article', 'arti_page');
 				switch ($pv['p2p_marque']) {
@@ -415,8 +416,8 @@ class ModuleDocumentDisplay
 					<a href='" . $baseUrl . $currentRouteSlug . "/" . ($CurrentArtiPage + 1) . "'>" . $bts->I18nTransObj->getI18nTransEntry('next1') . "</a>\r";
 						break;
 				}
+				$Content .= "</p></div>\r";
 			}
-			$Content .= "</p></div>\r";
 
 			// --------------------------------------------------------------------------------------------
 			//	Document information (author etc...)
@@ -472,21 +473,21 @@ class ModuleDocumentDisplay
 
 			$bts->segmentEnding(__METHOD__);
 		}
-		if ($WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
-			unset(
-				$ad,
-				$ADP_users,
-				$documentAnalyse,
-				$dbp,
-				$dbquery,
-				$i,
-				$P2P_tab_,
-				$position_float,
-				$pv,
-				$x,
-				$y
-			);
-		}
+		// if ($WebSiteObj->getWebSiteEntry('ws_info_debug') < 10) {
+		// 	unset(
+		// 		$ad,
+		// 		$ADP_users,
+		// 		$documentAnalyse,
+		// 		$dbp,
+		// 		$dbquery,
+		// 		$i,
+		// 		$P2P_tab_,
+		// 		$position_float,
+		// 		$pv,
+		// 		$x,
+		// 		$y
+		// 	);
+		// }
 
 		return $Content;
 	}

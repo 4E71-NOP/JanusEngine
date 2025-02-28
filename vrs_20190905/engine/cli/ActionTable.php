@@ -593,6 +593,7 @@ self::$ActionTable['show']['menus']	= function (&$a) {
 			. "dl.deadline_name AS 'Deadline', "
 			. "(SELECT m1.menu_name FROM " . $a['sqlTables']['menu'] . " m1 WHERE m1.menu_id = m.menu_parent) AS 'Parent', "
 			. "m.menu_position AS 'Pos', "
+			. "m.menu_visibility AS 'Visibility', "
 			. "perm.perm_name AS 'Permission', "
 			. "m.fk_arti_slug AS 'Slug', "
 			. "m.fk_arti_ref AS 'Ref article', "

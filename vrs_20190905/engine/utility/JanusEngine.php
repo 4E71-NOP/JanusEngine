@@ -19,6 +19,11 @@
 /* @var $l String                                   */
 /*JanusEngine-IDE-end*/
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 class JanusEngine
 {
 	private static $Instance = null;
@@ -54,7 +59,7 @@ class JanusEngine
 	public function render()
 	{
 		$application = 'website';
-		include("current/define.php");
+		include('current/define.php');
 
 		// --------------------------------------------------------------------------------------------
 		/*
@@ -65,7 +70,7 @@ class JanusEngine
 		 * $varsSum = array_diff ($varsEnd, $varsStart);
 		 * foreach ( $varsSum as $B => $C ) { if ( $C != 'infos' && $C != 'Content' && !is_object($$C) ) { unset ($$C); } }
 		 */
-		include("current/engine/utility/ClassLoader.php");
+		include('current/engine/utility/ClassLoader.php');
 		$ClassLoaderObj = ClassLoader::getInstance();
 
 		$ClassLoaderObj->provisionClass('BaseToolSet'); // First of them all as it is used by others.
@@ -81,7 +86,7 @@ class JanusEngine
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 
 		$bts->LMObj->setStoreStatisticsStateOn();
-		$bts->LMObj->logCheckpoint("Index");
+		$bts->LMObj->logCheckpoint('Index');
 
 		// --------------------------------------------------------------------------------------------
 		// error_reporting ( E_ALL ^ E_WARNING ^ E_NOTICE );
@@ -97,10 +102,10 @@ class JanusEngine
 		// Don't push me cuz i'm close to the edge !!!
 		// It’s like a jungle sometimes, it makes me wonder how I keep from going under...
 		// MSIE / Edge must die!!! for good this time.
-		$Navigator = getenv("HTTP_USER_AGENT");
+		$Navigator = getenv('HTTP_USER_AGENT');
 		if (strpos($Navigator, "MSIE") !== FALSE) {
 			if (strpos($Navigator, "DOM") !== FALSE) {
-				include("current/engine/staticPages/UnsupportedBrowserBanner.php");
+				include('current/engine/staticPages/UnsupportedBrowserBanner.php');
 			}
 		}
 		unset($Navigator);
@@ -184,8 +189,8 @@ class JanusEngine
 		// Loading the configuration file associated with this website
 		$this->loadConfigFile();
 		// If the configuration has a ws_short we use it 
-		if (strlen($bts->CMObj->getConfigurationEntry("ws_short") ?? '') > 0) {
-			$CurrentSetObj->setDataEntry('ws', $bts->CMObj->getConfigurationEntry("ws_short"));
+		if (strlen($bts->CMObj->getConfigurationEntry('ws_short') ?? '') > 0) {
+			$CurrentSetObj->setDataEntry('ws', $bts->CMObj->getConfigurationEntry('ws_short'));
 		}
 
 		// Creating the necessary arrays for Sql Db Dialog Management
@@ -198,17 +203,9 @@ class JanusEngine
 			$this->authentificationCheck();
 
 			// Language selection
-			$this->languageSelection();
-
-			// Form Management for commandLine interface
-			// Do we have a user submitting from the auth form ?
-			// if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
-			if (
-				$bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1 &&
-				$CurrentSetObj->UserObj->getUserEntry('user_login') != 'anonymous'
-			) {
-				$this->formManagement();
-			}
+			$ClassLoaderObj->provisionClass('CommonWebsiteTools');
+			$CommonWebsiteToolsObj = CommonWebsiteTools::getInstance();
+			$CommonWebsiteToolsObj->languageSelection();
 
 			// Router : What was called ? (slug/form etc..) and storing information in the session
 			$bts->Router->manageNavigation();
@@ -237,6 +234,17 @@ class JanusEngine
 
 			// theme and layout
 			$this->initializeTheme();
+
+			// Form Management for commandLine interface
+			// Do we have a user submitting from the auth form ?
+			// if ($bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'modification' ) == 'on' || $bts->RequestDataObj->getRequestDataSubEntry ( 'formGenericData', 'deletion' ) == 'on' && $UserObj->getUserEntry ( 'user_login' ) != 'anonymous') {
+			if ($bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1) {
+				$this->formManagement();
+			} else {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No form posted apparently."));
+			}
+
+
 			// Initialize Layout
 			$this->initializeLayout();
 
@@ -255,7 +263,7 @@ class JanusEngine
 
 			// Build document
 			$Content = $this->buildDocument();
-			// Checkpoint ("index_before_stat");
+			// Checkpoint ('index_before_stat');
 			$Content .= $this->buidAdminDashboard();
 			// File selector if necessary
 			$Content .= $this->buildFileSelector();
@@ -265,7 +273,7 @@ class JanusEngine
 			//
 			// --------------------------------------------------------------------------------------------
 			$CssContent  = "<!-- Extra CSS -->\r";
-			$CssContent .= $this->GeneratedScript->renderScriptFileWithBaseURL("Css-File", "<link rel='stylesheet' href='", "'>\r");
+			$CssContent .= $this->GeneratedScript->renderScriptFileWithBaseURL('Css-File', "<link rel='stylesheet' href='", "'>\r");
 
 			// --------------------------------------------------------------------------------------------
 			// Rendering of the JavaScript
@@ -278,24 +286,24 @@ class JanusEngine
 			$this->GeneratedScript->insertString('JavaScript-Init', 'var dm = new DecorationManagement();');
 
 			$JavaScriptContent = "<!-- JavaScript -->\r\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptFileWithBaseURL("JavaScript-File", "<script type='text/javascript' src='", "'></script>\r");
-			$JavaScriptContent .= $this->GeneratedScript->renderExternalRessourceScript("JavaScript-ExternalRessource", "<script type='text/javascript' src='", "'></script>\r");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptFileWithBaseURL('JavaScript-File', "<script type='text/javascript' src='", "'></script>\r");
+			$JavaScriptContent .= $this->GeneratedScript->renderExternalRessourceScript('JavaScript-ExternalRessource', "<script type='text/javascript' src='", "'></script>\r");
 			$JavaScriptContent .= "<script type='text/javascript'>\r";
 
 			$JavaScriptContent .= "// ----------------------------------------\r//\r// Data segment\r//\r//\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-Data");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode('JavaScript-Data');
 			$JavaScriptContent .= "// ----------------------------------------\r//\r// Data (Flexible) \r//\r//\r";
 			$JavaScriptContent .= $this->GeneratedScript->renderJavaScriptObjects();
 			$JavaScriptContent .= "// ----------------------------------------\r//\r// Init segment\r//\r//\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-Init");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode('JavaScript-Init');
 			$JavaScriptContent .= "// ----------------------------------------\r//\r// Command segment\r//\r//\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-Command");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode('JavaScript-Command');
 			$JavaScriptContent .= "// ----------------------------------------\r//\r// OnLoad segment\r//\r//\r";
 			$JavaScriptContent .= "function WindowOnResize (){\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-OnResize");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode('JavaScript-OnResize');
 			$JavaScriptContent .= "}\r";
 			$JavaScriptContent .= "function WindowOnLoad () {\r";
-			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode("JavaScript-OnLoad");
+			$JavaScriptContent .= $this->GeneratedScript->renderScriptCrudeMode('JavaScript-OnLoad');
 			$JavaScriptContent .= "}\r
 									window.onresize = WindowOnResize;\r
 									window.onload = WindowOnLoad;\r
@@ -303,7 +311,7 @@ class JanusEngine
 
 			$licence = "
 				<!--
-				Author : FMA - 2005 ~ " . date("Y", time()) . "
+				Author : FMA - 2005 ~ " . date('Y', time()) . "
 				Licence : Creative commons CC-by-nc-sa (http://www.creativecommons.org/)
 				-->
 				";
@@ -324,7 +332,7 @@ class JanusEngine
 			return ($Content . $CssContent . $JavaScriptContent . $licence . "</body>\r</html>\r");
 		} else {
 			$this->WebSiteObj->setWebSiteEntry('banner_offline', 1);
-			include("modules/initial/OfflineMessage/OfflineMessage.php");
+			include('modules/initial/OfflineMessage/OfflineMessage.php');
 		}
 	}
 
@@ -367,7 +375,7 @@ class JanusEngine
 		) {
 			$firstContactScore += 4;
 		}
-		if (strlen($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == "disconnection") ?? '') {
+		if (strlen($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action') == 'disconnection') ?? '') {
 			$firstContactScore += 8;
 		}
 
@@ -451,7 +459,7 @@ class JanusEngine
 				$CurrentSetObj->SqlTableListObj->makeSqlTableList($bts->CMObj->getConfigurationEntry('dbprefix'), $bts->CMObj->getConfigurationEntry('tabprefix'));
 				break;
 			case "pgsql":
-				$CurrentSetObj->SqlTableListObj->makeSqlTableList("public", $bts->CMObj->getConfigurationEntry('tabprefix'));
+				$CurrentSetObj->SqlTableListObj->makeSqlTableList('public', $bts->CMObj->getConfigurationEntry('tabprefix'));
 				break;
 		}
 
@@ -463,7 +471,7 @@ class JanusEngine
 		$bts->initSddmObj();
 
 		if ($bts->SDDMObj->getReportEntry('cnxErr') == 1) {
-			include("modules/initial/OfflineMessage/OfflineMessage.php");
+			include('modules/initial/OfflineMessage/OfflineMessage.php');
 			$ModuleOffLineMessageObj = new ModuleOffLineMessage();
 			$ModuleOffLineMessageObj->render(array(
 				"SQLFatalError" => 1,
@@ -498,7 +506,7 @@ class JanusEngine
 			case 3: // Maintenance
 			case 99: // Verouillé
 				$this->WebSiteObj->setWebSiteEntry('banner_offline', 1);
-				include("modules/initial/OfflineMessage/OfflineMessage.php");
+				include('modules/initial/OfflineMessage/OfflineMessage.php');
 				break;
 		}
 		$bts->CMObj->setLangSupport(); // will set support=1 in the languagelist if website supports the language.
@@ -573,7 +581,7 @@ class JanusEngine
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$SMObj->getSession() :" . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession())));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : \$_SESSION :" . $bts->StringFormatObj->arrayToString($_SESSION)));
 		if ($bts->AUObj->getDataEntry('error') === TRUE) {
-			$UserObj->getDataFromDBUsingLogin("anonymous", $WebSiteObj);
+			$UserObj->getDataFromDBUsingLogin('anonymous', $WebSiteObj);
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : checkUserCredential end"));
 
@@ -582,169 +590,14 @@ class JanusEngine
 	}
 
 	/**
-	 * Sets the language for the page. It chooses by priority.
-	 * 
-	 */
-	private function languageSelection()
-	{
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$ClassLoaderObj = ClassLoader::getInstance();
-		$UserObj = $CurrentSetObj->UserObj;
-		$WebSiteObj = $CurrentSetObj->WebSiteObj;
-
-		$bts->mapSegmentLocation(__METHOD__, "languageSelection");
-
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection start"));
-		$scoreLang = 0;
-
-		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0 && $bts->RequestDataObj->getRequestDataEntry('l') != 0) {
-			$scoreLang += 4;
-		}
-		if (is_numeric($UserObj->getUserEntry('user_lang')) && $UserObj->getUserEntry('user_lang') != 0) {
-			$scoreLang += 2;
-		}
-		if (strlen($WebSiteObj->getWebSiteEntry('fk_lang_id') ?? '') != 0 && $WebSiteObj->getWebSiteEntry('fk_lang_id') != 0) {
-			$scoreLang += 1;
-		}
-
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Website fk_lang_id='" . $WebSiteObj->getWebSiteEntry('fk_lang_id') . "'"));
-
-		switch ($scoreLang) {
-			case 0:
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language."));
-				$CurrentSetObj->setDataEntry('language', 'eng');
-				$CurrentSetObj->setDataEntry('language_id', '38');
-				break;
-			case 1:
-				$tmp = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says Website priority (Case=" . $scoreLang . "; " . $WebSiteObj->getWebSiteEntry('fk_lang_id') . "->" . $tmp . ")"));
-				$CurrentSetObj->setDataEntry('language', $tmp);
-				$CurrentSetObj->setDataEntry('language_id', $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_id'));
-				break;
-			case 2:
-			case 3:
-				$tmp = $bts->CMObj->getLanguageListSubEntry($UserObj->getUserEntry('user_lang'), 'lang_639_3');
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says User priority (Case=" . $scoreLang . "; " . $UserObj->getUserEntry('user_lang') . "->" . $tmp . ")"));
-				$CurrentSetObj->setDataEntry('language', $tmp);
-				$CurrentSetObj->setDataEntry('language_id', $bts->CMObj->getLanguageListSubEntry($UserObj->getUserEntry('user_lang'), 'lang_id'));
-				break;
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-				$tmp = strtolower($bts->RequestDataObj->getRequestDataEntry('l'));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection says URL priority (Case=" . $scoreLang . "; " . $bts->RequestDataObj->getRequestDataEntry('l') . "->" . $tmp . ")"));
-				$CurrentSetObj->setDataEntry('language', $tmp); // URl/form asked, the king must be served!
-				$CurrentSetObj->setDataEntry('language_id', strtolower($bts->RequestDataObj->getRequestDataEntry('l')));
-				break;
-		}
-
-		$ClassLoaderObj->provisionClass('I18nTrans');
-		$I18nObj = I18nTrans::getInstance();
-		$I18nObj->getI18nTransFromDB();
-
-		$bts->segmentEnding(__METHOD__);
-		return (true);
-	}
-
-	/**
-	 * 
+	 * Manage what was received in the form
 	 */
 	private function formManagement()
 	{
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
-		$UserObj = $CurrentSetObj->UserObj;
-		$WebSiteObj = $CurrentSetObj->WebSiteObj;
-
-		$bts->mapSegmentLocation(__METHOD__, "formManagement");
-
-		$bts->LMObj->saveVectorSystemLogLevel();
-		$bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
-
-		$ClassLoaderObj->provisionClass('CommandConsole');
-		$CurrentSetObj->setWebSiteContextObj($WebSiteObj); // Set an initial website context.
-		$CommandConsoleObj = CommandConsole::getInstance();
-
-		if ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section') == "CommandConsole") {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
-			// We consider we have a script 
-			$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// enabled/disabled
-
-			$ClassLoaderObj->provisionClass('ScriptFormatting');
-			$ScriptFormattingObj = ScriptFormatting::getInstance();
-
-			$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
-			$ScriptFormattingObj->createMap($CLiContent);
-			$ScriptFormattingObj->commandFormatting($CLiContent);
-
-			unset($A);
-			foreach ($CLiContent['FormattedCommand'] as $A) {
-				$Script[] = $A['cont'];
-			}
-		} else {
-			$ClassLoaderObj->provisionClass('FormToCommandLine');
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - FormToCommandLine"));
-			$FormToCommandLineObj = FormToCommandLine::getInstance();
-			$FormToCommandLineObj->analysis();
-
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : FormToCommandLineObj->getCommandLineNbr() =" . $FormToCommandLineObj->getCommandLineNbr()));
-
-			if ($FormToCommandLineObj->getCommandLineNbr() > 0) {
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :"));
-
-				$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled'); // enabled/disabled
-				$Script = $FormToCommandLineObj->getCommandLineScript();
-			}
-		}
-		switch ($bts->CMObj->getConfigurationSubEntry('commandLineEngine', 'state')) {
-			case "enabled":
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Commande console                                                               |"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				foreach ($Script as $A) {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`" . $A . "`)"));
-					$CommandConsoleObj->executeCommand($A);
-
-					// We have to reload website and user in case of one of them was updated.
-					$WebSiteObj->getDataFromDBUsingShort();
-					$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'user_login'), $WebSiteObj);
-
-					$this->languageSelection();
-				}
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Fin Commande console                                                           |"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				break;
-			case "disabled":
-			default:
-				foreach ($Script as $A) {
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Logging Command"));
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $A));
-				}
-				break;
-		}
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End of command execution - " . $A));
-		$bts->LMObj->restoreVectorSystemLogLevel();
-
-		switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin') . $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')) {
-			case "AdminDashboardUserProfileForm":
-			case "ModuleQuickSkin":
-			case "ModuleSelectLanguage":
-				$UserObj->getDataFromDBUsingLogin($UserObj->getUserEntry('user_login'), $WebSiteObj); // We need to reload the user data in order to update the current user_pref_theme variable.
-				break;
-			case "AdminDashboardWebsiteManagementP01":
-				// refresh with updated data
-				$id = $WebSiteObj->getWebSiteEntry('ws_id');
-				$WebSiteObj->getDataFromDB($id);
-				break;
-		}
-
-		$bts->segmentEnding(__METHOD__);
-		return (true);
+		$ClassLoaderObj->provisionClass('FormManagement');
+		$FormManagementObj = FormManagement::getInstance();
+		$FormManagementObj->processForm();
 	}
 
 	/**
@@ -898,7 +751,7 @@ class JanusEngine
 		$CurrentSetObj->setThemeDescriptorObj(new ThemeDescriptor());
 		$ThemeDescriptorObj = $CurrentSetObj->ThemeDescriptorObj;
 
-		$ThemeDescriptorObj->setCssPrefix("mt_");
+		$ThemeDescriptorObj->setCssPrefix('mt_');
 		$ThemeDescriptorObj->getDataFromDBByPriority();
 
 		$ClassLoaderObj->provisionClass('ThemeData');
@@ -939,8 +792,8 @@ class JanusEngine
 		$this->ContentFragments = $LayoutProcessorObj->render();
 
 		$LayoutCommands = array(
-			0 => array("regex"	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
-			1 => array("regex"	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
+			0 => array('regex'	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
+			1 => array('regex'	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
 		);
 
 		// We know there's only one command per entry
@@ -957,7 +810,7 @@ class JanusEngine
 							if ($insertJavascriptDecorationMgmt == false) {
 								$this->GeneratedScript->insertString('JavaScript-OnLoad', "\tdm.UpdateAllDecoModule(TabInfoModule);");
 								$this->GeneratedScript->insertString('JavaScript-OnResize', "\tdm.UpdateAllDecoModule(TabInfoModule);");
-								$this->GeneratedScript->insertString("JavaScript-Data", "var TabInfoModule = new Array();\r");
+								$this->GeneratedScript->insertString('JavaScript-Data', "var TabInfoModule = new Array();\r");
 								$insertJavascriptDecorationMgmt = true;
 							}
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : `" . $A['type'] . "`; for `" . $A['module_name'] . "` and data " . $A['data']));
@@ -984,7 +837,7 @@ class JanusEngine
 		$bts->mapSegmentLocation(__METHOD__, "renderStylsheet");
 
 		$RenderStylesheetObj = RenderStylesheet::getInstance();
-		$this->stylesheet = $RenderStylesheetObj->render("mt_", $this->ThemeDataObj);
+		$this->stylesheet = $RenderStylesheetObj->render('mt_', $this->ThemeDataObj);
 
 		$bts->segmentEnding(__METHOD__);
 		return (true);
@@ -1000,7 +853,7 @@ class JanusEngine
 		$CurrentSetObj = CurrentSet::getInstance();
 
 
-		$bts->mapSegmentLocation(__METHOD__, "buildDocument");
+		$bts->mapSegmentLocation(__METHOD__, 'buildDocument');
 
 		$randomNumber = sprintf('%03d', random_int(1, 2));
 		$Content = "<!DOCTYPE html>\r<html>";
@@ -1050,7 +903,7 @@ class JanusEngine
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg') ?? '') > 0) {
 			$Content .= "background-image: url("
 				. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
-				. "media/theme/" . $this->ThemeDataObj->getDefinitionValue('directory') . "/" . $this->ThemeDataObj->getDefinitionValue('bg') . "); ";
+				. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('bg') . '); ';
 		}
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position') ?? '') > 0) {

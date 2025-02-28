@@ -88,7 +88,7 @@ class User extends Entity
 			AND gu.fk_group_id = sg.fk_group_id
 			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 			;";
-		$this->loadDataFromDB($sqlQuery);
+		return $this->loadDataFromDB($sqlQuery);
 	}
 
 
@@ -98,7 +98,7 @@ class User extends Entity
 	 * It uses the current WebSiteObj to restrict the user selection to the website ID only.
 	 * 
 	 * @param User $UserLogin
-	 * @param WebSite $WebSiteObj
+	 * 
 	 */
 	public function getDataFromDBUsingLogin($UserLogin)
 	{
@@ -120,8 +120,41 @@ class User extends Entity
 			AND gu.fk_group_id = sg.fk_group_id
 			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 			;";
-		$this->loadDataFromDB($sqlQuery);
+		return $this->loadDataFromDB($sqlQuery);
 	}
+
+	/**
+	 * Gets the user data from the DB using email<br>
+	 * <br>
+	 * It uses the current WebSiteObj to restrict the user selection to the website ID only.
+	 * 
+	 * @param User $UserLogin
+	 * 
+	 */
+	public function getDataFromDBUsingEmail($UserEmail)
+	{
+		// $bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+		$SqlTableListObj = SqlTableList::getInstance(null, null);
+
+		$sqlQuery = "
+			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
+			FROM "
+			. $SqlTableListObj->getSQLTableName('user') . " usr, "
+			. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
+			. $SqlTableListObj->getSQLTableName('group_website') . " sg, "
+			. $SqlTableListObj->getSQLTableName('group') . " g
+			WHERE usr.user_email = '" . $UserEmail . "'
+			AND usr.user_id = gu.fk_user_id
+			AND gu.group_user_initial_group = '1'
+			AND gu.fk_group_id = g.group_id
+			AND gu.fk_group_id = sg.fk_group_id
+			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
+			;";
+		return $this->loadDataFromDB($sqlQuery);
+	}
+
+
 
 
 	/**
@@ -160,6 +193,7 @@ class User extends Entity
 				;";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 			$dbquery = $bts->SDDMObj->query($sqlQuery);
+			$groupList01 = array();
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$groupList01[] = $dbp['fk_group_id'];
 				$this->User['group'][$dbp['fk_group_id']] = 1;
@@ -174,6 +208,7 @@ class User extends Entity
 					$strGrp .= "'" . $A . "', ";
 				}
 				$strGrp = "(" . substr($strGrp, 0, -2) . ") ";
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " groupList01= `" . $strGrp . "`."));
 				$sqlQuery = "SELECT group_id, group_parent, group_name, group_tag 
 					FROM " . $SqlTableListObj->getSQLTableName('group') . "
 					WHERE group_parent IN " . $strGrp . "
@@ -189,6 +224,7 @@ class User extends Entity
 					}
 				} else {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " The query `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "` did not return any rows. Most likely it's the end of the group search process."));
+					// $res = false; // it's only a warning not an error
 				}
 
 				unset($A);
@@ -219,13 +255,13 @@ class User extends Entity
 
 		// Building the permission list
 		$q = "SELECT p.*, gp.fk_group_id, g.group_name 
-			FROM 
-			" . $SqlTableListObj->getSQLTableName('permission') . " p, 
-			" . $SqlTableListObj->getSQLTableName('group_permission') . " gp, 
-			" . $SqlTableListObj->getSQLTableName('group') . " g 
-			WHERE p.perm_id = gp.fk_perm_id 
-			AND gp.fk_group_id = g.group_id 
-			AND gp.fk_group_id " . $this->User['clause_in_group'] . ";";
+				FROM 
+				" . $SqlTableListObj->getSQLTableName('permission') . " p, 
+				" . $SqlTableListObj->getSQLTableName('group_permission') . " gp, 
+				" . $SqlTableListObj->getSQLTableName('group') . " g 
+				WHERE p.perm_id = gp.fk_perm_id 
+				AND gp.fk_group_id = g.group_id 
+				AND gp.fk_group_id " . $this->User['clause_in_group'] . ";";
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : permissionList q = " . $bts->StringFormatObj->formatToLog($q)));
 		$dbquery = $bts->SDDMObj->query($q);
@@ -258,6 +294,7 @@ class User extends Entity
 		if ($this->User['user_pref_theme'] == 0) {
 			$this->User['user_pref_theme'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_theme_id');
 		}
+
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
 		return $res;
@@ -445,9 +482,11 @@ class User extends Entity
 	{
 		return $this->User;
 	}
+	
 	public function resetUser()
 	{
-		$this->User = array();
+		$this->User = $this->columns;
+		$this->groupList = array();
 	}
 
 	public function setUserEntry($entry, $data)

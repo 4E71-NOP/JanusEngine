@@ -20,14 +20,15 @@ $i18n = array(
 
 	'tabTxt1'	=> "Serveur",
 	'tabTxt2'	=> "BDD",
-	'tabTxt3'	=> "Méthode",
-	'tabTxt4'	=> "Sites",
-	'tabTxt5'	=> "Personalisation",
-	'tabTxt6'	=> "Journaux",
+	'tabTxt3'	=> "Courriel",
+	'tabTxt4'	=> "Méthode",
+	'tabTxt5'	=> "Sites",
+	'tabTxt6'	=> "Personalisation",
+	'tabTxt7'	=> "Journaux",
 
 	// Server
-	'SRV_ip'		=> "Nom de cette machine / IP", 
-	'SRV_phpVrs'	=> "Version PHP", 
+	'SRV_ip'		=> "Nom de cette machine / IP",
+	'SRV_phpVrs'	=> "Version PHP",
 	'SRV_incPth'	=> "Chemin d'inclusion",
 	'SRV_CurDir'	=> "Répertoire courant",
 	'SRV_DisErr'	=> "Affiche erreur / Registre global / Taille maximum du 'POST'",
@@ -88,6 +89,15 @@ $i18n = array(
 	"DB_installationLockedok"	=>	"Pas de verrou trouvé.",
 	"DB_installationLockedko"	=>	"L'installation est  <b>vérrouillée!</b> Le programme n'installera pas tant que le verrou sera présent.",
 
+	// mail
+	"Mail_Titlec1"		=> "Envoi de courriels",
+	"mailHost"			=> "Hôte SMTP",
+	"mailUsername"		=> "Nom d'utilisateur",
+	"mailPassword"		=> "Mot de passe",
+	"mailHostInfo"		=> "Le serveur qui sera utilisé pour envoyer des courriels.",
+	"mailUsernameInfo"	=> "Sera vu comme l'envoyeur du courriel.",
+	"mailPasswordInfo"	=> "",
+
 	// Method
 	'MTH_intro'		=> "Il y a deux types d'installation de Janus Engine. Ceci dans le but de permettre une installation facile sur un plus large nombre de plateformes.<br>\r<br>\r",
 	'MTH_opt1'		=> "Connexion directe à la base",
@@ -101,7 +111,7 @@ $i18n = array(
 	'SIT_Titlec3'	=> "Faut-il Contrôler le code ?",
 
 	// Personalization
-	'PER_Titlec1'	=> "Element",		
+	'PER_Titlec1'	=> "Element",
 	'PER_Titlec2'	=> "Préfixe",
 	'PER_Titlec3'	=> "Champ",
 	'PER_Titlec4'	=> "Information",
@@ -171,13 +181,13 @@ Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer a
 <br>\r
 ",
 	'BtnSelect' => "Sélectionner",
-	
+
 	"perfTab01"	=>	"N",
 	"perfTab02"	=>	"Checkpoint",
 	"perfTab03"	=>	"Time",
 	"perfTab04"	=>	"Memory",
 	"perfTab05"	=>	"Queries",
-	
+
 	't9c1' => "A",
 	't9c2' => "B",
 	't9c3' => "C",
@@ -189,4 +199,3 @@ Assurez vous qu'il est bien présent sur le serveur. Assurez vous de l'éditer a
 	"REPORT_badToken"	=>	"Le jeton d'installation n'est pas le bon."
 
 );
-?>

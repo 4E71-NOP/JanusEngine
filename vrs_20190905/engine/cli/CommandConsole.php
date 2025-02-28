@@ -343,7 +343,7 @@ class CommandConsole
 			}
 		}
 		//----------------------------------------
-		// Convert selected values and store it into a target varaible
+		// Convert selected values and store it into a target variable
 		if (is_array($ptr['convertIntoTarget'])) {
 			foreach ($ptr['convertIntoTarget'] as $A) {
 				if ($A['n'] == $CCL['params']['name']) {

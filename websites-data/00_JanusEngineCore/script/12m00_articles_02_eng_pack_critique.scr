@@ -44,6 +44,8 @@ add article	name "eng_user_management_p01"						reference "eng_user_management"	
 add article	name "eng_user_management_p02"						reference "eng_user_management"				slug "user-management"					deadline initial_online		desc "Admin in English"				title "User managment"							subtitle "Modify the user"									page "2"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 add article	name "eng_website_list_p01"							reference "eng_website_list"				slug "website-list"						deadline initial_online		desc "Admin in English"				title "Website list"							subtitle "Website list"										page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 add article	name "eng_website_management_p01"					reference "eng_website_management"			slug "website-management"				deadline initial_online		desc "Admin in English"				title "Site configuration"						subtitle "Modify the site"									page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
+add article	name "eng_signup_p01"								reference "eng_signup_p01"					slug "sign-up"							deadline initial_online		desc "Admin en Francais"			title "Sign up"									subtitle "Form"												page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
+add article	name "eng_reset_password_p01"						reference "eng_reset_password_p01"			slug "reset-password"					deadline initial_online		desc "Admin en Francais"			title "Password"								subtitle "Reset"											page "1"	validation_state "VALID"	config "no_menu"		layout_generic_name "manage_full_width";
 
 
 assign	document name "doc_uni_admin_authentification_p01.php"			to_article	"eng_admin_authentification_p01";
@@ -92,3 +94,5 @@ assign	document name "doc_uni_toolset_cleanup_script_p01.php"			to_article	"eng_
 assign	document name "doc_uni_toolset_useful_links_p01.php"			to_article	"eng_toolset_useful_links_p01";
 assign	document name "doc_uni_website_list_p01.php"					to_article	"eng_website_list_p01";
 assign	document name "doc_uni_website_management_p01.php"				to_article	"eng_website_management_p01";
+assign	document name "doc_uni_signup_p01.php"							to_article	"eng_signup_p01";
+assign	document name "doc_uni_reset_password_p01.php"					to_article	"eng_reset_password_p01";

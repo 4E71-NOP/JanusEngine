@@ -51,7 +51,8 @@ class WebSite extends Entity
 	 * <br>
 	 * It uses the current WebSiteObj to restrict the website selection to the website ID only.
 	 */
-	public function getDataFromDB()	{
+	public function getDataFromDB()
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
@@ -94,7 +95,8 @@ class WebSite extends Entity
 	 * It uses the current WebSiteObj to restrict the website selection to the website SHORT only.
 	 * 
 	 */
-	public function getDataFromDBUsingShort() {
+	public function getDataFromDBUsingShort()
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
@@ -137,7 +139,8 @@ class WebSite extends Entity
 	 * It uses the current WebSiteObj to restrict the website selection to the website FULL name (home) only.
 	 * 
 	 */
-	public function getDataFromDBUsingHome() {
+	public function getDataFromDBUsingHome()
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$currentWs = $CurrentSetObj->getDataEntry('ws'); // get the Webite
@@ -232,9 +235,9 @@ class WebSite extends Entity
 			'entityId'		=> $this->WebSite['ws_id'],
 			'entityTitle'	=> 'website'
 		);
-		if ($this->existsInDB() === true && $mode == 2 || $mode == 0) {
+		if ($this->existsInDB() === true && ($mode == OBJECT_SENDTODB_MODE_UPDATEONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
 			$res = $this->genericUpdateDb($genericActionArray);
-		} elseif ($this->existsInDB() === false  && $mode == 1 || $mode == 0) {
+		} elseif ($this->existsInDB() === false && ($mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
 			$res = $this->genericInsertInDb($genericActionArray);
 		}
 

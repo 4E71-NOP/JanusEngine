@@ -24,17 +24,20 @@ $fileContent = array(
 	"db_user_password"	=> "9eBFs>vQX(kt.Ptfr>4x",
 	"dbprefix"			=> "JnsEng",
 	"tabprefix"			=> "Jet_",
-	"SessionMaxAge" 	=> (60*60*24),			// 24 hours by default
+	"SessionMaxAge" 	=> (60 * 60 * 24),			// 24 hours by default
 	"DebugLevel_SQL"	=> LOGLEVEL_WARNING,	// SDDM
 	"DebugLevel_CC"		=> LOGLEVEL_WARNING,	// Command console
 	"DebugLevel_PHP"	=> LOGLEVEL_WARNING,	// 
 	"DebugLevel_JS"		=> LOGLEVEL_WARNING,	// 
 	"execution_context"	=> "render",
 	"InsertStatistics"	=> 1,
+	"mail"				=> array(
+		"host" => "mail.rootwave.net",
+		"username" => "cfdt@rootwave.net",
+		"password" => "Rcvbplsw20!!"
+	),
 	"commandLineEngine"	=> array(
 		"state"			=>	"enabled"
 	)
 
 );
-
-?>

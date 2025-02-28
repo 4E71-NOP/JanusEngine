@@ -11,4 +11,4 @@ $i18n['disconnect'] = "D&eacute;connexion";
 $i18n['viassl'] = "(SSL actif)";
 $i18n['via80'] = "(SSL inactif)";
 
-?>
+$i18n['signup'] = "Créer un compte";

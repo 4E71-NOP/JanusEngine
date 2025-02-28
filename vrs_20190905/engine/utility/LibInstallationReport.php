@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*JanusEngine-license-start*/
 // --------------------------------------------------------------------------------------------
 //
@@ -36,59 +36,63 @@
 /* @var $l String                                   */
 /*JanusEngine-IDE-end*/
 
-class LibInstallationReport {
+class LibInstallationReport
+{
 	private static $Instance = null;
-	
+
 	private function __construct() {}
-	
-	public static function getInstance() {
+
+	public static function getInstance()
+	{
 		if (self::$Instance == null) {
 			self::$Instance = new LibInstallationReport();
 		}
 		return self::$Instance;
 	}
-	
+
 	/**
 	 * Renders a 2D array containing the report on a spécific installation section
 	 * @param string $section
 	 * @param array $style
 	 * @return array
 	 */
-	public function renderReport ($section , $style) {
+	public function renderReport($section, $style)
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$T = array();
 
 		$l = $c = 1;
-		foreach ( $style['titles'] as $A ) {
+		foreach ($style['titles'] as $A) {
 			$T[$l][$c]['cont'] = $A;
 			$c++;
 		}
-		
-		$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
-		." WHERE instreport_section = '".$section."'"
-		." ORDER BY instreport_name"
-		.";"
+
+		$dbquery = $bts->SDDMObj->query(
+			"SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
+				. " WHERE instreport_section = '" . $section . "'"
+				. " ORDER BY instreport_name"
+				. ";"
 		);
 		$l = 3;
 		$dataOk = $dataWrn = $dataErr = $dataTim = $dataQry = $dataCmd = 0;
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$T[$l]['1']['cont'] = $dbp['instreport_name'];
 			$T[$l]['2']['cont'] = $dbp['instreport_ok'];
 
-			if ( $dbp['instreport_wrn'] > 0 ) { 
-				$T[$l]['3']['class'] = $style['block'] . "_warning" ; 
-				$T[$l]['3']['b'] = 1 ; 
-			} 
+			if ($dbp['instreport_wrn'] > 0) {
+				$T[$l]['3']['class'] = $style['block'] . "_warning";
+				$T[$l]['3']['b'] = 1;
+			}
 			$T[$l]['3']['cont'] = $dbp['instreport_wrn'];
-			
-			if ( $dbp['instreport_err'] > 0 ) { 
-				$T[$l]['4']['class'] = $style['block'] . "_error" ; 
-				$T[$l]['4']['b'] = 1; 
-			} 
+
+			if ($dbp['instreport_err'] > 0) {
+				$T[$l]['4']['class'] = $style['block'] . "_error";
+				$T[$l]['4']['b'] = 1;
+			}
 			$T[$l]['4']['cont'] =  $dbp['instreport_err'];
 
-			$T[$l]['5']['cont'] = round  ( (($dbp['instreport_end'] - $dbp['instreport_start'])/1000000000), 4 );
+			$T[$l]['5']['cont'] = round((($dbp['instreport_end'] - $dbp['instreport_start']) / 1000000000), 4);
 			$T[$l]['6']['cont'] = $dbp['instreport_nbr_query'];
 			$T[$l]['7']['cont'] = $dbp['instreport_nbr_cmd'];
 
@@ -103,16 +107,27 @@ class LibInstallationReport {
 		}
 
 		$l = 2;
-		$T[$l]['1']['b'] = 1;	$T[$l]['1']['cont'] = "Tot";
-		$T[$l]['2']['b'] = 1;	$T[$l]['2']['cont'] = $dataOk;
-		$T[$l]['3']['b'] = 1;	$T[$l]['3']['cont'] = $dataWrn;
-		$T[$l]['4']['b'] = 1;	$T[$l]['4']['cont'] = $dataErr;
-		$T[$l]['5']['b'] = 1;	$T[$l]['5']['cont'] = round(($dataTim/1000000000), 4 );
-		$T[$l]['6']['b'] = 1;	$T[$l]['6']['cont'] = $dataQry;
-		$T[$l]['7']['b'] = 1;	$T[$l]['7']['cont'] = $dataCmd;
+		$T[$l]['1']['b'] = 1;
+		$T[$l]['1']['cont'] = "Tot";
+		$T[$l]['2']['b'] = 1;
+		$T[$l]['2']['cont'] = $dataOk;
+		$T[$l]['3']['b'] = 1;
+		$T[$l]['3']['cont'] = $dataWrn;
+		$T[$l]['4']['b'] = 1;
+		$T[$l]['4']['cont'] = $dataErr;
+		$T[$l]['5']['b'] = 1;
+		$T[$l]['5']['cont'] = round(($dataTim / 1000000000), 4);
+		$T[$l]['6']['b'] = 1;
+		$T[$l]['6']['cont'] = $dataQry;
+		$T[$l]['7']['b'] = 1;
+		$T[$l]['7']['cont'] = $dataCmd;
 
-		if ( $dataWrn > 0 )  { $T[$l]['3']['class'] = $style['block'] . "_warning"; }
-		if ( $dataErr > 0 )  { $T[$l]['4']['class'] = $style['block'] . "_error"; }
+		if ($dataWrn > 0) {
+			$T[$l]['3']['class'] = $style['block'] . "_warning";
+		}
+		if ($dataErr > 0) {
+			$T[$l]['4']['class'] = $style['block'] . "_error";
+		}
 
 		return ($T);
 	}
@@ -123,70 +138,88 @@ class LibInstallationReport {
 	 * @return integer
 
 	 */
-	public function getInstallSectionLineCount($section){
+	public function getInstallSectionLineCount($section)
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$n=0;
-		$dbquery = $bts->SDDMObj->query("SELECT COUNT(*) as lc FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
-		." WHERE instreport_section = '".$section."';"
+		$n = 0;
+		$dbquery = $bts->SDDMObj->query(
+			"SELECT COUNT(*) as lc FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
+				. " WHERE instreport_section = '" . $section . "';"
 		);
-		while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) { $n = $dbp['lc']; }
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '".$section."' has ".$n." lines."));
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+			$n = $dbp['lc'];
+		}
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Section '" . $section . "' has " . $n . " lines."));
 		return ($n);
 	}
 
 	/**
 	 * renderPerfomanceReport
 	 */
-	public function renderPerfomanceReport ($infos) {
+	public function renderPerfomanceReport($infos)
+	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		
+
 		// $Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
 		$SQLQueries = 0;
 		$memoryUsed = 0;
 		$RamB4 = 0;
 		$Content = array();
-		
+
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab01');
 		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab02');
 		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab03');
 		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab04');
 		$Content['1']['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab05');
 		// $Content['1']['6']['cont'] = $bts->I18nTransObj->getI18nTransEntry('perfTab06');
-		
+
 		$sg['MemoryMax'] = 0;
 		$sg['MemoryMin'] = 1000;
 		$sg['timeMin'] = $bts->TimeObj->getMicrotime();
 		$sg['timeMax'] = 0;
-		
+
 		$TableStats = $bts->LMObj->getStatisticsLog();
-		reset ( $TableStats );
-		
-		foreach ( $TableStats as &$A ) {
-			$A['SgMem'] = round(( $A['memory'] / 1024 ), 2 );
-			if ( $A['SgMem'] > $sg['MemoryMax'] )	{ $sg['MemoryMax'] = $A['SgMem']; }
-			if ( $A['SgMem'] < $sg['MemoryMin'] )	{ $sg['MemoryMin'] = $A['SgMem']; }
-			if ( $A['time'] > $sg['timeMax'] )	{ $sg['timeMax'] = $A['time']; }
-			if ( $A['time'] < $sg['timeMin'] )	{ $sg['timeMin'] = $A['time']; }
+		reset($TableStats);
+
+		foreach ($TableStats as &$A) {
+			$A['SgMem'] = round(($A['memory'] / 1024), 2);
+			if ($A['SgMem'] > $sg['MemoryMax']) {
+				$sg['MemoryMax'] = $A['SgMem'];
+			}
+			if ($A['SgMem'] < $sg['MemoryMin']) {
+				$sg['MemoryMin'] = $A['SgMem'];
+			}
+			if ($A['time'] > $sg['timeMax']) {
+				$sg['timeMax'] = $A['time'];
+			}
+			if ($A['time'] < $sg['timeMin']) {
+				$sg['timeMin'] = $A['time'];
+			}
 		}
 		$i = 2;
-		foreach ( $TableStats as &$A ) {
-			if ( $i == 2 ) { 
+		foreach ($TableStats as &$A) {
+			if ($i == 2) {
 				$sg['timeB4'] = $A['time'];
 				$t0 = $A['time'];
 			}
-			$A['timePerf'] =  round ( ($A['time'] - $sg['timeB4']), 4 );
-			$A['timeCheckpoint'] =  round ($A['time'] - $sg['timeMin'], 4 );
+			$A['timePerf'] =  round(($A['time'] - $sg['timeB4']), 4);
+			$A['timeCheckpoint'] =  round($A['time'] - $sg['timeMin'], 4);
 			$sg['timeB4'] = $A['time'];
-			
-			$A['MemorySegment'] = ( $A['memory'] - $RamB4 );
+
+			$A['MemorySegment'] = ($A['memory'] - $RamB4);
 			$RamB4 = $A['memory'];
-			
-			$Content[$i]['1']['cont'] = $A['position'];																	$Content[$i]['1']['style'] = "text-align: center;";
-			$Content[$i]['2']['cont'] = $A['routine'];																	$Content[$i]['3']['cont'] = $A['timePerf'];																$Content[$i]['3']['style'] = "text-align: center;";
-			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemorySegment'] );	$Content[$i]['4']['style'] = "text-align: center;";
-			$Content[$i]['5']['cont'] = $A['SQL_queries'];																$Content[$i]['5']['style'] = "text-align: center;";
+
+			$Content[$i]['1']['cont'] = $A['position'];
+			$Content[$i]['1']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = $A['routine'];
+			$Content[$i]['3']['cont'] = $A['timePerf'];
+			$Content[$i]['3']['style'] = "text-align: center;";
+			$Content[$i]['4']['cont'] = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $A['MemorySegment']);
+			$Content[$i]['4']['style'] = "text-align: center;";
+			$Content[$i]['5']['cont'] = $A['SQL_queries'];
+			$Content[$i]['5']['style'] = "text-align: center;";
 			// $Content[$i]['6']['cont'] = $A['context'];																	
 			// error_log("----------------------->inserted : " . $bts->StringFormatObj->arrayToString($Content[$i]));
 
@@ -195,23 +228,27 @@ class LibInstallationReport {
 			$tLast = $A['time'];
 			$i++;
 		}
-		
-		$timeSpent = round ($tLast - $t0, 4);
-		
+
+		$timeSpent = round($tLast - $t0, 4);
+
 		$memoryUsed = $bts->StringFormatObj->makeSizeHumanFriendly($infos, $memoryUsed);
-		$Content[$i]['1']['cont'] = "";				$Content[$i]['1']['style'] = "text-align: center;";
-		$Content[$i]['2']['cont'] = "";				
-		$Content[$i]['3']['cont'] = $timeSpent;		$Content[$i]['3']['style'] = "text-align: center;";
-		$Content[$i]['4']['cont'] = $memoryUsed;	$Content[$i]['4']['style'] = "text-align: center;";
-		$Content[$i]['5']['cont'] = $SQLQueries;	$Content[$i]['5']['style'] = "text-align: center;";
-		
+		$Content[$i]['1']['cont'] = "";
+		$Content[$i]['1']['style'] = "text-align: center;";
+		$Content[$i]['2']['cont'] = "";
+		$Content[$i]['3']['cont'] = $timeSpent;
+		$Content[$i]['3']['style'] = "text-align: center;";
+		$Content[$i]['4']['cont'] = $memoryUsed;
+		$Content[$i]['4']['style'] = "text-align: center;";
+		$Content[$i]['5']['cont'] = $SQLQueries;
+		$Content[$i]['5']['style'] = "text-align: center;";
+
 		$config = array(
-				"NbrOfLines" => $i,
-				"NbrOfCells" => 5,
-				"TableCaptionPos" => 1,
+			"NbrOfLines" => $i,
+			"NbrOfCells" => 5,
+			"TableCaptionPos" => 1,
 		);
-		$package = array ("content" => $Content , "config" => $config);
-		return $package ;
+		$package = array("content" => $Content, "config" => $config);
+		return $package;
 	}
 
 	/**
@@ -219,11 +256,12 @@ class LibInstallationReport {
 	 * @param array $infos
 	 * @return string
 	 */
-	public function renderConfigFile (&$infos) {
+	public function renderConfigFile(&$infos)
+	{
 		$bts = BaseToolSet::getInstance();
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:".$infos['n']));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : creating config for site N°:" . $infos['n']));
 
-// 		$CurrentSetObj = CurrentSet::getInstance();
+		// 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = "
 <?php
 /*JanusEngine-license-start*/
@@ -236,44 +274,42 @@ class LibInstallationReport {
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-license-end*/
 //	This config file has been generated.
-//	Date		:	".$bts->TimeObj->timestampToDate($bts->TimeObj->getMicrotime())."
-//	Filename	:	site_".$infos['n']."_config.php
+//	Date		:	" . $bts->TimeObj->timestampToDate($bts->TimeObj->getMicrotime()) . "
+//	Filename	:	site_" . $infos['n'] . "_config.php
 //	
 //	
 // You may need to insert the 'account prefix' depending on web hosters.
 // ex DB = <user>_yourdatabase
 
-function returnConfig () {
-	\$tab = array();
-	\$tab['type']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'type')."\"; // mysql, pgsql
-	\$tab['host']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'host')."\";
-	\$tab['dal']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dal')."\";	//PDO, PHP
-	\$tab['port']				= \"".$bts->CMObj->getConfigurationSubEntry('db', 'port')."\";
-	\$tab['db_user_login']		= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin')."\";
-	\$tab['db_user_password']	= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword')."\";
-	\$tab['dbprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')."\";
-	\$tab['tabprefix']			= \"".$bts->CMObj->getConfigurationSubEntry('db', 'tabprefix')."\";
-	\$tab['SessionMaxAge']	= (60*60*24);
-	
-	\$tab['DebugLevel_SQL']	= LOGLEVEL_WARNING;					// SDDM
-	\$tab['DebugLevel_CC']	= LOGLEVEL_WARNING;					// Commande Console
-	\$tab['DebugLevel_PHP']	= LOGLEVEL_WARNING;					// 
-	\$tab['DebugLevel_JS']	= LOGLEVEL_WARNING;					// 
-	
-	\$tab['execution_context']		= \"render\";
-	\$tab['InsertStatistics']		= 1;
-	\$tab['commandLineEngine'] = array(
-			\"state\"		=>	\"enabled\",
-	);
-	return \$tab;
-}
-
+\$fileContent = array(
+	\"ws_short\"			=> \"JnsEngCore\",
+	\"type\"				=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'type') . "\",	// mysql, pgsql
+	\"charset\"				=> \"utf8mb4\",
+	\"host\"				=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'host') . "\",
+	\"port\"				=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'type') . "\",
+	\"dal\"					=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'type') . "\", // PDO, PHP
+	\"db_user_login\"		=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\",
+	\"db_user_password\"	=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserPassword') . "\",
+	\"dbprefix\"			=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\",
+	\"tabprefix\"			=> \"" . $bts->CMObj->getConfigurationSubEntry('db', 'tabprefix') . "\",
+	\"SessionMaxAge\" 		=> (60 * 60 * 24),			// 24 hours by default
+	\"DebugLevel_SQL\"		=> LOGLEVEL_WARNING,	// SDDM
+	\"DebugLevel_CC\"		=> LOGLEVEL_WARNING,	// Command console
+	\"DebugLevel_PHP\"		=> LOGLEVEL_WARNING,	// 
+	\"DebugLevel_JS\"		=> LOGLEVEL_WARNING,	// 
+	\"execution_context\"	=> \"render\",
+	\"InsertStatistics\"	=> 1,
+	\"mail\"				=> array(
+		\"host\" 		=> \"" . $bts->CMObj->getConfigurationSubEntry('mail', 'host') . "\",
+		\"username\"	=> \"" . $bts->CMObj->getConfigurationSubEntry('mail', 'username') . "\",
+		\"password\"	=> \"" . $bts->CMObj->getConfigurationSubEntry('mail', 'password') . "\",
+	),
+	\"commandLineEngine\"	=> array(
+		\"state\"			=>	\"enabled\",
+	)
 ?>
 ";
-	
-	return $Content;
+
+		return $Content;
 	}
-
-
-
 }

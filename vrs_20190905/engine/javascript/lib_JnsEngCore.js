@@ -22,7 +22,7 @@
 class JnsEngGlobalConfig {
 	constructor() {
 		this.GeneralDebug = 0;
-		this.CoreDbg = 0;
+		this.CoreDbg = 1;
 		this.MouseDbg = 0;
 	}
 }
@@ -433,10 +433,24 @@ class ElementHandling {
 		this.Gebi(ElementTarget).style.Property = 'value';
 	}
 
-
-
+	/**
+	 * 
+	 */
+	ToggleInputType(field) {
+		var f = this.Gebi(field);
+		if (f) {
+			if (f.type === "password") {
+				f.type = "text";
+				l.Log[cfg.CoreDbg]("Switching " + field + " to text");
+			} else {
+				f.type = "password";
+				l.Log[cfg.CoreDbg]("Switching " + field + " to password");
+			}
+		} else {
+			l.Log[cfg.CoreDbg](field + " was not found by Gebi()");
+		}
+	}
 }
-
 
 
 // --------------------------------------------------------------------------------------------

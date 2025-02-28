@@ -259,6 +259,18 @@ update document	name "doc_uni_website_list_p01.php"	validation YES	validator "*u
 
 
 
+add document	name "doc_uni_signup_p01.php"	type PHP;
+insert content	file "staffTools/uni_signup_p01.php"		into "doc_uni_signup_p01.php";
+share document	name "doc_uni_signup_p01.php"	with_website JanusEngineCore	modification NO;
+update document	name "doc_uni_signup_p01.php"	validation YES	validator "*user_install*"	from_site JanusEngineCore;
+
+
+add document	name "doc_uni_reset_password_p01.php"	type PHP;
+insert content	file "staffTools/uni_reset_password_p01.php"		into "doc_uni_reset_password_p01.php";
+share document	name "doc_uni_reset_password_p01.php"	with_website JanusEngineCore	modification NO;
+update document	name "doc_uni_reset_password_p01.php"	validation YES	validator "*user_install*"	from_site JanusEngineCore;
+
+
 add document	name "doc_uni_testDocument_p01.php"	type PHP;
 insert content	file "staffTools/uni_website_list_p01.php"		into "doc_uni_testDocument_p01.php";
 share document	name "doc_uni_testDocument_p01.php"	with_website JanusEngineCore	modification NO;
