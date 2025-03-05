@@ -42,6 +42,8 @@ class SqlTableList
 		'group_permission',
 		'group_user',
 		'i18n',
+		'infos',
+		'infos_config',
 		'installation',
 		'installation_report',
 		'keyword',

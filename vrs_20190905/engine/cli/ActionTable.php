@@ -2,20 +2,12 @@
 //--------------------------------------------------------------------------------
 //	Add
 //--------------------------------------------------------------------------------
-self::$ActionTable['add']['article']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['article'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
-self::$ActionTable['add']['article_config']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['article_config'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['article']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['article'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
+self::$ActionTable['add']['article_config']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['article_config'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['add']['deadline']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['deadline'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['deadline']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['deadline'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['add']['definition']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['definition'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['definition']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['definition'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 
 self::$ActionTable['add']['decoration']			= function (&$a) {
@@ -62,80 +54,60 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 	return array(
 		"INSERT INTO " . $a['sqlTables']['decoration'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
 		"INSERT INTO " . $a['sqlTables'][$targetTable] . " (" . $a['columns2'] . ") VALUES " . $a['values2'] . ";",
-	);
+	); 
 };
 
+self::$ActionTable['add']['document']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['document'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['add']['document']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['document'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
-
-self::$ActionTable['add']['group'] = function (&$a) {
-	return array(
+self::$ActionTable['add']['group'] = function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['group'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
 		"INSERT INTO " . $a['sqlTables']['group_website'] . " VALUES ('" . $a['params']['group_webws_id'] . "', '" . $a['Context']['ws_id'] . "', '" . $a['params']['id'] . "', '1' );"
-	);
+	); 
 };
 
-self::$ActionTable['add']['keyword']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['keyword'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['infos_config']	= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['infos_config'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");" ); };
 
-self::$ActionTable['add']['layout']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['layout'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['keyword']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['keyword'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['add']['layout_file']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['layout_file'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['layout']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['layout'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
+
+self::$ActionTable['add']['layout_file']	= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['layout_file'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 // self::$ActionTable['add']['layout_content']	= function (&$a) { return array ("INSERT INTO ".$a['sqlTables']['layout_content']." (".$a['columns'].") VALUES (".$a['values'].");");};
 
 
 self::$ActionTable['add']['log']	= function (&$a) {
 	$bts = BaseToolSet::getInstance();
-	// 	$LMObj = LogManagement::getInstance();
-	$bts->LMObj->msgLog($a);
+	$bts->LMObj->msgLog($a); 
 };
 
 
-self::$ActionTable['add']['menu']				= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['menu'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['menu']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['menu'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 
-self::$ActionTable['add']['module'] = function (&$a) {
-	return array(
+self::$ActionTable['add']['module'] = function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['module'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
 		"INSERT INTO " . $a['sqlTables']['module_website'] . " VALUES ('" . $a['params']['module_website_id'] . "', '" . $a['Context']['ws_id'] . "', '" . $a['params']['id'] . "', '" . $a['params']['state'] . "', '" . $a['params']['position'] . "' );"
-	);
+	); 
 };
 
-self::$ActionTable['add']['permission'] = function (&$a) {
-	return array(
+self::$ActionTable['add']['permission'] = function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['permission'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
-	);
+	); 
 };
 
 
-self::$ActionTable['add']['tag']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['tag'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['tag']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['tag'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['add']['theme']			= function (&$a) {
-	return array(
+self::$ActionTable['add']['theme']			= function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['theme_descriptor'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
 		"INSERT INTO " . $a['sqlTables']['theme_website'] . " (theme_website_id, fk_ws_id, fk_theme_id, theme_state) VALUES ('" . $a['params']['theme_website_id'] . "','" . $a['Context']['ws_id'] . "','" . $a['params']['id'] . "','" . $a['params']['state'] . "');"
-	);
+	); 
 };
 
-self::$ActionTable['add']['theme_definition']	= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['theme_definition'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",);
-};
+self::$ActionTable['add']['theme_definition']	= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['theme_definition'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",); };
 
-self::$ActionTable['add']['translation']	= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['i18n'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['add']['translation']	= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['i18n'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 self::$ActionTable['add']['user']			= function (&$a) {
 	$queries = array();
@@ -148,29 +120,23 @@ self::$ActionTable['add']['user']			= function (&$a) {
 		$c = 0;
 	}
 	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . ($a['params']['group_user_id'] + $b) . "','" . $a['params']['anonymous_id'] . "','" . $a['params']['id'] . "','" . $c . "');";
-	return $queries;
+	return $queries; 
 };
 
 
 self::$ActionTable['add']['website']		= function (&$a) {
 	$CurrentSetObj = CurrentSet::getInstance();
 	$CurrentSetObj->setDataSubEntry('install', 'websitePostCreation', 1);
-	return array("INSERT INTO " . $a['sqlTables']['website'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
+	return array("INSERT INTO " . $a['sqlTables']['website'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); 
 };
 
 //--------------------------------------------------------------------------------
 //	Update
 //--------------------------------------------------------------------------------
-self::$ActionTable['update']['article']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article'] . " SET " . $a['equalities'] . " WHERE arti_id = '" . $a['params']['arti_id'] . "';");
-};
-self::$ActionTable['update']['article_config']	= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article_config'] . " SET " . $a['equalities'] . " WHERE config_id = '" . $a['params']['config_id'] . "';");
-};
+self::$ActionTable['update']['article']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['article'] . " SET " . $a['equalities'] . " WHERE arti_id = '" . $a['params']['arti_id'] . "';"); };
+self::$ActionTable['update']['article_config']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config'] . " SET " . $a['equalities'] . " WHERE config_id = '" . $a['params']['config_id'] . "';"); };
 
-self::$ActionTable['update']['deadline']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['deadline'] . " SET " . $a['equalities'] . " WHERE deadline_id = '" . $a['params']['deadline_id'] . "';");
-};
+self::$ActionTable['update']['deadline']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['deadline'] . " SET " . $a['equalities'] . " WHERE deadline_id = '" . $a['params']['deadline_id'] . "';"); };
 
 self::$ActionTable['update']['document']		= function (&$a) {
 	if ($a['params']['updateGO'] == 1) {
@@ -181,164 +147,78 @@ self::$ActionTable['update']['document']		= function (&$a) {
 		return ($arr);
 	} else {
 		return array("SELECT 'Nothing to do';");
-	}
+	} 
 };
 
-self::$ActionTable['update']['group']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['group']			. " SET " . $a['equalities'] . " WHERE group_id = '"			. $a['params']['group_id'] . "';");
-};
-self::$ActionTable['update']['keyword']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['keyword']		. " SET " . $a['equalities'] . " WHERE keyword_id = '"		. $a['params']['keyword_id'] . "';");
-};
-self::$ActionTable['update']['layout']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout']		. " SET " . $a['equalities'] . " WHERE layout_id = '"		. $a['params']['layout_id'] . "';");
-};
-self::$ActionTable['update']['layout_file']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET " . $a['equalities'] . " WHERE layout_file_id = '"	. $a['params']['layout_file_id'] . "';");
-};
-self::$ActionTable['update']['menu']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['menu']			. " SET " . $a['equalities'] . " WHERE menu_id = '"			. $a['params']['menu_id'] . "';");
-};
-self::$ActionTable['update']['module']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['module']		. " SET " . $a['equalities'] . " WHERE module_id = '"		. $a['params']['module_id'] . "';");
-};
-self::$ActionTable['update']['permission']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['permission']	. " SET " . $a['equalities'] . " WHERE permission_id = '"	. $a['params']['permission_id'] . "';");
-};
-self::$ActionTable['update']['tag']				= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['tag']			. " SET " . $a['equalities'] . " WHERE tag_id = '"			. $a['params']['tag_id'] . "';");
-};
-self::$ActionTable['update']['theme']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['theme']			. " SET " . $a['equalities'] . " WHERE theme_id = '"			. $a['params']['theme_id'] . "';");
-};
-self::$ActionTable['update']['translation']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['translation']	. " SET " . $a['equalities'] . " WHERE translation_id = '"	. $a['params']['translation_id'] . "';");
-};
-self::$ActionTable['update']['user']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['user']			. " SET " . $a['equalities'] . " WHERE user_id = '"			. $a['params']['user_id'] . "';");
-};
+self::$ActionTable['update']['group']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']			. " SET " . $a['equalities'] . " WHERE group_id = '"			. $a['params']['group_id'] . "';"); };
+self::$ActionTable['update']['keyword']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['keyword']		. " SET " . $a['equalities'] . " WHERE keyword_id = '"		. $a['params']['keyword_id'] . "';"); };
+self::$ActionTable['update']['layout']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout']		. " SET " . $a['equalities'] . " WHERE layout_id = '"		. $a['params']['layout_id'] . "';"); };
+self::$ActionTable['update']['layout_file']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET " . $a['equalities'] . " WHERE layout_file_id = '"	. $a['params']['layout_file_id'] . "';"); };
+self::$ActionTable['update']['menu']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['menu']			. " SET " . $a['equalities'] . " WHERE menu_id = '"			. $a['params']['menu_id'] . "';"); };
+self::$ActionTable['update']['module']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['module']		. " SET " . $a['equalities'] . " WHERE module_id = '"		. $a['params']['module_id'] . "';"); };
+self::$ActionTable['update']['permission']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['permission']	. " SET " . $a['equalities'] . " WHERE permission_id = '"	. $a['params']['permission_id'] . "';"); };
+self::$ActionTable['update']['tag']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['tag']			. " SET " . $a['equalities'] . " WHERE tag_id = '"			. $a['params']['tag_id'] . "';"); };
+self::$ActionTable['update']['theme']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']			. " SET " . $a['equalities'] . " WHERE theme_id = '"			. $a['params']['theme_id'] . "';"); };
+self::$ActionTable['update']['translation']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['translation']	. " SET " . $a['equalities'] . " WHERE translation_id = '"	. $a['params']['translation_id'] . "';"); };
+self::$ActionTable['update']['user']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['user']			. " SET " . $a['equalities'] . " WHERE user_id = '"			. $a['params']['user_id'] . "';"); };
 
 self::$ActionTable['update']['website']		= function (&$a) {
 	$queries = array();
 	if ($a['params']['updateGO'] == 1) {
 		$queries[] = "UPDATE " . $a['sqlTables']['website'] . " SET " . $a['equalities'] . " WHERE ws_id = '" . $a['params']['ws_id'] . "';";
 	}
-	return $queries;
+	return $queries; 
 };
 
 
 //--------------------------------------------------------------------------------
 //	Disable state=>0 (it's NOT delete)
 //--------------------------------------------------------------------------------
-self::$ActionTable['disable']['article']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article']		. " SET article_state=0		WHERE article_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['article_config']	= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article_config'] . " SET config_state=0		WHERE config_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['deadline']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['deadline']		. " SET deadline_state=0 	WHERE deadline_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['document']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['document']		. " SET docu_state=0			WHERE docu_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['group']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['group']			. " SET group_state=0		WHERE group_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['keyword']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['keyword']		. " SET keyword_state=0		WHERE keyword_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['layout']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout']		. " SET layout_state=0		WHERE layout_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['layout_file']	= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET layout_file_state=0	WHERE layout_file_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['menu']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['menu']			. " SET menu_state=0			WHERE menu_id = '"			. $a['params']['id'] . "';");
-};
+self::$ActionTable['disable']['article']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['article']		. " SET article_state=0		WHERE article_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['article_config']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config'] . " SET config_state=0		WHERE config_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['deadline']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['deadline']		. " SET deadline_state=0 	WHERE deadline_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['document']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']		. " SET docu_state=0			WHERE docu_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['group']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']			. " SET group_state=0		WHERE group_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['keyword']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['keyword']		. " SET keyword_state=0		WHERE keyword_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['layout']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout']		. " SET layout_state=0		WHERE layout_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['layout_file']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET layout_file_state=0	WHERE layout_file_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['menu']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['menu']			. " SET menu_state=0			WHERE menu_id = '"			. $a['params']['id'] . "';"); };
 //self::$ActionTable['disable']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=0		WHERE module_id = '"		.$a['params']['id']."';"); };
-self::$ActionTable['disable']['permission']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['permission']	. " SET permission_state=0	WHERE permission_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['tag']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['tag']			. " SET tag_state=0			WHERE tag_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['theme']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['theme']			. " SET theme_state=0		WHERE theme_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['translation']	= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['translation']	. " SET translation_state=0	WHERE translation_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['user']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['user']			. " SET user_state=0			WHERE user_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['disable']['website']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['website']		. " SET ws_state=0			WHERE ws_id = '"			. $a['params']['id'] . "';");
-};
+self::$ActionTable['disable']['permission']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['permission']	. " SET permission_state=0	WHERE permission_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['tag']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['tag']			. " SET tag_state=0			WHERE tag_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['theme']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']			. " SET theme_state=0		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['translation']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['translation']	. " SET translation_state=0	WHERE translation_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['user']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['user']			. " SET user_state=0			WHERE user_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['website']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['website']		. " SET ws_state=0			WHERE ws_id = '"			. $a['params']['id'] . "';"); };
 
 
 //--------------------------------------------------------------------------------
 //	Delete state=>2
 //--------------------------------------------------------------------------------
-self::$ActionTable['delete']['article']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article']		. " SET article_state=2		WHERE article_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['article_config']	= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article_config'] . " SET config_state=2		WHERE config_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['deadline']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['deadline']		. " SET deadline_state=2 	WHERE deadline_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['document']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['document']		. " SET docu_state=2			WHERE docu_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['group']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['group']			. " SET group_state=2		WHERE group_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['keyword']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['keyword']		. " SET keyword_state=2		WHERE keyword_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['layout']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout']		. " SET layout_state=2		WHERE layout_id = '"		. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['layout_file']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET layout_file_state=2	WHERE layout_file_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['menu']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['menu']			. " SET menu_state=2			WHERE menu_id = '"			. $a['params']['id'] . "';");
-};
+self::$ActionTable['delete']['article']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['article']		. " SET article_state=2		WHERE article_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['article_config']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config'] . " SET config_state=2		WHERE config_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['deadline']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['deadline']		. " SET deadline_state=2 	WHERE deadline_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['document']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']		. " SET docu_state=2			WHERE docu_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['group']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']			. " SET group_state=2		WHERE group_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['keyword']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['keyword']		. " SET keyword_state=2		WHERE keyword_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['layout']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout']		. " SET layout_state=2		WHERE layout_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['layout_file']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout_file']	. " SET layout_file_state=2	WHERE layout_file_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['menu']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['menu']			. " SET menu_state=2			WHERE menu_id = '"			. $a['params']['id'] . "';"); };
 //self::$ActionTable['delete']['module']			= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']		." SET module_state=2		WHERE module_id = '"		.$a['params']['id']."';"); };
-self::$ActionTable['delete']['permission']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['permission']	. " SET permission_state=2	WHERE permission_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['tag']				= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['tag']			. " SET tag_state=2			WHERE tag_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['theme']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['theme']			. " SET theme_state=2		WHERE theme_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['translation']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['translation']	. " SET translation_state=2	WHERE translation_id = '"	. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['user']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['user']			. " SET user_state=2			WHERE user_id = '"			. $a['params']['id'] . "';");
-};
-self::$ActionTable['delete']['website']			= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['website']		. " SET ws_state=2			WHERE ws_id = '"			. $a['params']['id'] . "';");
-};
+self::$ActionTable['delete']['permission']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['permission']	. " SET permission_state=2	WHERE permission_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['tag']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['tag']			. " SET tag_state=2			WHERE tag_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['theme']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']			. " SET theme_state=2		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['translation']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['translation']	. " SET translation_state=2	WHERE translation_id = '"	. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['user']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['user']			. " SET user_state=2			WHERE user_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['website']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['website']		. " SET ws_state=2			WHERE ws_id = '"			. $a['params']['id'] . "';"); };
 
 
 //--------------------------------------------------------------------------------
 //	Assign
 //--------------------------------------------------------------------------------
-self::$ActionTable['assign']['document']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['article'] . " SET fk_docu_id = '" . $a['params']['docu_id'] . "' WHERE arti_id = '" . $a['params']['arti_id'] . "';");
-};
+self::$ActionTable['assign']['document']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['article'] . " SET fk_docu_id = '" . $a['params']['docu_id'] . "' WHERE arti_id = '" . $a['params']['arti_id'] . "';"); };
 
-self::$ActionTable['assign']['language']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['language_website'] . " VALUES ('" . $a['params']['lang_website_id'] . "', '" . $a['params']['ws_id'] . "', '" . $a['params']['lang_id'] . "');");
-};
+self::$ActionTable['assign']['language']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['language_website'] . " VALUES ('" . $a['params']['lang_website_id'] . "', '" . $a['params']['ws_id'] . "', '" . $a['params']['lang_id'] . "');"); };
 
 
 self::$ActionTable['assign']['layout']		= function (&$a) {
@@ -347,7 +227,7 @@ self::$ActionTable['assign']['layout']		= function (&$a) {
 		$queries[] = "UPDATE " . $a['sqlTables']['layout_theme'] . " SET default_layout_content = '0' WHERE fk_theme_id = '" . $a['params']['theme_id'] . "';";
 	}
 	$queries[] = "INSERT INTO " . $a['sqlTables']['layout_theme'] . " VALUES ('" . $a['params']['layout_theme_id'] . "','" . $a['params']['theme_id'] . "','" . $a['params']['layout_id'] . "','" . $a['params']['default'] . "');";
-	return $queries;
+	return $queries; 
 };
 
 self::$ActionTable['assign']['group_permission']		= function (&$a) {
@@ -359,7 +239,7 @@ self::$ActionTable['assign']['group_permission']		= function (&$a) {
 		return $queries;
 	} else {
 		return array("INSERT INTO " . $a['sqlTables']['group_permission'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-	}
+	} 
 };
 
 self::$ActionTable['assign']['user_permission']		= function (&$a) {
@@ -371,16 +251,12 @@ self::$ActionTable['assign']['user_permission']		= function (&$a) {
 		return $queries;
 	} else {
 		return array("INSERT INTO " . $a['sqlTables']['user_permission'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-	}
+	} 
 };
 
-self::$ActionTable['assign']['tag']			= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['article_tag'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['assign']['tag']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['article_tag'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
-self::$ActionTable['assign']['theme']		= function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['website'] . " SET fk_theme_id = '" . $a['params']['theme_id'] . "' WHERE ws_id = '" . $a['params']['ws_id'] . "';");
-};
+self::$ActionTable['assign']['theme']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['website'] . " SET fk_theme_id = '" . $a['params']['theme_id'] . "' WHERE ws_id = '" . $a['params']['ws_id'] . "';"); };
 
 self::$ActionTable['assign']['user']		= function (&$a) {
 	$queries = array();
@@ -388,7 +264,7 @@ self::$ActionTable['assign']['user']		= function (&$a) {
 		$queries[] = "UPDATE " . $a['sqlTables']['group_user'] . " SET group_user_initial_group = '0' WHERE fk_user_id = '" . $a['params']['user_id'] . "';";
 	}
 	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . $a['params']['group_user_id'] . "','" . $a['params']['group_id'] . "','" . $a['params']['user_id'] . "','" . $a['params']['primary_group'] . "');";
-	return $queries;
+	return $queries; 
 };
 
 
@@ -445,7 +321,7 @@ self::$ActionTable['insert']['content']		= function (&$a, &$sddmObj) {
 	}
 	// $bts->LMObj->restoreVectorSystemLogLevel();
 
-	return array("UPDATE " . $a['sqlTables']['document'] . " SET docu_validation = '1', docu_validator = '" . $a['params']['validator_id'] . "', docu_cont = '" . $content . "' WHERE docu_id = '" . $a['params']['docu_id'] . "';");
+	return array("UPDATE " . $a['sqlTables']['document'] . " SET docu_validation = '1', docu_validator = '" . $a['params']['validator_id'] . "', docu_cont = '" . $content . "' WHERE docu_id = '" . $a['params']['docu_id'] . "';"); 
 };
 
 //--------------------------------------------------------------------------------
@@ -457,20 +333,18 @@ self::$ActionTable['set']['checkpoint']		= function (&$a) {
 	$bts = BaseToolSet::getInstance();
 	$bts->MapperObj->setWhereWeAreAt($a['params']['name']);
 	$bts->LMObj->logCheckpoint($a['params']['name']);
-	// 	error_log("--------------------------------------------------------------> chekpoint : " . $a['params']['name']);
 };
 
 // Directive 4
 self::$ActionTable['set']['variable']		= function (&$a) {
 	$bts = BaseToolSet::getInstance();
-	$bts->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']);
+	$bts->CMObj->setConfigurationEntry($a['params']['name'], $a['params']['value']); 
 };
 
 //--------------------------------------------------------------------------------
 //	Show
 //--------------------------------------------------------------------------------
-self::$ActionTable['show']['articles']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['articles']	= function (&$a) { return array(
 		"SELECT "
 			. "art.arti_ref AS 'Ref', "
 			. "art.arti_id AS Id, "
@@ -494,12 +368,11 @@ self::$ActionTable['show']['articles']	= function (&$a) {
 			. "AND mnu.menu_state = '1' "
 			. "AND mnu.menu_type IN ('1', '0') "
 			. "ORDER BY art.arti_ref, art.arti_page"
-	);
+	); 
 };
 
 
-self::$ActionTable['show']['deadlines']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['deadlines']	= function (&$a) { return array(
 		"SELECT "
 			. "deadline_name AS 'Name', "
 			. "deadline_title AS 'Title', "
@@ -510,11 +383,10 @@ self::$ActionTable['show']['deadlines']	= function (&$a) {
 			. $a['sqlTables']['deadline'] . " dl "
 			. "WHERE dl.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. "ORDER BY dl.deadline_name;"
-	);
+	); 
 };
 
-self::$ActionTable['show']['decorations']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['decorations']	= function (&$a) { return array(
 		"SELECT "
 			. "deco_name AS 'Name', "
 			. "deco_state AS 'State', "
@@ -522,11 +394,10 @@ self::$ActionTable['show']['decorations']	= function (&$a) {
 			. "FROM "
 			. $a['sqlTables']['decoration'] . " d "
 			. "ORDER BY d.deco_name;"
-	);
+	); 
 };
 
-self::$ActionTable['show']['documents']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['documents']	= function (&$a) { return array(
 		"SELECT "
 			. "doc.docu_name AS 'Name', "
 			. "doc.docu_type AS 'Type', "
@@ -543,11 +414,10 @@ self::$ActionTable['show']['documents']	= function (&$a) {
 			. "AND shr.fk_docu_id = doc.docu_id "
 			. "AND doc.docu_origin = '" . $a['Context']['ws_id'] . "' "
 			. "ORDER BY doc.docu_name"
-	);
+	); 
 };
 
-self::$ActionTable['show']['groups']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['groups']	= function (&$a) { return array(
 		"SELECT "
 			. "grp.group_name AS 'Name', "
 			. "grp.group_title 'Title', "
@@ -559,11 +429,10 @@ self::$ActionTable['show']['groups']	= function (&$a) {
 			. "AND grp.group_id = wg.fk_group_id "
 			. "AND grp.group_name != 'Server_owner' "
 			. "ORDER BY grp.group_name;"
-	);
+	); 
 };
 
-self::$ActionTable['show']['keywords']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['keywords']	= function (&$a) { return array(
 		"SELECT "
 			. "ws.ws_name AS 'Website', "
 			. "art.arti_name AS 'Article', "
@@ -581,11 +450,10 @@ self::$ActionTable['show']['keywords']	= function (&$a) {
 			. "AND kw.fk_arti_id = art.arti_id "
 			. "AND kw.fk_ws_id = ws.ws_id "
 			. "ORDER BY kw.keyword_name"
-	);
+	); 
 };
 
-self::$ActionTable['show']['menus']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['menus']	= function (&$a) { return array(
 		"SELECT "
 			. "m.menu_name AS 'Name', "
 			. "m.menu_title AS 'Title', "
@@ -613,11 +481,10 @@ self::$ActionTable['show']['menus']	= function (&$a) {
 			. "AND m.fk_perm_id = perm.perm_id "
 			. "AND m.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. "ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position "
-	);
+	); 
 };
 
-self::$ActionTable['show']['modules']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['modules']	= function (&$a) { return array(
 		"SELECT "
 			. "m.module_name AS 'Name', "
 			. "m.module_title AS 'Title', "
@@ -633,13 +500,12 @@ self::$ActionTable['show']['modules']	= function (&$a) {
 			. "AND m.module_id = mw.fk_module_id "
 			. "AND m.fk_perm_id = p.perm_id "
 			. "ORDER BY m.module_name, mw.module_position;"
-	);
+	); 
 };
 
 
 
-self::$ActionTable['show']['users']		= function (&$a) {
-	return array(
+self::$ActionTable['show']['users']		= function (&$a) { return array(
 		"SELECT "
 			. "usr.user_name AS 'Name', "
 			. "usr.user_login AS 'Login', "
@@ -656,26 +522,23 @@ self::$ActionTable['show']['users']		= function (&$a) {
 			. "AND gw.fk_group_id = gu.fk_group_id "
 			. "AND gu.fk_user_id = usr.user_id "
 			. "GROUP BY usr.user_id"
-	);
+	); 
 };
 
-self::$ActionTable['show']['websites']	= function (&$a) {
-	return array(
+self::$ActionTable['show']['websites']	= function (&$a) { return array(
 		"SELECT " .
 			"ws_name AS 'Name', "
 			. "ws_directory AS 'Directory' "
 			. "FROM "
 			. $a['sqlTables']['website'] . " "
 			. "ORDER BY ws_id;"
-	);
+	); 
 };
 
 //--------------------------------------------------------------------------------
 //	Share
 //--------------------------------------------------------------------------------
-self::$ActionTable['share']['document']		= function (&$a) {
-	return array("INSERT INTO " . $a['sqlTables']['document_share'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");");
-};
+self::$ActionTable['share']['document']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['document_share'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 //--------------------------------------------------------------------------------
 //	Website
@@ -685,5 +548,6 @@ self::$ActionTable['website']['context'] = function (&$a) {
 	$CurrentSetObj = CurrentSet::getInstance();
 	$CurrentSetObj->setWebSiteContextObj(new WebSite());
 	$CurrentSetObj->WebSiteContextObj->changeWebSiteContext($a['params']['ws_id']);
-	return 0;
+	return 0; 
 };
+

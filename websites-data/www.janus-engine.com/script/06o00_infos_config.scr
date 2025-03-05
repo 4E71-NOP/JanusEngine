@@ -1,0 +1,21 @@
+add infos_config	website	"JanusEngine"	section "user"	field	"Facebook"				label_ref	"facebook"		type	"string"	order 1;
+add infos_config	website	"JanusEngine"	section "user"	field	"WhatsApp"				label_ref	"whatsapp"		type	"string"	order 2;
+add infos_config	website	"JanusEngine"	section "user"	field	"YouTube"				label_ref	"youtube"		type	"string"	order 3;
+add infos_config	website	"JanusEngine"	section "user"	field	"Instagram"				label_ref	"instagram"		type	"string"	order 4;
+add infos_config	website	"JanusEngine"	section "user"	field	"TikTok"				label_ref	"tiktok"		type	"string"	order 5;
+add infos_config	website	"JanusEngine"	section "user"	field	"WeChat"				label_ref	"wechat"		type	"string"	order 7;
+add infos_config	website	"JanusEngine"	section "user"	field	"Telegram"				label_ref	"telegram"		type	"string"	order 8;
+add infos_config	website	"JanusEngine"	section "user"	field	"Snapchat"				label_ref	"snapchat"		type	"string"	order 9;
+add infos_config	website	"JanusEngine"	section "user"	field	"X_formerly_Twitter"	label_ref	"x_twitter"		type	"string"	order 10;
+add infos_config	website	"JanusEngine"	section "user"	field	"Pinterest"				label_ref	"pinterest"		type	"string"	order 11;
+add infos_config	website	"JanusEngine"	section "user"	field	"Reddit"				label_ref	"reddit"		type	"string"	order 12;
+add infos_config	website	"JanusEngine"	section "user"	field	"LinkedIn"				label_ref	"linkedin"		type	"string"	order 13;
+add infos_config	website	"JanusEngine"	section "user"	field	"Quora"					label_ref	"quora"			type	"string"	order 14;
+add infos_config	website	"JanusEngine"	section "user"	field	"Discord"				label_ref	"discord"		type	"string"	order 15;
+add infos_config	website	"JanusEngine"	section "user"	field	"Slack"					label_ref	"slack"			type	"string"	order 16;
+add infos_config	website	"JanusEngine"	section "user"	field	"Twitch"				label_ref	"twitch"		type	"string"	order 17;
+add infos_config	website	"JanusEngine"	section "user"	field	"Tumblr"				label_ref	"tumblr"		type	"string"	order 18;
+add infos_config	website	"JanusEngine"	section "user"	field	"Threads"				label_ref	"threads"		type	"string"	order 19;
+add infos_config	website	"JanusEngine"	section "user"	field	"Bluesky"				label_ref	"bluesky"		type	"string"	order 20;
+add infos_config	website	"JanusEngine"	section "user"	field	"Mastodon"				label_ref	"mastodon"		type	"string"	order 21;
+

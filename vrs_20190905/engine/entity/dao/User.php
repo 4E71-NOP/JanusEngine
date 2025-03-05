@@ -15,6 +15,7 @@ class User extends Entity
 {
 	private $User;
 	private $groupList = array();
+
 	//@formatter:off
 	private $columns = array(
 		'user_id'						=> 0,
@@ -23,35 +24,17 @@ class User extends Entity
 		'user_password'					=> "1a2b3c4d5e",
 		'user_subscription_date'		=> 0,
 		'user_status'					=> 0,
+	
 		'user_role_function'			=> 0,
-		'user_forum_access'				=> 0,
-		'user_email'					=> 0,
-		'user_msn'						=> 0,
-		'user_aim'						=> 0,
-		'user_icq'						=> 0,
-		'user_yim'						=> 0,
-		'user_website'					=> 0,
-		'user_perso_name'				=> 0,
-		'user_perso_country'			=> 0,
-		'user_perso_town'				=> 0,
-		'user_perso_occupation'			=> 0,
-		'user_perso_interest'			=> 0,
+		'user_pref_theme'				=> 0,
+		'user_lang'						=> 0,
+	
+		'user_avatar_image'				=> 0,
+		'user_admin_comment'			=> 0,
+
 		'user_last_visit'				=> 0,
 		'user_last_ip'					=> 0,
 		'user_timezone'					=> 0,
-		'user_lang'						=> 0,
-		'user_pref_theme'				=> 0,
-		'user_pref_newsletter'			=> 0,
-		'user_pref_show_email'			=> 0,
-		'user_pref_show_online_status'	=> 0,
-		'user_pref_forum_notification'	=> 0,
-		'user_pref_forum_pm'			=> 0,
-		'user_pref_allow_bbcode'		=> 0,
-		'user_pref_allow_html'			=> 0,
-		'user_pref_autorise_smilies'	=> 0,
-		'user_avatar_image'				=> 0,
-		'user_admin_comment'			=> 0,
-		'fk_group_id'					=> 0,
 	);
 	//@formatter:on
 
@@ -165,7 +148,6 @@ class User extends Entity
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
@@ -295,6 +277,9 @@ class User extends Entity
 			$this->User['user_pref_theme'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_theme_id');
 		}
 
+		// Get the list of info_config for this type
+		$this->getInfosConfig('user');
+		$this->getInfos($this->User['user_id'], 'user');
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
 		return $res;

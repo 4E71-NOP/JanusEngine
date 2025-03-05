@@ -126,6 +126,10 @@ class StringFormat
 		self::$ConvertTable['group']['staff']					= _STAFF_;
 		self::$ConvertTable['group']['senior_staff']			= _SENIOR_STAFF_;
 
+		self::$ConvertTable['infos_config']['string']			= 0;
+		self::$ConvertTable['infos_config']['number']			= 1;
+		self::$ConvertTable['infos_config']['timestamp']		= 2;
+
 		self::$ConvertTable['module']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['module']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['module']['off']					= &self::$ConvertTable['universal']['off'];
