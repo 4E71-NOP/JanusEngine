@@ -32,6 +32,7 @@ class ClassLoader
 		"LogManagement"				=> _UTILITY_DIRECTORY_ . "LogManagement.php",
 		"Mapper"					=> _UTILITY_DIRECTORY_ . "Mapper.php",
 		"MenuSelectTable"			=> _UTILITY_DIRECTORY_ . "MenuSelectTable.php",
+		"MiscTools"					=> _UTILITY_DIRECTORY_ . "MiscTools.php",
 		"RenderAdmDashboard"		=> _UTILITY_DIRECTORY_ . "RenderAdmDashboard.php",
 		"RenderForm"				=> _UTILITY_DIRECTORY_ . "RenderForm.php",
 		"RenderDeco10Menu"			=> _UTILITY_DIRECTORY_ . "RenderDeco10Menu.php",

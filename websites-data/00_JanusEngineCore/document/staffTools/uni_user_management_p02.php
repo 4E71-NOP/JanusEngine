@@ -30,7 +30,7 @@
 $bts->RequestDataObj->setRequestData(
 	'userForm',
 	array(
-		'selectionId'		=>	1213894243138838511,
+		'selectionId'		=>	5676061570371875937,
 		// 'selectionLogin'	=>	"auteur_senior",
 	)
 );
@@ -62,9 +62,8 @@ $bts->I18nTransObj->apply(
 			"tabTxt1"		=> "Général",
 			"tabTxt2"		=> "Etat",
 			"tabTxt3"		=> "Adresses",
-			"tabTxt4"		=> "Perso",
-			"tabTxt5"		=> "Localisation",
-			"tabTxt6"		=> "Config",
+			"tabTxt4"		=> "Localisation",
+			"tabTxt5"		=> "Config",
 			"raf1"			=> "Rien a afficher",
 
 			"t1l1c1"		=>	"ID",
@@ -77,20 +76,6 @@ $bts->I18nTransObj->apply(
 			"t2l1c1"		=>	"Groupe initial",
 			"t2l2c1"		=>	"Statut",
 			"t2l3c1"		=>	"Fonction",
-			"t2l4c1"		=>	"Droits forums",
-
-			"t3l1c1"		=>	"Courriel",
-			"t3l2c1"		=>	"MSN",
-			"t3l3c1"		=>	"AIM",
-			"t3l4c1"		=>	"ICQ",
-			"t3l5c1"		=>	"YIM",
-			"t3l6c1"		=>	"Site web",
-
-			"t4l1c1"		=>	"Nom",
-			"t4l2c1"		=>	"Pays",
-			"t4l3c1"		=>	"Ville",
-			"t4l4c1"		=>	"Occupation",
-			"t4l5c1"		=>	"Interet",
 
 			"t5l1c1"		=>	"Langue",
 			"t5l2c1"		=>	"Dernière visite",
@@ -101,11 +86,6 @@ $bts->I18nTransObj->apply(
 			"t6l2c1"		=>	"Newsletter",
 			"t6l3c1"		=>	"Montre email",
 			"t6l4c1"		=>	"Montre status online",
-			"t6l5c1"		=>	"Notification reponse forum",
-			"t6l6c1"		=>	"Notification nouveau",
-			"t6l7c1"		=>	"Autorise bbcode",
-			"t6l8c1"		=>	"Autorise html",
-			"t6l9c1"		=>	"Autorise smilies",
 
 			"public"		=>	"Public",
 			"private"		=>	"Privé",
@@ -118,9 +98,8 @@ $bts->I18nTransObj->apply(
 			"tabTxt1"		=> "General",
 			"tabTxt2"		=> "State",
 			"tabTxt3"		=> "Addresses",
-			"tabTxt4"		=> "Perso",
-			"tabTxt5"		=> "Localisation",
-			"tabTxt6"		=> "Config",
+			"tabTxt4"		=> "Localisation",
+			"tabTxt5"		=> "Config",
 			"raf1"			=> "Nothing to display",
 
 			"t1l1c1"		=>	"ID",
@@ -133,20 +112,6 @@ $bts->I18nTransObj->apply(
 			"t2l1c1"		=>	"Initial group",
 			"t2l2c1"		=>	"Status",
 			"t2l3c1"		=>	"Fonction",
-			"t2l4c1"		=>	"Forums access",
-
-			"t3l1c1"		=>	"Email",
-			"t3l2c1"		=>	"MSN",
-			"t3l3c1"		=>	"AIM",
-			"t3l4c1"		=>	"ICQ",
-			"t3l5c1"		=>	"YIM",
-			"t3l6c1"		=>	"Website",
-
-			"t4l1c1"		=>	"Nom",
-			"t4l2c1"		=>	"Country",
-			"t4l3c1"		=>	"Town",
-			"t4l4c1"		=>	"Occupation",
-			"t4l5c1"		=>	"Interest",
 
 			"t5l1c1"		=>	"Language",
 			"t5l2c1"		=>	"Last visit",
@@ -157,11 +122,6 @@ $bts->I18nTransObj->apply(
 			"t6l2c1"		=>	"newsletter",
 			"t6l3c1"		=>	"show email",
 			"t6l4c1"		=>	"show status online",
-			"t6l5c1"		=>	"forum notification",
-			"t6l6c1"		=>	"new topic notification",
-			"t6l7c1"		=>	"Allow bbcode",
-			"t6l8c1"		=>	"Allow html",
-			"t6l9c1"		=>	"Allow smilies",
 
 			"public"		=>	"Public",
 			"private"		=>	"Private",
@@ -240,7 +200,6 @@ $timezone = array(
 	23		=> "-1 - Azores, Cape Verda Is.",
 );
 
-
 // --------------------------------------------------------------------------------------------
 
 $Content .=
@@ -256,17 +215,31 @@ $Content .=
 	. "<p>\r";
 
 // --------------------------------------------------------------------------------------------
+$l = 1;
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $currentUserObj->getUserEntry('user_id');
+$l++;
 
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
-$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
-$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l2c1');
+$l++;
 
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l3c1');
+$l++;
 
-$T['Content'][$curTab]['1']['2']['cont'] = $currentUserObj->getUserEntry('user_id');
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l4c1');
+$infos['IconSelectFile'] = $FileSelectorConfig;
+$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
+$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
+$l++;
 
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l5c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
+$l++;
+
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l6c1');
+$T['Content'][$curTab][$l]['2']['cont'] = "<textarea name='formParams[user_admin_comment]' cols='50' rows='5'>" . $currentUserObj->getUserEntry('user_admin_comment') . "</textarea>";
+$l++;
 
 $FileSelectorConfig = array_merge(
 	$bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
@@ -286,184 +259,128 @@ $FileSelectorConfig = array_merge(
 
 	)
 );
-// $FileSelectorConfig = array(
-// 		"width"				=> 80,	//in %
-// 		"height"			=> 50,	//in %
-// 		"formName"			=> "userForm",
-// 		"formTargetId"		=> "formParams[user_avatar_image]",
-// 		"formInputSize"		=> 25 ,
-// 		"formInputVal"		=> $currentUserObj->getUserEntry('user_avatar_image'),
-// 		"path"				=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
-// 		"restrictTo"		=> "/websites-data/".$WebSiteObj->getWebSiteEntry ('ws_directory')."/data/images/avatars/",
-// 		"strRemove"			=> "/\.*\w*\//",
-// 		"strAdd"			=> "../",
-// 		"selectionMode"		=> "file",
-// 		"displayType"		=> "imageMosaic",
-// 		"buttonId"			=> "t5l8c2",
-// 		"case"				=> 3,
-// 		"update"			=> 1,
-// 		"array"				=> "tableFileSelector[".$CurrentSetObj->getDataEntry('fsIdx')."]",
-// );
-$infos['IconSelectFile'] = $FileSelectorConfig;
-$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
-$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
 
-$T['Content'][$curTab]['5']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_subscription_date'));
-$T['Content'][$curTab]['6']['2']['cont'] = "<textarea name='formParams[user_admin_comment]' cols='50' rows='5'>" . $currentUserObj->getUserEntry('user_admin_comment') . "</textarea>";
+$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig(6, 2, 2);
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l4c1');
-
 $bts->LMObj->logDebug($currentUserObj, 'currentUserObj');
 
-// Group shouldn't be there. It's better to create a group-user link management interface
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[group_DEPRECATED]',
-	'defaultSelected' => $currentUserObj->getUserEntry('fk_group_id'),
-	'options' => $tabGroup,
-));
-
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$l = 1;
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l2c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[status]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_status'),
 	'options' => $tab['state'],
 ));
+$l++;
 
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t2l3c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[role_function]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_role_function'),
 	'options' => $tab['role'],
 ));
+$l++;
 
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[forums]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_forum_access'),
-	'options' => $tab['yesno'],
-));
+$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig(2, 2, 2);
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
 
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l4c1');
-$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l5c1');
-$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t3l6c1');
+// query 
+$q = "SELECT ic.* FROM "
+	. $SqlTableListObj->getSQLTableName('infos_config') . " ic "
+	. "WHERE ic.infcfg_section = 'user' "
+	. "AND ic.infcfg_enabled = 1 "
+	. "AND ic.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "' "
+	. "ORDER BY ic.infcfg_order;"
+;
 
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[email]',	$currentUserObj->getUserEntry('user_email'));
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[msn]',		$currentUserObj->getUserEntry('user_msn'));
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[aim]',		$currentUserObj->getUserEntry('user_aim'));
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[icq]',		$currentUserObj->getUserEntry('user_icq'));
-$T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[yim]',		$currentUserObj->getUserEntry('user_yim'));
-$T['Content'][$curTab]['6']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[website]',	$currentUserObj->getUserEntry('user_website'));
+$l = 1;
+$dbquery = $bts->SDDMObj->query($q);
+if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+		$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry($dbp['infcfg_label_ref']);
+		switch ( $dbp['infcfg_type'] ) {
+			case 0; // string
+				$tmpContent = $bts->RenderFormObj->renderInputText('formParams1[adr_'.$dbp['infcfg_field'].']',	$currentUserObj->getInfosEntry($dbp['infcfg_field']));
+			break;
+			case 1; // number
+			break;
+			case 2; // timestamp
+			break;
+		}
+		$T['Content'][$curTab][$l]['2']['cont'] = $tmpContent;
+		$l++;
+	}
+}
 
+$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l - 1, 2, 2);
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
-
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l4c1');
-$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4l5c1');
-
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[perso_nom]',			$currentUserObj->getUserEntry('perso_nom'));
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[perso_pays]',			$currentUserObj->getUserEntry('perso_pays'));
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[perso_ville]',			$currentUserObj->getUserEntry('perso_ville'));
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[perso_occupation]',	$currentUserObj->getUserEntry('perso_occupation'));
-$T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderInputText('formParams1[perso_interet]',		$currentUserObj->getUserEntry('perso_interet'));
-
-// --------------------------------------------------------------------------------------------
-$curTab++;
-
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
-
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$l = 1;
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l1c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[lang]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_lang'),
 	'options' => $tabLanguage,
 ));
+$l++;
 
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_last_visit'));
-$T['Content'][$curTab]['3']['2']['cont'] = $currentUserObj->getUserEntry('user_last_ip');
-$T['Content'][$curTab]['4']['2']['cont'] = $timezone[$currentUserObj->getUserEntry('user_timezone')];
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l2c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->TimeObj->timestampToDate($currentUserObj->getUserEntry('user_last_visit'));
+$l++;
+
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l3c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $currentUserObj->getUserEntry('user_last_ip');
+$l++;
+
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t5l4c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $timezone[$currentUserObj->getUserEntry('user_timezone')];
+$l++;
+
+$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l -1, 2, 2);
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
+$l = 1;
 
-$T['Content'][$curTab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
-$T['Content'][$curTab]['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
-$T['Content'][$curTab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
-$T['Content'][$curTab]['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
-$T['Content'][$curTab]['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l5c1');
-$T['Content'][$curTab]['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l6c1');
-$T['Content'][$curTab]['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l7c1');
-$T['Content'][$curTab]['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l8c1');
-$T['Content'][$curTab]['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l9c1');
-
-$T['Content'][$curTab]['1']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l1c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[pref_theme]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_theme'),
 	'options' => $tabTheme,
 ));
+$l++;
 
-$T['Content'][$curTab]['2']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l2c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[pref_newsletter]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_newsletter'),
 	'options' => $tab['yesno'],
 ));
+$l++;
 
-$T['Content'][$curTab]['3']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l3c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[pref_show_email]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_show_email'),
 	'options' => $tab['yesno'],
 ));
+$l++;
 
-$T['Content'][$curTab]['4']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
+$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l4c1');
+$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
 	'name' => 'formParams1[pref_show_online_status]',
 	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_show_online_status'),
 	'options' => $tab['yesno'],
 ));
+$l++;
 
-$T['Content'][$curTab]['5']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[pref_forum_notification]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_forum_notification'),
-	'options' => $tab['yesno'],
-));
-
-$T['Content'][$curTab]['6']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[pref_forum_pm]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_forum_pm'),
-	'options' => $tab['yesno'],
-));
-
-$T['Content'][$curTab]['7']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[pref_allow_bbcode]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_allow_bbcode'),
-	'options' => $tab['yesno'],
-));
-
-$T['Content'][$curTab]['8']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[pref_allow_html]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_allow_html'),
-	'options' => $tab['yesno'],
-));
-
-$T['Content'][$curTab]['9']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(array(
-	'name' => 'formParams1[pref_autorise_smilies]',
-	'defaultSelected' => $currentUserObj->getUserEntry('user_pref_autorise_smilies'),
-	'options' => $tab['yesno'],
-));
+$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l -1, 2, 2);
 
 // --------------------------------------------------------------------------------------------
 //
@@ -471,15 +388,7 @@ $T['Content'][$curTab]['9']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 6);
-$T['ContentCfg']['tabs'] = array(
-	1	=>	$bts->RenderTablesObj->getDefaultTableConfig(6, 2, 2),
-	2	=>	$bts->RenderTablesObj->getDefaultTableConfig(4, 2, 2),
-	3	=>	$bts->RenderTablesObj->getDefaultTableConfig(6, 2, 2),
-	4	=>	$bts->RenderTablesObj->getDefaultTableConfig(5, 2, 2),
-	5	=>	$bts->RenderTablesObj->getDefaultTableConfig(4, 2, 2),
-	6	=>	$bts->RenderTablesObj->getDefaultTableConfig(9, 2, 2),
-);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 5);
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------

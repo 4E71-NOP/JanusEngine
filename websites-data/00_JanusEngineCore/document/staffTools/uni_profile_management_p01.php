@@ -68,6 +68,7 @@ $bts->I18nTransObj->apply(
 			"col_7_txt"		=>	"Message",
 			"tabTxt1"		=>	"Compte",
 			"tabTxt2"		=>	"Preferences",
+			"tabTxt3"		=>	"Adresses",
 			"btn1"			=>	"Rafraichir la vue",
 			"btn2"			=>	"Supprimer",
 			"AvatarUploadError" => array(
@@ -79,19 +80,16 @@ $bts->I18nTransObj->apply(
 				5	=>	"Extension interdite pour les images d'avatar.",
 			),
 			"confirmation_modification_oubli"	=>	"Vous n'avez pas confirm&eacute; la modification du profil.",
-			"t1_login"	=>	"Identifiant",
-			"t1_mail"	=>	"Email",
-			"t1_avatar"	=>	"Avatar",
-			"t1_upload"	=>	"Téléchargement",
+			"t1_login"			=>	"Identifiant",
+			"t1_mail"			=>	"Email",
+			"t1_avatar"			=>	"Avatar",
+			"t1_upload"			=>	"Téléchargement",
+			"t1_passwordTopic"	=>	"Mot de passe",
+			"t1_passwordLink"	=>	"Suivre ce lien pour changer le mot de passe",
 			"t4_l1"	=>	"Recevoir la newsletter",
 			"t4_l2"	=>	"Montrer l'E-mail au public",
 			"t4_l3"	=>	"Montrer le status 'En ligne'",
-			"t4_l4"	=>	"Recevoir une notification des forums",
-			"t4_l5"	=>	"Recevoir une notification de la messagerie priv&eacute;e",
-			"t4_l6"	=>	"Autorise le BBcode",
-			"t4_l7"	=>	"Autorise le HTML",
-			"t4_l8"	=>	"Autorise les smileys",
-			"t4_l9"	=>	"Langue",
+			"t4_l4"	=>	"Langue",
 			"modif_profil"	=>	"Modifier le profil",
 			"upload_avatar"	=>	"Télécharger une image",
 			"uni"	=>	array(
@@ -118,6 +116,7 @@ $bts->I18nTransObj->apply(
 			"col_7_txt"		=>	"Message",
 			"tabTxt1"		=>	"Compte",
 			"tabTxt2"		=>	"Préférences",
+			"tabTxt3"		=>	"Addresses",
 			"btn1"			=>	"Refresh display",
 			"AvatarUploadError" => array(
 				0	=>	"Unknown error.",
@@ -128,19 +127,16 @@ $bts->I18nTransObj->apply(
 				5	=>	"Forbidden extenssion for avatar images.",
 			),
 			"confirmation_modification_oubli"	=>	"You forgot to confirm the profil modification.",
-			"t1_login"	=>	"Login",
-			"t1_mail"	=>	"Email",
-			"t1_avatar"	=>	"Avatar",
-			"t1_upload"	=>	"Upload",
+			"t1_login"			=>	"Login",
+			"t1_mail"			=>	"Email",
+			"t1_avatar"			=>	"Avatar",
+			"t1_upload"			=>	"Upload",
+			"t1_passwordTopic"	=>	"Password",
+			"t1_passwordLink"	=>	"Follow this link to change your password",
 			"t4_l1"	=>	"Get the newletter",
 			"t4_l2"	=>	"Show email to the public",
 			"t4_l3"	=>	"Show Online status",
-			"t4_l4"	=>	"Be notified by the forum",
-			"t4_l5"	=>	"Be notified on private message",
-			"t4_l6"	=>	"Allow BBcode",
-			"t4_l7"	=>	"Allow HTML",
-			"t4_l8"	=>	"Allow smileys",
-			"t4_l9"	=>	"Language",
+			"t4_l4"	=>	"Language",
 			"modif_profil"	=>	"Update profile",
 			"upload_avatar"	=>	"Upload image",
 			"uni"	=>	array(
@@ -228,36 +224,46 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 
 	$T = array();
-	$T['Content']['1']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_login');
-	$T['Content']['1']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_mail');
-	$T['Content']['1']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_avatar');
-	$T['Content']['1']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_upload');
-
-	$T['Content']['1']['1']['2']['cont'] = "<input type='text' name='formParams[login]' value='" . $UserObj->getUserEntry('user_login') . "' size='15' maxlength='255' disabled>";
-	$T['Content']['1']['2']['2']['cont'] = $bts->RenderFormObj->renderInputText("formParams[user_email]", $UserObj->getUserEntry('user_email'), "", 30);
-	// $T['Content']['1']['2']['2']['cont'] = "<input type='text' name='formParams[user_email]'	value='" .	$UserObj->getUserEntry('user_email')	. "' size='30' maxlength='255'>";
-
-	if (strlen($PmListTheme['user_avatar_image'] ?? '') != 1024) {
-		$T['Content']['1']['3']['2']['cont'] = "<img src='" . $PmListTheme['user_avatar_image'] . "' width='48' height='48' alt='[Avatar]'>";
-	} else {
-		$T['Content']['1']['3']['2']['cont'] = "N/A";
-	}
-	$T['Content']['1']['3']['2']['cont'] .=	$bts->InteractiveElementsObj->renderIconSelectFile($infos);
-	$T['Content']['1']['4']['2']['cont'] = "<input type='hidden' name='MAX_FILE_SIZE' value='32768'> 
-	<input type='file' name='formParams[AvatarSelectedFile]' size='40'>";
+	$curTab = 0;
+	$maxLines = 0;
 
 	// --------------------------------------------------------------------------------------------
-	$T['Content']['2']['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l1');
-	$T['Content']['2']['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l2');
-	$T['Content']['2']['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l3');
-	$T['Content']['2']['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l4');
-	$T['Content']['2']['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l5');
-	$T['Content']['2']['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l6');
-	$T['Content']['2']['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l7');
-	$T['Content']['2']['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l8');
-	$T['Content']['2']['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l9');
+	$curTab++;
+	$l = 1;
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_login');
+	$T['Content'][$curTab][$l]['2']['cont'] = "<input type='text' name='formParams[login]' value='" . $UserObj->getUserEntry('user_login') . "' size='15' maxlength='255' disabled>";
+	$l++;
+	
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_mail');
+	$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText("formParams[user_email]", $UserObj->getUserEntry('user_email'), "", 30);
+	$l++;
+	
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_avatar');
+	if (strlen($PmListTheme['user_avatar_image'] ?? '') != 1024) {
+		$T['Content'][$curTab][$l]['2']['cont'] = "<img src='" . $PmListTheme['user_avatar_image'] . "' width='48' height='48' alt='[Avatar]'>";
+	} else {
+		$T['Content'][$curTab][$l]['2']['cont'] = "N/A";
+	}
+	$T['Content'][$curTab][$l]['2']['cont'] .=	$bts->InteractiveElementsObj->renderIconSelectFile($infos);
+	$l++;
+	
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_upload');
+	$T['Content'][$curTab][$l]['2']['cont'] = "<input type='hidden' name='MAX_FILE_SIZE' value='32768'> 
+	<input type='file' name='formParams[AvatarSelectedFile]' size='40'>";
+	$l++;
+	
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_passwordTopic');
+	$T['Content'][$curTab][$l]['2']['cont'] = "<a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') 
+			. "reset-password'>" . $bts->I18nTransObj->getI18nTransEntry('t1_passwordLink') . "</a>";
+	$l++;
 
-	// TSO = $TableSelectOptions
+	$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l -1, 2, 2);
+	if ($l > $maxLines) { $maxLines = $l;}
+
+	// --------------------------------------------------------------------------------------------
+	$curTab++;
+	$l = 1;
+
 	$TSO = array(
 		0	=>	array(
 			"A"	=>	"<option value='0' ",
@@ -269,94 +275,119 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		),
 	);
 
+	$preferenceList = array( 
+		"show_email",
+		"show_online_status",
+		"",
+		"",
+		"",
+		"",
+		"",
+	);
+
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l1');
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_newsletter')]['s'] = "selected";
-	$T['Content']['2']['1']['2']['cont'] = "<select name='formParams[pref_newsletter]'>\r"
+	$T['Content'][$curTab][$l]['2']['cont'] = "<select name='formParams[user_pref_newsletter]'>\r"
 		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
 		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
 		. "</select>\r";
+	$l++;
 
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l2');
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_show_email')]['s'] = "selected";
-	$T['Content']['2']['2']['2']['cont'] = "<select name='formParams[pref_montre_email]'>\r "
+	$T['Content'][$curTab][$l]['2']['cont'] = "<select name='formParams[user_pref_show_email]'>\r "
 		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
 		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
 		. "</select>\r";
+	$l++;
 
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l3');
 	$TSO['S0'] = $TSO['S1'] = "";
 	$TSO[$UserObj->getUserEntry('user_pref_show_online_status')]['s'] = "selected";
-	$T['Content']['2']['3']['2']['cont'] = "<select name='formParams[pref_montre_status_online]'>\r "
+	$T['Content'][$curTab][$l]['2']['cont'] = "<select name='formParams[user_pref_show_online_status]'>\r "
 		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
 		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
 		. "</select>\r";
+	$l++;
 
-	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_forum_notification')]['s'] = "selected";
-	$T['Content']['2']['4']['2']['cont'] = "<select name='formParams[pref_notification_reponse_forum]'>\r"
-		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
-		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
-		. "</select>\r";
+	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t4_l4');
+	$T['Content'][$curTab][$l]['2']['cont'] = "<select name='formParams[lang]'>\r";
 
-	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_forum_pm')]['s'] = "selected";
-	$T['Content']['2']['5']['2']['cont'] = "<select name='formParams[pref_notification_nouveau_pm]'>\r"
-		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
-		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
-		. "</select>\r";
+	$langList = array();
+	$q = "SELECT * FROM ". $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " l;";
+	$dbqueryL1 = $bts->SDDMObj->query($q);
+	while ($dbpL1 = $bts->SDDMObj->fetch_array_sql($dbqueryL1)) {
+		$langList[$dbpL1['lang_id']] =  array(
+			"lang_id"				=>	$dbpL1['lang_id'],           
+			"lang_639_3"			=>	$dbpL1['lang_639_3'],        
+			"lang_original_name"	=>	$dbpL1['lang_original_name'],
+			"lang_639_2"			=>	$dbpL1['lang_639_2'],        
+			"lang_639_1"			=>	$dbpL1['lang_639_1'],        
+			"lang_image"			=>	$dbpL1['lang_image'],        
+		);
+	}
 
-	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_allow_bbcode')]['s'] = "selected";
-	$T['Content']['2']['6']['2']['cont'] = "<select name='formParams[pref_autorise_bbcode]'>\r "
-		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
-		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
-		. "</select>\r";
-
-	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_allow_html')]['s'] = "selected";
-	$T['Content']['2']['7']['2']['cont'] = "<select name='formParams[pref_autorise_html]'>\r"
-		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
-		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
-		. "</select>\r";
-
-	$TSO['S0'] = $TSO['S1'] = "";
-	$TSO[$UserObj->getUserEntry('user_pref_autorise_smilies')]['s'] = "selected";
-	$T['Content']['2']['8']['2']['cont'] = "<select name='formParams[pref_autorise_smilies]'>\r"
-		. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
-		. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
-		. "</select>\r";
-
-	$T['Content']['2']['9']['2']['cont'] = "<select name='formParams[lang]'>\r";
-	$dbqueryL = $bts->SDDMObj->query("
-		SELECT lw.fk_lang_id FROM "
+	$q = "SELECT lw.fk_lang_id FROM "
 		. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw , "
 		. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " w 
 		WHERE w.ws_id ='" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
 		AND lw.fk_ws_id = w.ws_id
-		;");
-	$langList = array();
-	while ($dbpL = $bts->SDDMObj->fetch_array_sql($dbqueryL)) {
-		$langList[$dbpL['lang_id']]['support'] = 1;
+		;";
+	$dbqueryL2 = $bts->SDDMObj->query($q);
+	while ($dbpL2 = $bts->SDDMObj->fetch_array_sql($dbqueryL2)) {
+		$langList[$dbpL2['fk_lang_id']]['support'] = 1;
 	}
 	if ($PmListTheme['user_lang'] == 0) {
 		$langList[$WebSiteObj->getWebSiteEntry('fk_lang_id')]['s'] = " selected ";
 	} else {
 		$langList[$PmListTheme['user_lang']]['s'] = " selected ";
 	}
+
+	reset($langList);
+	unset($A);
+	
 	foreach ($langList as $A) {
 		if ($A['support'] == 1) {
-			$T['Content']['2']['9']['2']['cont'] .= "<option value='" . $A['lang_639_3'] . "' " . $A['s'] . "> " . $A['lang_original_name'] . " </option>\r";
+			$T['Content'][$curTab][$l]['2']['cont'] .= "<option value='" . $A['lang_639_3'] . "' " . $A['s'] . "> " . $A['lang_original_name'] . " </option>\r";
 		}
 	}
-	$T['Content']['2']['9']['2']['cont'] .= "</select>\r";
+	
+	$T['Content'][$curTab][$l]['2']['cont'] .= "</select>\r";
+	$l++;
 
+	$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l -1, 2, 2);
+	if ($l > $maxLines) { $maxLines = $l; }
 
 	// --------------------------------------------------------------------------------------------
-	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 2);
-	$T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4, 2, 2),
-		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(9, 2, 2),
-	);
+	$curTab++;
+	$l = 1;
+
+	$bts->InitClass('MiscTools');
+	$tab = $bts->MiscTools->makeInfosConfigList('user', 'adr_', '');
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : tab=" . $bts->StringFormatObj->print_r_debug($tab) ));
+
+	foreach ($tab as $IC) {
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : l=" . $l . ", field=" . $IC['infcfg_field']));
+
+		$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry($IC['infcfg_label_ref']);
+		$T['Content'][$curTab][$l]['2']['cont'] = $bts->RenderFormObj->renderInputText(
+			"formParams1['" . $IC['infcfg_field'] . "']", 
+			$UserObj->getInfosEntry($IC['infcfg_field']), 
+			"", 
+			64);
+		$l++;
+	}
+
+	$T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l - 1, 2, 2);
+	if ($l > $maxLines) { $maxLines = $l; }
+
+	// --------------------------------------------------------------------------------------------
+	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, $curTab);
+
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
+
 
 	$Content .= "
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>

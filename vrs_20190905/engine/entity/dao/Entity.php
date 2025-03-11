@@ -285,4 +285,9 @@ class Entity
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " no infos rows returned for this id : " . $id));
 		}
 	}
+
+
+	public function getInfosEntry($data) {
+		return $this->infos[$data];
+	}
 }

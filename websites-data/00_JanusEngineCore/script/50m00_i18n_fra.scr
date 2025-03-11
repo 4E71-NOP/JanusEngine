@@ -69,3 +69,25 @@ add translation	lang	"fra"		package	"initial"		name	"fileSelectorC3"			text	"Dat
 
 add translation	lang	"fra"		package	"initial"		name	"SqlNoResultReturned1"		text	"Aucune ligne retournée!";
 add translation	lang	"fra"		package	"initial"		name	"SqlNoResultReturned2"		text	"Aucune ligne retournée pour cette requête.";
+
+
+add translation	lang	"fra"		package	"initial"		name	"whatsapp"		text	"WhatsApp";
+add translation	lang	"fra"		package	"initial"		name	"telegram"		text	"Telegram";
+add translation	lang	"fra"		package	"initial"		name	"youtube"		text	"YouTube";
+add translation	lang	"fra"		package	"initial"		name	"x_twitter"		text	"X (Ancien Twitter)";
+add translation	lang	"fra"		package	"initial"		name	"linkedin"		text	"LinkedIn";
+add translation	lang	"fra"		package	"initial"		name	"snapchat"		text	"Snapchat";
+add translation	lang	"fra"		package	"initial"		name	"tiktok"		text	"TikTok";
+add translation	lang	"fra"		package	"initial"		name	"bluesky"		text	"Bluesky";
+add translation	lang	"fra"		package	"initial"		name	"wechat"		text	"WeChat";
+add translation	lang	"fra"		package	"initial"		name	"facebook"		text	"Facebook";
+add translation	lang	"fra"		package	"initial"		name	"mastodon"		text	"Mastodon";
+add translation	lang	"fra"		package	"initial"		name	"threads"		text	"Threads";
+add translation	lang	"fra"		package	"initial"		name	"quora"			text	"Quora";
+add translation	lang	"fra"		package	"initial"		name	"reddit"		text	"Reddit";
+add translation	lang	"fra"		package	"initial"		name	"twitch"		text	"Twitch";
+add translation	lang	"fra"		package	"initial"		name	"instagram"		text	"Instagram";
+add translation	lang	"fra"		package	"initial"		name	"discord"		text	"Discord";
+add translation	lang	"fra"		package	"initial"		name	"slack"			text	"Slack";
+add translation	lang	"fra"		package	"initial"		name	"tumblr"		text	"Tumblr";
+add translation	lang	"fra"		package	"initial"		name	"pinterest"		text	"Pinterest";

@@ -1188,9 +1188,9 @@ self::$InitTable['translation'] = function (&$a) {
 		"package"				=> "initial",
 		"name"					=> "default_err",
 		"text"					=> "something went wrong",
-
 	);
 };
+
 self::$InitTable['user'] = function (&$a) {
 	$a['params'] = array(
 		"id"					=> "",

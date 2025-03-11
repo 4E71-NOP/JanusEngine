@@ -38,6 +38,7 @@ class BaseToolSet
 	public $StringFormatObj;
 	public $TimeObj;
 	public $SQLlogEntry;
+	public $MiscTools;
 	// public $SqlTableListObj;
 
 	private static $Instance = null;
@@ -101,19 +102,43 @@ class BaseToolSet
 		return self::$Instance;
 	}
 
+
+	/**
+	 * Loads and prepare the given class
+	 */
+	public function InitClass($className)
+	{
+		$ClassLoaderObj = ClassLoader::getInstance();
+		$ClassLoaderObj->provisionClass($className);
+
+		switch ($className){
+			case "MiscTools":
+				$this->MiscTools		= MiscTools::getInstance();
+				break;
+			case "CommandConsole":
+				$this->CommandConsole	= CommandConsole::getInstance();
+				break;
+			case "SessionManagement":
+				$this->SMObj			= SessionManagement::getInstance();
+				break;
+		}
+	}
+
+
 	/**
 	 * Loads and prepare the command console class. 
+	 * @DEPRECATED
 	 */
 	public function InitCommandConsole()
 	{
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('CommandConsole');
-		$this->CommandConsole			= CommandConsole::getInstance();
 	}
 
 	/**
 	 * Sets the session management instance.
 	 * It is done this ways because the session isn't initialized right away at the start or when this class is loaded.
+	 * @DEPRECATED
 	 */
 	public function initSmObj()
 	{
