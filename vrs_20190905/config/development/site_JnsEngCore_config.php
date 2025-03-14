@@ -38,6 +38,8 @@ $fileContent = array(
 	),
 	"commandLineEngine"	=> array(
 		"state"			=>	"enabled"
-	)
-
+	),
+	"functions" => array(
+		"user_sign_up" => "enabled",
+	),
 );

@@ -60,37 +60,50 @@ class FormManagement
 		$tmpFormRequest = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section');
 		switch ($tmpFormRequest) {
 			case "CommandConsole";
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
-				// We consider we have a script 
-				$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// enabled/disabled
+				if ($bts->RequestDataObj->getRequestDataSubEntry('commandLineEngine', 'state') == 'enabled') {
+					// TODO must check a security token to make sure this was submitted by a form a not a forged post
 
-				$ClassLoaderObj->provisionClass('ScriptFormatting');
-				$ScriptFormattingObj = ScriptFormatting::getInstance();
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
+					// We consider we have a script to execute as it's from AdminDashboard
+					$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// enabled/disabled
 
-				$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
-				$ScriptFormattingObj->createMap($CLiContent);
-				$ScriptFormattingObj->commandFormatting($CLiContent);
+					$ClassLoaderObj->provisionClass('ScriptFormatting');
+					$ScriptFormattingObj = ScriptFormatting::getInstance();
 
-				unset($A);
-				foreach ($CLiContent['FormattedCommand'] as $A) {
-					$Script[] = $A['cont'];
+					$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
+					$ScriptFormattingObj->createMap($CLiContent);
+					$ScriptFormattingObj->commandFormatting($CLiContent);
+
+					unset($A);
+					foreach ($CLiContent['FormattedCommand'] as $A) {
+						$Script[] = $A['cont'];
+					}
+					$this->runCommandScript($Script);
+				} else {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Somebody tried to use commandLine while it is disabled."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Script submitted = `" . $bts->RequestDataObj->getRequestDataEntry('formConsole', 'CLiContent') . "`."));
 				}
-				$this->runCommandScript($Script);
+
 				break;
 
 			case "SubscriptionForm";
-				switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')) {
-					case "SubmitSubsciption":
-						$this->processSubscriptionForm();
-						// send mail if all is ok
-						break;
-					case "SubscriptionConfirmation":
-						$this->processSubscriptionConfirmation();
-						// user confirmed email address
-						// Enable user
-						break;
+				if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabled') {
+					switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')) {
+						case "SubmitSubsciption":
+							$this->processSubscriptionForm();
+							// send mail if all is ok
+							break;
+						case "SubscriptionConfirmation":
+							$this->processSubscriptionConfirmation();
+							// user confirmed email address
+							// Enable user
+							break;
+					}
+				} else {
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Somebody tried to use SubscriptionForm while it is disabled."));
 				}
+
 				break;
 
 			case "ResetPasswordForm";
@@ -109,6 +122,7 @@ class FormManagement
 				break;
 
 			default;
+			// Create script from submitted form
 				$ClassLoaderObj->provisionClass('FormToCommandLine');
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - FormToCommandLine"));
 				$FormToCommandLineObj = FormToCommandLine::getInstance();

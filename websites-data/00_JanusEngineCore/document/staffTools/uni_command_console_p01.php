@@ -41,10 +41,15 @@
 // $_REQUEST['requete_insert'] = "show user";
 
 $bts->RequestDataObj->setRequestData(
-	'formConsole',
-	array(
+	'formConsole',	array(
 		"CLiContent"		=> "show user",
-		"CLiContentResult"	=> array("result 01", "result 02", "result 03", "result 04", "result 05"),
+		"CLiContentResult"	=> array(
+			0 => array ("command" => "result 01" , "result" => "ok" ), 
+			1 => array ("command" => "result 02" , "result" => "ok" ), 
+			2 => array ("command" => "result 03" , "result" => "ok" ), 
+			3 => array ("command" => "result 04" , "result" => "ok" ), 
+			4 => array ("command" => "result 05" , "result" => "ok" )
+		),
 	)
 );
 

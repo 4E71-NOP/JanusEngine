@@ -328,13 +328,10 @@ class StringFormat
 
 			foreach ($data as $resultEntry) {
 				$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
-				// if ($doHeader == true) {
 				$tmpCol = reset($resultEntry);
-				foreach ($tmpCol as $A => $B) {
+				foreach ($tmpCol as $A => $B ) {
 					$str .= "<td>" . $A . "</td>\r";
 				}
-				$doHeader = false;
-				// }
 				reset($resultEntry);
 				foreach ($resultEntry as $tmpRecord) {
 					$str .= "<tr>\r";

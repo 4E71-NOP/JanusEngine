@@ -32,12 +32,14 @@ $fileContent = array(
 	"execution_context"	=> "render",
 	"InsertStatistics"	=> 1,
 	"mail"				=> array(
-		"host" => "mail.rootwave.net",
-		"username" => "cfdt@rootwave.net",
-		"password" => "Rcvbplsw20!!"
+		"host" => "---------------",
+		"username" => "-----------",
+		"password" => "-----------"
 	),
 	"commandLineEngine"	=> array(
 		"state"			=>	"enabled"
-	)
-
+	),
+	"functions" => array(
+		"user_sign_up" => "disabled",
+	),
 );

@@ -37,7 +37,9 @@ $fileContent = array(
 		"password" => "Rcvbplsw20!!"
 	),
 	"commandLineEngine"	=> array(
-		"state"				=> "enabled"
-	)
-
+		"state"			=>	"enabled"
+	),
+	"functions" => array(
+		"user_sign_up" => "enabled",
+	),
 );

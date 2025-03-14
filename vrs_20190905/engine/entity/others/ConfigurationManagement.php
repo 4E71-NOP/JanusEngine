@@ -194,58 +194,21 @@ class ConfigurationManagement
 	}
 
 	//@formatter:off
-	public function getConfigurationEntry($data)
-	{
-		return $this->Configuration[$data];
-	}
-	public function getConfigurationSubEntry($lvl1, $lvl2)
-	{
-		return $this->Configuration[$lvl1][$lvl2];
-	}
-	public function getConfiguration()
-	{
-		return $this->Configuration;
-	}
-	public function getExecutionContext()
-	{
-		return $this->Configuration['execution_context'];
-	}
-	public function getLanguageList()
-	{
-		return $this->LanguageList;
-	}
-	public function getLanguageListEntry($data)
-	{
-		return $this->LanguageList[$data];
-	}
-	public function getLanguageListSubEntry($Lvl1, $lvl2)
-	{
-		return $this->LanguageList[$Lvl1][$lvl2];
-	}
+	public function getConfigurationEntry($data)	{ return $this->Configuration[$data];	}
+	public function getConfigurationSubEntry($lvl1, $lvl2)	{ return $this->Configuration[$lvl1][$lvl2];	}
+	public function getConfiguration()	{ return $this->Configuration;	}
+	public function getExecutionContext()	{ return $this->Configuration['execution_context'];	}
 
-	public function setConfigurationEntry($entry, $data)
-	{
-		$this->Configuration[$entry] = $data;
-	}
-	public function setConfigurationSubEntry($lvl1, $lvl2, $data)
-	{
-		$this->Configuration[$lvl1][$lvl2] = $data;
-	}
-	public function setConfiguration($Configuration)
-	{
-		$this->Configuration = $Configuration;
-	}
-	public function setExecutionContext($data)
-	{
-		$this->Configuration['execution_context'] = $data;
-	}
-	public function setLanguageList($LanguageList)
-	{
-		$this->LanguageList = $LanguageList;
-	}
+	public function getLanguageList()	{ return $this->LanguageList;	}
+	public function getLanguageListEntry($data)	{ return $this->LanguageList[$data];	}
+	public function getLanguageListSubEntry($Lvl1, $lvl2)	{ return $this->LanguageList[$Lvl1][$lvl2];	}
 
-	public function toStringConfiguration()
-	{
+	public function setConfigurationEntry($entry, $data)	{ $this->Configuration[$entry] = $data;	}
+	public function setConfigurationSubEntry($lvl1, $lvl2, $data)	{ $this->Configuration[$lvl1][$lvl2] = $data;	}
+	public function setConfiguration($Configuration)	{ $this->Configuration = $Configuration;	}
+	public function setExecutionContext($data)	{ $this->Configuration['execution_context'] = $data;	}
+	public function setLanguageList($LanguageList)	{ $this->LanguageList = $LanguageList;	}
+	public function toStringConfiguration()	{
 		$str = "Configuration : ";
 		foreach ($this->Configuration as $A => $B) {
 			$str .= $A . "=" . $B . "; ";
