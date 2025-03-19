@@ -37,9 +37,11 @@ $fileContent = array(
 		"password" => "-----------"
 	),
 	"commandLineEngine"	=> array(
-		"state"			=>	"enabled"
+		// Specific to command like engine
 	),
-	"functions" => array(
-		"user_sign_up" => "disabled",
-	),
-);
+		"functions" => array(
+			"user_sign_up"			=> "enabled",
+			"commandLineEngine"		=> "enabled",
+		),
+	);
+	

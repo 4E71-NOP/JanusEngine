@@ -314,7 +314,7 @@ class StringFormat
 	}
 
 	/**
-	 * Returns the HTML code of an array
+	 * Returns the HTML code of an array (transformed into a HTML table)
 	 * @param array $data
 	 */
 	public function arrayToHtmlTable($data, $infos)
@@ -325,23 +325,26 @@ class StringFormat
 
 		// $doHeader = true;
 		if (is_array($data)) {
-
+			reset($data);
+			$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
+			$i = 1;
 			foreach ($data as $resultEntry) {
-				$str = "<table class='" . $Block . _CLASS_TABLE01_ . "' style='width:90%;'>\r";
-				$tmpCol = reset($resultEntry);
-				foreach ($tmpCol as $A => $B ) {
-					$str .= "<td>" . $A . "</td>\r";
+				if ($i == 1) {
+					$tmpCol = $resultEntry;
+					foreach ($tmpCol as $A => $B) {
+						$str .= "<td>" . $A . "</td>\r";
+					}
+					unset($A, $B);
+					$i++;
 				}
 				reset($resultEntry);
-				foreach ($resultEntry as $tmpRecord) {
-					$str .= "<tr>\r";
-					foreach ($tmpRecord as $A => $B) {
-						$str .= "<td>" . $B . "</td>\r";
-					}
-					$str .= "</tr>\r";
+				$str .= "<tr>\r";
+				foreach ($resultEntry as $A => $B) {
+					$str .= "<td>" . $B . "</td>\r";
 				}
-				$str .= "</table>\r<br>\r<hr>\r<br>\r";
 			}
+			$str .= "</tr>\r";
+			$str .= "</table>\r<br>\r<hr>\r<br>\r";
 		}
 		return $str;
 	}

@@ -366,35 +366,18 @@ class User extends Entity
 		$tab['user_password']					= "1a2b3c4d5e";
 		$tab['user_subscription_date']			= $date;
 		$tab['user_status']						= _ENABLED_;
+
 		$tab['user_role_function']				= _READER_;
-		$tab['user_forum_access']				= _YES_;
-		$tab['user_email']						= "";
-		$tab['user_msn']						= "";
-		$tab['user_aim']						= "";
-		$tab['user_icq']						= "";
-		$tab['user_yim']						= "";
-		$tab['user_website']					= "";
-		$tab['user_perso_name']					= "";
-		$tab['user_perso_country']				= "";
-		$tab['user_perso_town']					= "";
-		$tab['user_perso_occupation']			= "";
-		$tab['user_perso_interest']				= "";
+		$tab['user_pref_theme']					= "";
+		$tab['user_lang']						= "";
+
+		$tab['user_avatar_image']				= "";
+		$tab['user_admin_comment']				= "";
+
 		$tab['user_last_visit']					= 0;
 		$tab['user_last_ip']					= "0.0.0.0";
 		$tab['user_timezone']					= "";
-		$tab['user_lang']						= "";
-		$tab['user_pref_theme']					= "";
-		$tab['user_pref_newsletter']			= "";
-		$tab['user_pref_show_email']			= "";
-		$tab['user_pref_show_online_status']	= "";
-		$tab['user_pref_forum_notification']	= "";
-		$tab['user_pref_forum_pm']				= "";
-		$tab['user_pref_allow_bbcode']			= "";
-		$tab['user_pref_allow_html']			= "";
-		$tab['user_pref_autorise_smilies']		= "";
-		$tab['user_avatar_image']				= "";
-		$tab['user_admin_comment']				= "";
-		$tab['fk_group_id']						= "";
+
 		return $tab;
 	}
 
@@ -441,16 +424,15 @@ class User extends Entity
 
 
 	//@formatter:off
-	public function getUserEntry($data)
-	{
+	public function getUserEntry($data) {
 		if (isset($this->User[$data])) {
 			return $this->User[$data];
 		} else {
 			return null;
 		}
 	}
-	public function getUserGroupEntry($lvl1, $lvl2)
-	{
+
+	public function getUserGroupEntry($lvl1, $lvl2) {
 		if (isset($this->User[$lvl1][$lvl2])) {
 			return $this->User[$lvl1][$lvl2];
 		} else {
@@ -458,24 +440,14 @@ class User extends Entity
 		}
 	}
 
-	public function getGroupList()
-	{
-		return $this->groupList;
-	}
-
-	public function getUser()
-	{
-		return $this->User;
-	}
-	
-	public function resetUser()
-	{
+	public function getGroupList()	{ return $this->groupList; }
+	public function getUser()	{ return $this->User;	}
+	public function resetUser()	{		
 		$this->User = $this->columns;
 		$this->groupList = array();
 	}
 
-	public function setUserEntry($entry, $data)
-	{
+	public function setUserEntry($entry, $data) {
 		if (isset($this->User[$entry])) {
 			$this->User[$entry] = $data;
 		}	//DB Entity objects do NOT accept new columns!
@@ -488,8 +460,7 @@ class User extends Entity
 	 * @param string
 	 * @return boolean
 	 */
-	public function hasPermission($perm)
-	{
+	public function hasPermission($perm) {
 		foreach ($this->User['permissionList'] as $A) {
 			if ($A['perm_name'] == $perm) {
 				return true;

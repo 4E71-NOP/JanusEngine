@@ -110,6 +110,11 @@ unset(
 	$llvil,
 );
 
+// --------------------------------------------------------------------------------------------
+// Timer
+define("_TOKEN_DEFAULT_EXPIRATION_TIME_", 30);
+define("_TOKEN_SUBSCRIPTION_EXPIRATION_TIME_", 30);
+define("_TOKEN_COMMAND_EXPIRATION_TIME_", 5);
 
 // --------------------------------------------------------------------------------------------
 // URL elements

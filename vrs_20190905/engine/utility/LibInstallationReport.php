@@ -305,10 +305,11 @@ class LibInstallationReport
 		\"password\"	=> \"" . $bts->CMObj->getConfigurationSubEntry('mail', 'password') . "\",
 	),
 	\"commandLineEngine\"	=> array(
-		\"state\"			=>	\"enabled\",
+	// Specific to command like engine
 	),
 	\"functions\" => array(
 		\"user_sign_up\" => \"enabled\",
+		\"commandLineEngine\"	=> \"enabled\", 
 	),
 ?>
 ";

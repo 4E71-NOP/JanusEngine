@@ -552,7 +552,7 @@ self::$ActionTable['show']['users']		= function (&$a) { return array(
 			. "usr.user_login AS 'Login', "
 			. "FROM_UNIXTIME(usr.user_subscription_date) AS 'Subscription', "
 			. "usr.user_status AS 'Status', "
-			. "usr.user_perso_name AS 'Name', "
+			. "usr.user_name AS 'Name', "
 			. "FROM_UNIXTIME(usr.user_last_visit) AS 'Last visit', "
 			. "usr.user_last_ip AS 'Last IP' "
 			. "FROM "

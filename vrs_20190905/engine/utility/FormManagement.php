@@ -60,26 +60,45 @@ class FormManagement
 		$tmpFormRequest = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section');
 		switch ($tmpFormRequest) {
 			case "CommandConsole";
-				if ($bts->RequestDataObj->getRequestDataSubEntry('commandLineEngine', 'state') == 'enabled') {
+				if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == 'enabled') {
 					// TODO must check a security token to make sure this was submitted by a form a not a forged post
-
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
-					// We consider we have a script to execute as it's from AdminDashboard
-					$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled');		// enabled/disabled
-
-					$ClassLoaderObj->provisionClass('ScriptFormatting');
-					$ScriptFormattingObj = ScriptFormatting::getInstance();
-
-					$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
-					$ScriptFormattingObj->createMap($CLiContent);
-					$ScriptFormattingObj->commandFormatting($CLiContent);
-
-					unset($A);
-					foreach ($CLiContent['FormattedCommand'] as $A) {
-						$Script[] = $A['cont'];
+					$token = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'token');
+					switch ($this->checkSecurityToken($token, _TOKEN_COMMAND_EXPIRATION_TIME_)) {
+						case "notFound":
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token not found : " . $token));
+							break;
+			
+						case "expired":
+							// Token too old. Re-route to page "token expired"
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token expired : " . $token));
+							// TODO remove commented lines below
+							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'progress', "processFaillure");
+							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error', true);
+							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error_type', 'errorTokenExpired');
+							break;
+			
+						case "ok":
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
+							// We consider we have a script to execute as it's from AdminDashboard
+							
+							// TODO remove commented lines below
+							// $bts->CMObj->setConfigurationSubEntry('functions', 'commandLineEngine', 'enabled');		// enabled/disabled
+		
+							$ClassLoaderObj->provisionClass('ScriptFormatting');
+							$ScriptFormattingObj = ScriptFormatting::getInstance();
+		
+							$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
+							$ScriptFormattingObj->createMap($CLiContent);
+							$ScriptFormattingObj->commandFormatting($CLiContent);
+		
+							unset($A);
+							foreach ($CLiContent['FormattedCommand'] as $A) {
+								$Script[] = $A['cont'];
+							}
+							$this->runCommandScript($Script);
+							break;
 					}
-					$this->runCommandScript($Script);
 				} else {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Somebody tried to use commandLine while it is disabled."));
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Script submitted = `" . $bts->RequestDataObj->getRequestDataEntry('formConsole', 'CLiContent') . "`."));
@@ -133,7 +152,8 @@ class FormManagement
 				if ($FormToCommandLineObj->getCommandLineNbr() > 0) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A script is on the bench :"));
 
-					$bts->CMObj->setConfigurationSubEntry('commandLineEngine', 'state', 'enabled'); // enabled/disabled
+					// Make sure it's enabled for form processing
+					$bts->CMObj->setConfigurationSubEntry('functions', 'commandLineEngine', 'enabled'); // enabled/disabled
 					$Script = $FormToCommandLineObj->getCommandLineScript();
 				}
 				$this->runCommandScript($Script);
@@ -178,7 +198,7 @@ class FormManagement
 		$WebSiteObj = $CurrentSetObj->WebSiteObj;
 		$CommandConsoleObj = CommandConsole::getInstance();
 
-		switch ($bts->CMObj->getConfigurationSubEntry('commandLineEngine', 'state')) {
+		switch ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine')) {
 			case "enabled":
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Commande console                                                               |"));
@@ -380,7 +400,7 @@ class FormManagement
 
 		$ClassLoaderObj->provisionClass('SecurityToken');
 
-		switch ($this->checkSecurityToken($formArr['t'])) {
+		switch ($this->checkSecurityToken($formArr['t'], _TOKEN_SUBSCRIPTION_EXPIRATION_TIME_)) {
 			case "notFound":
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token not found : " . $formArr['t']));
 				break;
@@ -548,7 +568,7 @@ class FormManagement
 			"t" => $bts->RequestDataObj->getRequestDataSubEntry('resetProcessForm', 'token'),
 		);
 
-		switch ($this->checkSecurityToken($formArr['t'])) {
+		switch ($this->checkSecurityToken($formArr['t'], _TOKEN_SUBSCRIPTION_EXPIRATION_TIME_)) {
 			case "notFound":
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : resetProcessForm - Token not found : " . $formArr['t']));
 				break;
@@ -580,7 +600,7 @@ class FormManagement
 			"t" => $bts->RequestDataObj->getRequestDataSubEntry('resetProcessForm', 'token'),
 		);
 
-		switch ($this->checkSecurityToken($formArr['t'])) {
+		switch ($this->checkSecurityToken($formArr['t'], _TOKEN_SUBSCRIPTION_EXPIRATION_TIME_)) {
 			case "notFound":
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : resetProcessForm - Token not found : " . $formArr['t']));
 				break;
@@ -603,7 +623,6 @@ class FormManagement
 				);
 				$this->runCommandScript($script);
 
-				// TODO disconnect user, reroute to homepage
 				$bts->SMObj->InitializeSession();
 				$CurrentSetObj->UserObj->resetUser();
 				$CurrentSetObj->UserObj->getDataFromDBUsingLogin(ANONYMOUS_USER_NAME);
@@ -631,7 +650,7 @@ class FormManagement
 	}
 
 
-	private function checkSecurityToken($token)
+	private function checkSecurityToken($token, $delay)
 	{
 		$bts = BaseToolSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
@@ -642,7 +661,7 @@ class FormManagement
 		$SecurityTokenObj = new SecurityToken();
 
 		if ($SecurityTokenObj->getDataFromDBbyToken($token)) {
-			if ($SecurityTokenObj->isTokenExpired()) {
+			if ($SecurityTokenObj->isTokenExpired($delay)) {
 				$retResp = "expired";
 			}
 		} else {

@@ -180,9 +180,8 @@ class SecurityToken extends Entity
 	/**
 	 * Check expiration of the token 
 	 */
-	public function isTokenExpired()
-	{
-		return ($this->SecurityToken['st_creation'] < (time() - (30 * 60)));
+	public function isTokenExpired($delay) {
+		return ($this->SecurityToken['st_creation'] < (time() - ($delay * 60)));
 	}
 
 	/**
