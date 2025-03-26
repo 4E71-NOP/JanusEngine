@@ -61,6 +61,8 @@ class Entity
 		if ($bts->SDDMObj->errno != 0) {
 			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => $bts->SDDMObj->error);
 			$res = false;
+		} else {
+			$this->LastExecutionReport[] = array('state' => 'ok', 'msg' => 'genericInsertInDb succeded');
 		}
 		return $res;
 	}
@@ -84,6 +86,8 @@ class Entity
 		if ($bts->SDDMObj->errno != 0) {
 			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => $bts->SDDMObj->error);
 			$res = false;
+		} else {
+			$this->LastExecutionReport[] = array('state' => 'ok', 'msg' => 'genericUpdateDb succeded');
 		}
 		return $res;
 	}
@@ -104,99 +108,37 @@ class Entity
 		$column = "";
 
 		switch ($entity) {
-			case "article":
-				$column = "arti_id";
-				break;
-			case "article_config":
-				$column = "config_id";
-				break;
-			case "article_tag":
-				$column = "article_tag_id";
-				break;
-			case "menu":
-				$column = "menu_id";
-				break;
-			case "deadline":
-				$column = "deadline_id";
-				break;
-			case "decoration":
-				$column = "deco_id";
-				break;
-			case "definition":
-				$column = "def_id";
-				break;
-			case "document":
-				$column = "docu_id";
-				break;
-			case "document_share":
-				$column = "share_id";
-				break;
-			case "extension":
-				$column = "extension_id";
-				break;
-			case "extension_config":
-				$column = "config_id";
-				break;
-			case "extension_dependency":
-				$column = "dependency_id";
-				break;
-			case "extension_file":
-				$column = "file_id";
-				break;
-			case "group":
-				$column = "group_id";
-				break;
-			case "group_user":
-				$column = "group_user_id";
-				break;
-			case "group_website":
-				$column = "group_website_id";
-				break;
-			case "i18n":
-				$column = "i18n_id";
-				break;
-			case "keyword":
-				$column = "keyword_id";
-				break;
-			case "language":
-				$column = "lang_id";
-				break;
-			case "language_website":
-				$column = "lang_website_id";
-				break;
-			case "layout":
-				$column = "layout_id";
-				break;
-			case "module":
-				$column = "module_id";
-				break;
-			case "module_website":
-				$column = "module_website_id";
-				break;
-			case "permission":
-				$column = "perm_id";
-				break;
-			case "note":
-				$column = "note_id";
-				break;
-			case "security_token":
-				$column = "st_id";
-				break;
-			case "tag":
-				$column = "tag_id";
-				break;
-			case "theme_descriptor":
-				$column = "theme_id";
-				break;
-			case "theme_website":
-				$column = "theme_website_id";
-				break;
-			case "user":
-				$column = "user_id";
-				break;
-			case "website":
-				$column = "ws_id";
-				break;
+			case "article":					$column = "arti_id";				break;
+			case "article_config":			$column = "config_id";				break;
+			case "article_tag":				$column = "article_tag_id";			break;
+			case "menu":					$column = "menu_id";				break;
+			case "deadline":				$column = "deadline_id";			break;
+			case "decoration":				$column = "deco_id";				break;
+			case "definition":				$column = "def_id";					break;
+			case "document":				$column = "docu_id";				break;
+			case "document_share":			$column = "share_id";				break;
+			case "extension":				$column = "extension_id";			break;
+			case "extension_config":		$column = "config_id";				break;
+			case "extension_dependency":	$column = "dependency_id";			break;
+			case "extension_file":			$column = "file_id";				break;
+			case "group":					$column = "group_id";				break;
+			case "group_user":				$column = "group_user_id";			break;
+			case "group_website":			$column = "group_website_id";		break;
+			case "i18n":					$column = "i18n_id";				break;
+			case "keyword":					$column = "keyword_id";				break;
+			case "language":				$column = "lang_id";				break;
+			case "language_website":		$column = "lang_website_id";		break;
+			case "layout":					$column = "layout_id";				break;
+			case "module":					$column = "module_id";				break;
+			case "module_website":			$column = "module_website_id";		break;
+			case "permission":				$column = "perm_id";				break;
+			case "note":					$column = "note_id";				break;
+			case "security_token":			$column = "st_id";					break;
+			case "tag":						$column = "tag_id";					break;
+			case "theme_descriptor":		$column = "theme_id";				break;
+			case "theme_website":			$column = "theme_website_id";		break;
+			case "user":					$column = "user_id";				break;
+			case "website":					$column = "ws_id";					break;
 		}
 
 		$dbquery = $bts->SDDMObj->query("
@@ -206,6 +148,8 @@ class Entity
 		if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 			$this->LastExecutionReport[] = array('state' => 'wrn', 'msg' => 'No rows returned for the last query.');
 			$res = false;
+		} else {
+			$this->LastExecutionReport[] = array('state' => 'ok', 'msg' => 'entityExistsInDb succeded');
 		}
 		return $res;
 	}
@@ -244,8 +188,10 @@ class Entity
 					);
 				}
 			}
+			$this->LastExecutionReport[] = array('state' => 'ok', 'msg' => 'getInfosConfig succeded');
 		} else {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " no infos_config rows returned for this type."));
+			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => 'getInfosConfig failed');
 		}
 	}
 
@@ -286,8 +232,16 @@ class Entity
 		}
 	}
 
-
 	public function getInfosEntry($data) {
 		return $this->infos[$data];
 	}
+
+	/**
+	 * Returns the last report
+	 */
+	protected function getLastExecutionReport() {
+		return end($this->LastExecutionReport);
+
+	}
+	
 }

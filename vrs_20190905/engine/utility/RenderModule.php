@@ -67,15 +67,35 @@ class RenderModule {
 		$infos['mode'] = 1;
 		
 		$ModuleRendererName = $m['module_classname'];
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleRendererName=".$ModuleRendererName . "; module file is : " . $m['module_directory'].$m['module_file']));
+		$moduleFileName = $m['module_directory'].$m['module_file'];
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleRendererName=".$ModuleRendererName . "; module file is : " . $moduleFileName));
 		
 		if (!class_exists($ModuleRendererName)) {
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $m['module_directory'].$m['module_file']));
-			include ($m['module_directory'].$m['module_file']);
-		} else { $Content .= "!! !! !! !!"; }
+			// Loading module file and if present module config file
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module file is : " . $moduleFileName));
+			if (file_exists($moduleFileName)) {
+				include ($moduleFileName);
+				$moduleFileName = str_replace('.php', '_config.php', $moduleFileName);
+				if (file_exists($moduleFileName)) {
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Loading module config file : " . $moduleFileName));
+					include ($moduleFileName);
+					$bts->CMObj->setConfigurationEntry($m['module_name'], $fileContent);
+					unset($fileContent);
+				} else {
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module config file " . $moduleFileName . "not found (not an error)."));
+				}
+			} else {
+				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => "Module class name ". $ModuleRendererName . " file could not be found."));
+			}
+		} else { 
+			// Bizarre case in which the class exist but not loaded by us. Who's there ?
+			// Basically it's a name conflict between modules
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_WARNING, 'msg' => "Module class name ". $ModuleRendererName . " is already loaded but not by me. Who's there ?"));
+			$Content .= "!! !! !! !!"; 
+		}
 		
 		if (class_exists($ModuleRendererName)) { 
-			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "module class name is : ". $ModuleRendererName));
+			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module class name is : ". $ModuleRendererName));
 			$ModuleRenderer = new $ModuleRendererName();
 		}
 		else {

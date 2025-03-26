@@ -50,22 +50,22 @@ class FormToCommandLine
 			switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'origin')) {
 					// Analyze the origin of the form
 				case "ModuleQuickSkin":
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => " ModuleQuickSkin submitted a form."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleQuickSkin submitted a form."));
 					$scr[$cln] = "update user name " . $UserObj->getUserEntry('user_login') . " pref_theme '" . $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_pref_theme') . "'";
 					$cln++;
 					break;
 				case "ModuleSelectLanguage":
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => " ModuleSelectLanguage submitted a form."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "ModuleSelectLanguage submitted a form."));
 					$scr[$cln] = "update user name " . $UserObj->getUserEntry('user_login') . " lang '" . $bts->RequestDataObj->getRequestDataSubEntry('userForm', 'user_lang') . "'";
 					$cln++;
 					break;
 				case "profileManagement":
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => " Page profile management submitted a form."));
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Page profile management submitted a form."));
 					if ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'modification') == "on") {
 						$n = 1;
 						while ($n > 0) {
 							if (strlen($bts->RequestDataObj->getRequestDataEntry('formCommand' . $n)) > 0) {
-								$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => " Profile management new command N°" . $n . "."));
+								$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Profile management new command N°" . $n . "."));
 								$scr[$cln] = $this->createCommandFromPost($n);
 								$cln++;
 								$n++;

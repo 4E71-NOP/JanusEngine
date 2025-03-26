@@ -29,6 +29,11 @@ class ModuleLogo {
 		// include ($infos['module']['module_directory']."/i18n/".$l.".php");
 		// $bts->I18nTransObj->apply($i18n);
 		// unset ($i18n);
+
+		$listNumber = $bts->CMObj->getConfigurationSubEntry($infos['module_name'], 'listNumber');
+		$n = $listNumber[random_int(0,9)];
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module '".$infos['module_name']."' is greeting you with the Fibonacci number : " . $n));
+
 		$Content = "";
 		
 		$Content .= "
