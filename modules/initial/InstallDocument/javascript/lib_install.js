@@ -187,17 +187,6 @@ class LibInstall {
 				l.Log[this.dbgInstFonction]('Install URL=: `' + InstallURL + "?" + installFormData + "`");
 
 
-				// let mainInstallRequest = new XMLHttpRequest(); 
-				// mainInstallRequest.open( "POST" , InstallURL , true );
-				// mainInstallRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				// mainInstallRequest.timeout = 10; // we don't need an answer.
-				// mainInstallRequest.send(installFormData);
-				// mainInstallRequest = null;
-				this.xmlhttp.open("POST", InstallURL, true);
-				this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				// this.xmlhttp.timeout = 10;
-				this.xmlhttp.send(installFormData);
-
 				// Monitoring
 				mi.monitorToggleDisplay();
 				this.monitorURL = "http://" + window.location.hostname + RequestURI + "/install_monitor.php";
@@ -211,6 +200,16 @@ class LibInstall {
 				mi.setUrl(this.monitorURL);
 				mi.startInterval();
 
+				// let mainInstallRequest = new XMLHttpRequest(); 
+				// mainInstallRequest.open( "POST" , InstallURL , true );
+				// mainInstallRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				// mainInstallRequest.timeout = 10; // we don't need an answer.
+				// mainInstallRequest.send(installFormData);
+				// mainInstallRequest = null;
+				this.xmlhttp.open("POST", InstallURL, true);
+				this.xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				// this.xmlhttp.timeout = 10;
+				this.xmlhttp.send(installFormData);
 
 			}
 			else { document.forms['install_page_init'].submit(); }

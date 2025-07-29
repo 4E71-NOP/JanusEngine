@@ -46,7 +46,7 @@ class SddmCore
 			)
 		);
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : " . $bts->StringFormatObj->print_r_debug($SQLlogEntry) . "`."));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : " . $bts->StringFormatObj->print_r_debug($SQLlogEntry) . "`."));
 	}
 
 	//@formatter:off
