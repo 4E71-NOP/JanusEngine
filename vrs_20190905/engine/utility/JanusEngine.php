@@ -983,7 +983,7 @@ class JanusEngine
 			$str = "var tableFileSelector = {\r";
 			$i = 0;
 			foreach ($fs as $A) {
-				$str .= "'" . $i . "':{ 'idx':'" . $i . "',	'width':'" . $A['width'] . "',	'height':'" . $A['height'] . "',	'formName':'" . $A['formName'] . "',	'formTargetId':'" . $A['formTargetId'] . "',	'selectionMode':'" . $A['selectionMode'] . "',	'lastPath':'" . $A['path'] . "',	'restrictTo':'" . $A['restrictTo'] . "',	'strRemove':'" . addslashes($A['strRemove']) . "',	'strAdd':'" . $A['strAdd'] . "',	'displayType':'" . $A['displayType'] . "'	},\r";
+				$str .= "'" . $i . "':{ 'idx':'" . $i . "',	'width':'" . $A['width'] . "',	'height':'" . $A['height'] . "',	'formName':'" . $A['formName'] . "',	'formTargetId':'" . $A['formTargetId'] . "',	'selectionMode':'" . $A['selectionMode'] . "',	'lastPath':'" . $A['path'] . "',	'restrictTo':'" . $A['restrictTo'] . "',	'strRemove':'" . addslashes( $A['strRemove'] ?? '' ) . "',	'strAdd':'" . $A['strAdd'] . "',	'displayType':'" . $A['displayType'] . "'	},\r";
 				$i++;
 			}
 			$str = substr($str, 0, -2) . "\r};\r";

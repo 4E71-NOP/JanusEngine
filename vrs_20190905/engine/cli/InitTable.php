@@ -325,7 +325,7 @@ self::$InitTable['decoration'] = function (&$a) {
 		"a_active_fg_col" => 	"",		"a_active_bg_col" => 	"",	"a_active_decoration" => "",	"a_active_special" => 	"",
 		"a_visited_fg_col" => 	"",		"a_visited_bg_col" => 	"",	"a_visited_decoration" => 	"",	"a_visited_special" => 	"",
 
-		"table_rules" => 	"border-spacing:0px; border-collapse:collapse; width:100%",
+		"table_rules" => 	"border-spacing:0px; border-collapse:collapse; width:100%",	"table_tr_height" => _TABLE_TR_HEIGHT_,
 		"t01_caption_fg_col" => 	"",		"t01_caption_bg_col" => 	"",
 		"t01_txt_col" => 	"",
 		"t01_tr_bg_col" => 	"",
@@ -477,7 +477,9 @@ self::$InitTable['decoration'] = function (&$a) {
 			"txt_l_td_display",			"txt_l_td_size",			"txt_l_td_weight",		"txt_l_td_decoration",		"txt_l_td_margin_top",	"txt_l_td_margin_bottom",	"txt_l_td_margin_left",			"txt_l_td_margin_right",	"txt_l_td_hover_size",		"txt_l_td_hover_weight",	"txt_l_td_hover_decoration",	"txt_l_td_fg_col",	"txt_l_td_fg_hover_col",	"txt_l_td_fg_active_col",	"txt_l_td_fg_visite_col",	"txt_l_td_bg_col",	"txt_l_td_bg_hover_col",	"txt_l_td_bg_active_col",	"txt_l_td_bg_visite_col",
 			"txt_input1_fg_col",		"txt_input1_bg_col",		"txt_input2_fg_col",	"txt_input2_bg_col",		"txt_input1_td_fg_col",	"txt_input1_td_bg_col",		"txt_input2_td_fg_col",			"txt_input2_td_bg_col",
 			"code_font",				"code_fg_col",				"code_bg_col",			"code_mrg_top",				"code_mrg_bottom",		"code_mrg_left",			"code_mrg_right",				"code_pad_top",				"code_pad_bottom",			"code_pad_left",			"code_pad_right",				"code_special",
-			"table_rules",				"t01_txt_col",				"t01_caption_fg_col",	"t01_caption_bg_col",		"t01_caption_special",	"t01_tr_bg_col",			"t01_tr_bg_odd_col",			"t01_tr_bg_even_col",		"t01_tr_bg_hover_col",		"t01_tr_special",			"t01_td_bg_odd_col",			"t01_td_bg_even_col",	"t01_td_special",
+			"table_rules",
+			"table_tr_height",			"table_tr_height",
+			"t01_txt_col",				"t01_caption_fg_col",	"t01_caption_bg_col",		"t01_caption_special",	"t01_tr_bg_col",			"t01_tr_bg_odd_col",			"t01_tr_bg_even_col",		"t01_tr_bg_hover_col",		"t01_tr_special",			"t01_td_bg_odd_col",			"t01_td_bg_even_col",	"t01_td_special",
 			"ca_txt_col",				"ca_txt_bg_col",			"cb_txt_col",			"cb_txt_bg_col",			"cc_txt_col",			"cc_txt_bg_col",			"cd_txt_col",					"cd_txt_bg_col",			"cta_txt_col",				"cta_txt_bg_col",			"ctb_txt_col",					"ctb_txt_bg_col",		"csa_txt_col",			"csa_txt_bg_col",			"csb_txt_col",				"csb_txt_bg_col",	"co_txt_col",				"co_txt_bg_col",
 			"s1_txt_col",				"s2_txt_col",				"s3_txt_col",	
 			"s1_txt_weight",			"s2_txt_weight",			"s3_txt_weight",	
@@ -532,7 +534,7 @@ self::$InitTable['decoration'] = function (&$a) {
 			"a_active_fg_col",		"a_active_bg_col",	"a_active_decoration",		"a_active_special",
 			"a_visited_fg_col",		"a_visited_bg_col",	"a_visited_decoration",		"a_visited_special",
 
-			"table_rules",
+			"table_rules",			"table_tr_height",
 			"t01_caption_fg_col",	"t01_caption_bg_col",		"t01_caption_special",
 			"t01_txt_col",
 			"t01_tr_bg_col",			"t01_td_bg_odd_col",		"t01_tr_bg_odd_col",		"t01_td_special",

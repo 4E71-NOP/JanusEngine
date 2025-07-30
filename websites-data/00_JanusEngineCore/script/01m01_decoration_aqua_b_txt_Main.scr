@@ -29,7 +29,7 @@ a_hover_fg_col	'000000'					a_hover_special	'font-weight:bold;'
 a_active_fg_col	'000000'						
 a_visited_fg_col	'000000'						
 							
-table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'			table_tr_height	'50'
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'000000'						
 t01_tr_bg_col	'A0D0FF'	t01_td_bg_odd_col	'FFFFFF40'				

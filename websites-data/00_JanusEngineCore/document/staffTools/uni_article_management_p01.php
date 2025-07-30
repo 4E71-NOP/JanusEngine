@@ -118,6 +118,8 @@ $pageSelectorData['query'] = "SELECT"
 	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 	. ";";
 
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $pageSelectorData['query']));
+
 $dbquery = $bts->SDDMObj->query($pageSelectorData['query']);
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$pageSelectorData['ItemsCount'] = $dbp['ItemsCount'];
@@ -156,12 +158,12 @@ $listDeadline = array(
 		'deadline_title' => $bts->I18nTransObj->getI18nTransEntry('deadline0'),
 	),
 );
-
-$dbquery = $bts->SDDMObj->query("
-SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM "
+$q = "SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM "
 	. $SqlTableListObj->getSQLTableName('deadline')
-	. " WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
-;");
+	. " WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "';";
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
+
+$dbquery = $bts->SDDMObj->query($q);
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['deadline_id'];
 	$listDeadline[$A]['id'] = $A;
@@ -199,8 +201,7 @@ $infos['insertLines'] .= $bts->I18nTransObj->getI18nTransEntry('pageSelectorNbrP
 	. "</td>\r"
 	. "</tr>\r";
 // --------------------------------------------------------------------------------------------
-
-$dbquery = $bts->SDDMObj->query("SELECT "
+$q = "SELECT "
 	. "art.arti_ref, art.arti_id, art.arti_name, art.arti_title, art.arti_page, "
 	. "mnu.fk_lang_id, "
 	. "dl.deadline_name, dl.deadline_title, dl.deadline_state "
@@ -210,8 +211,11 @@ $dbquery = $bts->SDDMObj->query("SELECT "
 	. $SqlTableListObj->getSQLTableName('deadline') . " dl "
 	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 	. " ORDER BY art.arti_ref,art.arti_page"
-	. " LIMIT " . $pageSelectorData['nbrPerPage'] . ", OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
-	. ";");
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. ";";
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
+
+$dbquery = $bts->SDDMObj->query($q);
 
 $T = array();
 $articleList = array();
