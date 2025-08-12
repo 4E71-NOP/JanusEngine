@@ -409,7 +409,7 @@ function computeInfoDebug () {\r
 </script>\r
 \r
 <input type='hidden' name='site_context[ws_id]'		value='".$WebSiteObj->getWebSiteEntry('ws_id')."'>
-<input type='hidden' name='site_context[site_nom]'	value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
+<input type='hidden' name='site_context[site_name]'	value='".$WebSiteObj->getWebSiteEntry('ws_name')."'>
 
 <table cellpadding='8' cellspacing='0' style='width :100%;'>
 <tr>\r

@@ -760,6 +760,11 @@ self::$PreRequisiteTable['update']['module']['convert']		= &self::$PreRequisiteT
 self::$PreRequisiteTable['update']['module']['nextId']		= &self::$PreRequisiteTable['add']['module']['nextId'];
 self::$PreRequisiteTable['update']['module']['columns']		= &self::$PreRequisiteTable['add']['module']['columns'];
 
+self::$PreRequisiteTable['update']['theme']['convert']		= &self::$PreRequisiteTable['add']['theme']['convert'];
+self::$PreRequisiteTable['update']['theme']['columns']		= &self::$PreRequisiteTable['add']['theme']['columns'];
+
+self::$PreRequisiteTable['update']['theme_definition']['convert']	= &self::$PreRequisiteTable['add']['theme_definition']['convert'];
+self::$PreRequisiteTable['update']['theme_definition']['columns']	= &self::$PreRequisiteTable['add']['theme_definition']['columns'];
 
 self::$PreRequisiteTable['update']['user']['convert']		= &self::$PreRequisiteTable['add']['user']['convert'];
 self::$PreRequisiteTable['update']['user']['columns']		= &self::$PreRequisiteTable['add']['user']['columns'];

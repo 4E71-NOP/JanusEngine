@@ -470,7 +470,7 @@ self::$InitTable['decoration'] = function (&$a) {
 		"20" => array(
 			// "repertoire",
 			"directory",	
-			"txt_fonte",				"txt_fonte_size_min",		"txt_fonte_size_max",	"txt_fonte_size",			"txt_fonte_dl_nom",		"txt_fonte_dl_url",	"p_txt_indent",	"p_txt_align",	"p_special",
+			"txt_font",				"txt_font_size_min",		"txt_font_size_max",	"txt_font_size",			"txt_font_dl_name",		"txt_font_dl_url",	"p_txt_indent",	"p_txt_align",	"p_special",
 			"main_unit",	
 			"txt_font_unit",			"txt_col",					"txt_highlight_col",	"txt_bg_col",				"txt_titre_col",		"txt_ok_col",				"txt_avert_col",				"txt_erreur_col",			"txt_fade_col",				"txt_l_01_display",			"txt_l_01_size",				"txt_l_01_weight",	"txt_l_01_decoration",
 			"txt_l_01_margin_top",		"txt_l_01_margin_bottom",	"txt_l_01_margin_left",	"txt_l_01_margin_right",	"txt_l_01_hover_size",	"txt_l_01_hover_weight",	"txt_l_01_hover_decoration",	"txt_l_01_fg_col",			"txt_l_01_fg_hover_col",	"txt_l_01_fg_active_col",	"txt_l_01_fg_visite_col",		"txt_l_01_bg_col",	"txt_l_01_bg_hover_col",	"txt_l_01_bg_active_col",	"txt_l_01_bg_visite_col",

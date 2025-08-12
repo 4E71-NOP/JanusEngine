@@ -61,7 +61,7 @@ class FormManagement
 		switch ($tmpFormRequest) {
 			case "CommandConsole";
 				if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == 'enabled') {
-					// TODO must check a security token to make sure this was submitted by a form a not a forged post
+					// TODO must check a security token to make sure this was submitted by a form and not a forged post
 					$token = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'token');
 					switch ($this->checkSecurityToken($token, _TOKEN_COMMAND_EXPIRATION_TIME_)) {
 						case "notFound":

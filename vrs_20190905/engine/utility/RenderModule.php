@@ -61,8 +61,8 @@ class RenderModule {
 		$infos['blockT'] = $Block . "T";
 		$infos['deco_type'] = $ThemeDataObj->getThemeBlockEntry($infos['blockG'], 'deco_type');
 		$infos['module'] = $m;
-		$fontSizeRange= $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
-		$infos['fontSizeMin'] = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
+		$fontSizeRange= $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size_min');
+		$infos['fontSizeMin'] = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size_min');
 		$infos['fontCoef'] = $fontSizeRange / 6;
 		$infos['mode'] = 1;
 		

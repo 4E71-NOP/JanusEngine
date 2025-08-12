@@ -202,7 +202,7 @@ class InstallPage03 {
 			//
 			//
 			// --------------------------------------------------------------------------------------------
-			// $fontSizeRange = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_fonte_size_min');
+			// $fontSizeRange = $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size_max') - $ThemeDataObj->getThemeBlockEntry($infos['blockT'],'txt_font_size_min');
 			
 			$infos = array(
 					"mode" => 1,

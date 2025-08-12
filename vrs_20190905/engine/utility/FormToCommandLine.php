@@ -92,20 +92,29 @@ class FormToCommandLine
 							switch ($formCommand . $formEntity) {
 								case "assignlanguage":
 									// This one is an additive from website manipulation
-									$scr[$cln] = "reset languages on_website " . $bts->RequestDataObj->getRequestDataSubEntry('site_context', 'site_nom') . ";";
+									$scr[$cln] = "reset languages on_website " . $bts->RequestDataObj->getRequestDataSubEntry('site_context', 'site_name') . ";";
 									$cln++;
 									$n++;
 									foreach ($formTarget as $k => $v) {
-										$str = "assign language " . $k . " to_website " . $bts->RequestDataObj->getRequestDataSubEntry('site_context', 'site_nom') . ";";
+										$str = "assign language " . $k . " to_website " . $bts->RequestDataObj->getRequestDataSubEntry('site_context', 'site_name') . ";";
 										$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " (assignlanguage) Processed =" . $str));
-										$scr[$cln] = $str;
-										$cln++;
-										$n++;
 									}
 									break;
-								case "qsdlkfjqsdlmkfjqsmldfkj":
+								case "updatetheme_definition": 
+									$str = $formCommand . " " . $formEntity 
+									. " name '".$formTarget['name']."'"
+									. " fk_theme_id '" . $formParams['fk_theme_id'] . "'";
 
+									$idx = $formTarget['name'];
+									if (isset($formParams[$idx . "_string"])) {
+										$str .= " type 'string' string '" . $formParams[$idx . "_string"] . "'";
+									}
+									if (isset($formParams[$idx . "_number"])) {
+										$str .= " type 'number' number '" . $formParams[$idx . "_number"] . "'";
+									}
+									$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "(updatetheme_definition) Processed =`" . $str . "`"));
 									break;
+
 								default:
 									$str = $formCommand . " " . $formEntity . " ";
 									foreach ($formTarget as $k => $v) {
@@ -116,12 +125,12 @@ class FormToCommandLine
 									}
 									$str .= ";";
 									$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Processed =`" . $str . "`"));
-									$scr[$cln] = $str;
-									$cln++;
-									$n++;
 
 									break;
 							}
+							$scr[$cln] = $str;
+							$cln++;
+							$n++;
 						} else {
 							$n = 0;
 						} // Exit

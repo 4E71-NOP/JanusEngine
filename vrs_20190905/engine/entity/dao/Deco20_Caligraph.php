@@ -13,7 +13,7 @@
 /* JanusEngine-license-end */
 class Deco20_Caligraph {
 	private $Deco20_Caligraph = array (
-			"txt_fonte_dl_nom" => null,
+			"txt_font_dl_name" => null,
 		);
 	public function __construct() {
 	}
