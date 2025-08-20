@@ -268,6 +268,9 @@ class Template {
 
 	/**
 	 * renderFilterForm
+	 * 
+	 * Closes the current form and adds a form to send a set of filters data
+	 * 
 	 * @return string
 	 */
 	public function renderFilterForm ($infos) {
@@ -284,7 +287,6 @@ class Template {
 		$tdStyle = " style='margin:0.1cm;'";
 		$Content = "</form>\r"
 		. $bts->RenderFormObj->renderformHeader("FilterForm")
-		// ."<form ACTION='index.php?' method='post'>\r"
 		."<table class='".$CurrentSetObj->ThemeDataObj->getThemeName()."defaultTable' style='width:50%; margin-left:auto; margin-right:0px;'>\r"
 		."<tr>\r"
 		."<td ".$tdStyle.">".$bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryLike')."</td>\r"
@@ -310,6 +312,10 @@ class Template {
 		."</tr>\r"
 		
 		."</table>\r"
+		."<input type='hidden'	name='formSubmitted'						value='1'>\r"
+		."<input type='hidden'	name='newRoute[arti_slug]'					value='".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_slug')."'>\r"
+		."<input type='hidden'	name='newRoute[arti_page]'					value='1'>\r"
+
 		."</form>\r"
 		;
 		

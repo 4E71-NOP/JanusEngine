@@ -176,14 +176,18 @@ class  RenderTables
 						$Content .= "<tfoot>\r";
 					}
 
+					$table_tr_height_value = $CurrentSetObj->ThemeDataObj->getThemeBlockEntry($infos['blockT'], "table_tr_height");
+					if (empty($table_tr_height_value)) { $table_tr_height_value = _TABLE_TR_HEIGHT_; } // Fail safe
+					$table_tr_height = "height:" . $table_tr_height_value . "px;";
+
 					$trLink = "";
 					if (isset($AD[$CurT][$CurL]['link'])) {
 						$trLink = "onclick=\"document.location = '" . $AD[$CurT][$CurL]['link'] . "';\"";
 					}
 					if ($tab_infos['HighLightType'] == 1) {
-						$strTR = "<tr style='vertical-align:middle;' " . $trLink . " >\r";
+						$strTR = "<tr style='vertical-align:middle; " . $table_tr_height . "' " . $trLink . " >\r";
 					} else {
-						$strTR = "<tr style='vertical-align:middle;' " . $trLink . " >\r";
+						$strTR = "<tr style='vertical-align:middle; " . $table_tr_height . "' " . $trLink . " >\r";
 					}
 					$Content .= $strTR;
 

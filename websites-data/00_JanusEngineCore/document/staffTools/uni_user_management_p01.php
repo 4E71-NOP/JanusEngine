@@ -31,7 +31,7 @@ $bts->RequestDataObj->setRequestData(
 	'filterForm',
 	array(
 		'user_status'			=> 1,
-		'nbrPerPage'			=> 5,
+		'nbrPerPage'			=> 10,
 		'group_id'				=> 0,
 	),
 );
@@ -106,16 +106,35 @@ $bts->I18nTransObj->apply(
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
+// FilterForm control and correction
+$filterForm = array(
+	'user_status'			=> 1,
+	'nbrPerPage'			=> 10,
+	'group_id'				=> null,
+	'query_like'			=> $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'),
+	'selectionOffset'		=> 0
+);
+
+if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
+	$filterForm['group_id'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');
+}
+
+if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') <= 0) {
+	$filterForm['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
+} else {
+	$filterForm['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+}
+
+if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset') != 0) {
+	$filterForm['selectionOffset'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+}
+
+$bts->RequestDataObj->setRequestDataEntry('filterForm', $filterForm);
+
+// --------------------------------------------------------------------------------------------
 $GDU_ = array();
 
 $GDU_['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-// error_log( $data['selectionOffset'] ."!=". $data['pageCounter'] );
-if ($GDU_['nbrPerPage'] < 1) {
-	$GDU_['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
-if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') == 0) {
-	$bts->RequestDataObj->setRequestDataSubEntry('filterForm', 'group_id', null);
-}
 
 $clause_sql_element = array();
 $clause_sql_element['1'] = "WHERE";
@@ -234,7 +253,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 6, 1),
 );
