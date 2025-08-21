@@ -45,6 +45,7 @@ define("LOGLEVEL_WARNING",		2); // More
 define("LOGLEVEL_ERROR",		1); // Usual level
 define("LOGLEVEL_NO_LOG",		0); // You don't like to read. Or you don't wanna polute your server.
 
+define("SDDM_QUERY_DEFAULT_LOG", 1); // 0 none / 1 log as BREAKPOIINT
 // define ( "LOG_TARGET", "both" ); // none, both, internal, system
 
 // define ( "INSTALL_LOG_TARGET", "system" );			//DEPRECATED SOON

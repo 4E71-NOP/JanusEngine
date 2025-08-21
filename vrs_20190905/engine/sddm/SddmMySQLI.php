@@ -93,12 +93,17 @@ class SddmMySQLI extends SddmCore
 	 * @param String $q
 	 * @return mysqli_result|boolean
 	 */
-	public function query($q)
+	public function query($q, $log = SDDM_QUERY_DEFAULT_LOG)
 	{
 		$bts = BaseToolSet::getInstance();
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$bts->LMObj->increaseSqlQueryNumber();
+
+		if ($log > 0) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
+		}
+
 		$db_result = $this->DBInstance->query($q);
 		$SQLlogEntry = array(
 			"err_no"		=> $this->DBInstance->errno,

@@ -322,5 +322,41 @@ class Template {
 		return $Content;
 	}
 
+	/**
+	 * checkFilterForm
+	 * 
+	 * This is not directly related to a template as HTML code. In the mean time create a class for this single tool is not relevant.
+	 * 
+	 * Checks the filterForm array from the POST.
+	 * 
+	 * @return 
+	 */
+	public function checkFilterForm($ff = array()) {
+		$bts = BaseToolSet::getInstance();
 
+		if (count($ff) == 0 ) {
+			$filterForm = array(
+				'nbrPerPage'			=> _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_,
+				'query_like'			=> strtolower($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? ''),
+				'selectionOffset'		=> 0,
+			);
+		} else {
+			$filterForm = $ff;
+		}
+
+		if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') > 0) {
+			$filterForm['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+		} 
+
+		if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset') != 0) {
+			$filterForm['selectionOffset'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+		}
+
+		// Debug
+		// $filterForm['query_like'] = "e";
+		// $filterForm['nbrPerPage'] = 5;
+		// $filterForm['selectionOffset'] = 0;
+
+		$bts->RequestDataObj->setRequestDataEntry('filterForm', $filterForm);
+	}
 }

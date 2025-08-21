@@ -69,25 +69,28 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>";
 // --------------------------------------------------------------------------------------------
+// FilterForm control and correction
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
+$TemplateObj->checkFilterForm();
+
+// --------------------------------------------------------------------------------------------
+$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>";
+
+// --------------------------------------------------------------------------------------------
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1) {
-	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
 
 $pageSelectorData['clauseElements'] = array();
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(l.layout_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
 $pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "lt.fk_theme_id",	"operator" => "=",	"right" => "tw.fk_theme_id");
 $pageSelectorData['clauseElements'][] = array("left" => "tw.fk_theme_id",	"operator" => "=",	"right" => "td.theme_id");
 $pageSelectorData['clauseElements'][] = array("left" => "lt.fk_layout_id",	"operator" => "=",	"right" => "l.layout_id");
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "m.deco_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(l.layout_id) AS ItemsCount "
@@ -160,7 +163,7 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 }
 
 
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i, 1);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );

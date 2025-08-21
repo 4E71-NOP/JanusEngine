@@ -78,6 +78,7 @@ class SddmTools {
 	 */
 	public function makeQueryClause($data){
 		$bts = BaseToolSet::getInstance();
+		reset($data);
 		$Content = "";
 		$word = "WHERE";
 		foreach( $data as $A ) {

@@ -75,22 +75,25 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 // --------------------------------------------------------------------------------------------
+// FilterForm control and correction
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
+$TemplateObj->checkFilterForm();
+
+
+// --------------------------------------------------------------------------------------------
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
+// --------------------------------------------------------------------------------------------
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1) {
-	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
 
 $pageSelectorData['clauseElements'] = array();
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(kw.keyword_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
 $pageSelectorData['clauseElements'][] = array("left" => "kw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_state",	"operator" => "=",	"right" => "'1'");
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "kw.keyword_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(kw.keyword_id) AS ItemsCount "

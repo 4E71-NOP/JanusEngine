@@ -106,13 +106,17 @@ class SddmPDO extends SddmCore
 	 * @param String $q
 	 * @return PDOStatement
 	 */
-	public function query($q)
+	public function query($q, $log = SDDM_QUERY_DEFAULT_LOG)
 	{
 		$bts = BaseToolSet::getInstance();
 		$timeBegin = $bts->TimeObj->getMicrotime();
 
 		$SQL_temps_depart = $bts->TimeObj->getMicrotime();
 		$bts->LMObj->increaseSqlQueryNumber();
+
+		if ($log > 0) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
+		}
 
 		$db_result = $this->DBInstance->query($q);
 

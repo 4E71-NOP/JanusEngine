@@ -46,7 +46,7 @@ $bts->I18nTransObj->apply(
 		"fra" => array(
 			"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
 			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Pages",
+			"col_2_txt"		=> "Page",
 			"col_3_txt"		=> "Langage",
 			"col_4_txt"		=> "Bouclage",
 			"tabTxt1"		=> "Informations",
@@ -64,7 +64,7 @@ $bts->I18nTransObj->apply(
 		"eng" => array(
 			"invite1"		=> "This part will allow you to modify articles.",
 			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Pages",
+			"col_2_txt"		=> "Page",
 			"col_3_txt"		=> "Language",
 			"col_4_txt"		=> "Deadline",
 			"tabTxt1"		=> "Informations",
@@ -82,32 +82,47 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>";
+
+// --------------------------------------------------------------------------------------------
+$pageSelectorData['query'] = "";
+$pageSelectorData['clauseElements'] = array();
+
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-$pageSelectorData['query'] = "";
-$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1) {
-	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
 
-$pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "mnu.fk_ws_id",			"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
-$pageSelectorData['clauseElements'][] = array("left" => "art.arti_ref",			"operator" => "=",	"right" => "mnu.fk_arti_ref");
-$pageSelectorData['clauseElements'][] = array("left" => "art.fk_deadline_id",	"operator" => "=",	"right" => "dl.deadline_id");
-$pageSelectorData['clauseElements'][] = array("left" => "art.fk_ws_id",			"operator" => "=",	"right" => "dl.fk_ws_id");
-$pageSelectorData['clauseElements'][] = array("left" => "dl.fk_ws_id",			"operator" => "=",	"right" => "mnu.fk_ws_id");
-$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_state",		"operator" => "=",	"right" => "'1'");
-$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_type",		"operator" => "IN",	"right" => "('1','0')");
+$filterForm = array(
+	'nbrPerPage'			=> 10,
+	'query_like'			=> strtolower($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? ''),
+	'selectionOffset'		=> 0,
+	'deadline'				=> null
+);
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "art.arti_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 $formDeadline = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'deadline');
 if (strlen($formDeadline ?? '') > 0 && $formDeadline != 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "dl.deadline_id", "operator" => "=", "right" => $formDeadline);
+	$filterForm['deadline'] = $formDeadline;
 }
+
+$TemplateObj->checkFilterForm($filterForm);
+
+// --------------------------------------------------------------------------------------------
+$Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>";
+
+// --------------------------------------------------------------------------------------------
+$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "art.arti_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
+$pageSelectorData['clauseElements'][] = array("left" => "LOWER(art.arti_ref)",	"operator" => "LIKE",	"right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+$pageSelectorData['clauseElements'][] = array("left" => "mnu.fk_ws_id",			"operator" => "=",		"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "art.arti_ref",			"operator" => "=",		"right" => "mnu.fk_arti_ref");
+$pageSelectorData['clauseElements'][] = array("left" => "art.fk_deadline_id",	"operator" => "=",		"right" => "dl.deadline_id");
+$pageSelectorData['clauseElements'][] = array("left" => "art.fk_ws_id",			"operator" => "=",		"right" => "dl.fk_ws_id");
+$pageSelectorData['clauseElements'][] = array("left" => "dl.fk_ws_id",			"operator" => "=",		"right" => "mnu.fk_ws_id");
+$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_state",		"operator" => "=",		"right" => "'1'");
+$pageSelectorData['clauseElements'][] = array("left" => "mnu.menu_type",		"operator" => "IN",		"right" => "('1','0')");
+
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(art.arti_id) AS ItemsCount "
@@ -161,9 +176,8 @@ $listDeadline = array(
 $q = "SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM "
 	. $SqlTableListObj->getSQLTableName('deadline')
 	. " WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "';";
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
 
-$dbquery = $bts->SDDMObj->query($q);
+$dbquery = $bts->SDDMObj->query($q, 1);
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$A = $dbp['deadline_id'];
 	$listDeadline[$A]['id'] = $A;
@@ -174,11 +188,11 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 unset($A);
 foreach ($listDeadline as $A) {
 	if ($A['deadline_state'] == 0) {
-		$A['deadline_title'] = "<span class='" . $Block . "_err'>" . $A['deadline_title'];
+		$A['deadline_title'] = "<span class='" . $Block . "_error'>" . $A['deadline_title'];
 	} else {
 		$A['deadline_title'] = "<span class='" . $Block . "_ok'>" . $A['deadline_title'];
 	}
-	$A['deadline_title'] = $A['deadline_name'] . "</span>";
+	$A['deadline_title'] .= $A['deadline_name'] . "</span>";
 }
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'deadline') ?? '') > 0) {
 	$listDeadline[$bts->RequestDataObj->getRequestDataEntry('SQLdeadline')]['s'] = "selected";
@@ -221,21 +235,22 @@ $T = array();
 $articleList = array();
 if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-		$p = &$articleList[$dbp['arti_ref']][$dbp['arti_id']];
+		$p = &$articleList[$dbp['arti_id']];
 		$p['arti_ref']			= $dbp['arti_ref'];
 		$p['arti_id']			= $dbp['arti_id'];
 		$p['arti_name']			= $dbp['arti_name'];
 		$p['arti_title']		= $dbp['arti_title'];
 		$p['arti_page']			= $dbp['arti_page'];
-		$p['arti_lang']			= $dbp['lang_id'];
-		$p['deadline_state']	= $dbp['deadline_state'];
+		$p['fk_lang_id']		= $dbp['fk_lang_id'];
+		$p['deadline_name']		= $dbp['deadline_name'];
 		$p['deadline_title']	= $dbp['deadline_title'];
+		$p['deadline_state']	= $dbp['deadline_state'];
 	}
 
 	$colorState = array(
-		"0" => "<span class='" . $Block . "_avert'>",
+		"0" => "<span class='" . $Block . "_warning'>",
 		"1" => "<span class='" . $Block . "_ok'>",
-		"2" => "<span class='" . $Block . "_erreur'>",
+		"2" => "<span class='" . $Block . "_error'>",
 	);
 
 	unset($A, $B);
@@ -253,33 +268,22 @@ if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 		. "&formGenericData[mode]=edit"
 		. "&articleForm[selectionId]=";
 
-	// $linkId2 = "&formGenericData[selectionPage]=";
-	// $tranlation = $bts->CMObj->getLanguageListSubEntry($l, 'id');
-	// $tranlation = $bts->CMObj->getLanguageListSubEntry($tranlation, 'lang_original_name');
-
 	foreach ($articleList as &$A) {
 		$i++;
-		$articlePageLink = "";
-		unset($B);
-		foreach ($A as $B) {
-			$T['Content']['1'][$i]['1']['cont'] = $B['arti_ref'];
-			$articlePageLink .= $linkId1 . $B['arti_id'] . "'>" . $B['arti_page'] . "</a>";
-			// $articlePageLink .= $linkId1.$B['arti_id'].$linkId2.$B['arti_page']."'>".$B['arti_page']."</a>";
-			$articlePageLink .= " - ";
-			$T['Content']['1'][$i]['3']['cont'] = $langList[$B['arti_lang']]['txt'];
-			$T['Content']['1'][$i]['4']['cont'] = $colorState[$B['deadline_state']] . $B['deadline_title'] . "</span>";
-		}
-		$articlePageLink = substr($articlePageLink, 0, -3);
-		$T['Content']['1'][$i]['2']['cont'] = $articlePageLink;
+		$T['Content']['1'][$i]['1']['cont'] = $linkId1 . $A['arti_id'] . "'>" .  $A['arti_ref'] . "</a>";
+		$T['Content']['1'][$i]['2']['cont'] = $A['arti_page'];
+		$T['Content']['1'][$i]['3']['cont'] = $langList[$A['fk_lang_id']]['lang_original_name'];
+		$T['Content']['1'][$i]['4']['cont'] = $colorState[$A['deadline_state']] . $A['deadline_title'] . "</span>";
 	}
 }
+
 // --------------------------------------------------------------------------------------------
 //
 //	Display
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 4, 1),
 );

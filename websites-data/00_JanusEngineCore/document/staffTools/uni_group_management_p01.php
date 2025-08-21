@@ -75,21 +75,22 @@ $tagTab = array(
 );
 
 // --------------------------------------------------------------------------------------------
+// FilterForm control and correction
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
+$TemplateObj->checkFilterForm();
+
+// --------------------------------------------------------------------------------------------
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1) {
-	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
 
 $pageSelectorData['clauseElements'] = array();
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(grp.group_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
 $pageSelectorData['clauseElements'][] = array("left" => "wg.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "grp.group_id",		"operator" => "=",	"right" => "wg.fk_group_id");
 $pageSelectorData['clauseElements'][] = array("left" => "grp.group_name",	"operator" => "!=",	"right" => "'Server_owner'");
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "grp.group_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(grp.group_id) AS ItemsCount "
@@ -157,7 +158,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 // --------------------------------------------------------------------------------------------
 //	Display
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );

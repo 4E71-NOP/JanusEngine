@@ -67,6 +67,8 @@ $bts->I18nTransObj->apply(
 			"select2_1"		=> "Actif",
 			"select2_2"		=> "Supprimé",
 			"pageSelectorQueryLike"		=>	"Filtrer avec",
+			"pageSelectorQuerygroup"	=>	"Groupe",
+			"pageSelectorQueryStatus"	=>	"Statut",
 			"pageSelectorDisplay"		=>	"Affichage",
 			"pageSelectorNbrPerPage"	=>	"entrées par page",
 			"pageSelectorBtnFilter"		=>	"Filtrer",
@@ -96,6 +98,8 @@ $bts->I18nTransObj->apply(
 			"select2_1"		=> "Active",
 			"select2_2"		=> "Deleted",
 			"pageSelectorQueryLike"		=>	"Filter with",
+			"pageSelectorQuerygroup"	=>	"Group",
+			"pageSelectorQueryStatus"	=>	"Status",
 			"pageSelectorDisplay"		=>	"Display",
 			"pageSelectorNbrPerPage"	=>	"entries per page",
 			"pageSelectorBtnFilter"		=>	"Filter",
@@ -107,86 +111,57 @@ $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
 // FilterForm control and correction
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+
 $filterForm = array(
-	'user_status'			=> 1,
 	'nbrPerPage'			=> 10,
-	'group_id'				=> null,
-	'query_like'			=> $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like'),
-	'selectionOffset'		=> 0
+	'query_like'			=> strtolower($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? ''),
+	'selectionOffset'		=> 0,
+	'user_status'			=> $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'),
+	'group_id'				=> $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'),
 );
-
-if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
-	$filterForm['group_id'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');
-}
-
-if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') <= 0) {
-	$filterForm['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-} else {
-	$filterForm['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-}
-
-if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset') != 0) {
-	$filterForm['selectionOffset'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
-}
-
-$bts->RequestDataObj->setRequestDataEntry('filterForm', $filterForm);
+$TemplateObj->checkFilterForm($filterForm);
 
 // --------------------------------------------------------------------------------------------
-$GDU_ = array();
+$pageSelectorData['query'] = "";
+$pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+$pageSelectorData['clauseElements'] = array();
 
-$GDU_['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-
-$clause_sql_element = array();
-$clause_sql_element['1'] = "WHERE";
-$clause_sql_element['2'] = $clause_sql_element['3'] = $clause_sql_element['4'] = $clause_sql_element['5'] = $clause_sql_element['6'] = $clause_sql_element['7'] = $clause_sql_element['8'] = $clause_sql_element['9'] = $clause_sql_element['10'] = "AND";
-
-$clause_sql_element_offset = 1;
-$GDU_['clause_like'] = "";
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " usr.user_login LIKE '%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%' ";
-	$clause_sql_element_offset++;
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(usr.user_login)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') ?? '') > 0 && $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
-	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " gr.group_id = '" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') . "' ";
-	$clause_sql_element_offset++;
+if ($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id') != 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "gr.group_id", "operator" => "=", "right" => $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id'));
 }
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') ?? '') > 0) {
-	$GDU_['clause_like'] .= " " .	$clause_sql_element[$clause_sql_element_offset] . " usr.user_status = '" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') . "' ";
-	$clause_sql_element_offset++;
+	$pageSelectorData['clauseElements'][] = array("left" => "usr.user_status", "operator" => "=", "right" => $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status'));
 }
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gr.group_tag != '0' ";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gu.group_user_initial_group = '1' ";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gw.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' ";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gu.fk_user_id = usr.user_id";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gw.fk_group_id = gu.fk_group_id ";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " gu.fk_group_id = gr.group_id ";
-$clause_sql_element_offset++;
-$GDU_['clause_like'] .= " " . $clause_sql_element[$clause_sql_element_offset] . " usr.user_name != 'JnsEngAdmDB'";
-$clause_sql_element_offset++;
 
+$pageSelectorData['clauseElements'][] = array("left" => "gr.group_tag", 				"operator" => "<>",	"right" => "0");
+$pageSelectorData['clauseElements'][] = array("left" => "gu.group_user_initial_group",	"operator" => "=",	"right" => "1");
+$pageSelectorData['clauseElements'][] = array("left" => "gw.fk_ws_id",					"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "gu.fk_user_id",				"operator" => "=",	"right" => "usr.user_id");
+$pageSelectorData['clauseElements'][] = array("left" => "gw.fk_group_id",				"operator" => "=",	"right" => "gu.fk_group_id");
+$pageSelectorData['clauseElements'][] = array("left" => "gu.fk_group_id",				"operator" => "=",	"right" => "gr.group_id");
+$pageSelectorData['clauseElements'][] = array("left" => "usr.user_name",				"operator" => "<>",	"right" => "'JnsEngAdmDB'");
 
 $dbquery = $bts->SDDMObj->query("
 SELECT COUNT(usr.user_id) AS mucount 
 FROM " . $SqlTableListObj->getSQLTableName('user') . " usr, "
 	. $SqlTableListObj->getSQLTableName('group') . " gr, "
 	. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
-	. $SqlTableListObj->getSQLTableName('group_website') . " gw 
-" . $GDU_['clause_like'] . ";");
+	. $SqlTableListObj->getSQLTableName('group_website') . " gw " 
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. ";", 1);
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-	$GDU_['ItemsCount'] = $dbp['mucount'];
+	$pageSelectorData['ItemsCount'] = $dbp['mucount'];
 }
 
-// --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
-if ($GDU_['ItemsCount'] > $GDU_['nbrPerPage']) {
-
-	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
+		if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
 	}
 	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
@@ -198,14 +173,14 @@ if ($GDU_['ItemsCount'] > $GDU_['nbrPerPage']) {
 	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status') ?? '') > 0) {
 		$strUserStatus	= "&filterForm[user_status]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'user_status');
 	}
-
-	$GDU_['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
-	$GDU_['elmIn'] = "<div class='" . $Block . "_page_selector'>";
-	$GDU_['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
-	$GDU_['elmOut'] = "</div>";
-	$GDU_['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
-	$Content .= $TemplateObj->renderPageSelector($GDU_);
+	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
+	$pageSelectorData['elmIn'] = "<div class='" . $Block . "_page_selector'>";
+	$pageSelectorData['elmInHighlight'] = "<div class='" . $Block . "_page_selector_highlight'>";
+	$pageSelectorData['elmOut'] = "</div>";
+	$pageSelectorData['selectionOffset'] = "" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset');
+	$Content .= $TemplateObj->renderPageSelector($pageSelectorData);
 }
+
 
 $dbquery = $bts->SDDMObj->query("
 SELECT usr.user_id,usr.user_login,user_name,usr.user_last_visit,gr.group_title,usr.user_status 
@@ -213,12 +188,12 @@ FROM " . $SqlTableListObj->getSQLTableName('user') . " usr, "
 	. $SqlTableListObj->getSQLTableName('group') . " gr, "
 	. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 	. $SqlTableListObj->getSQLTableName('group_website') . " gw "
-	. $GDU_['clause_like']
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 	. " ORDER BY user_name, user_login"
-	. " LIMIT " . $GDU_['nbrPerPage'] . " OFFSET " . ($GDU_['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 	. ";");
 
-$GDU_['realNbrPerPage'] = $bts->SDDMObj->num_row_sql($dbquery);
+$pageSelectorData['realNbrPerPage'] = $bts->SDDMObj->num_row_sql($dbquery);
 
 $T = array();
 $i = 1;
@@ -246,6 +221,57 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$lastVisit = ($dbp['user_last_visit'] != 0) ? date("Y M d - H:i:s", $dbp['user_last_visit']) : "";
 	$T['Content']['1'][$i]['5']['cont'] = $lastVisit;
 }
+
+// --------------------------------------------------------------------------------------------
+// Menu select for group
+$tdStyle = " style='margin:0.1cm;'";
+$infos['insertLines'] = "<!-- group select -->"
+	. "<tr>\r"
+	. "<td " . $tdStyle . ">" . $bts->I18nTransObj->getI18nTransEntry('pageSelectorQuerygroup') . "</td>\r"
+	. "<td " . $tdStyle . ">"
+	. "<select name='filterForm[group_id]'>";
+
+unset($A, $B);
+
+$q = "SELECT grp.group_id, grp.group_name, grp.group_title "
+	. "FROM "
+	. $SqlTableListObj->getSQLTableName('group') . " grp, "
+	. $SqlTableListObj->getSQLTableName('group_website') . " wg "
+	. "WHERE wg.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
+	. "AND wg.fk_group_id = grp.group_id "
+	. "ORDER BY grp.group_title "
+	. ";";
+
+	$infos['insertLines'] .= "<option value='0'></option>\r";
+
+$dbquery = $bts->SDDMObj->query($q, 1);
+$group_id = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'group_id');
+while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+	if ($group_id == $dbp['group_id']) {
+		$dbp['selected'] = " selected ";
+	} else {
+		$dbp['selected'] = "";
+	}
+	$infos['insertLines'] .= "<option value='" . $dbp['group_id'] . "' " . $dbp['selected'] . ">" . $dbp['group_title'] . "</option>\r";
+}
+
+$infos['insertLines'] .= "</select>\r"
+	. "</td>\r"
+	. "</tr>\r";
+
+// --------------------------------------------------------------------------------------------
+// Menu select for status
+$infos['insertLines'] .= "<!-- status select -->"
+	. "<tr>\r"
+	. "<td " . $tdStyle . ">" . $bts->I18nTransObj->getI18nTransEntry('pageSelectorQueryStatus') . "</td>\r"
+	. "<td " . $tdStyle . ">"
+	. "<select name='filterForm[user_status]'>"
+	. "<option value='0'>" . $bts->I18nTransObj->getI18nTransEntry('select2_0') . "</option>\r"
+	. "<option value='1' selected>" . $bts->I18nTransObj->getI18nTransEntry('select2_1') . "</option>\r"
+	. "<option value='2'>" . $bts->I18nTransObj->getI18nTransEntry('select2_2') . "</option>\r"
+	. "</select>\r"
+	. "</td>\r"
+	. "</tr>\r";
 
 // --------------------------------------------------------------------------------------------
 //

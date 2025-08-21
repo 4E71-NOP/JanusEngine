@@ -69,10 +69,17 @@ $bts->I18nTransObj->apply(
 	)
 );
 
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
+
 // --------------------------------------------------------------------------------------------
+// FilterForm control and correction
 $ClassLoaderObj->provisionClass('Template');
 $TemplateObj = Template::getInstance();
+$TemplateObj->checkFilterForm();
+
+// --------------------------------------------------------------------------------------------
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
+
+// --------------------------------------------------------------------------------------------
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
 if ($pageSelectorData['nbrPerPage'] < 1) {
@@ -80,12 +87,12 @@ if ($pageSelectorData['nbrPerPage'] < 1) {
 }
 
 $pageSelectorData['clauseElements'] = array();
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(doc.docu_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
 $pageSelectorData['clauseElements'][] = array("left" => "shr.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "shr.fk_docu_id",	"operator" => "=",	"right" => "doc.docu_id");
 $pageSelectorData['clauseElements'][] = array("left" => "doc.docu_origin",	"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "doc.docu_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(doc.docu_id) AS ItemsCount "
@@ -176,7 +183,7 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );

@@ -144,11 +144,11 @@ if ($CheckClauseType > 0) {
 }
 unset($A, $B);
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page') ?? '') == 0) {
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_par_page', 10);
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage') ?? '') == 0) {
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbrPerPage', 10);
 }
-$criteriaUrl .= "&amp;lmForm[nbr_par_page]=" . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page');
-$criteria2ndPost .= "<input type='hidden' name='lmForm[nbr_par_page]'	value='" . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page') . "'>\r";
+$criteriaUrl .= "&amp;lmForm[nbrPerPage]=" . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage');
+$criteria2ndPost .= "<input type='hidden' name='lmForm[nbrPerPage]'	value='" . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage') . "'>\r";
 
 $Content .= "
 <form id='lmForm_001' ACTION='index.php?' method='post'>\r
@@ -175,8 +175,8 @@ $T['Content'][$Tab][$lt]['2']['cont'] = "
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
-$T['Content'][$Tab][$lt]['2']['cont'] = $bts->RenderFormObj->renderInputText("lmForm[nbr_par_page]", $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'), "", 15);
-// ."<input type='text' name='lmForm[nbr_par_page]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')."' class='" . $Block."_t3 ".$Block."_form_1'>";
+$T['Content'][$Tab][$lt]['2']['cont'] = $bts->RenderFormObj->renderInputText("lmForm[nbrPerPage]", $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage'), "", 15);
+// ."<input type='text' name='lmForm[nbrPerPage]' size='15' value='".$bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage')."' class='" . $Block."_t3 ".$Block."_form_1'>";
 
 // $T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = $lt;	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 2;	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
 
@@ -250,10 +250,10 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'log_count', $dbp['nbr_log']);
 }
 
-if ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') > $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page')) {
+if ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') > $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage')) {
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'selection_page', "<p style='text-align: center;'>\r --\r");
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') / $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'));
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'reste', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') % $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'));
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') / $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage'));
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'reste', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') % $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage'));
 	if ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'reste') != 0) {
 		$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'nbr_page', $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_page') + 1);
 	}
@@ -282,7 +282,7 @@ WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 " . $ClauseType .
 	$pv['clause_msgid'] . "
 ORDER BY log_date DESC, log_id DESC 
-LIMIT " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page') . " OFFSET " . ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') * $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbr_par_page'))
+LIMIT " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage') . " OFFSET " . ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') * $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'nbrPerPage'))
 	. ";");
 
 $config = array(

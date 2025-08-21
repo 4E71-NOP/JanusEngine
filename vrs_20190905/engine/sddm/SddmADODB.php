@@ -29,7 +29,7 @@ class SddmADODB {
 	}
 	
 	public function connect(){}
-	public function query($q) {}
+	public function query($q, $log = SDDM_QUERY_DEFAULT_LOG) {}
 	public function num_row_sql($res) {}
 	public function fetch_array_sql($res) {
 		return $res->fields;

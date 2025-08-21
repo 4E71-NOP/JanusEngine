@@ -67,25 +67,27 @@ $bts->I18nTransObj->apply(
 	)
 );
 
+// --------------------------------------------------------------------------------------------
+// FilterForm control and correction
+$ClassLoaderObj->provisionClass('Template');
+$TemplateObj = Template::getInstance();
+$TemplateObj->checkFilterForm();
+
+// --------------------------------------------------------------------------------------------
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-$ClassLoaderObj->provisionClass('Template');
-$TemplateObj = Template::getInstance();
 $pageSelectorData['query'] = "";
 $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
-if ($pageSelectorData['nbrPerPage'] < 1) {
-	$pageSelectorData['nbrPerPage'] = _ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_;
-}
 
 $pageSelectorData['clauseElements'] = array();
+if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
+	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(m.module_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
+}
 $pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "m.module_id",		"operator" => "=",	"right" => "mw.fk_module_id");
 $pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id",		"operator" => "=",	"right" => "p.perm_id");
 
-if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-	$pageSelectorData['clauseElements'][] = array("left" => "m.module_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-}
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(m.module_id) AS ItemsCount "
@@ -197,7 +199,7 @@ foreach ($table_infos_modules as $A1) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 6, 1),
 );
