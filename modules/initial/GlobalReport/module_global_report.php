@@ -227,7 +227,7 @@ class ModuleGlobalReport
 		$pv['pv_t'] = time() - (60 * 60 * 24 * 30);
 		if ($pv['def_number'] < $pv['pv_t']) {
 			//	echo ("<br>...Mail...<br><br>");
-			$pv['a']	= "license@rootwave.net";
+			$pv['a']	= "licence@rootwave.net";
 			$pv['b']	= "[JNSENG-L] - " . $pv['def_text'];
 			$pv['c']	= "\r\n" . $_SERVER . "\r\n";
 			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['serverOwner'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();

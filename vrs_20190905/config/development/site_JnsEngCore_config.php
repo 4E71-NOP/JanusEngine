@@ -6,7 +6,7 @@
 //	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
 //	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
 //
-//	(c)2005-∞ Faust MARIA DE AREVALO faust@multiweb-manager.net
+//	(c)2005-∞ Faust MARIA DE AREVALO faust@rootwave.net
 //
 // --------------------------------------------------------------------------------------------
 // Vous serrez peut etre obligé de rajouter le préfix de votre compte chez l'hébergeur.
@@ -19,7 +19,7 @@ $fileContent = array(
 	"charset"			=> "utf8mb4",
 	"host"				=> "mysql",
 	"port"				=> "",
-	"dal"				=> "PDO",				// MYSQLI , PDOMYSQL
+	"dal"				=> "PDO",				// PDO (MYSQLI is deprecated in PHP >8.2 )
 	"db_user_login"		=> "JnsEngAdmBDD",
 	"db_user_password"	=> "9eBFs>vQX(kt.Ptfr>4x",
 	"dbprefix"			=> "JnsEng",
