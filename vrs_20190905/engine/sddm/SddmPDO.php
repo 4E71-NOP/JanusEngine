@@ -67,7 +67,8 @@ class SddmPDO extends SddmCore
 				break;
 
 			case "pgsql":
-				$dsn .= ";dbname=" . $TabConfig['dbprefix'];
+				// $dsn .= ";dbname=" . $TabConfig['dbprefix'];
+				$dsn .= ";dbname=postgres";
 				break;
 		}
 		$options = [

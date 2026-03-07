@@ -365,7 +365,7 @@ class InstallPage02
 						break;
 				}
 
-				$r[] = "GRANT ALL PRIVILEGES ON DATABASE \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
+				// $r[] = "GRANT ALL PRIVILEGES ON DATABASE \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "\" TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 				$r[] = "GRANT ALL ON SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 				$r[] = "ALTER DEFAULT PRIVILEGES IN SCHEMA " . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . " GRANT ALL ON TABLES TO \"" . $bts->CMObj->getConfigurationSubEntry('db', 'dataBaseUserLogin') . "\";";
 				break;

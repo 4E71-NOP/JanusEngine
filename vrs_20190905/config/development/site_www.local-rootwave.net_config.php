@@ -15,9 +15,9 @@
 
 $fileContent = array(
 	"ws_short"			=> "Rw",
-	"type"				=> "mysql",
+	"type"				=> "pgsql",
 	"charset"			=> "utf8mb4",
-	"host"				=> "mysql",
+	"host"				=> "postgres",
 	"port"				=> "",
 	"dal"				=> "PDO",				// PDO (MYSQLI is deprecated in PHP >8.2 )
 	"db_user_login"		=> "JnsEngAdmBDD",
