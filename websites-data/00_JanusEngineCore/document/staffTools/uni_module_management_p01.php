@@ -35,34 +35,32 @@ $bts->I18nTransObj->apply(
 	array(
 		"type" => "array",
 		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de créer un module.",
-			"invite2"		=> "Cette partie va vous permettre de gérer les modules.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Description",
-			"col_3_txt"		=> "State",
-			"col_4_txt"		=> "Decoration",
-			"col_5_txt"		=> "Permission",
-			"col_6_txt"		=> "Panneau d'administration",
-			"tabTxt1"		=> "Informations",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
+			"invite1" => "Cette partie va vous permettre de créer un module.",
+			"invite2" => "Cette partie va vous permettre de gérer les modules.",
+			"col_1_txt" => "Name",
+			"col_2_txt" => "Description",
+			"col_3_txt" => "Decoration",
+			"col_4_txt" => "Permission",
+			"col_5_txt" => "Panneau d'administration",
+			"tabTxt1" => "Informations",
+			"pageSelectorQueryLike" => "Filtrer avec",
+			"pageSelectorDisplay" => "Affichage",
+			"pageSelectorNbrPerPage" => "entrées par page",
+			"pageSelectorBtnFilter" => "Filtrer",
 		),
 		"eng" => array(
-			"invite1"		=> "This part will allow you to create a module.",
-			"invite2"		=> "This part will allow you to manage modules.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Description",
-			"col_3_txt"		=> "State",
-			"col_4_txt"		=> "Decoration",
-			"col_5_txt"		=> "Permission",
-			"col_6_txt"		=> "Administration panel",
-			"tabTxt1"		=> "Informations",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
+			"invite1" => "This part will allow you to create a module.",
+			"invite2" => "This part will allow you to manage modules.",
+			"col_1_txt" => "Name",
+			"col_2_txt" => "Description",
+			"col_3_txt" => "Decoration",
+			"col_4_txt" => "Permission",
+			"col_5_txt" => "Administration panel",
+			"tabTxt1" => "Informations",
+			"pageSelectorQueryLike" => "Filter with",
+			"pageSelectorDisplay" => "Display",
+			"pageSelectorNbrPerPage" => "entries per page",
+			"pageSelectorBtnFilter" => "Filter",
 		)
 	)
 );
@@ -84,9 +82,9 @@ $pageSelectorData['clauseElements'] = array();
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(m.module_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
-$pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
-$pageSelectorData['clauseElements'][] = array("left" => "m.module_id",		"operator" => "=",	"right" => "mw.fk_module_id");
-$pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id",		"operator" => "=",	"right" => "p.perm_id");
+$pageSelectorData['clauseElements'][] = array("left" => "mw.fk_ws_id", "operator" => "=", "right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "m.module_id", "operator" => "=", "right" => "mw.fk_module_id");
+$pageSelectorData['clauseElements'][] = array("left" => "m.fk_perm_id", "operator" => "=", "right" => "p.perm_id");
 
 
 $pageSelectorData['query'] = "SELECT"
@@ -105,10 +103,10 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 
 if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
 	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
-		$strQueryLike	= "&filterForm[query_like]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
+		$strQueryLike = "&filterForm[query_like]=" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like');
 	}
 	if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage') ?? '') > 0) {
-		$strNbrPerPage	= "&filterForm[nbrPerPage]="	. $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
+		$strNbrPerPage = "&filterForm[nbrPerPage]=" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'nbrPerPage');
 	}
 
 	$pageSelectorData['link'] = $strQueryLike . $strGroupId . $strUserStatus . $strNbrPerPage;
@@ -121,17 +119,18 @@ if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
 
 // --------------------------------------------------------------------------------------------
 
-
 $dbquery = $bts->SDDMObj->query(
-	"SELECT m.*,p.perm_name"
-		. " FROM "
-		. $SqlTableListObj->getSQLTableName('module') . " m , "
-		. $SqlTableListObj->getSQLTableName('module_website') . " mw, "
-		. $SqlTableListObj->getSQLTableName('permission') . " p "
-		. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
-		. " ORDER BY m.module_name, mw.module_position "
-		. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
-		. ";"
+	"SELECT "
+	. "m.*, "
+	. "p.perm_name "
+	. "FROM "
+	. $SqlTableListObj->getSQLTableName('module') . " m , "
+	. $SqlTableListObj->getSQLTableName('module_website') . " mw, "
+	. $SqlTableListObj->getSQLTableName('permission') . " p "
+	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
+	. " ORDER BY m.module_name, mw.module_position "
+	. " LIMIT " . $pageSelectorData['nbrPerPage'] . " OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
+	. ";"
 );
 
 $groupTab = array();
@@ -152,28 +151,20 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$groupTab[$i] = $dbp['group_title'];
 }
 
-$tab_module_state = array(
-	0 => "<span class='" . $Block . "_avert " . $Block . "_t1'>" . $bts->I18nTransObj->getI18nTransEntry('disabled') . "</span>",
-	1 => $bts->I18nTransObj->getI18nTransEntry('enabled'),
-	2 => "<span class='" . $Block . "_avert " . $Block . "_t1'>" . $bts->I18nTransObj->getI18nTransEntry('deleted') . "</span>",
-);
-
 $tab_module_deco = array(
 	0 => $bts->I18nTransObj->getI18nTransEntry('no'),
 	1 => $bts->I18nTransObj->getI18nTransEntry('yes'),
 );
 
 $i = 1;
-$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
-$T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
-$T['Content']['1'][$i]['6']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_6_txt');
+$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+$T['Content']['1'][$i]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+$T['Content']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+$T['Content']['1'][$i]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
+$T['Content']['1'][$i]['5']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
 
 foreach ($table_infos_modules as $A1) {
 	$i++;
-	$A2 = $A1['module_state'];
 	$A3 = $A1['module_deco'];
 	$A4 = $A1['module_adm_control'];
 	$T['Content']['1'][$i]['1']['cont'] = "<a href='"
@@ -188,7 +179,6 @@ foreach ($table_infos_modules as $A1) {
 		. "</a>\r";
 
 	$T['Content']['1'][$i]['2']['cont'] = $A1['module_desc'];
-	$T['Content']['1'][$i]['3']['cont'] = $tab_module_state[$A2];
 	$T['Content']['1'][$i]['4']['cont'] = $tab_module_deco[$A3];
 	$T['Content']['1'][$i]['5']['cont'] = $A1['perm_name'];
 	$T['Content']['1'][$i]['6']['cont'] = $tab_module_deco[$A4];
@@ -201,7 +191,7 @@ foreach ($table_infos_modules as $A1) {
 // --------------------------------------------------------------------------------------------
 $T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
 $T['ContentCfg']['tabs'] = array(
-	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 6, 1),
+	1 => $bts->RenderTablesObj->getDefaultTableConfig($i, 6, 1),
 );
 $Content .= $bts->RenderTablesObj->render($infos, $T)
 	. "<br>\r"

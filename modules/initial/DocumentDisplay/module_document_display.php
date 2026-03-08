@@ -546,6 +546,17 @@ class ModuleDocumentDisplay
 					$Content .= "<span class='skin_princ_" . $infos['bloc'] . "_tb2 skin_princ_" . $infos['bloc'] . "_warning' style='font-weight: bold'>ERR : ['/WM']/['WM']. STOP!</span>";
 				}
 				$pv['wm_code'] = substr($inputContent, $StartPos + 4, $EndPos - $StartPos - 4);				// Copy the code
+
+
+				// set_error_handler(function ($_errno, $errstr) {
+				// 	// Convert notice, warning, etc. to error.
+				// 	throw new ErrorException($errstr);
+				// });
+				// try {
+				// 	$Content .= eval ($pv['wm_code']);
+				// } catch (Throwable $e) {
+				// 	error_log($e);
+				// }
 				$Content .= eval ($pv['wm_code']);																				// Execute the code segment
 				$EndPos = $EndPos + 5;																			// Put the 'end' after the ['/WM'] markup
 				$StartPos = $EndPos;																			// Put the 'start' after the ['/WM'] markup

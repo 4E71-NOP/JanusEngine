@@ -118,7 +118,7 @@ else {
 		;
 
 		$T['Content']['1'][$i]['2']['cont']	= $tab_type[$dbp['docu_type']];
-		$T['Content']['1'][$i]['3']['cont']	= $tab_modif[$dbp['part_modification']];
+		$T['Content']['1'][$i]['3']['cont']	= $tab_modif[$dbp['share_modification']];
 	}
 }
 
@@ -135,12 +135,12 @@ $Content .= "
 <br>\r
 <br>\r"
 .$bts->RenderFormObj->renderformHeader('documentForm')
-.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"				,	"1")
+.$bts->RenderFormObj->renderHiddenInput(	"formSubmitted"			,	"1")
 .$bts->RenderFormObj->renderHiddenInput(	"formGenericData[origin]"	,	"AdminDashboard")
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]"	,	"AdminDocumentManagementP02" )
-.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"				,	$commandType )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[section]",	"AdminDocumentManagementP02" )
+.$bts->RenderFormObj->renderHiddenInput(	"formCommand1"			,	$commandType )
 .$bts->RenderFormObj->renderHiddenInput(	"formEntity1"				,	"document" )
-.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"		,	"create" )
+.$bts->RenderFormObj->renderHiddenInput(	"formGenericData[mode]"	,	"create" )
 ."<p>\r"
 ;
 

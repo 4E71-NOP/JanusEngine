@@ -36,7 +36,9 @@ class JanusEngine
 	private $ContentFragments;
 	private $stylesheet;
 
-	private function __construct() {}
+	private function __construct()
+	{
+	}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -77,7 +79,7 @@ class JanusEngine
 		$bts = BaseToolSet::getInstance();
 
 		// --------------------------------------------------------------------------------------------
-		$Content =  "";
+		$Content = "";
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
@@ -97,6 +99,7 @@ class JanusEngine
 			ini_set('log_errors', LOG_CONFIG_LOG_ERRORS);
 			ini_set('error_log', LOG_CONFIG_ERROR_LOG); // Local
 		}
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "PHP/display_errors =" . ini_get('display_errors')));
 
 		// --------------------------------------------------------------------------------------------
 		// Don't push me cuz i'm close to the edge !!!
@@ -272,7 +275,7 @@ class JanusEngine
 			// Rendering of the CSS
 			//
 			// --------------------------------------------------------------------------------------------
-			$CssContent  = "<!-- Extra CSS -->\r";
+			$CssContent = "<!-- Extra CSS -->\r";
 			$CssContent .= $this->GeneratedScript->renderScriptFileWithBaseURL('Css-File', "<link rel='stylesheet' href='", "'>\r");
 
 			// --------------------------------------------------------------------------------------------
@@ -792,8 +795,8 @@ class JanusEngine
 		$this->ContentFragments = $LayoutProcessorObj->render();
 
 		$LayoutCommands = array(
-			0 => array('regex'	=> "/{{\s*get_header\s*\(\s*\)\s*}}/", "command"	=> 'get_header'),
-			1 => array('regex'	=> "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command"	=> 'render_module'),
+			0 => array('regex' => "/{{\s*get_header\s*\(\s*\)\s*}}/", "command" => 'get_header'),
+			1 => array('regex' => "/{{\s*render_module\s*\(\s*('|\"|`)\w*('|\"|`)\s*\)\s*}}/", "command" => 'render_module'),
 		);
 
 		// We know there's only one command per entry
@@ -882,22 +885,22 @@ class JanusEngine
 		$Content .= "style='";
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('width') ?? '') > 0) {
-			$Content .= "width:" .			$this->ThemeDataObj->getDefinitionValue('width') . "; ";
+			$Content .= "width:" . $this->ThemeDataObj->getDefinitionValue('width') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('heigth') ?? '') > 0) {
-			$Content .= "height:" .		$this->ThemeDataObj->getDefinitionValue('height') . "; ";
+			$Content .= "height:" . $this->ThemeDataObj->getDefinitionValue('height') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width') ?? '') > 0) {
-			$Content .= "min-width:" .		$this->ThemeDataObj->getDefinitionValue('min_width') . "; ";
+			$Content .= "min-width:" . $this->ThemeDataObj->getDefinitionValue('min_width') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('min_height') ?? '') > 0) {
-			$Content .= "min-height:" .	$this->ThemeDataObj->getDefinitionValue('min_height') . "; ";
+			$Content .= "min-height:" . $this->ThemeDataObj->getDefinitionValue('min_height') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('max_width') ?? '') > 0) {
-			$Content .= "max-width:" .		$this->ThemeDataObj->getDefinitionValue('max_width') . "; ";
+			$Content .= "max-width:" . $this->ThemeDataObj->getDefinitionValue('max_width') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('max_height') ?? '') > 0) {
-			$Content .= "max-height:" .	$this->ThemeDataObj->getDefinitionValue('max_height') . "; ";
+			$Content .= "max-height:" . $this->ThemeDataObj->getDefinitionValue('max_height') . "; ";
 		}
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg') ?? '') > 0) {
@@ -907,13 +910,13 @@ class JanusEngine
 		}
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position') ?? '') > 0) {
-			$Content .= "background-position:" .	$this->ThemeDataObj->getDefinitionValue('bg_position') . "; ";
+			$Content .= "background-position:" . $this->ThemeDataObj->getDefinitionValue('bg_position') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_repeat') ?? '') > 0) {
-			$Content .= "background-repeat:" .		$this->ThemeDataObj->getDefinitionValue('bg_repeat') . "; ";
+			$Content .= "background-repeat:" . $this->ThemeDataObj->getDefinitionValue('bg_repeat') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_color') ?? '') > 0) {
-			$Content .= "background-color:#" .		$this->ThemeDataObj->getDefinitionValue('bg_color') . "; ";
+			$Content .= "background-color:#" . $this->ThemeDataObj->getDefinitionValue('bg_color') . "; ";
 		}
 		$Content .= "'\r";
 
@@ -983,7 +986,7 @@ class JanusEngine
 			$str = "var tableFileSelector = {\r";
 			$i = 0;
 			foreach ($fs as $A) {
-				$str .= "'" . $i . "':{ 'idx':'" . $i . "',	'width':'" . $A['width'] . "',	'height':'" . $A['height'] . "',	'formName':'" . $A['formName'] . "',	'formTargetId':'" . $A['formTargetId'] . "',	'selectionMode':'" . $A['selectionMode'] . "',	'lastPath':'" . $A['path'] . "',	'restrictTo':'" . $A['restrictTo'] . "',	'strRemove':'" . addslashes( $A['strRemove'] ?? '' ) . "',	'strAdd':'" . $A['strAdd'] . "',	'displayType':'" . $A['displayType'] . "'	},\r";
+				$str .= "'" . $i . "':{ 'idx':'" . $i . "',	'width':'" . $A['width'] . "',	'height':'" . $A['height'] . "',	'formName':'" . $A['formName'] . "',	'formTargetId':'" . $A['formTargetId'] . "',	'selectionMode':'" . $A['selectionMode'] . "',	'lastPath':'" . $A['path'] . "',	'restrictTo':'" . $A['restrictTo'] . "',	'strRemove':'" . addslashes($A['strRemove'] ?? '') . "',	'strAdd':'" . $A['strAdd'] . "',	'displayType':'" . $A['displayType'] . "'	},\r";
 				$i++;
 			}
 			$str = substr($str, 0, -2) . "\r};\r";
