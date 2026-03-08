@@ -22,6 +22,7 @@ class InstallTestDb
 	private $db_ = array();
 	private $messageLog = array();
 	private $jsonApiResponse = array(
+		"cnxToService" => false,
 		"cnxToDB" => false,
 		"JnsEngDBAlreadyExists" => false,
 		"JnsEngUserAlreadyExists" => false,
@@ -281,6 +282,7 @@ class InstallTestDb
 		$this->messageLog[] = "Install_test_db - " . $currentTest['testName'] . " - " . $currentTest[$respValue];
 
 		if ($this->jsonApiResponse['cnxToService']) {
+			$this->findUserTest($this->currentDbObj);
 
 			$currentTest = $this->queryCatalog['cnxToDb'];
 			$this->jsonApiResponse['cnxToDB'] = $this->cnxToDbTest($currentTest);
@@ -288,9 +290,7 @@ class InstallTestDb
 			$this->messageLog[] = "Install_test_db - " . $currentTest['testName'] . " - " . $currentTest[$respValue];
 
 			if ($this->jsonApiResponse['cnxToDB']) {
-				$this->findUserTest($this->currentDbObj);
 				$this->findTableTest($this->currentDbObj);
-
 
 				if ($this->jsonApiResponse['JnsEngDBInstallTableExists']) {
 					$currentTest = $this->queryCatalog['findLock'];

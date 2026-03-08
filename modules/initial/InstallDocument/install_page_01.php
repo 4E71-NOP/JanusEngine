@@ -419,6 +419,8 @@ class InstallPage01
 		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='" . $Block;
 
 		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
+			. "<div id='cnxToServiceTrue'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceok') . "</div>"
+			. "<div id='cnxToServiceFalse'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceko') . "</div>"
 			. "<div id='cnxToDBTrue'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
 			. "<div id='cnxToDBFalse'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
 			. "<div id='JnsEngDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsok') . "</div>"

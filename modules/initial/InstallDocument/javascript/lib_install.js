@@ -144,8 +144,8 @@ class LibInstall {
 			window.alert(AlertCheckFormValues + ErrorDesc);
 		}
 
-		l.Log[this.dbgInstFonction]("Processing: tdb.resultTest.cnxToDB=" + tdb.resultTest.cnxToDB + "; tdb.resultTest.installationLocked=" + tdb.resultTest.installationLocked);
-		if (tdb.resultTest.cnxToDB == false) { dbDiagnostic = false; installGo = false; }
+		l.Log[this.dbgInstFonction]("Processing: tdb.resultTest.cnxToService=" + tdb.resultTest.cnxToService + "; tdb.resultTest.installationLocked=" + tdb.resultTest.installationLocked);
+		if (tdb.resultTest.cnxToService == false) { dbDiagnostic = false; installGo = false; }
 		if (tdb.resultTest.installationLocked == true) { dbDiagnostic = false; installGo = false; }
 		if (dbDiagnostic == false) { window.alert(JavaScriptI18nDbCnxAlert); }
 

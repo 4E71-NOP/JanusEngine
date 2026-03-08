@@ -80,6 +80,8 @@ $i18n = array(
 	'DB_password'		=> "Mot de passe",
 
 	'DB_tstcnx'					=>	"Tester la connexion à la base de donnée.",
+	'DB_cnxToServiceok'			=>	"La connexion au service a réussi",
+	'DB_cnxToServiceko'			=>	"La connexion au service a échoué",
 	'DB_cnxToDBok'				=>	"La connexion à la base a réussi.",
 	'DB_cnxToDBko'				=>	"La connexion à la base a échoué.",
 	'DB_JnsEngDBAlreadyExistsok'	=>	"ATTENTION! Une BDD Janus Engine est déjà présente. L'installation écrasera cette base si vous continuez. Changez le nom si vous voulez garder l'existant.",

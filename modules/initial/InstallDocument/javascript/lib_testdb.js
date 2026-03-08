@@ -16,8 +16,9 @@
 class LibTestDB {
 
 	constructor() {
-		this.dbgTstDb = 0;
+		this.dbgTstDb = 1;
 		this.resultTest = {
+			'cnxToService': false,
 			'cnxToDB': false,
 			'JnsEngDBAlreadyExists': false,
 			'installationLocked': false,
@@ -57,16 +58,18 @@ class LibTestDB {
 				tdb.resultTest = res;
 				l.Log[tdb.dbgTstDb](res);
 
+				tdb.toggleDbResultDivsVisibilty('cnxToService', false);
 				tdb.toggleDbResultDivsVisibilty('cnxToDB', false);
 				tdb.toggleDbResultDivsVisibilty('JnsEngDBAlreadyExists', false);
 				tdb.toggleDbResultDivsVisibilty('JnsEngUserAlreadyExists', false);
 				tdb.toggleDbResultDivsVisibilty('installationLocked', false);
 
 
-				tdb.toggleDbResultDivs('cnxToDB', res.cnxToDB);
+				tdb.toggleDbResultDivs('cnxToService', res.cnxToService);
+				tdb.toggleDbResultDivs('JnsEngUserAlreadyExists', res.JnsEngUserAlreadyExists);
 				if (res.cnxToDB) {
+					tdb.toggleDbResultDivs('cnxToDB', res.cnxToDB);
 					tdb.toggleDbResultDivs('JnsEngDBAlreadyExists', res.JnsEngDBAlreadyExists);
-					tdb.toggleDbResultDivs('JnsEngUserAlreadyExists', res.JnsEngUserAlreadyExists);
 					tdb.toggleDbResultDivs('installationLocked', res.installationLocked);
 				}
 			}

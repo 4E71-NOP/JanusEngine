@@ -80,6 +80,8 @@ $i18n = array(
 	'DB_password'	=> "Password",
 
 	'DB_tstcnx'					=>	"Test the database connexion",
+	'DB_cnxToServiceok'			=>	"Connection to DB service succeeded",
+	'DB_cnxToServiceko'			=>	"Connection to DB service failed",
 	'DB_cnxToDBok'				=>	"The database connection suceeded.",
 	'DB_cnxToDBko'				=>	"The database connection failed.",
 	'DB_JnsEngDBAlreadyExistsok'	=>	"WARNING! A Janus Engine database has been found. The install process <b>will erase</b> this DB if you continue. Change the DB name if you want to keep the existing DB.",
