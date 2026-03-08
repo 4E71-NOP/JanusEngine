@@ -16,7 +16,9 @@
 
 class ModuleDocumentDisplay
 {
-	public function __construct() {}
+	public function __construct()
+	{
+	}
 
 	public function render($infos)
 	{
@@ -50,28 +52,28 @@ class ModuleDocumentDisplay
 
 
 			// 		We have a document object. Now we have to process it.
-			$DocumentDataObj->setDocumentDataEntry('arti_creation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_creation_date')));
-			$DocumentDataObj->setDocumentDataEntry('arti_validation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_validation_date')));
-			$DocumentDataObj->setDocumentDataEntry('arti_release_date',		date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_release_date')));
-			$DocumentDataObj->setDocumentDataEntry('docu_creation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_creation_date')));
-			$DocumentDataObj->setDocumentDataEntry('docu_validation_date',	date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_validation_date')));
-			$DocumentDataObj->setDocumentDataEntry('docu_cont_brut',		$DocumentDataObj->getDocumentDataEntry('docu_cont'));
+			$DocumentDataObj->setDocumentDataEntry('arti_creation_date', date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_creation_date')));
+			$DocumentDataObj->setDocumentDataEntry('arti_validation_date', date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_validation_date')));
+			$DocumentDataObj->setDocumentDataEntry('arti_release_date', date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('arti_release_date')));
+			$DocumentDataObj->setDocumentDataEntry('docu_creation_date', date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_creation_date')));
+			$DocumentDataObj->setDocumentDataEntry('docu_validation_date', date("Y M d - H:i:s", $DocumentDataObj->getDocumentDataEntry('docu_validation_date')));
+			$DocumentDataObj->setDocumentDataEntry('docu_cont_brut', $DocumentDataObj->getDocumentDataEntry('docu_cont'));
 
 			$document_list = array();
 			$LD_idx = 1;
-			$document_list[$LD_idx]['arti_id']					= $DocumentDataObj->getDocumentDataEntry('arti_id');
-			$document_list[$LD_idx]['arti_title']				= $DocumentDataObj->getDocumentDataEntry('arti_title');
-			$document_list[$LD_idx]['arti_creator_id']			= $DocumentDataObj->getDocumentDataEntry('arti_creator_id');
-			$document_list[$LD_idx]['arti_creation_date']		= $DocumentDataObj->getDocumentDataEntry('arti_creation_date');
-			$document_list[$LD_idx]['arti_validator_id']		= $DocumentDataObj->getDocumentDataEntry('arti_validator_id');
-			$document_list[$LD_idx]['arti_validation_date']		= $DocumentDataObj->getDocumentDataEntry('arti_validation_date');
+			$document_list[$LD_idx]['arti_id'] = $DocumentDataObj->getDocumentDataEntry('arti_id');
+			$document_list[$LD_idx]['arti_title'] = $DocumentDataObj->getDocumentDataEntry('arti_title');
+			$document_list[$LD_idx]['arti_creator_id'] = $DocumentDataObj->getDocumentDataEntry('arti_creator_id');
+			$document_list[$LD_idx]['arti_creation_date'] = $DocumentDataObj->getDocumentDataEntry('arti_creation_date');
+			$document_list[$LD_idx]['arti_validator_id'] = $DocumentDataObj->getDocumentDataEntry('arti_validator_id');
+			$document_list[$LD_idx]['arti_validation_date'] = $DocumentDataObj->getDocumentDataEntry('arti_validation_date');
 			$LD_idx++;
-			$document_list[$LD_idx]['docu_id']					= $DocumentDataObj->getDocumentDataEntry('docu_id');
-			$document_list[$LD_idx]['docu_name']				= $DocumentDataObj->getDocumentDataEntry('docu_name');
-			$document_list[$LD_idx]['docu_creator']				= $DocumentDataObj->getDocumentDataEntry('docu_creator');
-			$document_list[$LD_idx]['docu_creation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-			$document_list[$LD_idx]['docu_validator']			= $DocumentDataObj->getDocumentDataEntry('docu_validator');
-			$document_list[$LD_idx]['docu_validation_date']	= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
+			$document_list[$LD_idx]['docu_id'] = $DocumentDataObj->getDocumentDataEntry('docu_id');
+			$document_list[$LD_idx]['docu_name'] = $DocumentDataObj->getDocumentDataEntry('docu_name');
+			$document_list[$LD_idx]['docu_creator'] = $DocumentDataObj->getDocumentDataEntry('docu_creator');
+			$document_list[$LD_idx]['docu_creation_date'] = $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
+			$document_list[$LD_idx]['docu_validator'] = $DocumentDataObj->getDocumentDataEntry('docu_validator');
+			$document_list[$LD_idx]['docu_validation_date'] = $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
 			$LD_idx++;
 
 			$position_float = array('0' => "none", '1' => "left", '2' => "right");
@@ -81,15 +83,15 @@ class ModuleDocumentDisplay
 			WHERE config_id = '" . $DocumentDataObj->getDocumentDataEntry('fk_config_id') . "'
 			;");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_type',					$dbp['config_menu_type']);
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_style',					$dbp['config_menu_style']);
-				$DocumentDataObj->setDocumentDataEntry('config_menu_float_position',		$dbp['config_menu_float_position']);
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_position',			$position_float[$DocumentDataObj->getDocumentDataEntry('config_menu_float_position')]);
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_taille_x',			$dbp['config_menu_float_size_x']);
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_taille_y',			$dbp['config_menu_float_size_y']);
-				$DocumentDataObj->setDocumentDataEntry('arti_menu_occurence',				$dbp['config_menu_occurence']);
-				$DocumentDataObj->setDocumentDataEntry('arti_montre_info_parution',		$dbp['config_show_release_info']);
-				$DocumentDataObj->setDocumentDataEntry('arti_montre_info_modification',	$dbp['config_show_info_update']);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_type', $dbp['config_menu_type']);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_style', $dbp['config_menu_style']);
+				$DocumentDataObj->setDocumentDataEntry('config_menu_float_position', $dbp['config_menu_float_position']);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_position', $position_float[$DocumentDataObj->getDocumentDataEntry('config_menu_float_position')]);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_taille_x', $dbp['config_menu_float_size_x']);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_float_taille_y', $dbp['config_menu_float_size_y']);
+				$DocumentDataObj->setDocumentDataEntry('arti_menu_occurence', $dbp['config_menu_occurence']);
+				$DocumentDataObj->setDocumentDataEntry('arti_montre_info_parution', $dbp['config_show_release_info']);
+				$DocumentDataObj->setDocumentDataEntry('arti_montre_info_modification', $dbp['config_show_info_update']);
 			}
 
 			// --------------------------------------------------------------------------------------------
@@ -161,19 +163,19 @@ class ModuleDocumentDisplay
 				$pg = $DocumentDataObj->getDocumentDataEntry('arti_page');
 				$tab_menu_selected[$pg] = " selected";
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-					$P2P_tab_[$idx]['arti_id']			= $dbp['arti_id'];
-					$P2P_tab_[$idx]['arti_ref']			= $dbp['arti_ref'];
-					$P2P_tab_[$idx]['arti_slug']		= $dbp['arti_slug'];
-					$P2P_tab_[$idx]['arti_title']		= $dbp['arti_title'];
-					$P2P_tab_[$idx]['arti_subtitle']	= $dbp['arti_subtitle'];
-					$P2P_tab_[$idx]['arti_page']		= $dbp['arti_page'];
-					$P2P_tab_[$idx]['lien']				= "
+					$P2P_tab_[$idx]['arti_id'] = $dbp['arti_id'];
+					$P2P_tab_[$idx]['arti_ref'] = $dbp['arti_ref'];
+					$P2P_tab_[$idx]['arti_slug'] = $dbp['arti_slug'];
+					$P2P_tab_[$idx]['arti_title'] = $dbp['arti_title'];
+					$P2P_tab_[$idx]['arti_subtitle'] = $dbp['arti_subtitle'];
+					$P2P_tab_[$idx]['arti_page'] = $dbp['arti_page'];
+					$P2P_tab_[$idx]['lien'] = "
 					<a 
 					href='" . $baseUrl . $dbp['arti_slug'] . "/" . $dbp['arti_page'] . "'
 					onMouseOver=\"t.ToolTip('-> " . addslashes($dbp['arti_subtitle']) . ", en page " . $dbp['arti_page'] . "');\"
 					onMouseOut=\"t.ToolTip();\">" . $dbp['arti_page'] . " " . $dbp['arti_subtitle'] . "</a>\r
 					";
-					$P2P_tab_[$idx]['menu_select']		= "<option value='" . $dbp['arti_page'] . "' " . $tab_menu_selected[$idx] . ">" . $dbp['arti_page'] . " - " . $dbp['arti_subtitle'] . "</option>\r";
+					$P2P_tab_[$idx]['menu_select'] = "<option value='" . $dbp['arti_page'] . "' " . $tab_menu_selected[$idx] . ">" . $dbp['arti_page'] . " - " . $dbp['arti_subtitle'] . "</option>\r";
 					$idx++;
 				}
 
@@ -200,8 +202,8 @@ class ModuleDocumentDisplay
 						$ADC['tabs']['1']['NbrOfCells'] = 1;
 						$ADC['tabs']['1']['TableCaptionPos'] = 0;
 						$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, ($i - 1), 1);
-						$T['ContentInfos']['tabTxt1']		= $bts->I18nTransObj->getI18nTransEntry('tab1');
-						$T['ContentInfos']['EnableTabs']	= 0;
+						$T['ContentInfos']['tabTxt1'] = $bts->I18nTransObj->getI18nTransEntry('tab1');
+						$T['ContentInfos']['EnableTabs'] = 0;
 
 						$ContentMenu .= $bts->RenderTablesObj->render($infos, $T);
 						break;
@@ -288,11 +290,11 @@ class ModuleDocumentDisplay
 					$documentAnalyse['start'] = stripos($analysedContent, "[INCLUDE]");
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Analyze n=" . $documentAnalyse['nbr']));
 					if ($documentAnalyse['start'] !== FALSE) {
-						$documentAnalyse['contenu_include']	= "";
-						$documentAnalyse['docu_type']			= 0; //MWMCODE
-						$documentAnalyse['stop']				= stripos($analysedContent, "[/INCLUDE]", $documentAnalyse['start'] + 9);
-						$documentAnalyse['start2']				= $documentAnalyse['start'] + 9;
-						$documentAnalyse['include_docu_name']	= substr($analysedContent, $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']));
+						$documentAnalyse['contenu_include'] = "";
+						$documentAnalyse['docu_type'] = 0; //MWMCODE
+						$documentAnalyse['stop'] = stripos($analysedContent, "[/INCLUDE]", $documentAnalyse['start'] + 9);
+						$documentAnalyse['start2'] = $documentAnalyse['start'] + 9;
+						$documentAnalyse['include_docu_name'] = substr($analysedContent, $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']));
 						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : " . $documentAnalyse['include_docu_name']));
 						$dbquery = $bts->SDDMObj->query("
 					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_validator, doc.docu_validation_date
@@ -306,18 +308,18 @@ class ModuleDocumentDisplay
 
 						if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `" . $documentAnalyse['include_docu_name'] . "` in INCLUDE."));
-							$documentAnalyse['contenu_include']	= " ";
-							$documentAnalyse['docu_type']			= 0; //MWMCODE
+							$documentAnalyse['contenu_include'] = " ";
+							$documentAnalyse['docu_type'] = 0; //MWMCODE
 						} else {
 							while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-								$documentAnalyse['contenu_include']	= $dbp['docu_cont'];
-								$documentAnalyse['docu_type']		= $dbp['docu_type'];
-								$document_list[$LD_idx]['docu_id']						= $DocumentDataObj->getDocumentDataEntry('docu_id');
-								$document_list[$LD_idx]['docu_name']					= $DocumentDataObj->getDocumentDataEntry('docu_name');
-								$document_list[$LD_idx]['docu_creator']					= $DocumentDataObj->getDocumentDataEntry('docu_creator');
-								$document_list[$LD_idx]['docu_creation_date']			= $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
-								$document_list[$LD_idx]['docu_validator']				= $DocumentDataObj->getDocumentDataEntry('docu_validator');
-								$document_list[$LD_idx]['docu_validation_date']		= $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
+								$documentAnalyse['contenu_include'] = $dbp['docu_cont'];
+								$documentAnalyse['docu_type'] = $dbp['docu_type'];
+								$document_list[$LD_idx]['docu_id'] = $DocumentDataObj->getDocumentDataEntry('docu_id');
+								$document_list[$LD_idx]['docu_name'] = $DocumentDataObj->getDocumentDataEntry('docu_name');
+								$document_list[$LD_idx]['docu_creator'] = $DocumentDataObj->getDocumentDataEntry('docu_creator');
+								$document_list[$LD_idx]['docu_creation_date'] = $DocumentDataObj->getDocumentDataEntry('docu_creation_date');
+								$document_list[$LD_idx]['docu_validator'] = $DocumentDataObj->getDocumentDataEntry('docu_validator');
+								$document_list[$LD_idx]['docu_validation_date'] = $DocumentDataObj->getDocumentDataEntry('docu_validation_date');
 								$LD_idx++;
 							}
 						}
@@ -352,8 +354,8 @@ class ModuleDocumentDisplay
 			}
 
 			// 		We need to modify the css classnames expressions in the script
-			$search = array('{[block]}',	"{[DataLocation]}");
-			$replace = array($Block,			$baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/document/" . $DocumentDataObj->getDocumentDataEntry('docu_name') . "/");
+			$search = array('{[block]}', "{[DataLocation]}");
+			$replace = array($Block, $baseUrl . "websites-data/" . $WebSiteObj->getWebSiteEntry('ws_directory') . "/data/document/" . $DocumentDataObj->getDocumentDataEntry('docu_name') . "/");
 			if ($analysedContent != null) {
 				$analysedContent = str_replace($search, $replace, $analysedContent);
 			}
@@ -365,15 +367,16 @@ class ModuleDocumentDisplay
 			// 
 			// --------------------------------------------------------------------------------------------
 			//	0: Post process & convert
-			//	1: No change;
+			//	1: No change; Usually bare HTML
 			//	2: Execution without any processing
 			//	3: Mixed; Execution & simple display
 			switch ($DocumentDataObj->getDocumentDataEntry('docu_type')) {
 				case 0:
-					$result = $analysedContent;
+					// Bare HTML doesn't include CSS classes. Inserting CSS class of the current block.
+					$result = str_replace('<table', "<table class='" . $Block . "_Table01 " . $Block . "_TblLgndTop' ", $analysedContent);
 					break;
 				case 1:
-					$result = eval($analysedContent);
+					$result = eval ($analysedContent);
 					break;
 				case 2:
 					$result = $this->documentExecution($analysedContent, $infos);
@@ -502,11 +505,11 @@ class ModuleDocumentDisplay
 		$DocumentDataObj = $CurrentSetObj->DocumentDataObj;
 
 		$pv = array();
-		$StartPos		= 0;
-		$EndPos			= 0;
-		$SearchAction	= "ON";
-		$Mode			= "NORMAL";
-		$Content		= "";
+		$StartPos = 0;
+		$EndPos = 0;
+		$SearchAction = "ON";
+		$Mode = "NORMAL";
+		$Content = "";
 
 		while ($SearchAction == "ON") {																		// This is ON we loop
 			$SearchAction = "OFF";																				// Allow to exit the loop if no ['WM'] is found
@@ -543,7 +546,7 @@ class ModuleDocumentDisplay
 					$Content .= "<span class='skin_princ_" . $infos['bloc'] . "_tb2 skin_princ_" . $infos['bloc'] . "_warning' style='font-weight: bold'>ERR : ['/WM']/['WM']. STOP!</span>";
 				}
 				$pv['wm_code'] = substr($inputContent, $StartPos + 4, $EndPos - $StartPos - 4);				// Copy the code
-				$Content .= eval($pv['wm_code']);																				// Execute the code segment
+				$Content .= eval ($pv['wm_code']);																				// Execute the code segment
 				$EndPos = $EndPos + 5;																			// Put the 'end' after the ['/WM'] markup
 				$StartPos = $EndPos;																			// Put the 'start' after the ['/WM'] markup
 				$Mode = "NORMAL";																				// Switch to NORMAL
@@ -570,11 +573,11 @@ class ModuleDocumentDisplay
 		AND fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-			$KeyWordEntry['id']		= $dbp['keyword_id'];
-			$KeyWordEntry['string']	= $dbp['keyword_string'];
-			$KeyWordEntry['count']	= $dbp['keyword_count'];
-			$KeyWordEntry['type']	= $dbp['keyword_type'];
-			$KeyWordEntry['data']	= $dbp['keyword_data'];
+			$KeyWordEntry['id'] = $dbp['keyword_id'];
+			$KeyWordEntry['string'] = $dbp['keyword_string'];
+			$KeyWordEntry['count'] = $dbp['keyword_count'];
+			$KeyWordEntry['type'] = $dbp['keyword_type'];
+			$KeyWordEntry['data'] = $dbp['keyword_data'];
 			switch ($KeyWordEntry['type']) {
 				case 1:
 					break;

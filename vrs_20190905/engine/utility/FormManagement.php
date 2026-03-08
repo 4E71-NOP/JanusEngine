@@ -59,7 +59,7 @@ class FormManagement
 
 		$tmpFormRequest = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section');
 		switch ($tmpFormRequest) {
-			case "CommandConsole";
+			case "CommandConsole":
 				if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == 'enabled') {
 					// TODO must check a security token to make sure this was submitted by a form and not a forged post
 					$token = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'token');
@@ -106,7 +106,7 @@ class FormManagement
 
 				break;
 
-			case "SubscriptionForm";
+			case "SubscriptionForm":
 				if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabled') {
 					switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')) {
 						case "SubmitSubsciption":
@@ -125,12 +125,12 @@ class FormManagement
 
 				break;
 
-			case "ResetPasswordForm";
+			case "ResetPasswordForm":
 				switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')) {
 					case "submitResetPassword":
 						$this->processResetPassword();
 						break;
-					case "ResetPasswordConfirmation";
+					case "ResetPasswordConfirmation":
 						// check token validity
 						$this->ResetPasswordConfirmation();
 						break;
@@ -140,7 +140,7 @@ class FormManagement
 				}
 				break;
 
-			default;
+			default:
 			// Create script from submitted form
 				$ClassLoaderObj->provisionClass('FormToCommandLine');
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - FormToCommandLine"));
@@ -158,7 +158,7 @@ class FormManagement
 				}
 				$this->runCommandScript($Script);
 				break;
-		}
+		} 
 
 		$bts->LMObj->restoreVectorSystemLogLevel();
 
