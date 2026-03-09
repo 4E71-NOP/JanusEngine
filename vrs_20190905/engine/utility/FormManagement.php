@@ -20,7 +20,9 @@ class FormManagement
 {
 	private static $Instance = null;
 
-	public function __construct() {}
+	public function __construct()
+	{
+	}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -67,7 +69,7 @@ class FormManagement
 						case "notFound":
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token not found : " . $token));
 							break;
-			
+
 						case "expired":
 							// Token too old. Re-route to page "token expired"
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token expired : " . $token));
@@ -76,22 +78,22 @@ class FormManagement
 							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error', true);
 							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error_type', 'errorTokenExpired');
 							break;
-			
+
 						case "ok":
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
 							// We consider we have a script to execute as it's from AdminDashboard
-							
+
 							// TODO remove commented lines below
 							// $bts->CMObj->setConfigurationSubEntry('functions', 'commandLineEngine', 'enabled');		// enabled/disabled
-		
+
 							$ClassLoaderObj->provisionClass('ScriptFormatting');
 							$ScriptFormattingObj = ScriptFormatting::getInstance();
-		
+
 							$CLiContent['currentFileContent'] = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent');
 							$ScriptFormattingObj->createMap($CLiContent);
 							$ScriptFormattingObj->commandFormatting($CLiContent);
-		
+
 							unset($A);
 							foreach ($CLiContent['FormattedCommand'] as $A) {
 								$Script[] = $A['cont'];
@@ -141,7 +143,7 @@ class FormManagement
 				break;
 
 			default:
-			// Create script from submitted form
+				// Create script from submitted form
 				$ClassLoaderObj->provisionClass('FormToCommandLine');
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - FormToCommandLine"));
 				$FormToCommandLineObj = FormToCommandLine::getInstance();
@@ -158,14 +160,16 @@ class FormManagement
 				}
 				$this->runCommandScript($Script);
 				break;
-		} 
+		}
 
 		$bts->LMObj->restoreVectorSystemLogLevel();
 
-		switch ($bts->RequestDataObj->getRequestDataSubEntry(
-			'formGenericData',
-			'origin'
-		) . $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')) {
+		switch (
+			$bts->RequestDataObj->getRequestDataSubEntry(
+				'formGenericData',
+				'origin'
+			) . $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'section')
+		) {
 			case "AdminDashboardUserProfileForm":
 			case "ModuleQuickSkin":
 			case "ModuleSelectLanguage":
@@ -257,7 +261,8 @@ class FormManagement
 			if ($signUpAttenptUserObj->getDataFromDBUsingLogin($formArr['l']) == true) {
 				$processError = true;
 				$bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error_type', 'errorLoginAlreadyExists');
-			};
+			}
+			;
 		}
 		if (strlen($formArr['p'] ?? '') == 0 && !$processError) {
 			$processError = true;
@@ -288,14 +293,14 @@ class FormManagement
 			$script = array(
 				"website context name " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 				"add user "
-					. "name \"" . $formArr['l'] . "\" "
-					. "login	\"" . $formArr['l'] . "\" "
-					. "password \"" . hash('sha512', $formArr['p']) . "\" "
-					. "email \"" . $formArr['e'] . "\" "
-					. "status SIGNINGUP "
-					. "image_avatar \"../websites-data/00_JanusEngineCore/data/images/avatars/public/mask_001.png\" "
-					. ";",
-				"assign user_permission name default_user_permission  to_user \"" . $formArr['l']  . "\";"
+				. "name \"" . $formArr['l'] . "\" "
+				. "login	\"" . $formArr['l'] . "\" "
+				. "password \"" . hash('sha512', $formArr['p']) . "\" "
+				. "email \"" . $formArr['e'] . "\" "
+				. "status SIGNINGUP "
+				. "image_avatar \"../websites-data/00_JanusEngineCore/data/images/avatars/public/mask_001.png\" "
+				. ";",
+				"assign user_permission name default_user_permission  to_user \"" . $formArr['l'] . "\";"
 			);
 			$this->runCommandScript($script);
 
@@ -319,22 +324,22 @@ class FormManagement
 			$PHPMailerObj = new PHPMailer(true);
 
 			try {
-				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 				// Recipients
 				// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
 				$PHPMailerObj->CharSet = "UTF-8";
 				$PHPMailerObj->Encoding = "base64";
 				$PHPMailerObj->isSMTP();																	//Send using SMTP
-				$PHPMailerObj->Host			= $bts->CMObj->getConfigurationSubEntry('mail', 'host');		//Set the SMTP server to send through
-				$PHPMailerObj->SMTPAuth		= true;															//Enable SMTP authentication
-				$PHPMailerObj->Username		= $bts->CMObj->getConfigurationSubEntry('mail', 'username');	//SMTP username
-				$PHPMailerObj->Password		= $bts->CMObj->getConfigurationSubEntry('mail', 'password');	//SMTP password
-				$PHPMailerObj->SMTPSecure	= PHPMailer::ENCRYPTION_SMTPS;									//Enable implicit TLS encryption
-				$PHPMailerObj->Port			= 465;															//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+				$PHPMailerObj->Host = $bts->CMObj->getConfigurationSubEntry('mail', 'host');		//Set the SMTP server to send through
+				$PHPMailerObj->SMTPAuth = true;															//Enable SMTP authentication
+				$PHPMailerObj->Username = $bts->CMObj->getConfigurationSubEntry('mail', 'username');	//SMTP username
+				$PHPMailerObj->Password = $bts->CMObj->getConfigurationSubEntry('mail', 'password');	//SMTP password
+				$PHPMailerObj->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;									//Enable implicit TLS encryption
+				$PHPMailerObj->Port = 465;															//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 				$PHPMailerObj->setFrom('sign-up@local-janus-engine.com', $WebSiteObj->getWebSiteEntry('ws_name'));
 				$PHPMailerObj->addAddress($formArr['e']);	 												//Add a recipient
 				$PHPMailerObj->isHTML(true);																//Set email format to HTML
-				$PHPMailerObj->Subject		= $WebSiteObj->getWebSiteEntry('ws_name') . " - Signing up";
+				$PHPMailerObj->Subject = $WebSiteObj->getWebSiteEntry('ws_name') . " - Signing up";
 
 				$lang639_3 = $this->getWebsiteLanguage();
 				$targetFile = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('currentDirectory')
@@ -347,18 +352,18 @@ class FormManagement
 				$mailContentSearchList = array("{{logo}}", "{{link}}", "{{websiteName}}", "{{baseUrl}}");
 				$mailContentReplaceList = array(
 					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
-						. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
-						. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
-						. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
+					. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
+					. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
+					. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
 
 					$baseUrl . "sign-up"
-						. "?formSubmitted=1"
-						. "&formGenericData[origin]=uni_signup_p01"
-						. "&formGenericData[section]=SubscriptionForm"
-						. "&formGenericData[action]=SubscriptionConfirmation"
-						. "&signUpForm[progress]=confirmationReceived"
-						. "&signUpForm[token]="
-						. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
+					. "?formSubmitted=1"
+					. "&formGenericData[origin]=uni_signup_p01"
+					. "&formGenericData[section]=SubscriptionForm"
+					. "&formGenericData[action]=SubscriptionConfirmation"
+					. "&signUpForm[progress]=confirmationReceived"
+					. "&signUpForm[token]="
+					. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
 
 					$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
@@ -366,7 +371,7 @@ class FormManagement
 				$mailContent = str_replace($mailContentSearchList, $mailContentReplaceList, $mailContent);
 				// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Mail content : '" . $mailContent . "'"));
 
-				$PHPMailerObj->Body			= $mailContent;
+				$PHPMailerObj->Body = $mailContent;
 				$PHPMailerObj->send();
 
 				$bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'progress', 'mailSent');
@@ -419,9 +424,9 @@ class FormManagement
 				$script = array(
 					"website context name " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 					"update user "
-						. "name \"" . $SecurityTokenObj->getSecurityTokenEntry('st_login') . "\" "
-						. "status ACTIVE "
-						. ";",
+					. "name \"" . $SecurityTokenObj->getSecurityTokenEntry('st_login') . "\" "
+					. "status ACTIVE "
+					. ";",
 				);
 
 				$this->runCommandScript($script);
@@ -463,7 +468,8 @@ class FormManagement
 						$processError = true;
 						$bts->RequestDataObj->setRequestDataSubEntry('resetProcessForm', 'error_type', 'errorWrongLogin');
 					}
-				};
+				}
+				;
 			}
 		}
 
@@ -487,22 +493,22 @@ class FormManagement
 			$PHPMailerObj = new PHPMailer(true);
 
 			try {
-				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 				// Recipients
 				// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
 				$PHPMailerObj->CharSet = "UTF-8";
 				$PHPMailerObj->Encoding = "base64";
 				$PHPMailerObj->isSMTP();																	//Send using SMTP
-				$PHPMailerObj->Host			= $bts->CMObj->getConfigurationSubEntry('mail', 'host');		//Set the SMTP server to send through
-				$PHPMailerObj->SMTPAuth		= true;															//Enable SMTP authentication
-				$PHPMailerObj->Username		= $bts->CMObj->getConfigurationSubEntry('mail', 'username');	//SMTP username
-				$PHPMailerObj->Password		= $bts->CMObj->getConfigurationSubEntry('mail', 'password');	//SMTP password
-				$PHPMailerObj->SMTPSecure	= PHPMailer::ENCRYPTION_SMTPS;									//Enable implicit TLS encryption
-				$PHPMailerObj->Port			= 465;															//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-				$PHPMailerObj->setFrom('sign-up@local-janus-engine.com', $WebSiteObj->getWebSiteEntry('ws_name'));
+				$PHPMailerObj->Host = $bts->CMObj->getConfigurationSubEntry('mail', 'host');		//Set the SMTP server to send through
+				$PHPMailerObj->SMTPAuth = true;															//Enable SMTP authentication
+				$PHPMailerObj->Username = $bts->CMObj->getConfigurationSubEntry('mail', 'username');	//SMTP username
+				$PHPMailerObj->Password = $bts->CMObj->getConfigurationSubEntry('mail', 'password');	//SMTP password
+				$PHPMailerObj->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;									//Enable implicit TLS encryption
+				$PHPMailerObj->Port = 465;															//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+				$PHPMailerObj->setFrom($bts->CMObj->getConfigurationSubEntry('mail', 'username'), $WebSiteObj->getWebSiteEntry('ws_name'));
 				$PHPMailerObj->addAddress($formArr['e']);	 												//Add a recipient
 				$PHPMailerObj->isHTML(true);																//Set email format to HTML
-				$PHPMailerObj->Subject		= $WebSiteObj->getWebSiteEntry('ws_name') . " - Password management";
+				$PHPMailerObj->Subject = $WebSiteObj->getWebSiteEntry('ws_name') . " - Password management";
 
 				$lang639_3 = $this->getWebsiteLanguage();
 				$targetFile = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('currentDirectory')
@@ -515,18 +521,18 @@ class FormManagement
 				$mailContentSearchList = array("{{logo}}", "{{link}}", "{{websiteName}}", "{{baseUrl}}");
 				$mailContentReplaceList = array(
 					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
-						. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
-						. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
-						. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
+					. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
+					. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
+					. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
 
 					$baseUrl . $baseUrl . "reset-password"
-						. "?formSubmitted=1"
-						. "&formGenericData[origin]=uni_reset_password_p01"
-						. "&formGenericData[section]=ResetPasswordForm"
-						. "&formGenericData[action]=ResetPasswordConfirmation"
-						. "&resetProcessForm[progress]=ResetPasswordConfirmation"
-						. "&resetProcessForm[token]="
-						. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
+					. "?formSubmitted=1"
+					. "&formGenericData[origin]=uni_reset_password_p01"
+					. "&formGenericData[section]=ResetPasswordForm"
+					. "&formGenericData[action]=ResetPasswordConfirmation"
+					. "&resetProcessForm[progress]=ResetPasswordConfirmation"
+					. "&resetProcessForm[token]="
+					. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
 
 					$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
@@ -534,7 +540,7 @@ class FormManagement
 				$mailContent = str_replace($mailContentSearchList, $mailContentReplaceList, $mailContent);
 				// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Mail content : '" . $mailContent . "'"));
 
-				$PHPMailerObj->Body			= $mailContent;
+				$PHPMailerObj->Body = $mailContent;
 				$PHPMailerObj->send();
 
 				$bts->RequestDataObj->setRequestDataSubEntry('resetProcessForm', 'progress', 'mailSent');
@@ -617,9 +623,9 @@ class FormManagement
 				$script = array(
 					"website context name " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 					"update user "
-						. "name \"" . $formArr['l'] . "\" "
-						. "password \"" . hash('sha512', $formArr['p']) . "\" "
-						. ";",
+					. "name \"" . $formArr['l'] . "\" "
+					. "password \"" . hash('sha512', $formArr['p']) . "\" "
+					. ";",
 				);
 				$this->runCommandScript($script);
 

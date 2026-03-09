@@ -33,7 +33,7 @@ $fileContent = array(
 	"InsertStatistics"	=> 1,
 	"mail"				=> array(
 		"host" => "mail.rootwave.net",
-		"username" => "cfdt@rootwave.net",
+		"username" => "faust@rootwave.net",
 		"password" => "Rcvbplsw20!!"
 	),
 	"commandLineEngine"	=> array(

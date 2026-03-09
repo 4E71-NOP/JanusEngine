@@ -20,7 +20,6 @@ define("DOCUMENT_TAG_BEGIN", "/*JanusEngine-Content-Begin*/");
 define("DOCUMENT_TAG_BEGIN_OFFSET", strlen(DOCUMENT_TAG_BEGIN) + 1);
 define("DOCUMENT_TAG_END", "/*JanusEngine-Content-End*/");
 
-
 // --------------------------------------------------------------------------------------------
 // Directories 
 define("_EXTENSIONS_DIRECTORY_", "extensions/");

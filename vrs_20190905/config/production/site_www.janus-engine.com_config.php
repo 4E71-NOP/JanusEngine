@@ -32,9 +32,9 @@ $fileContent = array(
 	"execution_context"	=> "render",
 	"InsertStatistics"	=> 1,
 	"mail"				=> array(
-		"host" => "---------------",
-		"username" => "-----------",
-		"password" => "-----------"
+		"host" => "",
+		"username" => "",
+		"password" => ""
 	),
 	"commandLineEngine"	=> array(
 		// Specific to command like engine
