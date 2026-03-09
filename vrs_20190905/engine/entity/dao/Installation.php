@@ -16,9 +16,16 @@
  * @author faust
  *
  */
-class Installation {
+class Installation extends Entity{
 	private $Installation = array ();
 
+	private $columns = array(
+		'inst_id'		=> 0,
+		'inst_display'	=> 1,
+		'inst_name'		=> "new theme definition",
+		'inst_nbr'		=> 0,
+		'inst_txt'		=> "new theme definition",
+	);
 	public function __construct() {
 	}
 
@@ -52,6 +59,44 @@ class Installation {
 		return $res;
 	}
 	
+	/**
+	 * Updates or inserts in DB the local data.
+	 * mode are available: <br>
+	 * <br>
+	 * 0 = insert or update - Depending on the Id existing in DB or not, it'll be UPDATE or INSERT<br>
+	 * 1 = insert only - Supposedly a new ID and not an existing one<br>
+	 * 2 = update only - Supposedly an existing ID<br>
+	 */
+	public function sendToDB($mode = OBJECT_SENDTODB_MODE_DEFAULT){
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
+		$res = true;
+
+		$genericActionArray = array(
+			'columns'		=> $this->columns,
+			'data'			=> $this->Installation,
+			'targetTable'	=> 'installation',
+			'targetColumn'	=> 'inst_id',
+			'entityId'		=> $this->Installation['inst_id'],
+			'entityTitle'	=> 'installation'
+		);
+		if ($this->existsInDB() === true && ($mode == OBJECT_SENDTODB_MODE_UPDATEONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
+			$res = $this->genericUpdateDb($genericActionArray);
+		} elseif ($this->existsInDB() === false && ($mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
+			$res = $this->genericInsertInDb($genericActionArray);
+		}
+
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
+		return $res;
+	}
+	
+	/**
+	 * Verifies if the entity exists in DB.
+	 */
+	public function existsInDB() {
+		return $this->entityExistsInDb('installation', $this->Installation['inst_id']);
+	}
+
 	//@formatter:off
 	public function getInstallationEntry ($data) { return $this->Installation[$data]; }
 	public function getInstallation() { return $this->Installation; }

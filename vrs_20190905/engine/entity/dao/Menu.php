@@ -103,9 +103,9 @@ class Menu extends Entity
 			'entityId'		=> $this->Menu['menu_id'],
 			'entityTitle'	=> 'menu'
 		);
-		if ($this->existsInDB() === true && $mode == 2 || $mode == 0) {
+		if ($this->existsInDB() === true && $mode == OBJECT_SENDTODB_MODE_UPDATEONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT) {
 			$res = $this->genericUpdateDb($genericActionArray);
-		} elseif ($this->existsInDB() === false  && $mode == 1 || $mode == 0) {
+		} elseif ($this->existsInDB() === false  && $mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT) {
 			$res = $this->genericInsertInDb($genericActionArray);
 		}
 

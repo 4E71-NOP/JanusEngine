@@ -125,6 +125,7 @@ class Entity
 			case "group_user":				$column = "group_user_id";			break;
 			case "group_website":			$column = "group_website_id";		break;
 			case "i18n":					$column = "i18n_id";				break;
+			case "installation":			$column = "inst_id";				break;
 			case "keyword":					$column = "keyword_id";				break;
 			case "language":				$column = "lang_id";				break;
 			case "language_website":		$column = "lang_website_id";		break;
@@ -135,6 +136,7 @@ class Entity
 			case "note":					$column = "note_id";				break;
 			case "security_token":			$column = "st_id";					break;
 			case "tag":						$column = "tag_id";					break;
+			case "theme_definition":		$column = "def_id";					break;
 			case "theme_descriptor":		$column = "theme_id";				break;
 			case "theme_website":			$column = "theme_website_id";		break;
 			case "user":					$column = "user_id";				break;

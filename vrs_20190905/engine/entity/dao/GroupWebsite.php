@@ -81,8 +81,11 @@ class GroupWebsite extends Entity{
 			'entityId'		=> $this->GroupWebsite['group_website_id'],
 			'entityTitle'	=> 'GroupWebsite'
 		);
-		if ( $this->existsInDB() === true && $mode == 2 || $mode == 0 ) { $res = $this->genericUpdateDb($genericActionArray);}
-		elseif ( $this->existsInDB() === false  && $mode == 1 || $mode == 0 ) { $res = $this->genericInsertInDb($genericActionArray); }
+		if ($this->existsInDB() === true && ($mode == OBJECT_SENDTODB_MODE_UPDATEONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
+			$res = $this->genericUpdateDb($genericActionArray);
+		} elseif ($this->existsInDB() === false && ($mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT)) {
+			$res = $this->genericInsertInDb($genericActionArray);
+		}
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));
 		return $res;

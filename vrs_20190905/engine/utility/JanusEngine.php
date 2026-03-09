@@ -217,12 +217,13 @@ class JanusEngine
 			$this->initializeArticle();
 
 			// --------------------------------------------------------------------------------------------
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $this->WebSiteObj->getWebSiteEntry('ws_short') . "'>\r");
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry('language') . "'>\r");
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login', "<input type='hidden'	name='user_login'	value='" . $bts->SMObj->getSessionEntry('user_login') . "'>\r");
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass', "<input type='hidden'	name='user_pass'	value='" . $bts->SMObj->getSessionEntry('user_password') . "'>\r");
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_ref', "<input type='hidden'	name='arti_ref'		value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "'>\r");
-			$CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page', "<input type='hidden'	name='arti_page'	value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "'>\r");
+			// TODO clean up
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $this->WebSiteObj->getWebSiteEntry('ws_short') . "'>\r");
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry('language') . "'>\r");
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login', "<input type='hidden'	name='user_login'	value='" . $bts->SMObj->getSessionEntry('user_login') . "'>\r");
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass', "<input type='hidden'	name='user_pass'	value='" . $bts->SMObj->getSessionEntry('user_password') . "'>\r");
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_ref', "<input type='hidden'	name='arti_ref'		value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "'>\r");
+			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page', "<input type='hidden'	name='arti_page'	value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "'>\r");
 
 			$urlUsrPass = "";
 			if ($bts->SMObj->getSessionEntry('sessionMode') != 1) {
@@ -648,7 +649,7 @@ class JanusEngine
 			// Special case for admin auth 
 			if ($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') == "admin-authentification") {
 				$sqlQuery = "
-					SELECT * FROM " . $$CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
+					SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
 					WHERE art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "'
 					AND art.arti_page = '1';
 					;";
