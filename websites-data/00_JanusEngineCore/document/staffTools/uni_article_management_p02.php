@@ -42,7 +42,7 @@ $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionId'	=> 7526169192682853807,
+				'selectionId'	=> 8506863991981179210,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -52,8 +52,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'creation'		=> 'on',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
-				'mode'			=> 'create',
 				'mode'			=> 'edit',
+				// 'mode'			=> 'create',
 				// 'mode'			=> 'delete',
 		)
 );
@@ -249,7 +249,7 @@ $T['Content']['1']['10']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(ar
 // --------------------------------------------------------------------------------------------
 $T['Content']['2']['1']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
 $T['Content']['2']['2']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
-$T['Content']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
+$T['Content']['2']['3']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_validator_id')]['t'];
 $T['Content']['2']['4']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
 
 $tab = $currentArticleObj->getMenuOptionArray();

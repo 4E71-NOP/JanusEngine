@@ -30,7 +30,7 @@
 $bts->RequestDataObj->setRequestData(
 	'userForm',
 	array(
-		'selectionId'		=>	5676061570371875937,
+		'selectionId'		=>	1039302295286694092,
 		// 'selectionLogin'	=>	"auteur_senior",
 	)
 );
@@ -304,12 +304,12 @@ if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 	while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 		$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry($dbp['infcfg_label_ref']);
 		switch ( $dbp['infcfg_type'] ) {
-			case 0; // string
+			case 0: // string
 				$tmpContent = $bts->RenderFormObj->renderInputText('formParams1[adr_'.$dbp['infcfg_field'].']',	$currentUserObj->getInfosEntry($dbp['infcfg_field']));
 			break;
-			case 1; // number
+			case 1: // number
 			break;
-			case 2; // timestamp
+			case 2: // timestamp
 			break;
 		}
 		$T['Content'][$curTab][$l]['2']['cont'] = $tmpContent;

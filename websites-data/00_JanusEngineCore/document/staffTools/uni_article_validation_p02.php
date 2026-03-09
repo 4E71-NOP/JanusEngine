@@ -32,7 +32,7 @@ $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionId'	=> 7843562880049273739,
+				'selectionId'	=> 1024977694751394116,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -217,7 +217,7 @@ $T['Content']['1']['9']['2']['cont'] = $documentTmpObj->getDocumentEntry('docu_n
 // --------------------------------------------------------------------------------------------
 $T['Content']['1']['10']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creator_id')]['t'];
 $T['Content']['1']['11']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_creation_date'));
-$T['Content']['1']['12']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_creation_validateur')]['t'];
+$T['Content']['1']['12']['2']['cont'] = $tabUser[$currentArticleObj->getArticleEntry('arti_validator_id')]['t'];
 $T['Content']['1']['13']['2']['cont'] = $bts->TimeObj->timestampToDate($currentArticleObj->getArticleEntry('arti_validation_date'));
 
 $tabState = $currentArticleObj->getMenuOptionArray();
