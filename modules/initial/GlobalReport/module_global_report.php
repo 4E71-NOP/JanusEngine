@@ -188,7 +188,7 @@ class ModuleGlobalReport
 		$Content['9']['2']['cont'] = getmygid();
 		$Content['10']['2']['cont'] = getmypid();
 		$Content['11']['2']['cont'] = getenv("HTTP_USER_AGENT");
-		$Content['12']['2']['cont'] = get_current_user();
+		$Content['12']['2']['cont'] = (empty(get_current_user())) ? "???" : get_current_user();
 		$Content['13']['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
 
 		$Content['14']['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
@@ -235,7 +235,6 @@ class ModuleGlobalReport
 			$PHPMailerObj = new PHPMailer(true);
 			$WebSiteObj = $CurrentSetObj->WebSiteObj;
 
-			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 			// Recipients
 			// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
 			$PHPMailerObj->CharSet = "UTF-8";
@@ -254,13 +253,6 @@ class ModuleGlobalReport
 
 			$PHPMailerObj->Body = "\r\nActive licence : " . $pv['def_text'] . "\r\n";
 			$PHPMailerObj->send();
-
-			//	echo ("<br>...Mail...<br><br>");
-			$pv['a'] = "licence@rootwave.net";
-			$pv['b'] = "[JNSENG-L] - " . $pv['def_text'];
-			$pv['c'] = "\r\n" . $_SERVER . "\r\n";
-			$pv['d'] = "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['serverOwner'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
-			mail($pv['a'], $pv['b'], $pv['c'], $pv['d']);
 
 			$pv['def_number'] = time();
 		}
@@ -290,7 +282,8 @@ class ModuleGlobalReport
 		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js' integrity='sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==' crossorigin='anonymous' referrerpolicy='no-referrer");
 		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js' integrity='sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==' crossorigin='anonymous' referrerpolicy='no-referrer");
 		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js' integrity='sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==' crossorigin='anonymous' referrerpolicy='no-referrer");
-		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' integrity='sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		// $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js' integrity='sha512-CQBWl4fJHWbryGE+Pc7UAxWMUMNMWzWxF4SQo9CgkJIN1kx6djDQZjh3Y8SZ1d+6I+1zze6Z7kHXO7q3UyZAWw==' crossorigin='anonymous' referrerpolicy='no-referrer");
+		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-ExternalRessource', "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js' integrity='sha512-Y51n9mtKTVBh3Jbx5pZSJNDDMyY+yGe77DGtBPzRlgsf/YLCh13kSZ3JmfHGzYFCmOndraf0sQgfM654b7dJ3w==' crossorigin='anonymous' referrerpolicy='no-referrer");
 
 		$log = $bts->LMObj->getStatisticsLog();
 		$stepOne = true;
@@ -343,7 +336,7 @@ class ModuleGlobalReport
 
 		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Data', $javaScriptForChartJs . "\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed') . " : " . $highestMemory . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed') . " : " . round($highestMemory,2) . " " . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['3']['1']['cont'] = "<canvas id='statChart2' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['4']['1']['cont'] = "<canvas id='statChart3' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";

@@ -30,7 +30,7 @@ $i18n = array(
 	'tGraphLabelT'	=>	"Temps",
 	'tGraphLabelM2'	=>	"% Mémoire",
 	'tGraphLabelT2'	=>	"% Temps",
-	'tMemoryMaxMemUsed' => "Total mémoire utilisée",
+	'tMemoryMaxMemUsed' => "Maximum de mémoire utilisée",
 	'tMemoryMb' => "Mo" ,
 		
 	't2l11'	=>	"Pos",
