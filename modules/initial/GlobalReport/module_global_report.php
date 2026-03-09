@@ -11,6 +11,9 @@
 //
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-license-end*/
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class ModuleGlobalReport
 {
@@ -33,16 +36,16 @@ class ModuleGlobalReport
 
 			$l = $CurrentSetObj->getDataEntry('language');
 
-			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(),		"RequestDataObj");
-			$bts->LMObj->logDebug($bts->SMObj->getSession(),						"SMObj->getSession()");
-			$bts->LMObj->logDebug($CurrentSetObj->ServerInfosObj,					"CurrentSetObj->getInstanceOfServerInfosObj");
-			$bts->LMObj->logDebug($CurrentSetObj->UserObj->getUser(),				"User");
-			$bts->LMObj->logDebug($infos,											"infos");
-			$bts->LMObj->logDebug($CurrentSetObj->getData(),						"CurrentSetObj->getData()");
-			$bts->LMObj->logDebug($bts->CMObj->ConfigDump(),						"CMObj->ConfigDump()");
-			$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(),				"I18nObj->getI18nTrans()");
-			$bts->LMObj->logDebug($CurrentSetObj->ThemeDescriptorObj->getThemeDescriptor(),		"ThemeDescriptorObj->getThemeDescriptor()");
-			$bts->LMObj->logDebug($CurrentSetObj->ThemeDataObj->getThemeData(),					"ThemeDataObj->getThemeData()");
+			$bts->LMObj->logDebug($bts->RequestDataObj->getRequestDataArray(), "RequestDataObj");
+			$bts->LMObj->logDebug($bts->SMObj->getSession(), "SMObj->getSession()");
+			$bts->LMObj->logDebug($CurrentSetObj->ServerInfosObj, "CurrentSetObj->getInstanceOfServerInfosObj");
+			$bts->LMObj->logDebug($CurrentSetObj->UserObj->getUser(), "User");
+			$bts->LMObj->logDebug($infos, "infos");
+			$bts->LMObj->logDebug($CurrentSetObj->getData(), "CurrentSetObj->getData()");
+			$bts->LMObj->logDebug($bts->CMObj->ConfigDump(), "CMObj->ConfigDump()");
+			$bts->LMObj->logDebug($bts->I18nTransObj->getI18nTrans(), "I18nObj->getI18nTrans()");
+			$bts->LMObj->logDebug($CurrentSetObj->ThemeDescriptorObj->getThemeDescriptor(), "ThemeDescriptorObj->getThemeDescriptor()");
+			$bts->LMObj->logDebug($CurrentSetObj->ThemeDataObj->getThemeData(), "ThemeDataObj->getThemeData()");
 
 			$T = array();
 			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "/i18n/" . $l . ".php", "format" => "php"));
@@ -139,7 +142,7 @@ class ModuleGlobalReport
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');
 		}
 
-		$T['ContentInfos']['GroupName']		= "AdmGr";
+		$T['ContentInfos']['GroupName'] = "AdmGr";
 		$Content .= $bts->RenderTablesObj->render($infos, $T);
 		return $Content;
 	}
@@ -155,49 +158,49 @@ class ModuleGlobalReport
 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = array();
 
-		$Content['1']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l11');
-		$Content['2']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l21');
-		$Content['3']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l31');
-		$Content['4']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l41');
-		$Content['5']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l51');
-		$Content['6']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l61');
-		$Content['7']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l71');
-		$Content['8']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l81');
-		$Content['9']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l91');
-		$Content['10']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l101');
-		$Content['11']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l111');
-		$Content['12']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l112');
-		$Content['13']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l113');
-		$Content['14']['1']['cont']		= $bts->I18nTransObj->getI18nTransEntry('t1l114');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l11');
+		$Content['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l21');
+		$Content['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l31');
+		$Content['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l41');
+		$Content['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l51');
+		$Content['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l61');
+		$Content['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l71');
+		$Content['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l81');
+		$Content['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l91');
+		$Content['10']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l101');
+		$Content['11']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l111');
+		$Content['12']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l112');
+		$Content['13']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l113');
+		$Content['14']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l114');
 
-		$memory_			= array();
-		$memory_['peak']	= memory_get_peak_usage();
-		$memory_['usage']	= memory_get_usage();
+		$memory_ = array();
+		$memory_['peak'] = memory_get_peak_usage();
+		$memory_['usage'] = memory_get_usage();
 
-		$Content['1']['2']['cont']		= $_SERVER['HTTP_HOST'];
-		$Content['2']['2']['cont']		= round(($memory_['peak'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['3']['2']['cont']		= phpversion();
-		$Content['4']['2']['cont']		= round(($memory_['usage'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['5']['2']['cont']		= $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
-		$Content['6']['2']['cont']		= get_include_path();
-		$Content['7']['2']['cont']		= getcwd();
-		$Content['8']['2']['cont']		= getmyuid();
-		$Content['9']['2']['cont']		= getmygid();
-		$Content['10']['2']['cont']		= getmypid();
-		$Content['11']['2']['cont']		= getenv("HTTP_USER_AGENT");
-		$Content['12']['2']['cont']		= get_current_user();
-		$Content['13']['2']['cont']		= $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
-		
-		$Content['14']['2']['cont']		=  $bts->CMObj->getConfigurationEntry('db_user_login')
-				. "@" . $bts->CMObj->getConfigurationEntry('host') 
-				. ((strlen($bts->CMObj->getConfigurationEntry('port')) ?? '' ) > 0 ? ':' . $bts->CMObj->getConfigurationEntry('host') : '')
-				. "/" . $bts->CMObj->getConfigurationEntry('dbprefix') 
-				. " (" 
-				. $bts->CMObj->getConfigurationEntry('dal') 
-				. ", "
-				. $bts->CMObj->getConfigurationEntry('charset') 
-				. ")"
-				;
+		$Content['1']['2']['cont'] = $_SERVER['HTTP_HOST'];
+		$Content['2']['2']['cont'] = round(($memory_['peak'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
+		$Content['3']['2']['cont'] = phpversion();
+		$Content['4']['2']['cont'] = round(($memory_['usage'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
+		$Content['5']['2']['cont'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
+		$Content['6']['2']['cont'] = get_include_path();
+		$Content['7']['2']['cont'] = getcwd();
+		$Content['8']['2']['cont'] = getmyuid();
+		$Content['9']['2']['cont'] = getmygid();
+		$Content['10']['2']['cont'] = getmypid();
+		$Content['11']['2']['cont'] = getenv("HTTP_USER_AGENT");
+		$Content['12']['2']['cont'] = get_current_user();
+		$Content['13']['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
+
+		$Content['14']['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
+			. "@" . $bts->CMObj->getConfigurationEntry('host')
+			. ((strlen($bts->CMObj->getConfigurationEntry('port')) ?? '') > 0 ? ':' . $bts->CMObj->getConfigurationEntry('host') : '')
+			. "/" . $bts->CMObj->getConfigurationEntry('dbprefix')
+			. " ("
+			. $bts->CMObj->getConfigurationEntry('dal')
+			. ", "
+			. $bts->CMObj->getConfigurationEntry('charset')
+			. ")"
+		;
 
 		$config = $bts->RenderTablesObj->getDefaultTableConfig(14, 2, 2);
 
@@ -223,14 +226,40 @@ class ModuleGlobalReport
 			$pv['def_number'] = $dbp['def_number'];
 			$pv['def_text'] = $dbp['def_text'];
 		}
-
 		$pv['pv_t'] = time() - (60 * 60 * 24 * 30);
 		if ($pv['def_number'] < $pv['pv_t']) {
+
+			include("current/engine/extlib/phpmailer/current/src/PHPMailer.php");
+			include("current/engine/extlib/phpmailer/current/src/SMTP.php");
+			include("current/engine/extlib/phpmailer/current/src/Exception.php");
+			$PHPMailerObj = new PHPMailer(true);
+			$WebSiteObj = $CurrentSetObj->WebSiteObj;
+
+			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+			// Recipients
+			// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
+			$PHPMailerObj->CharSet = "UTF-8";
+			$PHPMailerObj->Encoding = "base64";
+			$PHPMailerObj->isSMTP();																	//Send using SMTP
+			$PHPMailerObj->Host = $bts->CMObj->getConfigurationSubEntry('mail', 'host');		//Set the SMTP server to send through
+			$PHPMailerObj->SMTPAuth = true;															//Enable SMTP authentication
+			$PHPMailerObj->Username = $bts->CMObj->getConfigurationSubEntry('mail', 'username');	//SMTP username
+			$PHPMailerObj->Password = $bts->CMObj->getConfigurationSubEntry('mail', 'password');	//SMTP password
+			$PHPMailerObj->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;									//Enable implicit TLS encryption
+			$PHPMailerObj->Port = 465;															//TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$PHPMailerObj->setFrom($bts->CMObj->getConfigurationSubEntry('mail', 'username'), $WebSiteObj->getWebSiteEntry('ws_name'));
+			$PHPMailerObj->addAddress('licence@rootwave.net');	 												//Add a recipient
+			$PHPMailerObj->isHTML(true);																//Set email format to HTML
+			$PHPMailerObj->Subject = $WebSiteObj->getWebSiteEntry('ws_name') . " - License - " . $pv['def_text'];
+
+			$PHPMailerObj->Body = "\r\nActive licence : " . $pv['def_text'] . "\r\n";
+			$PHPMailerObj->send();
+
 			//	echo ("<br>...Mail...<br><br>");
-			$pv['a']	= "licence@rootwave.net";
-			$pv['b']	= "[JNSENG-L] - " . $pv['def_text'];
-			$pv['c']	= "\r\n" . $_SERVER . "\r\n";
-			$pv['d']	= "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['serverOwner'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
+			$pv['a'] = "licence@rootwave.net";
+			$pv['b'] = "[JNSENG-L] - " . $pv['def_text'];
+			$pv['c'] = "\r\n" . $_SERVER . "\r\n";
+			$pv['d'] = "From: " . $_REQUEST['server_infos']['uid'] . "." . $_REQUEST['server_infos']['serverOwner'] . "@" . $_REQUEST['server_infos']['srv_hostname'] . "\r\nReply-To: none@example.com\r\nX-Mailer: PHP/" . phpversion();
 			mail($pv['a'], $pv['b'], $pv['c'], $pv['d']);
 
 			$pv['def_number'] = time();
@@ -403,8 +432,8 @@ class ModuleGlobalReport
 			if ($i == 2) {
 				$sg['timeB4'] = $A['time'];
 			}
-			$A['timePerf'] =  round(($A['time'] - $sg['timeB4']), 4);
-			$A['timeCheckpoint'] =  round($A['time'] - $sg['timeMin'], 4);
+			$A['timePerf'] = round(($A['time'] - $sg['timeB4']), 4);
+			$A['timeCheckpoint'] = round($A['time'] - $sg['timeMin'], 4);
 			$sg['timeB4'] = $A['time'];
 
 			$A['MemorySegment'] = ($A['memory'] - $pv['mem_b4']);
@@ -489,7 +518,7 @@ class ModuleGlobalReport
 			;");
 
 		$i = 2;
-		while ($dbp =  $bts->SDDMObj->fetch_array_sql($dbquery)) {
+		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$pv['log_action_longeur'] = strlen($dbp['log_action']);
 			switch (TRUE) {
 				case ($pv['log_action_longeur'] < 128 && $pv['log_action_longeur'] > 64):
@@ -552,12 +581,12 @@ class ModuleGlobalReport
 		$Content = array();
 		$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
 
-		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l11');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l11');
 		$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l12');
-		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l13');
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l12');
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l13');
 		$Content['1']['3']['style'] = "text-align: center;";
-		$Content['1']['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t6l14');
+		$Content['1']['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t6l14');
 
 		$i = 2;
 		foreach ($bts->LMObj->getSqlQueryLog() as $A) {
@@ -565,19 +594,19 @@ class ModuleGlobalReport
 
 			$queryTime = round(($A['temps_fin'] - $A['temps_debut']), 4);
 
-			$Content[$i]['1']['cont']	= $A['nbr'];
-			$Content[$i]['1']['style']	= "text-align: center;";
-			$Content[$i]['2']['cont']	= $A['nom'];
-			$Content[$i]['2']['style']	= "font-size:75%;";
-			$Content[$i]['3']['cont']	= $queryTime;
-			$Content[$i]['3']['style']	= "text-align: center;font-size:75%;";
-			$Content[$i]['4']['cont']	= $query;
-			$Content[$i]['4']['style']	= "font-size:60%;";
+			$Content[$i]['1']['cont'] = $A['nbr'];
+			$Content[$i]['1']['style'] = "text-align: center;";
+			$Content[$i]['2']['cont'] = $A['nom'];
+			$Content[$i]['2']['style'] = "font-size:75%;";
+			$Content[$i]['3']['cont'] = $queryTime;
+			$Content[$i]['3']['style'] = "text-align: center;font-size:75%;";
+			$Content[$i]['4']['cont'] = $query;
+			$Content[$i]['4']['style'] = "font-size:60%;";
 			if (isset($A['signal']) && $A['signal'] != "OK") {
 				// 		outil_debug($A, "A");
-				$Content[$i]['4']['cont']	.= "<br>\rErr N°=" . $A['err_no'] . " : " . $A['err_msg'];
-				$Content[$i]['4']['class']	= $Block . "_warning";
-				$Content[$i]['4']['style']	.= " font-weight: bold;";
+				$Content[$i]['4']['cont'] .= "<br>\rErr N°=" . $A['err_no'] . " : " . $A['err_msg'];
+				$Content[$i]['4']['class'] = $Block . "_warning";
+				$Content[$i]['4']['style'] .= " font-weight: bold;";
 			}
 			$i++;
 		}
@@ -597,7 +626,8 @@ class ModuleGlobalReport
 	 * Returns the internal report into an array for RenderTables:render()
 	 * @param array $infos
 	 * @return array
-	 */ private function internalLogReport(&$infos)
+	 */
+	private function internalLogReport(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -605,10 +635,10 @@ class ModuleGlobalReport
 		$Content = array();
 		$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
 
-		$Content['1']['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l11');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t9l11');
 		$Content['1']['1']['style'] = "text-align: center;";
-		$Content['1']['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l12');
-		$Content['1']['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('t9l13');
+		$Content['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t9l12');
+		$Content['1']['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t9l13');
 		$Content['1']['3']['style'] = "text-align: center;";
 
 		$i = 2;
