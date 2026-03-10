@@ -39,59 +39,8 @@
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_decoration_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gerer les décorations.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Etat",
-			"col_3_txt"		=> "Type",
-			"tabTxt1"		=> "Informations",
-			"type"			=> array(
-				10	=>	"Menu",
-				20	=>	"Caligraph",
-				30	=>	"1_DIV",
-				40	=>	"Elegance",
-				50	=>	"Exquisite",
-				60	=>	"Elysion",
-			),
-			"state"			=> array(
-				0	=> "HOrs ligne",
-				1	=> "En ligne",
-				2	=> "Supprimé",
-			),
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage decoration.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "State",
-			"col_3_txt"		=> "Type",
-			"tabTxt1"		=> "Informations",
-			"type"			=> array(
-				10	=>	"Menu",
-				20	=>	"Caligraphr",
-				30	=>	"1_DIV",
-				40	=>	"Elegance",
-				50	=>	"Exquisite",
-				60	=>	"Elysion",
-			),
-			"state"			=> array(
-				0	=> "Offline",
-				1	=> "Online",
-				2	=> "Deleted",
-			),
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_decoration_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_decoration_management_p01_");
 
 // --------------------------------------------------------------------------------------------
 // FilterForm control and correction

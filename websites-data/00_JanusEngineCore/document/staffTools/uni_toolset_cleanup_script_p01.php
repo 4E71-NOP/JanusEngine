@@ -40,21 +40,9 @@ module_zindex	'10';
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_toolset_cleanup_script_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Formatting tool for text copied from LibreOffice.",
-			"btn1"			=>	"Convertir",
-			"instruction"	=>	"Insérer le texte à convertir",
-		),
-		"eng" => array(
-			"invite1"		=>	"Outil de formattage de texte issu de copi&eacute;/coll&eacute; depuis LibreOffice.",
-			"btn1"			=>	"Convert",
-			"instruction"	=>	"Insert here the text you want to convert",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_toolset_cleanup_script");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_toolset_cleanup_script_p01_");
+
 $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_JnsEngScriptFormatTool.js');
 
 $textAreaCols=50;

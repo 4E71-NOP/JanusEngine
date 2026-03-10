@@ -42,35 +42,8 @@ aaa
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_toolset_type_conversion_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Cette partie va vous permettre de gérer les themes.",
-			"TypeTxt"		=>	"Texte",
-			"TypeHtml"		=>	"HTML (héritage)",
-			"TypeMixed"		=>	"Mixé",
-			"TypePHP"		=>	"PHP",
-			"TypeJnsEng"	=>	"Janus Engine",
-			"btn1"			=>	"Convertir",
-			"l1c1"			=>	"Depuis le type",
-			"l1c2"			=>	"Convertir en",
-			"instruction"	=>	"Insérer le texte à convertir",
-		),
-		"eng" => array(
-			"invite1"		=>	"This part will allow you to manage themes.",
-			"TypeTxt"		=>	"Text",
-			"TypeHtml"		=>	"HTML (old school)",
-			"TypeMixed"		=>	"Mixed",
-			"TypePHP"		=>	"PHP",
-			"TypeJnsEng"	=>	"Janus Engine",
-			"btn1"			=>	"Convert",
-			"l1c1"			=>	"From type",
-			"l1c2"			=>	"Convert to",
-			"instruction"	=>	"Insert here the text you want to convert",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_toolset_type_conversion");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_toolset_type_conversion_p01_");
 
 $CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'engine/javascript/lib_ConvertTool.js');
 

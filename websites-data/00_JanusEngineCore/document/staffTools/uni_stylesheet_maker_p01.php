@@ -35,45 +35,8 @@ $bts->RequestDataObj->setRequestDataSubEntry('stylesheetMaker', 'selectedTheme',
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_stylesheet_maker_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Cette partie va vous permettre de g&eacute;n&eacute;rer un script au format CSS (Cascading StyleSheet) pour un des thèmes de Janus Engine.<br>\r<br>\r",
-			"invite2"		=>	"Générer le stylesheet du theme :",
-			"invite3"		=>	"Sélectionnez un theme :",
-			"btn1"			=>	"Créer un stylesheet",
-			"btn2"			=>	"Selectionner le texte",
-			"frame1"		=>	"CSS",
-			"frame2"		=>	"Variables mémoire",
-			"retour"		=>	"Retour a la liste",
-			"state0"		=>	"Hors ligne",
-			"state1"		=>	"En ligne",
-			"state2"		=>	"Supprimé",
-			"instructions"	=>	"Le stylesheet se trouve dans le cadre. Recopiez le texte dans un fichier dont le nom est indiqué que vous placerez dans le repertoire 'stylesheets'.<br>\r
-					<br>\r
-					Cette m&eacute;thode est utilis&eacute;e pour diverses raisons. La principale est qu'il y a souvent des probl&egrave;mes de droits d'&eacute;criture sur le syst&egrave;me de fichier.<br>\r
-					<br>\r",
-		),
-		"eng" => array(
-			"invite1"		=>	"This part will allow you to create dedicated Stylesheet (Cascading StyleSheet) for a MWM theme.",
-			"invite2"		=>	"Build the stylesheet of the theme : ",
-			"invite3"		=>	"Select a theme :",
-			"btn1"			=>	"Build the stylesheet",
-			"btn2"			=>	"Select the text",
-			"frame1"		=>	"CSS",
-			"frame2"		=>	"Memory varibles",
-			"retour"		=>	"Return to selection",
-			"state0"		=>	"Offline",	
-			"state1"		=>	"Online",	
-			"state2"		=>	"Deleted",	
-			"instructions"	=>	"The stylesheet is in the box. Copy the text and save it in a file Place this file in the directory named 'stylesheets'.<br>\r
-					<br>\r
-					This method is used for several reasons. The most common is about rights on the filesystem.<br>\r
-					<br>\r",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_stylesheet_maker");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_stylesheet_maker_p01_");
 
 // --------------------------------------------------------------------------------------------
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r

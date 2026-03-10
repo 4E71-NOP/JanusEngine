@@ -49,73 +49,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_menu_management_p02");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les menus.",
-			"invite2"		=> "Cette partie va vous permettre de créer un menu.",
-			"tabTxt1"		=> "Général",
-			"tabTxt2"		=> "Détail",
-			
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Nom",
-			"t1l3c1"		=>	"Titre",
-			"t1l4c1"		=>	"Description",
-			"t1l5c1"		=>	"Type",
-			"t1l6c1"		=>	"Langue",
-			"t1l7c1"		=>	"Etat",
-			"t1l8c1"		=>	"Parent",
-			"t1l9c1"		=>	"Position",
-
-			"t2l1c1"		=>	"Bouclage",
-			"t2l3c1"		=>	"Dernière modification",
-			"t2l4c1"		=>	"Rôle",
-			"t2l5c1"		=>	"Document premier",
-			"t2l6c1"		=>	"Référence article",
-			
-			"article_racine"		=> "Article racine",
-			"article"				=> "Article",
-			"menu_admin_racine"		=> "Menu admin racine",
-			"menu_admin"			=> "Menu admin",
-			
-			"noRole"				=> "Aucun",
-			"correction_article"	=> "Correction article",
-			"admin_conf_extension"	=> "Configuration extension",
-			),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage menus.",
-			"invite2"		=> "This part will allow you to create a menu.",
-			"tabTxt1"		=> "General",
-			"tabTxt2"		=> "Details",
-
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Name",
-			"t1l3c1"		=>	"Title",
-			"t1l4c1"		=>	"Description",
-			"t1l5c1"		=>	"Type",
-			"t1l6c1"		=>	"Language",
-			"t1l7c1"		=>	"State",
-			"t1l8c1"		=>	"Parent",
-			"t1l9c1"		=>	"Position",
-			
-			"t2l1c1"		=>	"Deadline",
-			"t2l3c1"		=>	"Last modification",
-			"t2l4c1"		=>	"Role",
-			"t2l5c1"		=>	"Document premier",
-			"t2l6c1"		=>	"Article reference",
-			
-			"article_racine"		=> "Root article",
-			"article"				=> "Article",
-			"menu_admin_racine"		=> "Root admin menu ",
-			"menu_admin"			=> "Admin menu",
-			
-			"noRole"				=> "None",
-			"correction_article"	=> "Article examination",
-			"admin_conf_extension"	=> "Configuration of extension",
-		),
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_menu_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_menu_management_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('MenuSelectTable');

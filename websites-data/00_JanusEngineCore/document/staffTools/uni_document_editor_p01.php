@@ -31,43 +31,8 @@
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_document_editor_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les documents.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Type",
-			"col_3_txt"		=> "Modifiable",
-			"tabTxt1"		=> "Informations",
-			"docTyp0"		=>	"HTML",
-			"docTyp1"		=>	"PHP",
-			"docTyp2"		=>	"Mixé",
-			"docModif0"		=> "Non",
-			"docModif1"		=> "Oui",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage documents.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Type",
-			"col_3_txt"		=> "Can be modified",
-			"tabTxt1"		=> "Informations",
-			"docTyp0"		=>	"HTML",
-			"docTyp1"		=>	"PHP",
-			"docTyp2"		=>	"Mixed",
-			"docModif0"		=> "No",
-			"docModif1"		=> "Yes",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_document_editor");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_document_editor_p01_");
 
 // --------------------------------------------------------------------------------------------
 // FilterForm control and correction

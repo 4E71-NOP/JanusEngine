@@ -47,21 +47,9 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_script_execution_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de tester du code PHP. Sélectionnez un fichier qui contient un script PHP et vous pourrez le tester directement dans l'interface. Le fichier doit se trouver dans le repertoire 'Document'.<br>\r",
-			"processing"	=> "Traitement de : ",
-			"mode"			=> "Mode : "
-		),
-		"eng" => array(
-			"invite1"		=> "This part will help you test some PHP code. Select a file and you will be able to test it directly. The file must be located in the 'Document' directory.<br>\r",
-			"processing"	=> "Processing : ",
-			"mode"			=> "Mode : "
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_script_execution");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_script_execution_p01_");
+
 
 $formInputFile = $bts->RequestDataObj->getRequestDataSubEntry('formScrExec', 'inputFile');
 

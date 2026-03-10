@@ -35,40 +35,8 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_document_validation_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Cette partie va vous permettre de modifier les documents.",
-			"type0"			=>	"HTML",
-			"type1"			=>	"PHP",
-			"type2"			=>	"Mixé",
-			"modif0"		=>	"Non",
-			"modif1"		=>	"Oui",
-			"tabTxt1"		=>	"Informations",
-			"col_1_txt"		=>	"Nom",
-			"col_2_txt"		=>	"Type",
-			"col_3_txt"		=>	"Modifiable",
-			"raf1"			=>	"Rien a afficher",
-			"btn1"			=>	"Créer un document",
-		),
-		"eng" => array(
-			"invite1"		=>	"This part will allow you to modify documents.",
-			"type0"			=>	"HTML",
-			"type1"			=>	"PHP",
-			"type2"			=>	"Mixed",
-			"modif0"		=>	"No",
-			"modif1"		=>	"Yes",
-			"tabTxt1"		=>	"Informations",
-			"col_1_txt"		=>	"Name",
-			"col_2_txt"		=>	"Type",
-			"col_3_txt"		=>	"Can be modified",
-			"raf1"			=>	"Nothing to display",
-			"btn1"			=>	"Create a document",
-		)
-	)
-);
-
+$bts->I18nTransObj->getI18nTransFromDB("uni_document_validation");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_document_validation_p01_");
 
 // --------------------------------------------------------------------------------------------
 

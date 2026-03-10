@@ -37,39 +37,9 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_deadline_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les deadlines.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Etat",
-			"col_3_txt"		=> "Date",
-			"tabTxt1"		=> "Informations",
-			"dlState0"		=> "Hors ligne",
-			"dlState1"		=> "En ligne",
-			"dlState2"		=> "Supprimé",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage deadlines.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Status",
-			"col_3_txt"		=> "Date",
-			"tabTxt1"		=> "Informations",
-			"dlState0"		=> "Offline",
-			"dlState1"		=> "Online",
-			"dlState2"		=> "Deleted",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_deadline_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_deadline_management_p01_");
+
 
 $Content .= "<p>" . $bts->I18nTransObj->getI18nTransEntry('invite1') . "</p>";
 // --------------------------------------------------------------------------------------------

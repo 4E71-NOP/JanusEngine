@@ -47,53 +47,8 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_deadline_management_p02");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer le deadline.",
-			"invite2"		=> "Cette partie va vous permettre de créer un deadline.",
-			"tabTxt1"		=> "Informations",
-			"dlState0"		=> "Hors ligne",
-			"dlState1"		=> "En ligne",
-			"dlState2"		=> "Désactivé",
-			
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Nom",
-			"t1l3c1"		=>	"Titre",
-			"t1l4c1"		=>	"Etat",
-			"t1l5c1"		=>	"Date de cr&eacute;ation",
-			"t1l6c1"		=>	"Date limite (YYYY-MM-DD hh:mm:ss)",
-			"t1l7c1"		=>	"Créateur",
-			"t1l8c1"		=>	"Articles de ce deadline",
-			
-			"t1l1c2"		=>	"?",
-			"t1l2c2"		=>	"Nouveau_deadline",
-			"t1l3c2"		=>	"Deadline_",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage this deadline.",
-			"invite2"		=> "This part will allow you to create a deadline.",
-			"tabTxt1"		=> "Informations",
-			"dlState0"		=> "Offline",
-			"dlState1"		=> "Online",
-			"dlState2"		=> "Disabled",
-			
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Name",
-			"t1l3c1"		=>	"Title",
-			"t1l4c1"		=>	"State",
-			"t1l5c1"		=>	"Creation date",
-			"t1l6c1"		=>	"Threshold (YYYY-MM-DD hh:mm:ss)",
-			"t1l7c1"		=>	"Creator",
-			"t1l8c1"		=>	"Articles in this deadline",
-			
-			"t1l1c2"		=>	"?",
-			"t1l2c2"		=>	"New_deadline",
-			"t1l3c2"		=>	"Deadline_",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_deadline_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_deadline_management_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('AdminFormTool');

@@ -40,48 +40,8 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_article_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de modifier les articles.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Page",
-			"col_3_txt"		=> "Langage",
-			"col_4_txt"		=> "Bouclage",
-			"tabTxt1"		=> "Informations",
-			"deadline0"		=> "Choisissez une deadline",
-			"caption"		=> "Recherche",
-			"c1l1"			=> "Nom contient",
-			"c1l2"			=> "Langue",
-			"c1l3"			=> "Bouclage",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-			"pageSelectorDeadline"		=>	"Deadline",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to modify articles.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Page",
-			"col_3_txt"		=> "Language",
-			"col_4_txt"		=> "Deadline",
-			"tabTxt1"		=> "Informations",
-			"deadline0"		=> "Choose a deadline",
-			"caption"		=> "Search",
-			"c1l1"			=> "Name contains",
-			"c1l2"			=> "Language",
-			"c1l3"			=> "Dead line",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-			"pageSelectorDeadline"		=>	"Deadline",
-		)
-	)
-);
-
+$bts->I18nTransObj->getI18nTransFromDB("uni_article_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_article_management_p01_");
 
 // --------------------------------------------------------------------------------------------
 $pageSelectorData['query'] = "";

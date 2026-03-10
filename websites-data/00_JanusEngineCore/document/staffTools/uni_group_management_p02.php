@@ -50,49 +50,8 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_group_management_p02");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"anonymous" => "Anonyme",
-			"reader" => "Lecteur",
-			"staff" => "Staff",
-			"seniorStaff" => "Staff Sénior",
-
-			"invite1" => "Cette partie va vous permettre de gérer le groupe.",
-			"invite2" => "Cette partie va vous permettre de créer un groupe.",
-			"tabTxt1" => "Informations",
-
-			"t1l1c1" => "ID",
-			"t1l2c1" => "Nom",
-			"t1l3c1" => "Titre",
-			"t1l4c1" => "Tag",
-			"t1l5c1" => "Description",
-			"t1l6c1" => "Icone",
-
-			"t1l2c2" => "Nouveau_groupe ",
-		),
-		"eng" => array(
-			"anonymous" => "Anonymous",
-			"reader" => "Reader",
-			"staff" => "Staff",
-			"seniorStaff" => "Senior Staff",
-
-			"invite1" => "This part will allow you to manage this group.",
-			"invite2" => "This part will allow you to create a group.",
-			"tabTxt1" => "Informations",
-
-			"t1l1c1" => "ID",
-			"t1l2c1" => "Nom",
-			"t1l3c1" => "Title",
-			"t1l4c1" => "Tag",
-			"t1l5c1" => "Description",
-			"t1l6c1" => "Icon file",
-
-			"t1l2c2" => "New group ",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_group_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_group_management_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('AdminFormTool');

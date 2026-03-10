@@ -43,25 +43,10 @@
 
 // --------------------------------------------------------------------------------------------
 /*JanusEngine-Content-Begin*/
-$bts->mapSegmentLocation(__METHOD__, "uni_script_execution_p01");
+$bts->mapSegmentLocation(__METHOD__, "uni_caligraph_decoration_test_page_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Page de visualisation de la décoration caligraphe<br>\r",
-			"tabTxt1"		=>	"Onglet 01",
-			"tabTxt2"		=>	"Onglet 02",
-			"button"		=>	"Bouton Lorem Ipsum",
-		),
-		"eng" => array(
-			"invite1"		=> "Visualisation page of caligraph decoration.<br>\r",
-			"tabTxt1"		=>	"Tab zero 1",
-			"tabTxt2"		=>	"Tab zero 2",
-			"button"		=>	"Lorem Ipsum Button",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_caligraph_decoration_test_page");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_caligraph_decoration_test_page_p01_");
 
 $formInputFile = $bts->RequestDataObj->getRequestDataSubEntry('formScrExec', 'inputFile');
 

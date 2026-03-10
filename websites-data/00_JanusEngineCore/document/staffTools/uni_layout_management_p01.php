@@ -37,37 +37,8 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_layout_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les présentations.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Nom générique",
-			"col_3_txt"		=> "Theme",
-			"tabTxt1"		=> "Informations",
-			"raf1"			=> "Rien a afficher",
-			"btn1"			=> "Filtrer",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage layouts.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Generic name",
-			"col_3_txt"		=> "Theme",
-			"tabTxt1"		=> "Informations",
-			"raf1"			=> "Nothing to display",
-			"btn1"			=> "Filter",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_layout_management_p01");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_layout_management_p01_");
 
 // --------------------------------------------------------------------------------------------
 // FilterForm control and correction

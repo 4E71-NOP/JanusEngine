@@ -39,73 +39,9 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_user_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les utilisateurs.",
-			"col_1_txt"		=> "Login",
-			"col_2_txt"		=> "Nom",
-			"col_3_txt"		=> "Groupe",
-			"col_4_txt"		=> "Statut",
-			"col_5_txt"		=> "Dernière visite",
-			"tabTxt1"		=> "Informations",
-			"select1_0"		=> "No groupe",
-			"select1_1"		=> "Aucun groupe",
+$bts->I18nTransObj->getI18nTransFromDB("uni_user_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_user_management_p01_");
 
-			"status0"		=> "Désactivé",
-			"status1"		=> "Actif",
-			"status2"		=> "Suppprimé",
-
-			"table1_1"		=> "Chercher le login contenant",
-			"table1_2"		=> "Du groupe",
-			"table1_3"		=> "Statut",
-			"table1_41"		=> "Affichage",
-			"table1_42"		=> "entrées par pages.",
-			"select1_0"		=> "Aucun groupe",
-			"select2_0"		=> "Inactif",
-			"select2_1"		=> "Actif",
-			"select2_2"		=> "Supprimé",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorQuerygroup"	=>	"Groupe",
-			"pageSelectorQueryStatus"	=>	"Statut",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage users.",
-			"col_1_txt"		=> "Login",
-			"col_2_txt"		=> "Name",
-			"col_3_txt"		=> "In group",
-			"col_4_txt"		=> "Status",
-			"col_5_txt"		=> "Last visit",
-			"tabTxt1"		=> "Informations",
-			"select1_0"		=> "No group",
-			"select1_1"		=> "Aucun group",
-
-			"status0"		=> "Disabled",
-			"status1"		=> "Active",
-			"status2"		=> "Deleted",
-
-			"table1_1"		=> "Find login containing",
-			"table1_2"		=> "From group",
-			"table1_3"		=> "User status",
-			"table1_41"		=> "Display",
-			"table1_42"		=> "entry per pages.",
-			"select1_0"		=> "No group",
-			"select2_0"		=> "Disabled",
-			"select2_1"		=> "Active",
-			"select2_2"		=> "Deleted",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorQuerygroup"	=>	"Group",
-			"pageSelectorQueryStatus"	=>	"Status",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 

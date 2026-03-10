@@ -45,49 +45,8 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_log_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
-			"col_1_txt"		=>	"Id",
-			"col_2_txt"		=>	"Date",
-			"col_3_txt"		=>	"Signal",
-			"col_4_txt"		=>	"Id Msg",
-			"col_5_txt"		=>	"Initiateur",
-			"col_6_txt"		=>	"Action",
-			"col_7_txt"		=>	"Message",
-			"tabTxt1"		=> "Informations",
-			"type_err"		=>	"Erreur",
-			"type_avrt"		=>	"Avertissement",
-			"type_ok"		=>	"Ok",
-			"type_info"		=>	"Information",
-			"type_autr"		=>	"Autre",
-			"t1r1"			=>	"Voir signal",
-			"t1r2"			=>	"Entrées par page",
-			"t1cap"			=>	"Critères de recherche",
-		),
-		"eng" => array(
-			"invite1"		=>	"This part will allow you to manage Logs.",
-			"col_1_txt"		=>	"Id",
-			"col_2_txt"		=>	"Date",
-			"col_3_txt"		=>	"Signal",
-			"col_4_txt"		=>	"Id Msg",
-			"col_5_txt"		=>	"Initiator",
-			"col_6_txt"		=>	"Action",
-			"col_7_txt"		=>	"Message",
-			"tabTxt1"		=> "Informations",
-			"type_err"		=>	"Error",
-			"type_avrt"		=>	"Warning",
-			"type_ok"		=>	"Ok",
-			"type_info"		=>	"Information",
-			"type_autr"		=>	"Other",
-			"t1r1"			=>	"View signal",
-			"t1r2"			=>	"Entries per page",
-			"t1cap"			=>	"Search criteria",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_log_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_log_management_p01_");
 
 // --------------------------------------------------------------------------------------------
 //	Realisation des suppresions demandées

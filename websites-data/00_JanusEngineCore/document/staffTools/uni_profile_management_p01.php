@@ -41,7 +41,7 @@ $bts->RequestDataObj->setRequestData(
 $bts->RequestDataObj->setRequestData(
 	'browseTheme',
 	array(
-		"theme_id"			=>	1952994312284275436,
+		"theme_id"			=>	5019118178467027216,
 		"theme_name"		=>	"JnsEng_tronic_01",
 	)
 );
@@ -53,106 +53,9 @@ $bts->RequestDataObj->setRequestData('scriptFile', 'uni_recherche_p01.php');
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_profile_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"anonDeny"		=>	"Partie reservée aux membres enregistrés",
-			"invite1"		=>	"Cette partie va vous permettre de gérer les journaux d'évennement.",
-			"col_1_txt"		=>	"Id",
-			"col_2_txt"		=>	"Date",
-			"col_3_txt"		=>	"Signal",
-			"col_4_txt"		=>	"Id Msg",
-			"col_5_txt"		=>	"Initiateur",
-			"col_6_txt"		=>	"Action",
-			"col_7_txt"		=>	"Message",
-			"tabTxt1"		=>	"Compte",
-			"tabTxt2"		=>	"Preferences",
-			"tabTxt3"		=>	"Adresses",
-			"btn1"			=>	"Rafraichir la vue",
-			"btn2"			=>	"Supprimer",
-			"AvatarUploadError" => array(
-				0	=>	"Erreur inconnue.",
-				1	=>	"Le fichier dépasse la limite autorisée par le serveur.",
-				2	=>	"Le fichier d&eacute;passe la limite autoris&eacute;e dans le formulaire HTML.",
-				3	=>	"L'envoi du fichier a &eacute;t&eacute; interrompu pendant le transfert.",
-				4	=>	"Le fichier que vous avez envoy&eacute; a une taille nulle.",
-				5	=>	"Extension interdite pour les images d'avatar.",
-			),
-			"confirmation_modification_oubli"	=>	"Vous n'avez pas confirm&eacute; la modification du profil.",
-			"t1_login"			=>	"Identifiant",
-			"t1_mail"			=>	"Email",
-			"t1_avatar"			=>	"Avatar",
-			"t1_upload"			=>	"Téléchargement",
-			"t1_passwordTopic"	=>	"Mot de passe",
-			"t1_passwordLink"	=>	"Suivre ce lien pour changer le mot de passe",
-			"t4_l1"	=>	"Recevoir la newsletter",
-			"t4_l2"	=>	"Montrer l'E-mail au public",
-			"t4_l3"	=>	"Montrer le status 'En ligne'",
-			"t4_l4"	=>	"Langue",
-			"modif_profil"	=>	"Modifier le profil",
-			"upload_avatar"	=>	"Télécharger une image",
-			"uni"	=>	array(
-				0	=>	"Non",
-				1	=>	"Oui",
-			),
-			"text_confirm1"			=>	"Je confirme les modifications",
-			"text_choix_theme"		=>	"Choix du theme.",
-			"visualisation_theme"	=>	"Valider",
-			"formIwantTo"			=>	"Je veux ",
-			"formIwantToSee"		=>	"voir",
-			"formIwantToActivate"	=>	"activer",
-			"formTheTheme"			=>	"le thème",
-		),
-		"eng" => array(
-			"anonDeny"		=>	"Partie reservée aux membres enregistrés",
-			"invite1"		=>	"This part will allow you to manage Logs.",
-			"col_1_txt"		=>	"Id",
-			"col_2_txt"		=>	"Date",
-			"col_3_txt"		=>	"Signal",
-			"col_4_txt"		=>	"Id Msg",
-			"col_5_txt"		=>	"Initiator",
-			"col_6_txt"		=>	"Action",
-			"col_7_txt"		=>	"Message",
-			"tabTxt1"		=>	"Compte",
-			"tabTxt2"		=>	"Préférences",
-			"tabTxt3"		=>	"Addresses",
-			"btn1"			=>	"Refresh display",
-			"AvatarUploadError" => array(
-				0	=>	"Unknown error.",
-				1	=>	"The filesize is exeeding maximum filsesize.",
-				2	=>	"The filesize is exeeding autorized HTML maximum filsesize.",
-				3	=>	"The file transfert has been interrupted.",
-				4	=>	"The submitted filesize is equals to zero.",
-				5	=>	"Forbidden extenssion for avatar images.",
-			),
-			"confirmation_modification_oubli"	=>	"You forgot to confirm the profil modification.",
-			"t1_login"			=>	"Login",
-			"t1_mail"			=>	"Email",
-			"t1_avatar"			=>	"Avatar",
-			"t1_upload"			=>	"Upload",
-			"t1_passwordTopic"	=>	"Password",
-			"t1_passwordLink"	=>	"Follow this link to change your password",
-			"t4_l1"	=>	"Get the newletter",
-			"t4_l2"	=>	"Show email to the public",
-			"t4_l3"	=>	"Show Online status",
-			"t4_l4"	=>	"Language",
-			"modif_profil"	=>	"Update profile",
-			"upload_avatar"	=>	"Upload image",
-			"uni"	=>	array(
-				0	=>	"No",
-				1	=>	"Yes",
-			),
-			"text_confirm1"			=>	"I confirm the modifications",
-			"text_choix_theme"		=>	"Theme browser.",
-			"visualisation_theme"	=>	"Confirm",
-			"formIwantTo"			=>	"I want to ",
-			"formIwantToSee"		=>	"see",
-			"formIwantToActivate"	=>	"activate",
-			"formTheTheme"			=>	"the theme",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_profile_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_profile_management_p01_");
+
 
 $UserObj = $CurrentSetObj->UserObj;
 if ($UserObj->getUserEntry('user_login') == "anonymous") {

@@ -37,43 +37,8 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_keyword_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les mots clés.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Type",
-			"col_3_txt"		=> "Etat",
-			"tabTxt1"		=> "Informations",
-			"kwState0"		=> "Hors ligne",
-			"kwState1"		=> "En ligne",
-			"kwType1"		=> "Vers une menu",
-			"kwType2"		=> "Vers une URL",
-			"kwType3"		=> "Tooltip",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage keywords.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Type",
-			"col_3_txt"		=> "State",
-			"tabTxt1"		=> "Informations",
-			"kwState0"		=> "Offline",
-			"kwState0"		=> "Online",
-			"kwType1"		=> "Link to a menu",
-			"kwType2"		=> "Link to an URL",
-			"kwType3"		=> "Tooltip",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_keyword_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_keyword_management_p01_");
 
 // --------------------------------------------------------------------------------------------
 // FilterForm control and correction

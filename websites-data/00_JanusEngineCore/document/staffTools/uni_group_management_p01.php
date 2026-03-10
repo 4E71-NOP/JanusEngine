@@ -31,41 +31,8 @@
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_group_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les groupes.",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Titre",
-			"col_3_txt"		=> "Tag",
-			"tabTxt1"		=> "Informations",
-			"tag0"			=> "Anonyme",
-			"tag1"			=> "Lecteur",
-			"tag2"			=> "Staff",
-			"tag3"			=> "Senior staff",
-			"pageSelectorQueryLike"		=>	"Filtrer avec",
-			"pageSelectorDisplay"		=>	"Affichage",
-			"pageSelectorNbrPerPage"	=>	"entrées par page",
-			"pageSelectorBtnFilter"		=>	"Filtrer",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage groups.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Title",
-			"col_3_txt"		=> "Tag",
-			"tabTxt1"		=> "Informations",
-			"tag0"			=> "Anonymous",
-			"tag1"			=> "Reader",
-			"tag2"			=> "Staff",
-			"tag3"			=> "Senior staff",
-			"pageSelectorQueryLike"		=>	"Filter with",
-			"pageSelectorDisplay"		=>	"Display",
-			"pageSelectorNbrPerPage"	=>	"entries per page",
-			"pageSelectorBtnFilter"		=>	"Filter",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_group_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_group_management_p01_");
 
 $tagTab = array(
 	0 => $bts->I18nTransObj->getI18nTransEntry('tag0'),

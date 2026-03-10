@@ -30,25 +30,9 @@
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_website_list_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de voir les sites.",
-			"col_1_txt"	=> "Nom",
-			"col_2_txt"	=> "Répertoire",
-			"col_3_txt"	=> "Lien",
-			"link"		 => "Visiter le site",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will show you the websites.",
-			"col_1_txt"	=> "Name",
-			"col_2_txt"	=> "Directory",
-			"col_3_txt"	=> "Link",
-			"link"		=> "Visit the website",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_website_list");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_website_list_p01_");
+
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 

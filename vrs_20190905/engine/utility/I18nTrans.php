@@ -106,6 +106,28 @@ class I18nTrans
 		}
 	}
 
+	/**
+	 * 
+	 * Load I18n translation from file and apply it to the existing data.
+	 * 
+	 * @return void
+	 */
+	public function getI18nTransFromFile($fileBaseName)
+	{
+		$bts = BaseToolSet::getInstance();
+		$CurrentSetObj = CurrentSet::getInstance();
+
+		if (!empty($CurrentSetObj->getDataEntry('language'))) {
+			$fileBaseName .= $CurrentSetObj->getDataEntry('language') . ".php";
+			if (file_exists($fileBaseName)) {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Loading I18n file : " . $fileBaseName));
+				include($fileBaseName);
+			}
+		} else {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : CurrentSetObj->language is empty. I don't know where to put the data."));
+		}
+	}
+
 	//@formatter:off
 	public function getI18nTrans()
 	{

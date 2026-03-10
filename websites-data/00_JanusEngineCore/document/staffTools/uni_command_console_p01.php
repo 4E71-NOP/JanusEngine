@@ -71,81 +71,8 @@ $bts->RequestDataObj->setRequestData(
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_command_console_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"inviteErr"		=>	"Ce site ne permet pas l'utilisation de la console de commandes.'",
-			"tabTxt1"		=> "Mode CLI",
-			"tabTxt2"		=> "Mode fichier",
-			"tabTxt3"		=> "Résultats",
-			"tabTxt4"		=> "Journaux",
-			"tabTxt5"		=> "Aide",
-			"col_1_txt"		=> "Nom",
-			"col_2_txt"		=> "Etat",
-			"col_3_txt"		=> "Date",
-			"raf1"			=> "Rien à afficher",
-			"btn1"			=> "Soumettre",
-			"cmd_l1"		=> "Dernier tampon de commande",
-			"cmd_result"	=> "Résultat",
-			"cmd_CmdToExec"	=> "Commande à exécuter",
-			"file_select"	=> "Sélectionnez un fichier",
-			"file_info"		=> "Si un fichier est sélectionné, il prendra la priorité. Seul le contenu du fichier sera exécuté.",
-			"help01"		=> "Utilisez '<b>;</b>' comme separateur.<br>\r
-			<br>\r
-			Les entitées sont les suivantes : website, user, group, deadline, document, article, menu, module, decoration, keyword.<br>\r
-			<br>\r
-			<span style='text-decoration: underline;'>Liste de commandes basiques:</span>
-			<ul>
-			<li>show &lt;<i>ENTITÉ<b>S</b></i>&gt;; Affiche la liste du type donné.</li>
-			<li>show &lt;<i>ENTITÉ</i>&gt; name '<i>myEntity</i>'; Affiche les détails de l'élément de l'entité donnée.</li>
-			</ul>
-			",
-			"Logs_c1"			=> "N",
-			"Logs_c2"			=> "Date",
-			"Logs_c3"			=> "Initiateur",
-			"Logs_c4"			=> "Action",
-			"Logs_c5"			=> "Signal",
-			"Logs_c6"			=> "Message ID",
-			"Logs_c7"			=> "Message",
-		),
-		"eng" => array(
-			"inviteErr"		=>	"This website does not allow the use of command console.'",
-			"tabTxt1"		=> "Command",
-			"tabTxt2"		=> "File mode",
-			"tabTxt3"		=> "Results",
-			"tabTxt4"		=> "Logs",
-			"tabTxt5"		=> "Help",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Status",
-			"col_3_txt"		=> "Date",
-			"raf1"			=> "Nothing to display",
-			"btn1"			=> "Submit",
-			"cmd_l1"		=> "Last buffer",
-			"cmd_result"	=> "Result",
-			"cmd_CmdToExec"	=> "Commande à exécuter",
-			"file_select"	=> "Select a file",
-			"file_info"		=> "If a file is selected, it will take over the console box. Only the file content will be executed.",
-			"help01"		=> "Use '<b>;</b>' as separator.<br>\r
-			<br>\r
-			Entities are as follow : website, user, group, deadline, document, article, menu, module, decoration, keyword.<br>\r
-			<br>\r
-			<span style='text-decoration: underline;'>Basic command list:</span>
-			<ul>
-			<li>show &lt;<i>ENTITIES</i>&gt;; Display the entity list.</li>
-			<li>show &lt;<i>ENTITY</i>&gt; name '<i>myEntity</i>'; Display details about this entity.</li>
-			</ul>
-			",
-			"Logs_c1"			=> "N",
-			"Logs_c2"			=> "Date",
-			"Logs_c3"			=> "Initiator",
-			"Logs_c4"			=> "Action",
-			"Logs_c5"			=> "Signal",
-			"Logs_c6"			=> "Message ID",
-			"Logs_c7"			=> "Message",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_command_console");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_command_console_p01_");
 
 // --------------------------------------------------------------------------------------------
 //	Affichage

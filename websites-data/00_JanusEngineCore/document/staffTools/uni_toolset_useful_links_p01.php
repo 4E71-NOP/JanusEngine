@@ -30,27 +30,10 @@
 // $RequestDataObj->setRequestDataEntry('script_source',"");
 
 /*JanusEngine-Content-Begin*/
-$bts->mapSegmentLocation(__METHOD__, "uni_toolset_useful_links_p01");
+$bts->mapSegmentLocation(__METHOD__, location: "uni_toolset_useful_links_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Liste d'URL utiles",
-			"tabTxt1"		=>	"JavaScript",
-			"tabTxt2"		=>	"CSS",
-			"tabTxt3"		=>	"Validation",
-			"tabTxt4"		=>	"Gratuit",
-		),
-		"eng" => array(
-			"invite1"		=>	"Useful links",
-			"tabTxt1"		=>	"JavaScript",
-			"tabTxt2"		=>	"CSS",
-			"tabTxt3"		=>	"Validation",
-			"tabTxt4"		=>	"Free Stuff",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_toolset_useful_links");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_toolset_useful_links_p01_");
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 

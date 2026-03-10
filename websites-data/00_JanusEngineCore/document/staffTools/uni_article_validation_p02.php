@@ -49,67 +49,10 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 );
 
 /*JanusEngine-Content-Begin*/
-$bts->mapSegmentLocation(__METHOD__, "uni_article_management_p02");
+$bts->mapSegmentLocation(__METHOD__, "uni_article_validation_p02");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les articles.",
-			"invite2"		=> "Cette partie va vous permettre de créer un article.",
-			"tabTxt1"		=> "Article",
-			"tabTxt2"		=> "Utilisateurs",
-			
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Nom",
-			"t1l3c1"		=>	"Référence",
-			"t1l4c1"		=>	"Titre",
-			"t1l5c1"		=>	"Sous-titre",
-			"t1l6c1"		=>	"Bouclage",
-			"t1l7c1"		=>	"Page",
-			"t1l8c1"		=>	"Nom générique de présentation",
-			"t1l9c1"		=>	"Document",
-
-			"t2l1c1"		=>	"Créateur",
-			"t2l2c1"		=>	"Date création",
-			"t2l3c1"		=>	"Validateur",
-			"t2l4c1"		=>	"Date validation",
-			"t2l5c1"		=>	"Etat validation",
-			"t2l6c1"		=>	"Date de parution",
-			"valid"			=>	"Validé",
-			"invalid"		=>	"non validé",
-
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage articles.",
-			"invite2"		=> "This part will allow you to create an article.",
-			"col_1_txt"		=> "Name",
-			"col_2_txt"		=> "Type",
-			"col_3_txt"		=> "State",
-			"tabTxt1"		=> "Article",
-			"tabTxt2"		=> "Users",
-			
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Name",
-			"t1l3c1"		=>	"Reference",
-			"t1l4c1"		=>	"Title",
-			"t1l5c1"		=>	"Sub-title",
-			"t1l6c1"		=>	"Deadline",
-			"t1l7c1"		=>	"Page",
-			"t1l8c1"		=>	"Presentation generic name",
-			"t1l9c1"		=>	"Document",
-			
-			"t2l1c1"		=>	"Creator",
-			"t2l2c1"		=>	"Creation date",
-			"t2l3c1"		=>	"Validator",
-			"t2l4c1"		=>	"Validation date",
-			"t2l5c1"		=>	"Validation state",
-			"t2l6c1"		=>	"Publishing date",
-			"valid"			=>	"Valid",
-			"invalid"		=>	"Invalid",
-		),
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_article_validation");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_article_validation_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('MenuSelectTable');

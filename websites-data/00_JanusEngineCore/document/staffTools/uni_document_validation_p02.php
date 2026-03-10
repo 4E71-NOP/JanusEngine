@@ -48,6 +48,9 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_document_management_p02");
 
+$bts->I18nTransObj->getI18nTransFromDB("uni_document_management_p02");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_document_management_p02_");
+
 $bts->I18nTransObj->apply(
 	array(
 		"type" => "array",

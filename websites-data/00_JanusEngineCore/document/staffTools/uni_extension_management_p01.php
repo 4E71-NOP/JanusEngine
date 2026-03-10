@@ -31,41 +31,8 @@
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_extension_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer les extensions.",
-			"col_1_txt"		=> "Extensions disponibles",
-			"col_2_txt"		=> "Version",
-			"col_3_txt"		=> "Installée",
-			"col_4_txt"		=> "Action #1",
-			"col_5_txt"		=> "Action #2",
-			"tabTxt1"		=> "Informations",
-			"tab10"			=> "Non",
-			"tab11"			=> "Oui",
-			"tab20"			=> "Activer",
-			"tab21"			=> "Réinstaller",
-			"tab30"			=> "Supprimer",
-			"tab31"			=> "Désactiver",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage extensions.",
-			"col_1_txt"		=> "Available extensions",
-			"col_2_txt"		=> "Version",
-			"col_3_txt"		=> "Installed",
-			"col_4_txt"		=> "Action #1",
-			"col_5_txt"		=> "Action #2",
-			"tabTxt1"		=> "Informations",
-			"tab10"			=> "No",
-			"tab11"			=> "Yes",
-			"tab20"			=> "Activate",
-			"tab21"			=> "Reinstall",
-			"tab30"			=> "Delete",
-			"tab31"			=> "Deactivate",
-		)
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_extension_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_extension_management_p01_");
 
 $Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
 

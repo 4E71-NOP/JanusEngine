@@ -38,33 +38,8 @@ $bts->RequestDataObj->setRequestDataEntry('RenderCSS',
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_article_validation_p01.php");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=>	"Cette partie va vous permettre de valider des articles.",
-			"raf1"			=>	"Rien à afficher",
-			"tabTxt1"		=>	"Informations",
-			"col_1_txt"		=>	"Nom",
-			"col_2_txt"		=>	"Page",
-			"col_3_txt"		=>	"Référence",
-			"col_4_txt"		=>	"Titre",
-			"col_5_txt"		=>	"Bouclage",
-			"btnCreate"		=>	"Créer un article",
-		),
-		"eng" => array(
-			"invite1"		=>	"This part will allow you to validate documents.",
-			"raf1"			=>	"Nothing to display",
-			"tabTxt1"		=>	"Informations",
-			"col_1_txt"		=>	"Name",
-			"col_2_txt"		=>	"Page",
-			"col_3_txt"		=>	"Reference",
-			"col_4_txt"		=>	"Title",
-			"col_5_txt"		=>	"Deadline",
-			"btnCreate"		=>	"Create a article",
-		),
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_article_validation");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_article_validation_p01_");
 
 // --------------------------------------------------------------------------------------------
 $T = array();

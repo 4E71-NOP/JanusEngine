@@ -34,18 +34,8 @@ $bts->SMObj->setSessionEntry('user_login', 'anonymous');
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_admin_authentification_p01");
 
-switch ($l) {
-	case "fra":
-		$bts->I18nTransObj->apply(array(
-			"invite"		=>	"Module d'authentification<br>\r<br>\r",)
-		);
-		break;
-	case "eng":
-		$bts->I18nTransObj->apply(array(
-			"invite"		=>	"Authentification module.",)
-		);
-		break;
-}
+$bts->I18nTransObj->getI18nTransFromDB("uni_admin_authentification");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_admin_authentification_p01_");
 
 if ( !class_exists('ModuleAuthentification')) {
 	include("modules/Authentification/module_authentification_Obj.php");

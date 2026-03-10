@@ -33,38 +33,8 @@ $bts->RequestDataObj->setRequestData('menu_parent', 39);
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_menu_management_p01");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1" => "Cette partie va vous permettre de modifier les deadlines.",
-			"col_1_txt" => "Nom",
-			"col_2_txt" => "Titre",
-			"col_3_txt" => "Parent",
-			"col_4_txt" => "Pos",
-			"col_5_txt" => "▲/▼",
-			"col_6_txt" => "Etat",
-			"cell_1_txt" => "Informations",
-			"dlState0" => "Hors ligne",
-			"dlState1" => "En ligne",
-			"dlState2" => "Supprimé",
-		),
-		"eng" => array(
-			"invite1" => "This part will allow you to modify deadlines.",
-			"col_1_txt" => "Name",
-			"col_2_txt" => "Title",
-			"col_3_txt" => "Parent",
-			"col_4_txt" => "Pos",
-			"col_5_txt" => "▲/▼",
-			"col_6_txt" => "Status",
-			"cell_1_txt" => "Informations",
-			"dlState0" => "Offline",
-			"dlState1" => "Online",
-			"dlState2" => "Deleted",
-		)
-	)
-);
-
+$bts->I18nTransObj->getI18nTransFromDB("uni_menu_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_menu_management_p01_");
 
 $sqlQuery = "
 	SELECT m.fk_lang_id, l.lang_original_name

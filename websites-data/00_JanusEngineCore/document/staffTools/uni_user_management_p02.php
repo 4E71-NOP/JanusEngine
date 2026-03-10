@@ -53,83 +53,8 @@ $bts->CMObj->setConfigurationEntry('colorSelector', 'system');		//"or JnsEng"
 /*JanusEngine-Content-Begin*/
 $bts->mapSegmentLocation(__METHOD__, "uni_user_management_p02");
 
-$bts->I18nTransObj->apply(
-	array(
-		"type" => "array",
-		"fra" => array(
-			"invite1"		=> "Cette partie va vous permettre de gérer le thème.",
-			"invite2"		=> "Cette partie va vous permettre de créer un thème.",
-			"tabTxt1"		=> "Général",
-			"tabTxt2"		=> "Etat",
-			"tabTxt3"		=> "Adresses",
-			"tabTxt4"		=> "Localisation",
-			"tabTxt5"		=> "Config",
-			"raf1"			=> "Rien a afficher",
-
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Nom",
-			"t1l3c1"		=>	"Identifiant",
-			"t1l4c1"		=>	"Avatar",
-			"t1l5c1"		=>	"Date d'inscription",
-			"t1l6c1"		=>	"Commentaire admin",
-
-			"t2l1c1"		=>	"Groupe initial",
-			"t2l2c1"		=>	"Statut",
-			"t2l3c1"		=>	"Fonction",
-
-			"t5l1c1"		=>	"Langue",
-			"t5l2c1"		=>	"Dernière visite",
-			"t5l3c1"		=>	"Dernière IP",
-			"t5l4c1"		=>	"TimeZone",
-
-			"t6l1c1"		=>	"Theme",
-			"t6l2c1"		=>	"Newsletter",
-			"t6l3c1"		=>	"Montre email",
-			"t6l4c1"		=>	"Montre status online",
-
-			"public"		=>	"Public",
-			"private"		=>	"Privé",
-			"forumAccesGranted"		=>	"Forum accessilbe",
-			"forumAccesDenied"		=>	"Forum inaccessilbe",
-		),
-		"eng" => array(
-			"invite1"		=> "This part will allow you to manage this theme.",
-			"invite2"		=> "This part will allow you to create a theme.",
-			"tabTxt1"		=> "General",
-			"tabTxt2"		=> "State",
-			"tabTxt3"		=> "Addresses",
-			"tabTxt4"		=> "Localisation",
-			"tabTxt5"		=> "Config",
-			"raf1"			=> "Nothing to display",
-
-			"t1l1c1"		=>	"ID",
-			"t1l2c1"		=>	"Name",
-			"t1l3c1"		=>	"Login",
-			"t1l4c1"		=>	"Avatar",
-			"t1l5c1"		=>	"Sign up date",
-			"t1l6c1"		=>	"Admin coment",
-
-			"t2l1c1"		=>	"Initial group",
-			"t2l2c1"		=>	"Status",
-			"t2l3c1"		=>	"Fonction",
-
-			"t5l1c1"		=>	"Language",
-			"t5l2c1"		=>	"Last visit",
-			"t5l3c1"		=>	"Last IP",
-			"t5l4c1"		=>	"TimeZone",
-
-			"t6l1c1"		=>	"theme",
-			"t6l2c1"		=>	"newsletter",
-			"t6l3c1"		=>	"show email",
-			"t6l4c1"		=>	"show status online",
-
-			"public"		=>	"Public",
-			"private"		=>	"Private",
-			"forumAccesGranted"		=>	"Forum access granted",
-			"forumAccesDenied"		=>	"Forum denied",
-		),
-	)
-);
+$bts->I18nTransObj->getI18nTransFromDB("uni_user_management");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_user_management_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('AdminFormTool');
