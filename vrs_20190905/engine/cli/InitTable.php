@@ -1037,6 +1037,7 @@ self::$InitTable['user'] = function (&$a) {
 		"name"					=> "New user",
 		"login"					=> "NA",
 		"password"				=> "NA",
+		"mail"					=> "NA",
 		"date_inscription"		=> time(),
 		"status"				=> "ACTIVE",
 

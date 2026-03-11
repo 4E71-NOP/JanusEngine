@@ -474,6 +474,7 @@ self::$PreRequisiteTable['add']['user'] = array(
 	"columns" => array(
 		array("v" => "id",					"t"	=>	"user_id"),
 		array("v" => "name",				"t"	=>	"user_name"),
+		array("v" => "mail",				"t"	=>	"user_mail"),
 		array("v" => "login",				"t"	=>	"user_login"),
 		array("v" => "password",			"t"	=>	"user_password"),
 		array("v" => "date_inscription",	"t"	=>	"user_subscription_date"),
