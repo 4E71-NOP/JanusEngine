@@ -16,12 +16,17 @@ class User extends Entity
 	private $User;
 	private $groupList = array();
 
+	private $UserInformation = array();
+	private $UserProfileElement = array();
+
 	//@formatter:off
 	private $columns = array(
 		'user_id'						=> 0,
 		'user_name'						=> "new User",
 		'user_login'					=> "newLogin",
 		'user_password'					=> "1a2b3c4d5e",
+		'user_mail'						=> "",
+
 		'user_subscription_date'		=> 0,
 		'user_status'					=> 0,
 	
@@ -55,7 +60,7 @@ class User extends Entity
 	{
 		// $bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$SqlTableListObj = SqlTableList::getInstance();
 
 		$sqlQuery = "
 			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
@@ -87,7 +92,7 @@ class User extends Entity
 	{
 		// $bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$SqlTableListObj = SqlTableList::getInstance();
 
 		$sqlQuery = "
 			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
@@ -118,7 +123,7 @@ class User extends Entity
 	{
 		// $bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$SqlTableListObj = SqlTableList::getInstance();
 
 		$sqlQuery = "
 			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
@@ -127,7 +132,7 @@ class User extends Entity
 			. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 			. $SqlTableListObj->getSQLTableName('group_website') . " sg, "
 			. $SqlTableListObj->getSQLTableName('group') . " g
-			WHERE usr.user_email = '" . $UserEmail . "'
+			WHERE usr.user_mail = '" . $UserEmail . "'
 			AND usr.user_id = gu.fk_user_id
 			AND gu.group_user_initial_group = '1'
 			AND gu.fk_group_id = g.group_id
@@ -138,6 +143,95 @@ class User extends Entity
 	}
 
 
+	/**
+	 * Load extra user data from DB. It relies on the fact that User already has data.
+	 */
+	public function retrieveUserInformation()
+	{
+		$bts = BaseToolSet::getInstance();
+		if (!empty($this->User['user_id'])) {
+			$SqlTableListObj = SqlTableList::getInstance();
+
+			$sqlQuery = "SELECT i.*, u.* "
+				. "FROM "
+				. $SqlTableListObj->getSQLTableName('user_information') . " i, "
+				. $SqlTableListObj->getSQLTableName('user_profile_element') . " u "
+				. "WHERE i.fk_user_id = '" . $this->User['user_id'] . "' "
+				. "AND u.upe_id = i.fk_upe_id "
+				. "AND u.upe_state = 1 "
+				. "ORDER BY u.upe_class, u.upe_name "
+				. ";"
+			;
+
+			$dbquery = $bts->SDDMObj->query($sqlQuery);
+			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+					$this->UserInformation[$dbp['upe_name']] = array(
+						//@formatter:off
+						"upe_id"			=> $dbp['upe_id'],
+						"upe_name"			=> $dbp['upe_name'],
+						"upe_translation"	=> $dbp['upe_translation'],
+						"upe_type"			=> $dbp['upe_type'],
+						"upe_length"		=> $dbp['upe_length'],
+						"upe_order"			=> $dbp['upe_order'],
+						"fk_ws_id"			=> $dbp['fk_ws_id'],
+						"ui_id"				=> $dbp['ui_id'],
+						"fk_usr_id"			=> $dbp['fk_usr_id'],
+						"ui_string"			=> $dbp['ui_string'],
+						"ui_number"			=> $dbp['ui_number'],
+						//@formatter:on
+					);
+				}
+			}
+		} else {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Cannot load user extra data as no user ID is there."));
+		}
+	}
+
+
+	/**
+	 * Retrieve the profile blueprint as what to display or not.
+	 * @return void
+	 */
+	public function retrieveProfileBluePrint($type)
+	{
+		$bts = BaseToolSet::getInstance();
+		if (!empty($this->User['user_id'])) {
+			unset($this->UserProfileElement);
+			$CurrentSetObj = CurrentSet::getInstance();
+			$SqlTableListObj = SqlTableList::getInstance();
+
+			$sqlQuery = "SELECT * "
+				. "FROM "
+				. $SqlTableListObj->getSQLTableName('user_profile_element') . " "
+				. "WHERE upe_class = " . $type . " "
+				. "AND upe_state = 1 "
+				. "AND fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "' "
+				. "ORDER BY upe_order, upe_name "
+				. ";"
+			;
+
+			$dbquery = $bts->SDDMObj->query($sqlQuery);
+			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
+					$this->UserProfileElement[$dbp['upe_order']] = array(
+						//@formatter:off
+						"upe_id"			=> $dbp['upe_id'],
+						"upe_name"			=> $dbp['upe_name'],
+						"upe_translation"	=> $dbp['upe_translation'],
+						"upe_order"			=> $dbp['upe_order'],
+						"upe_type"			=> $dbp['upe_type'],
+						"upe_length"		=> $dbp['upe_length'],
+						//@formatter:on
+					);
+				}
+			}
+
+		} else {
+			$bts = BaseToolSet::getInstance();
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Cannot load user extra data as no user ID is there."));
+		}
+	}
 
 
 	/**
@@ -147,7 +241,7 @@ class User extends Entity
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
+		$SqlTableListObj = SqlTableList::getInstance();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
@@ -251,13 +345,13 @@ class User extends Entity
 		if ($bts->SDDMObj->num_row_sql($dbquery) > 0) {
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$this->User['permissionList'][$dbp['perm_id']] = array(
-					"perm_id"			=> $dbp['perm_id'],
-					"perm_state"		=> $dbp['perm_state'],
-					"perm_name"			=> $dbp['perm_name'],
-					"perm_affinity"		=> $dbp['perm_affinity'],
-					"perm_object_type"	=> $dbp['perm_object_type'],
-					"perm_desc"			=> $dbp['perm_desc'],
-					"perm_level"		=> $dbp['perm_level'],
+					"perm_id" => $dbp['perm_id'],
+					"perm_state" => $dbp['perm_state'],
+					"perm_name" => $dbp['perm_name'],
+					"perm_affinity" => $dbp['perm_affinity'],
+					"perm_object_type" => $dbp['perm_object_type'],
+					"perm_desc" => $dbp['perm_desc'],
+					"perm_level" => $dbp['perm_level'],
 				);
 			}
 		}
@@ -300,16 +394,16 @@ class User extends Entity
 		$res = true;
 
 		$genericActionArray = array(
-			'columns'		=> $this->columns,
-			'data'			=> $this->User,
-			'targetTable'	=> 'user',
-			'targetColumn'	=> 'user_id',
-			'entityId'		=> $this->User['user_id'],
-			'entityTitle'	=> 'user'
+			'columns' => $this->columns,
+			'data' => $this->User,
+			'targetTable' => 'user',
+			'targetColumn' => 'user_id',
+			'entityId' => $this->User['user_id'],
+			'entityTitle' => 'user'
 		);
 		if ($this->existsInDB() === true && $mode == OBJECT_SENDTODB_MODE_UPDATEONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT) {
 			$res = $this->genericUpdateDb($genericActionArray);
-		} elseif ($this->existsInDB() === false  && $mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT) {
+		} elseif ($this->existsInDB() === false && $mode == OBJECT_SENDTODB_MODE_INSERTONLY || $mode == OBJECT_SENDTODB_MODE_DEFAULT) {
 			$res = $this->genericInsertInDb($genericActionArray);
 		}
 
@@ -360,23 +454,24 @@ class User extends Entity
 		$date = time();
 		$tab = $this->columns;
 
-		$tab['user_id']							= 0;
-		$tab['user_name']						= "New user name " . $date;
-		$tab['user_login']						= "New user login " . $date;
-		$tab['user_password']					= "1a2b3c4d5e";
-		$tab['user_subscription_date']			= $date;
-		$tab['user_status']						= _ENABLED_;
+		$tab['user_id'] = 0;
+		$tab['user_name'] = "New user name " . $date;
+		$tab['user_login'] = "New user login " . $date;
+		$tab['user_password'] = "1a2b3c4d5e";
+		$tab['user_mail'] = "";
+		$tab['user_subscription_date'] = $date;
+		$tab['user_status'] = _ENABLED_;
 
-		$tab['user_role_function']				= _READER_;
-		$tab['user_pref_theme']					= "";
-		$tab['user_lang']						= "";
+		$tab['user_role_function'] = _READER_;
+		$tab['user_pref_theme'] = "";
+		$tab['user_lang'] = "";
 
-		$tab['user_avatar_image']				= "";
-		$tab['user_admin_comment']				= "";
+		$tab['user_avatar_image'] = "";
+		$tab['user_admin_comment'] = "";
 
-		$tab['user_last_visit']					= 0;
-		$tab['user_last_ip']					= "0.0.0.0";
-		$tab['user_timezone']					= "";
+		$tab['user_last_visit'] = 0;
+		$tab['user_last_ip'] = "0.0.0.0";
+		$tab['user_timezone'] = "";
 
 		return $tab;
 	}
@@ -392,17 +487,17 @@ class User extends Entity
 
 		$res = array(
 			'yesno' => array(
-				0 => array(_MENU_OPTION_DB_ =>	 "NO",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
-				1 => array(_MENU_OPTION_DB_ =>	 "YES",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),
+				0 => array(_MENU_OPTION_DB_ => "NO", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('no')),
+				1 => array(_MENU_OPTION_DB_ => "YES", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('yes')),
 			),
 			'state' => array(
-				0 => array(_MENU_OPTION_DB_ =>	 "DISABLED",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
-				1 => array(_MENU_OPTION_DB_ =>	 "ENABLED",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')),
-				2 => array(_MENU_OPTION_DB_ =>	 "DELETED",		_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')),
+				0 => array(_MENU_OPTION_DB_ => "DISABLED", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('disabled')),
+				1 => array(_MENU_OPTION_DB_ => "ENABLED", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('enabled')),
+				2 => array(_MENU_OPTION_DB_ => "DELETED", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('deleted')),
 			),
 			'role' => array(
-				1	=> array(_MENU_OPTION_DB_ => "PUBLIC",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('public')),
-				2	=> array(_MENU_OPTION_DB_ => "PRIVATE",	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('private')),
+				1 => array(_MENU_OPTION_DB_ => "PUBLIC", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('public')),
+				2 => array(_MENU_OPTION_DB_ => "PRIVATE", _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $bts->I18nTransObj->getI18nTransEntry('private')),
 			),
 			// 'status' => array (
 			// 	'name' => "user_status",
@@ -415,9 +510,9 @@ class User extends Entity
 			// )
 		);
 
-		$res['group']['options'] = array(0 => array(_MENU_OPTION_DB_ =>	 0,	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => ''));
+		$res['group']['options'] = array(0 => array(_MENU_OPTION_DB_ => 0, _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => ''));
 		foreach ($this->groupList as $A) {
-			$res['group']['options'][$A['group_id']] = array(_MENU_OPTION_DB_ =>	 $A['group_id'],	_MENU_OPTION_SELECTED_ => '',	_MENU_OPTION_TXT_ => $A['group_name']);
+			$res['group']['options'][$A['group_id']] = array(_MENU_OPTION_DB_ => $A['group_id'], _MENU_OPTION_SELECTED_ => '', _MENU_OPTION_TXT_ => $A['group_name']);
 		}
 		return $res;
 	}
@@ -439,9 +534,10 @@ class User extends Entity
 			return null;
 		}
 	}
-
-	public function getGroupList()	{ return $this->groupList; }
 	public function getUser()	{ return $this->User;	}
+	public function getUserInformation()	{ return $this->UserInformation;	}
+	public function getUserProfileElement()	{ return $this->UserProfileElement;	}
+	public function getGroupList()	{ return $this->groupList; }
 	public function resetUser()	{		
 		$this->User = $this->columns;
 		$this->groupList = array();

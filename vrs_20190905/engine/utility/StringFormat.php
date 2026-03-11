@@ -202,11 +202,14 @@ class StringFormat
 		self::$ConvertTable['user']['on']						= &self::$ConvertTable['universal']['yes'];
 
 		// User_profile_element
-		self::$ConvertTable['user_profile_element']['off']		= &self::$ConvertTable['universal']['no'];
-		self::$ConvertTable['user_profile_element']['on']		= &self::$ConvertTable['universal']['yes'];
-		self::$ConvertTable['user_profile_element']['string']	= 1;
-		self::$ConvertTable['user_profile_element']['number']	= 2;
-		self::$ConvertTable['user_profile_element']['switch']	= 3;
+		self::$ConvertTable['user_profile_element']['offline']		= &self::$ConvertTable['universal']['offline'];
+		self::$ConvertTable['user_profile_element']['online']		= &self::$ConvertTable['universal']['online'];
+		self::$ConvertTable['user_profile_element']['string']		= 1;
+		self::$ConvertTable['user_profile_element']['number']		= 2;
+		self::$ConvertTable['user_profile_element']['switch']		= 3;
+		self::$ConvertTable['user_profile_element']['preference']	= 1;
+		self::$ConvertTable['user_profile_element']['data']			= 2;
+
 
 		// Website
 		self::$ConvertTable['website']['no']					= &self::$ConvertTable['universal']['no'];

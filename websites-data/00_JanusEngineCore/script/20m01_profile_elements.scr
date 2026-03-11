@@ -1,0 +1,5 @@
+add user_profile_element		name "showEmail"	translation "profile_showEmail"		order 1 state online	class	"preference"	type switch		length 0;
+add user_profile_element		name "showStatus"	translation "profile_showStatus"	order 2 state online	class	"preference"	type switch		length 0;
+add user_profile_element		name "newsletter"	translation "profile_newsletter"	order 3 state online	class	"preference"	type switch		length 0;
+add user_profile_element		name "linkedin"		translation "profile_linkedin"		order 1 state online	class	"data"			type string		length 1024;
+add user_profile_element		name "numberOfDays"	translation "profile_numberOfDays"	order 2 state online	class	"data"			type number		length 0;

@@ -337,16 +337,6 @@ self::$CheckTable['delete']['group']['0']['p'] = "group";
 self::$CheckTable['delete']['group']['0']['s'] = "name";
 
 
-//info_config
-self::$CheckTable['add']['infos_config']['0']['d']	= 2;
-self::$CheckTable['add']['infos_config']['0']['f']	= function ($a) { return array("SELECT ws_id,ws_name FROM " . $a['sqlTables']['website'] . " WHERE ws_name = '" . $a['params']['website'] . "';");};
-self::$CheckTable['add']['infos_config']['0']['c']	= "ws_id";
-self::$CheckTable['add']['infos_config']['0']['v']	= "ws_id";
-self::$CheckTable['add']['infos_config']['0']['m']	= "CLI_AddInfoConfig_A001";
-self::$CheckTable['add']['infos_config']['0']['p']	= "site";
-self::$CheckTable['add']['infos_config']['0']['s']	= "website";
-
-
 // KeyWord
 self::$CheckTable['add']['keyword']['0']['d']	= 3;
 self::$CheckTable['add']['keyword']['0']['f']	= function ($a) {return array("SELECT keyword_id FROM " . $a['sqlTables']['keyword'] . " WHERE keyword_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};

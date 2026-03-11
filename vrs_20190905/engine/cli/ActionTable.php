@@ -65,8 +65,6 @@ self::$ActionTable['add']['group'] = function (&$a) { return array(
 	); 
 };
 
-self::$ActionTable['add']['infos_config']	= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['infos_config'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");" ); };
-
 self::$ActionTable['add']['keyword']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['keyword'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 self::$ActionTable['add']['layout']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['layout'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };

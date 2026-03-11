@@ -216,26 +216,6 @@ self::$PreRequisiteTable['add']['group'] = array(
 	),
 );
 
-self::$PreRequisiteTable['add']['infos_config'] = array(
-	"nextId" => array(
-		array("table" => "infos_config",			"column" => "infcfg_id",		"target" => "id"),
-	),
-	"convert" => array(
-		array("v" => "type",			"s" => "infos_config"),
-	),
-	"columns" => array(
-		array("v" => "id",				"t" => "infcfg_id"),
-		array("v" => "ws_id",			"t" => "fk_ws_id"),
-		array("v" => "section",			"t" => "infcfg_section"),
-		array("v" => "field",			"t" => "infcfg_field"),
-		array("v" => "label_ref",		"t" => "infcfg_label_ref"),
-		array("v" => "enabled",			"t" => "infcfg_enabled"),
-		array("v" => "type",			"t" => "infcfg_type"),
-		array("v" => "order",			"t" => "infcfg_order"),
-	),
-);
-
-
 self::$PreRequisiteTable['add']['keyword'] = array(
 	"convert" => array(
 		array("v" => "state",			"s" => "keyword"),
@@ -496,6 +476,7 @@ self::$PreRequisiteTable['add']['user_profile_element'] = array(
 	"convert" => array(
 		array("v" => "state",			"s" => "user_profile_element"),
 		array("v" => "type",			"s" => "user_profile_element"),
+		array("v" => "class",			"s" => "user_profile_element"),
 	),
 	"nextId" => array(
 		array("table" => "profile_element",			"column" => "upe_id",			"target" => "id"),
@@ -504,7 +485,9 @@ self::$PreRequisiteTable['add']['user_profile_element'] = array(
 		array("v" => "id",			"t" => "upe_id"),
 		array("v" => "name",		"t" => "upe_name"),
 		array("v" => "state",		"t" => "upe_state"),
+		array("v" => "order",		"t" => "upe_order"),
 		array("v" => "translation",	"t" => "upe_translation"),
+		array("v" => "class",		"t" => "upe_class"),
 		array("v" => "type",		"t" => "upe_type"),
 		array("v" => "length",		"t" => "upe_length"),
 		array("v" => "ws_id",		"t" => "fk_ws_id"),
@@ -770,8 +753,6 @@ self::$PreRequisiteTable['update']['group']['convert']		= &self::$PreRequisiteTa
 self::$PreRequisiteTable['update']['group']['nextId']		= &self::$PreRequisiteTable['add']['group']['nextId'];
 self::$PreRequisiteTable['update']['group']['columns']		= &self::$PreRequisiteTable['add']['group']['columns'];
 self::$PreRequisiteTable['update']['group']['timeCreate']	= &self::$PreRequisiteTable['add']['group']['timeCreate'];
-
-self::$PreRequisiteTable['update']['infos_config']			= &self::$PreRequisiteTable['add']['group']['infos_config'];
 
 self::$PreRequisiteTable['update']['keyword']['convert']	= &self::$PreRequisiteTable['add']['keyword']['convert'];
 self::$PreRequisiteTable['update']['keyword']['columns']	= &self::$PreRequisiteTable['add']['keyword']['columns'];

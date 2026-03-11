@@ -48,6 +48,13 @@ $bts->I18nTransObj->apply(
 			"formIwantToSee"		=>	"voir",
 			"formIwantToActivate"	=>	"activer",
 			"formTheTheme"			=>	"le thème",
+
+			"profile_showEmail"		=>	"Montrer l'email",
+			"profile_showStatus"	=>	"Montrer le status",
+			"profile_newsletter"	=>	"Recevoir la newsletter",
+
+			"profile_linkedin"		=>	"Profil LinkedIn",
+			"profile_numberOfDays"	=>	"Nombre de jours",
 		),
     )
 );

@@ -814,19 +814,6 @@ self::$InitTable['group'] = function (&$a) {
 	);
 };
 
-self::$InitTable['infos_config'] = function (&$a) {
-	$a['params'] = array(
-		"website"		=> "",
-		"section"		=> "",
-		"field"			=> "",
-		"label_ref"		=> "",
-		"enabled"		=> 1,
-		"type"			=> "",
-		"order"			=> 1,
-	);
-};
-
-
 self::$InitTable['keyword'] = function (&$a) {
 	$a['params'] = array(
 		"name"		=> "nouveau_keyword",
@@ -1063,7 +1050,9 @@ self::$InitTable['user_profile_element'] = function (&$a) {
 		"id"				=> "",
 		"name" 				=> "new_user_profile_element",
 		"state" 			=> "enabled",
+		"order" 			=> 1,
 		"translation"		=> "new_user_profile_element",
+		"class"				=> "preference",
 		"type"				=> "string",
 		"length"			=> "1024",
 		"ws_id"				=> $a['Context']['ws_id'],
