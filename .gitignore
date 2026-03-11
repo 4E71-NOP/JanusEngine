@@ -1,4 +1,6 @@
 .metadata
+.phpdoc
+.vscode
 .project
 devTools/cherche_expression.sh
 devTools/compteur_code_stats.sh

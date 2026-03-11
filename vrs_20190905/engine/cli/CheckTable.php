@@ -554,8 +554,6 @@ self::$CheckTable['update']['module']['1']['m']	= "CLI_Module_C002";
 self::$CheckTable['update']['module']['1']['p']	= "permission";
 self::$CheckTable['update']['module']['1']['s']	= "name";
 
-
-
 self::$CheckTable['delete']['module']['0']['d']	= 2;
 self::$CheckTable['delete']['module']['0']['f']	= function ($a) {return array("SELECT mdl.module_id FROM " . $a['sqlTables']['module'] . " mdl , " . $a['sqlTables']['module_website'] . " sm WHERE mdl.module_name = '" . $a['params']['name'] . "' AND mdl.module_id = sm.fk_module_id AND sm.fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
 self::$CheckTable['delete']['module']['0']['c']	= "module_id";
@@ -564,10 +562,12 @@ self::$CheckTable['delete']['module']['0']['m']	= "CLI_Module_D001";
 self::$CheckTable['delete']['module']['0']['p']	= "module";
 self::$CheckTable['delete']['module']['0']['s']	= "name";
 
+// Permission
 self::$CheckTable['add']['permission']['0']['d']	= 3;
 self::$CheckTable['add']['permission']['0']['f']	= function ($a) {return array("SELECT prm.perm_id FROM " . $a['sqlTables']['permission'] . " prm WHERE prm.perm_name = '" . $a['params']['name'] . "';");};
 self::$CheckTable['add']['permission']['0']['m']	= "CLI_Permission_C001";
 self::$CheckTable['add']['permission']['0']['s']	= "name";
+
 
 // Tag
 self::$CheckTable['add']['tag']['0']['d']	= 3;
@@ -733,6 +733,29 @@ self::$CheckTable['update']['user']['4']['v']	= "lang";
 self::$CheckTable['update']['user']['4']['m']	= "CLI_User_U005";
 self::$CheckTable['update']['user']['4']['p']	= "language";
 self::$CheckTable['update']['user']['4']['s']	= "lang";
+
+
+// User_rofile_element
+self::$CheckTable['add']['user_profile_element']['0']['d']		= 3;
+self::$CheckTable['add']['user_profile_element']['0']['f']		= function ($a) {return array("SELECT upe_id,upe_name FROM " . $a['sqlTables']['user_profile_element'] . " WHERE upe_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
+self::$CheckTable['add']['user_profile_element']['0']['m']		= "CLI_profile_element_A001";
+self::$CheckTable['add']['user_profile_element']['0']['s']		= "name";
+
+self::$CheckTable['update']['user_profile_element']['0']['d']	= 2;
+self::$CheckTable['update']['user_profile_element']['0']['f']	= function ($a) {return array("SELECT upe_id,upe_name FROM " . $a['sqlTables']['user_profile_element'] . " WHERE upe_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
+self::$CheckTable['update']['user_profile_element']['0']['c']	= "upe_id";
+self::$CheckTable['update']['user_profile_element']['0']['v']	= "upe_id";
+self::$CheckTable['update']['user_profile_element']['0']['m']	= "CLI_profile_element_U001";
+self::$CheckTable['update']['user_profile_element']['0']['p']	= "profile element";
+self::$CheckTable['update']['user_profile_element']['0']['s']	= "name";
+
+self::$CheckTable['delete']['user_profile_element']['0']['d']	= 2;
+self::$CheckTable['delete']['user_profile_element']['0']['f']	= function ($a) {return array("SELECT upe_id,upe_name FROM " . $a['sqlTables']['user_profile_element'] . " WHERE upe_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
+self::$CheckTable['delete']['user_profile_element']['0']['c']	= "upe_id";
+self::$CheckTable['delete']['user_profile_element']['0']['v']	= "upe_id";
+self::$CheckTable['delete']['user_profile_element']['0']['m']	= "CLI_profile_element_D001";
+self::$CheckTable['delete']['user_profile_element']['0']['p']	= "profile element";
+self::$CheckTable['delete']['user_profile_element']['0']['s']	= "name";
 
 
 self::$CheckTable['assign']['group_permission']['0']['d']	= 2;

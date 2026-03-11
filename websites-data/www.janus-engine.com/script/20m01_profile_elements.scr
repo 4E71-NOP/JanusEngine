@@ -1,0 +1,4 @@
+add user_profile_element		name "facebook"		translation "profile_facebook"		state enabled	type string		length 1024;
+add user_profile_element		name "newsletter"	translation "profile_newsletter"	state enabled	type switch		length 0;
+add user_profile_element		name "numberOfDays"	translation "profile_numberOfDays"	state enabled	type number		length 0;
+

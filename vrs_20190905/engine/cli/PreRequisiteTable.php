@@ -373,7 +373,6 @@ self::$PreRequisiteTable['add']['permission'] = array(
 	),
 );
 
-
 self::$PreRequisiteTable['add']['tag'] = array(
 	// "execute" => function (&$a) {
 	// 	$a['params']['name'] = strtolower($a['params']['name']);
@@ -488,6 +487,26 @@ self::$PreRequisiteTable['add']['user'] = array(
 		array("v" => "last_ip",				"t"	=>	"user_last_ip"),
 		array("v" => "timezone",			"t"	=>	"user_timezone"),
 
+	),
+);
+
+
+self::$PreRequisiteTable['add']['user_profile_element'] = array(
+	"convert" => array(
+		array("v" => "state",			"s" => "user_profile_element"),
+		array("v" => "type",			"s" => "user_profile_element"),
+	),
+	"nextId" => array(
+		array("table" => "profile_element",			"column" => "upe_id",			"target" => "id"),
+	),
+	"columns" => array(
+		array("v" => "id",			"t" => "upe_id"),
+		array("v" => "name",		"t" => "upe_name"),
+		array("v" => "state",		"t" => "upe_state"),
+		array("v" => "translation",	"t" => "upe_translation"),
+		array("v" => "type",		"t" => "upe_type"),
+		array("v" => "length",		"t" => "upe_length"),
+		array("v" => "ws_id",		"t" => "fk_ws_id"),
 	),
 );
 
@@ -769,6 +788,9 @@ self::$PreRequisiteTable['update']['theme_definition']['columns']	= &self::$PreR
 self::$PreRequisiteTable['update']['user']['convert']		= &self::$PreRequisiteTable['add']['user']['convert'];
 self::$PreRequisiteTable['update']['user']['columns']		= &self::$PreRequisiteTable['add']['user']['columns'];
 
+self::$PreRequisiteTable['update']['user_profile_element']['convert']		= &self::$PreRequisiteTable['add']['user_profile_element']['convert'];
+self::$PreRequisiteTable['update']['user_profile_element']['columns']		= &self::$PreRequisiteTable['add']['user_profile_element']['columns'];
+
 
 self::$PreRequisiteTable['website']['context'] = array(
 	"execute" => function (&$a) {
@@ -811,13 +833,14 @@ self::$PreRequisiteTable['update']['website']['columns']			= array(
 //--------------------------------------------------------------------------------
 //	Show
 //--------------------------------------------------------------------------------
-self::$PreRequisiteTable['show']['articles']	= &self::$PreRequisiteTable['add']['article'];		// Empty array for 'show' commands
-self::$PreRequisiteTable['show']['deadlines']	= &self::$PreRequisiteTable['add']['deadline'];
-self::$PreRequisiteTable['show']['decorations']	= &self::$PreRequisiteTable['add']['decoration'];
-self::$PreRequisiteTable['show']['documents']	= &self::$PreRequisiteTable['add']['document'];
-self::$PreRequisiteTable['show']['groups']		= &self::$PreRequisiteTable['add']['group'];
-self::$PreRequisiteTable['show']['keywords']	= &self::$PreRequisiteTable['add']['keyword'];
-self::$PreRequisiteTable['show']['menus']		= &self::$PreRequisiteTable['add']['menu'];
-self::$PreRequisiteTable['show']['modules']		= &self::$PreRequisiteTable['add']['module'];
-self::$PreRequisiteTable['show']['users']		= &self::$PreRequisiteTable['add']['user'];
-self::$PreRequisiteTable['show']['websites']	= &self::$PreRequisiteTable['add']['website'];
+self::$PreRequisiteTable['show']['articles']					= &self::$PreRequisiteTable['add']['article'];		// Empty array for 'show' commands
+self::$PreRequisiteTable['show']['deadlines']					= &self::$PreRequisiteTable['add']['deadline'];
+self::$PreRequisiteTable['show']['decorations']					= &self::$PreRequisiteTable['add']['decoration'];
+self::$PreRequisiteTable['show']['documents']					= &self::$PreRequisiteTable['add']['document'];
+self::$PreRequisiteTable['show']['groups']						= &self::$PreRequisiteTable['add']['group'];
+self::$PreRequisiteTable['show']['keywords']					= &self::$PreRequisiteTable['add']['keyword'];
+self::$PreRequisiteTable['show']['menus']						= &self::$PreRequisiteTable['add']['menu'];
+self::$PreRequisiteTable['show']['modules']						= &self::$PreRequisiteTable['add']['module'];
+self::$PreRequisiteTable['show']['users']						= &self::$PreRequisiteTable['add']['user'];
+self::$PreRequisiteTable['show']['user_profile_element']		= &self::$PreRequisiteTable['add']['user_profile_element'];
+self::$PreRequisiteTable['show']['websites']					= &self::$PreRequisiteTable['add']['website'];

@@ -962,6 +962,7 @@ self::$InitTable['permission'] = function (&$a) {
 };
 
 
+
 self::$InitTable['group_permission'] = function (&$a) {
 	$a['params'] = array(
 		"id"						=> "",
@@ -1053,6 +1054,20 @@ self::$InitTable['user'] = function (&$a) {
 		"join_group" 						=> 0,
 		"initial_group"						=> 0,
 	);
+};
+
+
+self::$InitTable['user_profile_element'] = function (&$a) {
+	$a['params'] = array(
+		"id"				=> "",
+		"name" 				=> "new_user_profile_element",
+		"state" 			=> "enabled",
+		"translation"		=> "new_user_profile_element",
+		"type"				=> "string",
+		"length"			=> "1024",
+		"ws_id"				=> $a['Context']['ws_id'],
+	);
+	$a['params']['description'] = &$a['params']['desc'];
 };
 
 

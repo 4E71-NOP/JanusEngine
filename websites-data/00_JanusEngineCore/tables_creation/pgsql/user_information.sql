@@ -10,5 +10,5 @@ ui_type			    BIGINT,
 ui_data_string		VARCHAR(255),
 ui_data_number 		BIGINT,
 
-PRIMARY KEY (ui_id),
+PRIMARY KEY (ui_id)
 );
