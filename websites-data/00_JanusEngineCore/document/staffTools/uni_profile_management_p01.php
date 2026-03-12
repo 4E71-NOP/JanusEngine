@@ -400,7 +400,8 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$PmThemeDataObj = new ThemeData();
 
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "User preference theme name : " . ($themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] ?? ' not defined') . " and id : " . ($themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] ?? ' not defined') . "."));
+ 	$tmpSelectedTheme = $bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme');
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "User preference theme name : " . ((!empty($tmpSelectedTheme)) ? $themeList[$tmpSelectedTheme]['theme_name'] : 'not defined') . " and id : " . ((!empty($tmpSelectedTheme)) ? $themeList[$tmpSelectedTheme]['theme_id'] : 'not defined') . "."));
 	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form browseTheme name : " . ($bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') ?? ' not defined') . "."));
 	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
 

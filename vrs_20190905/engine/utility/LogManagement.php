@@ -82,8 +82,8 @@ class LogManagement {
 			$this->msgLogIdx ++;
 		}
 		if ($this->vectorSystemLog == true && $logLevel <= $this->vectorSystemLogLevel) {
-			// error_log ( $log['level']."<=".$this->vectorInternalLevel."; InternalLog N " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] ); // Debug
-			error_log("InternalLog N " . str_pad($data['nbr'], 6, '0', STR_PAD_LEFT) . " | " . $data['message'] . ((strlen($data['origin']) > 0) ? "; " . $data['origin'] : ""));
+			// error_log ( $log['level']."<=".$this->vectorInternalLevel."; " . _LOG_ENGINE_TITLE_ . " " . $data['nbr'] . "; " . $data['message'] . "; " . $data['origin'] ); // Debug
+			error_log(_LOG_ENGINE_TITLE_ . " " . str_pad($data['nbr'], 6, '0', STR_PAD_LEFT) . " | " . $data['message'] . ((strlen($data['origin']) > 0) ? "; " . $data['origin'] : ""));
 			$this->msgLogIdx++;
 		}
 		error_reporting(DEFAULT_ERROR_REPORTING);
