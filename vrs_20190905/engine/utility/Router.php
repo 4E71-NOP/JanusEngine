@@ -41,10 +41,10 @@ class Router
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$routerTitle = "Router";
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $routerTitle . str_repeat(" ", (82 - (strlen($routerTitle ?? '') + 3))) . "|"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_TOP_));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION,	'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", $routerTitle, "|", _LOG_STRING_FRAME_LENGTH_)   ));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", "", "|", _LOG_STRING_FRAME_LENGTH_)   ));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_BOTTOM_));
 
 		if ($bts->RequestDataObj->getRequestDataEntry('formSubmitted') == 1) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A form has been submitted"));
@@ -71,7 +71,7 @@ class Router
 				$bts->StringFormatObj->arrayToString($bts->SMObj->getSessionSubEntry($CurrentSetObj->getDataEntry('ws'), 'previousRoute'))
 		));
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_BOTTOM_));
 	}
 
 	/**

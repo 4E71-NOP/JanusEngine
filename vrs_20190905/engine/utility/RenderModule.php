@@ -45,11 +45,11 @@ class RenderModule {
 			return ("");
 		}
 
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION,	'msg' => "| Rendering module '".$m['module_name']. "'" . str_repeat(" ",(63 - (strlen($m['module_name'] ?? '')+3))) . "|" ));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,	'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,		'msg' => _LOG_STRING_FRAME_TOP_));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_INFORMATION,	'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", "Rendering module '" . $m['module_name'] . "'", "|", _LOG_STRING_FRAME_LENGTH_)));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,		'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", "-", "|", _LOG_STRING_FRAME_LENGTH_)));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,		'msg' => _LOG_STRING_FRAME_BOTTOM_));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT,		'msg' => __METHOD__ ." " . $bts->StringFormatObj->arrayToString($m)));
 		$Content .= "<!-- __________ Module '".$m['module_name']."' start __________ -->\r";
 
 		$infos = array();
@@ -130,7 +130,7 @@ class RenderModule {
 		$CurrentSetObj->setDataSubEntry('RenderModule', 'extraContent', '' );		//Whatever happens we reset the extra content delivered by a module.
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " rendering of '".$m['module_name']. "' module is done"));
-		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => _LOG_STRING_FRAME_BOTTOM_));
 		return $Content;
 	}
 	

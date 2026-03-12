@@ -139,10 +139,10 @@ class RenderAdmDashboard
 		<tr style=' padding:0px 0px 5px 0px;'>\r";
 
 			foreach ($module_tab_adm_ as $m) {
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => "+--------------------------------------------------------------------------------+"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => "| Rendering module '" . $m['module_name'] . "'" . str_repeat(" ", (63 - (strlen($m['module_name']) + 3))) . "|"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "|                                                                                |"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => _LOG_STRING_FRAME_TOP_));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", $m['module_name'], "|", _LOG_STRING_FRAME_LENGTH_)));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => _LOG_STRING_FRAME_TOP_));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => _LOG_STRING_FRAME_BOTTOM_));
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => __METHOD__ . " " . $bts->StringFormatObj->arrayToString($m)));
 
 				$infos['module_name'] = $mn = &$m['module_name'];

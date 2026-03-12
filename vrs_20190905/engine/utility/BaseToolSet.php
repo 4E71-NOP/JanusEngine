@@ -165,8 +165,8 @@ class BaseToolSet
 		$this->LMObj->logCheckpoint($location);
 		$this->MapperObj->RemoveThisLevel(" / " . $location);
 		$this->MapperObj->setSqlApplicant($location);
-		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		$this->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "| " . $method . " started"));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => _LOG_STRING_FRAME_TOP_));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT,  'msg' => $this->StringFormatObj->makeFixedLengthLine("|", $method . " started", "|", _LOG_STRING_FRAME_LENGTH_)));
 	}
 
 	/**
@@ -174,7 +174,7 @@ class BaseToolSet
 	 */
 	public function segmentEnding($method)
 	{
-		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "| " . $method . " ended --------------------"));
-		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,  'msg' => $this->StringFormatObj->makeFixedLengthLine("|", $method . " ended", "|", _LOG_STRING_FRAME_LENGTH_)));
+		$this->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => _LOG_STRING_FRAME_BOTTOM_));
 	}
 }

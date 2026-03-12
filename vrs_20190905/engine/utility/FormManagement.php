@@ -204,9 +204,9 @@ class FormManagement
 
 		switch ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine')) {
 			case "enabled":
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Commande console                                                               |"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . _LOG_STRING_FRAME_TOP_));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->StringFormatObj->makeFixedLengthLine("|", "Commande console begin", "|", _LOG_STRING_FRAME_LENGTH_)));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . _LOG_STRING_FRAME_BOTTOM_));
 				foreach ($Script as $A) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : before CommandConsole->ExecuteCommand (`" . $A . "`)"));
 					$CommandConsoleObj->executeCommand($A);
@@ -219,9 +219,9 @@ class FormManagement
 					$CommonWebsiteToolsObj = CommonWebsiteTools::getInstance();
 					$CommonWebsiteToolsObj->languageSelection();
 				}
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "| Fin Commande console                                                           |"));
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "+--------------------------------------------------------------------------------+"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . _LOG_STRING_FRAME_TOP_));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . $bts->StringFormatObj->makeFixedLengthLine("|", "Commande console end", "|", _LOG_STRING_FRAME_LENGTH_)));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . _LOG_STRING_FRAME_BOTTOM_));
 				break;
 			case "disabled":
 			default:

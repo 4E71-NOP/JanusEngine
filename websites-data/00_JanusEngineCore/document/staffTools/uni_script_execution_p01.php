@@ -121,10 +121,10 @@ $path = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "
 $fileName = str_replace("//",  "/", $path . $formInputFile);
 
 $logTitle = "Script Execution - Start";
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $logTitle . str_repeat(" ", (82 - (strlen($logTitle ?? '') + 3))) . "|"));
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "|                                                                                |"));
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_TOP_));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION,	'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", $logTitle, "|", _LOG_STRING_FRAME_LENGTH_)));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", "", "|", _LOG_STRING_FRAME_LENGTH_)));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_BOTTOM_));
 
 $bts->LMObj->msgLog(array(
 	'level' => LOGLEVEL_BREAKPOINT,
@@ -175,9 +175,9 @@ $bts->LMObj->msgLog(array(
 ));
 
 $logTitle = "Script Execution - End";
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "| " . $logTitle . str_repeat(" ", (82 - (strlen($logTitle ?? '') + 3))) . "|"));
-$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => "+--------------------------------------------------------------------------------+"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_TOP_));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => "│ " . $logTitle . str_repeat(" ", (_LOG_STRING_FRAME_LENGTH_ - (strlen($logTitle ?? '') + 3))) . "│"));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT,	'msg' => _LOG_STRING_FRAME_BOTTOM_));
 
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/

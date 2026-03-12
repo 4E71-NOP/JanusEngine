@@ -81,11 +81,11 @@ class JanusEngine
 		// --------------------------------------------------------------------------------------------
 		$Content = "";
 		// --------------------------------------------------------------------------------------------
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "| Begining JnsEng page                                                           |"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "|                                                                                |"));
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "+--------------------------------------------------------------------------------+"));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => _LOG_STRING_FRAME_TOP_));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => _LOG_STRING_FRAME_MIDDLE_));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => $bts->StringFormatObj->makeFixedLengthLine("|", "Begining JnsEng page", "|", _LOG_STRING_FRAME_LENGTH_)));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => _LOG_STRING_FRAME_MIDDLE_));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => _LOG_STRING_FRAME_BOTTOM_));
 
 		$bts->LMObj->setStoreStatisticsStateOn();
 		$bts->LMObj->logCheckpoint('Index');

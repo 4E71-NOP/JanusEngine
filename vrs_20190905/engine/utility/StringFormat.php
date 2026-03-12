@@ -37,6 +37,7 @@ class StringFormat
 	 */
 	private static function makeConvertTable()
 	{
+		//@formatter:off
 		self::$ConvertTable['universal']['no']					= "0";
 		self::$ConvertTable['universal']['yes']					= 1;
 		self::$ConvertTable['universal']['offline']				= "0";
@@ -219,7 +220,24 @@ class StringFormat
 		self::$ConvertTable['website']['static']				= 0;
 		self::$ConvertTable['website']['dynamic']				= 1;
 		self::$ConvertTable['website']['base']					= 0;
+		//@formatter:on
+
 	}
+
+
+	public function makeFixedLengthLine($begin, $content, $end, $length)
+	{
+		$str = $begin . " " . $content;
+		$rep = $length - strlen($str . $end);
+
+		if ($rep > 0) {
+			$str .= str_repeat(" ", $rep);
+		}
+		$str .= $end;
+
+		return $str;
+	}
+
 
 	/**
 	 * Return a string striped of caracters that would clutter the logs and make it unreadable.
@@ -229,8 +247,8 @@ class StringFormat
 	 */
 	public function formatToLog($data)
 	{
-		$tab_rch = array("\n",	"\t",		"    ",	"   ",	"  ",);
-		$tab_rpl = array(" ",	" ",		" ",	" ",	" ",);
+		$tab_rch = array("\n", "\t", "    ", "   ", "  ", );
+		$tab_rpl = array(" ", " ", " ", " ", " ", );
 		return str_replace($tab_rch, $tab_rpl, $data);
 	}
 
@@ -244,8 +262,8 @@ class StringFormat
 	public function print_r_html($data, $return_data = true)
 	{
 		$data = print_r($data, true);
-		$tab_rch = array("&",		"<",		">",	" ",		"\r\n",		"\r",		"\n");
-		$tab_rpl = array("&amp;",	"&lt;",		"&gt;",	"&nbsp;",	"<br>\r",	"<br>\r",	"<br>\r");
+		$tab_rch = array("&", "<", ">", " ", "\r\n", "\r", "\n");
+		$tab_rpl = array("&amp;", "&lt;", "&gt;", "&nbsp;", "<br>\r", "<br>\r", "<br>\r");
 		$data = str_replace($tab_rch, $tab_rpl, $data);
 		if (!$return_data) {
 			echo $data;
@@ -263,8 +281,8 @@ class StringFormat
 	public function print_r_debug($data, $return_data = true)
 	{
 		$data = print_r($data, true);
-		$tab_rch = array("\r\n",		"\r");
-		$tab_rpl = array("\n",			"\n");
+		$tab_rch = array("\r\n", "\r");
+		$tab_rpl = array("\n", "\n");
 		$data = str_replace($tab_rch, $tab_rpl, $data);
 		if (!$return_data) {
 			echo $data;

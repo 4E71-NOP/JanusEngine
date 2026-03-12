@@ -206,7 +206,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 					. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
 					. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
 					. "</select>\r";
-					break;
+				break;
 		}
 		$l++;
 
@@ -291,7 +291,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 					. $TSO['0']['A'] . $TSO['0']['s'] . $TSO['0']['B']
 					. $TSO['1']['A'] . $TSO['1']['s'] . $TSO['1']['B']
 					. "</select>\r";
-					break;
+				break;
 		}
 		$l++;
 	}
@@ -400,11 +400,9 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$PmThemeDataObj = new ThemeData();
 
 	$PmThemeDataObj->setThemeName($PmThemeDescriptorObj->getCssPrefix());
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "User preference theme name: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] . " and id: " . $themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] . "."));
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form browseTheme name: " . $bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') . "."));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "User preference theme name : " . ($themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_name'] ?? ' not defined') . " and id : " . ($themeList[$bts->RequestDataObj->getRequestDataSubEntry('UserProfileForm', 'SelectedTheme')]['theme_id'] ?? ' not defined') . "."));
+	$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "Form browseTheme name : " . ($bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name') ?? ' not defined') . "."));
 	$PmThemeDescriptorObj->getDataFromDB($themeList[$bts->RequestDataObj->getRequestDataSubEntry('browseTheme', 'theme_name')]['theme_id']);
-
-	// $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "  PmThemeDescriptorObj :" . $bts->StringFormatObj->print_r_debug($PmThemeDescriptorObj) ));
 
 	$PmThemeDataObj->setThemeData($PmThemeDescriptorObj->getThemeDescriptor()); //Better to give an array than the object itself.
 	$PmThemeDataObj->setThemeDefinition($PmThemeDescriptorObj->getThemeDefinition());
