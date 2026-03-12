@@ -43,7 +43,6 @@ class SqlTableList
 		'group_user',
 		'i18n',
 		'infos',
-		'infos_config',
 		'installation',
 		'installation_report',
 		'keyword',

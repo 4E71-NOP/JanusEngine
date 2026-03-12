@@ -20,7 +20,7 @@
 class Entity
 {
 	private $LastExecutionReport = array();
-	private $infos_config = array();
+	// private $infos_config = array();
 	private $infos = array();
 
 	public function __construct() {}
@@ -155,48 +155,6 @@ class Entity
 		}
 		return $res;
 	}
-
-	/**
-	 * Gets the information configuration for the user section.
-	 */
-	protected function getInfosConfig($type)
-	{
-		$bts = BaseToolSet::getInstance();
-		$CurrentSetObj = CurrentSet::getInstance();
-		$SqlTableListObj = SqlTableList::getInstance(null, null);
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : loading infos_config for section : User"));
-
-		$q = "SELECT * "
-			. "FROM " . $SqlTableListObj->getSQLTableName('infos_config') . " ic "
-			. "WHERE ic.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "' "
-			. "AND ic.infcfg_section = '" . $type . "' "
-			. "ORDER BY ic.infcfg_order"
-			. ";";
-
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`" . $bts->StringFormatObj->formatToLog($q) . "`."));
-		$dbquery = $bts->SDDMObj->query($q);
-		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
-			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-				foreach ($dbp as $A => $B) {
-					$idx = $dbp['infcfg_order'];
-					$this->infos_config[$idx] = array(
-						"infcfg_id" 		=> $dbp['infcfg_id'],
-						"fk_ws_id"			=> $dbp['fk_ws_id'],
-						"infcfg_section"	=> $dbp['infcfg_section'],
-						"infcfg_field"		=> $dbp['infcfg_field'],
-						"infcfg_enabled"	=> $dbp['infcfg_enabled'],
-						"infcfg_type"		=> $dbp['infcfg_type'],
-						"infcfg_order"		=> $dbp['infcfg_order'],
-					);
-				}
-			}
-			$this->LastExecutionReport[] = array('state' => 'ok', 'msg' => 'getInfosConfig succeded');
-		} else {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " no infos_config rows returned for this type."));
-			$this->LastExecutionReport[] = array('state' => 'err', 'msg' => 'getInfosConfig failed');
-		}
-	}
-
 
 	/**
 	 * Gets the related information for this user

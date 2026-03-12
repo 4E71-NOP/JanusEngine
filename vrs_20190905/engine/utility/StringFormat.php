@@ -68,13 +68,11 @@ class StringFormat
 		self::$ConvertTable['menu']['article_examination']	= &self::$ConvertTable['menu']['correction_article'];
 		self::$ConvertTable['menu']['admin_conf_extension']	= 2;
 
-
 		self::$ConvertTable['deadline']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['deadline']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['deadline']['offline']				= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['deadline']['online']				= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['deadline']['disabled']				= &self::$ConvertTable['universal']['disabled'];
-
 
 		self::$ConvertTable['decoration']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['decoration']['yes']				= &self::$ConvertTable['universal']['yes'];
@@ -115,7 +113,6 @@ class StringFormat
 		self::$ConvertTable['article_config']['both']			= 3;
 		self::$ConvertTable['article_config']['store']			= 4;
 
-
 		self::$ConvertTable['document']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['document']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['document']['html']					= 0;
@@ -126,10 +123,6 @@ class StringFormat
 		self::$ConvertTable['group']['reader']					= _READER_;
 		self::$ConvertTable['group']['staff']					= _STAFF_;
 		self::$ConvertTable['group']['senior_staff']			= _SENIOR_STAFF_;
-
-		self::$ConvertTable['infos_config']['string']			= 0;
-		self::$ConvertTable['infos_config']['number']			= 1;
-		self::$ConvertTable['infos_config']['timestamp']		= 2;
 
 		self::$ConvertTable['module']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['module']['yes']					= &self::$ConvertTable['universal']['yes'];
@@ -167,18 +160,15 @@ class StringFormat
 		self::$ConvertTable['layout_content']['gauche']			= &self::$ConvertTable['layout_content']['left'];
 		self::$ConvertTable['layout_content']['droite']			= &self::$ConvertTable['layout_content']['right'];
 
-		// Permission
 		self::$ConvertTable['permission']['disbled']			= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['permission']['enabled']			= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['permission']['deleted']			= &self::$ConvertTable['universal']['disabled'];
 		self::$ConvertTable['permission']['read']				= 1;
 		self::$ConvertTable['permission']['write']				= 2;
 
-		// Theme
 		self::$ConvertTable['theme']['offline']					= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['theme']['online']					= &self::$ConvertTable['universal']['online'];
 
-		// Theme_definition
 		self::$ConvertTable['theme_definition']['top-left']			= 0;
 		self::$ConvertTable['theme_definition']['bottom-left']		= 1;
 		self::$ConvertTable['theme_definition']['center-left']		= 2;
@@ -191,7 +181,6 @@ class StringFormat
 		self::$ConvertTable['theme_definition']['number']			= 0;
 		self::$ConvertTable['theme_definition']['string']			= 1;
 
-		// User
 		self::$ConvertTable['user']['no']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['user']['yes']						= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['user']['private']					= 1;
@@ -202,7 +191,6 @@ class StringFormat
 		self::$ConvertTable['user']['off']						= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['user']['on']						= &self::$ConvertTable['universal']['yes'];
 
-		// User_profile_element
 		self::$ConvertTable['user_profile_element']['offline']		= &self::$ConvertTable['universal']['offline'];
 		self::$ConvertTable['user_profile_element']['online']		= &self::$ConvertTable['universal']['online'];
 		self::$ConvertTable['user_profile_element']['string']		= 1;
@@ -211,8 +199,6 @@ class StringFormat
 		self::$ConvertTable['user_profile_element']['preference']	= 1;
 		self::$ConvertTable['user_profile_element']['data']			= 2;
 
-
-		// Website
 		self::$ConvertTable['website']['no']					= &self::$ConvertTable['universal']['no'];
 		self::$ConvertTable['website']['yes']					= &self::$ConvertTable['universal']['yes'];
 		self::$ConvertTable['website']['offline']				= &self::$ConvertTable['universal']['offline'];

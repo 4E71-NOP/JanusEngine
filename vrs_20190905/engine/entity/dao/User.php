@@ -372,7 +372,6 @@ class User extends Entity
 		}
 
 		// Get the list of info_config for this type
-		$this->getInfosConfig('user');
 		$this->getInfos($this->User['user_id'], 'user');
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : End"));

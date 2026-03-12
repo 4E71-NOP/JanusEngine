@@ -123,24 +123,6 @@ self::$ActionTable['add']['user']			= function (&$a) {
 	}
 	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . ($a['params']['group_user_id'] + $b) . "','" . $a['params']['anonymous_id'] . "','" . $a['params']['id'] . "','" . $c . "');";
 
-	$bts = BaseToolSet::getInstance();
-	$bts->InitClass('MiscTools');
-	
-	$tab = $bts->MiscTools->makeInfosConfigList('user', 'adr_', '');
-	foreach ($tab as $IC) {
-		if (strlen( $a['param'][$IC['info_field']] ?? '') > 0 ) {
-			$queries[] = "INSERT INTO " . $a['sqlTables']['infos'] . " " 
-			. "VALUES ("
-			. $bts->SDDMObj->createUniqueId() . ", "
-			. "'user', "
-			. $a['params']['user_id'] . ", "
-			. "'" . $IC['info_field'] . "', "
-			. "'" . $IC['info_string'] . "', "
-			. "'" . $IC['info_number'] . "', "
-			.");";
-		}
-	}
-
 	return $queries; 
 };
 

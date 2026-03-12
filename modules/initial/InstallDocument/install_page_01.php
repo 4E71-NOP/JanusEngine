@@ -301,6 +301,39 @@ class InstallPage01
 		$T[$t][$l]['4']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_Titlec4');
 		$l++;
 
+		$SB['id']				= "bouton_install_testdb";
+		$SB['type']				= "button";
+		$SB['initialStyle']		= $Block . "_submit_s1_n";
+		$SB['hoverStyle']		= $Block . "_submit_s1_h";
+		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('JnsEngDBAlreadyExists', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
+		$SB['message']			= "Test DB";
+		$SB['mode']				= 1;
+		$SB['size'] 			= 128;
+		$SB['lastSize']			= 128;
+
+		$arrInputText1['id'] = "form[TestCnxString]";
+		$arrInputText1['name'] = "form[TestCnxString]";
+		$arrInputText1['size'] = 40;
+		$pv['div_cnx_db'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1) . "\r<br>\r";
+
+		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_tstcnx');
+		$T[$t][$l]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
+		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='" . $Block;
+
+		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
+			. "<div id='cnxToServiceTrue'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceok') . "</div>"
+			. "<div id='cnxToServiceFalse'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceko') . "</div>"
+			. "<div id='cnxToDBTrue'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
+			. "<div id='cnxToDBFalse'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
+			. "<div id='JnsEngDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsok') . "</div>"
+			. "<div id='JnsEngDBAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsko') . "</div>"
+			. "<div id='JnsEngUserAlreadyExistsTrue'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsok') . "</div>"
+			. "<div id='JnsEngUserAlreadyExistsFalse'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsko') . "</div>"
+			. "<div id='installationLockedTrue'			style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko') . "</div>"
+			. "<div id='installationLockedFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok') . "</div>";
+		$l++;
+
+
 		unset($tab_);
 		$tab_[$bts->CMObj->getConfigurationEntry('dal')] = " selected ";
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_dal');
@@ -397,38 +430,6 @@ class InstallPage01
 			. $bts->I18nTransObj->getI18nTransEntry('unveilPassword')
 			. "</span>";
 		$l++;
-
-
-		$SB['id']				= "bouton_install_testdb";
-		$SB['type']				= "button";
-		$SB['initialStyle']		= $Block . "_submit_s1_n";
-		$SB['hoverStyle']		= $Block . "_submit_s1_h";
-		$SB['onclick']			= "tdb.toggleDbResultDivs ('cnxToDB', false ); tdb.toggleDbResultDivs ('JnsEngDBAlreadyExists', false ); tdb.testDbCnx(); var tmp_cnx_chaine = document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dataBaseAdminUser]'].value + '@' + document.forms['" . $this->FormName . "'].elements['form[host]'].value  + ', Database: ' + document.forms['" . $this->FormName . "'].elements['form[dataBaseHostingPrefix]'].value + document.forms['" . $this->FormName . "'].elements['form[dbprefix]'].value ; li.insertValue ( tmp_cnx_chaine , '" . $this->FormName . "', [ 'form[TestCnxString]']  );";
-		$SB['message']			= "Test DB";
-		$SB['mode']				= 1;
-		$SB['size'] 			= 128;
-		$SB['lastSize']			= 128;
-
-		$arrInputText1['id'] = "form[TestCnxString]";
-		$arrInputText1['name'] = "form[TestCnxString]";
-		$arrInputText1['size'] = 40;
-		$pv['div_cnx_db'] = $bts->RenderFormObj->renderInputTextEnhanced($arrInputText1) . "\r<br>\r";
-
-		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('DB_tstcnx');
-		$T[$t][$l]['3']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
-		$divImgSrc = "<div style='width:18px; height:18px; background-size:contain; display:inline-block; vertical-align:middle;' class='" . $Block;
-
-		$T[$t][$l]['4']['cont'] = $pv['div_cnx_db']
-			. "<div id='cnxToServiceTrue'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceok') . "</div>"
-			. "<div id='cnxToServiceFalse'				style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToServiceko') . "</div>"
-			. "<div id='cnxToDBTrue'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBok') . "</div>"
-			. "<div id='cnxToDBFalse'					style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_cnxToDBko') . "</div>"
-			. "<div id='JnsEngDBAlreadyExistsTrue'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsok') . "</div>"
-			. "<div id='JnsEngDBAlreadyExistsFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngDBAlreadyExistsko') . "</div>"
-			. "<div id='JnsEngUserAlreadyExistsTrue'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_WARNING_ . "'>	" . $divImgSrc . "_icon_notification"	. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsok') . "</div>"
-			. "<div id='JnsEngUserAlreadyExistsFalse'	style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_JnsEngUserAlreadyExistsko') . "</div>"
-			. "<div id='installationLockedTrue'			style='font-size:80%; visibilty:hidden; display:none; position:realtive;' class='" . $Block . _CLASS_TXT_ERROR_ . "'>	" . $divImgSrc . "_icon_nok"			. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedko') . "</div>"
-			. "<div id='installationLockedFalse'		style='font-size:80%; visibilty:hidden; display:none; position:realtive;'>												" . $divImgSrc . "_icon_ok"				. "'></div> " . $bts->I18nTransObj->getI18nTransEntry('DB_installationLockedok') . "</div>";
 
 		$SrvUri = $_SERVER['REQUEST_URI'];
 		$uriCut = strpos($_SERVER['REQUEST_URI'], "/JanusEngine/current/install/install_page_01.php");
