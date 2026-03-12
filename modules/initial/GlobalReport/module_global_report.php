@@ -58,7 +58,7 @@ class ModuleGlobalReport
 			if (($dbgLvl & 0b0000000000000001) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt1'));
-				$tmp = $this->reportTab01($infos);
+				$tmp = $this->reportGeneral($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
@@ -68,7 +68,7 @@ class ModuleGlobalReport
 			if (($dbgLvl & 0b0000000000000010) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt2'));
-				$tmp = $this->reportTab02($infos);
+				$tmp = $this->reportGraph($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
@@ -78,7 +78,7 @@ class ModuleGlobalReport
 			if (($dbgLvl & 0b0000000000000100) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt3'));
-				$tmp = $this->reportTab03($infos);
+				$tmp = $this->reportStats($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
@@ -87,38 +87,38 @@ class ModuleGlobalReport
 
 			if (($dbgLvl & 0b0000000000001000) != 0) {
 				$CurrentTab++;
-				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt4'));
-				$tmp = $this->reportTab04($infos);
-				$T['Content'][$CurrentTab] = $tmp['content'];
-				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
-				$T['ContentInfos']['NbrOfTabs']++;
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : result binary is:`" . sprintf('%016b', ($dbgLvl & 0b0000000000001000)) . "`; NbrOfTabs=" . $T['ContentInfos']['NbrOfTabs']));
-			}
-
-			if (($dbgLvl & 0b0000000000010000) != 0) {
-				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt5'));
-				$tmp = $this->sqlReportTab($infos);
+				$tmp = $this->reportSQL($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : result binary is:`" . sprintf('%016b', ($dbgLvl & 0b0000000000010000)) . "`; NbrOfTabs=" . $T['ContentInfos']['NbrOfTabs']));
 			}
 
-			if (($dbgLvl & 0b0000000000100000) != 0) {
+			if (($dbgLvl & 0b0000000000010000) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt6'));
-				$tmp = $this->reportTab08($infos);
+				$tmp = $this->reportCmdBuffer($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : result binary is:`" . sprintf('%016b', ($dbgLvl & 0b0000000000100000)) . "`; NbrOfTabs=" . $T['ContentInfos']['NbrOfTabs']));
 			}
 
+			if (($dbgLvl & 0b0000000000100000) != 0) {
+				$CurrentTab++;
+				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt4'));
+				$tmp = $this->reportDbLog($infos);
+				$T['Content'][$CurrentTab] = $tmp['content'];
+				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
+				$T['ContentInfos']['NbrOfTabs']++;
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : result binary is:`" . sprintf('%016b', ($dbgLvl & 0b0000000000001000)) . "`; NbrOfTabs=" . $T['ContentInfos']['NbrOfTabs']));
+			}
+
 			if (($dbgLvl & 0b0100000000000000) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt7'));
-				$tmp = $this->internalLogReport($infos);
+				$tmp = $this->reportInternalLog($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
@@ -128,7 +128,7 @@ class ModuleGlobalReport
 			if (($dbgLvl & 0b1000000000000000) != 0) {
 				$CurrentTab++;
 				$bts->I18nTransObj->setI18nTransEntry("tabTxt" . $CurrentTab, $bts->I18nTransObj->getI18nTransEntry('srcTabTxt8'));
-				$tmp = $this->variablesReport($infos);
+				$tmp = $this->reportVariables($infos);
 				$T['Content'][$CurrentTab] = $tmp['content'];
 				$T['ContentCfg']['tabs'][$CurrentTab] = $tmp['config'];
 				$T['ContentInfos']['NbrOfTabs']++;
@@ -152,7 +152,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab01(&$infos)
+	private function reportGeneral(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -270,7 +270,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab02(&$infos)
+	private function reportGraph(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -371,7 +371,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab03(&$infos)
+	private function reportStats(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -464,7 +464,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function reportTab04(&$infos)
+	private function reportDbLog(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -566,7 +566,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function sqlReportTab(&$infos)
+	private function reportSQL(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -609,7 +609,7 @@ class ModuleGlobalReport
 		return $package;
 	}
 
-	private function reportTab08(&$infos)
+	private function reportCmdBuffer(&$infos)
 	{
 		$Content = array();
 		return $Content;
@@ -620,7 +620,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function internalLogReport(&$infos)
+	private function reportInternalLog(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
@@ -655,7 +655,7 @@ class ModuleGlobalReport
 	 * @param array $infos
 	 * @return array
 	 */
-	private function variablesReport(&$infos)
+	private function reportVariables(&$infos)
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();

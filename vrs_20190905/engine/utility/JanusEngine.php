@@ -217,21 +217,10 @@ class JanusEngine
 			$this->initializeArticle();
 
 			// --------------------------------------------------------------------------------------------
-			// TODO clean up
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_ws', "<input type='hidden'	name='ws'					value='" . $this->WebSiteObj->getWebSiteEntry('ws_short') . "'>\r");
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_l', "<input type='hidden'	name='l'					value='" . $CurrentSetObj->getDataEntry('language') . "'>\r");
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_login', "<input type='hidden'	name='user_login'	value='" . $bts->SMObj->getSessionEntry('user_login') . "'>\r");
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_user_pass', "<input type='hidden'	name='user_pass'	value='" . $bts->SMObj->getSessionEntry('user_password') . "'>\r");
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_ref', "<input type='hidden'	name='arti_ref'		value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "'>\r");
-			// $CurrentSetObj->setDataSubEntry('block_HTML', 'post_hidden_arti_page', "<input type='hidden'	name='arti_page'	value='" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "'>\r");
-
 			$urlUsrPass = "";
 			if ($bts->SMObj->getSessionEntry('sessionMode') != 1) {
 				$urlUsrPass = "&amp;user_login=" . $bts->SMObj->getSessionEntry('user_login');
 			}
-			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_slup', "" ); // Site Lang User Pass
-			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sldup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&l=" . $CurrentSetObj->getDataEntry ( 'language' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Lang Article User Pass
-			// $CurrentSetObj->setDataSubEntry ( 'block_HTML', 'url_sdup', "&sw=" . $this->WebSiteObj->getWebSiteEntry ( 'ws_id' ) . "&arti_ref=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref' ) . "&arti_page=" . $CurrentSetObj->getDataSubEntry ( 'article', 'arti_page' ) . $urlUsrPass ); // Site Article User Pass
 
 			// JavaScript Object
 			$this->initializeJavascript();

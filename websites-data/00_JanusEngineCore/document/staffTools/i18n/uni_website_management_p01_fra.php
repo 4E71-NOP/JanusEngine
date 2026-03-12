@@ -25,7 +25,7 @@ $bts->I18nTransObj->apply(
 
 			"checkbox_t2_05_default"		=> "Défaut",
 			"checkbox_t2_05_graph"			=> "Graphiques",
-			"checkbox_t2_05_stats"			=> "Stats",
+			"checkbox_t2_05_stats"			=> "Statistiques",
 			"checkbox_t2_05_sql"			=> "Requêtes SQL",
 			"checkbox_t2_05_commandbuffer"	=> "Tampon des commandes",
 			"checkbox_t2_05_commandlogs"	=> "Journaux des commandes",
