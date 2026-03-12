@@ -6,10 +6,10 @@
 
 CREATE TABLE !table! (
 gal_id			INTEGER NOT NULL,
-gal_fichier		VARCHAR(255),
-gal_taille		VARCHAR(7),
+gal_file		VARCHAR(255),
+gal_size		VARCHAR(7),
 gal_date		INTEGER,
-gal_temps_rendu	VARCHAR(255),
+gal_render_time	VARCHAR(255),
 gal_data		BLOB,
 PRIMARY KEY (gal_id)
 );

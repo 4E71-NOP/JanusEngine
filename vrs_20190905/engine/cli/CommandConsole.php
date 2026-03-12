@@ -317,7 +317,7 @@ class CommandConsole
 				}
 				$idx++;
 				if ($CCL['errFlag'] == 1) {
-					$CCL['params'][$A['v']] = "0";
+					$CCL['params'][($A['v'] ?? '0')] = "0";
 				}
 			}
 		}

@@ -13,6 +13,7 @@ user_id 						BIGINT NOT NULL UNIQUE,
 user_name						VARCHAR(255),
 user_login						VARCHAR(255),
 user_password					VARCHAR(255),
+user_mail						VARCHAR(255),
 user_subscription_date			INTEGER,
 user_status						INTEGER,
 
@@ -28,5 +29,4 @@ user_last_ip					VARCHAR(15),
 user_timezone					INTEGER,
 
 PRIMARY KEY (user_id)
-
 );

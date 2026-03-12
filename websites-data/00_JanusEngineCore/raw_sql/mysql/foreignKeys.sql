@@ -39,12 +39,6 @@ ALTER TABLE !table_note! ADD CONSTRAINT Ht_note_FK_B FOREIGN KEY (fk_user_id) RE
 
 ALTER TABLE !table_tag! ADD CONSTRAINT Ht_tag_FK_A FOREIGN KEY (fk_ws_id) REFERENCES !table_website!(ws_id);
 
-ALTER TABLE !table_extension! ADD CONSTRAINT Ht_extension_FK_A FOREIGN KEY (fk_ws_id) REFERENCES !table_website!(ws_id);
-
-ALTER TABLE !table_extension_file! ADD CONSTRAINT Ht_extension_file_FK_A FOREIGN KEY (fk_extension_id) REFERENCES !table_extension!(extension_id);
-
-ALTER TABLE !table_extension_dependency! ADD CONSTRAINT Ht_extension_dependency_FK_A FOREIGN KEY (fk_extension_id) REFERENCES !table_extension!(extension_id);
-
 ALTER TABLE !table_article_config! ADD CONSTRAINT Ht_article_config_FK_A FOREIGN KEY (fk_ws_id) REFERENCES !table_website!(ws_id);
 
 ALTER TABLE !table_i18n! ADD CONSTRAINT Ht_i18n_FK_A FOREIGN KEY (fk_lang_id) REFERENCES !table_language!(lang_id);

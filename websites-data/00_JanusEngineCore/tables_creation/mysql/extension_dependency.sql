@@ -1,13 +1,12 @@
 /* ---------------------------------------- */
-/* Foreign keys: 							*/
+/* Foreign keys: fk_ext_id					*/
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-dependency_id		BIGINT NOT NULL UNIQUE, 
-fk_extension_id		BIGINT, 
-extension_dep		INTEGER, 
+extdep_id		BIGINT NOT NULL UNIQUE, 
+fk_ext_id		BIGINT, 
 
-PRIMARY KEY (dependency_id),
-KEY idx_!IdxNom!_dependency_id (dependency_id)
+PRIMARY KEY (extdep_id),
+KEY idx_!IdxNom!_ext_id (extdep_id)
 
 );
