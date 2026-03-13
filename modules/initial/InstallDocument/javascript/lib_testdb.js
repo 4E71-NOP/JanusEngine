@@ -59,7 +59,6 @@ class LibTestDB {
 				l.Log[tdb.dbgTstDb](res);
 
 				tdb.toggleDbResultDivsVisibilty('cnxToService', false);
-				tdb.toggleDbResultDivsVisibilty('cnxToDB', false);
 				tdb.toggleDbResultDivsVisibilty('JnsEngDBAlreadyExists', false);
 				tdb.toggleDbResultDivsVisibilty('JnsEngUserAlreadyExists', false);
 				tdb.toggleDbResultDivsVisibilty('installationLocked', false);
@@ -67,8 +66,7 @@ class LibTestDB {
 
 				tdb.toggleDbResultDivs('cnxToService', res.cnxToService);
 				tdb.toggleDbResultDivs('JnsEngUserAlreadyExists', res.JnsEngUserAlreadyExists);
-				if (res.cnxToDB) {
-					tdb.toggleDbResultDivs('cnxToDB', res.cnxToDB);
+				if (res.JnsEngDBAlreadyExists) {
 					tdb.toggleDbResultDivs('JnsEngDBAlreadyExists', res.JnsEngDBAlreadyExists);
 					tdb.toggleDbResultDivs('installationLocked', res.installationLocked);
 				}

@@ -23,7 +23,6 @@ class InstallTestDb
 	private $messageLog = array();
 	private $jsonApiResponse = array(
 		"cnxToService" => false,
-		"cnxToDB" => false,
 		"JnsEngDBAlreadyExists" => false,
 		"JnsEngUserAlreadyExists" => false,
 		"JnsEngBDDuserPermission" => false,
@@ -206,8 +205,8 @@ class InstallTestDb
 						"successMsg" => "database service connection succeeded",
 						"failMsg" => "database service connection failed"
 					),
-					"cnxToDb" => array(
-						"testName" => "CnxToDb",
+					"JnsEngDBAlreadyExists" => array(
+						"testName" => "JnsEngDBAlreadyExists",
 						"query" => "",
 						"successMsg" => "database connection succeeded",
 						"failMsg" => "database connection failed"
@@ -241,8 +240,8 @@ class InstallTestDb
 						"successMsg" => "database service connection succeeded",
 						"failMsg" => "database service connection failed"
 					),
-					"cnxToDb" => array(
-						"testName" => "CnxToDb",
+					"JnsEngDBAlreadyExists" => array(
+						"testName" => "JnsEngDBAlreadyExists",
 						"query" => "SELECT COUNT(*) AS nbr FROM information_schema.schemata WHERE schema_name = '" . strtolower($this->db_['dbprefix']) . "';",
 						"successMsg" => "database connection succeeded",
 						"failMsg" => "database connection failed"
@@ -284,12 +283,12 @@ class InstallTestDb
 		if ($this->jsonApiResponse['cnxToService']) {
 			$this->findUserTest($this->currentDbObj);
 
-			$currentTest = $this->queryCatalog['cnxToDb'];
-			$this->jsonApiResponse['cnxToDB'] = $this->cnxToDbTest($currentTest);
-			$respValue = ($this->jsonApiResponse['cnxToDB']) ? "successMsg" : "failMsg";
+			$currentTest = $this->queryCatalog['JnsEngDBAlreadyExists'];
+			$this->jsonApiResponse['JnsEngDBAlreadyExists'] = $this->JnsEngDBAlreadyExistsTest($currentTest);
+			$respValue = ($this->jsonApiResponse['JnsEngDBAlreadyExists']) ? "successMsg" : "failMsg";
 			$this->messageLog[] = "Install_test_db - " . $currentTest['testName'] . " - " . $currentTest[$respValue];
 
-			if ($this->jsonApiResponse['cnxToDB']) {
+			if ($this->jsonApiResponse['JnsEngDBAlreadyExists']) {
 				$this->findTableTest($this->currentDbObj);
 
 				if ($this->jsonApiResponse['JnsEngDBInstallTableExists']) {
@@ -365,16 +364,16 @@ class InstallTestDb
 	 * @param mixed $currentTest
 	 * @return bool
 	 */
-	private function cnxToDbTest($currentTest)
+	private function JnsEngDBAlreadyExistsTest($currentTest)
 	{
 		$retResp = false;
 		switch ($this->db_['type']) {
 			case "mysql":
-				$this->messageLog[] = ($this->debug == true) ? "cnxToDbTest Mysql selected" : "";
+				$this->messageLog[] = ($this->debug == true) ? "JnsEngDBAlreadyExistsTest Mysql selected" : "";
 				$dsn = $this->db_['type'] . ":host=" . $this->db_['host'] . "; port=" . $this->db_['port'] . "; dbname=" . $this->db_['dbprefix'];
 				break;
 			case "pgsql":
-				$this->messageLog[] = ($this->debug == true) ? "cnxToDbTest Postgres selected" : "";
+				$this->messageLog[] = ($this->debug == true) ? "JnsEngDBAlreadyExistsTest Postgres selected" : "";
 				$dsn = $this->db_['type'] . ":host=" . $this->db_['host'] . "; dbname=postgres";
 				break;
 		}
@@ -390,7 +389,7 @@ class InstallTestDb
 							// If it fails, it raises an Exception and go no further
 							$retResp = true;
 						} catch (Exception $e) {
-							$this->messageLog[] = ($this->debug == true) ? "Exception in cnxToDbTest PHP function / Mysql" : "";
+							$this->messageLog[] = ($this->debug == true) ? "Exception in JnsEngDBAlreadyExistsTest PHP function / Mysql" : "";
 						}
 						break;
 					case "pgsql":
@@ -415,7 +414,7 @@ class InstallTestDb
 						$retResp = ($this->genericCount($db, $currentTest['query']) > 0) ? true : false;
 					}
 				} catch (PDOException $e) {
-					$this->messageLog[] = ($this->debug == true) ? "Exception in cnxToDbTest PDO" : "";
+					$this->messageLog[] = ($this->debug == true) ? "Exception in JnsEngDBAlreadyExistsTest PDO" : "";
 				}
 				break;
 		}
