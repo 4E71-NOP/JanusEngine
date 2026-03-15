@@ -1,0 +1,4 @@
+site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
+
+delete extension 		name "Gallery";
+delete extension_file	generic_name "galleryMainFile";

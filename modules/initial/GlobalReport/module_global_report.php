@@ -583,7 +583,7 @@ class ModuleGlobalReport
 
 		$i = 2;
 		foreach ($bts->LMObj->getSqlQueryLog() as $A) {
-			$query = $bts->StringFormatObj->ConvertToHtml($A['requete']);
+			$query = $bts->StringFormatObj->convertToHtml($A['requete']);
 
 			$queryTime = round(($A['temps_fin'] - $A['temps_debut']), 4);
 

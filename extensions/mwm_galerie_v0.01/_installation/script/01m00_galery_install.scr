@@ -1,4 +1,0 @@
-site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
-
-add extension name "Gallery"	author "Tex"	author_website "janus-engine.com"	version "2026-03-12"	class_exec "ExtGallery"
-add extension_file	extension "Gallery"	generic_name "galleryMainFile"	file "program/ExtGallery.php"

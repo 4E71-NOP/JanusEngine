@@ -73,20 +73,12 @@ class FormManagement
 						case "expired":
 							// Token too old. Re-route to page "token expired"
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Token expired : " . $token));
-							// TODO remove commented lines below
-							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'progress', "processFaillure");
-							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error', true);
-							// $bts->RequestDataObj->setRequestDataSubEntry('signUpForm', 'error_type', 'errorTokenExpired');
 							break;
 
 						case "ok":
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Command console - CLiContent"));
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CLiContent='" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "'"));
 							// We consider we have a script to execute as it's from AdminDashboard
-
-							// TODO remove commented lines below
-							// $bts->CMObj->setConfigurationSubEntry('functions', 'commandLineEngine', 'enabled');		// enabled/disabled
-
 							$ClassLoaderObj->provisionClass('ScriptFormatting');
 							$ScriptFormattingObj = ScriptFormatting::getInstance();
 
@@ -138,6 +130,17 @@ class FormManagement
 						break;
 					case "ResetPasswordFinalization":
 						$this->processNewPassword();
+						break;
+				}
+				break;
+
+			case "AdminExtensionManagement":
+				switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'action')) {
+					case "installExtension":
+						$this->installExtension();
+						break;
+					case "uninstallExtension":
+						$this->uninstallExtension();
 						break;
 				}
 				break;
@@ -290,6 +293,7 @@ class FormManagement
 
 
 		if (!$processError) {
+			// TODO make the array repect the output format of ScriptFormatting->commandFormatting
 			$script = array(
 				"website context name " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 				"add user "
@@ -676,4 +680,93 @@ class FormManagement
 
 		return $retResp;
 	}
+
+	
+	/**
+	 * Extension installation process
+	 * 
+	 * @return void
+	 */
+	private function installExtension()
+	{
+		$bts = BaseToolSet::getInstance();
+
+		$name = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'ext_name');
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Installing extension : '" . $name . "'"));
+
+		$this->scanExtensionDirectory("/_install/script/");
+		$dbType = $bts->CMObj->getConfigurationEntry('type');
+		$this->scanExtensionDirectory("/_install/db_tables/" . $dbType . "/");
+	}
+
+
+	/**
+	 * Extension uninstallation process
+	 * 
+	 * @return void
+	 */
+	private function uninstallExtension()
+	{
+
+	}
+
+	/**
+	 * Scan extension directory and execute the content found.
+	 * 
+	 * @param mixed $subDirectory
+	 * @return void
+	 */
+	private function scanExtensionDirectory($subDirectory)
+	{
+		$bts = BaseToolSet::getInstance();
+
+		$name = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'ext_name');
+		$ext_dir = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'ext_directory');
+
+		$path = "extensions/" . $ext_dir . $subDirectory;
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Opening path : '" . $path . "'"));
+		$handle = opendir($path);
+		if ($handle != false) {
+			while (false !== ($file = readdir($handle))) {
+				if ($file != "." && $file != ".." && is_file($path . $file)) {
+					$ClassLoaderObj = ClassLoader::getInstance();
+					$ClassLoaderObj->provisionClass('LibContentExec');
+					$LibContentExecObj = LibContentExec::getInstance();
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : found a script '" . $file . "'"));
+
+					$filePackage = array(
+						"section" => $path,
+						"path" => $path,
+						"currentFileName" => $file,
+						"currentFileContent" => file($path . $file),
+						"currentTableName" => str_replace(".sql", "", $file),
+					);
+
+					// $filePackage = $this->prepareScriptFile($filePackage);
+
+					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : script content : '" . $filePackage['currentFileContent'] . "'"));
+					switch ($subDirectory) {
+						case "/_install/script/":
+							// Command script
+							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : script content : '" . $bts->StringFormatObj->print_r_debug($filePackage) . "'"));
+							// $this->runCommandScript($filePackage['currentFileContent']);
+							$report = $LibContentExecObj->methodCommand($filePackage);
+							break;
+						case "/_install/db_tables/mysql/":
+						case "/_install/db_tables/pgsql/":
+						case "/_install/db_tables/db2/":
+							// SQL script
+							// $this->methodRawSql($filePackage);
+							$report = $LibContentExecObj->methodAssistedSqlFile($filePackage);
+							break;
+					}
+				}
+			}
+		} else {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Couldn't open directory '" . $path . "' or directory empty"));
+		}
+	}
+
+
+
 }

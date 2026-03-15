@@ -803,6 +803,20 @@ self::$InitTable['document'] = function (&$a) {
 	);
 };
 
+
+self::$InitTable['extension'] = function (&$a) {
+	$a['params'] = array(
+		"id"				=> "",
+		"site"				=> $a['Context']['ws_id'],
+		"name"				=> "NewExtension",
+		"version"			=> "1.0",
+		"author"			=> "me",
+		"class"				=> "NewExtension",
+		"directory"			=> "NewExtension",
+	);
+};
+
+
 self::$InitTable['group'] = function (&$a) {
 	$a['params'] = array(
 		"name" => "NewGroup",

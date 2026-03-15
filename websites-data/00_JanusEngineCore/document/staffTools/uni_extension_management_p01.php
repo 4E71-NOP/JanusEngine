@@ -34,125 +34,113 @@ $bts->mapSegmentLocation(__METHOD__, "uni_extension_management_p01");
 $bts->I18nTransObj->getI18nTransFromDB("uni_extension_management");
 $bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_extension_management_p01_");
 
-$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1')."<br>\r<br>\r";
+$Content .= $bts->I18nTransObj->getI18nTransEntry('invite1') . "<br>\r<br>\r";
 
 // --------------------------------------------------------------------------------------------
-$bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupTag=" . $CurrentSetObj->UserObj->getUserEntry('group_tag') ));
+$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : GroupTag=" . $CurrentSetObj->UserObj->getUserEntry('group_tag')));
 
 // Will be replaced by a proper user permission management.
 $permissionOnExtenssion = 0;
 $groupList = $CurrentSetObj->UserObj->getGroupList();
 // $bts->LMObj->msgLog ( array ('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ ." : GroupList=" . $bts->StringFormatObj->arrayToString($groupList) ));
-foreach ($groupList as $A) { if ( $A['group_tag'] == 3) { $permissionOnExtenssion = 1; } }
+foreach ($groupList as $A) {
+	if ($A['group_tag'] == 3) {
+		$permissionOnExtenssion = 1;
+	}
+}
 
-
-if ( $permissionOnExtenssion == 1 ) {
+if ($permissionOnExtenssion == 1) {
 	$extensionList = array();
 	$extensions_ = array();
 	$handle = opendir("extensions/");
 	while (false !== ($file = readdir($handle))) {
-		if ( $file != "." && $file != ".." && !is_file("extensions/".$file)  ) { $extensionList[] = $file; }
+		if ($file != "." && $file != ".." && !is_file("extensions/" . $file)) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : found extension '" . $file . "'"));
+			$extensionList[] = $file;
+		}
 	}
 
-	unset ( $A );
+	unset($A);
 	$i = 0;
-	foreach ( $extensionList as $A ) {
-		$B = "extensions/".$A."/extension_config.php";
-		if ( file_exists ($B) ) { include ($B); }
-		else {
-			$extensions_['donnees'][$i]['introuvable'] = 1;
-			$extensions_['donnees'][$i]['repertoire_vide'] = $A;
+	foreach ($extensionList as $A) {
+		$B = "extensions/" . $A . "/extension_config.php";
+		if (file_exists($B)) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading file '" . $B . "'"));
+			include($B);
+			if (is_array($extension_info)) {
+				$extensions_['data'][$i] = $extension_info;
+				$extensions_['data'][$i]['ext_directory'] = $A;
+				$extensions_['data'][$i]['command'] = "installExtension";
+			}
+		} else {
+			$extensions_['data'][$i]['notFound'] = 1;
 		}
 		$i++;
 	}
 
-	unset ( $A );
-	foreach ( $extensions_['donnees'] as &$A ) {
-		if ( $A['introuvable'] != 1 ) {
+	unset($A);
+	foreach ($extensions_['data'] as &$A) {
+		if ($A['notFound'] != 1) {
 			$dbquery = $bts->SDDMObj->query("
-			SELECT ext.* 
-			FROM ".$SqlTableListObj->getSQLTableName('extension')." ext 
-			WHERE ext.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND ext.extension_name = '".$A['extension_name']."'
+			SELECT e.* 
+			FROM " . $SqlTableListObj->getSQLTableName('extension') . " e 
+			WHERE e.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
+			AND e.ext_name = '" . $A['ext_name'] . "'
 			;");
-			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) { $A['extension_etat'] = 1; }
+			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+				$A['ext_state'] = 1;
+				$A['commmand'] = "uninstallExtension";
+			}
 		}
 	}
 
-	unset ( $A );
+	unset($A);
 	$i = 1;
-	$T['Content']['1'][$i]['1']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
-	$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
-	$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
-	$T['Content']['1'][$i]['4']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_4_txt');
-	$T['Content']['1'][$i]['5']['cont']	= $bts->I18nTransObj->getI18nTransEntry('col_5_txt');
-	foreach ( $extensions_['donnees'] as $A ) {
-		if ( $A['introuvable'] != 1 ) {
+	$T['Content']['1'][$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_1_txt');
+	$T['Content']['1'][$i]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_2_txt');
+	$T['Content']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('col_3_txt');
+	foreach ($extensions_['data'] as $A) {
+		$cell2 = "";
+		if ($A['notFound'] != 1) {
 			$i++;
-			$T['Content']['1'][$i]['1']['cont'] = $A['extension_name'];
-			$T['Content']['1'][$i]['2']['cont'] = $A['extension_version'];
-			$T['Content']['1'][$i]['3']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tab1'.$A['extension_etat']);
-			
-			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-				$infos , 'submit', 
-				$bts->I18nTransObj->getI18nTransEntry('tab2'.$A['extension_etat']), 64, 
-				'installButton', 
-				1, 1, 
-				"" 
-			);
-			
-			$T['Content']['1'][$i]['4']['style']	= "padding:16px";
-			$T['Content']['1'][$i]['4']['cont']		= "
-			<form ACTION='index.php?' method='post' name='installForm01'>\r
-			<input type='hidden' name='M_EXTENS[extension_name]'		value='".$A['extension_name']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_directory]'	value='".$A['extension_directory']."'>\r
-			<input type='hidden' name='M_EXTENS[extension_requete]'		value='Installer'>\r
-			<input type='hidden' name='uni_gestion_des_extensions_p'	value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r
-			". $bts->InteractiveElementsObj->renderSubmitButton($SB).
-			"</form>\r";
-
-			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-				$infos , 'submit', 
-				$bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']), 64, 
-				'deleteButton', 
-				2, 2, 
-				"" 
-			);
-
-			$T['Content']['1'][$i]['5']['style']	= "padding:16px";
-			$T['Content']['1'][$i]['5']['cont']		= "<form ACTION='index.php?' method='post' name='Form01'>\r"
-			."<input type='hidden' name='formGenericData[origin]'		value='AdminDashboard".$processStep."'>\r"
-			."<input type='hidden' name='formGenericData[section]'		value='AdminExtensionManagementP02'>"
-			."<input type='hidden' name='formCommand1'					value='".$commandType."'>"
-			."<input type='hidden' name='formEntity1'					value='entity'>"
-			."<input type='hidden' name='formTarget1[name]'				value='".$A['extension_name']."'>\r"
-			."<input type='hidden' name='formGenericData[mode]'			value='".$processTarget."'>\r"
-			."<input type='hidden' name='formGenericData[selectionId]'	value='".$bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'selectionId')."'>\r"
-			. $bts->InteractiveElementsObj->renderSubmitButton($SB).
-			"</form>\r";
+			$T['Content']['1'][$i]['1']['cont'] = $A['ext_name'];
+			$T['Content']['1'][$i]['2']['cont'] = $A['ext_version'];
 		}
-		if ( $A['extension_etat'] == 1 ) {
-			$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-				$infos , 'submit', 
-				$bts->I18nTransObj->getI18nTransEntry('tab3'.$A['extension_etat']), 64, 
-				'deleteButton', 
-				3, 3, 
-				"" 
-			);
+		$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+			$infos,
+			'submit',
+			$bts->I18nTransObj->getI18nTransEntry('state' . $A['ext_state']),
+			128,
+			($A['ext_state'] == 0) ? "enableButton" . $A['ext_name'] : "disableButton" . $A['ext_name'],
+			($A['ext_state'] == 0) ? 1 : 3,
+			($A['ext_state'] == 0) ? 1 : 3,
+			""
+		);
 
-			$T['Content']['1'][$i]['5']['cont']		= 
-			"<form ACTION='index.php?' method='post' name='Form01'>\r"
-			."<input type='hidden' name='formGenericData[origin]'				value='AdminDashboard".$processStep."'>\r"
-			."<input type='hidden' name='formGenericData[section]'				value='AdminExtensionManagementP02'>"
-			."<input type='hidden' name='formCommand1'							value='".$commandType."'>"
-			."<input type='hidden' name='formGenericData[extension_directory]'	value='".$A['extension_directory']."'>\r"
-			."<input type='hidden' name='formGenericData[extension_requete]'	value='Retirer'>\r"
-			."<input type='hidden' name='uni_gestion_des_extensions_p'			value='".$_REQUEST['uni_gestion_des_modules_p']."'>\r"
-			.$bts->InteractiveElementsObj->renderSubmitButton($SB)
-			."</form>\r";
+		if ($A['ext_state'] == 1) {
+			$cell2 = "<td>\r"
+			. $bts->RenderFormObj->renderCheckbox("formGenericData[totalCleanup]", 0, $bts->I18nTransObj->getI18nTransEntry('totalCleanup'))
+			."</td>\r";
 		}
+
+		$T['Content']['1'][$i]['3']['cont'] = "<table class='mt_bareTable'>\r<tr>\r<td>\r"
+			. $bts->RenderFormObj->renderformHeader('WebsiteForm')
+			. $bts->RenderFormObj->renderHiddenInput("formSubmitted",					"1")
+			. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",			"AdminDashboard")
+			. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]",		"AdminExtensionManagement")
+			. $bts->RenderFormObj->renderHiddenInput("formGenericData[action]",			$A['command'])
+			. $bts->RenderFormObj->renderHiddenInput("formGenericData[ext_name]",		$A['ext_name'])
+			. $bts->RenderFormObj->renderHiddenInput("formGenericData[ext_directory]",	$A['ext_directory'])
+			. $bts->InteractiveElementsObj->renderSubmitButton($SB)
+			. "</form>\r"
+			. "</td>\r"
+			. $cell2 
+			. "</tr>\r"
+			. "</table>\r"
+			;
+
 	}
-	
+
 	// --------------------------------------------------------------------------------------------
 	//
 	//	Display
@@ -161,11 +149,12 @@ if ( $permissionOnExtenssion == 1 ) {
 	// --------------------------------------------------------------------------------------------
 	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
 	$T['ContentCfg']['tabs'] = array(
-			1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,5,1),
+		1 => $bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 	);
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
+} else {
+	$Content .= "!!!!!!!!!!!!!!!!";
 }
-else { $Content .= "!!!!!!!!!!!!!!!!"; }
 
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/

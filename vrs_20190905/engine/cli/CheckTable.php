@@ -294,6 +294,13 @@ self::$CheckTable['assign']['document']['1']['p']	= "article";
 self::$CheckTable['assign']['document']['1']['s']	= "to_article";
 
 
+// Extension
+self::$CheckTable['add']['extension']['0']['d'] = 3;
+self::$CheckTable['add']['extension']['0']['f'] = function ($a) {return array("SELECT e.ext_id FROM " . $a['sqlTables']['extension'] . " e WHERE e.ext_name = '" . $a['params']['name'] . "' AND e.fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
+self::$CheckTable['add']['extension']['0']['m'] = "CLI_extension_C001";
+self::$CheckTable['add']['extension']['0']['s'] = "name";
+
+
 // Group
 self::$CheckTable['add']['group']['0']['d'] = 3;
 self::$CheckTable['add']['group']['0']['f'] = function ($a) {return array("SELECT grp.group_id FROM " . $a['sqlTables']['group'] . " grp , " . $a['sqlTables']['group_website'] . " sg , " . $a['sqlTables']['website'] . " ws WHERE grp.group_name = '" . $a['params']['name'] . "' AND grp.group_id = sg.fk_group_id AND sg.fk_ws_id = ws.ws_id AND ws.ws_id = '" . $a['Context']['ws_id'] . "';");};

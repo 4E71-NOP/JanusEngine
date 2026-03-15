@@ -126,6 +126,7 @@ class ClassLoader
 
 		"CommandConsole"			=> "current/engine/cli/CommandConsole.php",
 
+		"LibContentExec"			=> _UTILITY_DIRECTORY_ . "LibContentExec.php",
 		"LibInstallation"			=> _UTILITY_DIRECTORY_ . "LibInstallation.php",
 		"LibInstallationReport"		=> _UTILITY_DIRECTORY_ . "LibInstallationReport.php",
 	);

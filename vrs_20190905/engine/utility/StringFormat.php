@@ -431,7 +431,7 @@ class StringFormat
 	 * @param string $expr
 	 * @return string
 	 */
-	public function ConvertToHtml($expr)
+	public function convertToHtml($expr)
 	{
 		return htmlentities($expr);
 	}
@@ -489,4 +489,22 @@ class StringFormat
 			}
 		}
 	}
+
+	/**
+	 * Returns a single concatenated variable from an array.
+	 * 
+	 * @param mixed $input
+	 * @return string
+	 */
+	public function arrayConcatenation($input)
+	{
+		$Tmp = "";
+		foreach ($input as $L => $C) {
+			$Tmp .= $C;
+		}
+		return $Tmp;
+	}
+
+
+	
 }

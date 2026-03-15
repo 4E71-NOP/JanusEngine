@@ -1,0 +1,4 @@
+site_context site "*website*" user "*user_install*"	password "*user_install*";
+
+add extension name "Simple extension"	author "Janus"	author_website "janus-engine.com"	version "2026-03-12"	class_exec "ExtSimpleExtension";
+add extension_file	extension "Simple extension"	generic_name "SimpleExtensionMainFile"	file "program/ExtSimpleExtension.php";

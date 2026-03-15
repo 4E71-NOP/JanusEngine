@@ -194,6 +194,22 @@ self::$PreRequisiteTable['add']['document'] = array(
 );
 
 
+self::$PreRequisiteTable['add']['extension'] = array(
+	"nextId" => array(
+		array("table" => "",				"column" => "ext_id",			"target" => "id"),
+	),
+	"columns" => array(
+		array("v" => "id",			"t" => "ext_id"),
+		array("v" => "site",		"t" => "fk_ws_id"),
+		array("v" => "name",		"t" => "ext_name"),
+		array("v" => "version",		"t" => "ext_version"),
+		array("v" => "author",		"t" => "ext_author"),
+		array("v" => "class",		"t" => "ext_class"),
+		array("v" => "directory",	"t" => "ext_directory"),
+	),
+);
+
+
 self::$PreRequisiteTable['add']['group'] = array(
 	"convert" => array(
 		array("v" => "tag",			"s" => "group"),

@@ -140,6 +140,7 @@ class ScriptFormatting {
 		if ($err == 1) { $Dest[$idx]['Ordre'] = 1; }
 	}
 	
+	// TODO clean up
 	/**
 	 * 
 	 * Extract sql commands

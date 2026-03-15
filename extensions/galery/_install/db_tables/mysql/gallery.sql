@@ -4,12 +4,12 @@
 /* Clefs etrangeres   																												*/ 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-CREATE TABLE !table! (
+CREATE TABLE !table! IF NOT EXISTS (
 gal_id			INTEGER NOT NULL,
 gal_file		VARCHAR(255),
-gal_size		VARCHAR(7),
-gal_date		INTEGER,
-gal_render_time	VARCHAR(255),
+gal_size		BIGINT,
+gal_date		DATE,
+gal_render_time	BIGINT,
 gal_data		BLOB,
 PRIMARY KEY (gal_id)
 );

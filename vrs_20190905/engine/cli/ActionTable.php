@@ -65,6 +65,8 @@ self::$ActionTable['add']['group'] = function (&$a) { return array(
 	); 
 };
 
+self::$ActionTable['add']['extension']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['extension'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
+
 self::$ActionTable['add']['keyword']		= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['keyword'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
 
 self::$ActionTable['add']['layout']			= function (&$a) { return array("INSERT INTO " . $a['sqlTables']['layout'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");"); };
@@ -207,16 +209,16 @@ self::$ActionTable['disable']['article']				= function (&$a) { return array("UPD
 self::$ActionTable['disable']['article_config']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config']		. " SET config_state=0		WHERE config_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['deadline']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['deadline']				. " SET deadline_state=0 	WHERE deadline_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['document']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']				. " SET docu_state=0		WHERE docu_id = '"			. $a['params']['id'] . "';"); };
-self::$ActionTable['disable']['group']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']					. " SET group_state=0		WHERE group_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['group']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']				. " SET group_state=0		WHERE group_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['keyword']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['keyword']				. " SET keyword_state=0		WHERE keyword_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['layout']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout']				. " SET layout_state=0		WHERE layout_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['layout_file']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout_file']			. " SET layout_file_state=0	WHERE layout_file_id = '"	. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['menu']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['menu']					. " SET menu_state=0		WHERE menu_id = '"			. $a['params']['id'] . "';"); };
-//self::$ActionTable['disable']['module']				= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']						." SET module_state=0		WHERE module_id = '"		.$a['params']['id']."';"); };
+//self::$ActionTable['disable']['module']				= function (&$a) { return array ("UPDATE ".$a['sqlTables']['module']					." SET module_state=0		WHERE module_id = '"		.$a['params']['id']."';"); };
 self::$ActionTable['disable']['permission']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['permission']			. " SET permission_state=0	WHERE permission_id = '"	. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['user_profile_element']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['user_profile_element']	. " SET upe_state=0			WHERE upe_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['tag']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['tag']					. " SET tag_state=0			WHERE tag_id = '"			. $a['params']['id'] . "';"); };
-self::$ActionTable['disable']['theme']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']					. " SET theme_state=0		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['disable']['theme']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']				. " SET theme_state=0		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['translation']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['translation']			. " SET translation_state=0	WHERE translation_id = '"	. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['user']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['user']					. " SET user_state=0		WHERE user_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['disable']['website']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['website']				. " SET ws_state=0			WHERE ws_id = '"			. $a['params']['id'] . "';"); };
@@ -226,10 +228,10 @@ self::$ActionTable['disable']['website']				= function (&$a) { return array("UPD
 //	Delete state=>2
 //--------------------------------------------------------------------------------
 self::$ActionTable['delete']['article']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['article']				. " SET article_state=2		WHERE article_id = '"		. $a['params']['id'] . "';"); };
-self::$ActionTable['delete']['article_config']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config'		] 	. " SET config_state=2		WHERE config_id = '"		. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['article_config']			= function (&$a) { return array("UPDATE " . $a['sqlTables']['article_config'] 		. " SET config_state=2		WHERE config_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['deadline']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['deadline']				. " SET deadline_state=2 	WHERE deadline_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['document']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']				. " SET docu_state=2		WHERE docu_id = '"			. $a['params']['id'] . "';"); };
-self::$ActionTable['delete']['group']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']					. " SET group_state=2		WHERE group_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['group']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['group']				. " SET group_state=2		WHERE group_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['keyword']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['keyword']				. " SET keyword_state=2		WHERE keyword_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['layout']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout']				. " SET layout_state=2		WHERE layout_id = '"		. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['layout_file']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['layout_file']			. " SET layout_file_state=2	WHERE layout_file_id = '"	. $a['params']['id'] . "';"); };
@@ -238,7 +240,7 @@ self::$ActionTable['delete']['menu']					= function (&$a) { return array("UPDATE
 self::$ActionTable['delete']['permission']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['permission']			. " SET permission_state=2	WHERE permission_id = '"	. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['user_profile_element']	= function (&$a) { return array("UPDATE " . $a['sqlTables']['user_profile_element']	. " SET upe_state=0			WHERE upe_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['tag']						= function (&$a) { return array("UPDATE " . $a['sqlTables']['tag']					. " SET tag_state=2			WHERE tag_id = '"			. $a['params']['id'] . "';"); };
-self::$ActionTable['delete']['theme']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']					. " SET theme_state=2		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
+self::$ActionTable['delete']['theme']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['theme']				. " SET theme_state=2		WHERE theme_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['translation']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['translation']			. " SET translation_state=2	WHERE translation_id = '"	. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['user']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['user']					. " SET user_state=2		WHERE user_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['website']					= function (&$a) { return array("UPDATE " . $a['sqlTables']['website']				. " SET ws_state=2			WHERE ws_id = '"			. $a['params']['id'] . "';"); };
