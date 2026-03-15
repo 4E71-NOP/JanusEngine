@@ -140,25 +140,6 @@ class ScriptFormatting {
 		if ($err == 1) { $Dest[$idx]['Ordre'] = 1; }
 	}
 	
-	// TODO clean up
-	/**
-	 * 
-	 * Extract sql commands
-	 * 
-	 */
-	// private function rawSqlExtraction (&$infos) {
-	// 	$Map = &$infos['TabAnalyse'];
-	// 	$Buffer = &$infos['currentFileContent'];
-	// 	$Dest = &$infos['FormattedCommand'];
-
-	// 	// 99993
-	// 	foreach ( $Map as $K => $A ) {
-	// 	}
-	// }
-	
-	//@formatter:off
-	//@formatter:on
-	
 	
 }
 ?>

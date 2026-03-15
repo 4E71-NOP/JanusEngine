@@ -1,4 +1,3 @@
-site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
+website context name "*website*" user "*user_install*"	password "*user_install*";
 
 delete extension name "Simple extension";
-delete extension_file	generic_name "SimpleExtensionMainFile";

@@ -817,6 +817,17 @@ self::$InitTable['extension'] = function (&$a) {
 };
 
 
+self::$InitTable['extension_file'] = function (&$a) {
+	$a['params'] = array(
+		"id"				=> "",
+		"extension"			=> "NewExtension",
+		"generic_name"		=> "NewExtensionFile",
+		"file"				=> "",
+	);
+};
+
+
+
 self::$InitTable['group'] = function (&$a) {
 	$a['params'] = array(
 		"name" => "NewGroup",

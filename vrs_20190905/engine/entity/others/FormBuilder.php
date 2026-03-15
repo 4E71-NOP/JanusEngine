@@ -48,7 +48,7 @@ class FormBuilder {
 					$ptr .= $bts->RenderFormObj->renderRadioSelection($A['name'], $A['value'], $A['text']);
 					break;
 				case 'checkbox':
-					$ptr .= $bts->RenderFormObj->renderCheckbox($A['idAndName'], $A['value'], $A['text'], $A['checked'], $A['disabled'], $A['onclik']);
+					$ptr .= $bts->RenderFormObj->renderCheckbox($A['idAndName'], $A['text'], $A['value'], $A['checked'], $A['disabled'], $A['onclik']);
 					break;
 				case 'menuSelect':
 					$ptr .= $bts->RenderFormObj->renderMenuSelect($A['data']);

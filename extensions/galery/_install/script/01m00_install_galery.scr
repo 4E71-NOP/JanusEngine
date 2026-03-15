@@ -1,8 +1,4 @@
-site_context site "*website*" user "*user_install*"	password "*user_install*";
-
-set checkpoint name "Galery install - Begin";
+website context name "*website*" user "*user_install*"	password "*user_install*";
 
 add extension name "Gallery"	author "Tex"	author_website "janus-engine.com"	version "2026-03-12"	class_exec "ExtGallery";
 add extension_file	extension "Gallery"	generic_name "galleryMainFile"	file "program/ExtGallery.php";
-
-set checkpoint name "Galery install - End";

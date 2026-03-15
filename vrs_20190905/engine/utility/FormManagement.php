@@ -707,6 +707,20 @@ class FormManagement
 	 */
 	private function uninstallExtension()
 	{
+		$bts = BaseToolSet::getInstance();
+
+		$name = $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'ext_name');
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Uninstalling extension : '" . $name . "'"));
+
+		$this->scanExtensionDirectory("/_uninstall/script/");
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : totalCleanup = '" . $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'totalCleanup') . "'"));
+
+
+		if ( $bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'totalCleanup') == 'on') {
+			$dbType = $bts->CMObj->getConfigurationEntry('type');
+			$this->scanExtensionDirectory("/_uninstall/db_tables/" . $dbType . "/");
+		}
 
 	}
 
@@ -744,19 +758,19 @@ class FormManagement
 
 					// $filePackage = $this->prepareScriptFile($filePackage);
 
-					$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : script content : '" . $filePackage['currentFileContent'] . "'"));
 					switch ($subDirectory) {
 						case "/_install/script/":
+						case "/_uninstall/script/":
 							// Command script
-							$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : script content : '" . $bts->StringFormatObj->print_r_debug($filePackage) . "'"));
-							// $this->runCommandScript($filePackage['currentFileContent']);
 							$report = $LibContentExecObj->methodCommand($filePackage);
 							break;
 						case "/_install/db_tables/mysql/":
 						case "/_install/db_tables/pgsql/":
 						case "/_install/db_tables/db2/":
+						case "/_uninstall/db_tables/mysql/":
+						case "/_uninstall/db_tables/pgsql/":
+						case "/_uninstall/db_tables/db2/":
 							// SQL script
-							// $this->methodRawSql($filePackage);
 							$report = $LibContentExecObj->methodAssistedSqlFile($filePackage);
 							break;
 					}

@@ -196,7 +196,7 @@ self::$PreRequisiteTable['add']['document'] = array(
 
 self::$PreRequisiteTable['add']['extension'] = array(
 	"nextId" => array(
-		array("table" => "",				"column" => "ext_id",			"target" => "id"),
+		array("table" => "extension",				"column" => "ext_id",			"target" => "id"),
 	),
 	"columns" => array(
 		array("v" => "id",			"t" => "ext_id"),
@@ -206,6 +206,19 @@ self::$PreRequisiteTable['add']['extension'] = array(
 		array("v" => "author",		"t" => "ext_author"),
 		array("v" => "class",		"t" => "ext_class"),
 		array("v" => "directory",	"t" => "ext_directory"),
+	),
+);
+
+
+self::$PreRequisiteTable['add']['extension_file'] = array(
+	"nextId" => array(
+		array("table" => "extension_file",				"column" => "ext_id",			"target" => "id"),
+	),
+	"columns" => array(
+		array("v" => "id",				"t" => "extfil_id"),
+		array("v" => "fk_ext_id",		"t" => "fk_ext_id"),
+		array("v" => "generic_name",	"t" => "extfil_generic_name"),
+		array("v" => "file",			"t" => "extfil_file"),
 	),
 );
 
@@ -690,6 +703,8 @@ self::$PreRequisiteTable['assign']['user'] = array(
 );
 
 
+self::$PreRequisiteTable['delete']['extension'] = &self::$PreRequisiteTable['add']['extension'];
+
 
 //--------------------------------------------------------------------------------
 //	Insert
@@ -798,6 +813,10 @@ self::$PreRequisiteTable['website']['context'] = array(
 		if ($a['params']['password'] == "*user_install*") {
 			$a['params']['password'] = $a['Initiator']['db_pass'];
 		}
+		if ($a['params']['name'] == "*website*") {
+			$a['params']['name'] = $a['Initiator']['ws_name'];
+		}
+
 		$a['params']['password'] = hash("sha512", stripslashes($a['params']['password']));
 	},
 );

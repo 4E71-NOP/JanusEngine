@@ -32,7 +32,7 @@ class SddmTools {
 		switch ($bts->CMObj->getConfigurationEntry ( 'execution_context')) {
 			case "admin_menu" :
 			case "Admin_menu" :
-			case "Extension_installation" :
+			// case "Extension_installation" :
 			case "Rendu" :
 			case "render" :
 			default :

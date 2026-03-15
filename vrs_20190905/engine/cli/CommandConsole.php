@@ -49,17 +49,8 @@ class CommandConsole
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$l = $bts->CMObj->getLanguageListSubEntry($CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');
-		// if ($bts->CMObj->getConfigurationEntry('execution_context') == "installation") {
-		// 	$l = "eng"; // Fallback
-		// }
-
-		// $i18n = array();
-		// include ("current/engine/cli/i18n/".$l.".php");
-		// $bts->I18nTransObj->apply($i18n);
 		$langFile = "current/engine/cli/i18n/" . $l . ".php";
 		$bts->I18nTransObj->apply(array("type" => "file", "file" => $langFile, "format" => "php"));
-
-
 		unset($i18n);
 	}
 
@@ -228,10 +219,10 @@ class CommandConsole
 	/**
 	 * Do tests based on a specific list chosen with the type of command and entity (article, group, etc.).
 	 * 
-	 * Directive = 1 : Return the data in a variable. No error message.
-	 * Directive = 2 : Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
-	 * Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
-	 * Directive = 4 : Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
+	 * Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in a variable. No error message.
+	 * Directive = 2 : _RETURN__DATA_AND_ERROR_		/ Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
+	 * Directive = 3 : _FIND_DUPLICATE_				/ Test if a duplicate exists. If 1 line is returned it raises an error.
+	 * Directive = 4 : _EXECUTE_FUNCTION_			/ Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
 	 * 
 	 * Info on directive 1,2,3 : $af returning -1 means the called function tells us there is nothing relevant to do.
 	 * 
@@ -261,7 +252,7 @@ class CommandConsole
 					$af = $A['f'];
 					switch ($A['d']) {
 							// Directive = 1 : Return the data in a variable. No error message.
-						case 1:
+						case _RETURN_DATA_ONLY_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
 								$dbquery = $bts->SDDMObj->query($q['0']);
@@ -273,7 +264,7 @@ class CommandConsole
 							}
 							break;
 							// Directive = 2 : Return the data in a variable. If an error occurs, a message is stored and a flag is set.
-						case 2:
+						case _RETURN__DATA_AND_ERROR_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
 								$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : " . $q['0']));
@@ -293,7 +284,7 @@ class CommandConsole
 							}
 							break;
 							// Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
-						case 3:
+						case _FIND_DUPLICATE_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
 								$dbquery = $bts->SDDMObj->query($q['0']);
@@ -307,7 +298,7 @@ class CommandConsole
 							}
 							break;
 							// Directive = 4 : Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
-						case 4:
+						case _EXECUTE_FUNCTION_:
 							$result = $af($CCL);
 							if ($result == 0) {
 								$CCL['errFlag'] = 1;
@@ -507,6 +498,7 @@ class CommandConsole
 					// "user_name"	=> $UserObj->getUserEntry('nom'),
 					"db_login"	=> $TabConfig['db_user_login'],
 					"db_pass"	=> $TabConfig['db_user_password'],
+					"ws_name"	=> $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
 				);
 
 				$this->commandInitialization($CCL);

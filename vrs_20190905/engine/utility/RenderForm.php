@@ -302,17 +302,17 @@ class  RenderForm
 	 * @param string $onclik
 	 * @return string
 	 */
-	public function renderCheckbox($idAndName, $value, $text, $checked = false, $disabled = false, $onclik = '')
+	public function renderCheckbox($idAndName, $text, $value = '', $checked = false, $disabled = false, $onclik = '')
 	{
 		$content = false;
-		if (strlen($idAndName ?? '') > 0 && strlen($value ?? '') > 0 && strlen($text ?? '') > 0) {
+		if (strlen($idAndName ?? '') > 0 && strlen($text ?? '') > 0) {
 			$content =
-				"<input type='checkbox' id='" . $idAndName . "' name='" . $idAndName . "' " .
-				(($checked == true) ? "checked " : "") .
-				(($disabled == true) ? "disabled='disabled " : "") .
-				((strlen($onclik ?? '') > 0) ? "onclick='" . $onclik . "'" : "") .
-				"value='" . $value . "'
-			>\r
+				"<input type='checkbox' id='" . $idAndName . "' name='" . $idAndName . "' "
+				. (($checked == true) ? "checked " : "")
+				. (($disabled == true) ? "disabled='disabled " : "")
+				. ((strlen($onclik ?? '') > 0) ? "onclick='" . $onclik . "' " : "")
+				. ((strlen($value ?? '') > 0) ? "value='" . $value . "' " : "")
+				. ">\r
 			<label for='" . $idAndName . "'>" . $text . "</label> <br>\r";
 		}
 		return $content;

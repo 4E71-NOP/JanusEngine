@@ -1,4 +1,4 @@
-site_context site "*website*" user "*utilisateur_install*"	password "*utilisateur_install*";
+website context name "*website*" user "*user_install*"	password "*user_install*";
 
 delete extension 		name "Gallery";
 delete extension_file	generic_name "galleryMainFile";

@@ -65,7 +65,7 @@ if ($permissionOnExtenssion == 1) {
 	foreach ($extensionList as $A) {
 		$B = "extensions/" . $A . "/extension_config.php";
 		if (file_exists($B)) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : loading file '" . $B . "'"));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : found extension file '" . $B . "'"));
 			include($B);
 			if (is_array($extension_info)) {
 				$extensions_['data'][$i] = $extension_info;
@@ -87,9 +87,10 @@ if ($permissionOnExtenssion == 1) {
 			WHERE e.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
 			AND e.ext_name = '" . $A['ext_name'] . "'
 			;");
-			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
+			if ($bts->SDDMObj->num_row_sql($dbquery) > 0) {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : found extension occurence in DB '" . $A['ext_name'] . "'"));
 				$A['ext_state'] = 1;
-				$A['commmand'] = "uninstallExtension";
+				$A['command'] = "uninstallExtension";
 			}
 		}
 	}
@@ -119,7 +120,7 @@ if ($permissionOnExtenssion == 1) {
 
 		if ($A['ext_state'] == 1) {
 			$cell2 = "<td>\r"
-			. $bts->RenderFormObj->renderCheckbox("formGenericData[totalCleanup]", 0, $bts->I18nTransObj->getI18nTransEntry('totalCleanup'))
+			. $bts->RenderFormObj->renderCheckbox("formGenericData[totalCleanup]", $bts->I18nTransObj->getI18nTransEntry('totalCleanup'))
 			."</td>\r";
 		}
 
@@ -132,10 +133,10 @@ if ($permissionOnExtenssion == 1) {
 			. $bts->RenderFormObj->renderHiddenInput("formGenericData[ext_name]",		$A['ext_name'])
 			. $bts->RenderFormObj->renderHiddenInput("formGenericData[ext_directory]",	$A['ext_directory'])
 			. $bts->InteractiveElementsObj->renderSubmitButton($SB)
-			. "</form>\r"
 			. "</td>\r"
 			. $cell2 
 			. "</tr>\r"
+			. "</form>\r"
 			. "</table>\r"
 			;
 
