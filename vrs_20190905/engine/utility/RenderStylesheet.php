@@ -378,10 +378,12 @@ html { width:100%; height:100%;}\r\r
 		//form
 		$list= array( "fg_col",	"bg_col",	"special");
 		$str = $this->testAndRenderCssStyle("input", $list, $p);
-		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=text]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
-		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"input[type=password]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
-		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"select",	"{".$str."}");}
-		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",				"textarea",	"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",					"input[type=text]",		"{font-family:".$p['txt_font_family']."; ".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",					"input[type=password]",	"{font-family:".$p['txt_font_family']."; ".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"_CheckboxLabel",	"",						"{height:2em; display: grid; grid-template-columns: 1cm auto; gap 0.25cm;}");} 
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",					"input[type=checkbox]",	"{transform: scale(1);}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",					"select",				"{".$str."}");}
+		if ( strlen($str ?? '') > 0 ) { $Content .= $this->makeCssSelectorList ($infos, $infos['currentBlock'],	"T",	"",					"textarea",				"{".$str."}");}
 		
 		// code
 		$list= array( "font",	"fg_col",	"bg_col",	"mrg_top",	"mrg_bottom",	"mrg_left",	"mrg_right",	"pad_top",	"pad_bottom",	"pad_left",	"pad_right", "special" ); 

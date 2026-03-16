@@ -119,9 +119,8 @@ if ($permissionOnExtenssion == 1) {
 		);
 
 		if ($A['ext_state'] == 1) {
-			$cell2 = "<td>\r"
-			. $bts->RenderFormObj->renderCheckbox("formGenericData[totalCleanup]", $bts->I18nTransObj->getI18nTransEntry('totalCleanup'))
-			."</td>\r";
+			$arr = $bts->RenderFormObj->getCheckboxArray('formGenericData[totalCleanup]', $bts->I18nTransObj->getI18nTransEntry('totalCleanup'), $infos['block']);
+			$cell2 = "<td>\r" . $bts->RenderFormObj->renderCheckbox($arr) . "</td>\r";
 		}
 
 		$T['Content']['1'][$i]['3']['cont'] = "<table class='mt_bareTable'>\r<tr>\r<td>\r"

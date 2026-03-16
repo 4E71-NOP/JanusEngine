@@ -170,25 +170,41 @@ $T['Content'][$Tab]['4']['2']['cont'] .= "</select>\r";
 
 $wsdbg = $WebSiteObj->getWebSiteEntry('ws_info_debug');
 $arrayDbg = array(
-		2 => (($wsdbg & 2 ) != 0 ) ? "checked":"", 
-		3 => (($wsdbg & 4 ) != 0 ) ? "checked":"", 
-		4 => (($wsdbg & 8 ) != 0 ) ? "checked":"", 
-		5 => (($wsdbg & 16 ) != 0 ) ? "checked":"", 
-		6 => (($wsdbg & 32 ) != 0 ) ? "checked":"", 
-		7 => (($wsdbg & 16384 ) != 0 ) ? "checked":"", 
-		8 => (($wsdbg & 32768 ) != 0 ) ? "checked":"", 
+	2 => (($wsdbg & 2) != 0) ? "checked" : "",
+	3 => (($wsdbg & 4) != 0) ? "checked" : "",
+	4 => (($wsdbg & 8) != 0) ? "checked" : "",
+	5 => (($wsdbg & 16) != 0) ? "checked" : "",
+	6 => (($wsdbg & 32) != 0) ? "checked" : "",
+	7 => (($wsdbg & 16384) != 0) ? "checked" : "",
+	8 => (($wsdbg & 32768) != 0) ? "checked" : "",
 );
 
-$T['Content'][$Tab]['5']['2']['cont'] = "
-<input type='checkbox' id='info_debug_default' checked									disabled='disabled'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default')."<br>\r 
-<input type='checkbox' id='info_debug_graph'			".$arrayDbg['2']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph')."<br>\r 
-<input type='checkbox' id='info_debug_stats'			".$arrayDbg['3']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats')."<br>\r 
-<input type='checkbox' id='info_debug_sql'				".$arrayDbg['4']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql')."<br>\r 
-<input type='checkbox' id='info_debug_commandbuffer'	".$arrayDbg['5']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer')."<br>\r 
-<input type='checkbox' id='info_debug_commandlogs'		".$arrayDbg['6']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs')."<br>\r 
-<input type='checkbox' id='info_debug_internallogs'		".$arrayDbg['7']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs')."<br>\r 
-<input type='checkbox' id='info_debug_variables'		".$arrayDbg['8']."	onclick='computeInfoDebug()'	>".	$bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables')."<br>\r 
-";
+// $arr = array(
+// 	"idAndName" => "formParams1[confirmation_modification]",
+// 	"text" => $bts->I18nTransObj->getI18nTransEntry('text_confirm1'),
+// 	"block" => $infos['block'],
+// 	"value" => '',
+// 	"disabled" => false,
+// 	"onclik" => 'computeInfoDebug()',
+// );
+$arr = $bts->RenderFormObj->getCheckboxArray('formParams1[confirmation_modification]', $bts->I18nTransObj->getI18nTransEntry('text_confirm1'), $infos['block'], '', false, true, 'computeInfoDebug()');
+
+$arr['idAndName'] = "info_debug_default";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_default');			$arr['checked'] = true;
+$T['Content'][$Tab]['5']['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_graph";				$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_graph');			$arr['checked'] = $arrayDbg['2']; $arr['disabled'] = false;
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_stats";				$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_stats');			$arr['checked'] = $arrayDbg['3'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_sql";				$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_sql');				$arr['checked'] = $arrayDbg['4'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_commandbuffer";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandbuffer');	$arr['checked'] = $arrayDbg['5'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_commandlogs";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_commandlogs');		$arr['checked'] = $arrayDbg['6'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_internallogs";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_internallogs');	$arr['checked'] = $arrayDbg['7'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "info_debug_variables";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('checkbox_t2_05_variables');		$arr['checked'] = $arrayDbg['8'];
+$T['Content'][$Tab]['5']['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
 
 // --------------------------------------------------------------------------------------------
 // Tab 03
@@ -212,12 +228,15 @@ $T['Content'][$Tab][$i][$j]['cont'] = "";
 
 $i++;
 
+$arr = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block']);
 $dbquery = $bts->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$B = "";
 	if ( $langList[$dbp['lang_id']]['support'] == 1 ) { $B = " checked"; }
-	$T['Content'][$Tab][$i][$j]['cont'] = "<input type='checkbox' name='formTarget2[".$dbp['lang_639_3']."]' ".$B.">\r";		$j++;
-	$T['Content'][$Tab][$i][$j]['cont'] = $dbp['lang_original_name'];																		$j++;
+
+	$arr['idAndName'] = "formTarget2[".$dbp['lang_639_3']."]";
+	$T['Content'][$Tab][$i][$j]['cont'] = $bts->RenderFormObj->renderCheckbox($arr);		$j++;
+	$T['Content'][$Tab][$i][$j]['cont'] = $dbp['lang_original_name'];						$j++;
 	if ( $j == 9 ) { $j = 1; $i++; }
 }
 $tab3NbrLine = $i;
@@ -268,6 +287,17 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // A Javascript is inserted for computing the final 'info_debug' value. 
 // This is a specific case that does not require a separated script file.
+// $arr = array(
+// 	"idAndName" => "formGenericData[modification]",
+// 	"block" => $infos['block'],
+// 	"text" => $bts->I18nTransObj->getI18nTransEntry('validation'),
+// 	"value" => "",
+// 	"checked" => false,
+// 	"disabled" => false,
+// 	"onclik" => "",
+// );
+
+$arr = $bts->RenderFormObj->getCheckboxArray('formGenericData[modification]', $bts->I18nTransObj->getI18nTransEntry('validation'), $infos['block']);
 $Content .= "
 <input type='hidden' id='formParams1_info_debug' name='formParams1[info_debug]'				value='UPDATE_WEBSITE'>\r
 
@@ -300,9 +330,10 @@ function computeInfoDebug () {\r
 
 <table cellpadding='8' cellspacing='0' style='width :100%;'>
 <tr>\r
-<td>\r
-<input type='checkbox' name='formGenericData[modification]'>".$bts->I18nTransObj->getI18nTransEntry('validation')."\r
-</td>\r
+<td>\r"
+
+. $bts->RenderFormObj->renderCheckbox($arr)
+."</td>\r
 <td align='right'>\r
 ";
 

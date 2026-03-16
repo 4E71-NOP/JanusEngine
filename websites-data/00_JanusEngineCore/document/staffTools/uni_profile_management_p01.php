@@ -309,13 +309,13 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 
-
+	$arr = $bts->RenderFormObj->getCheckboxArray('formParams1[confirmation_modification]', $bts->I18nTransObj->getI18nTransEntry('text_confirm1'), $infos['block']);
 	$Content .= "
 	<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto; padding:8px'>
 	<tr>\r
-	<td style='width:70%;'>\r
-	<input type='checkbox' name='formParams1[confirmation_modification]' checked> " . $bts->I18nTransObj->getI18nTransEntry('text_confirm1') . "\r
-	</td>\r
+	<td style='width:70%;'>\r"
+	. $bts->RenderFormObj->renderCheckbox($arr)
+	."</td>\r
 	<td style='width: 200px;'>\r
 	";
 

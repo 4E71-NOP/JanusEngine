@@ -292,32 +292,54 @@ class  RenderForm
 		return (false);
 	}
 
+
 	/**
-	 * Returns the html checkbox 
-	 * @param String $idAndName
-	 * @param String $value
-	 * @param String $text
-	 * @param boolean $checked
-	 * @param boolean $disabled
-	 * @param string $onclik
+	 * Summary of renderCheckbox
+	 * @param mixed $arr
 	 * @return string
 	 */
-	public function renderCheckbox($idAndName, $text, $value = '', $checked = false, $disabled = false, $onclik = '')
+	public function renderCheckbox($arr)
 	{
-		$content = false;
-		if (strlen($idAndName ?? '') > 0 && strlen($text ?? '') > 0) {
+		// $idAndName, $text, $value = '', $checked = false, $disabled = false, $onclik = ''
+		$content = "";
+		if (strlen($arr['idAndName'] ?? '') > 0) {
 			$content =
-				"<input type='checkbox' id='" . $idAndName . "' name='" . $idAndName . "' "
-				. (($checked == true) ? "checked " : "")
-				. (($disabled == true) ? "disabled='disabled " : "")
-				. ((strlen($onclik ?? '') > 0) ? "onclick='" . $onclik . "' " : "")
-				. ((strlen($value ?? '') > 0) ? "value='" . $value . "' " : "")
-				. ">\r
-			<label for='" . $idAndName . "'>" . $text . "</label> <br>\r";
+				// "<label class='" . $arr['block'] . "' for='" . $arr['idAndName'] . "'>\r"
+				"<label class='mt_" . $arr['block'] . "_CheckboxLabel'>\r"
+				. "<input type='checkbox' id='" . $arr['idAndName'] . "' name='" . $arr['idAndName'] . "' "
+				. (($arr['checked'] == true) ? "checked " : "")
+				. (($arr['disabled'] == true) ? "disabled='disabled' " : "")
+				. ((strlen($arr['onclik'] ?? '') > 0) ? "onclick='" . $arr['onclik'] . "' " : "")
+				. ((strlen($arr['value'] ?? '') > 0) ? "value='" . $arr['value'] . "' " : "")
+				. ">\r&nbsp;"
+				. $arr['text'] . "</label>\r";
 		}
 		return $content;
 	}
 
+	/**
+	 * Summary of getCheckboxArray
+	 * @param mixed $idAndName
+	 * @param mixed $text
+	 * @param mixed $block
+	 * @param mixed $value
+	 * @param mixed $checked
+	 * @param mixed $disabled
+	 * @param mixed $onClick
+	 * @return array{block: mixed, checked: mixed, disabled: mixed, idAndName: mixed, onclik: mixed, text: mixed, value: mixed}
+	 */
+ 	public function getCheckboxArray($idAndName, $text, $block = '', $value = '', $checked = false, $disabled = false, $onClick = '')
+	{
+		return array(
+			"idAndName" => $idAndName,
+			"text" => $text,
+			"block" => $block,
+			"value" => $value,
+			"checked" => $checked,
+			"disabled" => $disabled,
+			"onclik" => $onClick,
+		);
+	}
 
 	/**
 	 * Returns the html input hidden

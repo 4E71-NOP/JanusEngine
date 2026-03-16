@@ -124,13 +124,20 @@ $T['Content'][$Tab][$lt]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r1');
-$T['Content'][$Tab][$lt]['2']['cont'] = "
-<input type='checkbox' name ='lmForm[clause_type][ok]'		class='" . $Block . "_form_1' " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'ok') . ">\r" . $bts->I18nTransObj->getI18nTransEntry('type_ok') . "; \r
-<input type='checkbox' name ='lmForm[clause_type][avrt]'	class='" . $Block . "_form_1' " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'avrt') . ">\r" . $bts->I18nTransObj->getI18nTransEntry('type_avrt') . "; \r
-<input type='checkbox' name ='lmForm[clause_type][err]'		class='" . $Block . "_form_1' " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'err') . ">\r" . $bts->I18nTransObj->getI18nTransEntry('type_err') . "; \r
-<input type='checkbox' name ='lmForm[clause_type][info]'	class='" . $Block . "_form_1' " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'info') . ">\r" . $bts->I18nTransObj->getI18nTransEntry('type_info') . "; \r
-<input type='checkbox' name ='lmForm[clause_type][autr]'	class='" . $Block . "_form_1' " . $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'autr') . ">\r" . $bts->I18nTransObj->getI18nTransEntry('type_autr') . "\r
-";
+
+$arr = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block']);
+
+$arr['idAndName'] = "lmForm[clause_type][ok]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_ok');
+$T['Content'][$Tab][$lt]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "lmForm[clause_type][avrt]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_avrt');
+$T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "lmForm[clause_type][err]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_err');
+$T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "lmForm[clause_type][info]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_info');
+$T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+$arr['idAndName'] = "lmForm[clause_type]autr]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_autr');
+$T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
+
 $lt++;
 
 $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1r2');
@@ -261,12 +268,6 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 	$lt = 1;
 	$T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('nothingToDisplay');
 
-	// 	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15);
-	// 	$T['ContentCfg']['tabs'] = array(
-	// 			1	=>	$bts->RenderTablesObj->getDefaultTableConfig($lt,1,1),
-	// 	);
-	// 	$Content .= $bts->RenderTablesObj->render($infos, $T);
-
 } else {
 	$tab = array(
 		0 => "<span class='" . $Block . "_erreur'>Erreur</span>",
@@ -301,8 +302,9 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 				break;
 		}
 
+		$arr = $bts->RenderFormObj->getCheckboxArray("lmForm[selection][" . $dbp['log_id'] . "]", '', $infos['block']);
 		$lt++;
-		$T['Content'][$Tab][$lt]['1']['cont'] = $dbp['log_id'] . "<br>\r<input type='checkbox' name='lmForm[selection][" . $dbp['log_id'] . "]'>";
+		$T['Content'][$Tab][$lt]['1']['cont'] = $dbp['log_id'] . "<br>\r" . $bts->RenderFormObj->renderCheckbox($arr);
 		$T['Content'][$Tab][$lt]['2']['cont'] = date("Y m d H:i:s", $dbp['log_date']);
 		$T['Content'][$Tab][$lt]['3']['cont'] = $tab[$dbp['log_signal']];
 		$T['Content'][$Tab][$lt]['4']['cont'] = $dbp['log_msgid'];

@@ -527,19 +527,25 @@ class InstallPage01
 		sort($directory_list);
 		reset($directory_list);
 
+		$arrChkBx = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block'] , '' ,true, true);
 		$DirectoryStateList = array();
 		$FormDirectoryNameList = array();
 		foreach ($directory_list as $a) {
 			if ($a == JANUS_ENGINE_CORE_SCRIPT_DIR) {
 				$T[$t][$i]['1']['cont'] = "<span style='font-style:italic'>" . $a . "</span>\r";
-				$T[$t][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][plouf]' disabled checked >";
-				$T[$t][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][plouf2]' disabled checked >\r
-				<input type='hidden' name='directory_list[" . $a . "][name]' value='" . $a . "'>\r
-				<input type='hidden' name='directory_list[" . $a . "][state]' value='on'>\r";
+
+				$arrChkBx['idAndName'] = "directory_list[" . $a . "][plouf]";
+				$T[$t][$i]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arrChkBx);
+				$arrChkBx['idAndName'] = "directory_list[" . $a . "][plouf2]";
+				$T[$t][$i]['3']['cont'] = $bts->RenderFormObj->renderCheckbox($arrChkBx)
+					. "<input type='hidden' name='directory_list[" . $a . "][name]' value='" . $a . "'>\r"
+					. "<input type='hidden' name='directory_list[" . $a . "][state]' value='on'>\r";
 			} else {
 				$T[$t][$i]['1']['cont'] = $a . " <input type='hidden' name='directory_list[" . $a . "][name]' value='" . $a . "'>\r";
-				$T[$t][$i]['2']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][state]' checked onClick='li.setFormPreconizedSettings()'>\r";
-				$T[$t][$i]['3']['cont'] = "<input type='checkbox' name='directory_list[" . $a . "][code_verification]' checked>\r";
+				$arrChkBx['idAndName'] = "directory_list[" . $a . "][state]";				$arrChkBx['onclik'] = "li.setFormPreconizedSettings()"; $arrChkBx['disabled'] = false;
+				$T[$t][$i]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arrChkBx);
+				$arrChkBx['idAndName'] = "directory_list[" . $a . "][code_verification]";	$arrChkBx['onclik'] = "";
+				$T[$t][$i]['3']['cont'] = $bts->RenderFormObj->renderCheckbox($arrChkBx);
 				$DirectoryStateList[] = "directory_list[" . $a . "][state]";
 				$FormDirectoryNameList[] = $a;
 			}
@@ -690,19 +696,24 @@ class InstallPage01
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_Titlec1');
 		$l++;
 
+		$arr = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block']);
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_db');
-		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[dataBaseLogWarning]'>" . $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
-		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[dataBaseLogError]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
-		$l++;
+		$arr['idAndName'] = 'form[dataBaseLogWarning]';		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
+		$arr['idAndName'] = 'form[dataBaseLogError]';		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
 
+
+		$l++;
+		
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('REP_consol');
-		$T[$t][$l]['2']['cont'] = "<input type='checkbox' name='form[consoleLogWarning]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
-		$T[$t][$l]['3']['cont'] = "<input type='checkbox' name='form[consoleLogError]' checked>" . $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
+		$arr['idAndName'] = 'form[consoleLogWarning]';		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('REP_wrnMsg');
+		$T[$t][$l]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
+		$arr['idAndName'] = 'form[consoleLogError]';		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('REP_errMsg');
+		$T[$t][$l]['3']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
 
 		$this->T['ContentCfg']['tabs'][$t] = $bts->RenderTablesObj->getDefaultTableConfig($l, 3, 1);
 	}
-
-
 
 	/**
 	 *  Detects PEAR support. 
