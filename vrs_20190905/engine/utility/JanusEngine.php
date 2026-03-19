@@ -559,6 +559,7 @@ class JanusEngine
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$_SESSION strlen(user_login)=0 (let's go anonymous)"));
 					$bts->SMObj->setSessionSubEntry($currentWs, 'user_login', 'anonymous');
 				}
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . "***************************** currentWs : " . $bts->StringFormatObj->arrayToString($currentWs)));
 				$UserObj->getDataFromDBUsingLogin($bts->SMObj->getSessionSubEntry($currentWs, 'user_login'), $WebSiteObj);
 				if ($UserObj->getUserEntry('error_login_not_found') != 1) {
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : session mode : " . $bts->StringFormatObj->arrayToString($bts->SMObj->getSession())));

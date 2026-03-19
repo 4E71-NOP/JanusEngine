@@ -158,12 +158,12 @@ html { width:100%; height:100%;}\r\r
 	$Content .= "
 	.centered { text-align: center; }\r"
 	
-	.".".$tableName."bareTable			{background-color:transparent; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}\r"
+	.".".$tableName."bareTable			{background-color:transparent !important; border-spacing:0px; border-collapse:collapse; border-width:0px; border-style:none; margin:0px; padding:0px;}\r"
 	.".".$tableName."bareTable tr		{background-color:transparent !important; margin:0px; padding:0px;}\r"
 	.".".$tableName."bareTable td		{background-color:transparent; margin:0px !important; padding:0px !important;}\r"
-	.".".$tableName."bareTable:hover	{background-color:transparent}\r"
-	.".".$tableName."bareTable tr:hover {background-color:transparent}\r"
-	.".".$tableName."bareTable td:hover	{background-color:transparent}\r"
+	.".".$tableName."bareTable:hover	{background-color:transparent !important;}\r"
+	.".".$tableName."bareTable tr:hover {background-color:transparent !important;}\r"
+	.".".$tableName."bareTable td:hover	{background-color:transparent !important;}\r"
 
 	.".".$tableName."modif_article	{ height:512px ; overflow:auto }\r"
 	.".".$tableName."modif_menu		{ height:512px ; overflow:auto }\r"

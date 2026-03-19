@@ -1,4 +1,5 @@
 <?php
+// TODO remove after 2026 05 31
 //--------------------------------------------------------------------------------
 //	Add
 //--------------------------------------------------------------------------------
@@ -405,6 +406,36 @@ self::$ActionTable['show']['articles']	= function (&$a) { return array(
 	); 
 };
 
+self::$ActionTable['show']['article']	= function (&$a) { return array(
+		"SELECT "
+			. "art.arti_ref AS 'Ref', "
+			. "art.arti_id AS Id, "
+			. "art.arti_name AS Name, "
+			. "art.arti_title AS 'Title', "
+			. "art.arti_page AS 'Page', "
+			. "mnu.fk_lang_id AS 'Lang', "
+			. "dl.deadline_name AS 'Deadline', "
+			. "dl.deadline_title AS 'DL Title', "
+			. "dl.deadline_state AS 'DL State' "
+			. "FROM "
+			. $a['sqlTables']['article'] . " art, "
+			. $a['sqlTables']['menu'] . " mnu, "
+			. $a['sqlTables']['deadline'] . " dl "
+			. "WHERE mnu.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+			. "AND art.arti_ref = mnu.fk_arti_ref "
+			. "AND art.fk_deadline_id = dl.deadline_id "
+			. "AND art.fk_ws_id = dl.fk_ws_id "
+			. "AND dl.fk_ws_id = mnu.fk_ws_id "
+			. "AND arti_page = 1 "
+			. "AND mnu.menu_state = '1' "
+			. "AND mnu.menu_type IN ('1', '0') "
+			. (strlen($a['params']['ref'] > 0) ? "AND art.arti_ref = '" . $a['params']['ref'] . "' " : "")
+			. (strlen($a['params']['name'] > 0) ? "AND art.arti_name = '" . $a['params']['name'] . "' " : "")
+			. (strlen($a['params']['title'] > 0) ? "AND art.arti_title = '" . $a['params']['title'] . "' " : "")
+			. (strlen($a['params']['deadline'] > 0) ? "AND dl.deadline_name = '" . $a['params']['deadline'] . "' " : "")
+			. "ORDER BY art.arti_ref, art.arti_page"
+	); 
+};
 
 self::$ActionTable['show']['deadlines']	= function (&$a) { return array(
 		"SELECT "
@@ -420,6 +451,22 @@ self::$ActionTable['show']['deadlines']	= function (&$a) { return array(
 	); 
 };
 
+self::$ActionTable['show']['deadline']	= function (&$a) { return array(
+		"SELECT "
+			. "deadline_name AS 'Name', "
+			. "deadline_title AS 'Title', "
+			. "deadline_state AS 'State', "
+			. "FROM_UNIXTIME(deadline_creation_date) AS 'Creation', "
+			. "FROM_UNIXTIME(deadline_end_date) AS 'End' "
+			. "FROM "
+			. $a['sqlTables']['deadline'] . " dl "
+			. "WHERE dl.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+			. (strlen($a['params']['name'] > 0) ? "AND dl.deadline_name = '" . $a['params']['name'] . "' " : "")
+			. (strlen($a['params']['title'] > 0) ? "AND dl.deadline_title = '" . $a['params']['title'] . "' " : "")
+			. "ORDER BY dl.deadline_name;"
+	); 
+};
+
 self::$ActionTable['show']['decorations']	= function (&$a) { return array(
 		"SELECT "
 			. "deco_name AS 'Name', "
@@ -430,6 +477,21 @@ self::$ActionTable['show']['decorations']	= function (&$a) { return array(
 			. "ORDER BY d.deco_name;"
 	); 
 };
+
+self::$ActionTable['show']['decoration']	= function (&$a) { return array(
+		"SELECT "
+			. "deco_name AS 'Name', "
+			. "deco_state AS 'State', "
+			. "deco_type AS 'Type' "
+			. "FROM "
+			. $a['sqlTables']['decoration'] . " d "
+			. "WHERE 1=1 "
+			. (strlen($a['params']['name'] > 0) ? "AND d.deco_name = '" . $a['params']['name'] . "' " : "")
+			. (($a['params']['type'] > 0) ? "AND d.deco_type = '" . $a['params']['type'] . "' " : "")
+			. "ORDER BY d.deco_name;"
+	); 
+};
+
 
 self::$ActionTable['show']['documents']	= function (&$a) { return array(
 		"SELECT "
@@ -549,26 +611,47 @@ self::$ActionTable['show']['modules']	= function (&$a) { return array(
 };
 
 
-
-self::$ActionTable['show']['users']		= function (&$a) { return array(
+self::$ActionTable['show']['users'] = function (&$a) {
+	return array(
 		"SELECT "
-			. "usr.user_name AS 'Name', "
-			. "usr.user_login AS 'Login', "
-			. "FROM_UNIXTIME(usr.user_subscription_date) AS 'Subscription', "
-			. "usr.user_status AS 'Status', "
-			. "usr.user_name AS 'Name', "
-			. "FROM_UNIXTIME(usr.user_last_visit) AS 'Last visit', "
-			. "usr.user_last_ip AS 'Last IP' "
-			. "FROM "
-			. $a['sqlTables']['user'] . " usr,"
-			. $a['sqlTables']['group_user'] . " gu,"
-			. $a['sqlTables']['group_website'] . " gw "
-			. "WHERE gw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
-			. "AND gw.fk_group_id = gu.fk_group_id "
-			. "AND gu.fk_user_id = usr.user_id "
-			. "GROUP BY usr.user_id"
-	); 
+		. "usr.user_name AS 'Name', "
+		. "usr.user_login AS 'Login', "
+		. "FROM_UNIXTIME(usr.user_subscription_date) AS 'Subscription', "
+		. "usr.user_status AS 'Status', "
+		. "usr.user_name AS 'Name', "
+		. "FROM_UNIXTIME(usr.user_last_visit) AS 'Last visit', "
+		. "usr.user_last_ip AS 'Last IP' "
+		. "FROM "
+		. $a['sqlTables']['user'] . " usr,"
+		. $a['sqlTables']['group_user'] . " gu,"
+		. $a['sqlTables']['group_website'] . " gw "
+		. "WHERE usr.user_id = gu.fk_user_id "
+		. "AND gu.fk_group_id = gw.fk_group_id "
+		. "AND gw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+		. "GROUP BY usr.user_id"
+	);
 };
+
+self::$ActionTable['show']['user'] = function (&$a) {
+	return array(
+		"SELECT "
+		. "usr.user_id, usr.user_name, usr.user_login, usr.user_mail, usr.user_subscription_date, "
+		. "usr.user_status, usr.user_role_function, usr.user_pref_theme, usr.user_lang, usr.user_avatar_image, "
+		. "usr.user_admin_comment, usr.user_last_visit, usr.user_last_ip, usr.user_timezone "		
+		. "FROM "
+		. $a['sqlTables']['user'] . " usr,"
+		. $a['sqlTables']['group_user'] . " gu,"
+		. $a['sqlTables']['group_website'] . " gw "
+		. "WHERE usr.user_id = gu.fk_user_id "
+		. "AND gu.fk_group_id = gw.fk_group_id "
+		. "AND gw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+		. (strlen($a['params']['name'] > 0) ? "AND usr.user_name = '" . $a['params']['name'] . "' " : "")
+		. (strlen($a['params']['login'] > 0) ? "AND usr.user_login = '" . $a['params']['login'] . "' " : "")
+		. (strlen($a['params']['mail'] > 0) ? "AND usr.user_mail = '" . $a['params']['mail'] . "' " : "")
+		. "GROUP BY usr.user_id"
+	);
+};
+
 
 self::$ActionTable['show']['websites']	= function (&$a) { return array(
 		"SELECT " .

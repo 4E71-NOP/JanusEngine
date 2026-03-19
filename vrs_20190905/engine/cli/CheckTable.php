@@ -1,4 +1,5 @@
 <?php
+// TODO remove after 2026 05 31
 
 // d=Directive
 //		Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in (v)ariable. No error message.

@@ -31,8 +31,8 @@
 $bts->RequestDataObj->setRequestData(
 	'formConsole',
 	array(
-		"CLiContent"		=> "show user",
-		"CLiContentResult"	=> array(
+		"CLiContent" => "show users",
+		"CLiContentResult" => array(
 			"1" => array(
 				"1" => array("Name" => "redacteur_en_chef_debutant", "Login" => "redacteur_en_chef_debutant", "Subscription" => "2025-03-19 12:41:23", "Status" => "1", "Last visit" => "1970-01-01 00:00:00", "Last IP" => "0.0.0.0"),
 				"2" => array("Name" => "anonymous", "Login" => "anonymous", "Subscription" => "2025-03-19 12:41:23", "Status" => "1", "Last visit" => "1970-01-01 00:00:00", "Last IP" => "0.0.0.0"),
@@ -85,28 +85,18 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 	$T = array();
 	$BlockT = $infos['blockT'];
 
-	$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
-		$infos,
-		"submit",
-		$bts->I18nTransObj->getI18nTransEntry('btn1'),
-		0,
-		"T01submitButton",
-		2,
-		2,
-		"",
-		0
-	);
-
-
 	// --------------------------------------------------------------------------------------------
 	// Formatting results (if any)
 
 	$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "**************************************************************"));
-	$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : CLiContentResult " .
-	$bts->StringFormatObj->arrayToString(
-		$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult')
-		)
-		. "`"));
+	$bts->LMObj->msgLog(array(
+		'level' => LOGLEVEL_BREAKPOINT,
+		'msg' => __METHOD__ . " : CLiContentResult " .
+			$bts->StringFormatObj->arrayToString(
+				$bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult')
+			)
+			. "`"
+	));
 	$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "**************************************************************"));
 
 	$resultData = $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContentResult');
@@ -138,22 +128,54 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 	}
 
 	// --------------------------------------------------------------------------------------------
+	$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+		$infos,
+		"button",
+		$bts->I18nTransObj->getI18nTransEntry('btnCopy'),
+		192,
+		"T01submitButton",
+		1,
+		1,
+		"document.forms['formConsole'].elements['formConsole[CLiContent]'].value = '" . $bts->StringFormatObj->escapeQuotes( $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent')) . "';",
+		1
+	);
 
-	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_l1');
-	$T['Content'][$Tab]['2']['1']['cont'] = "<br>\r>>> " . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent') . "<br>\r&nbsp;";
-	$T['Content'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_CmdToExec');
-	$T['Content'][$Tab]['4']['1']['cont'] = "<textarea name='formConsole[CLiContent]' style='width:97%' rows='6'></textarea>";
-	$T['Content'][$Tab]['4']['1']['style'] = "text-align:center;";
-	$T['Content'][$Tab]['5']['1']['cont'] .= $bts->InteractiveElementsObj->renderSubmitButton($SB);
+	$baretable = $CurrentSetObj->ThemeDataObj->getThemeName() . "bareTable";
+
+	$l = 1;
+	$T['Content'][$Tab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_l1');
+	$l++;
+	$T['Content'][$Tab][$l]['1']['cont'] = "<table class='" . $baretable . "' style='width:100%' style='margin-left:auto; margin-right:auto;'>"
+		. "<tr class='" . $baretable . "'>"
+		. "<td class='" . $baretable . "' style='width:70%'>" . $bts->RequestDataObj->getRequestDataSubEntry('formConsole', 'CLiContent'). "</td>"
+		. "<td class='" . $baretable . "'>" . $bts->InteractiveElementsObj->renderSubmitButton($SB) . "</td>"
+		. "</tr>"
+		. "</table>";
+	$l++;
 
 
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 5;
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
-	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+	$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+		$infos,
+		"submit",
+		$bts->I18nTransObj->getI18nTransEntry('btnCmd'),
+		192,
+		"T02submitButton",
+		1,
+		2,
+		"",
+		1
+	);
+	$T['Content'][$Tab][$l]['1']['cont'] = "<table class='" . $baretable . "' style='width:100%' style='margin-left:auto; margin-right:auto;'>"
+		. "<tr class='" . $baretable . "'>"
+		. "<td class='" . $baretable . "' style='width:70%'>" . $bts->I18nTransObj->getI18nTransEntry('cmd_CmdToExec') . "<br>\r"
+		. "<textarea name='formConsole[CLiContent]' style='width:100%; height:100%;' rows='3'></textarea>" . "</td>"
+		. "<td class='" . $baretable . "'>" . $bts->InteractiveElementsObj->renderSubmitButton($SB) . "</td>"
+		. "</tr>"
+		. "</table>";
+	$l++;
 
 	// --------------------------------------------------------------------------------------------
-	//	Tab File mode
-	$Tab = 2;
+	// File mode
 	$FileSelectorConfig = $bts->InteractiveElementsObj->getDefaultIconSelectFileConfig(
 		"formConsole",
 		"formConsole[inputFile]",
@@ -165,34 +187,42 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 	);
 	$FileSelectorConfig['strRemove'] = "";
 	$FileSelectorConfig['strAdd'] = "../";
-	$FileSelectorConfig['case'] = 1;
+	$FileSelectorConfig['case'] = 3;
 
 	$infos['IconSelectFile'] = $FileSelectorConfig;
 	$CurrentSetObj->setDataSubEntry('fs', $CurrentSetObj->getDataEntry('fsIdx'), $FileSelectorConfig);
 	$CurrentSetObj->setDataEntry('fsIdx', $CurrentSetObj->getDataEntry('fsIdx') + 1);
 
-	$SB['id'] = "T02submitButton";
-	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('file_select');
-	$T['Content'][$Tab]['2']['1']['cont'] = $bts->InteractiveElementsObj->renderIconSelectFile($infos);
-	$T['Content'][$Tab]['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('file_info');
-	$T['Content'][$Tab]['3']['1']['cont'] = $bts->InteractiveElementsObj->renderSubmitButton($SB);
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 3;
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
-	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+	$SB = $bts->InteractiveElementsObj->getDefaultSubmitButtonConfig(
+		$infos,
+		"submit",
+		$bts->I18nTransObj->getI18nTransEntry('btnFile'),
+		192,
+		"T03submitButton",
+		1,
+		2,
+		"",
+		1
+	);
+	$T['Content'][$Tab][$l]['1']['cont'] = "<table class='" . $baretable . "' style='width:100%' style='margin-left:auto; margin-right:auto;'>"
+		. "<tr class='" . $baretable . "'>"
+		. "<td class='" . $baretable . "' style='width:70%'>" . $bts->I18nTransObj->getI18nTransEntry('file_select')
+		. $bts->InteractiveElementsObj->renderIconSelectFile($infos) . "<br>\r"
+		. $bts->I18nTransObj->getI18nTransEntry('file_info')
+		. "</td>"
+		. "<td class='" . $baretable . "'>"
+		. $bts->InteractiveElementsObj->renderSubmitButton($SB) . "</td>"
+		. "</tr>"
+		. "</table>";
+	$l++;
 
 	// --------------------------------------------------------------------------------------------
-	//	Tab Results
-	$Tab = 3;
-
-	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_result');
-	$T['Content'][$Tab]['2']['1']['cont'] = $strResult;
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 2;
-	$T['ContentCfg']['tabs'][$Tab]['NbrOfCells'] = 1;
-	$T['ContentCfg']['tabs'][$Tab]['TableCaptionPos'] = 1;
+	// Results
+	$T['Content'][$Tab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('cmd_result') . "<br>\r" . $strResult;
 
 	// --------------------------------------------------------------------------------------------
 	//	Tab Logs
-	$Tab = 4;
+	$Tab = 2;
 
 	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Logs_c1');
 	$T['Content'][$Tab]['1']['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Logs_c2');
@@ -203,11 +233,11 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 	$T['Content'][$Tab]['1']['7']['cont'] = $bts->I18nTransObj->getI18nTransEntry('Logs_c7');
 
 	$tab = array(
-		0	=>	"<span class='" . $Block . "_error'>Erreur</span>",
-		1	=>	"<span class='" . $Block . "_ok " . $Block . "_t1'>OK</span>",
-		2	=>	"<span class='" . $Block . "_warning'>Avertissement</span>",
-		3	=>	"Information",
-		4	=>	"Autre",
+		0 => "<span class='" . $Block . "_error'>Erreur</span>",
+		1 => "<span class='" . $Block . "_ok " . $Block . "_t1'>OK</span>",
+		2 => "<span class='" . $Block . "_warning'>Avertissement</span>",
+		3 => "Information",
+		4 => "Autre",
 	);
 
 	$dbquery = $bts->SDDMObj->query("
@@ -246,7 +276,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 
 	// --------------------------------------------------------------------------------------------
 	//	Tab Help
-	$Tab = 5;
+	$Tab = 3;
 
 	$T['Content'][$Tab]['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('help01');
 	$T['ContentCfg']['tabs'][$Tab]['NbrOfLines'] = 1;
@@ -255,14 +285,12 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 
 
 	// --------------------------------------------------------------------------------------------
-	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, 5);
+	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, 3);
 
 	$T['ContentCfg']['tabs'] = array(
-		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5, 1, 1),
-		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(3, 1, 1),
-		3	=>	$bts->RenderTablesObj->getDefaultTableConfig(2, 1, 1),
-		4	=>	$bts->RenderTablesObj->getDefaultTableConfig(10, 7, 1),
-		5	=>	$bts->RenderTablesObj->getDefaultTableConfig(1, 1, 0),
+		1 => $bts->RenderTablesObj->getDefaultTableConfig(6, 1, 1),
+		2 => $bts->RenderTablesObj->getDefaultTableConfig(10, 7, 1),
+		3 => $bts->RenderTablesObj->getDefaultTableConfig(1, 1, 0),
 	);
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 
@@ -276,24 +304,24 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 
 	$Content .=
 		$bts->RenderFormObj->renderformHeader('ConsoleCommandForm')
-		. $bts->RenderFormObj->renderHiddenInput("formSubmitted",				"1")
-		. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]",		"AdminDashboard")
-		. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]",	"CommandConsole")
-		. $bts->RenderFormObj->renderHiddenInput("formGenericData[token]",		$SecurityTokenObj->getSecurityTokenEntry('st_content'))
-		;
+		. $bts->RenderFormObj->renderHiddenInput("formSubmitted", "1")
+		. $bts->RenderFormObj->renderHiddenInput("formGenericData[origin]", "AdminDashboard")
+		. $bts->RenderFormObj->renderHiddenInput("formGenericData[section]", "CommandConsole")
+		. $bts->RenderFormObj->renderHiddenInput("formGenericData[token]", $SecurityTokenObj->getSecurityTokenEntry('st_content'))
+	;
 
 	$Content .= "</form>\r";
 
 } else {
 	$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Somebody is trying to use console while it is disabled."));
 	$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
-	. "<tr>\r<td style='padding:15px;'>"
-	. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
-	. "</td>\r"
-	. "<td style='padding:15px;'>"
-	. $bts->I18nTransObj->getI18nTransEntry('inviteErr')
-	. "</td>\r</tr>\r"
-	. "</table>\r";
+		. "<tr>\r<td style='padding:15px;'>"
+		. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
+		. "</td>\r"
+		. "<td style='padding:15px;'>"
+		. $bts->I18nTransObj->getI18nTransEntry('inviteErr')
+		. "</td>\r</tr>\r"
+		. "</table>\r";
 }
 
 $bts->segmentEnding(__METHOD__);

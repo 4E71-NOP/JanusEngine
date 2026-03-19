@@ -116,7 +116,7 @@ class SddmPDO extends SddmCore
 		$bts->LMObj->increaseSqlQueryNumber();
 
 		if ($log > 0) {
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $q));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : \$q:" . $bts->StringFormatObj->formatToLog($q)));
 		}
 
 		$db_result = $this->DBInstance->query($q);

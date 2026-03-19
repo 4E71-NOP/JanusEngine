@@ -71,7 +71,36 @@ class CommandConsole
 	 */
 	private static function makeCheckTable()
 	{
-		include("current/engine/cli/CheckTable.php");
+		// include("current/engine/cli/CheckTable.php");
+		include("current/engine/cli/checks/article_check.php");
+		include("current/engine/cli/checks/article_config_check.php");
+		include("current/engine/cli/checks/deadline_check.php");
+		include("current/engine/cli/checks/decoration_check.php");
+		include("current/engine/cli/checks/definition_check.php");
+		include("current/engine/cli/checks/document_check.php");
+		include("current/engine/cli/checks/extension_check.php");
+		include("current/engine/cli/checks/extension_file_check.php");
+		include("current/engine/cli/checks/group_check.php");
+		include("current/engine/cli/checks/group_permission_check.php");
+		include("current/engine/cli/checks/keyword_check.php");
+		include("current/engine/cli/checks/language_check.php");
+		include("current/engine/cli/checks/layout_check.php");
+		include("current/engine/cli/checks/layout_file_check.php");
+		include("current/engine/cli/checks/layout_theme_check.php");
+		include("current/engine/cli/checks/log_check.php");
+		include("current/engine/cli/checks/menu_check.php");
+		include("current/engine/cli/checks/misc_check.php");
+		include("current/engine/cli/checks/module_check.php");
+		include("current/engine/cli/checks/permission_check.php");
+		include("current/engine/cli/checks/profile_element_check.php");
+		include("current/engine/cli/checks/tag_check.php");
+		include("current/engine/cli/checks/theme_check.php");
+		include("current/engine/cli/checks/theme_definition_check.php");
+		include("current/engine/cli/checks/translation_check.php");
+		include("current/engine/cli/checks/user_check.php");
+		include("current/engine/cli/checks/user_permission_check.php");
+		include("current/engine/cli/checks/user_profile_element_check.php");
+		include("current/engine/cli/checks/website_check.php");
 	}
 
 	/**
@@ -91,7 +120,38 @@ class CommandConsole
 	 */
 	private static function makeActionTable()
 	{
-		include("current/engine/cli/ActionTable.php");
+		// include("current/engine/cli/ActionTable.php");
+		include("current/engine/cli/actions/article_action.php");
+		include("current/engine/cli/actions/article_config_action.php");
+		include("current/engine/cli/actions/deadline_action.php");
+		include("current/engine/cli/actions/decoration_action.php");
+		include("current/engine/cli/actions/definition_action.php");
+		include("current/engine/cli/actions/document_action.php");
+		include("current/engine/cli/actions/extension_action.php");
+		include("current/engine/cli/actions/extension_file_action.php");
+		include("current/engine/cli/actions/group_action.php");
+		include("current/engine/cli/actions/group_permission_action.php");
+		include("current/engine/cli/actions/keyword_action.php");
+		include("current/engine/cli/actions/language_action.php");
+		include("current/engine/cli/actions/layout_action.php");
+		include("current/engine/cli/actions/layout_theme_action.php");
+		include("current/engine/cli/actions/layout_file_action.php");
+		include("current/engine/cli/actions/log_action.php");
+		include("current/engine/cli/actions/menu_action.php");
+		include("current/engine/cli/actions/misc_action.php");
+		include("current/engine/cli/actions/module_action.php");
+		include("current/engine/cli/actions/permission_action.php");
+		include("current/engine/cli/actions/profile_element_action.php");
+		include("current/engine/cli/actions/tag_action.php");
+		include("current/engine/cli/actions/theme_action.php");
+		include("current/engine/cli/actions/theme_definition_action.php");
+		include("current/engine/cli/actions/translation_action.php");
+		include("current/engine/cli/actions/user_action.php");
+		include("current/engine/cli/actions/user_permission_action.php");
+		include("current/engine/cli/actions/user_profile_element_action.php");
+		include("current/engine/cli/actions/website_action.php");
+
+
 	}
 
 	/**
@@ -528,18 +588,18 @@ class CommandConsole
 			} else {
 				// Entity not found
 				$CCL['errFlag'] = 1;
-				$CCL['errMsg'] = "unknown entity for that command";
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : unknown entity :`" . $CCL['init']['entity'] . "`"));
+				$CCL['errMsg'] = "unknown entity for this command";
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : unknown entity :`" . $CCL['init']['entity'] . "`"));
 			}
 		} else {
 			// Command not found
 			$CCL['errFlag'] = 1;
 			$CCL['errMsg'] = "Command not found";
-			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Command not found in \$ActionTable['" . $CCL['init']['cmd'] . "']['" . $CCL['init']['entity'] . "']"));
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Command not found in \$ActionTable['" . $CCL['init']['cmd'] . "']['" . $CCL['init']['entity'] . "']"));
 		}
 
 		self::$report['signal'] = ($CCL['errFlag'] == 1) ? "ERR" : "OK";
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+		$bts->LMObj->msgLog(array('level' => (($CCL['errFlag'] == 1) ? LOGLEVEL_WARNING : LOGLEVEL_BREAKPOINT), 'msg' => __METHOD__ . " : End"));
 	}
 
 	//@formatter:off

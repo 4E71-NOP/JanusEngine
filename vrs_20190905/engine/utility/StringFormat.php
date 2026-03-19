@@ -490,6 +490,19 @@ class StringFormat
 		}
 	}
 
+	public function escapeQuotes($str)
+	{
+		if (strlen($str ?? '') > 0) {
+			$tabSrsh = array("'", '"', "`");
+			$tabRplc = array("\\'", '\\"', "\\`");
+			$str = str_replace($tabSrsh, $tabRplc, $str);
+		} else {
+			$str = "";
+		}
+		return $str;
+	}
+
+	
 	/**
 	 * Returns a single concatenated variable from an array.
 	 * 

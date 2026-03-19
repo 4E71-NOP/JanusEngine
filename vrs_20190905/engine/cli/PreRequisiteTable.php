@@ -861,3 +861,15 @@ self::$PreRequisiteTable['show']['modules']						= &self::$PreRequisiteTable['ad
 self::$PreRequisiteTable['show']['users']						= &self::$PreRequisiteTable['add']['user'];
 self::$PreRequisiteTable['show']['user_profile_element']		= &self::$PreRequisiteTable['add']['user_profile_element'];
 self::$PreRequisiteTable['show']['websites']					= &self::$PreRequisiteTable['add']['website'];
+
+self::$PreRequisiteTable['show']['article']						= &self::$PreRequisiteTable['add']['article'];		// Empty array for 'show' commands
+self::$PreRequisiteTable['show']['deadline']					= &self::$PreRequisiteTable['add']['deadline'];
+self::$PreRequisiteTable['show']['decoration']					= &self::$PreRequisiteTable['add']['decoration'];
+self::$PreRequisiteTable['show']['document']					= &self::$PreRequisiteTable['add']['document'];
+self::$PreRequisiteTable['show']['group']						= &self::$PreRequisiteTable['add']['group'];
+self::$PreRequisiteTable['show']['keyword']						= &self::$PreRequisiteTable['add']['keyword'];
+self::$PreRequisiteTable['show']['menu']						= &self::$PreRequisiteTable['add']['menu'];
+self::$PreRequisiteTable['show']['module']						= &self::$PreRequisiteTable['add']['module'];
+self::$PreRequisiteTable['show']['user']						= &self::$PreRequisiteTable['add']['user'];
+self::$PreRequisiteTable['show']['user_profile_elemen']			= &self::$PreRequisiteTable['add']['user_profile_element'];
+self::$PreRequisiteTable['show']['website']						= &self::$PreRequisiteTable['add']['website'];
