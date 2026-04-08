@@ -82,8 +82,8 @@ class ThemeData
 
 			if (strlen($CurrentBlock['name'] ?? '') > 0) {
 				$cbn = $CurrentBlock['name'];
-				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
-				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
+				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'] ?? '';
+				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'] ?? '';
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing block_" . $Block . "_name / " . $CurrentBlock['name'] . " with decoration " . $CurrentBlock['deco_name'] . " (id=" . $CurrentBlock['deco_id'] . "; type=" . $CurrentBlock['deco_type'] . ")"));
 
 				$cbal = &$BlockAlreadyLoaded[$CurrentBlock['deco_type']][$CurrentBlock['deco_id']]; // Current Block Already Loaded
@@ -144,8 +144,8 @@ class ThemeData
 
 			if (strlen($CurrentBlock['name'] ?? '') > 0) {
 				$cbn = $CurrentBlock['name'];
-				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'];
-				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'];
+				$CurrentBlock['deco_type']	= $this->DecorationList[$cbn]['deco_type'] ?? '';
+				$CurrentBlock['deco_id']	= $this->DecorationList[$cbn]['deco_id'] ?? '';
 
 				$cbal = &$BlockAlreadyLoaded[$CurrentBlock['deco_type']][$CurrentBlock['deco_id']];	// Current Block Already Loaded
 				if (!isset($cbal)) {
@@ -205,8 +205,8 @@ class ThemeData
 				$CurrentBlock['deco_id'] = $this->DecorationList[$cbn]['deco_id'];
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu " . $cbn . " with deco_id=" . $CurrentBlock['deco_id']));
 
-				$cbal = &$BlockAlreadyLoaded['10'][$CurrentBlock['deco_id']];
-				if (!isset($cbal)) {
+				$cbal = &$BlockAlreadyLoaded['10'][($CurrentBlock['deco_id'] ?? '')];
+				if (empty($cbal)) {
 					$dbquery = $bts->SDDMObj->query("
 						SELECT *
 						FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deco_10_menu') . "
@@ -222,10 +222,10 @@ class ThemeData
 					$cbal = $BlocT = $BlocG = $BlockM;
 
 
-					$CurrentBlock['deco_id'] = $this->DecorationList[$p['text']]['deco_id'];
+					$CurrentBlock['deco_id'] = $this->DecorationList[($p['text']?? '')]['deco_id'];
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Caligraph deco_id=" . $CurrentBlock['deco_id']));
 
-					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList[$p['text']]['deco_type'];
+					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList[($p['text'] ?? '')]['deco_type'];
 					$DecoTmpObj = new Deco20_Caligraph();
 					$DecoTmpObj->getDeco20_CaligraphDataFromDB($CurrentBlock['deco_id']);
 
@@ -237,8 +237,8 @@ class ThemeData
 					unset($DecoTmpObj);
 
 					// --------------------------------------------------------------------------------------------
-					$CurrentBlock['deco_id'] = $this->DecorationList[$p['graphic']]['deco_id'];
-					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList[$p['graphic']]['deco_type'];
+					$CurrentBlock['deco_id'] = $this->DecorationList[($p['graphic'] ?? '')]['deco_id'];
+					$p['deco_type'] = $CurrentBlock['deco_type'] = $this->DecorationList[($p['graphic'] ?? '')]['deco_type'];
 					$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Processing menu Graphic Type=" . $CurrentBlock['deco_type'] . "; deco_id=" . $CurrentBlock['deco_id']));
 
 					// 					echo ("<!-- \$p['deco_type']=".$p ['deco_type']."-->\r");

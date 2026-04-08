@@ -3,7 +3,7 @@
 		margin-left: auto; margin-right: auto;
 		max-width: 1280px; max-height: 100%;">
 	<tr style="vertical-align: top;">
-		<td style="width:20%; min-width:5cm; height:95%; padding:0.1cm;">
+		<td style="width:100%; min-width:5cm; padding:0.1cm;" colspan="3">
 			<div id="layout_logo" style="
 				display:block; 
 				min-height:1cm; 
@@ -11,6 +11,10 @@
 				">
 				{{ render_module( 'logo' ) }}
 			</div>
+		</td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="width:20%; min-width:5cm; height:95%; padding:0.1cm;">
 			<div id="layout_authentification" style="
 				display:block; 
 				min-height:3.5cm; 
@@ -44,7 +48,7 @@
 				">
 				{{ render_module( 'selectlanguage' ) }}
 			</div>
-			</td>
+		</td>
 		<td style="width:57%; min-width:10cm; height: 95%; padding:0.1cm;">
 			<div id="layout_document" style="
 				display:block; 
@@ -53,7 +57,7 @@
 				padding-bottom: 0px;
 				margin:0px 0px 10px auto;
 			">
-			{{ render_module( 'document' ) }}
+				{{ render_module( 'document' ) }}
 			</div>
 		</td>
 		<td style="width:20%; min-width:5cm; height: 95%; padding:0.1cm;">
@@ -64,7 +68,7 @@
 			overflow:auto;
 			margin:0px auto 10px auto;
 			">
-			{{ render_module( 'quickskin' ) }}
+				{{ render_module( 'quickskin' ) }}
 			</div>
 
 			<div id="layout_search" style="
@@ -74,8 +78,8 @@
 			overflow:auto;
 			margin:0px auto 10px auto;
 			">
-			{{ render_module( 'search' ) }}
-			</div>			
+				{{ render_module( 'search' ) }}
+			</div>
 		</td>
 	</tr>
 	<tr>
@@ -95,7 +99,6 @@
 	</tr>
 </table>
 
-<div id="layout_tooltip" 
-style="top:0px; left:0px; width:1cm; height:1cm; z-index:500;">
-{{ render_module( 'tooltip' ) }}
+<div id="layout_tooltip" style="top:0px; left:0px; width:1cm; height:1cm; z-index:500;">
+	{{ render_module( 'tooltip' ) }}
 </div>

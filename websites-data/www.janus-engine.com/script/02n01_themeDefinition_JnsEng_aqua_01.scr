@@ -1,8 +1,8 @@
 
 add theme_definition for_theme "JnsEng_aqua_01"	name "stylesheet_1"	type	"string"	string	"JnsEng_aqua_01.css";
 add theme_definition for_theme "JnsEng_aqua_01"	name "directory"	type	"string"	string	"Aqua";
-add theme_definition for_theme "JnsEng_aqua_01"	name "height"		type	"string"	string	"97%";
-add theme_definition for_theme "JnsEng_aqua_01"	name "width"		type	"string"	string	"97%";
+add theme_definition for_theme "JnsEng_aqua_01"	name "bodyHeight"	type	"string"	string	"97%";
+add theme_definition for_theme "JnsEng_aqua_01"	name "bodyWidth"	type	"string"	string	"97%";
 
 add theme_definition for_theme "JnsEng_aqua_01"	name "bg"			type	"string"	string	"aqua_bg.png";
 add theme_definition for_theme "JnsEng_aqua_01"	name "bg_repeat"	type	"string"	string	"repeat";

@@ -875,10 +875,10 @@ class JanusEngine
 		$Content .= "<body id='JnsEngBody' ";
 		$Content .= "style='";
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('width') ?? '') > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyWidth') ?? '') > 0) {
 			$Content .= "width:" . $this->ThemeDataObj->getDefinitionValue('width') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('height') ?? '') > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyHeight') ?? '') > 0) {
 			$Content .= "height:" . $this->ThemeDataObj->getDefinitionValue('height') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width') ?? '') > 0) {
