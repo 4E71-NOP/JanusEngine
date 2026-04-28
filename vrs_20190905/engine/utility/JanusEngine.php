@@ -872,14 +872,16 @@ class JanusEngine
 					";
 				break;
 		}
+
+		// Main body
 		$Content .= "<body id='JnsEngBody' ";
 		$Content .= "style='";
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyWidth') ?? '') > 0) {
-			$Content .= "width:" . $this->ThemeDataObj->getDefinitionValue('width') . "; ";
+			$Content .= "width:" . $this->ThemeDataObj->getDefinitionValue('bodyWidth') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyHeight') ?? '') > 0) {
-			$Content .= "height:" . $this->ThemeDataObj->getDefinitionValue('height') . "; ";
+			$Content .= "height:" . $this->ThemeDataObj->getDefinitionValue('bodyHeight') . "; ";
 		}
 		if (strlen($this->ThemeDataObj->getDefinitionValue('min_width') ?? '') > 0) {
 			$Content .= "min-width:" . $this->ThemeDataObj->getDefinitionValue('min_width') . "; ";
@@ -894,20 +896,20 @@ class JanusEngine
 			$Content .= "max-height:" . $this->ThemeDataObj->getDefinitionValue('max_height') . "; ";
 		}
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg') ?? '') > 0) {
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyBg') ?? '') > 0) {
 			$Content .= "background-image: url("
 				. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
-				. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('bg') . '); ';
+				. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('bodyBg') . '); ';
 		}
 
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_position') ?? '') > 0) {
-			$Content .= "background-position:" . $this->ThemeDataObj->getDefinitionValue('bg_position') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyBg_position') ?? '') > 0) {
+			$Content .= "background-position:" . $this->ThemeDataObj->getDefinitionValue('bodyBg_position') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_repeat') ?? '') > 0) {
-			$Content .= "background-repeat:" . $this->ThemeDataObj->getDefinitionValue('bg_repeat') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyBg_repeat') ?? '') > 0) {
+			$Content .= "background-repeat:" . $this->ThemeDataObj->getDefinitionValue('bodyBg_repeat') . "; ";
 		}
-		if (strlen($this->ThemeDataObj->getDefinitionValue('bg_color') ?? '') > 0) {
-			$Content .= "background-color:#" . $this->ThemeDataObj->getDefinitionValue('bg_color') . "; ";
+		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyBg_color') ?? '') > 0) {
+			$Content .= "background-color:#" . $this->ThemeDataObj->getDefinitionValue('bodyBg_color') . "; ";
 		}
 		$Content .= "'\r";
 
@@ -918,6 +920,21 @@ class JanusEngine
 				"' alink='" . $this->ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') . "' ";
 		}
 		$Content .= ">\r ";
+
+		// Background divs 1 to 5
+		// Div[x]Bg are DIVs that will live as background images atop body and atop each other from 1 to 5.
+		for ($divNbr = 1; $divNbr <= 5; $divNbr++) {
+			if (strlen($this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg') ?? '') > 0) {
+				$Content .= "<div id='div" . $divNbr . "bg' style='background-image: url("
+					. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg') . '); ';
+
+				if (strlen($this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg_style') ?? '') > 0) {
+					$Content .= $this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg_style');
+				}
+				$Content .= "'>\r</div>\r";
+			}
+		}
 
 		foreach ($this->ContentFragments as &$A) {
 			$Content .= $A['content'];

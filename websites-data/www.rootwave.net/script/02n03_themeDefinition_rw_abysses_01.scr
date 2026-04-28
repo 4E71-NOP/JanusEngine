@@ -1,16 +1,20 @@
 add theme_definition for_theme 'rw_abysses_01' name 'stylesheet_1' type 'string'  string 'rw_abysses_01.css';
 add theme_definition for_theme 'rw_abysses_01' name 'directory' type 'string'  string 'Abysses';
+add theme_definition for_theme 'rw_abysses_01' name 'bodyHeight' type 'string'  string '100%';
+add theme_definition for_theme 'rw_abysses_01' name 'bodyWidth' type 'string'  string '100%';
 
+add theme_definition for_theme 'rw_abysses_01' name 'bodyBg' type 'string'  string 'abysses_bg.png';
+add theme_definition for_theme 'rw_abysses_01' name 'bodyBg_position' type 'string'  string 'center top';
+add theme_definition for_theme 'rw_abysses_01' name 'bodyBg_repeat' type 'string'  string 'no-repeat';
+add theme_definition for_theme 'rw_abysses_01' name 'bodyBg_color' type 'string'  string '000000';
 
+add theme_definition for_theme 'rw_abysses_01' name 'div1Bg' type 'string'  string 'abysses_div1bg.png';
+add theme_definition for_theme 'rw_abysses_01' name 'div1Bg_style' type 'string'  string 'width :100%; height :100%; position :absolute; background-repeat: repeat ; background-position: top; background-attachment: fixed;';
 
+add theme_definition for_theme 'rw_abysses_01' name 'div2Bg' type 'string'  string 'abysses_div1bg.png';
+add theme_definition for_theme 'rw_abysses_01' name 'div2Bg_style' type 'string'  string 'width :100%; height :100%; position :absolute; background-repeat: repeat ; background-position: bottom; background-attachment: fixed;';
 
-
-
-add theme_definition for_theme 'rw_abysses_01' name 'bg' type 'string'  string 'abysses_bg.png';
-
-add theme_definition for_theme 'rw_abysses_01' name 'bg_repeat' type 'string'  string 'repeat';
-add theme_definition for_theme 'rw_abysses_01' name 'bg_color' type 'string'  string '000000';
-add theme_definition for_theme 'rw_abysses_01' name 'logo' type 'string'  string 'abysses_logo_rw.png';
+add theme_definition for_theme 'rw_abysses_01' name 'logo' type 'string'  string 'abysses_logo_jnseng.png';
 
 add theme_definition for_theme 'rw_abysses_01' name 'block_01_name' type 'string'  string 'rw_abysses_block_001';
 add theme_definition for_theme 'rw_abysses_01' name 'block_02_name' type 'string'  string 'rw_abysses_block_002';

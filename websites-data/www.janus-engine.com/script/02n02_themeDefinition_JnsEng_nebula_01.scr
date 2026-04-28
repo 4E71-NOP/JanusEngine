@@ -6,10 +6,10 @@ add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyWidth' type 'string'
 add theme_definition for_theme 'JnsEng_nebula_01' name 'min_height' type 'string'  string '100%';
 
 
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bg' type 'string'  string 'nebula_bg.png';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bg_position' type 'string'  string 'top';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bg_repeat' type 'string'  string 'no-repeat';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bg_color' type 'string'  string '000000';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg' type 'string'  string 'nebula_bg.png';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_position' type 'string'  string 'top';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_repeat' type 'string'  string 'no-repeat';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_color' type 'string'  string '000000';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'logo' type 'string'  string 'nebula_logo_JnsEng.png';
 
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_01_name' type 'string'  string 'nebula_block_001';

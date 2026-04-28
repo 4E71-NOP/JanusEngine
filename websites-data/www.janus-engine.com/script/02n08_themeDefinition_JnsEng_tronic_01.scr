@@ -1,9 +1,9 @@
 
 add theme_definition for_theme "JnsEng_tronic_01"	name "directory"	type	"string"	string	"Tronic";
-add theme_definition for_theme "JnsEng_tronic_01"	name "bg"			type	"string"	string	"tronic_bg.png";
-add theme_definition for_theme "JnsEng_tronic_01"	name "bg_repeat"	type	"string"	string	"repeat";
-add theme_definition for_theme "JnsEng_tronic_01"	name "bg_color"		type	"string"	string	"000000";
-add theme_definition for_theme "JnsEng_tronic_01"	name "logo"			type	"string"	string	"tronic_logo_hydr.png";
+add theme_definition for_theme "JnsEng_tronic_01"	name "bodyBg"			type	"string"	string	"tronic_bg.png";
+add theme_definition for_theme "JnsEng_tronic_01"	name "bodyBg_repeat"	type	"string"	string	"repeat";
+add theme_definition for_theme "JnsEng_tronic_01"	name "bodyBg_color"		type	"string"	string	"000000";
+add theme_definition for_theme "JnsEng_tronic_01"	name "logo"				type	"string"	string	"tronic_logo_hydr.png";
 
 add theme_definition for_theme "JnsEng_tronic_01"	name "block_01_name"	type	"string"	string	"tronic_block_001";
 add theme_definition for_theme "JnsEng_tronic_01"	name "block_02_name"	type	"string"	string	"tronic_block_002";
