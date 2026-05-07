@@ -932,7 +932,7 @@ class JanusEngine
 				if (strlen($this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg_style') ?? '') > 0) {
 					$Content .= $this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg_style');
 				}
-				$Content .= "'>\r</div>\r";
+				$Content .= "z-index: -" . $divNbr . ";'>\r</div>\r";
 			}
 		}
 
