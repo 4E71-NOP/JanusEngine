@@ -115,19 +115,19 @@ class  RenderTables
 		//	Display
 		//
 
+		$Height = ($tab_infos['Height'] > 0) ? "height:" . $tab_infos['Height'] . "px; " : "height:95%; ";
+
 		if ($tab_infos['EnableTabs'] != 0) {
-			$Height = ($tab_infos['Height'] > 0) ? "height:" . $tab_infos['Height'] . "px; " : "height:auto; ";
 			$Content .= "<div id='AD_" . $tab_infos['GroupName'] . "_" . $tab_infos['DocumentName'] . "' class='" . $Block . "_tabFrame' style='width:100%; padding:0px; margin:0px; overflow:auto; " . $Height . "' >\r"; // overflow:hidden;
 		}
 
 		$TableWidth = ($tab_infos['Width'] - 32);
 		$visibility = ($infos['initial_visibility']) ? $infos['initial_visibility'] : "visible";
 		for ($CurT = 1; $CurT <= $tab_infos['NbrOfTabs']; $CurT++) {
-			if ($CurT > 1) {
-				$visibility = "hidden";
-			}
+
+			$visibility = ($CurT > 1) ? "visibility:hidden; display:none;" : "visibility:visible; display:contents;";
 			if ($tab_infos['EnableTabs'] != 0) {
-				$Content .= "<div id='" . $tab_infos['GroupName'] . "_" . $tab_infos['DocumentName'] . $CurT . "' style='position:absolute; visibility:" . $visibility . "; width:100%; " . $Height . " overflow:auto;'>\r"; // position:absolute;
+				$Content .= "<div id='" . $tab_infos['GroupName'] . "_" . $tab_infos['DocumentName'] . $CurT . "' style='position:absolute; " . $visibility . " width:100%; " . $Height . "overflow:auto;'>\r"; // position:absolute;
 			}
 
 			unset($A);

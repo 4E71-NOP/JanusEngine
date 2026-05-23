@@ -50,7 +50,7 @@ class ModuleGlobalReport
 			$T = array();
 			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "/i18n/" . $l . ".php", "format" => "php"));
 
-			$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25, 8);
+			$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 8);
 			$T['ContentInfos']['NbrOfTabs'] = 0;
 			$dbgLvl = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : \$dbgLvl=" . $dbgLvl . ", binary is:`" . sprintf('%016b', $dbgLvl) . "`"));
@@ -220,6 +220,11 @@ class ModuleGlobalReport
 			'0',
 			'RW-1234-4321-8765-5678-9999'
 			);");
+
+			$dbp = array(
+				"def_number"	=>	1779545573,
+				"def_text"		=>	"RW-1234-4321-8765-5678-9999",
+			);
 		}
 
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

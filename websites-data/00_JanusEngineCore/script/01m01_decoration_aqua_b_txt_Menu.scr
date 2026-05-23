@@ -4,30 +4,30 @@ directory	'Aqua'
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
 txt_font_family	'Arial'	txt_font_size	'14'				
+txt_font_name_normal	'Arial'						
+txt_font_name_bold	'Arial'						
+txt_font_name_italic	'Arial'						
 							
-							
-							
-							
-h1_font_family	'Arial'	h1_font_size	'26'	h1_txt_col	'000000'	h1_special	'font-weight:bold;'
-h2_font_family	'Arial'	h2_font_size	'24'	h2_txt_col	'000000'	h2_special	'font-weight:bold;'
-h3_font_family	'Arial'	h3_font_size	'22'	h3_txt_col	'000000'	h3_special	'font-weight:bold;'
-h4_font_family	'Arial'	h4_font_size	'20'	h4_txt_col	'000000'	h4_special	'font-weight:bold;'
-h5_font_family	'Arial'	h5_font_size	'18'	h5_txt_col	'000000'	h5_special	'font-weight:bold;'
-h6_font_family	'Arial'	h6_font_size	'16'	h6_txt_col	'000000'	h6_special	'font-weight:bold;'
-h7_font_family	'Arial'	h7_font_size	'14'	h7_txt_col	'000000'	h7_special	'font-weight:bold;'
+h1_font_family	'Arial'	h1_font_size	'24'	h1_txt_col	'FFFFFF'	h1_special	'font-weight:bold;'
+h2_font_family	'Arial'	h2_font_size	'22'	h2_txt_col	'FFFFFF'	h2_special	'font-weight:bold;'
+h3_font_family	'Arial'	h3_font_size	'21'	h3_txt_col	'FFFFFF'	h3_special	'font-weight:bold;'
+h4_font_family	'Arial'	h4_font_size	'19'	h4_txt_col	'FFFFFF'	h4_special	'font-weight:bold;'
+h5_font_family	'Arial'	h5_font_size	'17'	h5_txt_col	'FFFFFF'	h5_special	'font-weight:bold;'
+h6_font_family	'Arial'	h6_font_size	'16'	h6_txt_col	'FFFFFF'	h6_special	'font-weight:bold;'
+h7_font_family	'Arial'	h7_font_size	'14'	h7_txt_col	'FFFFFF'	h7_special	'font-weight:bold;'
 							
 		p_txt_align	'justify'				
 							
-		p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 							
 							
 txt_col	'000000'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
-txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
+txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF8080'	txt_fade_col	'C0C0C0'
 							
-a_fg_col	'000000'			a_decoration	'none'	a_special	'display:block;'
-a_hover_fg_col	'000000'	a_hover_bg_col	'B0E0FF'			a_hover_special	'font-weight:bold;display:block;'
-							
-							
+a_fg_col	'000000'			a_decoration	'none'		
+a_hover_fg_col	'000000'					a_hover_special	'font-weight:bold;'
+a_active_fg_col	'000000'						
+a_visited_fg_col	'000000'						
 							
 table_rules	'border-spacing:0px; cellspacing:0px; width:100%'						
 t01_caption_fg_col	'000000'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
@@ -49,9 +49,9 @@ code_font	'courier, monospace'	code_fg_col	'008000'	code_bg_col	'000000CC'
 code_pad_top	'3'	code_pad_bottom	'5'	code_pad_left	'3'	code_pad_right	'3'
 code_special	'display:block; border-radius:2.5mm;'						
 							
-input_fg_col	'000000'	input_bg_col	'FFFFFF'				
+input_fg_col	'000000'	input_bg_col	'FFFFFF'	input_special	'box-shadow: inset 5px 3px 3px #00000040; border-radius:10px; min-height: 24px; padding: 5px;'		
 							
-		td_input_bg_col	'E8F8FF'				
+td_input_fg_col	'000000'	td_input_bg_col	'E8F8FF'	td_input_special	'box-shadow: inset 5px 3px 3px #00000040; border-radius:10px; min-height: 24px; padding: 5px;'		
 							
 s1_txt_col	'EEEEEE'	s2_txt_col	'EEEEEE'	s3_txt_col	'EEEEEE'		
 s1_txt_weight	'bold'	s2_txt_weight	'bold'	s3_txt_weight	'bold'		
@@ -89,7 +89,6 @@ icon_directory	'aqua_B01_icon_directory.png'	icon_erase	'aqua_B01_icon_erase.png
 icon_ok	'aqua_B01_icon_ok.png'	icon_nok	'aqua_B01_icon_ko.png'				
 icon_left	'aqua_B01_icon_left.png'	icon_right	'aqua_B01_icon_right.png'	icon_top	'aqua_B01_icon_up.png'	icon_bottom	'aqua_B01_icon_down.png'
 icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_notification.png'				
-transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						
 ;							

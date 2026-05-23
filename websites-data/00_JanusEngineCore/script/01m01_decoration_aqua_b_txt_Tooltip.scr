@@ -18,7 +18,7 @@ h7_font_family	'Arial'	h7_font_size	'14'	h7_txt_col	'FFFFFF'	h7_special	'font-we
 							
 		p_txt_align	'justify'				
 							
-		p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
+p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
 							
 							
 txt_col	'FFFFFF'	txt_highlight_col	'404000'			txt_title_col	'FFFFFF'
@@ -85,11 +85,10 @@ a_visited_fg_col	'FFFFFF'
 							
 							
 							
-icon_directory	'aqua_B01_icon_directory.png'	icon_erase	'aqua_B01_icon_erase.png'				
-icon_ok	'aqua_B01_icon_ok.png'	icon_nok	'aqua_B01_icon_ko.png'				
-icon_left	'aqua_B01_icon_left.png'	icon_right	'aqua_B01_icon_right.png'	icon_top	'aqua_B01_icon_up.png'	icon_bottom	'aqua_B01_icon_down.png'
-icon_question	'aqua_B01_icon_question.png'	icon_notification	'aqua_B01_icon_notification.png'				
-transparent_8x8	'empty.gif'						
+icon_directory	'aqua_Aqua_icon_directory.png'	icon_erase	'aqua_Aqua_icon_erase.png'				
+icon_ok	'aqua_Aqua_icon_ok.png'	icon_nok	'aqua_Aqua_icon_ko.png'				
+icon_left	'aqua_Aqua_icon_left.png'	icon_right	'aqua_Aqua_icon_right.png'	icon_top	'aqua_Aqua_icon_up.png'	icon_bottom	'aqua_Aqua_icon_down.png'
+icon_question	'aqua_Aqua_icon_question.png'	icon_notification	'aqua_Aqua_icon_notification.png'				
 icon_width	'32'						
 icon_height	'32'						
 ;							

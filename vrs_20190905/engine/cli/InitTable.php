@@ -283,8 +283,6 @@ self::$InitTable['decoration'] = function (&$a) {
 		"tab_offset_x" => 	"",
 		"tab_offset_y" => 	"",
 
-		"transparent_8x8"		=> "transparent_8x8.png",
-
 		"p_mrg_top" => 0,		"p_mrg_bottom" => 0,
 		"p_mrg_left" => 0,		"p_mrg_right" => 0,
 		"p_pad_top" => 0,		"p_pad_bottom" => 5,
@@ -399,7 +397,6 @@ self::$InitTable['decoration'] = function (&$a) {
 		"icon_bottom" => 	"",
 		"icon_question" => 	"",
 		"icon_notification" => 	"",
-		"transparent_8x8" => 	"",
 		"icon_width" => 	"32",
 		"icon_height" => 	"32",
 
@@ -495,7 +492,6 @@ self::$InitTable['decoration'] = function (&$a) {
 			"ft1",						"ft2",						"ft3",	
 			"ft1_x",					"ft3_x",					"ft_y",
 
-			"transparent_8x8",	
 			"icone_dim_x",	"icone_dim_y",
 
 
@@ -632,7 +628,6 @@ self::$InitTable['decoration'] = function (&$a) {
 			"icon_bottom",
 			"icon_question",
 			"icon_notification",
-			"transparent_8x8",
 			"icon_width",
 			"icon_height",
 

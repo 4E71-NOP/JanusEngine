@@ -117,7 +117,7 @@ class InstallPage01
 		$infos['iconGoNoGoOk'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') .	"' width='18' height='18' border='0'>";
 		$infos['iconGoNoGoNok'] = "<img src='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_notification') .	"' width='18' height='18' border='0'>";
 
-		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, 7);
+		$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 7);
 
 		$this->serverInfos($infos, 1);
 		$this->databaseAccess($infos, 2);
@@ -178,8 +178,7 @@ class InstallPage01
 		);
 
 		$Content .= "
-		<br>\r
-		<br>\r
+		<p>\r
 		<div style='position: absolute; text-align: center; width: 100%;'>\r
 		<table cellpadding='0' cellspacing='0' style='margin-left: auto; margin-right: auto;'>
 		<tr>\r
@@ -191,6 +190,7 @@ class InstallPage01
 		</tr>\r
 		</table>\r
 		</div>\r
+		</p>\r
 		<input type='hidden' name='PageInstall' value='2'>\r
 		<input type='hidden' name='installToken' value='" . $installToken . "'>\r
 		<input type='hidden' name='l' value='" . $CurrentSetObj->getDataEntry('language') . "'>\r

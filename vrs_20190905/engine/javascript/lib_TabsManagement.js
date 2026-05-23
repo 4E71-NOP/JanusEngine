@@ -82,7 +82,7 @@ class TabsManagement {
 					te[t].up.idb.className = ts.up.Stylb;
 					te[t].up.idc.className = ts.up.Stylc;
 					elm.Gebi(Group + '_' + CardName + cpt).style.visibility = 'visible';
-					elm.Gebi(Group + '_' + CardName + cpt).style.display = 'block';
+					elm.Gebi(Group + '_' + CardName + cpt).style.display = 'contents'; // block, contents
 					te[t].isSelected = 1;
 					break;
 				case 12:

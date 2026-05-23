@@ -27,8 +27,10 @@ class GlobalReport {
 			divGR.style.left = Math.floor((window.innerWidth - divGR.clientWidth) / 2) + "px";
 			divGR.style.top = Math.floor(((window.innerHeight - divGR.clientHeight) / 2) + window.scrollY) + "px";
 
-			let bodySizes = document.body.getBoundingClientRect();
-			divBG.style.height = Math.ceil(bodySizes.bottom + 32) + 'px';
+			// clean up 20260523
+			// Height 100% is enough
+			// let bodySizes = document.body.getBoundingClientRect();
+			// divBG.style.height = Math.ceil(bodySizes.bottom + 32) + 'px';
 
 			l.Log[this.dbgGr](document.body.getBoundingClientRect());
 
@@ -51,6 +53,5 @@ class GlobalReport {
 		var cs = getComputedStyle(elm);
 		return (elm.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom));
 	}
-
 
 }
