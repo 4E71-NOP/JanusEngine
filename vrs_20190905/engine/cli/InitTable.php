@@ -22,9 +22,9 @@ self::$InitTable['article'] = function (&$a) {
 		"config_id" => 0,
 
 		"creator" => $a['Initiator']['user_name'],
-		"creation_date" => 0,
+		"creation_date" => time(),
 		"validator" => $a['Initiator']['user_name'],
-		"validation_date" => 0,
+		"validation_date" => time(),
 		"validation_state" => "NON_VALIDE",
 
 		"parution_date" => 0,
@@ -789,7 +789,7 @@ self::$InitTable['document'] = function (&$a) {
 		"creation_date"		=> time(),
 		"validation"		=> "NO",
 		"validator"			=> $a['Initiator']['db_login'],
-		"validation_date"	=> 0,
+		"validation_date"	=> time(),
 		"content"			=> "",
 		"from_site"			=> "",
 		"with_site"			=> "",

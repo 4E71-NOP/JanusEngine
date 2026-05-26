@@ -1,16 +1,32 @@
-add theme_definition for_theme 'JnsEng_nebula_01' name 'stylesheet_1' type 'string'  string 'JnsEng_nebula_01.css';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'stylesheet_1' type 'string'  string 'nebula_01.css';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'directory' type 'string'  string 'Nebula';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyHeight' type 'string'  string '100%';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyWidth' type 'string'  string '100%';
 
-add theme_definition for_theme 'JnsEng_nebula_01' name 'min_height' type 'string'  string '100%';
 
 
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg' type 'string'  string 'nebula_bg.png';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_position' type 'string'  string 'top';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_repeat' type 'string'  string 'no-repeat';
+
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg' type 'string'  string 'nebula_bg.svg';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_position' type 'string'  string 'center top';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_repeat' type 'string'  string 'repeat-x';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'bodyBg_color' type 'string'  string '000000';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'logo' type 'string'  string 'nebula_logo_JnsEng.png';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add theme_definition for_theme 'JnsEng_nebula_01' name 'logo' type 'string'  string 'nebula_logo_jnseng.png';
 
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_01_name' type 'string'  string 'nebula_block_001';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_02_name' type 'string'  string 'nebula_block_002';
@@ -62,7 +78,7 @@ add theme_definition for_theme 'JnsEng_nebula_01' name 'block_16_text' type 'str
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_17_text' type 'string'  string 'nebula_txt_main';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_18_text' type 'string'  string 'nebula_txt_main';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_19_text' type 'string'  string 'nebula_txt_main';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'block_20_text' type 'string'  string 'nebula_txt_main';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'block_20_text' type 'string'  string 'nebula_txt_tooltip';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_21_text' type 'string'  string 'nebula_txt_main';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_22_text' type 'string'  string 'nebula_txt_main';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'block_23_text' type 'string'  string 'nebula_txt_main';
@@ -89,8 +105,9 @@ add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_panel_bg' type '
 add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_switch_bg' type 'string'  string 'nebula_admctrl_switch_bg.png';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_width' type 'number'  number '64';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_height' type 'number'  number '64';
-add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_position' type 'number'  string 'top-left';
+add theme_definition for_theme 'JnsEng_nebula_01' name 'admctrl_position' type 'string'  string 'top-left';
 
 add theme_definition for_theme 'JnsEng_nebula_01' name 'gradient_color_start' type 'string'  string 'C33A09';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'gradient_color_middle' type 'string'  string '0897DF';
 add theme_definition for_theme 'JnsEng_nebula_01' name 'gradient_color_end' type 'string'  string 'CFC600';
+

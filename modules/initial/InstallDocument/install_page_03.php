@@ -234,7 +234,7 @@ class InstallPage03 {
 							)
 			);
 			
-			$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 25, $CurrentTab-1);
+			$this->T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, $CurrentTab-1);
 			$this->T['ContentInfos']['tabTxt1']			= $bts->I18nTransObj->getI18nTransEntry('tab_1');
 			$this->T['ContentInfos']['tabTxt2']			= $bts->I18nTransObj->getI18nTransEntry('tab_2');
 			$this->T['ContentInfos']['tabTxt3']			= $bts->I18nTransObj->getI18nTransEntry('tab_3');
