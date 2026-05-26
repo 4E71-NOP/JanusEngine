@@ -35,20 +35,21 @@ class ModuleLogo {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module '".$infos['module_name']."' is greeting you with the Fibonacci number : " . $n));
 
 		$Content = "";
-		
+
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Module '" . $infos['module_name'] . "' Link homepage as : '" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "'."));
 		$Content .= "
 		<div style='text-align: center;'>\r
-		<a href='".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_home')."' onMouseOver=\"t.ToolTip('".$bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip'))."')\" onMouseOut=\"t.ToolTip()\">\r
-		<img src='".
+		<a href='/' onMouseOver=\"t.ToolTip('" . $bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip')) . "')\" onMouseOut=\"t.ToolTip()\">\r
+		<img src='" .
 			$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
-			."media/theme/".$CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
-			."/".$CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
-			."' alt='".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name')."' style='border:0px'
+			. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
+			. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
+			. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'
 		>\r
 		</a>\r
 		</div>\r
 		";
-		
+
 		// Cleaning up
 		if ( $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug') < 10 ) {
 			unset (
