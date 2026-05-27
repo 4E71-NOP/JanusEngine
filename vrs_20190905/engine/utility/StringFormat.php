@@ -518,6 +518,14 @@ class StringFormat
 		return $Tmp;
 	}
 
+	/**
+	 * Returns a JSON string in a better shape for HTML display
+	 */
+	public function jsonSimpleTransformForHtml($input)
+	{
+		$tab_srch = array('} ', ',"', '{"', '}');
+		$tab_rplc = array('} <br>', ',<br>"', '{<br>"', '<br>}');
+		return str_replace($tab_srch, $tab_rplc, $input);
+	}
 
-	
 }

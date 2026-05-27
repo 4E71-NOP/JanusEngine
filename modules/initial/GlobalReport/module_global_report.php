@@ -218,7 +218,7 @@ class ModuleGlobalReport
 			'1',
 			'sl',
 			'0',
-			'RW-1234-4321-8765-5678-9999'
+			'JnsEng-1234-4321-8765-5678-9999'
 			);");
 
 			$dbp = array(
@@ -255,8 +255,19 @@ class ModuleGlobalReport
 			$PHPMailerObj->addAddress('licence@rootwave.net');	 												//Add a recipient
 			$PHPMailerObj->isHTML(true);																//Set email format to HTML
 			$PHPMailerObj->Subject = $WebSiteObj->getWebSiteEntry('ws_name') . " - License - " . $pv['def_text'];
-
-			$PHPMailerObj->Body = "\r\nActive licence : " . $pv['def_text'] . "\r\n";
+			// $bts->StringFormatObj->print_r_html(
+			$PHPMailerObj->Body = "<html>\r<body>\r"
+				. "Monthly check for active licence : <span style='font-weight:bold;'>" . $pv['def_text'] . "</span><br>\r"
+				. "<hr>\r"
+				. "ServerInfos : " . $bts->StringFormatObj->jsonSimpleTransformForHtml(json_encode($CurrentSetObj->ServerInfosObj->getServerInfos()))
+				. "<hr>\r"
+				. "Website : " . $bts->StringFormatObj->jsonSimpleTransformForHtml(json_encode($CurrentSetObj->WebSiteObj->getWebSite()))
+				. "<hr>\r"
+				. "<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+				. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
+				. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
+				. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>"
+				. "<br>\r";
 			$PHPMailerObj->send();
 
 			$pv['def_number'] = time();
