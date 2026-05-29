@@ -58,7 +58,7 @@ class  RenderTables
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " Start"));
 
-		$Content = "<!-- Render Table Begin -->\r<div style='width:100%;'>\r";
+		$Content = "<!-- Render Table Begin -->\r<div style='width:100%; height:100%'>\r";
 		if ($T['ContentInfos']['NbrOfTabs'] == 0) {
 			$T['ContentInfos']['NbrOfTabs'] = 1;
 		}
