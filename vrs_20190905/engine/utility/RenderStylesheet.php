@@ -16,6 +16,10 @@ class RenderStylesheet {
 	private $ThemeDataObj = null;
 	// private $themeDefinitionArray = null;
 
+	private $mainUnit;
+	private $fontUnit;
+
+
 	public function __construct() {}
 	
 	/**
@@ -255,15 +259,17 @@ html { width:100%; height:100%;}\r\r
 		// https://www.w3.org/Style/Examples/007/units.fr.html
 		// The choice is made as 'everything' is bound to a main unit (mostly mm).
 		// Font are the exeption as it can be tricky sometimes depending on browsers.
-		$mainUnit = $p['main_unit'];
-		$fontUnit = $p['txt_font_unit'];
+		$this->mainUnit = $p['main_unit'];
+		$this->fontUnit = $p['txt_font_unit'];
 		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
 		
 		$Content = "";
+		if (strlen($p['common_content'] ?? '') > 0) { $Content .= ".common_content { " . $p['common_content'] . "}"; }
+
 		$Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft",					" { border-spacing: 0px; border: 0px;	empty-cells: show; vertical-align: middle; } \r");
 		// If no background image is defined the style isn't rendered.
 		if ( strlen($p['ft1_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft1",				" { padding: 0px;	border: 0px;	width: ".$p['ft1_width']."px;	max-width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft1_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft1_bg'].");" :"")."	".$p['ft1_special']. " } \r");																												}
-		if ( strlen($p['ft2_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;																		height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$fontUnit."; } \r");									}
+		if ( strlen($p['ft2_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft2",				" { padding: 0px;	border: 0px;																		height: ".$p['ft_height']."px;	".((strlen($p['ft2_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft2_bg'].");" :"")."	".$p['ft2_special']. " 	color: ".$p['ft2_fg_col']."; font-size:".$p['ft2_font_size'].$this->fontUnit."; } \r");									}
 		if ( strlen($p['ft3_bg'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_ft3",				" { padding: 0px;	border: 0px;	width: ".$p['ft3_width']."px;	max-width: ".$p['ft1_width']."px;	height: ".$p['ft_height']."px;	".((strlen($p['ft3_bg'] ?? '')>0)? "background-image: url(".$baseUrl."media/theme/".$dir."/".$p['ft3_bg'].");" :"")."	".$p['ft3_special']. " } \r");																												}
 
 		if ( strlen($p['s1_a'] ?? '')>0)	{ $Content .= $this->makeCssIdString ($infos, ".",		$infos['currentBlock'], "T", "_submit_s1_n01",		" { width: ".$p['s1_01_width']."px;	height: ".$p['s1_01_height']."px; 								background-image: url(".$baseUrl."media/theme/".$dir."/".$p['s1_a'].");	background-position: 0px 0px;											border-width : 0px; 	padding: 0px;	border-style: none;	color: ".$p['s1_txt_col'].";}\r");																																		}
@@ -649,8 +655,8 @@ html { width:100%; height:100%;}\r\r
 				"warning_col"	=>	"color",
 		);
 		foreach ($infos as $A) {
-			$mainUnit = $p['main_unit'];
-			$fontUnit = $p['txt_font_unit'];
+			$this->mainUnit = $p['main_unit'];
+			$this->fontUnit = $p['txt_font_unit'];
 			
 			switch ($A) {
 				case "mrg_top":
@@ -664,13 +670,13 @@ html { width:100%; height:100%;}\r\r
 				case "txt_indent":
 					if ( $p[$elm.'_'.$A] != 0 )	{ 
 						$str .= $tab[$A] .":".$p[$elm.'_'.$A];
-						if ( strpos($p[$elm.'_'.$A], 'auto') === false ) { $str .= $mainUnit;}
+						if ( strpos($p[$elm.'_'.$A], 'auto') === false ) { $str .= $this->mainUnit;}
 						$str .= "; ";
 					}
 					break;
 				case "fonte_size":
 				case "font_size":
-					if ( $p[$elm.'_'.$A] != 0 )	{ $str .= $tab[$A] .":".$p[$elm.'_'.$A].$fontUnit."; ";}
+					if ( $p[$elm.'_'.$A] != 0 )	{ $str .= $tab[$A] .":".$p[$elm.'_'.$A].$this->fontUnit."; ";}
 					break;
 				case "bg_col":
 				case "col":

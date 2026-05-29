@@ -290,6 +290,7 @@ self::$InitTable['decoration'] = function (&$a) {
 
 		// ***************************************************************************
 		// New style
+		"common_content" => 	"",
 		"main_unit" => 	"mm",
 		"txt_font_unit" => 	"px",
 		"txt_font_family" => 	"Arial",
@@ -443,6 +444,8 @@ self::$InitTable['decoration'] = function (&$a) {
 
 		"a_line_height"			=> 14,
 	);
+
+	// Commands CLI will look for variables registered in this list, and ignore the rest
 	$a['listVars'] = array(
 		"10" => array(
 			"id",	
@@ -491,13 +494,13 @@ self::$InitTable['decoration'] = function (&$a) {
 			"p_pad_left",				"p_pad_right",	
 			"ft1",						"ft2",						"ft3",	
 			"ft1_x",					"ft3_x",					"ft_y",
-
+			
 			"icone_dim_x",	"icone_dim_y",
-
-
+			
+			
 			// ***************************************************************************
 			// new style
-
+			"common_content",
 			"main_unit",
 			"txt_font_unit",
 			"txt_font_family",

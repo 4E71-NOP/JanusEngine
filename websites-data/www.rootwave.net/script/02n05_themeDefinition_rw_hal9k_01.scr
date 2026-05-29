@@ -1,20 +1,37 @@
 add theme_definition for_theme 'rw_hal9k_01' name 'stylesheet_1' type 'string'  string 'hal9k_01.css';
 add theme_definition for_theme 'rw_hal9k_01' name 'directory' type 'string'  string 'Hal9k';
-
-
+add theme_definition for_theme 'rw_hal9k_01' name 'bodyHeight' type 'string'  string '100%';
+add theme_definition for_theme 'rw_hal9k_01' name 'bodyWidth' type 'string'  string '100%';
 
 
 
 
 add theme_definition for_theme 'rw_hal9k_01' name 'bodyBg' type 'string'  string 'hal9k_bg.png';
-add theme_definition for_theme 'rw_hal9k_01' name 'bodyBg_repeat' type 'string'  string 'repeat';
+add theme_definition for_theme 'rw_hal9k_01' name 'bodyBg_position' type 'string'  string 'center top';
+add theme_definition for_theme 'rw_hal9k_01' name 'bodyBg_repeat' type 'string'  string 'no-repeat';
 add theme_definition for_theme 'rw_hal9k_01' name 'bodyBg_color' type 'string'  string '000000';
+
+add theme_definition for_theme 'rw_hal9k_01' name 'div1Bg' type 'string'  string 'hal9k_div1bg.png';
+add theme_definition for_theme 'rw_hal9k_01' name 'div1Bg_style' type 'string'  string 'width :100%; height :100%; position :absolute; background-repeat: repeat ; background-position: top; background-attachment: fixed;';
+
+add theme_definition for_theme 'rw_hal9k_01' name 'div2Bg' type 'string'  string 'hal9k_div1bg.png';
+add theme_definition for_theme 'rw_hal9k_01' name 'div2Bg_style' type 'string'  string 'width :100%; height :100%; position :absolute; background-repeat: repeat ; background-position: bottom; background-attachment: fixed;';
+
+
+
+
+
+
+
+
+
+
 add theme_definition for_theme 'rw_hal9k_01' name 'logo' type 'string'  string 'hal9k_logo_rw.png';
 
 add theme_definition for_theme 'rw_hal9k_01' name 'block_01_name' type 'string'  string 'hal9k_block_001';
 add theme_definition for_theme 'rw_hal9k_01' name 'block_02_name' type 'string'  string 'hal9k_block_002';
-add theme_definition for_theme 'rw_hal9k_01' name 'block_03_name' type 'string'  string 'hal9k_block_003';
-add theme_definition for_theme 'rw_hal9k_01' name 'block_04_name' type 'string'  string 'hal9k_block_004';
+add theme_definition for_theme 'rw_hal9k_01' name 'block_03_name' type 'string'  string 'hal9k_block_001';
+add theme_definition for_theme 'rw_hal9k_01' name 'block_04_name' type 'string'  string 'hal9k_block_001';
 add theme_definition for_theme 'rw_hal9k_01' name 'block_05_name' type 'string'  string 'hal9k_block_001';
 add theme_definition for_theme 'rw_hal9k_01' name 'block_06_name' type 'string'  string 'hal9k_block_001';
 add theme_definition for_theme 'rw_hal9k_01' name 'block_07_name' type 'string'  string 'hal9k_block_001';
@@ -84,10 +101,10 @@ add theme_definition for_theme 'rw_hal9k_01' name 'block_07_menu' type 'string' 
 add theme_definition for_theme 'rw_hal9k_01' name 'block_08_menu' type 'string'  string 'hal9k_menu_002';
 add theme_definition for_theme 'rw_hal9k_01' name 'block_09_menu' type 'string'  string 'hal9k_menu_002';
 
-add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_panel_bg' type 'string'  string 'hal9k_B01_bgc_fca.png';
+add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_panel_bg' type 'string'  string 'hal9k_bg.png';
 add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_switch_bg' type 'string'  string 'hal9k_admctrl_switch_bg.png';
-add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_width' type 'number'  number '96';
-add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_height' type 'number'  number '96';
+add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_width' type 'number'  number '128';
+add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_height' type 'number'  number '128';
 add theme_definition for_theme 'rw_hal9k_01' name 'admctrl_position' type 'string'  string 'top-left';
 
 add theme_definition for_theme 'rw_hal9k_01' name 'gradient_color_start' type 'string'  string '00FF00';

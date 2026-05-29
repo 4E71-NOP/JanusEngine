@@ -91,11 +91,11 @@ class MenuSlide {
 		l.Log[dbgMenu]("MenuSlide.makeMenu on: '"+c.menu_title+"' ("+c.menu_id+ "); slug:'"+ c.fk_arti_slug+"', level:'"+this.level+"'");
 		elm.Gebi('menuTitle').innerHTML = this.data[this.currentMenu].menu_title;
 
-		let str="<ul style='padding:0px 0px 0px 0.25cm'>";
+		let str="<ul class='common_content'>";
 		if ( this.level > 1) {
 			str += "<li class='"
 				+this.themeName
-				+"menu_lvl_0_link' style='padding:0.05cm' onClick='ms.slideBack()'><div class='"
+				+"menu_lvl_0_link common_content' style='padding:0.05cm' onClick='ms.slideBack()'><div class='"
 				+this.themeName+this.block
 				+"_icon_left' style='width:16px;height:16px;'></div></li>";
 		}
@@ -105,7 +105,7 @@ class MenuSlide {
 				if ( this.checkChild(d[n].menu_id) === true) {
 					str += "<li class='"
 						+this.themeName
-						+"menu_lvl_0_link' style='padding:0.05cm' onClick=\"ms.slideDeeper('"
+						+"menu_lvl_0_link common_content' style='padding:0.05cm' onClick=\"ms.slideDeeper('"
 						+d[n].menu_id+"')\"><div class='"
 						+this.themeName
 						+this.block
@@ -116,14 +116,14 @@ class MenuSlide {
 					if ( d[n].menu_id == this.menu_id ) {
 						str += "<li class='"
 							+this.themeName
-							+"menu_lvl_0_link' style='padding:0.05cm'>"
+							+"menu_lvl_0_link common_content' style='padding:0.05cm'>"
 							+d[n].menu_title
 							+"</li>";
 					}
 					else {
 						str += "<li class='"
 							+this.themeName
-							+"menu_lvl_0_link' style='padding:0.05cm'><a href='/"
+							+"menu_lvl_0_link common_content' style='padding:0.05cm'><a href='/"
 							+d[n].fk_arti_slug
 							+"' style='display :block;'>"
 							+d[n].menu_title+"</a></li>";

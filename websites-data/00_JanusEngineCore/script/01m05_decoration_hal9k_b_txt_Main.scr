@@ -16,10 +16,10 @@ h5_font_family	'venus rising'	h5_font_size	'13'	h5_txt_col	'D0D0D0C0'	h5_special
 h6_font_family	'venus rising'	h6_font_size	'12'	h6_txt_col	'D0D0D0C0'	h6_special	'font-weight:bold;'
 h7_font_family	'venus rising'	h7_font_size	'10'	h7_txt_col	'D0D0D0C0'	h7_special	'font-weight:bold;'
 							
-		p_txt_align	'justify'			p_special	'Line-height:175%;'
+		p_txt_align	'justify'				
 							
 p_pad_top	'0'	p_pad_bottom	'5'	p_pad_left	'3'	p_pad_right	'3'
-							
+p_special	'line-height:1.5em;'	common_content	'line-height:1.5em; padding:1px;'				
 							
 txt_col	'D0D0D0C0'	txt_highlight_col	'404000'	txt_bg_col	'transparent'	txt_title_col	'FFFFFF'
 txt_ok_col	'008000'	txt_warning_col	'FF8000'	txt_error_col	'FF0000'	txt_fade_col	'C0C0C0'
@@ -29,7 +29,7 @@ a_hover_fg_col	'D0D0D0C0'					a_hover_special	'font-weight:bold;'
 a_active_fg_col	'D0D0D0C0'						
 a_visited_fg_col	'D0D0D0C0'						
 							
-table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'						
+table_rules	'border-spacing:0px; border-collapse:collapse; width:100%'			table_tr_height	'12.5mm'		
 t01_caption_fg_col	'D0D0D0C0'	t01_caption_bg_col	'FFFFE0'	t01_caption_special	'font-size:16px;font-style:italic;padding:2.5mm;'		
 t01_txt_col	'D0D0D0C0'						
 t01_tr_bg_col	'FFFFFF05'	t01_td_bg_odd_col	'FFFFFF10'				
@@ -37,7 +37,7 @@ t01_tr_bg_col	'FFFFFF05'	t01_td_bg_odd_col	'FFFFFF10'
 t01_tr_bg_even_col	'FFFFFF10'	t01_td_special	'padding:5px;'				
 t01_tr_bg_hover_col	'FFFFFF40'						
 							
-		t01_legend_bg_col	'FFFFFF80'				
+t01_legend_txt_col	'000000'	t01_legend_bg_col	'FFFFFF80'				
 							
 td_a_fg_col	'D0D0D0C0'			td_a_decoration	'none'		
 td_a_hover_fg_col	'D0D0D0C0'					td_a_hover_special	'font-weight:bold;'
@@ -72,13 +72,13 @@ s3_01_width	'8'	s3_01_height	'32'	s3_03_width	'8'
 s3_a	'hal9k_B01_submit_s3a.png'	s3_b	'hal9k_B01_submit_s3b.png'	s3_c	'hal9k_B01_submit_s3c.png'		
 s3_offset_x	'0'	s3_offset_y	'32'				
 							
-tab_up_txt_col	'FFFFFF'			tab_up_txt_weight	'bold'	tab_up_txt_special	'text-shadow:0px 0px 5px #000000;'
-tab_down_txt_col	'DDDDDD'					tab_down_txt_special	'text-shadow:0px 0px 5px #000000;'
-tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'	tab_hover_txt_special	'text-shadow:0px 0px 5px #FFFFFF;'
+tab_up_txt_col	'DDDDDD'			tab_up_txt_weight	'bold'		
+tab_down_txt_col	'DDDDDD'						
+tab_hover_txt_col	'FFFFFF'			tab_hover_txt_weight	'bold'		
 tab_height	'32'	tab_a_width	'8'	tab_c_width	'8'		
 tab_a	'hal9k_B01_tab_a.png'	tab_b	'hal9k_B01_tab_b.png'	tab_c	'hal9k_B01_tab_c.png'		
 tab_offset_x	'0'	tab_offset_y	'32'				
-tab_frame_bg_col	'55749280'						
+tab_frame_bg_col	'00000080'						
 							
 							
 		ft2_font_size	'26'	ft2_fg_col	'000000'	ft2_special	'font-weight:bold;'
@@ -89,7 +89,6 @@ icon_directory	'hal9k_B01_icon_directory.png'	icon_erase	'hal9k_B01_icon_erase.p
 icon_ok	'hal9k_B01_icon_ok.png'	icon_nok	'hal9k_B01_icon_ko.png'				
 icon_left	'hal9k_B01_icon_left.png'	icon_right	'hal9k_B01_icon_right.png'	icon_top	'hal9k_B01_icon_up.png'	icon_bottom	'hal9k_B01_icon_down.png'
 icon_question	'hal9k_B01_icon_question.png'	icon_notification	'hal9k_B01_icon_notification.png'				
-transparent_8x8	'empty.gif'						
 icon_width	'32'						
 icon_height	'32'						
 ;							

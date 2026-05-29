@@ -39,7 +39,7 @@ class ModuleAdministration {
 
 			if ( $bts->SDDMObj->num_row_sql($dbquery) == 0) { echo ("Pas de menu afficher."); }
 			else {
-				$Content .= "<ul id='Admin_Menu_Simple' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";
+				$Content .= "<ul id='Admin_Menu_Simple' class='common_content' style='padding-left: 0px; margin-left: 0px; list-style: none outside none;'>\r";
 				$infos['menuData'] = array();
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					$cateIdIndex = $dbp['menu_id'];
@@ -89,7 +89,7 @@ class ModuleAdministration {
 		foreach ( $infos['menuData'] as $A ) {
 			if ($A['menu_parent'] == $infos['parameters']['menu_parent'] ) {
 				if ( $A['fk_arti_ref'] == "0" ) {
-					$Content .= $tabDecal."<li><b>".$A['menu_title']."</b>\r".$tabDecal."\t<ul style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
+					$Content .= $tabDecal."<li class='common_content'><b>".$A['menu_title']."</b>\r".$tabDecal."\t<ul class='common_content' style='list-style-type: none; margin-left: 10px; padding: 0px;'>\r";
 					$tmp = $infos['parameters']['menu_parent'];
 					$infos['parameters']['menu_parent'] = $A['menu_id'];
 					$infos['parameters']['level']++;
@@ -99,10 +99,10 @@ class ModuleAdministration {
 					$Content .= $tabDecal."\t</ul>\r".$tabDecal."</li>\r";
 				}
 				elseif ( $A['fk_arti_ref'] == $infos['parameters']['arti_request'] ) {
-					$Content .= $tabDecal."<li><span class='".$Block."_fade'><b>*".$A['menu_title']."</b></span></li>\r";
+					$Content .= $tabDecal."<li class='common_content'><span class='".$Block."_fade'><b>*".$A['menu_title']."</b></span></li>\r";
 				}
 				else {
-					$Content .= $tabDecal."<li><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['menu_title']."</a></li>\r";
+					$Content .= $tabDecal."<li class='common_content'><a href=\"".$baseUrl.$A['fk_arti_slug']."/1\">".$A['menu_title']."</a></li>\r";
 				}
 			}
 		}
