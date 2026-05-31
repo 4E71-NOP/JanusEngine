@@ -1,18 +1,22 @@
 <?php
-/* JanusEngine-license-start */
+// @JanusEngine:license-start
 // --------------------------------------------------------------------------------------------
-//
 // Janus Engine 
 //
 // This file file is part of the Janus-Engine project.
-// Source code	: https://github.com/4E71-NOP/JanusEngine
-// License 		: Creative Common licence CC-by-nc-sa (http://creativecommons.org)
-// Author		: Faust MARIA DE AREVALO (faust@rootwave.com)
+// @see      : https://github.com/4E71-NOP/JanusEngine
 //
-// See README.md for more information
+// @license  : Creative Commons licence CC-by-nc-sa (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+// @author   : Faust MARIA DE AREVALO (original founder) <faust@rootwave.com>
+// @copyright : 2005 - ∞ Faust MARIA DE AREVALO
 //
+// @note     : This program is distributed in the hope that it will be useful - WITHOUT ANY WARRANTY; 
+//             without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// Check README.md for more details
 // --------------------------------------------------------------------------------------------
-/* JanusEngine-license-end */
+// @JanusEngine:license-end
+
 
 if(session_status() !== PHP_SESSION_ACTIVE || session_status() === PHP_SESSION_NONE ) {
 	if ( session_start() === false ){
