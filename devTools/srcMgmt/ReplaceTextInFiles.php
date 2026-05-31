@@ -106,7 +106,9 @@ class ReplaceTextInFiles
 							$localFileCount++;
 							// $this->logMsg(">" . str_replace($this->entryPoint, "", $currentFile) . " is a regular file.", __LOG_INFO__);
 							$newContent = $this->replace(file_get_contents($currentFile));
-							file_put_contents($currentFile, $newContent);
+							if (strlen($newContent ?? '') > 0 ) {
+								file_put_contents($currentFile, $newContent);
+							}
 						}
 					}
 				}

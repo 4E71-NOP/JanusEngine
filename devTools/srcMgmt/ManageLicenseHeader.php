@@ -3,7 +3,7 @@
 require_once("ReplaceTextInFiles.php");
 $R = ReplaceTextInFiles::getInstance();
 
-$R->setRegexStr("/\/\*\s*JanusEngine-license-start\s*\*\/(.*)\/\*\s*JanusEngine-license-end\s*\*\//s");
+$R->setRegexStr("/@JanusEngine:license-start(.*)@JanusEngine:license-end/s");
 
 $R->setExcludeList(array(
 	".",
@@ -20,7 +20,7 @@ $R->setExcludeList(array(
 	".metadata",
 	".phpdoc",
 	".project",
-	"README.m"
+	"README.md"
 ));
 
 $R->setIncludedExtension(array("php"));

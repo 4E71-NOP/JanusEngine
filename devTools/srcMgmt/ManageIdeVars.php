@@ -19,7 +19,7 @@ $R->setExcludeList(array(
 	".metadata",
 	".phpdoc",
 	".project",
-	"README.m"
+	"README.md"
 ));
 
 $R->setIncludedExtension(array("php"));
