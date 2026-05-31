@@ -1,0 +1,8 @@
+// @JanusEngine:IDE-begin
+// Some definitions in order to ease the IDE work and to provide details about what is available.
+//
+// @var $CurrentSetObj CurrentSet
+// @var $Block String
+// @var $infos Array
+// @var $l String
+// @JanusEngine-IDE-end
