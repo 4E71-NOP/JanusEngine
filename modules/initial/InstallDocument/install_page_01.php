@@ -18,30 +18,37 @@
 // @JanusEngine:license-end
 
 
-/*JanusEngine-IDE-begin*/
-// Some definitions in order to ease the IDE work.
-/* @var $bts BaseToolSet                            */
-/* @var $CMObj ConfigurationManagement              */
-/* @var $ClassLoaderObj ClassLoader                 */
-/* @var $LMObj LogManagement                        */
-/* @var $MapperObj Mapper                           */
-/* @var $InteractiveElementsObj InteractiveElements */
-/* @var $RenderTablesObj RenderTables               */
-/* @var $RequestDataObj RequestData                 */
-/* @var $SDDMObj DalFacade                          */
-/* @var $SqlTableListObj SqlTableList               */
-/* @var $StringFormatObj StringFormat               */
+// @JanusEngine:IDE-begin
+// Some definitions in order to ease the IDE work and to provide details about what is available.
+//
+// @var $bts BaseToolSet
+// @var $CurrentSetObj CurrentSet
+// @var $ClassLoaderObj ClassLoader
+//
+// @var $RequestDataObj RequestData
+// @var $SDDMObj DalFacade
+// @var $SqlTableListObj SqlTableList
+//
+// @var $StringFormatObj StringFormat
+// @var $MapperObj Mapper
+// @var $DocumentDataObj DocumentData
+// @var $ThemeDataObj ThemeData
+// @var $UserObj User
+// @var $WebSiteObj WebSite
+//
+// @var $CMObj ConfigurationManagement
+// @var $LMObj LogManagement
+//
+// @var $InteractiveElementsObj InteractiveElements
+// @var $RenderTablesObj RenderTables
+//
+// @var $Content String
+// @var $Block String
+// @var $infos array
+// @var $l String
+//
+// @JanusEngine:IDE-end
 
-/* @var $CurrentSetObj CurrentSet                   */
-/* @var $DocumentDataObj DocumentData               */
-/* @var $ThemeDataObj ThemeData                     */
-/* @var $UserObj User                               */
-/* @var $WebSiteObj WebSite                         */
-
-/* @var $Block String                               */
-/* @var $infos array                                */
-/* @var $l String                                   */
-/*JanusEngine-IDE-end*/
 
 // --------------------------------------------------------------------------------------------
 //		Installation page 01
