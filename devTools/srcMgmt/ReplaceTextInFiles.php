@@ -105,7 +105,8 @@ class ReplaceTextInFiles
 							$this->fileCount++;
 							$localFileCount++;
 							// $this->logMsg(">" . str_replace($this->entryPoint, "", $currentFile) . " is a regular file.", __LOG_INFO__);
-							$this->replace(file_get_contents($currentFile));
+							$newContent = $this->replace(file_get_contents($currentFile));
+							file_put_contents($currentFile, $newContent);
 						}
 					}
 				}
@@ -140,19 +141,7 @@ class ReplaceTextInFiles
 	private function replace($fileContent)
 	{
 		$fileContent = preg_replace($this->regexStr, $this->contentStr, $fileContent);
-		$this->logMsg($fileContent, __LOG_INFO__);
-
-		// $echoStr = "------------------------------------------------------------\n";
-		// $contentStr = file_get_contents('license_header.txt');
-		// echo ($echoStr . $contentStr . "\n" . $echoStr);
-
-		// // New text
-		// $fileContent = file_get_contents('../licenseTest.php');
-
-		// $regexStr = "/\/\*\s*JanusEngine-license-start\s*\*\/(.*)\/\*\s*JanusEngine-license-end\s*\*\//s";
-		// $fileContent = preg_replace($regexStr, $contentStr, $fileContent);
-		// file_put_contents('../licenseTest.php', $fileContent);
-
+		return ($fileContent);
 	}
 
 	private function logMsg($str, $type)
