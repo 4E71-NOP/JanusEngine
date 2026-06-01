@@ -1,5 +1,5 @@
 <?php
-// // @JanusEngine:license-start
+// @JanusEngine:license-start
 // --------------------------------------------------------------------------------------------
 // Janus Engine 
 //
@@ -16,7 +16,6 @@
 // Check README.md for more details
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
-
 
 class ExtSimpleExtension
 {

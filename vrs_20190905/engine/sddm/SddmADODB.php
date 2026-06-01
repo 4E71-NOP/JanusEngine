@@ -30,7 +30,7 @@ class SddmADODB {
 	}
 	public static function getInstance() {
 		if (self::$Instance == null) {
-			self::$Instance = new SddmMySQLI();
+			self::$Instance = new SddmADODB();
 		}
 		return self::$Instance;
 	}

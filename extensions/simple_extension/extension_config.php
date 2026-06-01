@@ -1,16 +1,22 @@
 <?php
-/*MWM-licence*/
+// @JanusEngine:license-start
 // --------------------------------------------------------------------------------------------
+// Janus Engine 
 //
-//	JnsEng - Janus Engine
-//	Sous licence Creative common	
-//	Under Creative Common licence	CC-by-nc-sa (http://creativecommons.org)
-//	CC by = Attribution; CC NC = Non commercial; CC SA = Share Alike
+// This file file is part of the Janus-Engine project.
+// @see       : https://github.com/4E71-NOP/JanusEngine
 //
-//	(c)Faust MARIA DE AREVALO faust@multiweb-manager.net
+// @license   : Creative Commons licence CC-by-nc-sa (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+// @author    : Faust MARIA DE AREVALO (original founder) <faust@rootwave.com>
+// @copyright : 2005 - ∞ Faust MARIA DE AREVALO
 //
+// @note      : This program is distributed in the hope that it will be useful - WITHOUT ANY WARRANTY; 
+//              without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// Check README.md for more details
 // --------------------------------------------------------------------------------------------
-/*MWM-licence-fin*/
+// @JanusEngine:license-end
+
 
 $extension_info = array(
 	"ext_name"		=>	"Simple extension",

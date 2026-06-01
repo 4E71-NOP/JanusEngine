@@ -17,8 +17,6 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-
-
 /**
  * This class is a necessary facade to be able to reuse the code as much as possible. 
  * Interfaces and Abstract classes will NOT provide the desired level of reusabitlity.

@@ -18,9 +18,6 @@
 // @JanusEngine:license-end
 
 
-
-
-
 $_REQUEST[server_infos][srv_hostname]		= gethostbyname('localhost'); 
 $_REQUEST[server_infos][include_path]		= get_include_path(); 
 $_REQUEST[server_infos][currentDirectory]	= getcwd(); 

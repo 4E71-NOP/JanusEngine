@@ -17,7 +17,6 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-
 //	This config file has been generated.
 //	Date		:	" . $bts->TimeObj->timestampToDate($bts->TimeObj->getMicrotime()) . "
 //	Filename	:	site_" . $infos['n'] . "_config.php

@@ -17,9 +17,6 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-
-
-
 //$_REQUEST['M_EXTENS']['extension_name']		= "MWM_Galerie";
 $_REQUEST['M_EXTENS']['extension_directory'] = "mwm_galerie_v0.01";
 $_REQUEST['M_EXTENS']['extension_requete']	= "Installer";

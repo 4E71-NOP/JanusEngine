@@ -17,9 +17,6 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-
-
-
 // @JanusEngine:IDE-begin
 // Some definitions in order to ease the IDE work and to provide details about what is available.
 //
