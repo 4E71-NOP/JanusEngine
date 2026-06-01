@@ -67,9 +67,7 @@ class JanusEngine
 	private $ContentFragments;
 	private $stylesheet;
 
-	private function __construct()
-	{
-	}
+	private function __construct() {}
 
 	/**
 	 * Singleton : Will return the instance of this class.
@@ -531,6 +529,12 @@ class JanusEngine
 			case 99: // Verouillé
 				$this->WebSiteObj->setWebSiteEntry('banner_offline', 1);
 				include('modules/initial/OfflineMessage/OfflineMessage.php');
+				$ModuleOffLineMessageObj = new ModuleOffLineMessage();
+				$ModuleOffLineMessageObj->render(array(
+					"SQLFatalError" => 1,
+					"bannerOffline" => 0
+				));
+				return (false);
 				break;
 		}
 		$bts->CMObj->setLangSupport(); // will set support=1 in the languagelist if website supports the language.

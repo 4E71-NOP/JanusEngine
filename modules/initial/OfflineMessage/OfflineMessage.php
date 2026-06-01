@@ -131,7 +131,7 @@ class ModuleOffLineMessage
 				. "' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_col')
 				. "' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_visite_col')
 				. "' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'deco_txt_l_01_fg_active_col')
-				. "' background='../media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bg') . "'>\r\r
+				. "' background='/media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getDefinitionValue('bodyBg') . "'>\r\r
 				<div style='
 				width:80%; 
 				height:256px;
