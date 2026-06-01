@@ -133,10 +133,10 @@ class JanusEngine
 		// --------------------------------------------------------------------------------------------
 		// Don't push me cuz i'm close to the edge !!!
 		// It’s like a jungle sometimes, it makes me wonder how I keep from going under...
-		// MSIE / Edge must die!!! for good this time.
+		// MSIE / Edge must die!!! Once and for all!
 		$Navigator = getenv('HTTP_USER_AGENT');
 		if (strpos($Navigator, "MSIE") !== FALSE) {
-			if (strpos($Navigator, "DOM") !== FALSE) {
+			if (strpos($Navigator, "DOM") === FALSE) {
 				include('current/engine/staticPages/UnsupportedBrowserBanner.php');
 			}
 		}

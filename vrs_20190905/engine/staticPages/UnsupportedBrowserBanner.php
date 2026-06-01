@@ -18,8 +18,6 @@
 // @JanusEngine:license-end
 
 
-// ../media/IE6_redirect/fond.jpg
-
 $baseUrl  = "http" . (isset($_SERVER['HTTPS']) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . "/";
 $broswerList = array(
 	1 => array(
@@ -29,22 +27,22 @@ $broswerList = array(
 	),
 	2 => array(
 		"name" => "Chrome",
-		"logo" => $baseUrl . "/media/_staticPages/LogoGoogleChrome.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoGoogleChrome.svg",
 		"url" => "https://www.google.com/chrome/"
 	),
 	3 => array(
 		"name" => "Edge",
-		"logo" => $baseUrl . "/media/_staticPages/LogoMicrosoftEdgeChromium.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoMicrosoftEdgeChromium.svg",
 		"url" => "https://www.microsoft.com/fr-fr/windows/microsoft-edge"
 	),
 	4 => array(
 		"name" => "Firefox",
-		"logo" => $baseUrl . "/media/_staticPages/LogoMozillaFirefox.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoMozillaFirefox.svg",
 		"url" => "https://www.mozilla.org/fr/firefox/new/"
 	),
 	5 => array(
 		"name" => "Opera",
-		"logo" => $baseUrl . "/media/_staticPages/LogoOpera.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoOpera.svg",
 		"url" => "http://www.opera.com/"
 	),
 	6 => array(
@@ -54,12 +52,12 @@ $broswerList = array(
 	),
 	7 => array(
 		"name" => "Tor",
-		"logo" => $baseUrl . "/media/_staticPages/LogoTor.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoTor.svg",
 		"url" => "https://www.torproject.org/download/"
 	),
 	8 => array(
 		"name" => "Vivaldi",
-		"logo" => $baseUrl . "/media/_staticPages/LogoVivaldi.png",
+		"logo" => $baseUrl . "/media/_staticPages/LogoVivaldi.svg",
 		"url" => "https://vivaldi.com/en/download/"
 	)
 );
@@ -77,8 +75,9 @@ text-align: center;
 '>\r
 
 <div style='
-width: 100%; height: 768px; 
-background-image: url(" . $baseUrl . "/media/_staticPages/bg.jpg); 
+width: 100%; height: 100%; 
+background-image: url(" . $baseUrl . "/media/_staticPages/bg.svg);
+background-position: center; 
 background-repeat: repeat;
 margin-left: auto; 
 margin-right: auto;
@@ -108,28 +107,40 @@ margin-bottom: auto;
 border-spacing: 32px;
 '>\r
 <tr>\r";
-
+$LimitPerLine = 4;
+$CountPerLine = 0;
 foreach ($broswerList as $A) {
-	$Content .= "<td>\r"
+
+	$CountPerLine++;
+	if ($CountPerLine > $LimitPerLine ) {
+		$Content .= "</tr>\r<tr>";
+		$CountPerLine = 1;
+	}
+	$Content .= 
+		"<td>\r"
+		. "<table>\r<tr>\r<td>\r"
 		. "<div style='
-			padding: 15px; border-radius: 100%; text-align: center; 
+			padding: 15px; margin-bottom: 30px;
+			text-align: center; 
+			border-radius: 100%; 
 			background-color: #FFFFFF; border: solid 2px #404040;
-			box-shadow: 0px 20px 10px #000000FF;'>\r"
+			box-shadow: 0px 20px 10px #00000080;'>\r"
 		. "<a style='color: #FFFFFF;' href='" . $A['url'] . "'>\r"
-		. "<img style='width:64px; height:64px;' src='" . $A['logo'] . "'>"
+		. "<img style='width:128px; height:128px;' src='" . $A['logo'] . "'>"
 		. "</a>\r"
 		. "</div>\r"
+		. "</td>\r</tr>\r"
+
+		
+		. "<tr>\r<td style='width: 96px; text-align:center; font-weight: bold; font-size: 20px;'>\r"
+		. "<a style='color: #FFFFFF;' href='" . $A['url'] . "'><div style='width:100%; padding:10px; background-color:#FFFFFF80; border-radius:10px'>" . $A['name'] . "</div></a>\r"
+		. "</td>\r</tr>\r"
+
+		. "</table>\r"
 		. "</td>\r";
 }
 
 $Content .= "</tr>\r<tr>\r";
-
-reset($broswerList);
-foreach ($broswerList as $A) {
-	$Content .= "<td style='width: 96px; text-align:center; font-weight: bold; font-size: 20px;'>\r"
-		. "<a style='color: #FFFFFF;' href='" . $A['url'] . "'>" . $A['name'] . "</a>\r"
-		. "</td>\r";
-}
 
 $Content .= "</tr>\r
 </table>\r
