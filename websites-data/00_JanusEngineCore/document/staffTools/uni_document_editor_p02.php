@@ -207,7 +207,7 @@ $T['Content']['2']['2']['2']['cont']		= $bts->InteractiveElementsObj->renderIcon
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, 2);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 2); // 20
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(2,2,2),

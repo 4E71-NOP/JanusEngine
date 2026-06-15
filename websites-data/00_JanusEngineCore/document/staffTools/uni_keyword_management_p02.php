@@ -51,7 +51,7 @@
 
 $bts->RequestDataObj->setRequestData('keywordForm',
 		array(
-				'selectionId'	=> 5309202433557915355,
+				'selectionId'	=> 3478302215613287175,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -62,7 +62,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 				'modification'	=> 'on',
 				'deletion'		=> 'on',
 				'mode'			=> 'edit',
-				'mode'			=> 'create',
+				// 'mode'			=> 'create',
 //				'mode'			=> 'delete',
 		)
 );
@@ -182,7 +182,7 @@ $T['Content']['1']['8']['2']['cont'] .= $bts->RenderFormObj->renderInputText('fo
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 9);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); // 9
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),
 );

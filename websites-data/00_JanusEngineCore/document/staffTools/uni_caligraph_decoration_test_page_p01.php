@@ -156,7 +156,7 @@ foreach ( $tab as $Letter ) {
 	$l++;
 }
 
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 5, 2);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 2); // 5
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,4,1),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,4,2),

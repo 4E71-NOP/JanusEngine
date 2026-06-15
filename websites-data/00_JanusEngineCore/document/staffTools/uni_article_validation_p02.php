@@ -194,7 +194,7 @@ $T['Content']['1']['14']['2']['cont'] = $tabState['validation'][$currentArticleO
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 12, 1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 1); // 12
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(14,2,2),
 );

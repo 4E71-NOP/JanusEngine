@@ -145,8 +145,8 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 			. "&formGenericData[mode]=edit"
 			. "&formGenericData[selectionId]=" . $dbp['deco_id']
 			. "'>" . $dbp['deco_name'] . "</a>";
-		$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('state')[$dbp['deco_state']];
-		$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('type')[$dbp['deco_type']];
+		$T['Content']['1'][$i]['2']['cont']	= $bts->I18nTransObj->getI18nTransEntry('state')[($dbp['deco_state'] ?? 0)];
+		$T['Content']['1'][$i]['3']['cont']	= $bts->I18nTransObj->getI18nTransEntry('type')[($dbp['deco_type']?? 40)];
 	}
 }
 
@@ -156,7 +156,7 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); //$i
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );

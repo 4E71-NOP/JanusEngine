@@ -52,7 +52,7 @@
 $bts->RequestDataObj->setRequestData(
 	'userForm',
 	array(
-		'selectionId'		=>	1039302295286694092,
+		'selectionId'		=>	6970871803512147980,
 		// 'selectionLogin'	=>	"auteur_senior",
 	)
 );
@@ -235,6 +235,34 @@ $T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig
 
 // --------------------------------------------------------------------------------------------
 $curTab++;
+$l = 1;
+
+// Types : string = 1; number = 2; switch = 3;
+// Classes : preference = 1; data = 2;
+$currentUserObj->retrieveUserInformation();
+$arrTmp = $currentUserObj->getUserInformation();
+
+foreach($arrTmp as $A ) {
+	if ($A['upe_state'] == 1 ) {
+		$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry($A['upe_translation']);
+		switch ($A['upe_type']) {
+			case 1:
+				$T['Content'][$curTab][$l]['2']['cont'] = $A['ui_string'];
+				break;
+			case 2:
+			case 3:
+				$T['Content'][$curTab][$l]['2']['cont'] = $A['ui_number'];
+				break;
+		}
+		$l++;
+	}
+}
+
+if ($l == 1 ) {
+	$T['Content'][$curTab][$l]['1']['cont'] = "--->";
+	$T['Content'][$curTab][$l]['2']['cont'] = $bts->I18nTransObj->getI18nTransEntry('msgNoExtras');
+	$l++;
+}
 
 $T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig($l - 1, 2, 2);
 
@@ -307,7 +335,7 @@ $T['ContentCfg']['tabs'][$curTab] = $bts->RenderTablesObj->getDefaultTableConfig
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 5);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 5); // 10,5
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------

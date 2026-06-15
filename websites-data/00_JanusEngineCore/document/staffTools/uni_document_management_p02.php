@@ -176,7 +176,7 @@ $Content .= $bts->RenderFormObj->renderHiddenInput(	"formParams1[validator]"	,	$
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 6, 1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); // 6
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 );

@@ -122,7 +122,7 @@ self::$InitTable['decoration'] = function (&$a) {
 		"name"			=> "",
 		"id"			=> "",
 		"directory"		=> "",
-		"state"			=> "",
+		"state"			=> "ONLINE",
 		"type"			=> 0,
 
 		"background_url"	=> "",

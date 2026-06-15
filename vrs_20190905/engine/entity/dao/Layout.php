@@ -26,7 +26,7 @@ class Layout extends Entity {
 		'layout_id'				=> 0,
 		'layout_name'			=> "New Layout",
 		'layout_title'			=> "New Layout",
-		'layout_generic_name'	=> "NewLyot",
+		'layout_generic_name'	=> "NewLayout",
 		'layout_desc'			=> 0,
 		'fk_layout_file_id'		=> 0,
 	);

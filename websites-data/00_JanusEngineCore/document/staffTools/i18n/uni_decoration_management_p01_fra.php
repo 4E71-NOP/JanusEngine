@@ -35,7 +35,7 @@ $bts->I18nTransObj->apply(
 				60	=>	"Elysion",
 			),
 			"state"			=> array(
-				0	=> "HOrs ligne",
+				0	=> "Hors ligne",
 				1	=> "En ligne",
 				2	=> "Supprimé",
 			),

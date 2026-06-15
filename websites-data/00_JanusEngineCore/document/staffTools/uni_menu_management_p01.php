@@ -189,7 +189,7 @@ foreach ($TabListLang as $A) {
 	$T['ContentCfg']['tabs'][$Tab] = $bts->RenderTablesObj->getDefaultTableConfig($A['count'] - 1, 7, 1);
 	$bts->I18nTransObj->setI18nTransEntry('tabTxt' . $Tab, $A['nom']);
 }
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, $nbrTabs);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, $nbrTabs); // 15
 $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 // --------------------------------------------------------------------------------------------

@@ -54,7 +54,7 @@ $bts->RequestDataObj->setRequestData(
 	'lmForm',
 	array(
 		"ok"			=>	"on",
-		"avrt"			=>	"on",
+		"warn"			=>	"on",
 		"err"			=>	"on",
 		"info"			=>	"on",
 		"other"			=>	"on",
@@ -71,7 +71,7 @@ $bts->I18nTransObj->getI18nTransFromDB("uni_log_management");
 $bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_log_management_p01_");
 
 // --------------------------------------------------------------------------------------------
-//	Realisation des suppresions demandées
+//	Processing sumitted deletions
 // --------------------------------------------------------------------------------------------
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action') ?? '') != 0) {
 	switch ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'action')) {
@@ -97,22 +97,23 @@ $ClauseTmp = array();
 
 $CheckClauseType = 0;
 if (is_array($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'clause_type'))) {
-	$tabClauseTypes = array("err" => 0, "ok" => 1, "avrt" => 2, "info" => 3, "autr" => 4);
+	$tabClauseTypes = array("err" => 0, "ok" => 1, "warn" => 2, "info" => 3, "other" => 4);
 
 	foreach ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'clause_type') as $k => $v) {
 		if ($v == "on") {
 			$CheckClauseType++;
-			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', $k, ' checked ');
+			$bts->RequestDataObj->setRequestDataSubEntry('lmForm', $k, true);
 			$criteriaUrl .= "&amp;lmForm[clause_type][" . $k . "]=on";
 			$criteria2ndPost .= "<input type='hidden' name='lmForm[clause_type][" . $k . "]'	value='on'>\r";
 			$ClauseTmp[] = $tabClauseTypes[$k];
 		}
 	}
 }
+
 if ($CheckClauseType == 0) {
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'err', ' checked ');
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'ok', ' checked ');
-	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'avrt', ' checked ');
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'err', true);
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'ok', true);
+	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'warn', true);
 }
 
 $ClauseType = "";
@@ -149,15 +150,15 @@ $T['Content'][$Tab][$lt]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t
 
 $arr = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block']);
 
-$arr['idAndName'] = "lmForm[clause_type][ok]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_ok');
+$arr['idAndName'] = "lmForm[clause_type][ok]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_ok');		$arr['checked'] = $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'ok');
 $T['Content'][$Tab][$lt]['2']['cont'] = $bts->RenderFormObj->renderCheckbox($arr);
-$arr['idAndName'] = "lmForm[clause_type][avrt]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_avrt');
+$arr['idAndName'] = "lmForm[clause_type][warn]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_warn');		$arr['checked'] = $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'warn');
 $T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
-$arr['idAndName'] = "lmForm[clause_type][err]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_err');
+$arr['idAndName'] = "lmForm[clause_type][err]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_err');		$arr['checked'] = $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'err');
 $T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
-$arr['idAndName'] = "lmForm[clause_type][info]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_info');
+$arr['idAndName'] = "lmForm[clause_type][info]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_info');		$arr['checked'] = $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'info');
 $T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
-$arr['idAndName'] = "lmForm[clause_type]autr]";			$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_autr');
+$arr['idAndName'] = "lmForm[clause_type][other]";		$arr['text'] = $bts->I18nTransObj->getI18nTransEntry('type_other');		$arr['checked'] = $bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'other');
 $T['Content'][$Tab][$lt]['2']['cont'] .= $bts->RenderFormObj->renderCheckbox($arr);
 
 $lt++;
@@ -353,7 +354,7 @@ if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, $Tab);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 15, $Tab); // 15
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($lt, 7, 1),
 );

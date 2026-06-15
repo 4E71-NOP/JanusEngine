@@ -25,7 +25,7 @@ $bts->I18nTransObj->apply(
 			"invite2"		=> "Cette partie va vous permettre de créer un thème.",
 			"tabTxt1"		=> "Général",
 			"tabTxt2"		=> "Etat",
-			"tabTxt3"		=> "Adresses",
+			"tabTxt3"		=> "Extras",
 			"tabTxt4"		=> "Localisation",
 			"tabTxt5"		=> "Config",
 			"raf1"			=> "Rien a afficher",
@@ -55,6 +55,7 @@ $bts->I18nTransObj->apply(
 			"private"		=>	"Privé",
 			"forumAccesGranted"		=>	"Forum accessilbe",
 			"forumAccesDenied"		=>	"Forum inaccessilbe",
+			"msgNoExtras"	=>	"Aucune information utilisateur supplémentaire trouvée",
 		),
 	)
 );

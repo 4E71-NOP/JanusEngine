@@ -70,7 +70,7 @@ $bts->RequestDataObj->setRequestData('formGenericData',
 $bts->mapSegmentLocation(__METHOD__, "uni_module_management_p02");
 
 $bts->I18nTransObj->getI18nTransFromDB("uni_admin_authentification");
-$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_admin_authentification_p01_");
+$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/websites-data/00_JanusEngineCore/document/staffTools/i18n/uni_module_management_p02_");
 
 // --------------------------------------------------------------------------------------------
 $ClassLoaderObj->provisionClass('AdminFormTool');
@@ -240,7 +240,7 @@ $T['Content']['3'][$line]['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(a
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 8, 3);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 3);
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(8,2,2),

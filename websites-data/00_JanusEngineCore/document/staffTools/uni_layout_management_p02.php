@@ -165,7 +165,7 @@ $T['Content']['1']['6']['2']['cont'] = $bts->RenderFormObj->renderMenuSelect(arr
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, 1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); //10,1
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),
 );

@@ -108,7 +108,7 @@ else {
 	}
 }
 
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); // 10
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i,5,1),
 );

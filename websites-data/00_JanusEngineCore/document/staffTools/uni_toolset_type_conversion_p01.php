@@ -148,6 +148,8 @@ $Content .= "
 </form>\r
 ";
 
+$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_ConvertTool.js');
+
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/
 ?>

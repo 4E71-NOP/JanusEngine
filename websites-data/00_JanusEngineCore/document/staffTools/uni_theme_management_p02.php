@@ -52,7 +52,7 @@
 $bts->RequestDataObj->setRequestData(
 	'themeForm',
 	array(
-		'selectionId'	=>	2056201610955903802,
+		'selectionId'	=>	2263923652761773144,
 	)
 );
 $bts->RequestDataObj->setRequestData(
@@ -515,7 +515,7 @@ foreach ($ThemeDefinitionNameList as $tdnl) {
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 16, 6);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 6);	// 16
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4, 2, 2),
 	2	=>	$bts->RenderTablesObj->getDefaultTableConfig(15, 2, 2),

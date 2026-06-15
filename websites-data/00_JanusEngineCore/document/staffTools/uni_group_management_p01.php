@@ -147,7 +147,7 @@ while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 // --------------------------------------------------------------------------------------------
 //	Display
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, $i);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos); // $i
 $T['ContentCfg']['tabs'] = array(
 	1	=>	$bts->RenderTablesObj->getDefaultTableConfig($i, 3, 1),
 );

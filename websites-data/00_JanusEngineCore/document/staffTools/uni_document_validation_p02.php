@@ -51,7 +51,7 @@
 
 $bts->RequestDataObj->setRequestData('documentForm',
 		array(
-				'selectionId'	=> 3713950451103223709,
+				'selectionId'	=> 1327807971879396630,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -220,7 +220,7 @@ $T['Content']['1']['5']['2']['cont'] = $tabUser[$currentDocumentObj->getDocument
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 6, 1);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 1); // 6
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
 );

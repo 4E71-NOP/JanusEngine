@@ -64,7 +64,7 @@ $bts->LMObj->setVectorSystemLogLevel(LOGLEVEL_BREAKPOINT);
 
 $bts->RequestDataObj->setRequestData('articleForm',
 		array(
-				'selectionId'	=> 8506863991981179210,
+				'selectionId'	=> 5193490316280335610,
 		)
 );
 $bts->RequestDataObj->setRequestData('formGenericData',
@@ -231,7 +231,7 @@ $T['Content']['2']['6']['2']['cont'] = $bts->TimeObj->timestampToDate($currentAr
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 11, 2);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 2); // 11
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(10,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(6,2,2),

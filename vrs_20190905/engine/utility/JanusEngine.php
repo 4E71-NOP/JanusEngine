@@ -286,7 +286,7 @@ class JanusEngine
 			// Build document
 			$Content = $this->buildDocument();
 			// Checkpoint ('index_before_stat');
-			$Content .= $this->buidAdminDashboard();
+			$Content .= $this->buildAdminDashboard();
 			// File selector if necessary
 			$Content .= $this->buildFileSelector();
 
@@ -983,13 +983,13 @@ class JanusEngine
 	 * Builds the admin dashboard content
 	 * @return string
 	 */
-	private function buidAdminDashboard()
+	private function buildAdminDashboard()
 	{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$ClassLoaderObj = ClassLoader::getInstance();
 
-		$bts->mapSegmentLocation(__METHOD__, "buidAdminDashboard");
+		$bts->mapSegmentLocation(__METHOD__, "buildAdminDashboard");
 
 		$CurrentSetObj->setDataSubEntry('timeStat', 'end', $bts->TimeObj->getMicrotime()); // We get time for later use in the stats.
 
