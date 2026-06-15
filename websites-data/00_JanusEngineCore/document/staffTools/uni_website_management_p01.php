@@ -294,7 +294,7 @@ $T['Content'][$Tab]['1']['2']['cont'] .= "</select>";
 //
 //
 // --------------------------------------------------------------------------------------------
-$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 13, 5);
+$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, 5); // 13
 $T['ContentCfg']['tabs'] = array(
 		1	=>	$bts->RenderTablesObj->getDefaultTableConfig(4,2,2),
 		2	=>	$bts->RenderTablesObj->getDefaultTableConfig(5,2,2),
@@ -321,7 +321,7 @@ $Content .= $bts->RenderTablesObj->render($infos, $T);
 
 $arr = $bts->RenderFormObj->getCheckboxArray('formGenericData[modification]', $bts->I18nTransObj->getI18nTransEntry('validation'), $infos['block']);
 $Content .= "
-<input type='hidden' id='formParams1_info_debug' name='formParams1[info_debug]'				value='UPDATE_WEBSITE'>\r
+<input type='hidden' id='formParams1[info_debug]' name='formParams1[info_debug]'				value='UPDATE_WEBSITE'>\r
 
 <script type='text/javascript'>\r
 function computeInfoDebug () {\r
@@ -342,8 +342,8 @@ function computeInfoDebug () {\r
 			scoreInfoDebug += Number(listInfoDebug[f].v);\r
 		}\r
 	}\r
-	elm.Gebi('formParams1_info_debug').value = scoreInfoDebug;\r
-	l.Log[cfg.CoreDbg]('formParams1_info_debug=' + elm.Gebi('formParams1_info_debug').value);\r
+	elm.Gebi('formParams1[info_debug]').value = scoreInfoDebug;\r
+	l.Log[cfg.CoreDbg]('formParams1[info_debug]=' + elm.Gebi('formParams1[info_debug]').value);\r
 }\r
 </script>\r
 \r

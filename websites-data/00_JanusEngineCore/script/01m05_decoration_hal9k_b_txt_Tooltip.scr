@@ -1,5 +1,5 @@
 add decoration 							
-name	'hal9k_txt_main'						
+name	'hal9k_txt_tooltip'						
 directory	'Hal9k'						
 type	'caligraph'						
 main_unit	'mm'	txt_font_unit	'px'				
