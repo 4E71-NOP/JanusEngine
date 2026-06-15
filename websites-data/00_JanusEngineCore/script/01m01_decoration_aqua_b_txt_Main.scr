@@ -39,10 +39,10 @@ t01_tr_bg_hover_col	'ACEDD4'
 							
 		t01_legend_bg_col	'FFFFE0'				
 							
-td_a_fg_col	'FFFFFF'			td_a_decoration	'none'		
-td_a_hover_fg_col	'FFFFFF'					td_a_hover_special	'font-weight:bold;'
-td_a_active_fg_col	'FFFFFF'					td_a_active_special	'color:inherit;'
-td_a_visited_fg_col	'FFFFFF'						
+td_a_fg_col	'000000'			td_a_decoration	'none'		
+td_a_hover_fg_col	'000000'					td_a_hover_special	'font-weight:bold;'
+td_a_active_fg_col	'000000'					td_a_active_special	'color:inherit;'
+td_a_visited_fg_col	'000000'						
 							
 code_font	'courier, monospace'	code_fg_col	'008000'	code_bg_col	'000000CC'		
 							
