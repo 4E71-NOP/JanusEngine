@@ -327,7 +327,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	// --------------------------------------------------------------------------------------------
 	// Rendering of first part
 	// --------------------------------------------------------------------------------------------
-	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 10, $curTab);
+	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, $curTab); // 10
 
 	$Content .= $bts->RenderTablesObj->render($infos, $T);
 
@@ -466,7 +466,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		$bts->I18nTransObj->setI18nTransEntry('tabTxtThm' . $i, "#" . $i);
 		$T['ContentCfg']['tabs'][$i] = $bts->RenderTablesObj->getDefaultTableConfig(1, 1, 0);
 	}
-	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 20, count($ListThemeBlock) + 1, 1, 0, 'tabTxtThm');
+	$T['ContentInfos'] = $bts->RenderTablesObj->getDefaultDocumentConfig($infos, 0, count($ListThemeBlock) + 1, 1, 0, 'tabTxtThm'); // 20
 	$T['ContentInfos']['GroupName'] = "pm";
 	$T['ContentInfos']['Width'] = 768;
 	$T['ContentInfos']['Height'] = 1200;

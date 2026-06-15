@@ -1,15 +1,11 @@
-add layout_file name 'rw_hal9k_default'  generic_name 'default'  description 'rw_default' filename 'Rootwave/rw_hal9k_default.lyt.html';
-add layout name 'rw_hal9k_01_default' title 'Présentation par défaut'   generic_name 'default'  description 'rw_hal9k default'   layout_file 'rw_hal9k_default';
-assign layout name 'rw_hal9k_01_default' to_theme 'rw_hal9k_01' default YES;
+add layout_file name 'rw_hal9k_default_lf'  generic_name 'default'  description 'Default desc' filename 'Rootwave/rw_hal9k_default.lyt.html';
+add layout name 'rw_hal9k_01_default' title 'Default title'   generic_name 'default'  description 'Default desc' layout_file 'rw_hal9k_default_lf';
+assign layout name 'rw_hal9k_01_default' to_theme 'JnsEng_hal9k_01' default YES;
 
-add layout_file name 'rw_hal9k_user_profile'  generic_name 'user_profile'  description 'rw_user_profile' filename 'Rootwave/rw_hal9k_user_profile.lyt.html';
-add layout name 'rw_hal9k_01_user_profile' title 'Profil utilisateur'   generic_name 'user_profile'  description 'rw_hal9k user_profile'   layout_file 'rw_hal9k_user_profile';
-assign layout name 'rw_hal9k_01_user_profile' to_theme 'rw_hal9k_01';
+add layout_file name 'rw_hal9k_manage_full_width_lf'  generic_name 'manage_full_width'  description 'Full width for managing' filename 'Rootwave/rw_hal9k_manage_full_width.lyt.html';
+add layout name 'rw_hal9k_01_manage_full_width' title 'Full width'   generic_name 'manage_full_width'  description 'Full width for managing' layout_file 'rw_hal9k_manage_full_width_lf';
+assign layout name 'rw_hal9k_01_manage_full_width' to_theme 'JnsEng_hal9k_01';
 
-add layout_file name 'rw_hal9k_script_execution'  generic_name 'script_execution'  description 'rw_script_execution' filename 'Rootwave/rw_hal9k_script_execution.lyt.html';
-add layout name 'rw_hal9k_01_script_execution' title 'Exécution de script'   generic_name 'script_execution'  description 'rw_hal9k script_execution'   layout_file 'rw_hal9k_script_execution';
-assign layout name 'rw_hal9k_01_script_execution' to_theme 'rw_hal9k_01';
-
-add layout_file name 'rw_hal9k_decoration'  generic_name 'decoration'  description 'rw_decoration' filename 'Rootwave/rw_hal9k_decoration.lyt.html';
-add layout name 'rw_hal9k_01_decoration' title 'Gestion des décorations'   generic_name 'decoration'  description 'rw_hal9k decoration'   layout_file 'rw_hal9k_decoration';
-assign layout name 'rw_hal9k_01_decoration' to_theme 'rw_hal9k_01';
+add layout_file name 'rw_hal9k_script_execution_lf'  generic_name 'script_execution'  description 'Space for execution' filename 'Rootwave/rw_hal9k_script_execution.lyt.html';
+add layout name 'rw_hal9k_01_script_execution' title 'Script execution'   generic_name 'script_execution'  description 'Space for execution' layout_file 'rw_hal9k_script_execution_lf';
+assign layout name 'rw_hal9k_01_script_execution' to_theme 'JnsEng_hal9k_01';
