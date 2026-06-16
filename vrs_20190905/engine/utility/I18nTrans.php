@@ -129,6 +129,8 @@ class I18nTrans
 			if (file_exists($fileBaseName)) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : Loading I18n file : " . $fileBaseName));
 				include($fileBaseName);
+			} else {
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : file : " . $fileBaseName . " not found."));
 			}
 		} else {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " : CurrentSetObj->language is empty. I don't know where to put the data."));

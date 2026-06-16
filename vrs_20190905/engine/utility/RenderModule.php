@@ -89,7 +89,7 @@ class RenderModule {
 					$bts->CMObj->setConfigurationEntry($m['module_name'], $fileContent);
 					unset($fileContent);
 				} else {
-					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module config file " . $moduleFileName . "not found (not an error)."));
+					$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => "Module config file " . $moduleFileName . " not found (not an error)."));
 				}
 			} else {
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_ERROR, 'msg' => "Module class name ". $ModuleRendererName . " file could not be found."));

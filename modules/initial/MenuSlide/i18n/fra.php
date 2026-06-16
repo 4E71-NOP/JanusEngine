@@ -17,5 +17,14 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-$i18n['jobless'] = "Aucune tache &agrave; executer.";
+$bts->I18nTransObj->apply(
+    array(
+        "type" => "array",
+        "fra" => array(
+            "jobless" => "Aucune tache à executer.",
+			"back" => "Retour",
+        )
+    )
+);
+
 ?>

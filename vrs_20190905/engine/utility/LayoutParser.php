@@ -70,10 +70,10 @@ class LayoutParser {
 				// Now the command
 				$extract = array();
 				$extract= array();
-				preg_match ( "/('|\"|`)\w*('|\"|`)/", strtolower($A['0']), $extract);
+				preg_match ( "/('|\"|`)\w*('|\"|`)/", $A['0'], $extract);
 				$map[$i] = array(
 					"type"		=> "command",
-					"data"		=> strtolower($A['0']),
+					"data"		=> $A['0'],
 					"module_name"	=> substr( $extract['0'] , 1 , -1),
 				);
 				$i++;

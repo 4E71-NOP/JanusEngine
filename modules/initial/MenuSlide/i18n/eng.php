@@ -17,5 +17,14 @@
 // --------------------------------------------------------------------------------------------
 // @JanusEngine:license-end
 
-$i18n['jobless'] = "Nothing to do";
+$bts->I18nTransObj->apply(
+    array(
+        "type" => "array",
+        "eng" => array(
+            "jobless" => "Nothing to do.",
+			"back" => "Back",
+        )
+    )
+);
+
 ?>

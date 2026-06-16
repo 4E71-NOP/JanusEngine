@@ -134,7 +134,7 @@
 125 ../modules/initial/QuickSkin/module_quickskin.php
 2 ../modules/initial/Menu/i18n/eng.php
 2 ../modules/initial/Menu/i18n/fra.php
-80 ../modules/initial/Menu/module_menu.php
+80 ../modules/initial/Menu/module_menu_slide.php
 118 ../modules/initial/Menu/_Deprecated/ModuleMenuType01_static.php
 387 ../modules/initial/Menu/_Deprecated/ModuleMenuType02_animation.php
 28 ../modules/initial/Menu/_Deprecated/ModuleMenuType03_banner.php

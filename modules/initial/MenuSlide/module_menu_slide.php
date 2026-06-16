@@ -21,7 +21,7 @@
 //	Module : ModuleMenu
 // --------------------------------------------------------------------------------------------
 
-class ModuleMenu {
+class ModuleMenuSlide {
 	public function __construct(){}
 
 	/**
@@ -36,12 +36,16 @@ class ModuleMenu {
 
 		$Content = "";
 		if ( $CurrentSetObj->UserObj->hasPermission('group_default_read_permission') === true ) {
+			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : path = `".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') ."/". $infos['module']['module_directory'] . "menuSlide/i18n/"."`"));
+
+			$bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServerInfosEntry('DOCUMENT_ROOT') . "/" . $infos['module']['module_directory'] . "/i18n/");
+
 			$ClassLoaderObj = ClassLoader::getInstance();
 			$ClassLoaderObj->provisionClass('MenuData');
 
 			$MenuDataObj = new MenuData();
 			$MenuDataObj->RenderMenuData();
-
+			
 			$JavaScriptData = "var MenuData = {\r
 				'EntryPoint':'m".$MenuDataObj->getEntryPoint()."',\r
 				'theme_name':'".$CurrentSetObj->ThemeDataObj->getThemeName()."',\r
@@ -70,8 +74,16 @@ class ModuleMenu {
 			}
 			$Content .= "</div>\r";
 
+
+			$JavaScriptContent = "var menuSlideI18n = {\r
+			\t'back' : '" . $bts->I18nTransObj->getI18nTransEntry('back') . "',\r
+			\t'jobless' : '" . $bts->I18nTransObj->getI18nTransEntry('jobless') . "'\r
+			}\r
+			ms = new MenuSlide();\r
+			";
+
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'].'javascript/MenuSlide.js');
-			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', "ms = new MenuSlide();\r");
+			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Init', $JavaScriptContent);
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tms.initialization(MenuData,'menuBlock');");
 			$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-OnLoad', "\tms.makeMenu();");
 			$CurrentSetObj->GeneratedScriptObj->insertString('Css-File', $infos['module']['module_directory'].'css/MenuSlide.css');

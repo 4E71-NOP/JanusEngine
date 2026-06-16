@@ -142,7 +142,7 @@ Le contenu du module peut être n'importe quoi mais ici nous allons faire en sor
 <code>
 > site_context site test001 user site_owner password site_owner;<br>
 > add module name "document" title "Document" file "modules/module_affiche_document.php" desc "Affichage des documents" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 1;<br>
-> add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
+> add module name "menu" title "Menu" file "modules/menuSlide/module_menu_slide.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
 </code>
 <p>
 La position des modules indique au moteur l'ordre dans lequel les modules doivent être traité. 
@@ -208,7 +208,7 @@ Vous pourrez loisir vous inspirer des scripts déjà présents pour vos propres 
 <br>
 <br>
 > add module name "document" title "Document" file "modules/module_affiche_document.php" desc "Affichage des documents" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 1;<br>
-> add module name "menu" title "Menu" file "modules/module_menu.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
+> add module name "menu" title "Menu" file "modules/menuSlide/module_menu_slide.php" desc "Menu de selection des sujets" group_who_can_see Anonyme group_who_can_use Anonyme deco OFF position 2;<br>
 <br>
 <br>
 > add menu name "fr_sommaire" parent 00000000000000 position 01 type ARTICLE_RACINE lang fra state ONLINE deadline initial_tst title "Sommaire" desc "Sommaire" group Anonyme article 0;<br>
