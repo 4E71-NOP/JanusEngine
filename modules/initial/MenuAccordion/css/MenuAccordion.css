@@ -1,0 +1,34 @@
+.menuAccordionTitle {
+	background-color: #00000010;
+	font-weight: bold;
+	padding: 5px 0px 5px 0px;
+	border-radius: 3px;
+}
+
+.menuAccordionTitle:hover {
+	background-color: #00000018;
+}
+
+.menuAccordionLink {
+	font-weight: normal;
+}
+
+.menuGroup {
+	visibility: visible;
+	display: block;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+/* A scale here to allow it to transition in both directions */
+.menuGroupUnfold {
+	max-height: 256px !important; /* If you have many nested menus the display won't exeed this value. So increase it for more height*/
+	transform: scale(1);
+	transition: 1s all ease;
+}
+
+.menuGroupFold {
+	max-height: 0px !important;
+	transform: scale(1);
+	transition: 1s all ease;
+}

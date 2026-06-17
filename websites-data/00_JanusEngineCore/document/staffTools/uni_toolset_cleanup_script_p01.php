@@ -113,7 +113,7 @@ $Content .= "
 </form>\r
 ";
 
-$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_HydrScriptFormatTool.js');
+$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-File', 'current/engine/javascript/lib_JnsEngScriptFormatTool.js');
 
 $bts->segmentEnding(__METHOD__);
 /*JanusEngine-Content-End*/
