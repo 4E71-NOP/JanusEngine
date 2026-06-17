@@ -39,7 +39,7 @@ class ModuleAdministration {
 				WHERE menu_type IN ('2', '3') 
 				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ('language_id')."' 
 				AND menu_state = '1' 
-				ORDER BY menu_position , menu_name
+				ORDER BY menu_name
 				;");
 				// AND fk_group_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_group')." 
 				// AND fk_ws_id IN ('1', '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."')

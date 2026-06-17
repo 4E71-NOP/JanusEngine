@@ -10,7 +10,6 @@ module_website_id	BIGINT NOT NULL UNIQUE,
 fk_ws_id 			BIGINT,
 fk_module_id		BIGINT,
 module_state 		INTEGER,
-module_position		INTEGER,
 
 PRIMARY KEY (module_website_id),
 KEY idx_!IdxNom!_ws_id (fk_ws_id),

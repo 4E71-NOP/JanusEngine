@@ -54,7 +54,6 @@ class ModuleList {
 			AND wm.module_state = '1'
 			AND m.fk_perm_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_perm')."
 			AND m.module_adm_control = '0'
-			ORDER BY module_position
 			;";
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);

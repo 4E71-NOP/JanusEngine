@@ -241,7 +241,6 @@ class InstallPage03 {
 							"module_website_id" => 11,
 							"ws_id" => 2,
 							"module_state" => 1,
-							"module_position" => 2,
 							)
 			);
 			

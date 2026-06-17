@@ -22,7 +22,7 @@
 //--------------------------------------------------------------------------------
 self::$ActionTable['add']['module'] = function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['module'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
-		"INSERT INTO " . $a['sqlTables']['module_website'] . " VALUES ('" . $a['params']['module_website_id'] . "', '" . $a['Context']['ws_id'] . "', '" . $a['params']['id'] . "', '" . $a['params']['state'] . "', '" . $a['params']['position'] . "' );"
+		"INSERT INTO " . $a['sqlTables']['module_website'] . " VALUES ('" . $a['params']['module_website_id'] . "', '" . $a['Context']['ws_id'] . "', '" . $a['params']['id'] . "', '" . $a['params']['state'] . "');"
 	); 
 };
 //@formatter:off
@@ -46,7 +46,7 @@ self::$ActionTable['show']['modules']	= function (&$a) { return array(
 			. "WHERE mw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. "AND m.module_id = mw.fk_module_id "
 			. "AND m.fk_perm_id = p.perm_id "
-			. "ORDER BY m.module_name, mw.module_position;"
+			. "ORDER BY m.module_name;"
 	); 
 };
 

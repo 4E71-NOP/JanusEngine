@@ -967,7 +967,6 @@ self::$InitTable['module'] = function (&$a) {
 		"group_allowed_to_see"	=> 1,
 		"group_allowed_to_use"	=> 1,
 		"state"					=> "ONLINE",
-		"position"				=> 1,
 		"adm_control"			=> "NO",
 		"container_name"		=> "",
 		"container_style"		=> "",

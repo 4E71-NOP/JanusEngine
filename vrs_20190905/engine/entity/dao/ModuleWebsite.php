@@ -27,7 +27,6 @@ class ModuleWebsite extends Entity {
 		"ws_id"					=> 0,
 		"module_id"				=> 0,
 		"module_state"			=> 0,
-		"module_position"		=> 0,
 	);
 	//@formatter:on
 	

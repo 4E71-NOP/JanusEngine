@@ -53,7 +53,6 @@ class RenderAdmDashboard
 			AND b.module_state = '1'
 			AND a.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . "
 			AND a.module_adm_control > '0'
-			ORDER BY module_position
 			;");
 
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
