@@ -131,21 +131,10 @@ class BaseToolSet
 		}
 	}
 
-
-	/**
-	 * Loads and prepare the command console class. 
-	 * @DEPRECATED
-	 */
-	public function InitCommandConsole()
-	{
-		$ClassLoaderObj = ClassLoader::getInstance();
-		$ClassLoaderObj->provisionClass('CommandConsole');
-	}
-
 	/**
 	 * Sets the session management instance.
 	 * It is done this ways because the session isn't initialized right away at the start or when this class is loaded.
-	 * @DEPRECATED
+	 * 
 	 */
 	public function initSmObj()
 	{

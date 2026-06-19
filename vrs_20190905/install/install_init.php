@@ -196,7 +196,7 @@ class JnsEngInstall
 			"' vlink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_visite_col') .
 			"' alink='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_active_col') .
 			"' background='media/theme/" . $ThemeDataObj->getDefinitionValue('directory') .
-			"/" . $ThemeDataObj->getDefinitionValue('bg')
+			"/" . $ThemeDataObj->getDefinitionValue('bodyBg')
 			. "' style='height:100%;'>\r\r
 			";
 

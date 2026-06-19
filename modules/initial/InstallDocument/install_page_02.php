@@ -132,10 +132,9 @@ class InstallPage02
 			$this->errorRaised = true;
 		};
 
-		$bts->InitCommandConsole();
-
 		$ClassLoaderObj = ClassLoader::getInstance();
 		$ClassLoaderObj->provisionClass('LibInstallation');
+		$ClassLoaderObj->provisionClass('CommandConsole');
 		$LibInstallationObj = LibInstallation::getInstance();
 		$t = time();
 		$LibInstallationObj->setReport(array(
