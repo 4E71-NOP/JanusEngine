@@ -57,7 +57,7 @@ class Router
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : A form has been submitted"));
 			$this->updateSessionRouteFromForm();
 		} else {
-			$url = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
+			$url = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('requestUri');
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Analyzing requested URI `" . $url . "`"));
 			if ($this->isCleanUrl($url) === true) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : URL is clean. We consider it's a slug thing."));

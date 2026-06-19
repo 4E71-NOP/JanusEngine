@@ -59,7 +59,7 @@ $bts->I18nTransObj->apply(
 		"fra" => array(
 			"invite1"		=>	"C'est un petit développeur dans sa campagne qui lance ce projet.<br>\r
 			<br>\r
-			Si vous souhaitez aider, allez sur <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "enroll'>cette page</a>.<br>\r
+			Si vous souhaitez aider, allez sur <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "enroll'>cette page</a>.<br>\r
 			<br>\r
 			<br>\r
 			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r
@@ -70,7 +70,7 @@ $bts->I18nTransObj->apply(
 		"eng" => array(
 			"invite1"		=>	"This is a single developer lost in the jungle who launch this project.<br>\r
 			<br>\r
-			If you want to help, go to <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "enroll'>this page</a>.<br>\r
+			If you want to help, go to <a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "enroll'>this page</a>.<br>\r
 			<br>\r
 			<br>\r
 			<br>\r	<br>\r	<br>\r	<br>\r	<br>\r

@@ -189,7 +189,7 @@ class JnsEngInstall
 			<head>\r
 			<title>INSTALL</title>\r
 			" . $stylesheet . "\r
-			<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_".$randomNumber.".png' sizes='32x32'>\r
+			<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/img/favicon/favicon_".$randomNumber.".png' sizes='32x32'>\r
 			</head>\r
 			<body id='JnsEngBody' text='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'txt_col') .
 			"' link='" . $ThemeDataObj->getThemeBlockEntry('B01T', 'a_fg_col') .

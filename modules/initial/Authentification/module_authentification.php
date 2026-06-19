@@ -106,7 +106,7 @@ class ModuleAuthentification
 					2,
 					""
 				);
-				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+				$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 				$pv['SSL_etat'] = "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(" . $baseUrl . "/media/img/universal/ssl_ko.png)'></div>";
 				if ($CurrentSetObj->ServerInfosObj->getServerInfosEntry('sslState') == 0) {
 					if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == '443')) {

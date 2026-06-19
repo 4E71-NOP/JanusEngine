@@ -24,9 +24,7 @@ use PHPMailer\PHPMailer\Exception;
 
 class ModuleGlobalReport
 {
-	public function __construct()
-	{
-	}
+	public function __construct() {}
 
 	/**
 	 * Return the rendered HTML bloc about log, SQL quesries, and other things.
@@ -164,6 +162,8 @@ class ModuleGlobalReport
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$Content = array();
+		$ServerInfosObj = $CurrentSetObj->ServerInfosObj->getServerInfos();
+		$hideInfo = _HIDE_SENSITIVE_SERVER_INFO_;
 
 		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l11');
 		$Content['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l21');
@@ -179,37 +179,42 @@ class ModuleGlobalReport
 		$Content['12']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l112');
 		$Content['13']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l113');
 		$Content['14']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l114');
+		$Content['15']['1']['cont'] = "*";
 
 		$memory_ = array();
 		$memory_['peak'] = memory_get_peak_usage();
 		$memory_['usage'] = memory_get_usage();
 
-		$Content['1']['2']['cont'] = $_SERVER['HTTP_HOST'];
+		$Content['1']['2']['cont'] = $ServerInfosObj['srvHost'];	//$_SERVER['HTTP_HOST'];
 		$Content['2']['2']['cont'] = round(($memory_['peak'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['3']['2']['cont'] = phpversion();
+		$Content['3']['2']['cont'] = $ServerInfosObj['phpVersion'];	//phpversion();
 		$Content['4']['2']['cont'] = round(($memory_['usage'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
 		$Content['5']['2']['cont'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
 		$Content['6']['2']['cont'] = get_include_path();
-		$Content['7']['2']['cont'] = getcwd();
-		$Content['8']['2']['cont'] = getmyuid();
-		$Content['9']['2']['cont'] = getmygid();
-		$Content['10']['2']['cont'] = getmypid();
+		$Content['7']['2']['cont'] = $ServerInfosObj['currentDirectory'];	//getcwd();
+		$Content['8']['2']['cont'] = $ServerInfosObj['uid'];	//getmyuid();
+		$Content['9']['2']['cont'] = $ServerInfosObj['gid'];	//getmygid();
+		$Content['10']['2']['cont'] = $ServerInfosObj['pid'];	//getmypid();
 		$Content['11']['2']['cont'] = getenv("HTTP_USER_AGENT");
 		$Content['12']['2']['cont'] = (empty(get_current_user())) ? "???" : get_current_user();
-		$Content['13']['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('request_uri');
-
-		$Content['14']['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
+		$Content['13']['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('requestUri');
+		
+		if ($hideInfo == 0) {
+			$Content['14']['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
 			. "@" . $bts->CMObj->getConfigurationEntry('host')
-			. ((strlen($bts->CMObj->getConfigurationEntry('port')) ?? '') > 0 ? ':' . $bts->CMObj->getConfigurationEntry('host') : '')
-			. "/" . $bts->CMObj->getConfigurationEntry('dbprefix')
-			. " ("
-			. $bts->CMObj->getConfigurationEntry('dal')
-			. ", "
-			. $bts->CMObj->getConfigurationEntry('charset')
-			. ")"
-		;
-
-		$config = $bts->RenderTablesObj->getDefaultTableConfig(14, 2, 2);
+				. ((strlen($bts->CMObj->getConfigurationEntry('port')) ?? '') > 0 ? ':' . $bts->CMObj->getConfigurationEntry('host') : '')
+				. "/" . $bts->CMObj->getConfigurationEntry('dbprefix')
+				. " ("
+				. $bts->CMObj->getConfigurationEntry('dal')
+				. ", "
+				. $bts->CMObj->getConfigurationEntry('charset')
+				. ")";
+		} else {
+			$Content['14']['2']['cont'] = "*";
+		}
+		$Content['15']['2']['cont'] = $bts->StringFormatObj->print_r_html($CurrentSetObj->ServerInfosObj->getServerInfosEntry('execIfInfos'));
+		
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(15, 2, 2);
 
 		$package = array("content" => $Content, "config" => $config);
 
@@ -270,7 +275,7 @@ class ModuleGlobalReport
 				. "<hr>\r"
 				. "Website : " . $bts->StringFormatObj->jsonSimpleTransformForHtml(json_encode($CurrentSetObj->WebSiteObj->getWebSite()))
 				. "<hr>\r"
-				. "<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+				. "<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 				. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
 				. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
 				. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>"
@@ -359,7 +364,7 @@ class ModuleGlobalReport
 
 		$CurrentSetObj->GeneratedScriptObj->insertString('JavaScript-Data', $javaScriptForChartJs . "\r");
 		$Content = array();
-		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed') . " : " . round($highestMemory,2) . " " . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
+		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('tMemoryMaxMemUsed') . " : " . round($highestMemory, 2) . " " . $bts->I18nTransObj->getI18nTransEntry('tMemoryMb');
 		$Content['2']['1']['cont'] = "<canvas id='statChart1' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['3']['1']['cont'] = "<canvas id='statChart2' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";
 		$Content['4']['1']['cont'] = "<canvas id='statChart3' style='width:512px; height:256px; background-color: #FFFFFF; margin:5px;'></canvas>\r";

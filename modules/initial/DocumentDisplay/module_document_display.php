@@ -48,7 +48,7 @@ class ModuleDocumentDisplay
 			$l = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');
 			$bts->I18nTransObj->apply(array("type" => "file", "file" => $infos['module']['module_directory'] . "i18n/" . $l . ".php", "format" => "php"));
 
-			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+			$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 
 			if (!class_exists("DocumentData")) {
 				include("modules/initial/DocumentDisplay/DocumentData.php");

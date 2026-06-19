@@ -337,7 +337,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'commandLineEngine') == '
 	$bts->LMObj->msgLog(array('level' => LOGLEVEL_WARNING, 'msg' => __METHOD__ . " Somebody is trying to use console while it is disabled."));
 	$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 		. "<tr>\r<td style='padding:15px;'>"
-		. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
+		. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
 		. "</td>\r"
 		. "<td style='padding:15px;'>"
 		. $bts->I18nTransObj->getI18nTransEntry('inviteErr')

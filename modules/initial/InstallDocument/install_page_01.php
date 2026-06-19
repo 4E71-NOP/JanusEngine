@@ -244,7 +244,7 @@ class InstallPage01
 
 		$l = 1;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_ip');
-		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('srv_hostname');
+		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('srvHostname');
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_phpVrs');
@@ -253,7 +253,7 @@ class InstallPage01
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_incPth');
-		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('include_path');
+		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('includePath');
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_CurDir');
@@ -261,7 +261,7 @@ class InstallPage01
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_DisErr');
-		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('display_errors') . " / " . $bts->I18nTransObj->getI18nTransEntry($ServerInfosObj->getServerInfosEntry('register_globals')) . " / " . $ServerInfosObj->getServerInfosEntry('post_max_size');
+		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('displayErrors') . " / " . $bts->I18nTransObj->getI18nTransEntry($ServerInfosObj->getServerInfosEntry('registerGlobals')) . " / " . $ServerInfosObj->getServerInfosEntry('postMaxSize');
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_MemLim');
@@ -274,8 +274,8 @@ class InstallPage01
 
 		$l++;
 		$T[$t][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('SRV_MaxTim');
-		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('max_execution_time') . "s";
-		if ($ServerInfosObj->getServerInfosEntry('max_execution_time') >= 60) {
+		$T[$t][$l]['2']['cont'] = $ServerInfosObj->getServerInfosEntry('maxExecutionTime') . "s";
+		if ($ServerInfosObj->getServerInfosEntry('maxExecutionTime') >= 60) {
 			$T[$t][$l]['2']['cont'] .= " (<span class='" . $Block . "_warning'>" . $bts->I18nTransObj->getI18nTransEntry('test_nok') . "</span>)";
 		} else {
 			$T[$t][$l]['2']['cont'] .= " " . $bts->I18nTransObj->getI18nTransEntry('test_ok');

@@ -54,7 +54,7 @@ class RenderStylesheet {
 		$themeArray = $ThemeDataObj->getThemeData();
 		$themeArray['tableName'] = $tableName;
 		
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 		$Content = "
 <style type='text/css'>
 <!--
@@ -268,7 +268,7 @@ html { width:100%; height:100%;}\r\r
 		// Font are the exeption as it can be tricky sometimes depending on browsers.
 		$this->mainUnit = $p['main_unit'];
 		$this->fontUnit = $p['txt_font_unit'];
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 		
 		$Content = "";
 		if (strlen($p['common_content'] ?? '') > 0) { $Content .= ".common_content { " . $p['common_content'] . "}"; }
@@ -321,7 +321,7 @@ html { width:100%; height:100%;}\r\r
 			&& isset($p['txt_font_filename_normal']) 
 			// && file_exists($rootPath.$p['txt_font_filename_normal'])
 			) {
-				$Content .= "@font-face {	font-family: '".$p['txt_font_name_normal']."'; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$dir."/".$p['txt_font_filename_normal']."');}\r";
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_normal']."'; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srvHost')."/media/theme/".$dir."/".$p['txt_font_filename_normal']."');}\r";
 		}
 
 		if ( 
@@ -329,7 +329,7 @@ html { width:100%; height:100%;}\r\r
 			&& isset($p['txt_font_filename_bold'])
 			// && file_exists($rootPath.$p['txt_font_filename_bold'])
 			) {
-				$Content .= "@font-face {	font-family: '".$p['txt_font_name_bold']."'; font-weight:bold; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$dir."/".$p['txt_font_filename_bold']."');}\r";
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_bold']."'; font-weight:bold; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srvHost')."/media/theme/".$dir."/".$p['txt_font_filename_bold']."');}\r";
 		}
 
 		if ( 
@@ -337,7 +337,7 @@ html { width:100%; height:100%;}\r\r
 			&& isset($p['txt_font_filename_italic'])
 			// && file_exists($rootPath.$p['txt_font_filename_bold'])
 			) {
-				$Content .= "@font-face {	font-family: '".$p['txt_font_name_italic']."'; font-style:italic; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srv_host')."/media/theme/".$dir."/".$p['txt_font_filename_italic']."');}\r";
+				$Content .= "@font-face {	font-family: '".$p['txt_font_name_italic']."'; font-style:italic; src: url('".$protocol.$ServerInfosObj->getServerInfosEntry('srvHost')."/media/theme/".$dir."/".$p['txt_font_filename_italic']."');}\r";
 		}
 		
 		// Main module class
@@ -496,7 +496,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
@@ -520,7 +520,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");
@@ -552,7 +552,7 @@ html { width:100%; height:100%;}\r\r
 		$CurrentSetObj = CurrentSet::getInstance();
 		$type = $infos['currentBlockType'];
 		$p = &$infos[$infos['currentBlock'].$type];
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 
 		$Content = "";
 		$dir = $this->ThemeDataObj->getDefinitionValue("directory");

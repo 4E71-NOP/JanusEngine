@@ -58,7 +58,7 @@ $bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServ
 $Content .= $bts->I18nTransObj->getI18nTransEntry('url_bypass') . "
 <p style='text-align:center;'>
 <br>\r
-<a href='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url').
+<a href='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl').
 "index.php?"._JNSENGLINKURLTAG_."=1&arti_slug=admin-authentification&arti_page=1' 
 style='background-color:#FF800080; border-radius:0.5cm; padding:0.5cm'
 >\r".$bts->I18nTransObj->getI18nTransEntry('url_bypass_name')."

@@ -114,7 +114,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 	
 	if ($CurrentSetObj->ServerInfosObj->getServerInfosEntry('sslState') == 0) {
 		$Content .= "<div style='background-color:#FF800080; margin:15px; padding:15px; border-radius:5px; box-shadow: 3px 5px 10px #00000040;'>"
-			. "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "/media/img/universal/ssl_ko.png)'></div>"
+			. "<div style='display:inline-block; width:40px;height:16px; background-size:contain; background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "/media/img/universal/ssl_ko.png)'></div>"
 			. " " . $bts->I18nTransObj->getI18nTransEntry('sslStateOff')
 			. "</div>\r"
 			. "<br>\r";
@@ -196,7 +196,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 		case "mailSent":
 			$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 				. "<tr>\r<td style='padding:15px;'>"
-				. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "'>"
+				. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "'>"
 				. "</td>\r"
 				. "<td style='padding:15px;'>"
 				. $bts->I18nTransObj->getI18nTransEntry('invite2')
@@ -208,7 +208,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 		case "confirmationReceived":
 			$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 				. "<tr>\r<td style='padding:15px;'>"
-				. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "'>"
+				. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_ok') . "'>"
 				. "</td>\r"
 				. "<td style='padding:15px;'>"
 				. $bts->I18nTransObj->getI18nTransEntry('invite3')
@@ -222,7 +222,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 				case "PhpMailfailed":
 					$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 						. "<tr>\r<td style='padding:15px;'>"
-						. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
+						. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
 						. "</td>\r"
 						. "<td style='padding:15px;'>"
 						. $bts->I18nTransObj->getI18nTransEntry('invite4')
@@ -233,7 +233,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 				case "errorTokenExpired":
 					$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 						. "<tr>\r<td style='padding:15px;'>"
-						. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
+						. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
 						. "</td>\r"
 						. "<td style='padding:15px;'>"
 						. $bts->I18nTransObj->getI18nTransEntry('invite5')
@@ -254,7 +254,7 @@ if ($bts->CMObj->getConfigurationSubEntry('functions', 'user_sign_up') == 'enabl
 } else {
 	$Content .= "<table style='margin-right: auto; margin-left: auto'>\r"
 	. "<tr>\r<td style='padding:15px;'>"
-	. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
+	. "<img width='64' heigth='64' src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_nok') . "'>"
 	. "</td>\r"
 	. "<td style='padding:15px;'>"
 	. $bts->I18nTransObj->getI18nTransEntry('invite6')

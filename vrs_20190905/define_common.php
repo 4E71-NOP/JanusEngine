@@ -114,7 +114,7 @@ define("_STAFF_", 2);
 define("_SENIOR_STAFF_", 3);
 
 // --------------------------------------------------------------------------------------------
-// Class names
+// CSS Class names
 define("_CLASS_TABLE01_",			"_Table01");
 define("_CLASS_TABLE_STD_",			"_TableStd");
 define("_CLASS_TXT_OK_",			"_ok");
@@ -135,7 +135,7 @@ define("_CLASS_FILE_SELECTOR_",				"FileSelector");
 // --------------------------------------------------------------------------------------------
 // Behavior
 define("_ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_",			10);
-
+define ("_HIDE_SENSITIVE_SERVER_INFO_", 0);
 // --------------------------------------------------------------------------------------------
 // Default CSS values
 define("_TABLE_TR_HEIGHT_",			24);

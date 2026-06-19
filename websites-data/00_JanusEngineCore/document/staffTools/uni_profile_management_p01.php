@@ -179,7 +179,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$l++;
 
 	$T['Content'][$curTab][$l]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1_passwordTopic');
-	$T['Content'][$curTab][$l]['2']['cont'] = "<a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+	$T['Content'][$curTab][$l]['2']['cont'] = "<a href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 		. "reset-password'>" . $bts->I18nTransObj->getI18nTransEntry('t1_passwordLink') . "</a>";
 	$l++;
 
@@ -473,7 +473,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['ContentInfos']['padding-h'] = "128px";
 	$T['ContentInfos']['padding-v'] = "16px";
 
-	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
+	$PmThemeDataObj->setThemeDataEntry('pathThemeBg', $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $PmThemeDataObj->getDefinitionValue('directory') . "/" . $PmThemeDataObj->getDefinitionValue('bg'));
 	$ModulePaddingX = $ModulePaddingY = 64;
 
 	$infos['module_nameBackup'] = $infos['module_name'];
@@ -692,7 +692,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		foreach ($iconList as $A) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " icon " . $A . ": " . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A)));
 			if (strlen($PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A) ?? '') != 0) {
-				$PmIcon[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A) . ");";
+				$PmIcon[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], 'directory') . "/" . $PmThemeDataObj->getThemeBlockEntry($infos['blockT'], $A) . ");";
 			}
 			$j++;
 		}
@@ -755,7 +755,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	foreach ($themeList as $A) {
 		$tmpArrayDefEntry = $PmThemeDataObj->getThemeDefinitionEntry($A);
 		if (strlen($tmpArrayDefEntry['def_string'] ?? '') != 0) {
-			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $themeDir . "/" . $tmpArrayDefEntry['def_string'] . ");";
+			$themeEntries[$j] = "background-image: url(" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $themeDir . "/" . $tmpArrayDefEntry['def_string'] . ");";
 			$j++;
 		}
 	}

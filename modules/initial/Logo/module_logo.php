@@ -43,12 +43,12 @@ class ModuleLogo {
 
 		$Content = "";
 
-		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Module '" . $infos['module_name'] . "' Link homepage as : '" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "'."));
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "Module '" . $infos['module_name'] . "' Link homepage as : '" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "'."));
 		$Content .= "
 		<div style='text-align: center;'>\r
 		<a href='/' onMouseOver=\"t.ToolTip('" . $bts->SDDMObj->escapeString($bts->I18nTransObj->getI18nTransEntry('tooltip')) . "')\" onMouseOut=\"t.ToolTip()\">\r
 		<img src='" .
-			$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+			$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 			. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
 			. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
 			. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'

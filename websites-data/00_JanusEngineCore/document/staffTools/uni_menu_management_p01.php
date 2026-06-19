@@ -132,8 +132,8 @@ $buttonLink = "<a href='"
 	. "&arti_page=1"
 ;
 
-$buttonUp = "'><img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_top') . "' width='24' height='24'>";
-$buttonDown = "'><img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_bottom') . "' width='24' height='24'>";
+$buttonUp = "'><img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_top') . "' width='24' height='24'>";
+$buttonDown = "'><img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/theme/" . $ThemeDataObj->getDefinitionValue('directory') . "/" . $ThemeDataObj->getThemeBlockEntry($infos['blockT'], 'icon_bottom') . "' width='24' height='24'>";
 
 //$tabListMenu = array();
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

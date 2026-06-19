@@ -335,7 +335,7 @@ class FormManagement
 			$PHPMailerObj = new PHPMailer(true);
 
 			try {
-				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 				// Recipients
 				// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
 				$PHPMailerObj->CharSet = "UTF-8";
@@ -362,7 +362,7 @@ class FormManagement
 
 				$mailContentSearchList = array("{{logo}}", "{{link}}", "{{websiteName}}", "{{baseUrl}}");
 				$mailContentReplaceList = array(
-					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 					. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
 					. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
 					. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
@@ -377,7 +377,7 @@ class FormManagement
 					. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
 
 					$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
-					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 				);
 				$mailContent = str_replace($mailContentSearchList, $mailContentReplaceList, $mailContent);
 				// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Mail content : '" . $mailContent . "'"));
@@ -504,7 +504,7 @@ class FormManagement
 			$PHPMailerObj = new PHPMailer(true);
 
 			try {
-				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url');
+				$baseUrl = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl');
 				// Recipients
 				// $PHPMailerObj->SMTPDebug = SMTP::DEBUG_SERVER;												//Enable verbose debug output
 				$PHPMailerObj->CharSet = "UTF-8";
@@ -531,7 +531,7 @@ class FormManagement
 
 				$mailContentSearchList = array("{{logo}}", "{{link}}", "{{websiteName}}", "{{baseUrl}}");
 				$mailContentReplaceList = array(
-					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					"<img src='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 					. "media/theme/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('directory')
 					. "/" . $CurrentSetObj->ThemeDataObj->getDefinitionValue('logo')
 					. "' alt='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name') . "' style='border:0px'>",
@@ -546,7 +546,7 @@ class FormManagement
 					. $SecurityTokenObj->getSecurityTokenEntry('st_content'),
 
 					$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_name'),
-					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 				);
 				$mailContent = str_replace($mailContentSearchList, $mailContentReplaceList, $mailContent);
 				// $bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : SingUp - Mail content : '" . $mailContent . "'"));

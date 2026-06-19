@@ -90,7 +90,7 @@ class ModuleAdministration {
 	private function renderAdminMenu (&$infos) {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$Block = $CurrentSetObj->ThemeDataObj->getThemeName().$infos['block'];
-		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url'); 
+		$baseUrl  = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl'); 
 		$Content = "";
 		$tabDecal = str_repeat("\t",$infos['parameters']['level']*2);
 		foreach ( $infos['menuData'] as $A ) {

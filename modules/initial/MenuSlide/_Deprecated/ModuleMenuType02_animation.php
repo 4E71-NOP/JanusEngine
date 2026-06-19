@@ -254,8 +254,8 @@ class ModuleMenuType02 {
 				$CurrentSetObj->GeneratedScriptObj->insertString("JavaScript-OnLoad" , "\telm.Gebi( '".$A['id']."' ).style.visibility = 'visible';");
 			}
 			if ( $Ab['display_icons'] == 1 ) {
-				if ( strlen ($Ab['icone_directory_01']) > 0 ) { $Micone_rep =		"<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_directory']."'	width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
-				if ( strlen ($Ab['icone_file_01']) > 0 ) { $Micone_fichier =	"<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')."/media/theme/".$Ab['directory']."/".$Ab['icone_file']."'			width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
+				if ( strlen ($Ab['icone_directory_01']) > 0 ) { $Micone_rep =		"<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')."/media/theme/".$Ab['directory']."/".$Ab['icone_directory']."'	width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
+				if ( strlen ($Ab['icone_file_01']) > 0 ) { $Micone_fichier =	"<img src='".$CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')."/media/theme/".$Ab['directory']."/".$Ab['icone_file']."'			width='".$Ab['icons_width']."' height='".$Ab['icons_height']."' border='0'>"; }
 			}
 			
 			$infos['backup']['module_display_mode']	= $infos['module_display_mode'];

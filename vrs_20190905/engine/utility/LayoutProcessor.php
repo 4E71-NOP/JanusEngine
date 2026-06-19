@@ -101,13 +101,13 @@ class LayoutProcessor
 			$finalFileName = str_replace(".lyt.html", "_connected.lyt.html", $finalFileName);
 		}
 
-		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . $finalFileName;
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('currentDirectory') . "/" . _LAYOUTS_DIRECTORY_ . $finalFileName;
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Processing file :'" . $targetFilneName . "'"));
 
 		$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 
 		if ($fileContentObj->getFileContent() === false) {
-			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . "default/default.lyt.html";
+			$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('currentDirectory') . "/" . _LAYOUTS_DIRECTORY_ . "default/default.lyt.html";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " : Layout file not found. Back to default layout filename `" . $targetFilneName . "`"));
 			$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 		}
@@ -144,7 +144,7 @@ class LayoutProcessor
 		//		$layoutFileObj = new LayoutFile();
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : layout filename `" . $targetFilneName . "`"));
-		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('current_dir') . "/" . _LAYOUTS_DIRECTORY_ . $targetFilneName;
+		$targetFilneName = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('currentDirectory') . "/" . _LAYOUTS_DIRECTORY_ . $targetFilneName;
 		$fileContentObj->setFileContent($fileUtilObj->getFileContent($targetFilneName));
 		$map = $layoutParserObj->getFragments($fileContentObj->getFileContent());
 		return ($map);

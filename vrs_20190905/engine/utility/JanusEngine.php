@@ -747,7 +747,7 @@ class JanusEngine
 		// $this->GeneratedScript->insertString('JavaScript-File', 'current/engine/javascript_lib_calculs_decoration.js');
 		// We got the route definition in the $CurrentSet and the session.
 		// Inserting the URL in the browser bar.
-		$urlBar = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "/" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "/";
+		$urlBar = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "/" . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . "/";
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	window.history.pushState( null , '" . $WebSiteObj->getWebSiteEntry('ws_title') . "', '" . $urlBar . "');");
 		$this->GeneratedScript->insertString('JavaScript-OnLoad', "	document.title = '" . $WebSiteObj->getWebSiteEntry('ws_title') . " - " . $CurrentSetObj->getDataSubEntry('article', 'arti_slug') . "';");
 
@@ -891,7 +891,7 @@ class JanusEngine
 				$Content .= "
 				<head>\r
 				<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-				<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
+				<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
 				<title>" . $this->WebSiteObj->getWebSiteEntry('ws_title') . "</title>\r
 			";
 				$Content .= $this->stylesheet . "</head>\r";
@@ -901,8 +901,8 @@ class JanusEngine
 				$Content .= "
 					<head>\r
 					<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\r
-					<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
-					<link rel='stylesheet' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
+					<link rel='icon' type='image/png' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "media/img/favicon/favicon_" . $randomNumber . ".png' sizes='32x32'>\r
+					<link rel='stylesheet' href='" . $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl') . "stylesheets/" . $this->ThemeDataObj->getDefinitionValue('stylesheet_1') . "'>
 					</head>\r
 					";
 				break;
@@ -933,7 +933,7 @@ class JanusEngine
 
 		if (strlen($this->ThemeDataObj->getDefinitionValue('bodyBg') ?? '') > 0) {
 			$Content .= "background-image: url("
-				. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+				. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 				. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('bodyBg') . '); ';
 		}
 
@@ -961,7 +961,7 @@ class JanusEngine
 		for ($divNbr = 1; $divNbr <= 5; $divNbr++) {
 			if (strlen($this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg') ?? '') > 0) {
 				$Content .= "<div id='div" . $divNbr . "bg' style='background-image: url("
-					. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('base_url')
+					. $CurrentSetObj->ServerInfosObj->getServerInfosEntry('baseUrl')
 					. 'media/theme/' . $this->ThemeDataObj->getDefinitionValue('directory') . '/' . $this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg') . '); ';
 
 				if (strlen($this->ThemeDataObj->getDefinitionValue('div' . $divNbr . 'Bg_style') ?? '') > 0) {
