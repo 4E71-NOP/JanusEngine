@@ -135,7 +135,7 @@ define("_CLASS_FILE_SELECTOR_",				"FileSelector");
 // --------------------------------------------------------------------------------------------
 // Behavior
 define("_ADMIN_PAGE_TABLE_DEFAULT_NBR_LINE_",			10);
-define ("_HIDE_SENSITIVE_SERVER_INFO_", 0);
+define ("_HIDE_SENSITIVE_SERVER_INFO_", 1);
 // --------------------------------------------------------------------------------------------
 // Default CSS values
 define("_TABLE_TR_HEIGHT_",			24);

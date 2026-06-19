@@ -143,7 +143,7 @@ class ModuleGlobalReport
 			$bts->RenderTablesObj->updateTabsTitle($T['ContentInfos'], $CurrentTab);
 
 			$GeneratedScriptObj = $CurrentSetObj->GeneratedScriptObj;
-			$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'] . 'lib_GlobalReport.js');
+			$GeneratedScriptObj->insertString('JavaScript-File', $infos['module']['module_directory'] . 'javascript/lib_GlobalReport.js');
 			$GeneratedScriptObj->insertString('JavaScript-Init', 'var gr = new GlobalReport();');
 		}
 
@@ -165,43 +165,69 @@ class ModuleGlobalReport
 		$ServerInfosObj = $CurrentSetObj->ServerInfosObj->getServerInfos();
 		$hideInfo = _HIDE_SENSITIVE_SERVER_INFO_;
 
-		$Content['1']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l11');
-		$Content['2']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l21');
-		$Content['3']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l31');
-		$Content['4']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l41');
-		$Content['5']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l51');
-		$Content['6']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l61');
-		$Content['7']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l71');
-		$Content['8']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l81');
-		$Content['9']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l91');
-		$Content['10']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l101');
-		$Content['11']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l111');
-		$Content['12']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l112');
-		$Content['13']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l113');
-		$Content['14']['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l114');
-		$Content['15']['1']['cont'] = "*";
+		$i = 1;
 
-		$memory_ = array();
-		$memory_['peak'] = memory_get_peak_usage();
-		$memory_['usage'] = memory_get_usage();
+		$memory_ = array(
+			"peak" => memory_get_peak_usage(),
+			"usage" => memory_get_usage()
+		);
 
-		$Content['1']['2']['cont'] = $ServerInfosObj['srvHost'];	//$_SERVER['HTTP_HOST'];
-		$Content['2']['2']['cont'] = round(($memory_['peak'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['3']['2']['cont'] = $ServerInfosObj['phpVersion'];	//phpversion();
-		$Content['4']['2']['cont'] = round(($memory_['usage'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
-		$Content['5']['2']['cont'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
-		$Content['6']['2']['cont'] = get_include_path();
-		$Content['7']['2']['cont'] = $ServerInfosObj['currentDirectory'];	//getcwd();
-		$Content['8']['2']['cont'] = $ServerInfosObj['uid'];	//getmyuid();
-		$Content['9']['2']['cont'] = $ServerInfosObj['gid'];	//getmygid();
-		$Content['10']['2']['cont'] = $ServerInfosObj['pid'];	//getmypid();
-		$Content['11']['2']['cont'] = getenv("HTTP_USER_AGENT");
-		$Content['12']['2']['cont'] = (empty(get_current_user())) ? "???" : get_current_user();
-		$Content['13']['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('requestUri');
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l11');
+		$Content[$i]['2']['cont'] = $ServerInfosObj['srvHost'];	//$_SERVER['HTTP_HOST'];
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l31');
+		$Content[$i]['2']['cont'] = $ServerInfosObj['phpVersion'];	//phpversion();
+		$i++;
 		
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l21');
+		$Content[$i]['2']['cont'] = round(($memory_['peak'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l41');
+		$Content[$i]['2']['cont'] = round(($memory_['usage'] / 1024), 2) . $bts->I18nTransObj->getI18nTransEntry('Ko');
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l51');
+		$Content[$i]['2']['cont'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_info_debug');
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l61');
+		$Content[$i]['2']['cont'] = get_include_path();
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l71');
+		$Content[$i]['2']['cont'] = $ServerInfosObj['currentDirectory'];	//getcwd();
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l111');
+		$Content[$i]['2']['cont'] = getenv("HTTP_USER_AGENT");
+		$i++;
+
+		$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l113');
+		$Content[$i]['2']['cont'] = $CurrentSetObj->ServerInfosObj->getServerInfosEntry('requestUri');
+		$i++;
+
 		if ($hideInfo == 0) {
-			$Content['14']['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
-			. "@" . $bts->CMObj->getConfigurationEntry('host')
+			$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l112');
+			$Content[$i]['2']['cont'] = (empty(get_current_user())) ? "???" : get_current_user();
+			$i++;
+
+			$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l81');
+			$Content[$i]['2']['cont'] = $ServerInfosObj['uid'];	//getmyuid();
+			$i++;
+
+			$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l91');
+			$Content[$i]['2']['cont'] = $ServerInfosObj['gid'];	//getmygid();
+			$i++;
+
+			$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l101');
+			$Content[$i]['2']['cont'] = $ServerInfosObj['pid'];	//getmypid();
+			$i++;
+
+			$Content[$i]['1']['cont'] = $bts->I18nTransObj->getI18nTransEntry('t1l114');
+			$Content[$i]['2']['cont'] = $bts->CMObj->getConfigurationEntry('db_user_login')
+				. "@" . $bts->CMObj->getConfigurationEntry('host')
 				. ((strlen($bts->CMObj->getConfigurationEntry('port')) ?? '') > 0 ? ':' . $bts->CMObj->getConfigurationEntry('host') : '')
 				. "/" . $bts->CMObj->getConfigurationEntry('dbprefix')
 				. " ("
@@ -209,12 +235,14 @@ class ModuleGlobalReport
 				. ", "
 				. $bts->CMObj->getConfigurationEntry('charset')
 				. ")";
-		} else {
-			$Content['14']['2']['cont'] = "*";
+			$i++;
+
+			$Content[$i]['2']['cont'] = $bts->StringFormatObj->print_r_html($CurrentSetObj->ServerInfosObj->getServerInfosEntry('execIfInfos'));
+			$Content[$i]['1']['cont'] = "*";
+			$i++;
 		}
-		$Content['15']['2']['cont'] = $bts->StringFormatObj->print_r_html($CurrentSetObj->ServerInfosObj->getServerInfosEntry('execIfInfos'));
-		
-		$config = $bts->RenderTablesObj->getDefaultTableConfig(15, 2, 2);
+
+		$config = $bts->RenderTablesObj->getDefaultTableConfig(($i - 1), 2, 2);
 
 		$package = array("content" => $Content, "config" => $config);
 

@@ -27,22 +27,19 @@ class ServerInfos
 	{
 		$hideInfo = _HIDE_SENSITIVE_SERVER_INFO_;
 
-		$this->ServerInfos['execIfInfos'] = "*";
-		if ($hideInfo != _ENABLED_) {
-			$this->getIpAndMac();
-		}
+		$this->getIpAndMac();
 
 		$this->ServerInfos['srvHostname']			= php_uname('s') . " " . php_uname('n') . " " . php_uname('m') . " / " . $this->getRealIp();
 		$this->ServerInfos['srvIp']					= $this->getRealIp();
 
 		$this->ServerInfos['currentDirectory']		= getcwd(); // Do not hide.
 		$this->ServerInfos['DOCUMENT_ROOT']			= $_SERVER['DOCUMENT_ROOT'];
-		$this->ServerInfos['includePath']			= (($hideInfo == 0) ? get_include_path() : "*");
-		$this->ServerInfos['uid']					= (($hideInfo == 0) ? getmyuid() : "*");
-		$this->ServerInfos['gid']					= (($hideInfo == 0) ? getmygid() : "*");
-		$this->ServerInfos['pid']					= (($hideInfo == 0) ? getmypid() : "*");
+		$this->ServerInfos['includePath']			= get_include_path();
+		$this->ServerInfos['uid']					= getmyuid();
+		$this->ServerInfos['gid']					= getmygid();
+		$this->ServerInfos['pid']					= getmypid();
 		$this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
-		$this->ServerInfos['serverOwner']			= (($hideInfo == 0) ? get_current_user() : "*");
+		$this->ServerInfos['serverOwner']			= get_current_user();
 		$this->ServerInfos['memoryLimit']			= ini_get('memory_limit');
 		$this->ServerInfos['displayErrors']			= ini_get('display_errors');
 		$this->ServerInfos['registerGlobals']		= ini_get('register_globals');
@@ -50,7 +47,7 @@ class ServerInfos
 		$this->ServerInfos['maxExecutionTime']		= ini_get('max_execution_time');
 		$this->ServerInfos['phpVersion']			= phpversion();;
 
-		$this->ServerInfos['owner']					= (($hideInfo == 0) ? get_current_user() : "*");
+		$this->ServerInfos['owner']					= get_current_user();
 		$this->ServerInfos['browser']				= getenv("HTTP_USER_AGENT");
 		$this->ServerInfos['srvHost']				= $_SERVER['HTTP_HOST'];
 		$this->ServerInfos['sslState']				= 0;
