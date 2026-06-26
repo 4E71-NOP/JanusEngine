@@ -76,7 +76,7 @@ $dbquery = $bts->SDDMObj->query("
 	SELECT td.theme_id,td.theme_name,td.theme_title,tw.theme_state
 	FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." td, "
 	.$SqlTableListObj->getSQLTableName('theme_website')." tw 
-	WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'  
+	WHERE tw.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 	AND td.theme_id = tw.fk_theme_id 
 	ORDER BY td.theme_title
 	;");

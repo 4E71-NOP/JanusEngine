@@ -3,12 +3,13 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-ws_id				BIGINT NOT NULL UNIQUE,
+ws_id				BINARY(16) NOT NULL UNIQUE,
+ws_id_str			CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(ws_id))),
 ws_name				VARCHAR(255),
 ws_short			VARCHAR(255) UNIQUE,
-fk_lang_id			BIGINT,
+fk_lang_id			BINARY(16),
 ws_lang_select		INTEGER,
-fk_theme_id			BIGINT,
+fk_theme_id			BINARY(16),
 ws_title			VARCHAR(255),
 ws_home				VARCHAR(255),
 ws_directory		VARCHAR(255),

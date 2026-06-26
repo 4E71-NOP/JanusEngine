@@ -23,12 +23,12 @@ class Layout extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'layout_id'				=> 0,
-		'layout_name'			=> "New Layout",
-		'layout_title'			=> "New Layout",
-		'layout_generic_name'	=> "NewLayout",
-		'layout_desc'			=> 0,
-		'fk_layout_file_id'		=> 0,
+		"layout_id"				=> "",
+		"layout_name"			=> "New Layout",
+		"layout_title"			=> "New Layout",
+		"layout_generic_name"	=> "NewLayout",
+		"layout_desc"			=> 0,
+		"fk_layout_file_id"		=> 0,
 	);
 	//@formatter:on
 	
@@ -45,12 +45,17 @@ class Layout extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('layout') . "
-			WHERE layout_id = '" . $id . "'
-			;" );
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(layout_id)) AS layout_id, "
+			. "layout_name, "
+			. "layout_title, "
+			. "layout_generic_name, "
+			. "layout_desc, "
+			. "CONCAT('0x', HEX(fk_layout_file_id)) AS fk_layout_file_id "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('layout') . " "
+			. "WHERE layout_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for layout id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

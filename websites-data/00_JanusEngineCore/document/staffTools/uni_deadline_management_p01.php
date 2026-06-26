@@ -74,7 +74,7 @@ if ($pageSelectorData['nbrPerPage'] < 1) {
 }
 
 $pageSelectorData['clauseElements'] = array();
-$pageSelectorData['clauseElements'][] = array("left" => "dl.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
+$pageSelectorData['clauseElements'][] = array("left" => "dl.fk_ws_id",		"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
 // $pageSelectorData['clauseElements'][] = array("left" => "",	"operator" => "=",	"right" => "" );
 
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {

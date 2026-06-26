@@ -23,9 +23,9 @@ class LanguageWebsite extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'lang_website_id'	=> 0,
-		'ws_id'				=> 0,
-		'lang_id'			=> 0,
+		"lang_website_id"		=> "",
+		"ws_id"					=> "",
+		"lang_id"				=> "",
 	);
 	//@formatter:on
 	
@@ -45,12 +45,14 @@ class LanguageWebsite extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')."
-			WHERE lang_website_id = '".$id."'
-			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
-		;");
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(lang_website_id)) AS lang_website_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id "
+			. "FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." "
+			. "WHERE lang_website_id = ".$id." "
+			. "AND fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." "
+			. ";");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for lang_website id=".$id));

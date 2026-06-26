@@ -23,10 +23,10 @@ class DocumentShare extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-			'share_id'				=> 0,
-			'docu_id'				=> 0,
-			'ws_id'					=> 0,
-			'share_modification'	=> 0,
+			"share_id"				=> "",
+			"docu_id"				=> 0,
+			"ws_id"					=> 0,
+			"share_modification"	=> 0,
 	);
 	//@formatter:on
 	
@@ -44,12 +44,15 @@ class DocumentShare extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('document_share') . "
-			WHERE share_id = '" . $id . "'
-			;" );
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(share_id)) AS share_id, "
+			. "CONCAT('0x', HEX(fk_docu_id)) AS fk_docu_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "share_modification "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('document_share') . " "
+			. "WHERE share_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document_share id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -78,13 +81,16 @@ class DocumentShare extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('document_share') . "
-			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
-			AND fk_docu_id = '" . $id . "'
-			;" );
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(share_id)) AS share_id, "
+			. "CONCAT('0x', HEX(fk_docu_id)) AS fk_docu_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "share_modification "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('document_share') . " "
+			. "WHERE fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
+			. "AND fk_docu_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document_share id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

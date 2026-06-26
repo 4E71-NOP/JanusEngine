@@ -72,7 +72,7 @@ FROM ".$SqlTableListObj->getSQLTableName('article')." art, "
 .$SqlTableListObj->getSQLTableName('deadline')." dl 
 WHERE art.arti_validation_state = 0 
 AND dl.deadline_id = art.fk_deadline_id 
-AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+AND art.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 ;");
 
 $i = 1;

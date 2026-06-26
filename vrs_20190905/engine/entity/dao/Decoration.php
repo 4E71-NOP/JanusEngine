@@ -27,7 +27,7 @@ class Decoration extends Entity {
 		"deco_name"			=> "New Decoration",
 		"deco_state"		=> 1,
 		"deco_type"			=> 20,
-		"deco_id"			=> 0,
+		"deco_id"			=> "",
 	);
 	//@formatter:on
 	
@@ -45,11 +45,14 @@ class Decoration extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('decoration') . "
-			WHERE deco_id = '" . $id . "'
-			;" );
+		$dbquery = $bts->SDDMObj->query ( "SELECT "
+			. "CONCAT('0x', HEX(deco_id)) AS deco_id, "
+			. "deco_name, "
+			. "deco_state, "
+			. "deco_type "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('decoration') . " "
+			. "WHERE deco_id = " . $id
+			. ";" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for <neddle> id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

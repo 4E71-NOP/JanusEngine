@@ -23,9 +23,9 @@ class ExtensionDependency extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'dependency_id'		=> 0,
-		'extension_id'		=> 0,
-		'extension_dep'		=> 0,
+		"dependency_id"		=> "",
+		"extension_id"		=> 0,
+		"extension_dep"		=> 0,
 	);
 	//@formatter:on
 	
@@ -42,12 +42,13 @@ class ExtensionDependency extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_dependency') . "
-			WHERE dependency_id = '" . $id . "'
-			;" );
+		
+		$dbquery = $bts->SDDMObj->query ("SELECT "
+			. "CONCAT('0x', HEX(extdep_id)) AS extdep_id, "
+			. "CONCAT('0x', HEX(fk_ext_id)) AS fk_ext_id "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_dependency') . " "
+			. "WHERE dependency_id = " . $id
+			. ";" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for Extension_Dependency id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

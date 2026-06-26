@@ -40,19 +40,37 @@ class MenuData
 
 		$bts->mapSegmentLocation(__METHOD__, "MenuData");
 
-		$q = "
-		SELECT mnu.* FROM "
+		$q = "SELECT " 
+			. "CONCAT('0x', HEX(mnu.menu_id)) AS menu_id, "
+			. "mnu.menu_name, "
+			. "mnu.menu_title, "
+			. "mnu.menu_desc, "
+			. "mnu.menu_type, "
+			. "mnu.menu_visibility, "
+			. "CONCAT('0x', HEX(mnu.fk_ws_id)) AS fk_ws_id, "
+			. "CONCAT('0x', HEX(mnu.fk_lang_id)) AS fk_lang_id, "
+			. "CONCAT('0x', HEX(mnu.fk_deadline_id)) AS fk_deadline_id, "
+			. "mnu.menu_state, "
+			. "CONCAT('0x', HEX(mnu.menu_parent)) AS menu_parent, "
+			. "mnu.menu_position, "
+			. "CONCAT('0x', HEX(mnu.fk_perm_id)) AS fk_perm_id, "
+			. "mnu.menu_last_update, "
+			. "mnu.menu_role, "
+			. "mnu.menu_initial_document, "
+			. "mnu.fk_arti_slug, "
+			. "mnu.fk_arti_ref "
+			. "FROM "
 			. $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " bcl
-		WHERE mnu.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-		AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "'
-		AND mnu.fk_deadline_id = bcl.deadline_id
-		AND bcl.deadline_state = '1'
-		AND mnu.menu_type IN ('0','1')
-		AND mnu.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . "
-		AND mnu.menu_state = '1'
-		ORDER BY mnu.menu_parent,mnu.menu_position
-		;";
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " bcl "
+			. "WHERE mnu.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
+			. "AND mnu.fk_lang_id = " . $CurrentSetObj->getDataEntry('language_id') . " "
+			. "AND mnu.fk_deadline_id = bcl.deadline_id "
+			. "AND bcl.deadline_state = 1 "
+			. "AND mnu.menu_type IN (0,1) "
+			. "AND mnu.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . " "
+			. "AND mnu.menu_state = 1 "
+			. "ORDER BY mnu.menu_parent,mnu.menu_position"
+			. ";";
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "q='" . $q . "'."));
 

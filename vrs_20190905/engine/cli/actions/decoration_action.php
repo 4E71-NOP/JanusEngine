@@ -36,10 +36,11 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 	$a['values2'] = "";
 	$l = &$a['params'][$idv];
 
+	$bts = BaseToolSet::getInstance(); // we assume we got a system interface
+
 	foreach ($vl as $V) {
 		if (strlen($a['params'][$V] ?? '') != 0) {
-			$a['values2'] .= "('" . $l . "','" . $a['params']['id'] . "','" . $V . "','" . $a['params'][$V] . "'),";
-			$l++;
+			$a['values2'] .= "(" . $bts->SDDMObj->createUniqueId() . ", " . $a['params']['id'] . ",'" . $V . "','" . $a['params'][$V] . "'),";
 		}
 	}
 	$a['values2'] = substr($a['values2'], 0, -1);

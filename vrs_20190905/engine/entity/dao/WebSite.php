@@ -25,7 +25,7 @@ class WebSite extends Entity
 
 	//@formatter:off
 	private $columns = array(
-		'ws_id'				=> 0,
+		'ws_id'				=> "",
 		'ws_name'			=> JANUS_ENGINE_CORE_TITLE,
 		'ws_short'			=> JANUS_ENGINE_CORE_SHORT,
 		'fk_lang_id'		=> 0,
@@ -68,11 +68,29 @@ class WebSite extends Entity
 		$res = true;
 
 		if ($currentWs) {
-			$dbquery = $bts->SDDMObj->query("
-				SELECT * 
-				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
-				WHERE ws_id = '" . $currentWs . "'
-				;");
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(ws_id)) AS ws_id, "
+				. "ws_name, "
+				. "ws_short, "
+				. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
+				. "ws_lang_select, "
+				. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
+				. "ws_title, "
+				. "ws_home, "
+				. "ws_directory, "
+				. "ws_state, "
+				. "ws_info_debug, "
+				. "ws_stylesheet, "
+				. "ws_gal_mode, "
+				. "ws_gal_file_tag, "
+				. "ws_gal_quality, "
+				. "ws_gal_x, "
+				. "ws_gal_y, "
+				. "ws_gal_border, "
+				. "ws_ma_diff "
+				. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " "
+				. "WHERE ws_id = " . $currentWs
+				. ";");
 			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=" . $currentWs));
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -86,7 +104,7 @@ class WebSite extends Entity
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website id=" . $currentWs));
 				$res = false;
 			}
-			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'];		// Dédiée aux routines de manipulation
+			$_REQUEST['site_context']['ws_id']		= $this->WebSite['ws_id'];			// Dédiée aux routines de manipulation
 		} else {
 			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");
 			exit(1);
@@ -112,11 +130,29 @@ class WebSite extends Entity
 		$res = true;
 
 		if ($currentWs > 1) {
-			$dbquery = $bts->SDDMObj->query("
-				SELECT * 
-				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
-				WHERE ws_short = '" . $currentWs . "'
-				;");
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(ws_id)) AS ws_id, "
+				. "ws_name, "
+				. "ws_short, "
+				. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
+				. "ws_lang_select, "
+				. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
+				. "ws_title, "
+				. "ws_home, "
+				. "ws_directory, "
+				. "ws_state, "
+				. "ws_info_debug, "
+				. "ws_stylesheet, "
+				. "ws_gal_mode, "
+				. "ws_gal_file_tag, "
+				. "ws_gal_quality, "
+				. "ws_gal_x, "
+				. "ws_gal_y, "
+				. "ws_gal_border, "
+				. "ws_ma_diff "
+				. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " "
+				. "WHERE ws_short = '" . $currentWs . "'"
+				. ";");
 			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website short=" . $currentWs));
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -130,7 +166,7 @@ class WebSite extends Entity
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website short=" . $currentWs));
 				$res = false;
 			}
-			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'];		// Dédiée aux routines de manipulation
+			$_REQUEST['site_context']['ws_id']		= $this->WebSite['ws_id'];			// Dédiée aux routines de manipulation
 		} else {
 			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");
 			exit(1);
@@ -156,11 +192,29 @@ class WebSite extends Entity
 		$res = true;
 
 		if ($currentWs > 1) {
-			$dbquery = $bts->SDDMObj->query("
-				SELECT * 
-				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
-				WHERE ws_home = '" . $currentWs . "'
-				;");
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(ws_id)) AS ws_id, "
+				. "ws_name, "
+				. "ws_short, "
+				. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
+				. "ws_lang_select, "
+				. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
+				. "ws_title, "
+				. "ws_home, "
+				. "ws_directory, "
+				. "ws_state, "
+				. "ws_info_debug, "
+				. "ws_stylesheet, "
+				. "ws_gal_mode, "
+				. "ws_gal_file_tag, "
+				. "ws_gal_quality, "
+				. "ws_gal_x, "
+				. "ws_gal_y, "
+				. "ws_gal_border, "
+				. "ws_ma_diff "
+				. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " "
+				. "WHERE ws_home = '" . $currentWs . "'"
+				. ";");
 			if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website home=" . $currentWs));
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -174,7 +228,7 @@ class WebSite extends Entity
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for website home=" . $currentWs));
 				$res = false;
 			}
-			$_REQUEST['site_context']['ws_id'] = $this->WebSite['ws_id'];		// Dédiée aux routines de manipulation
+			$_REQUEST['site_context']['ws_id']		= $this->WebSite['ws_id'];			// Dédiée aux routines de manipulation
 		} else {
 			echo ("Error : Website ID is NOT defined in the session.<br>Exiting.");
 			exit(1);
@@ -196,11 +250,29 @@ class WebSite extends Entity
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query(
-			"SELECT * 
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " 
-			WHERE ws_id = '" . $id . "'
-			;"
+		$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(ws_id)) AS ws_id, "
+				. "ws_name, "
+				. "ws_short, "
+				. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
+				. "ws_lang_select, "
+				. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
+				. "ws_title, "
+				. "ws_home, "
+				. "ws_directory, "
+				. "ws_state, "
+				. "ws_info_debug, "
+				. "ws_stylesheet, "
+				. "ws_gal_mode, "
+				. "ws_gal_file_tag, "
+				. "ws_gal_quality, "
+				. "ws_gal_x, "
+				. "ws_gal_y, "
+				. "ws_gal_border, "
+				. "ws_ma_diff "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " "
+			. "WHERE ws_id = " . $id 
+			. ";"
 		);
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for website id=" . $id));
@@ -333,8 +405,9 @@ class WebSite extends Entity
 		$this->WebSite = array(
 			"ws_id"			=> "1",
 			"ws_title"		=> "Janus Engine Installation",
-			'fk_lang_id'	=> 38,
-			"ws_lang"		=> 38, // <- deprecated
+			'fk_lang_id'	=> '0x00000000000000000000000000000030',
+			// TODO 
+			"ws_lang"		=> '0x00000000000000000000000000000030', // <- deprecated
 		);
 		// 38 = Eng
 	}

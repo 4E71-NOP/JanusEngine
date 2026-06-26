@@ -39,24 +39,23 @@ class DocumentData {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " Start"), false );
 		
 // 		Checks if we have a requested article 
-// 		if ( !isset($_REQUEST['arti_ref']) || strlen($_REQUEST['arti_ref']) == 0 ) {
-// 		if ( strlen($bts->RequestDataObj->getRequestDataEntry('arti_ref')) == 0 ) {
 		if (strlen ( $CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref') ) == 0) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " No arti_ref available. Getting first article"), false );
-			$dbquery = $bts->SDDMObj->query ( "
-			SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
-			FROM " . $SqlTableListObj->getSQLTableName('menu') . " mnu, " 
-			. $SqlTableListObj->getSQLTableName('deadline') . " bcl
-			WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry ('ws_id'). "'
-			AND mnu.fk_lang_id = '" . $WebSiteObj->getWebSiteEntry ('fk_lang_id'). "'
-			AND mnu.fk_deadline_id = bcl.deadline_id
-			AND bcl.deadline_state = '1'
-			AND mnu.menu_type IN ('0','1')
-			AND mnu.menu_state = '1'
-			AND menu_initial_document = '1'
-			ORDER BY mnu.menu_parent,mnu.menu_position
-			;" );
-//			AND mnu.fk_group_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_group')."
+			$dbquery = $bts->SDDMObj->query ("SELECT " 
+			. "CONCAT('0x', HEX(menu_id)) AS menu_id, "
+			. "menu_name, "
+			. "mnu.fk_arti_ref "
+			. "FROM " . $SqlTableListObj->getSQLTableName('menu') . " mnu, " 
+			. $SqlTableListObj->getSQLTableName('deadline') . " bcl "
+			. "WHERE mnu.fk_ws_id = " . $WebSiteObj->getWebSiteEntry ('ws_id'). " "
+			. "AND mnu.fk_lang_id = " . $WebSiteObj->getWebSiteEntry ('fk_lang_id'). " "
+			. "AND mnu.fk_deadline_id = bcl.deadline_id "
+			. "AND bcl.deadline_state = 1 "
+			. "AND mnu.menu_type IN (0, 1) "
+			. "AND mnu.menu_state = 1 "
+			. "AND menu_initial_document = 1 "
+			. "ORDER BY mnu.menu_parent,mnu.menu_position"
+			. ";" );
 
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$CurrentSetObj->setDocumentDataObj(new DocumentData());
@@ -66,36 +65,74 @@ class DocumentData {
 		}
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " arti_ref=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_ref')."`; arti_page=`".$CurrentSetObj->getDataSubEntry ( 'article', 'arti_page')."`"), false );
-		$dbquery = $bts->SDDMObj->query("
-		SELECT art.*, doc.docu_id, doc.docu_name, doc.docu_type,
-		doc.docu_creator, doc.docu_creation_date,
-		doc.docu_validator, doc.docu_validation_date,
-		doc.docu_origin, doc.docu_cont, w.ws_directory
-		FROM "
-		.$SqlTableListObj->getSQLTableName('article')." art, "
-		.$SqlTableListObj->getSQLTableName('document')." doc, "
-		.$SqlTableListObj->getSQLTableName('deadline')." bcl, "
-		.$SqlTableListObj->getSQLTableName('website')." w
-		WHERE art.arti_ref = '".$CurrentSetObj->getDataSubEntry('article', 'arti_ref')."'
-		AND art.arti_page = '".$CurrentSetObj->getDataSubEntry('article', 'arti_page')."'
-		AND art.fk_docu_id = doc.docu_id
-		AND art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND w.ws_id = doc.docu_origin
-		AND art.fk_deadline_id = bcl.deadline_id
-		AND bcl.deadline_state = '1'
-		;");
-		
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(art.arti_id)) AS arti_id, "
+			. "art.arti_ref, "
+			. "art.arti_slug, "
+			. "CONCAT('0x', HEX(art.fk_deadline_id)) AS fk_deadline_id, "
+			. "art.arti_name, "
+			. "art.arti_desc, "
+			. "art.arti_title, "
+			. "art.arti_subtitle, "
+			. "art.arti_page, "
+			. "art.layout_generic_name, "
+			. "CONCAT('0x', HEX(art.fk_config_id)) AS fk_config_id, "
+			. "CONCAT('0x', HEX(art.arti_creator_id)) AS arti_creator_id, "
+			. "art.arti_creation_date, "
+			. "CONCAT('0x', HEX(art.arti_validator_id)) AS arti_validator_id, "
+			. "art.arti_validation_date, "
+			. "art.arti_validation_state, "
+			. "art.arti_release_date, "
+			. "CONCAT('0x', HEX(art.fk_docu_id)) AS fk_docu_id, "
+			. "CONCAT('0x', HEX(art.fk_ws_id)) AS fk_ws_id, "
+
+			. "CONCAT('0x', HEX(doc.docu_id)) AS docu_id, "
+			. "doc.docu_name, "
+			. "doc.docu_type, "
+			. "CONCAT('0x', HEX(doc.docu_origin)) AS docu_origin, "
+			. "CONCAT('0x', HEX(doc.docu_creator)) AS docu_creator, "
+			. "doc.docu_creation_date, "
+			. "doc.docu_validation, "
+			. "CONCAT('0x', HEX(doc.docu_validator)) AS docu_validator, "
+			. "doc.docu_validation_date, "
+			. "doc.docu_cont, "
+			. "w.ws_directory "
+
+			. "FROM "
+			. $SqlTableListObj->getSQLTableName('article') . " art, "
+			. $SqlTableListObj->getSQLTableName('document') . " doc, "
+			. $SqlTableListObj->getSQLTableName('deadline') . " bcl, "
+			. $SqlTableListObj->getSQLTableName('website') . " w "
+			. "WHERE art.arti_ref = '" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "' "
+			. "AND art.arti_page = " . $CurrentSetObj->getDataSubEntry('article', 'arti_page') . " "
+			. "AND art.fk_docu_id = doc.docu_id "
+			. "AND art.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . "  "
+			. "AND w.ws_id = doc.docu_origin "
+			. "AND art.fk_deadline_id = bcl.deadline_id "
+			. "AND bcl.deadline_state = 1 "
+			. ";");
+			
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " article not found"), false );
-			
-			$dbquery = $bts->SDDMObj->query("
-			SELECT doc.*
-			FROM ".$SqlTableListObj->getSQLTableName('document')." doc, "
-			.$SqlTableListObj->getSQLTableName('document_share')." ds
-			WHERE doc.docu_name LIKE '%article_inexistant%'
-			AND ds.fk_docu_id = doc.docu_id
-			AND ds.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
-			;");
+
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(doc.docu_id)) AS docu_id, "
+				. "doc.docu_name, "
+				. "doc.docu_type, "
+				. "CONCAT('0x', HEX(doc.docu_origin)) AS docu_origin, "
+				. "CONCAT('0x', HEX(doc.docu_creator)) AS docu_creator, "
+				. "doc.docu_creation_date, "
+				. "doc.docu_validation, "
+				. "CONCAT('0x', HEX(doc.docu_validator)) AS docu_validator, "
+				. "doc.docu_validation_date, "
+				. "doc.docu_cont "
+				. "FROM "
+				. $SqlTableListObj->getSQLTableName('document') . " doc, "
+				. $SqlTableListObj->getSQLTableName('document_share') . " ds "
+				. "WHERE doc.docu_name LIKE '%article_not_found%' "
+				. "AND ds.fk_docu_id = doc.docu_id "
+				. "AND ds.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id')
+				. ";");
 		}
 		
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

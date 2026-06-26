@@ -3,8 +3,9 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-extfil_id			BIGINT NOT NULL UNIQUE, 
-fk_ext_id			BIGINT,
+extfil_id			BINARY(16) NOT NULL UNIQUE, 
+extfil_id_str		CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(extfil_id))),
+fk_ext_id			BINARY(16),
 extfil_generic_name	VARCHAR(255), 
 extfil_file			VARCHAR(255), 
 

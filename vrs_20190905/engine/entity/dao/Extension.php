@@ -23,14 +23,14 @@ class Extension extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'extension_id'				=> 0,
-		'ws_id'						=> 0,
-		'extension_name'			=> 'NewExtension',
-		'extension_version'			=> 1,
-		'extension_author'			=> 0,
-		'extension_author_website'	=> 0,
-		'extension_exec'			=> '',
-		'extension_directory'		=> '',
+		"extension_id"				=> "",
+		"ws_id"						=> 0,
+		"extension_name"			=> "NewExtension",
+		"extension_version"			=> 1,
+		"extension_author"			=> 0,
+		"extension_author_website"	=> 0,
+		"extension_exec"			=> "",
+		"extension_directory"		=> "",
 	);
 	//@formatter:on
 
@@ -47,12 +47,18 @@ class Extension extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension') . "
-			WHERE extension_id = '" . $id . "'
-			;" );
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(ext_id)) AS ext_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "ext_name, "
+			. "ext_version, "
+			. "ext_author, "
+			. "ext_class, "
+			. "ext_directory "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('extension') . " "
+			. "WHERE extension_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for extension id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

@@ -25,9 +25,9 @@ self::$ActionTable['add']['document']		= function (&$a) { return array("INSERT I
 
 self::$ActionTable['update']['document']		= function (&$a) {
 	if ($a['params']['updateGO'] == 1) {
-		$arr = array("UPDATE " . $a['sqlTables']['document'] . " SET " . $a['equalities'] . " WHERE docu_id = '" . $a['params']['docu_id'] . "';");
+		$arr = array("UPDATE " . $a['sqlTables']['document'] . " SET " . $a['equalities'] . " WHERE docu_id = " . $a['params']['docu_id'] . ";");
 		if (is_numeric($a['params']['modification'])) {
-			$arr[] = "UPDATE " . $a['sqlTables']['document_share'] . " SET share_modification='" . $a['params']['modification'] . "' WHERE fk_docu_id = '" . $a['params']['docu_id'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';";
+			$arr[] = "UPDATE " . $a['sqlTables']['document_share'] . " SET share_modification='" . $a['params']['modification'] . "' WHERE fk_docu_id = " . $a['params']['docu_id'] . " AND fk_ws_id = " . $a['Context']['ws_id'] . ";";
 		}
 		return ($arr);
 	} else {
@@ -37,7 +37,7 @@ self::$ActionTable['update']['document']		= function (&$a) {
 self::$ActionTable['disable']['document']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']				. " SET docu_state=0		WHERE docu_id = '"			. $a['params']['id'] . "';"); };
 self::$ActionTable['delete']['document']				= function (&$a) { return array("UPDATE " . $a['sqlTables']['document']				. " SET docu_state=2		WHERE docu_id = '"			. $a['params']['id'] . "';"); };
 
-self::$ActionTable['assign']['document']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['article'] . " SET fk_docu_id = '" . $a['params']['docu_id'] . "' WHERE arti_id = '" . $a['params']['arti_id'] . "';"); };
+self::$ActionTable['assign']['document']		= function (&$a) { return array("UPDATE " . $a['sqlTables']['article'] . " SET fk_docu_id = " . $a['params']['docu_id'] . " WHERE arti_id = " . $a['params']['arti_id'] . ";"); };
 
 //--------------------------------------------------------------------------------
 //	Insert
@@ -88,7 +88,7 @@ self::$ActionTable['insert']['content']		= function (&$a, &$sddmObj) {
 		$content = $bts->SDDMObj->escapeString($content);
 	}
 
-	return array("UPDATE " . $a['sqlTables']['document'] . " SET docu_validation = '1', docu_validator = '" . $a['params']['validator_id'] . "', docu_cont = '" . $content . "' WHERE docu_id = '" . $a['params']['docu_id'] . "';"); 
+	return array("UPDATE " . $a['sqlTables']['document'] . " SET docu_validation = 1, docu_validator = " . $a['params']['validator_id'] . ", docu_cont = '" . $content . "' WHERE docu_id = " . $a['params']['docu_id'] . ";"); 
 };
 
 
@@ -104,10 +104,10 @@ self::$ActionTable['show']['documents']	= function (&$a) { return array(
 			. $a['sqlTables']['document'] . " doc, "
 			. $a['sqlTables']['document_share'] . " shr, "
 			. $a['sqlTables']['website'] . " ws "
-			. "WHERE shr.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
-			. "AND ws.ws_id = '" . $a['Context']['ws_id'] . "' "
+			. "WHERE shr.fk_ws_id = " . $a['Context']['ws_id'] . " "
+			. "AND ws.ws_id = " . $a['Context']['ws_id'] . " "
 			. "AND shr.fk_docu_id = doc.docu_id "
-			. "AND doc.docu_origin = '" . $a['Context']['ws_id'] . "' "
+			. "AND doc.docu_origin = " . $a['Context']['ws_id'] . " "
 			. "ORDER BY doc.docu_name"
 	); 
 };

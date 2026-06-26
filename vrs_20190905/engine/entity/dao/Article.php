@@ -63,11 +63,29 @@ class Article extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 		
-		$dbquery = $dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article')."
-			WHERE arti_id = '".$id."'
-			;");
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(arti_id)) AS arti_id, "
+			. "arti_ref, "
+			. "arti_slug, "
+			. "CONCAT('0x', HEX(fk_deadline_id)) AS fk_deadline_id, "
+			. "arti_name, "
+			. "arti_desc, "
+			. "arti_title, "
+			. "arti_subtitle, "
+			. "arti_page, "
+			. "layout_generic_name, "
+			. "CONCAT('0x', HEX(fk_config_id)) AS fk_config_id, "
+			. "CONCAT('0x', HEX(arti_creator_id)) AS arti_creator_id, "
+			. "arti_creation_date, "
+			. "CONCAT('0x', HEX(arti_validator_id)) AS arti_validator_id, "
+			. "arti_validation_date, "
+			. "arti_validation_state, "
+			. "arti_release_date, "
+			. "CONCAT('0x', HEX(fk_docu_id)) AS fk_docu_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id "
+			. "FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article'). " "
+			. "WHERE arti_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

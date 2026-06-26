@@ -30,7 +30,7 @@ class Definition extends Entity {
 
 	//@formatter:off
 	private $columns = array(
-		"def_id"		=> 0,
+		"def_id"		=> "",
 		"def_name"		=> "New definition",
 		"def_number"	=> 0,
 		"def_text"		=> "-",
@@ -49,11 +49,15 @@ class Definition extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 		
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('definition') . "
-			WHERE def_id = '" . $id . "'
-			;" );
+		$dbquery = $bts->SDDMObj->query ( "SELECT "
+			. "CONCAT('0x', HEX(def_id)) AS def_id, "
+			. "def_name, "
+			. "def_number, "
+			. "def_text "
+			. "FROM " 
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName ('definition') . " "
+			. "WHERE def_id = " . $id
+			. ";" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for definition id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

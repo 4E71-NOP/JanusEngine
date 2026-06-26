@@ -27,11 +27,11 @@ class Installation extends Entity{
 	private $Installation = array ();
 
 	private $columns = array(
-		'inst_id'		=> 0,
-		'inst_display'	=> 1,
-		'inst_name'		=> "new theme definition",
-		'inst_nbr'		=> 0,
-		'inst_txt'		=> "new theme definition",
+		"inst_id"		=> "",
+		"inst_display"	=> 1,
+		"inst_name"		=> "new theme definition",
+		"inst_nbr"		=> 0,
+		"inst_txt"		=> "new theme definition",
 	);
 	public function __construct() {
 	}
@@ -45,12 +45,16 @@ class Installation extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query ( "
-			SELECT *
-			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('installation') . "
-			WHERE inst_id = '" . $id . "'
-			;" );
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(inst_id)) AS inst_id, "
+			. "inst_display, "
+			. "inst_name, "
+			. "inst_nbr, "
+			. "inst_txt "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation') . " "
+			. "WHERE inst_id = " . $id
+			. ";");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for installation id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

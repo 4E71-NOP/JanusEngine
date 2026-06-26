@@ -23,9 +23,9 @@ class ModuleWebsite extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"module_website_id"		=> 0,
-		"ws_id"					=> 0,
-		"module_id"				=> 0,
+		"module_website_id"		=> "",
+		"ws_id"					=> "",
+		"module_id"				=> "",
 		"module_state"			=> 0,
 	);
 	//@formatter:on
@@ -43,13 +43,16 @@ class ModuleWebsite extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')."
-			WHERE module_website_id = '".$id."' 
-			;");
-		
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(module_website_id)) AS module_website_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "CONCAT('0x', HEX(fk_module_id)) AS fk_module_id, "
+			. "module_state "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " "
+			. "WHERE module_website_id = " . $id
+			. ";");
+
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module_website id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -76,13 +79,16 @@ class ModuleWebsite extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')." 
-			WHERE fk_module_id = '".$id."' 
-			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
-			;");
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(module_website_id)) AS module_website_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "CONCAT('0x', HEX(fk_module_id)) AS fk_module_id, "
+			. "module_state "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " "
+			. "WHERE fk_module_id = " . $id . " "
+			. "AND fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			. ";");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module_website id=".$id));

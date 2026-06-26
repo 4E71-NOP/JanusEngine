@@ -3,190 +3,193 @@
 								https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1
 */
 
-INSERT INTO !table! VALUES (	'1',		'aar',		'Afaraf',										'aar',				'aa',				'tl_aar.png'	);
-INSERT INTO !table! VALUES (	'2',		'abk',		'Аҧсуа',										'abk',				'ab',				'tl_abk.png'	);
-INSERT INTO !table! VALUES (	'3',		'ave',		'Avesta',										'ave',				'ae',				'tl_ave.png'	);
-INSERT INTO !table! VALUES (	'4',		'afr',		'Afrikaans',									'afr',				'af',				'tl_afr.png'	);
-INSERT INTO !table! VALUES (	'5',		'aka',		'Akan',											'aka',				'ak',				'tl_aka.png'	);
-INSERT INTO !table! VALUES (	'6',		'amh',		'አማርኛ',											'amh',				'am',				'tl_amh.png'	);
-INSERT INTO !table! VALUES (	'7',		'arg',		'Aragonés',										'arg',				'an',				'tl_arg.png'	);
-INSERT INTO !table! VALUES (	'8',		'ara',		'‫العربية',										'ara',				'ar',				'tl_ara.png'	);
-INSERT INTO !table! VALUES (	'9',		'asm',		'অসমীয়া',											'asm',				'as',				'tl_asm.png'	);
-INSERT INTO !table! VALUES (	'10',		'ava',		'авар мацӀ ; магӀарул мацӀ',					'ava',				'av',				'tl_ava.png'	);
-INSERT INTO !table! VALUES (	'11',		'aym',		'Aymar aru',									'aym',				'ay',				'tl_aym.png'	);
-INSERT INTO !table! VALUES (	'12',		'aze',		'Azərbaycan dili',								'aze',				'az',				'tl_aze.png'	);
-INSERT INTO !table! VALUES (	'13',		'bak',		'башҡорт теле',									'bak',				'ba',				'tl_bak.png'	);
-INSERT INTO !table! VALUES (	'14',		'bel',		'Беларуская',									'bel',				'be',				'tl_bel.png'	);
-INSERT INTO !table! VALUES (	'15',		'bul',		'български език',								'bul',				'bg',				'tl_bul.png'	);
-INSERT INTO !table! VALUES (	'16',		'--',		'भोजपुरी',											'bih',				'bh',				'tl_--.png'	);
-INSERT INTO !table! VALUES (	'17',		'bis',		'Bislama',										'bis',				'bi',				'tl_bis.png'	);
-INSERT INTO !table! VALUES (	'18',		'bam',		'Bamanankan',									'bam',				'bm',				'tl_bam.png'	);
-INSERT INTO !table! VALUES (	'19',		'ben',		'বাংলা',											'ben',				'bn',				'tl_ben.png'	);
-INSERT INTO !table! VALUES (	'20',		'bod',		'བོད་ཡིག',									'tib/bod',			'bo',				'tl_bod.png'	);
-INSERT INTO !table! VALUES (	'21',		'bre',		'Brezhoneg',									'bre',				'br',				'tl_bre.png'	);
-INSERT INTO !table! VALUES (	'22',		'bos',		'Bosanski jezik',								'bos',				'bs',				'tl_bos.png'	);
-INSERT INTO !table! VALUES (	'23',		'cat',		'Català',										'cat',				'ca',				'tl_mnu.png'	);
-INSERT INTO !table! VALUES (	'24',		'che',		'нохчийн мотт',									'che',				'ce',				'tl_che.png'	);
-INSERT INTO !table! VALUES (	'25',		'cha',		'Chamoru',										'cha',				'ch',				'tl_cha.png'	);
-INSERT INTO !table! VALUES (	'26',		'cos',		'Corsu ; lingua corsa',							'cos',				'co',				'tl_cos.png'	);
-INSERT INTO !table! VALUES (	'27',		'cre',		'ᓀᐦᐃᔭᐍᐏᐣ',										'cre',				'cr',				'tl_cre.png'	);
-INSERT INTO !table! VALUES (	'28',		'ces',		'Česky ; čeština',								'cze/ces',			'cs',				'tl_ces.png'	);
-INSERT INTO !table! VALUES (	'29',		'chu',		'Словѣньскъ',									'chu',				'cu',				'tl_chu.png'	);
-INSERT INTO !table! VALUES (	'30',		'chv',		'чӑваш чӗлхи',									'chv',				'cv',				'tl_chv.png'	);
-INSERT INTO !table! VALUES (	'31',		'cym',		'Cymraeg',										'wel/cym',			'cy',				'tl_cym.png'	);
-INSERT INTO !table! VALUES (	'32',		'dan',		'Dansk',										'dan',				'da',				'tl_dan.png'	);
-INSERT INTO !table! VALUES (	'33',		'deu',		'Deutsch',										'ger/deu',			'de',				'tl_deu.png'	);
-INSERT INTO !table! VALUES (	'34',		'div',		'‫ދިވެހި',											'div',				'dv',				'tl_div.png'	);
-INSERT INTO !table! VALUES (	'35',		'dzo',		'རྫོང་ཁ',										'dzo',				'dz',				'tl_dzo.png'	);
-INSERT INTO !table! VALUES (	'36',		'ewe',		'Ɛʋɛgbɛ',										'ewe',				'ee',				'tl_ewe.png'	);
-INSERT INTO !table! VALUES (	'37',		'ell',		'Ελληνικά',										'gre/ell',			'el',				'tl_ell.png'	);
-INSERT INTO !table! VALUES (	'38',		'eng',		'English',										'eng',				'en',				'tl_eng.png'	);
-INSERT INTO !table! VALUES (	'39',		'epo',		'Esperanto',									'epo',				'eo',				'tl_epo.png'	);
-INSERT INTO !table! VALUES (	'40',		'spa',		'Español; castellano',							'spa',				'es',				'tl_spa.png'	);
-INSERT INTO !table! VALUES (	'41',		'est',		'Eesti keel',									'est',				'et',				'tl_est.png'	);
-INSERT INTO !table! VALUES (	'42',		'eus',		'Euskara',										'baq/eus',			'eu',				'tl_eus.png'	);
-INSERT INTO !table! VALUES (	'43',		'fas',		'‫فارسی',										'per/fas',			'fa',				'tl_fas.png'	);
-INSERT INTO !table! VALUES (	'44',		'ful',		'Fulfulde',										'ful',				'ff',				'tl_ful.png'	);
-INSERT INTO !table! VALUES (	'45',		'fin',		'Suomen kieli',									'fin',				'fi',				'tl_fin.png'	);
-INSERT INTO !table! VALUES (	'46',		'fij',		'Vosa Vakaviti',								'fij',				'fj',				'tl_fij.png'	);
-INSERT INTO !table! VALUES (	'47',		'fao',		'Føroyskt',										'fao',				'fo',				'tl_fao.png'	);
-INSERT INTO !table! VALUES (	'48',		'fra',		'Français ; langue française',					'fre/fra',			'fr',				'tl_fra.png'	);
-INSERT INTO !table! VALUES (	'49',		'fry',		'Frysk',										'fry',				'fy',				'tl_fry.png'	);
-INSERT INTO !table! VALUES (	'50',		'gle',		'Gaeilge',										'gle',				'ga',				'tl_gle.png'	);
-INSERT INTO !table! VALUES (	'51',		'gla',		'Gàidhlig',										'gla',				'gd',				'tl_gla.png'	);
-INSERT INTO !table! VALUES (	'52',		'glg',		'Galego',										'glg',				'gl',				'tl_glg.png'	);
-INSERT INTO !table! VALUES (	'53',		'grn',		'Avañe ẽ',										'grn',				'gn',				'tl_grn.png'	);
-INSERT INTO !table! VALUES (	'54',		'guj',		'ગુજરાતી',										'guj',				'gu',				'tl_guj.png'	);
-INSERT INTO !table! VALUES (	'55',		'glv',		'Ghaelg',										'glv',				'gv',				'tl_glv.png'	);
-INSERT INTO !table! VALUES (	'56',		'hau',		'‫هَوُسَ',											'hau',				'ha',				'tl_hau.png'	);
-INSERT INTO !table! VALUES (	'57',		'heb',		'‫עברית',										'heb',				'he',				'tl_heb.png'	);
-INSERT INTO !table! VALUES (	'58',		'hin',		'हिन्दी ; हिंदी',										'hin',				'hi',				'tl_hin.png'	);
-INSERT INTO !table! VALUES (	'59',		'hmo',		'Hiri Motu',									'hmo',				'ho',				'tl_hmo.png'	);
-INSERT INTO !table! VALUES (	'60',		'hrv',		'Hrvatski',										'scr/hrv',			'hr',				'tl_hrv.png'	);
-INSERT INTO !table! VALUES (	'61',		'hat',		'Kreyòl ayisyen',								'hat',				'ht',				'tl_hat.png'	);
-INSERT INTO !table! VALUES (	'62',		'hun',		'magyar',										'hun',				'hu',				'tl_hun.png'	);
-INSERT INTO !table! VALUES (	'63',		'hye',		'Հայերեն',										'arm/hye',			'hy',				'tl_hye.png'	);
-INSERT INTO !table! VALUES (	'64',		'her',		'Otjiherero',									'her',				'hz',				'tl_her.png'	);
-INSERT INTO !table! VALUES (	'65',		'ina',		'Interlingua',									'ina',				'ia',				'tl_ina.png'	);
-INSERT INTO !table! VALUES (	'66',		'ind',		'Bahasa Indonesia',								'ind',				'id',				'tl_ind.png'	);
-INSERT INTO !table! VALUES (	'67',		'ile',		'Interlingue',									'ile',				'ie',				'tl_ile.png'	);
-INSERT INTO !table! VALUES (	'68',		'ibo',		'Igbo',											'ibo',				'ig',				'tl_ibo.png'	);
-INSERT INTO !table! VALUES (	'69',		'iii',		'ꆇꉙ',											'iii',				'ii',				'tl_iii.png'	);
-INSERT INTO !table! VALUES (	'70',		'ipk',		'Iñupiaq ; Iñupiatun',							'ipk',				'ik',				'tl_ipk.png'	);
-INSERT INTO !table! VALUES (	'71',		'ido',		'Ido',											'ido',				'io',				'tl_ido.png'	);
-INSERT INTO !table! VALUES (	'72',		'isl',		'Íslenska',										'ice/isl',			'is',				'tl_isl.png'	);
-INSERT INTO !table! VALUES (	'73',		'ita',		'Italiano',										'ita',				'it',				'tl_ita.png'	);
-INSERT INTO !table! VALUES (	'74',		'iku',		'ᐃᓄᒃᑎᑐᑦ',										'iku',				'iu',				'tl_iku.png'	);
-INSERT INTO !table! VALUES (	'75',		'jpn',		'日本語 (にほんご)',								'jpn',				'ja',				'tl_jpn.png'	);
-INSERT INTO !table! VALUES (	'76',		'jav',		'Basa Jawa',									'jav',				'jv',				'tl_jav.png'	);
-INSERT INTO !table! VALUES (	'77',		'kat',		'ქართული',										'geo/kat',			'ka',				'tl_kat.png'	);
-INSERT INTO !table! VALUES (	'78',		'kon',		'KiKongo',										'kon',				'kg',				'tl_kon.png'	);
-INSERT INTO !table! VALUES (	'79',		'kik',		'Gĩkũyũ',										'kik',				'ki',				'tl_kik.png'	);
-INSERT INTO !table! VALUES (	'80',		'kua',		'Kuanyama',										'kua',				'kj',				'tl_kua.png'	);
-INSERT INTO !table! VALUES (	'81',		'kaz',		'Қазақ тілі',									'kaz',				'kk',				'tl_kaz.png'	);
-INSERT INTO !table! VALUES (	'82',		'kal',		'Kalaallisut ; kalaallit oqaasii',				'kal',				'kl',				'tl_kal.png'	);
-INSERT INTO !table! VALUES (	'83',		'khm',		'ភាសាខ្មែរ',							'khm',				'km',				'tl_khm.png'	);
-INSERT INTO !table! VALUES (	'84',		'kan',		'ಕನ್ನಡ',										'kan',				'kn',				'tl_kan.png'	);
-INSERT INTO !table! VALUES (	'85',		'kor',		'한국어 (韓國語) ; 조선말 (朝鮮語)',				'kor',				'ko',				'tl_kor.png'	);
-INSERT INTO !table! VALUES (	'86',		'kau',		'Kanuri',										'kau',				'kr',				'tl_kau.png'	);
-INSERT INTO !table! VALUES (	'87',		'kas',		'कश्मीरी ; كشميري',									'kas',				'ks',				'tl_kas.png'	);
-INSERT INTO !table! VALUES (	'88',		'kur',		'Kurdî ; كوردی',								'kur',				'ku',				'tl_kur.png'	);
-INSERT INTO !table! VALUES (	'89',		'kom',		'коми кыв',										'kom',				'kv',				'tl_kom.png'	);
-INSERT INTO !table! VALUES (	'90',		'cor',		'Kernewek',										'cor',				'kw',				'tl_cor.png'	);
-INSERT INTO !table! VALUES (	'91',		'kir',		'кыргыз тили',									'kir',				'ky',				'tl_kir.png'	);
-INSERT INTO !table! VALUES (	'92',		'lat',		'Latine ; lingua latina',						'lat',				'la',				'tl_lat.png'	);
-INSERT INTO !table! VALUES (	'93',		'ltz',		'Lëtzebuergesch',								'ltz',				'lb',				'tl_ltz.png'	);
-INSERT INTO !table! VALUES (	'94',		'lug',		'Luganda',										'lug',				'lg',				'tl_lug.png'	);
-INSERT INTO !table! VALUES (	'95',		'lim',		'Limburgs',										'lim',				'li',				'tl_lim.png'	);
-INSERT INTO !table! VALUES (	'96',		'lin',		'Lingála',										'lin',				'ln',				'tl_lin.png'	);
-INSERT INTO !table! VALUES (	'97',		'lao',		'ພາສາລາວ',										'lao',				'lo',				'tl_lao.png'	);
-INSERT INTO !table! VALUES (	'98',		'lit',		'Lietuvių kalba',								'lit',				'lt',				'tl_lit.png'	);
-INSERT INTO !table! VALUES (	'99',		'lub',		'kiluba',										'lub',				'lu',				'tl_lub.png'	);
-INSERT INTO !table! VALUES (	'100',		'lav',		'Latviešu valoda',								'lav',				'lv',				'tl_lav.png'	);
-INSERT INTO !table! VALUES (	'101',		'mlg',		'Fiteny malagasy',								'mlg',				'mg',				'tl_mlg.png'	);
-INSERT INTO !table! VALUES (	'102',		'mah',		'Kajin M̧ajeļ',									'mah',				'mh',				'tl_mah.png'	);
-INSERT INTO !table! VALUES (	'103',		'mri',		'Te reo Māori',									'mao/mri',			'mi',				'tl_mri.png'	);
-INSERT INTO !table! VALUES (	'104',		'mkd',		'македонски јазик',								'mac/mkd',			'mk',				'tl_mkd.png'	);
-INSERT INTO !table! VALUES (	'105',		'mal',		'മലയാളം',										'mal',				'ml',				'tl_mal.png'	);
-INSERT INTO !table! VALUES (	'106',		'mon',		'Монгол',										'mon',				'mn',				'tl_mon.png'	);
-INSERT INTO !table! VALUES (	'107',		'mol',		'лимба молдовеняскэ',							'mol',				'mo',				'tl_mol.png'	);
-INSERT INTO !table! VALUES (	'108',		'mar',		'मराठी',											'mar',				'mr',				'tl_mar.png'	);
-INSERT INTO !table! VALUES (	'109',		'msa',		'Bahasa Melayu ; بهاس ملايو',					'may/msa',			'ms',				'tl_msa.png'	);
-INSERT INTO !table! VALUES (	'110',		'mlt',		'Malti',										'mlt',				'mt',				'tl_mlt.png'	);
-INSERT INTO !table! VALUES (	'111',		'mya',		'ဗမာစာ',									'bur/mya',			'my',				'tl_mya.png'	);
-INSERT INTO !table! VALUES (	'112',		'nau',		'Ekakairũ Naoero',								'nau',				'na',				'tl_nau.png'	);
-INSERT INTO !table! VALUES (	'113',		'nob',		'Norsk bokmål',									'nob',				'nb',				'tl_nob.png'	);
-INSERT INTO !table! VALUES (	'114',		'nde',		'isiNdebele',									'nde',				'nd',				'tl_nde.png'	);
-INSERT INTO !table! VALUES (	'115',		'nep',		'नेपाली',											'nep',				'ne',				'tl_nep.png'	);
-INSERT INTO !table! VALUES (	'116',		'ndo',		'Owambo',										'ndo',				'ng',				'tl_ndo.png'	);
-INSERT INTO !table! VALUES (	'117',		'nld',		'Nederlands',									'dut/nld',			'nl',				'tl_nld.png'	);
-INSERT INTO !table! VALUES (	'118',		'nno',		'Norsk nynorsk',								'nno',				'nn',				'tl_nno.png'	);
-INSERT INTO !table! VALUES (	'119',		'nor',		'Norsk',										'nor',				'no',				'tl_nor.png'	);
-INSERT INTO !table! VALUES (	'120',		'nbl',		'Ndébélé',										'nbl',				'nr',				'tl_nbl.png'	);
-INSERT INTO !table! VALUES (	'121',		'nav',		'Diné bizaad ; Dinékʼehǰí',						'nav',				'nv',				'tl_nav.png'	);
-INSERT INTO !table! VALUES (	'122',		'nya',		'ChiCheŵa ; chinyanja',							'nya',				'ny',				'tl_nya.png'	);
-INSERT INTO !table! VALUES (	'123',		'oci',		'Occitan',										'oci',				'oc',				'tl_oci.png'	);
-INSERT INTO !table! VALUES (	'124',		'oji',		'ᐊᓂᔑᓈᐯᒧᐎᓐ',									'oji',				'oj',				'tl_oji.png'	);
-INSERT INTO !table! VALUES (	'125',		'orm',		'Afaan Oromoo',									'orm',				'om',				'tl_orm.png'	);
-INSERT INTO !table! VALUES (	'126',		'ori',		'ଓଡ଼ିଆ',											'ori',				'or',				'tl_ori.png'	);
-INSERT INTO !table! VALUES (	'127',		'oss',		'Ирон æвзаг',									'oss',				'os',				'tl_oss.png'	);
-INSERT INTO !table! VALUES (	'128',		'pan',		'ਪੰਜਾਬੀ ; پنجابی',									'pan',				'pa',				'tl_pan.png'	);
-INSERT INTO !table! VALUES (	'129',		'pli',		'पािऴ',											'pli',				'pi',				'tl_pli.png'	);
-INSERT INTO !table! VALUES (	'130',		'pol',		'Polski',										'pol',				'pl',				'tl_pol.png'	);
-INSERT INTO !table! VALUES (	'131',		'pus',		'‫پښتو',											'pus',				'ps',				'tl_pus.png'	);
-INSERT INTO !table! VALUES (	'132',		'por',		'Português',									'por',				'pt',				'tl_por.png'	);
-INSERT INTO !table! VALUES (	'133',		'que',		'Runa Simi ; Kichwa',							'que',				'qu',				'tl_que.png'	);
-INSERT INTO !table! VALUES (	'134',		'rcf',		'Kréol Rénioné',								'rcf',				'rc',				'tl_rcf.png'	);
-INSERT INTO !table! VALUES (	'135',		'roh',		'Rumantsch grischun',							'roh',				'rm',				'tl_roh.png'	);
-INSERT INTO !table! VALUES (	'136',		'run',		'kiRundi',										'run',				'rn',				'tl_run.png'	);
-INSERT INTO !table! VALUES (	'137',		'ron',		'Română',										'rum/ron',			'ro',				'tl_ron.png'	);
-INSERT INTO !table! VALUES (	'138',		'rus',		'русский язык',									'rus',				'ru',				'tl_rus.png'	);
-INSERT INTO !table! VALUES (	'139',		'kin',		'Kinyarwanda',									'kin',				'rw',				'tl_kin.png'	);
-INSERT INTO !table! VALUES (	'140',		'san',		'संस्कृतम्',											'san',				'sa',				'tl_san.png'	);
-INSERT INTO !table! VALUES (	'141',		'srd',		'sardu',										'srd',				'sc',				'tl_srd.png'	);
-INSERT INTO !table! VALUES (	'142',		'snd',		'सिन्धी ; ‫سنڌي، سندھی',								'snd',				'sd',				'tl_snd.png'	);
-INSERT INTO !table! VALUES (	'143',		'sme',		'Davvisámegiella',								'sme',				'se',				'tl_sme.png'	);
-INSERT INTO !table! VALUES (	'144',		'sag',		'Yângâ tî sängö',								'sag',				'sg',				'tl_sag.png'	);
-INSERT INTO !table! VALUES (	'145',		'hbs',		'srpskohrvatski jezik ; српскохрватски језик',	'',					'sh',				'tl_hbs.png'	);
-INSERT INTO !table! VALUES (	'146',		'sin',		'සිංහල',											'sin',				'si',				'tl_sin.png'	);
-INSERT INTO !table! VALUES (	'147',		'slk',		'Slovenčina',									'slo/slk',			'sk',				'tl_slk.png'	);
-INSERT INTO !table! VALUES (	'148',		'slv',		'Slovenščina',									'slv',				'sl',				'tl_slv.png'	);
-INSERT INTO !table! VALUES (	'149',		'smo',		'Gagana fa a Samoa',							'smo',				'sm',				'tl_smo.png'	);
-INSERT INTO !table! VALUES (	'150',		'sna',		'chiShona',										'sna',				'sn',				'tl_sna.png'	);
-INSERT INTO !table! VALUES (	'151',		'som',		'Soomaaliga ; af Soomaali',						'som',				'so',				'tl_som.png'	);
-INSERT INTO !table! VALUES (	'152',		'sqi',		'Shqip',										'alb/sqi',			'sq',				'tl_sqi.png'	);
-INSERT INTO !table! VALUES (	'153',		'srp',		'српски језик',									'scc/srp',			'sr',				'tl_srp.png'	);
-INSERT INTO !table! VALUES (	'154',		'ssw',		'SiSwati',										'ssw',				'ss',				'tl_ssw.png'	);
-INSERT INTO !table! VALUES (	'155',		'sot',		'seSotho',										'sot',				'st',				'tl_sot.png'	);
-INSERT INTO !table! VALUES (	'156',		'sun',		'Basa Sunda',									'sun',				'su',				'tl_sun.png'	);
-INSERT INTO !table! VALUES (	'157',		'swe',		'Svenska',										'swe',				'sv',				'tl_swe.png'	);
-INSERT INTO !table! VALUES (	'158',		'swa',		'Kiswahili',									'swa',				'sw',				'tl_swa.png'	);
-INSERT INTO !table! VALUES (	'159',		'tam',		'தமிழ்',											'tam',				'ta',				'tl_tam.png'	);
-INSERT INTO !table! VALUES (	'160',		'tel',		'తెలుగు',									'tel',				'te',				'tl_tel.png'	);
-INSERT INTO !table! VALUES (	'161',		'tgk',		'тоҷикӣ ; toğikī ; ‫تاجیکی',						'tgk',				'tg',				'tl_tgk.png'	);
-INSERT INTO !table! VALUES (	'162',		'tha',		'ไทย',											'tha',				'th',				'tl_tha.png'	);
-INSERT INTO !table! VALUES (	'163',		'tir',		'ትግርኛ',											'tir',				'ti',				'tl_tir.png'	);
-INSERT INTO !table! VALUES (	'164',		'tuk',		'Türkmen ; Түркмен',							'tuk',				'tk',				'tl_tuk.png'	);
-INSERT INTO !table! VALUES (	'165',		'tgl',		'Tagalog',										'tgl',				'tl',				'tl_tgl.png'	);
-INSERT INTO !table! VALUES (	'166',		'tsn',		'seTswana',										'tsn',				'tn',				'tl_tsn.png'	);
-INSERT INTO !table! VALUES (	'167',		'ton',		'faka Tonga',									'ton',				'to',				'tl_ton.png'	);
-INSERT INTO !table! VALUES (	'168',		'tur',		'Türkçe',										'tur',				'tr',				'tl_tur.png'	);
-INSERT INTO !table! VALUES (	'169',		'tso',		'xiTsonga',										'tso',				'ts',				'tl_tso.png'	);
-INSERT INTO !table! VALUES (	'170',		'tat',		'татарча ; tatarça ; ‫تاتارچا',					'tat',				'tt',				'tl_tat.png'	);
-INSERT INTO !table! VALUES (	'171',		'twi',		'Twi',											'twi',				'tw',				'tl_twi.png'	);
-INSERT INTO !table! VALUES (	'172',		'tah',		'Reo Mā`ohi',									'tah',				'ty',				'tl_tah.png'	);
-INSERT INTO !table! VALUES (	'173',		'uig',		'Uyƣurqə ; ‫ئۇيغۇرچ',							'uig',				'ug',				'tl_uig.png'	);
-INSERT INTO !table! VALUES (	'174',		'ukr',		'українська мова',								'ukr',				'uk',				'tl_ukr.png'	);
-INSERT INTO !table! VALUES (	'175',		'urd',		'‫اردو',											'urd',				'ur',				'tl_urd.png'	);
-INSERT INTO !table! VALUES (	'176',		'uzb',		'O zbek ; Ўзбек ; أۇزبېك',						'uzb',				'uz',				'tl_uzb.png'	);
-INSERT INTO !table! VALUES (	'177',		'ven',		'tshiVenḓa',									'ven',				've',				'tl_ven.png'	);
-INSERT INTO !table! VALUES (	'178',		'vie',		'Tiếng Việt',									'vie',				'vi',				'tl_vie.png'	);
-INSERT INTO !table! VALUES (	'179',		'vol',		'Volapük',										'vol',				'vo',				'tl_vol.png'	);
-INSERT INTO !table! VALUES (	'180',		'wln',		'Walon',										'wln',				'wa',				'tl_wln.png'	);
-INSERT INTO !table! VALUES (	'181',		'wol',		'Wollof',										'wol',				'wo',				'tl_wol.png'	);
-INSERT INTO !table! VALUES (	'182',		'xho',		'isiXhosa',										'xho',				'xh',				'tl_xho.png'	);
-INSERT INTO !table! VALUES (	'183',		'yid',		'‫ייִדיש',										'yid',				'yi',				'tl_yid.png'	);
-INSERT INTO !table! VALUES (	'184',		'yor',		'Yorùbá',										'yor',				'yo',				'tl_yor.png'	);
-INSERT INTO !table! VALUES (	'185',		'zha',		'Saɯ cueŋƅ ; Saw cuengh',						'zha',				'za',				'tl_zha.png'	);
-INSERT INTO !table! VALUES (	'186',		'zho',		'中文, 汉语, 漢語',								'chi/zho',			'zh',				'tl_zho.png'	);
-INSERT INTO !table! VALUES (	'187',		'zul',		'isiZulu',										'zul',				'zu',				'tl_zul.png'	);
+INSERT INTO !table! (lang_id, lang_639_3, lang_original_name, lang_639_2, lang_639_1, lang_image) 
+VALUES 
+(	0x00000000000000000000000000000001,		"aar",		"Afaraf",										"aar",				"aa",				"tl_aar.png"	),
+(	0x00000000000000000000000000000002,		"abk",		"Аҧсуа",										"abk",				"ab",				"tl_abk.png"	),
+(	0x00000000000000000000000000000003,		"ave",		"Avesta",										"ave",				"ae",				"tl_ave.png"	),
+(	0x00000000000000000000000000000004,		"afr",		"Afrikaans",									"afr",				"af",				"tl_afr.png"	),
+(	0x00000000000000000000000000000005,		"aka",		"Akan",											"aka",				"ak",				"tl_aka.png"	),
+(	0x00000000000000000000000000000006,		"amh",		"አማርኛ",											"amh",				"am",				"tl_amh.png"	),
+(	0x00000000000000000000000000000007,		"arg",		"Aragonés",										"arg",				"an",				"tl_arg.png"	),
+(	0x00000000000000000000000000000008,		"ara",		"‫العربية",										"ara",				"ar",				"tl_ara.png"	),
+(	0x00000000000000000000000000000009,		"asm",		"অসমীয়া",											"asm",				"as",				"tl_asm.png"	),
+(	0x0000000000000000000000000000000A,		"ava",		"авар мацӀ ; магӀарул мацӀ",					"ava",				"av",				"tl_ava.png"	),
+(	0x0000000000000000000000000000000B,		"aym",		"Aymar aru",									"aym",				"ay",				"tl_aym.png"	),
+(	0x0000000000000000000000000000000C,		"aze",		"Azərbaycan dili",								"aze",				"az",				"tl_aze.png"	),
+(	0x0000000000000000000000000000000D,		"bak",		"башҡорт теле",									"bak",				"ba",				"tl_bak.png"	),
+(	0x0000000000000000000000000000000E,		"bel",		"Беларуская",									"bel",				"be",				"tl_bel.png"	),
+(	0x0000000000000000000000000000000F,		"bul",		"български език",								"bul",				"bg",				"tl_bul.png"	),
+(	0x00000000000000000000000000000010,		"--",		"भोजपुरी",											"bih",				"bh",				"tl_--.png"	),
+(	0x00000000000000000000000000000011,		"bis",		"Bislama",										"bis",				"bi",				"tl_bis.png"	),
+(	0x00000000000000000000000000000012,		"bam",		"Bamanankan",									"bam",				"bm",				"tl_bam.png"	),
+(	0x00000000000000000000000000000013,		"ben",		"বাংলা",											"ben",				"bn",				"tl_ben.png"	),
+(	0x00000000000000000000000000000014,		"bod",		"བོད་ཡིག",									"tib/bod",			"bo",				"tl_bod.png"	),
+(	0x00000000000000000000000000000015,		"bre",		"Brezhoneg",									"bre",				"br",				"tl_bre.png"	),
+(	0x00000000000000000000000000000016,		"bos",		"Bosanski jezik",								"bos",				"bs",				"tl_bos.png"	),
+(	0x00000000000000000000000000000017,		"cat",		"Català",										"cat",				"ca",				"tl_mnu.png"	),
+(	0x00000000000000000000000000000018,		"che",		"нохчийн мотт",									"che",				"ce",				"tl_che.png"	),
+(	0x00000000000000000000000000000019,		"cha",		"Chamoru",										"cha",				"ch",				"tl_cha.png"	),
+(	0x0000000000000000000000000000001A,		"cos",		"Corsu ; lingua corsa",							"cos",				"co",				"tl_cos.png"	),
+(	0x0000000000000000000000000000001B,		"cre",		"ᓀᐦᐃᔭᐍᐏᐣ",										"cre",				"cr",				"tl_cre.png"	),
+(	0x0000000000000000000000000000001C,		"ces",		"Česky ; čeština",								"cze/ces",			"cs",				"tl_ces.png"	),
+(	0x0000000000000000000000000000001D,		"chu",		"Словѣньскъ",									"chu",				"cu",				"tl_chu.png"	),
+(	0x0000000000000000000000000000001E,		"chv",		"чӑваш чӗлхи",									"chv",				"cv",				"tl_chv.png"	),
+(	0x0000000000000000000000000000001F,		"cym",		"Cymraeg",										"wel/cym",			"cy",				"tl_cym.png"	),
+(	0x00000000000000000000000000000020,		"dan",		"Dansk",										"dan",				"da",				"tl_dan.png"	),
+(	0x00000000000000000000000000000021,		"deu",		"Deutsch",										"ger/deu",			"de",				"tl_deu.png"	),
+(	0x00000000000000000000000000000022,		"div",		"‫ދިވެހި",											"div",				"dv",				"tl_div.png"	),
+(	0x00000000000000000000000000000023,		"dzo",		"རྫོང་ཁ",										"dzo",				"dz",				"tl_dzo.png"	),
+(	0x00000000000000000000000000000024,		"ewe",		"Ɛʋɛgbɛ",										"ewe",				"ee",				"tl_ewe.png"	),
+(	0x00000000000000000000000000000025,		"ell",		"Ελληνικά",										"gre/ell",			"el",				"tl_ell.png"	),
+(	0x00000000000000000000000000000026,		"eng",		"English",										"eng",				"en",				"tl_eng.png"	),
+(	0x00000000000000000000000000000027,		"epo",		"Esperanto",									"epo",				"eo",				"tl_epo.png"	),
+(	0x00000000000000000000000000000028,		"spa",		"Español; castellano",							"spa",				"es",				"tl_spa.png"	),
+(	0x00000000000000000000000000000029,		"est",		"Eesti keel",									"est",				"et",				"tl_est.png"	),
+(	0x0000000000000000000000000000002A,		"eus",		"Euskara",										"baq/eus",			"eu",				"tl_eus.png"	),
+(	0x0000000000000000000000000000002B,		"fas",		"‫فارسی",										"per/fas",			"fa",				"tl_fas.png"	),
+(	0x0000000000000000000000000000002C,		"ful",		"Fulfulde",										"ful",				"ff",				"tl_ful.png"	),
+(	0x0000000000000000000000000000002D,		"fin",		"Suomen kieli",									"fin",				"fi",				"tl_fin.png"	),
+(	0x0000000000000000000000000000002E,		"fij",		"Vosa Vakaviti",								"fij",				"fj",				"tl_fij.png"	),
+(	0x0000000000000000000000000000002F,		"fao",		"Føroyskt",										"fao",				"fo",				"tl_fao.png"	),
+(	0x00000000000000000000000000000030,		"fra",		"Français ; langue française",					"fre/fra",			"fr",				"tl_fra.png"	),
+(	0x00000000000000000000000000000031,		"fry",		"Frysk",										"fry",				"fy",				"tl_fry.png"	),
+(	0x00000000000000000000000000000032,		"gle",		"Gaeilge",										"gle",				"ga",				"tl_gle.png"	),
+(	0x00000000000000000000000000000033,		"gla",		"Gàidhlig",										"gla",				"gd",				"tl_gla.png"	),
+(	0x00000000000000000000000000000034,		"glg",		"Galego",										"glg",				"gl",				"tl_glg.png"	),
+(	0x00000000000000000000000000000035,		"grn",		"Avañe'ẽ",										"grn",				"gn",				"tl_grn.png"	),
+(	0x00000000000000000000000000000036,		"guj",		"ગુજરાતી",										"guj",				"gu",				"tl_guj.png"	),
+(	0x00000000000000000000000000000037,		"glv",		"Ghaelg",										"glv",				"gv",				"tl_glv.png"	),
+(	0x00000000000000000000000000000038,		"hau",		"‫هَوُسَ",											"hau",				"ha",				"tl_hau.png"	),
+(	0x00000000000000000000000000000039,		"heb",		"‫עברית",										"heb",				"he",				"tl_heb.png"	),
+(	0x0000000000000000000000000000003A,		"hin",		"हिन्दी ; हिंदी",										"hin",				"hi",				"tl_hin.png"	),
+(	0x0000000000000000000000000000003B,		"hmo",		"Hiri Motu",									"hmo",				"ho",				"tl_hmo.png"	),
+(	0x0000000000000000000000000000003C,		"hrv",		"Hrvatski",										"scr/hrv",			"hr",				"tl_hrv.png"	),
+(	0x0000000000000000000000000000003D,		"hat",		"Kreyòl ayisyen",								"hat",				"ht",				"tl_hat.png"	),
+(	0x0000000000000000000000000000003E,		"hun",		"magyar",										"hun",				"hu",				"tl_hun.png"	),
+(	0x0000000000000000000000000000003F,		"hye",		"Հայերեն",										"arm/hye",			"hy",				"tl_hye.png"	),
+(	0x00000000000000000000000000000040,		"her",		"Otjiherero",									"her",				"hz",				"tl_her.png"	),
+(	0x00000000000000000000000000000041,		"ina",		"Interlingua",									"ina",				"ia",				"tl_ina.png"	),
+(	0x00000000000000000000000000000042,		"ind",		"Bahasa Indonesia",								"ind",				"id",				"tl_ind.png"	),
+(	0x00000000000000000000000000000043,		"ile",		"Interlingue",									"ile",				"ie",				"tl_ile.png"	),
+(	0x00000000000000000000000000000044,		"ibo",		"Igbo",											"ibo",				"ig",				"tl_ibo.png"	),
+(	0x00000000000000000000000000000045,		"iii",		"ꆇꉙ",											"iii",				"ii",				"tl_iii.png"	),
+(	0x00000000000000000000000000000046,		"ipk",		"Iñupiaq ; Iñupiatun",							"ipk",				"ik",				"tl_ipk.png"	),
+(	0x00000000000000000000000000000047,		"ido",		"Ido",											"ido",				"io",				"tl_ido.png"	),
+(	0x00000000000000000000000000000048,		"isl",		"Íslenska",										"ice/isl",			"is",				"tl_isl.png"	),
+(	0x00000000000000000000000000000049,		"ita",		"Italiano",										"ita",				"it",				"tl_ita.png"	),
+(	0x0000000000000000000000000000004A,		"iku",		"ᐃᓄᒃᑎᑐᑦ",										"iku",				"iu",				"tl_iku.png"	),
+(	0x0000000000000000000000000000004B,		"jpn",		"日本語 (にほんご)",								"jpn",				"ja",				"tl_jpn.png"	),
+(	0x0000000000000000000000000000004C,		"jav",		"Basa Jawa",									"jav",				"jv",				"tl_jav.png"	),
+(	0x0000000000000000000000000000004D,		"kat",		"ქართული",										"geo/kat",			"ka",				"tl_kat.png"	),
+(	0x0000000000000000000000000000004E,		"kon",		"KiKongo",										"kon",				"kg",				"tl_kon.png"	),
+(	0x0000000000000000000000000000004F,		"kik",		"Gĩkũyũ",										"kik",				"ki",				"tl_kik.png"	),
+(	0x00000000000000000000000000000050,		"kua",		"Kuanyama",										"kua",				"kj",				"tl_kua.png"	),
+(	0x00000000000000000000000000000051,		"kaz",		"Қазақ тілі",									"kaz",				"kk",				"tl_kaz.png"	),
+(	0x00000000000000000000000000000052,		"kal",		"Kalaallisut ; kalaallit oqaasii",				"kal",				"kl",				"tl_kal.png"	),
+(	0x00000000000000000000000000000053,		"khm",		"ភាសាខ្មែរ",							"khm",				"km",				"tl_khm.png"	),
+(	0x00000000000000000000000000000054,		"kan",		"ಕನ್ನಡ",										"kan",				"kn",				"tl_kan.png"	),
+(	0x00000000000000000000000000000055,		"kor",		"한국어 (韓國語) ; 조선말 (朝鮮語)",				"kor",				"ko",				"tl_kor.png"	),
+(	0x00000000000000000000000000000056,		"kau",		"Kanuri",										"kau",				"kr",				"tl_kau.png"	),
+(	0x00000000000000000000000000000057,		"kas",		"कश्मीरी ; كشميري",									"kas",				"ks",				"tl_kas.png"	),
+(	0x00000000000000000000000000000058,		"kur",		"Kurdî ; كوردی",								"kur",				"ku",				"tl_kur.png"	),
+(	0x00000000000000000000000000000059,		"kom",		"коми кыв",										"kom",				"kv",				"tl_kom.png"	),
+(	0x0000000000000000000000000000005A,		"cor",		"Kernewek",										"cor",				"kw",				"tl_cor.png"	),
+(	0x0000000000000000000000000000005B,		"kir",		"кыргыз тили",									"kir",				"ky",				"tl_kir.png"	),
+(	0x0000000000000000000000000000005C,		"lat",		"Latine ; lingua latina",						"lat",				"la",				"tl_lat.png"	),
+(	0x0000000000000000000000000000005D,		"ltz",		"Lëtzebuergesch",								"ltz",				"lb",				"tl_ltz.png"	),
+(	0x0000000000000000000000000000005E,		"lug",		"Luganda",										"lug",				"lg",				"tl_lug.png"	),
+(	0x0000000000000000000000000000005F,		"lim",		"Limburgs",										"lim",				"li",				"tl_lim.png"	),
+(	0x00000000000000000000000000000060,		"lin",		"Lingála",										"lin",				"ln",				"tl_lin.png"	),
+(	0x00000000000000000000000000000061,		"lao",		"ພາສາລາວ",										"lao",				"lo",				"tl_lao.png"	),
+(	0x00000000000000000000000000000062,		"lit",		"Lietuvių kalba",								"lit",				"lt",				"tl_lit.png"	),
+(	0x00000000000000000000000000000063,		"lub",		"kiluba",										"lub",				"lu",				"tl_lub.png"	),
+(	0x00000000000000000000000000000064,		"lav",		"Latviešu valoda",								"lav",				"lv",				"tl_lav.png"	),
+(	0x00000000000000000000000000000065,		"mlg",		"Fiteny malagasy",								"mlg",				"mg",				"tl_mlg.png"	),
+(	0x00000000000000000000000000000066,		"mah",		"Kajin M̧ajeļ",									"mah",				"mh",				"tl_mah.png"	),
+(	0x00000000000000000000000000000067,		"mri",		"Te reo Māori",									"mao/mri",			"mi",				"tl_mri.png"	),
+(	0x00000000000000000000000000000068,		"mkd",		"македонски јазик",								"mac/mkd",			"mk",				"tl_mkd.png"	),
+(	0x00000000000000000000000000000069,		"mal",		"മലയാളം",										"mal",				"ml",				"tl_mal.png"	),
+(	0x0000000000000000000000000000006A,		"mon",		"Монгол",										"mon",				"mn",				"tl_mon.png"	),
+(	0x0000000000000000000000000000006B,		"mol",		"лимба молдовеняскэ",							"mol",				"mo",				"tl_mol.png"	),
+(	0x0000000000000000000000000000006C,		"mar",		"मराठी",											"mar",				"mr",				"tl_mar.png"	),
+(	0x0000000000000000000000000000006D,		"msa",		"Bahasa Melayu ; بهاس ملايو",					"may/msa",			"ms",				"tl_msa.png"	),
+(	0x0000000000000000000000000000006E,		"mlt",		"Malti",										"mlt",				"mt",				"tl_mlt.png"	),
+(	0x0000000000000000000000000000006F,		"mya",		"ဗမာစာ",									"bur/mya",			"my",				"tl_mya.png"	),
+(	0x00000000000000000000000000000070,		"nau",		"Ekakairũ Naoero",								"nau",				"na",				"tl_nau.png"	),
+(	0x00000000000000000000000000000071,		"nob",		"Norsk bokmål",									"nob",				"nb",				"tl_nob.png"	),
+(	0x00000000000000000000000000000072,		"nde",		"isiNdebele",									"nde",				"nd",				"tl_nde.png"	),
+(	0x00000000000000000000000000000073,		"nep",		"नेपाली",											"nep",				"ne",				"tl_nep.png"	),
+(	0x00000000000000000000000000000074,		"ndo",		"Owambo",										"ndo",				"ng",				"tl_ndo.png"	),
+(	0x00000000000000000000000000000075,		"nld",		"Nederlands",									"dut/nld",			"nl",				"tl_nld.png"	),
+(	0x00000000000000000000000000000076,		"nno",		"Norsk nynorsk",								"nno",				"nn",				"tl_nno.png"	),
+(	0x00000000000000000000000000000077,		"nor",		"Norsk",										"nor",				"no",				"tl_nor.png"	),
+(	0x00000000000000000000000000000078,		"nbl",		"Ndébélé",										"nbl",				"nr",				"tl_nbl.png"	),
+(	0x00000000000000000000000000000079,		"nav",		"Diné bizaad ; Dinékʼehǰí",						"nav",				"nv",				"tl_nav.png"	),
+(	0x0000000000000000000000000000007A,		"nya",		"ChiCheŵa ; chinyanja",							"nya",				"ny",				"tl_nya.png"	),
+(	0x0000000000000000000000000000007B,		"oci",		"Occitan",										"oci",				"oc",				"tl_oci.png"	),
+(	0x0000000000000000000000000000007C,		"oji",		"ᐊᓂᔑᓈᐯᒧᐎᓐ",									"oji",				"oj",				"tl_oji.png"	),
+(	0x0000000000000000000000000000007D,		"orm",		"Afaan Oromoo",									"orm",				"om",				"tl_orm.png"	),
+(	0x0000000000000000000000000000007E,		"ori",		"ଓଡ଼ିଆ",											"ori",				"or",				"tl_ori.png"	),
+(	0x0000000000000000000000000000007F,		"oss",		"Ирон æвзаг",									"oss",				"os",				"tl_oss.png"	),
+(	0x00000000000000000000000000000080,		"pan",		"ਪੰਜਾਬੀ ; پنجابی",									"pan",				"pa",				"tl_pan.png"	),
+(	0x00000000000000000000000000000081,		"pli",		"पािऴ",											"pli",				"pi",				"tl_pli.png"	),
+(	0x00000000000000000000000000000082,		"pol",		"Polski",										"pol",				"pl",				"tl_pol.png"	),
+(	0x00000000000000000000000000000083,		"pus",		"‫پښتو",											"pus",				"ps",				"tl_pus.png"	),
+(	0x00000000000000000000000000000084,		"por",		"Português",									"por",				"pt",				"tl_por.png"	),
+(	0x00000000000000000000000000000085,		"que",		"Runa Simi ; Kichwa",							"que",				"qu",				"tl_que.png"	),
+(	0x00000000000000000000000000000086,		"rcf",		"Kréol Rénioné",								"rcf",				"rc",				"tl_rcf.png"	),
+(	0x00000000000000000000000000000087,		"roh",		"Rumantsch grischun",							"roh",				"rm",				"tl_roh.png"	),
+(	0x00000000000000000000000000000088,		"run",		"kiRundi",										"run",				"rn",				"tl_run.png"	),
+(	0x00000000000000000000000000000089,		"ron",		"Română",										"rum/ron",			"ro",				"tl_ron.png"	),
+(	0x0000000000000000000000000000008A,		"rus",		"русский язык",									"rus",				"ru",				"tl_rus.png"	),
+(	0x0000000000000000000000000000008B,		"kin",		"Kinyarwanda",									"kin",				"rw",				"tl_kin.png"	),
+(	0x0000000000000000000000000000008C,		"san",		"संस्कृतम्",											"san",				"sa",				"tl_san.png"	),
+(	0x0000000000000000000000000000008D,		"srd",		"sardu",										"srd",				"sc",				"tl_srd.png"	),
+(	0x0000000000000000000000000000008E,		"snd",		"सिन्धी ; ‫سنڌي، سندھی",								"snd",				"sd",				"tl_snd.png"	),
+(	0x0000000000000000000000000000008F,		"sme",		"Davvisámegiella",								"sme",				"se",				"tl_sme.png"	),
+(	0x00000000000000000000000000000090,		"sag",		"Yângâ tî sängö",								"sag",				"sg",				"tl_sag.png"	),
+(	0x00000000000000000000000000000091,		"hbs",		"srpskohrvatski jezik ; српскохрватски језик",	"",					"sh",				"tl_hbs.png"	),
+(	0x00000000000000000000000000000092,		"sin",		"සිංහල",											"sin",				"si",				"tl_sin.png"	),
+(	0x00000000000000000000000000000093,		"slk",		"Slovenčina",									"slo/slk",			"sk",				"tl_slk.png"	),
+(	0x00000000000000000000000000000094,		"slv",		"Slovenščina",									"slv",				"sl",				"tl_slv.png"	),
+(	0x00000000000000000000000000000095,		"smo",		"Gagana fa'a Samoa",							"smo",				"sm",				"tl_smo.png"	),
+(	0x00000000000000000000000000000096,		"sna",		"chiShona",										"sna",				"sn",				"tl_sna.png"	),
+(	0x00000000000000000000000000000097,		"som",		"Soomaaliga ; af Soomaali",						"som",				"so",				"tl_som.png"	),
+(	0x00000000000000000000000000000098,		"sqi",		"Shqip",										"alb/sqi",			"sq",				"tl_sqi.png"	),
+(	0x00000000000000000000000000000099,		"srp",		"српски језик",									"scc/srp",			"sr",				"tl_srp.png"	),
+(	0x0000000000000000000000000000009A,		"ssw",		"SiSwati",										"ssw",				"ss",				"tl_ssw.png"	),
+(	0x0000000000000000000000000000009B,		"sot",		"seSotho",										"sot",				"st",				"tl_sot.png"	),
+(	0x0000000000000000000000000000009C,		"sun",		"Basa Sunda",									"sun",				"su",				"tl_sun.png"	),
+(	0x0000000000000000000000000000009D,		"swe",		"Svenska",										"swe",				"sv",				"tl_swe.png"	),
+(	0x0000000000000000000000000000009E,		"swa",		"Kiswahili",									"swa",				"sw",				"tl_swa.png"	),
+(	0x0000000000000000000000000000009F,		"tam",		"தமிழ்",											"tam",				"ta",				"tl_tam.png"	),
+(	0x000000000000000000000000000000A0,		"tel",		"తెలుగు",									"tel",				"te",				"tl_tel.png"	),
+(	0x000000000000000000000000000000A1,		"tgk",		"тоҷикӣ ; toğikī ; ‫تاجیکی",						"tgk",				"tg",				"tl_tgk.png"	),
+(	0x000000000000000000000000000000A2,		"tha",		"ไทย",											"tha",				"th",				"tl_tha.png"	),
+(	0x000000000000000000000000000000A3,		"tir",		"ትግርኛ",											"tir",				"ti",				"tl_tir.png"	),
+(	0x000000000000000000000000000000A4,		"tuk",		"Türkmen ; Түркмен",							"tuk",				"tk",				"tl_tuk.png"	),
+(	0x000000000000000000000000000000A5,		"tgl",		"Tagalog",										"tgl",				"tl",				"tl_tgl.png"	),
+(	0x000000000000000000000000000000A6,		"tsn",		"seTswana",										"tsn",				"tn",				"tl_tsn.png"	),
+(	0x000000000000000000000000000000A7,		"ton",		"faka Tonga",									"ton",				"to",				"tl_ton.png"	),
+(	0x000000000000000000000000000000A8,		"tur",		"Türkçe",										"tur",				"tr",				"tl_tur.png"	),
+(	0x000000000000000000000000000000A9,		"tso",		"xiTsonga",										"tso",				"ts",				"tl_tso.png"	),
+(	0x000000000000000000000000000000AA,		"tat",		"татарча ; tatarça ; ‫تاتارچا",					"tat",				"tt",				"tl_tat.png"	),
+(	0x000000000000000000000000000000AB,		"twi",		"Twi",											"twi",				"tw",				"tl_twi.png"	),
+(	0x000000000000000000000000000000AC,		"tah",		"Reo Mā`ohi",									"tah",				"ty",				"tl_tah.png"	),
+(	0x000000000000000000000000000000AD,		"uig",		"Uyƣurqə ; ‫ئۇيغۇرچ",							"uig",				"ug",				"tl_uig.png"	),
+(	0x000000000000000000000000000000AE,		"ukr",		"українська мова",								"ukr",				"uk",				"tl_ukr.png"	),
+(	0x000000000000000000000000000000AF,		"urd",		"‫اردو",											"urd",				"ur",				"tl_urd.png"	),
+(	0x000000000000000000000000000000B0,		"uzb",		"O'zbek ; Ўзбек ; أۇزبېك",						"uzb",				"uz",				"tl_uzb.png"	),
+(	0x000000000000000000000000000000B1,		"ven",		"tshiVenḓa",									"ven",				"ve",				"tl_ven.png"	),
+(	0x000000000000000000000000000000B2,		"vie",		"Tiếng Việt",									"vie",				"vi",				"tl_vie.png"	),
+(	0x000000000000000000000000000000B3,		"vol",		"Volapük",										"vol",				"vo",				"tl_vol.png"	),
+(	0x000000000000000000000000000000B4,		"wln",		"Walon",										"wln",				"wa",				"tl_wln.png"	),
+(	0x000000000000000000000000000000B5,		"wol",		"Wollof",										"wol",				"wo",				"tl_wol.png"	),
+(	0x000000000000000000000000000000B6,		"xho",		"isiXhosa",										"xho",				"xh",				"tl_xho.png"	),
+(	0x000000000000000000000000000000B7,		"yid",		"‫ייִדיש",										"yid",				"yi",				"tl_yid.png"	),
+(	0x000000000000000000000000000000B8,		"yor",		"Yorùbá",										"yor",				"yo",				"tl_yor.png"	),
+(	0x000000000000000000000000000000B9,		"zha",		"Saɯ cueŋƅ ; Saw cuengh",						"zha",				"za",				"tl_zha.png"	),
+(	0x000000000000000000000000000000BA,		"zho",		"中文, 汉语, 漢語",								"chi/zho",			"zh",				"tl_zho.png"	),
+(	0x000000000000000000000000000000BB,		"zul",		"isiZulu",										"zul",				"zu",				"tl_zul.png"	)
+;

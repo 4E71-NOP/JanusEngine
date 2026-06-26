@@ -23,22 +23,22 @@ class Module extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		'module_id'						=> 0,
-		'module_deco'					=> 0,
-		'module_deco_nbr'				=> 0,
-		'module_deco_default_text'		=> 0,
-		'module_name'					=> "New Module",
-		'module_classname'				=> "",
-		'module_title'					=> 0,
-		'module_directory'				=> 0,
-		'module_file'					=> 0,
-		'module_desc'					=> 0,
-		'module_type'					=> 0,
-		'module_container_name'			=> 0,
-		'module_container_style'		=> 0,
-		'fk_perm_id'					=> 0,
-		'module_adm_control'			=> 0,
-		'module_execution'				=> 0,
+		"module_id"						=> "",
+		"module_deco"					=> 0,
+		"module_deco_nbr"				=> 0,
+		"module_deco_default_text"		=> 0,
+		"module_name"					=> "New Module",
+		"module_classname"				=> "",
+		"module_title"					=> 0,
+		"module_directory"				=> 0,
+		"module_file"					=> 0,
+		"module_desc"					=> 0,
+		"module_type"					=> 0,
+		"module_container_name"			=> 0,
+		"module_container_style"		=> 0,
+		"fk_perm_id"					=> "",
+		"module_adm_control"			=> 0,
+		"module_execution"				=> 0,
 	);
 	//@formatter:on
 	
@@ -58,14 +58,32 @@ class Module extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $bts->SDDMObj->query("
-			SELECT m.*,mw.module_state
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module')." m , ".$CurrentSetObj->SqlTableListObj->getSQLTableName('module_website')." mw
-			WHERE m.module_id = '".$id."'
-			AND m.module_id = mw.fk_module_id
-			AND mw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
-		;");
+
+		$dbquery = $bts->SDDMObj->query("SELECT m.*, "
+			. "CONCAT('0x', HEX(m.module_id)) AS module_id, "
+			. "m.module_deco, "
+			. "m.module_deco_nbr, "
+			. "m.module_deco_default_text, "
+			. "m.module_name, "
+			. "m.module_classname, "
+			. "m.module_title, "
+			. "m.module_directory, "
+			. "m.module_file, "
+			. "m.module_type, "
+			. "m.module_desc, "
+			. "m.module_container_name, "
+			. "m.module_container_style, "
+			. "CONCAT('0x', HEX(m.fk_perm_id)) AS fk_perm_id, "
+			. "m.module_adm_control, "
+			. "m.module_execution, "
+			. "mw.module_state "
+			. "FROM "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('module') . " m , "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " mw "
+			. "WHERE m.module_id = " . $id . " "
+			. "AND m.module_id = mw.fk_module_id "
+			. "AND mw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			. ";");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for module id=".$id));

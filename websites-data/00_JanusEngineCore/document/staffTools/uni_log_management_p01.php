@@ -228,13 +228,13 @@ if (strlen($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'page') ?? '')
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'page', 0);
 }
 
-$dbquery = $bts->SDDMObj->query("
-SELECT COUNT(log_id) as nbr_log 
-FROM " . $SqlTableListObj->getSQLTableName('log') . " 
-WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
-" . $ClauseType .
-	$pv['clause_msgid'] . "
-;");
+$dbquery = $bts->SDDMObj->query("SELECT "
+. "COUNT(log_id) as nbr_log "
+. "FROM " . $SqlTableListObj->getSQLTableName('log') . " "
+. "WHERE fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
+. $ClauseType
+. $pv['clause_msgid'] 
+. ";");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$bts->RequestDataObj->setRequestDataSubEntry('lmForm', 'log_count', $dbp['nbr_log']);
 }
@@ -267,7 +267,7 @@ if ($bts->RequestDataObj->getRequestDataSubEntry('lmForm', 'log_count') > $bts->
 $dbquery = $bts->SDDMObj->query("
 SELECT * 
 FROM " . $SqlTableListObj->getSQLTableName('log') . " 
-WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
+WHERE fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . "
 " . $ClauseType .
 	$pv['clause_msgid'] . "
 ORDER BY log_date DESC, log_id DESC 

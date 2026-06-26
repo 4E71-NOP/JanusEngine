@@ -22,21 +22,21 @@
 //--------------------------------------------------------------------------------
 self::$ActionTable['add']['user'] = function (&$a) {
 	$queries = array();
-	$b = 1;
 	$c = 1;
 	$queries[] = "INSERT INTO " . $a['sqlTables']['user'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");";
+
+	$bts = BaseToolSet::getInstance();
 	if ($a['params']['name'] != "anonymous") {
-		$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . ($a['params']['group_user_id'] + $b) . "','" . $a['params']['reader_id'] . "','" . $a['params']['id'] . "','1');";
-		$b++;
+		$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . "(group_user_id, fk_group_id, fk_user_id, group_user_initial_group) VALUES (" . $bts->SDDMObj->createUniqueId() . ", " . $a['params']['reader_id'] . ", " . $a['params']['id'] . ", 1);";
 		$c = 0;
 	}
-	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . ($a['params']['group_user_id'] + $b) . "','" . $a['params']['anonymous_id'] . "','" . $a['params']['id'] . "','" . $c . "');";
+	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . "(group_user_id, fk_group_id, fk_user_id, group_user_initial_group) VALUES (" . $bts->SDDMObj->createUniqueId() . ", " . $a['params']['anonymous_id'] . ", " . $a['params']['id'] . ", " . $c . ");";
 
 	return $queries;
 };
 
 self::$ActionTable['update']['user'] = function (&$a) {
-	$queries[] = "UPDATE " . $a['sqlTables']['user'] . " SET " . $a['equalities'] . " WHERE user_id = '" . $a['params']['user_id'] . "';";
+	$queries[] = "UPDATE " . $a['sqlTables']['user'] . " SET " . $a['equalities'] . " WHERE user_id = " . $a['params']['user_id'] . ";";
 
 	$bts = BaseToolSet::getInstance();
 	$bts->InitClass('MiscTools');
@@ -59,17 +59,17 @@ self::$ActionTable['update']['user'] = function (&$a) {
 };
 
 self::$ActionTable['disable']['user'] = function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['user'] . " SET user_state=0		WHERE user_id = '" . $a['params']['id'] . "';"); };
+	return array("UPDATE " . $a['sqlTables']['user'] . " SET user_state=0		WHERE user_id = " . $a['params']['id'] . ";"); };
 
 self::$ActionTable['delete']['user'] = function (&$a) {
-	return array("UPDATE " . $a['sqlTables']['user'] . " SET user_state=2		WHERE user_id = '" . $a['params']['id'] . "';"); };
+	return array("UPDATE " . $a['sqlTables']['user'] . " SET user_state=2		WHERE user_id = " . $a['params']['id'] . ";"); };
 
 self::$ActionTable['assign']['user'] = function (&$a) {
 	$queries = array();
 	if ($a['params']['primary_group'] == 1) {
-		$queries[] = "UPDATE " . $a['sqlTables']['group_user'] . " SET group_user_initial_group = '0' WHERE fk_user_id = '" . $a['params']['user_id'] . "';";
+		$queries[] = "UPDATE " . $a['sqlTables']['group_user'] . " SET group_user_initial_group = 0 WHERE fk_user_id = " . $a['params']['user_id'] . ";";
 	}
-	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . " VALUES ('" . $a['params']['group_user_id'] . "','" . $a['params']['group_id'] . "','" . $a['params']['user_id'] . "','" . $a['params']['primary_group'] . "');";
+	$queries[] = "INSERT INTO " . $a['sqlTables']['group_user'] . "(group_user_id, fk_group_id, fk_user_id, group_user_initial_group) VALUES (" . $a['params']['group_user_id'] . ", " . $a['params']['group_id'] . ", " . $a['params']['user_id'] . ", " . $a['params']['primary_group'] . ");";
 	return $queries;
 };
 
@@ -89,7 +89,7 @@ self::$ActionTable['show']['users'] = function (&$a) {
 		. $a['sqlTables']['group_website'] . " gw "
 		. "WHERE usr.user_id = gu.fk_user_id "
 		. "AND gu.fk_group_id = gw.fk_group_id "
-		. "AND gw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+		. "AND gw.fk_ws_id = " . $a['Context']['ws_id'] . " "
 		. "GROUP BY usr.user_id"
 	);
 };
@@ -106,7 +106,7 @@ self::$ActionTable['show']['user'] = function (&$a) {
 		. $a['sqlTables']['group_website'] . " gw "
 		. "WHERE usr.user_id = gu.fk_user_id "
 		. "AND gu.fk_group_id = gw.fk_group_id "
-		. "AND gw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+		. "AND gw.fk_ws_id = " . $a['Context']['ws_id'] . " "
 		. (strlen($a['params']['name'] > 0) ? "AND usr.user_name = '" . $a['params']['name'] . "' " : "")
 		. (strlen($a['params']['login'] > 0) ? "AND usr.user_login = '" . $a['params']['login'] . "' " : "")
 		. (strlen($a['params']['mail'] > 0) ? "AND usr.user_mail = '" . $a['params']['mail'] . "' " : "")

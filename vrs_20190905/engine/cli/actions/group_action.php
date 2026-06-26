@@ -23,7 +23,7 @@
 //@formatter:off
 self::$ActionTable['add']['group'] = function (&$a) { return array(
 		"INSERT INTO " . $a['sqlTables']['group'] . " (" . $a['columns'] . ") VALUES (" . $a['values'] . ");",
-		"INSERT INTO " . $a['sqlTables']['group_website'] . " VALUES ('" . $a['params']['group_webws_id'] . "', '" . $a['Context']['ws_id'] . "', '" . $a['params']['id'] . "', '1' );"
+		"INSERT INTO " . $a['sqlTables']['group_website'] . " (group_website_id, fk_ws_id, fk_group_id, group_state) VALUES (" . $a['params']['group_website_id'] . ", " . $a['Context']['ws_id'] . ", " . $a['params']['id'] . ", 1 );"
 	); 
 };
 
@@ -39,7 +39,7 @@ self::$ActionTable['show']['groups']	= function (&$a) { return array(
 			. "FROM "
 			. $a['sqlTables']['group'] . " grp, "
 			. $a['sqlTables']['group_website'] . " wg "
-			. "WHERE wg.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
+			. "WHERE wg.fk_ws_id = " . $a['Context']['ws_id'] . " "
 			. "AND grp.group_id = wg.fk_group_id "
 			. "AND grp.group_name != 'Server_owner' "
 			. "ORDER BY grp.group_name;"

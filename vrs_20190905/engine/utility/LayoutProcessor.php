@@ -65,20 +65,25 @@ class LayoutProcessor
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$SqlTableListObj = $CurrentSetObj->SqlTableListObj;
 
-		$sqlQuery = "
-		SELECT lfi.layout_file_id, lfi.layout_file_filename, lyt.layout_id, lth.fk_theme_id, tw.fk_ws_id 
-		FROM "
+		$sqlQuery = "SELECT "
+			. "CONCAT('0x', HEX(lfi.layout_file_id)) AS layout_file_id, "
+			. "lfi.layout_file_filename, "
+			. "CONCAT('0x', HEX(lyt.layout_id)) AS layout_id, "
+			. "CONCAT('0x', HEX(lth.fk_theme_id)) AS fk_theme_id, "
+			. "CONCAT('0x', HEX(tw.fk_ws_id)) AS fk_ws_id "
+			. "FROM "
 			. $SqlTableListObj->getSQLTableName('layout_file') . " lfi, "
 			. $SqlTableListObj->getSQLTableName('layout') . " lyt, "
 			. $SqlTableListObj->getSQLTableName('layout_theme') . " lth, "
-			. $SqlTableListObj->getSQLTableName('theme_website') . " tw 
-		WHERE lyt.layout_generic_name = '" . $CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name') . "'
-		AND lyt.fk_layout_file_id = lfi.layout_file_id 
-		AND lyt.layout_id = lth.fk_layout_id
-		AND lth.fk_theme_id = tw.fk_theme_id
-		AND tw.fk_theme_id = '" . $CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id') . "'
-		AND tw.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-		;";
+			. $SqlTableListObj->getSQLTableName('theme_website') . " tw "
+			. "WHERE lyt.layout_generic_name = '" . $CurrentSetObj->ArticleObj->getArticleEntry('layout_generic_name') . "' "
+			. "AND lyt.fk_layout_file_id = lfi.layout_file_id "
+			. "AND lyt.layout_id = lth.fk_layout_id "
+			. "AND lth.fk_theme_id = tw.fk_theme_id "
+			. "AND tw.fk_theme_id = " . $CurrentSetObj->ThemeDescriptorObj->getThemeDescriptorEntry('theme_id') . " "
+			. "AND tw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			. "; ";
+
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 		$dbquery = $bts->SDDMObj->query($sqlQuery);

@@ -108,24 +108,24 @@ class ConfigurationManagement
 			case "installation":
 				// No DB data available for a short time; so we create it.
 				$this->LanguageList = array(
-					38 => array(
-						"lang_id" => 38,
+					"0x00000000000000000000000000000026" => array(
+						"lang_id" => "0x00000000000000000000000000000026",
 						"lang_639_3" => "eng",
 						"lang_original_name" => "English",
 						"lang_639_2" => "eng",
 						"lang_639_1" => "en",
 						"lang_image" => "tl_eng.png",
 					),
-					"eng" => array("lang_id" => 38),
-					48 => array(
-						"lang_id" => 48,
+					"eng" => array("lang_id" => "0x00000000000000000000000000000026"),
+					"0x00000000000000000000000000000030" => array(
+						"lang_id" => "0x00000000000000000000000000000030",
 						"lang_639_3" => "fra",
 						"lang_original_name" => "Français ; langue française",
 						"lang_639_2" => "fre/fra",
 						"lang_639_1" => "fr",
 						"lang_image" => "tl_fra.png",
 					),
-					"fra" => array("lang_id" => 48)
+					"fra" => array("lang_id" => "0x00000000000000000000000000000030")
 				);
 				break;
 			case "render":
@@ -135,12 +135,14 @@ class ConfigurationManagement
 				$this->LanguageList = array();
 
 				$TabLangueAdmises = array();
-				$q = "SELECT ws.ws_short, lw.fk_lang_id 
-					FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw,
-					" . $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " ws 
-					WHERE ws.ws_id = lw.fk_ws_id 
-					AND ws.ws_short = '" . $currentWs . "'
-					;";
+				$q = "SELECT " 
+					. "ws.ws_short, " 
+					. "CONCAT('0x', HEX(lw.fk_lang_id)) AS fk_lang_id "
+					. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw, "
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " ws "
+					. "WHERE ws.ws_id = lw.fk_ws_id "
+					. "AND ws.ws_short = '" . $currentWs . "' "
+					. ";";
 				$dbquery = $bts->SDDMObj->query($q);
 
 				if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
@@ -149,7 +151,16 @@ class ConfigurationManagement
 					}
 					sort($TabLangueAdmises);
 
-					$q = "SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . ";";
+					$q = "SELECT "
+					. "CONCAT('0x', HEX(lang_id)) AS lang_id, "
+					. "lang_639_3, "
+					. "lang_original_name, "
+					. "lang_639_2, "
+					. "lang_639_1, "
+					. "lang_image "
+					. "FROM "
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('language') 
+					. ";";
 					$dbquery = $bts->SDDMObj->query($q);
 					if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 						while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -185,12 +196,14 @@ class ConfigurationManagement
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$q = "SELECT lw.fk_lang_id FROM "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw , "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " w
-			WHERE w.ws_id ='" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-			AND lw.fk_ws_id = w.ws_id
-			;";
+		$q = "SELECT " 
+			. "CONCAT('0x', HEX(lw.fk_lang_id)) AS fk_lang_id "
+			. "FROM "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw, "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " w "
+			. "WHERE w.ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
+			. "AND lw.fk_ws_id = w.ws_id "
+			. ";";
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : q =" . $q));
 		$dbquery = $bts->SDDMObj->query($q);

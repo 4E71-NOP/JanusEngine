@@ -79,7 +79,7 @@ FROM "
 	. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 	. $SqlTableListObj->getSQLTableName('group_website') . " gw 
 WHERE gu.group_user_initial_group = '1' 
-AND gw.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
+AND gw.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " 
 AND gu.fk_user_id = usr.user_id 
 AND gw.fk_group_id = gu.fk_group_id 
 AND gu.fk_group_id = grp.group_id

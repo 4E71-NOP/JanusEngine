@@ -74,7 +74,7 @@ $bts->I18nTransObj->getI18nTransFromFile($CurrentSetObj->ServerInfosObj->getServ
 $dbquery = $bts->SDDMObj->query("
 SELECT ws_state, fk_lang_id 
 FROM ".$SqlTableListObj->getSQLTableName('website')." 
-WHERE ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+WHERE ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')."
 ;");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$pv['ws_state2']	= "select_o1_1_" . $dbp['ws_state'];
@@ -169,7 +169,7 @@ $dbquery = $bts->SDDMObj->query("
 SELECT td.theme_id,td.theme_name,td.theme_title 
 FROM ".$SqlTableListObj->getSQLTableName('theme_descriptor')." td, " 
 .$SqlTableListObj->getSQLTableName('theme_website')." tw 
-WHERE tw.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
+WHERE tw.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
 AND td.theme_id  = tw.fk_theme_id;
 ;");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -251,7 +251,15 @@ $T['Content'][$Tab][$i][$j]['cont'] = "";
 $i++;
 
 $arr = $bts->RenderFormObj->getCheckboxArray('', '', $infos['block']);
-$dbquery = $bts->SDDMObj->query("SELECT * FROM ".$SqlTableListObj->getSQLTableName('language').";");
+$dbquery = $bts->SDDMObj->query("SELECT "
+	. "CONCAT('0x', HEX(lang_id)) AS lang_id, "
+	. "lang_639_3, "
+	. "lang_original_name, "
+	. "lang_639_2, "
+	. "lang_639_1, "
+	. "lang_image "
+	. "FROM "
+	. $SqlTableListObj->getSQLTableName('language') . ";");
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 	$B = "";
 	if ( $langList[$dbp['lang_id']]['support'] == 1 ) { $B = " checked"; }

@@ -24,13 +24,13 @@ class DeadLine extends Entity{
 
 	//@formatter:off
 	private $columns = array(
-		'deadline_id'				=>	0,
-		'deadline_name'				=>	"",
-		'deadline_title'			=>	"",
-		'deadline_state'			=>	_OFFLINE_,
-		'deadline_creation_date'	=>	0,
-		'deadline_end_date'			=>	0,
-		'fk_ws_id'					=>	0,
+		"deadline_id"				=>	"",
+		"deadline_name"				=>	"",
+		"deadline_title"			=>	"",
+		"deadline_state"			=>	_OFFLINE_,
+		"deadline_creation_date"	=>	0,
+		"deadline_end_date"			=>	0,
+		"fk_ws_id"					=>	"",
 	);
 	//@formatter:on
 	
@@ -50,12 +50,18 @@ class DeadLine extends Entity{
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query("
-		SELECT dl.*
-		FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('deadline')." dl "
-		."WHERE dl.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
-		AND dl.deadline_id ='".$id."'
-		;");
+		$dbquery = $bts->SDDMObj->query("SELECT "
+		. "CONCAT('0x', HEX(deadline_id)) AS deadline_id, "
+		. "dl.deadline_name, "
+		. "dl.deadline_title, "
+		. "dl.deadline_state, "
+		. "dl.deadline_creation_date, "
+		. "dl.deadline_end_date, "
+		. "CONCAT('0x', HEX(dl.fk_ws_id)) AS fk_ws_id "
+		. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " dl "
+		. "WHERE dl.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
+		. "AND dl.deadline_id =" . $id
+		. ";");
 		if ( $dbquery === false ) { 
 			$this->LastExecutionReport[] = array('state' => 'err', 'msg' =>  $bts->SDDMObj->errno.':'.$bts->SDDMObj->error);
 			return false; 

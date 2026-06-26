@@ -8,11 +8,12 @@ remplacement_type
 	3	vers_aide_dynamique
 */
 CREATE TABLE !table! (
-keyword_id			BIGINT NOT NULL UNIQUE, 
+keyword_id			BINARY(16) NOT NULL UNIQUE, 
+keyword_id_str		CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(keyword_id))),
 keyword_state		INTEGER,
 keyword_name		VARCHAR(255),
-fk_arti_id  		BIGINT,
-fk_ws_id			BIGINT,
+fk_arti_id  		BINARY(16),
+fk_ws_id			BINARY(16),
 keyword_string		VARCHAR(255),
 keyword_count		INTEGER,
 keyword_type		INTEGER,

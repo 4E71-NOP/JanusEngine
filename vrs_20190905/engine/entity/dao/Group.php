@@ -23,13 +23,13 @@ class Group extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-			'group_id'			=> 0,
-			'group_parent'		=> 0,
-			'group_tag'			=> 0,
-			'group_name'		=> "New Group",
-			'group_title'		=> "New Group",
-			'group_file'		=> 0,
-			'group_desc'		=> "New Group",
+			"group_id"			=> "",
+			"group_parent"		=> "",
+			"group_tag"			=> 0,
+			"group_name"		=> "New Group",
+			"group_title"		=> "New Group",
+			"group_file"		=> 0,
+			"group_desc"		=> "New Group",
 	);
 	//@formatter:on
 	
@@ -48,17 +48,23 @@ class Group extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-				
-		$dbquery = $dbquery = $bts->SDDMObj->query("
-			SELECT grp.* 
-			FROM "
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('group')." grp , "
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('group_website')." gw
-			WHERE grp.group_id = '".$id."'
-			AND grp.group_id = gw.fk_group_id
-			AND gw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
-		;");
-		
+
+		$dbquery = $bts->SDDMObj->query("SELECT grp.* "
+			. "CONCAT('0x', HEX(group_id)) AS , "
+			. "CONCAT('0x', HEX(group_parent)) AS , "
+			. "group_tag, "
+			. "group_name, "
+			. "group_title, "
+			. "group_file, "
+			. "group_desc "
+			. " FROM "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('group') . " grp , "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('group_website') . " gw "
+			. "WHERE grp.group_id = " . $id . " "
+			. "AND grp.group_id = gw.fk_group_id "
+			. "AND gw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			. ";");
+
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

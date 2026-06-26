@@ -28,7 +28,7 @@ class User extends Entity
 
 	//@formatter:off
 	private $columns = array(
-		'user_id'						=> 0,
+		'user_id'						=> "",
 		'user_name'						=> "new User",
 		'user_login'					=> "newLogin",
 		'user_password'					=> "1a2b3c4d5e",
@@ -38,8 +38,8 @@ class User extends Entity
 		'user_status'					=> 0,
 	
 		'user_role_function'			=> 0,
-		'user_pref_theme'				=> 0,
-		'user_lang'						=> 0,
+		'user_pref_theme'				=> "",
+		'user_lang'						=> "",
 	
 		'user_avatar_image'				=> 0,
 		'user_admin_comment'			=> 0,
@@ -69,20 +69,38 @@ class User extends Entity
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance();
 
-		$sqlQuery = "
-			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM "
+		$sqlQuery = "SELECT "
+			. "CONCAT('0x', HEX(usr.user_id)) AS user_id, "
+			. "usr.user_name, "
+			. "usr.user_login, "
+			. "usr.user_password, "
+			. "usr.user_mail, "
+			. "usr.user_subscription_date, "
+			. "usr.user_status, "
+			. "usr.user_role_function, "
+			. "CONCAT('0x', HEX(usr.user_pref_theme)) AS user_pref_theme, "
+			. "CONCAT('0x', HEX(usr.user_lang)) AS user_lang, "
+			. "usr.user_avatar_image, "
+			. "usr.user_admin_comment, "
+			. "usr.user_last_visit, "
+			. "usr.user_last_ip, "
+			. "usr.user_timezone, "
+			. "CONCAT('0x', HEX(g.group_id)) as fk_group_id, "
+			. "g.group_name, "
+			. "gu.group_user_initial_group, "
+			. "g.group_tag "
+			. "FROM "
 			. $SqlTableListObj->getSQLTableName('user') . " usr, "
 			. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 			. $SqlTableListObj->getSQLTableName('group_website') . " sg, "
-			. $SqlTableListObj->getSQLTableName('group') . " g
-			WHERE usr.user_id = '" . $UserId . "'
-			AND usr.user_id = gu.fk_user_id
-			AND gu.group_user_initial_group = '1'
-			AND gu.fk_group_id = g.group_id
-			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-			;";
+			. $SqlTableListObj->getSQLTableName('group') . " g "
+			. "WHERE usr.user_id = " . $UserId . " "
+			. "AND usr.user_id = gu.fk_user_id "
+			. "AND gu.group_user_initial_group = 1 "
+			. "AND gu.fk_group_id = g.group_id "
+			. "AND gu.fk_group_id = sg.fk_group_id "
+			. "AND sg.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') 
+			. ";";
 		return $this->loadDataFromDB($sqlQuery);
 	}
 
@@ -101,20 +119,39 @@ class User extends Entity
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance();
 
-		$sqlQuery = "
-			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM "
+		$sqlQuery = "SELECT "
+			. "CONCAT('0x', HEX(usr.user_id)) AS user_id, "
+			. "usr.user_name, "
+			. "usr.user_login, "
+			. "usr.user_password, "
+			. "usr.user_mail, "
+			. "usr.user_subscription_date, "
+			. "usr.user_status, "
+			. "usr.user_role_function, "
+			. "usr.user_pref_theme, "
+			. "CONCAT('0x', HEX(usr.user_pref_theme)) AS user_pref_theme, "
+			. "CONCAT('0x', HEX(usr.user_lang)) AS user_lang, "
+			. "usr.user_avatar_image, "
+			. "usr.user_admin_comment, "
+			. "usr.user_last_visit, "
+			. "usr.user_last_ip, "
+			. "usr.user_timezone, "
+			. "CONCAT('0x', HEX(g.group_id)) as fk_group_id, "
+			. "g.group_name, "
+			. "gu.group_user_initial_group, "
+			. "g.group_tag "
+			. "FROM "
 			. $SqlTableListObj->getSQLTableName('user') . " usr, "
 			. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 			. $SqlTableListObj->getSQLTableName('group_website') . " sg, "
-			. $SqlTableListObj->getSQLTableName('group') . " g
-			WHERE usr.user_login = '" . $UserLogin . "'
-			AND usr.user_id = gu.fk_user_id
-			AND gu.group_user_initial_group = '1'
-			AND gu.fk_group_id = g.group_id
-			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-			;";
+			. $SqlTableListObj->getSQLTableName('group') . " g "
+			. "WHERE usr.user_login = '" . $UserLogin . "' "
+			. "AND usr.user_id = gu.fk_user_id "
+			. "AND gu.group_user_initial_group = 1 "
+			. "AND gu.fk_group_id = g.group_id "
+			. "AND gu.fk_group_id = sg.fk_group_id "
+			. "AND sg.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
+			. ";";
 		return $this->loadDataFromDB($sqlQuery);
 	}
 
@@ -132,20 +169,39 @@ class User extends Entity
 		$CurrentSetObj = CurrentSet::getInstance();
 		$SqlTableListObj = SqlTableList::getInstance();
 
-		$sqlQuery = "
-			SELECT usr.*, g.group_id as fk_group_id, g.group_name, gu.group_user_initial_group, g.group_tag
-			FROM "
+		$sqlQuery = "SELECT "
+			. "CONCAT('0x', HEX(usr.user_id)) AS user_id, "
+			. "usr.user_name, "
+			. "usr.user_login, "
+			. "usr.user_password, "
+			. "usr.user_mail, "
+			. "usr.user_subscription_date, "
+			. "usr.user_status, "
+			. "usr.user_role_function, "
+			. "usr.user_pref_theme, "
+			. "CONCAT('0x', HEX(usr.user_pref_theme)) AS user_pref_theme, "
+			. "CONCAT('0x', HEX(usr.user_lang)) AS user_lang, "
+			. "usr.user_avatar_image, "
+			. "usr.user_admin_comment, "
+			. "usr.user_last_visit, "
+			. "usr.user_last_ip, "
+			. "usr.user_timezone, "
+			. "CONCAT('0x', HEX(g.group_id)) as fk_group_id, "
+			. "g.group_name, "
+			. "gu.group_user_initial_group, "
+			. "g.group_tag "
+			. "FROM "
 			. $SqlTableListObj->getSQLTableName('user') . " usr, "
 			. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
 			. $SqlTableListObj->getSQLTableName('group_website') . " sg, "
-			. $SqlTableListObj->getSQLTableName('group') . " g
-			WHERE usr.user_mail = '" . $UserEmail . "'
-			AND usr.user_id = gu.fk_user_id
-			AND gu.group_user_initial_group = '1'
-			AND gu.fk_group_id = g.group_id
-			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
-			;";
+			. $SqlTableListObj->getSQLTableName('group') . " g "
+			. "WHERE usr.user_mail = '" . $UserEmail . "' "
+			. "AND usr.user_id = gu.fk_user_id "
+			. "AND gu.group_user_initial_group = 1 "
+			. "AND gu.fk_group_id = g.group_id "
+			. "AND gu.fk_group_id = sg.fk_group_id "
+			. "AND sg.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
+			. ";";
 		return $this->loadDataFromDB($sqlQuery);
 	}
 
@@ -159,11 +215,25 @@ class User extends Entity
 		if (!empty($this->User['user_id'])) {
 			$SqlTableListObj = SqlTableList::getInstance();
 
-			$sqlQuery = "SELECT i.*, u.* "
+			$sqlQuery = "SELECT "
+				. "CONCAT('0x', HEX(i.ui_id)) AS ui_id, "
+				. "CONCAT('0x', HEX(i.fk_user_id)) AS fk_user_id, "
+				. "CONCAT('0x', HEX(i.fk_upe_id)) AS fk_upe_id, "
+				. "i.ui_string, "
+				. "i.ui_number, "
+				. "CONCAT('0x', HEX(u.upe_id)) AS upe_id, "
+				. "u.upe_name, "
+				. "u.upe_translation, "
+				. "u.upe_order, "
+				. "u.upe_state, "
+				. "u.upe_class, "
+				. "u.upe_type, "
+				. "u.upe_length, "
+				. "CONCAT('0x', HEX(u.fk_ws_id)) AS fk_ws_id "
 				. "FROM "
 				. $SqlTableListObj->getSQLTableName('user_information') . " i, "
 				. $SqlTableListObj->getSQLTableName('user_profile_element') . " u "
-				. "WHERE i.fk_user_id = '" . $this->User['user_id'] . "' "
+				. "WHERE i.fk_user_id = " . $this->User['user_id'] . " "
 				. "AND u.upe_id = i.fk_upe_id "
 				. "AND u.upe_state = 1 "
 				. "ORDER BY u.upe_class, u.upe_name "
@@ -208,12 +278,20 @@ class User extends Entity
 			$CurrentSetObj = CurrentSet::getInstance();
 			$SqlTableListObj = SqlTableList::getInstance();
 
-			$sqlQuery = "SELECT * "
-				. "FROM "
-				. $SqlTableListObj->getSQLTableName('user_profile_element') . " "
+			$sqlQuery = "SELECT "
+				. "CONCAT('0x', HEX(u.upe_id)) AS upe_id, "
+				. "u.upe_name, "
+				. "u.upe_translation, "
+				. "u.upe_order, "
+				. "u.upe_state, "
+				. "u.upe_class, "
+				. "u.upe_type, "
+				. "u.upe_length, "
+				. "CONCAT('0x', HEX(u.fk_ws_id)) AS fk_ws_id "
+				. "FROM " . $SqlTableListObj->getSQLTableName('user_profile_element') . " u "
 				. "WHERE upe_class = " . $type . " "
 				. "AND upe_state = 1 "
-				. "AND fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "' "
+				. "AND fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
 				. "ORDER BY upe_order, upe_name "
 				. ";"
 			;
@@ -268,12 +346,13 @@ class User extends Entity
 			$groupList00 = $groupList01 = $groupList02 = array();
 
 			// find all children of the initial user "groupset". 
-			$sqlQuery = "
-				SELECT fk_group_id
-				FROM " . $SqlTableListObj->getSQLTableName('group_user') . "
-				WHERE fk_user_id = '" . $this->User['user_id'] . "'
-				ORDER BY fk_group_id
-				;";
+			$sqlQuery = "SELECT "
+				. "CONCAT('0x', HEX(gus.fk_group_id)) AS fk_group_id "
+				. "FROM " 
+				. $SqlTableListObj->getSQLTableName('group_user') . " gus "
+				. "WHERE gus.fk_user_id = " . $this->User['user_id'] . " "
+				. "ORDER BY gus.fk_group_id "
+				. ";";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 			$dbquery = $bts->SDDMObj->query($sqlQuery);
 			$groupList01 = array();
@@ -288,15 +367,20 @@ class User extends Entity
 				$strGrp = "";
 				unset($A);
 				foreach ($groupList01 as $A) {
-					$strGrp .= "'" . $A . "', ";
+					$strGrp .= $A . ", ";
 				}
 				$strGrp = "(" . substr($strGrp, 0, -2) . ") ";
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " groupList01= `" . $strGrp . "`."));
-				$sqlQuery = "SELECT group_id, group_parent, group_name, group_tag 
-					FROM " . $SqlTableListObj->getSQLTableName('group') . "
-					WHERE group_parent IN " . $strGrp . "
-					ORDER BY group_id
-					;";
+				$sqlQuery = "SELECT "
+					. "CONCAT('0x', HEX(group_id)) AS group_id, "
+					. "CONCAT('0x', HEX(group_parent)) AS group_parent, "
+					. "group_name, "
+					. "group_tag "
+					. "FROM " 
+					. $SqlTableListObj->getSQLTableName('group') . " "
+					. "WHERE group_parent IN " . $strGrp . " "
+					. "ORDER BY group_id "
+					. ";";
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 				if ($bts->SDDMObj->num_row_sql($dbquery) > 0) {
 					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -326,7 +410,7 @@ class User extends Entity
 			$strGrp = "";
 			// 			foreach ( $groupList00 as $A ) { $strGrp .= "'" . $A . "', "; }
 			foreach ($this->User['group'] as $A => $B) {
-				$strGrp .= "'" . $A . "', ";
+				$strGrp .= $A . ", ";
 			}
 			$this->User['clause_in_group'] = " IN ( " . substr($strGrp, 0, -2) . " ) ";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_DEBUG_LVL0, 'msg' => __METHOD__ . " : user = " . $bts->StringFormatObj->arrayToString($this->User)));
@@ -337,14 +421,24 @@ class User extends Entity
 		}
 
 		// Building the permission list
-		$q = "SELECT p.*, gp.fk_group_id, g.group_name 
-				FROM 
-				" . $SqlTableListObj->getSQLTableName('permission') . " p, 
-				" . $SqlTableListObj->getSQLTableName('group_permission') . " gp, 
-				" . $SqlTableListObj->getSQLTableName('group') . " g 
-				WHERE p.perm_id = gp.fk_perm_id 
-				AND gp.fk_group_id = g.group_id 
-				AND gp.fk_group_id " . $this->User['clause_in_group'] . ";";
+		$q = "SELECT "
+			. "CONCAT('0x', HEX(p.perm_id)) AS perm_id, "
+			. "p.perm_state, "
+			. "p.perm_name, "
+			. "p.perm_affinity, "
+			. "p.perm_object_type, "
+			. "p.perm_desc, "
+			. "p.perm_level, "
+			. "CONCAT('0x', HEX(gp.fk_group_id)) AS fk_group_id, "
+			. "g.group_name "
+			. "FROM "
+			. $SqlTableListObj->getSQLTableName('permission') . " p, "
+			. $SqlTableListObj->getSQLTableName('group_permission') . " gp, "
+			. $SqlTableListObj->getSQLTableName('group') . " g "
+			. "WHERE p.perm_id = gp.fk_perm_id "
+			. "AND gp.fk_group_id = g.group_id "
+			. "AND gp.fk_group_id " . $this->User['clause_in_group']
+			. ";";
 
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : permissionList q = " . $bts->StringFormatObj->formatToLog($q)));
 		$dbquery = $bts->SDDMObj->query($q);
@@ -365,16 +459,16 @@ class User extends Entity
 		$strPerm = "";
 		reset($this->User['permissionList']);
 		foreach ($this->User['permissionList'] as $A) {
-			$strPerm .= "'" . $A['perm_id'] . "', ";
+			$strPerm .= $A['perm_id'] . ", ";
 		}
 		$this->User['clause_in_perm'] = " IN ( " . substr($strPerm, 0, -2) . " ) ";
 
 		// Set a default language if none is specified.
-		if ($this->User['user_lang'] == 0) {
+		if (strlen($this->User['user_lang'] ?? "") == 0) {
 			$this->User['user_lang'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_lang_id');
 		}
 		// Set a default theme if none is specified.
-		if ($this->User['user_pref_theme'] == 0) {
+		if (strlen($this->User['user_pref_theme'] ?? "") == 0) {
 			$this->User['user_pref_theme'] = $CurrentSetObj->WebSiteObj->getWebSiteEntry('fk_theme_id');
 		}
 

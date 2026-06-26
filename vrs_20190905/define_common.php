@@ -53,6 +53,13 @@ define("_SDDM_DIRECTORY_", "current/engine/sddm/");
 define("_ENTITY_DIRECTORY_", "current/engine/entity/");
 
 // --------------------------------------------------------------------------------------------
+// Databases
+define("_ID_METHOD_", "uuidv7"); // maxLengthInt, uuidv7
+define("DTA_UID", 1); // 
+define("DTA_NBR", 2); // 
+define("DTA_STR", 3); // 
+
+// --------------------------------------------------------------------------------------------
 // Object SendToDb mode
 define("OBJECT_SENDTODB_MODE_DEFAULT", 0);
 define("OBJECT_SENDTODB_MODE_INSERTONLY", 1);
@@ -61,7 +68,7 @@ define("OBJECT_SENDTODB_MODE_UPDATEONLY", 2);
 // --------------------------------------------------------------------------------------------
 // Console
 define("_RETURN_DATA_ONLY_", 1);
-define("_RETURN__DATA_AND_ERROR_", 2);
+define("_RETURN_DATA_AND_ERROR_", 2);
 define("_FIND_DUPLICATE_", 3);
 define("_EXECUTE_FUNCTION_", 4);
 

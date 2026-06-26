@@ -25,115 +25,115 @@ class ThemeDescriptor extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		'theme_id'						=> 0,
-		'theme_name'					=> "New theme",
-		'theme_title'					=> 0,
-		'theme_desc'					=> 0,
-		'theme_date'					=> 0,
+		"theme_id"						=> "",
+		"theme_name"					=> "New theme",
+		"theme_title"					=> 0,
+		"theme_desc"					=> 0,
+		"theme_date"					=> 0,
 		);
 
 	private $themeDefinitionList = array(
-		'directory'				=> 0,
-		'stylesheet_1'			=> 0,
-		'stylesheet_2'			=> 0,
-		'stylesheet_3'			=> 0,
-		'stylesheet_4'			=> 0,
-		'stylesheet_5'			=> 0,
-		'width'					=> 0,
-		'height'				=> 0,
-		'max_width'				=> 0,
-		'max_height'			=> 0,
-		'min_width'				=> 0,
-		'min_height'			=> 0,
-		'bodyBg'				=> 0,
-		'bodyBg_color'			=> 0,
-		'bodyBg_position'		=> 0,
-		'bodyBg_repeat'			=> 0,
-		'bodyHeight'			=> 0,
-		'bodyWidth'				=> 0,
-		'logo'					=> 0,
-		'divinitial_bg'			=> 0,
-		'divinitial_repeat'		=> 0,
-		'divinitial_dx'			=> 0,
-		'divinitial_dy'			=> 0,
-		'block_01_name'			=> 0,
-		'block_01_text'			=> 0,
-		'block_02_name'			=> 0,
-		'block_02_text'			=> 0,
-		'block_03_name'			=> 0,
-		'block_03_text'			=> 0,
-		'block_04_name'			=> 0,
-		'block_04_text'			=> 0,
-		'block_05_name'			=> 0,
-		'block_05_text'			=> 0,
-		'block_06_name'			=> 0,
-		'block_06_text'			=> 0,
-		'block_07_name'			=> 0,
-		'block_07_text'			=> 0,
-		'block_08_name'			=> 0,
-		'block_08_text'			=> 0,
-		'block_09_name'			=> 0,
-		'block_09_text'			=> 0,
-		'block_10_name'			=> 0,
-		'block_10_text'			=> 0,
-		'block_11_name'			=> 0,
-		'block_11_text'			=> 0,
-		'block_12_name'			=> 0,
-		'block_12_text'			=> 0,
-		'block_13_name'			=> 0,
-		'block_13_text'			=> 0,
-		'block_14_name'			=> 0,
-		'block_14_text'			=> 0,
-		'block_15_name'			=> 0,
-		'block_15_text'			=> 0,
-		'block_16_name'			=> 0,
-		'block_16_text'			=> 0,
-		'block_17_name'			=> 0,
-		'block_17_text'			=> 0,
-		'block_18_name'			=> 0,
-		'block_18_text'			=> 0,
-		'block_19_name'			=> 0,
-		'block_19_text'			=> 0,
-		'block_20_name'			=> 0,
-		'block_20_text'			=> 0,
-		'block_21_name'			=> 0,
-		'block_21_text'			=> 0,
-		'block_22_name'			=> 0,
-		'block_22_text'			=> 0,
-		'block_23_name'			=> 0,
-		'block_23_text'			=> 0,
-		'block_24_name'			=> 0,
-		'block_24_text'			=> 0,
-		'block_25_name'			=> 0,
-		'block_25_text'			=> 0,
-		'block_26_name'			=> 0,
-		'block_26_text'			=> 0,
-		'block_27_name'			=> 0,
-		'block_27_text'			=> 0,
-		'block_28_name'			=> 0,
-		'block_28_text'			=> 0,
-		'block_29_name'			=> 0,
-		'block_29_text'			=> 0,
-		'block_30_name'			=> 0,
-		'block_30_text'			=> 0,
-		'block_00_menu'			=> 0,
-		'block_01_menu'			=> 0,
-		'block_02_menu'			=> 0,
-		'block_03_menu'			=> 0,
-		'block_04_menu'			=> 0,
-		'block_05_menu'			=> 0,
-		'block_06_menu'			=> 0,
-		'block_07_menu'			=> 0,
-		'block_08_menu'			=> 0,
-		'block_09_menu'			=> 0,
-		'admctrl_panel_bg'		=> 0,
-		'admctrl_switch_bg'		=> 0,
-		'admctrl_width'			=> 0,
-		'admctrl_height'		=> 0,
-		'admctrl_position'		=> 0,
-		'gradient_start_color'	=> 0,
-		'gradient_middle_color'	=> 0,
-		'gradient_end_color'	=> 0,
+		"directory"				=> 0,
+		"stylesheet_1"			=> 0,
+		"stylesheet_2"			=> 0,
+		"stylesheet_3"			=> 0,
+		"stylesheet_4"			=> 0,
+		"stylesheet_5"			=> 0,
+		"width"					=> 0,
+		"height"				=> 0,
+		"max_width"				=> 0,
+		"max_height"			=> 0,
+		"min_width"				=> 0,
+		"min_height"			=> 0,
+		"bodyBg"				=> 0,
+		"bodyBg_color"			=> 0,
+		"bodyBg_position"		=> 0,
+		"bodyBg_repeat"			=> 0,
+		"bodyHeight"			=> 0,
+		"bodyWidth"				=> 0,
+		"logo"					=> 0,
+		"divinitial_bg"			=> 0,
+		"divinitial_repeat"		=> 0,
+		"divinitial_dx"			=> 0,
+		"divinitial_dy"			=> 0,
+		"block_01_name"			=> 0,
+		"block_01_text"			=> 0,
+		"block_02_name"			=> 0,
+		"block_02_text"			=> 0,
+		"block_03_name"			=> 0,
+		"block_03_text"			=> 0,
+		"block_04_name"			=> 0,
+		"block_04_text"			=> 0,
+		"block_05_name"			=> 0,
+		"block_05_text"			=> 0,
+		"block_06_name"			=> 0,
+		"block_06_text"			=> 0,
+		"block_07_name"			=> 0,
+		"block_07_text"			=> 0,
+		"block_08_name"			=> 0,
+		"block_08_text"			=> 0,
+		"block_09_name"			=> 0,
+		"block_09_text"			=> 0,
+		"block_10_name"			=> 0,
+		"block_10_text"			=> 0,
+		"block_11_name"			=> 0,
+		"block_11_text"			=> 0,
+		"block_12_name"			=> 0,
+		"block_12_text"			=> 0,
+		"block_13_name"			=> 0,
+		"block_13_text"			=> 0,
+		"block_14_name"			=> 0,
+		"block_14_text"			=> 0,
+		"block_15_name"			=> 0,
+		"block_15_text"			=> 0,
+		"block_16_name"			=> 0,
+		"block_16_text"			=> 0,
+		"block_17_name"			=> 0,
+		"block_17_text"			=> 0,
+		"block_18_name"			=> 0,
+		"block_18_text"			=> 0,
+		"block_19_name"			=> 0,
+		"block_19_text"			=> 0,
+		"block_20_name"			=> 0,
+		"block_20_text"			=> 0,
+		"block_21_name"			=> 0,
+		"block_21_text"			=> 0,
+		"block_22_name"			=> 0,
+		"block_22_text"			=> 0,
+		"block_23_name"			=> 0,
+		"block_23_text"			=> 0,
+		"block_24_name"			=> 0,
+		"block_24_text"			=> 0,
+		"block_25_name"			=> 0,
+		"block_25_text"			=> 0,
+		"block_26_name"			=> 0,
+		"block_26_text"			=> 0,
+		"block_27_name"			=> 0,
+		"block_27_text"			=> 0,
+		"block_28_name"			=> 0,
+		"block_28_text"			=> 0,
+		"block_29_name"			=> 0,
+		"block_29_text"			=> 0,
+		"block_30_name"			=> 0,
+		"block_30_text"			=> 0,
+		"block_00_menu"			=> 0,
+		"block_01_menu"			=> 0,
+		"block_02_menu"			=> 0,
+		"block_03_menu"			=> 0,
+		"block_04_menu"			=> 0,
+		"block_05_menu"			=> 0,
+		"block_06_menu"			=> 0,
+		"block_07_menu"			=> 0,
+		"block_08_menu"			=> 0,
+		"block_09_menu"			=> 0,
+		"admctrl_panel_bg"		=> 0,
+		"admctrl_switch_bg"		=> 0,
+		"admctrl_width"			=> 0,
+		"admctrl_height"		=> 0,
+		"admctrl_position"		=> 0,
+		"gradient_start_color"	=> 0,
+		"gradient_middle_color"	=> 0,
+		"gradient_end_color"	=> 0,
 	);
 	//@formatter:on
 	
@@ -149,14 +149,19 @@ class ThemeDescriptor extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$q = "
-		SELECT * FROM " 
-		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
-		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
-		WHERE td.theme_id = '".$id."'
-		AND td.theme_id = tw.fk_theme_id
-		AND tw.theme_state = '1'
-		;";
+		$q = "SELECT "
+			. "CONCAT('0x', HEX(td.theme_id)) AS theme_id, "
+			. "td.theme_name, "
+			. "td.theme_title, "
+			. "td.theme_desc, "
+			. "td.theme_date "
+			. "FROM "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td , "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " tw "
+			. "WHERE td.theme_id = " . $id . " "
+			. "AND td.theme_id = tw.fk_theme_id "
+			. "AND tw.theme_state = 1 "
+			. ";";
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading header for theme ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
@@ -185,11 +190,17 @@ class ThemeDescriptor extends Entity{
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$q = "
-		SELECT * FROM " 
-		.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_definition')." td "
-		."WHERE td.fk_theme_id = '".$id . "' "
-		."ORDER BY td.def_name;";
+		$q = "SELECT "
+			. "CONCAT('0x', HEX(td.def_id)) AS def_id, "
+			. "CONCAT('0x', HEX(td.fk_theme_id)) AS fk_theme_id, "
+			. "td.def_type, "
+			. "td.def_name, "
+			. "td.def_number, "
+			. "td.def_string "
+			. "FROM "
+			. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_definition') . " td "
+			. "WHERE td.fk_theme_id = " . $id . " "
+			. "ORDER BY td.def_name;";
 
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Loading data for theme ".$id .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
 		$dbquery = $bts->SDDMObj->query ( $q );
@@ -226,28 +237,38 @@ class ThemeDescriptor extends Entity{
 				$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting website theme. id=".$Dest ));
 			}
 			// By default we use ID
-			$q = "
-			SELECT * FROM " 
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
-			WHERE td.theme_id = '".$Dest."'
-			AND td.theme_id = tw.fk_theme_id
-			AND tw.theme_state = '1'
-			;";
+			$q = "SELECT "
+				. "CONCAT('0x', HEX(td.theme_id)) AS theme_id, "
+				. "td.theme_name, "
+				. "td.theme_title, "
+				. "td.theme_desc, "
+				. "td.theme_date "
+				. "FROM "
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td , "
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " tw "
+				. "WHERE td.theme_id = " . $Dest . " "
+				. "AND td.theme_id = tw.fk_theme_id "
+				. "AND tw.theme_state = 1 "
+				. ";";
 		}
 		else { 
 			// Case for displaying another theme to the user (browsing and choosing).
 			// in this case we use names as this was eventually sent to a command line which only uses names. 
 			$Dest = $bts->RequestDataObj->getRequestDataSubEntry('formParams1', 'pref_theme');
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Selecting theme for profile. id=".$Dest ));
-			$q = "
-			SELECT * FROM " 
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." td , "
-			.$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." tw
-			WHERE td.theme_name = '".$Dest."'
-			AND td.theme_id = tw.fk_theme_id
-			AND tw.theme_state = '1'
-			;";
+			$q = "SELECT "
+				. "CONCAT('0x', HEX(td.theme_id)) AS theme_id, "
+				. "td.theme_name, "
+				. "td.theme_title, "
+				. "td.theme_desc, "
+				. "td.theme_date "
+				. "FROM "
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td , "
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " tw "
+				. "WHERE td.theme_name = " . $Dest . " "
+				. "AND td.theme_id = tw.fk_theme_id "
+				. "AND tw.theme_state = 1 "
+				. ";";
 		}
 		
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme descriptor ".$Dest .". \$q = `".$bts->StringFormatObj->formatToLog($q)."`"));
@@ -258,11 +279,16 @@ class ThemeDescriptor extends Entity{
 		//	"Yo dawg i heard you like admin Ungoofing so i put an admin ungoof in yo admin ungoof..."
 		// --------------------------------------------------------------------------------------------
 		if ( $bts->SDDMObj->num_row_sql($dbquery) == 0 ) {
-			$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')."
-			LIMIT 1
-			;");
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(td.theme_id)) AS theme_id, "
+				. "td.theme_name, "
+				. "td.theme_title, "
+				. "td.theme_desc, "
+				. "td.theme_date "
+				. "FROM "
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td  "
+				. "LIMIT 1"
+				. ";");
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : No rows returned for 1st theme descriptor.Fallback on generic theme."));
 		}
 

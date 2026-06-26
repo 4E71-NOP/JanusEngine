@@ -116,12 +116,12 @@ class AuthenticateUser
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : The user `" . $this->report['user_login'] . "` has successfuly authenticated"));
 				$bts->SMObj->StoreUserCredential();
 
-				$bts->SDDMObj->query("
-				UPDATE " . $CurrentSetObj->SqlTableListObj->getSQLTableName('user') . " SET
-				user_last_ip = '" . $_SERVER['REMOTE_ADDR'] . "',
-				user_last_visit = '" . $_SERVER['REQUEST_TIME'] . "'
-				WHERE user_id = '" . $UserObj->getUserEntry('user_id') . "'
-				;");
+				$bts->SDDMObj->query("UPDATE " 
+				. $CurrentSetObj->SqlTableListObj->getSQLTableName('user') . " SET "
+				. "user_last_ip = '" . $_SERVER['REMOTE_ADDR'] . "', "
+				. "user_last_visit = '" . $_SERVER['REQUEST_TIME'] . "' "
+				. "WHERE user_id = " . $UserObj->getUserEntry('user_id')
+				. ";");
 			}
 		}
 	}

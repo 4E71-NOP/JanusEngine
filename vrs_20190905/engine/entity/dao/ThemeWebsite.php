@@ -23,10 +23,10 @@ class ThemeWebsite extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"theme_website_id"	=> 0,
-		"ws_id"				=> 0,
-		"theme_id"			=> 0,
-		"theme_state"		=> 0,
+		"theme_website_id"		=> "",
+		"ws_id"					=> "",
+		"theme_id"				=> "",
+		"theme_state"			=> 0,
 	);
 	//@formatter:on
 	
@@ -46,13 +46,15 @@ class ThemeWebsite extends Entity {
 		$bts = BaseToolSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-		
-				
-		$dbquery = $bts->SDDMObj->query("
-			SELECT *
-			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')."
-			WHERE theme_website_id = '".$id."'
-		;");
+
+		$dbquery = $bts->SDDMObj->query("SELECT "
+			. "CONCAT('0x', HEX(theme_website_id)) AS theme_website_id, "
+			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+			. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
+			. "theme_state "
+			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " "
+			. "WHERE theme_website_id = " . $id
+			. ";");
 		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for theme_website id=".$id));

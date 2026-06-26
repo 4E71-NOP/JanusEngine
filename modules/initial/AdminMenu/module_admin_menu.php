@@ -33,14 +33,31 @@ class ModuleAdministration {
 			$bts->mapSegmentLocation(__METHOD__, "ModuleAdministration");
 			
 			$Content = "";
-			$dbquery = $bts->SDDMObj->query ("
-				SELECT * 
-				FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')." 
-				WHERE menu_type IN ('2', '3') 
-				AND fk_lang_id = '".$CurrentSetObj->getDataEntry ('language_id')."' 
-				AND menu_state = '1' 
-				ORDER BY menu_name
-				;");
+			$dbquery = $bts->SDDMObj->query("SELECT "
+				. "CONCAT('0x', HEX(menu_id)) AS menu_id, "
+				. "menu_name, "
+				. "menu_title, "
+				. "menu_desc, "
+				. "menu_type, "
+				. "menu_visibility, "
+				. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
+				. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
+				. "CONCAT('0x', HEX(fk_deadline_id)) AS fk_deadline_id, "
+				. "menu_state, "
+				. "CONCAT('0x', HEX(menu_parent)) AS menu_parent, "
+				. "menu_position, "
+				. "CONCAT('0x', HEX(fk_perm_id)) AS fk_perm_id, "
+				. "menu_last_update, "
+				. "menu_role, "
+				. "menu_initial_document, "
+				. "fk_arti_slug, "
+				. "fk_arti_ref "
+				. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " "
+				. "WHERE menu_type IN ('2', '3')  "
+				. "AND fk_lang_id = " . $CurrentSetObj->getDataEntry('language_id') . "  "
+				. "AND menu_state = 1  "
+				. "ORDER BY menu_name "
+				. ";");
 				// AND fk_group_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_group')." 
 				// AND fk_ws_id IN ('1', '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."')
 

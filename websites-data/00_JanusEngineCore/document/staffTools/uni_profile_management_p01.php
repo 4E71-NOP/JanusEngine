@@ -238,7 +238,15 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$T['Content'][$curTab][$l]['2']['cont'] = "<select name='formParams1[lang]'>\r";
 
 	$langList = array();
-	$q = "SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " l;";
+	$q = "SELECT "
+		. "CONCAT('0x', HEX(lang_id)) AS lang_id, "
+		. "lang_639_3, "
+		. "lang_original_name, "
+		. "lang_639_2, "
+		. "lang_639_1, "
+		. "lang_image "
+		. "FROM " 
+		. $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " l;";
 	$dbqueryL1 = $bts->SDDMObj->query($q);
 	while ($dbpL1 = $bts->SDDMObj->fetch_array_sql($dbqueryL1)) {
 		$langList[$dbpL1['lang_id']] = array(
@@ -254,7 +262,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 	$q = "SELECT lw.fk_lang_id FROM "
 		. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw , "
 		. $CurrentSetObj->SqlTableListObj->getSQLTableName('website') . " w 
-		WHERE w.ws_id ='" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
+		WHERE w.ws_id =" . $WebSiteObj->getWebSiteEntry('ws_id') . " 
 		AND lw.fk_ws_id = w.ws_id
 		;";
 	$dbqueryL2 = $bts->SDDMObj->query($q);
@@ -379,7 +387,7 @@ if ($UserObj->getUserEntry('user_login') == "anonymous") {
 		. $SqlTableListObj->getSQLTableName('theme_descriptor') . " td, "
 		. $SqlTableListObj->getSQLTableName('theme_website') . " tw "
 		. "WHERE td.theme_id = tw.fk_theme_id  "
-		. "AND tw.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' "
+		. "AND tw.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
 		. "ORDER BY td.theme_name "
 		. ";";
 	$dbqueryTL = $bts->SDDMObj->query($q);
