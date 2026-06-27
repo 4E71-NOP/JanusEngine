@@ -61,7 +61,7 @@ define("OBJECT_SENDTODB_MODE_UPDATEONLY", 2);
 // --------------------------------------------------------------------------------------------
 // Console
 define("_RETURN_DATA_ONLY_", 1);
-define("_RETURN__DATA_AND_ERROR_", 2);
+define("_RETURN_DATA_AND_ERROR_", 2);
 define("_FIND_DUPLICATE_", 3);
 define("_EXECUTE_FUNCTION_", 4);
 

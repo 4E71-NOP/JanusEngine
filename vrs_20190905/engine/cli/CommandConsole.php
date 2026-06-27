@@ -287,7 +287,7 @@ class CommandConsole
 	 * Do tests based on a specific list chosen with the type of command and entity (article, group, etc.).
 	 * 
 	 * Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in a variable. No error message.
-	 * Directive = 2 : _RETURN__DATA_AND_ERROR_		/ Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
+	 * Directive = 2 : _RETURN_DATA_AND_ERROR_		/ Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
 	 * Directive = 3 : _FIND_DUPLICATE_				/ Test if a duplicate exists. If 1 line is returned it raises an error.
 	 * Directive = 4 : _EXECUTE_FUNCTION_			/ Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
 	 * 
@@ -331,7 +331,7 @@ class CommandConsole
 							}
 							break;
 							// Directive = 2 : Return the data in a variable. If an error occurs, a message is stored and a flag is set.
-						case _RETURN__DATA_AND_ERROR_:
+						case _RETURN_DATA_AND_ERROR_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
 								$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : " . $q['0']));

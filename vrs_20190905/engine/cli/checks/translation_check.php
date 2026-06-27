@@ -20,7 +20,7 @@
 
 // d=Directive
 //		Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in (v)ariable. No error message.
-//		Directive = 2 : _RETURN__DATA_AND_ERROR_	/ Return the data in (v)ariable. If an error occurs, a message is stored and a flag is set.
+//		Directive = 2 : _RETURN_DATA_AND_ERROR_	/ Return the data in (v)ariable. If an error occurs, a message is stored and a flag is set.
 //		Directive = 3 : _FIND_DUPLICATE_			/ Test if a duplicate exists. If 1 line is returned it raises an error/flag.
 // f=Function
 // c=Column
@@ -34,7 +34,7 @@
 //
 
 // Translation
-self::$CheckTable['add']['translation']['0']['d']	= _RETURN__DATA_AND_ERROR_;
+self::$CheckTable['add']['translation']['0']['d']	= _RETURN_DATA_AND_ERROR_;
 self::$CheckTable['add']['translation']['0']['f']	= function ($a) {return array("SELECT lang_id FROM " . $a['sqlTables']['language'] . " WHERE lang_639_3 = '" . $a['params']['lang'] . "'");};
 self::$CheckTable['add']['translation']['0']['c']	= "lang_id";
 self::$CheckTable['add']['translation']['0']['v']	= "lang_id";
