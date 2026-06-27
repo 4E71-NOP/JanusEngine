@@ -120,7 +120,7 @@ class InstallPage02
 			case "pgsql":
 				$SqlSequence = array(
 					"COMMIT;",
-					"SET SCHEMA '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "';"
+					"SET SCHEMA '" . strtolower($bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')) . "';"
 				);
 				break;
 		}
@@ -141,6 +141,11 @@ class InstallPage02
 			"lastReportExecution" => $t,
 			"lastReportExecutionSaved" => $t,
 		));
+
+		// Due to the unfathamable need of some people to reinvent the soup over and over...
+		// we must prepare a set of things to make the SQL queries work everywhere. 
+		$this->processFileInitSQL();
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : processFileRawSQL() completed (init)"));
 
 		$this->processFileCreateTable();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : processFileCreateTable() completed"));
@@ -436,6 +441,7 @@ class InstallPage02
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
 		$LibInstallationObj = LibInstallation::getInstance();
 		$infos = array(
+			"dbState" =>  "unavailable",
 			"path" => "websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_creation",
@@ -469,6 +475,7 @@ class InstallPage02
 
 		// --------------------------------------------------------------------------------------------
 		$infos = array(
+			"dbState" =>  "available",
 			"path" => "websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_data",
@@ -525,6 +532,7 @@ class InstallPage02
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : commandConsole"));
 		$infos = array(
+			"dbState" =>  "available",
 			"path" => "websites-data/",
 			"method" =>  "commandConsole",
 			"section" => "script",
@@ -556,6 +564,7 @@ class InstallPage02
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => "install_page_p02 : tables_post_install"));
 		$infos = array(
+			"dbState" =>  "available",
 			"path" => "websites-data/",
 			"method" =>  "filename",
 			"section" => "tables_post_install",
@@ -586,6 +595,7 @@ class InstallPage02
 		// --------------------------------------------------------------------------------------------
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
 		$infos = array(
+			"dbState" =>  "available",
 			"path" => "websites-data/",
 			"method" =>  "raw_sql",
 			"section" => "raw_sql",
@@ -604,4 +614,38 @@ class InstallPage02
 		}
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
 	}
+
+	/**
+	 * processFileRawSQL
+	 */
+	private function processFileInitSQL()
+	{
+		$bts = BaseToolSet::getInstance();
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Start"));
+		$LibInstallationObj = LibInstallation::getInstance();
+		// --------------------------------------------------------------------------------------------
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => "install_page_p02 : raw_sql"));
+		$infos = array(
+			"dbState" =>  "unavailable",
+			"path" => "websites-data/",
+			"method" =>  "raw_sql",
+			"section" => "init_sql",
+			"sectionPath" => "init_sql/" . $bts->CMObj->getConfigurationSubEntry('db', 'type'),
+			"directory_list" => $bts->RequestDataObj->getRequestDataEntry('directory_list'),
+			"updateInstallationMonitor" => 0
+		);
+		$LibInstallationObj->scanDirectories($infos);
+		foreach ($infos['directory_list'] as $A) {
+			if ($A['state'] == 'on') {
+
+				if (isset($A['filesFound'])) {
+					$LibInstallationObj->executeContent($infos, $A);
+				}
+			}
+		}
+		$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : End"));
+	}
+
+
+
 }

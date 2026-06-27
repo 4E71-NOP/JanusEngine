@@ -1,15 +1,14 @@
 /* ---------------------------------------- */
-/* Foreign keys: extension_id							*/
+/* Foreign keys: ext_id						*/
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-file_id				BIGINT NOT NULL UNIQUE, 
-fk_extension_id		BIGINT,
-extension_name		VARCHAR(255), 
-file_name			VARCHAR(255), 
-file_generic_name	VARCHAR(255), 
-file_type			INTEGER, 
+extfil_id			BYTEA NOT NULL UNIQUE, 
+fk_ext_id			BYTEA,
+extfil_generic_name	VARCHAR(255), 
+extfil_file			VARCHAR(255), 
 
-PRIMARY KEY (file_id)
+PRIMARY KEY (extfil_id)
+
 
 );
