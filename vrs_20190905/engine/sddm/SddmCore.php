@@ -28,12 +28,27 @@ class SddmCore
 
 	/**
 	 * Create an UID with random function
+	 * 
+	 * This is not UUIDv7. It's stong enough to prevent any collision though.
+	 * 
+	 * This system has been elected as the different DB systems (one or all) do NOT 
+	 *  - support the UUIDv7 natively
+	 *  - support dedicated data type (so we don't have to play with BINARY(16))
+	 *  - provide similar syntax environement, needs and solutions to handle this (it's painful at best).
+	 * 
+	 * The solution: One big number based on the microsecond timestamp on which a random number is added.
+	 * Simple, random enough to avoid any collision, standart and it's numerical. Db systems like numerical better than text.
+	 * 
 	 * @return string
 	 */
 	public function createUniqueId()
 	{
-		return random_int(1, 9223372036854775807);
+		// 17825934884004        = Timestamp microsecond
+		// 92233720368547 75807
+		return (microtime(true) * 1000000000) + random_int(1, 99999);
+		// return random_int(1, 9223372036854775807);
 	}
+
 
 	protected function logToSqlDetails($q, $SQLlogEntry, $timeBegin)
 	{

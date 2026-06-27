@@ -120,7 +120,7 @@ class InstallPage02
 			case "pgsql":
 				$SqlSequence = array(
 					"COMMIT;",
-					"SET SCHEMA '" . $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix') . "';"
+					"SET SCHEMA '" . strtolower($bts->CMObj->getConfigurationSubEntry('db', 'dbprefix')) . "';"
 				);
 				break;
 		}
