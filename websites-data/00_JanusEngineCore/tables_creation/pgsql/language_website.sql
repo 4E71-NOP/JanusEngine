@@ -6,12 +6,10 @@ group_state 	OFFLINE 0	ONLINE 1	SUPPRIME 2
 */
 
 CREATE TABLE !table! ( 
-lang_website_id		BYTEA NOT NULL UNIQUE, 
-fk_ws_id			BYTEA,
-fk_lang_id			BYTEA,
+lang_website_id	BIGINT NOT NULL UNIQUE, 
+fk_ws_id			BIGINT,
+fk_lang_id			BIGINT,
 
 PRIMARY KEY (lang_website_id)
-
-
 
 );

@@ -52,18 +52,15 @@ class ModuleQuickSkin
 			";
 
 			if ($CurrentSetObj->UserObj->hasPermission("connected_group_read_permission") == true) {
-				$sqlQuery = "SELECT "
-					. "CONCAT('0x', HEX(td.theme_id)) AS theme_id, "
-					. "td.theme_name, "
-					. "td.theme_title, "
-					. "FROM "
+				$sqlQuery = "
+				SELECT td.theme_id, td.theme_name, td.theme_title FROM "
 					. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor') . " td , "
-					. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " tw "
-					. "WHERE tw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-					. "AND td.theme_id = tw.fk_theme_id "
-					. "AND tw.theme_state = 1 "
-					. "ORDER BY td.theme_name "
-					. ";";
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website') . " tw
+				WHERE tw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "
+				AND td.theme_id = tw.fk_theme_id
+				AND tw.theme_state = '1'
+				ORDER BY td.theme_name 
+				;";
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query=`" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 

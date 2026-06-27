@@ -10,16 +10,16 @@ juste un renseignement sur le site a qui appartien tout les droits de ce documen
 */
 
 CREATE TABLE !table! (
-docu_id 					BYTEA NOT NULL UNIQUE, 
+docu_id 					BIGINT NOT NULL UNIQUE, 
 docu_name					VARCHAR(255),
 docu_type					INTEGER,
-docu_origin		    		BYTEA,
+docu_origin		    		BIGINT,
 
-docu_creator				BYTEA,
+docu_creator				BIGINT,
 docu_creation_date			INTEGER,
 
 docu_validation		    	INTEGER,
-docu_validator				BYTEA,
+docu_validator				BIGINT,
 docu_validation_date		INTEGER,
 docu_cont 					TEXT,
 
