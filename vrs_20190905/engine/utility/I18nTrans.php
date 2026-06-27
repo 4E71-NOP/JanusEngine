@@ -51,16 +51,12 @@ class I18nTrans
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : CurrentSet Language_id=" . $CurrentSetObj->getDataEntry('language_id')));
 
-		$dbquery = $bts->SDDMObj->query(
-			"SELECT "
-				. "i18n_name, "
-				. "i18n_text "
-				. "FROM "
-				. $CurrentSetObj->SqlTableListObj->getSQLTableName('i18n') . " "
-				. "WHERE i18n_package = '" . $package . "' "
-				. "AND fk_lang_id = " . $CurrentSetObj->getDataEntry('language_id') . " "
-				. ";"
-		);
+		$dbquery = $bts->SDDMObj->query("
+			SELECT i18n_name, i18n_text 
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('i18n') . "
+			WHERE i18n_package = '" . $package . "'
+			AND fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "' 
+			");
 		$tab0 = $this->I18nTrans;
 		$tab1 = array();
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

@@ -34,14 +34,11 @@ class StoredEvent {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query ("SELECT "
-			. "CONCAT('0x', HEX(stored_event_id)) AS stored_event_id, "
-			. "stored_event_date, "
-			. "stored_event_object, "
-			. "stored_event_type "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('stored_event') . " "
-			. "WHERE stored_event_id = " . $id
-			. ";" );
+		$dbquery = $bts->SDDMObj->query ( "
+				SELECT *
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('stored_event') . "
+				WHERE stored_event_id = '" . $id . "'
+				;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for stored_event id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

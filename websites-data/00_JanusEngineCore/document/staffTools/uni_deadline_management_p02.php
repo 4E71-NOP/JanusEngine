@@ -91,7 +91,7 @@ switch ($bts->RequestDataObj->getRequestDataSubEntry('formGenericData', 'mode'))
 			FROM "
 			.$SqlTableListObj->getSQLTableName('article')." as art, "
 			.$SqlTableListObj->getSQLTableName('menu')." as mnu			
-			WHERE art.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')."
+			WHERE art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 			AND art.fk_deadline_id = '".$currentDeadlineObj->getDeadLineEntry('deadline_id')."'
 			AND art.fk_ws_id = mnu.fk_ws_id
 			AND art.arti_ref = mnu.fk_arti_ref

@@ -77,7 +77,7 @@ $pageSelectorData['clauseElements'] = array();
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(grp.group_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
-$pageSelectorData['clauseElements'][] = array("left" => "wg.fk_ws_id",		"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "wg.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "grp.group_id",		"operator" => "=",	"right" => "wg.fk_group_id");
 $pageSelectorData['clauseElements'][] = array("left" => "grp.group_name",	"operator" => "!=",	"right" => "'Server_owner'");
 

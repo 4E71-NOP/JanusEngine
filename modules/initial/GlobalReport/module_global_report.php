@@ -247,25 +247,19 @@ class ModuleGlobalReport
 		$package = array("content" => $Content, "config" => $config);
 
 		// --------------------------------------------------------------------------------------------
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(def_id)) AS def_id, "
-			. "def_name, "
-			. "def_number, "
-			. "def_text "
-			. "FROM "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('definition') . " "
-			. "WHERE def_name = 'sl' "
-			. ";");
+		$dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('definition') . "
+			WHERE def_name = 'sl'
+			;");
 		if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
-			$bts->SDDMObj->query("INSERT "
-				. "INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('definition')
-				. "(def_id, def_name, def_number, def_text)"
-				. " VALUES ("
-				. $bts->SDDMObj->createUniqueId() . ", "
-				. "'sl', "
-				. "'0', "
-				. "'JnsEng-1234-4321-8765-5678-9999' "
-				. ");");
+			$bts->SDDMObj->query("
+			INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('definition') . " VALUES (
+			'1',
+			'sl',
+			'0',
+			'JnsEng-1234-4321-8765-5678-9999'
+			);");
 
 			$dbp = array(
 				"def_number"	=>	1779545573,
@@ -567,7 +561,7 @@ class ModuleGlobalReport
 		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
 			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('log') . "
-			WHERE fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "
+			WHERE fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 			ORDER BY log_id DESC
 			LIMIT 15
 			;");

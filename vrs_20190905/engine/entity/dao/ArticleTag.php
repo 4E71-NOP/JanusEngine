@@ -23,9 +23,9 @@ class ArticleTag extends Entity {
 
 		//@formatter:off
 		private $columns = array(
-			"article_tag_id"		=> "",
-			"arti_id"				=> "",
-			"tag_id"				=> "",
+			'article_tag_id'	=> 0,
+			'arti_id'			=> 0,
+			'tag_id'			=> 0,
 		);
 		//@formatter:on
 
@@ -39,13 +39,11 @@ class ArticleTag extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query ( "SELECT "
-			. "CONCAT('0x', HEX(article_tag_id)) AS article_tag_id, "
-			. "CONCAT('0x', HEX(fk_arti_id)) AS fk_arti_id, "
-			. "CONCAT('0x', HEX(fk_tag_id)) AS fk_tag_id "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('article_tag') . " "
-			. "WHERE article_tag_id = " . $id
-			. ";" );
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('article_tag') . "
+			WHERE article_tag_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article_tag id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

@@ -49,17 +49,11 @@ class Permission extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(perm_id)) AS perm_id, "
-			. "perm_state, "
-			. "perm_name, "
-			. "perm_affinity, "
-			. "perm_object_type, "
-			. "perm_desc, "
-			. "perm_level "
-			. "FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('permission')." "
-			. "WHERE perm_id = ".$id." "
-			. ";");
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('permission')."
+			WHERE perm_id = '".$id."'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for permission perm_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

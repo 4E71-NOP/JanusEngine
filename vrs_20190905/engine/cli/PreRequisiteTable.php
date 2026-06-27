@@ -44,32 +44,32 @@ self::$PreRequisiteTable['add']['article'] = array(
 		array("v" => "validation_state",		"s" => "article")
 	),
 	"nextId" => array(
-		array("table" => "article",			"column" => "arti_id",			"target" => "id"),
+		array("table" => "article",		"column" => "arti_id",			"target" => "id"),
 		array("table" => "group_website",	"column" => "group_website_id",	"target" => "group_website_id")
 	),
 	"timeCreate" => array(
 		"creation_date",
 	),
 	"columns" => array(
-		array("v" => "id",					"t" => "arti_id",					"d" => DTA_UID),
-		array("v" => "ref",					"t" => "arti_ref",					"d" => DTA_STR),
-		array("v" => "slug",				"t" => "arti_slug",					"d" => DTA_STR),
-		array("v" => "deadline_id",			"t" => "fk_deadline_id",			"d" => DTA_UID),
-		array("v" => "name",				"t" => "arti_name",					"d" => DTA_STR),
-		array("v" => "desc",				"t" => "arti_desc",					"d" => DTA_STR),
-		array("v" => "title",				"t" => "arti_title",				"d" => DTA_STR),
-		array("v" => "subtitle",			"t" => "arti_subtitle",				"d" => DTA_STR),
-		array("v" => "page",				"t" => "arti_page",					"d" => DTA_NBR),
-		array("v" => "layout_generic_name",	"t" => "layout_generic_name",		"d" => DTA_STR),
-		array("v" => "config_id",			"t" => "fk_config_id",				"d" => DTA_UID),
-		array("v" => "user_id_creator",		"t" => "arti_creator_id",			"d" => DTA_UID),
-		array("v" => "creation_date",		"t" => "arti_creation_date",		"d" => DTA_NBR),
-		array("v" => "user_id_validator",	"t" => "arti_validator_id",			"d" => DTA_UID),
-		array("v" => "validation_date",		"t" => "arti_validation_date",		"d" => DTA_NBR),
-		array("v" => "validation_state",	"t" => "arti_validation_state",		"d" => DTA_NBR),
-		array("v" => "parution_date",		"t" => "arti_release_date",			"d" => DTA_NBR),
-		array("v" => "docu_id",				"t" => "fk_docu_id",				"d" => DTA_UID),
-		array("v" => "ws_id",				"t" => "fk_ws_id",					"d" => DTA_UID),
+		array("v" => "id",					"t" => "arti_id"),
+		array("v" => "ref",					"t" => "arti_ref"),
+		array("v" => "slug",				"t" => "arti_slug"),
+		array("v" => "deadline_id",			"t" => "fk_deadline_id"),
+		array("v" => "name",				"t" => "arti_name"),
+		array("v" => "desc",				"t" => "arti_desc"),
+		array("v" => "title",				"t" => "arti_title"),
+		array("v" => "subtitle",			"t" => "arti_subtitle"),
+		array("v" => "page",				"t" => "arti_page"),
+		array("v" => "layout_generic_name",	"t" => "layout_generic_name"),
+		array("v" => "config_id",			"t" => "fk_config_id"),
+		array("v" => "user_id_creator",		"t" => "arti_creator_id"),
+		array("v" => "creation_date",		"t" => "arti_creation_date"),
+		array("v" => "user_id_validator",	"t" => "arti_validator_id"),
+		array("v" => "validation_date",		"t" => "arti_validation_date"),
+		array("v" => "validation_state",	"t" => "arti_validation_state"),
+		array("v" => "parution_date",		"t" => "arti_release_date"),
+		array("v" => "docu_id",				"t" => "fk_docu_id"),
+		array("v" => "ws_id",				"t" => "fk_ws_id"),
 	),
 );
 
@@ -84,13 +84,13 @@ self::$PreRequisiteTable['add']['deadline'] = array(
 		"end_date"
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "deadline_id",				"d" => DTA_UID),
-		array("v" => "name",			"t" => "deadline_name",				"d" => DTA_STR),
-		array("v" => "title",			"t" => "deadline_title",			"d" => DTA_STR),
-		array("v" => "state",			"t" => "deadline_state",			"d" => DTA_NBR),
-		array("v" => "date_creation",	"t" => "deadline_creation_date",	"d" => DTA_NBR),
-		array("v" => "end_date",		"t" => "deadline_end_date",			"d" => DTA_NBR),
-		array("v" => "ws_id",			"t" => "fk_ws_id",					"d" => DTA_UID),
+		array("v" => "id",				"t" => "deadline_id"),
+		array("v" => "name",			"t" => "deadline_name"),
+		array("v" => "title",			"t" => "deadline_title"),
+		array("v" => "state",			"t" => "deadline_state"),
+		array("v" => "date_creation",	"t" => "deadline_creation_date"),
+		array("v" => "end_date",		"t" => "deadline_end_date"),
+		array("v" => "ws_id",			"t" => "fk_ws_id"),
 	),
 );
 
@@ -129,10 +129,10 @@ self::$PreRequisiteTable['add']['decoration'] = array(
 		array("table" => "deco_60_elysion",		"column" => "deco_line_number",		"target" => "60_id"),
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "deco_id",			"d" => DTA_UID),
-		array("v" => "name",			"t" => "deco_name",			"d" => DTA_STR),
-		array("v" => "state",			"t" => "deco_state",		"d" => DTA_NBR),
-		array("v" => "type",			"t" => "deco_type",			"d" => DTA_NBR),
+		array("v" => "id",				"t" => "deco_id"),
+		array("v" => "name",			"t" => "deco_name"),
+		array("v" => "state",			"t" => "deco_state"),
+		array("v" => "type",			"t" => "deco_type"),
 		// array ( "v" => "id",			"t" => "fk_deco_id"),
 	),
 );
@@ -143,10 +143,10 @@ self::$PreRequisiteTable['add']['definition'] = array(
 		array("table" => "definition",				"column" => "def_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "def_id",		"d" => DTA_UID),
-		array("v" => "name",			"t" => "def_name",		"d" => DTA_STR),
-		array("v" => "number",			"t" => "def_number",	"d" => DTA_NBR),
-		array("v" => "text",			"t" => "def_text",		"d" => DTA_STR),
+		array("v" => "id",				"t" => "def_id"),
+		array("v" => "name",			"t" => "def_name"),
+		array("v" => "number",			"t" => "def_number"),
+		array("v" => "text",			"t" => "def_text"),
 	),
 );
 
@@ -164,17 +164,17 @@ self::$PreRequisiteTable['add']['article_config'] = array(
 		array("table" => "article_config",		"column" => "config_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",						"t" => "config_id",						"d" => DTA_UID),
-		array("v" => "name",					"t" => "config_name",					"d" => DTA_STR),
-		array("v" => "menu_type",				"t" => "config_menu_type",				"d" => DTA_NBR),
-		array("v" => "menu_style",				"t" => "config_menu_style",				"d" => DTA_NBR),
-		array("v" => "menu_float_position",		"t" => "config_menu_float_position",	"d" => DTA_NBR),
-		array("v" => "menu_float_size_x",		"t" => "config_menu_float_size_x",		"d" => DTA_NBR),
-		array("v" => "menu_float_size_y",		"t" => "config_menu_float_size_y",		"d" => DTA_NBR),
-		array("v" => "menu_occurence",			"t" => "config_menu_occurence",			"d" => DTA_NBR),
-		array("v" => "show_info_parution",		"t" => "config_show_release_info",		"d" => DTA_NBR),
-		array("v" => "show_info_modification",	"t" => "config_show_info_update",		"d" => DTA_NBR),
-		array("v" => "ws_id",					"t" => "fk_ws_id",						"d" => DTA_UID),
+		array("v" => "id",						"t" => "config_id"),
+		array("v" => "name",					"t" => "config_name"),
+		array("v" => "menu_type",				"t" => "config_menu_type"),
+		array("v" => "menu_style",				"t" => "config_menu_style"),
+		array("v" => "menu_float_position",		"t" => "config_menu_float_position"),
+		array("v" => "menu_float_size_x",		"t" => "config_menu_float_size_x"),
+		array("v" => "menu_float_size_y",		"t" => "config_menu_float_size_y"),
+		array("v" => "menu_occurence",			"t" => "config_menu_occurence"),
+		array("v" => "show_info_parution",		"t" => "config_show_release_info"),
+		array("v" => "show_info_modification",	"t" => "config_show_info_update"),
+		array("v" => "ws_id",					"t" => "fk_ws_id"),
 	),
 );
 
@@ -199,16 +199,16 @@ self::$PreRequisiteTable['add']['document'] = array(
 		"creation_date",
 	),
 	"columns" => array(
-		array("v" => "id",					"t" => "docu_id",				"d" => DTA_UID),
-		array("v" => "name",				"t" => "docu_name",				"d" => DTA_STR),
-		array("v" => "type",				"t" => "docu_type",				"d" => DTA_NBR),
-		array("v" => "origin",				"t" => "docu_origin",			"d" => DTA_UID),
-		array("v" => "creator_user_id",		"t" => "docu_creator",			"d" => DTA_UID),
-		array("v" => "creation_date",		"t" => "docu_creation_date",	"d" => DTA_NBR),
-		array("v" => "validation",			"t" => "docu_validation",		"d" => DTA_NBR),
-		array("v" => "validator_user_id",	"t" => "docu_validator",		"d" => DTA_UID),
-		array("v" => "validation_date",		"t" => "docu_validation_date",	"d" => DTA_NBR),
-		array("v" => "content",				"t" => "docu_cont",				"d" => DTA_STR),
+		array("v" => "id",					"t" => "docu_id"),
+		array("v" => "name",				"t" => "docu_name"),
+		array("v" => "type",				"t" => "docu_type"),
+		array("v" => "origin",				"t" => "docu_origin"),
+		array("v" => "creator_user_id",		"t" => "docu_creator"),
+		array("v" => "creation_date",		"t" => "docu_creation_date"),
+		array("v" => "validation",			"t" => "docu_validation"),
+		array("v" => "validator_user_id",	"t" => "docu_validator"),
+		array("v" => "validation_date",		"t" => "docu_validation_date"),
+		array("v" => "content",				"t" => "docu_cont"),
 	),
 );
 
@@ -218,13 +218,13 @@ self::$PreRequisiteTable['add']['extension'] = array(
 		array("table" => "extension",				"column" => "ext_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t" => "ext_id",			"d" => DTA_UID),
-		array("v" => "site",		"t" => "fk_ws_id",			"d" => DTA_UID),
-		array("v" => "name",		"t" => "ext_name",			"d" => DTA_STR),
-		array("v" => "version",		"t" => "ext_version",		"d" => DTA_STR),
-		array("v" => "author",		"t" => "ext_author",		"d" => DTA_STR),
-		array("v" => "class",		"t" => "ext_class",			"d" => DTA_STR),
-		array("v" => "directory",	"t" => "ext_directory",		"d" => DTA_STR),
+		array("v" => "id",			"t" => "ext_id"),
+		array("v" => "site",		"t" => "fk_ws_id"),
+		array("v" => "name",		"t" => "ext_name"),
+		array("v" => "version",		"t" => "ext_version"),
+		array("v" => "author",		"t" => "ext_author"),
+		array("v" => "class",		"t" => "ext_class"),
+		array("v" => "directory",	"t" => "ext_directory"),
 	),
 );
 
@@ -234,10 +234,10 @@ self::$PreRequisiteTable['add']['extension_file'] = array(
 		array("table" => "extension_file",				"column" => "ext_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "extfil_id",				"d" => DTA_UID),
-		array("v" => "fk_ext_id",		"t" => "fk_ext_id",				"d" => DTA_UID),
-		array("v" => "generic_name",	"t" => "extfil_generic_name",	"d" => DTA_STR),
-		array("v" => "file",			"t" => "extfil_file",			"d" => DTA_STR),
+		array("v" => "id",				"t" => "extfil_id"),
+		array("v" => "fk_ext_id",		"t" => "fk_ext_id"),
+		array("v" => "generic_name",	"t" => "extfil_generic_name"),
+		array("v" => "file",			"t" => "extfil_file"),
 	),
 );
 
@@ -247,20 +247,20 @@ self::$PreRequisiteTable['add']['group'] = array(
 		array("v" => "tag",			"s" => "group"),
 	),
 	"nextId" => array(
-		array("table" => "group",			"column" => "group_id",			"target" => "id"),
-		array("table" => "group_website",	"column" => "group_website_id",	"target" => "group_website_id"),
+		array("table" => "group",			"column" => "group_id",		"target" => "id"),
+		array("table" => "group_website",	"column" => "group_website_id",	"target" => "group_webws_id"),
 	),
 	"timeCreate" => array(
 		"creation_date",
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "group_id",			"d" => DTA_UID),
-		array("v" => "name",			"t" => "group_name",		"d" => DTA_STR),
-		array("v" => "group_parent",	"t" => "group_parent",		"d" => DTA_UID),
-		array("v" => "tag",				"t" => "group_tag",			"d" => DTA_NBR),
-		array("v" => "title",			"t" => "group_title",		"d" => DTA_STR),
-		array("v" => "file",			"t" => "group_file",		"d" => DTA_STR),
-		array("v" => "desc",			"t" => "group_desc",		"d" => DTA_STR),
+		array("v" => "id",				"t" => "group_id"),
+		array("v" => "name",			"t" => "group_name"),
+		array("v" => "group_parent",	"t" => "group_parent"),
+		array("v" => "tag",				"t" => "group_tag"),
+		array("v" => "title",			"t" => "group_title"),
+		array("v" => "file",			"t" => "group_file"),
+		array("v" => "desc",			"t" => "group_desc"),
 	),
 );
 
@@ -273,15 +273,15 @@ self::$PreRequisiteTable['add']['keyword'] = array(
 		array("table" => "keyword",			"column" => "keyword_id",		"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "keyword_id",			"d" => DTA_UID),
-		array("v" => "name",			"t" => "keyword_name",			"d" => DTA_STR),
-		array("v" => "state",			"t" => "keyword_state",			"d" => DTA_NBR),
-		array("v" => "arti_id",			"t" => "fk_arti_id",			"d" => DTA_UID),
-		array("v" => "site",			"t" => "fk_ws_id",				"d" => DTA_UID),
-		array("v" => "string",			"t" => "keyword_string",		"d" => DTA_STR),
-		array("v" => "count",			"t" => "keyword_count",			"d" => DTA_NBR),
-		array("v" => "type",			"t" => "keyword_type",			"d" => DTA_NBR),
-		array("v" => "data", 			"t" => "keyword_data",			"d" => DTA_STR),
+		array("v" => "id",				"t" => "keyword_id"),
+		array("v" => "name",			"t" => "keyword_name"),
+		array("v" => "state",			"t" => "keyword_state"),
+		array("v" => "arti_id",			"t" => "fk_arti_id"),
+		array("v" => "site",			"t" => "fk_ws_id"),
+		array("v" => "string",			"t" => "keyword_string"),
+		array("v" => "count",			"t" => "keyword_count"),
+		array("v" => "type",			"t" => "keyword_type"),
+		array("v" => "data", 			"t" => "keyword_data"),
 	),
 );
 
@@ -292,12 +292,12 @@ self::$PreRequisiteTable['add']['layout'] = array(
 		array("table" => "layout",		"column" => "layout_id",				"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",					"t" => "layout_id",					"d" => DTA_UID),
-		array("v" => "name",				"t" => "layout_name",				"d" => DTA_STR),
-		array("v" => "title",				"t" => "layout_title",				"d" => DTA_STR),
-		array("v" => "generic_name",		"t" => "layout_generic_name",		"d" => DTA_STR),
-		array("v" => "desc",				"t" => "layout_desc",				"d" => DTA_STR),
-		array("v" => "layout_file",			"t" => "fk_layout_file_id",			"d" => DTA_UID),
+		array("v" => "id",					"t" => "layout_id"),
+		array("v" => "name",				"t" => "layout_name"),
+		array("v" => "title",				"t" => "layout_title"),
+		array("v" => "generic_name",		"t" => "layout_generic_name"),
+		array("v" => "desc",				"t" => "layout_desc"),
+		array("v" => "layout_file",			"t" => "fk_layout_file_id"),
 	),
 );
 
@@ -307,11 +307,11 @@ self::$PreRequisiteTable['add']['layout_file'] = array(
 		array("table" => "layout_file",				"column" => "layout_file_id",				"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",					"t" => "layout_file_id",				"d" => DTA_UID),
-		array("v" => "name",				"t" => "layout_file_name",				"d" => DTA_STR),
-		array("v" => "generic_name",		"t" => "layout_file_generic_name",		"d" => DTA_STR),
-		array("v" => "filename",			"t" => "layout_file_filename",			"d" => DTA_STR),
-		array("v" => "desc",				"t" => "layout_file_desc",				"d" => DTA_STR),
+		array("v" => "id",					"t" => "layout_file_id"),
+		array("v" => "name",				"t" => "layout_file_name"),
+		array("v" => "generic_name",		"t" => "layout_file_generic_name"),
+		array("v" => "filename",			"t" => "layout_file_filename"),
+		array("v" => "desc",				"t" => "layout_file_desc"),
 	),
 );
 
@@ -328,24 +328,24 @@ self::$PreRequisiteTable['add']['menu'] = array(
 		array("table" => "menu",				"column" => "menu_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",					"t" => "menu_id",					"d" => DTA_UID),
-		array("v" => "name",				"t" => "menu_name",					"d" => DTA_STR),
-		array("v" => "title",				"t" => "menu_title",				"d" => DTA_STR),
-		array("v" => "desc",				"t" => "menu_desc",					"d" => DTA_STR),
-		array("v" => "type",				"t" => "menu_type",					"d" => DTA_NBR),
-		array("v" => "visibility",			"t" => "menu_visibility",			"d" => DTA_NBR),
-		array("v" => "ws_id",				"t" => "fk_ws_id",					"d" => DTA_UID),
-		array("v" => "lang_id",				"t" => "fk_lang_id",				"d" => DTA_UID),
-		array("v" => "deadline_id",			"t" => "fk_deadline_id",			"d" => DTA_UID),
-		array("v" => "state",				"t" => "menu_state",				"d" => DTA_NBR),
-		array("v" => "parent_id",			"t" => "menu_parent",				"d" => DTA_UID),
-		array("v" => "position",			"t" => "menu_position",				"d" => DTA_NBR),
-		array("v" => "fk_perm_id",			"t" => "fk_perm_id",				"d" => DTA_UID),
-		array("v" => "last_modif",			"t" => "menu_last_update",			"d" => DTA_NBR),
-		array("v" => "role",				"t" => "menu_role",					"d" => DTA_NBR),
-		array("v" => "first_doc",			"t" => "menu_initial_document",		"d" => DTA_UID),
-		array("v" => "article",				"t" => "fk_arti_ref",				"d" => DTA_STR),
-		array("v" => "slug",				"t" => "fk_arti_slug",				"d" => DTA_STR),
+		array("v" => "id",					"t" => "menu_id"),
+		array("v" => "name",				"t" => "menu_name"),
+		array("v" => "title",				"t" => "menu_title"),
+		array("v" => "desc",				"t" => "menu_desc"),
+		array("v" => "type",				"t" => "menu_type"),
+		array("v" => "visibility",			"t" => "menu_visibility"),
+		array("v" => "ws_id",				"t" => "fk_ws_id"),
+		array("v" => "lang_id",				"t" => "fk_lang_id"),
+		array("v" => "deadline_id",			"t" => "fk_deadline_id"),
+		array("v" => "state",				"t" => "menu_state"),
+		array("v" => "parent_id",			"t" => "menu_parent"),
+		array("v" => "position",			"t" => "menu_position"),
+		array("v" => "fk_perm_id",			"t" => "fk_perm_id"),
+		array("v" => "last_modif",			"t" => "menu_last_update"),
+		array("v" => "role",				"t" => "menu_role"),
+		array("v" => "first_doc",			"t" => "menu_initial_document"),
+		array("v" => "article",				"t" => "fk_arti_ref"),
+		array("v" => "slug",				"t" => "fk_arti_slug"),
 	),
 );
 
@@ -361,23 +361,23 @@ self::$PreRequisiteTable['add']['module'] = array(
 		array("table" => "module_website",	"column" => "module_website_id",	"target" => "module_website_id"),
 	),
 	"columns" => array(
-		array("v" => "id",						"t" => "module_id",						"d" => DTA_UID),
-		array("v" => "name",					"t" => "module_name",					"d" => DTA_STR),
-		array("v" => "classname",				"t" => "module_classname",				"d" => DTA_STR),
-		array("v" => "deco",					"t" => "module_deco",					"d" => DTA_NBR),
-		array("v" => "deco_nbr",				"t" => "module_deco_nbr",				"d" => DTA_NBR),
-		array("v" => "deco_txt_default",		"t" => "module_deco_default_text",		"d" => DTA_NBR),
-		array("v" => "title",					"t" => "module_title",					"d" => DTA_STR),
-		array("v" => "directory",				"t" => "module_directory",				"d" => DTA_STR),
-		array("v" => "file",					"t" => "module_file",					"d" => DTA_STR),
-		array("v" => "desc",					"t" => "module_desc",					"d" => DTA_STR),
-		array("v" => "fk_perm_id",				"t" => "fk_perm_id",					"d" => DTA_UID),
-		array("v" => "group_allowed_to_see_id",	"t" => "module_group_allowed_to_see",	"d" => DTA_UID),
-		array("v" => "group_allowed_to_use_id",	"t" => "module_group_allowed_to_use",	"d" => DTA_UID),
-		array("v" => "adm_control",				"t" => "module_adm_control",			"d" => DTA_NBR),
-		array("v" => "container_name",			"t" => "module_container_name",			"d" => DTA_STR),
-		array("v" => "container_style",			"t" => "module_container_style",		"d" => DTA_STR),
-		array("v" => "execution",				"t" => "module_execution",				"d" => DTA_NBR),
+		array("v" => "id",						"t" => "module_id"),
+		array("v" => "name",					"t" => "module_name"),
+		array("v" => "classname",				"t" => "module_classname"),
+		array("v" => "deco",					"t" => "module_deco"),
+		array("v" => "deco_nbr",				"t" => "module_deco_nbr"),
+		array("v" => "deco_txt_default",		"t" => "module_deco_default_text"),
+		array("v" => "title",					"t" => "module_title"),
+		array("v" => "directory",				"t" => "module_directory"),
+		array("v" => "file",					"t" => "module_file"),
+		array("v" => "desc",					"t" => "module_desc"),
+		array("v" => "fk_perm_id",				"t" => "fk_perm_id"),
+		array("v" => "group_allowed_to_see_id",	"t" => "module_group_allowed_to_see"),
+		array("v" => "group_allowed_to_use_id",	"t" => "module_group_allowed_to_use"),
+		array("v" => "adm_control",				"t" => "module_adm_control"),
+		array("v" => "container_name",			"t" => "module_container_name"),
+		array("v" => "container_style",			"t" => "module_container_style"),
+		array("v" => "execution",				"t" => "module_execution"),
 	),
 );
 
@@ -391,13 +391,13 @@ self::$PreRequisiteTable['add']['permission'] = array(
 		array("table" => "permission",			"column" => "perm_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",				"t" => "perm_id",				"d" => DTA_UID),
-		array("v" => "state",			"t" => "perm_state",			"d" => DTA_NBR),
-		array("v" => "name",			"t" => "perm_name",				"d" => DTA_STR),
-		array("v" => "affinity",		"t" => "perm_affinity",			"d" => DTA_STR),
-		array("v" => "object_type",		"t" => "perm_object_type",		"d" => DTA_STR),
-		array("v" => "desc",			"t" => "perm_desc",				"d" => DTA_STR),
-		array("v" => "level",			"t" => "perm_level",			"d" => DTA_NBR),
+		array("v" => "id",				"t" => "perm_id"),
+		array("v" => "state",			"t" => "perm_state"),
+		array("v" => "name",			"t" => "perm_name"),
+		array("v" => "affinity",		"t" => "perm_affinity"),
+		array("v" => "object_type",		"t" => "perm_object_type"),
+		array("v" => "desc",			"t" => "perm_desc"),
+		array("v" => "level",			"t" => "perm_level"),
 	),
 );
 
@@ -410,10 +410,10 @@ self::$PreRequisiteTable['add']['tag'] = array(
 		array("table" => "tag",	"column" => "tag_id",		"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t" => "tag_id",				"d" => DTA_UID),
-		array("v" => "name",		"t" => "tag_name",				"d" => DTA_STR),
-		array("v" => "html",		"t" => "tag_html",				"d" => DTA_STR),
-		array("v" => "site",		"t" => "fk_ws_id",				"d" => DTA_UID),
+		array("v" => "id",			"t" => "tag_id"),
+		array("v" => "name",		"t" => "tag_name"),
+		array("v" => "html",		"t" => "tag_html"),
+		array("v" => "site",		"t" => "fk_ws_id"),
 
 	),
 );
@@ -428,11 +428,11 @@ self::$PreRequisiteTable['add']['theme'] = array(
 		array("table" => "theme_website",			"column" => "theme_website_id",	"target" => "theme_website_id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t" => "theme_id",			"d" => DTA_UID),
-		array("v" => "name",		"t" => "theme_name",		"d" => DTA_STR),
-		array("v" => "title",		"t" => "theme_title",		"d" => DTA_STR),
-		array("v" => "desc",		"t" => "theme_desc",		"d" => DTA_STR),
-		array("v" => "date",		"t" => "theme_date",		"d" => DTA_NBR),
+		array("v" => "id",			"t" => "theme_id"),
+		array("v" => "name",		"t" => "theme_name"),
+		array("v" => "title",		"t" => "theme_title"),
+		array("v" => "desc",		"t" => "theme_desc"),
+		array("v" => "date",		"t" => "theme_date"),
 	),
 );
 
@@ -448,12 +448,12 @@ self::$PreRequisiteTable['add']['theme_definition'] = array(
 		array("table" => "theme_definition",		"column" => "def_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t" => "def_id",			"d" => DTA_UID),
-		array("v" => "name",		"t" => "def_name",			"d" => DTA_STR),
-		array("v" => "fk_theme_id",	"t" => "fk_theme_id",		"d" => DTA_UID),
-		array("v" => "type",		"t" => "def_type",			"d" => DTA_NBR),
-		array("v" => "number",		"t" => "def_number",		"d" => DTA_NBR),
-		array("v" => "string",		"t" => "def_string",		"d" => DTA_STR),
+		array("v" => "id",			"t" => "def_id"),
+		array("v" => "name",		"t" => "def_name"),
+		array("v" => "fk_theme_id",	"t" => "fk_theme_id"),
+		array("v" => "type",		"t" => "def_type"),
+		array("v" => "number",		"t" => "def_number"),
+		array("v" => "string",		"t" => "def_string"),
 	),
 );
 
@@ -463,11 +463,11 @@ self::$PreRequisiteTable['add']['translation'] = array(
 		array("table" => "i18n",			"column" => "i18n_id",				"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t"	=>	"i18n_id",				"d" => DTA_UID),
-		array("v" => "lang_id",		"t"	=>	"fk_lang_id",			"d" => DTA_UID),
-		array("v" => "package",		"t"	=>	"i18n_package",			"d" => DTA_STR),
-		array("v" => "name",		"t"	=>	"i18n_name",			"d" => DTA_STR),
-		array("v" => "text",		"t"	=>	"i18n_text",			"d" => DTA_STR),
+		array("v" => "id",			"t"	=>	"i18n_id"),
+		array("v" => "lang_id",		"t"	=>	"fk_lang_id"),
+		array("v" => "package",		"t"	=>	"i18n_package"),
+		array("v" => "name",		"t"	=>	"i18n_name"),
+		array("v" => "text",		"t"	=>	"i18n_text"),
 	),
 );
 
@@ -500,21 +500,21 @@ self::$PreRequisiteTable['add']['user'] = array(
 		array("table" => "group_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 	),
 	"columns" => array(
-		array("v" => "id",					"t"	=>	"user_id",					"d" => DTA_UID),
-		array("v" => "name",				"t"	=>	"user_name",				"d" => DTA_STR),
-		array("v" => "mail",				"t"	=>	"user_mail",				"d" => DTA_STR),
-		array("v" => "login",				"t"	=>	"user_login",				"d" => DTA_STR),
-		array("v" => "password",			"t"	=>	"user_password",			"d" => DTA_STR),
-		array("v" => "date_inscription",	"t"	=>	"user_subscription_date",	"d" => DTA_NBR),
-		array("v" => "status",				"t"	=>	"user_status",				"d" => DTA_NBR),
-		array("v" => "role_function",		"t"	=>	"user_role_function",		"d" => DTA_NBR),
-		array("v" => "pref_theme_id",		"t"	=>	"user_pref_theme",			"d" => DTA_UID),
-		array("v" => "lang",				"t"	=>	"user_lang",				"d" => DTA_UID),
-		array("v" => "image_avatar",		"t"	=>	"user_avatar_image",		"d" => DTA_STR),
-		array("v" => "admin_comment",		"t"	=>	"user_admin_comment",		"d" => DTA_STR),
-		array("v" => "last_visit",			"t"	=>	"user_last_visit",			"d" => DTA_NBR),
-		array("v" => "last_ip",				"t"	=>	"user_last_ip",				"d" => DTA_STR),
-		array("v" => "timezone",			"t"	=>	"user_timezone",			"d" => DTA_NBR),
+		array("v" => "id",					"t"	=>	"user_id"),
+		array("v" => "name",				"t"	=>	"user_name"),
+		array("v" => "mail",				"t"	=>	"user_mail"),
+		array("v" => "login",				"t"	=>	"user_login"),
+		array("v" => "password",			"t"	=>	"user_password"),
+		array("v" => "date_inscription",	"t"	=>	"user_subscription_date"),
+		array("v" => "status",				"t"	=>	"user_status"),
+		array("v" => "role_function",		"t"	=>	"user_role_function"),
+		array("v" => "pref_theme_id",		"t"	=>	"user_pref_theme"),
+		array("v" => "lang",				"t"	=>	"user_lang"),
+		array("v" => "image_avatar",		"t"	=>	"user_avatar_image"),
+		array("v" => "admin_comment",		"t"	=>	"user_admin_comment"),
+		array("v" => "last_visit",			"t"	=>	"user_last_visit"),
+		array("v" => "last_ip",				"t"	=>	"user_last_ip"),
+		array("v" => "timezone",			"t"	=>	"user_timezone"),
 
 	),
 );
@@ -530,15 +530,15 @@ self::$PreRequisiteTable['add']['user_profile_element'] = array(
 		array("table" => "profile_element",			"column" => "upe_id",			"target" => "id"),
 	),
 	"columns" => array(
-		array("v" => "id",			"t" => "upe_id",				"d" => DTA_UID),
-		array("v" => "name",		"t" => "upe_name",				"d" => DTA_STR),
-		array("v" => "state",		"t" => "upe_state",				"d" => DTA_NBR),
-		array("v" => "order",		"t" => "upe_order",				"d" => DTA_NBR),
-		array("v" => "translation",	"t" => "upe_translation",		"d" => DTA_STR),
-		array("v" => "class",		"t" => "upe_class",				"d" => DTA_NBR),
-		array("v" => "type",		"t" => "upe_type",				"d" => DTA_NBR),
-		array("v" => "length",		"t" => "upe_length",			"d" => DTA_NBR),
-		array("v" => "ws_id",		"t" => "fk_ws_id",				"d" => DTA_UID),
+		array("v" => "id",			"t" => "upe_id"),
+		array("v" => "name",		"t" => "upe_name"),
+		array("v" => "state",		"t" => "upe_state"),
+		array("v" => "order",		"t" => "upe_order"),
+		array("v" => "translation",	"t" => "upe_translation"),
+		array("v" => "class",		"t" => "upe_class"),
+		array("v" => "type",		"t" => "upe_type"),
+		array("v" => "length",		"t" => "upe_length"),
+		array("v" => "ws_id",		"t" => "fk_ws_id"),
 	),
 );
 
@@ -563,25 +563,25 @@ self::$PreRequisiteTable['add']['website'] = array(
 		array("table" => "website",	"column" => "ws_id",		"target" => "ws_id"),
 	),
 	"columns" => array(
-		array("v" => "ws_id",			"t" => "ws_id",				"d" => DTA_UID),
-		array("v" => "name",			"t" => "ws_name",			"d" => DTA_STR),
-		array("v" => "short",			"t" => "ws_short",			"d" => DTA_STR),
-		array("v" => "lang_id",			"t" => "fk_lang_id",		"d" => DTA_UID),
-		array("v" => "lang_select",		"t" => "ws_lang_select",	"d" => DTA_NBR),
-		array("v" => "theme_id",		"t" => "fk_theme_id",		"d" => DTA_UID),
-		array("v" => "title",			"t" => "ws_title",			"d" => DTA_STR),
-		array("v" => "home",			"t" => "ws_home",			"d" => DTA_STR),
-		array("v" => "directory",		"t" => "ws_directory",		"d" => DTA_STR),
-		array("v" => "state",			"t" => "ws_state",			"d" => DTA_NBR),
-		array("v" => "info_debug",		"t" => "ws_info_debug",		"d" => DTA_NBR),
-		array("v" => "stylesheet",		"t" => "ws_stylesheet",		"d" => DTA_NBR),
-		array("v" => "gal_mode",		"t" => "ws_gal_mode",		"d" => DTA_NBR),
-		array("v" => "gal_file_tag",	"t" => "ws_gal_file_tag",	"d" => DTA_STR),
-		array("v" => "gal_quality",		"t" => "ws_gal_quality",	"d" => DTA_NBR),
-		array("v" => "gal_x",			"t" => "ws_gal_x",			"d" => DTA_NBR),
-		array("v" => "gal_y",			"t" => "ws_gal_y",			"d" => DTA_NBR),
-		array("v" => "gal_border",		"t" => "ws_gal_border",		"d" => DTA_NBR),
-		array("v" => "ma_diff",			"t" => "ws_ma_diff",		"d" => DTA_NBR),
+		array("v" => "ws_id",			"t" => "ws_id"),
+		array("v" => "name",			"t" => "ws_name"),
+		array("v" => "short",			"t" => "ws_short"),
+		array("v" => "lang_id",			"t" => "fk_lang_id"),
+		array("v" => "lang_select",		"t" => "ws_lang_select"),
+		array("v" => "theme_id",		"t" => "fk_theme_id"),
+		array("v" => "title",			"t" => "ws_title"),
+		array("v" => "home",			"t" => "ws_home"),
+		array("v" => "directory",		"t" => "ws_directory"),
+		array("v" => "state",			"t" => "ws_state"),
+		array("v" => "info_debug",		"t" => "ws_info_debug"),
+		array("v" => "stylesheet",		"t" => "ws_stylesheet"),
+		array("v" => "gal_mode",		"t" => "ws_gal_mode"),
+		array("v" => "gal_file_tag",	"t" => "ws_gal_file_tag"),
+		array("v" => "gal_quality",		"t" => "ws_gal_quality"),
+		array("v" => "gal_x",			"t" => "ws_gal_x"),
+		array("v" => "gal_y",			"t" => "ws_gal_y"),
+		array("v" => "gal_border",		"t" => "ws_gal_border"),
+		array("v" => "ma_diff",			"t" => "ws_ma_diff"),
 	),
 );
 
@@ -591,8 +591,8 @@ self::$PreRequisiteTable['add']['website'] = array(
 //--------------------------------------------------------------------------------
 self::$PreRequisiteTable['assign']['document'] = array(
 	"columns" => array(
-		array("v" => "arti_id",					"t" => "arti_id",				"d" => DTA_UID),
-		array("v" => "docu_id",					"t" => "docu_id",				"d" => DTA_UID),
+		array("v" => "arti_id",					"t" => "arti_id"),
+		array("v" => "docu_id",					"t" => "docu_id"),
 	),
 );
 
@@ -601,25 +601,25 @@ self::$PreRequisiteTable['assign']['language'] = array(
 		array("table" => "language_website",		"column" => "lang_website_id",				"target" => "lang_website_id"),
 	),
 	"columns" => array(
-		array("v" => "lang_website_id",		"t" => "lang_website_id",		"d" => DTA_UID),
-		array("v" => "ws_id",				"t" => "fk_ws_id",				"d" => DTA_UID),
-		array("v" => "lang_id",				"t" => "fk_lang_id",			"d" => DTA_UID),
+		array("v" => "lang_website_id",		"t" => "lang_website_id"),
+		array("v" => "ws_id",				"t" => "fk_ws_id"),
+		array("v" => "lang_id",				"t" => "fk_lang_id"),
 	),
 );
 
 
 self::$PreRequisiteTable['assign']['layout'] = array(
 	"convert" => array(
-		array("v" => "default",			"s" => "layout"),
+		array("v" => "default",						"s" => "layout"),
 	),
 	"nextId" => array(
 		array("table" => "layout_theme",	"column" => "layout_theme_id",	"target" => "layout_theme_id",),
 	),
 	"columns" => array(
-		array("v" => "layout_theme_id",			"t" => "layout_theme_id",			"d" => DTA_UID),
-		array("v" => "theme_id",				"t" => "fk_theme_id",				"d" => DTA_UID),
-		array("v" => "layout_id",				"t" => "fk_layout_id",				"d" => DTA_UID),
-		array("v" => "default",					"t" => "default_layout_content",	"d" => DTA_NBR),
+		array("v" => "layout_theme_id",		"t" => "layout_theme_id"),
+		array("v" => "theme_id",			"t" => "fk_theme_id"),
+		array("v" => "layout_id",			"t" => "fk_layout_id"),
+		array("v" => "default",				"t" => "default"),
 	),
 );
 
@@ -629,11 +629,11 @@ self::$PreRequisiteTable['assign']['group_permission'] = array(
 		if (strtolower($a['params']['to_all_groups']) == "yes") {
 			$bts = BaseToolSet::getInstance();
 			$dbquery = $bts->SDDMObj->query("
-			SELECT CONCAT('0x', HEX(grp.group_id)) AS group_id  
+			SELECT grp.group_id 
 			FROM " . $a['sqlTables']['group'] . " grp , " . $a['sqlTables']['group_website'] . " gw , " . $a['sqlTables']['website'] . " ws 
 			WHERE grp.group_id = gw.fk_group_id 
 			AND gw.fk_ws_id = ws.ws_id 
-			AND ws.ws_id = " . $a['Context']['ws_id'] . "
+			AND ws.ws_id = '" . $a['Context']['ws_id'] . "';
 			");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$a['params']['allIds'][] = array('uid' => $bts->SDDMObj->createUniqueId(), 'group_id' => $dbp['group_id']);
@@ -646,9 +646,9 @@ self::$PreRequisiteTable['assign']['group_permission'] = array(
 		array("table" => "group_permission",	"column" => "group_perm_id",		"target" => "group_perm_id"),
 	),
 	"columns" => array(
-		array("v" => "group_perm_id",		"t" => "group_perm_id",				"d" => DTA_UID),
-		array("v" => "perm_id",				"t" => "fk_perm_id",				"d" => DTA_UID),
-		array("v" => "group_id",			"t" => "fk_group_id",				"d" => DTA_UID),
+		array("v" => "group_perm_id",		"t" => "group_perm_id"),
+		array("v" => "perm_id",				"t" => "fk_perm_id"),
+		array("v" => "group_id",			"t" => "fk_group_id"),
 	),
 );
 
@@ -657,12 +657,12 @@ self::$PreRequisiteTable['assign']['user_permission'] = array(
 		if (strtolower($a['params']['to_all_users']) == "yes") {
 			$bts = BaseToolSet::getInstance();
 			$dbquery = $bts->SDDMObj->query("
-			SELECT CONCAT('0x', HEX(usr.user_id)) AS user_id 
+			SELECT usr.user_id 
 			FROM " . $a['sqlTables']['user'] . " usr, " . $a['sqlTables']['group_user'] . " gu, " . $a['sqlTables']['group_website'] . " gw 
 			WHERE usr.user_id = gu.fk_user_id 
 			AND gu.fk_group_id = gw.fk_group_id 
 			AND gu.group_user_initial_group = '1' 
-			AND gw.fk_ws_id = " . $a['Context']['ws_id'] . "
+			AND gw.fk_ws_id = '" . $a['Context']['ws_id'] . "';
 			");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$a['params']['allIds'][] = array('uid' => $bts->SDDMObj->createUniqueId(), 'user_id' => $dbp['user_id']);
@@ -675,9 +675,9 @@ self::$PreRequisiteTable['assign']['user_permission'] = array(
 		array("table" => "user_permission",	"column" => "user_perm_id",		"target" => "user_perm_id"),
 	),
 	"columns" => array(
-		array("v" => "user_perm_id",		"t" => "user_perm_id",				"d" => DTA_UID),
-		array("v" => "perm_id",				"t" => "fk_perm_id",				"d" => DTA_UID),
-		array("v" => "user_id",				"t" => "fk_user_id",				"d" => DTA_UID),
+		array("v" => "user_perm_id",		"t" => "user_perm_id"),
+		array("v" => "perm_id",				"t" => "fk_perm_id"),
+		array("v" => "user_id",				"t" => "fk_user_id"),
 	),
 );
 
@@ -690,9 +690,9 @@ self::$PreRequisiteTable['assign']['tag'] = array(
 		array("table" => "article_tag",	"column" => "article_tag_id",		"target" => "article_tag_id"),
 	),
 	"columns" => array(
-		array("v" => "article_tag_id",	"t" => "article_tag_id",		"d" => DTA_UID),
-		array("v" => "arti_id",			"t" => "fk_arti_id",			"d" => DTA_UID),
-		array("v" => "tag_id",			"t" => "fk_tag_id",				"d" => DTA_UID),
+		array("v" => "article_tag_id",	"t" => "article_tag_id"),
+		array("v" => "arti_id",			"t" => "fk_arti_id"),
+		array("v" => "tag_id",			"t" => "fk_tag_id"),
 
 	),
 );
@@ -714,10 +714,10 @@ self::$PreRequisiteTable['assign']['user'] = array(
 		array("table" => "group_user",	"column" => "group_user_id",		"target" => "group_user_id"),
 	),
 	"columns" => array(
-		array("v" => "group_user_id",	"t"	=>	"group_user_id",				"d" => DTA_UID),
-		array("v" => "group_id",		"t"	=>	"fk_group_id",					"d" => DTA_UID),
-		array("v" => "user_id",			"t"	=>	"fk_user_id",					"d" => DTA_UID),
-		array("v" => "primary_group",	"t"	=>	"group_user_initial_group",		"d" => DTA_NBR),
+		array("v" => "group_user_id",	"t"	=>	"group_user_id"),
+		array("v" => "group_id",		"t"	=>	"fk_group_id"),
+		array("v" => "user_id",			"t"	=>	"fk_user_id"),
+		array("v" => "primary_group",	"t"	=>	"group_user_initial_group"),
 	),
 );
 
@@ -738,8 +738,8 @@ self::$PreRequisiteTable['insert']['content'] = array(
 		}
 	},
 	"columns" => array(
-		array("v" => "docu_id",		"t" => "docu_id",				"d" => DTA_UID),
-		array("v" => "content",		"t" => "docu_cont",				"d" => DTA_STR),
+		array("v" => "docu_id",		"t" => "docu_id"),
+		array("v" => "content",		"t" => "docu_cont"),
 	),
 );
 
@@ -762,10 +762,10 @@ self::$PreRequisiteTable['share']['document'] = array(
 		array("table" => "document_share",	"column" => "share_id",		"target" => "share_id"),
 	),
 	"columns" => array(
-		array("v" => "share_id",		"t" => "share_id",				"d" => DTA_UID),
-		array("v" => "docu_id",			"t" => "fk_docu_id",			"d" => DTA_UID),
-		array("v" => "ws_id",			"t" => "fk_ws_id",				"d" => DTA_UID),
-		array("v" => "modification",	"t" => "share_modification",	"d" => DTA_NBR),
+		array("v" => "share_id",		"t" => "share_id"),
+		array("v" => "docu_id",			"t" => "fk_docu_id"),
+		array("v" => "ws_id",			"t" => "fk_ws_id"),
+		array("v" => "modification",	"t" => "share_modification"),
 	),
 );
 
@@ -846,24 +846,24 @@ self::$PreRequisiteTable['update']['website']['timeCreate']			= &self::$PreRequi
 self::$PreRequisiteTable['update']['website']['nextId']				= 0;
 self::$PreRequisiteTable['update']['website']['langConvert']		= 0;
 self::$PreRequisiteTable['update']['website']['columns']			= array(
-	array("v" => "name",			"t" => "ws_name",				"d" => DTA_STR),
-	array("v" => "short",			"t" => "ws_short",				"d" => DTA_STR),
-	array("v" => "lang_id",			"t" => "fk_lang_id",			"d" => DTA_UID),
-	array("v" => "lang_select",		"t" => "ws_lang_select",		"d" => DTA_NBR),
-	array("v" => "theme_id",		"t" => "fk_theme_id",			"d" => DTA_UID),
-	array("v" => "title",			"t" => "ws_title",				"d" => DTA_STR),
-	array("v" => "home",			"t" => "ws_home",				"d" => DTA_STR),
-	array("v" => "directory",		"t" => "ws_directory",			"d" => DTA_STR),
-	array("v" => "state",			"t" => "ws_state",				"d" => DTA_NBR),
-	array("v" => "info_debug",		"t" => "ws_info_debug",			"d" => DTA_NBR),
-	array("v" => "stylesheet",		"t" => "ws_stylesheet",			"d" => DTA_NBR),
-	array("v" => "gal_mode",		"t" => "ws_gal_mode",			"d" => DTA_NBR),
-	array("v" => "gal_file_tag",	"t" => "ws_gal_file_tag",		"d" => DTA_STR),
-	array("v" => "gal_quality",		"t" => "ws_gal_quality",		"d" => DTA_NBR),
-	array("v" => "gal_x",			"t" => "ws_gal_x",				"d" => DTA_NBR),
-	array("v" => "gal_y",			"t" => "ws_gal_y",				"d" => DTA_NBR),
-	array("v" => "gal_border",		"t" => "ws_gal_border",			"d" => DTA_NBR),
-	array("v" => "ma_diff",			"t" => "ws_ma_diff",			"d" => DTA_NBR),
+	array("v" => "name",			"t" => "ws_name"),
+	array("v" => "short",			"t" => "ws_short"),
+	array("v" => "lang_id",			"t" => "fk_lang_id"),
+	array("v" => "lang_select",		"t" => "ws_lang_select"),
+	array("v" => "theme_id",		"t" => "fk_theme_id"),
+	array("v" => "title",			"t" => "ws_title"),
+	array("v" => "home",			"t" => "ws_home"),
+	array("v" => "directory",		"t" => "ws_directory"),
+	array("v" => "state",			"t" => "ws_state"),
+	array("v" => "info_debug",		"t" => "ws_info_debug"),
+	array("v" => "stylesheet",		"t" => "ws_stylesheet"),
+	array("v" => "gal_mode",		"t" => "ws_gal_mode"),
+	array("v" => "gal_file_tag",	"t" => "ws_gal_file_tag"),
+	array("v" => "gal_quality",		"t" => "ws_gal_quality"),
+	array("v" => "gal_x",			"t" => "ws_gal_x"),
+	array("v" => "gal_y",			"t" => "ws_gal_y"),
+	array("v" => "gal_border",		"t" => "ws_gal_border"),
+	array("v" => "ma_diff",			"t" => "ws_ma_diff"),
 );
 
 //--------------------------------------------------------------------------------

@@ -106,7 +106,7 @@ if ($permissionOnExtenssion == 1) {
 			$dbquery = $bts->SDDMObj->query("
 			SELECT e.* 
 			FROM " . $SqlTableListObj->getSQLTableName('extension') . " e 
-			WHERE e.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " 
+			WHERE e.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
 			AND e.ext_name = '" . $A['ext_name'] . "'
 			;");
 			if ($bts->SDDMObj->num_row_sql($dbquery) > 0) {

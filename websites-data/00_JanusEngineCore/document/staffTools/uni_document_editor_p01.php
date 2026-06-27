@@ -74,9 +74,9 @@ $pageSelectorData['nbrPerPage'] = $bts->RequestDataObj->getRequestDataSubEntry('
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(doc.docu_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
-$pageSelectorData['clauseElements'][] = array("left" => "shr.fk_ws_id",		"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "shr.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "shr.fk_docu_id",	"operator" => "=",	"right" => "doc.docu_id");
-$pageSelectorData['clauseElements'][] = array("left" => "doc.docu_origin",	"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "doc.docu_origin",	"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 
 $pageSelectorData['query'] = "SELECT"
 	. " COUNT(doc.docu_id) AS ItemsCount "

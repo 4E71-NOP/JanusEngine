@@ -45,34 +45,16 @@ class ModuleList {
 		$SqlTableListObj = SqlTableList::getInstance ( null, null );
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$q = "SELECT "
-			. "CONCAT('0x', HEX(m.module_id)) AS module_id, "
-			. "m.module_deco, "
-			. "m.module_deco_nbr, "
-			. "m.module_deco_default_text, "
-			. "m.module_name, "
-			. "m.module_classname, "
-			. "m.module_title, "
-			. "m.module_directory, "
-			. "m.module_file, "
-			. "m.module_type, "
-			. "m.module_desc, "
-			. "m.module_container_name, "
-			. "m.module_container_style, "
-			. "CONCAT('0x', HEX(m.fk_perm_id)) AS fk_perm_id, "
-			. "m.module_adm_control, "
-			. "m.module_execution, "
-			. "wm.module_state "
-			. "FROM "
-			. $SqlTableListObj->getSQLTableName('module') . " m, "
-			. $SqlTableListObj->getSQLTableName('module_website') . " wm "
-			. "WHERE wm.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. "AND m.module_id = wm.fk_module_id "
-			. "AND wm.module_state = 1 "
-			. "AND m.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . " "
-			. "AND m.module_adm_control = 0 "
-			. ";";
+				
+		$q = "SELECT * FROM "
+			.$SqlTableListObj->getSQLTableName('module')." m, "
+			.$SqlTableListObj->getSQLTableName('module_website')." wm
+			WHERE wm.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
+			AND m.module_id = wm.fk_module_id
+			AND wm.module_state = '1'
+			AND m.fk_perm_id ".$CurrentSetObj->UserObj->getUserEntry('clause_in_perm')."
+			AND m.module_adm_control = '0'
+			;";
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : ModuleList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {

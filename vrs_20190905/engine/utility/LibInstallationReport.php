@@ -81,22 +81,11 @@ class LibInstallationReport
 			$c++;
 		}
 
-		$dbquery = $bts->SDDMObj->query("SELECT " 
-			. "CONCAT('0x', HEX(instreport_id)) AS instreport_id, "
-			. "instreport_section, "
-			. "instreport_name, "
-			. "instreport_ok, "
-			. "instreport_wrn, "
-			. "instreport_err, "
-			. "instreport_start, "
-			. "instreport_end, "
-			. "instreport_nbr_query, "
-			. "instreport_nbr_cmd "
-			. "FROM " 
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
-			. " WHERE instreport_section = '" . $section . "'"
-			. " ORDER BY instreport_name"
-			. ";"
+		$dbquery = $bts->SDDMObj->query(
+			"SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
+				. " WHERE instreport_section = '" . $section . "'"
+				. " ORDER BY instreport_name"
+				. ";"
 		);
 		$l = 3;
 		$dataOk = $dataWrn = $dataErr = $dataTim = $dataQry = $dataCmd = 0;
@@ -167,11 +156,9 @@ class LibInstallationReport
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 		$n = 0;
-		$dbquery = $bts->SDDMObj->query("SELECT "
-		. "COUNT(*) as lc " 
-		. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " "
-		. "WHERE instreport_section = '" . $section . "'"
-		. ";"
+		$dbquery = $bts->SDDMObj->query(
+			"SELECT COUNT(*) as lc FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report')
+				. " WHERE instreport_section = '" . $section . "';"
 		);
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$n = $dbp['lc'];

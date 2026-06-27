@@ -646,23 +646,19 @@ class JanusEngine
 
 		if (strlen($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') ?? '') == 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : There is no viable route in the session. Back to home."));
-			$sqlQuery = "SELECT "
-				. "CONCAT('0x', HEX(mnu.menu_id)) AS menu_id, "
-				. "mnu.menu_name, "
-				. "mnu.fk_arti_ref "
-				. "FROM "
-				. $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, " 
-				. $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " bcl "
-				. "WHERE mnu.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
-				. "AND mnu.fk_lang_id = " . $CurrentSetObj->getDataEntry('language_id') . " "
-				. "AND mnu.fk_deadline_id = bcl.deadline_id "
-				. "AND bcl.deadline_state = 1 "
-				. "AND mnu.menu_type IN ('0','1') "
-				. "AND mnu.fk_perm_id " . $UserObj->getUserEntry('clause_in_perm') . " "
-				. "AND mnu.menu_state = 1 "
-				. "AND mnu.menu_initial_document = 1 "
-				. "ORDER BY mnu.menu_parent,mnu.menu_position "
-				. ";";
+			$sqlQuery = "
+				SELECT mnu.menu_id, mnu.menu_name, mnu.fk_arti_ref
+				FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deadline') . " bcl
+				WHERE mnu.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
+				AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "'
+				AND mnu.fk_deadline_id = bcl.deadline_id
+				AND bcl.deadline_state = '1'
+				AND mnu.menu_type IN ('0','1')
+				AND mnu.fk_perm_id " . $UserObj->getUserEntry('clause_in_perm') . "
+				AND mnu.menu_state = '1'
+				AND mnu.menu_initial_document = '1'
+				ORDER BY mnu.menu_parent,mnu.menu_position
+				;";
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 			$dbquery = $bts->SDDMObj->query($sqlQuery);
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -677,67 +673,28 @@ class JanusEngine
 
 			// Special case for admin auth 
 			if ($bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') == "admin-authentification") {
-				$sqlQuery = "SELECT "
-					. "CONCAT('0x', HEX(art.arti_id)) AS arti_id, "
-					. "art.arti_ref, "
-					. "art.arti_slug, "
-					. "CONCAT('0x', HEX(art.fk_deadline_id)) AS fk_deadline_id, "
-					. "art.arti_name, "
-					. "art.arti_desc, "
-					. "art.arti_title, "
-					. "art.arti_subtitle, "
-					. "art.arti_page, "
-					. "art.layout_generic_name, "
-					. "CONCAT('0x', HEX(art.fk_config_id)) AS fk_config_id, "
-					. "CONCAT('0x', HEX(art.arti_creator_id)) AS arti_creator_id, "
-					. "art.arti_creation_date, "
-					. "CONCAT('0x', HEX(art.arti_validator_id)) AS arti_validator_id, "
-					. "art.arti_validation_date, "
-					. "art.arti_validation_state, "
-					. "art.arti_release_date, CONCAT('0x', HEX(fk_docu_id)) AS fk_docu_id, "
-					. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id "
-					. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art "
-					. "WHERE art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "' "
-					. "AND art.arti_page = 1"
-					. ";";
+				$sqlQuery = "
+					SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
+					WHERE art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "'
+					AND art.arti_page = '1';
+					;";
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 			} else {
 				// Normal case
-				$sqlQuery = "SELECT "
-					. "CONCAT('0x', HEX(mnu.menu_id)) AS menu_id, "
-					. "mnu.menu_name, "
-					. "mnu.menu_title, "
-					. "mnu.menu_desc, "
-					. "mnu.menu_type, "
-					. "mnu.menu_visibility, "
-					. "CONCAT('0x', HEX(mnu.fk_ws_id)) AS fk_ws_id, "
-					. "CONCAT('0x', HEX(mnu.fk_lang_id)) AS fk_lang_id, "
-					. "CONCAT('0x', HEX(mnu.fk_deadline_id)) AS fk_deadline_id, "
-					. "mnu.menu_state, "
-					. "CONCAT('0x', HEX(mnu.menu_parent)) AS menu_parent, "
-					. "mnu.menu_position, "
-					. "CONCAT('0x', HEX(mnu.fk_perm_id)) AS fk_perm_id, "
-					. "mnu.menu_last_update, "
-					. "mnu.menu_role, "
-					. "mnu.menu_initial_document, "
-					. "mnu.fk_arti_slug, "
-					. "mnu.fk_arti_ref, "
-					. "CONCAT('0x', HEX(art.arti_id)) AS arti_id, "
-					. "art.arti_ref, "
-					. "art.arti_slug, "
-					. "art.arti_page "
-					. "FROM "
+				$sqlQuery = "
+					SELECT * 
+					FROM "
 					. $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " mnu, "
-					. $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art "
-					. "WHERE mnu.fk_ws_id IN (" . $WebSiteObj->getWebSiteEntry('ws_id') . ") "
-					. "AND mnu.fk_lang_id = " . $CurrentSetObj->getDataEntry('language_id') . " "
-					. "AND mnu.fk_perm_id " . $UserObj->getUserEntry('clause_in_perm') . " "
-					. "AND mnu.menu_state = 1 "
-					. "AND mnu.fk_arti_ref = art.arti_ref "
-					. "AND art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "' "
-					. "AND art.arti_page = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'page') . "'; "
-					. ";";
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('article') . " art
+					WHERE mnu.fk_ws_id IN ('" . $WebSiteObj->getWebSiteEntry('ws_id') . "')
+					AND mnu.fk_lang_id = '" . $CurrentSetObj->getDataEntry('language_id') . "' 
+					AND mnu.fk_perm_id " . $UserObj->getUserEntry('clause_in_perm') . " 
+					AND mnu.menu_state = '1'
+					AND mnu.fk_arti_ref = art.arti_ref
+					AND art.arti_slug = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'target') . "'
+					AND art.arti_page = '" . $bts->SMObj->getSession3rdLvlEntry($currentWs, 'currentRoute', 'page') . "';
+					;";
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 				$dbquery = $bts->SDDMObj->query($sqlQuery);
 			}

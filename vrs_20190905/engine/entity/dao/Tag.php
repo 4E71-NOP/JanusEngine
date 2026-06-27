@@ -23,10 +23,10 @@ class Tag extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"tag_id"		=> "",
-		"tag_name"		=> "New Tag",
-		"tag_html"		=> 0,
-		"ws_id"			=> "",
+		'tag_id'	=> 0,
+		'tag_name'	=> "New Tag",
+		'tag_html'	=> 0,
+		'ws_id'		=> 0,
 	);
 	//@formatter:on
 	
@@ -43,16 +43,13 @@ class Tag extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(tag_id)) AS tag_id, "
-			. "tag_name, "
-			. "tag_html, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('tag') . " "
-			. "WHERE tag_id = " . $id
-			. ";");
-		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('tag') . "
+			WHERE tag_id = '" . $id . "'
+			;" );
+			if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for tag id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
 				foreach ( $dbp as $A => $B ) {

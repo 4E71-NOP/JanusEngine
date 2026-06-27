@@ -2,8 +2,7 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 CREATE TABLE !table! ( 
-perm_id				BINARY(16) NOT NULL UNIQUE, 
-perm_id_str			CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(perm_id))),
+perm_id				BIGINT NOT NULL UNIQUE, 
 perm_state			INTEGER,
 perm_name 			VARCHAR(255),
 perm_affinity		VARCHAR(255),

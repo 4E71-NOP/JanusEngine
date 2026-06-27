@@ -38,33 +38,25 @@ class ModuleSelectLanguage
 
 			$language_website_ = array();
 			if ($CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_lang_select') == 1) {
-				$dbquery = $bts->SDDMObj->query("SELECT "
-					. "CONCAT('0x', HEX(lang_id)) AS lang_id, "
-					. "lang_639_3, "
-					. "lang_original_name, "
-					. "lang_639_2, "
-					. "lang_639_1, "
-					. "lang_image "
-					. "FROM " 
-					. $CurrentSetObj->SqlTableListObj->getSQLTableName('language')
-					. ";");
+				$dbquery = $bts->SDDMObj->query("SELECT * FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . ";");
+				$pv['1'] = 1;
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-					$lid = $dbp['lang_id'];
-					$language_website_[$lid]['lang_id']				= $dbp['lang_id'];
-					$language_website_[$lid]['lang_639_3']			= $dbp['lang_639_3'];
-					$language_website_[$lid]['lang_image']			= $dbp['lang_image'];
-					$language_website_[$lid]['lang_original_name']	= $dbp['lang_original_name'];
+					$language_website_[$pv['1']]['lang_id']				= $dbp['lang_id'];
+					$language_website_[$pv['1']]['lang_639_3']			= $dbp['lang_639_3'];
+					$language_website_[$pv['1']]['lang_image']			= $dbp['lang_image'];
+					$language_website_[$pv['1']]['lang_original_name']	= $dbp['lang_original_name'];
+					$pv['1']++;
 				}
 
 				$language_website_support = array();
-				$dbquery = $bts->SDDMObj->query("SELECT " 
-					. "CONCAT('0x', HEX(l.lang_id)) AS lang_id "
-					. "FROM "
+				$dbquery = $bts->SDDMObj->query("
+					SELECT l.lang_id
+					FROM "
 					. $CurrentSetObj->SqlTableListObj->getSQLTableName('language_website') . " lw, "
-					. $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " l "
-					. "WHERE lw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-					. "AND lw.fk_lang_id = l.lang_id "
-					. ";");
+					. $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " l
+					WHERE lw.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
+					AND lw.fk_lang_id = l.lang_id
+					;");
 
 				$Content .= "
 				<table>\r

@@ -157,6 +157,8 @@ class CommandConsole
 		include("current/engine/cli/actions/user_permission_action.php");
 		include("current/engine/cli/actions/user_profile_element_action.php");
 		include("current/engine/cli/actions/website_action.php");
+
+
 	}
 
 	/**
@@ -285,7 +287,7 @@ class CommandConsole
 	 * Do tests based on a specific list chosen with the type of command and entity (article, group, etc.).
 	 * 
 	 * Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in a variable. No error message.
-	 * Directive = 2 : _RETURN_DATA_AND_ERROR_		/ Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
+	 * Directive = 2 : _RETURN__DATA_AND_ERROR_		/ Return the data in a variable. If an error uccurs, a message is stored and a flag is set.
 	 * Directive = 3 : _FIND_DUPLICATE_				/ Test if a duplicate exists. If 1 line is returned it raises an error.
 	 * Directive = 4 : _EXECUTE_FUNCTION_			/ Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
 	 * 
@@ -316,7 +318,7 @@ class CommandConsole
 				if ($CCL['errFlag'] != 1) {						// Saves time if a previous error occured. We stop at first error.
 					$af = $A['f'];
 					switch ($A['d']) {
-						// Directive = 1 : Return the data in a variable. No error message.
+							// Directive = 1 : Return the data in a variable. No error message.
 						case _RETURN_DATA_ONLY_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
@@ -328,8 +330,8 @@ class CommandConsole
 								}
 							}
 							break;
-						// Directive = 2 : Return the data in a variable. If an error occurs, a message is stored and a flag is set.
-						case _RETURN_DATA_AND_ERROR_:
+							// Directive = 2 : Return the data in a variable. If an error occurs, a message is stored and a flag is set.
+						case _RETURN__DATA_AND_ERROR_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
 								$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : " . $q['0']));
@@ -348,7 +350,7 @@ class CommandConsole
 								}
 							}
 							break;
-						// Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
+							// Directive = 3 : Test if a duplicate exists. If 1 line is returned it raises an error.
 						case _FIND_DUPLICATE_:
 							$CCL['entityCheck'][$idx] = $q = $af($CCL);
 							if ($q != -1) {
@@ -362,7 +364,7 @@ class CommandConsole
 								}
 							}
 							break;
-						// Directive = 4 : Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
+							// Directive = 4 : Execute function and behave depending on "0" or "1" return value. 1=OK; 0=NOK
 						case _EXECUTE_FUNCTION_:
 							$result = $af($CCL);
 							if ($result == 0) {
@@ -440,38 +442,18 @@ class CommandConsole
 		$equality = $columns = $values = "";
 		$colCount = 0;
 		if (is_array($ptr['columns'])) {
-			unset($A);
-			reset($ptr['columns']);
 			foreach ($ptr['columns'] as $A) {
 				if (strlen($CCL['params'][$A['v']] ?? '') != 0) {
-					$val = $CCL['params'][$A['v']];
-					// $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " : entry { d='" . $A['d'] . "', v='" . $A['v'] . "', t='" . $A['t'] . "', val='" . $val . "'}"));
-					switch ($A['d']) {
-						case DTA_UID:
-							$equality .= $A['t'] . " = " . $val . ", ";
-							$values .= $val . ", ";
-							break;
-						case DTA_NBR:
-							$equality .= $A['t'] . " = " . $val . ", ";
-							$values .= $val . ", ";
-							break;
-						case DTA_STR:
-							$equality .= $A['t'] . " = '" . $val . "', ";
-							$values .= "'" . $val . "', ";
-							break;
-					}
+					$equality .= $A['t'] . "='" . $CCL['params'][$A['v']] . "', ";
 					$columns .= $A['t'] . ", ";
+					$values .= "'" . $CCL['params'][$A['v']] . "', ";
 					$CCL['params']['updateGO'] = 1;
 					$colCount++;
 				}
 			}
-
 			$CCL['equalities'] = substr($equality, 0, -2);
 			$CCL['columns'] = substr($columns, 0, -2);
 			$CCL['values'] = substr($values, 0, -2);
-			// $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " : equality {" . $equality . "}"));
-			// $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " : columns {" . $columns . "}"));
-			// $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " : values {" . $values . "}"));
 		} else {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . " : ptr['columns'] is not an array."));
 		}
@@ -494,7 +476,7 @@ class CommandConsole
 			$showFound = false;
 			$j = 1;
 			foreach ($CCL['sql'] as $Q) {
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query `" . $Q . "`*****"));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : Query `" . $Q . "`"));
 
 				// If $CCL['command'] is a 'show' we execute the query and save results in RequestDataObj.
 				switch (strtolower($CCL['init']['cmd'])) {

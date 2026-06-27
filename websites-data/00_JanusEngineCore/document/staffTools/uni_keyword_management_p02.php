@@ -81,8 +81,8 @@ $dbquery = $bts->SDDMObj->query("
 SELECT art.arti_id, art.arti_name, art.arti_title 
 FROM ".$SqlTableListObj->getSQLTableName('article')." art, "
 .$SqlTableListObj->getSQLTableName('menu')." mnu
-WHERE art.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')."
-AND mnu.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')."
+WHERE art.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
+AND mnu.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."'
 AND mnu.fk_arti_ref = art.arti_ref
 AND mnu.fk_arti_ref != '0'
 AND mnu.menu_type IN ('0','1')

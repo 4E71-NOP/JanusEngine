@@ -53,7 +53,7 @@ self::$ActionTable['show']['menus']	= function (&$a) { return array(
 			. "AND lw.fk_lang_id = lang.lang_id "
 			. "AND m.fk_deadline_id = dl.deadline_id "
 			. "AND m.fk_perm_id = perm.perm_id "
-			. "AND m.fk_ws_id = " . $a['Context']['ws_id'] . " "
+			. "AND m.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. "ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position "
 	); 
 };

@@ -23,12 +23,12 @@ class Note extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"note_id"			=> "",
-		"docu_id"			=> 0,
-		"user_id"			=> 0,
-		"note_date"			=> 0,
-		"note_origin"		=> 0,
-		"note_content"		=> "New note content",
+		'note_id'			=> 0,
+		'docu_id'			=> 0,
+		'user_id'			=> 0,
+		'note_date'			=> 0,
+		'note_origin'		=> 0,
+		'note_content'		=> "New note content",
 	);
 	//@formatter:on
 	
@@ -48,16 +48,11 @@ class Note extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query ("SELECT "
-			. "CONCAT('0x', HEX(note_id)) AS note_id, "
-			. "CONCAT('0x', HEX(fk_docu_id)) AS fk_docu_id, "
-			. "CONCAT('0x', HEX(fk_user_id)) AS fk_user_id, "
-			. "note_date, "
-			. "note_origin, "
-			. "note_content "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('note') . " "
-			. "WHERE note_id = " . $id
-			. ";");
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('note') . "
+			WHERE note_id = '" . $id . "'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for note id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

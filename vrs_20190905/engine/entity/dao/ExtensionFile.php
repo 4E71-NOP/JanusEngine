@@ -24,12 +24,12 @@ class ExtensionFile extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		"file_id"			=> "",
-		"extension_id"		=> "",
-		"extension_name"	=> "New File",
-		"file_name"			=> "/folder/file",
-		"file_generic_name"	=> "New File",
-		"file_type"			=> 0,
+		'file_id'			=> 0,
+		'extension_id'		=> 0,
+		'extension_name'	=> "New File",
+		'file_name'			=> "/folder/file",
+		'file_generic_name'	=> "New File",
+		'file_type'			=> 0,
 	);
 	//@formatter:on
 	
@@ -46,15 +46,12 @@ class ExtensionFile extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(extfil_id)) AS extfil_id, "
-			. "CONCAT('0x', HEX(fk_ext_id)) AS fk_ext_id, "
-			. "extfil_generic_name, "
-			. "extfil_file, "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('extension_file') . " "
-			. "WHERE file_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_file') . "
+			WHERE file_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for extension_file id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

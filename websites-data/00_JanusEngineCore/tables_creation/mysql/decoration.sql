@@ -9,8 +9,7 @@ fk_deco_id				INTEGER,
 */
 
 CREATE TABLE !table! (
-deco_id		    		BINARY(16) NOT NULL UNIQUE, 
-deco_id_str		    	CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(deco_id))),
+deco_id		    		BIGINT NOT NULL UNIQUE, 
 deco_name				VARCHAR(255),
 deco_state				INTEGER,
 deco_type				INTEGER,

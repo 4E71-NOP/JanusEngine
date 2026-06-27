@@ -48,7 +48,7 @@ class MenuSelectTable {
 			SELECT arti_ref, arti_slug  
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article')." 
 			WHERE arti_validation_state = '1'
-			AND fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			AND arti_page = 1 
 			ORDER BY arti_slug
 		;");
@@ -77,7 +77,7 @@ class MenuSelectTable {
 		$dbquery = $bts->SDDMObj->query("
 		SELECT *
 		FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('article_config')." ac 
-		WHERE fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."
+		WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -105,7 +105,7 @@ class MenuSelectTable {
 		$dbquery = $bts->SDDMObj->query("
 			SELECT * 
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('menu')."
-			WHERE fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY menu_name
 		;");
 		$tab = array();
@@ -134,7 +134,7 @@ class MenuSelectTable {
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('deadline')."
-			WHERE fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			WHERE fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY deadline_name
 		;");
 		$tab = array();
@@ -165,7 +165,7 @@ class MenuSelectTable {
 			SELECT doc.*
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." ds
 			WHERE doc.docu_id = ds.fk_docu_id
-			AND ds.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND ds.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY doc.docu_name
 		;");
 		$tab = array();
@@ -197,7 +197,7 @@ class MenuSelectTable {
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('group')." grp , "
 			.$CurrentSetObj->SqlTableListObj->getSQLTableName('group_website')." sg
 			WHERE grp.group_id = sg.fk_group_id
-			AND sg.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND sg.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -231,7 +231,7 @@ class MenuSelectTable {
 			WHERE p.layout_id = lt.fk_layout_id
 			AND lt.fk_theme_id = wt.fk_theme_id
 			AND wt.theme_state = '1'
-			AND wt.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."
+			AND wt.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.layout_name
 		;");
 		$tab = array();
@@ -268,7 +268,7 @@ class MenuSelectTable {
 			AND p.layout_id = lt.fk_layout_id
 			AND lt.fk_theme_id = wt.fk_theme_id
 			AND wt.theme_state = '1'
-			AND wt.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND wt.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
 			ORDER BY p.layout_name
 		;");
 		$tab = array();
@@ -300,7 +300,7 @@ class MenuSelectTable {
 			SELECT l.* 
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language')." l, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('language_website')." lw 
 			WHERE l.lang_id = lw.fk_lang_id
-			AND lw.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."
+			AND lw.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -331,7 +331,7 @@ class MenuSelectTable {
 			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_descriptor')." t, ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_website')." st 
 			WHERE t.theme_id = st.fk_theme_id
 			AND st.theme_state = '1' 
-			AND st.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND st.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 		;");
 		$tab = array();
 		
@@ -366,7 +366,7 @@ class MenuSelectTable {
 			AND g.group_tag IN (2,3)
 			AND gu.fk_group_id = g.group_id
 			AND gu.fk_group_id = sg.fk_group_id
-			AND sg.fk_ws_id = ".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')." 
+			AND sg.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
 			ORDER BY usr.user_name
 		;");
 		$tab = array();

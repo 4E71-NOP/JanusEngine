@@ -846,12 +846,12 @@ self::$InitTable['extension_file'] = function (&$a) {
 
 self::$InitTable['group'] = function (&$a) {
 	$a['params'] = array(
-		"name"		=> "NewGroup",
-		"parent"	=> "reader",
-		"tag"		=> 1,
-		"title"		=> "New group",
-		"file"		=> "media/img/universal/icon_dev_001.jpg",
-		"desc"		=> "New group"
+		"name" => "NewGroup",
+		"parent" => "reader",
+		"tag" => 1,
+		"title" => "New group",
+		"file" => "media/img/universal/icon_dev_001.jpg",
+		"desc" => "New group"
 	);
 };
 
@@ -1069,18 +1069,18 @@ self::$InitTable['user'] = function (&$a) {
 		"status"				=> "ACTIVE",
 
 		"role_function"			=> "PUBLIC",
-		"pref_theme"			=> "",
-		"lang"					=> "",
+		"pref_theme"						=> "",
+		"lang"					=> 0,
 
-		"image_avatar"			=> "",
-		"admin_comment"			=> "",
+		"image_avatar"						=> "",
+		"admin_comment"						=> "",
 		
 		"last_visit"			=> 0,
 		"last_ip"				=> "0.0.0.0",
 		"timezone"				=> 1,
 		
-		"join_group" 			=> 0,
-		"initial_group"			=> 0,
+		"join_group" 						=> 0,
+		"initial_group"						=> 0,
 	);
 };
 

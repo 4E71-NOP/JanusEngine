@@ -11,8 +11,7 @@ config_menu_occurence			0 no_menu 1 top 2 bottom 3 both 4 store
 */
 
 CREATE TABLE !table! (
-config_id						BINARY(16) NOT NULL UNIQUE, 
-config_id_str					CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(config_id))),
+config_id						BIGINT NOT NULL UNIQUE, 
 config_name						VARCHAR(255), 
 config_menu_type				INTEGER, 
 config_menu_style				INTEGER, 
@@ -22,7 +21,7 @@ config_menu_float_size_y		INTEGER,
 config_menu_occurence			INTEGER, 
 config_show_release_info		INTEGER,
 config_show_info_update	        INTEGER,
-fk_ws_id						BINARY(16), 
+fk_ws_id						BIGINT, 
 
 PRIMARY KEY (config_id),
 KEY idx_!IdxNom!_ws_id (fk_ws_id)

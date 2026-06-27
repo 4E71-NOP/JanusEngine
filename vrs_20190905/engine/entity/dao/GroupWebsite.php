@@ -23,10 +23,10 @@ class GroupWebsite extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		"group_website_id"		=> "",
-		"ws_id"					=> "",
-		"group_id"				=> "",
-		"group_state"			=> 0,
+		'group_website_id'		=> 0,
+		'ws_id'					=> 0,
+		'group_id'				=> 0,
+		'group_state'			=> 0,
 	);
 	//@formatter:on
 	
@@ -44,15 +44,12 @@ class GroupWebsite extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(group_website_id)) AS group_website_id, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
-			. "CONCAT('0x', HEX(fk_group_id)) AS fk_group_id, "
-			. "group_state "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('group_website') . " "
-			. "WHERE group_website_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('group_website') . "
+			WHERE group_website_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group_website id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

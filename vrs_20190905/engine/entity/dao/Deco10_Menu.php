@@ -28,14 +28,11 @@ class Deco10_Menu {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 		
-		$dbquery = $bts->SDDMObj->query ("SELECT "
-			. "CONCAT('0x', HEX(deco_line_number)) AS deco_line_number, "
-			. "CONCAT('0x', HEX(fk_deco_id)) AS fk_deco_id, "
-			. "deco_variable_name, "
-			. "deco_value "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_10_menu') . " "
-			. "WHERE fk_deco_id = " . $id
-			. ";" );
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('deco_10_menu') . "
+			WHERE fk_deco_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for deco_10_menu id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

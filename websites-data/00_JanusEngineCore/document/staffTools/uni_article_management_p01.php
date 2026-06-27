@@ -97,7 +97,7 @@ if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_lik
 	$pageSelectorData['clauseElements'][] = array("left" => "art.arti_name", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
 $pageSelectorData['clauseElements'][] = array("left" => "LOWER(art.arti_ref)",	"operator" => "LIKE",	"right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
-$pageSelectorData['clauseElements'][] = array("left" => "mnu.fk_ws_id",			"operator" => "=",		"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "mnu.fk_ws_id",			"operator" => "=",		"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "art.arti_ref",			"operator" => "=",		"right" => "mnu.fk_arti_ref");
 $pageSelectorData['clauseElements'][] = array("left" => "art.fk_deadline_id",	"operator" => "=",		"right" => "dl.deadline_id");
 $pageSelectorData['clauseElements'][] = array("left" => "art.fk_ws_id",			"operator" => "=",		"right" => "dl.fk_ws_id");
@@ -157,7 +157,7 @@ $listDeadline = array(
 );
 $q = "SELECT deadline_id,deadline_name,deadline_title,deadline_state FROM "
 	. $SqlTableListObj->getSQLTableName('deadline')
-	. " WHERE fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . ";";
+	. " WHERE fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "';";
 
 $dbquery = $bts->SDDMObj->query($q, 1);
 while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

@@ -23,8 +23,8 @@ class I18n extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		"i18n_id"		=> "",
-		"fk_lang_id"	=> "",
+		"i18n_id"		=> 0,
+		"fk_lang_id"	=> 0,
 		"i18n_package"	=> 0,
 		"i18n_name"		=> 0,
 		"i18n_text"		=> 0,
@@ -44,16 +44,12 @@ class I18n extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(i18n_id)) AS i18n_id, "
-			. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
-			. "i18n_package, "
-			. "i18n_name, "
-			. "i18n_text "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('i18n') . " "
-			. "WHERE i18n_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('i18n') . "
+			WHERE i18n_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for i18n id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

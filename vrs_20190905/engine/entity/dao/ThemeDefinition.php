@@ -23,12 +23,12 @@ class ThemeDefinition extends Entity{
 
 	//@formatter:off
 	private $columns = array(
-		"def_id"		=> "",
-		"fk_theme_id"	=> "",
-		"def_type"		=> 1,
-		"def_name"		=> "bg",
-		"def_number"	=> 0,
-		"def_string"	=> "bg.png",
+		'def_id'		=> 0,
+		'fk_theme_id'	=> "",
+		'def_type'		=> 1,
+		'def_name'		=> "bg",
+		'def_number'	=> 0,
+		'def_string'	=> "bg.png",
 	);
 	//@formatter:on
 	
@@ -55,17 +55,12 @@ class ThemeDefinition extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(def_id)) AS def_id, "
-			. "CONCAT('0x', HEX(fk_theme_id)) AS fk_theme_id, "
-			. "def_type, "
-			. "def_name, "
-			. "def_number, "
-			. "def_string "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('theme_definition') . " "
-			. "WHERE def_id = " . $id
-			. ";");
+		
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('theme_definition')."
+			WHERE def_id = '".$id."'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article arti_id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

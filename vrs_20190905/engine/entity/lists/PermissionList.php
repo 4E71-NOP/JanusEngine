@@ -46,17 +46,9 @@ class PermissionList {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$q = "SELECT "
-			. "CONCAT('0x', HEX(perm_id)) AS perm_id, "
-			. "perm_state, "
-			. "perm_name, "
-			. "perm_affinity, "
-			. "perm_object_type, "
-			. "perm_desc, "
-			. "perm_level "
-			. "FROM "
-			. $SqlTableListObj->getSQLTableName('permission') . " "
-            . "ORDER BY perm_name;";
+		$q = "SELECT * FROM "
+			.$SqlTableListObj->getSQLTableName('permission')
+            ." ORDER BY perm_name;";
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " : PermissionList query `".$bts->StringFormatObj->formatToLog($q)."`."));
 		$dbquery = $bts->SDDMObj->query($q);
 		if ( $bts->SDDMObj->num_row_sql($dbquery) > 0 ) {

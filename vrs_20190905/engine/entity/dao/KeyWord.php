@@ -23,15 +23,15 @@ class KeyWord extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"keyword_id"		=> "",
-		"keyword_state"		=> 0,
-		"keyword_name"		=> "new Keyword",
-		"fk_arti_id"		=> "",
-		"fk_ws_id"			=> "",
-		"keyword_string"	=> "",
-		"keyword_count"		=> 0,
-		"keyword_type"		=> 0,
-		"keyword_data"		=> 0,
+		'keyword_id'		=> 0,
+		'keyword_state'		=> 0,
+		'keyword_name'		=> 'new Keyword',
+		'fk_arti_id'		=> 0,
+		'fk_ws_id'			=> 0,
+		'keyword_string'	=> "",
+		'keyword_count'		=> 0,
+		'keyword_type'		=> 0,
+		'keyword_data'		=> 0,
 	);
 	//@formatter:on
 	
@@ -50,22 +50,14 @@ class KeyWord extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(keyword_id)) AS keyword_id, "
-			. "keyword_state, "
-			. "keyword_name, "
-			. "CONCAT('0x', HEX(fk_arti_id)) AS fk_arti_id, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
-			. "keyword_string, "
-			. "keyword_count, "
-			. "keyword_type, "
-			. "keyword_data "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('keyword') . " "
-			. "WHERE keyword_id = " . $id . " "
-			. "AND fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
-			. ";");
-
+				
+		$dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('keyword')."
+			WHERE keyword_id = '".$id."'
+			AND fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."'
+		;");
+		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for keyword id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

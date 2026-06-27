@@ -24,7 +24,7 @@ class SecurityToken extends Entity
 	
 	//@formatter:off
 	private $columns = array(
-		"st_id"			=> "",
+		"st_id"			=> 0,
 		"st_creation"	=> 0,
 		"st_action"		=> "",
 		"st_login"		=> "",
@@ -52,16 +52,11 @@ class SecurityToken extends Entity
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(st_id)) AS st_id, "
-			. "st_creation, "
-			. "st_action, "
-			. "st_login, "
-			. "st_email, "
-			. "st_content "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('security_token') . " "
-			. "WHERE st_id = " . $id
-			. ";");
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('security_token') . "
+			WHERE st_id = '" . $id . "'
+			;");
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for security_token st_id=" . $id));
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
@@ -93,16 +88,11 @@ class SecurityToken extends Entity
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(st_id)) AS st_id, "
-			. "st_creation, "
-			. "st_action, "
-			. "st_login, "
-			. "st_email, "
-			. "st_content "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('security_token') . " "
-			. "WHERE st_content = '" . $content . "' "
-			. ";");
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('security_token') . "
+			WHERE st_content = '" . $content . "'
+			;");
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for security_token st_content=" . $content));
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

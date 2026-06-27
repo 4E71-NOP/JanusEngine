@@ -23,12 +23,12 @@ class Language extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"lang_id"				=> "",
-		"lang_639_3"			=> 0,
-		"lang_original_name"	=> 0,
-		"lang_639_2"			=> 0,
-		"lang_639_1"			=> 0,
-		"lang_image"			=> 0,
+		'lang_id'				=> 0,
+		'lang_639_3'			=> 0,
+		'lang_original_name'	=> 0,
+		'lang_639_2'			=> 0,
+		'lang_639_1'			=> 0,
+		'lang_image'			=> 0,
 	);
 	//@formatter:on
 	
@@ -45,17 +45,12 @@ class Language extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(lang_id)) AS lang_id, "
-			. "lang_639_3, "
-			. "lang_original_name, "
-			. "lang_639_2, "
-			. "lang_639_1, "
-			. "lang_image "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('language') . " "
-			. "WHERE lang_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('language') . "
+			WHERE lang_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for language id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

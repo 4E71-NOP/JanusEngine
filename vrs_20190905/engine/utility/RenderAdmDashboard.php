@@ -48,7 +48,7 @@ class RenderAdmDashboard
 		$dbquery = $bts->SDDMObj->query("
 			SELECT *
 			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module') . " a, " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " b
-			WHERE b.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "
+			WHERE b.fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
 			AND a.module_id = b.fk_module_id
 			AND b.module_state = '1'
 			AND a.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . "

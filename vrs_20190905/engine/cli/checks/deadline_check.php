@@ -20,7 +20,7 @@
 
 // d=Directive
 //		Directive = 1 : _RETURN_DATA_ONLY_			/ Return the data in (v)ariable. No error message.
-//		Directive = 2 : _RETURN_DATA_AND_ERROR_	/ Return the data in (v)ariable. If an error occurs, a message is stored and a flag is set.
+//		Directive = 2 : _RETURN__DATA_AND_ERROR_	/ Return the data in (v)ariable. If an error occurs, a message is stored and a flag is set.
 //		Directive = 3 : _FIND_DUPLICATE_			/ Test if a duplicate exists. If 1 line is returned it raises an error/flag.
 // f=Function
 // c=Column
@@ -36,20 +36,20 @@
 
 // DeadLine
 self::$CheckTable['add']['deadline']['0']['d']	= _FIND_DUPLICATE_;
-self::$CheckTable['add']['deadline']['0']['f']	= function ($a) {return array("SELECT deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = " . $a['Context']['ws_id'] . ";");};
+self::$CheckTable['add']['deadline']['0']['f']	= function ($a) {return array("SELECT deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
 self::$CheckTable['add']['deadline']['0']['m']	= "CLI_Deadline_C001";
 self::$CheckTable['add']['deadline']['0']['s']	= "name";
 
-self::$CheckTable['update']['deadline']['0']['d']	= _RETURN_DATA_AND_ERROR_;
-self::$CheckTable['update']['deadline']['0']['f']	= function ($a) {return array("SELECT CONCAT('0x', HEX(deadline_id)) AS deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = " . $a['Context']['ws_id'] . ";");};
+self::$CheckTable['update']['deadline']['0']['d']	= _RETURN__DATA_AND_ERROR_;
+self::$CheckTable['update']['deadline']['0']['f']	= function ($a) {return array("SELECT deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
 self::$CheckTable['update']['deadline']['0']['c']	= "deadline_id";
 self::$CheckTable['update']['deadline']['0']['v']	= "deadline_id";
 self::$CheckTable['update']['deadline']['0']['m']	= "CLI_Deadline_U001";
 self::$CheckTable['update']['deadline']['0']['p']	= "deadline";
 self::$CheckTable['update']['deadline']['0']['s']	= "name";
 
-self::$CheckTable['delete']['deadline']['0']['d']	= _RETURN_DATA_AND_ERROR_;
-self::$CheckTable['delete']['deadline']['0']['f']	= function ($a) {return array("SELECT CONCAT('0x', HEX(deadline_id)) AS deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = " . $a['Context']['ws_id'] . ";");};
+self::$CheckTable['delete']['deadline']['0']['d']	= _RETURN__DATA_AND_ERROR_;
+self::$CheckTable['delete']['deadline']['0']['f']	= function ($a) {return array("SELECT deadline_id FROM " . $a['sqlTables']['deadline'] . " WHERE deadline_name = '" . $a['params']['name'] . "' AND fk_ws_id = '" . $a['Context']['ws_id'] . "';");};
 self::$CheckTable['delete']['deadline']['0']['c']	= "deadline_id";
 self::$CheckTable['delete']['deadline']['0']['v']	= "deadline_id";
 self::$CheckTable['delete']['deadline']['0']['m']	= "CLI_Deadline_D001";

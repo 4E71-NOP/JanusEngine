@@ -113,21 +113,15 @@ class LibInstallation
 			switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
 				case "mysql":
 				default:
-					$queryHeader = "INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " " 
-					. "(instreport_id, instreport_section, instreport_name, instreport_ok, instreport_wrn, "
-					. "instreport_err, instreport_start, instreport_end, instreport_nbr_query, instreport_nbr_cmd) "
-					. " VALUES (";
+					$queryHeader = "INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " VALUES (";
 					break;
 				case "pgsql":
-					$queryHeader = "INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " "
-					. "(instreport_id, instreport_section, instreport_name, instreport_ok, instreport_wrn, "
-					. "instreport_err, instreport_start, instreport_end, instreport_nbr_query, instreport_nbr_cmd) "
-					. " VALUES (";
+					$queryHeader = "INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " VALUES (";
 					break;
 			}
 
 			$q = $queryHeader . " "
-				. $bts->SDDMObj->createUniqueId() . ", "
+				. "'" . $bts->SDDMObj->createUniqueId() . "', "
 				. "'" . $infos['section'] . "', "
 				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['file'] . "', "
 				. "'" . $this->report[$infos['section']][$infos['currentFileName']]['OK'] . "', "

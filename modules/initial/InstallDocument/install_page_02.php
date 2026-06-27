@@ -148,22 +148,19 @@ class InstallPage02
 		// We could not store into DB informations about table creation. Now we can.
 		$tab = $LibInstallationObj->getReport();
 		foreach ($tab['tables_creation'] as $k => $v) {
-			$bts->SDDMObj->query("INSERT INTO " 
-				. $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " "
-				. "(instreport_id, instreport_section, instreport_name, instreport_ok, instreport_wrn, "
-				. "instreport_err, instreport_start, instreport_end, instreport_nbr_query, instreport_nbr_cmd) "
-				. "VALUES ("
-				. $bts->SDDMObj->createUniqueId() . ", "
-				. "'tables_creation', "
-				. "'" . $k . "', "
-				. "'" . $v['OK'] . "', "
-				. "'" . $v['WARN'] . "', "
-				. "'" . $v['ERR'] . "', "
-				. "'" . $v['start'] . "', "
-				. "'" . $v['end'] . "', "
-				. "'" . $v['sqlCount'] . "',"
-				. "'0'"
-				. ");"
+			$bts->SDDMObj->query(
+				"INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation_report') . " VALUES ("
+					. "'" . $bts->SDDMObj->createUniqueId() . "', "
+					. "'tables_creation', "
+					. "'" . $k . "', "
+					. "'" . $v['OK'] . "', "
+					. "'" . $v['WARN'] . "', "
+					. "'" . $v['ERR'] . "', "
+					. "'" . $v['start'] . "', "
+					. "'" . $v['end'] . "', "
+					. "'" . $v['sqlCount'] . "',"
+					. "'0'"
+					. ");"
 			);
 		}
 		unset($tab);
@@ -182,7 +179,7 @@ class InstallPage02
 
 		$bts->SDDMObj->query("UPDATE " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation') . " SET inst_nbr = '" . time() . "' WHERE inst_name = 'end_date';");
 		$bts->SDDMObj->query("UPDATE " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation') . " SET inst_nbr = '1' WHERE inst_name = 'installationFinished';");
-		$bts->SDDMObj->query("INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation') . " (inst_id, inst_display, inst_name, inst_nbr, inst_txt) VALUES ( 100, 0, 'installationLocked', '1', '');");
+		$bts->SDDMObj->query("INSERT INTO " . $CurrentSetObj->SqlTableListObj->getSQLTableName('installation') . " VALUES ( 100, 0, 'installationLocked', '1', '');");
 	}
 
 

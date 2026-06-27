@@ -112,16 +112,12 @@ if ($pageSelectorData['ItemsCount'] > $pageSelectorData['nbrPerPage']) {
 }
 
 // --------------------------------------------------------------------------------------------
-$dbquery = $bts->SDDMObj->query("SELECT "
-	. "CONCAT('0x', HEX(d.deco_id)) AS deco_id, "
-	. "d.deco_name, "
-	. "d.deco_state, "
-	. "d.deco_type "
-	. "FROM "
+$dbquery = $bts->SDDMObj->query("
+SELECT * FROM "
 	. $SqlTableListObj->getSQLTableName('decoration') . " d "
 	. $bts->SddmToolsObj->makeQueryClause($pageSelectorData['clauseElements'])
 	. "ORDER BY  d.deco_name "
-	. "LIMIT " . $pageSelectorData['nbrPerPage'] . " "
+	. "LIMIT " . $pageSelectorData['nbrPerPage'] . " " 
 	. "OFFSET " . ($pageSelectorData['nbrPerPage'] * $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'selectionOffset'))
 	. ";");
 

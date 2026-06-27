@@ -23,10 +23,10 @@ class GroupUser extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		"group_user_id"				=> "",
-		"group_id"					=> "",
-		"user_id"					=> "",
-		"group_user_initial_group"	=> 0,
+		'group_user_id'				=> 0,
+		'group_id'					=> 0,
+		'user_id'					=> 0,
+		'group_user_initial_group'	=> 0,
 	);
 	//@formatter:on
 	
@@ -44,15 +44,12 @@ class GroupUser extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(group_user_id)) AS group_user_id, "
-			. "CONCAT('0x', HEX(fk_group_id)) AS fk_group_id, "
-			. "CONCAT('0x', HEX(fk_user_id)) AS fk_user_id, "
-			. "group_user_initial_group "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('group_user') . " "
-			. "WHERE group_user_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('group_user') . "
+			WHERE group_user_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for group_user id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

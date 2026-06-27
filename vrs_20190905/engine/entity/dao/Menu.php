@@ -30,18 +30,18 @@ class Menu extends Entity
 		"menu_desc"				=> "New Menu",
 		"menu_type"				=> "ARTICLE",
 		"menu_visibility"		=> 1,
-		"fk_ws_id"				=> "",
-		"fk_lang_id"			=> "",
-		"fk_deadline_id"		=> "",
+		"fk_ws_id"				=> 0,
+		"fk_lang_id"			=> 0,
+		"fk_deadline_id"		=> 0,
 		"menu_state"			=> 0,
-		"menu_parent"			=> "",
+		"menu_parent"			=> 0,
 		"menu_position"			=> "",
-		"fk_perm_id"			=> "",
+		"fk_perm_id"			=> 0,
 		"menu_last_update"		=> 0,
 		"menu_role"				=> 0,
 		"menu_initial_document"	=> 0,
-		"fk_arti_slug"			=> "",
-		"fk_arti_ref"			=> "",	
+		"fk_artie_slug"			=> "",
+		"fk_arti_ref"			=> 0,	
 	);
 	//@formatter:on
 
@@ -63,29 +63,12 @@ class Menu extends Entity
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(menu_id)) AS menu_id, "
-			. "menu_name, "
-			. "menu_title, "
-			. "menu_desc, "
-			. "menu_type, "
-			. "menu_visibility, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
-			. "CONCAT('0x', HEX(fk_lang_id)) AS fk_lang_id, "
-			. "CONCAT('0x', HEX(fk_deadline_id)) AS fk_deadline_id, "
-			. "menu_state, "
-			. "CONCAT('0x', HEX(menu_parent)) AS menu_parent, "
-			. "menu_position, "
-			. "CONCAT('0x', HEX(fk_perm_id)) AS fk_perm_id, "
-			. "menu_last_update, "
-			. "menu_role, "
-			. "menu_initial_document, "
-			. "fk_arti_slug, "
-			. "fk_arti_ref "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " "
-			. "WHERE menu_id = " . $id . " "
-			. "AND fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. ";");
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT * 
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('menu') . " 
+			WHERE menu_id = '" . $id . "'
+			AND fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
+		;");
 
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for Menu id=" . $id));

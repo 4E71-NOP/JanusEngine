@@ -24,16 +24,16 @@ class Document extends Entity{
 	
 	//@formatter:off
 	private $columns = array(
-		"docu_id"				=> "",
-		"docu_name"				=> 0,
-		"docu_type"				=> 1,
-		"docu_origin"			=> "",
-		"docu_creator"			=> "",
-		"docu_creation_date"	=> 0,
-		"docu_validation"		=> 0,
-		"docu_validator"		=> "",
-		"docu_validation_date"	=> 0,
-		"docu_cont"				=> 0,
+		'docu_id'				=> 0,
+		'docu_name'				=> 0,
+		'docu_type'				=> 1,
+		'docu_origin'			=> 0,
+		'docu_creator'			=> 0,
+		'docu_creation_date'	=> 0,
+		'docu_validation'		=> 0,
+		'docu_validator'		=> 0,
+		'docu_validation_date'	=> 0,
+		'docu_cont'				=> 0,
 	);
 	//@formatter:on
 	
@@ -52,27 +52,17 @@ class Document extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(doc.docu_id)) AS docu_id, "
-			. "doc.docu_name, "
-			. "doc.docu_type, "
-			. "CONCAT('0x', HEX(doc.docu_origin)) AS docu_origin, "
-			. "CONCAT('0x', HEX(doc.docu_creator)) AS docu_creator, "
-			. "doc.docu_creation_date, "
-			. "doc.docu_validation, "
-			. "CONCAT('0x', HEX(doc.docu_validator)) AS docu_validator, "
-			. "doc.docu_validation_date, "
-			. "doc.docu_cont, "
-			. "shr.share_modification "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('document') . " doc, "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('document_share') . " shr "
-			. "WHERE doc.docu_id = " . $id . " "
-			. "AND shr.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. "AND shr.fk_docu_id = doc.docu_id "
-			. "AND doc.docu_origin = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')
-			. ";");
-
+				
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT doc.*, shr.share_modification 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." shr 
+			WHERE doc.docu_id = '".$id."' 
+			AND shr.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND shr.fk_docu_id = doc.docu_id 
+			AND doc.docu_origin = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
+		;");
+		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {
@@ -101,26 +91,16 @@ class Document extends Entity{
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(doc.docu_id)) AS docu_id, "
-			. "doc.docu_name, "
-			. "doc.docu_type, "
-			. "CONCAT('0x', HEX(doc.docu_origin)) AS docu_origin, "
-			. "CONCAT('0x', HEX(doc.docu_creator)) AS docu_creator, "
-			. "doc.docu_creation_date, "
-			. "doc.docu_validation, "
-			. "CONCAT('0x', HEX(doc.docu_validator)) AS docu_validator, "
-			. "doc.docu_validation_date, "
-			. "doc.docu_cont, "
-			. "shr.share_modification "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('document') . " doc, "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('document_share') . " shr "
-			. "WHERE shr.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. "AND doc.docu_id = " . $id . " "
-			. "AND shr.fk_docu_id = doc.docu_id "
-			. ";");
-
+		
+		$dbquery = $dbquery = $bts->SDDMObj->query("
+			SELECT doc.*, shr.share_modification 
+			FROM ".$CurrentSetObj->SqlTableListObj->getSQLTableName('document')." doc, "
+			.$CurrentSetObj->SqlTableListObj->getSQLTableName('document_share')." shr 
+			WHERE shr.fk_ws_id = '".$CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id')."' 
+			AND doc.docu_id = '".$id."' 
+			AND shr.fk_docu_id = doc.docu_id 
+		;");
+		
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for document id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

@@ -51,21 +51,11 @@ class ArticleConfig extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 				
-		$dbquery = $bts->SDDMObj->query ( "SELECT "
-			. "CONCAT('0x', HEX(config_id)) AS config_id, "
-			. "config_name, "
-			. "config_menu_type, "
-			. "config_menu_style, "
-			. "config_menu_float_position, "
-			. "config_menu_float_size_x, "
-			. "config_menu_float_size_y, "
-			. "config_menu_occurence, "
-			. "config_show_release_info, "
-			. "config_show_info_update, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('article_config') . " "
-			. "WHERE config_id = " . $id
-			. ";" );
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('article_config') . "
+			WHERE config_id = '" . $id . "'
+			;" );
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for article_config id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

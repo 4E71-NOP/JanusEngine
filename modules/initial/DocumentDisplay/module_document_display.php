@@ -84,22 +84,11 @@ class ModuleDocumentDisplay
 			$LD_idx++;
 
 			$position_float = array('0' => "none", '1' => "left", '2' => "right");
-			$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(config_id)) AS config_id, "
-			. "config_name, "
-			. "config_menu_type, "
-			. "config_menu_style, "
-			. "config_menu_float_position, "
-			. "config_menu_float_size_x, "
-			. "config_menu_float_size_y, "
-			. "config_menu_occurence, "
-			. "config_show_release_info, "
-			. "config_show_info_update, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id "
-			. "FROM " 
-			. $SqlTableListObj->getSQLTableName('article_config') . " "
-			. "WHERE config_id = " . $DocumentDataObj->getDocumentDataEntry('fk_config_id') 
-			. ";");
+			$dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM " . $SqlTableListObj->getSQLTableName('article_config') . "
+			WHERE config_id = '" . $DocumentDataObj->getDocumentDataEntry('fk_config_id') . "'
+			;");
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$DocumentDataObj->setDocumentDataEntry('arti_menu_type', $dbp['config_menu_type']);
 				$DocumentDataObj->setDocumentDataEntry('arti_menu_style', $dbp['config_menu_style']);
@@ -114,16 +103,16 @@ class ModuleDocumentDisplay
 
 			// --------------------------------------------------------------------------------------------
 			//	Get the article number of pages (Article != Document)
-			$sqlQuery = "SELECT "
-				. "COUNT(fk_docu_id) AS arti_nbr_page "
-				. "FROM "
+			$sqlQuery = "
+			SELECT COUNT(fk_docu_id) AS arti_nbr_page
+			FROM "
 				. $SqlTableListObj->getSQLTableName('article') . " art, "
-				. $SqlTableListObj->getSQLTableName('deadline') . " bcl "
-				. "WHERE art.arti_ref = '" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "' "
-				. "AND art.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
-				. "AND art.fk_deadline_id = bcl.deadline_id "
-				. "AND bcl.deadline_state = 1 "
-				. ";";
+				. $SqlTableListObj->getSQLTableName('deadline') . " bcl
+			WHERE art.arti_ref = '" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "'
+			AND art.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
+			AND art.fk_deadline_id = bcl.deadline_id
+			AND bcl.deadline_state = '1'
+			;";
 			$dbquery = $bts->SDDMObj->query($sqlQuery);
 			while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 				$DocumentDataObj->setDocumentDataEntry('arti_nbr_page', $dbp['arti_nbr_page']);
@@ -159,24 +148,18 @@ class ModuleDocumentDisplay
 			if ($DocumentDataObj->getDocumentDataEntry('arti_nbr_page') > 1 && $DocumentDataObj->getDocumentDataEntry('arti_menu_type') > 0) {
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " menu needed"));
 
-				$q = "SELECT" 
-				. "CONCAT('0x', HEX(art.arti_id)) AS arti_id, "
-				. "art.arti_ref, "
-				. "art.arti_slug, "
-				. "art.arti_title, "
-				. "art.arti_subtitle, "
-				. "art.arti_page, "
-				. "bcl.deadline_name "
-				. "FROM "
-				. $SqlTableListObj->getSQLTableName('article') . " art, "
-				. $SqlTableListObj->getSQLTableName('deadline') . " bcl "
-				. "WHERE art.arti_ref = " . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . " "
-				. "AND art.arti_validation_state = 1 "
-				. "AND art.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
-				. "AND art.fk_deadline_id = bcl.deadline_id "
-				. "AND bcl.deadline_state = '1' "
-				. "ORDER BY art.arti_page "
-				. ";";
+				$q = "
+				SELECT art.arti_id, art.arti_ref, art.arti_slug, art.arti_title, art.arti_subtitle, art.arti_page, bcl.deadline_name 
+				FROM "
+					. $SqlTableListObj->getSQLTableName('article') . " art, "
+					. $SqlTableListObj->getSQLTableName('deadline') . " bcl 
+				WHERE art.arti_ref = '" . $CurrentSetObj->getDataSubEntry('article', 'arti_ref') . "' 
+				AND art.arti_validation_state = '1' 
+				AND art.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
+				AND art.fk_deadline_id = bcl.deadline_id 
+				AND bcl.deadline_state = '1' 
+				ORDER BY art.arti_page
+				;";
 				$bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " q=`" . $q . "`"));
 				$dbquery = $bts->SDDMObj->query($q);
 
@@ -320,21 +303,15 @@ class ModuleDocumentDisplay
 						$documentAnalyse['start2'] = $documentAnalyse['start'] + 9;
 						$documentAnalyse['include_docu_name'] = substr($analysedContent, $documentAnalyse['start2'], ($documentAnalyse['stop'] - $documentAnalyse['start2']));
 						$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " [INCLUDE] requires : " . $documentAnalyse['include_docu_name']));
-						$dbquery = $bts->SDDMObj->query("SELECT "
-							. "CONCAT('0x', HEX(doc.docu_id)) AS docu_id, "
-							. "doc.docu_type, "
-							. "doc.docu_cont, "
-							. "CONCAT('0x', HEX(doc.docu_creator)) AS docu_creator, "
-							. "doc.docu_creation_date, "
-							. "CONCAT('0x', HEX(doc.docu_validator)) AS docu_validator, "
-							. "doc.docu_validation_date, "
-							. "FROM "
+						$dbquery = $bts->SDDMObj->query("
+					SELECT doc.docu_id, doc.docu_type, doc.docu_cont, doc.docu_creator, doc.docu_creation_date, doc.docu_validator, doc.docu_validation_date
+					FROM "
 							. $SqlTableListObj->getSQLTableName('document') . " doc, "
-							. $SqlTableListObj->getSQLTableName('document_share') . " ds "
-							. "WHERE doc.docu_name = '" . $documentAnalyse['include_docu_name'] . "' "
-							. "AND doc.docu_id = ds.fk_docu_id "
-							. "AND ds.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " "
-							. ";");
+							. $SqlTableListObj->getSQLTableName('document_share') . " ds
+					WHERE doc.docu_name = '" . $documentAnalyse['include_docu_name'] . "'
+					AND doc.docu_id = ds.fk_docu_id
+					AND ds.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
+					;");
 
 						if ($bts->SDDMObj->num_row_sql($dbquery) == 0) {
 							$bts->LMObj->msgLog(array('level' => LOGLEVEL_ERROR, 'msg' => __METHOD__ . " Could not find the document named `" . $documentAnalyse['include_docu_name'] . "` in INCLUDE."));
@@ -458,18 +435,17 @@ class ModuleDocumentDisplay
 
 			if (($DocumentDataObj->getDocumentDataEntry('arti_montre_info_modification') + $DocumentDataObj->getDocumentDataEntry('arti_montre_info_parution')) != 0) {
 				$ADP_users = array();
-				$dbquery = $bts->SDDMObj->query("SELECT "
-					. "CONCAT('0x', HEX(u.user_id)) AS user_id, "
-					. "u.user_name "
-					. "FROM "
+				$dbquery = $bts->SDDMObj->query("
+				SELECT u.user_id,u.user_name
+				FROM "
 					. $SqlTableListObj->getSQLTableName('user') . " u , "
 					. $SqlTableListObj->getSQLTableName('group_user') . " gu, "
-					. $SqlTableListObj->getSQLTableName('group_website') . " gw "
-					. "WHERE u.user_id = gu.fk_user_id "
-					. "AND gu.fk_group_id = gw.fk_group_id "
-					. "AND gu.group_user_initial_group = 1 "
-					. "ORDER BY u.user_id "
-					. ";");
+					. $SqlTableListObj->getSQLTableName('group_website') . " gw 
+				WHERE u.user_id = gu.fk_user_id
+				AND gu.fk_group_id = gw.fk_group_id
+				AND gu.group_user_initial_group = '1'
+				ORDER BY u.user_id
+				;");
 				while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 					$ADP_users[$dbp['user_id']] = $dbp['user_name'];
 				}
@@ -607,22 +583,13 @@ class ModuleDocumentDisplay
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		$Block = $CurrentSetObj->ThemeDataObj->getThemeName() . $infos['block'];
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(keyword_id)) AS keyword_id, "
-			. "keyword_state, "
-			. "keyword_name, "
-			. "CONCAT('0x', HEX(fk_arti_id)) AS fk_arti_id, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
-			. "keyword_string, "
-			. "keyword_count, "
-			. "keyword_type, "
-			. "keyword_data "
-			. "FROM "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('keyword') . " "
-			. "WHERE fk_arti_id = " . $CurrentSetObj->DocumentDataObj->getDocumentDataEntry('arti_id') . " "
-			. "AND keyword_state = 1 "
-			. "AND fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. ";");
+		$dbquery = $bts->SDDMObj->query("
+		SELECT *
+		FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('keyword') . "
+		WHERE fk_arti_id = '" . $CurrentSetObj->DocumentDataObj->getDocumentDataEntry('arti_id') . "'
+		AND keyword_state = '1'
+		AND fk_ws_id = '" . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "'
+		;");
 		while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
 			$KeyWordEntry['id'] = $dbp['keyword_id'];
 			$KeyWordEntry['string'] = $dbp['keyword_string'];

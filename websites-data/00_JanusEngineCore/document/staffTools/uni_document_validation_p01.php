@@ -67,7 +67,7 @@ SELECT doc.docu_id,doc.docu_name,doc.docu_type,shr.share_modification
 FROM "
 .$SqlTableListObj->getSQLTableName('document')." doc, "
 .$SqlTableListObj->getSQLTableName('document_share')." shr 
-WHERE shr.fk_ws_id = ".$WebSiteObj->getWebSiteEntry('ws_id')." 
+WHERE shr.fk_ws_id = '".$WebSiteObj->getWebSiteEntry('ws_id')."' 
 AND shr.fk_docu_id = doc.docu_id 
 AND doc.docu_validation = '0' 
 ;");

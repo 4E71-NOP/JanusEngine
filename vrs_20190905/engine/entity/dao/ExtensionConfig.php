@@ -24,11 +24,11 @@ class ExtensionConfig extends Entity {
 	
 	//@formatter:off
 	private $columns = array(
-		"config_id"				=> "",
-		"ws_id"					=> 0,
-		"extension_id"			=> 0,
-		"extension_variable"	=> "New Variable",
-		"extension_value"		=> 0,
+		'config_id'				=> 0,
+		'ws_id'					=> 0,
+		'extension_id'			=> 0,
+		'extension_variable'	=> 'New Variable',
+		'extension_value'		=> 0,
 	);
 	//@formatter:on
 	
@@ -45,16 +45,12 @@ class ExtensionConfig extends Entity {
 		$CurrentSetObj = CurrentSet::getInstance();
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
-
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(extcfg_id)) AS extcfg_id, "
-			. "CONCAT('0x', HEX(fk_ws_id)) AS fk_ws_id, "
-			. "CONCAT('0x', HEX(fk_ext_id)) AS fk_ext_id, "
-			. "extcfg_variable, "
-			. "extcfg_value "
-			. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('extension_config') . " "
-			. "WHERE config_id = " . $id
-			. ";");
+				
+		$dbquery = $bts->SDDMObj->query ( "
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName ('extension_config') . "
+			WHERE config_id = '" . $id . "'
+			;");
 		if ( $bts->SDDMObj->num_row_sql($dbquery) != 0 ) {
 			$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data for extension_config id=".$id));
 			while ( $dbp = $bts->SDDMObj->fetch_array_sql ( $dbquery ) ) {

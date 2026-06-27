@@ -41,7 +41,7 @@ self::$ActionTable['show']['keywords'] = function (&$a) {
 		. $a['sqlTables']['keyword'] . " kw, "
 		. $a['sqlTables']['article'] . " art, "
 		. $a['sqlTables']['website'] . " ws "
-		. "WHERE kw.fk_ws_id = " . $a['Context']['ws_id'] . " "
+		. "WHERE kw.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 		. "AND kw.keyword_state = '1' "
 		. "AND kw.fk_arti_id = art.arti_id "
 		. "AND kw.fk_ws_id = ws.ws_id "

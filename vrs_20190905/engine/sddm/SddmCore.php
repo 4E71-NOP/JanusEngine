@@ -28,58 +28,11 @@ class SddmCore
 
 	/**
 	 * Create an UID with random function
-	 * 
-	 * The auto incremental solutions aren't implemnted the same in every DB systems.
-	 * So, this manual method has been chosen in order to be able to have the same data compatible with several databases systems.
-	 * This enables flexibility so the admin can choose his DB solution more freely.
-	 * 
-	 * 
 	 * @return string
 	 */
 	public function createUniqueId()
 	{
-		$idMethod = _ID_METHOD_;
-		switch ($idMethod) {
-			case 'maxLengthInt':
-				return $this->createRandomInt();
-				break;
-			case 'uuidv7':
-				return $this->createUuidv7();
-				break;
-		}
-	}
-
-	/**
-	 * Returns a simple random big integer<br>
-	 * <br>
-	 * As it is completely random, it's not duplicate proof by design. 
-	 * Even though in reality, there is 1 chance in a <i>Gazillion</i> that a duplicate can happen. 
-	 * This method is kept for the sake of smiplicity or compensate for lack of type binary(16) in some DB solution. 
-	 * 
-	 * @return int
-	 */
-	protected function createRandomInt()
-	{
 		return random_int(1, 9223372036854775807);
-	}
-
-	/**
-	 * Summary of createUuidv7
-	 * @return string
-	 */
-	protected function createUuidv7()
-	{
-		$timestamp = (int)(microtime(true) * 1000);
-
-		// '%08x-%04x-%04x-%04x-%012x',
-		return "0x" . sprintf(
-			'%08x%04x%04x%04x%012x',
-			($timestamp >> 16) & 0xFFFFFFFF,
-			$timestamp & 0xFFFF,
-			random_int(0, 0x0FFF) | 0x7000,     // version 7
-			random_int(0, 0x3FFF) | 0x8000,     // variant 10xx
-			random_int(0, 0xFFFFFFFFFFFF)       // 48 random bits
-		);
 	}
 
 	protected function logToSqlDetails($q, $SQLlogEntry, $timeBegin)

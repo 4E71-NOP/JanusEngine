@@ -79,7 +79,7 @@ $pageSelectorData['clauseElements'] = array();
 if (strlen($bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') ?? '') > 0) {
 	$pageSelectorData['clauseElements'][] = array("left" => "LOWER(l.layout_name)", "operator" => "LIKE", "right" => "'%" . $bts->RequestDataObj->getRequestDataSubEntry('filterForm', 'query_like') . "%'");
 }
-$pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => $WebSiteObj->getWebSiteEntry('ws_id'));
+$pageSelectorData['clauseElements'][] = array("left" => "tw.fk_ws_id",		"operator" => "=",	"right" => "'" . $WebSiteObj->getWebSiteEntry('ws_id') . "'");
 $pageSelectorData['clauseElements'][] = array("left" => "lt.fk_theme_id",	"operator" => "=",	"right" => "tw.fk_theme_id");
 $pageSelectorData['clauseElements'][] = array("left" => "tw.fk_theme_id",	"operator" => "=",	"right" => "td.theme_id");
 $pageSelectorData['clauseElements'][] = array("left" => "lt.fk_layout_id",	"operator" => "=",	"right" => "l.layout_id");

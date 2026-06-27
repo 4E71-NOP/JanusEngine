@@ -36,7 +36,7 @@ self::$ActionTable['show']['deadlines']	= function (&$a) { return array(
 			. "FROM_UNIXTIME(deadline_end_date) AS 'End' "
 			. "FROM "
 			. $a['sqlTables']['deadline'] . " dl "
-			. "WHERE dl.fk_ws_id = " . $a['Context']['ws_id'] . " "
+			. "WHERE dl.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. "ORDER BY dl.deadline_name;"
 	); 
 };
@@ -50,7 +50,7 @@ self::$ActionTable['show']['deadline']	= function (&$a) { return array(
 			. "FROM_UNIXTIME(deadline_end_date) AS 'End' "
 			. "FROM "
 			. $a['sqlTables']['deadline'] . " dl "
-			. "WHERE dl.fk_ws_id = " . $a['Context']['ws_id'] . " "
+			. "WHERE dl.fk_ws_id = '" . $a['Context']['ws_id'] . "' "
 			. (strlen($a['params']['name'] > 0) ? "AND dl.deadline_name = '" . $a['params']['name'] . "' " : "")
 			. (strlen($a['params']['title'] > 0) ? "AND dl.deadline_title = '" . $a['params']['title'] . "' " : "")
 			. "ORDER BY dl.deadline_name;"

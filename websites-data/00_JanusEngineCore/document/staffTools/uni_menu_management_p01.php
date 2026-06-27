@@ -68,7 +68,7 @@ $sqlQuery = "
 	AND m.fk_lang_id = l.lang_id
 	AND l.lang_id = lw.fk_lang_id
 	AND m.fk_ws_id = lw.fk_ws_id
-	AND m.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . "
+	AND m.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "'
 	GROUP BY m.fk_lang_id
 	;";
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_INFORMATION, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
@@ -114,7 +114,7 @@ AND m.menu_state = '1'
 AND m.fk_lang_id IN (" . $langClause . ") 
 AND m.fk_lang_id = lw.fk_lang_id 
 AND lw.fk_ws_id = m.fk_ws_id 
-AND m.fk_ws_id = " . $WebSiteObj->getWebSiteEntry('ws_id') . " 
+AND m.fk_ws_id = '" . $WebSiteObj->getWebSiteEntry('ws_id') . "' 
 ORDER BY m.fk_lang_id, m.menu_parent, m.menu_position 
 ;";
 $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . "sqlQuery=`" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));

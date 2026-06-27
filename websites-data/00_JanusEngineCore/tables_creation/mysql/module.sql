@@ -8,8 +8,7 @@ module_deco_default_text 1 à 7
 */
 
 CREATE TABLE !table! (
-module_id 					BINARY(16) NOT NULL UNIQUE, 
-module_id_str				CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(module_id))),
+module_id 					BIGINT NOT NULL UNIQUE, 
 module_deco 				INTEGER,
 module_deco_nbr 			INTEGER,
 module_deco_default_text	INTEGER,
@@ -22,7 +21,7 @@ module_type 				INTEGER DEFAULT 1 NOT NULL,
 module_desc 				VARCHAR(255),
 module_container_name		VARCHAR(255),
 module_container_style		VARCHAR(255),
-fk_perm_id                  BINARY(16),
+fk_perm_id                  BIGINT,
 module_adm_control			INTEGER,
 module_execution			INTEGER,
 

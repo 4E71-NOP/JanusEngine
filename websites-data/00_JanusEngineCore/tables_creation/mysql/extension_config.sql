@@ -3,10 +3,9 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-extcfg_id			BINARY(16) NOT NULL UNIQUE, 
-extcfg_id_str		CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(extcfg_id))),
-fk_ws_id			BINARY(16), 
-fk_ext_id			BINARY(16),
+extcfg_id			BIGINT NOT NULL UNIQUE, 
+fk_ws_id			BIGINT, 
+fk_ext_id			BIGINT,
 extcfg_variable		VARCHAR(255), 
 extcfg_value		VARCHAR(255), 
 

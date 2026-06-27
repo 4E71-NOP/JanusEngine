@@ -45,14 +45,10 @@ class ThemeData
 		$bts = BaseToolSet::getInstance();
 		$CurrentSetObj = CurrentSet::getInstance();
 
-		$sqlQuery = "SELECT "
-			. "CONCAT('0x', HEX(deco_id)) AS deco_id, "
-			. "deco_name, "
-			. "deco_state, "
-			. "deco_type "
-			. "FROM "
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('decoration')
-			. ";";
+		$sqlQuery = "
+		SELECT *
+		FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('decoration') . "
+		;";
 		$dbquery = $bts->SDDMObj->query($sqlQuery);
 		$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Loading data \$q = `" . $bts->StringFormatObj->formatToLog($sqlQuery) . "`."));
 
@@ -218,14 +214,11 @@ class ThemeData
 
 				$cbal = &$BlockAlreadyLoaded['10'][($CurrentBlock['deco_id'] ?? '')];
 				if (empty($cbal)) {
-					$dbquery = $bts->SDDMObj->query("SELECT "
-						. "CONCAT('0x', HEX(deco_line_number)) AS deco_line_number, "
-						. "CONCAT('0x', HEX(fk_deco_id)) AS fk_deco_id, "
-						. "deco_variable_name, "
-						. "deco_value "
-						. "FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deco_10_menu') . " "
-						. "WHERE fk_deco_id = " . $CurrentBlock['deco_id']
-						. ";");
+					$dbquery = $bts->SDDMObj->query("
+						SELECT *
+						FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('deco_10_menu') . "
+						WHERE fk_deco_id = '" . $CurrentBlock['deco_id'] . "'
+						;");
 					$p = &$this->ThemeData[$BlockM];
 
 					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {

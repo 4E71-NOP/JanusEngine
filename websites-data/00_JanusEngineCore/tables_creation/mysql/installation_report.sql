@@ -2,15 +2,14 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 CREATE TABLE !table! (
-instreport_id		    BINARY(16) NOT NULL UNIQUE, 
-instreport_id_str		CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(instreport_id))),
+instreport_id		    BIGINT NOT NULL UNIQUE, 
 instreport_section	    VARCHAR(255),
 instreport_name		    VARCHAR(255),
 instreport_ok      	    INTEGER,
 instreport_wrn     	    INTEGER,
 instreport_err     	    INTEGER,
-instreport_start	    BINARY(16),
-instreport_end  	    BINARY(16),
+instreport_start	    BIGINT,
+instreport_end  	    BIGINT,
 instreport_nbr_query  	INTEGER,
 instreport_nbr_cmd  	INTEGER,
 

@@ -58,7 +58,7 @@ class CommonWebsiteTools
 		if (strlen($bts->RequestDataObj->getRequestDataEntry('l') ?? '') != 0 && $bts->RequestDataObj->getRequestDataEntry('l') != 0) {
 			$scoreLang += 4;
 		}
-		if (strlen($UserObj->getUserEntry('user_lang') ?? '') > 0 && $UserObj->getUserEntry('user_lang') != 0) {
+		if (is_numeric($UserObj->getUserEntry('user_lang')) && $UserObj->getUserEntry('user_lang') != 0) {
 			$scoreLang += 2;
 		}
 		if (strlen($WebSiteObj->getWebSiteEntry('fk_lang_id') ?? '') != 0 && $WebSiteObj->getWebSiteEntry('fk_lang_id') != 0) {
@@ -69,9 +69,9 @@ class CommonWebsiteTools
 
 		switch ($scoreLang) {
 			case 0:
-				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time; back to English as website language."));
+				$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Language selection Error. Something wrong happened (most likely no data for language in website table). In the mean time back to English as website language."));
 				$CurrentSetObj->setDataEntry('language', 'eng');
-				$CurrentSetObj->setDataEntry('language_id', '0x00000000000000000000000000000030');
+				$CurrentSetObj->setDataEntry('language_id', '38');
 				break;
 			case 1:
 				$tmp = $bts->CMObj->getLanguageListSubEntry($WebSiteObj->getWebSiteEntry('fk_lang_id'), 'lang_639_3');

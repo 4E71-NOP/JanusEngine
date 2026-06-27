@@ -10,17 +10,16 @@ juste un renseignement sur le site a qui appartien tout les droits de ce documen
 */
 
 CREATE TABLE !table! (
-docu_id 					BINARY(16) NOT NULL UNIQUE, 
-docu_id_str 				CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(docu_id))),
+docu_id 					BIGINT NOT NULL UNIQUE, 
 docu_name					VARCHAR(255),
 docu_type					INTEGER,
-docu_origin		    		BINARY(16),
+docu_origin		    		BIGINT,
 
-docu_creator				BINARY(16),
+docu_creator				BIGINT,
 docu_creation_date			INTEGER,
 
 docu_validation		    	INTEGER,
-docu_validator				BINARY(16),
+docu_validator				BIGINT,
 docu_validation_date		INTEGER,
 docu_cont 					BLOB,
 

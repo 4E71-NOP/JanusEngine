@@ -3,8 +3,7 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! (
-def_id 					BINARY(16) NOT NULL UNIQUE, 
-def_id_str 				CHAR(34) GENERATED ALWAYS AS (CONCAT('0x', HEX(def_id))),
+def_id 					BIGINT NOT NULL UNIQUE, 
 def_name 				VARCHAR(255),
 def_number				INTEGER,
 def_text				VARCHAR(255),
