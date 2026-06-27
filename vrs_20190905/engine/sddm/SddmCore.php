@@ -69,33 +69,17 @@ class SddmCore
 	 */
 	protected function createUuidv7()
 	{
-		$bts = BaseToolSet::getInstance();
 		$timestamp = (int)(microtime(true) * 1000);
 
-		switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
-			case "mysql":
-			default:
-				return "0x" . sprintf(
-					'%08x%04x%04x%04x%012x',
-					($timestamp >> 16) & 0xFFFFFFFF,
-					$timestamp & 0xFFFF,
-					random_int(0, 0x0FFF) | 0x7000,     // version 7
-					random_int(0, 0x3FFF) | 0x8000,     // variant 10xx
-					random_int(0, 0xFFFFFFFFFFFF)       // 48 random bits
-				);
-				break;
-			case "pgsql":
-				return "'\x" . sprintf(
-					'%08x%04x%04x%04x%012x',
-					($timestamp >> 16) & 0xFFFFFFFF,
-					$timestamp & 0xFFFF,
-					random_int(0, 0x0FFF) | 0x7000,     // version 7
-					random_int(0, 0x3FFF) | 0x8000,     // variant 10xx
-					random_int(0, 0xFFFFFFFFFFFF)       // 48 random bits
-				)
-					. "'";
-				break;
-		}
+		// '%08x-%04x-%04x-%04x-%012x',
+		return "0x" . sprintf(
+			'%08x%04x%04x%04x%012x',
+			($timestamp >> 16) & 0xFFFFFFFF,
+			$timestamp & 0xFFFF,
+			random_int(0, 0x0FFF) | 0x7000,     // version 7
+			random_int(0, 0x3FFF) | 0x8000,     // variant 10xx
+			random_int(0, 0xFFFFFFFFFFFF)       // 48 random bits
+		);
 	}
 
 	protected function logToSqlDetails($q, $SQLlogEntry, $timeBegin)

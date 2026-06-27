@@ -187,11 +187,8 @@ class LibContentExec
 		}
 
 		$TabConfig = $bts->CMObj->getConfiguration();
-		$TabRpl[] = $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix');
 		$TabSrch[] = "!db!";
-		if ( $bts->CMObj->getConfigurationSubEntry('db', 'type') == 'pgsql') { // thx PGSQL
-			$TabRpl[] = strtolower($bts->CMObj->getConfigurationSubEntry('db', 'dbprefix'));
-		}
+		$TabRpl[] = $bts->CMObj->getConfigurationSubEntry('db', 'dbprefix');
 
 		$TabSrch[] = "*user_install*";
 		$TabRpl[] = $TabConfig['db_user_login'];

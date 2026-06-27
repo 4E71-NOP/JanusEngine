@@ -45,33 +45,15 @@ class RenderAdmDashboard
 
 		$Content = "";
 
-		$dbquery = $bts->SDDMObj->query("SELECT "
-			. "CONCAT('0x', HEX(m.module_id)) AS module_id, "
-			. "m.module_deco, "
-			. "m.module_deco_nbr, "
-			. "m.module_deco_default_text, "
-			. "m.module_name, "
-			. "m.module_classname, "
-			. "m.module_title, "
-			. "m.module_directory, "
-			. "m.module_file, "
-			. "m.module_type, "
-			. "m.module_desc, "
-			. "m.module_container_name, "
-			. "m.module_container_style, "
-			. "CONCAT('0x', HEX(m.fk_perm_id)) AS fk_perm_id, "
-			. "m.module_adm_control, "
-			. "m.module_execution, "
-			. "mw.module_state "
-			. "FROM " 
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('module') . " m, " 
-			. $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " mw "
-			. "WHERE mw.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . " "
-			. "AND m.module_id = mw.fk_module_id "
-			. "AND mw.module_state = 1 "
-			. "AND m.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . " "
-			. "AND m.module_adm_control > '0' "
-			. ";");
+		$dbquery = $bts->SDDMObj->query("
+			SELECT *
+			FROM " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module') . " a, " . $CurrentSetObj->SqlTableListObj->getSQLTableName('module_website') . " b
+			WHERE b.fk_ws_id = " . $CurrentSetObj->WebSiteObj->getWebSiteEntry('ws_id') . "
+			AND a.module_id = b.fk_module_id
+			AND b.module_state = '1'
+			AND a.fk_perm_id " . $CurrentSetObj->UserObj->getUserEntry('clause_in_perm') . "
+			AND a.module_adm_control > '0'
+			;");
 
 		if ($bts->SDDMObj->num_row_sql($dbquery) != 0) {
 			$module_tab_adm_ = array();

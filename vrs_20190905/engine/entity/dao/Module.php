@@ -59,7 +59,7 @@ class Module extends Entity {
 		$bts->LMObj->msgLog( array( 'level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : Start"));
 		$res = true;
 
-		$dbquery = $bts->SDDMObj->query("SELECT "
+		$dbquery = $bts->SDDMObj->query("SELECT m.*, "
 			. "CONCAT('0x', HEX(m.module_id)) AS module_id, "
 			. "m.module_deco, "
 			. "m.module_deco_nbr, "

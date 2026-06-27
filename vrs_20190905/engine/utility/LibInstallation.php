@@ -68,10 +68,10 @@ class LibInstallation
 			$infos['TabAnalyse'] = array();
 
 			// TODO Remove when all 3 are migrated
-			// $this->report[$infos['section']][$infos['currentFileName']]['file'] = $list['name'] . "/" . $infos['currentFileName'];
-			// $this->report[$infos['section']][$infos['currentFileName']]['OK'] = 0;
-			// $this->report[$infos['section']][$infos['currentFileName']]['WARN'] = 0;
-			// $this->report[$infos['section']][$infos['currentFileName']]['ERR'] = 0;
+			$this->report[$infos['section']][$infos['currentFileName']]['file'] = $list['name'] . "/" . $infos['currentFileName'];
+			$this->report[$infos['section']][$infos['currentFileName']]['OK'] = 0;
+			$this->report[$infos['section']][$infos['currentFileName']]['WARN'] = 0;
+			$this->report[$infos['section']][$infos['currentFileName']]['ERR'] = 0;
 
 			$bts->LMObj->msgLog(array('level' => LOGLEVEL_STATEMENT, 'msg' => __METHOD__ . " : processing file : `" . $this->report[$infos['section']][$infos['currentFileName']]['file'] . "`"));
 
@@ -109,7 +109,7 @@ class LibInstallation
 		$CurrentSetObj = CurrentSet::getInstance();
 
 		// If DB is ready we store directly into DB. Thank you captain obvious.
-		if (strpos($infos['dbState'], 'available') === true ) {
+		if (strpos($infos['section'], 'tables_creation') === false) {
 			switch ($bts->CMObj->getConfigurationSubEntry('db', 'type')) {
 				case "mysql":
 				default:
