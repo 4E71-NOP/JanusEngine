@@ -4,9 +4,9 @@
 /* 
 */
 CREATE TABLE !table! ( 
-info_id 			BIGINT NOT NULL UNIQUE,
+info_id 			BYTEA NOT NULL UNIQUE,
 fk_infcfg_section	VARCHAR(255),
-info_ref_obj		BIGINT,
+info_ref_obj		BYTEA,
 info_field			VARCHAR(255),
 info_string			VARCHAR(1024),
 info_number			INTEGER,

@@ -9,25 +9,27 @@ menu_role		None 0
 */
 
 CREATE TABLE !table! (
-menu_id 				BIGINT NOT NULL UNIQUE, 
+menu_id 				BYTEA NOT NULL UNIQUE, 
 menu_name 				VARCHAR(255),
 menu_title 				VARCHAR(255),
 menu_desc 				VARCHAR(255),
 menu_type				INTEGER,
 menu_visibility			INTEGER,
-fk_ws_id				BIGINT,
-fk_lang_id				BIGINT,
-fk_deadline_id 			BIGINT,
+fk_ws_id				BYTEA,
+fk_lang_id				BYTEA,
+fk_deadline_id 			BYTEA,
 menu_state 				INTEGER,
-menu_parent 			BIGINT,
+menu_parent 			BYTEA,
 menu_position 			INTEGER,
-fk_perm_id 				BIGINT,
+fk_perm_id 				BYTEA,
 menu_last_update		INTEGER,
 menu_role 				INTEGER,
-menu_initial_document	BIGINT,
+menu_initial_document	BYTEA,
 fk_arti_slug			VARCHAR(255),
 fk_arti_ref 			VARCHAR(255),
 
+
 PRIMARY KEY (menu_id)
+
 
 );

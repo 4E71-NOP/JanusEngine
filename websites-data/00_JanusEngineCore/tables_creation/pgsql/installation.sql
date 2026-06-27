@@ -2,7 +2,7 @@
 /* Foreign keys: 							*/
 /* ---------------------------------------- */
 CREATE TABLE !table! (
-inst_id			BIGINT NOT NULL UNIQUE, 
+inst_id			BYTEA NOT NULL UNIQUE, 
 inst_display	INTEGER DEFAULT 1,
 inst_name		VARCHAR(100) NOT NULL,
 inst_nbr		INTEGER DEFAULT 0,

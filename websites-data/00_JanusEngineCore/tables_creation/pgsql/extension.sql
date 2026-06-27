@@ -3,8 +3,8 @@
 /* ---------------------------------------- */
 
 CREATE TABLE !table! ( 
-ext_id				BIGINT NOT NULL UNIQUE, 
-fk_ws_id			BIGINT, 
+ext_id				BYTEA NOT NULL UNIQUE, 
+fk_ws_id			BYTEA, 
 ext_name			VARCHAR(255), 
 ext_version			VARCHAR(255), 
 ext_author			VARCHAR(255), 
