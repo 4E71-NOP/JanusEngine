@@ -53,6 +53,12 @@ define("_SDDM_DIRECTORY_", "current/engine/sddm/");
 define("_ENTITY_DIRECTORY_", "current/engine/entity/");
 
 // --------------------------------------------------------------------------------------------
+// Object Db mode
+define("_RANDOM_INT_", 1);
+define("_MICROTIME_RAND_", 2); // Last digits of micro timestamp + random int 10 decimal digit
+
+define("_ID_CREATION_METHOD_", _RANDOM_INT_); 
+// --------------------------------------------------------------------------------------------
 // Object SendToDb mode
 define("OBJECT_SENDTODB_MODE_DEFAULT", 0);
 define("OBJECT_SENDTODB_MODE_INSERTONLY", 1);

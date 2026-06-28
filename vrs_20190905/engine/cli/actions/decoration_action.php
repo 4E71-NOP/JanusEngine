@@ -34,12 +34,14 @@ self::$ActionTable['add']['decoration']			= function (&$a) {
 
 	$vl = &$a['listVars'][$a['params']['type']];
 	$a['values2'] = "";
-	$l = &$a['params'][$idv];
+	$bts = BaseToolSet::getInstance();
+
+	// $l = &$a['params'][$idv];
 
 	foreach ($vl as $V) {
 		if (strlen($a['params'][$V] ?? '') != 0) {
-			$a['values2'] .= "('" . $l . "','" . $a['params']['id'] . "','" . $V . "','" . $a['params'][$V] . "'),";
-			$l++;
+			$a['values2'] .= "('" . $bts->SDDMObj->createUniqueId() . "','" . $a['params']['id'] . "','" . $V . "','" . $a['params'][$V] . "'),";
+			// $l++;
 		}
 	}
 	$a['values2'] = substr($a['values2'], 0, -1);

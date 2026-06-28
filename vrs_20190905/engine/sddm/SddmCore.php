@@ -19,6 +19,11 @@
 
 
 // --------------------------------------------------------------------------------------------
+		// 1782596073
+		// 17825934884004        = Timestamp microsecond 14 digits
+		// 92233720368547 75807	 = max int length int 19 digits
+		// 9 223 372 036 854 775 807 - BIGINT max
+
 
 class SddmCore
 {
@@ -34,19 +39,21 @@ class SddmCore
 	 * This system has been elected as the different DB systems (one or all) do NOT 
 	 *  - support the UUIDv7 natively
 	 *  - support dedicated data type (so we don't have to play with BINARY(16))
-	 *  - provide similar syntax environement, needs and solutions to handle this (it's painful at best).
-	 * 
-	 * The solution: One big number based on the microsecond timestamp on which a random number is added.
-	 * Simple, random enough to avoid any collision, standart and it's numerical. Db systems like numerical better than text.
+	 *  - provide similar syntax environement, needs and solutions to handle this. (it's painful at best).
 	 * 
 	 * @return string
 	 */
 	public function createUniqueId()
 	{
-		// 17825934884004        = Timestamp microsecond
-		// 92233720368547 75807
-		return (microtime(true) * 1000000000) + random_int(1, 99999);
-		// return random_int(1, 9223372036854775807);
+		$m = _ID_CREATION_METHOD_;
+		switch ($m) {
+			case _RANDOM_INT_:
+				return random_int(1, 9223372036854775807);
+				break;
+			case _MICROTIME_RAND_:
+				return (substr((microtime(true) * 10000),-9) . random_int(1, 9999999999));
+				break;
+		}
 	}
 
 
