@@ -75,7 +75,8 @@ class ModuleQuickSkin
 					<select name='userForm[user_pref_theme]' class='" . $Block . "_form_1 " . $Block . "_t3'>
 					";
 					while ($dbp = $bts->SDDMObj->fetch_array_sql($dbquery)) {
-						if ($dbp['theme_id'] == $ThemeDataObj->getDefinitionValue('id')) {
+						// $bts->LMObj->msgLog(array('level' => LOGLEVEL_BREAKPOINT, 'msg' => __METHOD__ . " theme_ids : =`" . $dbp['theme_id'] . "`, `" . $ThemeDataObj->getThemeDataEntry('theme_id') . "`."));
+						if ($dbp['theme_id'] == $ThemeDataObj->getThemeDataEntry('theme_id')) {
 							$Content .= "<option value='" . $dbp['theme_name'] . "' selected>" . $dbp['theme_title'] . "</option>\r";
 						} else {
 							$Content .= "<option value='" . $dbp['theme_name'] . "'>" . $dbp['theme_title'] . "</option>\r";
